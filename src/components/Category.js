@@ -18,8 +18,6 @@ export default function Category({data = []}) {
       <FlatList
         data={data}
         contentContainerStyle={{
-          alignItems: 'center',
-          flexDirection: 'row',
           columnGap: scale(10),
         }}
         horizontal
@@ -32,7 +30,7 @@ export default function Category({data = []}) {
             isShadow
             styleWrapper={[
               {
-                width: scale(widthSize),
+                width: widthSize,
                 backgroundColor: select === item ? COLORS.primary : '#f1f1f1',
               },
             ]}

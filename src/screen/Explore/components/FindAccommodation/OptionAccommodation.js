@@ -45,65 +45,69 @@ export default function OptionAccommodation({
 
   // const borderBottom
   return (
-    <FlatList
-      data={data}
-      contentContainerStyle={[styles.content, styleWrapper]}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      scrollEnabled={data.length > 3}
-      renderItem={({item, index}) => (
-        <TouchableOpacity
-          key={`key-${item?.text}-${index}`}
-          activeOpacity={0.7}
-          style={[
-            styles.option,
-            option.includes(item?.text) &&
-              !outline && {
-                borderBottomWidth: 2,
-                paddingBottom: scale(4),
+    <View style={styles.wrapper}>
+      <FlatList
+        data={data}
+        contentContainerStyle={[styles.content, styleWrapper]}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        scrollEnabled={data.length > 3}
+        renderItem={({item, index}) => (
+          <TouchableOpacity
+            key={`key-${item?.text}-${index}`}
+            activeOpacity={0.7}
+            style={[
+              styles.option,
+              option.includes(item?.text) &&
+                !outline && {
+                  borderBottomWidth: 2,
+                  paddingBottom: scale(4),
+                },
+              outline && {
+                backgroundColor: !option.includes(item?.text)
+                  ? '#f8f8f8'
+                  : '#F0B90B20',
               },
-            outline && {
-              backgroundColor: !option.includes(item?.text)
-                ? '#f8f8f8'
-                : '#F0B90B20',
-            },
-            option.includes(item?.text) && outline && styles.outline,
-          ]}
-          onPress={() => handleSelectOption(item?.text)}>
-          {item?.icon && (
-            <item.icon
-              style={{
-                width: scale(16),
-                height: scale(16),
-              }}
-              fill={option.includes(item?.text) && COLORS.primary}
-            />
-          )}
-          {item?.text && (
-            <CustomText
-              textType="medium"
-              style={{
-                color: option.includes(item?.text)
-                  ? COLORS.primary
-                  : COLORS.textSub,
-                paddingHorizontal: scale(10),
-              }}>
-              {item?.text}
-            </CustomText>
-          )}
-        </TouchableOpacity>
-      )}
-    />
+              option.includes(item?.text) && outline && styles.outline,
+            ]}
+            onPress={() => handleSelectOption(item?.text)}>
+            {item?.icon && (
+              <item.icon
+                style={{
+                  width: scale(16),
+                  height: scale(16),
+                }}
+                fill={option.includes(item?.text) && COLORS.primary}
+              />
+            )}
+            {item?.text && (
+              <CustomText
+                textType="medium"
+                style={{
+                  color: option.includes(item?.text)
+                    ? COLORS.primary
+                    : COLORS.textSub,
+                  paddingHorizontal: scale(10),
+                }}>
+                {item?.text}
+              </CustomText>
+            )}
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    alignItems: 'center',
+    flex: 1,
+  },
   content: {
     alignItems: 'center',
-    flexDirection: 'row',
     columnGap: scale(20),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(12),
     minHeight: scale(38),
   },
   option: {
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
     rowGap: scale(2),
     minHeight: scale(36),
-    borderRadius: 12,
+    borderRadius: scale(10),
     justifyContent: 'center',
   },
   outline: {

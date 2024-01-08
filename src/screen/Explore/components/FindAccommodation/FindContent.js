@@ -75,7 +75,6 @@ export default function FindContent() {
           styleWrapper={{
             flex: 1,
             columnGap: scale(8),
-            paddingHorizontal: scale(12),
           }}
           data={[
             {
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
   optionBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: scale(16),
+    marginLeft: '4%',
   },
   boxIcon: {
     paddingHorizontal: scale(10),
