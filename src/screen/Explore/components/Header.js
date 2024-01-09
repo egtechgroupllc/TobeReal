@@ -3,11 +3,16 @@ import React from 'react';
 import {COLORS, images, scale} from '../../../assets/constants';
 import {IconSearch} from '../../../assets/icon/Icon';
 import {CustomInput} from '../../../components';
+import CustomImage from '../../../components/CustomImage';
 
 export default function Header() {
   return (
     <View style={styles.wrapper}>
-      <Image source={images.logo} style={styles.img} resizeMode="contain" />
+      <CustomImage
+        source={images.logo}
+        style={styles.img}
+        resizeMode="contain"
+      />
 
       <CustomInput
         iconLeft={IconSearch}

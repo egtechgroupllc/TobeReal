@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   COLORS,
@@ -8,18 +8,27 @@ import {
   scale,
 } from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
-import {IconHouse, IconMarker} from '../../../../assets/icon/Icon';
+import {IconExplore, IconHouse, IconMarker} from '../../../../assets/icon/Icon';
 import Ribbon from '../../../../components/Ribbon';
 import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/formatPrice';
+import CustomImage from '../../../../components/CustomImage';
 
-export default function BoxPlaceItem({seeViewNumber = 2.5}) {
+export default function BoxPlaceItem({
+  seeViewNumber = 2.4,
+  isViewMap,
+  isStar,
+  isDiscount,
+  rental = 'month',
+  multiPrice,
+  isUnitAvailable,
+}) {
   return (
     <View
       style={[
         styles.wrapper,
         {
-          width: WIDTH.widthScreen / seeViewNumber,
+          width: scale(400 / seeViewNumber),
         },
         SHADOW,
       ]}>
@@ -30,7 +39,7 @@ export default function BoxPlaceItem({seeViewNumber = 2.5}) {
         }}>
         <Ribbon text="Promotion 30%" iconRight={IconHouse} />
 
-        <Image
+        <CustomImage
           src="https://cdn.travelio.id/hotel/b6906-6538c063f4bc0a28cbe6e5e9/Deluxe-King_l.jpg"
           style={styles.img}
         />
@@ -64,14 +73,125 @@ export default function BoxPlaceItem({seeViewNumber = 2.5}) {
           margin: scale(10),
           rowGap: scale(4),
         }}>
-        <CustomText textType="bold" style={styles.buildingName}>
+        <CustomText
+          textType="semiBold"
+          style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+          numberOfLines={1}>
           Hotel Residence
         </CustomText>
-        <Star rating={3} />
+        {isStar && <Star rating={3} />}
 
-        <CustomText textType="bold" style={styles.buildingName}>
-          {formatPrice(10000000)} VNĐ
-        </CustomText>
+        <View
+          style={{
+            backgroundColor: '#ccc',
+            flex: 1,
+            height: 1,
+            marginVertical: scale(3),
+          }}
+        />
+
+        <View>
+          {!multiPrice ? (
+            <>
+              {isDiscount && (
+                <View
+                  style={{
+                    ...styles.price,
+                    justifyContent: 'flex-start',
+                  }}>
+                  <CustomText textType="regular" style={styles.textDiscount}>
+                    {formatPrice(10000000)} VNĐ{' '}
+                  </CustomText>
+
+                  <CustomText
+                    textType="semiBold"
+                    style={{
+                      color: '#FF0000',
+                      fontSize: SIZES.xSmall,
+                      minWidth: scale(35),
+                    }}>
+                    20% OFF
+                  </CustomText>
+                </View>
+              )}
+
+              <View style={styles.price}>
+                <CustomText
+                  textType="semiBold"
+                  style={[
+                    styles.buildingName,
+                    isStar && {fontSize: SIZES.xMedium},
+                    isDiscount && {color: COLORS.primary},
+                  ]}>
+                  {formatPrice(10000000)} VNĐ{' '}
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall}}>
+                    / {rental}
+                  </CustomText>
+                </CustomText>
+
+                {isViewMap && (
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={{padding: scale(4)}}>
+                    <IconExplore />
+                  </TouchableOpacity>
+                )}
+              </View>
+            </>
+          ) : (
+            <View style={styles.price}>
+              <View
+                style={{
+                  rowGap: scale(4),
+                }}>
+                <CustomText
+                  textType="semiBold"
+                  style={[styles.buildingName, {color: '#000'}]}>
+                  {formatPrice(10000000)} VNĐ{' '}
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall}}>
+                    / night
+                  </CustomText>
+                </CustomText>
+                <CustomText
+                  textType="semiBold"
+                  style={[styles.buildingName, {color: '#000'}]}>
+                  {formatPrice(10000000)} VNĐ{' '}
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall}}>
+                    / month
+                  </CustomText>
+                </CustomText>
+                <CustomText
+                  textType="semiBold"
+                  style={[styles.buildingName, {color: '#000'}]}>
+                  {formatPrice(10000000)} VNĐ{' '}
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall}}>
+                    / year
+                  </CustomText>
+                </CustomText>
+              </View>
+              {isUnitAvailable && (
+                <View style={styles.unitAvailable}>
+                  <CustomText
+                    textType="semiBold"
+                    style={styles.textUnitAvailable}>
+                    86{'\n'}
+                    <CustomText textType="regular" style={{fontSize: scale(8)}}>
+                      Unit {'\n'} Available
+                    </CustomText>
+                  </CustomText>
+                </View>
+              )}
+            </View>
+          )}
+        </View>
       </View>
     </View>
   );
@@ -115,6 +235,31 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xSmall,
   },
   buildingName: {
-    fontSize: SIZES.xMedium,
+    flex: 1,
+  },
+  price: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: scale(6),
+    alignItems: 'flex-start',
+  },
+  textDiscount: {
+    textDecorationLine: 'line-through',
+    fontSize: SIZES.xSmall,
+    flex: 1,
+  },
+  unitAvailable: {
+    borderRadius: scale(12),
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#f8f8f8',
+    alignItems: 'center',
+    padding: scale(4),
+    paddingHorizontal: scale(6),
+  },
+  textUnitAvailable: {
+    color: '#000',
+    textAlign: 'center',
+    fontSize: SIZES.xSmall,
   },
 });

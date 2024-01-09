@@ -22,7 +22,7 @@ export default function TabSelectFind({data = [], onChange}) {
             text={item}
             buttonType="large"
             isShadow={tab === item}
-            styleWrapper={{
+            style={{
               // flex: 0.5,
               width: '100%',
               borderRadius: 0,

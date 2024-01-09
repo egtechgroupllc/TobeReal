@@ -16,7 +16,6 @@ type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
   text: string;
   isShadow: boolean;
-  styleWrapper: ViewStyle;
   iconLeft: React.JSX.Element;
   iconRight: React.JSX.Element;
   styleIcon: ViewStyle;
@@ -30,10 +29,10 @@ export default function CustomButton({
   isShadow,
   iconLeft,
   iconRight,
-  styleWrapper,
   styleText,
   styleIcon,
   onPress,
+  ...props
 }: CustomButtonProps) {
   const IconRight: any = iconRight;
   const IconLeft: any = iconLeft;
@@ -41,9 +40,10 @@ export default function CustomButton({
   const heightSize =
     buttonType === 'large' ? 40 : buttonType === 'medium' ? 37 : 31;
 
-  const propStyle = arrayToObject(styleWrapper);
+  const propStyle = arrayToObject(props.style);
   return (
     <View
+      {...props}
       style={[
         styles.wrapper,
         {
@@ -55,13 +55,7 @@ export default function CustomButton({
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={onPress}
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          flex: 1,
-          flexDirection: 'row',
-          columnGap: scale(10),
-        }}>
+        style={styles.button}>
         {iconLeft && <IconLeft style={{...styles.icon, ...styleIcon}} />}
         <CustomText
           textType={styleText?.textType || 'medium'}
@@ -79,6 +73,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     borderRadius: 12,
     width: '100%',
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    columnGap: scale(10),
   },
   text: {
     color: COLORS.textSub,

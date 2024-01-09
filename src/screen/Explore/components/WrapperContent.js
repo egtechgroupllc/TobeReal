@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {CustomButton} from '../../../components';
+import {Category, CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 
@@ -11,7 +11,9 @@ export default function WrapperContent({
   subHeading,
   styleWrapper,
   isSeeAll,
+  isCategory,
   onPressSeeAll = funcFallBack,
+  onPressCategory = funcFallBack,
 }) {
   return (
     <View style={[styles.wrapper, styleWrapper]}>
@@ -22,9 +24,11 @@ export default function WrapperContent({
             justifyContent: 'space-between',
             columnGap: scale(8),
           }}>
-          <CustomText textType="bold" style={styles.text}>
-            {heading}
-          </CustomText>
+          {heading && (
+            <CustomText textType="bold" style={styles.text}>
+              {heading}
+            </CustomText>
+          )}
           {isSeeAll && (
             <CustomText
               textType="bold"
@@ -38,10 +42,27 @@ export default function WrapperContent({
             </CustomText>
           )}
         </View>
-        <CustomText textType="regular" style={styles.textSub}>
-          {subHeading}
-        </CustomText>
+
+        {subHeading && (
+          <CustomText textType="regular" style={styles.textSub}>
+            {subHeading}
+          </CustomText>
+        )}
       </View>
+
+      {isCategory && (
+        <Category
+          data={[
+            'Jakarta',
+            'Bandung',
+            'Tangerang',
+            'Jakarta',
+            'Bandung',
+            'Tangerang',
+          ]}
+          onPress={onPressCategory}
+        />
+      )}
 
       <View style={styles.content}>{children}</View>
     </View>

@@ -105,7 +105,7 @@ export default function FindContent() {
           iconStyle={{borderRadius: 4}}
         />
         <CustomButton
-          styleWrapper={styles.question}
+          style={styles.question}
           text="?"
           styleText={{
             color: COLORS.white,
@@ -122,7 +122,7 @@ export default function FindContent() {
           textType: 'bold',
           textTransform: 'uppercase',
         }}
-        styleWrapper={{
+        style={{
           width: '92%',
         }}
       />

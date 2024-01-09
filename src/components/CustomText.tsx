@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TextProps, TextStyle} from 'react-native';
-import {COLORS, FONTS, scale} from '../assets/constants';
+import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
 import {arrayToObject} from '../utils/arrayToObject';
 
 export type CustomTextProps = {
@@ -33,7 +33,7 @@ export default function CustomText({
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: scale(12),
+    fontSize: SIZES.small,
     color: COLORS.text,
   },
 });
