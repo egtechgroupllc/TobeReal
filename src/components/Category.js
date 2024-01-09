@@ -3,7 +3,8 @@ import React, {useState} from 'react';
 import {COLORS, WIDTH, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
-export default function Category({data = [], onPress}) {
+const funcFallBack = () =>{}
+export default function Category({data = [], onPress=funcFallBack}) {
   const [select, setSelect] = useState(data[1]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);

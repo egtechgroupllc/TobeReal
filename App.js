@@ -5,6 +5,7 @@ import {StyleSheet, Text, TextInput, StatusBar} from 'react-native';
 import BottomTab from './src/navigation/BottomTab';
 import {COLORS} from './src/assets/constants';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import NavigationAuth from './src/navigation/NavigationAuth';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -40,6 +41,7 @@ export default function App() {
                 backgroundColor: '#e6e7e8',
               },
             }}>
+              <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
             <Stack.Screen name="BottomTab" component={BottomTab} />
           </Stack.Navigator>
         </NavigationContainer>
