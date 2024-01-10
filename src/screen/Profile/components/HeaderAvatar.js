@@ -15,10 +15,11 @@ export default function HeaderAvatar({
   notify = funcFallBack,
   goback,
   noti,
+  style,
 }) {
   return (
     <View>
-    <View style={{marginTop: scale(50), marginLeft: scale(40)}}>
+    <View style={[styles.head, style]}>
         <CustomText textType="bold" style={styles.textHeading}>
           {heading}
         </CustomText>
@@ -54,6 +55,9 @@ export default function HeaderAvatar({
 }
 
 const styles = StyleSheet.create({
+  head:{
+    marginTop: scale(50), marginLeft: scale(40)
+  },
   wrapper: {
     backgroundColor: COLORS.grey,
     height: scale(188),

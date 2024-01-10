@@ -8,37 +8,200 @@ import {
   IconEditProfile,
   IconGoBack,
   IconNotification,
+  IconRight,
 } from '../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function CategoriesButton({title}) {
-    return (
-        <TouchableOpacity>
-        <LinearGradient
-          colors={['#F0B90B', '#FFFFFF00']}
-          start={{x: 0, y: 0}}
-          end={{x: 0, y: 0.8}}
-          style={styles.button}>
-          <CustomText textType="bold" style={{...styles.text2}}>
-            {title}
-          </CustomText>
-        </LinearGradient>
-      </TouchableOpacity>
-    )
+export default function CategoriesButton({
+  title,
+  viewpersonal,
+  onPress,
+  changePW,
+  large,
+  small,
+  style,
+  client,
+  customerClient,
+  personalInformation,
+  number,
+  postManagement
+}) {
+  return (
+    <View style={style}>
+      {large && (
+        <TouchableOpacity onPress={onPress}>
+          <LinearGradient
+            colors={['#F0B90B', '#FFFFFF00']}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 0.8}}
+            style={styles.button}>
+            <CustomText textType="bold" style={{...styles.text2}}>
+              {title}
+            </CustomText>
+            <IconRight />
+          </LinearGradient>
+        </TouchableOpacity>
+      )}
+        {postManagement && (
+        <View>
+          <LinearGradient
+            colors={['#F0B90B', '#FFFFFF00']}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 0.8}}
+            style={styles.button}>
+              <CustomText textType="medium" style={{...styles.text2}}>
+              {number}
+            </CustomText>
+            <CustomText textType="medium"  style={{...styles.text2}}>
+              {title}
+            </CustomText>
+            <CustomText textType="medium" style={{...styles.text2}}>
+            </CustomText>
+          </LinearGradient>
+        </View>
+      )}
+      {small && (
+        <TouchableOpacity onPress={onPress}>
+          <LinearGradient
+            colors={['#F0B90B', '#FFFFFF00']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={[styles.buttonSmall]}>
+            <CustomText textType="bold" style={{...styles.text2}}>
+              {title}
+            </CustomText>
+            <IconRight />
+          </LinearGradient>
+        </TouchableOpacity>
+      )}
+      {viewpersonal && (
+        <View style={styles.box}>
+            <View>
+            <TouchableOpacity
+              onPress={changePW}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <CustomText textType="bold" style={{...styles.text2}}>
+                Change password
+              </CustomText>
+              <View style={{marginLeft: scale(165)}}>
+                <IconRight />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={personalInformation}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <CustomText textType="bold" style={{...styles.text2}}>
+                Personal Information
+              </CustomText>
+              <IconRight />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+      {client && (
+        <View style={styles.box}>
+          <View>
+            <TouchableOpacity
+              onPress={customerClient}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <CustomText textType="bold" style={{...styles.text2}}>
+                Customers need to buy the project
+              </CustomText>
+              <View style={{marginLeft: scale(55)}}>
+                <IconRight />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={customerClient}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <CustomText textType="bold" style={{...styles.text2}}>
+                Customers need to buy - need to rent
+              </CustomText>
+              <IconRight />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={customerClient}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <CustomText textType="bold" style={{...styles.text2}}>
+                Contact purchased
+              </CustomText>
+              <IconRight />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    </View>
+  );
 }
 const styles = StyleSheet.create({
-    button: {
-      alignItems: 'center',
-      borderRadius: scale(4),
-      height: scale(29),
-      justifyContent: 'center',
-      marginTop: scale(70),
-      paddingHorizontal: scale(10),
-      width: scale(325),
-      borderWidth: scale(1),
-      borderColor:'#00000040'
+  button: {
+    backgroundColor:'white',
+    alignItems: 'center',
+    borderRadius: scale(4),
+    height: scale(29),
+    justifyContent: 'space-between',
+    marginTop: scale(20),
+    paddingHorizontal: scale(10),
+    width: scale(325),
+    borderWidth: scale(0.5),
+    borderColor: '#F0B90B',
+    shadowColor: '#00000040',
+    shadowOffset: {
+      width: 0,
+      height: 5,
     },
-    text2: {
-        fontSize: SIZES.small,
-      },
-  });
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
+    flexDirection: 'row',
+    paddingHorizontal: scale(20),
+  },
+  buttonSmall: {
+    alignItems: 'center',
+    borderRadius: scale(36),
+    height: scale(29),
+    justifyContent: 'space-between',
+    marginTop: scale(20),
+    paddingHorizontal: scale(10),
+    width: scale(156),
+    borderWidth: scale(0.5),
+    borderColor: '#0000001A',
+    flexDirection: 'row',
+    paddingHorizontal: scale(7),
+  },
+  text2: {
+    fontSize: SIZES.small,
+  },
+  box: {
+    height: scale(70),
+    backgroundColor: '#EEEEEE',
+    borderBottomLeftRadius: scale(5),
+    borderBottomRightRadius: scale(5),
+    borderBottomStartRadius: scale(5),
+    borderBottomEndRadius: scale(5),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(20),
+    paddingTop: scale(10),
+  },
+});
