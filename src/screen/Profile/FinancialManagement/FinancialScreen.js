@@ -4,7 +4,7 @@ import MainAuth from '../../../components/MainAuth';
 import Main from './components/Main';
 
 
-export default function ForgotPasswordScreen() {
+export default function FinancialScreen() {
   return (
     <MainAuth>
         <Main/>

@@ -6,6 +6,7 @@ import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS} from './src/assets/constants';
 import BottomTab from './src/navigation/BottomTab';
 import NavigationAuth from './src/navigation/NavigationAuth';
+import NavigationProfile from './src/navigation/NavigationProfile';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -42,6 +43,10 @@ export default function App() {
               },
             }}>
             <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
+            <Stack.Screen
+              name="NavigationProfile"
+              component={NavigationProfile}
+            />
             <Stack.Screen name="BottomTab" component={BottomTab} />
           </Stack.Navigator>
         </NavigationContainer>

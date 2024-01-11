@@ -5,6 +5,7 @@ import CustomText from '../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {
   Avatar,
+  IconCamera,
   IconEditProfile,
   IconGoBack,
   IconNotification,
@@ -18,11 +19,18 @@ export default function AvatarImage({
   changeName,
   upgrade,
   name,
+  camera,
+  onPressCamera
 }) {
   return (
     <View style={{alignItems: 'center', marginTop: scale(-60)}}>
       <View style={{flexDirection: 'row'}}>
         <Avatar />
+        {camera&&(
+          <TouchableOpacity onPress={onPressCamera} style={{marginTop:scale(100)}}>
+          <IconCamera/>
+          </TouchableOpacity>
+        )}
         {upgrade && (
           <TouchableOpacity onPress={onPressUpgrade}>
             <LinearGradient

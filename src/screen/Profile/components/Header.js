@@ -6,48 +6,42 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {IconGoBack, IconNotification} from '../../../assets/icon/Icon';
 
 const funcFallBack = () => {};
-export default function HeaderAvatar({
+export default function Header({
   children,
-  heading,
   subHeading,
   styleWrapper,
   onPress = funcFallBack,
   notify = funcFallBack,
   goback,
   noti,
-  style,
 }) {
   return (
     <View>
-      <View style={[styles.head, style]}>
-        <CustomText textType="bold" style={styles.textHeading}>
-          {heading}
-        </CustomText>
-      </View>
-      <View style={[styles.wrapper, styleWrapper]}>
+      <View style={[styleWrapper]}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
             marginTop: scale(10),
-            marginHorizontal: scale(10),
           }}>
           {goback && (
             <TouchableOpacity onPress={onPress}>
               <IconGoBack />
             </TouchableOpacity>
           )}
-          <CustomText textType="semiBold" style={styles.text}>
-            {subHeading}
-          </CustomText>
+            <View style={{flexDirection:'row'}}>
+              <CustomText textType="semiBold" style={styles.text}>
+                {subHeading}
+              </CustomText>
+              <CustomText textType="semiBold" style={styles.text}></CustomText>
+            </View>
           {noti && (
             <TouchableOpacity onPress={notify}>
-              <IconNotification />
+              <IconNotification fill={'#000000'}/>
             </TouchableOpacity>
           )}
         </View>
-        <View style={styles.content}>{children}</View>
       </View>
     </View>
   );
@@ -55,8 +49,7 @@ export default function HeaderAvatar({
 
 const styles = StyleSheet.create({
   head: {
-    marginTop: scale(50),
-    marginLeft: scale(40),
+    flex: 1,
   },
   wrapper: {
     backgroundColor: COLORS.grey,
@@ -65,7 +58,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.medium,
-    color: COLORS.white,
+    color: COLORS.black,
   },
   textHeading: {
     fontSize: SIZES.xxLarge,

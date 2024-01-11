@@ -12,6 +12,7 @@ export const COLORS = {
   textSub: '#7d7d7d',
   white: '#fff',
   grey: '#B9B9B9',
+  black: '#000000',
 };
 export const WIDTH = {
   widthScreen: width,

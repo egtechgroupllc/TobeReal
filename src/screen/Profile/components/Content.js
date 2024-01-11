@@ -15,15 +15,51 @@ import LinearGradient from 'react-native-linear-gradient';
 import CategoriesButton from './CategoriesButton';
 export default function Content() {
   const navigation = useNavigation();
-  const [check, setCheck] = useState(false);
+  const [viewpersonal, setViewpersonal] = useState(false);
+  const [client, setClient] = useState(false);
   const toggleCheckBox = () => {
     setCheck(prevCheck => !prevCheck);
   };
-  const gotoRegister = () => {
-    navigation.navigate('RegisterScreen');
+  const viewPersonal = () => {
+    setViewpersonal(prevViewpersonal => !prevViewpersonal);
   };
-  const gotoForgotPassword = () => {
-    navigation.navigate('ForgotPasswordScreen');
+  const viewClient = () => {
+    setClient(prevClient => !prevClient);
+  };
+  const changePW = () => {
+    navigation.navigate('ChangePasswordScreen');
+  };
+  const personalInformation = () => {
+    navigation.navigate('InformationScreen');
+  };
+  const financial = () => {
+    navigation.navigate('FinancialScreen');
+  };
+  const FaceId = () => {
+
+  };
+  const priceList= () => {
+    navigation.navigate('PriceListScreen');
+  };
+  const customerManagement = () => {
+    navigation.navigate('CustomerManagementScreen');
+  };
+  const managingTradeFloor = () => {
+    navigation.navigate('TradingFloorScreen');
+  };
+  const seeTheNews= () => {
+    navigation.navigate('NewsSavedScreen');
+  };
+  const  postManagement= () => {
+    navigation.navigate('PostManagementScreen');
+  };
+  const CustomersBuy = () => {
+    navigation.navigate('CustomersBuyScreen');
+  
+  };
+  const CustomersRent = () => {
+    navigation.navigate('CustomersRentScreen');
+  
   };
   const gotoHome = () => {
     navigation.navigate('BottomTab');
@@ -93,7 +129,17 @@ export default function Content() {
           </View>
         </View>
       </View>
-        <CategoriesButton title={"asddsa"}/>
+        <CategoriesButton title={"View personal information"} onPress={viewPersonal} viewpersonal={viewpersonal} changePW={changePW} large={true} personalInformation={personalInformation}/>
+        <View style={{flexDirection:'row'}}>
+        <CategoriesButton title={"See the news saved"} onPress={seeTheNews} small={true}/>
+        <CategoriesButton title={"Post management"} onPress={postManagement} small={true} style={{marginLeft: scale(15)}}/>
+        </View>
+        <CategoriesButton title={"Financial management"} onPress={financial} large={true} />
+        <CategoriesButton title={"Customer management"} onPress={customerManagement} large={true} />
+        <CategoriesButton title={"Managing the trading floor"} onPress={managingTradeFloor} large={true} />
+        <CategoriesButton title={"Client"} onPress={viewClient} large={true} client={client} customerBuy={CustomersBuy} customerRent={CustomersRent}/>
+        <CategoriesButton title={"Posted price list"} onPress={priceList} large={true} />
+        <CategoriesButton title={"Install Face ID"} onPress={FaceId} large={true} />
     </View>
   );
 }
@@ -106,7 +152,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: COLORS.grey,
     height: scale(85),
-    width: '85%',
+    width: scale(325),
     borderRadius: scale(5),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
