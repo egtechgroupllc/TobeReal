@@ -1,16 +1,27 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
-import {scale} from '../assets/constants';
+import {images, scale} from '../assets/constants';
 
 export default function MainWrapper({children}) {
   return (
-    <View style={styles.wrapper}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled">
-        <View>{children}</View>
-      </ScrollView>
-    </View>
+    <ImageBackground
+      source={images.background}
+      resizeMode="stretch"
+      style={{flex: 1}}>
+      <View style={styles.wrapper}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled">
+          <View>{children}</View>
+        </ScrollView>
+      </View>
+    </ImageBackground>
   );
 }
 

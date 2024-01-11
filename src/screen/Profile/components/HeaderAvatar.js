@@ -18,37 +18,36 @@ export default function HeaderAvatar({
 }) {
   return (
     <View>
-    <View style={{marginTop: scale(50), marginLeft: scale(40)}}>
+      <View style={{marginTop: scale(50), marginLeft: scale(40)}}>
         <CustomText textType="bold" style={styles.textHeading}>
           {heading}
         </CustomText>
       </View>
-    <View style={[styles.wrapper, styleWrapper]}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: scale(10),
-          marginHorizontal: scale(10),
-        }}>
-        {goback && (
-          <TouchableOpacity onPress={onPress}>
-            <IconGoBack />
-          </TouchableOpacity>
-        )}
-        <CustomText textType="semiBold" style={styles.text}>
-          {subHeading}
-        </CustomText>
-        {noti && (
-          <TouchableOpacity onPress={notify}>
-            <IconNotification />
-          </TouchableOpacity>
-        )}
-       
+      <View style={[styles.wrapper, styleWrapper]}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: scale(10),
+            marginHorizontal: scale(10),
+          }}>
+          {goback && (
+            <TouchableOpacity onPress={onPress}>
+              <IconGoBack />
+            </TouchableOpacity>
+          )}
+          <CustomText textType="semiBold" style={styles.text}>
+            {subHeading}
+          </CustomText>
+          {noti && (
+            <TouchableOpacity onPress={notify}>
+              <IconNotification />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.content}>{children}</View>
       </View>
-      <View style={styles.content}>{children}</View>
-    </View>
     </View>
   );
 }

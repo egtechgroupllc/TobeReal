@@ -16,7 +16,7 @@ import {
 import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 export default function Content() {
   const navigation = useNavigation();
   const [check, setCheck] = useState(false);
@@ -24,14 +24,15 @@ export default function Content() {
     setCheck(prevCheck => !prevCheck);
   };
   const gotoRegister = () => {
-    navigation.navigate("RegisterScreen"); 
+    navigation.navigate('RegisterScreen');
   };
   const gotoForgotPassword = () => {
-    navigation.navigate("ForgotPasswordScreen"); 
+    navigation.navigate('ForgotPasswordScreen');
   };
   const gotoHome = () => {
-    navigation.navigate("BottomTab"); 
+    navigation.navigate('BottomTab');
   };
+
   return (
     <View style={styles.container}>
       <CustomText
@@ -41,7 +42,11 @@ export default function Content() {
       </CustomText>
       <CustomInput
         placeholder="example@gmail.com"
-        styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
+        styleWrapper={{
+          width: '80%',
+          marginBottom: scale(25),
+          height: scale(48),
+        }}
       />
       <CustomText
         textType="medium"
@@ -50,7 +55,7 @@ export default function Content() {
       </CustomText>
       <CustomInput
         placeholder="Enter Your Password"
-        styleWrapper={{width: '80%',height:scale(48)}}
+        styleWrapper={{width: '80%', height: scale(48)}}
         iconRight={IconViewablePassword}
       />
       <View

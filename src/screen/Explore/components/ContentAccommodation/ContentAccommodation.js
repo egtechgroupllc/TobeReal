@@ -3,9 +3,10 @@ import React from 'react';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import {scale} from '../../../../assets/constants';
-import {formatPrice} from '../../../../utils/formatPrice';
+import {formatPrice} from '../../../../utils/format';
 import RecommendedUnitItem from './RecommendedUnitItem';
 import ThematicInstagram from './ThematicInstagram';
+import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
 
 export default function ContentAccommodation() {
   return (
@@ -104,6 +105,8 @@ export default function ContentAccommodation() {
           )}
         />
       </WrapperContent>
+
+      <VideoInfluencerApproved />
     </View>
   );
 }

@@ -6,7 +6,7 @@ import Main from './components/Main';
 export default function LoginScreen() {
   return (
     <MainAuth>
-        <Main/>
+      <Main />
     </MainAuth>
   );
 }

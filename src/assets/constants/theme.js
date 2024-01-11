@@ -11,7 +11,7 @@ export const COLORS = {
   text: '#3b3a3a',
   textSub: '#7d7d7d',
   white: '#fff',
-  grey:'#B9B9B9'
+  grey: '#B9B9B9',
 };
 export const WIDTH = {
   widthScreen: width,

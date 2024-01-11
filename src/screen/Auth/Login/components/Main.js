@@ -7,22 +7,28 @@ import CustomText from '../../../../components/CustomText';
 import Content from './Content';
 import Wrapper from '../../components/Wrapper';
 
-
 export default function Main() {
   return (
     <View style={styles.container}>
-      <View style={{flexDirection:'row',marginTop: scale(80),alignItems: 'center'}}>
-        <Wrapper Heading1="Hi, Welcome Back!" styleWrapper={{flexDirection:'row', marginRight:scale(5)}}/>
-        <IconHi/>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: scale(80),
+          alignItems: 'center',
+        }}>
+        <Wrapper
+          Heading1="Hi, Welcome Back! 👋"
+          styleWrapper={{flexDirection: 'row', marginRight: scale(5)}}
+        />
       </View>
-      <Content/>
+      <Content />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     alignItems: 'center',
   },
 });

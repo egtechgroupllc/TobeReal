@@ -11,7 +11,7 @@ import CustomText from '../../../../components/CustomText';
 import {IconExplore, IconHouse, IconMarker} from '../../../../assets/icon/Icon';
 import Ribbon from '../../../../components/Ribbon';
 import Star from '../../../../components/Star';
-import {formatPrice} from '../../../../utils/formatPrice';
+import {formatPrice} from '../../../../utils/format';
 import CustomImage from '../../../../components/CustomImage';
 
 export default function BoxPlaceItem({
