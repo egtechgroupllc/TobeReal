@@ -18,10 +18,16 @@ export default function InformationScreen() {
   const changeName= () =>{
 
   }
+  const notify= () =>{
+
+  }
+  const onPressCamera = () =>{
+
+  }
   return (
     <MainAuth>
-        <HeaderAvatar noti={true} notify={goBack} goback={true} onPress={goBack} subHeading={"Personal Information"}/>
-        <AvatarImage name={"John"} changeName={true} onPressChangeName={changeName}/>
+        <HeaderAvatar noti={true} notify={notify} goback={true} onPress={goBack} subHeading={"Personal Information"}/>
+        <AvatarImage name={"John"} changeName={true} onPressChangeName={changeName} camera={true} onPressCamera={onPressCamera}/>
         <MidContent/>
         <BotContent/>
     </MainAuth>

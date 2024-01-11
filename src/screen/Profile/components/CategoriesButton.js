@@ -21,11 +21,14 @@ export default function CategoriesButton({
   small,
   style,
   client,
-  customerClient,
+  customerBuy,
+  customerRent,
+  contactPurchase,
   personalInformation,
   number,
   postManagement
-}) {
+}) 
+{
   return (
     <View style={style}>
       {large && (
@@ -110,7 +113,7 @@ export default function CategoriesButton({
         <View style={styles.box}>
           <View>
             <TouchableOpacity
-              onPress={customerClient}
+              onPress={customerBuy}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -124,7 +127,7 @@ export default function CategoriesButton({
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={customerClient}
+              onPress={customerRent}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -136,7 +139,7 @@ export default function CategoriesButton({
               <IconRight />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={customerClient}
+              onPress={contactPurchase}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',

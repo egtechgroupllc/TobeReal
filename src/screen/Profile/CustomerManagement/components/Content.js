@@ -13,6 +13,9 @@ export default function Content() {
   const goBack = () => {
     navigation.goBack();
   };
+  const listCustomers= () => {
+    navigation.navigate("ListOfCustomersScreen")
+  };
   const onPress= () => {
   };
   const notify = () => {
@@ -20,7 +23,7 @@ export default function Content() {
   return (
     <View style={styles.container}>
           <Header goback={true} subHeading={'Customer management'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={"List of customers"} onPress={onPress} large={true} style={{marginTop:scale(10)}}/>
+          <CategoriesButton title={"List of customers"} onPress={listCustomers} large={true} style={{marginTop:scale(10)}}/>
           <CategoriesButton title={"Customers see postings"} onPress={onPress} large={true}/>
     </View>
   );

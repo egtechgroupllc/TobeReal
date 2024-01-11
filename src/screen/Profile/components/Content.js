@@ -33,7 +33,10 @@ export default function Content() {
     navigation.navigate('InformationScreen');
   };
   const financial = () => {
-    
+    navigation.navigate('FinancialScreen');
+  };
+  const FaceId = () => {
+
   };
   const priceList= () => {
     navigation.navigate('PriceListScreen');
@@ -50,8 +53,13 @@ export default function Content() {
   const  postManagement= () => {
     navigation.navigate('PostManagementScreen');
   };
-  const gotoForgotPassword = () => {
-    navigation.navigate('ForgotPasswordScreen');
+  const CustomersBuy = () => {
+    navigation.navigate('CustomersBuyScreen');
+  
+  };
+  const CustomersRent = () => {
+    navigation.navigate('CustomersRentScreen');
+  
   };
   const gotoHome = () => {
     navigation.navigate('BottomTab');
@@ -129,9 +137,9 @@ export default function Content() {
         <CategoriesButton title={"Financial management"} onPress={financial} large={true} />
         <CategoriesButton title={"Customer management"} onPress={customerManagement} large={true} />
         <CategoriesButton title={"Managing the trading floor"} onPress={managingTradeFloor} large={true} />
-        <CategoriesButton title={"Client"} onPress={viewClient} large={true} client={client}/>
+        <CategoriesButton title={"Client"} onPress={viewClient} large={true} client={client} customerBuy={CustomersBuy} customerRent={CustomersRent}/>
         <CategoriesButton title={"Posted price list"} onPress={priceList} large={true} />
-        <CategoriesButton title={"Install Face ID"} onPress={financial} large={true} />
+        <CategoriesButton title={"Install Face ID"} onPress={FaceId} large={true} />
     </View>
   );
 }

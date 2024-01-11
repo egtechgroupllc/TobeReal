@@ -1,6 +1,11 @@
 import {ProfileScreen} from '../screen/Profile';
 import { ChangePasswordScreen } from '../screen/Profile/ChangePassword';
+import { CustomersBuyScreen } from '../screen/Profile/Client/CustomersBuy';
+import { CustomersRentScreen } from '../screen/Profile/Client/CustomersRent';
 import CustomerManagementScreen from '../screen/Profile/CustomerManagement/CustomerManagementScreen';
+import { ListOfCustomersScreen } from '../screen/Profile/CustomerManagement/ListOfCustomers';
+
+import FinancialScreen from '../screen/Profile/FinancialManagement/FinancialScreen';
 import {InformationScreen} from '../screen/Profile/Information';
 import { NewsSavedScreen } from '../screen/Profile/NewsSaved';
 import PostManagementScreen from '../screen/Profile/PostManagement/PostManagement';
@@ -39,5 +44,21 @@ export default routerProfile = [
   {
     name: 'PriceListScreen',
     component: PriceListScreen,
+  },
+  {
+    name: 'FinancialScreen',
+    component: FinancialScreen,
+  },
+  {
+    name: 'ListOfCustomersScreen',
+    component: ListOfCustomersScreen,
+  },
+  {
+    name: 'CustomersBuyScreen',
+    component: CustomersBuyScreen,
+  },
+  {
+    name: 'CustomersRentScreen',
+    component: CustomersRentScreen,
   },
 ];

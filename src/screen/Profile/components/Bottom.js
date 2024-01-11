@@ -47,36 +47,35 @@ export default function Bottom() {
           </View>
         </View>
       </View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', marginTop: scale(10)}}>
         <TouchableOpacity
-          style={{borderWidth: scale(1), width: scale(23), height: scale(23)}}>
+          style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
           <IconShare />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{borderWidth: scale(1), width: scale(23), height: scale(23)}}>
+          style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
           <IconFacebook />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{borderWidth: scale(1), width: scale(23), height: scale(23)}}>
+          style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
           <IconTwitter />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{borderWidth: scale(1), width: scale(23), height: scale(23)}}>
+          style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
           <IconYoutube />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{borderWidth: scale(1), width: scale(23), height: scale(23)}}>
+          style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
           <IconInstagram />
         </TouchableOpacity>
       </View>
       <TouchableOpacity
         style={{
           height: scale(48),
-          marginTop: scale(40),
+          marginTop: scale(20),
           marginBottom: scale(50),
         }}
-        onPress={Logout}
-        >
+        onPress={Logout}>
         <LinearGradient
           colors={['#F7E75A', '#FFC702']}
           start={{x: 0, y: 0}}
