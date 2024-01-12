@@ -10,6 +10,7 @@ import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
+import Button from '../../components/Button';
 export default function Content() {
   const navigation = useNavigation();
   const goBack = () => {
@@ -17,7 +18,8 @@ export default function Content() {
   };
   const notify = () => {
   };
-
+  const ok = () => {
+  };
   return (
     <View style={styles.container}>
           <Header goback={true} subHeading={'Change Password'} noti={true} onPress={goBack} notify={notify}></Header>
@@ -28,7 +30,7 @@ export default function Content() {
       </CustomText>
           <CustomInput
             styleWrapper={{
-              width: scale(318),
+              width:'90%',
               marginBottom: scale(25),
               height: scale(40),
               backgroundColor:'#E3E3E3'
@@ -41,7 +43,7 @@ export default function Content() {
       </CustomText>
           <CustomInput
             styleWrapper={{
-              width: scale(318),
+              width:'90%',
               marginBottom: scale(25),
               height: scale(40),
               backgroundColor:'#E3E3E3'
@@ -54,23 +56,13 @@ export default function Content() {
       </CustomText>
           <CustomInput
             styleWrapper={{
-              width: scale(318),
+              width:'90%',
               marginBottom: scale(25),
               height: scale(40),
               backgroundColor:'#E3E3E3'
             }}
           />
-          <TouchableOpacity>
-            <LinearGradient
-              colors={['#F7E75A', '#FFC702']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <CustomText textType="semiBold" style={{...styles.text2, color:COLORS.black}}>
-                ok
-              </CustomText>
-            </LinearGradient>
-          </TouchableOpacity>
+         <Button title={'ok'} onPress={ok}/>
     </View>
   );
 }

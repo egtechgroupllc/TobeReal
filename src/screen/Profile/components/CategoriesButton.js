@@ -30,7 +30,7 @@ export default function CategoriesButton({
 }) 
 {
   return (
-    <View style={style}>
+    <View >
       {large && (
         <TouchableOpacity onPress={onPress}>
           <LinearGradient
@@ -160,12 +160,12 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor:'white',
     alignItems: 'center',
+    alignSelf:'center',
     borderRadius: scale(4),
     height: scale(29),
+    width:'100%',
     justifyContent: 'space-between',
     marginTop: scale(20),
-    paddingHorizontal: scale(10),
-    width: scale(325),
     borderWidth: scale(0.5),
     borderColor: '#F0B90B',
     shadowColor: '#00000040',
@@ -185,12 +185,12 @@ const styles = StyleSheet.create({
     height: scale(29),
     justifyContent: 'space-between',
     marginTop: scale(20),
-    paddingHorizontal: scale(10),
-    width: scale(156),
+    // flex:1,
     borderWidth: scale(0.5),
     borderColor: '#0000001A',
     flexDirection: 'row',
     paddingHorizontal: scale(7),
+    minWidth:'45%'
   },
   text2: {
     fontSize: SIZES.small,

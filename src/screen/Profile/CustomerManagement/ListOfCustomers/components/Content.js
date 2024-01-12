@@ -69,8 +69,9 @@ export default function Content() {
                   alignItems: 'center',
                   backgroundColor: '#FADD55',
                   borderRadius: scale(10),
-                  width: scale(325),
+                  width: '90%',
                   height: scale(63),
+                  alignSelf:'center'
                 }}>
                 {item?.image && (
                   <View

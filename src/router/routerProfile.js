@@ -4,6 +4,8 @@ import { CustomersBuyScreen } from '../screen/Profile/Client/CustomersBuy';
 import { CustomersRentScreen } from '../screen/Profile/Client/CustomersRent';
 import CustomerManagementScreen from '../screen/Profile/CustomerManagement/CustomerManagementScreen';
 import { ListOfCustomersScreen } from '../screen/Profile/CustomerManagement/ListOfCustomers';
+import { DepositWithdrawScreen } from '../screen/Profile/FinancialManagement/DepositWithdraw';
+import { AddBankScreen } from '../screen/Profile/FinancialManagement/DepositWithdraw/AddBank';
 
 import FinancialScreen from '../screen/Profile/FinancialManagement/FinancialScreen';
 import {InformationScreen} from '../screen/Profile/Information';
@@ -60,5 +62,13 @@ export default routerProfile = [
   {
     name: 'CustomersRentScreen',
     component: CustomersRentScreen,
+  },
+  {
+    name: 'DepositWithdrawScreen',
+    component: DepositWithdrawScreen,
+  },
+  {
+    name: 'AddBankScreen',
+    component: AddBankScreen,
   },
 ];

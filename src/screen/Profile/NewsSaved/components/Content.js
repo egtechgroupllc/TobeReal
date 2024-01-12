@@ -30,6 +30,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
+    width:'90%'
   },
   text: {
     fontSize: SIZES.small,

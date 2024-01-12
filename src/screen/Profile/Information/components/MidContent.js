@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#EEEEEE',
     height: scale(87),
-    width: scale(331),
+    width:'90%',
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   box1: {
     backgroundColor: '#EEEEEE',
     height: scale(62),
-    width: scale(331),
+    width:'90%',
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(15),

@@ -74,6 +74,7 @@ export default function Bottom() {
           height: scale(48),
           marginTop: scale(20),
           marginBottom: scale(50),
+          width:'85%'
         }}
         onPress={Logout}>
         <LinearGradient
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#0000004D',
     height: scale(85),
-    width: scale(325),
+    width: '90%',
     borderRadius: scale(5),
     paddingHorizontal: scale(10),
     alignItems: 'center',
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     height: scale(48),
     justifyContent: 'center',
-    width: scale(325),
+    // width: scale(325),
   },
   text2: {
     fontSize: SIZES.medium,

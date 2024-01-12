@@ -11,7 +11,6 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
-import LinearGradient from 'react-native-linear-gradient';
 import CategoriesButton from './CategoriesButton';
 export default function Content() {
   const navigation = useNavigation();
@@ -35,10 +34,8 @@ export default function Content() {
   const financial = () => {
     navigation.navigate('FinancialScreen');
   };
-  const FaceId = () => {
-
-  };
-  const priceList= () => {
+  const FaceId = () => {};
+  const priceList = () => {
     navigation.navigate('PriceListScreen');
   };
   const customerManagement = () => {
@@ -47,19 +44,17 @@ export default function Content() {
   const managingTradeFloor = () => {
     navigation.navigate('TradingFloorScreen');
   };
-  const seeTheNews= () => {
+  const seeTheNews = () => {
     navigation.navigate('NewsSavedScreen');
   };
-  const  postManagement= () => {
+  const postManagement = () => {
     navigation.navigate('PostManagementScreen');
   };
   const CustomersBuy = () => {
     navigation.navigate('CustomersBuyScreen');
-  
   };
   const CustomersRent = () => {
     navigation.navigate('CustomersRentScreen');
-  
   };
   const gotoHome = () => {
     navigation.navigate('BottomTab');
@@ -71,7 +66,7 @@ export default function Content() {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent:'space-between'
+            justifyContent: 'space-between',
           }}>
           <View>
             <CustomText
@@ -81,7 +76,6 @@ export default function Content() {
             </CustomText>
           </View>
           <View>
-
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.white}}>
@@ -109,37 +103,80 @@ export default function Content() {
           </View>
           <View>
             <CustomText
-                textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
-              </CustomText>
-              <CustomText
-                textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
-              </CustomText>
-              <CustomText
-                textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
-                0/3
-              </CustomText>
-              <CustomText
-                textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
-                0/15
-              </CustomText>
+              textType="bold"
+              style={{...styles.text, color: COLORS.white}}></CustomText>
+            <CustomText
+              textType="bold"
+              style={{...styles.text, color: COLORS.white}}></CustomText>
+            <CustomText
+              textType="bold"
+              style={{...styles.text, color: COLORS.white}}>
+              0/3
+            </CustomText>
+            <CustomText
+              textType="bold"
+              style={{...styles.text, color: COLORS.white}}>
+              0/15
+            </CustomText>
           </View>
         </View>
       </View>
-        <CategoriesButton title={"View personal information"} onPress={viewPersonal} viewpersonal={viewpersonal} changePW={changePW} large={true} personalInformation={personalInformation}/>
-        <View style={{flexDirection:'row'}}>
-        <CategoriesButton title={"See the news saved"} onPress={seeTheNews} small={true}/>
-        <CategoriesButton title={"Post management"} onPress={postManagement} small={true} style={{marginLeft: scale(15)}}/>
+      <View style={{alignItems:'center', width:'90%'}}>
+        <CategoriesButton
+          title={'View personal information'}
+          onPress={viewPersonal}
+          viewpersonal={viewpersonal}
+          changePW={changePW}
+          large={true}
+          personalInformation={personalInformation}
+        />
+        <View style={{flexDirection: 'row', justifyContent:'space-between', width:'100%'}}>
+          <CategoriesButton
+            title={'See the news saved'}
+            onPress={seeTheNews}
+            small={true}
+          />
+          <CategoriesButton
+            title={'Post management'}
+            onPress={postManagement}
+            small={true}
+            style={{marginLeft: scale(15)}}
+          />
         </View>
-        <CategoriesButton title={"Financial management"} onPress={financial} large={true} />
-        <CategoriesButton title={"Customer management"} onPress={customerManagement} large={true} />
-        <CategoriesButton title={"Managing the trading floor"} onPress={managingTradeFloor} large={true} />
-        <CategoriesButton title={"Client"} onPress={viewClient} large={true} client={client} customerBuy={CustomersBuy} customerRent={CustomersRent}/>
-        <CategoriesButton title={"Posted price list"} onPress={priceList} large={true} />
-        <CategoriesButton title={"Install Face ID"} onPress={FaceId} large={true} />
+        <CategoriesButton
+          title={'Financial management'}
+          onPress={financial}
+          large={true}
+        />
+        <CategoriesButton
+          title={'Customer management'}
+          onPress={customerManagement}
+          large={true}
+        />
+        <CategoriesButton
+          title={'Managing the trading floor'}
+          onPress={managingTradeFloor}
+          large={true}
+        />
+        <CategoriesButton
+          title={'Client'}
+          onPress={viewClient}
+          large={true}
+          client={client}
+          customerBuy={CustomersBuy}
+          customerRent={CustomersRent}
+        />
+        <CategoriesButton
+          title={'Posted price list'}
+          onPress={priceList}
+          large={true}
+        />
+        <CategoriesButton
+          title={'Install Face ID'}
+          onPress={FaceId}
+          large={true}
+        />
+      </View>
     </View>
   );
 }
@@ -152,7 +189,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: COLORS.grey,
     height: scale(85),
-    width: scale(325),
+    width: '90%',
     borderRadius: scale(5),
     justifyContent: 'center',
     paddingHorizontal: scale(10),

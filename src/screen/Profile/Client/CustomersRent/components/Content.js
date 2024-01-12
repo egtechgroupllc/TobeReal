@@ -12,6 +12,7 @@ import CustomText from '../../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../../components/Header';
+import Button from '../../../components/Button';
 export default function Content() {
   const data = [
     {
@@ -52,7 +53,7 @@ export default function Content() {
     navigation.goBack();
   };
   const notify = () => {};
-
+  const Search = () => {};
   return (
     <View style={styles.container}>
       <Header
@@ -73,7 +74,7 @@ export default function Content() {
       </CustomText>
       <CustomInput
         styleWrapper={{
-          width: scale(318),
+          
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
@@ -86,25 +87,13 @@ export default function Content() {
       </CustomText>
       <CustomInput
         styleWrapper={{
-          width: scale(318),
+          
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
         }}
       />
-      <TouchableOpacity>
-        <LinearGradient
-          colors={['#F7E75A', '#FFC702']}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          style={styles.button}>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text2, color: COLORS.black}}>
-            Search
-          </CustomText>
-        </LinearGradient>
-      </TouchableOpacity>
+      <Button title={'Search'} onPress={Search}/>
       <View style={{marginBottom: scale(50)}}>
         {data && data.length > 0 ? (
           <FlatList
@@ -117,13 +106,14 @@ export default function Content() {
                 <View
                   key={`${item?.id}`}
                   style={{
+                    alignSelf:'center',
                     flexDirection: 'row',
                     marginTop: scale(20),
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     backgroundColor: '#FFFFFF',
                     borderRadius: scale(10),
-                    width: scale(325),
+                    width:'100%',
                     minHeight: scale(94),
                     borderWidth: scale(0.5),
                     borderColor: '#00000040',
@@ -232,6 +222,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
+    width:'90%'
   },
   text: {
     fontSize: SIZES.medium,

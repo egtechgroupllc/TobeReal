@@ -18,7 +18,7 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading={'See the news saved'}
+        subHeading={'Price list post in news'}
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
@@ -80,6 +80,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
+    width:'90%'
   },
   text: {
     fontSize: SIZES.small,
@@ -103,10 +104,8 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#EEEEEE',
     height: scale(85),
-    width: scale(325),
     borderRadius: scale(5),
     justifyContent: 'center',
-    paddingHorizontal: scale(10),
     flexDirection: 'row',
     paddingTop: scale(5),
     marginTop: scale(20),

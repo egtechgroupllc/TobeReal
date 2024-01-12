@@ -37,6 +37,9 @@ export default function Content() {
   const goBack = () => {
     navigation.goBack();
   };
+  const DepositWithdraw = () => {
+    navigation.navigate('DepositWithdrawScreen');
+  };
   const onPress = () => {};
   const notify = () => {};
   return (
@@ -53,7 +56,7 @@ export default function Content() {
           flexDirection: 'row',
           alignSelf: 'center',
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={DepositWithdraw}>
           <LinearGradient
             colors={['#FFFFFF', '#FFC702']}
             start={{x: 0, y: 0}}
@@ -85,6 +88,8 @@ export default function Content() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginTop: scale(30),
+          columnGap:scale(30),
+          
         }}>
         <LinearGradient
           colors={['#FADD55', '#D88A00']}
@@ -261,6 +266,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
+    width:'90%',
     marginTop: scale(30),
     shadowColor: '#000',
     shadowOffset: {
@@ -305,7 +311,6 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#EEEEEE',
     height: scale(91),
-    width: scale(334),
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
@@ -313,7 +318,7 @@ const styles = StyleSheet.create({
   box1: {
     backgroundColor: '#EEEEEE',
     height: scale(91),
-    width: scale(156),
+    flex:1,
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
@@ -321,7 +326,6 @@ const styles = StyleSheet.create({
   },
   historyHeader: {
     flexDirection: 'row',
-    width: scale(335),
     height: scale(29),
     backgroundColor: COLORS.white,
     borderTopLeftRadius: scale(8),
