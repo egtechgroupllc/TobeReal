@@ -13,6 +13,7 @@ import { NewsSavedScreen } from '../screen/Profile/NewsSaved';
 import PostManagementScreen from '../screen/Profile/PostManagement/PostManagement';
 import { PriceListScreen } from '../screen/Profile/PriceList';
 import { TradingFloorScreen } from '../screen/Profile/TradingFloor';
+import { CreateTradingScreen } from '../screen/Profile/TradingFloor/CreateTradingFloor';
 
 export default routerProfile = [
   {
@@ -70,5 +71,9 @@ export default routerProfile = [
   {
     name: 'AddBankScreen',
     component: AddBankScreen,
+  },
+  {
+    name: 'CreateTradingScreen',
+    component: CreateTradingScreen,
   },
 ];

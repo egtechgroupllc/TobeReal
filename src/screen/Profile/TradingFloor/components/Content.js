@@ -14,6 +14,7 @@ export default function Content() {
     navigation.goBack();
   };
   const onPress= () => {
+    navigation.navigate('CreateTradingScreen')
   };
   const notify = () => {
   };
