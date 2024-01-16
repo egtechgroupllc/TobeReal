@@ -6,7 +6,9 @@ import CategoriesButton from './CategoriesButton';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../components/CustomText';
 import { IconNoHistory } from '../../../assets/icon/Icon';
+import {useNavigation} from '@react-navigation/native';
 export default function TabContent() {
+  const navigation = useNavigation();
   const [tabSelect, setTabSelect] = useState('Post news');
   const [viewbenefit, setViewbenefit] = useState(false);
   const [viewpakage, setViewpackage] = useState(false);
@@ -24,6 +26,9 @@ export default function TabContent() {
   const viewTradingflatform= () => {
     setViewtradingflatform(prevViewtradingflatform => !prevViewtradingflatform  );
   };
+  const goPostScreen = () =>{
+    navigation.navigate('PostNewsScreen')
+  }
   const data = [
     // {
     //   id: 1,
@@ -73,8 +78,8 @@ export default function TabContent() {
           <CategoriesButton title={'Posting package'} onPress={viewPackage} viewpackage={viewpakage}/>
           <CategoriesButton title={'Cost for each type of news'} viewcostnew={viewcostnew} onPress={viewCostnew}/>
           <CategoriesButton title={'Create an online trading platform'} viewtradingflatform={viewtradingflatform} onPress={viewTradingflatform}/>
-          <TouchableOpacity
-            style={{alignItems: 'center', marginTop: scale(50)}}>
+          <TouchableOpacity onPress={goPostScreen}
+            style={{alignItems: 'center', marginTop: scale(50), marginBottom:scale(30)}}>
             <LinearGradient
               colors={['#FFE259', '#FFA751']}
               start={{x: 0, y: 0}}

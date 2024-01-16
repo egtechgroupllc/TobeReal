@@ -6,6 +6,7 @@ import {IconBookings, IconBookingsInactive, IconExplore, IconExploreInactive, Ic
 import NavigationExplore from './NavigationExplore';
 import NavigationProfile from './NavigationProfile';
 import { NewsScreen } from '../screen/News';
+import NavigationNews from './NavigationNews';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ export default function BottomTab() {
       />
        <Tab.Screen
         name="Post news"
-        component={NewsScreen}
+        component={NavigationNews}
         options={{
           tabBarIcon: ({ focused }) =>
           getTabBarIcon(focused, <IconNews />, <IconNewsInactive/>),

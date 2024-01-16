@@ -6,7 +6,7 @@ import routerNews from '../router/routerNews';
 
 const Stack = createNativeStackNavigator();
 
-export default function NavigationProfile() {
+export default function NavigationNews() {
   return (
     <Stack.Navigator
       screenOptions={{

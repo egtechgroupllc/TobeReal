@@ -374,6 +374,24 @@ export function IconRight({fill, ...props}) {
     </Svg>
   );
 }
+export function IconDown({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(12)}
+      height={props?.style?.height || scale(9)}
+      viewBox="0 0 12 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M1 1.598c0 .131.044.264.131.374l4.661 5.795a.598.598 0 00.931 0l4.636-5.77a.597.597 0 00-.93-.748L6.256 6.44 2.062 1.223A.597.597 0 001 1.598z"
+        fill="#000"
+        stroke="#000"
+      />
+    </Svg>
+  );
+}
 export function IconShare({fill, ...props}) {
   return (
     <Svg
