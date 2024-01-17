@@ -49,20 +49,20 @@ export default function TabContent() {
       }}>
       <View style={styles.button}>
         <Image
-          source={images.sell}
-          style={{width: scale(47), height: scale(38)}}
+          source={images.lease}
+          style={{width: scale(38), height: scale(38)}}
         />
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-          Sell
+          Lease
         </CustomText>
       </View>
       <View
         style={{
           flexDirection: 'row',
           marginTop: scale(30),
-          columnGap: scale(40),
+          columnGap: scale(30),
         }}>
         <TouchableOpacity
           onPress={toggleCheckBox}

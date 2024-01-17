@@ -369,7 +369,7 @@ export default function CategoriesButton({
                   colors={['#000000', '#000000']}
                   start={{x: 0, y: 0}}
                   end={{x: 0, y: 1}}
-                  style={[styles.item]}>
+                  style={{...styles.item, height: scale(330)}}>
                   <CustomText
                     textType="bold"
                     style={{...styles.text, color: COLORS.white}}>

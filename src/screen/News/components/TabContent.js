@@ -149,6 +149,7 @@ export default function TabContent() {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
+            alignSelf:'center',
             marginTop: scale(150),
             width: scale(325),
           }}>

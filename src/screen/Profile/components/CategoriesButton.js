@@ -87,10 +87,10 @@ export default function CategoriesButton({
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <CustomText textType="bold" style={{...styles.text2}}>
+              <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
                 Change password
               </CustomText>
-              <View style={{marginLeft: scale(165)}}>
+              <View>
                 <IconRight />
               </View>
             </TouchableOpacity>
@@ -119,10 +119,10 @@ export default function CategoriesButton({
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <CustomText textType="bold" style={{...styles.text2}}>
+              <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
                 Customers need to buy the project
               </CustomText>
-              <View style={{marginLeft: scale(55)}}>
+              <View>
                 <IconRight />
               </View>
             </TouchableOpacity>

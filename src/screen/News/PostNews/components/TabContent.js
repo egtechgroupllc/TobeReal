@@ -26,7 +26,12 @@ export default function TabContent() {
   const goSell = () =>{
     navigation.navigate('SellScreen')
   }
-  
+  const goLease = () =>{
+    navigation.navigate('LeaseScreen')
+  }
+  const goRentBuy= () =>{
+    navigation.navigate('RentBuyScreen')
+  }
   return (
     <View
       style={{
@@ -41,8 +46,8 @@ export default function TabContent() {
             Post
           </CustomText>
           <ButtonPost image={images.sell} style={{width:'100%'}} title={'Sell'} styleImage={{width:scale(39), height:scale(39)}} onPress={goSell}/>
-          <ButtonPost image={images.lease} style={{width:'100%'}} title={'Lease'} styleImage={{width:scale(39), height:scale(39)}}/>
-          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={'Need to rent, Need to buy'} styleImage={{width:scale(39), height:scale(39)}}/>
+          <ButtonPost image={images.lease} style={{width:'100%'}} title={'Lease'} styleImage={{width:scale(39), height:scale(39)}} onPress={goLease}/>
+          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={'Need to rent, Need to buy'} styleImage={{width:scale(39), height:scale(39)}}onPress={goRentBuy}/>
     </View>
   );
 }

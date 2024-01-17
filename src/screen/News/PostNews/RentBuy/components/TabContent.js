@@ -49,20 +49,28 @@ export default function TabContent() {
       }}>
       <View style={styles.button}>
         <Image
-          source={images.sell}
+          source={images.rentbuy}
           style={{width: scale(47), height: scale(38)}}
         />
+        <View>
         <CustomText
-          textType="medium"
-          style={{...styles.text2, marginLeft: scale(20)}}>
-          Sell
+          textType="semiBold"
+          style={{...styles.text1, marginLeft: scale(20)}}>
+          Need to rent,
         </CustomText>
+        <CustomText
+          textType="semiBold"
+          style={{...styles.text1, marginLeft: scale(20)}}>
+          Need to buy
+        </CustomText>
+        </View>
       </View>
+    
       <View
         style={{
           flexDirection: 'row',
           marginTop: scale(30),
-          columnGap: scale(40),
+          columnGap: scale(30),
         }}>
         <TouchableOpacity
           onPress={toggleCheckBox}
@@ -71,7 +79,7 @@ export default function TabContent() {
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>
-            Real estate
+            Need employ
           </CustomText>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleCheckBox1} style={styles.buttonSmall}>
@@ -79,114 +87,10 @@ export default function TabContent() {
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>
-            Land for sale
+            Need to buy
           </CustomText>
         </TouchableOpacity>
       </View>
-      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
-        <Text style={{...styles.text, color: COLORS.black}}>0/10</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View></View>
-          <TouchableOpacity style={{marginBottom: scale(10)}}>
-            <IconCamera />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(20),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Legal image
-      </CustomText>
-      <CustomText
-        textType="regular"
-        style={{
-          ...styles.text3,
-          color: COLORS.black,
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Update images to a maximum of two images
-      </CustomText>
-      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
-        <View></View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View></View>
-          <TouchableOpacity style={{marginBottom: scale(10)}}>
-            <IconCamera />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(20),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Video Youtube (Add videos)
-      </CustomText>
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        placeholder="Link Youtube"
-      />
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(20),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Contact Info
-      </CustomText>
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        placeholder="Full name"
-      />
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        placeholder="Phone"
-      />
       <CustomText
         textType="medium"
         style={{
@@ -229,7 +133,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Address
+        Province/city
       </CustomText>
       <TouchableOpacity
         style={{
@@ -242,7 +146,6 @@ export default function TabContent() {
           alignItems: 'center',
           borderRadius: scale(5),
           marginTop: scale(10),
-          marginBottom: scale(30),
         }}>
         <CustomText
           textType="medium"
@@ -250,23 +153,82 @@ export default function TabContent() {
             ...styles.text1,
             color: '#979797',
           }}>
-          Select address
+         Choose province/ city
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      <Image
-        source={images.map}
-        style={{
-          height: scale(323),
-          width: '90%',
-          alignSelf: 'center',
-        }}></Image>
       <CustomText
         textType="medium"
         style={{
           ...styles.text1,
           color: COLORS.black,
+          marginTop: scale(20),
+          alignSelf: 'flex-start',
+          paddingHorizontal: scale(20),
+        }}>
+        District
+      </CustomText>
+      <TouchableOpacity
+        style={{
+          height: scale(36),
+          paddingHorizontal: scale(20),
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#E3E3E3',
+          width: '90%',
+          alignItems: 'center',
+          borderRadius: scale(5),
           marginTop: scale(10),
+        }}>
+        <CustomText
+          textType="medium"
+          style={{
+            ...styles.text1,
+            color: '#979797',
+          }}>
+          Choose District
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      <CustomText
+        textType="medium"
+        style={{
+          ...styles.text1,
+          color: COLORS.black,
+          marginTop: scale(20),
+          alignSelf: 'flex-start',
+          paddingHorizontal: scale(20),
+        }}>
+        Ward/commune
+      </CustomText>
+      <TouchableOpacity
+        style={{
+          height: scale(36),
+          paddingHorizontal: scale(20),
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#E3E3E3',
+          width: '90%',
+          alignItems: 'center',
+          borderRadius: scale(5),
+          marginTop: scale(10),
+          marginBottom: scale(20),
+        }}>
+        <CustomText
+          textType="medium"
+          style={{
+            ...styles.text1,
+            color: '#979797',
+          }}>
+         Choose ward / commune
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      <CustomText
+        textType="medium"
+        style={{
+          ...styles.text1,
+          color: COLORS.black,
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
@@ -277,7 +239,7 @@ export default function TabContent() {
           <TextInput
             multiline
             numberOfLines={4}
-            placeholder="Enter a desciption"
+            placeholder="Enter Title"
             value={inputText}
             onChangeText={handleInputChange}
             style={{...styles.text, color: COLORS.black}}
@@ -303,7 +265,7 @@ export default function TabContent() {
           <TextInput
             multiline
             numberOfLines={4}
-            placeholder="Enter a desciption"
+            placeholder="Enter Description content"
             value={inputText}
             onChangeText={handleInputChange}
             style={{...styles.text, color: COLORS.black}}
@@ -322,7 +284,18 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Acreage (m2)
+        Contact information
+      </CustomText>
+      <CustomText
+        textType="medium"
+        style={{
+          ...styles.text,
+          color: COLORS.black,
+          marginTop: scale(20),
+          alignSelf: 'flex-start',
+          paddingHorizontal: scale(20),
+        }}>
+        First and last name
       </CustomText>
       <CustomInput
         styleWrapper={{
@@ -333,182 +306,28 @@ export default function TabContent() {
           borderWidth: scale(0),
           width: '90%',
         }}
-        placeholder="Enter the land area"
       />
-      <View style={{flexDirection: 'row', paddingHorizontal: scale(25)}}>
-        <View>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}>
-            Horizontal (m)
-          </CustomText>
-          <CustomInput
-            styleWrapper={{
-              height: scale(40),
-              backgroundColor: '#E3E3E3',
-              marginTop: scale(10),
-              borderRadius: scale(5),
-              borderWidth: scale(0),
-              width: '95%',
-            }}
-            placeholder="Enter the land area"
-          />
-        </View>
-        <View>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}>
-            Longs (m)
-          </CustomText>
-          <CustomInput
-            styleWrapper={{
-              height: scale(40),
-              backgroundColor: '#E3E3E3',
-              marginTop: scale(10),
-              borderRadius: scale(5),
-              borderWidth: scale(0),
-              width: '95%',
-              columnGap: scale(10),
-            }}
-            placeholder="Enter the land area"
-          />
-        </View>
-      </View>
       <CustomText
         textType="medium"
         style={{
-          ...styles.text1,
+          ...styles.text,
           color: COLORS.black,
+          marginTop: scale(20),
           alignSelf: 'flex-start',
-          marginTop: scale(10),
           paddingHorizontal: scale(20),
         }}>
-        Price
+          Phone
       </CustomText>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        <CustomInput
-          styleWrapper={{
-            height: scale(40),
-            backgroundColor: '#E3E3E3',
-            marginTop: scale(10),
-            borderRadius: scale(5),
-            borderWidth: scale(0),
-            width: '40%',
-          }}
-          placeholder="Enter price"
-        />
-        <TouchableOpacity
-          style={{
-            height: scale(40),
-            paddingHorizontal: scale(15),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: '#E3E3E3',
-            width: '25%',
-            alignItems: 'center',
-            borderRadius: scale(5),
-            marginTop: scale(10),
-            marginLeft: scale(10),
-          }}>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text,
-              color: '#979797',
-            }}>
-            USD
-          </CustomText>
-          <IconDown />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            height: scale(40),
-            paddingHorizontal: scale(5),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: '#E3E3E3',
-            width: '25%',
-            alignItems: 'center',
-            borderRadius: scale(5),
-            marginTop: scale(10),
-            marginLeft: scale(10),
-          }}>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text3,
-              color: '#979797',
-            }}>
-            Total area
-          </CustomText>
-          <IconDown />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={{
+      <CustomInput
+        styleWrapper={{
+          height: scale(40),
+          backgroundColor: '#E3E3E3',
           marginTop: scale(10),
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <CustomText
-          textType="medium"
-          style={{
-            ...styles.text,
-            color: COLORS.black,
-            paddingHorizontal: scale(20),
-            marginTop: scale(10),
-          }}>
-          Detailed information
-        </CustomText>
-        <IconDown />
-      </TouchableOpacity>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <CustomText
-          textType="medium"
-          style={{
-            ...styles.text3,
-            color: COLORS.black,
-            marginLeft: scale(-45),
-            width: '70%',
-            alignSelf: 'flex-start',
-            marginTop: scale(10),
-          }}>
-          Do you want to deposit with the Vietnamese brokerage community of 10k
-          people?
-        </CustomText>
-        <TouchableOpacity onPress={toggleCheckBox1}>
-          {check1 ? <IconCheckBox /> : <IconUnCheckBox />}
-        </TouchableOpacity>
-      </View>
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text3,
-          color: COLORS.black,
-          paddingHorizontal: scale(20),
-          width: '100%',
-          alignSelf: 'flex-start',
-          marginTop: scale(10),
-        }}>
-        Note: TOBE REAL Real Estate does not allow properties to be posted that
-        are not real or misleading to solicit customer information. If
-        discovered, your account will be permanently banned.
-      </CustomText>
+          borderRadius: scale(5),
+          borderWidth: scale(0),
+          width: '90%',
+        }}
+      />
       <View style={{width:'100%', marginBottom:scale(30)}}>
       <Button title={'Post'} onPress={ok} />
       </View>
@@ -589,8 +408,8 @@ const styles = StyleSheet.create({
   textArea: {
     flexDirection: 'row',
     borderWidth: scale(2),
-    backgroundColor:'#E3E3E3',
     borderColor: '#E3E3E3',
+    backgroundColor:'#E3E3E3',
     width: '90%',
     borderRadius: scale(5),
     height: scale(71),
