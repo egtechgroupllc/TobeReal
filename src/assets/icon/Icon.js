@@ -1035,6 +1035,40 @@ export function IconUnCheckBox({fill, ...props}) {
     </Svg>
   );
 }
+export function IconUnCheckBoxWhite({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(18)}
+      height={props?.style?.height || scale(18)}
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Rect x={0.5} y={0.5} width={17} height={17} rx={2.5} stroke="#fff" />
+    </Svg>
+  );
+}
+export function IconCheckBoxWhite({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(18)}
+      height={props?.style?.height || scale(18)}
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Rect x={0.5} y={0.5} width={17} height={17} rx={2.5} stroke="#fff" />
+      <Path
+        d="M5 8.063L8.24 12 14 5"
+        stroke="#02FFAC"
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+}
 export function IconCheckBox({fill, ...props}) {
   return (
     <Svg

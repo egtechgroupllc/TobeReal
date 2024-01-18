@@ -12,11 +12,9 @@ import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import CustomText from '../../../../../components/CustomText';
 import {
-  IconCamera,
-  IconCheckBox,
-  IconDown,
+  IconCheckBoxWhite,
   IconRight,
-  IconUnCheckBox,
+  IconUnCheckBoxWhite,
 } from '../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
@@ -75,7 +73,7 @@ export default function TabContent() {
         <TouchableOpacity
           onPress={toggleCheckBox}
           style={{...styles.buttonSmall, paddingHorizontal: scale(10)}}>
-          {check ? <IconCheckBox /> : <IconUnCheckBox />}
+          {check ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>
@@ -83,7 +81,7 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleCheckBox1} style={styles.buttonSmall}>
-          {check1 ? <IconCheckBox /> : <IconUnCheckBox />}
+          {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>

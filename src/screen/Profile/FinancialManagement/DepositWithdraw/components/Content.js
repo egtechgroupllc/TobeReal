@@ -40,8 +40,7 @@ export default function Content() {
   const goBack = () => {
     navigation.goBack();
   };
-  const Submit = () => {
-  };
+  const Submit = () => {};
   const AddBank = () => {
     navigation.navigate('AddBankScreen');
   };
@@ -122,7 +121,7 @@ export default function Content() {
           </CustomText>
         </TouchableOpacity>
       </LinearGradient>
-      <Button title={'Submit'} onPress={Submit}/>
+      <Button title={'Submit'} onPress={Submit} />
       <View style={styles.historyHeader}>
         <CustomText
           textType="medium"

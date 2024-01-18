@@ -173,7 +173,7 @@ export default function Content() {
         large={true}
         style={{marginTop: scale(10)}}
       />
-      <TouchableOpacity>
+      <TouchableOpacity style={{width:'45%', alignSelf:'center'}}>
         <LinearGradient
           colors={['#F7E75A', '#FFC702']}
           start={{x: 0, y: 0}}
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scale(10),
     height: scale(25),
-    width: scale(147),
+    width: '100%',
     justifyContent: 'center',
     marginTop: scale(20),
     alignSelf: 'center',

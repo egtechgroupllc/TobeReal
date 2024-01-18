@@ -79,7 +79,7 @@ export default function TabContent() {
           <CategoriesButton title={'Cost for each type of news'} viewcostnew={viewcostnew} onPress={viewCostnew}/>
           <CategoriesButton title={'Create an online trading platform'} viewtradingflatform={viewtradingflatform} onPress={viewTradingflatform}/>
           <TouchableOpacity onPress={goPostScreen}
-            style={{alignItems: 'center', marginTop: scale(50), marginBottom:scale(30)}}>
+            style={{alignItems: 'center', marginTop: scale(50), marginBottom:scale(30),width: '50%',alignSelf:'center'}}>
             <LinearGradient
               colors={['#FFE259', '#FFA751']}
               start={{x: 0, y: 0}}
@@ -177,8 +177,8 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
   },
   button: {
+    width:'100%',
     height: scale(50),
-    width: '50%',
     borderRadius: scale(10),
     alignItems: 'center',
     justifyContent: 'center',
