@@ -11,7 +11,7 @@ import {images, scale} from '../assets/constants';
 export default function MainWrapper({children}) {
   return (
     <ImageBackground
-      source={images.background}
+      source={images.background1}
       resizeMode="stretch"
       style={{flex: 1}}>
       <View style={styles.wrapper}>

@@ -1,6 +1,7 @@
 export default {
   logo: require('../images/logo.png'),
   background: require('../images/background.png'),
+  background1: require('../images/background1.png'),
   avatar: require('../images/avatar.png'),
   visa: require('../images/visa.png'),
   map: require('../images/map.png'),

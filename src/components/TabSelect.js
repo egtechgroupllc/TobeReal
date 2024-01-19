@@ -11,12 +11,14 @@ export default function TabSelectFind({data = [], onChange}) {
     <View
       style={{
         flexDirection: 'row',
+        borderWidth:scale(0.5),
+        borderColor:'#F0B90B40',
         justifyContent: tab === data[0] ? 'flex-start' : 'flex-end',
       }}>
       {data.map((item, index) => (
         <View
           key={`key-${item}-${index}`}
-          style={{width: '49%', alignItems: 'center'}}>
+          style={{width: '50%', alignItems: 'center'}}>
           <CustomButton
             key={`key-${item}-${index}`}
             text={item}
