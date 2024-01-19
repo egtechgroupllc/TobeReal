@@ -1,18 +1,18 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {COLORS, FONTS, SIZES, scale} from '../../../../assets/constants';
 import {
   IconCalendar,
   IconFurniture,
   IconMarker,
   IconRoom,
+  IconTag,
 } from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import OptionAccommodation from './OptionAccommodation';
-import CustomText from '../../../../components/CustomText';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-export default function FindContent() {
+export default function FindContent({isBuy}) {
   return (
     <View style={styles.findContent}>
       <CustomInput
@@ -24,16 +24,17 @@ export default function FindContent() {
           height: scale(20),
         }}
       />
-
-      <CustomInput
-        defaultValue="05 Jan 2024 - 04 Feb 2024"
-        styleWrapper={{width: '92%'}}
-        iconLeft={IconCalendar}
-        styleIcon={{
-          width: scale(20),
-          height: scale(20),
-        }}
-      />
+      {!isBuy && (
+        <CustomInput
+          defaultValue="05 Jan 2024 - 04 Feb 2024"
+          styleWrapper={{width: '92%'}}
+          iconLeft={IconCalendar}
+          styleIcon={{
+            width: scale(20),
+            height: scale(20),
+          }}
+        />
+      )}
 
       <View style={styles.optionBox}>
         <View style={styles.boxIcon}>
@@ -41,7 +42,7 @@ export default function FindContent() {
         </View>
         <OptionAccommodation
           outline
-          styleWrapper={{
+          styleContent={{
             flex: 1,
             columnGap: scale(8),
             paddingHorizontal: scale(12),
@@ -72,7 +73,7 @@ export default function FindContent() {
         </View>
         <OptionAccommodation
           outline
-          styleWrapper={{
+          styleContent={{
             flex: 1,
             columnGap: scale(8),
           }}
@@ -89,6 +90,31 @@ export default function FindContent() {
           ]}
         />
       </View>
+      {isBuy && (
+        <View style={styles.optionBox}>
+          <View style={styles.boxIcon}>
+            <IconTag />
+          </View>
+          <OptionAccommodation
+            outline
+            styleContent={{
+              flex: 1,
+              columnGap: scale(8),
+            }}
+            data={[
+              {
+                text: 'All',
+              },
+              {
+                text: 'Fixed Price',
+              },
+              {
+                text: 'Negotiable',
+              },
+            ]}
+          />
+        </View>
+      )}
 
       <View
         style={{
@@ -133,7 +159,7 @@ export default function FindContent() {
 const styles = StyleSheet.create({
   findContent: {
     alignItems: 'center',
-    rowGap: scale(8),
+    rowGap: scale(10),
   },
   optionBox: {
     flexDirection: 'row',
@@ -160,9 +186,10 @@ const styles = StyleSheet.create({
   question: {
     backgroundColor: COLORS.primary,
     width: scale(16),
-    aspectRatio: 1,
+    height: scale(16),
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 0,
   },
 });

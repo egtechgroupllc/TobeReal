@@ -1,70 +1,90 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+/* eslint-disable react/no-unstable-nested-components */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomeBookingsScreen} from '../screen/Bookings';
-import {IconBookings, IconBookingsInactive, IconExplore, IconExploreInactive, IconNews, IconNewsInactive, IconProfile, IconProfileInactive} from '../assets/icon/Icon';
+import React, {useEffect, useState} from 'react';
+import {Keyboard, StyleSheet, View} from 'react-native';
+import {
+  IconBookings,
+  IconExplore,
+  IconHeart,
+  IconNews,
+  IconProfile,
+  IconProfileInactive,
+  IconPromotion,
+} from '../assets/icon/Icon';
+import NavigationBookings from './NavigationBookings';
 import NavigationExplore from './NavigationExplore';
 import NavigationProfile from './NavigationProfile';
-import { NewsScreen } from '../screen/News';
+import NavigationPromotion from './NavigationPromotion';
+import NavigationWishList from './NavigationWishList';
+import {scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
-  const getTabBarIcon = (focused, activeIcon, inactiveIcon) => {
-    const color = focused ? '#F0B90B' : '#000000';
-    const iconComponent = focused ? activeIcon : inactiveIcon;
-  
-    return (
-      <View style={{ color }}>
-        {iconComponent}
-      </View>
-    );
-  };
   return (
     <Tab.Navigator
       initialRouteName="Explore"
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: '#F0B90B',
+        tabBarInactiveTintColor: '#000000',
+        tabBarItemStyle: {
+          // height: scale(90),
+          columnGap: scale(4),
+        },
+        // tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          zIndex: -1,
+        },
       }}>
       <Tab.Screen
         name="Explore"
         component={NavigationExplore}
         options={{
-          tabBarIcon: ({ focused }) =>
-          getTabBarIcon(focused, <IconExplore/>, <IconExploreInactive/>),
-          tabBarActiveTintColor: '#F0B90B',
-          tabBarInactiveTintColor: '#000000',
+          tabBarIcon: ({focused}) => (
+            <IconExplore fill={focused && '#F0B90B'} />
+          ),
         }}
       />
       <Tab.Screen
         name="Bookings"
-        component={HomeBookingsScreen}
+        component={NavigationBookings}
         options={{
-          tabBarIcon: ({ focused }) =>
-          getTabBarIcon(focused, <IconBookings />, <IconBookingsInactive/>),
-          tabBarActiveTintColor: '#F0B90B',
-          tabBarInactiveTintColor: '#000000',
+          tabBarIcon: ({focused}) => (
+            <IconBookings fill={focused && '#F0B90B'} />
+          ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
+        name="Promotion"
+        component={NavigationPromotion}
+        options={{
+          tabBarIcon: ({focused}) => <IconPromotion active={focused} />,
+        }}
+      />
+      <Tab.Screen
+        name="WishList"
+        component={NavigationWishList}
+        options={{
+          title: 'Wish List',
+          tabBarIcon: ({focused}) => <IconHeart fill={focused && '#F0B90B'} />,
+        }}
+      />
+      <Tab.Screen
         name="Post news"
         component={NavigationNews}
         options={{
-          tabBarIcon: ({ focused }) =>
-          getTabBarIcon(focused, <IconNews />, <IconNewsInactive/>),
-          tabBarActiveTintColor: '#F0B90B',
-          tabBarInactiveTintColor: '#000000',
+          tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
         }}
       />
       <Tab.Screen
         name="Profile"
         component={NavigationProfile}
         options={{
-          tabBarIcon: ({ focused }) =>
-          getTabBarIcon(focused, <IconProfile />, <IconProfileInactive />),
-          tabBarActiveTintColor: '#F0B90B',
-          tabBarInactiveTintColor: '#000000',
+          tabBarIcon: ({focused}) => (
+            <IconProfile fill={focused && '#F0B90B'} />
+          ),
         }}
       />
     </Tab.Navigator>

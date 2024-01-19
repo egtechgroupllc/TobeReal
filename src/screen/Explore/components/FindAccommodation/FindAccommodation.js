@@ -1,20 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import CustomButton from '../../../../components/CustomButton';
-import {COLORS, scale} from '../../../../assets/constants';
-import {Category, CustomInput, TabSelect} from '../../../../components';
-import OptionAccommodation from './OptionAccommodation';
+import {StyleSheet, View} from 'react-native';
+import {WIDTH, scale} from '../../../../assets/constants';
 import {
   IconAccommodationOther,
   IconApartment,
-  IconCalendar,
   IconCity,
   IconHouse,
-  IconMarker,
   IconRoom,
   IconVilla,
 } from '../../../../assets/icon/Icon';
+import {Category, TabSelect} from '../../../../components';
 import FindContent from './FindContent';
+import OptionAccommodation from './OptionAccommodation';
 
 const listAccommodation = [
   {
@@ -49,7 +46,7 @@ export default function FindAccommodation() {
   return (
     <View
       style={{
-        width: '94%',
+        width: WIDTH.widthContain,
         alignSelf: 'center',
       }}>
       <TabSelect
@@ -57,44 +54,31 @@ export default function FindAccommodation() {
         onChange={value => {
           setTabSelect(value);
         }}
+        renderView={() => (
+          <>
+            <View style={styles.category}>
+              {tabSelect !== 'BUY' && (
+                <Category data={['Daily', 'Monthly', 'Yearly']} />
+              )}
+
+              <OptionAccommodation
+                data={
+                  tabSelect !== 'BUY'
+                    ? listAccommodation
+                    : [listAccommodation[1]]
+                }
+              />
+            </View>
+
+            <FindContent isBuy={tabSelect === 'BUY'} />
+          </>
+        )}
       />
-
-      <View
-        style={[
-          styles.content,
-          tabSelect !== 'BUY' && {
-            borderTopLeftRadius: 0,
-          },
-          tabSelect !== 'RENT' && {
-            borderTopRightRadius: 0,
-          },
-        ]}>
-        <View style={styles.category}>
-          {tabSelect !== 'BUY' && (
-            <Category data={['Daily', 'Monthly', 'Yearly']} />
-          )}
-
-          <OptionAccommodation
-            data={
-              tabSelect !== 'BUY' ? listAccommodation : [listAccommodation[1]]
-            }
-          />
-        </View>
-
-        <FindContent />
-      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingVertical: scale(16),
-    rowGap: scale(14),
-  },
   category: {
     rowGap: scale(14),
     borderBottomWidth: 1,

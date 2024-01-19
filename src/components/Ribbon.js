@@ -23,13 +23,13 @@ export default function Ribbon({text, iconRight, iconLeft}) {
       </View>
 
       <View style={{...styles.left, ...styles.right, ...SHADOW}}>
-        <IconRoom style={styles.icon} />
+        {/* <IconRoom style={styles.icon} /> */}
         <CustomText
           textType="medium"
           style={{
             fontSize: SIZES.xSmall,
           }}>
-          1
+          🛌 1
         </CustomText>
       </View>
     </View>

@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import {COLORS, images, scale} from '../../../assets/constants';
+import {COLORS, WIDTH, images, scale} from '../../../assets/constants';
 import {IconSearch} from '../../../assets/icon/Icon';
 import {CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
@@ -21,6 +21,7 @@ export default function Header() {
         styleWrapper={{
           flex: 1,
         }}
+        onPress={() => console.log(312)}
       />
     </View>
   );
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '94%',
+    width: WIDTH.widthContain,
     alignSelf: 'center',
     height: scale(56),
     columnGap: scale(20),

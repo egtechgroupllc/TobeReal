@@ -7,6 +7,8 @@ import {formatPrice} from '../../../../utils/format';
 import RecommendedUnitItem from './RecommendedUnitItem';
 import ThematicInstagram from './ThematicInstagram';
 import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
+import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
+import RecommendedApartments from './RecommendedApartments';
 
 export default function ContentAccommodation() {
   return (
@@ -20,7 +22,13 @@ export default function ContentAccommodation() {
           data={[...Array(10)]}
           contentContainerStyle={styles.content}
           renderItem={({item}) => (
-            <BoxPlaceItem seeViewNumber={1.5} isViewMap isStar />
+            <BoxPlaceItem
+              seeViewNumber={1.5}
+              isViewMap
+              isStar
+              rating={2}
+              isHeart
+            />
           )}
         />
       </WrapperContent>
@@ -43,7 +51,7 @@ export default function ContentAccommodation() {
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
         heading="Stay Monthly For Cheaper Prices 🤑"
-        subHeading={`Disc. up to ${formatPrice(1000000)} VND`}
+        subHeading={`Disc. up to $${formatPrice(1000000)}`}
         styleWrapper={{backgroundColor: 'transparent'}}>
         <FlatList
           horizontal
@@ -89,6 +97,28 @@ export default function ContentAccommodation() {
         />
       </WrapperContent>
 
+      <VideoInfluencerApproved />
+      <FindApartmentFitsBudget />
+
+      <WrapperContent
+        isSeeAll
+        isCategory
+        onPressSeeAll={() => console.log(1)}
+        onPressCategory={item => console.log(item)}
+        heading="Weekly Hot Deals 🔥"
+        subHeading="Ends in"
+        dayEndDeals={6}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={[...Array(10)]}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxPlaceItem seeViewNumber={2.5} isDiscount />
+          )}
+        />
+      </WrapperContent>
+
       <WrapperContent
         isSeeAll
         isCategory
@@ -101,12 +131,37 @@ export default function ContentAccommodation() {
           data={[...Array(10)]}
           contentContainerStyle={styles.content}
           renderItem={({item}) => (
-            <BoxPlaceItem seeViewNumber={1.5} multiPrice isUnitAvailable />
+            <BoxPlaceItem
+              seeViewNumber={1.5}
+              multiPrice
+              isUnitAvailable
+              isHeart
+            />
           )}
         />
       </WrapperContent>
 
-      <VideoInfluencerApproved />
+      <RecommendedApartments />
+
+      <WrapperContent
+        heading="Looking for a place to stay? 🏠"
+        subHeading="Find “By Travelio” units in Indonesia’s big cities">
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={[...Array(10)]}
+          contentContainerStyle={styles.content}
+          renderItem={({item, index}) => (
+            <RecommendedUnitItem
+              viewShow={2.5}
+              isCenter
+              styesWrapper={{
+                height: scale(160),
+              }}
+            />
+          )}
+        />
+      </WrapperContent>
     </View>
   );
 }

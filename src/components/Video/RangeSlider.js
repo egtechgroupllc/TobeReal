@@ -14,8 +14,11 @@ import {
 } from 'react-native-safe-area-context';
 import CustomText from '../CustomText';
 import {COLORS, SIZES, scale} from '../../assets/constants';
+import TimeProgress from './TimeProgress';
+import BubbleProgress from './BubbleProgress';
 const MIN_DEFAULT = 0;
 const MAX_DEFAULT = 100;
+
 const formatTime = (seconds = 0) => {
   let mins = parseInt(seconds / 60)
     .toString()
@@ -25,8 +28,8 @@ const formatTime = (seconds = 0) => {
 };
 
 const RangeSlider = ({
-  minimumValue,
-  maximumValue,
+  minimumValue = MIN_DEFAULT,
+  maximumValue = MAX_DEFAULT,
   progressValue,
   onValueChange,
 }) => {
@@ -37,8 +40,8 @@ const RangeSlider = ({
   const heightProgress = useSharedValue(3);
   const thumbScaleValue = useSharedValue(0.5);
 
-  const min = useSharedValue(MIN_DEFAULT);
-  const max = useSharedValue(MAX_DEFAULT);
+  const min = useSharedValue(minimumValue);
+  const max = useSharedValue(maximumValue);
 
   useEffect(() => {
     if (isMoveProgress) {
@@ -71,58 +74,26 @@ const RangeSlider = ({
     max.value = withTiming(maximumValue);
   }, [max, maximumValue]);
 
+  useEffect(() => {
+    min.value = withTiming(minimumValue);
+  }, [min, minimumValue]);
+
   return (
-    <GestureHandlerRootView
+    <View
       style={{
         width: '100%',
-        // marginTop: 'auto',
         justifyContent: 'flex-end',
       }}>
-      {true && (
-        <View
-          style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-          }}>
-          <CustomText
-            // textType="semiBold"
-            style={{
-              alignItems: 'center',
-              color: '#fff',
-              //   fontSize: SIZES.xLarge,
-              marginVertical: scale(6),
-            }}>
-            {formatTime(progressValue)}
-          </CustomText>
-
-          <CustomText
-            // textType="semiBold"
-            style={{
-              color: '#fff',
-              fontSize: SIZES.xSmall,
-            }}>
-            {' '}
-            /{' '}
-          </CustomText>
-
-          <CustomText
-            // textType="semiBold"
-            style={{
-              color: '#fff',
-              //   fontSize: SIZES.xLarge,
-            }}>
-            {formatTime(maximumValue)}
-          </CustomText>
-        </View>
-      )}
+      <TimeProgress
+        timeCurrent={formatTime(progressValue)}
+        timeTotal={formatTime(maximumValue)}
+      />
 
       <Slider
         containerStyle={{
           width: '100%',
           height: heightProgress,
           borderRadius: 99,
-          // marginVertical: 2,
         }}
         theme={{
           maximumTrackTintColor: '#ffffff57',
@@ -144,37 +115,10 @@ const RangeSlider = ({
           onValueChange(value);
         }}
         renderBubble={() => (
-          <View
-            style={{
-              alignItems: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: COLORS.primary,
-                alignItems: 'center',
-                paddingVertical: scale(2),
-                borderRadius: scale(6),
-                paddingHorizontal: scale(6),
-              }}>
-              <CustomText
-                style={{
-                  alignItems: 'center',
-                  color: '#fff',
-                }}>
-                {formatTime(moveProgress)}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                borderWidth: scale(4),
-                borderColor: 'transparent',
-                borderTopColor: COLORS.primary,
-              }}
-            />
-          </View>
+          <BubbleProgress moveProgress={formatTime(moveProgress)} />
         )}
       />
-    </GestureHandlerRootView>
+    </View>
   );
 };
 

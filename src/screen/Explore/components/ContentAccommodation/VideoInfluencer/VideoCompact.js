@@ -8,7 +8,14 @@ import {VideoPlay} from '../../../../../components';
 export default function VideoCompact({onPlay}) {
   return (
     <View style={styles.wrapper}>
-      <VideoPlay style={styles.backgroundVideo} paused />
+      <VideoPlay
+        style={styles.backgroundVideo}
+        paused
+        source={
+          'https://github.com/KuDenn172/TobeNFT/blob/main/video/tiktok3.mp4?raw=true'
+        }
+        resizeMode="cover"
+      />
       <TouchableOpacity
         style={styles.overlay}
         activeOpacity={0.7}

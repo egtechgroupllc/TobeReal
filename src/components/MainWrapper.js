@@ -1,25 +1,41 @@
+import React from 'react';
 import {
   ImageBackground,
+  KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
-import React from 'react';
-import {images, scale} from '../assets/constants';
+import {images} from '../assets/constants';
 
-export default function MainWrapper({children}) {
+export default function MainWrapper({
+  children,
+  backgroundColor,
+  styleContent,
+  scrollEnabled = true,
+  onScroll = () => {},
+}) {
   return (
     <ImageBackground
       source={images.background1}
       resizeMode="stretch"
-      style={{flex: 1}}>
-      <View style={styles.wrapper}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled">
-          <View>{children}</View>
-        </ScrollView>
+      style={[
+        {flex: 1, backgroundColor: '#fff'},
+        backgroundColor && {backgroundColor},
+      ]}>
+      <View style={[styles.wrapper]}>
+        {scrollEnabled ? (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            scrollEnabled={scrollEnabled}
+            onScroll={onScroll}
+            scrollEventThrottle={16}>
+            <View style={{flex: 1, ...styleContent}}>{children}</View>
+          </ScrollView>
+        ) : (
+          <View style={{flex: 1, ...styleContent}}>{children}</View>
+        )}
       </View>
     </ImageBackground>
   );
@@ -29,6 +45,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     // maxWidth: scale(400),
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
 });

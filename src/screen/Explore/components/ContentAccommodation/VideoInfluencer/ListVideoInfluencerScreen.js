@@ -15,15 +15,6 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const listVideo = [
   {
-    id: 1,
-    src: 'https://github.com/KuDenn172/TobeNFT/blob/main/video/jojo.mp4?raw=true',
-    name: 'kietdepzai',
-    caption: 'kiet dep zai vai ca dai , oai that dep zai',
-    price: 9999999999,
-    location: 'HoChiMinh',
-    rental: 'night',
-  },
-  {
     id: 3,
     src: 'https://github.com/KuDenn172/TobeNFT/blob/main/video/titok2.mp4?raw=true',
     name: 'quanh1099',
@@ -41,6 +32,15 @@ const listVideo = [
     location: 'HoChiMinh',
     rental: 'night',
   },
+  {
+    id: 1,
+    src: 'https://github.com/KuDenn172/TobeNFT/blob/main/video/jojo.mp4?raw=true',
+    name: 'kietdepzai',
+    caption: 'kiet dep zai vai ca dai , oai that dep zai',
+    price: 9999999999,
+    location: 'HoChiMinh',
+    rental: 'night',
+  },
 
   {
     id: 4,
@@ -53,13 +53,13 @@ const listVideo = [
   },
 ];
 
-export default function ListVideoInfluencer() {
+export default function ListVideoInfluencerScreen() {
   const {goBack} = useNavigation();
   const insets = useSafeAreaInsets();
 
   const [videoPlay, setVideoPlay] = useState(true);
   const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
-    if (viewableItems && viewableItems[0].isViewable) {
+    if (viewableItems.length > 0 && viewableItems[0].isViewable) {
       setVideoPlay(viewableItems[0].item?.id);
     }
   }, []);
@@ -70,6 +70,7 @@ export default function ListVideoInfluencer() {
         style={{
           ...StyleSheet.absoluteFill,
           alignItems: 'center',
+          backgroundColor: '#000',
         }}>
         <TouchableOpacity
           activeOpacity={0.7}

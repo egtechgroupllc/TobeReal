@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Header from './components/Header';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
-import {scale} from '../../assets/constants';
+import {WIDTH, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
 import ContentAccommodation from './components/ContentAccommodation/ContentAccommodation';
 
@@ -18,7 +18,7 @@ export default function HomeExploreScreen() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: '94%',
+    width: WIDTH.widthContain,
     alignSelf: 'center',
     flex: 1,
     maxWidth: scale(400),

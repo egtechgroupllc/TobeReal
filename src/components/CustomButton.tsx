@@ -3,6 +3,7 @@ import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
+  TouchableOpacityProps,
   View,
   ViewProps,
   ViewStyle,
@@ -15,13 +16,22 @@ import CustomText, {CustomTextProps} from './CustomText';
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
   text: string;
-  isShadow: boolean;
-  iconLeft: React.JSX.Element;
-  iconRight: React.JSX.Element;
-  styleIcon: ViewStyle;
+  isShadow?: boolean;
+  outline?: boolean;
+  iconLeft?: React.JSX.Element;
+  iconRight?: React.JSX.Element;
+  isDelay?: boolean;
+  styleIcon?: ViewStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
   onPress: () => void;
-} & ViewProps;
+  onDoublePress: () => void;
+} & TouchableOpacityProps;
+const funcFallBlack = () => {};
+
+let delayTime = 300;
+let firstPress = true;
+let lastTime: number = new Date().getTime();
+let timer: any = 0;
 
 export default function CustomButton({
   buttonType,
@@ -29,9 +39,12 @@ export default function CustomButton({
   isShadow,
   iconLeft,
   iconRight,
+  isDelay,
+  outline,
   styleText,
   styleIcon,
-  onPress,
+  onPress = funcFallBlack,
+  onDoublePress = funcFallBlack,
   ...props
 }: CustomButtonProps) {
   const IconRight: any = iconRight;
@@ -39,29 +52,76 @@ export default function CustomButton({
 
   const heightSize =
     buttonType === 'large' ? 40 : buttonType === 'medium' ? 37 : 31;
+  const fontSize =
+    buttonType === 'large' ? 14 : buttonType === 'medium' ? 13 : 12;
 
   const propStyle = arrayToObject(props.style);
+
+  const singlePress = (now: number) => {
+    if (!isDelay) {
+      onPress();
+      return;
+    }
+    firstPress = false;
+    timer = setTimeout(() => {
+      onPress();
+      firstPress = true;
+    }, delayTime);
+    lastTime = now;
+  };
+
+  const doublePress = (now: number) => {
+    if (now - lastTime < delayTime) {
+      onDoublePress();
+      timer && clearTimeout(timer);
+      firstPress = true;
+    }
+  };
+
+  const _onPress = () => {
+    let now = new Date().getTime();
+    firstPress ? singlePress(now) : doublePress(now);
+  };
+
+  // useEffect(() => {
+  //   return () => {
+  //     timer && clearTimeout(timer);
+  //   };
+  // }, [timer]);
+
   return (
     <View
-      {...props}
       style={[
         styles.wrapper,
-        {
-          height: scale(heightSize),
-        },
-        propStyle,
-        isShadow && SHADOW,
+        propStyle?.flex ? {flex: propStyle?.flex} : {width: propStyle?.width},
       ]}>
       <TouchableOpacity
+        {...props}
         activeOpacity={0.6}
-        onPress={onPress}
-        style={styles.button}>
+        onPress={_onPress}
+        style={[
+          styles.button,
+          !propStyle?.height && {
+            minHeight: scale(heightSize),
+          },
+          isShadow && SHADOW,
+          outline && styles.outline,
+          propStyle,
+          propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
+        ]}>
         {iconLeft && <IconLeft style={{...styles.icon, ...styleIcon}} />}
-        <CustomText
-          textType={styleText?.textType || 'medium'}
-          style={[styles.text, styleText]}>
-          {text}
-        </CustomText>
+        {text && (
+          <CustomText
+            textType={styleText?.textType}
+            style={[
+              styles.text,
+              {fontSize: scale(fontSize)},
+              styleText,
+              outline && {color: COLORS.primary},
+            ]}>
+            {text}
+          </CustomText>
+        )}
         {iconRight && <IconRight style={{...styles.icon, ...styleIcon}} />}
       </TouchableOpacity>
     </View>
@@ -70,19 +130,27 @@ export default function CustomButton({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 12,
+    alignItems: 'center',
     width: '100%',
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS.primary,
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    // flex: 1,
+    backgroundColor: COLORS.primary,
     flexDirection: 'row',
     columnGap: scale(10),
+    borderRadius: scale(10),
+    paddingHorizontal: scale(7),
   },
   text: {
-    color: COLORS.textSub,
+    color: COLORS.white,
+    textAlign: 'center',
   },
   icon: {
     width: scale(14),

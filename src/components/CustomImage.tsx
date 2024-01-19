@@ -8,6 +8,7 @@ type CustomImgProps = {
 export default function CustomImage({source, ...props}: CustomImgProps) {
   const isImgAsset = typeof source === 'number';
 
+
   return <Image {...props} source={isImgAsset ? source : {uri: source}} />;
 }
 

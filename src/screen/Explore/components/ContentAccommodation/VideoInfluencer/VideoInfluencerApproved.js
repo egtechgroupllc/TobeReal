@@ -4,7 +4,7 @@ import WrapperContent from '../../WrapperContent';
 import {scale} from '../../../../../assets/constants';
 import BoxPlaceItem from '../BoxPlaceItem';
 import VideoCompact from './VideoCompact';
-import ListVideoInfluencer from './ListVideoInfluencer';
+import ListVideoInfluencerScreen from './ListVideoInfluencerScreen';
 import {useNavigation} from '@react-navigation/native';
 
 export default function VideoInfluencerApproved() {
@@ -18,10 +18,10 @@ export default function VideoInfluencerApproved() {
         data={[...Array(10)]}
         contentContainerStyle={styles.content}
         renderItem={({item}) => (
-          <VideoCompact onPlay={() => navigate('ListVideoInfluencer')} />
+          <VideoCompact onPlay={() => navigate('ListVideoInfluencerScreen')} />
         )}
       />
-      {/* {playVideo && <ListVideoInfluencer />} */}
+      {/* {playVideo && <ListVideoInfluencerScreen />} */}
     </WrapperContent>
   );
 }

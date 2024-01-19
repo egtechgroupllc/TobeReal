@@ -1,30 +1,63 @@
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {CustomButton} from '../../../../components';
-import {IconCity} from '../../../../assets/icon/Icon';
+import {
+  IconCity,
+  IconMarker,
+  IconNext,
+  IconRoom,
+} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 
 export default function RecommendedUnitItem({
   isButtonBottom,
   isShowDetail,
   styesWrapper,
+  viewShow = 2,
+  isCenter,
+  isOverlay,
+  onPress,
 }) {
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity
+      onPress={onPress && onPress}
+      activeOpacity={0.7}
+      style={[
+        styles.wrapper,
+        {
+          width:
+            (WIDTH.widthScreen > 500 ? scale(500) : WIDTH.widthScreen) /
+            viewShow,
+        },
+      ]}>
+      {isOverlay && <View style={styles.overlay} />}
       <ImageBackground
         resizeMode="stretch"
         src="https://cdn.travelio.id/hotel/b6906-6538c063f4bc0a28cbe6e5e9/Deluxe-King_l.jpg"
-        style={{...styles.img, ...styesWrapper}}>
+        style={[
+          styles.img,
+          styesWrapper,
+          isCenter && {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        ]}>
         <CustomText textType="bold" style={styles.title}>
-          Terdekat ke Stasiun LRT Cawang
+          In malybu
         </CustomText>
 
         {isShowDetail && (
           <View style={styles.detail}>
             <View style={styles.detailContent}>
               <CustomText style={styles.detailText}>
-                <IconCity style={styles.icon} fill={COLORS.white} /> Terdekat
+                <IconMarker style={styles.icon} fill={COLORS.white} /> Terdekat
               </CustomText>
 
               <View
@@ -36,7 +69,7 @@ export default function RecommendedUnitItem({
               />
 
               <CustomText style={styles.detailText}>
-                <IconCity style={styles.icon} fill={COLORS.white} /> Terdekat
+                <IconRoom style={styles.icon} fill={COLORS.white} /> Terdekat
               </CustomText>
             </View>
             <CustomText
@@ -54,10 +87,10 @@ export default function RecommendedUnitItem({
           buttonType="large"
           text="Dekat Stasiun LRT"
           styleText={styles.btnText}
-          iconRight={IconCity}
+          iconRight={IconNext}
         />
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -66,8 +99,10 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
   },
   img: {
-    width: (WIDTH.widthScreen > 500 ? scale(500) : WIDTH.widthScreen) / 2,
-    aspectRatio: 1.4,
+    // aspectRatio: 1.4,
+    minHeight: scale(150),
+    // width: '100%',
+    flex: 1,
     borderRadius: scale(12),
     overflow: 'hidden',
     padding: scale(10),
@@ -101,5 +136,12 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
     textType: 'semiBold',
     color: COLORS.text,
+  },
+  overlay: {
+    backgroundColor: '#00000050',
+    position: 'absolute',
+    zIndex: 999,
+    width: '100%',
+    height: '100%',
   },
 });

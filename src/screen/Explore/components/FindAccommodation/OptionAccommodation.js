@@ -7,13 +7,16 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {COLORS, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 
 export default function OptionAccommodation({
   data = [],
   outline,
   styleWrapper,
+  styleContent,
+  isSelectOnly,
+  isShaDow,
 }) {
   const [option, setOption] = useState([data[0].text]);
   useEffect(() => {
@@ -36,19 +39,22 @@ export default function OptionAccommodation({
     });
   };
 
+  const handleSelectOnly = value => {
+    setOption([value]);
+  };
+
   useEffect(() => {
-    if (option.length === 0) {
+    if (!isSelectOnly && option.length === 0) {
       setOption([data[0].text]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option]);
 
-  // const borderBottom
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, styleWrapper, isShaDow && SHADOW]}>
       <FlatList
         data={data}
-        contentContainerStyle={[styles.content, styleWrapper]}
+        contentContainerStyle={[styles.content, styleContent]}
         horizontal
         showsHorizontalScrollIndicator={false}
         scrollEnabled={data.length > 3}
@@ -69,24 +75,31 @@ export default function OptionAccommodation({
                   : '#F0B90B20',
               },
               option.includes(item?.text) && outline && styles.outline,
+              styleContent?.height && {height: styleContent?.height},
             ]}
-            onPress={() => handleSelectOption(item?.text)}>
+            onPress={() =>
+              isSelectOnly
+                ? handleSelectOnly(item?.text)
+                : handleSelectOption(item?.text)
+            }>
             {item?.icon && (
               <item.icon
                 style={{
                   width: scale(16),
                   height: scale(16),
                 }}
-                fill={option.includes(item?.text) && COLORS.primary}
+                fill={
+                  option.includes(item?.text) ? COLORS.primary : COLORS.text
+                }
               />
             )}
+
             {item?.text && (
               <CustomText
-                textType="medium"
                 style={{
                   color: option.includes(item?.text)
                     ? COLORS.primary
-                    : COLORS.textSub,
+                    : COLORS.text,
                   paddingHorizontal: scale(10),
                 }}>
                 {item?.text}
@@ -103,19 +116,22 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     flex: 1,
+    backgroundColor: '#fff',
+    height: scale(38),
+    zIndex: 1,
   },
   content: {
+    height: '100%',
     alignItems: 'center',
-    columnGap: scale(20),
+    columnGap: scale(16),
     paddingHorizontal: scale(12),
-    minHeight: scale(38),
   },
   option: {
     alignItems: 'center',
     minWidth: scale(36),
     borderColor: COLORS.primary,
     rowGap: scale(2),
-    minHeight: scale(36),
+    height: scale(38),
     borderRadius: scale(10),
     justifyContent: 'center',
   },

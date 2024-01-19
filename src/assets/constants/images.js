@@ -12,4 +12,10 @@ export default {
   sell: require('../images/sell.png'),
   lease: require('../images/lease.png'),
   rentbuy: require('../images/rentbuy.png'),
+  emptyData: require('../images/emptyData.png'),
+  promotion: require('../images/promotion.png'),
+  wishList: require('../images/wishList.png'),
+  voucher25: require('../images/voucher25.png'),
+  voucher50: require('../images/voucher50.png'),
+  emptyWish: require('../images/emptyWish.png'),
 };

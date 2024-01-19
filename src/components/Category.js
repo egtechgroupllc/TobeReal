@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import {COLORS, WIDTH, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
-const funcFallBack = () =>{}
-export default function Category({data = [], onPress=funcFallBack}) {
+const funcFallBack = () => {};
+export default function Category({data = [], onPress = funcFallBack}) {
   const [select, setSelect] = useState(data[1]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
@@ -14,7 +14,7 @@ export default function Category({data = [], onPress=funcFallBack}) {
       style={{
         width: '100%',
         alignItems: 'center',
-        minHeight: scale(38),
+        minHeight: scale(36),
       }}>
       <FlatList
         data={data}
@@ -32,13 +32,14 @@ export default function Category({data = [], onPress=funcFallBack}) {
             isShadow
             style={[
               {
-                width: widthSize,
+                width: 'auto',
+                minWidth: widthSize,
                 backgroundColor: select === item ? COLORS.primary : '#f1f1f1',
               },
             ]}
             styleText={[
-              select === item && {
-                color: COLORS.white,
+              select !== item && {
+                color: COLORS.text,
               },
             ]}
             onPress={() => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import React from 'react';
 import {
   StyleSheet,
@@ -5,24 +6,30 @@ import {
   View,
   TextInputProps,
   ViewStyle,
+  TouchableOpacity,
 } from 'react-native';
 
 import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
 import {arrayToObject} from '../utils/arrayToObject';
 
 type CustomInputProps = {
-  iconLeft: React.JSX.Element;
-  iconRight: React.JSX.Element;
-  styleWrapper: ViewStyle;
-  styleIcon: ViewStyle;
+  iconLeft?: React.JSX.Element;
+  iconRight?: React.JSX.Element;
+  componentRight?: React.ReactNode;
+  componentLeft?: React.ReactNode;
+  styleWrapper?: ViewStyle;
+  styleIcon?: ViewStyle;
+  onPress?: () => void;
 } & TextInputProps;
 
 export default function CustomInput({
   iconLeft,
   iconRight,
+  componentRight,
+  componentLeft,
   styleWrapper,
   styleIcon,
-
+  onPress,
   ...props
 }: CustomInputProps) {
   const IconRight: any = iconRight;
@@ -30,23 +37,36 @@ export default function CustomInput({
   const propStyle = arrayToObject(styleWrapper);
 
   return (
-    <View style={[styles.wrapper, propStyle]}>
-      {iconLeft && (
+    <TouchableOpacity
+      style={[styles.wrapper, propStyle]}
+      activeOpacity={!!onPress ? 0.8 : 1}
+      onPress={onPress}>
+      {(iconLeft || componentLeft) && (
         <View style={styles.iconBox}>
-          <IconLeft style={{...styles.icon, ...styleIcon}} />
+          {componentLeft ? (
+            componentLeft
+          ) : (
+            <IconLeft style={{...styles.icon, ...styleIcon}} />
+          )}
         </View>
       )}
+
       <TextInput
         {...props}
         style={[styles.input, props.style]}
         placeholderTextColor={COLORS.textSub}
+        pointerEvents={!!onPress ? 'none' : 'auto'}
       />
-      {iconRight && (
+      {(iconRight || componentRight) && (
         <View style={styles.iconBox}>
-          <IconRight style={{...styles.icon, ...styleIcon}} />
+          {componentRight ? (
+            componentRight
+          ) : (
+            <IconRight style={{...styles.icon, ...styleIcon}} />
+          )}
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -62,6 +82,7 @@ const styles = StyleSheet.create({
     width: '100%',
     columnGap: scale(10),
     justifyContent: 'center',
+    // flex: 1,
   },
   input: {
     flex: 1,

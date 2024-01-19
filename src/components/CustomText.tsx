@@ -1,16 +1,22 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps, TextStyle} from 'react-native';
-import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
+import {Animated, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
+import {COLORS, FONTS, SIZES} from '../assets/constants';
 import {arrayToObject} from '../utils/arrayToObject';
 
 export type CustomTextProps = {
   children: React.ReactNode;
+  isShadow?: boolean;
+  isAnimated?: boolean;
+  shaDowColor?: string;
   textType?: 'regular' | 'medium' | 'semiBold' | 'bold' | undefined;
 } & TextProps;
 
 export default function CustomText({
   children,
   textType,
+  isShadow,
+  isAnimated,
+  shaDowColor,
   ...props
 }: CustomTextProps) {
   const textWeight: TextStyle =
@@ -24,10 +30,18 @@ export default function CustomText({
 
   const propStyle = arrayToObject(props.style);
   delete propStyle.textType;
+  const Component = isAnimated ? Animated.Text : Text;
   return (
-    <Text {...props} style={[styles.text, propStyle, textWeight]}>
+    <Component
+      {...props}
+      style={[
+        styles.text,
+        isShadow && {...styles.shaDow, textShadowColor: shaDowColor},
+        propStyle,
+        textWeight,
+      ]}>
       {children}
-    </Text>
+    </Component>
   );
 }
 
@@ -35,5 +49,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: SIZES.small,
     color: COLORS.text,
+  },
+  shaDow: {
+    textShadowOffset: {width: 0, height: 1.5},
+    textShadowRadius: 2,
   },
 });
