@@ -11,6 +11,7 @@ import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {
   IconCheckBox,
   IconUnCheckBox,
+  IconUnViewablePassword,
   IconViewablePassword,
 } from '../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../components';
@@ -20,8 +21,12 @@ import {useNavigation} from '@react-navigation/native';
 export default function Content() {
   const navigation = useNavigation();
   const [check, setCheck] = useState(false);
+  const [view, setView] = useState(false);
   const toggleCheckBox = () => {
     setCheck(prevCheck => !prevCheck);
+  };
+  const toggleView = () => {
+    setView((prevView) => !prevView);
   };
   const gotoRegister = () => {
     navigation.navigate('RegisterScreen');
@@ -56,7 +61,8 @@ export default function Content() {
       <CustomInput
         placeholder="Enter Your Password"
         styleWrapper={{width: '80%', height: scale(48)}}
-        iconRight={IconViewablePassword}
+        onPress={toggleView}
+        iconRight={view ? IconUnViewablePassword  : IconViewablePassword}
       />
       <View
         style={{

@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     width:'100%',
     justifyContent: 'space-between',
     marginTop: scale(20),
-    borderWidth: scale(0.5),
+    borderWidth: scale(1),
     borderColor: '#F0B90B',
     shadowColor: '#00000040',
     shadowOffset: {

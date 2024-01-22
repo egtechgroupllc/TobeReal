@@ -70,7 +70,7 @@ export default function Header({
                     <View
                       style={{
                         ...styles.buttonActive,
-                        borderWidth: scale(0.5),
+                        borderWidth: scale(1),
                         borderColor: '#0000004D',
                       }}>
                       <CustomText textType="bold" style={styles.text}>

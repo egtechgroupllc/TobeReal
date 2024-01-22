@@ -69,7 +69,7 @@ export default function Content() {
             </CustomText>
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={DepositWithdraw}>
           <LinearGradient
             colors={['#FFFFFF', '#FFC702']}
             start={{x: 0, y: 0}}
@@ -307,6 +307,8 @@ const styles = StyleSheet.create({
     width: scale(104),
     justifyContent: 'center',
     marginTop: scale(20),
+    borderWidth:scale(1),
+    borderColor:'#F7E75A'
   },
   box: {
     backgroundColor: '#EEEEEE',

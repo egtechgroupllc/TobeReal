@@ -11,6 +11,7 @@ import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {
   IconCheckBox,
   IconUnCheckBox,
+  IconUnViewablePassword,
   IconViewablePassword,
 } from '../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../components';
@@ -19,6 +20,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Content() {
+  const [view, setView] = useState(false);
+  const toggleView = () => {
+    setView((prevView) => !prevView);
+  };
   const navigation = useNavigation();
   const gotoLogin = () => {
     navigation.navigate("LoginScreen"); 
@@ -40,7 +45,8 @@ export default function Content() {
          <CustomInput
         placeholder="Enter Your Password"
         styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
-        iconRight={IconViewablePassword}
+        onPress={toggleView}
+        iconRight={view ? IconUnViewablePassword  : IconViewablePassword}
       />
       <TouchableOpacity>
         <LinearGradient
