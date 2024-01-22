@@ -59,23 +59,35 @@ export default function DetailAccommodationScreen() {
   );
 
   const moveNavigateBar = offsetY => {
-    switch (offsetY) {
-      case offsetY <= dataSourceCords[0]:
-        setIndexSelect(0);
-        break;
-      case dataSourceCords[0] < offsetY && offsetY <= dataSourceCords[1]:
-        setIndexSelect(1);
-        break;
-      case dataSourceCords[1] < offsetY && offsetY <= dataSourceCords[2]:
-        setIndexSelect(2);
-        break;
-      case dataSourceCords[2] < offsetY && offsetY <= dataSourceCords[3]:
-        setIndexSelect(3);
-        break;
-      default:
-        setIndexSelect(4);
-        break;
+    if (offsetY <= dataSourceCords[0]) {
+      setIndexSelect(0);
+    } else if (dataSourceCords[0] < offsetY && offsetY <= dataSourceCords[1]) {
+      setIndexSelect(1);
+    } else if (dataSourceCords[1] < offsetY && offsetY <= dataSourceCords[2]) {
+      setIndexSelect(2);
+    } else if (dataSourceCords[2] < offsetY && offsetY <= dataSourceCords[3]) {
+      setIndexSelect(3);
+    } else {
+      setIndexSelect(4);
     }
+
+    // switch (offsetY) {
+    //   case offsetY <= dataSourceCords[0]:
+    //     setIndexSelect(0);
+    //     break;
+    //   case dataSourceCords[0] < offsetY && offsetY <= dataSourceCords[1]:
+    //     setIndexSelect(1);
+    //     break;
+    //   case dataSourceCords[1] < offsetY && offsetY <= dataSourceCords[2]:
+    //     setIndexSelect(2);
+    //     break;
+    //   case dataSourceCords[2] < offsetY && offsetY <= dataSourceCords[3]:
+    //     setIndexSelect(3);
+    //     break;
+    //   case dataSourceCords[3] < offsetY && offsetY <= dataSourceCords[4]:
+    //     setIndexSelect(4);
+    //     break;
+    // }
   };
 
   const selectScrollHandler = async value => {
