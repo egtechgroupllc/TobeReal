@@ -20,9 +20,10 @@ export default function WrapperContent({
   dayEndDeals,
   onPressSeeAll = funcFallBack,
   onPressCategory = funcFallBack,
+  ...props
 }) {
   return (
-    <View style={[styles.wrapper, styleWrapper]}>
+    <View {...props} style={[styles.wrapper, styleWrapper]}>
       <View style={styles.heading}>
         <View style={styles.boxHeading}>
           {heading && (

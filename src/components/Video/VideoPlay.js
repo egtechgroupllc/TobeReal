@@ -92,6 +92,7 @@ export default function VideoPlay({
             setProgress(value);
           }}
           repeat
+          muted
           resizeMode={resizeMode}
         />
 
@@ -109,7 +110,7 @@ export default function VideoPlay({
                   },
                 ]}>
                 <LottieView
-                  loop={false}
+                  // loop={false}
                   autoPlay={true}
                   duration={1200}
                   source={animations.releaseHeart}
@@ -120,7 +121,7 @@ export default function VideoPlay({
               </View>
             )}
 
-            <CustomButton
+            <TouchableOpacity
               isDelay
               activeOpacity={1}
               style={styles.overlayPlay}
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   overlayPlay: {
     width: '100%',
     position: 'absolute',
-    zIndex: 9,
+    zIndex: 1,
     height: '90%',
     backgroundColor: 'transparent',
   },

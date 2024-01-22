@@ -4,55 +4,61 @@ import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../../components/Ribbon';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconHouse, IconRoom} from '../../../../assets/icon/Icon';
+import Introduction from './Introduction';
 
 export default function InfoDetail() {
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.header}>
-        <CustomText textType="semiBold" style={styles.name}>
-          JP Hotel Pluit JP Hotel
-        </CustomText>
-        <View style={styles.boxHot}>
-          <CustomText
-            textType="semiBold"
-            style={{textAlign: 'center', color: '#fff'}}>
-            Hotel Residence 🏨
+    <View>
+      <View style={styles.wrapper}>
+        <View style={styles.header}>
+          <CustomText textType="semiBold" style={styles.name}>
+            JP Hotel Pluit JP Hotel
           </CustomText>
+          <View style={styles.boxHot}>
+            <CustomText
+              textType="semiBold"
+              style={{textAlign: 'center', color: '#fff'}}>
+              Hotel Residence 🏨
+            </CustomText>
+          </View>
         </View>
-      </View>
 
-      <View style={styles.room}>
-        <View style={styles.boxRoom}>
-          <IconHouse style={styles.icon} />
-          <CustomText textType="regular">Hotel Residence</CustomText>
+        <View style={styles.room}>
+          <View style={styles.boxRoom}>
+            <IconHouse style={styles.icon} />
+            <CustomText textType="regular">Hotel Residence</CustomText>
+          </View>
+          <View style={styles.boxRoom}>
+            <IconRoom style={styles.icon} />
+            <CustomText textType="regular">1</CustomText>
+          </View>
         </View>
-        <View style={styles.boxRoom}>
-          <IconRoom style={styles.icon} />
-          <CustomText textType="regular">1</CustomText>
-        </View>
-      </View>
 
-      <View style={styles.room}>
-        <View style={[styles.boxMore, styles.rating]}>
-          <CustomText
-            style={{color: COLORS.white, lineHeight: 18}}
-            textType="bold">
-            NEW
-          </CustomText>
-        </View>
-        <View style={styles.boxMore}>
-          <CustomText textType="bold">Discussion (0)</CustomText>
+        <View style={styles.room}>
+          <View style={[styles.boxMore, styles.rating]}>
+            <CustomText
+              style={{color: COLORS.white, lineHeight: 18}}
+              textType="bold">
+              NEW
+            </CustomText>
+          </View>
+          <View style={styles.boxMore}>
+            <CustomText textType="bold">Discussion (0)</CustomText>
+          </View>
         </View>
       </View>
+      <Introduction />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: WIDTH.widthContain,
-    alignSelf: 'center',
+    // width: WIDTH.widthContain,
     rowGap: scale(8),
+    backgroundColor: '#fff',
+    padding: scale(16),
+    paddingBottom: scale(4),
   },
   header: {
     flexDirection: 'row',

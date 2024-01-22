@@ -51,6 +51,7 @@ export default function SelectLocation() {
         onPress={() => {
           bottomSheetRef.current.open();
         }}
+        editable={false}
       />
 
       <BottomSheet
@@ -127,8 +128,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#cccccc',
     borderStyle: 'solid',
-    height: scale(37),
+    height: scale(38),
     borderRadius: scale(12),
     paddingHorizontal: scale(12),
+    fontSize: SIZES.xMedium,
+    paddingVertical: scale(4),
   },
 });
