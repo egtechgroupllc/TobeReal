@@ -1,4 +1,4 @@
-package com.travelio
+package com.smarthousegroup.shome
 
 import android.app.Application
 import com.facebook.react.PackageList
