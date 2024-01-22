@@ -14,7 +14,7 @@ export default function InfoAdditional() {
     <WrapperContent
       isSeeAll
       onPressSeeAll={() => console.log(1)}
-      heading="Unit Facilities"
+      heading="Additional information"
       styleContent={{
         paddingHorizontal: scale(16),
       }}>

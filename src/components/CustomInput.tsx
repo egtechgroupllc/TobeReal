@@ -56,6 +56,7 @@ export default function CustomInput({
         style={[styles.input, props.style]}
         placeholderTextColor={COLORS.textSub}
         pointerEvents={!!onPress ? 'none' : 'auto'}
+        editable={!onPress}
       />
       {(iconRight || componentRight) && (
         <View style={styles.iconBox}>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#cccccc',
     borderStyle: 'solid',
-    paddingHorizontal: scale(12),
+    paddingHorizontal: scale(10),
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 12,
@@ -86,7 +87,8 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: scale(37),
+    height: scale(38),
+    paddingVertical: scale(4),
     fontFamily: FONTS.regular,
     fontSize: SIZES.small,
     color: COLORS.text,

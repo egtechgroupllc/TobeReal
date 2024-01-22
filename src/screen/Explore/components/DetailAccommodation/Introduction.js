@@ -5,14 +5,12 @@ import {SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {TabSelect} from '../../../../components';
 import WrapperContent from '../WrapperContent';
 
-const listTab = ['Location', 'Info'];
+const listTab = ['Info', 'Nearby'];
 export default function Introduction() {
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   return (
     <WrapperContent
-      isSeeAll
-      onPressSeeAll={() => console.log(1)}
       heading="Introduction"
       styleContent={{
         paddingHorizontal: scale(16),

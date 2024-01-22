@@ -12,7 +12,6 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
   const refHeart = useRef();
 
   const [isHeart, setIsHeart] = useState(true);
-
   const onShare = async () => {
     Share.share({
       message: `${data?.caption}\n url: ${data?.src}`,
@@ -25,7 +24,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
         err && console.log(err);
       });
   };
-  console.log(isHeart);
+
   useEffect(() => {
     if (isFavourite) {
       setIsHeart(!isFavourite);
@@ -46,6 +45,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
           alignItems: 'center',
         }}
         onPress={() => {
+          console.log(231);
           setIsHeart(!isHeart);
           refHeart.current.reset();
           onFavourite(isHeart);
@@ -57,7 +57,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
           }}>
           <LottieView
             ref={refHeart}
-            loop={false}
+            // loop={false}
             autoPlay={!isHeart}
             source={animations.favouriteHeart}
             resizeMode="cover"
@@ -89,8 +89,7 @@ const styles = StyleSheet.create({
     rowGap: scale(16),
     position: 'absolute',
     right: scale(20),
-
-    zIndex: 9,
+    zIndex: 99,
     alignItems: 'center',
   },
   favouriteHeart: {

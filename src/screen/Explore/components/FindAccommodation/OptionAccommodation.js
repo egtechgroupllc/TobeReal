@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   FlatList,
   Modal,
@@ -6,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 
@@ -17,23 +18,33 @@ export default function OptionAccommodation({
   styleContent,
   isSelectOnly,
   isShaDow,
+  isSelectForIndex,
+  select,
+  onSelect,
 }) {
-  const [option, setOption] = useState([data[0].text]);
+  const valueDefault = useRef(isSelectForIndex ? 0 : data[0].text).current;
+  const valueDefaultView = useCallback(
+    (item, index) => (isSelectForIndex ? index : item?.text),
+    [],
+  );
+
+  const [option, setOption] = useState([valueDefault]);
+
   useEffect(() => {
-    setOption([data[0].text]);
-  }, [data]);
+    setOption([select || valueDefault]);
+  }, [valueDefault, select]);
 
   const handleSelectOption = value => {
     setOption(prev => {
       const check = option.includes(value);
 
-      if (value === data[0].text) {
+      if (value === valueDefault) {
         return [value];
       }
       if (check) {
-        return option.filter(item => item !== value && item !== data[0].text);
+        return option.filter(item => item !== value && item !== valueDefault);
       } else {
-        const result = prev.filter(item => item !== data[0].text);
+        const result = prev.filter(item => item !== valueDefault);
         return [...result, value];
       }
     });
@@ -41,13 +52,16 @@ export default function OptionAccommodation({
 
   const handleSelectOnly = value => {
     setOption([value]);
+    onSelect(value);
   };
 
   useEffect(() => {
     if (!isSelectOnly && option.length === 0) {
-      setOption([data[0].text]);
+      setOption([valueDefault]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!isSelectOnly && onSelect) {
+      onSelect(option);
+    }
   }, [option]);
 
   return (
@@ -64,23 +78,25 @@ export default function OptionAccommodation({
             activeOpacity={0.7}
             style={[
               styles.option,
-              option.includes(item?.text) &&
+              option.includes(valueDefaultView(item, index)) &&
                 !outline && {
                   borderBottomWidth: 2,
                   paddingBottom: scale(4),
                 },
               outline && {
-                backgroundColor: !option.includes(item?.text)
+                backgroundColor: !option.includes(valueDefaultView(item, index))
                   ? '#f8f8f8'
                   : '#F0B90B20',
               },
-              option.includes(item?.text) && outline && styles.outline,
+              option.includes(valueDefaultView(item, index)) &&
+                outline &&
+                styles.outline,
               styleContent?.height && {height: styleContent?.height},
             ]}
             onPress={() =>
               isSelectOnly
-                ? handleSelectOnly(item?.text)
-                : handleSelectOption(item?.text)
+                ? handleSelectOnly(valueDefaultView(item, index))
+                : handleSelectOption(valueDefaultView(item, index))
             }>
             {item?.icon && (
               <item.icon
@@ -89,7 +105,9 @@ export default function OptionAccommodation({
                   height: scale(16),
                 }}
                 fill={
-                  option.includes(item?.text) ? COLORS.primary : COLORS.text
+                  option.includes(valueDefaultView(item, index))
+                    ? COLORS.primary
+                    : COLORS.text
                 }
               />
             )}
@@ -97,7 +115,7 @@ export default function OptionAccommodation({
             {item?.text && (
               <CustomText
                 style={{
-                  color: option.includes(item?.text)
+                  color: option.includes(valueDefaultView(item, index))
                     ? COLORS.primary
                     : COLORS.text,
                   paddingHorizontal: scale(10),

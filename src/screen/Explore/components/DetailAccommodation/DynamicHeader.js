@@ -21,7 +21,29 @@ const Header_Max_Height = WIDTH.heightScreen / 3.2;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 
-export default React.memo(function DynamicHeader({scrollOffsetY, data}) {
+const listInfo = [
+  {
+    text: 'Detail',
+  },
+  {
+    text: 'Facilities',
+  },
+  {
+    text: 'Location',
+  },
+  {
+    text: 'Reviews',
+  },
+  {
+    text: 'Info',
+  },
+];
+export default React.memo(function DynamicHeader({
+  scrollOffsetY,
+  onSelect,
+  indexSelect,
+  data,
+}) {
   const {goBack} = useNavigation();
   const animatedTranslateY = scrollOffsetY.interpolate({
     inputRange: [0, Scroll_Distance],
@@ -34,7 +56,7 @@ export default React.memo(function DynamicHeader({scrollOffsetY, data}) {
     extrapolate: 'clamp',
   });
   const animatedOpacityText = scrollOffsetY.interpolate({
-    inputRange: [0, Scroll_Distance],
+    inputRange: [Scroll_Distance / 2, Scroll_Distance],
     outputRange: [0, 1],
     extrapolate: 'clamp',
   });
@@ -136,30 +158,17 @@ export default React.memo(function DynamicHeader({scrollOffsetY, data}) {
         <OptionAccommodation
           isShaDow
           isSelectOnly
+          isSelectForIndex
           styleContent={{
             columnGap: scale(8),
           }}
+          select={indexSelect}
           styleWrapper={{
             flex: 0,
             height: scale(46),
           }}
-          data={[
-            {
-              text: 'Detail',
-            },
-            {
-              text: 'Location',
-            },
-            {
-              text: 'Facilities',
-            },
-            {
-              text: 'Reviews',
-            },
-            {
-              text: 'Info',
-            },
-          ]}
+          data={listInfo}
+          onSelect={onSelect}
         />
       </Animated.View>
     </>
