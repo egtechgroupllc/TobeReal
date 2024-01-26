@@ -5,57 +5,46 @@ import {
   View,
   Text,
   TextInput,
-  Alert,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
-import {useNavigation} from '@react-navigation/native';
-import CustomText from '../../../../../components/CustomText';
+import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import CustomText from '../../../../../../components/CustomText';
 import {
   IconCamera,
-  IconCheckBox,
   IconCheckBoxWhite,
   IconDown,
-  IconRight,
-  IconUnCheckBox,
   IconUnCheckBoxWhite,
-} from '../../../../../assets/icon/Icon';
-import {CustomInput} from '../../../../../components';
-import Button from '../../../../Profile/components/Button';
+} from '../../../../../../assets/icon/Icon';
+import {CustomInput} from '../../../../../../components';
+import Button from '../../../../../Profile/components/Button';
+import LinearGradient from 'react-native-linear-gradient';
+import SelectService from './SelectService';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import axios from 'axios';
-import Map from '../../../../Explore/components/DetailAccommodation/Map';
 export default function TabContent() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [roomImage, setRoomImage] = useState([]);
+  const [roomType, setRoomType] = useState('');
+  const [acreage, setAcreage] = useState('');
   const [description, setDescription] = useState('');
-  const [realesate, setRealEsate] = useState('');
+  const [price, setPrice] = useState('');
+  const [showBed, setShowBed] = useState('');
+  const viewShowBed = () => {
+    setShowBed(prevshowBed => !prevshowBed);
+  };
+  const handleRoomType = text => {
+    setRoomType(text);
+  };
   const handleDesciption = text => {
     setDescription(text);
   };
-  const handleRealEsate = text => {
-    setRealEsate(text);
+  const handleAcreage = text => {
+    setAcreage(text);
   };
   const handlePrice = text => {
     setPrice(text);
-  };
-  const maxCharacters = 2000;
-  const navigation = useNavigation();
-  const [price, setPrice] = useState('');
-  const [selectedImage, setSelectedImage] = useState([]);
-  const [check, setCheck] = useState(false);
-  const [check1, setCheck1] = useState(false);
-  const [showFurniture, setShowFurniture] = useState('');
-  const viewShowFurniture = () => {
-    setShowFurniture(prevshowFurniture => !prevshowFurniture);
-  };
-  const toggleCheckBox = () => {
-    setCheck(prevCheck => !prevCheck);
-  };
-  const toggleCheckBox1 = () => {
-    setCheck1(prevCheck => !prevCheck);
-  };
-  const goPostScreen = () => {
-    navigation.navigate('PostNewsScreen');
   };
   const pickImage = () => {
     ImageCropPicker.openPicker({
@@ -63,47 +52,41 @@ export default function TabContent() {
       height: scale(400),
       multiple: true,
       maxFiles: 100,
-    })
-      .then(image => {
-        if (image) {
-          setSelectedImage(image);
-          uploadImage(image.path);
-        }
-      })
-      .catch(error => {
-        console.log('Error picking image:', error);
-      });
-  };
-  const uploadImage = async imagePath => {
-    try {
-      const formData = new FormData();
-      formData.append('image', {
-        uri: imagePath,
-        type: 'image/jpeg',
-        name: 'uploaded_image.jpg',
-      });
-
-      const response = await axios.post('YOUR_SERVER_API_ENDPOINT', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      // Handle the server response
-      if (response.status === 200) {
-        // Image uploaded successfully
-        console.log('Image uploaded successfully');
-      } else {
-        // Handle error
-        console.log('Error uploading image to server');
-        Alert.alert('Error', 'Failed to upload image to the server');
+    }).then(image => {
+      console.log(image);
+      if (image) {
+        setRoomImage(image);
+        console.log(roomImage);
       }
-    } catch (error) {
-      console.log('Error uploading image:', error);
-      Alert.alert('Error', 'An error occurred while uploading image');
-    }
+    });
   };
-  const ok = () => {};
+  const maxCharacters = 1000;
+  const [check, setCheck] = useState(false);
+  const [check1, setCheck1] = useState(false);
+  const toggleCheckBox1 = () => {
+    setCheck1(prevCheck => !prevCheck);
+  };
+  const handleOk = () => {
+    const roomDetails = {
+      receivedRoomType: roomType,
+      receivedDescription: description,
+      receivedAcreage: acreage,
+      receivedPrice: price,
+      receivedRoomImages: roomImage.map(image => image.path),
+    };
+    // Pass the roomDetails back to the previous screen
+    navigation.goBack();
+    route.params.onOk(roomDetails);
+  };
+  const ok = () => {
+    handleOk();
+    // Clear the input fields
+    setRoomType('');
+    setDescription('');
+    setAcreage('');
+    setPrice('');
+    setRoomImage('');
+  };
   return (
     <View
       style={{
@@ -112,22 +95,22 @@ export default function TabContent() {
         marginTop: scale(30),
         alignSelf: 'center',
       }}>
-      <View style={styles.button}>
+      {/* <View style={styles.button}>
         <Image
-          source={images.sell}
-          style={{width: scale(47), height: scale(38)}}
+          source={images.lease}
+          style={{width: scale(38), height: scale(38)}}
         />
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-          Sell
+          Lease
         </CustomText>
-      </View>
+      </View> */}
       {/* <View
         style={{
           flexDirection: 'row',
           marginTop: scale(30),
-          columnGap: scale(40),
+          columnGap: scale(30),
         }}>
         <TouchableOpacity
           onPress={toggleCheckBox}
@@ -140,7 +123,7 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleCheckBox1} style={styles.buttonSmall}>
-          {check1 ? <IconCheckBoxWhite/> : <IconUnCheckBoxWhite />}
+          {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>
@@ -157,7 +140,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Real estate title
+        Room type title
       </CustomText>
       <View style={styles.textArea}>
         <ScrollView>
@@ -165,13 +148,13 @@ export default function TabContent() {
             multiline
             numberOfLines={4}
             placeholder="Enter a desciption"
-            value={realesate}
-            onChangeText={handleRealEsate}
+            value={roomType}
+            onChangeText={handleRoomType}
             style={{...styles.text, color: COLORS.black}}
           />
         </ScrollView>
         <Text style={{...styles.text, color: COLORS.black}}>
-          {realesate.length}/{maxCharacters}
+          {roomType.length}/{maxCharacters}
         </Text>
       </View>
       <CustomText
@@ -200,16 +183,24 @@ export default function TabContent() {
           {description.length}/{maxCharacters}
         </Text>
       </View>
+      {/* <Image
+        source={images.map}
+        style={{
+          height: scale(323),
+          width: '90%',
+          alignSelf: 'center',
+          marginTop: scale(30),
+        }}></Image> */}
       <CustomText
         textType="medium"
         style={{
           ...styles.text1,
           color: COLORS.black,
-          marginTop: scale(20),
+          marginTop: scale(10),
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Contact Info
+        Acreage (m2)
       </CustomText>
       <CustomInput
         styleWrapper={{
@@ -220,176 +211,10 @@ export default function TabContent() {
           borderWidth: scale(0),
           width: '90%',
         }}
-        placeholder="Full name"
+        onChangeText={handleAcreage}
+        value={acreage}
+        placeholder="Enter the land area"
       />
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        placeholder="Phone"
-      />
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-          marginTop: scale(10),
-          marginBottom: scale(10),
-        }}>
-        Select the furniture
-      </CustomText>
-      <TouchableOpacity
-        style={
-          !showFurniture ? styles.buttonFurnitury : styles.buttonFurniturys
-        }
-        onPress={viewShowFurniture}>
-        <CustomText
-          textType="regular"
-          style={{
-            ...styles.text,
-            color: COLORS.black,
-            paddingHorizontal: scale(20),
-          }}>
-          Select the furniture
-        </CustomText>
-      </TouchableOpacity>
-      {showFurniture && (
-        <View style={styles.listBed}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: scale(25),
-              paddingVertical: scale(10),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text,
-                color: '#979797',
-              }}>
-              Toilet
-            </CustomText>
-            <CustomInput
-              styleWrapper={{
-                height: scale(20),
-                backgroundColor: 'white',
-                borderRadius: scale(5),
-                borderWidth: scale(0),
-                width: '40%',
-              }}
-              placeholder="Quantity"
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: scale(25),
-              paddingVertical: scale(10),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text,
-                color: '#979797',
-              }}>
-              Bed room
-            </CustomText>
-            <CustomInput
-              styleWrapper={{
-                height: scale(20),
-                backgroundColor: 'white',
-                borderRadius: scale(5),
-                borderWidth: scale(0),
-                width: '40%',
-              }}
-              placeholder="Quantity"
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              // justifyContent: 'space-between',
-              paddingHorizontal: scale(25),
-              paddingVertical: scale(10),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text,
-                color: '#979797',
-                width: '50%',
-              }}>
-              Indoor furniture
-            </CustomText>
-            <TouchableOpacity
-              onPress={toggleCheckBox}
-              style={{width: '40%', alignItems: 'center'}}>
-              {check ? <IconCheckBox /> : <IconUnCheckBox />}
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: scale(25),
-              paddingVertical: scale(10),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text,
-                color: '#979797',
-              }}>
-              Home direction
-            </CustomText>
-            <CustomInput
-              styleWrapper={{
-                height: scale(20),
-                backgroundColor: 'white',
-                borderRadius: scale(5),
-                borderWidth: scale(0),
-                width: '40%',
-              }}
-              placeholder="Direction"
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: scale(25),
-              paddingVertical: scale(10),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text,
-                color: '#979797',
-              }}>
-              Balcony direction
-            </CustomText>
-            <CustomInput
-              styleWrapper={{
-                height: scale(20),
-                backgroundColor: 'white',
-                borderRadius: scale(5),
-                borderWidth: scale(0),
-                width: '40%',
-              }}
-              placeholder="Direction"
-            />
-          </View>
-        </View>
-      )}
       <CustomText
         textType="medium"
         style={{
@@ -432,6 +257,7 @@ export default function TabContent() {
             borderRadius: scale(5),
             marginTop: scale(10),
             marginLeft: scale(10),
+            marginBottom: scale(20),
           }}>
           <CustomText
             textType="medium"
@@ -449,93 +275,224 @@ export default function TabContent() {
         style={{
           ...styles.text1,
           color: COLORS.black,
-          marginTop: scale(10),
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
+          marginBottom: scale(10),
         }}>
-        Acreage (m2)
+        Select bed type
       </CustomText>
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        placeholder="Enter the land area"
-      />
-
-      <View style={{flexDirection: 'row'}}>
+      <TouchableOpacity
+        style={!showBed ? styles.buttonBed : styles.buttonBeds}
+        onPress={viewShowBed}>
         <CustomText
-          textType="medium"
+          textType="regular"
           style={{
-            ...styles.text1,
+            ...styles.text,
             color: COLORS.black,
-            marginTop: scale(20),
-            width: '47%',
+            paddingHorizontal: scale(20),
           }}>
-          Country
+          Select bed type
         </CustomText>
-        <TouchableOpacity
-          style={{
-            height: scale(40),
-            paddingHorizontal: scale(15),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: '#E3E3E3',
-            width: '40%',
-            alignItems: 'center',
-            borderRadius: scale(5),
-            marginTop: scale(10),
-            marginLeft: scale(10),
-          }}>
-          <CustomText
-            textType="medium"
+      </TouchableOpacity>
+      {showBed && (
+        <View style={styles.listBed}>
+          <View
             style={{
-              ...styles.text,
-              color: '#979797',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
             }}>
-            USA
-          </CustomText>
-          <IconDown />
-        </TouchableOpacity>
-      </View>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Super king bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Super queen bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              King bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Queen bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Single bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Couple bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: scale(25),
+              paddingVertical: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Sofa bed
+            </CustomText>
+            <CustomInput
+              styleWrapper={{
+                height: scale(20),
+                backgroundColor: 'white',
+                borderRadius: scale(5),
+                borderWidth: scale(0),
+                width: '40%',
+              }}
+              placeholder="Quantity"
+            />
+          </View>
+        </View>
+      )}
       <CustomText
         textType="medium"
         style={{
           ...styles.text1,
           color: COLORS.black,
-          marginTop: scale(10),
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
-        }}>
-        Address
-      </CustomText>
-      <CustomInput
-        styleWrapper={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
           marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          marginBottom: scale(20),
-          width: '90%',
-        }}
-        placeholder="Enter address"
-      />
-      {/* <Image
-        source={images.map}
-        style={{
-          height: scale(323),
-          width: '90%',
-          alignSelf: 'center',
-        }}></Image> */}
-      <View style={{width: '100%', marginTop: scale(10)}}>
-        <Map />
-      </View>
-
+          marginBottom: scale(10),
+        }}>
+        Select service
+      </CustomText>
+      <SelectService />
       <CustomText
         textType="medium"
         style={{
@@ -545,7 +502,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Real estate images
+        Room images
       </CustomText>
       <CustomText
         textType="regular"
@@ -566,16 +523,12 @@ export default function TabContent() {
           <IconCamera />
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          ...styles.textArea1,
-          backgroundColor: '#E3E3E3',
-          marginBottom: scale(10),
-        }}>
+      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
         <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {selectedImage.map(image => (
+          {roomImage.map((image, index) => (
             <Image
+              key={index}
               source={{uri: image.path}}
               style={{
                 width: '100%',
@@ -640,7 +593,7 @@ export default function TabContent() {
         discovered, your account will be permanently banned.
       </CustomText> */}
       <View style={{width: '100%', marginBottom: scale(30)}}>
-        <Button title={'Post'} onPress={ok} />
+        <Button title={'Confirm'} onPress={ok} />
       </View>
     </View>
   );
@@ -729,7 +682,21 @@ const styles = StyleSheet.create({
     paddingTop: scale(5),
     marginTop: scale(10),
   },
-  buttonFurnitury: {
+  text: {
+    fontSize: SIZES.small,
+  },
+  buttonAdd: {
+    alignItems: 'center',
+    borderRadius: scale(10),
+    height: scale(30),
+    width: '60%',
+    justifyContent: 'center',
+    marginTop: scale(20),
+    alignSelf: 'center',
+    flexDirection: 'row',
+    columnGap: scale(30),
+  },
+  buttonBed: {
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
     borderRadius: scale(10),
@@ -737,7 +704,7 @@ const styles = StyleSheet.create({
     height: scale(40),
     justifyContent: 'center',
   },
-  buttonFurniturys: {
+  buttonBeds: {
     borderTopLeftRadius: scale(10),
     borderTopEndRadius: scale(10),
     borderTopLeftRadius: scale(10),
@@ -758,7 +725,7 @@ const styles = StyleSheet.create({
     width: '90%',
     minHeight: scale(100),
   },
-  text: {
-    fontSize: SIZES.small,
+  text2: {
+    fontSize: SIZES.medium,
   },
 });

@@ -17,37 +17,103 @@ import {
 import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Content() {
-  const [view, setView] = useState(false);
-  const toggleView = () => {
-    setView((prevView) => !prevView);
+  const [viewPassword, setViewPassword] = useState(false);
+  const [viewPasswordConfirm, setViewPasswordConfirm] = useState(false);
+  const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+  const toggleViewPassword = () => {
+    setViewPassword(prevView => !prevView);
+    setPasswordVisible(!passwordVisible);
+  };
+  const toggleViewPasswordConfirm = () => {
+    setViewPasswordConfirm(prevView => !prevView);
+    setPasswordConfirmVisible(!passwordConfirmVisible);
+  };
+  const handleEmail = text => {
+    setEmail(text);
+  };
+  const handleUserName = text => {
+    setUserName(text);
+  };
+  const handlePassword = text => {
+    setPassword(text);
+  };
+  const handlePasswordConfirm = text => {
+    setPasswordConfirm(text);
   };
   const navigation = useNavigation();
   const gotoLogin = () => {
-    navigation.navigate("LoginScreen"); 
+    navigation.navigate('LoginScreen');
   };
   return (
     <View style={styles.container}>
       <CustomInput
+        onChangeText={handleUserName}
+        value={username}
         placeholder="Enter Your Username"
-        styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
+        styleWrapper={{
+          width: '80%',
+          marginBottom: scale(25),
+          height: scale(48),
+        }}
       />
       <CustomInput
+        onChangeText={handleEmail}
+        value={email}
         placeholder="Enter Your Email"
-        styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
+        styleWrapper={{
+          width: '80%',
+          marginBottom: scale(25),
+          height: scale(48),
+        }}
       />
-          <CustomInput
+      {/* <CustomInput
         placeholder="Enter Your Phone Number"
-        styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
-      />
-         <CustomInput
+        styleWrapper={{
+          width: '80%',
+          marginBottom: scale(25),
+          height: scale(48),
+        }}
+      /> */}
+      <CustomInput
+        secureTextEntry={!passwordVisible}
+        onChangeText={handlePassword}
+        value={password}
         placeholder="Enter Your Password"
-        styleWrapper={{width: '80%', marginBottom: scale(25), height:scale(48)}}
-        onPress={toggleView}
-        iconRight={view ? IconUnViewablePassword  : IconViewablePassword}
+        styleWrapper={{
+          width: '80%',
+          height: scale(48),
+          marginBottom: scale(25),
+        }}
+        iconPress={toggleViewPassword}
+        iconRight={viewPassword ? IconUnViewablePassword : IconViewablePassword}
       />
+      <CustomInput
+        secureTextEntry={!passwordConfirmVisible}
+        onChangeText={handlePasswordConfirm}
+        value={passwordConfirm}
+        placeholder="Enter Your Password Confirm"
+        styleWrapper={{width: '80%', height: scale(48)}}
+        iconPress={toggleViewPasswordConfirm}
+        iconRight={
+          viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
+        }
+      />
+      {password !== passwordConfirm && (
+        <CustomText
+          textType="medium"
+          style={{...styles.text, marginTop: scale(10), color: COLORS.error}}>
+          Password does not match!
+        </CustomText>
+      )}
+
       <TouchableOpacity>
         <LinearGradient
           colors={['#F7E75A', '#FFC702']}
@@ -65,12 +131,12 @@ export default function Content() {
           marginTop: scale(20),
           justifyContent: 'center',
         }}>
-          <View>
+        <View>
           <CustomText textType="semiBold" style={{...styles.text}}>
-          Already have an account?
-        </CustomText>
-        <View style={styles.line}/>
-          </View>
+            Already have an account?
+          </CustomText>
+          <View style={styles.line} />
+        </View>
         <TouchableOpacity onPress={gotoLogin}>
           <CustomText
             textType="semiBold"
@@ -102,10 +168,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     height: scale(48),
     justifyContent: 'center',
-    marginTop: scale(15),
+    marginTop: scale(20),
   },
-  line:{
-    height:scale(1),
-    backgroundColor:'black',
-  }
+  line: {
+    height: scale(1),
+    backgroundColor: 'black',
+  },
 });

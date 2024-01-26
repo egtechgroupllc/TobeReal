@@ -20,6 +20,7 @@ type CustomInputProps = {
   styleWrapper?: ViewStyle;
   styleIcon?: ViewStyle;
   onPress?: () => void;
+  iconPress?: () => void;
 } & TextInputProps;
 
 export default function CustomInput({
@@ -30,6 +31,7 @@ export default function CustomInput({
   styleWrapper,
   styleIcon,
   onPress,
+  iconPress,
   ...props
 }: CustomInputProps) {
   const IconRight: any = iconRight;
@@ -59,13 +61,13 @@ export default function CustomInput({
         editable={!onPress}
       />
       {(iconRight || componentRight) && (
-        <View style={styles.iconBox}>
+        <TouchableOpacity style={styles.iconBox} onPress={iconPress}>
           {componentRight ? (
             componentRight
           ) : (
             <IconRight style={{...styles.icon, ...styleIcon}} />
           )}
-        </View>
+        </TouchableOpacity>
       )}
     </TouchableOpacity>
   );

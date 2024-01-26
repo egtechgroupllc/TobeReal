@@ -20,13 +20,23 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 export default function Content() {
   const navigation = useNavigation();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [check, setCheck] = useState(false);
   const [view, setView] = useState(false);
   const toggleCheckBox = () => {
     setCheck(prevCheck => !prevCheck);
   };
   const toggleView = () => {
-    setView((prevView) => !prevView);
+    setView(prevView => !prevView);
+    setPasswordVisible(!passwordVisible);
+  };
+  const handleEmail= text => {
+    setEmail(text);
+  };
+  const handlePassword= text => {
+    setPassword(text);
   };
   const gotoRegister = () => {
     navigation.navigate('RegisterScreen');
@@ -37,7 +47,7 @@ export default function Content() {
   const gotoHome = () => {
     navigation.navigate('BottomTab');
   };
-
+  console.log(password)
   return (
     <View style={styles.container}>
       <CustomText
@@ -46,6 +56,8 @@ export default function Content() {
         Email
       </CustomText>
       <CustomInput
+        onChangeText={handleEmail}
+        value={email}
         placeholder="example@gmail.com"
         styleWrapper={{
           width: '80%',
@@ -59,10 +71,13 @@ export default function Content() {
         Password
       </CustomText>
       <CustomInput
+        secureTextEntry={!passwordVisible}
+        onChangeText={handlePassword}
+        value={password}
         placeholder="Enter Your Password"
         styleWrapper={{width: '80%', height: scale(48)}}
-        onPress={toggleView}
-        iconRight={view ? IconUnViewablePassword  : IconViewablePassword}
+        iconPress={toggleView}
+        iconRight={view ? IconUnViewablePassword : IconViewablePassword}
       />
       <View
         style={{

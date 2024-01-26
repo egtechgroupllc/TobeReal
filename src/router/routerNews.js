@@ -1,5 +1,6 @@
 import { NewsScreen } from "../screen/News";
 import { PostNewsScreen } from "../screen/News/PostNews";
+import { AddRoomTypeScreen } from "../screen/News/PostNews/Lease/AddRoomType";
 import LeaseScreen from "../screen/News/PostNews/Lease/LeaseScreen";
 import RentBuyScreen from "../screen/News/PostNews/RentBuy/RentBuyScreen";
 import { SellScreen } from "../screen/News/PostNews/Sell";
@@ -25,5 +26,9 @@ export default routerNews = [
   {
     name: 'RentBuyScreen',
     component: RentBuyScreen,
+  },
+  {
+    name: 'AddRoomTypeScreen',
+    component: AddRoomTypeScreen,
   },
 ];

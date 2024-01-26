@@ -13,6 +13,7 @@ export const COLORS = {
   white: '#fff',
   grey: '#ccc',
   black: '#000000',
+  error:'#FF4500'
 };
 export const WIDTH = {
   widthScreen: width,
