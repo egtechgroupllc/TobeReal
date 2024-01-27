@@ -614,6 +614,23 @@ export function IconAdd({fill, ...props}) {
   );
 }
 
+export function IconError({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(14)}
+      height={props?.style?.height || scale(14)}
+      viewBox="0 0 23 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M4.946 19.077A1.846 1.846 0 006.54 20h9.44a1.845 1.845 0 001.581-.923l4.72-8.16a1.846 1.846 0 000-1.846L17.561.923A1.847 1.847 0 0015.971 0H6.55a1.846 1.846 0 00-1.605.923L.247 9.08a1.846 1.846 0 000 1.846l4.699 8.15zm7.384-3.16a1.006 1.006 0 01-1.006 1.006h-.138a1.006 1.006 0 01-1.01-1.006v-.139a1.006 1.006 0 011.007-1.009h.138a1.008 1.008 0 011.01 1.006v.142zM10.55 3.077h1.43a.997.997 0 01.995 1.074L12.256 12a.997.997 0 01-1.985 0l-.71-7.85a.997.997 0 01.987-1.073z"
+        fill={fill || '#F0334B'}
+      />
+    </Svg>
+  );
+}
+
 export function IconSubtract({fill, ...props}) {
   return (
     <Svg

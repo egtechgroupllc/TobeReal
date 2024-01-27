@@ -6,19 +6,19 @@ export const confirmField = (field, message) => {
   return {validate: value => value === field || message};
 };
 
-export const validateLength = (message, length) => {
+export const validateLength = (length, message) => {
   return {minLength: {value: length, message}, required: message};
 };
 
-export const validateEqualLength = (message, length) => {
+export const validateEqualLength = (length, message) => {
   return {validate: value => value?.length === length || message};
 };
 
-export const validateMinAmount = (message, amount) => {
+export const validateMinAmount = (amount, message) => {
   return {validate: value => parseFloat(value) > amount || message};
 };
 
-export const validateMinMaxAmount = (message, amount, minAmount = 1) => {
+export const validateMinMaxAmount = (amount, minAmount = 1, message) => {
   return {
     validate: value =>
       (parseFloat(value) <= amount &&
@@ -43,7 +43,7 @@ export const validateUserName = message => {
 const PNF = require('google-libphonenumber');
 const phoneUtil = PNF.PhoneNumberUtil.getInstance();
 
-export const validatePhone = (message, countryCode) => {
+export const validatePhone = (countryCode, message) => {
   return {
     validate: value => {
       try {
@@ -60,7 +60,7 @@ export const validatePhone = (message, countryCode) => {
   };
 };
 
-export const validatePhoneNotRequire = (message, countryCode) => {
+export const validatePhoneNotRequire = (countryCode, message) => {
   return {
     validate: value => {
       try {
@@ -83,6 +83,6 @@ export const validateCode = message => {
   };
 };
 
-export const validateLengthImage = (message, length) => {
+export const validateLengthImage = (length, message) => {
   return {validate: value => value?.length === length || message};
 };

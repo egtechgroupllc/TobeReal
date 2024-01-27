@@ -203,7 +203,7 @@ export default function TabContent() {
         Acreage (m2)
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -233,7 +233,7 @@ export default function TabContent() {
           paddingHorizontal: scale(20),
         }}>
         <CustomInput
-          styleWrapper={{
+          style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
             marginTop: scale(10),
@@ -312,7 +312,7 @@ export default function TabContent() {
               Super king bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -338,7 +338,7 @@ export default function TabContent() {
               Super queen bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -364,7 +364,7 @@ export default function TabContent() {
               King bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -390,7 +390,7 @@ export default function TabContent() {
               Queen bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -416,7 +416,7 @@ export default function TabContent() {
               Single bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -442,7 +442,7 @@ export default function TabContent() {
               Couple bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -468,7 +468,7 @@ export default function TabContent() {
               Sofa bed
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),

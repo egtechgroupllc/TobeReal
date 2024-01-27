@@ -16,6 +16,7 @@ import ChooseOccupancy from './ChooseOccupancy';
 import OptionAccommodation from './OptionAccommodation';
 import {useForm} from 'react-hook-form';
 import {requireField} from '../../../../utils/validate';
+import CheckBox from '../../../../components/CheckBox';
 
 export default function FindContent({isBuy, rental}) {
   const {navigate} = useNavigation();
@@ -138,14 +139,7 @@ export default function FindContent({isBuy, rental}) {
           columnGap: scale(6),
           marginVertical: scale(6),
         }}>
-        <BouncyCheckbox
-          size={scale(16)}
-          fillColor={COLORS.primary}
-          text="I am flexible with dates"
-          textStyle={styles.textCheckbox}
-          innerIconStyle={{borderWidth: 2, borderRadius: 4}}
-          iconStyle={{borderRadius: 4}}
-        />
+        <CheckBox text="I am flexible with dates" />
         <CustomButton
           style={styles.question}
           text="?"
@@ -197,13 +191,7 @@ const styles = StyleSheet.create({
     width: scale(20),
     height: scale(20),
   },
-  textCheckbox: {
-    textDecorationLine: 'none',
-    fontFamily: FONTS.medium,
-    color: COLORS.text,
-    fontSize: SIZES.small,
-    marginLeft: scale(-6),
-  },
+
   question: {
     backgroundColor: COLORS.primary,
     width: scale(16),

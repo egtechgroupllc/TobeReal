@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   StyleSheet,
   TextStyle,
@@ -12,12 +12,16 @@ import {COLORS, scale} from '../assets/constants';
 import {SHADOW} from '../assets/constants/theme';
 import {arrayToObject} from '../utils/arrayToObject';
 import CustomText, {CustomTextProps} from './CustomText';
+import LinearGradient, {
+  LinearGradientProps,
+} from 'react-native-linear-gradient';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
   text: string;
   isShadow?: boolean;
   outline?: boolean;
+  linearGradientProps?: LinearGradientProps;
   iconLeft?: React.JSX.Element;
   iconRight?: React.JSX.Element;
   isDelay?: boolean;
@@ -43,6 +47,7 @@ export default function CustomButton({
   outline,
   styleText,
   styleIcon,
+  linearGradientProps,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
   ...props
@@ -51,9 +56,9 @@ export default function CustomButton({
   const IconLeft: any = iconLeft;
 
   const heightSize =
-    buttonType === 'large' ? 40 : buttonType === 'medium' ? 37 : 31;
+    buttonType === 'large' ? 48 : buttonType === 'medium' ? 38 : 31;
   const fontSize =
-    buttonType === 'large' ? 15 : buttonType === 'medium' ? 13 : 12;
+    buttonType === 'large' ? 16 : buttonType === 'medium' ? 14 : 12;
 
   const propStyle = arrayToObject(props.style);
 
@@ -82,57 +87,75 @@ export default function CustomButton({
     let now = new Date().getTime();
     firstPress ? singlePress(now) : doublePress(now);
   };
-
   // useEffect(() => {
   //   return () => {
   //     timer && clearTimeout(timer);
   //   };
   // }, [timer]);
 
+  const _backgroundColor: (string | number)[] = useMemo(() => {
+    const backgroundColor = propStyle?.backgroundColor || COLORS.primary;
+
+    return outline
+      ? ['transparent', 'transparent']
+      : linearGradientProps
+      ? ['#F7E75A', '#FFC702']
+      : [backgroundColor, backgroundColor];
+  }, [propStyle?.backgroundColor, outline, linearGradientProps]);
+
   return (
     <View
       style={[
         styles.wrapper,
+        outline && styles.outline,
         propStyle?.flex ? {flex: propStyle?.flex} : {width: propStyle?.width},
       ]}>
       <TouchableOpacity
-        {...props}
         activeOpacity={0.6}
-        onPress={_onPress}
-        style={[
-          styles.button,
-          !propStyle?.height && {
-            minHeight: scale(heightSize),
-          },
-          isShadow && SHADOW,
-          outline && styles.outline,
-          propStyle,
-          propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
-        ]}>
-        {iconLeft && (
-          <IconLeft
-            style={{...styles.icon, ...styleIcon}}
-            fill={styleIcon?.color}
-          />
-        )}
-        {text && (
-          <CustomText
-            textType={styleText?.textType}
-            style={[
-              styles.text,
-              {fontSize: scale(fontSize)},
-              styleText,
-              outline && {color: COLORS.primary},
-            ]}>
-            {text}
-          </CustomText>
-        )}
-        {iconRight && (
-          <IconRight
-            style={{...styles.icon, ...styleIcon}}
-            fill={styleIcon?.color}
-          />
-        )}
+        {...props}
+        style={{}}
+        onPress={_onPress}>
+        <LinearGradient
+          colors={_backgroundColor}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          {...linearGradientProps}
+          style={[
+            styles.button,
+            !propStyle?.height && {
+              minHeight: scale(heightSize),
+            },
+            isShadow && SHADOW,
+            propStyle,
+            propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
+          ]}>
+          {iconLeft && (
+            <IconLeft
+              style={{...styles.icon, ...styleIcon}}
+              fill={styleIcon?.color}
+            />
+          )}
+          {text && (
+            <CustomText
+              textType={styleText?.textType || 'semiBold'}
+              style={[
+                styles.text,
+                {fontSize: scale(fontSize)},
+                !linearGradientProps && {color: COLORS.white},
+                styleText,
+
+                outline && {color: COLORS.primary},
+              ]}>
+              {text}
+            </CustomText>
+          )}
+          {iconRight && (
+            <IconRight
+              style={{...styles.icon, ...styleIcon}}
+              fill={styleIcon?.color}
+            />
+          )}
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
@@ -140,8 +163,9 @@ export default function CustomButton({
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
+    // alignItems: 'center',
     width: '100%',
+    backgroundColor: '#000',
   },
   outline: {
     backgroundColor: 'transparent',
@@ -151,15 +175,12 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    // flex: 1,
-    backgroundColor: COLORS.primary,
     flexDirection: 'row',
     columnGap: scale(10),
-    borderRadius: scale(10),
     paddingHorizontal: scale(7),
+    borderRadius: scale(10),
   },
   text: {
-    color: COLORS.white,
     textAlign: 'center',
   },
   icon: {

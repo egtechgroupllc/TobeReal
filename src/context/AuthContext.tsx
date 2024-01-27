@@ -5,8 +5,8 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 interface AuthProps {
   token?: string;
-  onLogin?: (data: any) => Promise<any>;
-  onLogout?: () => Promise<any>;
+  onSaveToken?: (data: any) => Promise<any>;
+  onClearToken?: () => Promise<any>;
 }
 const TOKEN_KEY = '@token';
 export const AuthContext = createContext<AuthProps>({});
@@ -20,13 +20,13 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     const loadToken = async () => {
       const result = await EncryptedStorage.getItem(TOKEN_KEY);
       if (result) {
-        login(result);
+        saveToken(result);
       }
     };
     loadToken();
   }, []);
 
-  const login = async (data: any) => {
+  const saveToken = async (data: any) => {
     try {
       axios.defaults.headers.common.Authorization = `${data}`;
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     }
   };
 
-  const logout = async () => {
+  const clearToken = async () => {
     try {
       setToken(undefined);
       queryClient.clear();
@@ -50,8 +50,8 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   };
 
   const value = {
-    onLogin: login,
-    onLogout: logout,
+    onSaveToken: saveToken,
+    onClearToken: clearToken,
     token,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -16,7 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 export default function Bottom() {
   const navigation = useNavigation();
-  const {onLogout} = useAuthentication();
+  const {onClearToken} = useAuthentication();
 
   return (
     <View style={styles.container}>
@@ -76,7 +76,7 @@ export default function Bottom() {
           marginBottom: scale(50),
           width: '85%',
         }}
-        onPress={onLogout}>
+        onPress={onClearToken}>
         <LinearGradient
           colors={['#F7E75A', '#FFC702']}
           start={{x: 0, y: 0}}

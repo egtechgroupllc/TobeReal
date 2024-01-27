@@ -19,7 +19,7 @@ export default function Header() {
         iconLeft={IconSearch}
         placeholder="Find Accommodation..."
         editable={false}
-        styleWrapper={{
+        style={{
           flex: 1,
         }}
         onPress={() => console.log(312)}
