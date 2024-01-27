@@ -21,7 +21,7 @@ type CustomButtonProps = {
   iconLeft?: React.JSX.Element;
   iconRight?: React.JSX.Element;
   isDelay?: boolean;
-  styleIcon?: ViewStyle;
+  styleIcon?: TextStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
   onPress: () => void;
   onDoublePress: () => void;
@@ -53,7 +53,7 @@ export default function CustomButton({
   const heightSize =
     buttonType === 'large' ? 40 : buttonType === 'medium' ? 37 : 31;
   const fontSize =
-    buttonType === 'large' ? 14 : buttonType === 'medium' ? 13 : 12;
+    buttonType === 'large' ? 15 : buttonType === 'medium' ? 13 : 12;
 
   const propStyle = arrayToObject(props.style);
 
@@ -109,7 +109,12 @@ export default function CustomButton({
           propStyle,
           propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
         ]}>
-        {iconLeft && <IconLeft style={{...styles.icon, ...styleIcon}} />}
+        {iconLeft && (
+          <IconLeft
+            style={{...styles.icon, ...styleIcon}}
+            fill={styleIcon?.color}
+          />
+        )}
         {text && (
           <CustomText
             textType={styleText?.textType}
@@ -122,7 +127,12 @@ export default function CustomButton({
             {text}
           </CustomText>
         )}
-        {iconRight && <IconRight style={{...styles.icon, ...styleIcon}} />}
+        {iconRight && (
+          <IconRight
+            style={{...styles.icon, ...styleIcon}}
+            fill={styleIcon?.color}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );

@@ -1,32 +1,51 @@
-import {
+import BottomSheetMain, {
   BottomSheetBackdrop,
   BottomSheetFlatList,
   BottomSheetModal,
+  BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomText from './CustomText';
-import {COLORS, SIZES, scale} from '../assets/constants';
-import {IconSearch} from '../assets/icon/Icon';
+import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
+import {IconSearch, IconX} from '../assets/icon/Icon';
 
 const BottomSheet = (
   {
     snapPoints,
+    snapPointsChild,
     dataList,
     renderItem,
     positionList = 'top',
     styleContent,
     children,
+    style,
+    handleStyle,
+    titleIndicator,
+    isLine,
+    handleChildBottom,
+    refChild,
   },
   ref,
 ) => {
   // ref
   const bottomSheetModalRef = useRef(null);
+  const bottomSheetChildRef = useRef(null);
   const insets = useSafeAreaInsets();
 
-  // variables
-  const _snapPoints = useMemo(() => snapPoints || ['25%', '50%'], [snapPoints]);
+  const _snapPoints = useMemo(
+    () => ['1%'].concat(snapPoints || '50%'),
+    [snapPoints],
+  );
+  const _snapPointsChild = useMemo(
+    () => ['1%'].concat(snapPointsChild || '50%'),
+    [snapPointsChild],
+  );
+
+  const handleClose = () => {
+    bottomSheetModalRef.current?.close();
+  };
 
   useImperativeHandle(ref, () => ({
     // Các phương thức hoặc thuộc tính có thể được định nghĩa ở đây
@@ -34,26 +53,52 @@ const BottomSheet = (
       bottomSheetModalRef.current?.present();
     },
     close: () => {
-      bottomSheetModalRef.current?.close();
+      handleClose();
     },
   }));
-
+  useImperativeHandle(refChild, () => ({
+    openChild: () => {
+      bottomSheetChildRef.current?.expand();
+    },
+    closeChild: () => {
+      bottomSheetChildRef.current?.close();
+    },
+  }));
   // renders
   return (
     <BottomSheetModal
       ref={bottomSheetModalRef}
-      index={1}
+      index={_snapPoints.length - 1}
       snapPoints={_snapPoints}
       backdropComponent={BottomSheetBackdrop}
+      onChange={index => index === 0 && handleClose()}
       handleIndicatorStyle={{
-        width: '30%',
+        width: '20%',
+        backgroundColor: '#e6e6e6',
+      }}
+      handleStyle={!isLine && {display: 'none'}}
+      style={{
+        ...SHADOW,
+        shadowOffset: {
+          height: -2,
+        },
+        ...style,
       }}>
+      {!isLine && (
+        <HandleIndicator
+          onClose={() => handleClose()}
+          title={titleIndicator}
+          style={handleStyle}
+        />
+      )}
+
       <View
         style={[
           styles.contentContainer,
           {
             flexDirection:
               positionList === 'bottom' ? 'column-reverse' : 'column',
+            paddingBottom: insets.bottom + scale(10),
           },
           styleContent,
         ]}>
@@ -65,9 +110,7 @@ const BottomSheet = (
               data={dataList}
               keyExtractor={item => item}
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingBottom: insets.bottom,
-              }}
+              contentContainerStyle={{}}
               renderItem={dataList && renderItem}
             />
           ) : (
@@ -89,9 +132,41 @@ const BottomSheet = (
             </View>
           ))}
       </View>
+      {handleChildBottom && (
+        <BottomSheetMain
+          ref={bottomSheetChildRef}
+          snapPoints={_snapPointsChild}
+          enablePanDownToClose
+          backdropComponent={BottomSheetBackdrop}>
+          {handleChildBottom()}
+        </BottomSheetMain>
+      )}
     </BottomSheetModal>
   );
 };
+
+const HandleIndicator = ({onClose, title, style}) => (
+  <View style={[styles.headerHandle, style]}>
+    <TouchableOpacity style={styles.icon} onPress={onClose} activeOpacity={0.6}>
+      <IconX
+        style={{
+          width: scale(20),
+          height: scale(20),
+        }}
+      />
+    </TouchableOpacity>
+    <CustomText
+      textType="semiBold"
+      style={[
+        {
+          fontSize: style?.fontSize || SIZES.xMedium,
+        },
+        style?.color && {color: style?.color},
+      ]}>
+      {title || 'Title'}
+    </CustomText>
+  </View>
+);
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -102,6 +177,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '25%',
     rowGap: scale(10),
+  },
+  headerHandle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: scale(10),
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  icon: {
+    alignItems: 'center',
+    position: 'absolute',
+    left: scale(8),
+    padding: scale(6),
+    // height: '100%',
   },
 });
 

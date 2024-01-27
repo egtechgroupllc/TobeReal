@@ -45,7 +45,6 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
           alignItems: 'center',
         }}
         onPress={() => {
-          console.log(231);
           setIsHeart(!isHeart);
           refHeart.current.reset();
           onFavourite(isHeart);

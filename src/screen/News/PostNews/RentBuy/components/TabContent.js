@@ -51,19 +51,19 @@ export default function TabContent() {
           style={{width: scale(47), height: scale(38)}}
         />
         <View>
-        <CustomText
-          textType="semiBold"
-          style={{...styles.text1, marginLeft: scale(20)}}>
-          Need to rent,
-        </CustomText>
-        <CustomText
-          textType="semiBold"
-          style={{...styles.text1, marginLeft: scale(20)}}>
-          Need to buy
-        </CustomText>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text1, marginLeft: scale(20)}}>
+            Need to rent,
+          </CustomText>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text1, marginLeft: scale(20)}}>
+            Need to buy
+          </CustomText>
         </View>
       </View>
-    
+
       <View
         style={{
           flexDirection: 'row',
@@ -151,7 +151,7 @@ export default function TabContent() {
             ...styles.text1,
             color: '#979797',
           }}>
-         Choose province/ city
+          Choose province/ city
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -218,7 +218,7 @@ export default function TabContent() {
             ...styles.text1,
             color: '#979797',
           }}>
-         Choose ward / commune
+          Choose ward / commune
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -296,7 +296,7 @@ export default function TabContent() {
         First and last name
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -314,10 +314,10 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-          Phone
+        Phone
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -326,8 +326,8 @@ export default function TabContent() {
           width: '90%',
         }}
       />
-      <View style={{width:'100%', marginBottom:scale(30)}}>
-      <Button title={'Post'} onPress={ok} />
+      <View style={{width: '100%', marginBottom: scale(30)}}>
+        <Button title={'Post'} onPress={ok} />
       </View>
     </View>
   );
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: scale(2),
     borderColor: '#E3E3E3',
-    backgroundColor:'#E3E3E3',
+    backgroundColor: '#E3E3E3',
     width: '90%',
     borderRadius: scale(5),
     height: scale(71),

@@ -6,7 +6,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {images} from '../assets/constants';
+import {images, scale} from '../assets/constants';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function MainWrapper({
   children,
@@ -15,9 +16,11 @@ export default function MainWrapper({
   scrollEnabled = true,
   onScroll = () => {},
 }) {
+  const insets = useSafeAreaInsets();
+
   return (
     <ImageBackground
-      source={images.background1}
+      source={images.background}
       resizeMode="stretch"
       style={[
         {flex: 1, backgroundColor: '#fff'},

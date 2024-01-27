@@ -1,3 +1,4 @@
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
@@ -8,8 +9,9 @@ import {COLORS} from './src/assets/constants';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
-import BottomSheet from './src/components/BottomSheet';
-import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {AuthProvider} from './src/context/AuthContext';
+import {useAuthentication} from './src/hooks/useAuthentication';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -29,6 +31,7 @@ if (TextInput.defaultProps) {
 }
 
 const Stack = createNativeStackNavigator();
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
@@ -38,34 +41,46 @@ export default function App() {
           backgroundColor: COLORS.primary,
         }}>
         <SafeAreaView style={styles.wrapper} edges={['right', 'top', 'left']}>
-          <StatusBar
-            barStyle="light-content"
-            backgroundColor={COLORS.primary}
-          />
-          <BottomSheetModalProvider>
-            <NavigationContainer>
-              <Stack.Navigator
-                screenOptions={{
-                  headerShown: false,
-                }}>
-                <Stack.Screen
-                  name="NavigationAuth"
-                  component={NavigationAuth}
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <BottomSheetModalProvider>
+                <StatusBar
+                  barStyle="light-content"
+                  backgroundColor={COLORS.primary}
                 />
-                <Stack.Screen
-                  name="NavigationProfile"
-                  component={NavigationProfile}
-                />
-                <Stack.Screen name="BottomTab" component={BottomTab} />
-                <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </BottomSheetModalProvider>
+                <Layout />
+              </BottomSheetModalProvider>
+            </AuthProvider>
+          </QueryClientProvider>
         </SafeAreaView>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
+
+const Layout = () => {
+  const {token} = useAuthentication();
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {token ? (
+          <Stack.Screen name="BottomTab" component={BottomTab} />
+        ) : (
+          <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
+        )}
+
+        <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
+
+        <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
+        {/* <NoBottomTab /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {

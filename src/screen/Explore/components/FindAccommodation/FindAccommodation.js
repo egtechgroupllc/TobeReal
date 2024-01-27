@@ -42,6 +42,7 @@ const listAccommodation = [
 
 export default function FindAccommodation() {
   const [tabSelect, setTabSelect] = useState('RENT');
+  const [category, setCategory] = useState();
 
   return (
     <View
@@ -58,7 +59,10 @@ export default function FindAccommodation() {
           <>
             <View style={styles.category}>
               {tabSelect !== 'BUY' && (
-                <Category data={['Daily', 'Monthly', 'Yearly']} />
+                <Category
+                  data={['Daily', 'Monthly', 'Yearly']}
+                  onPress={value => setCategory(value)}
+                />
               )}
 
               <OptionAccommodation
@@ -70,7 +74,7 @@ export default function FindAccommodation() {
               />
             </View>
 
-            <FindContent isBuy={tabSelect === 'BUY'} />
+            <FindContent isBuy={tabSelect === 'BUY'} rental={category} />
           </>
         )}
       />

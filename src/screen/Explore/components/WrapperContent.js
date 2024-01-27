@@ -33,7 +33,7 @@ export default function WrapperContent({
           )}
           {isSeeAll && (
             <CustomText
-              textType="bold"
+              textType="semiBold"
               style={{
                 color: COLORS.primary,
                 minWidth: scale(42),

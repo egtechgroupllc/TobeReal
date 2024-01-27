@@ -1,4 +1,10 @@
-import {FlatList, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
@@ -39,8 +45,7 @@ export default function Content() {
   const goBack = () => {
     navigation.goBack();
   };
-  const Submit = () => {
-  };
+  const Submit = () => {};
 
   const onPress = () => {};
   const notify = () => {};
@@ -53,39 +58,41 @@ export default function Content() {
         onPress={goBack}
         notify={notify}
       />
-      <View style={{marginTop:scale(50)}}>
-      <CustomText
+      <View style={{marginTop: scale(50)}}>
+        <CustomText
           textType="semiBold"
           style={{...styles.text1, color: COLORS.black}}>
           Add tags
         </CustomText>
         <LinearGradient
-        colors={['#FFC700', '#FADD55']}
-        start={{x: 0, y: 0}}
-        end={{x: 0, y: 1}}
-        style={{borderRadius: scale(8), marginTop: scale(20)}}>
-        <TouchableOpacity style={styles.addtag}>
-          <IconShield/>
-          <CustomText
-          textType="semiBold"
-          style={{...styles.text, color: COLORS.black}}>
-          Your card information will be kept confidential
-        </CustomText>
-        </TouchableOpacity>
-      </LinearGradient>
+          colors={['#FFC700', '#FADD55']}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          style={{borderRadius: scale(8), marginTop: scale(20)}}>
+          <TouchableOpacity style={styles.addtag}>
+            <IconShield />
+            <CustomText
+              textType="semiBold"
+              style={{...styles.text, color: COLORS.black}}>
+              Your card information will be kept confidential
+            </CustomText>
+          </TouchableOpacity>
+        </LinearGradient>
       </View>
-      <View style={{marginTop:scale(30)}}>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-        <CustomText
-          textType="semiBold"
-          style={{...styles.text1, color: COLORS.black}}>
-          Card details
-        </CustomText>
-        <Image source={images.visa} style={{width:scale(34), height:scale(11)}}></Image>
+      <View style={{marginTop: scale(30)}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text1, color: COLORS.black}}>
+            Card details
+          </CustomText>
+          <Image
+            source={images.visa}
+            style={{width: scale(34), height: scale(11)}}></Image>
         </View>
         <CustomInput
           placeholder="Card number"
-          styleWrapper={{
+          style={{
             marginBottom: scale(15),
             height: scale(36),
             backgroundColor: '#E3E3E3',
@@ -93,45 +100,45 @@ export default function Content() {
             borderRadius: scale(5),
           }}
         />
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-        <CustomInput
-          placeholder="Expiration date (MM/YY)"
-          styleWrapper={{
-            marginBottom: scale(15),
-            height: scale(36),
-            backgroundColor: '#E3E3E3',
-            borderRadius: scale(5),
-            width: '60%'
-          }}
-        />
-        <CustomInput
-          placeholder="Code CVV"
-          styleWrapper={{
-            marginBottom: scale(15),
-            height: scale(36),
-            backgroundColor: '#E3E3E3',
-            borderRadius: scale(5),
-            width: '30%'
-          }}
-        />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <CustomInput
+            placeholder="Expiration date (MM/YY)"
+            style={{
+              marginBottom: scale(15),
+              height: scale(36),
+              backgroundColor: '#E3E3E3',
+              borderRadius: scale(5),
+              width: '60%',
+            }}
+          />
+          <CustomInput
+            placeholder="Code CVV"
+            style={{
+              marginBottom: scale(15),
+              height: scale(36),
+              backgroundColor: '#E3E3E3',
+              borderRadius: scale(5),
+              width: '30%',
+            }}
+          />
         </View>
         <CustomInput
           placeholder="Full name of the cardholder"
-          styleWrapper={{
+          style={{
             marginBottom: scale(15),
             height: scale(36),
             backgroundColor: '#E3E3E3',
             borderRadius: scale(5),
           }}
         />
-          <CustomText
+        <CustomText
           textType="semiBold"
           style={{...styles.text1, color: COLORS.black}}>
           Address for credit/debit card registration
         </CustomText>
         <CustomInput
           placeholder="Address"
-          styleWrapper={{
+          style={{
             marginBottom: scale(15),
             height: scale(36),
             backgroundColor: '#E3E3E3',
@@ -139,9 +146,9 @@ export default function Content() {
             marginTop: scale(20),
           }}
         />
-         <CustomInput
+        <CustomInput
           placeholder="Zip code"
-          styleWrapper={{
+          style={{
             marginBottom: scale(15),
             height: scale(36),
             backgroundColor: '#E3E3E3',
@@ -149,8 +156,8 @@ export default function Content() {
           }}
         />
       </View>
-      
-      <Button title={'Submit'} onPress={Submit}/>
+
+      <Button title={'Submit'} onPress={Submit} />
     </View>
   );
 }
@@ -251,8 +258,8 @@ const styles = StyleSheet.create({
     height: scale(48),
     borderRadius: scale(8),
     alignItems: 'center',
-    justifyContent:'space-between',
-    paddingHorizontal:scale(10),
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(10),
     // justifyContent:'center',
     flexDirection: 'row',
   },

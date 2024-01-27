@@ -17,7 +17,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../components/Favourite';
 
-const Header_Max_Height = WIDTH.heightScreen / 3.2;
+const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 
@@ -118,13 +118,13 @@ export default React.memo(function DynamicHeader({
           <Favourite />
           <CustomButton
             isShadow
-            text="Share"
+            // text="Share"
             onPress={onShare}
             iconRight={IconShare}
             style={styles.menu}
-            styleText={{
-              color: COLORS.text,
-              textType: 'semiBold',
+            styleIcon={{
+              width: scale(20),
+              height: scale(20),
             }}
           />
         </View>
@@ -159,6 +159,7 @@ export default React.memo(function DynamicHeader({
           isShaDow
           isSelectOnly
           isSelectForIndex
+          isNoAutoSelect
           styleContent={{
             columnGap: scale(8),
           }}

@@ -1,149 +1,133 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
+import {useForm} from 'react-hook-form';
+import {StyleSheet, View} from 'react-native';
+import {SIZES, scale} from '../../../../assets/constants';
 import {
-  IconCheckBox,
-  IconUnCheckBox,
   IconUnViewablePassword,
   IconViewablePassword,
 } from '../../../../assets/icon/Icon';
-import {CustomInput} from '../../../../components';
+import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
-import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
+import {
+  confirmField,
+  requireField,
+  validateEmail,
+  validateEqualLength,
+} from '../../../../utils/validate';
 
 export default function Content() {
+  const {control, watch, handleSubmit} = useForm();
+  const {goBack} = useNavigation();
+
   const [viewPassword, setViewPassword] = useState(false);
   const [viewPasswordConfirm, setViewPasswordConfirm] = useState(false);
-  const [email, setEmail] = useState('');
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+
   const toggleViewPassword = () => {
-    setViewPassword(prevView => !prevView);
-    setPasswordVisible(!passwordVisible);
+    setViewPassword(!viewPassword);
   };
   const toggleViewPasswordConfirm = () => {
-    setViewPasswordConfirm(prevView => !prevView);
-    setPasswordConfirmVisible(!passwordConfirmVisible);
+    setViewPasswordConfirm(!viewPasswordConfirm);
   };
-  const handleEmail = text => {
-    setEmail(text);
-  };
-  const handleUserName = text => {
-    setUserName(text);
-  };
-  const handlePassword = text => {
-    setPassword(text);
-  };
-  const handlePasswordConfirm = text => {
-    setPasswordConfirm(text);
-  };
+
   const navigation = useNavigation();
-  const gotoLogin = () => {
+  const handleSignup = () => {
     navigation.navigate('LoginScreen');
   };
+
   return (
     <View style={styles.container}>
       <CustomInput
-        onChangeText={handleUserName}
-        value={username}
-        placeholder="Enter Your Username"
-        styleWrapper={{
-          width: '80%',
-          marginBottom: scale(25),
-          height: scale(48),
+        control={control}
+        sizeInput="medium"
+        rules={{
+          ...requireField('This field is required'),
         }}
+        name="username"
+        placeholder="Enter Your Username"
       />
       <CustomInput
-        onChangeText={handleEmail}
-        value={email}
-        placeholder="Enter Your Email"
-        styleWrapper={{
-          width: '80%',
-          marginBottom: scale(25),
-          height: scale(48),
+        control={control}
+        sizeInput="medium"
+        rules={{
+          ...requireField('Enter your Email address'),
+          ...validateEmail(
+            'Sorry, only letters (a-z), numbers (0-9), and periods (.) are allowed.',
+          ),
         }}
+        name="email"
+        placeholder="Enter Your Email"
       />
       {/* <CustomInput
         placeholder="Enter Your Phone Number"
-        styleWrapper={{
-          width: '80%',
-          marginBottom: scale(25),
-          height: scale(48),
-        }}
       /> */}
       <CustomInput
-        secureTextEntry={!passwordVisible}
-        onChangeText={handlePassword}
-        value={password}
-        placeholder="Enter Your Password"
-        styleWrapper={{
-          width: '80%',
-          height: scale(48),
-          marginBottom: scale(25),
+        secureTextEntry={!viewPassword}
+        control={control}
+        sizeInput="medium"
+        rules={{
+          ...requireField('This field is required'),
+          ...validateEqualLength(
+            6,
+            'Use 6 characters or more for your password',
+          ),
         }}
-        iconPress={toggleViewPassword}
-        iconRight={viewPassword ? IconUnViewablePassword : IconViewablePassword}
-      />
-      <CustomInput
-        secureTextEntry={!passwordConfirmVisible}
-        onChangeText={handlePasswordConfirm}
-        value={passwordConfirm}
-        placeholder="Enter Your Password Confirm"
-        styleWrapper={{width: '80%', height: scale(48)}}
-        iconPress={toggleViewPasswordConfirm}
+        name="password"
+        placeholder="Enter Your Password"
+        onPressIconRight={toggleViewPassword}
         iconRight={
-          viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
+          !viewPassword ? IconUnViewablePassword : IconViewablePassword
         }
       />
-      {password !== passwordConfirm && (
-        <CustomText
-          textType="medium"
-          style={{...styles.text, marginTop: scale(10), color: COLORS.error}}>
-          Password does not match!
-        </CustomText>
-      )}
+      <CustomInput
+        secureTextEntry={!viewPasswordConfirm}
+        control={control}
+        sizeInput="medium"
+        rules={{
+          ...confirmField(
+            watch('password'),
+            'The entered password does not match. Try again.',
+          ),
+        }}
+        name="passwordConfirm"
+        placeholder="Enter Your Password Confirm"
+        onPressIconRight={toggleViewPasswordConfirm}
+        iconRight={
+          !viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
+        }
+      />
 
-      <TouchableOpacity>
-        <LinearGradient
-          colors={['#F7E75A', '#FFC702']}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          style={styles.button}>
-          <CustomText textType="semiBold" style={{...styles.text2}}>
-            Sign Up
-          </CustomText>
-        </LinearGradient>
-      </TouchableOpacity>
+      <CustomButton
+        onPress={handleSubmit(handleSignup)}
+        buttonType="large"
+        text="Sign Up"
+        linearGradientProps
+        style={{
+          marginTop: scale(20),
+        }}
+      />
+
       <View
         style={{
           flexDirection: 'row',
           marginTop: scale(20),
           justifyContent: 'center',
         }}>
-        <View>
-          <CustomText textType="semiBold" style={{...styles.text}}>
-            Already have an account?
-          </CustomText>
-          <View style={styles.line} />
-        </View>
-        <TouchableOpacity onPress={gotoLogin}>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text1, marginLeft: scale(5)}}>
-            Login
-          </CustomText>
-        </TouchableOpacity>
+        <CustomText
+          textType="semiBold"
+          style={{
+            ...styles.text,
+            textDecorationLine: 'underline',
+          }}>
+          Already have an account?
+        </CustomText>
+
+        <CustomText
+          onPress={goBack}
+          textType="semiBold"
+          style={{...styles.text1, marginLeft: scale(5)}}>
+          Login
+        </CustomText>
       </View>
     </View>
   );
@@ -152,6 +136,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(50),
+    rowGap: scale(16),
   },
   text: {
     fontSize: SIZES.small,

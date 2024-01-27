@@ -11,7 +11,7 @@ export default function HomeExploreScreen() {
     <MainWrapper>
       <Header />
       <FindAccommodation />
-      <ContentAccommodation />
+      {/* <ContentAccommodation /> */}
     </MainWrapper>
   );
 }

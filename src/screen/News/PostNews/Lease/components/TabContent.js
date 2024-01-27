@@ -226,7 +226,7 @@ export default function TabContent() {
         Contact Info
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -237,7 +237,7 @@ export default function TabContent() {
         placeholder="Full name"
       />
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -294,7 +294,7 @@ export default function TabContent() {
         Address
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -354,7 +354,7 @@ export default function TabContent() {
               alignItems: 'center',
             }}>
             <CustomText
-              styleWrapper={{
+              style={{
                 ...styles.text1,
                 color: COLORS.black,
                 borderWidth: scale(0),
@@ -395,7 +395,7 @@ export default function TabContent() {
               alignItems: 'center',
             }}>
             <CustomText
-              styleWrapper={{
+              style={{
                 ...styles.text1,
                 color: COLORS.black,
                 borderWidth: scale(0),
@@ -575,9 +575,6 @@ const styles = StyleSheet.create({
     rowGap: scale(14),
     borderBottomWidth: 1,
     borderBottomColor: '#cccccc',
-  },
-  text2: {
-    fontSize: SIZES.xLarge,
   },
   text1: {
     fontSize: SIZES.medium,

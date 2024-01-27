@@ -1,8 +1,4 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {CustomInput} from '../../../../components';
@@ -16,53 +12,61 @@ export default function Content() {
   const goBack = () => {
     navigation.goBack();
   };
-  const notify = () => {
-  };
-  const ok = () => {
-  };
+  const notify = () => {};
+  const ok = () => {};
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={'Change Password'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CustomText
+      <Header
+        goback={true}
+        subHeading={'Change Password'}
+        noti={true}
+        onPress={goBack}
+        notify={notify}></Header>
+      <CustomText
         textType="medium"
-        style={{...styles.text, marginBottom: scale(10), marginTop:scale(60), color:COLORS.black}}>
+        style={{
+          ...styles.text,
+          marginBottom: scale(10),
+          marginTop: scale(60),
+          color: COLORS.black,
+        }}>
         Old password
       </CustomText>
-          <CustomInput
-            styleWrapper={{
-              width:'90%',
-              marginBottom: scale(25),
-              height: scale(40),
-              backgroundColor:'#E3E3E3'
-            }}
-          />
-          <CustomText
+      <CustomInput
+        style={{
+          width: '90%',
+          marginBottom: scale(25),
+          height: scale(40),
+          backgroundColor: '#E3E3E3',
+        }}
+      />
+      <CustomText
         textType="medium"
-        style={{...styles.text, marginBottom: scale(10), color:COLORS.black}}>
+        style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
         New password
       </CustomText>
-          <CustomInput
-            styleWrapper={{
-              width:'90%',
-              marginBottom: scale(25),
-              height: scale(40),
-              backgroundColor:'#E3E3E3'
-            }}
-          />
-          <CustomText
+      <CustomInput
+        style={{
+          width: '90%',
+          marginBottom: scale(25),
+          height: scale(40),
+          backgroundColor: '#E3E3E3',
+        }}
+      />
+      <CustomText
         textType="medium"
-        style={{...styles.text, marginBottom: scale(10), color:COLORS.black}}>
+        style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
         Confirm password
       </CustomText>
-          <CustomInput
-            styleWrapper={{
-              width:'90%',
-              marginBottom: scale(25),
-              height: scale(40),
-              backgroundColor:'#E3E3E3'
-            }}
-          />
-         <Button title={'ok'} onPress={ok}/>
+      <CustomInput
+        style={{
+          width: '90%',
+          marginBottom: scale(25),
+          height: scale(40),
+          backgroundColor: '#E3E3E3',
+        }}
+      />
+      <Button title={'ok'} onPress={ok} />
     </View>
   );
 }
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     width: scale(283),
     justifyContent: 'center',
     marginTop: scale(20),
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   line: {
     height: scale(1),

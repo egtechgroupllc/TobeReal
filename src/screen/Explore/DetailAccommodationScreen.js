@@ -14,7 +14,7 @@ import InfoUnitFacilities from './components/DetailAccommodation/InfoUnitFacilit
 import Map from './components/DetailAccommodation/Map';
 import Review from './components/DetailAccommodation/Review';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
-const Header_Max_Height = WIDTH.heightScreen / 3.2;
+const Header_Max_Height = WIDTH.heightScreen / 3;
 
 const listView = [
   <InfoDetail />,
@@ -81,7 +81,7 @@ export default function DetailAccommodationScreen() {
     }
   };
 
-  const selectScrollHandler = async value => {
+  const selectScrollHandler = value => {
     setIsSelect(false);
 
     scrollRef.current?.scrollTo({
@@ -123,11 +123,5 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     marginTop: scale(-4),
     // alignItems: 'center',
-  },
-  bannerContainer: {
-    marginTop: -1000,
-    paddingTop: 1000,
-    alignItems: 'center',
-    overflow: 'hidden',
   },
 });

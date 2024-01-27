@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {COLORS, WIDTH, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
@@ -8,6 +8,13 @@ export default function Category({data = [], onPress = funcFallBack}) {
   const [select, setSelect] = useState(data[1]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
+
+  useEffect(() => {
+    if (select && onPress) {
+      onPress(select);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [select]);
 
   return (
     <View
@@ -44,7 +51,7 @@ export default function Category({data = [], onPress = funcFallBack}) {
             ]}
             onPress={() => {
               setSelect(item);
-              onPress(item);
+              // onPress(item);
             }}
           />
         )}

@@ -32,8 +32,13 @@ const RangeSlider = ({
   maximumValue = MAX_DEFAULT,
   progressValue,
   onValueChange,
+  isShowTime = true,
+  disable,
+  theme,
+  heightProgressDefaults,
+  style,
 }) => {
-  const [isMoveProgress, setIsMoveProgress] = useState(MIN_DEFAULT);
+  const [isMoveProgress, setIsMoveProgress] = useState(false);
   const [moveProgress, setMoveProgress] = useState(MIN_DEFAULT);
 
   const progress = useSharedValue(0);
@@ -58,11 +63,11 @@ const RangeSlider = ({
           duration: 1500,
         }),
       );
-      heightProgress.value = withTiming(2, {
+      heightProgress.value = withTiming(heightProgressDefaults || 2, {
         duration: 10,
       });
     }
-  }, [isMoveProgress, thumbScaleValue, heightProgress]);
+  }, [isMoveProgress, thumbScaleValue, heightProgress, heightProgressDefaults]);
 
   useEffect(() => {
     if (!isMoveProgress) {
@@ -82,24 +87,40 @@ const RangeSlider = ({
     <View
       style={{
         width: '100%',
+        // flex: 1,
         justifyContent: 'flex-end',
+        ...style,
       }}>
-      <TimeProgress
-        timeCurrent={formatTime(progressValue)}
-        timeTotal={formatTime(maximumValue)}
-      />
-
+      {isShowTime && (
+        <TimeProgress
+          timeCurrent={formatTime(progressValue)}
+          timeTotal={formatTime(maximumValue)}
+        />
+      )}
+      {disable && (
+        <View
+          style={{
+            backgroundColor: 'transparent',
+            width: '100%',
+            position: 'absolute',
+            height: '100%',
+            zIndex: 9,
+          }}
+        />
+      )}
       <Slider
         containerStyle={{
           width: '100%',
           height: heightProgress,
           borderRadius: 99,
         }}
-        theme={{
-          maximumTrackTintColor: '#ffffff57',
-          cacheTrackTintColor: '#333',
-          minimumTrackTintColor: '#fff',
-        }}
+        theme={
+          theme || {
+            maximumTrackTintColor: '#ffffff57',
+            cacheTrackTintColor: '#333',
+            minimumTrackTintColor: '#fff',
+          }
+        }
         progress={progress}
         minimumValue={min}
         maximumValue={max}
@@ -112,7 +133,7 @@ const RangeSlider = ({
         onSlidingComplete={value => {
           setIsMoveProgress(false);
 
-          onValueChange(value);
+          onValueChange && onValueChange(value);
         }}
         renderBubble={() => (
           <BubbleProgress moveProgress={formatTime(moveProgress)} />

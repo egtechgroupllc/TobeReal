@@ -2,33 +2,29 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {IconHeart} from '../assets/icon/Icon';
 import {COLORS, SHADOW, scale} from '../assets/constants';
+import {CustomButton} from '.';
 
 export default function Favourite() {
   const [isFavourite, setIsFavourite] = useState(false);
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      style={styles.boxIcon}
-      onPress={() => setIsFavourite(!isFavourite)}>
-      <IconHeart
-        style={{
-          width: scale(18),
-          height: scale(18),
-        }}
-        fill={isFavourite && COLORS.primary}
-      />
-    </TouchableOpacity>
+    <CustomButton
+      isShadow
+      iconRight={IconHeart}
+      style={styles.active}
+      onPress={() => setIsFavourite(!isFavourite)}
+      styleIcon={{
+        color: isFavourite && COLORS.primary,
+        width: scale(18),
+        height: scale(18),
+      }}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  boxIcon: {
+  active: {
+    minWidth: scale(30),
     backgroundColor: '#fff',
-    padding: scale(5),
-    borderRadius: scale(6),
-    ...SHADOW,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

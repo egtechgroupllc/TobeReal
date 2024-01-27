@@ -9,6 +9,7 @@ import ThematicInstagram from './ThematicInstagram';
 import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
 import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
 import RecommendedApartments from './RecommendedApartments';
+import BigCity from './BigCity';
 
 export default function ContentAccommodation() {
   return (
@@ -97,7 +98,7 @@ export default function ContentAccommodation() {
         />
       </WrapperContent>
 
-      <VideoInfluencerApproved />
+      {/* <VideoInfluencerApproved /> */}
       <FindApartmentFitsBudget />
 
       <WrapperContent
@@ -146,21 +147,7 @@ export default function ContentAccommodation() {
       <WrapperContent
         heading="Looking for a place to stay? 🏠"
         subHeading="Find “By Travelio” units in Indonesia’s big cities">
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={[...Array(10)]}
-          contentContainerStyle={styles.content}
-          renderItem={({item, index}) => (
-            <RecommendedUnitItem
-              viewShow={2.5}
-              isCenter
-              styesWrapper={{
-                height: scale(160),
-              }}
-            />
-          )}
-        />
+        <BigCity />
       </WrapperContent>
     </View>
   );

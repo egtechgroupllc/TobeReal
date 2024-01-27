@@ -1,18 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {
   FlatList,
-  ImageBackground,
   Modal,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import CustomImage from '../../../../components/CustomImage';
 import ImageView from 'react-native-image-viewing';
-import {IconGoBack} from '../../../../assets/icon/Icon';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, WIDTH, scale} from '../../../../assets/constants';
+import {IconGoBack} from '../../../../assets/icon/Icon';
+import CustomImage from '../../../../components/CustomImage';
 export default function ListImg({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
@@ -21,80 +20,94 @@ export default function ListImg({dataImg, open, onClose}) {
   const images = dataImg.map(uri => ({uri}));
 
   const [visible, setIsVisible] = useState(false);
-  const [indexNavigation, setIndexNavigation] = useState(3);
+  const [indexNavigation, setIndexNavigation] = useState(1);
 
   useLayoutEffect(() => {
-    flatListRef.current.scrollToIndex({
-      animated: true,
-      index: indexNavigation,
-    });
+    if (dataImg.length > 1) {
+      flatListRef.current.scrollToIndex({
+        animated: true,
+        index: indexNavigation,
+      });
+    }
   }, [indexNavigation]);
 
   return (
     <Modal
       visible={!!open}
       transparent
-      animationType="slide"
+      animationType={dataImg.length === 1 ? 'none' : 'fade'}
       onRequestClose={onClose}>
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
-        <View
-          onLayout={e => {
-            const {height} = e.nativeEvent.layout;
-            heightHeader.current = height;
-          }}
-          style={{...styles.headerBar, minHeight: insets.top + scale(35)}}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={onClose}
-            style={{
-              padding: scale(4),
-            }}>
-            <IconGoBack style={styles.icon} fill="#fff" />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: insets.top + scale(35),
-          }}
-        />
-
-        <FlatList
-          ref={flatListRef}
-          onScrollToIndexFailed={({index}) => {
-            const wait = new Promise(resolve => setTimeout(resolve, 100));
-            wait.then(() => {
-              setIndexNavigation(open - 1);
-            });
-          }}
-          data={dataImg}
-          contentContainerStyle={{
-            rowGap: scale(6),
-          }}
-          renderItem={({item, index}) => (
-            <TouchableOpacity
-              style={{
-                width: WIDTH.widthScreen,
-                height: WIDTH.heightScreen / 3.2,
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: dataImg.length === 1 ? 'transparent' : '#fff',
+        }}>
+        {dataImg.length > 1 && (
+          <>
+            <View
+              onLayout={e => {
+                const {height} = e.nativeEvent.layout;
+                heightHeader.current = height;
               }}
-              activeOpacity={0.9}
-              onPress={() => setIsVisible(index)}>
-              <CustomImage
-                source={item}
+              style={{...styles.headerBar, minHeight: insets.top + scale(35)}}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={onClose}
                 style={{
-                  flex: 1,
-                }}
-              />
-            </TouchableOpacity>
-          )}
-        />
+                  padding: scale(4),
+                }}>
+                <IconGoBack style={styles.icon} fill="#fff" />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                height: insets.top + scale(35),
+              }}
+            />
 
-        {!!visible && (
+            <FlatList
+              ref={flatListRef}
+              onScrollToIndexFailed={({index}) => {
+                const wait = new Promise(resolve => setTimeout(resolve, 100));
+                wait.then(() => {
+                  setIndexNavigation(open - 1);
+                });
+              }}
+              data={dataImg}
+              contentContainerStyle={{
+                rowGap: scale(6),
+              }}
+              renderItem={({item, index}) => (
+                <TouchableOpacity
+                  style={{
+                    width: WIDTH.widthScreen,
+                    height: WIDTH.heightScreen / 3,
+                  }}
+                  activeOpacity={0.9}
+                  onPress={() => setIsVisible(index)}>
+                  <CustomImage
+                    source={item}
+                    style={{
+                      flex: 1,
+                    }}
+                  />
+                </TouchableOpacity>
+              )}
+            />
+          </>
+        )}
+
+        {(!!visible || dataImg.length === 1 || visible === 0) && (
           <ImageView
             images={images}
             imageIndex={visible}
-            visible={!!visible || visible === 0}
-            onRequestClose={() => setIsVisible(false)}
+            visible={dataImg.length === 1 || !!visible || visible === 0}
+            onRequestClose={() => {
+              setIsVisible(false);
+              dataImg.length === 1 && onClose();
+            }}
             onImageIndexChange={e => e && setIndexNavigation(e - 1)}
+            swipeToCloseEnabled={false}
           />
         )}
       </View>

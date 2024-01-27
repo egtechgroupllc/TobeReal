@@ -73,8 +73,7 @@ export default function Content() {
         Select Province/City:
       </CustomText>
       <CustomInput
-        styleWrapper={{
-          
+        style={{
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
@@ -86,14 +85,13 @@ export default function Content() {
         Select District:
       </CustomText>
       <CustomInput
-        styleWrapper={{
-          
+        style={{
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
         }}
       />
-      <Button title={'Search'} onPress={Search}/>
+      <Button title={'Search'} onPress={Search} />
       <View style={{marginBottom: scale(50)}}>
         {data && data.length > 0 ? (
           <FlatList
@@ -106,14 +104,14 @@ export default function Content() {
                 <View
                   key={`${item?.id}`}
                   style={{
-                    alignSelf:'center',
+                    alignSelf: 'center',
                     flexDirection: 'row',
                     marginTop: scale(20),
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     backgroundColor: '#FFFFFF',
                     borderRadius: scale(10),
-                    width:'100%',
+                    width: '100%',
                     minHeight: scale(94),
                     borderWidth: scale(0.5),
                     borderColor: '#00000040',
@@ -181,24 +179,24 @@ export default function Content() {
                       </View>
                     )}
                   </View>
-                    <TouchableOpacity
-                      style={{
-                        alignItems: 'center',
-                        right: scale(15),
-                        top: scale(10),
-                      }}>
-                      <LinearGradient
-                        colors={['#F7E75A', '#FFC702']}
-                        start={{x: 0, y: 0}}
-                        end={{x: 1, y: 0}}
-                        style={styles.button1}>
-                        <CustomText
-                          textType="bold"
-                          style={{...styles.text2, color: COLORS.black}}>
-                          Buy
-                        </CustomText>
-                      </LinearGradient>
-                    </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      right: scale(15),
+                      top: scale(10),
+                    }}>
+                    <LinearGradient
+                      colors={['#F7E75A', '#FFC702']}
+                      start={{x: 0, y: 0}}
+                      end={{x: 1, y: 0}}
+                      style={styles.button1}>
+                      <CustomText
+                        textType="bold"
+                        style={{...styles.text2, color: COLORS.black}}>
+                        Buy
+                      </CustomText>
+                    </LinearGradient>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -222,7 +220,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
-    width:'90%'
+    width: '90%',
   },
   text: {
     fontSize: SIZES.medium,

@@ -13,11 +13,11 @@ import {
 } from '../../../assets/icon/Icon';
 import CustomText from '../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 export default function Bottom() {
   const navigation = useNavigation();
-  const Logout = () => {
-    navigation.navigate('LoginScreen');
-  };
+  const {onLogout} = useAuthentication();
+
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -74,9 +74,9 @@ export default function Bottom() {
           height: scale(48),
           marginTop: scale(20),
           marginBottom: scale(50),
-          width:'85%'
+          width: '85%',
         }}
-        onPress={Logout}>
+        onPress={onLogout}>
         <LinearGradient
           colors={['#F7E75A', '#FFC702']}
           start={{x: 0, y: 0}}

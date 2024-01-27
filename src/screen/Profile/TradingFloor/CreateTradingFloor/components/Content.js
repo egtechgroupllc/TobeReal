@@ -55,7 +55,7 @@ export default function Content() {
         Name of the trading platform
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -109,7 +109,7 @@ export default function Content() {
         Headquarters information
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -120,7 +120,7 @@ export default function Content() {
       />
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <CustomInput
-          styleWrapper={{
+          style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
             marginTop: scale(10),
@@ -131,7 +131,7 @@ export default function Content() {
           placeholder="Province/city"
         />
         <CustomInput
-          styleWrapper={{
+          style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
             marginTop: scale(10),
@@ -142,7 +142,7 @@ export default function Content() {
           placeholder="Country"
         />
         <CustomInput
-          styleWrapper={{
+          style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
             marginTop: scale(10),
@@ -154,7 +154,7 @@ export default function Content() {
         />
       </View>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -164,7 +164,7 @@ export default function Content() {
         placeholder="Phone"
       />
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -179,7 +179,7 @@ export default function Content() {
         Website
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -235,7 +235,7 @@ export default function Content() {
         Contact person information
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -244,8 +244,8 @@ export default function Content() {
         }}
         placeholder="Full name"
       />
-        <CustomInput
-        styleWrapper={{
+      <CustomInput
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -254,8 +254,8 @@ export default function Content() {
         }}
         placeholder="Position"
       />
-        <CustomInput
-        styleWrapper={{
+      <CustomInput
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -264,8 +264,8 @@ export default function Content() {
         }}
         placeholder="Email"
       />
-        <CustomInput
-        styleWrapper={{
+      <CustomInput
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -274,8 +274,8 @@ export default function Content() {
         }}
         placeholder="Phone"
       />
-      <View style={{marginBottom:scale(30)}}>
-      <Button title={'Create'}/>
+      <View style={{marginBottom: scale(30)}}>
+        <Button title={'Create'} />
       </View>
     </View>
   );

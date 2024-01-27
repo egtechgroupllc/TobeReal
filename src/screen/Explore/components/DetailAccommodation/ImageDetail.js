@@ -9,25 +9,23 @@ const listImg = [
   'https://cdn.travelio.id/hotel/771b9-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-52-PM_l.jpeg',
   'https://cdn.travelio.id/hotel/31e52-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-11-at-6-17-28-PM-v1_l.jpg',
   'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/94178-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/85833-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM-1-_l.jpeg',
   'https://cdn.travelio.id/hotel/771b9-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-52-PM_l.jpeg',
   'https://cdn.travelio.id/hotel/31e52-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-11-at-6-17-28-PM-v1_l.jpg',
   'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/94178-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/85833-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM-1-_l.jpeg',
-  'https://cdn.travelio.id/hotel/771b9-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-52-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/31e52-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-11-at-6-17-28-PM-v1_l.jpg',
-  'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/94178-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/85833-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-50-PM-1-_l.jpeg',
 ];
 
 export default function ImageDetail({onLayout}) {
   const [isViewImg, setIsViewImg] = useState(false);
 
   return (
-    <View style={styles.wrapper} onLayout={onLayout}>
+    <View
+      style={[
+        styles.wrapper,
+        listImg[3] && {
+          flexDirection: 'column',
+        },
+      ]}
+      onLayout={onLayout}>
       {isViewImg && (
         <ListImg
           dataImg={listImg}
@@ -40,7 +38,6 @@ export default function ImageDetail({onLayout}) {
         activeOpacity={0.9}
         style={{
           flex: 1,
-          backgroundColor: '#000',
         }}>
         <CustomImage
           source={listImg[0]}
@@ -55,6 +52,7 @@ export default function ImageDetail({onLayout}) {
           style={{
             flex: !listImg[2] ? 1 : 0.6,
             gap: 1,
+            flexDirection: listImg[3] ? 'row' : 'column',
           }}>
           <TouchableOpacity
             activeOpacity={0.9}
@@ -71,8 +69,8 @@ export default function ImageDetail({onLayout}) {
           </TouchableOpacity>
           {listImg[2] && (
             <TouchableOpacity
-              onPress={() => setIsViewImg(3)}
               activeOpacity={0.9}
+              onPress={() => setIsViewImg(3)}
               style={{
                 flex: 1,
               }}>
@@ -82,10 +80,25 @@ export default function ImageDetail({onLayout}) {
                   flex: 1,
                 }}
               />
-              {listImg[3] && (
+            </TouchableOpacity>
+          )}
+          {listImg[3] && (
+            <TouchableOpacity
+              onPress={() => setIsViewImg(4)}
+              activeOpacity={0.9}
+              style={{
+                flex: 1,
+              }}>
+              <CustomImage
+                source={listImg[3]}
+                style={{
+                  flex: 1,
+                }}
+              />
+              {listImg[4] && (
                 <View style={styles.viewImgThree}>
                   <CustomText textType="bold" style={styles.totalImg}>
-                    +{listImg.length - 2}
+                    +{listImg.length - 3}
                   </CustomText>
                   <IconImg />
                 </View>
@@ -100,9 +113,9 @@ export default function ImageDetail({onLayout}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: '100%',
     flexDirection: 'row',
-    height: WIDTH.heightScreen / 3.2,
+    width: '100%',
+    height: WIDTH.heightScreen / 3,
     gap: 1,
     backgroundColor: '#fff',
   },

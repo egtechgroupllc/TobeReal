@@ -20,9 +20,9 @@ export default function RecommendedUnitItem({
   isButtonBottom,
   isShowDetail,
   styesWrapper,
+  styesTextTitle,
   viewShow = 2,
   isCenter,
-  isOverlay,
   onPress,
 }) {
   return (
@@ -33,11 +33,11 @@ export default function RecommendedUnitItem({
         styles.wrapper,
         {
           width:
+            styesWrapper?.width ||
             (WIDTH.widthScreen > 500 ? scale(500) : WIDTH.widthScreen) /
-            viewShow,
+              viewShow,
         },
       ]}>
-      {isOverlay && <View style={styles.overlay} />}
       <ImageBackground
         resizeMode="stretch"
         src="https://cdn.travelio.id/hotel/b6906-6538c063f4bc0a28cbe6e5e9/Deluxe-King_l.jpg"
@@ -49,7 +49,7 @@ export default function RecommendedUnitItem({
             alignItems: 'center',
           },
         ]}>
-        <CustomText textType="bold" style={styles.title}>
+        <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
           In malybu
         </CustomText>
 
@@ -100,9 +100,9 @@ const styles = StyleSheet.create({
   },
   img: {
     // aspectRatio: 1.4,
-    minHeight: scale(150),
     // width: '100%',
-    flex: 1,
+    minHeight: scale(150),
+    // flex: 1,
     borderRadius: scale(12),
     overflow: 'hidden',
     padding: scale(10),
@@ -136,12 +136,5 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
     textType: 'semiBold',
     color: COLORS.text,
-  },
-  overlay: {
-    backgroundColor: '#00000050',
-    position: 'absolute',
-    zIndex: 999,
-    width: '100%',
-    height: '100%',
   },
 });

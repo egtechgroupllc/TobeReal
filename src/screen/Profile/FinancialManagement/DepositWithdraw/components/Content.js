@@ -89,7 +89,7 @@ export default function Content() {
         </CustomText>
         <CustomInput
           placeholder="0$"
-          styleWrapper={{
+          style={{
             marginBottom: scale(25),
             height: scale(36),
             backgroundColor: '#E3E3E3',

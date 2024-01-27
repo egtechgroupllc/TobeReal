@@ -606,13 +606,33 @@ export function IconAdd({fill, ...props}) {
       {...props}>
       <Path
         d="M7.122 1v11.755M13 6.877H1.245"
-        stroke="#000"
+        stroke={fill || '#000'}
         strokeWidth={2}
         strokeLinecap="round"
       />
     </Svg>
   );
 }
+
+export function IconSubtract({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(24)}
+      height={props?.style?.height || scale(4)}
+      viewBox="0 0 24 4"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M2 2h20"
+        stroke={fill || '#000'}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+}
+
 export function IconAddBranch({fill, ...props}) {
   return (
     <Svg
@@ -1279,6 +1299,22 @@ export function IconBig({fill, ...props}) {
     </Svg>
   );
 }
+export function IconSort({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(24)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 24 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M21.364 8.314V.909a.91.91 0 10-1.819 0v7.405a3.186 3.186 0 00-2.272 3.05c0 1.438.958 2.657 2.273 3.05v4.677a.91.91 0 101.818 0v-4.678a3.186 3.186 0 002.272-3.05 3.186 3.186 0 00-2.272-3.05zm-8.637-6.818V.909a.91.91 0 10-1.818 0v.587a3.186 3.186 0 00-2.273 3.05c0 1.438.959 2.657 2.273 3.05V19.09a.91.91 0 101.818 0V7.595A3.186 3.186 0 0015 4.545a3.186 3.186 0 00-2.273-3.05zM4.091 12.405V.909a.91.91 0 10-1.818 0v11.496A3.186 3.186 0 000 15.455c0 1.438.958 2.657 2.273 3.05v.586a.91.91 0 101.818 0v-.587a3.186 3.186 0 002.273-3.05 3.186 3.186 0 00-2.273-3.05z"
+        fill="#474747"
+      />
+    </Svg>
+  );
+}
 
 export function IconStar({fill, ...props}) {
   return (
@@ -1669,8 +1705,8 @@ export function IconNext({fill, ...props}) {
       {...props}>
       <Path
         d="M1.289 20.697a.928.928 0 00.673.303c.24 0 .481-.101.673-.303l8.562-8.99a1.042 1.042 0 000-1.44L2.66 1.304a.927.927 0 00-1.37 0 1.042 1.042 0 000 1.44L9.153 11l-7.864 8.258a1.042 1.042 0 000 1.439z"
-        fill="#000"
-        stroke="#000"
+        fill={fill || '#000'}
+        stroke={fill || '#000'}
       />
     </Svg>
   );
@@ -1707,6 +1743,41 @@ export function IconX({fill, ...props}) {
         stroke="#000"
         strokeWidth={3}
         strokeLinecap="round"
+      />
+    </Svg>
+  );
+}
+export function IconMyLocation({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(20)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M10 6.364A3.635 3.635 0 006.364 10 3.635 3.635 0 0010 13.636 3.635 3.635 0 0013.636 10 3.635 3.635 0 0010 6.364zm8.127 2.727a8.177 8.177 0 00-7.218-7.218V0H9.091v1.873A8.177 8.177 0 001.873 9.09H0v1.818h1.873a8.177 8.177 0 007.218 7.218V20h1.818v-1.873a8.177 8.177 0 007.218-7.218H20V9.091h-1.873zM10 16.364a6.365 6.365 0 010-12.728 6.365 6.365 0 010 12.728z"
+        fill={fill || '#474747'}
+      />
+    </Svg>
+  );
+}
+
+export function IconHistory({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(21)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 22 21"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M11.83.059c-3.92 0-7.423 2.284-9.051 5.735l-.376-1.232a.77.77 0 10-1.47.443l.941 3.1a.77.77 0 00.938.516l3.038-.829a.77.77 0 00-.404-1.487l-1.38.378a8.459 8.459 0 017.764-5.086 8.447 8.447 0 018.46 8.46 8.448 8.448 0 01-8.46 8.463 8.46 8.46 0 01-8.184-6.287.77.77 0 00-1.488.393 10.014 10.014 0 009.672 7.433c5.516 0 10-4.487 10-10.001 0-5.515-4.484-10-10-10zm-.507 4.826a.77.77 0 00-.766.766v5.668a.77.77 0 00.386.67l3.606 2.05a.768.768 0 001.05-.29.768.768 0 00-.29-1.05l-3.213-1.828V5.65a.768.768 0 00-.773-.766z"
+        fill={fill || '#000'}
       />
     </Svg>
   );

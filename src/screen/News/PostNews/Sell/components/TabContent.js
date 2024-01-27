@@ -140,7 +140,7 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleCheckBox1} style={styles.buttonSmall}>
-          {check1 ? <IconCheckBoxWhite/> : <IconUnCheckBoxWhite />}
+          {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
           <CustomText
             textType="medium"
             style={{...styles.text1, color: COLORS.white}}>
@@ -212,7 +212,7 @@ export default function TabContent() {
         Contact Info
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -223,7 +223,7 @@ export default function TabContent() {
         placeholder="Full name"
       />
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -278,7 +278,7 @@ export default function TabContent() {
               Toilet
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -304,7 +304,7 @@ export default function TabContent() {
               Bed room
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -352,7 +352,7 @@ export default function TabContent() {
               Home direction
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -378,7 +378,7 @@ export default function TabContent() {
               Balcony direction
             </CustomText>
             <CustomInput
-              styleWrapper={{
+              style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
@@ -408,7 +408,7 @@ export default function TabContent() {
           paddingHorizontal: scale(20),
         }}>
         <CustomInput
-          styleWrapper={{
+          style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
             marginTop: scale(10),
@@ -456,7 +456,7 @@ export default function TabContent() {
         Acreage (m2)
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -514,7 +514,7 @@ export default function TabContent() {
         Address
       </CustomText>
       <CustomInput
-        styleWrapper={{
+        style={{
           height: scale(40),
           backgroundColor: '#E3E3E3',
           marginTop: scale(10),
@@ -740,7 +740,6 @@ const styles = StyleSheet.create({
   buttonFurniturys: {
     borderTopLeftRadius: scale(10),
     borderTopEndRadius: scale(10),
-    borderTopLeftRadius: scale(10),
     borderTopRightRadius: scale(10),
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
@@ -751,7 +750,6 @@ const styles = StyleSheet.create({
   listBed: {
     borderBottomLeftRadius: scale(10),
     borderBottomEndRadius: scale(10),
-    borderBottomLeftRadius: scale(10),
     borderBottomRightRadius: scale(10),
     backgroundColor: '#EEEEEE',
     justifyContent: 'center',

@@ -45,7 +45,7 @@ export default function SelectLocation() {
   return (
     <View>
       <CustomInput
-        value={select}
+        defaultValue={select}
         iconLeft={IconMarker}
         iconRight={IconDown}
         onPress={() => {
@@ -55,8 +55,12 @@ export default function SelectLocation() {
       />
 
       <BottomSheet
+        titleIndicator={'Select Location'}
         ref={bottomSheetRef}
         dataList={dataList}
+        handleStyle={{
+          borderBottomWidth: 0,
+        }}
         renderItem={({item, index}) => (
           <CustomButton
             style={[
@@ -72,18 +76,11 @@ export default function SelectLocation() {
             }}
             iconRight={select === item && IconCheckBox}
             styleText={{
-              color: COLORS.text,
+              color: select === item ? COLORS.primary : COLORS.text,
             }}
           />
         )}>
         <View style={styles.headerSheet}>
-          <View style={styles.header}>
-            <CustomText
-              textType="semiBold"
-              style={{fontSize: SIZES.medium, textAlign: 'center'}}>
-              Select Location
-            </CustomText>
-          </View>
           <BottomSheetTextInput
             style={styles.input}
             placeholder="Search"

@@ -1,3 +1,5 @@
+import {addDays, format} from 'date-fns';
+
 const decimalPlaces = 2;
 export const formatPrice = (number = 0, decimal) => {
   const numberString = number ? number.toString() : '0';
@@ -41,3 +43,21 @@ function formatWithComma(value, suffix) {
 
   return formattedValue.replace('.', ',') + suffix;
 }
+
+export const formatDateTime = (
+  date = new Date(),
+  {noDate, noHour, isHour24, addDays: daysToAdd} = {},
+) => {
+  let formattedDateTime = date;
+
+  // Thêm số ngày vào ngày hiện tại nếu có
+  if (daysToAdd) {
+    formattedDateTime = addDays(formattedDateTime, daysToAdd);
+  }
+
+  const dateFormat = noDate ? '' : 'dd MMM yyyy';
+  const timeFormat = !noHour ? '' : isHour24 ? 'HH:mm:ss' : 'h:mm:ss a';
+  const formatString = `${dateFormat} ${timeFormat}`.trim();
+
+  return format(formattedDateTime, formatString);
+};

@@ -1,41 +1,56 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {COLORS, FONTS, SIZES, scale} from '../../../../assets/constants';
+
+import {COLORS, FONTS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {
-  IconCalendar,
   IconFurniture,
   IconMarker,
   IconRoom,
   IconTag,
 } from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
+import ChooseCalendar from './ChooseCalendar';
+import ChooseOccupancy from './ChooseOccupancy';
 import OptionAccommodation from './OptionAccommodation';
+import {useForm} from 'react-hook-form';
+import {requireField} from '../../../../utils/validate';
 
-export default function FindContent({isBuy}) {
+export default function FindContent({isBuy, rental}) {
+  const {navigate} = useNavigation();
+  const params = useRoute().params;
+
+  const {control, handleSubmit} = useForm();
+
   return (
     <View style={styles.findContent}>
-      <CustomInput
-        placeholder="City, building, area of landmark"
-        styleWrapper={{width: '92%'}}
-        iconLeft={IconMarker}
-        styleIcon={{
-          width: scale(20),
-          height: scale(20),
-        }}
-      />
-      {!isBuy && (
+      <View
+        style={{
+          paddingHorizontal: scale(16),
+          rowGap: scale(10),
+        }}>
         <CustomInput
-          defaultValue="05 Jan 2024 - 04 Feb 2024"
-          styleWrapper={{width: '92%'}}
-          iconLeft={IconCalendar}
-          styleIcon={{
-            width: scale(20),
-            height: scale(20),
-          }}
+          control={control}
+          rules={requireField('Vui long them')}
+          name="location"
+          defaultValue={params || 'Around me'}
+          iconLeft={IconMarker}
+          styleIcon={styles.icon}
+          onPress={() =>
+            navigate('NoBottomTab', {
+              screen: 'HomeSearchAccommodScreen',
+            })
+          }
         />
-      )}
+        {!isBuy && (
+          <>
+            <ChooseCalendar rental={rental} />
 
+            {rental === 'Daily' && <ChooseOccupancy />}
+          </>
+        )}
+      </View>
       <View style={styles.optionBox}>
         <View style={styles.boxIcon}>
           <IconRoom />
@@ -90,6 +105,7 @@ export default function FindContent({isBuy}) {
           ]}
         />
       </View>
+
       {isBuy && (
         <View style={styles.optionBox}>
           <View style={styles.boxIcon}>
@@ -141,6 +157,7 @@ export default function FindContent({isBuy}) {
       </View>
 
       <CustomButton
+        onPress={handleSubmit(value => console.log(value))}
         buttonType="medium"
         text="Find Accommodation"
         styleText={{
@@ -175,6 +192,10 @@ const styles = StyleSheet.create({
     minHeight: scale(36),
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  icon: {
+    width: scale(20),
+    height: scale(20),
   },
   textCheckbox: {
     textDecorationLine: 'none',

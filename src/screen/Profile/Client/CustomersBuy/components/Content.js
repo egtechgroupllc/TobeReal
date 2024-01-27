@@ -73,8 +73,7 @@ export default function Content() {
         Select Province/City:
       </CustomText>
       <CustomInput
-        styleWrapper={{
-          
+        style={{
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
@@ -86,8 +85,7 @@ export default function Content() {
         Select District:
       </CustomText>
       <CustomInput
-        styleWrapper={{
-          
+        style={{
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
@@ -99,14 +97,13 @@ export default function Content() {
         Select project:
       </CustomText>
       <CustomInput
-        styleWrapper={{
-          
+        style={{
           marginBottom: scale(25),
           height: scale(40),
           backgroundColor: '#E3E3E3',
         }}
       />
-      <Button title={'Search'} onPress={Search}/>
+      <Button title={'Search'} onPress={Search} />
       <View style={{marginBottom: scale(50)}}>
         {data && data.length > 0 ? (
           <FlatList
@@ -115,105 +112,103 @@ export default function Content() {
             showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
             renderItem={({item}) => (
-              
-                <View
-                  key={`${item?.id}`}
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: scale(20),
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    alignSelf:'center',
-                    backgroundColor: '#FFFFFF',
-                    borderRadius: scale(10),
-                    minHeight: scale(94),
-                    borderWidth: scale(0.5),
-                    borderColor: '#00000040',
-                    width:'100%',
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.32,
-                    shadowRadius: 3,
+              <View
+                key={`${item?.id}`}
+                style={{
+                  flexDirection: 'row',
+                  marginTop: scale(20),
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: scale(10),
+                  minHeight: scale(94),
+                  borderWidth: scale(0.5),
+                  borderColor: '#00000040',
+                  width: '100%',
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.32,
+                  shadowRadius: 3,
 
-                    elevation: 2,
-                  }}>
-                  {item?.image && (
+                  elevation: 2,
+                }}>
+                {item?.image && (
+                  <View
+                    style={{
+                      width: scale(50),
+                      alignItems: 'center',
+                      left: scale(10),
+                    }}>
+                    <Image
+                      source={item?.image}
+                      style={{width: scale(37), height: scale(37)}}></Image>
+                  </View>
+                )}
+                <View>
+                  {item?.name && (
                     <View
                       style={{
-                        width: scale(50),
-                        alignItems: 'center',
-                        left: scale(10),
+                        width: scale(100),
                       }}>
-                      <Image
-                        source={item?.image}
-                        style={{width: scale(37), height: scale(37)}}></Image>
+                      <CustomText textType="semiBold" style={styles.text2}>
+                        {item?.name}
+                      </CustomText>
                     </View>
                   )}
-                  <View>
-                    {item?.name && (
-                      <View
-                        style={{
-                          width: scale(100),
-                        }}>
-                        <CustomText textType="semiBold" style={styles.text2}>
-                          {item?.name}
-                        </CustomText>
-                      </View>
-                    )}
-                    {item?.project && (
-                      <View
-                        style={{
-                          width: scale(150),
-                        }}>
-                        <CustomText textType="semiBold" style={styles.text1}>
-                          Project: {item?.project}
-                        </CustomText>
-                      </View>
-                    )}
-                    {item?.location && (
-                      <View
-                        style={{
-                          width: scale(170),
-                        }}>
-                        <CustomText textType="semiBold" style={styles.text1}>
-                          Location: {item?.location}
-                        </CustomText>
-                      </View>
-                    )}
-                    {item?.content && (
-                      <View
-                        style={{
-                          width: scale(100),
-                        }}>
-                        <CustomText textType="semiBold" style={styles.text1}>
-                          Content: {item?.content}
-                        </CustomText>
-                      </View>
-                    )}
-                  </View>
-                    <TouchableOpacity
+                  {item?.project && (
+                    <View
                       style={{
-                        alignItems: 'center',
-                        right: scale(15),
-                        top: scale(10),
+                        width: scale(150),
                       }}>
-                      <LinearGradient
-                        colors={['#F7E75A', '#FFC702']}
-                        start={{x: 0, y: 0}}
-                        end={{x: 1, y: 0}}
-                        style={styles.button1}>
-                        <CustomText
-                          textType="bold"
-                          style={{...styles.text2, color: COLORS.black}}>
-                          Buy
-                        </CustomText>
-                      </LinearGradient>
-                    </TouchableOpacity>
+                      <CustomText textType="semiBold" style={styles.text1}>
+                        Project: {item?.project}
+                      </CustomText>
+                    </View>
+                  )}
+                  {item?.location && (
+                    <View
+                      style={{
+                        width: scale(170),
+                      }}>
+                      <CustomText textType="semiBold" style={styles.text1}>
+                        Location: {item?.location}
+                      </CustomText>
+                    </View>
+                  )}
+                  {item?.content && (
+                    <View
+                      style={{
+                        width: scale(100),
+                      }}>
+                      <CustomText textType="semiBold" style={styles.text1}>
+                        Content: {item?.content}
+                      </CustomText>
+                    </View>
+                  )}
                 </View>
-        
+                <TouchableOpacity
+                  style={{
+                    alignItems: 'center',
+                    right: scale(15),
+                    top: scale(10),
+                  }}>
+                  <LinearGradient
+                    colors={['#F7E75A', '#FFC702']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    style={styles.button1}>
+                    <CustomText
+                      textType="bold"
+                      style={{...styles.text2, color: COLORS.black}}>
+                      Buy
+                    </CustomText>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
             )}
           />
         ) : (
@@ -235,7 +230,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
-    width:'90%'
+    width: '90%',
   },
   text: {
     fontSize: SIZES.medium,

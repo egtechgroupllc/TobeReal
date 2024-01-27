@@ -4,6 +4,7 @@ import {COLORS, WIDTH, images, scale} from '../../../assets/constants';
 import {IconSearch} from '../../../assets/icon/Icon';
 import {CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 
 export default function Header() {
   return (
@@ -14,7 +15,7 @@ export default function Header() {
         resizeMode="contain"
       />
 
-      <CustomInput
+      {/* <CustomInput
         iconLeft={IconSearch}
         placeholder="Find Accommodation..."
         editable={false}
@@ -22,7 +23,7 @@ export default function Header() {
           flex: 1,
         }}
         onPress={() => console.log(312)}
-      />
+      /> */}
     </View>
   );
 }

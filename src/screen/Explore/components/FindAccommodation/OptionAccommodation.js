@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 
@@ -16,20 +16,24 @@ export default function OptionAccommodation({
   outline,
   styleWrapper,
   styleContent,
+  styleOption,
   isSelectOnly,
   isShaDow,
   isSelectForIndex,
+  isNoAutoSelect,
   select,
   onSelect,
 }) {
-  const valueDefault = useRef(isSelectForIndex ? 0 : data[0].text).current;
+  const valueDefault = useMemo(
+    () => (isSelectForIndex ? 0 : data[0].text),
+    [data[0].text],
+  );
   const valueDefaultView = useCallback(
     (item, index) => (isSelectForIndex ? index : item?.text),
     [],
   );
 
   const [option, setOption] = useState([valueDefault]);
-
   useEffect(() => {
     setOption([select || valueDefault]);
   }, [valueDefault, select]);
@@ -59,8 +63,9 @@ export default function OptionAccommodation({
     if (!isSelectOnly && option.length === 0) {
       setOption([valueDefault]);
     }
-    if (!isSelectOnly && onSelect) {
-      onSelect(option);
+    if (!isNoAutoSelect && onSelect) {
+      onSelect(isSelectOnly ? option[0] : option);
+      setOption(option);
     }
   }, [option]);
 
@@ -78,6 +83,7 @@ export default function OptionAccommodation({
             activeOpacity={0.7}
             style={[
               styles.option,
+              styleOption,
               option.includes(valueDefaultView(item, index)) &&
                 !outline && {
                   borderBottomWidth: 2,
@@ -85,7 +91,7 @@ export default function OptionAccommodation({
                 },
               outline && {
                 backgroundColor: !option.includes(valueDefaultView(item, index))
-                  ? '#f8f8f8'
+                  ? '#f5f5f5'
                   : '#F0B90B20',
               },
               option.includes(valueDefaultView(item, index)) &&
@@ -150,6 +156,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
     rowGap: scale(2),
     height: scale(38),
+    // paddingHorizontal: scale(5),
     borderRadius: scale(10),
     justifyContent: 'center',
   },

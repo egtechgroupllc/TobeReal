@@ -35,8 +35,14 @@ export default function TabSelect({
           <View
             key={`key-${item}-${index}`}
             style={[
+              data[2]
+                ? {
+                    flex: 1,
+                  }
+                : {
+                    width: renderView ? '49%' : '50%',
+                  },
               {
-                width: !!renderView ? '49%' : '50%',
                 height:
                   tab === item
                     ? styleTabActive?.height || '100%'
@@ -94,6 +100,10 @@ export default function TabSelect({
               borderTopLeftRadius: 0,
             },
             tab !== data[0] && {
+              borderTopRightRadius: 0,
+            },
+            data[2] && {
+              borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
             },
             isShadow && SHADOW,

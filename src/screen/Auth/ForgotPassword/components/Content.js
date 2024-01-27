@@ -35,12 +35,21 @@ export default function Content() {
       {phase == 1 && (
         <View>
           <View style={{marginTop: scale(150), alignItems: 'center'}}>
-            <Image source={images.logo} style={{width:'40%', height:scale(55), marginBottom:scale(30)}}></Image>
-            <Wrapper Heading1="Forgot Password?" styleWrapper={{marginBottom: scale(30)}}/>
+            <Image
+              source={images.logo}
+              style={{
+                width: '40%',
+                height: scale(55),
+                marginBottom: scale(30),
+              }}></Image>
+            <Wrapper
+              Heading1="Forgot Password?"
+              styleWrapper={{marginBottom: scale(30)}}
+            />
           </View>
           <CustomInput
             placeholder="Email"
-            styleWrapper={{
+            style={{
               width: scale(312),
               marginBottom: scale(25),
               height: scale(48),
@@ -62,12 +71,21 @@ export default function Content() {
       {phase == 2 && (
         <View>
           <View style={{marginTop: scale(150), alignItems: 'center'}}>
-          <Image source={images.logo} style={{width:'40%', height:scale(55), marginBottom:scale(30)}}></Image>
-            <Wrapper Heading1="Forgot Password?" styleWrapper={{marginBottom: scale(30)}}/>
+            <Image
+              source={images.logo}
+              style={{
+                width: '40%',
+                height: scale(55),
+                marginBottom: scale(30),
+              }}></Image>
+            <Wrapper
+              Heading1="Forgot Password?"
+              styleWrapper={{marginBottom: scale(30)}}
+            />
           </View>
           <CustomInput
             placeholder="CODE"
-            styleWrapper={{
+            style={{
               width: scale(312),
               marginBottom: scale(25),
               height: scale(48),
@@ -89,12 +107,21 @@ export default function Content() {
       {phase == 3 && (
         <View>
           <View style={{marginTop: scale(150), alignItems: 'center'}}>
-          <Image source={images.logo} style={{width:'40%', height:scale(55), marginBottom:scale(30)}}></Image>
-            <Wrapper Heading1="Enter new password" styleWrapper={{marginBottom: scale(30)}} />
+            <Image
+              source={images.logo}
+              style={{
+                width: '40%',
+                height: scale(55),
+                marginBottom: scale(30),
+              }}></Image>
+            <Wrapper
+              Heading1="Enter new password"
+              styleWrapper={{marginBottom: scale(30)}}
+            />
           </View>
           <CustomInput
             placeholder="Password"
-            styleWrapper={{
+            style={{
               width: scale(312),
               marginBottom: scale(25),
               height: scale(48),
@@ -102,7 +129,7 @@ export default function Content() {
           />
           <CustomInput
             placeholder="Confirm Password"
-            styleWrapper={{
+            style={{
               width: scale(312),
               marginBottom: scale(25),
               height: scale(48),

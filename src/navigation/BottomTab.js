@@ -67,6 +67,7 @@ export default function BottomTab() {
         name="WishList"
         component={NavigationWishList}
         options={{
+          tabBarBadge: 3,
           title: 'Wish List',
           tabBarIcon: ({focused}) => <IconHeart fill={focused && '#F0B90B'} />,
         }}
