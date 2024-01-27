@@ -22,7 +22,13 @@ import Button from '../../../../../Profile/components/Button';
 import LinearGradient from 'react-native-linear-gradient';
 import SelectService from './SelectService';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import {
+  requireField,
+  validateMaxAmount,
+} from '../../../../../../utils/validate';
+import {useForm} from 'react-hook-form';
 export default function TabContent() {
+  const {control, watch, handleSubmit} = useForm();
   const navigation = useNavigation();
   const route = useRoute();
   const [roomImage, setRoomImage] = useState([]);
@@ -131,58 +137,52 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
       </View> */}
-      <CustomText
-        textType="medium"
-        style={{
+      <CustomInput
+        styleTextLabel={{
           ...styles.text1,
           color: COLORS.black,
           marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Room type title
-      </CustomText>
-      <View style={styles.textArea}>
-        <ScrollView>
-          <TextInput
-            multiline
-            numberOfLines={4}
-            placeholder="Enter a desciption"
-            value={roomType}
-            onChangeText={handleRoomType}
-            style={{...styles.text, color: COLORS.black}}
-          />
-        </ScrollView>
-        <Text style={{...styles.text, color: COLORS.black}}>
-          {roomType.length}/{maxCharacters}
-        </Text>
-      </View>
-      <CustomText
-        textType="medium"
-        style={{
+        }}
+        label="Room type title"
+        control={control}
+        name="RoomTypeTitle"
+        multiline
+        numberOfLines={4}
+        placeholder="Enter room type title"
+        rules={{
+          ...requireField('This field is required'),
+          ...validateMaxAmount(1000, '1000 characters limit'),
+        }}
+        style={styles.textArea}
+        componentRight={
+          <Text style={{...styles.text, color: COLORS.black}}>
+            {watch('RoomTypeTitle')?.length || 0}/{maxCharacters}
+          </Text>
+        }
+      />
+      <CustomInput
+        styleTextLabel={{
           ...styles.text1,
           color: COLORS.black,
           marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Description content
-      </CustomText>
-      <View style={styles.textArea}>
-        <ScrollView>
-          <TextInput
-            multiline
-            numberOfLines={4}
-            placeholder="Enter a desciption"
-            value={description}
-            onChangeText={handleDesciption}
-            style={{...styles.text, color: COLORS.black}}
-          />
-        </ScrollView>
-        <Text style={{...styles.text, color: COLORS.black}}>
-          {description.length}/{maxCharacters}
-        </Text>
-      </View>
+        }}
+        label="Description content"
+        control={control}
+        name="Description"
+        multiline
+        numberOfLines={4}
+        placeholder="Enter a description"
+        rules={{
+          ...requireField('This field is required'),
+          ...validateMaxAmount(1000, '1000 characters limit'),
+        }}
+        style={styles.textArea}
+        componentRight={
+          <Text style={{...styles.text, color: COLORS.black}}>
+            {watch('Description')?.length || 0}/{maxCharacters}
+          </Text>
+        }
+      />
       {/* <Image
         source={images.map}
         style={{
@@ -191,41 +191,21 @@ export default function TabContent() {
           alignSelf: 'center',
           marginTop: scale(30),
         }}></Image> */}
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Acreage (m2)
-      </CustomText>
       <CustomInput
-        style={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
-        }}
-        onChangeText={handleAcreage}
-        value={acreage}
-        placeholder="Enter the land area"
-      />
-      <CustomText
-        textType="medium"
-        style={{
+        styleTextLabel={{
           ...styles.text1,
           color: COLORS.black,
-          alignSelf: 'flex-start',
           marginTop: scale(10),
-          paddingHorizontal: scale(20),
-        }}>
-        Price
-      </CustomText>
+        }}
+        label="Acreage(m2)"
+        control={control}
+        name="acreage"
+        placeholder="Enter the land area"
+        rules={{
+          ...requireField('This field is required'),
+        }}
+        style={styles.textInput}
+      />
       <View
         style={{
           flexDirection: 'row',
@@ -233,17 +213,25 @@ export default function TabContent() {
           paddingHorizontal: scale(20),
         }}>
         <CustomInput
+          styleTextLabel={{
+            ...styles.text1,
+            color: COLORS.black,
+            marginTop: scale(10),
+          }}
+          label="Price"
+          control={control}
+          name="price"
+          placeholder="Enter price"
+          rules={{
+            ...requireField('This field is required'),
+          }}
           style={{
             height: scale(40),
             backgroundColor: '#E3E3E3',
-            marginTop: scale(10),
             borderRadius: scale(5),
             borderWidth: scale(0),
-            width: '40%',
+            width: '40%'
           }}
-          value={price}
-          onChangeText={handlePrice}
-          placeholder="Enter price"
         />
         <TouchableOpacity
           style={{
@@ -255,9 +243,8 @@ export default function TabContent() {
             width: '25%',
             alignItems: 'center',
             borderRadius: scale(5),
-            marginTop: scale(10),
+            alignSelf: 'flex-end',
             marginLeft: scale(10),
-            marginBottom: scale(20),
           }}>
           <CustomText
             textType="medium"
@@ -278,6 +265,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
           marginBottom: scale(10),
+          marginTop: scale(20),
         }}>
         Select bed type
       </CustomText>
@@ -621,6 +609,13 @@ const styles = StyleSheet.create({
   text3: {
     fontSize: SIZES.xSmall,
   },
+  textInput: {
+    backgroundColor: '#E3E3E3',
+    marginTop: scale(10),
+    borderRadius: scale(5),
+    borderWidth: scale(0),
+    width: '90%',
+  },
   button: {
     height: scale(63),
     width: '90%',
@@ -671,6 +666,7 @@ const styles = StyleSheet.create({
   },
   textArea: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     borderWidth: scale(2),
     backgroundColor: '#E3E3E3',
     borderColor: '#E3E3E3',

@@ -18,6 +18,7 @@ import {
   IconCheckBoxWhite,
   IconDown,
   IconUnCheckBoxWhite,
+  IconX,
 } from '../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
@@ -26,7 +27,7 @@ import DatePicker from 'react-native-date-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import axios from 'axios';
 import Map from '../../../../Explore/components/DetailAccommodation/Map';
-import {requireField,validateMaxAmount} from '../../../../../utils/validate';
+import {requireField, validateMaxAmount} from '../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
 export default function TabContent() {
   const {control, watch, handleSubmit} = useForm();
@@ -169,18 +170,6 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
       </View> */}
-      {/* <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Real estate title
-      </CustomText> */}
-      {/* <View style={styles.textArea}> */}
       <CustomInput
         styleTextLabel={{
           ...styles.text1,
@@ -192,78 +181,70 @@ export default function TabContent() {
         name="RealEstateTitle"
         multiline
         numberOfLines={4}
-        placeholder="Enter a desciption"
+        placeholder="Enter real estate title"
         rules={{
           ...requireField('This field is required'),
-          ...validateMaxAmount(10,'10This field is required'),
+          ...validateMaxAmount(1000, '1000 characters limit'),
         }}
         style={styles.textArea}
         componentRight={
           <Text style={{...styles.text, color: COLORS.black}}>
-            {watch('RealEstateTitle')?.length||0}/{maxCharacters}
+            {watch('RealEstateTitle')?.length || 0}/{maxCharacters}
           </Text>
         }
       />
 
-      {/* </View> */}
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Description content
-      </CustomText>
-      <View style={styles.textArea}>
-        <ScrollView>
-          <TextInput
-            multiline
-            numberOfLines={4}
-            placeholder="Enter a desciption"
-            value={description}
-            onChangeText={handleDesciption}
-            style={{...styles.text, color: COLORS.black}}
-          />
-        </ScrollView>
-        <Text style={{...styles.text, color: COLORS.black}}>
-          {description.length}/{maxCharacters}
-        </Text>
-      </View>
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(20),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Contact Info
-      </CustomText>
       <CustomInput
-        style={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
+        styleTextLabel={{
+          ...styles.text1,
+          color: COLORS.black,
           marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
         }}
-        placeholder="Full name"
+        label="Description content"
+        control={control}
+        name="Description"
+        multiline
+        numberOfLines={4}
+        placeholder="Enter a description"
+        rules={{
+          ...requireField('This field is required'),
+          ...validateMaxAmount(1000, '1000 characters limit'),
+        }}
+        style={styles.textArea}
+        componentRight={
+          <Text style={{...styles.text, color: COLORS.black}}>
+            {watch('Description')?.length || 0}/{maxCharacters}
+          </Text>
+        }
       />
       <CustomInput
-        style={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
+        styleTextLabel={{
+          ...styles.text1,
+          color: COLORS.black,
           marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
         }}
+        label="Contact info"
+        control={control}
+        name="fullname"
+        placeholder="Full name"
+        rules={{
+          ...requireField('This field is required'),
+        }}
+        style={styles.textInput}
+      />
+         <CustomInput
+        styleTextLabel={{
+          ...styles.text1,
+          color: COLORS.black,
+          marginTop: scale(10),
+        }}
+        control={control}
+        name="phone"
         placeholder="Phone"
+        rules={{
+          ...requireField('This field is required'),
+        }}
+        style={styles.textInput}
       />
       <View style={{flexDirection: 'row'}}>
         <CustomText
@@ -300,27 +281,20 @@ export default function TabContent() {
           <IconDown />
         </TouchableOpacity>
       </View>
-      <CustomText
-        textType="medium"
-        style={{
+      <CustomInput
+        styleTextLabel={{
           ...styles.text1,
           color: COLORS.black,
           marginTop: scale(10),
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-        }}>
-        Address
-      </CustomText>
-      <CustomInput
-        style={{
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
-          marginTop: scale(10),
-          borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '90%',
         }}
-        placeholder="Enter address"
+        label="Address"
+        control={control}
+        name="address"
+        placeholder="Address"
+        rules={{
+          ...requireField('This field is required'),
+        }}
+        style={styles.textInput}
       />
       {/* <Image
         source={images.map}
@@ -525,7 +499,7 @@ export default function TabContent() {
             <CustomText key={index}>{room.receivedRoomType}</CustomText>
           </View>
           <TouchableOpacity onPress={() => removeRoomType(index)}>
-            <IconAdd />
+            <IconX style={{width: scale(20), height: scale(20)}} />
           </TouchableOpacity>
         </View>
       ))}
@@ -662,6 +636,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     paddingTop: scale(5),
     marginTop: scale(10),
+  },
+  textInput: {
+    backgroundColor: '#E3E3E3',
+    marginTop: scale(10),
+    borderRadius: scale(5),
+    borderWidth: scale(0),
+    width: '90%'
   },
   text: {
     fontSize: SIZES.small,
