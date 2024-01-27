@@ -8,6 +8,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import {
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
@@ -35,6 +36,7 @@ type CustomInputProps = {
   componentLeft?: React.ReactNode;
   styleIcon?: TextStyle;
   styleText?: TextStyle;
+  styleTextLabel?: TextStyle;
   sizeInput?: 'small' | 'medium' | 'large';
   onPress?: () => void;
   onPressIconRight?: () => void;
@@ -49,6 +51,7 @@ export default function CustomInput({
   componentLeft,
   styleIcon,
   styleText,
+  styleTextLabel,
   control,
   rules,
   name,
@@ -80,7 +83,7 @@ export default function CustomInput({
             // propStyle?.height && {height: propStyle?.height},
             propStyle?.width && {width: propStyle?.width},
           ]}>
-          {label && <CustomText>{label}</CustomText>}
+          {label && <CustomText style={styleTextLabel}>{label}</CustomText>}
           <TouchableOpacity
             style={[
               styles.content,
@@ -91,48 +94,46 @@ export default function CustomInput({
             ]}
             activeOpacity={!!onPress ? 0.8 : 1}
             onPress={onPress}>
-            {(iconLeft || componentLeft) && (
-              <TouchableOpacity
-                style={styles.iconBox}
-                activeOpacity={onPressIconLeft ? 0.7 : 1}
-                onPress={onPressIconLeft && onPressIconLeft}>
-                {componentLeft ? (
-                  componentLeft
-                ) : (
+            {(iconLeft || componentLeft) &&
+              (componentLeft ? (
+                componentLeft
+              ) : (
+                <TouchableOpacity
+                  style={styles.iconBox}
+                  activeOpacity={onPressIconLeft ? 0.7 : 1}
+                  onPress={onPressIconLeft && onPressIconLeft}>
                   <IconLeft
                     style={{...styles.icon, ...styleIcon}}
                     fill={styleIcon?.color}
                   />
-                )}
-              </TouchableOpacity>
-            )}
+                </TouchableOpacity>
+              ))}
 
             <TextInput
               placeholderTextColor={COLORS.textSub}
               editable={!onPress}
               {...props}
-              onBlur={onBlur}
               onChangeText={onChange}
-              value={value || props?.defaultValue}
+              onBlur={onBlur}
+              value={value}
               style={[styles.input, styleText]}
               pointerEvents={!!onPress ? 'none' : 'auto'}
             />
 
-            {(iconRight || componentRight) && (
-              <TouchableOpacity
-                style={styles.iconBox}
-                activeOpacity={onPressIconRight ? 0.7 : 1}
-                onPress={onPressIconRight && onPressIconRight}>
-                {componentRight ? (
-                  componentRight
-                ) : (
+            {(iconRight || componentRight) &&
+              (componentRight ? (
+                componentRight
+              ) : (
+                <TouchableOpacity
+                  style={styles.iconBox}
+                  activeOpacity={onPressIconRight ? 0.7 : 1}
+                  onPress={onPressIconRight && onPressIconRight}>
                   <IconRight
                     style={{...styles.icon, ...styleIcon}}
                     fill={styleIcon?.color}
                   />
-                )}
-              </TouchableOpacity>
-            )}
+                </TouchableOpacity>
+              ))}
           </TouchableOpacity>
 
           {error && (

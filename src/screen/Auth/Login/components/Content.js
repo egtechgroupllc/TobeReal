@@ -40,7 +40,7 @@ export default function Content() {
         <CustomInput
           control={control}
           label="Email"
-          name="username"
+          name="username34567u76"
           sizeInput="medium"
           placeholder="example@gmail.com"
           rules={requireField('This field is required')}

@@ -574,8 +574,9 @@ export default function TabContent() {
         }}>
         <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {selectedImage.map(image => (
+          {selectedImage.map((image,index) => (
             <Image
+              key={index}
               source={{uri: image.path}}
               style={{
                 width: '100%',

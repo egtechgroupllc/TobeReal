@@ -1385,7 +1385,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: d3f49c53809116a5d38da093a8aa78bf551aed09
+  boost: 26fad476bfa736552bbfa698a06cc530475c1505
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
@@ -1466,4 +1466,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 374cf3db549e02f7d09e456f288352450b47c14e
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.12.1

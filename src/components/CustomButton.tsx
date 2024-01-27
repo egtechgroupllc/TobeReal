@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
   wrapper: {
     // alignItems: 'center',
     width: '100%',
-    backgroundColor: '#000',
   },
   outline: {
     backgroundColor: 'transparent',

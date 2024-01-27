@@ -17,6 +17,9 @@ export const validateEqualLength = (length, message) => {
 export const validateMinAmount = (amount, message) => {
   return {validate: value => parseFloat(value) > amount || message};
 };
+export const validateMaxAmount = (max, message) => {
+  return {validate: value => (value.length) < max || message};
+};
 
 export const validateMinMaxAmount = (amount, minAmount = 1, message) => {
   return {

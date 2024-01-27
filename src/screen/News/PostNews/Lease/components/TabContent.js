@@ -26,7 +26,11 @@ import DatePicker from 'react-native-date-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import axios from 'axios';
 import Map from '../../../../Explore/components/DetailAccommodation/Map';
+import {requireField,validateMaxAmount} from '../../../../../utils/validate';
+import {useForm} from 'react-hook-form';
 export default function TabContent() {
+  const {control, watch, handleSubmit} = useForm();
+
   const [selectedImage, setSelectedImage] = useState([]);
   const [openCheckin, setOpenCheckin] = useState(false);
   const [timeCheckin, setTimeCheckin] = useState(new Date());
@@ -45,6 +49,7 @@ export default function TabContent() {
   const handleRealEsate = text => {
     setRealEsate(text);
   };
+
   const pickImage = () => {
     ImageCropPicker.openPicker({
       width: scale(300),
@@ -116,7 +121,9 @@ export default function TabContent() {
       return updatedRoomTypes;
     });
   };
-  const ok = () => {};
+  const ok = value => {
+    console.log(value);
+  };
 
   return (
     <View
@@ -162,7 +169,7 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
       </View> */}
-      <CustomText
+      {/* <CustomText
         textType="medium"
         style={{
           ...styles.text1,
@@ -172,22 +179,33 @@ export default function TabContent() {
           paddingHorizontal: scale(20),
         }}>
         Real estate title
-      </CustomText>
-      <View style={styles.textArea}>
-        <ScrollView>
-          <TextInput
-            multiline
-            numberOfLines={4}
-            placeholder="Enter a desciption"
-            value={realesate}
-            onChangeText={handleRealEsate}
-            style={{...styles.text, color: COLORS.black}}
-          />
-        </ScrollView>
-        <Text style={{...styles.text, color: COLORS.black}}>
-          {realesate.length}/{maxCharacters}
-        </Text>
-      </View>
+      </CustomText> */}
+      {/* <View style={styles.textArea}> */}
+      <CustomInput
+        styleTextLabel={{
+          ...styles.text1,
+          color: COLORS.black,
+          marginTop: scale(10),
+        }}
+        label="Real estate title"
+        control={control}
+        name="RealEstateTitle"
+        multiline
+        numberOfLines={4}
+        placeholder="Enter a desciption"
+        rules={{
+          ...requireField('This field is required'),
+          ...validateMaxAmount(10,'10This field is required'),
+        }}
+        style={styles.textArea}
+        componentRight={
+          <Text style={{...styles.text, color: COLORS.black}}>
+            {watch('RealEstateTitle')?.length||0}/{maxCharacters}
+          </Text>
+        }
+      />
+
+      {/* </View> */}
       <CustomText
         textType="medium"
         style={{
@@ -459,8 +477,9 @@ export default function TabContent() {
         }}>
         <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {selectedImage.map(image => (
+          {selectedImage.map((image, index) => (
             <Image
+              key={index}
               source={{uri: image.path}}
               style={{
                 width: '100%',
@@ -557,7 +576,7 @@ export default function TabContent() {
         discovered, your account will be permanently banned.
       </CustomText> */}
       <View style={{width: '100%', marginBottom: scale(30)}}>
-        <Button title={'Post'} onPress={ok} />
+        <Button title={'Post'} onPress={handleSubmit(ok)} />
       </View>
     </View>
   );
@@ -632,6 +651,7 @@ const styles = StyleSheet.create({
   },
   textArea: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     borderWidth: scale(2),
     backgroundColor: '#E3E3E3',
     borderColor: '#E3E3E3',
