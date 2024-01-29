@@ -57,7 +57,6 @@ export default function TabSelect({
               style={[
                 styles.tab,
                 tab === item ? styleTabActive : styleTabDefault,
-
                 {
                   height: '100%',
                   backgroundColor:
@@ -69,7 +68,7 @@ export default function TabSelect({
               styleText={{
                 color:
                   tab === item
-                    ? styleTabActive?.color || '#000'
+                    ? styleTabActive?.color || '#F0B90B'
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
               }}

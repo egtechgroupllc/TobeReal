@@ -55,7 +55,7 @@ export default function HeaderAvatar({
 
 const styles = StyleSheet.create({
   head: {
-    marginTop: scale(50),
+    marginTop:scale(50),
     marginLeft: scale(40),
   },
   wrapper: {

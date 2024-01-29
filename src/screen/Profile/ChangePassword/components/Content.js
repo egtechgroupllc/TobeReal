@@ -7,7 +7,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
+import {useForm} from 'react-hook-form';
+import {requireField} from '../../../../utils/validate';
 export default function Content() {
+  const {control, handleSubmit} = useForm();
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -22,51 +25,55 @@ export default function Content() {
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text,
-          marginBottom: scale(10),
-          marginTop: scale(60),
+      <CustomInput
+        styleTextLabel={{
+          ...styles.text1,
           color: COLORS.black,
-        }}>
-        Old password
-      </CustomText>
-      <CustomInput
-        style={{
-          width: '90%',
-          marginBottom: scale(25),
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
+          marginTop: scale(60),
         }}
-      />
-      <CustomText
-        textType="medium"
-        style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
-        New password
-      </CustomText>
-      <CustomInput
-        style={{
-          width: '90%',
-          marginBottom: scale(25),
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
+        label="Old password"
+        control={control}
+        name="oldpassword"
+        // placeholder="Enter the land area"
+        rules={{
+          ...requireField('This field is required'),
         }}
+        style={styles.textInput}
       />
-      <CustomText
-        textType="medium"
-        style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
-        Confirm password
-      </CustomText>
       <CustomInput
-        style={{
-          width: '90%',
-          marginBottom: scale(25),
-          height: scale(40),
-          backgroundColor: '#E3E3E3',
+        styleTextLabel={{
+          ...styles.text1,
+          color: COLORS.black,
+          marginTop: scale(20),
         }}
+        label="New password"
+        control={control}
+        name="newpassword"
+        // placeholder="Enter the land area"
+        rules={{
+          ...requireField('This field is required'),
+        }}
+        style={styles.textInput}
       />
-      <Button title={'ok'} onPress={ok} />
+      <View style={{marginBottom: scale(20), width: '100%'}}>
+        <CustomInput
+          styleTextLabel={{
+            ...styles.text1,
+            color: COLORS.black,
+            marginTop: scale(20),
+          }}
+          label="Confirm password"
+          control={control}
+          name="confirmpassword"
+          // placeholder="Enter the land area"
+          rules={{
+            ...requireField('This field is required'),
+          }}
+          style={styles.textInput}
+        />
+      </View>
+
+      <Button title={'ok'} onPress={handleSubmit(ok)} />
     </View>
   );
 }
@@ -97,5 +104,12 @@ const styles = StyleSheet.create({
   line: {
     height: scale(1),
     backgroundColor: 'black',
+  },
+  textInput: {
+    backgroundColor: '#E3E3E3',
+    marginTop: scale(10),
+    borderRadius: scale(5),
+    // borderWidth: scale(0),
+    width: '90%',
   },
 });

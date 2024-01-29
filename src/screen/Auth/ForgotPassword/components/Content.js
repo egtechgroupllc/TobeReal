@@ -18,7 +18,10 @@ import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Wrapper from '../../components/Wrapper';
+import {useForm} from 'react-hook-form';
+import { requireField } from '../../../../utils/validate';
 export default function Content() {
+  const {control,handleSubmit} = useForm();
   const [phase, setPhase] = useState(1);
   const navigation = useNavigation();
   const gotoLogin = () => {
@@ -34,12 +37,12 @@ export default function Content() {
     <View style={styles.container}>
       {phase == 1 && (
         <View>
-          <View style={{marginTop: scale(150), alignItems: 'center'}}>
+          <View style={{marginTop: scale(50), alignItems: 'center'}}>
             <Image
-              source={images.logo}
+              source={images.logo1}
               style={{
                 width: '40%',
-                height: scale(55),
+                height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
@@ -47,15 +50,21 @@ export default function Content() {
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
+          <View style={{marginBottom: scale(10)}}>
           <CustomInput
             placeholder="Email"
             style={{
               width: scale(312),
-              marginBottom: scale(25),
               height: scale(48),
             }}
+            control={control}
+            name="email"
+            rules={{
+              ...requireField('This field is required'),
+            }}
           />
-          <TouchableOpacity onPress={setPhase2}>
+          </View>
+          <TouchableOpacity onPress={handleSubmit(setPhase2)}>
             <LinearGradient
               colors={['#F7E75A', '#FFC702']}
               start={{x: 0, y: 0}}
@@ -70,12 +79,12 @@ export default function Content() {
       )}
       {phase == 2 && (
         <View>
-          <View style={{marginTop: scale(150), alignItems: 'center'}}>
+        <View style={{marginTop: scale(50), alignItems: 'center'}}>
             <Image
-              source={images.logo}
+              source={images.logo1}
               style={{
                 width: '40%',
-                height: scale(55),
+                height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
@@ -83,15 +92,22 @@ export default function Content() {
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
+          <View style={{marginBottom: scale(10)}}>
           <CustomInput
+            control={control}
+            name="code"
+            rules={{
+              ...requireField('This field is required'),
+            }}
             placeholder="CODE"
             style={{
               width: scale(312),
-              marginBottom: scale(25),
+              // marginBottom: scale(25),
               height: scale(48),
             }}
           />
-          <TouchableOpacity onPress={setPhase3}>
+          </View>
+          <TouchableOpacity onPress={handleSubmit(setPhase3)}>
             <LinearGradient
               colors={['#F7E75A', '#FFC702']}
               start={{x: 0, y: 0}}
@@ -106,12 +122,12 @@ export default function Content() {
       )}
       {phase == 3 && (
         <View>
-          <View style={{marginTop: scale(150), alignItems: 'center'}}>
+      <View style={{marginTop: scale(50), alignItems: 'center'}}>
             <Image
-              source={images.logo}
+              source={images.logo1}
               style={{
                 width: '40%',
-                height: scale(55),
+                height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
@@ -119,23 +135,37 @@ export default function Content() {
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
+          <View style={{marginBottom: scale(10)}}>
           <CustomInput
+           control={control}
+           name="password"
+           rules={{
+             ...requireField('This field is required'),
+           }}
             placeholder="Password"
             style={{
               width: scale(312),
-              marginBottom: scale(25),
               height: scale(48),
+              marginBottom:scale(5)
             }}
           />
+          </View>
+          <View style={{marginBottom: scale(10)}}>
           <CustomInput
+           control={control}
+           name="passwordconfirm"
+           rules={{
+             ...requireField('This field is required'),
+           }}
             placeholder="Confirm Password"
             style={{
               width: scale(312),
-              marginBottom: scale(25),
               height: scale(48),
             }}
           />
-          <TouchableOpacity onPress={setPhase3}>
+          </View>
+         
+          <TouchableOpacity onPress={handleSubmit(setPhase3)}>
             <LinearGradient
               colors={['#F7E75A', '#FFC702']}
               start={{x: 0, y: 0}}
@@ -191,7 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     height: scale(48),
     justifyContent: 'center',
-    marginTop: scale(20),
+    marginTop: scale(10),
   },
   line: {
     height: scale(1),

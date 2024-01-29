@@ -20,7 +20,7 @@ export default function MainWrapper({
 
   return (
     <ImageBackground
-      source={images.background}
+      source={images.background1}
       resizeMode="stretch"
       style={[
         {flex: 1, backgroundColor: '#fff'},

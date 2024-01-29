@@ -386,8 +386,7 @@ export default function TabContent() {
       <View
         style={{
           flexDirection: 'row',
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
+          alignItems:'center',
         }}>
            <CustomInput
         styleTextLabel={{
@@ -406,11 +405,11 @@ export default function TabContent() {
           height: scale(40),
           backgroundColor: '#E3E3E3',
           borderRadius: scale(5),
-          borderWidth: scale(0),
-          width: '40%',
+          // borderWidth: scale(0),
+          width: '90%',
         }}
       />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             height: scale(40),
             paddingHorizontal: scale(15),
@@ -432,7 +431,7 @@ export default function TabContent() {
             USD
           </CustomText>
           <IconDown />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <CustomInput
         styleTextLabel={{
@@ -677,7 +676,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3E3E3',
     marginTop: scale(10),
     borderRadius: scale(5),
-    borderWidth: scale(0),
+    // borderWidth: scale(0),
     width: '90%'
   },
   line: {
@@ -702,7 +701,7 @@ const styles = StyleSheet.create({
   textArea: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    borderWidth: scale(2),
+    // borderWidth: scale(2),
     backgroundColor: '#E3E3E3',
     borderColor: '#E3E3E3',
     width: '90%',

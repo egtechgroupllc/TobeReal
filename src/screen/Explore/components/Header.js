@@ -9,6 +9,7 @@ import {useAuthentication} from '../../../hooks/useAuthentication';
 export default function Header() {
   return (
     <View style={styles.wrapper}>
+      {/* <View></View> */}
       <CustomImage
         source={images.logo}
         style={styles.img}
@@ -30,16 +31,16 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   wrapper: {
+    // justifyContent:'space-between',
     flexDirection: 'row',
     alignItems: 'center',
     width: WIDTH.widthContain,
     alignSelf: 'center',
     height: scale(56),
-    columnGap: scale(20),
   },
 
   img: {
-    height: scale(43),
+    height: scale(55),
     width: '40%',
   },
 });

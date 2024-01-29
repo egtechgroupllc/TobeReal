@@ -84,6 +84,7 @@ export default function Content() {
         control={control}
         sizeInput="medium"
         rules={{
+          ...requireField('This field is required'),
           ...confirmField(
             watch('password'),
             'The entered password does not match. Try again.',

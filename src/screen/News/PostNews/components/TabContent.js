@@ -37,8 +37,8 @@ export default function TabContent() {
       style={{
         width: '90%',
         alignItems:'center',
-        marginTop: scale(30),
-        alignSelf:'center'
+        marginTop: scale(100),
+        alignSelf:'center',
       }}>
          <CustomText
             textType="bold"
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: scale(16),
     rowGap: scale(14),
+  
   },
   category: {
     rowGap: scale(14),

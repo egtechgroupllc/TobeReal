@@ -11,9 +11,9 @@ export default function PostNewsScreen() {
   const goBack = () => {};
   const upgrade = () => {};
   return (
-    <MainWrapper>
-      <Header/>
+    <MainAuth>
+      {/* <Header/> */}
       <TabContent/>
-    </MainWrapper>
+    </MainAuth>
   );
 }

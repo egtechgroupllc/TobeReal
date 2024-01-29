@@ -5,6 +5,7 @@ import AvatarImage from './components/AvatarImage';
 import Content from './components/Content';
 import Bottom from './components/Bottom';
 import HeaderAvatar from './components/HeaderAvatar';
+import Header from '../Explore/components/Header';
 
 export default function ProfileScreen() {
   const goBack = () => {};

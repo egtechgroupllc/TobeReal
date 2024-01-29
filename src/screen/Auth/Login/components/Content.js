@@ -93,7 +93,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: scale(50),
+    marginTop: scale(20),
     width: '100%',
   },
   content: {

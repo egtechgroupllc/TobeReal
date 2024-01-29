@@ -4,16 +4,16 @@ import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import Content from '../Register/components/Content';
 import Wrapper from './Wrapper';
 import {IconHi} from '../../../assets/icon/Icon';
-import MainWrapper from '../../../components/MainWrapper';
+import MainAuth from '../../../components/MainAuth';
 
-export default function MainAuth({children, heading, subHeading}) {
+export default function Auth({children, heading, subHeading}) {
   return (
-    <MainWrapper>
+    <MainAuth>
       <View style={styles.container}>
         <View
           style={{
             flexDirection: 'row',
-            marginTop: scale(50),
+            marginTop: scale(90),
             alignItems: 'center',
             flex: 1,
           }}>
@@ -21,7 +21,7 @@ export default function MainAuth({children, heading, subHeading}) {
         </View>
         {children}
       </View>
-    </MainWrapper>
+    </MainAuth>
   );
 }
 
