@@ -7,7 +7,7 @@ export default function SimilarApartmentsNearby() {
   return (
     <WrapperContent
       heading={'Browse Similar Apartments Nearby'}
-      dataList={[...Array(4)]}
+      dataList={[...Array(4)].map(item => '1')}
       renderItem={({item, index}) => (
         <BoxPlaceItem
           key={`key-${item}-${index}`}
