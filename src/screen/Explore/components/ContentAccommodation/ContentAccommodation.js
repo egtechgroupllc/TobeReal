@@ -52,7 +52,7 @@ export default function ContentAccommodation() {
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
         heading="Stay Monthly For Cheaper Prices 🤑"
-        subHeading={`Disc. up to $${formatPrice(1000000)}`}
+        subHeading={`Disc. up to ${formatPrice(1000000)}`}
         styleWrapper={{backgroundColor: 'transparent'}}>
         <FlatList
           horizontal

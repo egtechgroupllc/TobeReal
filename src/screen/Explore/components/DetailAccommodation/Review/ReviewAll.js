@@ -1,20 +1,30 @@
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {COLORS, scale} from '../../../../../assets/constants';
-import FilterReView from './FilterReView';
 import ItemBoxReview from './ItemBoxReview';
 import ReviewOverview from './ReviewOverview';
+import FilterSort from './FilterSort';
 
 export default function ReviewAll({valueSort, onSort}) {
   return (
-    <BottomSheetScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{paddingTop: scale(10)}}>
+    <View>
       <ReviewOverview />
 
-      <FilterReView onSort={onSort} sort={valueSort} />
+      <FilterSort
+        isSelectAll
+        onSort={onSort}
+        sort={valueSort}
+        listFill={[
+          {
+            text: 'All',
+          },
+          {
+            text: 'Have pictures',
+          },
+        ]}
+      />
 
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -38,7 +48,7 @@ export default function ReviewAll({valueSort, onSort}) {
           />
         )}
       />
-    </BottomSheetScrollView>
+    </View>
   );
 }
 

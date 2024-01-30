@@ -22,16 +22,16 @@ export default function Header({
     setActiveOption(option === activeOption ? 'Deposit' : option);
   };
   return (
-    <View >
+    <View>
       <View style={[styleWrapper]}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            alignSelf:'center',
+            alignSelf: 'center',
             marginTop: scale(10),
-            width:'90%', 
+            width: '90%',
           }}>
           {goback && (
             <TouchableOpacity onPress={onPress}>

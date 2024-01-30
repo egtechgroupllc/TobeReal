@@ -6,6 +6,7 @@ import {
   IconBookings,
   IconExplore,
   IconHeart,
+  IconMapView,
   IconNews,
   IconProfile,
   IconProfileInactive,
@@ -18,6 +19,7 @@ import NavigationPromotion from './NavigationPromotion';
 import NavigationWishList from './NavigationWishList';
 import {scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
+import {HomeMapScreen} from '../components';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,13 +65,22 @@ export default function BottomTab() {
           tabBarIcon: ({focused}) => <IconPromotion active={focused} />,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="WishList"
         component={NavigationWishList}
         options={{
           tabBarBadge: 3,
           title: 'Wish List',
           tabBarIcon: ({focused}) => <IconHeart fill={focused && '#F0B90B'} />,
+        }}
+      /> */}
+      <Tab.Screen
+        name="Map"
+        component={HomeMapScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <IconMapView fill={focused && '#F0B90B'} />
+          ),
         }}
       />
       <Tab.Screen

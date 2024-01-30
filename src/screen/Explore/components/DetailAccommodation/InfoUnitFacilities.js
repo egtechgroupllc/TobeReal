@@ -1,9 +1,10 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 import WrapperContent from '../WrapperContent';
 import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconHouse} from '../../../../assets/icon/Icon';
+import BottomSheet from '../../../../components/BottomSheet';
 
 const listFacilities = [
   'City View',
@@ -21,10 +22,12 @@ const listFacilities = [
 ];
 
 export default function InfoUnitFacilities() {
+  const bottomSheetRef = useRef();
+
   return (
     <WrapperContent
       isSeeAll
-      onPressSeeAll={() => console.log(1)}
+      onPressSeeAll={() => bottomSheetRef.current.open()}
       heading="Unit Facilities"
       styleContent={{
         paddingHorizontal: scale(16),
@@ -48,7 +51,7 @@ export default function InfoUnitFacilities() {
       </View>
 
       <View style={styles.content}>
-        {listFacilities.map((item, index) => (
+        {listFacilities.slice(0, 10).map((item, index) => (
           <View key={`key-${item}-${index}`} style={styles.itemFac}>
             <View style={styles.dot} />
             <CustomText
@@ -61,6 +64,36 @@ export default function InfoUnitFacilities() {
           </View>
         ))}
       </View>
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={['50%', '86%']}
+        titleIndicator="Unit Facilities">
+        <View style={styles.content}>
+          {[
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+            ...listFacilities,
+          ].map((item, index) => (
+            <View key={`key-${item}-${index}`} style={styles.itemFac}>
+              <View style={styles.dot} />
+              <CustomText
+                textType="regular"
+                style={{
+                  fontSize: SIZES.xMedium,
+                }}>
+                {item}
+              </CustomText>
+            </View>
+          ))}
+        </View>
+      </BottomSheet>
     </WrapperContent>
   );
 }

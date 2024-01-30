@@ -5,7 +5,13 @@ import BottomSheetMain, {
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomText from './CustomText';
 import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
@@ -15,13 +21,12 @@ const BottomSheet = (
   {
     snapPoints,
     snapPointsChild,
-    dataList,
-    renderItem,
-    positionList = 'top',
     styleContent,
     children,
     style,
     handleStyle,
+    headerComponent,
+    styleHeaderWrapper,
     titleIndicator,
     isLine,
     handleChildBottom,
@@ -89,82 +94,64 @@ const BottomSheet = (
           onClose={() => handleClose()}
           title={titleIndicator}
           style={handleStyle}
+          headerComponent={headerComponent}
+          styleHeaderWrapper={styleHeaderWrapper}
         />
       )}
 
-      <View
-        style={[
-          styles.contentContainer,
-          {
-            flexDirection:
-              positionList === 'bottom' ? 'column-reverse' : 'column',
-            paddingBottom: insets.bottom + scale(10),
-          },
-          styleContent,
-        ]}>
-        {children}
-
-        {dataList &&
-          (dataList[0] ? (
-            <BottomSheetFlatList
-              data={dataList}
-              keyExtractor={item => item}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{}}
-              renderItem={dataList && renderItem}
-            />
-          ) : (
-            <View style={styles.boxNotFound}>
-              <IconSearch
-                style={{
-                  width: scale(30),
-                  height: scale(30),
-                }}
-                fill={COLORS.textSub}
-              />
-              <CustomText
-                textType="semiBold"
-                style={{
-                  fontSize: SIZES.medium,
-                }}>
-                No results found
-              </CustomText>
-            </View>
-          ))}
-      </View>
-      {handleChildBottom && (
+      <BottomSheetScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingVertical: scale(16),
+          paddingBottom: insets.bottom + scale(10),
+        }}>
+        <View style={[styles.contentContainer, styleContent]}>{children}</View>
+      </BottomSheetScrollView>
+      {bottomSheetChildRef && (
         <BottomSheetMain
           ref={bottomSheetChildRef}
           snapPoints={_snapPointsChild}
           enablePanDownToClose
           backdropComponent={BottomSheetBackdrop}>
-          {handleChildBottom()}
+          {handleChildBottom && handleChildBottom()}
         </BottomSheetMain>
       )}
     </BottomSheetModal>
   );
 };
 
-const HandleIndicator = ({onClose, title, style}) => (
-  <View style={[styles.headerHandle, style]}>
-    <TouchableOpacity style={styles.icon} onPress={onClose} activeOpacity={0.6}>
-      <IconX
-        style={{
-          width: scale(20),
-          height: scale(20),
-        }}
-      />
-    </TouchableOpacity>
-    <CustomText
-      textType="semiBold"
-      style={[
-        {
-          fontSize: style?.fontSize || SIZES.xMedium,
-        },
-        style?.color && {color: style?.color},
-      ]}>
-      {title || 'Title'}
-    </CustomText>
+const HandleIndicator = ({
+  onClose,
+  title,
+  headerComponent,
+  styleHeaderWrapper,
+  style,
+}) => (
+  <View style={[styles.wrapperHeader, styleHeaderWrapper]}>
+    <View style={[styles.headerHandle, style]}>
+      <TouchableOpacity
+        style={styles.icon}
+        onPress={onClose}
+        activeOpacity={0.6}>
+        <IconX
+          style={{
+            width: scale(20),
+            height: scale(20),
+          }}
+        />
+      </TouchableOpacity>
+      <CustomText
+        textType="semiBold"
+        style={[
+          {
+            fontSize: style?.fontSize || SIZES.xMedium,
+          },
+          style?.color && {color: style?.color},
+        ]}>
+        {title || 'Title'}
+      </CustomText>
+    </View>
+    {headerComponent}
   </View>
 );
 
@@ -172,18 +159,17 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
-  boxNotFound: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '25%',
+
+  // Header
+  wrapperHeader: {
     rowGap: scale(10),
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    paddingVertical: scale(12),
   },
   headerHandle: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: scale(10),
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   icon: {
     alignItems: 'center',

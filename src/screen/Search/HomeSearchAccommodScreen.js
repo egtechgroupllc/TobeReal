@@ -18,7 +18,11 @@ export default function HomeSearchAccommodScreen() {
 
   return (
     <View style={styles.wrapper}>
-      <HeaderBar />
+      <HeaderBar
+        styleWrapper={{
+          height: scale(120),
+        }}
+      />
 
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />

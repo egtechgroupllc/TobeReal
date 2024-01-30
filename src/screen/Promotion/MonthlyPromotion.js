@@ -9,7 +9,7 @@ export default function MonthlyPromotion() {
   return (
     <WrapperContent
       heading={'Monthly Promo'}
-      dataList={[...Array(4)]}
+      dataList={[...Array(4)].map(item => '321')}
       isList
       renderItem={({item}) => (
         <PromotionCard

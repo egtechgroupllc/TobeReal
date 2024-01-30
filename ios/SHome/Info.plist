@@ -35,6 +35,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow access to the camera to take pictures</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please allow location access to search for locations near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow location access to search for locations near you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -16,6 +16,7 @@ export default function SearchChooseLocation({onPress}) {
     <View style={styles.search}>
       <View>
         <CustomInput
+          autoFocus
           iconLeft={IconSearch}
           placeholder="Where would you like to go?"
         />
@@ -54,7 +55,7 @@ export default function SearchChooseLocation({onPress}) {
         styesTextTitle={{
           fontSize: SIZES.small,
         }}
-        onPress={value => onPress(JSON.stringify(value?.index))}
+        onPress={value => onPress(value.item)}
       />
     </View>
   );

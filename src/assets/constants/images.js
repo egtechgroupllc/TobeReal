@@ -19,4 +19,5 @@ export default {
   voucher25: require('../images/voucher25.png'),
   voucher50: require('../images/voucher50.png'),
   emptyWish: require('../images/emptyWish.png'),
+  contactHelp: require('../images/contactHelp.png'),
 };

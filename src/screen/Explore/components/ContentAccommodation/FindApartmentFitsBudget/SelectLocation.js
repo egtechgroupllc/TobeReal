@@ -8,11 +8,14 @@ import {
   IconCheckBox,
   IconDown,
   IconMarker,
+  IconSearch,
   IconX,
 } from '../../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../../components';
 import BottomSheet from '../../../../../components/BottomSheet';
 import CustomText from '../../../../../components/CustomText';
+import {FlatList} from 'react-native-gesture-handler';
+import EmptyData from '../../../../../components/EmptyData';
 
 const listLocation = [
   'Jakarta',
@@ -29,7 +32,7 @@ const listLocation = [
   'Yogyakarta (Jogja)',
   'Semarang',
 ];
-export default function SelectLocation() {
+export default function SelectLocation({control, name}) {
   const [select, setSelect] = useState(listLocation[0]);
   const [search, setSearch] = useState('');
   const {dismiss} = useBottomSheetModal();
@@ -37,7 +40,7 @@ export default function SelectLocation() {
 
   const dataList = useMemo(() => {
     const result = listLocation.filter(item =>
-      item.toLowerCase().includes(search.toLowerCase()),
+      item.toLowerCase().trim().includes(search.toLowerCase().trim()),
     );
     return result;
   }, [search]);
@@ -45,6 +48,8 @@ export default function SelectLocation() {
   return (
     <View>
       <CustomInput
+        control={control}
+        name={name}
         defaultValue={select}
         iconLeft={IconMarker}
         iconRight={IconDown}
@@ -58,43 +63,60 @@ export default function SelectLocation() {
         titleIndicator={'Select Location'}
         ref={bottomSheetRef}
         dataList={dataList}
-        handleStyle={{
-          borderBottomWidth: 0,
-        }}
-        renderItem={({item, index}) => (
-          <CustomButton
-            style={[
-              index !== 0 && {
-                borderTopWidth: 1,
-              },
-              styles.item,
-            ]}
-            text={item}
-            onPress={() => {
-              setSelect(item);
-              dismiss();
-            }}
-            iconRight={select === item && IconCheckBox}
-            styleText={{
-              color: select === item ? COLORS.primary : COLORS.text,
-            }}
+        headerComponent={
+          <View style={styles.headerSheet}>
+            <BottomSheetTextInput
+              style={styles.input}
+              placeholder="Search"
+              onChangeText={setSearch}
+              value={search}
+            />
+          </View>
+        }>
+        {dataList[0] ? (
+          <FlatList
+            data={dataList}
+            keyExtractor={item => item}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => (
+              <CustomButton
+                style={[
+                  index !== 0 && {
+                    borderTopWidth: 1,
+                  },
+                  styles.item,
+                ]}
+                text={item}
+                onPress={() => {
+                  setSelect(item);
+                  dismiss();
+                }}
+                iconRight={select === item && IconCheckBox}
+                styleText={{
+                  color: select === item ? COLORS.primary : COLORS.text,
+                }}
+              />
+            )}
           />
-        )}>
-        <View style={styles.headerSheet}>
-          <BottomSheetTextInput
-            style={styles.input}
-            placeholder="Search"
-            onChangeText={setSearch}
-          />
-        </View>
+        ) : (
+          <EmptyData desc={'No results found'} />
+        )}
       </BottomSheet>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  boxNotFound: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '25%',
+    rowGap: scale(10),
+  },
   item: {
-    borderColor: '#eee',
+    borderTopColor: '#eee',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -105,10 +127,7 @@ const styles = StyleSheet.create({
   },
   headerSheet: {
     paddingHorizontal: scale(20),
-    paddingVertical: scale(10),
     backgroundColor: COLORS.white,
-    ...SHADOW,
-    rowGap: scale(10),
     width: '100%',
   },
   header: {

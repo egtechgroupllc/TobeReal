@@ -24,10 +24,11 @@ export default function BoxPlaceItem({
   rental = 'month',
   multiPrice,
   isUnitAvailable,
+  styleWrapper,
 }) {
   const {navigate, dispatch} = useNavigation();
   return (
-    <View>
+    <View style={styles.wrapper}>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() =>
@@ -41,13 +42,15 @@ export default function BoxPlaceItem({
           styles.wrapper,
           {
             width: scale(400 / seeViewNumber),
+            // height: scale(200),
           },
+          styleWrapper,
           SHADOW,
         ]}>
         <View
           style={{
             width: '100%',
-            height: scale(150),
+            height: styleWrapper?.height ? '60%' : scale(150),
           }}>
           <Ribbon text="Promotion 30%  🏨" />
 
@@ -66,6 +69,7 @@ export default function BoxPlaceItem({
 
         <View
           style={{
+            flex: 1,
             marginTop: scale(18),
             margin: scale(10),
             rowGap: scale(4),
@@ -90,7 +94,7 @@ export default function BoxPlaceItem({
                       justifyContent: 'flex-start',
                     }}>
                     <CustomText textType="regular" style={styles.textDiscount}>
-                      ${formatPrice(10000000)}{' '}
+                      {formatPrice(10000000)}{' '}
                     </CustomText>
 
                     <CustomText
@@ -113,7 +117,7 @@ export default function BoxPlaceItem({
                       isStar && {fontSize: SIZES.xMedium},
                       isDiscount && {color: COLORS.primary},
                     ]}>
-                    ${formatPrice(10000000)}{' '}
+                    {formatPrice(10000000)}{' '}
                     <CustomText
                       textType="regular"
                       style={{fontSize: SIZES.xSmall}}>
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   },
   line: {
     backgroundColor: '#ccc',
-    flex: 1,
+    width: '100%',
     height: 1,
     marginVertical: scale(3),
   },

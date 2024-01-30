@@ -4,14 +4,22 @@ import {COLORS, WIDTH, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
 const funcFallBack = () => {};
-export default function Category({data = [], onPress = funcFallBack}) {
-  const [select, setSelect] = useState(data[1]);
+export default function Category({
+  data = [],
+  noSelect,
+  onPress = funcFallBack,
+  onChange = funcFallBack,
+  styleWrapper,
+  styleContent,
+  isShadow = true,
+}) {
+  const [select, setSelect] = useState(!noSelect && data[1]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
 
   useEffect(() => {
-    if (select && onPress) {
-      onPress(select);
+    if (select && onChange) {
+      onChange(select);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
@@ -22,12 +30,14 @@ export default function Category({data = [], onPress = funcFallBack}) {
         width: '100%',
         alignItems: 'center',
         minHeight: scale(36),
+        ...styleWrapper,
       }}>
       <FlatList
         data={data}
         contentContainerStyle={{
           columnGap: scale(10),
           paddingHorizontal: scale(16),
+          ...styleContent,
         }}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -36,7 +46,7 @@ export default function Category({data = [], onPress = funcFallBack}) {
           <CustomButton
             key={`key-${item}-${index}`}
             text={item}
-            isShadow
+            isShadow={isShadow}
             style={[
               {
                 width: 'auto',
@@ -51,7 +61,7 @@ export default function Category({data = [], onPress = funcFallBack}) {
             ]}
             onPress={() => {
               setSelect(item);
-              // onPress(item);
+              onPress(item);
             }}
           />
         )}

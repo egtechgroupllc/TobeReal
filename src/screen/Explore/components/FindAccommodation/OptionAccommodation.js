@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  FlatList,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 
@@ -17,55 +10,69 @@ export default function OptionAccommodation({
   styleWrapper,
   styleContent,
   styleOption,
-  isSelectOnly,
+  multiSelect,
+  isTextSub,
+  keyTextView,
+  keyTextSub,
+  isSelectAll,
   isShaDow,
   isSelectForIndex,
-  isNoAutoSelect,
+  noSelectDefault,
   select,
   onSelect,
+  onChange,
 }) {
+  const _keyTextView = keyTextView || 'text';
+  const _keyTextSub = keyTextSub || 'subText';
+
   const valueDefault = useMemo(
-    () => (isSelectForIndex ? 0 : data[0].text),
-    [data[0].text],
+    () => !noSelectDefault && (isSelectForIndex ? 0 : data[0][_keyTextView]),
+    [data[0][_keyTextView]],
   );
+
   const valueDefaultView = useCallback(
-    (item, index) => (isSelectForIndex ? index : item?.text),
+    (item, index) => (isSelectForIndex ? index : item?.[_keyTextView]),
     [],
   );
 
   const [option, setOption] = useState([valueDefault]);
   useEffect(() => {
-    setOption([select || valueDefault]);
-  }, [valueDefault, select]);
+    if (select) setOption([select]);
+  }, [select]);
+
+  useEffect(() => {
+    if (valueDefault) setOption([valueDefault]);
+  }, [valueDefault]);
 
   const handleSelectOption = value => {
+    if (!multiSelect) {
+      setOption([value]);
+      onSelect && onSelect(value);
+      return;
+    }
+
     setOption(prev => {
       const check = option.includes(value);
 
-      if (value === valueDefault) {
+      if (isSelectAll && value === valueDefault) {
         return [value];
       }
       if (check) {
-        return option.filter(item => item !== value && item !== valueDefault);
+        return prev.filter(item => item !== value);
       } else {
-        const result = prev.filter(item => item !== valueDefault);
-        return [...result, value];
+        const resultPrev = !isSelectAll
+          ? prev
+          : prev.filter(item => item !== valueDefault);
+
+        onSelect && onSelect([...resultPrev, value]);
+        return [...resultPrev, value];
       }
     });
   };
 
-  const handleSelectOnly = value => {
-    setOption([value]);
-    onSelect(value);
-  };
-
   useEffect(() => {
-    if (!isSelectOnly && option.length === 0) {
-      setOption([valueDefault]);
-    }
-    if (!isNoAutoSelect && onSelect) {
-      onSelect(isSelectOnly ? option[0] : option);
-      setOption(option);
+    if (onChange) {
+      onChange(!multiSelect ? option[0] : option);
     }
   }, [option]);
 
@@ -79,11 +86,10 @@ export default function OptionAccommodation({
         scrollEnabled={data.length > 3}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            key={`key-${item?.text}-${index}`}
+            key={`key-${item?.[_keyTextView]}-${index}`}
             activeOpacity={0.7}
             style={[
               styles.option,
-              styleOption,
               option.includes(valueDefaultView(item, index)) &&
                 !outline && {
                   borderBottomWidth: 2,
@@ -97,13 +103,10 @@ export default function OptionAccommodation({
               option.includes(valueDefaultView(item, index)) &&
                 outline &&
                 styles.outline,
-              styleContent?.height && {height: styleContent?.height},
+              styleOption,
+              // styleContent?.height && {height: styleContent?.height},
             ]}
-            onPress={() =>
-              isSelectOnly
-                ? handleSelectOnly(valueDefaultView(item, index))
-                : handleSelectOption(valueDefaultView(item, index))
-            }>
+            onPress={() => handleSelectOption(valueDefaultView(item, index))}>
             {item?.icon && (
               <item.icon
                 style={{
@@ -118,17 +121,33 @@ export default function OptionAccommodation({
               />
             )}
 
-            {item?.text && (
-              <CustomText
-                style={{
-                  color: option.includes(valueDefaultView(item, index))
-                    ? COLORS.primary
-                    : COLORS.text,
-                  paddingHorizontal: scale(10),
-                }}>
-                {item?.text}
-              </CustomText>
-            )}
+            <View
+              style={{
+                paddingHorizontal: scale(10),
+                alignItems: 'center',
+              }}>
+              {item?.[_keyTextView] && (
+                <CustomText
+                  textType={isTextSub && 'semiBold'}
+                  style={{
+                    color: option.includes(valueDefaultView(item, index))
+                      ? COLORS.primary
+                      : COLORS.text,
+                  }}>
+                  {item?.[_keyTextView]}
+                </CustomText>
+              )}
+              {isTextSub && (
+                <CustomText
+                  style={{
+                    color: option.includes(valueDefaultView(item, index))
+                      ? COLORS.primary
+                      : COLORS.text,
+                  }}>
+                  {item?.[_keyTextSub]}
+                </CustomText>
+              )}
+            </View>
           </TouchableOpacity>
         )}
       />

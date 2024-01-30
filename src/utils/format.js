@@ -1,24 +1,30 @@
 import {addDays, format} from 'date-fns';
 
-const decimalPlaces = 2;
-export const formatPrice = (number = 0, decimal) => {
-  const numberString = number ? number.toString() : '0';
-  const dotIndex = numberString.indexOf('.');
-
-  if (dotIndex !== -1) {
-    const decimalPart = numberString.slice(
-      dotIndex + 1,
-      dotIndex + 1 + (decimal || decimalPlaces),
-    );
-    const integerPart = numberString
-      .slice(0, dotIndex)
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    const result = integerPart + '.' + decimalPart;
-
-    return result;
-  } else {
-    return numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const formatPrice = (
+  price = 0,
+  {
+    showCurrency = true,
+    currency = '',
+    locales = 'en-US',
+    decimalPlaces = 3,
+  } = {},
+) => {
+  if (!price && price !== 0) {
+    return '';
   }
+  // Remove non-digit characters from price
+  const numericPrice = parseFloat(price.toString().replace(/[^\d.-]/g, ''));
+
+  let option = {
+    style: 'currency',
+    currency: currency || locales.startsWith('vi') ? 'VND' : 'USD',
+    maximumSignificantDigits: decimalPlaces,
+  };
+  !showCurrency && delete option.style;
+
+  const numberFormat = new Intl.NumberFormat(locales, option);
+
+  return numberFormat.format(numericPrice);
 };
 
 export function formatNumber(num) {

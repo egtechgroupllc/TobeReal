@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {CustomButton} from '.';
-import {COLORS, SHADOW, scale} from '../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
 import {IconBorderBottom} from '../assets/icon/Icon';
 
 const funcFallBlack = () => {};
@@ -71,6 +71,7 @@ export default function TabSelect({
                     ? styleTabActive?.color || '#F0B90B'
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
+                fontSize: SIZES.xMedium,
               }}
               onPress={() => {
                 setTab(item);

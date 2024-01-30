@@ -20,14 +20,28 @@ export default function SearchRecent({onPress}) {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[...Array(10)]}
+        data={[
+          'Jakarta',
+          'Bandung',
+          'Tangerang',
+          'Bekasi',
+          'Depok',
+          'Surabaya',
+          'Medan',
+          'Bogor',
+          'Makassar (Ujung Pandang)',
+          'Sumedang',
+          'Sidoarjo',
+          'Yogyakarta (Jogja)',
+          'Semarang',
+        ]}
         contentContainerStyle={{
           paddingHorizontal: scale(16),
         }}
         renderItem={({item, index}) => (
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => onPress(JSON.stringify(index))}
+            onPress={() => onPress(item)}
             style={[styles.searchItem, {borderTopWidth: index === 0 ? 0 : 1}]}>
             <IconHistory
               fill={COLORS.textSub}
@@ -41,7 +55,7 @@ export default function SearchRecent({onPress}) {
               style={{
                 flex: 1,
               }}>
-              {index} Around meAroundx
+              {item}
             </CustomText>
           </TouchableOpacity>
         )}

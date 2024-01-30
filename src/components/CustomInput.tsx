@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   Control,
   Controller,
@@ -8,7 +8,6 @@ import {
   useForm,
 } from 'react-hook-form';
 import {
-  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
@@ -18,9 +17,10 @@ import {
 } from 'react-native';
 
 import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
+import {IconError} from '../assets/icon/Icon';
 import {arrayToObject} from '../utils/arrayToObject';
-import {IconAdd, IconError} from '../assets/icon/Icon';
 import CustomText from './CustomText';
+import {formatPrice} from '../utils/format';
 
 type CustomInputProps = {
   control?: Control<FieldValues>;
@@ -37,6 +37,7 @@ type CustomInputProps = {
   styleIcon?: TextStyle;
   styleText?: TextStyle;
   styleTextLabel?: TextStyle;
+  enableFormatNum?: boolean;
   sizeInput?: 'small' | 'medium' | 'large';
   onPress?: () => void;
   onPressIconRight?: () => void;
@@ -56,6 +57,7 @@ export default function CustomInput({
   rules,
   name,
   label,
+  enableFormatNum,
   onPress,
   onPressIconRight,
   onPressIconLeft,
@@ -81,7 +83,10 @@ export default function CustomInput({
             styles.wrapper,
 
             // propStyle?.height && {height: propStyle?.height},
-            propStyle?.width && {width: propStyle?.width},
+
+            propStyle?.flex
+              ? {flex: propStyle?.flex}
+              : propStyle?.width && {width: propStyle?.width},
           ]}>
           {label && <CustomText style={styleTextLabel}>{label}</CustomText>}
           <TouchableOpacity
@@ -115,7 +120,11 @@ export default function CustomInput({
               {...props}
               onChangeText={onChange}
               onBlur={onBlur}
-              value={value}
+              value={
+                enableFormatNum
+                  ? formatPrice(value, {showCurrency: false})
+                  : value
+              }
               style={[styles.input, styleText]}
               pointerEvents={!!onPress ? 'none' : 'auto'}
             />

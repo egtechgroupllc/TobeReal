@@ -12,6 +12,7 @@ import NavigationProfile from './src/navigation/NavigationProfile';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {AuthProvider} from './src/context/AuthContext';
 import {useAuthentication} from './src/hooks/useAuthentication';
+import {HomeMapScreen} from './src/components';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -41,17 +42,19 @@ export default function App() {
           backgroundColor: COLORS.primary,
         }}>
         <SafeAreaView style={styles.wrapper} edges={['right', 'top', 'left']}>
-          <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-              <BottomSheetModalProvider>
-                <StatusBar
-                  barStyle="light-content"
-                  backgroundColor={COLORS.primary}
-                />
-                <Layout />
-              </BottomSheetModalProvider>
-            </AuthProvider>
-          </QueryClientProvider>
+          <NavigationContainer>
+            <QueryClientProvider client={queryClient}>
+              <AuthProvider>
+                <BottomSheetModalProvider>
+                  <StatusBar
+                    barStyle="light-content"
+                    backgroundColor={COLORS.primary}
+                  />
+                  <Layout />
+                </BottomSheetModalProvider>
+              </AuthProvider>
+            </QueryClientProvider>
+          </NavigationContainer>
         </SafeAreaView>
       </SafeAreaProvider>
     </GestureHandlerRootView>
@@ -62,23 +65,21 @@ const Layout = () => {
   const {token} = useAuthentication();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        {token ? (
-          <Stack.Screen name="BottomTab" component={BottomTab} />
-        ) : (
-          <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
-        )}
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      {token ? (
+        <Stack.Screen name="BottomTab" component={BottomTab} />
+      ) : (
+        <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
+      )}
 
-        <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
+      <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 
-        <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
-        {/* <NoBottomTab /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+      <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
+      {/* <NoBottomTab /> */}
+    </Stack.Navigator>
   );
 };
 

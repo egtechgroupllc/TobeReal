@@ -29,7 +29,7 @@ export default function BookAccommodation({setBookHeight}) {
             fontSize: SIZES.medium,
           }}
           textType="bold">
-          $ {formatPrice(20000)}
+          {formatPrice(20000)}
         </CustomText>
       </View>
 

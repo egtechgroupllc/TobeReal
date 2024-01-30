@@ -14,6 +14,8 @@ export default function WrapperContent({
   subHeading,
   styleWrapper,
   styleContent,
+  styleHeading,
+  styleTextHeading,
   isSeeAll,
   isCategory,
   isShadow,
@@ -24,10 +26,10 @@ export default function WrapperContent({
 }) {
   return (
     <View {...props} style={[styles.wrapper, styleWrapper]}>
-      <View style={styles.heading}>
+      <View style={[styles.heading, styleHeading]}>
         <View style={styles.boxHeading}>
           {heading && (
-            <CustomText textType="bold" style={styles.text}>
+            <CustomText textType="bold" style={[styles.text, styleTextHeading]}>
               {heading}
             </CustomText>
           )}
@@ -78,12 +80,12 @@ export default function WrapperContent({
             'Yogyakarta (Jogja)',
             'Semarang',
           ]}
-          onPress={onPressCategory}
+          onChange={onPressCategory}
         />
       )}
 
       <View style={[styles.content, styleContent, isShadow && SHADOW]}>
-        {!dataList[0] && (
+        {dataList[0] && (
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

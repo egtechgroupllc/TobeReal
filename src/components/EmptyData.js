@@ -44,10 +44,12 @@ export default function EmptyData({navigation, desc, textBtn, image}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: WIDTH.heightScreen / 10,
+    // marginTop: WIDTH.heightScreen / 10,
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
     rowGap: scale(10),
+    flex: 1,
   },
   img: {
     width: scale(220),

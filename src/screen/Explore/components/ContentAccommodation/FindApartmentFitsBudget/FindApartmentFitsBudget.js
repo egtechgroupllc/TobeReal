@@ -17,6 +17,7 @@ import FrequentlyPriceBox from './FrequentlyPriceBox';
 import BottomSheet from '../../../../../components/BottomSheet';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import SelectLocation from './SelectLocation';
+import {useForm} from 'react-hook-form';
 
 const listFrequentlyPrice = [
   {
@@ -29,7 +30,7 @@ const listFrequentlyPrice = [
     icon: IconManyStar,
     textType: 'Popular',
     priceMin: 4500000, // Use the priceMax value of the previous element
-    priceMax: 7000000,
+    priceMax: 700000.131,
   },
   {
     icon: IconDiamond,
@@ -45,6 +46,13 @@ export default function FindApartmentFitsBudget() {
   const handleSelectFrequently = value => {
     setInputState(value);
   };
+  const {control, handleSubmit, setValue} = useForm();
+  useEffect(() => {
+    if (inputState) {
+      setValue('lowest', inputState.priceMin);
+      setValue('highest', inputState.priceMax);
+    }
+  }, [inputState]);
 
   return (
     <WrapperContent
@@ -52,7 +60,7 @@ export default function FindApartmentFitsBudget() {
       subHeading="Price below is Monthly price"
       styleWrapper={{backgroundColor: '#f8f8f8'}}
       styleContent={styles.wrapper}>
-      <SelectLocation />
+      <SelectLocation control={control} name="location" />
 
       <View>
         <CustomText textType="semiBold" style={styles.title}>
@@ -60,27 +68,33 @@ export default function FindApartmentFitsBudget() {
         </CustomText>
 
         <View style={styles.box}>
-          <View style={styles.boxInput}>
-            <CustomText>Lowest</CustomText>
-            <CustomInput
-              placeholder="Lowest"
-              componentRight={renderComponent()}
-              defaultValue={
-                inputState && `${formatPrice(inputState?.priceMin)}`
-              }
-            />
-          </View>
+          <CustomInput
+            enableFormatNum
+            control={control}
+            name="lowest"
+            label="Lowest"
+            placeholder="Lowest"
+            componentRight={renderComponent()}
+            style={{flex: 1}}
+            defaultValue={
+              inputState &&
+              `${formatPrice(inputState?.priceMin, {showCurrency: false})}`
+            }
+          />
 
-          <View style={styles.boxInput}>
-            <CustomText>Highest</CustomText>
-            <CustomInput
-              placeholder="Highest"
-              componentRight={renderComponent()}
-              defaultValue={
-                inputState && `${formatPrice(inputState?.priceMax)}`
-              }
-            />
-          </View>
+          <CustomInput
+            enableFormatNum
+            control={control}
+            name="highest"
+            label="Highest"
+            placeholder="Highest"
+            componentRight={renderComponent()}
+            style={{flex: 1}}
+            defaultValue={
+              inputState &&
+              `${formatPrice(inputState?.priceMax, {showCurrency: false})}`
+            }
+          />
         </View>
       </View>
 
@@ -112,6 +126,7 @@ export default function FindApartmentFitsBudget() {
           textType: 'semiBold',
           textTransform: 'uppercase',
         }}
+        onPress={handleSubmit(value => console.log(value))}
       />
     </WrapperContent>
   );
@@ -129,10 +144,7 @@ const styles = StyleSheet.create({
     rowGap: scale(16),
     ...SHADOW,
   },
-  boxInput: {
-    flex: 1,
-    rowGap: scale(8),
-  },
+
   title: {
     fontSize: SIZES.xMedium,
     marginBottom: scale(8),
@@ -143,7 +155,7 @@ const styles = StyleSheet.create({
   },
   componentRight: {
     borderLeftWidth: 1,
-    width: '90%',
+    width: '17%',
     alignItems: 'center',
     borderLeftColor: COLORS.grey,
   },

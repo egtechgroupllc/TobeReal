@@ -52,7 +52,7 @@ export default function ListSelect({data = [], onSelect}) {
 
 const styles = StyleSheet.create({
   item: {
-    borderColor: '#eee',
+    borderTopColor: '#eee',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

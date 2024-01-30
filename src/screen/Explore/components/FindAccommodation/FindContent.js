@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
@@ -22,7 +22,11 @@ export default function FindContent({isBuy, rental}) {
   const {navigate} = useNavigation();
   const params = useRoute().params;
 
-  const {control, handleSubmit} = useForm();
+  const {control, setValue, handleSubmit} = useForm();
+
+  useEffect(() => {
+    params && setValue('location', params);
+  }, [params]);
 
   return (
     <View style={styles.findContent}>
@@ -35,7 +39,7 @@ export default function FindContent({isBuy, rental}) {
           control={control}
           rules={requireField('Vui long them')}
           name="location"
-          defaultValue={params || 'Around me'}
+          defaultValue={'Around me'}
           iconLeft={IconMarker}
           styleIcon={styles.icon}
           onPress={() =>
@@ -58,6 +62,8 @@ export default function FindContent({isBuy, rental}) {
         </View>
         <OptionAccommodation
           outline
+          multiSelect
+          isSelectAll
           styleContent={{
             flex: 1,
             columnGap: scale(8),
@@ -89,6 +95,8 @@ export default function FindContent({isBuy, rental}) {
         </View>
         <OptionAccommodation
           outline
+          multiSelect
+          isSelectAll
           styleContent={{
             flex: 1,
             columnGap: scale(8),
@@ -114,6 +122,8 @@ export default function FindContent({isBuy, rental}) {
           </View>
           <OptionAccommodation
             outline
+            multiSelect
+            isSelectAll
             styleContent={{
               flex: 1,
               columnGap: scale(8),

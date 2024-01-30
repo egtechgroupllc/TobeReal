@@ -13,12 +13,27 @@ export default function BigCity({
     <FlatList
       horizontal
       showsHorizontalScrollIndicator={false}
-      data={[...Array(10)]}
+      data={[
+        'Jakarta',
+        'Bandung',
+        'Tangerang',
+        'Bekasi',
+        'Depok',
+        'Surabaya',
+        'Medan',
+        'Bogor',
+        'Makassar (Ujung Pandang)',
+        'Sumedang',
+        'Sidoarjo',
+        'Yogyakarta (Jogja)',
+        'Semarang',
+      ]}
       contentContainerStyle={[styles.content, styleWrapper]}
       renderItem={({item, index}) => (
         <RecommendedUnitItem
           viewShow={2.5}
           isCenter
+          title={item}
           styesWrapper={styleItem}
           styesTextTitle={styesTextTitle}
           onPress={() => onPress({item, index})}

@@ -69,7 +69,7 @@ export default function ViewMultiPrice({
 function TextPrice({price, rental}) {
   return (
     <CustomText textType="semiBold" style={[styles.buildingName]}>
-      $ {formatPrice(price)}{' '}
+      {formatPrice(price)}{' '}
       <CustomText textType="regular" style={{fontSize: SIZES.xSmall}}>
         / {rental}
       </CustomText>
@@ -94,7 +94,7 @@ function TextPrice2({price, rental, isBorder}) {
       </View>
 
       <View style={[styles.buildingName, {alignItems: 'flex-end'}]}>
-        <CustomText textType="semiBold">$ {formatPrice(price)}</CustomText>
+        <CustomText textType="semiBold">{formatPrice(price)}</CustomText>
       </View>
     </View>
   );

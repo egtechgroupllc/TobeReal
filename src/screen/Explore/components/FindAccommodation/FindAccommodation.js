@@ -52,7 +52,7 @@ export default function FindAccommodation() {
         marginTop:scale(20)
       }}>
       <TabSelect
-        data={['RENT', 'BUY']}
+        data={['RENT', 'TOUR', 'BUY']}
         onChange={value => {
           setTabSelect(value);
         }}
@@ -62,11 +62,13 @@ export default function FindAccommodation() {
               {tabSelect !== 'BUY' && (
                 <Category
                   data={['Daily', 'Monthly', 'Yearly']}
-                  onPress={value => setCategory(value)}
+                  onChange={value => setCategory(value)}
                 />
               )}
 
               <OptionAccommodation
+                multiSelect
+                isSelectAll
                 data={
                   tabSelect !== 'BUY'
                     ? listAccommodation

@@ -5,16 +5,15 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewProps,
   ViewStyle,
 } from 'react-native';
+import LinearGradient, {
+  LinearGradientProps,
+} from 'react-native-linear-gradient';
 import {COLORS, scale} from '../assets/constants';
 import {SHADOW} from '../assets/constants/theme';
 import {arrayToObject} from '../utils/arrayToObject';
 import CustomText, {CustomTextProps} from './CustomText';
-import LinearGradient, {
-  LinearGradientProps,
-} from 'react-native-linear-gradient';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
@@ -26,6 +25,7 @@ type CustomButtonProps = {
   iconRight?: React.JSX.Element;
   isDelay?: boolean;
   styleIcon?: TextStyle;
+  styleWrapper?: ViewStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
   onPress: () => void;
   onDoublePress: () => void;
@@ -47,6 +47,7 @@ export default function CustomButton({
   outline,
   styleText,
   styleIcon,
+  styleWrapper,
   linearGradientProps,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
@@ -107,8 +108,13 @@ export default function CustomButton({
     <View
       style={[
         styles.wrapper,
-        outline && styles.outline,
+        isShadow && SHADOW,
         propStyle?.flex ? {flex: propStyle?.flex} : {width: propStyle?.width},
+        propStyle?.borderTopWidth && {
+          borderTopWidth: propStyle?.borderTopWidth,
+          borderTopColor: propStyle?.borderTopColor,
+        },
+        styleWrapper,
       ]}>
       <TouchableOpacity
         activeOpacity={0.6}
@@ -125,19 +131,23 @@ export default function CustomButton({
             !propStyle?.height && {
               minHeight: scale(heightSize),
             },
-            isShadow && SHADOW,
+            outline && styles.outline,
+            (iconLeft || iconRight) && text && {flexDirection: 'row'},
+
             propStyle,
             propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
           ]}>
           {iconLeft && (
-            <IconLeft
-              style={{...styles.icon, ...styleIcon}}
-              fill={styleIcon?.color}
-            />
+            <View>
+              <IconLeft
+                style={{...styles.icon, ...styleIcon}}
+                fill={styleIcon?.color}
+              />
+            </View>
           )}
           {text && (
             <CustomText
-              textType={styleText?.textType || 'semiBold'}
+              textType={styleText?.textType || (buttonType && 'semiBold')}
               style={[
                 styles.text,
                 {fontSize: scale(fontSize)},
@@ -174,7 +184,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
     columnGap: scale(10),
     paddingHorizontal: scale(7),
     borderRadius: scale(10),
@@ -183,7 +192,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   icon: {
-    width: scale(14),
-    height: scale(14),
+    width: scale(16),
+    height: scale(16),
   },
 });

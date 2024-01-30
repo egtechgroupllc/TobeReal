@@ -21,32 +21,46 @@ type CheckBoxProps = {
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
   name: string;
+  textLeft: boolean;
+  defaultValue: boolean;
 } & IBouncyCheckboxProps;
 
 export default function CheckBox({
   control,
   rules,
   name,
+  textLeft,
+  defaultValue,
   ...props
 }: CheckBoxProps) {
   const form = useForm();
   return (
     <Controller
-      defaultValue={false}
+      defaultValue={defaultValue}
       control={control || form.control}
       rules={rules}
       name={name || ''}
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <View>
           <BouncyCheckbox
+            textComponent={<CustomText>{props.text}</CustomText>}
             onPress={onChange}
             size={scale(16)}
             isChecked={value}
             fillColor={COLORS.primary}
-            textStyle={styles.textCheckbox}
             innerIconStyle={{borderWidth: 2, borderRadius: 4}}
             iconStyle={{borderRadius: 4}}
             {...props}
+            style={[
+              textLeft && {
+                flexDirection: 'row-reverse',
+              },
+              {
+                alignItems: 'center',
+                columnGap: scale(6),
+              },
+              props?.style,
+            ]}
           />
           {error && (
             <View style={styles.errorBox}>
@@ -66,13 +80,13 @@ export default function CheckBox({
 }
 
 const styles = StyleSheet.create({
-  textCheckbox: {
-    textDecorationLine: 'none',
-    fontFamily: FONTS.medium,
-    color: COLORS.text,
-    fontSize: SIZES.small,
-    marginLeft: scale(-6),
-  },
+  // textCheckbox: {
+  //   textDecorationLine: 'none',
+  //   fontFamily: FONTS.medium,
+  //   color: COLORS.text,
+  //   fontSize: SIZES.small,
+  //   marginLeft: scale(-6),
+  // },
   errorBox: {
     marginTop: scale(4),
     flexDirection: 'row',

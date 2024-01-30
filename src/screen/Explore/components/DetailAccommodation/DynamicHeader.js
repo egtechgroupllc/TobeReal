@@ -157,9 +157,7 @@ export default React.memo(function DynamicHeader({
         {/* OptionAccommodation */}
         <OptionAccommodation
           isShaDow
-          isSelectOnly
           isSelectForIndex
-          isNoAutoSelect
           styleContent={{
             columnGap: scale(8),
           }}

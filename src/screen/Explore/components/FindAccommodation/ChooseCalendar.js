@@ -84,11 +84,6 @@ export default function ChooseCalendar({rental}) {
     }
   }, [selected, rental]);
 
-  console.log(
-    `${formatDateTime(selectedStartDate)} - ${formatDateTime(
-      selectedEndDate || dateEnd,
-    )}`,
-  );
   return (
     <View>
       <CustomInput

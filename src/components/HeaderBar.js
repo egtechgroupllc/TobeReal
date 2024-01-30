@@ -1,15 +1,15 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {IconGoBack, IconX} from '../assets/icon/Icon';
+import {IconGoBack, IconSearch, IconX} from '../assets/icon/Icon';
 import {COLORS, SIZES, scale} from '../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import {CustomButton} from '.';
 import CustomText from './CustomText';
 
-export default function HeaderBar() {
+export default function HeaderBar({styleWrapper}) {
   const {goBack} = useNavigation();
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, styleWrapper]}>
       <View style={styles.content}>
         <CustomButton
           isShadow
@@ -29,7 +29,9 @@ export default function HeaderBar() {
           Search
         </CustomText>
 
-        <View>{/* <IconGoBack /> */}</View>
+        <View>
+          <IconSearch />
+        </View>
       </View>
     </View>
   );
@@ -37,7 +39,7 @@ export default function HeaderBar() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: scale(120),
+    // height: scale(120),
     backgroundColor: COLORS.primary,
   },
   content: {

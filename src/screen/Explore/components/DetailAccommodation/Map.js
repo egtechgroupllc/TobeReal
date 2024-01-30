@@ -1,10 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS, SHADOW, scale} from '../../../../assets/constants';
-import WrapperContent from '../WrapperContent';
-import {MapContain} from '../../../../components';
+import {StyleSheet, View} from 'react-native';
+import MapView, {
+  Marker,
+  MarkerAnimated,
+  PROVIDER_GOOGLE,
+} from 'react-native-maps';
+import {COLORS, scale} from '../../../../assets/constants';
 import {IconMapView} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
+import WrapperContent from '../WrapperContent';
+import CustomMarker from '../../../Map/CustomMarker';
 
 export default function Map() {
   return (
@@ -16,11 +21,26 @@ export default function Map() {
           overflow: 'hidden',
           borderRadius: scale(12),
         }}>
-        <MapContain
+        <MapView
+          provider={PROVIDER_GOOGLE}
           style={{
             flex: 1,
           }}
-        />
+          scrollEnabled={false}
+          initialRegion={{
+            latitude: 22.62938671242907,
+            longitude: 88.4354486029795,
+            latitudeDelta: 0.04864195044303443,
+            longitudeDelta: 0.040142817690068,
+          }}>
+          <Marker
+            coordinate={{
+              latitude: 22.62938671242907,
+              longitude: 88.4354486029795,
+            }}>
+            <CustomMarker />
+          </Marker>
+        </MapView>
         <View
           style={{
             // flex: 0.5,

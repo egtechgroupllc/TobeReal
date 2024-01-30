@@ -5,7 +5,7 @@ import {SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {TabSelect} from '../../../../components';
 import WrapperContent from '../WrapperContent';
 
-const listTab = ['Info', 'Nearby'];
+const listTab = ['Description', 'Nearby'];
 export default function Introduction() {
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 

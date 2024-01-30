@@ -22,6 +22,7 @@ export default function RecommendedUnitItem({
   styesWrapper,
   styesTextTitle,
   viewShow = 2,
+  title,
   isCenter,
   onPress,
 }) {
@@ -49,9 +50,11 @@ export default function RecommendedUnitItem({
             alignItems: 'center',
           },
         ]}>
-        <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
-          In malybu
-        </CustomText>
+        {title && (
+          <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
+            {title || 'Title'}
+          </CustomText>
+        )}
 
         {isShowDetail && (
           <View style={styles.detail}>

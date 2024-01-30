@@ -9,7 +9,7 @@ export default function YearlyPromotion() {
   return (
     <WrapperContent
       heading={'Yearly Promo'}
-      dataList={[...Array(4)]}
+      dataList={[...Array(4)].map(item => '321')}
       isList
       renderItem={({item}) => (
         <PromotionCard
