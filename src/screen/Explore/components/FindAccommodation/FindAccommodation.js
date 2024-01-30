@@ -49,6 +49,7 @@ export default function FindAccommodation() {
       style={{
         width: WIDTH.widthContain,
         alignSelf: 'center',
+        marginTop:scale(20)
       }}>
       <TabSelect
         data={['RENT', 'BUY']}

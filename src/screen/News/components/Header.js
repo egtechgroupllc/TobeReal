@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     width: WIDTH.widthContain,
     alignSelf: 'center',
     height: scale(56),
+    marginTop:scale(20)
   },
   img: {
     height: scale(55),

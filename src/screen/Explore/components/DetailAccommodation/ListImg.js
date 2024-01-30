@@ -36,7 +36,7 @@ export default function ListImg({dataImg, open, onClose}) {
       visible={!!open}
       transparent
       animationType={dataImg.length === 1 ? 'none' : 'fade'}
-      onRequestClose={onClose}>
+      onRequestClose={onClose && onClose}>
       <View
         style={{
           flex: 1,
@@ -52,7 +52,7 @@ export default function ListImg({dataImg, open, onClose}) {
               style={{...styles.headerBar, minHeight: insets.top + scale(35)}}>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={onClose}
+                onPress={onClose && onClose}
                 style={{
                   padding: scale(4),
                 }}>
@@ -104,7 +104,7 @@ export default function ListImg({dataImg, open, onClose}) {
             visible={dataImg.length === 1 || !!visible || visible === 0}
             onRequestClose={() => {
               setIsVisible(false);
-              dataImg.length === 1 && onClose();
+              dataImg.length === 1 && onClose && onClose();
             }}
             onImageIndexChange={e => e && setIndexNavigation(e - 1)}
             swipeToCloseEnabled={false}

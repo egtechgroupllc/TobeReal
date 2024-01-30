@@ -29,6 +29,7 @@ import axios from 'axios';
 import Map from '../../../../Explore/components/DetailAccommodation/Map';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
+import ImageDetail from '../../../../Explore/components/DetailAccommodation/ImageDetail';
 export default function TabContent() {
   const {control, watch, handleSubmit} = useForm();
 
@@ -60,8 +61,8 @@ export default function TabContent() {
     })
       .then(image => {
         if (image) {
-          setSelectedImage(image);
-          uploadImage(image.path);
+          setSelectedImage(image.map(img => img.path));
+          // uploadImage(image.path);
         }
       })
       .catch(error => {
@@ -232,7 +233,7 @@ export default function TabContent() {
         }}
         style={styles.textInput}
       />
-         <CustomInput
+      <CustomInput
         styleTextLabel={{
           ...styles.text1,
           color: COLORS.black,
@@ -449,7 +450,7 @@ export default function TabContent() {
           backgroundColor: '#E3E3E3',
           marginBottom: scale(10),
         }}>
-        <View></View>
+        {/* <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
           {selectedImage.map((image, index) => (
             <Image
@@ -463,7 +464,13 @@ export default function TabContent() {
               }}
             />
           ))}
-        </ScrollView>
+        </ScrollView> */}
+        {selectedImage.length > 0 ? (
+          <ImageDetail
+            dataImg={selectedImage}
+            styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
+          />
+        ) : null}
       </View>
 
       {/* <TouchableOpacity
@@ -496,7 +503,7 @@ export default function TabContent() {
             />
           </View>
           <View style={{width: '80%'}}>
-            <CustomText key={index}>{room.receivedRoomType}</CustomText>
+            <CustomText key={index}>{room.RoomTypeTitle}</CustomText>
           </View>
           <TouchableOpacity onPress={() => removeRoomType(index)}>
             <IconX style={{width: scale(20), height: scale(20)}} />
@@ -615,11 +622,10 @@ const styles = StyleSheet.create({
   textArea1: {
     borderWidth: scale(2),
     borderColor: '#E3E3E3',
-    borderRadius: scale(5),
+    borderRadius: scale(8),
     height: scale(250),
+    overflow: 'hidden',
     justifyContent: 'space-between',
-    paddingHorizontal: scale(10),
-    paddingTop: scale(5),
     marginTop: scale(10),
     width: '90%',
   },
@@ -642,7 +648,7 @@ const styles = StyleSheet.create({
     marginTop: scale(10),
     borderRadius: scale(5),
     // borderWidth: scale(0),
-    width: '90%'
+    width: '90%',
   },
   text: {
     fontSize: SIZES.small,

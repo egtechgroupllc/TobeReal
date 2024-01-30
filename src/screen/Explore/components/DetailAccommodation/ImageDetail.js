@@ -14,21 +14,22 @@ const listImg = [
   'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
 ];
 
-export default function ImageDetail({onLayout}) {
+export default function ImageDetail({onLayout,dataImg=listImg,styleWrapper}) {
   const [isViewImg, setIsViewImg] = useState(false);
 
   return (
     <View
       style={[
         styles.wrapper,
-        listImg[3] && {
+        dataImg[3] && {
           flexDirection: 'column',
         },
+        styleWrapper,
       ]}
       onLayout={onLayout}>
       {isViewImg && (
         <ListImg
-          dataImg={listImg}
+          dataImg={dataImg}
           open={isViewImg}
           onClose={() => setIsViewImg(false)}
         />
@@ -40,19 +41,19 @@ export default function ImageDetail({onLayout}) {
           flex: 1,
         }}>
         <CustomImage
-          source={listImg[0]}
+          source={dataImg[0]}
           style={{
             flex: 1,
           }}
         />
       </TouchableOpacity>
-      {listImg[1] && (
+      {dataImg[1] && (
         <View
           activeOpacity={0.9}
           style={{
-            flex: !listImg[2] ? 1 : 0.6,
+            flex: !dataImg[2] ? 1 : 0.6,
             gap: 1,
-            flexDirection: listImg[3] ? 'row' : 'column',
+            flexDirection: dataImg[3] ? 'row' : 'column',
           }}>
           <TouchableOpacity
             activeOpacity={0.9}
@@ -61,13 +62,13 @@ export default function ImageDetail({onLayout}) {
               flex: 1,
             }}>
             <CustomImage
-              source={listImg[1]}
+              source={dataImg[1]}
               style={{
                 flex: 1,
               }}
             />
           </TouchableOpacity>
-          {listImg[2] && (
+          {dataImg[2] && (
             <TouchableOpacity
               activeOpacity={0.9}
               onPress={() => setIsViewImg(3)}
@@ -75,14 +76,14 @@ export default function ImageDetail({onLayout}) {
                 flex: 1,
               }}>
               <CustomImage
-                source={listImg[2]}
+                source={dataImg[2]}
                 style={{
                   flex: 1,
                 }}
               />
             </TouchableOpacity>
           )}
-          {listImg[3] && (
+          {dataImg[3] && (
             <TouchableOpacity
               onPress={() => setIsViewImg(4)}
               activeOpacity={0.9}
@@ -90,12 +91,12 @@ export default function ImageDetail({onLayout}) {
                 flex: 1,
               }}>
               <CustomImage
-                source={listImg[3]}
+                source={dataImg[3]}
                 style={{
                   flex: 1,
                 }}
               />
-              {listImg[4] && (
+              {dataImg[4] && (
                 <View style={styles.viewImgThree}>
                   <CustomText textType="bold" style={styles.totalImg}>
                     +{listImg.length - 3}

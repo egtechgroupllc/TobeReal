@@ -27,30 +27,16 @@ import {
   validateMaxAmount,
 } from '../../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
+import ListImg from '../../../../../Explore/components/DetailAccommodation/ListImg';
+import ImageDetail from '../../../../../Explore/components/DetailAccommodation/ImageDetail';
 export default function TabContent() {
   const {control, watch, handleSubmit} = useForm();
   const navigation = useNavigation();
   const route = useRoute();
   const [roomImage, setRoomImage] = useState([]);
-  const [roomType, setRoomType] = useState('');
-  const [acreage, setAcreage] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
   const [showBed, setShowBed] = useState('');
   const viewShowBed = () => {
     setShowBed(prevshowBed => !prevshowBed);
-  };
-  const handleRoomType = text => {
-    setRoomType(text);
-  };
-  const handleDesciption = text => {
-    setDescription(text);
-  };
-  const handleAcreage = text => {
-    setAcreage(text);
-  };
-  const handlePrice = text => {
-    setPrice(text);
   };
   const pickImage = () => {
     ImageCropPicker.openPicker({
@@ -59,10 +45,8 @@ export default function TabContent() {
       multiple: true,
       maxFiles: 100,
     }).then(image => {
-      console.log(image);
       if (image) {
-        setRoomImage(image);
-        console.log(roomImage);
+        setRoomImage(image.map(img => img.path));
       }
     });
   };
@@ -72,26 +56,11 @@ export default function TabContent() {
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
-  const handleOk = () => {
-    const roomDetails = {
-      receivedRoomType: roomType,
-      receivedDescription: description,
-      receivedAcreage: acreage,
-      receivedPrice: price,
-      receivedRoomImages: roomImage.map(image => image.path),
-    };
+
+  const ok = value => {
     // Pass the roomDetails back to the previous screen
     navigation.goBack();
-    route.params.onOk(roomDetails);
-  };
-  const ok = () => {
-    handleOk();
-    // Clear the input fields
-    setRoomType('');
-    setDescription('');
-    setAcreage('');
-    setPrice('');
-    setRoomImage('');
+    route.params.onOk({...value, roomImage});
   };
   return (
     <View
@@ -209,7 +178,7 @@ export default function TabContent() {
       <View
         style={{
           flexDirection: 'row',
-          alignItems:'center',
+          alignItems: 'center',
         }}>
         <CustomInput
           styleTextLabel={{
@@ -229,7 +198,7 @@ export default function TabContent() {
             backgroundColor: '#E3E3E3',
             borderRadius: scale(5),
             // borderWidth: scale(0),
-            width: '90%'
+            width: '90%',
           }}
         />
         {/* <TouchableOpacity
@@ -511,22 +480,15 @@ export default function TabContent() {
         </TouchableOpacity>
       </View>
       <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
-        <View></View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {roomImage.map((image, index) => (
-            <Image
-              key={index}
-              source={{uri: image.path}}
-              style={{
-                width: '100%',
-                height: scale(200),
-                marginBottom: scale(10),
-                marginTop: scale(10),
-              }}
-            />
-          ))}
-        </ScrollView>
+        {roomImage.length > 0 ? (
+          <ImageDetail
+            dataImg={roomImage}
+            styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
+          />
+        ) : null}
       </View>
+
+      {/* <ListImg  open dataImg={roomImage}/> */}
       {/* <TouchableOpacity
         style={{
           marginTop: scale(10),
@@ -655,11 +617,10 @@ const styles = StyleSheet.create({
   textArea1: {
     borderWidth: scale(2),
     borderColor: '#E3E3E3',
-    borderRadius: scale(5),
+    borderRadius: scale(8),
     height: scale(250),
+    overflow: 'hidden',
     justifyContent: 'space-between',
-    paddingHorizontal: scale(10),
-    paddingTop: scale(5),
     marginTop: scale(10),
     width: '90%',
   },
