@@ -41,7 +41,7 @@ export default function Content() {
             <Image
               source={images.logo1}
               style={{
-                width: '40%',
+                width: '30%',
                 height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
@@ -83,7 +83,7 @@ export default function Content() {
             <Image
               source={images.logo1}
               style={{
-                width: '40%',
+                width: '30%',
                 height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
@@ -126,7 +126,7 @@ export default function Content() {
             <Image
               source={images.logo1}
               style={{
-                width: '40%',
+                width: '30%',
                 height: scale(165),
                 marginBottom: scale(30),
               }}></Image>
