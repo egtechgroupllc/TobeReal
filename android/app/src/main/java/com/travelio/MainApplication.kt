@@ -1,4 +1,4 @@
-package com.smarthousegroup.shome
+package com.saveloka.shome
 
 import android.app.Application
 import com.facebook.react.PackageList
