@@ -10,15 +10,13 @@ export default function NoBottomTab() {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Group>
-        {routerNoBottomTab.map(router => (
-          <Stack.Screen
-            key={router.name}
-            name={router.name}
-            component={router.component}
-          />
-        ))}
-      </Stack.Group>
+      {routerNoBottomTab.map(router => (
+        <Stack.Screen
+          key={router.name}
+          name={router.name}
+          component={router.component}
+        />
+      ))}
     </Stack.Navigator>
   );
 }

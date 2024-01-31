@@ -7,7 +7,7 @@ import Carousel from 'react-native-new-snap-carousel';
 import {StackActions, useNavigation} from '@react-navigation/native';
 
 export default function ThematicInstagram() {
-  const {dispatch} = useNavigation();
+  const {dispatch, isFocused} = useNavigation();
 
   return (
     <WrapperContent
@@ -43,13 +43,15 @@ export default function ThematicInstagram() {
                   styesWrapper={{
                     borderRadius: 0,
                   }}
-                  onPress={() =>
-                    dispatch(
-                      StackActions.push('NoBottomTab', {
-                        screen: 'DetailAccommodationScreen',
-                      }),
-                    )
-                  }
+                  onPress={() => {
+                    const isActive = isFocused();
+                    isActive &&
+                      dispatch(
+                        StackActions.push('NoBottomTab', {
+                          screen: 'DetailAccommodationScreen',
+                        }),
+                      );
+                  }}
                 />
               )}
             />

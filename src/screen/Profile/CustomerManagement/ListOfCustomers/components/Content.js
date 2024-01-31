@@ -12,28 +12,28 @@ export default function Content() {
     {
       id: 1,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       content: 'content',
       status: 'done',
     },
     {
       id: 2,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       content: 'content',
       status: 'done',
     },
     {
       id: 3,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       content: 'content',
       status: 'done',
     },
     {
       id: 4,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       content: 'content',
       status: 'done',
     },
@@ -51,8 +51,9 @@ export default function Content() {
         subHeading={'List of customers'}
         noti={true}
         onPress={goBack}
-        notify={notify}/>
-     {data && data.length > 0 ? (
+        notify={notify}
+      />
+      {data && data.length > 0 ? (
         <FlatList
           data={data}
           // horizontal={true}
@@ -71,7 +72,7 @@ export default function Content() {
                   borderRadius: scale(10),
                   width: '90%',
                   height: scale(63),
-                  alignSelf:'center'
+                  alignSelf: 'center',
                 }}>
                 {item?.image && (
                   <View
@@ -121,7 +122,13 @@ export default function Content() {
           )}
         />
       ) : (
-        <View style={{justifyContent:'center', alignItems:'center', marginTop:scale(150), width:scale(325)}}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: scale(150),
+            width: scale(325),
+          }}>
           <IconNodata />
         </View>
       )}

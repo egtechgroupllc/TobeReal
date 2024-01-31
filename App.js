@@ -78,7 +78,6 @@ const Layout = () => {
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 
       <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
-      {/* <NoBottomTab /> */}
     </Stack.Navigator>
   );
 };

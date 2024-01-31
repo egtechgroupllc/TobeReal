@@ -132,7 +132,7 @@ export default function CategoriesButton({
       id: 1,
       type: 'Test news',
       desciption:
-        'The news only has 02 unique images and represents the news that does not appear on the Tobe Real Real Estate home page, appears from page 3. is the news that appears last in the search.\nUnable to upload news (refresh news)',
+        'The news only has 02 unique images and represents the news that does not appear on the SHome Real Estate home page, appears from page 3. is the news that appears last in the search.\nUnable to upload news (refresh news)',
       price: 'Free',
       inside: 'NO',
       time: '2 months',
@@ -167,7 +167,7 @@ export default function CategoriesButton({
       id: 5,
       type: 'News Super Vip',
       desciption:
-        'Appearing prominently in the Tobe Rael homepage\nAppearing a front page according to the new previous mechanism after\nNews do not pass over time in categories\nCan give up to 16 pictures and 01 video\nFind signs before VIP news',
+        'Appearing prominently in the SHome homepage\nAppearing a front page according to the new previous mechanism after\nNews do not pass over time in categories\nCan give up to 16 pictures and 01 video\nFind signs before VIP news',
       price: '500,000Đ',
       inside: 'YES',
       time: '5 months',
@@ -248,7 +248,7 @@ export default function CategoriesButton({
                   colors={['#F0B90B', '#FFFFFF']}
                   start={{x: 0, y: 0}}
                   end={{x: 0, y: 1}}
-                  style={{...styles.item, height:scale(330)}}>
+                  style={{...styles.item, height: scale(330)}}>
                   <CustomText
                     textType="bold"
                     style={{...styles.text, color: COLORS.white}}>
@@ -265,7 +265,7 @@ export default function CategoriesButton({
                       borderTopRightRadius: scale(10),
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginTop:scale(10)
+                      marginTop: scale(10),
                     }}>
                     <CustomText
                       textType="bold"
@@ -354,7 +354,7 @@ export default function CategoriesButton({
                     <CustomText
                       textType="bold"
                       style={{...styles.text3, color: COLORS.white}}>
-                       Post super vip news for free
+                      Post super vip news for free
                     </CustomText>
                     <CustomText
                       textType="semiBold"

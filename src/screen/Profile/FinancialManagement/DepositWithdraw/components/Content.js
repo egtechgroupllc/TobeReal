@@ -71,7 +71,7 @@ export default function Content() {
             <CustomText
               textType="medium"
               style={{...styles.text1, color: COLORS.black}}>
-              Wallet TOBE REAL
+              Wallet SHOME
             </CustomText>
             <CustomText
               textType="bold"

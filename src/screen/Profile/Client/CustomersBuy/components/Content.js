@@ -18,7 +18,7 @@ export default function Content() {
     {
       id: 1,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       project: 'Shophouse la rina',
       location: 'Ha Tien, Kieng Giang',
       content: 'abc',
@@ -26,7 +26,7 @@ export default function Content() {
     {
       id: 2,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       project: 'Shophouse la rina',
       location: 'Ha Tien, Kieng Giang',
       content: 'abc',
@@ -34,7 +34,7 @@ export default function Content() {
     {
       id: 3,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       project: 'Shophouse la rina',
       location: 'Ha Tien, Kieng Giang',
       content: 'abc',
@@ -42,7 +42,7 @@ export default function Content() {
     {
       id: 4,
       image: images.avatar,
-      name: 'TobeReal',
+      name: 'shome',
       project: 'Shophouse la rina',
       location: 'Ha Tien, Kieng Giang',
       content: 'abc',
