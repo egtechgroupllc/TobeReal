@@ -54,5 +54,6 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     onClearToken: clearToken,
     token,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

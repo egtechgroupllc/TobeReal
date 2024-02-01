@@ -1,18 +1,19 @@
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
 import {StatusBar, StyleSheet, Text, TextInput} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+
 import {COLORS} from './src/assets/constants';
+import {AuthProvider} from './src/context/AuthContext';
+import {LanguageProvider} from './src/context/LanguageContext';
+import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {AuthProvider} from './src/context/AuthContext';
-import {useAuthentication} from './src/hooks/useAuthentication';
-import {HomeMapScreen} from './src/components';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -44,15 +45,17 @@ export default function App() {
         <SafeAreaView style={styles.wrapper} edges={['right', 'top', 'left']}>
           <NavigationContainer>
             <QueryClientProvider client={queryClient}>
-              <AuthProvider>
-                <BottomSheetModalProvider>
-                  <StatusBar
-                    barStyle="light-content"
-                    backgroundColor={COLORS.primary}
-                  />
-                  <Layout />
-                </BottomSheetModalProvider>
-              </AuthProvider>
+              <LanguageProvider>
+                <AuthProvider>
+                  <BottomSheetModalProvider>
+                    <StatusBar
+                      barStyle="light-content"
+                      backgroundColor={COLORS.primary}
+                    />
+                    <Layout />
+                  </BottomSheetModalProvider>
+                </AuthProvider>
+              </LanguageProvider>
             </QueryClientProvider>
           </NavigationContainer>
         </SafeAreaView>

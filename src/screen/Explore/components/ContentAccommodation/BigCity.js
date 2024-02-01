@@ -36,7 +36,7 @@ export default function BigCity({
           title={item}
           styesWrapper={styleItem}
           styesTextTitle={styesTextTitle}
-          onPress={() => onPress({item, index})}
+          onPress={() => onPress && onPress({item, index})}
         />
       )}
     />
