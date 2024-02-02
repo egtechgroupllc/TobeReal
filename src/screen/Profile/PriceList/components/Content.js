@@ -6,8 +6,10 @@ import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
 import {IconSupporterYellow} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -18,28 +20,28 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading={'Price list post in news'}
+        subHeading={t('post_price_list_news')}
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
       <CategoriesButton
-        title={'Benefits and annual account'}
+        title={t('benefit_annual')}
         onPress={onPress}
         large={true}
         style={{marginTop: scale(10)}}
       />
       <CategoriesButton
-        title={'Posting package'}
+        title={t('posting_package')}
         onPress={onPress}
         large={true}
       />
       <CategoriesButton
-        title={'Cost for each type of news'}
+        title={t('cost_for_each')}
         onPress={onPress}
         large={true}
       />
       <CategoriesButton
-        title={'Create an online trading platform'}
+        title={t('create_an_online')}
         onPress={onPress}
         large={true}
       />
@@ -52,23 +54,23 @@ export default function Content() {
           <CustomText
             textType="bold"
             style={{...styles.text1, color: COLORS.black}}>
-            Support
+            {t('support')}
           </CustomText>
           <View style={{marginTop: scale(10)}}>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.black}}>
-              Hotline: ....
+              {t('hotline')}: ....
             </CustomText>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.black}}>
-              Mail: ....
+              {t('email')}: ....
             </CustomText>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.black}}>
-              WEBSITE: ....
+              {t('website')}: ....
             </CustomText>
           </View>
         </View>

@@ -5,8 +5,10 @@ import Ribbon from '../../../../components/Ribbon';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconHouse, IconRoom} from '../../../../assets/icon/Icon';
 import Introduction from './Introduction';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function InfoDetail() {
+  const {t}= useLanguage()
   return (
     <View>
       <View style={styles.wrapper}>
@@ -26,7 +28,7 @@ export default function InfoDetail() {
         <View style={styles.room}>
           <View style={styles.boxRoom}>
             <IconHouse style={styles.icon} />
-            <CustomText textType="regular">Hotel Residence</CustomText>
+            <CustomText textType="regular">{t('hotel_residence')}</CustomText>
           </View>
           <View style={styles.boxRoom}>
             <IconRoom style={styles.icon} />
@@ -39,11 +41,11 @@ export default function InfoDetail() {
             <CustomText
               style={{color: COLORS.white, lineHeight: 18}}
               textType="bold">
-              NEW
+              {t('new')}
             </CustomText>
           </View>
           <View style={styles.boxMore}>
-            <CustomText textType="bold">Discussion (0)</CustomText>
+            <CustomText textType="bold">{t('discussion')} (0)</CustomText>
           </View>
         </View>
       </View>

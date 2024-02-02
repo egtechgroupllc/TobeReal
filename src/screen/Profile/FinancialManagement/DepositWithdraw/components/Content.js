@@ -9,7 +9,9 @@ import CustomText from '../../../../../components/CustomText';
 import {CustomInput} from '../../../../../components';
 import {IconAdd} from '../../../../../assets/icon/Icon';
 import Button from '../../../components/Button';
+import { useLanguage } from '../../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const data = [
     {
       id: 1,
@@ -62,16 +64,16 @@ export default function Content() {
         end={{x: 0, y: 1}}
         style={{...styles.box, marginTop: scale(25)}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <CustomText
+          {/* <CustomText
             textType="bold"
             style={{...styles.text, color: COLORS.black}}>
             Logo
-          </CustomText>
+          </CustomText> */}
           <View style={{marginLeft: scale(30)}}>
             <CustomText
               textType="medium"
               style={{...styles.text1, color: COLORS.black}}>
-              Wallet TOBE REAL
+             {t('wallet')} Saveloka
             </CustomText>
             <CustomText
               textType="bold"
@@ -85,7 +87,7 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Amount to deposit
+          {t('amount_deposit')}
         </CustomText>
         <CustomInput
           placeholder="0$"
@@ -100,7 +102,7 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          From money source
+         {t('from_money_source')}
         </CustomText>
       </View>
 
@@ -117,11 +119,11 @@ export default function Content() {
           <CustomText
             textType="bold"
             style={{...styles.text, marginLeft: scale(20)}}>
-            Add bank
+            {t('add_bank')}
           </CustomText>
         </TouchableOpacity>
       </LinearGradient>
-      <Button title={'Submit'} onPress={Submit} />
+      <Button title={t('submit')} onPress={Submit} />
       <View style={styles.historyHeader}>
         <CustomText
           textType="medium"
@@ -131,17 +133,17 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Day
+          {t('day')}
         </CustomText>
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Quantity
+          {t('quantity')}
         </CustomText>
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Status
+          {t('status')}
         </CustomText>
       </View>
       <View style={{marginBottom: scale(50)}}>

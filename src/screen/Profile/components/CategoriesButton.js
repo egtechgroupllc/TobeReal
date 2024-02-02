@@ -11,6 +11,7 @@ import {
   IconRight,
 } from '../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 export default function CategoriesButton({
   title,
@@ -29,6 +30,7 @@ export default function CategoriesButton({
   postManagement
 }) 
 {
+  const {t}= useLanguage()
   return (
     <View >
       {large && (
@@ -88,7 +90,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
-                Change password
+              {t('change_password')}
               </CustomText>
               <View>
                 <IconRight />
@@ -102,7 +104,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-                Personal Information
+              {t('personal_information')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -120,7 +122,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
-                Customers need to buy the project
+              {t('customer_buy')}
               </CustomText>
               <View>
                 <IconRight />
@@ -134,7 +136,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-                Customers need to buy - need to rent
+              {t('customer_rent')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -146,7 +148,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-                Contact purchased
+              {t('contact_purchased')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf:'center',
     borderRadius: scale(4),
-    height: scale(29),
+    height: scale(35),
     width:'100%',
     justifyContent: 'space-between',
     marginTop: scale(20),

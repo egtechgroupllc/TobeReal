@@ -21,7 +21,9 @@ import {
 } from '../../../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../../../components/Button';
+import { useLanguage } from '../../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const [inputText, setInputText] = useState('');
   const handleInputChange = text => {
@@ -46,13 +48,13 @@ export default function Content() {
         <CustomText
           textType="bold"
           style={{...styles.text1, color: COLORS.black}}>
-          Choose Logo
+          {t('choose_logo')}
         </CustomText>
       </TouchableOpacity>
       <CustomText
         textType="medium"
         style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-        Name of the trading platform
+      {t('name_of_trading')}
       </CustomText>
       <CustomInput
         style={{
@@ -62,19 +64,19 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Name of the trading platform"
+        placeholder={t('name_of_trading')}
       />
       <CustomText
         textType="regular"
         style={{...styles.text2, color: COLORS.black, marginTop: scale(20)}}>
-        Description content
+         {t('description_content')}
       </CustomText>
       <View style={styles.textArea}>
         <ScrollView>
           <TextInput
             multiline
             numberOfLines={4} // You can adjust the number of lines as needed
-            placeholder="Enter a desciption"
+            placeholder= {t('enter_a_description')}
             value={inputText}
             onChangeText={handleInputChange}
             style={{...styles.text, color: COLORS.black}}
@@ -87,7 +89,7 @@ export default function Content() {
       <CustomText
         textType="medium"
         style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-        Introductory photo
+         {t('introductory_photo')}
       </CustomText>
       <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
         <Text style={{...styles.text, color: COLORS.black}}>0/10</Text>
@@ -106,7 +108,7 @@ export default function Content() {
       <CustomText
         textType="medium"
         style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-        Headquarters information
+       {t('headquarter_information')}
       </CustomText>
       <CustomInput
         style={{
@@ -116,7 +118,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Office address"
+        placeholder= {t('office_address')}
       />
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <CustomInput
@@ -128,7 +130,7 @@ export default function Content() {
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder="Province/city"
+          placeholder= {t('province_city')}
         />
         <CustomInput
           style={{
@@ -139,7 +141,7 @@ export default function Content() {
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder="Country"
+          placeholder= {t('country')}
         />
         <CustomInput
           style={{
@@ -150,7 +152,7 @@ export default function Content() {
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder="Ward/Commune"
+          placeholder= {t('ward_commune')}
         />
       </View>
       <CustomInput
@@ -161,7 +163,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Phone"
+        placeholder= {t('phone')}
       />
       <CustomInput
         style={{
@@ -171,12 +173,12 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Hotline:"
+        placeholder= {t('hotline')}
       />
       <CustomText
         textType="medium"
         style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-        Website
+         {t('website')}
       </CustomText>
       <CustomInput
         style={{
@@ -186,7 +188,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Website:"
+        placeholder= {t('website')}
       />
       <Image
         source={images.map}
@@ -200,7 +202,7 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-          Branch information
+          {t('branch_information')}
         </CustomText>
         <CustomText
           textType="medium"
@@ -225,14 +227,14 @@ export default function Content() {
           <CustomText
             textType="medium"
             style={{...styles.text, marginLeft: scale(20)}}>
-            Add branch
+             {t('add_branch')}
           </CustomText>
         </TouchableOpacity>
       </LinearGradient>
       <CustomText
         textType="medium"
         style={{...styles.text, color: COLORS.black}}>
-        Contact person information
+        {t('contact_person_information')}
       </CustomText>
       <CustomInput
         style={{
@@ -242,7 +244,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Full name"
+        placeholder={t('full_name')}
       />
       <CustomInput
         style={{
@@ -252,7 +254,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Position"
+        placeholder=  {t('position')}
       />
       <CustomInput
         style={{
@@ -262,7 +264,7 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Email"
+        placeholder=  {t('email')}
       />
       <CustomInput
         style={{
@@ -272,10 +274,10 @@ export default function Content() {
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder="Phone"
+        placeholder=  {t('phone')}
       />
       <View style={{marginBottom: scale(30)}}>
-        <Button title={'Create'} />
+        <Button title=  {t('create')}/>
       </View>
     </View>
   );

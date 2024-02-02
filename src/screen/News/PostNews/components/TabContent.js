@@ -4,7 +4,9 @@ import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import ButtonPost from '../../components/ButtonPost';
 import CustomText from '../../../../components/CustomText';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function TabContent() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const [tabSelect, setTabSelect] = useState('Post news');
   const [viewbenefit, setViewbenefit] = useState(false);
@@ -43,11 +45,11 @@ export default function TabContent() {
          <CustomText
             textType="bold"
             style={{...styles.text2, color: COLORS.black}}>
-            Post
+           {t('post')}
           </CustomText>
-          <ButtonPost image={images.sell} style={{width:'100%'}} title={'Sell'} styleImage={{width:scale(39), height:scale(39)}} onPress={goSell}/>
-          <ButtonPost image={images.lease} style={{width:'100%'}} title={'Lease'} styleImage={{width:scale(39), height:scale(39)}} onPress={goLease}/>
-          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={'Need to rent, Need to buy'} styleImage={{width:scale(39), height:scale(39)}}onPress={goRentBuy}/>
+          <ButtonPost image={images.sell} style={{width:'100%'}} title={t('sell')} styleImage={{width:scale(39), height:scale(39)}} onPress={goSell}/>
+          <ButtonPost image={images.lease} style={{width:'100%'}} title={t('lease')} styleImage={{width:scale(39), height:scale(39)}} onPress={goLease}/>
+          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={t('need_to_rent_buy')} styleImage={{width:scale(39), height:scale(39)}}onPress={goRentBuy}/>
     </View>
   );
 }

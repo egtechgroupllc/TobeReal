@@ -3,12 +3,14 @@ import React from 'react';
 import MainWrapper from '../../../components/MainWrapper';
 import Content from './components/Content';
 import Auth from '../components/MainAuth';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 
 
 export default function LoginScreen() {
+const {t}= useLanguage()
   return (
-    <Auth heading={'Hi, Welcome Back! 👋'}>
+    <Auth heading={t('welcome_back') + ' 👋'}>
       <Content />
     </Auth>
   );

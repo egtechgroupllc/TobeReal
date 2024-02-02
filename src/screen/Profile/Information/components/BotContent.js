@@ -13,7 +13,9 @@ import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {IconAdd, IconEditProfile} from '../../../../assets/icon/Icon';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function BotContent() {
+  const {t}= useLanguage()
   const [openView, setOpenView] = useState(false);
   const OpenView = () => {
     setOpenView(prevOpenView => !prevOpenView);
@@ -32,7 +34,7 @@ export default function BotContent() {
           <CustomText
             textType="medium"
             style={{...styles.text, color: COLORS.black}}>
-            Email:
+                 {t('email')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -52,7 +54,7 @@ export default function BotContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}>
-            Phone:
+            {t('phone')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -73,7 +75,7 @@ export default function BotContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}>
-            Gender:
+            {t('gender')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -94,7 +96,7 @@ export default function BotContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}>
-            Address:
+            {t('address')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -113,7 +115,7 @@ export default function BotContent() {
           <CustomText
             textType="medium"
             style={{...styles.text, color: COLORS.black}}>
-            Link website:
+            {t('link_website')}:
           </CustomText>
           <TouchableOpacity>
             <IconEditProfile />
@@ -131,7 +133,7 @@ export default function BotContent() {
           <CustomText
             textType="medium"
             style={{...styles.text, color: COLORS.black}}>
-            Social network link:
+            {t('social_network_link')}:
           </CustomText>
           <IconEditProfile />
         </View>

@@ -7,8 +7,10 @@ import MainWrapper from '../../components/MainWrapper';
 import DailyPromotion from './DailyPromotion';
 import MonthlyPromotion from './MonthlyPromotion';
 import YearlyPromotion from './YearlyPromotion';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export default function HomePromotionScreen() {
+  const {t}= useLanguage()
   return (
     <MainWrapper>
       <ImageBackground
@@ -20,7 +22,7 @@ export default function HomePromotionScreen() {
           shaDowColor="#F0B90B90"
           textType="bold"
           style={styles.textBanner}>
-          Chect out All ongoing promo
+          {t('check_out_all')}
         </CustomText>
       </ImageBackground>
 

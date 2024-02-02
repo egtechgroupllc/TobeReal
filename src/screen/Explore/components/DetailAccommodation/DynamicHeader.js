@@ -16,35 +16,38 @@ import {CustomButton} from '../../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../components/Favourite';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 
-const listInfo = [
-  {
-    text: 'Detail',
-  },
-  {
-    text: 'Facilities',
-  },
-  {
-    text: 'Location',
-  },
-  {
-    text: 'Reviews',
-  },
-  {
-    text: 'Info',
-  },
-];
+
 export default React.memo(function DynamicHeader({
   scrollOffsetY,
   onSelect,
   indexSelect,
   data,
 }) {
+  const {t}= useLanguage()
   const {goBack} = useNavigation();
+  const listInfo = [
+    {
+      text: t('detail'),
+    },
+    {
+      text: t('facilities'),
+    },
+    {
+      text: t('location'),
+    },
+    {
+      text: t('reviews'),
+    },
+    {
+      text: t('info'),
+    },
+  ];
   const animatedTranslateY = scrollOffsetY.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [0, -Scroll_Distance],
@@ -69,7 +72,7 @@ export default React.memo(function DynamicHeader({
   const onShare = async () => {
     Share.share({
       message: `Temukan kenyamanan dan kemudahan di jantung kawasan Mangga Besar Jakarta yang ramai di Belvena Hotel, di mana studio yang nyaman dan dirancang secara efisien ini menjanjikan masa menginap yang nyaman bagi penjelajah perkotaan dan pelancong bisnis.`,
-      url: 'https://www.travelio.com/property/jakarta/belvena-hotel-mangga-besar?handpicked=&nights=31&searchType=monthly&checkIn=18-01-2024&checkOut=18-02-2024&roomName=Standard%20Room&roomBreakfast=0&guest=1',
+      url: 'https://www.agoda.com/?cid=1891474&tag=c0ba56c3-f836-b8c6-7f0e-8ab5ff0441fe&gclid=Cj0KCQiAwbitBhDIARIsABfFYIL1meATggkwP30pbwJEWDr94Q57mesRYq9RE14HRI-FIxhht18AEu4aAvGlEALw_wcB&ds=gL2Af8%2BwwrSh7B8d',
     })
       .then(res => {
         console.log(res);

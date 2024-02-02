@@ -7,16 +7,17 @@ import WrapperContent from '../../Explore/components/WrapperContent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import FilterSort from '../../Explore/components/DetailAccommodation/Review/FilterSort';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 const listSort = ['Lowest Price', 'Highest Price', 'Best Rating'];
 
 export default function SortBy({onSort}) {
   const [checked, setChecked] = useState(undefined);
-
+  const {t}= useLanguage()
   return (
     <WrapperContent
       onPressSeeAll={() => console.log(1)}
-      heading="Sorts results by"
+      heading={t('sort_result')}
       styleHeading={{
         paddingHorizontal: 0,
       }}

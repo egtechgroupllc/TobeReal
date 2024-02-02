@@ -14,7 +14,9 @@ import {CustomInput} from '../../../../../../components';
 import {IconAdd, IconShield} from '../../../../../../assets/icon/Icon';
 import Button from '../../../../components/Button';
 import Header from '../../../../components/Header';
+import { useLanguage } from '../../../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const data = [
     {
       id: 1,
@@ -62,7 +64,7 @@ export default function Content() {
         <CustomText
           textType="semiBold"
           style={{...styles.text1, color: COLORS.black}}>
-          Add tags
+          {t('add_tag')}
         </CustomText>
         <LinearGradient
           colors={['#FFC700', '#FADD55']}
@@ -74,7 +76,7 @@ export default function Content() {
             <CustomText
               textType="semiBold"
               style={{...styles.text, color: COLORS.black}}>
-              Your card information will be kept confidential
+              {t('your_card_information')}
             </CustomText>
           </TouchableOpacity>
         </LinearGradient>
@@ -84,14 +86,14 @@ export default function Content() {
           <CustomText
             textType="semiBold"
             style={{...styles.text1, color: COLORS.black}}>
-            Card details
+             {t('card_detail')}
           </CustomText>
           <Image
             source={images.visa}
             style={{width: scale(34), height: scale(11)}}></Image>
         </View>
         <CustomInput
-          placeholder="Card number"
+          placeholder= {t('card_number')}
           style={{
             marginBottom: scale(15),
             height: scale(36),
@@ -102,7 +104,7 @@ export default function Content() {
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomInput
-            placeholder="Expiration date (MM/YY)"
+            placeholder= {t('expiration_date') +" (MM/YY)" }
             style={{
               marginBottom: scale(15),
               height: scale(36),
@@ -112,7 +114,7 @@ export default function Content() {
             }}
           />
           <CustomInput
-            placeholder="Code CVV"
+            placeholder={t('code') +" CVV" }
             style={{
               marginBottom: scale(15),
               height: scale(36),
@@ -123,7 +125,7 @@ export default function Content() {
           />
         </View>
         <CustomInput
-          placeholder="Full name of the cardholder"
+          placeholder={t('full_name_cardholder')}
           style={{
             marginBottom: scale(15),
             height: scale(36),
@@ -134,10 +136,10 @@ export default function Content() {
         <CustomText
           textType="semiBold"
           style={{...styles.text1, color: COLORS.black}}>
-          Address for credit/debit card registration
+          {t('address_for_credit')}
         </CustomText>
         <CustomInput
-          placeholder="Address"
+          placeholder={t('address')}
           style={{
             marginBottom: scale(15),
             height: scale(36),
@@ -147,7 +149,7 @@ export default function Content() {
           }}
         />
         <CustomInput
-          placeholder="Zip code"
+          placeholder={"Zip " + t('code')  }
           style={{
             marginBottom: scale(15),
             height: scale(36),
@@ -157,7 +159,7 @@ export default function Content() {
         />
       </View>
 
-      <Button title={'Submit'} onPress={Submit} />
+      <Button title={t('submit')} onPress={Submit} />
     </View>
   );
 }

@@ -4,11 +4,13 @@ import {images, scale} from '../../assets/constants';
 import BoxPlaceItem from '../Explore/components/ContentAccommodation/BoxPlaceItem';
 import WrapperContent from '../Explore/components/WrapperContent';
 import PromotionCard from './components/PromotionCard';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export default function DailyPromotion() {
+  const {t}= useLanguage()
   return (
     <WrapperContent
-      heading={'Daily Promo'}
+      heading={t('daily_promo')}
       dataList={[...Array(4)].map(item => '321')}
       isList
       renderItem={({item}) => (

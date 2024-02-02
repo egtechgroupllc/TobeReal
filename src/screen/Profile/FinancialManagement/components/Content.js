@@ -6,7 +6,9 @@ import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../../components/CustomText';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const data = [
     {
       id: 1,
@@ -46,7 +48,7 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading={'Financial management'}
+        subHeading={t('financial_management')}
         noti={true}
         onPress={goBack}
         notify={notify}
@@ -65,7 +67,7 @@ export default function Content() {
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.black}}>
-              Deposit
+              {t('deposit')}
             </CustomText>
           </LinearGradient>
         </TouchableOpacity>
@@ -78,7 +80,7 @@ export default function Content() {
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.black}}>
-              Withdraw
+              {t('withdraw')}
             </CustomText>
           </LinearGradient>
         </TouchableOpacity>
@@ -105,7 +107,7 @@ export default function Content() {
               <CustomText
                 textType="bold"
                 style={{...styles.text1, color: COLORS.black}}>
-                Balance
+                {t('balance')}
               </CustomText>
               <CustomText
                 textType="bold"
@@ -133,7 +135,7 @@ export default function Content() {
               <CustomText
                 textType="bold"
                 style={{...styles.text1, color: COLORS.black}}>
-                Bonus
+                {t('bonus')}
               </CustomText>
               <CustomText
                 textType="bold"
@@ -158,7 +160,7 @@ export default function Content() {
           <CustomText
             textType="bold"
             style={{...styles.text1, color: COLORS.black}}>
-            Gift account
+           {t('gift_account')}
           </CustomText>
           <CustomText
             textType="bold"
@@ -168,7 +170,7 @@ export default function Content() {
         </View>
       </LinearGradient>
       <CategoriesButton
-        title={'Reward membership points'}
+        title={t('reward_membership')}
         onPress={onPress}
         large={true}
         style={{marginTop: scale(10)}}
@@ -182,7 +184,7 @@ export default function Content() {
           <CustomText
             textType="bold"
             style={{...styles.text0, color: COLORS.black}}>
-            Upgrade account
+           {t('upgrade_account')}
           </CustomText>
         </LinearGradient>
       </TouchableOpacity>
@@ -195,17 +197,17 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Day
+          {t('day')}
         </CustomText>
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Quantity
+          {t('quantity')}
         </CustomText>
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-          Status
+          {t('status')}
         </CustomText>
       </View>
       <View style={{marginBottom: scale(50)}}>

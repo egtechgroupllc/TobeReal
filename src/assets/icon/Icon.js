@@ -299,8 +299,8 @@ export function IconDown({fill, ...props}) {
 export function IconShare({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(23)}
-      height={props?.style?.height || scale(23)}
+    width={props?.style?.width || scale(30)}
+      height={props?.style?.height || scale(30)}
       viewBox="0 0 23 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -323,8 +323,8 @@ export function IconShare({fill, ...props}) {
 export function IconFacebook({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(24)}
-      height={props?.style?.height || scale(23)}
+    width={props?.style?.width || scale(30)}
+    height={props?.style?.height || scale(30)}
       viewBox="0 0 24 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -342,8 +342,8 @@ export function IconFacebook({fill, ...props}) {
 export function IconTwitter({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(24)}
-      height={props?.style?.height || scale(23)}
+    width={props?.style?.width || scale(30)}
+      height={props?.style?.height || scale(30)}
       viewBox="0 0 24 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -386,8 +386,8 @@ export function IconCamera({fill, ...props}) {
 export function IconYoutube({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(24)}
-      height={props?.style?.height || scale(23)}
+      width={props?.style?.width || scale(30)}
+      height={props?.style?.height || scale(30)}
       viewBox="0 0 24 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -560,8 +560,8 @@ export function IconShield({fill, ...props}) {
 export function IconInstagram({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(24)}
-      height={props?.style?.height || scale(23)}
+    width={props?.style?.width || scale(30)}
+    height={props?.style?.height || scale(30)}
       viewBox="0 0 23 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

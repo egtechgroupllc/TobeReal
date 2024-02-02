@@ -17,8 +17,10 @@ import OptionAccommodation from './OptionAccommodation';
 import {useForm} from 'react-hook-form';
 import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function FindContent({isBuy, rental}) {
+  const {t}= useLanguage()
   const {navigate} = useNavigation();
   const params = useRoute().params;
 
@@ -39,7 +41,7 @@ export default function FindContent({isBuy, rental}) {
           control={control}
           rules={requireField('Vui long them')}
           name="location"
-          defaultValue={'Around me'}
+          defaultValue={t('around_me')}
           iconLeft={IconMarker}
           styleIcon={styles.icon}
           onPress={() =>
@@ -74,7 +76,7 @@ export default function FindContent({isBuy, rental}) {
               text: 'All',
             },
             {
-              text: 'Studio',
+              text: t('studio'),
             },
             {
               text: '1BR',
@@ -103,13 +105,13 @@ export default function FindContent({isBuy, rental}) {
           }}
           data={[
             {
-              text: 'All',
+              text: t('all'),
             },
             {
-              text: 'Full Furnished',
+              text: t('full_furnished'),
             },
             {
-              text: 'Unfurnished',
+              text: t('unfurnished'),
             },
           ]}
         />
@@ -130,13 +132,13 @@ export default function FindContent({isBuy, rental}) {
             }}
             data={[
               {
-                text: 'All',
+                text: t('all'),
               },
               {
-                text: 'Fixed Price',
+                text: t('fixed_price'),
               },
               {
-                text: 'Negotiable',
+                text: t('negotiable'),
               },
             ]}
           />
@@ -149,7 +151,7 @@ export default function FindContent({isBuy, rental}) {
           columnGap: scale(6),
           marginVertical: scale(6),
         }}>
-        <CheckBox text="I am flexible with dates" />
+        <CheckBox text={t('im_flexible')} />
         <CustomButton
           style={styles.question}
           text="?"
@@ -163,7 +165,7 @@ export default function FindContent({isBuy, rental}) {
       <CustomButton
         onPress={handleSubmit(value => console.log(value))}
         buttonType="medium"
-        text="Find Accommodation"
+        text={t('Find_Accommodation')}
         styleText={{
           color: COLORS.white,
           textType: 'bold',

@@ -29,7 +29,9 @@ import {
 import {useForm} from 'react-hook-form';
 import ListImg from '../../../../../Explore/components/DetailAccommodation/ListImg';
 import ImageDetail from '../../../../../Explore/components/DetailAccommodation/ImageDetail';
+import { useLanguage } from '../../../../../../hooks/useLanguage';
 export default function TabContent() {
+  const {t}= useLanguage()
   const {control, watch, handleSubmit} = useForm();
   const navigation = useNavigation();
   const route = useRoute();
@@ -112,14 +114,14 @@ export default function TabContent() {
           color: COLORS.black,
           marginTop: scale(10),
         }}
-        label="Room type title"
+        label={t('room_type_title')}
         control={control}
         name="RoomTypeTitle"
         multiline
         numberOfLines={4}
-        placeholder="Enter room type title"
+        placeholder={t('enter_room_type')}
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
           ...validateMaxAmount(1000, '1000 characters limit'),
         }}
         style={styles.textArea}
@@ -135,14 +137,14 @@ export default function TabContent() {
           color: COLORS.black,
           marginTop: scale(10),
         }}
-        label="Description content"
+        label={t('description_content')}
         control={control}
         name="Description"
         multiline
         numberOfLines={4}
-        placeholder="Enter a description"
+        placeholder={t('enter_a_description')}
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
           ...validateMaxAmount(1000, '1000 characters limit'),
         }}
         style={styles.textArea}
@@ -166,12 +168,12 @@ export default function TabContent() {
           color: COLORS.black,
           marginTop: scale(10),
         }}
-        label="Acreage(m2)"
+        label={t('acreage')+'(m2)'}
         control={control}
         name="acreage"
-        placeholder="Enter the land area"
+        placeholder={t('enter_the_land_area')}
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
         }}
         style={styles.textInput}
       />
@@ -186,12 +188,12 @@ export default function TabContent() {
             color: COLORS.black,
             marginTop: scale(10),
           }}
-          label="Price"
+          label={t('price')}
           control={control}
           name="price"
-          placeholder="Enter price"
+          placeholder={t('enter_price')}
           rules={{
-            ...requireField('This field is required'),
+            ...requireField(t('this_field_required')),
           }}
           style={{
             height: scale(40),
@@ -235,7 +237,7 @@ export default function TabContent() {
           marginBottom: scale(10),
           marginTop: scale(20),
         }}>
-        Select bed type
+          {t('select_bed_type')}
       </CustomText>
       <TouchableOpacity
         style={!showBed ? styles.buttonBed : styles.buttonBeds}
@@ -247,7 +249,7 @@ export default function TabContent() {
             color: COLORS.black,
             paddingHorizontal: scale(20),
           }}>
-          Select bed type
+          {t('select_bed_type')}
         </CustomText>
       </TouchableOpacity>
       {showBed && (
@@ -446,7 +448,7 @@ export default function TabContent() {
           marginTop: scale(10),
           marginBottom: scale(10),
         }}>
-        Select service
+        {t('select_service')}
       </CustomText>
       <SelectService />
       <CustomText
@@ -458,7 +460,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Room images
+        {t('room_images')}
       </CustomText>
       <CustomText
         textType="regular"
@@ -468,7 +470,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-        Update images to a maximum of two images
+        {t('update_image_to_maximum')}
       </CustomText>
       <View
         style={{
@@ -479,7 +481,7 @@ export default function TabContent() {
           <IconCamera />
         </TouchableOpacity>
       </View>
-      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
+      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3', marginBottom:scale(10)}}>
         {roomImage.length > 0 ? (
           <ImageDetail
             dataImg={roomImage}
@@ -515,13 +517,11 @@ export default function TabContent() {
           style={{
             ...styles.text3,
             color: COLORS.black,
-            marginLeft: scale(-45),
-            width: '70%',
+            width: '80%',
             alignSelf: 'flex-start',
-            marginTop: scale(10),
+            marginTop: scale(5),
           }}>
-          Do you want to deposit with the Vietnamese brokerage community of 10k
-          people?
+          {t('do_you_agree')}
         </CustomText>
         <TouchableOpacity onPress={toggleCheckBox1}>
           {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
@@ -542,7 +542,7 @@ export default function TabContent() {
         discovered, your account will be permanently banned.
       </CustomText> */}
       <View style={{width: '100%', marginBottom: scale(30)}}>
-        <Button title={'Confirm'} onPress={handleSubmit(ok)} />
+        <Button title= {t('confirm')} onPress={handleSubmit(ok)} />
       </View>
     </View>
   );

@@ -12,13 +12,15 @@ import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {requireField} from '../../../../utils/validate';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  
   const toggleView = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -39,21 +41,21 @@ export default function Content() {
       <View style={styles.content}>
         <CustomInput
           control={control}
-          label="Email"
+          label={t('email')}
           name="username34567u76"
           sizeInput="medium"
           placeholder="example@gmail.com"
-          rules={requireField('This field is required')}
+          rules={requireField(t('this_field_required'))}
         />
 
         <CustomInput
           control={control}
-          label="Password"
+          label={t('password')}
           name="password"
-          rules={requireField('This field is required')}
+          rules={requireField(t('this_field_required'))}
           sizeInput="medium"
           secureTextEntry={passwordVisible}
-          placeholder="Enter Your Password"
+          placeholder={t('enter_password')}
           onPressIconRight={toggleView}
           iconRight={
             passwordVisible ? IconUnViewablePassword : IconViewablePassword
@@ -64,27 +66,27 @@ export default function Content() {
           onPress={gotoForgotPassword}
           textType="semiBold"
           style={{...styles.text1, marginLeft: 'auto'}}>
-          Forgot Password?
+          {t('forgot_password')}
         </CustomText>
 
         <CustomButton
           onPress={handleSubmit(handleLogin)}
           buttonType="large"
-          text="Login"
+          text={t('login')}
           linearGradientProps
         />
       </View>
 
       <View style={styles.footer}>
         <CustomText textType="semiBold" style={{...styles.text}}>
-          Don't have an account?
+        {t('dont_have_account')}
         </CustomText>
 
         <CustomText
           onPress={gotoRegister}
           textType="semiBold"
           style={{...styles.text1, marginLeft: scale(10)}}>
-          Sign Up
+          {t('signup')}
         </CustomText>
       </View>
     </View>

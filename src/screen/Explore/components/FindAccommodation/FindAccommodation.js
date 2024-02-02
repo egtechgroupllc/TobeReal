@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {WIDTH, scale} from '../../../../assets/constants';
 import {
@@ -12,35 +12,38 @@ import {
 import {Category, TabSelect} from '../../../../components';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
+
+export default function FindAccommodation() {
+  const {t}= useLanguage()
 const listAccommodation = [
   {
-    text: 'All',
+    text: t('all'),
     icon: IconCity,
   },
   {
-    text: 'Apartment',
+    text: t('apartment'),
     icon: IconApartment,
   },
   {
-    text: 'House',
+    text: t('house'),
     icon: IconHouse,
   },
   {
-    text: 'Villa',
+    text: t('villa'),
     icon: IconVilla,
   },
   {
-    text: 'Room',
+    text: t('room'),
     icon: IconRoom,
   },
   {
-    text: 'Others',
+    text: t('others'),
     icon: IconAccommodationOther,
   },
 ];
 
-export default function FindAccommodation() {
   const [tabSelect, setTabSelect] = useState('RENT');
   const [category, setCategory] = useState();
 
@@ -52,7 +55,7 @@ export default function FindAccommodation() {
         marginTop:scale(20)
       }}>
       <TabSelect
-        data={['RENT', 'TOUR', 'BUY']}
+        data={[t('rent'),  t('buy'), t('tour')]}
         onChange={value => {
           setTabSelect(value);
         }}
@@ -61,7 +64,7 @@ export default function FindAccommodation() {
             <View style={styles.category}>
               {tabSelect !== 'BUY' && (
                 <Category
-                  data={['Daily', 'Monthly', 'Yearly']}
+                  data={[t('daily'), t('monthly'), t('yearly')]}
                   onChange={value => setCategory(value)}
                 />
               )}
@@ -76,7 +79,6 @@ export default function FindAccommodation() {
                 }
               />
             </View>
-
             <FindContent isBuy={tabSelect === 'BUY'} rental={category} />
           </>
         )}

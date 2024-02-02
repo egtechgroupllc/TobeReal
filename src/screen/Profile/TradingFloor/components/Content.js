@@ -7,8 +7,10 @@ import { SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -20,9 +22,9 @@ export default function Content() {
   };
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={'Managing the trading floor'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={"Create a trading platform for free"} onPress={onPress} large={true} style={{marginTop:scale(10)}}/>
-          <CategoriesButton title={"Invitation to join the trading platform"} onPress={onPress} large={true}/>
+          <Header goback={true} subHeading={t('managing_trading')} noti={true} onPress={goBack} notify={notify}></Header>
+          <CategoriesButton title={t('create_trading')} onPress={onPress} large={true} style={{marginTop:scale(10)}}/>
+          <CategoriesButton title={t('invitation_trading')} onPress={onPress} large={true}/>
     </View>
   );
 }

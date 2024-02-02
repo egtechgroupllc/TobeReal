@@ -3,6 +3,7 @@ import React from 'react';
 import {SIZES, images, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import CustomImage from '../../../components/CustomImage';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 export default function PromotionCard({
   discountText,
@@ -12,6 +13,7 @@ export default function PromotionCard({
   colorTicket,
   isReverse,
 }) {
+  const {t}= useLanguage()
   const colorTicketStyle = colorTicket || '#F9BF6B';
   return (
     <View style={styles.wrapper}>
@@ -31,7 +33,7 @@ export default function PromotionCard({
             style={{
               fontSize: SIZES.xMedium,
             }}>
-            {rental} rental promotions
+            {rental} {t('rental_promotions')}
           </CustomText>
 
           <View>

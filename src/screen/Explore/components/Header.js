@@ -17,6 +17,7 @@ import {
 import {CustomButton, CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import {useNavigation} from '@react-navigation/native';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 const listSocial = [
   {
@@ -37,6 +38,7 @@ const listSocial = [
   },
 ];
 export default function Header() {
+  const {t}= useLanguage()
   const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -53,7 +55,7 @@ export default function Header() {
           }}>
           <CustomInput
             iconLeft={IconSearch}
-            placeholder="Find Accommodation..."
+            placeholder={t('find_accommodation')}
             editable={false}
             onPress={() =>
               navigate('NoBottomTab', {
@@ -66,7 +68,7 @@ export default function Header() {
 
       <View style={styles.content}>
         <CustomButton
-          text="We are always here to support you"
+          text={t('we_are_always_here')}
           buttonType="medium"
           styleText={{
             textTransform: 'uppercase',

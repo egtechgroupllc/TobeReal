@@ -11,6 +11,7 @@ import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 import TopImg from './BoxPlaceItem/TopImg';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function BoxPlaceItem({
   data,
@@ -26,6 +27,7 @@ export default function BoxPlaceItem({
   isUnitAvailable,
   styleWrapper,
 }) {
+  const {t}= useLanguage()
   const {navigate, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -52,10 +54,10 @@ export default function BoxPlaceItem({
             width: '100%',
             height: styleWrapper?.height ? '60%' : scale(150),
           }}>
-          <Ribbon text="Promotion 30%  🏨" />
+          <Ribbon text= {t('promotion') +" 30%  🏨"}  />
 
           <CustomImage
-            src="https://cdn.travelio.id/hotel/b6906-6538c063f4bc0a28cbe6e5e9/Deluxe-King_l.jpg"
+            src="https://pix8.agoda.net/hotelImages/281378/-1/4a990da89eaae1f2a7ba6bb0e0af827f.jpg?ca=0&ce=1&s=1024x768"
             style={styles.img}
           />
 
@@ -78,7 +80,7 @@ export default function BoxPlaceItem({
             textType="semiBold"
             style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
             numberOfLines={1}>
-            Hotel Residence
+            {t('hotel_residence')}
           </CustomText>
           {isStar && <Star rating={rating} />}
 

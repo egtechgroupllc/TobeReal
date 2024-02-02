@@ -5,6 +5,7 @@ import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconHouse} from '../../../../assets/icon/Icon';
 import BottomSheet from '../../../../components/BottomSheet';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 const listFacilities = [
   'City View',
@@ -22,13 +23,14 @@ const listFacilities = [
 ];
 
 export default function InfoUnitFacilities() {
+  const {t}= useLanguage()
   const bottomSheetRef = useRef();
 
   return (
     <WrapperContent
       isSeeAll
       onPressSeeAll={() => bottomSheetRef.current.open()}
-      heading="Unit Facilities"
+      heading={t('unit_facilities')}
       styleContent={{
         paddingHorizontal: scale(16),
         rowGap: scale(10),
@@ -46,7 +48,7 @@ export default function InfoUnitFacilities() {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Room amenities
+         {t('room_amenities')}
         </CustomText>
       </View>
 

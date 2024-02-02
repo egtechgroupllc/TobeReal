@@ -7,15 +7,17 @@ import WrapperContent from '../../Explore/components/WrapperContent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import {formatPrice} from '../../../utils/format';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 const min = 0;
 const max = 100000;
 export default function Budget() {
+  const {t}= useLanguage()
   const [multiSliderValue, setMultiSliderValue] = useState([min, max]);
 
   return (
     <WrapperContent
-      heading="Budget"
+      heading={t('budget')}
       styleHeading={{
         paddingHorizontal: 0,
       }}

@@ -20,7 +20,9 @@ import {useNavigation} from '@react-navigation/native';
 import Wrapper from '../../components/Wrapper';
 import {useForm} from 'react-hook-form';
 import { requireField } from '../../../../utils/validate';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const {control,handleSubmit} = useForm();
   const [phase, setPhase] = useState(1);
   const navigation = useNavigation();
@@ -46,13 +48,13 @@ export default function Content() {
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
-              Heading1="Forgot Password?"
+              Heading1={t('forgot_password')}
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
           <View style={{marginBottom: scale(10)}}>
           <CustomInput
-            placeholder="Email"
+            placeholder={t('email')}
             style={{
               width: scale(312),
               height: scale(48),
@@ -60,7 +62,7 @@ export default function Content() {
             control={control}
             name="email"
             rules={{
-              ...requireField('This field is required'),
+              ...requireField(t('this_field_required')),
             }}
           />
           </View>
@@ -71,7 +73,7 @@ export default function Content() {
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-                Submit
+              {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -88,7 +90,7 @@ export default function Content() {
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
-              Heading1="Forgot Password?"
+              Heading1={t('forgot_password')}
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
@@ -97,9 +99,9 @@ export default function Content() {
             control={control}
             name="code"
             rules={{
-              ...requireField('This field is required'),
+              ...requireField(t('this_field_required')),
             }}
-            placeholder="CODE"
+            placeholder={t('code')}
             style={{
               width: scale(312),
               // marginBottom: scale(25),
@@ -114,7 +116,7 @@ export default function Content() {
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-                Submit
+              {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -131,7 +133,7 @@ export default function Content() {
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
-              Heading1="Enter new password"
+              Heading1={t('enter_new_password')}
               styleWrapper={{marginBottom: scale(30)}}
             />
           </View>
@@ -140,9 +142,9 @@ export default function Content() {
            control={control}
            name="password"
            rules={{
-             ...requireField('This field is required'),
+             ...requireField(t('this_field_required')),
            }}
-            placeholder="Password"
+            placeholder={t('password')}
             style={{
               width: scale(312),
               height: scale(48),
@@ -155,9 +157,9 @@ export default function Content() {
            control={control}
            name="passwordconfirm"
            rules={{
-             ...requireField('This field is required'),
+             ...requireField(t('this_field_required')),
            }}
-            placeholder="Confirm Password"
+            placeholder={t('confirm_password')}
             style={{
               width: scale(312),
               height: scale(48),
@@ -172,7 +174,7 @@ export default function Content() {
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-                Submit
+              {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -186,7 +188,7 @@ export default function Content() {
         }}>
         <View>
           <CustomText textType="semiBold" style={{...styles.text}}>
-            Already have an account?
+          {t('already_have_account')}
           </CustomText>
           <View style={styles.line} />
         </View>
@@ -194,7 +196,7 @@ export default function Content() {
           <CustomText
             textType="semiBold"
             style={{...styles.text1, marginLeft: scale(5)}}>
-            Login
+            {t('login')}
           </CustomText>
         </TouchableOpacity>
       </View>

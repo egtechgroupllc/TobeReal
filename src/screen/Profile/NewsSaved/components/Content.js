@@ -7,8 +7,10 @@ import {SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -19,10 +21,10 @@ export default function Content() {
   };
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={'See the news saved'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={"Real estate news"} onPress={onPress} large={true} style={{marginTop:scale(10)}}/>
-          <CategoriesButton title={"Project news"} onPress={onPress} large={true}/>
-          <CategoriesButton title={"Believe in knowledge"} onPress={onPress} large={true}/>
+          <Header goback={true} subHeading={t('see_the_news')} noti={true} onPress={goBack} notify={notify}></Header>
+          <CategoriesButton title={t('real_estate')} onPress={onPress} large={true} style={{marginTop:scale(10)}}/>
+          <CategoriesButton title={t('project_news')} onPress={onPress} large={true}/>
+          <CategoriesButton title={t('believe_in_knowledge')} onPress={onPress} large={true}/>
     </View>
   );
 }

@@ -3,11 +3,13 @@ import React from 'react';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import {SIZES, scale} from '../../../assets/constants';
 import {Category} from '../../../components';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 export default function TypeAccommoda() {
+  const {t}= useLanguage()
   return (
     <WrapperContent
-      heading="Type"
+      heading={t('type')}
       styleHeading={{
         paddingHorizontal: 0,
       }}
@@ -21,7 +23,7 @@ export default function TypeAccommoda() {
       <Category
         noSelect
         isShadow={false}
-        data={['Rent', 'Tour', 'Buy']}
+        data={[t('rent'), t('tour'), t('buy')]}
         // onPress={value => setCategory(value)}
         styleWrapper={{
           marginTop: scale(10),

@@ -12,7 +12,9 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import CategoriesButton from './CategoriesButton';
+import { useLanguage } from '../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
@@ -33,6 +35,9 @@ export default function Content() {
   };
   const financial = () => {
     navigation.navigate('FinancialScreen');
+  };
+  const selectLanguage = () => {
+    navigation.navigate('SelectLanguageScreen');
   };
   const FaceId = () => {};
   const priceList = () => {
@@ -72,32 +77,32 @@ export default function Content() {
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.white}}>
-              Regular member
+                {t('regular_member')}
             </CustomText>
           </View>
           <View>
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.white}}>
-              Accumulated points:
+              {t('accumulated_points')}:
             </CustomText>
             <CustomText
               textType="bold"
               style={{...styles.text1, color: COLORS.white}}>
-              0.0 Point
+              0.0 {t('point')}
             </CustomText>
             <View style={{flexDirection: 'row'}}>
               <CustomText
                 textType="bold"
                 style={{...styles.text, color: COLORS.white}}>
-                View the plot:
+                {t('view_plot')}:
               </CustomText>
             </View>
             <View style={{flexDirection: 'row'}}>
               <CustomText
                 textType="bold"
                 style={{...styles.text, color: COLORS.white}}>
-                Free news:
+                {t('free_new')}:
               </CustomText>
             </View>
           </View>
@@ -123,7 +128,7 @@ export default function Content() {
       </View>
       <View style={{alignItems:'center', width:'90%'}}>
         <CategoriesButton
-          title={'View personal information'}
+          title={t('view_personal')}
           onPress={viewPersonal}
           viewpersonal={viewpersonal}
           changePW={changePW}
@@ -132,34 +137,39 @@ export default function Content() {
         />
         <View style={{flexDirection: 'row', justifyContent:'space-between', width:'100%'}}>
           <CategoriesButton
-            title={'See the news saved'}
+            title={t('see_the_news')}
             onPress={seeTheNews}
             small={true}
           />
           <CategoriesButton
-            title={'Post management'}
+            title={t('post_management')}
             onPress={postManagement}
             small={true}
             style={{marginLeft: scale(15)}}
           />
         </View>
         <CategoriesButton
-          title={'Financial management'}
+          title={t('financial_management')}
           onPress={financial}
           large={true}
         />
+          <CategoriesButton
+          title={t('select_language')}
+          onPress={selectLanguage}
+          large={true}
+        />
         <CategoriesButton
-          title={'Customer management'}
+          title={t('customer_management')}
           onPress={customerManagement}
           large={true}
         />
         <CategoriesButton
-          title={'Managing the trading floor'}
+          title={t('managing_trading')}
           onPress={managingTradeFloor}
           large={true}
         />
         <CategoriesButton
-          title={'Client'}
+          title={t('client')}
           onPress={viewClient}
           large={true}
           client={client}
@@ -167,12 +177,12 @@ export default function Content() {
           customerRent={CustomersRent}
         />
         <CategoriesButton
-          title={'Posted price list'}
+          title={t('post_price')}
           onPress={priceList}
           large={true}
         />
         <CategoriesButton
-          title={'Install Face ID'}
+          title={t('install_faceid')}
           onPress={FaceId}
           large={true}
         />

@@ -41,10 +41,10 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         textType="medium"
         style={{fontSize: SIZES.xMedium}}
         numberOfLines={numberOfLines}>
-        Vị trí trung tâm, nhân viên thân thiện, ăn sáng buffet đầy đủ và ngon.
-        Mình rất thích sữa tắm và dầu gội của khách sạn! ngon. Mình rất thích
-        sữa tắm và dầu gội của khách sạn! rất thích sữa tắm và dầu gội của khách
-        sạn! rất thích sữa tắm và dầu gội của khách sạn!
+        Central location, friendly staff, full and delicious buffet breakfast.
+        I really like the hotel's shower gel and shampoo! tasty. I really like
+        hotel shower gel and shampoo! really liked the customer's shower gel and shampoo
+        hotel! really liked the hotel's shower gel and shampoo!
       </CustomText>
 
       <CustomText

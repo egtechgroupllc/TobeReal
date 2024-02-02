@@ -14,7 +14,9 @@ import {
 import CustomText from '../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useAuthentication} from '../../../hooks/useAuthentication';
+import { useLanguage } from '../../../hooks/useLanguage';
 export default function Bottom() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const {onClearToken} = useAuthentication();
 
@@ -26,23 +28,23 @@ export default function Bottom() {
           <CustomText
             textType="bold"
             style={{...styles.text1, color: COLORS.white}}>
-            Support
+           {t('support')}
           </CustomText>
           <View style={{marginTop: scale(10)}}>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.white}}>
-              Hotline: ....
+              {t('hotline')}: ....
             </CustomText>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.white}}>
-              Mail: ....
+              {t('email')}: ....
             </CustomText>
             <CustomText
               textType="medium"
               style={{...styles.text, color: COLORS.white}}>
-              WEBSITE: ....
+              {t('website')}: ....
             </CustomText>
           </View>
         </View>
@@ -83,7 +85,7 @@ export default function Bottom() {
           end={{x: 1, y: 0}}
           style={styles.button}>
           <CustomText textType="bold" style={{...styles.text2}}>
-            Log Out
+          {t('log_out')}
           </CustomText>
         </LinearGradient>
       </TouchableOpacity>

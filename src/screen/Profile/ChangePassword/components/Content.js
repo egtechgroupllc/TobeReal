@@ -9,7 +9,9 @@ import Header from '../../components/Header';
 import Button from '../../components/Button';
 import {useForm} from 'react-hook-form';
 import {requireField} from '../../../../utils/validate';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const {control, handleSubmit} = useForm();
   const navigation = useNavigation();
   const goBack = () => {
@@ -21,7 +23,7 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading={'Change Password'}
+        subHeading={t('change_password')}
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
@@ -31,12 +33,12 @@ export default function Content() {
           color: COLORS.black,
           marginTop: scale(60),
         }}
-        label="Old password"
+        label={t('old_password')}
         control={control}
         name="oldpassword"
         // placeholder="Enter the land area"
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
         }}
         style={styles.textInput}
       />
@@ -46,12 +48,12 @@ export default function Content() {
           color: COLORS.black,
           marginTop: scale(20),
         }}
-        label="New password"
+        label={t('new_password')}
         control={control}
         name="newpassword"
         // placeholder="Enter the land area"
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
         }}
         style={styles.textInput}
       />
@@ -62,18 +64,18 @@ export default function Content() {
             color: COLORS.black,
             marginTop: scale(20),
           }}
-          label="Confirm password"
+          label={t('confirm_password')}
           control={control}
           name="confirmpassword"
           // placeholder="Enter the land area"
           rules={{
-            ...requireField('This field is required'),
+            ...requireField(t('this_field_required')),
           }}
           style={styles.textInput}
         />
       </View>
 
-      <Button title={'ok'} onPress={handleSubmit(ok)} />
+      <Button title={t('ok')} onPress={handleSubmit(ok)} />
     </View>
   );
 }

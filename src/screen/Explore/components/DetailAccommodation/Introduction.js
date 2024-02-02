@@ -4,14 +4,16 @@ import CustomText from '../../../../components/CustomText';
 import {SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {TabSelect} from '../../../../components';
 import WrapperContent from '../WrapperContent';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 const listTab = ['Description', 'Nearby'];
 export default function Introduction() {
+  const {t}= useLanguage()
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   return (
     <WrapperContent
-      heading="Introduction"
+      heading={t('introduction')}
       styleContent={{
         paddingHorizontal: scale(16),
       }}>
@@ -29,24 +31,24 @@ export default function Introduction() {
               style={{
                 lineHeight: 18,
               }}>
-              Lưu trú tại Cochin Sang Hotel là một lựa chọn đúng đắn khi quý
-              khách đến thăm Phường Bến Thành. khách sạn sở hữu vị trí đắc địa
-              cách sân bay Sân bay Tân Sơn Nhất 6,64 km. Lưu trú tại Cochin Sang
-              Hotel là một lựa chọn đúng đắn khi quý khách đến thăm Phường Bến
-              Thành. khách sạn sở hữu vị trí đắc địa cách sân bay Sân bay Tân
-              Sơn Nhất 6,64 km.
+              Staying at Cochin Sang Hotel is a right choice when you visit
+              visitors to Ben Thanh Ward. The hotel possesses a prime location
+              6.64 km from Tan Son Nhat Airport. Stay at Cochin Sang
+              Hotel is a good choice when you visit Ben Ward
+              Wall. The hotel possesses a prime location away from Tan Airport
+              Son Nhat 6.64 km.
             </CustomText>
           ) : (
             <CustomText
               style={{
                 lineHeight: 18,
               }}>
-              Hãy tận hưởng trải nghiệm lưu trú có một không hai tại toà nhà
-              mang đậm dấu ấn lịch sử của Cochin Sang Hotel, điều quý khách khó
-              có thể tìm thấy tại bất kỳ đâu. {'\n'}Nếu dự định có một kỳ nghỉ
-              dài, thì Cochin Sang Hotel chính là lựa chọn dành cho quý khách.
-              Với đầy đủ tiện nghi với chất lượng dịch vụ tuyệt vời, Cochin Sang
-              Hotel sẽ khiến quý khách cảm thấy thoải mái như đang ở nhà vậy.
+              Enjoy a unique stay experience at the building
+              Cochin Sang Hotel's rich historical imprint, which is difficult for you
+              can be found anywhere. {'\n'}If planning to have a vacation
+              long, then Cochin Sang Hotel is the choice for you.
+              With full amenities and excellent service quality, Cochin Sang
+              Hotel will make you feel comfortable like you are at home.
             </CustomText>
           )
         }

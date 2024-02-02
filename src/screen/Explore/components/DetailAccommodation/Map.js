@@ -10,10 +10,12 @@ import {IconMapView} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import WrapperContent from '../WrapperContent';
 import CustomMarker from '../../../Map/CustomMarker';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Map() {
+  const {t}= useLanguage()
   return (
-    <WrapperContent heading="Map View" isShadow styleContent={styles.wrapper}>
+    <WrapperContent heading={t('map_view')} isShadow styleContent={styles.wrapper}>
       <View
         style={{
           height: '100%',

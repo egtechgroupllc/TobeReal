@@ -4,6 +4,7 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import CustomText from '../../../components/CustomText';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 const listSort = [
   {
@@ -26,11 +27,11 @@ const listSort = [
 
 export default function RatingReview({onSort}) {
   const [checked, setChecked] = useState(undefined);
-
+  const {t}= useLanguage()
   return (
     <WrapperContent
       onPressSeeAll={() => console.log(1)}
-      heading={`Review score`}
+      heading={t('review_score')}
       styleHeading={{
         paddingHorizontal: 0,
       }}

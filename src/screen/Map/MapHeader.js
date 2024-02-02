@@ -10,6 +10,7 @@ import Budget from './Header/Budget';
 import SortBy from './Header/SortBy';
 import RatingReview from './Header/RatingReview';
 import TypeAccommoda from './Header/TypeAccommoda';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const listFill = [
   {
@@ -26,6 +27,7 @@ const listFill = [
   },
 ];
 export default function MapHeader() {
+  const {t}= useLanguage()
   const bottomSheetRef = useRef();
 
   return (
@@ -37,7 +39,7 @@ export default function MapHeader() {
       {/* <HeaderBar /> */}
       <View style={{}}>
         <FilterSort
-          text="Filter"
+          text={t('filter')}
           listFill={listFill}
           noSelectDefault
           onSort={() => bottomSheetRef.current.open()}
@@ -45,12 +47,12 @@ export default function MapHeader() {
 
         <BottomSheet
           snapPoints={['50%', '80%']}
-          titleIndicator={'Filter & Sort'}
+          titleIndicator={t('filter&sort')}
           ref={bottomSheetRef}
           styleContent={{
             paddingHorizontal: scale(16),
           }}>
-          <CustomInput placeholder="Accommodation Name" />
+          <CustomInput placeholder={t('accommodation_name')} />
           <TypeAccommoda />
           <RatingReview />
           <SortBy />

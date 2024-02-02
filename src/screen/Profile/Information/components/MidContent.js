@@ -12,7 +12,9 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
+import { useLanguage } from '../../../../hooks/useLanguage';
 export default function MidContent() {
+  const {t}= useLanguage()
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -30,7 +32,7 @@ export default function MidContent() {
             <CustomText
               textType="bold"
               style={{...styles.text1, color: COLORS.white}}>
-              Balance
+              {t('balance')}
             </CustomText>
             <CustomText
               textType="bold"
@@ -46,7 +48,7 @@ export default function MidContent() {
             <CustomText
               textType="bold"
               style={{...styles.text1, color: COLORS.white}}>
-              Bonus
+              {t('bonus')}
             </CustomText>
             <CustomText
               textType="bold"
@@ -69,7 +71,7 @@ export default function MidContent() {
           <CustomText
             textType="bold"
             style={{...styles.text1, color: COLORS.white}}>
-            Donated
+                 {t('donated')}
           </CustomText>
           <CustomText
             textType="bold"
@@ -84,7 +86,7 @@ export default function MidContent() {
             <CustomText
               textType="regular"
               style={{...styles.text, color: COLORS.black}}>
-              Main expiration date:
+             {t('main_expiration')}:
             </CustomText>
             <CustomText
               textType="regular"
@@ -92,7 +94,7 @@ export default function MidContent() {
                 ...styles.text,
                 color: COLORS.black,
               }}>
-              Normal expiration date:
+             {t('normal_expiration')}:
             </CustomText>
             <CustomText
               textType="regular"
@@ -100,7 +102,7 @@ export default function MidContent() {
                 ...styles.text,
                 color: COLORS.black,
               }}>
-              Gift expiration date:
+             {t('gift_expiration')}:
             </CustomText>
           </View>
           <View>

@@ -13,7 +13,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
+import { useLanguage } from '../../../../../hooks/useLanguage';
 export default function Content() {
+  const {t}= useLanguage()
   const data = [
     {
       id: 1,
@@ -58,7 +60,7 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading={'Customers rent the project'}
+        subHeading=  {t('customer_rent_project')}
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
@@ -70,7 +72,7 @@ export default function Content() {
           marginTop: scale(60),
           color: COLORS.black,
         }}>
-        Select Province/City:
+       {t('select_province_city')}:
       </CustomText>
       <CustomInput
         style={{
@@ -82,7 +84,7 @@ export default function Content() {
       <CustomText
         textType="medium"
         style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
-        Select District:
+        {t('select_district')}:
       </CustomText>
       <CustomInput
         style={{
@@ -91,7 +93,7 @@ export default function Content() {
           backgroundColor: '#E3E3E3',
         }}
       />
-      <Button title={'Search'} onPress={Search} />
+      <Button title={t('search')} onPress={Search} />
       <View style={{marginBottom: scale(50)}}>
         {data && data.length > 0 ? (
           <FlatList
@@ -193,7 +195,7 @@ export default function Content() {
                       <CustomText
                         textType="bold"
                         style={{...styles.text2, color: COLORS.black}}>
-                        Buy
+                        {t('buy')}
                       </CustomText>
                     </LinearGradient>
                   </TouchableOpacity>

@@ -3,18 +3,20 @@ import React from 'react';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import {scale} from '../../../../assets/constants';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function RecommendedApartments({
   isSeeAll = true,
   isCategory = true,
 }) {
+  const {t}= useLanguage()
   return (
     <WrapperContent
       isSeeAll={isSeeAll}
       isCategory={isCategory}
       onPressSeeAll={() => console.log(1)}
       onPressCategory={item => console.log(item)}
-      heading="Recommended Apartments 🏬">
+      heading={t('recommend_apartments')}>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

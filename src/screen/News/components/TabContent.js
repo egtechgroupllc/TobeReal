@@ -7,7 +7,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../components/CustomText';
 import { IconNoHistory } from '../../../assets/icon/Icon';
 import {useNavigation} from '@react-navigation/native';
+import { useLanguage } from '../../../hooks/useLanguage';
 export default function TabContent() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const [tabSelect, setTabSelect] = useState('Post news');
   const [viewbenefit, setViewbenefit] = useState(false);
@@ -71,13 +73,13 @@ export default function TabContent() {
       {tabSelect == 'Post news' ? (
         <View>
           <CategoriesButton
-            title={'Benefits and annual account maintenance fees'}
+            title={t('benefit_and_annual')}
             onPress={viewBenefit}
             viewbenefit={viewbenefit}
           />
-          <CategoriesButton title={'Posting package'} onPress={viewPackage} viewpackage={viewpakage}/>
-          <CategoriesButton title={'Cost for each type of news'} viewcostnew={viewcostnew} onPress={viewCostnew}/>
-          <CategoriesButton title={'Create an online trading platform'} viewtradingflatform={viewtradingflatform} onPress={viewTradingflatform}/>
+          <CategoriesButton title={t('posting_package')} onPress={viewPackage} viewpackage={viewpakage}/>
+          <CategoriesButton title={t('cost_for_each')} viewcostnew={viewcostnew} onPress={viewCostnew}/>
+          <CategoriesButton title={t('create_an_online')} viewtradingflatform={viewtradingflatform} onPress={viewTradingflatform}/>
           <TouchableOpacity onPress={goPostScreen}
             style={{alignItems: 'center', marginTop: scale(50), marginBottom:scale(30),width: '50%',alignSelf:'center'}}>
             <LinearGradient
@@ -86,7 +88,7 @@ export default function TabContent() {
               end={{x: 1, y: 0}}
               style={[styles.button]}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-                Post
+               {t('post')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>

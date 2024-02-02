@@ -6,12 +6,12 @@ import CustomText from '../../../../components/CustomText';
 import {IconApartment, IconImg} from '../../../../assets/icon/Icon';
 import ListImg from './ListImg';
 const listImg = [
-  'https://cdn.travelio.id/hotel/771b9-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-52-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/31e52-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-11-at-6-17-28-PM-v1_l.jpg',
-  'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/771b9-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-52-PM_l.jpeg',
-  'https://cdn.travelio.id/hotel/31e52-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-11-at-6-17-28-PM-v1_l.jpg',
-  'https://cdn.travelio.id/hotel/c6509-65782ba4220311eabb99df73/WhatsApp-Image-2023-12-12-at-3-32-49-PM_l.jpeg',
+  'https://pix8.agoda.net/hotelImages/394352/-1/1bafe96ba726850e9276f7de411d0629.jpg?ca=7&ce=1&s=512x384',
+  'https://pix8.agoda.net/hotelImages/394352/-1/1adbb8e3752c01c9fef10ec472a8dc6c.jpg?ca=7&ce=1&s=512x384',
+  'https://pix8.agoda.net/hotelImages/394352/-1/e573e0655c431a2fb4b990e9e3d8454c.jpg?ca=7&ce=1&s=512x384',
+  'https://pix8.agoda.net/hotelImages/394352/-1/998863bd621a755d72a7352050117433.jpg?ca=7&ce=1&s=512x384',
+  'https://pix8.agoda.net/hotelImages/394352/-1/52fab92ef50f7bd0cb63da5b81ac3eed.jpg?ca=7&ce=1&s=512x384',
+  'https://pix8.agoda.net/geo/poi/22300/2_22300_04.jpg?ca=7&ce=1&s=512x384',
 ];
 
 export default function ImageDetail({onLayout,dataImg=listImg,styleWrapper}) {

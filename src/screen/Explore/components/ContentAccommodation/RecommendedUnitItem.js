@@ -41,7 +41,7 @@ export default function RecommendedUnitItem({
       ]}>
       <ImageBackground
         resizeMode="stretch"
-        src="https://cdn.travelio.id/hotel/b6906-6538c063f4bc0a28cbe6e5e9/Deluxe-King_l.jpg"
+        src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
         style={[
           styles.img,
           styesWrapper,

@@ -10,13 +10,15 @@ import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
 import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
 import RecommendedApartments from './RecommendedApartments';
 import BigCity from './BigCity';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function ContentAccommodation() {
+  const {t}= useLanguage()
   return (
     <View style={styles.wrapper}>
       <WrapperContent
-        heading="Hotel Residence"
-        subHeading="Seamless Living, Make Hotel Your Permanent Home!">
+        heading={t('hotel_residence')}
+        subHeading={t('seamless_living')}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -36,7 +38,7 @@ export default function ContentAccommodation() {
 
       <WrapperContent
         onPressSeeAll={() => console.log(1)}
-        heading="Travelio Recommended Units">
+        heading={t('saveloka_recommended')}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -51,8 +53,8 @@ export default function ContentAccommodation() {
         isCategory
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
-        heading="Stay Monthly For Cheaper Prices 🤑"
-        subHeading={`Disc. up to ${formatPrice(1000000)}`}
+        heading={t('stay_monthly')}
+        subHeading={t('disc_upto') + ` ${formatPrice(1000000)}`}
         styleWrapper={{backgroundColor: 'transparent'}}>
         <FlatList
           horizontal
@@ -68,8 +70,8 @@ export default function ContentAccommodation() {
         isCategory
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
-        heading="Find Best Units for Staycation 🌴"
-        subHeading={`Disc. up to 30%!`}
+        heading={t('find_best')}
+        subHeading={t('disc_upto') + ` 30%!`}
         styleWrapper={{backgroundColor: '#91F2FF'}}>
         <FlatList
           horizontal
@@ -86,8 +88,8 @@ export default function ContentAccommodation() {
         isSeeAll
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
-        heading="Travelio Premium"
-        subHeading={`Selected premium unit with 5 star service by Travelio`}
+        heading={t('saveloka_premium')}
+        subHeading={t('selected_premium')}
         styleWrapper={{backgroundColor: '#f8eede'}}>
         <FlatList
           horizontal
@@ -106,8 +108,8 @@ export default function ContentAccommodation() {
         isCategory
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
-        heading="Weekly Hot Deals 🔥"
-        subHeading="Ends in"
+        heading={t('weekly_hot_deal')}
+        subHeading={t('ends_in')}
         dayEndDeals={6}>
         <FlatList
           horizontal
@@ -125,7 +127,7 @@ export default function ContentAccommodation() {
         isCategory
         onPressSeeAll={() => console.log(1)}
         onPressCategory={item => console.log(item)}
-        heading="Best Selling Apartment Buildings 🏆">
+        heading={t('best_selling')}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -145,8 +147,8 @@ export default function ContentAccommodation() {
       <RecommendedApartments />
 
       <WrapperContent
-        heading="Looking for a place to stay? 🏠"
-        subHeading="Find “By Travelio” units in Indonesia’s big cities">
+        heading={t('looking_for_a_place')}
+        subHeading={t('find_by_saveloka')}>
         <BigCity />
       </WrapperContent>
     </View>

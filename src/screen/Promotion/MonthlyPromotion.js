@@ -4,11 +4,13 @@ import {images, scale} from '../../assets/constants';
 import BoxPlaceItem from '../Explore/components/ContentAccommodation/BoxPlaceItem';
 import WrapperContent from '../Explore/components/WrapperContent';
 import PromotionCard from './components/PromotionCard';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export default function MonthlyPromotion() {
+  const {t}= useLanguage()
   return (
     <WrapperContent
-      heading={'Monthly Promo'}
+      heading={t('monthly_promo')}
       dataList={[...Array(4)].map(item => '321')}
       isList
       renderItem={({item}) => (

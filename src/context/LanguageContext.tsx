@@ -4,45 +4,50 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import getTranslations from '../languages/languagesApi';
 import vietnamese from '../languages/vi.json';
 import english from '../languages/en.json';
-
+import philipin from '../languages/ph.json';
+import thailand from '../languages/th.json';
+import malaysia from '../languages/my.json';
+import indonesia from '../languages/id.json';
 interface LanguageTranslations {
   [locale: string]: {[key: string]: string};
 }
 interface LanguageProps {
   locale?: string;
-  changeLocale?: (data: any) => Promise<any>;
+  changeLocale?: (data: string) => Promise<any>;
   t?: (key: keyof typeof english) => string;
 }
 
 const languageFallback: LanguageTranslations = {
   en: english,
   vi: vietnamese,
+  ph: philipin,
+  th: thailand,
+  my: malaysia,
+  id: indonesia
 };
 
 export const LanguageContext = createContext<LanguageProps>({});
 
 export const LanguageProvider = ({children}: {children: ReactNode}) => {
-  const [locale, setLocale] = useState<string>('en'); //ngôn ngữ hiện tại
-  const [translations, setTranslations] = useState<LanguageTranslations | null>(
-    null,
-  ); //lưu trữ dữ liệu các bản dịch
+  const [locale, setLocale] = useState<string>('en'); // Current language
+  const [translations, setTranslations] = useState<LanguageTranslations>({});
 
   const t = React.useMemo(() => {
     return (key: string) => {
       return (
-        languageFallback[locale][key] ||
-        (translations && translations?.[locale]?.[key]) ||
+        translations?.[locale]?.[key] ||
+        languageFallback?.[locale]?.[key] ||
         key
       );
     };
-  }, [locale, translations]);
+  }, [locale, translations, languageFallback]);
 
   const changeLocale = async (newLocale: string) => {
-    setLocale(newLocale);
     try {
       await EncryptedStorage.setItem('selectedLanguage', newLocale);
+      setLocale(newLocale);
     } catch (error) {
-      //_console.log(error);
+      console.log(error);
     }
   };
 
@@ -63,6 +68,7 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
         const selectedLanguage = await EncryptedStorage.getItem(
           'selectedLanguage',
         );
+      
         if (selectedLanguage) {
           setLocale(selectedLanguage);
         }

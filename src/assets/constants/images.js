@@ -20,4 +20,10 @@ export default {
   voucher50: require('../images/voucher50.png'),
   emptyWish: require('../images/emptyWish.png'),
   contactHelp: require('../images/contactHelp.png'),
+  usa: require('../images/usa.png'),
+  vietnam:require('../images/vietnam.png'),
+  philipin:require('../images/philipin.png'),
+  indonesia:require('../images/indonesia.png'),
+  malaysia:require('../images/malaysia.png'),
+  thailand:require('../images/thailand.png'),
 };

@@ -15,8 +15,10 @@ import {
   validateEmail,
   validateEqualLength,
 } from '../../../../utils/validate';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const {control, watch, handleSubmit} = useForm();
   const {goBack} = useNavigation();
 
@@ -41,22 +43,22 @@ export default function Content() {
         control={control}
         sizeInput="medium"
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
         }}
         name="username"
-        placeholder="Enter Your Username"
+        placeholder={t('enter_username')}
       />
       <CustomInput
         control={control}
         sizeInput="medium"
         rules={{
-          ...requireField('Enter your Email address'),
+          ...requireField(t('this_field_required')),
           ...validateEmail(
-            'Sorry, only letters (a-z), numbers (0-9), and periods (.) are allowed.',
+            t('invalid_email'),
           ),
         }}
         name="email"
-        placeholder="Enter Your Email"
+        placeholder={t('enter_email')}
       />
       {/* <CustomInput
         placeholder="Enter Your Phone Number"
@@ -66,14 +68,14 @@ export default function Content() {
         control={control}
         sizeInput="medium"
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
           ...validateEqualLength(
             6,
-            'Use 6 characters or more for your password',
+            t('use_6_characters'),
           ),
         }}
         name="password"
-        placeholder="Enter Your Password"
+        placeholder={t('enter_password')}
         onPressIconRight={toggleViewPassword}
         iconRight={
           !viewPassword ? IconUnViewablePassword : IconViewablePassword
@@ -84,14 +86,14 @@ export default function Content() {
         control={control}
         sizeInput="medium"
         rules={{
-          ...requireField('This field is required'),
+          ...requireField(t('this_field_required')),
           ...confirmField(
             watch('password'),
-            'The entered password does not match. Try again.',
+            t('password_not_match'),
           ),
         }}
         name="passwordConfirm"
-        placeholder="Enter Your Password Confirm"
+        placeholder={t('enter_password_confirm')}
         onPressIconRight={toggleViewPasswordConfirm}
         iconRight={
           !viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
@@ -101,7 +103,7 @@ export default function Content() {
       <CustomButton
         onPress={handleSubmit(handleSignup)}
         buttonType="large"
-        text="Sign Up"
+        text={t('signup')}
         linearGradientProps
         style={{
           marginTop: scale(20),
@@ -120,14 +122,14 @@ export default function Content() {
             ...styles.text,
             textDecorationLine: 'underline',
           }}>
-          Already have an account?
+         {t('already_have_account')}
         </CustomText>
 
         <CustomText
           onPress={goBack}
           textType="semiBold"
           style={{...styles.text1, marginLeft: scale(5)}}>
-          Login
+          {t('login')}
         </CustomText>
       </View>
     </View>

@@ -7,8 +7,10 @@ import { SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -19,13 +21,13 @@ export default function Content() {
   };
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={'Post management'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={"News is showing"}  postManagement={true} style={{marginTop:scale(10)}} number={0}/>
-          <CategoriesButton title={"News waiting for approval"}  postManagement={true} number={0}/>
-          <CategoriesButton title={"Information is not valid"}  postManagement={true} number={0}/>
-          <CategoriesButton title={"Unpaid news"}  postManagement={true} number={0}/>
-          <CategoriesButton title={"Expired news"}  postManagement={true} number={0}/>
-          <CategoriesButton title={"News stopped posting"}  postManagement={true} number={0}/>
+          <Header goback={true} subHeading={t('post_management')} noti={true} onPress={goBack} notify={notify}></Header>
+          <CategoriesButton title={t('news_is_showing')}  postManagement={true} style={{marginTop:scale(10)}} number={0}/>
+          <CategoriesButton title={t('news_waiting')}   postManagement={true} number={0}/>
+          <CategoriesButton title={t('information_not_valid')}   postManagement={true} number={0}/>
+          <CategoriesButton title={t('unpaid_news')}   postManagement={true} number={0}/>
+          <CategoriesButton title={t('expired_news')}   postManagement={true} number={0}/>
+          <CategoriesButton title={t('news_stopped')}   postManagement={true} number={0}/>
     </View>
   );
 }

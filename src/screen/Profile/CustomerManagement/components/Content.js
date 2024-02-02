@@ -7,8 +7,10 @@ import { SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function Content() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -22,9 +24,9 @@ export default function Content() {
   };
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={'Customer management'} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={"List of customers"} onPress={listCustomers} large={true} style={{marginTop:scale(10)}}/>
-          <CategoriesButton title={"Customers see postings"} onPress={onPress} large={true}/>
+          <Header goback={true} subHeading={t('customer_management')} noti={true} onPress={goBack} notify={notify}></Header>
+          <CategoriesButton title={t('list_of_customers')} onPress={listCustomers} large={true} style={{marginTop:scale(10)}}/>
+          <CategoriesButton title={t('customers_see_posting')} onPress={onPress} large={true}/>
     </View>
   );
 }

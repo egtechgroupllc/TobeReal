@@ -7,10 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 import MidContent from './components/MidContent';
 import BotContent from './components/BotContent';
 import HeaderAvatar from '../components/HeaderAvatar';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 
 
 export default function InformationScreen() {
+  const {t}= useLanguage()
   const navigation = useNavigation();
   const goBack = () =>{
    navigation.goBack();
@@ -26,7 +28,7 @@ export default function InformationScreen() {
   }
   return (
     <MainAuth>
-        <HeaderAvatar noti={true} notify={notify} goback={true} onPress={goBack} subHeading={"Personal Information"}/>
+        <HeaderAvatar noti={true} notify={notify} goback={true} onPress={goBack} subHeading={t('personal_information')}/>
         <AvatarImage name={"John"} changeName={true} onPressChangeName={changeName} camera={true} onPressCamera={onPressCamera}/>
         <MidContent/>
         <BotContent/>

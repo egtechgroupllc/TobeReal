@@ -6,10 +6,11 @@ import {CustomButton} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {formatPrice} from '../../../../utils/format';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function BookAccommodation({setBookHeight}) {
   const insets = useSafeAreaInsets();
-
+  const {t}= useLanguage()
   return (
     <View
       style={{...styles.wrapper, paddingBottom: insets.bottom - 5}}
@@ -22,7 +23,7 @@ export default function BookAccommodation({setBookHeight}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Per month from:
+          {t('per_month_from')}
         </CustomText>
         <CustomText
           style={{
@@ -38,7 +39,7 @@ export default function BookAccommodation({setBookHeight}) {
           outline
           buttonType="large"
           style={{flex: 0.7}}
-          text="Contact Host"
+          text=  {t('contact_host')}
           styleText={{
             fontSize: SIZES.xMedium,
           }}
@@ -46,7 +47,7 @@ export default function BookAccommodation({setBookHeight}) {
         <CustomButton
           buttonType="large"
           style={{flex: 1}}
-          text="Book Now"
+          text=  {t('book_now')}
           styleText={{
             fontSize: SIZES.xMedium,
           }}

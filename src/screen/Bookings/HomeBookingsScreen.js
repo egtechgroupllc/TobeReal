@@ -7,11 +7,12 @@ import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
 import EmptyData from '../../components/EmptyData';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const listTab = ['Active Booking', 'Booking History'];
 export default function HomeBookingsScreen() {
   const {navigate} = useNavigation();
-
+  const {t}= useLanguage()
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   return (
@@ -33,7 +34,7 @@ export default function HomeBookingsScreen() {
         {tabSelect === listTab[0] && (
           <CustomButton
             buttonType="medium"
-            text="ADD BOOKING"
+            text={t('add_booking')}
             style={styles.btnAdd}
             styleText={{
               textType: 'semiBold',
@@ -44,8 +45,8 @@ export default function HomeBookingsScreen() {
       </View>
 
       <EmptyData
-        desc={' No active booking yet'}
-        textBtn={'EXPLORE ACCOMMODATION'}
+        desc={t('no_active_booking')}
+        textBtn={t('explore_accommodation')}
       />
     </MainWrapper>
   );

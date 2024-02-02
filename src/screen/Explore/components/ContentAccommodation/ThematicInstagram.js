@@ -5,16 +5,17 @@ import RecommendedUnitItem from './RecommendedUnitItem';
 import {WIDTH, scale} from '../../../../assets/constants';
 import Carousel from 'react-native-new-snap-carousel';
 import {StackActions, useNavigation} from '@react-navigation/native';
+import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function ThematicInstagram() {
   const {dispatch} = useNavigation();
-
+  const {t}= useLanguage()
   return (
     <WrapperContent
       isSeeAll
       onPressSeeAll={() => console.log(1)}
-      heading="Thematic and Instagramable Unit!✨"
-      subHeading="Stay with a New Atmosphere!">
+      heading={t('thematic_instagram')}
+      subHeading={t('stay_with')}>
       <Carousel
         loop
         autoplay
