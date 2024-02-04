@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, TextStyle} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 export const scale = value => {
@@ -46,4 +46,16 @@ export const SHADOW = {
   shadowOpacity: 0.2,
   shadowRadius: 1.41,
   elevation: 2,
+};
+export const MessageStyle = {
+  success: {
+    style: {backgroundColor: '#26A17B'},
+    duration: 3000,
+    titleStyle: SIZES.medium,
+  },
+  error: {
+    style: {backgroundColor: '#FB7181' },
+    duration: 3000,
+    titleStyle: SIZES.medium,
+  },
 };

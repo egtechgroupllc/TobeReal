@@ -19,22 +19,74 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Wrapper from '../../components/Wrapper';
 import {useForm} from 'react-hook-form';
-import { requireField } from '../../../../utils/validate';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {requireField} from '../../../../utils/validate';
+import {useLanguage} from '../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
-  const {control,handleSubmit} = useForm();
+  const {t} = useLanguage();
+  const {control, handleSubmit} = useForm();
   const [phase, setPhase] = useState(1);
   const navigation = useNavigation();
   const gotoLogin = () => {
     navigation.navigate('LoginScreen');
   };
-  const setPhase2 = () => {
-    setPhase(2);
+  // const setPhase2 = () => {
+  //   setPhase(2);
+  // };
+  const setPhase2 = async data => {
+    try {
+      const response = await fetch(
+        'https://your-api-endpoint.com/api/v1/user/auth/forgot-password',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: data.email,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      } else {
+        setPhase(2);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      Alert.alert('Wrong email', 'Invalid email. Please try again.');
+    }
   };
   const setPhase3 = () => {
     setPhase(3);
   };
+  // const newPassword = async data => {
+  //   try {
+  //     const response = await fetch(
+  //       'https://your-api-endpoint.com/api/v1/user/auth/confirm-forgot-password',
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           email: data.email,
+  //           code: data.code,
+  //           password: data.password,
+  //         }),
+  //       },
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error('Login failed');
+  //     } else {
+  //       setPhase(2);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error logging in:', error);
+  //     Alert.alert('Wrong email', 'Invalid email. Please try again.');
+  //   }
+  // };
   return (
     <View style={styles.container}>
       {phase == 1 && (
@@ -53,18 +105,18 @@ export default function Content() {
             />
           </View>
           <View style={{marginBottom: scale(10)}}>
-          <CustomInput
-            placeholder={t('email')}
-            style={{
-              width: scale(312),
-              height: scale(48),
-            }}
-            control={control}
-            name="email"
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-          />
+            <CustomInput
+              placeholder={t('email')}
+              style={{
+                width: scale(312),
+                height: scale(48),
+              }}
+              control={control}
+              name="email"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+            />
           </View>
           <TouchableOpacity onPress={handleSubmit(setPhase2)}>
             <LinearGradient
@@ -73,7 +125,7 @@ export default function Content() {
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-              {t('submit')}
+                {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -81,7 +133,7 @@ export default function Content() {
       )}
       {phase == 2 && (
         <View>
-        <View style={{marginTop: scale(50), alignItems: 'center'}}>
+          <View style={{marginTop: scale(50), alignItems: 'center'}}>
             <Image
               source={images.logo1}
               style={{
@@ -95,19 +147,19 @@ export default function Content() {
             />
           </View>
           <View style={{marginBottom: scale(10)}}>
-          <CustomInput
-            control={control}
-            name="code"
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            placeholder={t('code')}
-            style={{
-              width: scale(312),
-              // marginBottom: scale(25),
-              height: scale(48),
-            }}
-          />
+            <CustomInput
+              control={control}
+              name="code"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              placeholder={t('code')}
+              style={{
+                width: scale(312),
+                // marginBottom: scale(25),
+                height: scale(48),
+              }}
+            />
           </View>
           <TouchableOpacity onPress={handleSubmit(setPhase3)}>
             <LinearGradient
@@ -116,7 +168,7 @@ export default function Content() {
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-              {t('submit')}
+                {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -124,7 +176,7 @@ export default function Content() {
       )}
       {phase == 3 && (
         <View>
-      <View style={{marginTop: scale(50), alignItems: 'center'}}>
+          <View style={{marginTop: scale(50), alignItems: 'center'}}>
             <Image
               source={images.logo1}
               style={{
@@ -138,43 +190,43 @@ export default function Content() {
             />
           </View>
           <View style={{marginBottom: scale(10)}}>
-          <CustomInput
-           control={control}
-           name="password"
-           rules={{
-             ...requireField(t('this_field_required')),
-           }}
-            placeholder={t('password')}
-            style={{
-              width: scale(312),
-              height: scale(48),
-              marginBottom:scale(5)
-            }}
-          />
+            <CustomInput
+              control={control}
+              name="password"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              placeholder={t('password')}
+              style={{
+                width: scale(312),
+                height: scale(48),
+                marginBottom: scale(5),
+              }}
+            />
           </View>
           <View style={{marginBottom: scale(10)}}>
-          <CustomInput
-           control={control}
-           name="passwordconfirm"
-           rules={{
-             ...requireField(t('this_field_required')),
-           }}
-            placeholder={t('confirm_password')}
-            style={{
-              width: scale(312),
-              height: scale(48),
-            }}
-          />
+            <CustomInput
+              control={control}
+              name="passwordconfirm"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              placeholder={t('confirm_password')}
+              style={{
+                width: scale(312),
+                height: scale(48),
+              }}
+            />
           </View>
-         
-          <TouchableOpacity onPress={handleSubmit(setPhase3)}>
+
+          <TouchableOpacity>
             <LinearGradient
               colors={['#F7E75A', '#FFC702']}
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-              {t('submit')}
+                {t('submit')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -188,7 +240,7 @@ export default function Content() {
         }}>
         <View>
           <CustomText textType="semiBold" style={{...styles.text}}>
-          {t('already_have_account')}
+            {t('already_have_account')}
           </CustomText>
           <View style={styles.line} />
         </View>

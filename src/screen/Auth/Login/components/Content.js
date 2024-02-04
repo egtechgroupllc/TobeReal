@@ -12,15 +12,27 @@ import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {requireField} from '../../../../utils/validate';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import {useMutation, useQuery} from '@tanstack/react-query';
+import { postLogin } from '../../../../api/auth';
+import { showMess } from '../../../../assets/constants/Helper';
+
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  
+
+  const loginMutation = useMutation({
+    mutationFn:postLogin
+  });
+  // const {data,isLoading,isError} = useQuery({
+  //   queryKey:['post'],
+  //   queryFn: getPost()
+  // })
+
   const toggleView = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -30,11 +42,34 @@ export default function Content() {
   const gotoForgotPassword = () => {
     navigation.navigate('ForgotPasswordScreen');
   };
-
   const handleLogin = value => {
-    // console.log(value);
-    onSaveToken('Login');
+    loginMutation.mutate(
+     value
+    , {
+      onSuccess: dataInde => {
+        console.log(dataInde,'onSuccess');
+        if(dataInde?.status == true){
+            showMess(dataInde?.message, 'success');
+            onSaveToken(dataInde?.data?.accessToken);
+        }else{
+          showMess(dataInde?.message, 'error');
+        }
+      },
+      onError:errr =>{
+        console.log(errr,78921378213789);
+      }
+    });
+
   };
+  // const handleLogin = async (value) => {
+  //   try {
+  //     const response = await loginMution.mutate({ title: 'foo', body: 'bar', userId: 1 });
+  //     console.log('Response:', response); // Make sure to log the actual response
+  //     // onSaveToken(response);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
 
   return (
     <View style={styles.wrapper}>
@@ -42,7 +77,7 @@ export default function Content() {
         <CustomInput
           control={control}
           label={t('email')}
-          name="username34567u76"
+          name="usernameOrEmail"
           sizeInput="medium"
           placeholder="example@gmail.com"
           rules={requireField(t('this_field_required'))}
@@ -79,7 +114,7 @@ export default function Content() {
 
       <View style={styles.footer}>
         <CustomText textType="semiBold" style={{...styles.text}}>
-        {t('dont_have_account')}
+          {t('dont_have_account')}
         </CustomText>
 
         <CustomText

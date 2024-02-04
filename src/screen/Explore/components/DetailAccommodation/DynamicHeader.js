@@ -28,6 +28,7 @@ export default React.memo(function DynamicHeader({
   onSelect,
   indexSelect,
   data,
+  image
 }) {
   const {t}= useLanguage()
   const {goBack} = useNavigation();
@@ -154,7 +155,7 @@ export default React.memo(function DynamicHeader({
               opacity: animatedOpacityImg,
             },
           ]}>
-          <ImageDetail />
+          <ImageDetail dataImg={image}/>
         </Animated.View>
 
         {/* OptionAccommodation */}

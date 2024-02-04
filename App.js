@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
-import {StatusBar, StyleSheet, Text, TextInput} from 'react-native';
+import {Platform, StatusBar, StyleSheet, Text, TextInput} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
@@ -14,6 +14,7 @@ import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
+import FlashMessage from 'react-native-flash-message';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -53,6 +54,14 @@ export default function App() {
                       backgroundColor={COLORS.primary}
                     />
                     <Layout />
+                    <FlashMessage
+                  position={
+                    Platform.OS === 'ios'
+                      ? 'top'
+                      : {top: StatusBar.currentHeight, left: 0, right: 0}
+                  }
+                  floating={Platform.OS !== 'ios'}
+                />
                   </BottomSheetModalProvider>
                 </AuthProvider>
               </LanguageProvider>

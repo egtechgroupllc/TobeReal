@@ -11,11 +11,6 @@ import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import CustomText from '../../../../components/CustomText';
-import {
-  IconCheckBox,
-  IconUnCheckBox,
-} from '../../../../assets/icon/Icon';
-import Button from '../../components/Button';
 const listLanguage  =[
   { id: '1', name: 'English', flag: images.usa, languageCode: 'en', checked: false },
   { id: '2', name: 'Vietnamese', flag: images.vietnam, languageCode: 'vi', checked: false },

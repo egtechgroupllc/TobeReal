@@ -5,10 +5,11 @@ import CustomText from './CustomText';
 import {COLORS, SIZES, WIDTH, images, scale} from '../assets/constants';
 import {CustomButton} from '.';
 import {useNavigation} from '@react-navigation/native';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function EmptyData({navigation, desc, textBtn, image}) {
   const {navigate} = useNavigation();
-
+  const {t}= useLanguage()
   return (
     <View style={styles.wrapper}>
       <CustomImage
@@ -35,7 +36,7 @@ export default function EmptyData({navigation, desc, textBtn, image}) {
           style={{
             minWidth: '40%',
           }}
-          onPress={() => navigate(navigation || 'Explore')}
+          onPress={() => navigate(navigation || t('explore'))}
         />
       )}
     </View>

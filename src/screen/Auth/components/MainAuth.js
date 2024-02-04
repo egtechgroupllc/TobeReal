@@ -6,17 +6,12 @@ import Wrapper from './Wrapper';
 import {IconHi} from '../../../assets/icon/Icon';
 import MainAuth from '../../../components/MainAuth';
 
-export default function Auth({children, heading, subHeading}) {
+export default function Auth({children, heading, subHeading, style}) {
   return (
     <MainAuth>
       <View style={styles.container}>
         <View
-          style={{
-            flexDirection: 'row',
-            marginTop: scale(90),
-            alignItems: 'center',
-            flex: 1,
-          }}>
+style={[styles.config, style]}>
           <Wrapper Heading1={heading} subHeading={subHeading} />
         </View>
         {children}
@@ -31,4 +26,10 @@ const styles = StyleSheet.create({
     width: '85%',
     alignSelf: 'center',
   },
+  config:{
+    flexDirection: 'row',
+    marginTop: scale(90),
+    alignItems: 'center',
+    flex: 1,
+  }
 });

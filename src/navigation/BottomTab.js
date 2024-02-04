@@ -20,10 +20,12 @@ import NavigationWishList from './NavigationWishList';
 import {scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
 import {HomeMapScreen} from '../components';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
+  const {t} = useLanguage();
   return (
     <Tab.Navigator
       initialRouteName="Explore"
@@ -41,7 +43,7 @@ export default function BottomTab() {
         },
       }}>
       <Tab.Screen
-        name="Explore"
+        name={t('explore')}
         component={NavigationExplore}
         options={{
           tabBarIcon: ({focused}) => (
@@ -50,7 +52,7 @@ export default function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Bookings"
+        name={t('booking')}
         component={NavigationBookings}
         options={{
           tabBarIcon: ({focused}) => (
@@ -59,7 +61,7 @@ export default function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Promotion"
+        name={t('promotion')}
         component={NavigationPromotion}
         options={{
           tabBarIcon: ({focused}) => <IconPromotion active={focused} />,
@@ -75,7 +77,7 @@ export default function BottomTab() {
         }}
       /> */}
       <Tab.Screen
-        name="Map"
+        name={t('map')}
         component={HomeMapScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -84,14 +86,14 @@ export default function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Post news"
+        name={t('post_new')}
         component={NavigationNews}
         options={{
           tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={t('profile')}
         component={NavigationProfile}
         options={{
           tabBarIcon: ({focused}) => (

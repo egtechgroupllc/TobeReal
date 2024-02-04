@@ -18,7 +18,7 @@ export default function ListImg({dataImg, open, onClose}) {
   const flatListRef = useRef(null);
   let heightHeader = useRef(20);
   const images = dataImg.map(uri => ({uri}));
-
+  // const images = dataImg.map(source => ({source}));
   const [visible, setIsVisible] = useState(false);
   const [indexNavigation, setIndexNavigation] = useState(1);
 
@@ -88,7 +88,8 @@ export default function ListImg({dataImg, open, onClose}) {
                   <CustomImage
                     source={item}
                     style={{
-                      flex: 1,
+                      width:'100%',
+                      height:'100%'
                     }}
                   />
                 </TouchableOpacity>
@@ -99,7 +100,7 @@ export default function ListImg({dataImg, open, onClose}) {
 
         {(!!visible || dataImg.length === 1 || visible === 0) && (
           <ImageView
-            images={images}
+            images={dataImg}
             imageIndex={visible}
             visible={dataImg.length === 1 || !!visible || visible === 0}
             onRequestClose={() => {

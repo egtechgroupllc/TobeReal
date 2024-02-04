@@ -65,7 +65,7 @@ export default function Header() {
           />
         </View>
       </View>
-
+{/* 
       <View style={styles.content}>
         <CustomButton
           text={t('we_are_always_here')}
@@ -96,7 +96,7 @@ export default function Header() {
             ))}
           </View>
         </ImageBackground>
-      </View>
+      </View> */}
     </View>
   );
 }

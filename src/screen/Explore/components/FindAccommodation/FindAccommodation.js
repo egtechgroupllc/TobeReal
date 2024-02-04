@@ -5,7 +5,9 @@ import {
   IconAccommodationOther,
   IconApartment,
   IconCity,
+  IconHome,
   IconHouse,
+  IconLand,
   IconRoom,
   IconVilla,
 } from '../../../../assets/icon/Icon';
@@ -17,17 +19,17 @@ import { useLanguage } from '../../../../hooks/useLanguage';
 
 export default function FindAccommodation() {
   const {t}= useLanguage()
-const listAccommodation = [
-  {
-    text: t('all'),
-    icon: IconCity,
-  },
+const listRent = [
+  // {
+  //   text: t('all'),
+  //   icon: IconCity,
+  // },
   {
     text: t('apartment'),
     icon: IconApartment,
   },
   {
-    text: t('house'),
+    text: t('hotel'),
     icon: IconHouse,
   },
   {
@@ -35,16 +37,48 @@ const listAccommodation = [
     icon: IconVilla,
   },
   {
-    text: t('room'),
-    icon: IconRoom,
+    text: t('home'),
+    icon: IconHome,
+  },
+  // {
+  //   text: t('others'),
+  //   icon: IconAccommodationOther,
+  // },
+];
+const listBuy = [
+  // {
+  //   text: t('all'),
+  //   icon: IconCity,
+  // },
+  {
+    text: t('apartment'),
+    icon: IconApartment,
   },
   {
-    text: t('others'),
-    icon: IconAccommodationOther,
+    text: t('villa'),
+    icon: IconHouse,
+  },
+  {
+    text: t('home'),
+    icon: IconVilla,
+  },
+  {
+    text: t('land'),
+    icon: IconLand,
+  },
+  // {
+  //   text: t('others'),
+  //   icon: IconAccommodationOther,
+  // },
+];
+const listTour = [
+  {
+    text: '',
+    icon: '',
   },
 ];
 
-  const [tabSelect, setTabSelect] = useState('RENT');
+  const [tabSelect, setTabSelect] = useState(t('RENT'));
   const [category, setCategory] = useState();
 
   return (
@@ -62,7 +96,7 @@ const listAccommodation = [
         renderView={() => (
           <>
             <View style={styles.category}>
-              {tabSelect !== 'BUY' && (
+              {tabSelect !== t('BUY') && tabSelect!==t('TOUR')&&(
                 <Category
                   data={[t('daily'), t('monthly'), t('yearly')]}
                   onChange={value => setCategory(value)}
@@ -73,13 +107,17 @@ const listAccommodation = [
                 multiSelect
                 isSelectAll
                 data={
-                  tabSelect !== 'BUY'
-                    ? listAccommodation
-                    : [listAccommodation[1]]
+                  tabSelect === t('RENT')
+                  ? listRent || []
+                  : tabSelect === t('BUY')
+                  ? listBuy || [] 
+                  : tabSelect === t('TOUR')
+                  ? listTour : []
+
                 }
               />
             </View>
-            <FindContent isBuy={tabSelect === 'BUY'} rental={category} />
+            <FindContent isBuy={tabSelect === t('BUY')} rental={category} />
           </>
         )}
       />

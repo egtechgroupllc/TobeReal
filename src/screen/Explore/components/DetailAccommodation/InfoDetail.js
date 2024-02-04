@@ -7,14 +7,14 @@ import {IconHouse, IconRoom} from '../../../../assets/icon/Icon';
 import Introduction from './Introduction';
 import { useLanguage } from '../../../../hooks/useLanguage';
 
-export default function InfoDetail() {
+export default function InfoDetail({name}) {
   const {t}= useLanguage()
   return (
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <CustomText textType="semiBold" style={styles.name}>
-            JP Hotel Pluit JP Hotel
+            {name}
           </CustomText>
           <View style={styles.boxHot}>
             <CustomText

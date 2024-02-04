@@ -5,14 +5,17 @@ import {IconMarker, IconPlayVideo} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {VideoPlay} from '../../../../../components';
 
-export default function VideoCompact({onPlay}) {
+export default function VideoCompact({onPlay,source}) {
+  console.log('====================================');
+  console.log(source);
+  console.log('====================================');
   return (
     <View style={styles.wrapper}>
       <VideoPlay
         style={styles.backgroundVideo}
         paused
         source={
-          'https://github.com/KuDenn172/TobeNFT/blob/main/video/tiktok3.mp4?raw=true'
+          source
         }
         resizeMode="cover"
       />
@@ -21,7 +24,7 @@ export default function VideoCompact({onPlay}) {
         activeOpacity={0.7}
         onPress={() => onPlay && onPlay(true)}>
         <CustomText textType="bold" style={styles.name}>
-          @tuankiet
+          @demo
         </CustomText>
 
         <IconPlayVideo fill={COLORS.white} style={styles.icon} />
@@ -31,7 +34,7 @@ export default function VideoCompact({onPlay}) {
             style={{width: scale(12), height: scale(12)}}
             fill={COLORS.white}
           />
-          <CustomText style={styles.location}>Tangerang</CustomText>
+          <CustomText style={styles.location}>VietNam</CustomText>
         </View>
       </TouchableOpacity>
     </View>

@@ -56,7 +56,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
           }}>
           <LottieView
             ref={refHeart}
-            // loop={false}
+            loop={false}
             autoPlay={!isHeart}
             source={animations.favouriteHeart}
             resizeMode="cover"

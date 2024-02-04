@@ -11,7 +11,7 @@ import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 import TopImg from './BoxPlaceItem/TopImg';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function BoxPlaceItem({
   data,
@@ -26,8 +26,14 @@ export default function BoxPlaceItem({
   multiPrice,
   isUnitAvailable,
   styleWrapper,
+  time,
+  jsonImage,
+  name
 }) {
-  const {t}= useLanguage()
+
+  console.log('name:',name);
+  console.log('====================================');
+  const {t} = useLanguage();
   const {navigate, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -37,6 +43,7 @@ export default function BoxPlaceItem({
           dispatch(
             StackActions.push('NoBottomTab', {
               screen: 'DetailAccommodationScreen',
+              params: { jsondata: jsonImage || [], title: name || '' },
             }),
           )
         }
@@ -54,12 +61,11 @@ export default function BoxPlaceItem({
             width: '100%',
             height: styleWrapper?.height ? '60%' : scale(150),
           }}>
-          <Ribbon text= {t('promotion') +" 30%  🏨"}  />
+          <Ribbon text={t('promotion') + ' 30%  🏨'} />
 
-          <CustomImage
-            src="https://pix8.agoda.net/hotelImages/281378/-1/4a990da89eaae1f2a7ba6bb0e0af827f.jpg?ca=0&ce=1&s=1024x768"
-            style={styles.img}
-          />
+          {data?<CustomImage source={data?.src} style={styles.img} />
+            : <CustomImage src='https://saveloka.vercel.app/_next/image?url=%2Fimages%2Fhome%2Fhotel-image%2Fresidence%2Fresidence-1.jpg&w=640&q=75' style={styles.img}></CustomImage>
+          }
 
           <TopImg
             rating={rating}
@@ -80,7 +86,7 @@ export default function BoxPlaceItem({
             textType="semiBold"
             style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
             numberOfLines={1}>
-            {t('hotel_residence')}
+            {data?.name}
           </CustomText>
           {isStar && <Star rating={rating} />}
 
@@ -96,7 +102,9 @@ export default function BoxPlaceItem({
                       justifyContent: 'flex-start',
                     }}>
                     <CustomText textType="regular" style={styles.textDiscount}>
-                      {formatPrice(10000000)}{' '}
+                      {formatPrice(data?.discount, {
+                        locales: 'vi',
+                      })}{' '}
                     </CustomText>
 
                     <CustomText
@@ -119,12 +127,17 @@ export default function BoxPlaceItem({
                       isStar && {fontSize: SIZES.xMedium},
                       isDiscount && {color: COLORS.primary},
                     ]}>
-                    {formatPrice(10000000)}{' '}
-                    <CustomText
+                    {formatPrice(data?.price, {
+                        locales: 'vi',
+                      })}{' '}
+                      {time &&(
+                        <CustomText
                       textType="regular"
                       style={{fontSize: SIZES.xSmall}}>
                       / {rental}
                     </CustomText>
+                      )}
+                    
                   </CustomText>
 
                   {isViewMap && (

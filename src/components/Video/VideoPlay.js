@@ -74,7 +74,10 @@ export default function VideoPlay({
       // removeHeart();
     }
   };
-
+  const isImgAsset = typeof source === 'number';
+console.log('====================================');
+console.log( typeof source );
+console.log('====================================');
   return (
     <TapGestureHandler
       ref={doubleTapRef}
@@ -85,7 +88,7 @@ export default function VideoPlay({
         <Video
           {...props}
           ref={videoRef}
-          source={{uri: source}} // Can be a URL or a local file.
+          source={isImgAsset ? source : {uri: source}}
           style={[styles.video, style]}
           paused={pausedVideo}
           onProgress={value => {
@@ -110,7 +113,7 @@ export default function VideoPlay({
                   },
                 ]}>
                 <LottieView
-                  // loop={false}
+                  loop={false}
                   autoPlay={true}
                   duration={1200}
                   source={animations.releaseHeart}
@@ -125,7 +128,7 @@ export default function VideoPlay({
               isDelay
               activeOpacity={1}
               style={styles.overlayPlay}
-              onPress={() => setPausedVideo(!pausedVideo)}
+              // onPress={() => setPausedVideo(!pausedVideo)}
             />
 
             <SideBar

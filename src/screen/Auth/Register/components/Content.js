@@ -13,12 +13,16 @@ import {
   confirmField,
   requireField,
   validateEmail,
-  validateEqualLength,
+  validateLength,
 } from '../../../../utils/validate';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import { useMutation } from '@tanstack/react-query';
+import { postSignUp } from '../../../../api/auth';
+import InputCountry from './InputCountry';
+import { showMess } from '../../../../assets/constants/Helper';
 
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {control, watch, handleSubmit} = useForm();
   const {goBack} = useNavigation();
 
@@ -31,12 +35,42 @@ export default function Content() {
   const toggleViewPasswordConfirm = () => {
     setViewPasswordConfirm(!viewPasswordConfirm);
   };
-
+ 
   const navigation = useNavigation();
-  const handleSignup = () => {
-    navigation.navigate('LoginScreen');
-  };
+  const signupMutation = useMutation({
+    mutationFn:postSignUp
+  });
+  const handleSignup =  value => {
+    delete value?.passwordConfirm
+    // console.log(value);
+    signupMutation.mutate(
+      value
+     , {
+       onSuccess: dataInde => {
 
+         if(dataInde?.status){
+             showMess(dataInde?.message, 'success');
+             navigation.navigate('VerifyEmailScreen');
+         }else{
+           showMess(dataInde?.message, 'error');
+         }
+       },
+       onError: error => {
+        // console.log(error?.response?.data,'3123123213');
+        // showMess(error?.response?.data?.message, 'error');
+
+        // if (error.response) {
+        //   showMess(error?.response?.data?.message, 'error');
+        // }
+        if (error.response) {
+          showMess(error?.response?.data?.message, 'error');
+         
+        }
+      },
+     });
+ 
+  
+  };
   return (
     <View style={styles.container}>
       <CustomInput
@@ -53,12 +87,19 @@ export default function Content() {
         sizeInput="medium"
         rules={{
           ...requireField(t('this_field_required')),
-          ...validateEmail(
-            t('invalid_email'),
-          ),
+          ...validateEmail(t('invalid_email')),
         }}
         name="email"
         placeholder={t('enter_email')}
+      />
+      <CustomInput
+        control={control}
+        sizeInput="medium"
+        // rules={{
+        //   ...requireField(t('this_field_required')),
+        // }}
+        name="refid"
+        placeholder={t('enter_referral')}
       />
       {/* <CustomInput
         placeholder="Enter Your Phone Number"
@@ -69,10 +110,7 @@ export default function Content() {
         sizeInput="medium"
         rules={{
           ...requireField(t('this_field_required')),
-          ...validateEqualLength(
-            6,
-            t('use_6_characters'),
-          ),
+          ...validateLength(6, t('use_6_characters')),
         }}
         name="password"
         placeholder={t('enter_password')}
@@ -87,10 +125,7 @@ export default function Content() {
         sizeInput="medium"
         rules={{
           ...requireField(t('this_field_required')),
-          ...confirmField(
-            watch('password'),
-            t('password_not_match'),
-          ),
+          ...confirmField(watch('password'), t('password_not_match')),
         }}
         name="passwordConfirm"
         placeholder={t('enter_password_confirm')}
@@ -99,9 +134,10 @@ export default function Content() {
           !viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
         }
       />
+    {/* <InputCountry/> */}
 
       <CustomButton
-        onPress={handleSubmit(handleSignup)}
+        onPress={(handleSubmit(handleSignup))}
         buttonType="large"
         text={t('signup')}
         linearGradientProps
@@ -109,7 +145,6 @@ export default function Content() {
           marginTop: scale(20),
         }}
       />
-
       <View
         style={{
           flexDirection: 'row',
@@ -122,7 +157,7 @@ export default function Content() {
             ...styles.text,
             textDecorationLine: 'underline',
           }}>
-         {t('already_have_account')}
+          {t('already_have_account')}
         </CustomText>
 
         <CustomText
@@ -138,7 +173,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(50),
+    marginTop: scale(20),
     rowGap: scale(16),
   },
   text: {

@@ -16,16 +16,21 @@ import Review from './components/DetailAccommodation/Review';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
-const listView = [
-  <InfoDetail />,
-  <InfoUnitFacilities />,
-  <Map />,
-  <Review />,
-  <InfoAdditional />,
-  <SimilarApartmentsNearby />,
-];
 
-export default function DetailAccommodationScreen() {
+
+export default function DetailAccommodationScreen({route}) {
+  const { jsondata,title } = route.params;
+  console.log('route.params:', route.params);
+  console.log('jsondata:', jsondata);
+  console.log('title:', title);
+  const listView = [
+    <InfoDetail name={title}/>,
+    <InfoUnitFacilities />,
+    <Map />,
+    <Review />,
+    <InfoAdditional />,
+    // <SimilarApartmentsNearby />,
+  ];
   const [tabBarHeight, setTabBarHeight] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
   const [indexSelect, setIndexSelect] = useState(0);
@@ -33,7 +38,6 @@ export default function DetailAccommodationScreen() {
 
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
   const scrollRef = useRef();
-
   const ItemView = (item, key) => {
     return (
       <View
@@ -100,6 +104,7 @@ export default function DetailAccommodationScreen() {
         scrollOffsetY={scrollOffsetY}
         onSelect={selectScrollHandler}
         indexSelect={indexSelect}
+        image={jsondata}
       />
 
       <Animated.ScrollView

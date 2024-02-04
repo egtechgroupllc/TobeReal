@@ -5,12 +5,13 @@ import HeaderBar from '../../components/HeaderBar';
 import SearchChooseLocation from './SearchChooseLocation';
 import SearchRecent from './SearchRecent';
 import {useNavigation} from '@react-navigation/native';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export default function HomeSearchAccommodScreen() {
   const {navigate} = useNavigation();
-
+  const {t}= useLanguage()
   const handleSelectSearch = value => {
-    navigate('Explore', {
+    navigate(t('explore'), {
       screen: 'HomeExploreScreen',
       params: value,
     });

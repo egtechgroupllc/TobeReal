@@ -19,7 +19,7 @@ export default function SimilarApartmentsNearby() {
           rating={4}
           textRating={index % 2 !== 0 && 'New'}
           isHeart
-          data={index}
+          // jsonImage={item?.imgdetail}
         />
       )}
     />
