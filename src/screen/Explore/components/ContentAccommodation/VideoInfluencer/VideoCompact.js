@@ -5,18 +5,13 @@ import {IconMarker, IconPlayVideo} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {VideoPlay} from '../../../../../components';
 
-export default function VideoCompact({onPlay,source}) {
-  console.log('====================================');
-  console.log(source);
-  console.log('====================================');
+export default function VideoCompact({onPlay, source}) {
   return (
     <View style={styles.wrapper}>
       <VideoPlay
         style={styles.backgroundVideo}
         paused
-        source={
-          source
-        }
+        source={source}
         resizeMode="cover"
       />
       <TouchableOpacity

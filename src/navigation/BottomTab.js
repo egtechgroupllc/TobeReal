@@ -20,7 +20,7 @@ import NavigationWishList from './NavigationWishList';
 import {scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
 import {HomeMapScreen} from '../components';
-import { useLanguage } from '../hooks/useLanguage';
+import {useLanguage} from '../hooks/useLanguage';
 
 const Tab = createBottomTabNavigator();
 

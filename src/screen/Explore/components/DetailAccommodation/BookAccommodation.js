@@ -6,11 +6,15 @@ import {CustomButton} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {formatPrice} from '../../../../utils/format';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import {useAuthentication} from '../../../../hooks/useAuthentication';
+import {useNavigation} from '@react-navigation/native';
 
 export default function BookAccommodation({setBookHeight}) {
   const insets = useSafeAreaInsets();
-  const {t}= useLanguage()
+  const {t} = useLanguage();
+  const {token} = useAuthentication();
+  const {navigate} = useNavigation();
   return (
     <View
       style={{...styles.wrapper, paddingBottom: insets.bottom - 5}}
@@ -34,20 +38,31 @@ export default function BookAccommodation({setBookHeight}) {
         </CustomText>
       </View>
 
-      <View style={{flexDirection: 'row', columnGap: scale(8)}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          columnGap: scale(8),
+          paddingVertical: scale(10),
+        }}>
         <CustomButton
+          onPress={() => {
+            !token ? navigate('NavigationAuth') : '';
+          }}
           outline
           buttonType="large"
           style={{flex: 0.7}}
-          text=  {t('contact_host')}
+          text={t('contact_host')}
           styleText={{
             fontSize: SIZES.xMedium,
           }}
         />
         <CustomButton
+          onPress={() => {
+            !token ? navigate('NavigationAuth') : '';
+          }}
           buttonType="large"
           style={{flex: 1}}
-          text=  {t('book_now')}
+          text={t('book_now')}
           styleText={{
             fontSize: SIZES.xMedium,
           }}

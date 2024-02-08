@@ -28,25 +28,24 @@ export default function BoxPlaceItem({
   styleWrapper,
   time,
   jsonImage,
-  name
+  name,
 }) {
-
-  console.log('name:',name);
-  console.log('====================================');
   const {t} = useLanguage();
-  const {navigate, dispatch} = useNavigation();
+  const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() =>
-          dispatch(
-            StackActions.push('NoBottomTab', {
-              screen: 'DetailAccommodationScreen',
-              params: { jsondata: jsonImage || [], title: name || '' },
-            }),
-          )
-        }
+        onPress={() => {
+          if (isFocused()) {
+            dispatch(
+              StackActions.push('NoBottomTab', {
+                screen: 'DetailAccommodationScreen',
+                params: {jsondata: jsonImage || [], title: name || ''},
+              }),
+            );
+          }
+        }}
         style={[
           styles.wrapper,
           {
@@ -63,9 +62,13 @@ export default function BoxPlaceItem({
           }}>
           <Ribbon text={t('promotion') + ' 30%  🏨'} />
 
-          {data?<CustomImage source={data?.src} style={styles.img} />
-            : <CustomImage src='https://saveloka.vercel.app/_next/image?url=%2Fimages%2Fhome%2Fhotel-image%2Fresidence%2Fresidence-1.jpg&w=640&q=75' style={styles.img}></CustomImage>
-          }
+          {data ? (
+            <CustomImage source={data?.src} style={styles.img} />
+          ) : (
+            <CustomImage
+              src="https://saveloka.vercel.app/_next/image?url=%2Fimages%2Fhome%2Fhotel-image%2Fresidence%2Fresidence-1.jpg&w=640&q=75"
+              style={styles.img}></CustomImage>
+          )}
 
           <TopImg
             rating={rating}
@@ -128,16 +131,15 @@ export default function BoxPlaceItem({
                       isDiscount && {color: COLORS.primary},
                     ]}>
                     {formatPrice(data?.price, {
-                        locales: 'vi',
-                      })}{' '}
-                      {time &&(
-                        <CustomText
-                      textType="regular"
-                      style={{fontSize: SIZES.xSmall}}>
-                      / {rental}
-                    </CustomText>
-                      )}
-                    
+                      locales: 'vi',
+                    })}{' '}
+                    {time && (
+                      <CustomText
+                        textType="regular"
+                        style={{fontSize: SIZES.xSmall}}>
+                        / {rental}
+                      </CustomText>
+                    )}
                   </CustomText>
 
                   {isViewMap && (

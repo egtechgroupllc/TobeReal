@@ -1,15 +1,26 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import MainAuth from '../../components/MainAuth';
+import {useAuthentication} from '../../hooks/useAuthentication';
 import AvatarImage from './components/AvatarImage';
-import Content from './components/Content';
 import Bottom from './components/Bottom';
+import Content from './components/Content';
 import HeaderAvatar from './components/HeaderAvatar';
-import Header from '../Explore/components/Header';
 
 export default function ProfileScreen() {
-  const goBack = () => {};
   const upgrade = () => {};
+
+  const {token} = useAuthentication();
+  const {navigate, goBack} = useNavigation();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused && !token) {
+      goBack();
+      navigate('NavigationAuth');
+    }
+  }, [isFocused]);
+
   return (
     <MainAuth>
       <HeaderAvatar noti={true} notify={goBack} heading={'Profile'} />

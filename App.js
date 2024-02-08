@@ -55,13 +55,13 @@ export default function App() {
                     />
                     <Layout />
                     <FlashMessage
-                  position={
-                    Platform.OS === 'ios'
-                      ? 'top'
-                      : {top: StatusBar.currentHeight, left: 0, right: 0}
-                  }
-                  floating={Platform.OS !== 'ios'}
-                />
+                      position={
+                        Platform.OS === 'ios'
+                          ? 'top'
+                          : {top: StatusBar.currentHeight, left: 0, right: 0}
+                      }
+                      floating={Platform.OS !== 'ios'}
+                    />
                   </BottomSheetModalProvider>
                 </AuthProvider>
               </LanguageProvider>
@@ -81,12 +81,8 @@ const Layout = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {token ? (
-        <Stack.Screen name="BottomTab" component={BottomTab} />
-      ) : (
-        <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
-      )}
-
+      <Stack.Screen name="BottomTab" component={BottomTab} />
+      <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 
       <Stack.Screen name="NoBottomTab" component={NoBottomTab} />

@@ -5,11 +5,11 @@ import RecommendedUnitItem from './RecommendedUnitItem';
 import {WIDTH, scale} from '../../../../assets/constants';
 import Carousel from 'react-native-new-snap-carousel';
 import {StackActions, useNavigation} from '@react-navigation/native';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function ThematicInstagram() {
-  const {dispatch} = useNavigation();
-  const {t}= useLanguage()
+  const {dispatch, isFocused} = useNavigation();
+  const {t} = useLanguage();
   return (
     <WrapperContent
       isSeeAll
@@ -44,13 +44,15 @@ export default function ThematicInstagram() {
                   styesWrapper={{
                     borderRadius: 0,
                   }}
-                  onPress={() =>
-                    dispatch(
-                      StackActions.push('NoBottomTab', {
-                        screen: 'DetailAccommodationScreen',
-                      }),
-                    )
-                  }
+                  // onPress={() => {
+                  //   if (isFocused()) {
+                  //     dispatch(
+                  //       StackActions.push('NoBottomTab', {
+                  //         screen: 'DetailAccommodationScreen',
+                  //       }),
+                  //     );
+                  //   }
+                  // }}
                 />
               )}
             />

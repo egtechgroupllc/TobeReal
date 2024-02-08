@@ -75,9 +75,7 @@ export default function VideoPlay({
     }
   };
   const isImgAsset = typeof source === 'number';
-console.log('====================================');
-console.log( typeof source );
-console.log('====================================');
+
   return (
     <TapGestureHandler
       ref={doubleTapRef}
@@ -148,7 +146,7 @@ console.log('====================================');
             )}
 
             <View
-              style={[styles.rangeSlider, {bottom: insets.bottom + scale(12)}]}>
+              style={[styles.rangeSlider, {bottom: insets.bottom + scale(20)}]}>
               <RangeSlider
                 progressValue={progress.currentTime || 0}
                 onValueChange={handleValueChange}
@@ -176,6 +174,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     ...StyleSheet.absoluteFill,
     justifyContent: 'center',
+    zIndex: 999,
   },
   overlayPlay: {
     width: '100%',
