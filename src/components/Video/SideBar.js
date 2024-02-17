@@ -24,7 +24,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
         err && console.log(err);
       });
   };
-
+  console.log('isFavourite', isFavourite, isHeart);
   useEffect(() => {
     if (isFavourite) {
       setIsHeart(!isFavourite);
@@ -36,7 +36,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
       style={[
         styles.wrapper,
         {
-          bottom: insets.bottom + scale(150),
+          bottom: insets.bottom + scale(200),
         },
       ]}>
       <TouchableOpacity
@@ -46,8 +46,8 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
         }}
         onPress={() => {
           setIsHeart(!isHeart);
-          refHeart.current.reset();
-          onFavourite(isHeart);
+          !isHeart && refHeart.current.reset();
+          // onFavourite(isHeart);
         }}>
         <View
           style={{

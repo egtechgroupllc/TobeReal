@@ -6,25 +6,26 @@ import {SIZES, scale} from '../../assets/constants';
 export default React.memo(function TimeProgress({timeCurrent, timeTotal}) {
   return (
     <View style={styles.wrapper}>
-      <CustomText
-        // textType="semiBold"
-        style={styles.text}>
+      <CustomText textType="medium" style={styles.text}>
         {timeCurrent}
       </CustomText>
 
       <CustomText
-        // textType="semiBold"
+        textType="medium"
         style={{
           color: '#fff',
-          fontSize: SIZES.xSmall,
+          fontSize: SIZES.small,
         }}>
         {' '}
         /{' '}
       </CustomText>
 
       <CustomText
-        // textType="semiBold"
-        style={styles.text}>
+        textType="medium"
+        style={{
+          ...styles.text,
+          color: '#ffffffaF',
+        }}>
         {timeTotal}
       </CustomText>
     </View>
@@ -33,12 +34,13 @@ export default React.memo(function TimeProgress({timeCurrent, timeTotal}) {
 const styles = StyleSheet.create({
   text: {
     color: '#fff',
-    //   fontSize: SIZES.xLarge,
+    fontSize: scale(22),
+    letterSpacing: 2,
   },
   wrapper: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     marginVertical: scale(6),
   },
 });

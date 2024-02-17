@@ -1,14 +1,19 @@
 import LottieView from 'lottie-react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {State, TapGestureHandler} from 'react-native-gesture-handler';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  GestureHandlerRootView,
+  State,
+  TapGestureHandler,
+} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
-import {WIDTH, animations, scale} from '../../assets/constants';
+import {COLORS, WIDTH, animations, scale} from '../../assets/constants';
 import {IconPlayVideo} from '../../assets/icon/Icon';
 import RangeSlider from './RangeSlider';
 import SideBar from './SideBar';
 import {CustomButton} from '..';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 export default function VideoPlay({
   fullScreen,
@@ -67,22 +72,23 @@ export default function VideoPlay({
   }, []);
 
   const onDoubleClick = event => {
-    const {x, y, state} = event.nativeEvent;
-
-    if (state === State.ACTIVE) {
-      setReleaseHeart({x, y});
-      // removeHeart();
-    }
+    const {locationX, locationY} = event.nativeEvent;
+    // if (state === State.ACTIVE) {
+    //   // removeHeart();
+    // }
+    setReleaseHeart({x: locationX, y: locationY});
   };
   const isImgAsset = typeof source === 'number';
 
   return (
-    <TapGestureHandler
+    <GestureHandlerRootView
       ref={doubleTapRef}
       numberOfTaps={2}
       maxDurationMs={500}
-      onHandlerStateChange={onDoubleClick}>
-      <View style={fullScreen && styles.fullScreen}>
+      //  onTouchStart={}
+      // onTouchStart={onDoubleClick}
+    >
+      <View style={[fullScreen ? styles.fullScreen : {flex: 1}]}>
         <Video
           {...props}
           ref={videoRef}
@@ -122,17 +128,22 @@ export default function VideoPlay({
               </View>
             )}
 
-            <TouchableOpacity
-              isDelay
+            <CustomButton
+              isDouble
               activeOpacity={1}
-              style={styles.overlayPlay}
-              // onPress={() => setPausedVideo(!pausedVideo)}
+              styleWrapper={styles.overlayPlay}
+              style={{
+                height: '100%',
+                backgroundColor: 'transparent',
+              }}
+              onDoublePress={onDoubleClick}
+              onPress={() => setPausedVideo(!pausedVideo)}
             />
 
             <SideBar
               data={data}
               isFavourite={releaseHeart.x}
-              onFavourite={e => {}}
+              // onFavourite={e => {}}
             />
 
             {pausedVideo && (
@@ -145,8 +156,7 @@ export default function VideoPlay({
               />
             )}
 
-            <View
-              style={[styles.rangeSlider, {bottom: insets.bottom + scale(20)}]}>
+            <View style={[styles.rangeSlider, {bottom: insets.bottom}]}>
               <RangeSlider
                 progressValue={progress.currentTime || 0}
                 onValueChange={handleValueChange}
@@ -156,7 +166,7 @@ export default function VideoPlay({
           </View>
         )}
       </View>
-    </TapGestureHandler>
+    </GestureHandlerRootView>
   );
 }
 
@@ -167,7 +177,7 @@ const styles = StyleSheet.create({
   },
   fullScreen: {
     width: WIDTH.widthScreen,
-    height: WIDTH.heightScreen,
+    height: WIDTH.heightScreen - scale(20),
   },
   safeProvider: {
     position: 'absolute',
@@ -179,9 +189,8 @@ const styles = StyleSheet.create({
   overlayPlay: {
     width: '100%',
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 999,
     height: '90%',
-    backgroundColor: 'transparent',
   },
   rangeSlider: {
     width: '90%',

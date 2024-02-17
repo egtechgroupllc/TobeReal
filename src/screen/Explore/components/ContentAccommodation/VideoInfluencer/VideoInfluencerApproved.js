@@ -10,33 +10,26 @@ import video from '../../../../../assets/constants/video';
 
 const data = [
   {
-      id:1,
-      src:video.video1,
-   
+    id: 1,
+    src: video.video1,
   },
   {
-    id:2,
-    src:video.video2,
- 
-},
-{
-  id:3,
-  src:video.video3,
-
-},
-{
-  id:4,
-  src:video.video4,
-
-},
-{
-  id:5,
-  src:video.video5,
-
-},
-  
-]
-
+    id: 2,
+    src: video.video2,
+  },
+  {
+    id: 3,
+    src: video.video3,
+  },
+  {
+    id: 4,
+    src: video.video4,
+  },
+  {
+    id: 5,
+    src: video.video5,
+  },
+];
 
 export default function VideoInfluencerApproved() {
   const [playVideo, setPlayVideo] = useState(false);
@@ -49,7 +42,10 @@ export default function VideoInfluencerApproved() {
         data={data}
         contentContainerStyle={styles.content}
         renderItem={({item}) => (
-          <VideoCompact  onPlay={() => navigate('ListVideoInfluencerScreen')}  source={item?.src}/>
+          <VideoCompact
+            onPlay={() => navigate('ListVideoInfluencerScreen')}
+            source={item?.src}
+          />
         )}
       />
       {/* {playVideo && <ListVideoInfluencerScreen />} */}

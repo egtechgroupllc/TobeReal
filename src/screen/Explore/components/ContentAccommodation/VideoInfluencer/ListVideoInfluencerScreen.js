@@ -91,10 +91,8 @@ export default function ListVideoInfluencerScreen() {
         <FlatList
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          // snapToInterval={WIDTH.heightScreen}
           pagingEnabled
-          // snapToAlignment={'start'}
-          // decelerationRate={'fast'}
+          snapToAlignment={'start'}
           data={listVideo}
           contentContainerStyle={{
             width: '100%',

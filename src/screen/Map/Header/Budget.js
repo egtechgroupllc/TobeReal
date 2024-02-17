@@ -1,18 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useRef, useState} from 'react';
-import CheckBox from '../../../components/CheckBox';
-import CustomText from '../../../components/CustomText';
-import {COLORS, SIZES, WIDTH, scale} from '../../../assets/constants';
-import WrapperContent from '../../Explore/components/WrapperContent';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+
+import {COLORS, SIZES, WIDTH, scale} from '../../../assets/constants';
+import CustomText from '../../../components/CustomText';
+import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
-import { useLanguage } from '../../../hooks/useLanguage';
+import WrapperContent from '../../Explore/components/WrapperContent';
 
 const min = 0;
 const max = 100000;
 export default function Budget() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const [multiSliderValue, setMultiSliderValue] = useState([min, max]);
 
   return (

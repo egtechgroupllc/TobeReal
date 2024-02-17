@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import {
+  GestureResponderEvent,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -23,7 +24,7 @@ type CustomButtonProps = {
   linearGradientProps?: LinearGradientProps;
   iconLeft?: React.JSX.Element;
   iconRight?: React.JSX.Element;
-  isDelay?: boolean;
+  isDouble?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
@@ -43,7 +44,7 @@ export default function CustomButton({
   isShadow,
   iconLeft,
   iconRight,
-  isDelay,
+  isDouble,
   outline,
   styleText,
   styleIcon,
@@ -63,30 +64,42 @@ export default function CustomButton({
 
   const propStyle = arrayToObject(props.style);
 
-  const singlePress = (now: number) => {
-    if (!isDelay) {
-      onPress();
+  const singlePress = ({
+    now,
+    event,
+  }: {
+    now: number;
+    event: GestureResponderEvent;
+  }) => {
+    if (!isDouble) {
+      onPress(event);
       return;
     }
     firstPress = false;
     timer = setTimeout(() => {
-      onPress();
+      onPress(event);
       firstPress = true;
     }, delayTime);
     lastTime = now;
   };
 
-  const doublePress = (now: number) => {
+  const doublePress = ({
+    now,
+    event,
+  }: {
+    now: number;
+    event: GestureResponderEvent;
+  }) => {
     if (now - lastTime < delayTime) {
-      onDoublePress();
+      onDoublePress(event);
       timer && clearTimeout(timer);
       firstPress = true;
     }
   };
 
-  const _onPress = () => {
+  const _onPress = (event: GestureResponderEvent) => {
     let now = new Date().getTime();
-    firstPress ? singlePress(now) : doublePress(now);
+    firstPress ? singlePress({now, event}) : doublePress({now, event});
   };
   // useEffect(() => {
   //   return () => {
