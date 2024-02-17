@@ -14,8 +14,8 @@ import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {requireField} from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {useMutation, useQuery} from '@tanstack/react-query';
-import { postLogin } from '../../../../api/auth';
-import { showMess } from '../../../../assets/constants/Helper';
+import {postLogin} from '../../../../api/auth';
+import {showMess} from '../../../../assets/constants/Helper';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -26,12 +26,8 @@ export default function Content() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const loginMutation = useMutation({
-    mutationFn:postLogin
+    mutationFn: postLogin,
   });
-  // const {data,isLoading,isError} = useQuery({
-  //   queryKey:['post'],
-  //   queryFn: getPost()
-  // })
 
   const toggleView = () => {
     setPasswordVisible(!passwordVisible);
@@ -43,33 +39,20 @@ export default function Content() {
     navigation.navigate('ForgotPasswordScreen');
   };
   const handleLogin = value => {
-    loginMutation.mutate(
-     value
-    , {
+    loginMutation.mutate(value, {
       onSuccess: dataInde => {
-        console.log(dataInde,'onSuccess');
-        if(dataInde?.status == true){
-            showMess(dataInde?.message, 'success');
-            onSaveToken(dataInde?.data?.accessToken);
-        }else{
+        if (dataInde?.status == true) {
+          showMess(dataInde?.message, 'success');
+          onSaveToken(dataInde?.data?.accessToken);
+        } else {
           showMess(dataInde?.message, 'error');
         }
       },
-      onError:errr =>{
-        console.log(errr,78921378213789);
-      }
+      onError: errr => {
+        console.log(errr);
+      },
     });
-
   };
-  // const handleLogin = async (value) => {
-  //   try {
-  //     const response = await loginMution.mutate({ title: 'foo', body: 'bar', userId: 1 });
-  //     console.log('Response:', response); // Make sure to log the actual response
-  //     // onSaveToken(response);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
 
   return (
     <View style={styles.wrapper}>

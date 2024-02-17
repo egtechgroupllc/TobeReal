@@ -11,31 +11,63 @@ import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import CustomText from '../../../../components/CustomText';
-const listLanguage  =[
-  { id: '1', name: 'English', flag: images.usa, languageCode: 'en', checked: false },
-  { id: '2', name: 'Vietnamese', flag: images.vietnam, languageCode: 'vi', checked: false },
-  { id: '3', name: 'Indonesia', flag: images.indonesia, languageCode: 'id', checked: false },
-  { id: '4', name: 'Malaysia', flag: images.malaysia, languageCode: 'my', checked: false },
-  { id: '5', name: 'Thailand', flag: images.thailand, languageCode: 'th', checked: false },
-  { id: '6', name: 'Philippines', flag: images.philipin, languageCode: 'ph', checked: false },
+import {IconCheckBox, IconUnCheckBox} from '../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../components';
+const listLanguage = [
+  {
+    id: '1',
+    name: 'English',
+    flag: images.usa,
+    languageCode: 'en',
+    checked: false,
+  },
+  {
+    id: '2',
+    name: 'Vietnamese',
+    flag: images.vietnam,
+    languageCode: 'vi',
+    checked: false,
+  },
+  {
+    id: '3',
+    name: 'Indonesia',
+    flag: images.indonesia,
+    languageCode: 'id',
+    checked: false,
+  },
+  {
+    id: '4',
+    name: 'Malaysia',
+    flag: images.malaysia,
+    languageCode: 'my',
+    checked: false,
+  },
+  {
+    id: '5',
+    name: 'Thailand',
+    flag: images.thailand,
+    languageCode: 'th',
+    checked: false,
+  },
+  {
+    id: '6',
+    name: 'Philippines',
+    flag: images.philipin,
+    languageCode: 'ph',
+    checked: false,
+  },
   // Add more language items as needed
-]
+];
 export default function Content() {
-  const {t, changeLocale} = useLanguage();
-  
+  const {t, changeLocale, locale} = useLanguage();
 
-  const navigation = useNavigation();
-  const goBack = () => {
-    navigation.goBack();
-  };
+  const {goBack} = useNavigation();
 
- 
   const notify = () => {};
-  const [check, setCheck] = useState(false);
-  const toggleCheckBox = (item) => {
-    setCheck(item?.id)
-    changeLocale(item.languageCode);
-    navigation.goBack();
+  const [language, setLanguage] = useState(locale);
+  const changeLanguage = () => {
+    changeLocale(language);
+    goBack();
   };
 
   return (
@@ -45,25 +77,40 @@ export default function Content() {
         subHeading={t('select_language')}
         noti={true}
         onPress={goBack}
-        notify={notify}></Header>
-      <View style={{marginTop: scale(40)}}>
-      <FlatList
-        data={listLanguage}
-        scrollEnabled={false}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.button} onPress={() => toggleCheckBox(item)}>
-            <View style={{flexDirection:'row', alignItems:'center'}}>
-            <Image source={item.flag} style={styles.image} />
-            <CustomText textType="medium" style={{marginLeft:scale(10)}}>{item.name}</CustomText>
-            </View>
-            {/* <View >
-              {check === item.id ? <IconCheckBox /> : <IconUnCheckBox />}
-            </View> */}
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.id}
+        notify={notify}
       />
-      {/* <Button title={'ok'} onPress={changeLanguage}></Button> */}
+      <View style={{marginTop: scale(40)}}>
+        <FlatList
+          style={{flex: 1}}
+          data={listLanguage}
+          scrollEnabled={false}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => setLanguage(item?.languageCode)}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image source={item.flag} style={styles.image} />
+                <CustomText textType="medium" style={{marginLeft: scale(10)}}>
+                  {item.name}
+                </CustomText>
+              </View>
+              <View>
+                {language === item.languageCode ? (
+                  <IconCheckBox />
+                ) : (
+                  <IconUnCheckBox />
+                )}
+              </View>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item.languageCode}
+        />
+        <CustomButton
+          text={'OK'}
+          buttonType="large"
+          linearGradientProps
+          onPress={changeLanguage}
+        />
       </View>
     </View>
   );

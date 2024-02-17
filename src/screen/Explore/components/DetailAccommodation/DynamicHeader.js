@@ -16,21 +16,20 @@ import {CustomButton} from '../../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../components/Favourite';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
-
 
 export default React.memo(function DynamicHeader({
   scrollOffsetY,
   onSelect,
   indexSelect,
   data,
-  image
+  image,
 }) {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {goBack} = useNavigation();
   const listInfo = [
     {
@@ -155,7 +154,7 @@ export default React.memo(function DynamicHeader({
               opacity: animatedOpacityImg,
             },
           ]}>
-          <ImageDetail dataImg={image}/>
+          <ImageDetail dataImg={image} />
         </Animated.View>
 
         {/* OptionAccommodation */}

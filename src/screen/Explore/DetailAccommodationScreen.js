@@ -16,21 +16,18 @@ import Review from './components/DetailAccommodation/Review';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
-
-
 export default function DetailAccommodationScreen({route}) {
-  const { jsondata,title } = route.params;
-  console.log('route.params:', route.params);
-  console.log('jsondata:', jsondata);
-  console.log('title:', title);
+  const {jsondata, title} = route.params;
+
   const listView = [
-    <InfoDetail name={title}/>,
+    <InfoDetail name={title} />,
     <InfoUnitFacilities />,
     <Map />,
     <Review />,
     <InfoAdditional />,
     // <SimilarApartmentsNearby />,
   ];
+
   const [tabBarHeight, setTabBarHeight] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
   const [indexSelect, setIndexSelect] = useState(0);
@@ -66,6 +63,7 @@ export default function DetailAccommodationScreen({route}) {
   );
 
   const moveNavigateBar = offsetY => {
+    console.log(indexSelect);
     switch (true) {
       case offsetY < dataSourceCords[1]:
         setIndexSelect(0);

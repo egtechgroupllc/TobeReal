@@ -2,10 +2,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from '../ContentAccommodation/BoxPlaceItem';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function SimilarApartmentsNearby() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   return (
     <WrapperContent
       heading={t('browse_similar')}

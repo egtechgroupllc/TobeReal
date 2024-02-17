@@ -7,11 +7,11 @@ import WrapperContent from '../WrapperContent';
 import ItemBoxReview from './Review/ItemBoxReview';
 import ReviewAll from './Review/ReviewAll';
 import ListSelect from '../../../../components/ListSelect';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const [select, setSelect] = useState();
@@ -35,7 +35,7 @@ export default function Review() {
           <CustomText
             textType="bold"
             style={{fontSize: SIZES.xMedium, color: COLORS.primary}}>
-           {t('overview')}
+            {t('overview')}
           </CustomText>
           <CustomText style={{fontSize: SIZES.xMedium}}>
             146 {t('reviews')}

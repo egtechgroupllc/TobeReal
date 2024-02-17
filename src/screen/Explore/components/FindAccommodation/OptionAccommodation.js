@@ -37,7 +37,7 @@ export default function OptionAccommodation({
 
   const [option, setOption] = useState([valueDefault]);
   useEffect(() => {
-    if (select) setOption([select]);
+    if (select || select === 0) setOption([select]);
   }, [select]);
 
   useEffect(() => {
