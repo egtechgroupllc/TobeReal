@@ -65,8 +65,9 @@ target 'Saveloka' do
 
   use_react_native!(
     :path => config[:reactNativePath],
+    :hermes_enabled => false,
     # Enables Flipper.
-      :hermes_enabled => false,
+    #
     # Note that if you have use_frameworks! ena bled, Flipper will not work and
     # you should disable the next line.
     :flipper_configuration => flipper_config,
@@ -75,7 +76,6 @@ target 'Saveloka' do
   )
 
 # React Native Maps dependencies
-
 rn_maps_path = '../node_modules/react-native-maps'
 pod 'react-native-google-maps', :path => rn_maps_path
 
