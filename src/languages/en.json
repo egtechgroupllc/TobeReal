@@ -91,7 +91,7 @@
     "per_month_from":"Per month from:",
     "contact_host":"Contact Host",
     "book_now":"Book Now",
-
+   
 
     "add_booking":"ADD BOOKING",
     "no_active_booking":"No active booking yet",
@@ -248,5 +248,6 @@
     "land":"Land",
     "RENT":"RENT",
     "BUY":"BUY",
-    "TOUR":"TOUR"
+    "TOUR":"TOUR",
+    "wish_list":"Wish list"
 }

@@ -335,6 +335,7 @@ export default function ContentAccommodation() {
               multiPrice
               isUnitAvailable
               isHeart
+              data={item}
               jsonImage={item?.imgdetail}
               name={item?.name}
             />

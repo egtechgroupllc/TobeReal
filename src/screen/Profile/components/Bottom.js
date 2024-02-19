@@ -15,11 +15,20 @@ import CustomText from '../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import { useLanguage } from '../../../hooks/useLanguage';
+import { showMess } from '../../../assets/constants/Helper';
 export default function Bottom() {
   const {t}= useLanguage()
   const navigation = useNavigation();
-  const {onClearToken} = useAuthentication();
-
+  const {onClearToken, token} = useAuthentication();
+  const handleLogout = () => {
+    navigation.navigate('HomeExploreScreen');
+    onClearToken();
+       // showMess('Log out success!', 'success')
+  };
+  const handleLogin = () => {
+    navigation.navigate('NavigationAuth');
+    // showMess('Log out success!', 'success')
+  };
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -71,24 +80,49 @@ export default function Bottom() {
           <IconInstagram />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={{
-          height: scale(48),
-          marginTop: scale(20),
-          marginBottom: scale(50),
-          width: '85%',
-        }}
-        onPress={onClearToken}>
-        <LinearGradient
-          colors={['#F7E75A', '#FFC702']}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          style={styles.button}>
-          <CustomText textType="bold" style={{...styles.text2}}>
-          {t('log_out')}
-          </CustomText>
-        </LinearGradient>
-      </TouchableOpacity>
+      {
+        token ? (
+          <TouchableOpacity
+          style={{
+            height: scale(48),
+            marginTop: scale(20),
+            marginBottom: scale(50),
+            width: '85%',
+          }}
+          onPress={handleLogout}>
+          <LinearGradient
+            colors={['#F7E75A', '#FFC702']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={styles.button}>
+            <CustomText textType="bold" style={{...styles.text2}}>
+            {t('log_out')}
+            </CustomText>
+          </LinearGradient>
+        </TouchableOpacity>
+        ):(
+          <TouchableOpacity
+          style={{
+            height: scale(48),
+            marginTop: scale(20),
+            marginBottom: scale(50),
+            width: '85%',
+          }}
+          onPress={handleLogin}>
+          <LinearGradient
+            colors={['#F7E75A', '#FFC702']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={styles.button}>
+            <CustomText textType="bold" style={{...styles.text2}}>
+            {t('login')}
+            </CustomText>
+          </LinearGradient>
+        </TouchableOpacity>
+        )
+      }
+
+      
     </View>
   );
 }

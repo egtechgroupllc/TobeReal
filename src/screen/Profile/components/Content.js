@@ -36,6 +36,9 @@ export default function Content() {
   const financial = () => {
     navigation.navigate('FinancialScreen');
   };
+  const wishlist = () => {
+    navigation.navigate('HomeWishListScreen');
+  };
   const selectLanguage = () => {
     navigation.navigate('SelectLanguageScreen');
   };
@@ -166,6 +169,11 @@ export default function Content() {
         <CategoriesButton
           title={t('managing_trading')}
           onPress={managingTradeFloor}
+          large={true}
+        />
+          <CategoriesButton
+          title={t('wish_list')}
+          onPress={wishlist}
           large={true}
         />
         <CategoriesButton

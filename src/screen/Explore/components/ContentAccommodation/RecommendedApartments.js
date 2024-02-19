@@ -121,6 +121,7 @@ export default function RecommendedApartments({
             key={`key-${item}-${index}`}
             seeViewNumber={1.5}
             multiPrice="viewMultiPrice2"
+            data={item}
             isUnitAvailable
             rating={4}
             textRating={index % 2 !== 0 && 'New'}

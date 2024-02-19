@@ -8,9 +8,11 @@ import {CustomButton} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import EmptyData from '../../components/EmptyData';
 import WishList from './WishList';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const data = [...Array(9)];
 export default function HomeWishListScreen() {
+  const {t}= useLanguage()
   return (
     <MainWrapper>
       <ImageBackground
@@ -22,7 +24,7 @@ export default function HomeWishListScreen() {
           shaDowColor="#F0B90B90"
           textType="bold"
           style={styles.textBanner}>
-          Wishlist
+          {t('wish_list')}
         </CustomText>
       </ImageBackground>
 

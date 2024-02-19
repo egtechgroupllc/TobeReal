@@ -12,12 +12,12 @@ export default function NewsScreen() {
   const {navigate, goBack} = useNavigation();
   const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (isFocused && !token) {
-      goBack();
-      navigate('NavigationAuth');
-    }
-  }, [isFocused]);
+    // useEffect(() => {
+    //   if (isFocused && !token) {
+    //     goBack();
+    //     navigate('NavigationAuth');
+    //   }
+    // }, [isFocused]);
 
   return (
     <MainWrapper>

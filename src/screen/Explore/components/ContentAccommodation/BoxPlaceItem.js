@@ -66,7 +66,7 @@ export default function BoxPlaceItem({
             <CustomImage source={data?.src} style={styles.img} />
           ) : (
             <CustomImage
-              src="https://saveloka.vercel.app/_next/image?url=%2Fimages%2Fhome%2Fhotel-image%2Fresidence%2Fresidence-1.jpg&w=640&q=75"
+              src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
               style={styles.img}></CustomImage>
           )}
 

@@ -15,6 +15,7 @@ import { PriceListScreen } from '../screen/Profile/PriceList';
 import { SelectLanguageScreen } from '../screen/Profile/SelectLanguage';
 import { TradingFloorScreen } from '../screen/Profile/TradingFloor';
 import { CreateTradingScreen } from '../screen/Profile/TradingFloor/CreateTradingFloor';
+import { HomeWishListScreen } from '../screen/WishList';
 
 export default routerProfile = [
   {
@@ -80,5 +81,9 @@ export default routerProfile = [
   {
     name: 'SelectLanguageScreen',
     component: SelectLanguageScreen,
+  },
+  {
+    name: 'HomeWishListScreen',
+    component: HomeWishListScreen,
   },
 ];

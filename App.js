@@ -80,7 +80,7 @@ const Layout = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+      }} initialRouteName='BottomTab'>
       <Stack.Screen name="BottomTab" component={BottomTab} />
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />

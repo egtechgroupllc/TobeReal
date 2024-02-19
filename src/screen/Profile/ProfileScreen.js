@@ -10,16 +10,19 @@ import HeaderAvatar from './components/HeaderAvatar';
 export default function ProfileScreen() {
   const upgrade = () => {};
 
-  const {token} = useAuthentication();
+  // const {token} = useAuthentication();
   const {navigate, goBack} = useNavigation();
-  const isFocused = useIsFocused();
+//   const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (isFocused && !token) {
-      goBack();
-      navigate('NavigationAuth');
-    }
-  }, [isFocused]);
+//   useEffect(() => {
+//     if (!token) {
+//       navigate('NavigationAuth');
+//       if(!isFocused ){
+//         goBack()
+//       }
+//     }
+// console.log(token,3213,isFocused);
+//   }, [isFocused,token]);
 
   return (
     <MainAuth>

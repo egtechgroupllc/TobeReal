@@ -44,6 +44,7 @@ export default function Content() {
         if (dataInde?.status == true) {
           showMess(dataInde?.message, 'success');
           onSaveToken(dataInde?.data?.accessToken);
+          navigation.navigate('HomeExploreScreen');
         } else {
           showMess(dataInde?.message, 'error');
         }
