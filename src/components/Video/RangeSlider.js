@@ -34,6 +34,7 @@ const RangeSlider = ({
         width: '100%',
         // flex: 1,
         justifyContent: 'flex-end',
+
         ...style,
       }}>
       {isShowTime && isMoveProgress && (
@@ -58,7 +59,7 @@ const RangeSlider = ({
           setIsMoveProgress(true);
         }}
         onSlidingComplete={value => {
-          onValueChange && onValueChange(moveProgress);
+          onValueChange && onValueChange(moveProgress || value[0]);
 
           setIsMoveProgress(undefined);
           setTimeout(() => {
@@ -75,7 +76,7 @@ const RangeSlider = ({
               ? scale(8)
               : isMoveProgress
               ? scale(15)
-              : scale(5),
+              : scale(4),
           width: isMoveProgress ? scale(9) : scale(5),
         }}
         trackStyle={{

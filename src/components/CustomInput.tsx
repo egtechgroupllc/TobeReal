@@ -105,6 +105,7 @@ export default function CustomInput({
               ) : (
                 <TouchableOpacity
                   style={styles.iconBox}
+                  disabled={!!onPress && !onPressIconLeft}
                   activeOpacity={onPressIconLeft ? 0.7 : 1}
                   onPress={onPressIconLeft && onPressIconLeft}>
                   <IconLeft
@@ -135,6 +136,7 @@ export default function CustomInput({
               ) : (
                 <TouchableOpacity
                   style={styles.iconBox}
+                  disabled={!!onPress && !onPressIconRight}
                   activeOpacity={onPressIconRight ? 0.7 : 1}
                   onPress={onPressIconRight && onPressIconRight}>
                   <IconRight

@@ -1,5 +1,5 @@
 import {HomeExploreScreen} from '../screen/Explore';
-import ListVideoInfluencerScreen from '../screen/Explore/components/ContentAccommodation/VideoInfluencer/ListVideoInfluencerScreen';
+import ListVideoInfluencerScreen from '../screen/Video/ListVideoInfluencerScreen';
 
 export default routerExplore = [
   {

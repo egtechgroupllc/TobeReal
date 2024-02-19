@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   icon: {
     alignItems: 'center',
     position: 'absolute',
-    left: scale(8),
+    right: scale(8),
     padding: scale(6),
     // height: '100%',
   },

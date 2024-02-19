@@ -1,21 +1,22 @@
 import LottieView from 'lottie-react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {
-  GestureHandlerRootView,
-  State,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Video from 'react-native-video';
-import {COLORS, WIDTH, animations, scale} from '../../assets/constants';
-import {IconPlayVideo} from '../../assets/icon/Icon';
-import RangeSlider from './RangeSlider';
-import SideBar from './SideBar';
 import {CustomButton} from '..';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import {WIDTH, animations, scale} from '../../assets/constants';
+import {IconPlayVideo} from '../../assets/icon/Icon';
+import SideBar from './SideBar';
+import RangeSlider from './RangeSlider';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export default function VideoPlay({
+export default (function VideoPlay({
   fullScreen,
   data,
   source,
@@ -24,10 +25,11 @@ export default function VideoPlay({
   resetVideo,
   style,
   resizeMode = 'contain',
+
   ...props
 }) {
   const videoRef = useRef();
-  const doubleTapRef = useRef(null);
+  const isImgAsset = typeof source === 'number';
   const insets = useSafeAreaInsets();
 
   const [progress, setProgress] = useState(0);
@@ -42,16 +44,10 @@ export default function VideoPlay({
 
   useEffect(() => {
     if (play) {
+      videoRef.current.seek(0);
       setPausedVideo(!play);
     }
   }, [play]);
-
-  useEffect(() => {
-    if (resetVideo) {
-      videoRef.current.seek(0);
-      setPausedVideo(true);
-    }
-  }, [resetVideo, pausedVideo]);
 
   const handleValueChange = useCallback(
     value => {
@@ -78,97 +74,96 @@ export default function VideoPlay({
     // }
     setReleaseHeart({x: locationX, y: locationY});
   };
-  const isImgAsset = typeof source === 'number';
 
   return (
-    <GestureHandlerRootView
-      ref={doubleTapRef}
-      numberOfTaps={2}
-      maxDurationMs={500}
-      //  onTouchStart={}
-      // onTouchStart={onDoubleClick}
-    >
-      <View style={[fullScreen ? styles.fullScreen : {flex: 1}]}>
-        <Video
-          {...props}
-          ref={videoRef}
-          source={isImgAsset ? source : {uri: source}}
-          style={[styles.video, style]}
-          paused={pausedVideo}
-          onProgress={value => {
-            setProgress(value);
-          }}
-          repeat
-          muted
-          resizeMode={resizeMode}
-        />
+    <View style={[fullScreen ? styles.fullScreen : {flex: 1}]}>
+      <Video
+        ref={videoRef}
+        {...props}
+        source={isImgAsset ? source : {uri: source}}
+        style={[styles.video, style]}
+        paused={pausedVideo}
+        onProgress={useCallback(value => {
+          setProgress(value);
+        }, [])}
+        repeat
+        muted
+        resizeMode={resizeMode}
+      />
 
-        {fullScreen && (
-          <View style={styles.safeProvider}>
-            {!!releaseHeart.y && (
-              <View
-                style={[
-                  {
-                    position: 'absolute',
-                  },
-                  releaseHeart.x && {
-                    left: releaseHeart.x - 50,
-                    top: releaseHeart.y - 40,
-                  },
-                ]}>
-                <LottieView
-                  loop={false}
-                  autoPlay={true}
-                  duration={1200}
-                  source={animations.releaseHeart}
-                  onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
-                  resizeMode="cover"
-                  style={styles.favouriteHeart}
-                />
-              </View>
-            )}
-
-            <CustomButton
-              isDouble
-              activeOpacity={1}
-              styleWrapper={styles.overlayPlay}
-              style={{
-                height: '100%',
-                backgroundColor: 'transparent',
-              }}
-              onDoublePress={onDoubleClick}
-              onPress={() => setPausedVideo(!pausedVideo)}
-            />
-
-            <SideBar
-              data={data}
-              isFavourite={releaseHeart.x}
-              // onFavourite={e => {}}
-            />
-
-            {pausedVideo && (
-              <IconPlayVideo
-                style={{
-                  width: scale(40),
-                  height: scale(40),
-                  opacity: 0.7,
-                }}
-              />
-            )}
-
-            <View style={[styles.rangeSlider, {bottom: insets.bottom}]}>
-              <RangeSlider
-                progressValue={progress.currentTime || 0}
-                onValueChange={handleValueChange}
-                maximumValue={progress.seekableDuration || 0}
+      {fullScreen && (
+        <View style={styles.safeProvider}>
+          {!!releaseHeart.y && (
+            <View
+              style={[
+                {
+                  position: 'absolute',
+                },
+                releaseHeart.x && {
+                  left: releaseHeart.x - 50,
+                  top: releaseHeart.y - 40,
+                },
+              ]}>
+              <LottieView
+                loop={false}
+                autoPlay={true}
+                duration={1200}
+                source={animations.releaseHeart}
+                onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
+                resizeMode="cover"
+                style={styles.favouriteHeart}
               />
             </View>
-          </View>
-        )}
-      </View>
-    </GestureHandlerRootView>
+          )}
+
+          <CustomButton
+            isDouble
+            activeOpacity={1}
+            styleWrapper={styles.overlayPlay}
+            style={{
+              height: '100%',
+              backgroundColor: 'transparent',
+            }}
+            onDoublePress={onDoubleClick}
+            onPress={() => setPausedVideo(!pausedVideo)}
+          />
+
+          {pausedVideo && (
+            <IconPlayVideo
+              style={{
+                width: scale(40),
+                height: scale(40),
+                opacity: 0.7,
+              }}
+            />
+          )}
+        </View>
+      )}
+
+      {fullScreen && (
+        <SideBar
+          data={data}
+          isFavourite={releaseHeart.x}
+          // onFavourite={e => {}}
+        />
+      )}
+
+      {play && (
+        <View
+          style={[
+            styles.rangeSlider,
+            {bottom: insets.bottom ? insets.bottom : scale(20)},
+          ]}>
+          <RangeSlider
+            progressValue={progress.currentTime || 0}
+            onValueChange={handleValueChange}
+            maximumValue={progress.seekableDuration || 0}
+          />
+        </View>
+      )}
+    </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   video: {
@@ -176,15 +171,16 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   fullScreen: {
-    width: WIDTH.widthScreen,
-    height: WIDTH.heightScreen - scale(20),
+    // width: WIDTH.widthScreen,
+    width: '100%',
+    height: WIDTH.heightScreen,
   },
   safeProvider: {
     position: 'absolute',
     alignItems: 'center',
     ...StyleSheet.absoluteFill,
     justifyContent: 'center',
-    zIndex: 999,
+    zIndex: 10,
   },
   overlayPlay: {
     width: '100%',
@@ -196,6 +192,7 @@ const styles = StyleSheet.create({
     width: '90%',
     position: 'absolute',
     zIndex: 999,
+    alignSelf: 'center',
   },
   favouriteHeart: {
     width: scale(100),

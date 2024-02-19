@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     rowGap: scale(16),
     position: 'absolute',
     right: scale(20),
-    zIndex: 99,
+    zIndex: 999,
     alignItems: 'center',
   },
   favouriteHeart: {

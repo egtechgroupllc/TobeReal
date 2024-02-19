@@ -4,7 +4,6 @@ import WrapperContent from '../../WrapperContent';
 import {scale} from '../../../../../assets/constants';
 import BoxPlaceItem from '../BoxPlaceItem';
 import VideoCompact from './VideoCompact';
-import ListVideoInfluencerScreen from './ListVideoInfluencerScreen';
 import {useNavigation} from '@react-navigation/native';
 import video from '../../../../../assets/constants/video';
 
@@ -32,8 +31,8 @@ const data = [
 ];
 
 export default function VideoInfluencerApproved() {
-  const [playVideo, setPlayVideo] = useState(false);
   const {navigate} = useNavigation();
+
   return (
     <WrapperContent heading="Influencer Approved Units ✨">
       <FlatList
@@ -43,12 +42,13 @@ export default function VideoInfluencerApproved() {
         contentContainerStyle={styles.content}
         renderItem={({item}) => (
           <VideoCompact
-            onPlay={() => navigate('ListVideoInfluencerScreen')}
+            onPlay={() =>
+              navigate('NoBottomTab', {screen: 'ListVideoInfluencerScreen'})
+            }
             source={item?.src}
           />
         )}
       />
-      {/* {playVideo && <ListVideoInfluencerScreen />} */}
     </WrapperContent>
   );
 }

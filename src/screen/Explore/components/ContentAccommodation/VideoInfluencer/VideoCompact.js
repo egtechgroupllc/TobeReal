@@ -10,7 +10,6 @@ export default function VideoCompact({onPlay, source}) {
     <View style={styles.wrapper}>
       <VideoPlay
         style={styles.backgroundVideo}
-        paused
         source={source}
         resizeMode="cover"
       />

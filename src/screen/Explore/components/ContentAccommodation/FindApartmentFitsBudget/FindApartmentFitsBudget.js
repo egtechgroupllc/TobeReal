@@ -18,7 +18,7 @@ import BottomSheet from '../../../../../components/BottomSheet';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import SelectLocation from './SelectLocation';
 import {useForm} from 'react-hook-form';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 const listFrequentlyPrice = [
   {
@@ -42,7 +42,7 @@ const listFrequentlyPrice = [
 ];
 
 export default function FindApartmentFitsBudget() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const [inputState, setInputState] = useState(null);
 
   const handleSelectFrequently = value => {
@@ -122,7 +122,7 @@ export default function FindApartmentFitsBudget() {
 
       <CustomButton
         buttonType="medium"
-        text= {t('Find_Accommodation')}
+        text={t('Find_Accommodation')}
         styleText={{
           color: '#fff',
           textType: 'semiBold',

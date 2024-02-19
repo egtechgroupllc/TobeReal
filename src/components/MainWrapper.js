@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  ImageBackground,
-  KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {images, scale} from '../assets/constants';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
+import {images} from '../assets/constants';
 
 export default function MainWrapper({
   children,
@@ -16,8 +9,6 @@ export default function MainWrapper({
   scrollEnabled = true,
   onScroll = () => {},
 }) {
-  const insets = useSafeAreaInsets();
-
   return (
     <ImageBackground
       source={images.background1}
