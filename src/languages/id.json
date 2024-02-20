@@ -243,5 +243,6 @@
   "RENT": "SEWA",
   "BUY": "BELI",
   "TOUR": "WISATA",
-  "wish_list":"Daftar Keinginan"
+  "wish_list":"Daftar Keinginan",
+  "change_language_success":"Berhasil mengubah bahasa!"
 }

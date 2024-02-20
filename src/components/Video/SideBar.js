@@ -63,6 +63,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
             style={styles.favouriteHeart}
           />
         </View>
+        
 
         <CustomText
           textType="semiBold"

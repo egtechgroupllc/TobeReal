@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {SIZES, scale} from '../../../../assets/constants';
@@ -21,7 +21,7 @@ export default function Content() {
   const {t} = useLanguage();
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
-
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -39,18 +39,23 @@ export default function Content() {
     navigation.navigate('ForgotPasswordScreen');
   };
   const handleLogin = value => {
+    setLoading(true);
     loginMutation.mutate(value, {
       onSuccess: dataInde => {
         if (dataInde?.status == true) {
-          showMess(dataInde?.message, 'success');
           onSaveToken(dataInde?.data?.accessToken);
-          navigation.navigate('HomeExploreScreen');
+          setTimeout(() => {
+            showMess(dataInde?.message, 'success');
+            navigation.navigate('HomeExploreScreen');
+          }, 2000);
         } else {
           showMess(dataInde?.message, 'error');
         }
+        setLoading(false);
       },
       onError: errr => {
         console.log(errr);
+        setLoading(false);
       },
     });
   };
@@ -80,7 +85,11 @@ export default function Content() {
             passwordVisible ? IconUnViewablePassword : IconViewablePassword
           }
         />
-
+      {!loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#FF8C00" />
+        </View>
+      )}
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"
@@ -142,5 +151,10 @@ const styles = StyleSheet.create({
     marginTop: scale(40),
     alignItems: 'center',
     justifyContent: 'center',
+  },  
+  loadingContainer: {
+    position:'absolute',
+    marginTop:scale(50),
+    alignSelf:'center'
   },
 });

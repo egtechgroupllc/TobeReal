@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SIZES, images, scale} from '../../../../assets/constants';
@@ -13,6 +14,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import CustomText from '../../../../components/CustomText';
 import {IconCheckBox, IconUnCheckBox} from '../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../components';
+import { showMess } from '../../../../assets/constants/Helper';
 const listLanguage = [
   {
     id: '1',
@@ -60,14 +62,18 @@ const listLanguage = [
 ];
 export default function Content() {
   const {t, changeLocale, locale} = useLanguage();
-
+  const [loading, setLoading] = useState(false);
   const {goBack} = useNavigation();
 
   const notify = () => {};
   const [language, setLanguage] = useState(locale);
   const changeLanguage = () => {
+    setLoading(true);
     changeLocale(language);
-    goBack();
+    setTimeout(() => {
+      setLoading(false);
+      showMess(t('change_language_success'), 'success');
+    }, 2000);
   };
 
   return (
@@ -105,6 +111,11 @@ export default function Content() {
           )}
           keyExtractor={item => item.languageCode}
         />
+         {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#FF8C00" />
+        </View>
+      )}
         <CustomButton
           text={'OK'}
           buttonType="large"
@@ -147,5 +158,10 @@ const styles = StyleSheet.create({
   image: {
     height: scale(20),
     width: scale(28),
+  },
+  loadingContainer: {
+    position:'absolute',
+    marginTop:scale(100),
+    alignSelf:'center'
   },
 });

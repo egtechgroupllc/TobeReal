@@ -249,5 +249,7 @@
     "RENT":"RENT",
     "BUY":"BUY",
     "TOUR":"TOUR",
-    "wish_list":"Wish list"
+    "wish_list":"Wish list",
+    "change_language_success":"Change language success!"
+
 }
