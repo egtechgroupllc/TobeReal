@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import CustomText from '../CustomText';
-import {SIZES, scale} from '../../assets/constants';
+import CustomText from '../../../components/CustomText';
+import {SIZES, scale} from '../../../assets/constants';
 
 export default React.memo(function TimeProgress({timeCurrent, timeTotal}) {
   return (
@@ -38,9 +38,11 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
   },
   wrapper: {
+    position: 'absolute',
     alignItems: 'center',
+    alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: scale(6),
+    top: scale(-24),
   },
 });

@@ -17,6 +17,7 @@ import NavigationProfile from './src/navigation/NavigationProfile';
 import FlashMessage from 'react-native-flash-message';
 import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
 import {showMess} from './src/assets/constants/Helper';
+import {KeyboardProvider} from 'react-native-keyboard-controller';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -54,9 +55,10 @@ export default function App() {
         style={{
           backgroundColor: COLORS.primary,
         }}>
-        <SafeAreaView style={styles.wrapper} edges={['right', 'top', 'left']}>
-          <NavigationContainer>
-            <QueryClientProvider client={queryClient}>
+        {/* <SafeAreaView style={styles.wrapper} edges={['top', 'right', 'left']}> */}
+        <NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <KeyboardProvider>
               <LanguageProvider>
                 <AuthProvider>
                   <BottomSheetModalProvider>
@@ -76,9 +78,10 @@ export default function App() {
                   </BottomSheetModalProvider>
                 </AuthProvider>
               </LanguageProvider>
-            </QueryClientProvider>
-          </NavigationContainer>
-        </SafeAreaView>
+            </KeyboardProvider>
+          </QueryClientProvider>
+        </NavigationContainer>
+        {/* </SafeAreaView> */}
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

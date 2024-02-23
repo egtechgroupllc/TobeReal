@@ -3,15 +3,17 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconMarker, IconPlayVideo} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
-import {VideoPlay} from '../../../../../components';
+import Video from 'react-native-video';
 
 export default function VideoCompact({onPlay, source}) {
   return (
     <View style={styles.wrapper}>
-      <VideoPlay
+      <Video
         style={styles.backgroundVideo}
         source={source}
         resizeMode="cover"
+        paused
+        poster={'https://baconmockup.com/300/200'}
       />
       <TouchableOpacity
         style={styles.overlay}

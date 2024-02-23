@@ -2,13 +2,12 @@ import LottieView from 'lottie-react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Share, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SHADOW, animations, scale} from '../../assets/constants';
-import {IconShare} from '../../assets/icon/Icon';
-import {formatNumber} from '../../utils/format';
-import CustomText from '../CustomText';
+import {SHADOW, animations, scale} from '../../../assets/constants';
+import {IconComment, IconShare, LogoMessageFB} from '../../../assets/icon/Icon';
+import {formatNumber} from '../../../utils/format';
+import CustomText from '../../../components/CustomText';
 
 export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
-  const insets = useSafeAreaInsets();
   const refHeart = useRef();
 
   const [isHeart, setIsHeart] = useState(true);
@@ -24,7 +23,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
         err && console.log(err);
       });
   };
-  console.log('isFavourite', isFavourite, isHeart);
+
   useEffect(() => {
     if (isFavourite) {
       setIsHeart(!isFavourite);
@@ -32,13 +31,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
   }, [isFavourite]);
 
   return (
-    <View
-      style={[
-        styles.wrapper,
-        {
-          bottom: insets.bottom + scale(200),
-        },
-      ]}>
+    <View style={styles.wrapper}>
       <TouchableOpacity
         activeOpacity={1}
         style={{
@@ -72,6 +65,26 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
         </CustomText>
       </TouchableOpacity>
 
+      <TouchableOpacity
+        onPress={onShare}
+        activeOpacity={0.7}
+        style={{
+          alignItems: 'center',
+          rowGap: scale(6),
+        }}>
+        <IconComment
+          style={{
+            width: scale(34),
+            height: scale(34),
+          }}
+        />
+        <CustomText
+          textType="semiBold"
+          style={{color: '#fff', marginTop: scale(-6)}}>
+          {formatNumber(10000)}
+        </CustomText>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={onShare} activeOpacity={0.7}>
         <IconShare
           style={{
@@ -91,6 +104,7 @@ const styles = StyleSheet.create({
     right: scale(20),
     zIndex: 999,
     alignItems: 'center',
+    bottom: scale(150),
   },
   favouriteHeart: {
     width: scale(45),

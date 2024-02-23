@@ -14,7 +14,7 @@ import {CustomButton, CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import BottomSheet from '../../../../../../components/BottomSheet';
 
-const listService= [
+const listService = [
   'Outdoor view',
   'Non-smoking',
   'Shower',
@@ -28,7 +28,7 @@ const listService= [
   'Closet',
   'Street view',
   'Balcony/terrace',
-  'Kitchenette'
+  'Kitchenette',
 ];
 export default function SelectService() {
   const [select, setSelect] = useState(listService[0]);
@@ -44,7 +44,7 @@ export default function SelectService() {
   }, [search]);
 
   return (
-    <View style={{width:'90%'}}>
+    <View style={{width: '90%'}}>
       <CustomInput
         value={select}
         iconLeft={IconMarker}

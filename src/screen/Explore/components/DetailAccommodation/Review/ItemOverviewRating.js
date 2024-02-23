@@ -1,7 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import CustomText from '../../../../../components/CustomText';
-import RangeSlider from '../../../../../components/Video/RangeSlider';
 import {COLORS, scale} from '../../../../../assets/constants';
 
 export default function ItemOverviewRating({rating, textType}) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
-import {images} from '../assets/constants';
+import {COLORS, images} from '../assets/constants';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default function MainWrapper({
   children,
@@ -10,28 +11,32 @@ export default function MainWrapper({
   onScroll = () => {},
 }) {
   return (
-    <ImageBackground
-      source={images.background1}
-      resizeMode="stretch"
-      style={[
-        {flex: 1, backgroundColor: '#fff'},
-        backgroundColor && {backgroundColor},
-      ]}>
-      <View style={[styles.wrapper]}>
-        {scrollEnabled ? (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            scrollEnabled={scrollEnabled}
-            onScroll={onScroll}
-            scrollEventThrottle={16}>
+    <SafeAreaView
+      style={{...styles.wrapper, backgroundColor: COLORS.primary}}
+      edges={['top', 'right', 'left']}>
+      <ImageBackground
+        source={images.background1}
+        resizeMode="stretch"
+        style={[
+          {flex: 1, backgroundColor: '#fff'},
+          backgroundColor && {backgroundColor},
+        ]}>
+        <View style={[styles.wrapper]}>
+          {scrollEnabled ? (
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              scrollEnabled={scrollEnabled}
+              onScroll={onScroll}
+              scrollEventThrottle={16}>
+              <View style={{flex: 1, ...styleContent}}>{children}</View>
+            </ScrollView>
+          ) : (
             <View style={{flex: 1, ...styleContent}}>{children}</View>
-          </ScrollView>
-        ) : (
-          <View style={{flex: 1, ...styleContent}}>{children}</View>
-        )}
-      </View>
-    </ImageBackground>
+          )}
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 

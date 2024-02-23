@@ -1,10 +1,12 @@
 import {Animated, FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {
   forwardRef,
+  memo,
   useCallback,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
+  useState,
 } from 'react';
 import BoxPlaceItem from '../Explore/components/ContentAccommodation/BoxPlaceItem';
 import {WIDTH, images, scale} from '../../assets/constants';
@@ -92,11 +94,15 @@ export default forwardRef(function ListLocation(
   const insets = useSafeAreaInsets();
   const flatListRef = useRef();
 
-  useImperativeHandle(ref, () => ({
-    scrollToOffset: (offset = 0) => {
-      flatListRef.current?.scrollToOffset({offset: offset, animated: true});
-    },
-  }));
+  useImperativeHandle(
+    ref,
+    () => ({
+      scrollToOffset: (offset = 0) => {
+        flatListRef.current?.scrollToOffset({offset: offset, animated: true});
+      },
+    }),
+    [],
+  );
 
   return (
     <View
@@ -126,7 +132,7 @@ export default forwardRef(function ListLocation(
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: scrollOffsetX}}}],
           {
-            useNativeDriver: true,
+            useNativeDriver: false,
           },
         )}
         renderItem={({item, index}) => (

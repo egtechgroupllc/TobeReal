@@ -3,6 +3,7 @@ import BottomSheetMain, {
   BottomSheetFlatList,
   BottomSheetModal,
   BottomSheetScrollView,
+  BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
 import {
@@ -31,6 +32,7 @@ const BottomSheet = (
     isLine,
     handleChildBottom,
     refChild,
+    disableScroll,
   },
   ref,
 ) => {
@@ -69,12 +71,14 @@ const BottomSheet = (
       bottomSheetChildRef.current?.close();
     },
   }));
+
   // renders
   return (
     <BottomSheetModal
       ref={bottomSheetModalRef}
       index={_snapPoints.length - 1}
       snapPoints={_snapPoints}
+      handleHeight={30}
       backdropComponent={BottomSheetBackdrop}
       onChange={index => index === 0 && handleClose()}
       handleIndicatorStyle={{
@@ -98,21 +102,37 @@ const BottomSheet = (
           styleHeaderWrapper={styleHeaderWrapper}
         />
       )}
+      {disableScroll ? (
+        <View
+          style={{
+            paddingVertical: scale(16),
+            flex: 1,
+            paddingBottom: insets.bottom + scale(10),
+            ...styleContent,
+          }}>
+          {children}
+        </View>
+      ) : (
+        <BottomSheetScrollView
+          scrollEnabled={!disableScroll}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingVertical: scale(16),
+            paddingBottom: insets.bottom + scale(10),
+          }}>
+          <View style={[styles.contentContainer, styleContent]}>
+            {children}
+          </View>
+        </BottomSheetScrollView>
+      )}
 
-      <BottomSheetScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingVertical: scale(16),
-          paddingBottom: insets.bottom + scale(10),
-        }}>
-        <View style={[styles.contentContainer, styleContent]}>{children}</View>
-      </BottomSheetScrollView>
       {bottomSheetChildRef && (
         <BottomSheetMain
           ref={bottomSheetChildRef}
           snapPoints={_snapPointsChild}
-          enablePanDownToClose
-          backdropComponent={BottomSheetBackdrop}>
+          // enablePanDownToClose
+          // backdropComponent={BottomSheetBackdrop}
+        >
           {handleChildBottom && handleChildBottom()}
         </BottomSheetMain>
       )}

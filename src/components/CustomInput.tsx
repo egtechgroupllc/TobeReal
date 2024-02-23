@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, {useEffect, useMemo} from 'react';
+import React, {forwardRef, useEffect, useMemo, useRef} from 'react';
 import {
   Control,
   Controller,
@@ -13,7 +13,9 @@ import {
   TextInputProps,
   TextStyle,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
+  ViewStyle,
 } from 'react-native';
 
 import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
@@ -37,6 +39,7 @@ type CustomInputProps = {
   styleIcon?: TextStyle;
   styleText?: TextStyle;
   styleTextLabel?: TextStyle;
+  styleWrapper?: ViewStyle;
   enableFormatNum?: boolean;
   sizeInput?: 'small' | 'medium' | 'large';
   onPress?: () => void;
@@ -44,25 +47,29 @@ type CustomInputProps = {
   onPressIconLeft?: () => void;
 } & TextInputProps;
 
-export default function CustomInput({
-  sizeInput,
-  iconLeft,
-  iconRight,
-  componentRight,
-  componentLeft,
-  styleIcon,
-  styleText,
-  styleTextLabel,
-  control,
-  rules,
-  name,
-  label,
-  enableFormatNum,
-  onPress,
-  onPressIconRight,
-  onPressIconLeft,
-  ...props
-}: CustomInputProps) {
+export default forwardRef(function CustomInput(
+  {
+    sizeInput,
+    iconLeft,
+    iconRight,
+    componentRight,
+    componentLeft,
+    styleIcon,
+    styleText,
+    styleTextLabel,
+    styleWrapper,
+    control,
+    rules,
+    name,
+    label,
+    enableFormatNum,
+    onPress,
+    onPressIconRight,
+    onPressIconLeft,
+    ...props
+  }: CustomInputProps,
+  ref,
+) {
   const IconRight: any = iconRight;
   const IconLeft: any = iconLeft;
   const propStyle = arrayToObject(props?.style);
@@ -71,6 +78,10 @@ export default function CustomInput({
   const heightSize =
     sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 40;
 
+  const ComponentWrapper: any =
+    rules || label ? View : TouchableWithoutFeedback;
+  // const inputRef = useRef();
+
   return (
     <Controller
       control={control || form.control}
@@ -78,92 +89,99 @@ export default function CustomInput({
       name={name || ''}
       defaultValue={control && props?.defaultValue}
       render={({field: {onBlur, onChange, value}, fieldState: {error}}) => (
-        <View
+        <ComponentWrapper
           style={[
             styles.wrapper,
-
-            // propStyle?.height && {height: propStyle?.height},
 
             propStyle?.flex
               ? {flex: propStyle?.flex}
               : propStyle?.width && {width: propStyle?.width},
+            styleWrapper,
           ]}>
-          {label && <CustomText style={styleTextLabel}>{label}</CustomText>}
-          <TouchableOpacity
-            style={[
-              styles.content,
-              {height: scale(heightSize)},
-              propStyle,
-              error && {borderColor: '#f6465d'},
-              {width: '100%'},
-            ]}
-            activeOpacity={!!onPress ? 0.8 : 1}
-            onPress={onPress}>
-            {(iconLeft || componentLeft) &&
-              (componentLeft ? (
-                componentLeft
-              ) : (
-                <TouchableOpacity
-                  style={styles.iconBox}
-                  disabled={!!onPress && !onPressIconLeft}
-                  activeOpacity={onPressIconLeft ? 0.7 : 1}
-                  onPress={onPressIconLeft && onPressIconLeft}>
-                  <IconLeft
-                    style={{...styles.icon, ...styleIcon}}
-                    fill={styleIcon?.color}
-                  />
-                </TouchableOpacity>
-              ))}
+          <>
+            {label && <CustomText style={styleTextLabel}>{label}</CustomText>}
+            <TouchableOpacity
+              style={[
+                styles.content,
+                !propStyle?.minHeight && {height: scale(heightSize)},
+                propStyle,
+                error && {borderColor: '#f6465d'},
+                {width: '100%'},
+              ]}
+              activeOpacity={!!onPress ? 0.8 : 1}
+              onPress={onPress}>
+              {(iconLeft || componentLeft) &&
+                (componentLeft ? (
+                  componentLeft
+                ) : (
+                  <TouchableOpacity
+                    style={styles.iconBox}
+                    disabled={!!onPress && !onPressIconLeft}
+                    activeOpacity={onPressIconLeft ? 0.7 : 1}
+                    onPress={onPressIconLeft && onPressIconLeft}>
+                    <IconLeft
+                      style={{...styles.icon, ...styleIcon}}
+                      fill={styleIcon?.color}
+                    />
+                  </TouchableOpacity>
+                ))}
 
-            <TextInput
-              placeholderTextColor={COLORS.textSub}
-              editable={!onPress}
-              {...props}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={
-                enableFormatNum
-                  ? formatPrice(value, {showCurrency: false})
-                  : value
-              }
-              style={[styles.input, styleText]}
-              pointerEvents={!!onPress ? 'none' : 'auto'}
-            />
+              <TextInput
+                ref={ref}
+                placeholderTextColor={COLORS.textSub}
+                editable={!onPress}
+                {...props}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={
+                  enableFormatNum
+                    ? formatPrice(value, {showCurrency: false})
+                    : value
+                }
+                style={[
+                  styles.input,
+                  propStyle?.maxHeight && {maxHeight: propStyle?.maxHeight},
+                  props?.multiline && {lineHeight: scale(16)},
+                  styleText,
+                ]}
+                pointerEvents={!!onPress ? 'none' : 'auto'}
+              />
 
-            {(iconRight || componentRight) &&
-              (componentRight ? (
-                componentRight
-              ) : (
-                <TouchableOpacity
-                  style={styles.iconBox}
-                  disabled={!!onPress && !onPressIconRight}
-                  activeOpacity={onPressIconRight ? 0.7 : 1}
-                  onPress={onPressIconRight && onPressIconRight}>
-                  <IconRight
-                    style={{...styles.icon, ...styleIcon}}
-                    fill={styleIcon?.color}
-                  />
-                </TouchableOpacity>
-              ))}
-          </TouchableOpacity>
+              {(iconRight || componentRight) &&
+                (componentRight ? (
+                  componentRight
+                ) : (
+                  <TouchableOpacity
+                    style={styles.iconBox}
+                    disabled={!onPressIconRight}
+                    activeOpacity={onPressIconRight ? 0.7 : 1}
+                    onPress={onPressIconRight && onPressIconRight}>
+                    <IconRight
+                      style={{...styles.icon, ...styleIcon}}
+                      fill={styleIcon?.color}
+                    />
+                  </TouchableOpacity>
+                ))}
+            </TouchableOpacity>
 
-          {error && (
-            <View style={styles.errorBox}>
-              <IconError fill="#f0334b" />
-              <CustomText
-                style={{
-                  color: '#f0334b',
-                  flex: 1,
-                }}>
-                {error.message}
-              </CustomText>
-            </View>
-          )}
-        </View>
+            {error && (
+              <View style={styles.errorBox}>
+                <IconError fill="#f0334b" />
+                <CustomText
+                  style={{
+                    color: '#f0334b',
+                    flex: 1,
+                  }}>
+                  {error.message}
+                </CustomText>
+              </View>
+            )}
+          </>
+        </ComponentWrapper>
       )}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -182,7 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     // height: '100%',
-    height: scale(38),
+    // height: scale(38),
   },
   input: {
     flex: 1,

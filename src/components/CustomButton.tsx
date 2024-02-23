@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
@@ -165,9 +165,8 @@ export default function CustomButton({
                 styles.text,
                 {fontSize: scale(fontSize)},
                 !linearGradientProps && {color: COLORS.white},
-                styleText,
-
                 outline && {color: COLORS.primary},
+                styleText,
               ]}>
               {text}
             </CustomText>

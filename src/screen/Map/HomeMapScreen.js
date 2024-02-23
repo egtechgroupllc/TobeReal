@@ -11,6 +11,7 @@ import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
 import CustomMarker from './CustomMarker';
 import {getCurrentLocation} from '../../utils/getCurrentLocation';
+import MainWrapper from '../../components/MainWrapper';
 
 const initialMapState = {
   markers,
@@ -25,6 +26,7 @@ const CARD_WIDTH = scale(400 / 1.4);
 export default function HomeMapScreen({children, showListLocation, style}) {
   const scrollOffsetX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(0);
+  const [focusedItem, setFocusedItem] = useState(0);
 
   const mapRef = useRef(null);
   const [state, setState] = useState(initialMapState);
@@ -35,7 +37,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
 
   let mapIndex = 0;
 
-  useEffect(() => {
+  useMemo(() => {
     const handleScroll = ({value}) => {
       let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
       if (index >= state.markers.length) {
@@ -44,6 +46,8 @@ export default function HomeMapScreen({children, showListLocation, style}) {
       if (index <= 0) {
         index = 0;
       }
+      setFocusedItem(index);
+
       clearTimeout(regionTimeout);
 
       const regionTimeout = setTimeout(() => {
@@ -76,11 +80,21 @@ export default function HomeMapScreen({children, showListLocation, style}) {
 
         const scale = scrollOffsetX.interpolate({
           inputRange,
-          outputRange: [0.6, 0.9, 0.6],
+          outputRange: [0.5, 0.7, 0.5],
+          extrapolate: 'clamp',
+        });
+        const backgroundColor = scrollOffsetX.interpolate({
+          inputRange,
+          outputRange: ['#deaf02', '#fff', '#deaf02'],
+          extrapolate: 'clamp',
+        });
+        const color = scrollOffsetX.interpolate({
+          inputRange,
+          outputRange: ['#fff', COLORS.primary, '#fff'],
           extrapolate: 'clamp',
         });
 
-        return {scale};
+        return {scale, backgroundColor, color};
       }),
     [],
   );
@@ -111,7 +125,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <MainWrapper style={{flex: 1}} scrollEnabled={false}>
       <MapView
         ref={mapRef}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -124,8 +138,9 @@ export default function HomeMapScreen({children, showListLocation, style}) {
             <Marker
               key={index}
               coordinate={marker.coordinate}
+              zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>
-              <CustomMarker scaleValue={interpolations[index].scale} />
+              <CustomMarker scaleValue={interpolations[index]} data={marker} />
             </Marker>
           );
         })}
@@ -160,7 +175,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
           color: '#3b57f8',
         }}
       />
-    </View>
+    </MainWrapper>
   );
 }
 

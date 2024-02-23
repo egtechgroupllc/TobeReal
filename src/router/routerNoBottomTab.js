@@ -14,5 +14,6 @@ export default routerNoBottomTab = [
   {
     name: 'ListVideoInfluencerScreen',
     component: ListVideoInfluencerScreen,
+    options: {contentStyle: {backgroundColor: '#000'}},
   },
 ];

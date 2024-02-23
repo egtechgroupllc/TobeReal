@@ -1,7 +1,7 @@
 import {Slider} from '@miblanchard/react-native-slider';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {COLORS, scale} from '../../assets/constants';
+import {COLORS, scale} from '../../../assets/constants';
 import TimeProgress from './TimeProgress';
 const MIN_DEFAULT = 0;
 const MAX_DEFAULT = 100;
@@ -32,9 +32,8 @@ const RangeSlider = ({
     <View
       style={{
         width: '100%',
-        // flex: 1,
         justifyContent: 'flex-end',
-
+        // alignItems: 'center',
         ...style,
       }}>
       {isShowTime && isMoveProgress && (
@@ -45,6 +44,9 @@ const RangeSlider = ({
       )}
 
       <Slider
+        containerStyle={{
+          height: scale(40),
+        }}
         minimumValue={minimumValue}
         maximumValue={maximumValue}
         value={moveProgress || progressValue}

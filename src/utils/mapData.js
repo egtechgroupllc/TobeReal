@@ -11,6 +11,7 @@ export const markers = [
     image: images.background,
     rating: 4,
     reviews: 99,
+    price: 100000,
   },
   {
     coordinate: {
@@ -22,6 +23,7 @@ export const markers = [
     image: images.wishList,
     rating: 5,
     reviews: 102,
+    price: 50000,
   },
   {
     coordinate: {
@@ -33,6 +35,7 @@ export const markers = [
     image: images.emptyData,
     rating: 3,
     reviews: 220,
+    price: 200000,
   },
   {
     coordinate: {
@@ -44,6 +47,7 @@ export const markers = [
     image: images.voucher25,
     rating: 4,
     reviews: 48,
+    price: 9000000,
   },
   {
     coordinate: {
@@ -55,6 +59,7 @@ export const markers = [
     image: images.voucher50,
     rating: 4,
     reviews: 178,
+    price: 1000000,
   },
 ];
 
