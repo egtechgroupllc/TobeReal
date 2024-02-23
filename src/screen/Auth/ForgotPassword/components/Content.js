@@ -91,12 +91,12 @@ export default function Content() {
     <View style={styles.container}>
       {phase == 1 && (
         <View>
-          <View style={{marginTop: scale(50), alignItems: 'center'}}>
+          <View style={{marginTop: scale(100), alignItems: 'center'}}>
             <Image
               source={images.logo1}
               style={{
-                width: '30%',
-                height: scale(165),
+                width: '35%',
+                height: scale(109),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
@@ -133,12 +133,12 @@ export default function Content() {
       )}
       {phase == 2 && (
         <View>
-          <View style={{marginTop: scale(50), alignItems: 'center'}}>
+          <View style={{marginTop: scale(100), alignItems: 'center'}}>
             <Image
               source={images.logo1}
               style={{
-                width: '30%',
-                height: scale(165),
+                width: '35%',
+                height: scale(109),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper
@@ -176,12 +176,12 @@ export default function Content() {
       )}
       {phase == 3 && (
         <View>
-          <View style={{marginTop: scale(50), alignItems: 'center'}}>
+          <View style={{marginTop: scale(100), alignItems: 'center'}}>
             <Image
               source={images.logo1}
               style={{
-                width: '30%',
-                height: scale(165),
+                width: '35%',
+                height: scale(109),
                 marginBottom: scale(30),
               }}></Image>
             <Wrapper

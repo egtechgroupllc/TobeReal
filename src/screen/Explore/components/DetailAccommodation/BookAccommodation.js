@@ -10,7 +10,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 
-export default function BookAccommodation({setBookHeight}) {
+export default function BookAccommodation({setBookHeight, price}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {token} = useAuthentication();
@@ -27,14 +27,17 @@ export default function BookAccommodation({setBookHeight}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          {t('per_month_from')}
+        {price < 1000000000 ? t('per_month_from') : t('for_sale')}
+         
         </CustomText>
         <CustomText
           style={{
             fontSize: SIZES.medium,
           }}
           textType="bold">
-          {formatPrice(20000)}
+            {formatPrice(price, {
+                        locales: 'vi',
+                      })}{' '}
         </CustomText>
       </View>
 
@@ -62,7 +65,7 @@ export default function BookAccommodation({setBookHeight}) {
           }}
           buttonType="large"
           style={{flex: 1}}
-          text={t('book_now')}
+          text={price < 1000000000 ? t('book_now') : t('buy')}
           styleText={{
             fontSize: SIZES.xMedium,
           }}

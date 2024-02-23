@@ -12,6 +12,7 @@ import {InformationScreen} from '../screen/Profile/Information';
 import { NewsSavedScreen } from '../screen/Profile/NewsSaved';
 import PostManagementScreen from '../screen/Profile/PostManagement/PostManagement';
 import { PriceListScreen } from '../screen/Profile/PriceList';
+import { RegisterAccountTypeScreen } from '../screen/Profile/RegisterAccountType';
 import { SelectLanguageScreen } from '../screen/Profile/SelectLanguage';
 import { TradingFloorScreen } from '../screen/Profile/TradingFloor';
 import { CreateTradingScreen } from '../screen/Profile/TradingFloor/CreateTradingFloor';
@@ -85,5 +86,9 @@ export default routerProfile = [
   {
     name: 'HomeWishListScreen',
     component: HomeWishListScreen,
+  },
+  {
+    name: 'RegisterAccountTypeScreen',
+    component: RegisterAccountTypeScreen,
   },
 ];

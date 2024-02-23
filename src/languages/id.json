@@ -244,5 +244,10 @@
   "BUY": "BELI",
   "TOUR": "WISATA",
   "wish_list":"Daftar Keinginan",
-  "change_language_success":"Berhasil mengubah bahasa!"
+  "change_language_success":"Berhasil mengubah bahasa!",
+  "username_or_email":"Nama pengguna atau email",
+  "enter_username_email":"Masukkan nama pengguna atau email Anda",
+  "for_sale":"Untuk dijual",
+  "register_partner":"Daftar mitra",
+  "become_shome_partner":"Menjadi mitra SHome"
 }

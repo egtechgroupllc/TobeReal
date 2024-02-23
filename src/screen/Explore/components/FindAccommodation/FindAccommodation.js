@@ -6,6 +6,7 @@ import {
   IconApartment,
   IconCity,
   IconHome,
+  IconHotel,
   IconHouse,
   IconLand,
   IconRoom,
@@ -30,7 +31,7 @@ const listRent = [
   },
   {
     text: t('hotel'),
-    icon: IconHouse,
+    icon: IconHotel,
   },
   {
     text: t('villa'),
@@ -56,7 +57,7 @@ const listBuy = [
   },
   {
     text: t('villa'),
-    icon: IconHouse,
+    icon: IconHotel,
   },
   {
     text: t('home'),
@@ -104,6 +105,7 @@ const listTour = [
               )}
 
               <OptionAccommodation
+                styleIcon={{color:'#BCBCBC'}}
                 multiSelect
                 isSelectAll
                 data={

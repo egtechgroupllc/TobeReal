@@ -42,6 +42,9 @@ export default function Content() {
   const selectLanguage = () => {
     navigation.navigate('SelectLanguageScreen');
   };
+  const AccountType = () => {
+    navigation.navigate('RegisterAccountTypeScreen');
+  };
   const FaceId = () => {};
   const priceList = () => {
     navigation.navigate('PriceListScreen');
@@ -159,6 +162,11 @@ export default function Content() {
           <CategoriesButton
           title={t('select_language')}
           onPress={selectLanguage}
+          large={true}
+        />
+           <CategoriesButton
+          title={t('become_shome_partner')}
+          onPress={AccountType}
           large={true}
         />
         <CategoriesButton

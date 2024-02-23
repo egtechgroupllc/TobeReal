@@ -65,10 +65,10 @@ export default function Content() {
       <View style={styles.content}>
         <CustomInput
           control={control}
-          label={t('email')}
+          label={t('username_or_email')}
           name="usernameOrEmail"
           sizeInput="medium"
-          placeholder="example@gmail.com"
+          placeholder={t('enter_username_email')}
           rules={requireField(t('this_field_required'))}
         />
 

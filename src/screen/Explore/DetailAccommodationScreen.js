@@ -17,8 +17,7 @@ import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApa
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
-  const {jsondata, title} = route.params;
-
+  const {jsondata, title, paramPrice} = route.params;
   const listView = [
     <InfoDetail name={title} />,
     <InfoUnitFacilities />,
@@ -63,7 +62,7 @@ export default function DetailAccommodationScreen({route}) {
   );
 
   const moveNavigateBar = offsetY => {
-    console.log(indexSelect);
+    // console.log(indexSelect);
     switch (true) {
       case offsetY < dataSourceCords[1]:
         setIndexSelect(0);
@@ -116,7 +115,7 @@ export default function DetailAccommodationScreen({route}) {
         ref={scrollRef}>
         <View style={styles.content}>{listView.map(ItemView)}</View>
       </Animated.ScrollView>
-      <BookAccommodation setBookHeight={setTabBarHeight} />
+      <BookAccommodation setBookHeight={setTabBarHeight} price={paramPrice}/>
     </MainWrapper>
   );
 }

@@ -244,5 +244,10 @@
   "BUY": "MUA",
   "TOUR": "DU LỊCH",
   "wish_list":"Danh sách mong muốn",
-  "change_language_success":"Đổi ngôn ngữ thành công!"
+  "change_language_success":"Đổi ngôn ngữ thành công!",
+  "username_or_email":"Tên người dùng hoặc email",
+  "enter_username_email":"Nhập tên người dùng hoặc email của bạn",
+  "for_sale":"Đang bán",
+  "register_partner":"Đăng ký đối tác",
+  "become_shome_partner":"Trở thành đối tác SHome"
 }

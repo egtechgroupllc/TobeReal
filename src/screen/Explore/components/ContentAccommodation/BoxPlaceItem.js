@@ -29,6 +29,7 @@ export default function BoxPlaceItem({
   time,
   jsonImage,
   name,
+  price
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -41,7 +42,7 @@ export default function BoxPlaceItem({
             dispatch(
               StackActions.push('NoBottomTab', {
                 screen: 'DetailAccommodationScreen',
-                params: {jsondata: jsonImage || [], title: name || ''},
+                params: {jsondata: jsonImage || [], title: name || '', paramPrice: price|| ''},
               }),
             );
           }

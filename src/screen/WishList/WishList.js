@@ -75,7 +75,6 @@ const data = [
       images.a6_3,
       images.a6_4,
       images.a6_5,
-      images.a6_6,
     ],
   },
   {
@@ -195,8 +194,9 @@ export default function WishList({data}) {
           seeViewNumber={2.3}
           isHeart
           data={item}
-          jsonImage={item.imgdetail}
-          name={item.name}
+          jsonImage={item?.imgdetail}
+          name={item?.name}
+          price={item?.price}
         />
       ))}
     </View>

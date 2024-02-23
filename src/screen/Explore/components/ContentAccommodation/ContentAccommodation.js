@@ -85,7 +85,6 @@ const data = [
       images.a6_3,
       images.a6_4,
       images.a6_5,
-      images.a6_6,
     ],
   },
   {
@@ -234,6 +233,7 @@ export default function ContentAccommodation() {
               rental="night"
               jsonImage={item?.imgdetail}
               name={item?.name}
+              price={item?.price}
             />
           )}
         />
@@ -259,6 +259,7 @@ export default function ContentAccommodation() {
               rental="night"
               jsonImage={item?.imgdetail}
               name={item?.name}
+              price={item?.price}
             />
           )}
         />
@@ -285,6 +286,7 @@ export default function ContentAccommodation() {
               rental="night"
               jsonImage={item?.imgdetail}
               name={item?.name}
+              price={item?.price}
             />
           )}
         />
@@ -313,6 +315,7 @@ export default function ContentAccommodation() {
               rental="night"
               jsonImage={item?.imgdetail}
               name={item?.name}
+              price={item?.price}
             />
           )}
         />
@@ -338,6 +341,7 @@ export default function ContentAccommodation() {
               data={item}
               jsonImage={item?.imgdetail}
               name={item?.name}
+              price={item?.price}
             />
           )}
         />

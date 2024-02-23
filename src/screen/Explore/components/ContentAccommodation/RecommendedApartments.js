@@ -39,7 +39,7 @@ const data = [
     src: images.a6,
     name: 'A6.7.08 Diamod Alanta Plus',
     price: 18000000,
-    imgdetail:[images.a6_1, images.a6_2, images.a6_3, images.a6_4, images.a6_5,images.a6_6]
+    imgdetail:[images.a6_1, images.a6_2, images.a6_3, images.a6_4, images.a6_5]
   },
   {
     id: 6,
@@ -126,8 +126,9 @@ export default function RecommendedApartments({
             rating={4}
             textRating={index % 2 !== 0 && 'New'}
             isHeart
-            // data={item}
-            jsonImage={item.imgdetail}
+            price={item?.price}
+            name={item?.name}
+            jsonImage={item?.imgdetail}
           />
         )}
       />

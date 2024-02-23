@@ -239,5 +239,10 @@
   "BUY": "BILHIN",
   "TOUR": "BIYAHENG TURISMO",
   "wish_list":"Listahan ng Nais",
-  "change_language_success":"Tagumpay na pagbabago ng wika!"
+  "change_language_success":"Tagumpay na pagbabago ng wika!",
+  "username_or_email":"Username o email",
+  "enter_username_email":"Ipasok ang iyong username o email",
+  "for_sale":"Para sa benta",
+  "register_partner":"Magparehistro ng kasosyo",
+  "become_shome_partner":"Maging kasosyo sa SHome"
 }

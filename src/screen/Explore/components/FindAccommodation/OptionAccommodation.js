@@ -10,6 +10,7 @@ export default function OptionAccommodation({
   styleWrapper,
   styleContent,
   styleOption,
+  styleIcon,
   multiSelect,
   isTextSub,
   keyTextView,
@@ -112,11 +113,12 @@ export default function OptionAccommodation({
                 style={{
                   width: scale(16),
                   height: scale(16),
+                  ...styleIcon,
                 }}
                 fill={
                   option.includes(valueDefaultView(item, index))
                     ? COLORS.primary
-                    : COLORS.text
+                    :styleIcon?.color|| COLORS.text
                 }
               />
             )}

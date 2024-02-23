@@ -64,7 +64,7 @@ export default function BottomTab() {
         name={t('promotion')}
         component={NavigationPromotion}
         options={{
-          tabBarIcon: ({focused}) => <IconPromotion active={focused} />,
+          tabBarIcon: ({focused}) => <IconPromotion fill={focused && '#F0B90B'}/>,
         }}
       />
       {/* <Tab.Screen

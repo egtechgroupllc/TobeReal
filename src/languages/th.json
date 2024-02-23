@@ -244,5 +244,10 @@
   "BUY": "ซื้อ",
   "TOUR": "ทัวร์",
   "wish_list":"รายการสิ่งที่ต้องการ",
-  "change_language_success":"เปลี่ยนภาษาสำเร็จ!"
+  "change_language_success":"เปลี่ยนภาษาสำเร็จ!",
+  "username_or_email":"ชื่อผู้ใช้หรืออีเมล",
+  "enter_username_email":"ป้อนชื่อผู้ใช้หรืออีเมลของคุณ",
+  "for_sale":"สำหรับขาย",
+  "register_partner":"ลงทะเบียนพาร์ทเนอร์",
+  "become_shome_partner":"เป็นพาร์ทเนอร์ SHome"
 }

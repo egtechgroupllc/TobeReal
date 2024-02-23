@@ -250,6 +250,10 @@
     "BUY":"BUY",
     "TOUR":"TOUR",
     "wish_list":"Wish list",
-    "change_language_success":"Change language success!"
-
+    "change_language_success":"Change language success!",
+    "username_or_email":"Username or email",
+    "enter_username_email":"Enter your username or email",
+    "for_sale":"For sale",
+    "register_partner":"Register partner",
+    "become_shome_partner":"Become SHome partner"
 }

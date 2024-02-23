@@ -78,7 +78,6 @@ const data = [
       images.a6_3,
       images.a6_4,
       images.a6_5,
-      images.a6_6,
     ],
   },
   {
@@ -210,8 +209,9 @@ export default function HotelResidence() {
             isHeart
             data={item}
             time={item.id < 6 ? true : false}
-            jsonImage={item.imgdetail}
+            jsonImage={item?.imgdetail}
             name={item?.name}
+            price={item?.price}
           />
         )}
       />

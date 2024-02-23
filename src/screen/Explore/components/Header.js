@@ -62,6 +62,7 @@ export default function Header() {
                 screen: 'HomeSearchAccommodScreen',
               })
             }
+            style={{   borderRadius:scale(20)}}
           />
         </View>
       </View>
