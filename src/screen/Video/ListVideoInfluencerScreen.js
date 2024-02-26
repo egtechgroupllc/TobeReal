@@ -18,7 +18,6 @@ import Comment from './Comment';
 import RangeSlider from './components/RangeSlider';
 import VideoPlay from './components/VideoPlay';
 import LottieView from 'lottie-react-native';
-import {runOnJS} from 'react-native-reanimated';
 
 const listVideo = [
   {
@@ -35,7 +34,8 @@ const listVideo = [
     id: 2,
     src: video.video2,
     username: 'cuongxautrai',
-    description: 'cuong xau zai vai ca dai , oai that xau zai',
+    description:
+      'cuong xau zai vai ca dai , oai that xaThe goal of is expanding the original React Native component by adding animations, style customization options, and new features, while still providing a simple APIThe goal of is expanding the original React Native component by adding animations, style customization options, and new features, while still providing a simple APIThe goal of is expanding the original React Native component by adding animations, style customization options, and new features, while still providing a simple APIu zai',
     price: 1,
     location: 'HoChiMinh',
     rental: 'night',
@@ -91,7 +91,7 @@ export function ListVideoInfluencer() {
   const {goBack, setOptions} = useNavigation();
   const insets = useSafeAreaInsets();
   const videoRef = useRef();
-  const heightBottomTab = useBottomTabBarHeight();
+  const commentRef = useRef();
 
   const [videoPlay, setVideoPlay] = useState(true);
   const [releaseHeart, setReleaseHeart] = useState({x: 0, y: 0});
@@ -126,7 +126,7 @@ export function ListVideoInfluencer() {
               maximumValue={value?.seekableDuration}
             />
           </View>
-          <Comment />
+          <Comment ref={commentRef} />
         </View>
       ),
     });
@@ -140,96 +140,77 @@ export function ListVideoInfluencer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const removeHeart = useCallback(() => {
+  const onHeartVideo = useCallback(event => {
+    const {x, y} = event;
+    setReleaseHeart({x, y});
     const timeOutID = setTimeout(() => {
       setReleaseHeart({x: 0, y: 0});
     }, 1000);
     return clearTimeout(timeOutID);
   }, []);
 
-  const singleTap = Gesture.Tap()
-    .maxDuration(250)
-    .runOnJS(true)
-    .hitSlop({
-      height: WIDTH.heightScreen - heightBottomTab - scale(30),
-      top: 0,
-    })
-    .onStart(event => {
-      videoRef.current?.paused();
-    });
-
-  const doubleTap = Gesture.Tap()
-    .maxDuration(250)
-    .numberOfTaps(2)
-    .runOnJS(true)
-    .onStart(event => {
-      const {x, y} = event;
-      setReleaseHeart({x, y});
-      removeHeart();
-    });
-
   return (
-    <GestureDetector gesture={Gesture.Exclusive(doubleTap, singleTap)} hitSlop>
-      <View>
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          pagingEnabled
-          snapToAlignment={'start'}
-          data={listVideo}
-          style={{
-            backgroundColor: '#ccc',
-            height: '100%',
-          }}
-          contentContainerStyle={{
-            backgroundColor: '#000',
-            justifyContent: 'center',
-          }}
-          viewabilityConfig={{
-            itemVisiblePercentThreshold: 50,
-          }}
-          onViewableItemsChanged={handlerViewableItemsChanged}
-          onEndReached={e => console.log('cuộn đén cuối')}
-          onEndReachedThreshold={listVideo?.length - 2}
-          renderItem={({item, index}) => (
-            <VideoPlay
-              ref={videoRef}
-              fullScreen
-              data={item}
-              paused={item?.id !== videoPlay}
-              play={item?.id === videoPlay}
-              isFavourite={releaseHeart.x}
-              onProgress={value => {
-                handleProgress(value);
-              }}
-            />
-          )}
-        />
-
-        {!!releaseHeart.y && (
-          <View
-            style={[
-              {
-                position: 'absolute',
-              },
-              releaseHeart.x && {
-                left: releaseHeart.x - 50,
-                top: releaseHeart.y - 40,
-              },
-            ]}>
-            <LottieView
-              loop={false}
-              autoPlay={true}
-              duration={1200}
-              source={animations.releaseHeart}
-              onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
-              resizeMode="cover"
-              style={styles.favouriteHeart}
-            />
-          </View>
+    <View>
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        pagingEnabled
+        snapToAlignment={'start'}
+        data={listVideo}
+        style={{
+          backgroundColor: '#ccc',
+          height: '100%',
+        }}
+        contentContainerStyle={{
+          backgroundColor: '#000',
+          justifyContent: 'center',
+        }}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 50,
+        }}
+        onViewableItemsChanged={handlerViewableItemsChanged}
+        onEndReached={e => console.log('cuộn đén cuối')}
+        onEndReachedThreshold={listVideo?.length - 2}
+        renderItem={({item, index}) => (
+          <VideoPlay
+            ref={videoRef}
+            fullScreen
+            data={item}
+            paused={item?.id !== videoPlay}
+            play={item?.id === videoPlay}
+            isFavourite={releaseHeart.x}
+            onProgress={value => {
+              handleProgress(value);
+            }}
+            onHeartVideo={onHeartVideo}
+            onComment={() => commentRef.current?.open()}
+          />
         )}
-      </View>
-    </GestureDetector>
+      />
+
+      {!!releaseHeart.y && (
+        <View
+          style={[
+            {
+              position: 'absolute',
+            },
+            releaseHeart.x && {
+              left: releaseHeart.x - 50,
+              top: releaseHeart.y - 40,
+            },
+          ]}>
+          <LottieView
+            loop={false}
+            autoPlay={true}
+            duration={1200}
+            source={animations.releaseHeart}
+            onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
+            resizeMode="cover"
+            style={styles.favouriteHeart}
+          />
+        </View>
+      )}
+    </View>
   );
 }
 

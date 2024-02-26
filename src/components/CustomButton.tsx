@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
@@ -33,18 +33,12 @@ type CustomButtonProps = {
 } & TouchableOpacityProps;
 const funcFallBlack = () => {};
 
-let delayTime = 300;
-let firstPress = true;
-let lastTime: number = new Date().getTime();
-let timer: any = 0;
-
 export default function CustomButton({
   buttonType,
   text,
   isShadow,
   iconLeft,
   iconRight,
-  isDouble,
   outline,
   styleText,
   styleIcon,
@@ -57,55 +51,15 @@ export default function CustomButton({
   const IconRight: any = iconRight;
   const IconLeft: any = iconLeft;
 
-  const heightSize =
-    buttonType === 'large' ? 48 : buttonType === 'medium' ? 38 : 31;
-  const fontSize =
-    buttonType === 'large' ? 16 : buttonType === 'medium' ? 14 : 12;
+  const heightSize = useMemo(() => {
+    return buttonType === 'large' ? 48 : buttonType === 'medium' ? 38 : 31;
+  }, [buttonType]);
 
-  const propStyle = arrayToObject(props.style);
+  const fontSize = useMemo(() => {
+    return buttonType === 'large' ? 16 : buttonType === 'medium' ? 14 : 12;
+  }, [buttonType]);
 
-  const singlePress = ({
-    now,
-    event,
-  }: {
-    now: number;
-    event: GestureResponderEvent;
-  }) => {
-    if (!isDouble) {
-      onPress(event);
-      return;
-    }
-    firstPress = false;
-    timer = setTimeout(() => {
-      onPress(event);
-      firstPress = true;
-    }, delayTime);
-    lastTime = now;
-  };
-
-  const doublePress = ({
-    now,
-    event,
-  }: {
-    now: number;
-    event: GestureResponderEvent;
-  }) => {
-    if (now - lastTime < delayTime) {
-      onDoublePress(event);
-      timer && clearTimeout(timer);
-      firstPress = true;
-    }
-  };
-
-  const _onPress = (event: GestureResponderEvent) => {
-    let now = new Date().getTime();
-    firstPress ? singlePress({now, event}) : doublePress({now, event});
-  };
-  // useEffect(() => {
-  //   return () => {
-  //     timer && clearTimeout(timer);
-  //   };
-  // }, [timer]);
+  const propStyle = useMemo(() => arrayToObject(props.style), [props.style]);
 
   const _backgroundColor: (string | number)[] = useMemo(() => {
     const backgroundColor = propStyle?.backgroundColor || COLORS.primary;
@@ -116,6 +70,26 @@ export default function CustomButton({
       ? ['#F7E75A', '#FFC702']
       : [backgroundColor, backgroundColor];
   }, [propStyle?.backgroundColor, outline, linearGradientProps]);
+
+  const timer = useRef<any>(null);
+  const TIMEOUT = 400;
+
+  const debounce = (onSingle: () => void, onDouble: () => void) => {
+    clearTimeout(timer.current);
+
+    if (timer.current) {
+      timer.current = null;
+      onDouble();
+    } else {
+      timer.current = setTimeout(() => {
+        timer.current = null;
+        onSingle();
+      }, TIMEOUT);
+    }
+  };
+  const _onPress = () => {
+    debounce(onPress, onDoublePress);
+  };
 
   return (
     <View

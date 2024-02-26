@@ -1,16 +1,16 @@
 import LottieView from 'lottie-react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Share, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SHADOW, animations, scale} from '../../../assets/constants';
-import {IconComment, IconShare, LogoMessageFB} from '../../../assets/icon/Icon';
-import {formatNumber} from '../../../utils/format';
+import {animations, scale} from '../../../assets/constants';
+import {IconComment, IconShare} from '../../../assets/icon/Icon';
 import CustomText from '../../../components/CustomText';
+import {formatNumber} from '../../../utils/format';
 
-export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
+export default React.memo(function SideBar({data, isFavourite, onComment}) {
   const refHeart = useRef();
-
+  console.log('SideBar');
   const [isHeart, setIsHeart] = useState(true);
+
   const onShare = async () => {
     Share.share({
       message: `${data?.caption}\n url: ${data?.src}`,
@@ -24,11 +24,11 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
       });
   };
 
-  useEffect(() => {
-    if (isFavourite) {
-      setIsHeart(!isFavourite);
-    }
-  }, [isFavourite]);
+  // useEffect(() => {
+  //   if (isFavourite) {
+  //     setIsHeart(!isFavourite);
+  //   }
+  // }, [isFavourite]);
 
   return (
     <View style={styles.wrapper}>
@@ -50,13 +50,12 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
           <LottieView
             ref={refHeart}
             loop={false}
-            autoPlay={!isHeart}
+            autoPlay={isFavourite || !isHeart}
             source={animations.favouriteHeart}
             resizeMode="cover"
             style={styles.favouriteHeart}
           />
         </View>
-        
 
         <CustomText
           textType="semiBold"
@@ -66,7 +65,7 @@ export default React.memo(function SideBar({data, isFavourite, onFavourite}) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={onShare}
+        onPress={onComment}
         activeOpacity={0.7}
         style={{
           alignItems: 'center',

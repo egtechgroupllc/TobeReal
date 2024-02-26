@@ -1,22 +1,14 @@
 import BottomSheetMain, {
   BottomSheetBackdrop,
-  BottomSheetFlatList,
   BottomSheetModal,
   BottomSheetScrollView,
-  BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
-import {
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SHADOW, SIZES, scale} from '../assets/constants';
+import {IconX} from '../assets/icon/Icon';
 import CustomText from './CustomText';
-import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
-import {IconSearch, IconX} from '../assets/icon/Icon';
 
 const BottomSheet = (
   {
@@ -33,6 +25,7 @@ const BottomSheet = (
     handleChildBottom,
     refChild,
     disableScroll,
+    onDismiss,
   },
   ref,
 ) => {
@@ -80,6 +73,7 @@ const BottomSheet = (
       snapPoints={_snapPoints}
       handleHeight={30}
       backdropComponent={BottomSheetBackdrop}
+      onDismiss={onDismiss}
       onChange={index => index === 0 && handleClose()}
       handleIndicatorStyle={{
         width: '20%',

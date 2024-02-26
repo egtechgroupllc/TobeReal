@@ -1,22 +1,20 @@
-import LottieView from 'lottie-react-native';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
-import {CustomButton} from '../../../components';
-import {WIDTH, animations, scale} from '../../../assets/constants';
+import {WIDTH, scale} from '../../../assets/constants';
 import {IconPlayVideo} from '../../../assets/icon/Icon';
 import SideBar from './SideBar';
-import RangeSlider from './RangeSlider';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import VideoCaption from './VideoCaption';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default forwardRef(function VideoPlay(
   {
@@ -30,6 +28,8 @@ export default forwardRef(function VideoPlay(
     muted,
     onProgress,
     isFavourite,
+    onHeartVideo,
+    onComment,
     ...props
   },
   ref,
@@ -46,7 +46,7 @@ export default forwardRef(function VideoPlay(
       videoRef.current.seek(0);
       setPausedVideo(!play);
     } else {
-      setPausedVideo(!play);
+      setPausedVideo(true);
     }
   }, [play]);
 
@@ -69,45 +69,76 @@ export default forwardRef(function VideoPlay(
     [pausedVideo],
   );
 
+  const singleTap = useMemo(
+    () =>
+      Gesture.Tap()
+        .runOnJS(true)
+        .onStart(event => {
+          setPausedVideo(!pausedVideo);
+        }),
+    [pausedVideo],
+  );
+
+  const doubleTap = useMemo(
+    () =>
+      Gesture.Tap()
+        .maxDuration(300)
+        .numberOfTaps(2)
+        .runOnJS(true)
+        .onStart(event => {
+          onHeartVideo(event);
+        }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
   return (
     <View
       style={{
         ...styles.container,
         height: WIDTH.heightScreen - heightBottomTab,
       }}>
-      <Video
-        ref={videoRef}
-        {...props}
-        source={isImgAsset ? data?.src : {uri: data?.src}}
-        style={[styles.video, style]}
-        paused={pausedVideo}
-        onProgress={value => {
-          setProgress(value);
-          onProgress && onProgress(value);
-        }}
-        repeat
-        muted={muted}
-        resizeMode={resizeMode}
-      />
-
-      <VideoCaption data={data} />
-
-      <SideBar
-        data={data}
-        isFavourite={isFavourite}
-        // onFavourite={e => {}}
-      />
-
-      {pausedVideo && (
-        <IconPlayVideo
-          style={{
-            width: scale(40),
-            height: scale(40),
-            opacity: 0.7,
-            position: 'absolute',
+      <GestureDetector
+        gesture={Gesture.Exclusive(doubleTap, singleTap)}
+        hitSlop>
+        <Video
+          ref={videoRef}
+          {...props}
+          source={isImgAsset ? data?.src : {uri: data?.src}}
+          style={[styles.video, style]}
+          paused={pausedVideo}
+          onProgress={value => {
+            setProgress(value);
+            onProgress && onProgress(value);
           }}
+          repeat
+          muted={muted}
+          resizeMode={resizeMode}
         />
+      </GestureDetector>
+
+      {play && (
+        <>
+          <VideoCaption data={data} />
+          <SideBar
+            data={data}
+            isFavourite={isFavourite}
+            onComment={onComment}
+          />
+
+          {pausedVideo && (
+            <IconPlayVideo
+              style={{
+                width: scale(40),
+                height: scale(40),
+                opacity: 0.7,
+                position: 'absolute',
+              }}
+            />
+          )}
+        </>
       )}
+
       {/* {true && (
         <View
           style={[

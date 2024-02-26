@@ -26,7 +26,7 @@ import Emojis from './Emojis';
 const KeyboardStickyViewAnimated =
   Animated.createAnimatedComponent(KeyboardStickyView);
 
-export default function CommentInput({onClickEmoji}) {
+export default function CommentInput({isComment}) {
   const {watch, control, reset, setValue} = useForm();
   const insets = useSafeAreaInsets();
   const [isKBEmojis, setIsKBEmojis] = useState(false);
@@ -67,6 +67,10 @@ export default function CommentInput({onClickEmoji}) {
     );
   }, [isKBEmojis, heightKB]);
 
+  useEffect(() => {
+    isComment && inputRef.current.focus();
+  }, [isComment]);
+
   return (
     <>
       <KeyboardStickyViewAnimated
@@ -89,6 +93,7 @@ export default function CommentInput({onClickEmoji}) {
             ref={inputRef}
             control={control}
             name="comment"
+            maxLength={150}
             placeholder="Nhập bình luận..."
             iconRight={!isKBEmojis ? IconEmojiFace : IconKeyBroad}
             style={[

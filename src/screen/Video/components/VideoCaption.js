@@ -1,95 +1,99 @@
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import React, {memo, useState} from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+import React, {memo, useCallback, useState} from 'react';
+import {
+  Pressable,
+  StyleSheet,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import Collapsible from 'react-native-collapsible';
+import LinearGradient from 'react-native-linear-gradient';
 import {SIZES, scale} from '../../../assets/constants';
+import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {formatPrice} from '../../../utils/format';
-import {CustomButton} from '../../../components';
-import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
-import Emojis from './Emojis';
 
 export default memo(function VideoCaption({data}) {
-  const insets = useSafeAreaInsets();
+  const {navigate} = useNavigation();
+
   const [isMoreText, setIsMoreText] = useState(false);
-  const {navigate, goBack} = useNavigation();
-  console.log(1231);
+  const [showMoreButton, setShowMoreButton] = useState(0);
+
+  const onTextLayout = useCallback(e => {
+    if (e.nativeEvent.lines.length > 3 && !isMoreText) {
+      setShowMoreButton(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <LinearGradient
-      colors={[isMoreText ? '#000000CF' : '#00000000', '#00000000']}
+      colors={[isMoreText ? '#000000CF' : '#00000060', '#00000000']}
       start={{x: 0, y: 1}}
       end={{x: 0, y: 0}}
-      style={{
-        ...styles.wrapper,
-        paddingBottom: scale(20),
-      }}>
+      style={styles.wrapper}>
       <View
         style={{
           rowGap: scale(6),
           flex: 1,
         }}>
-        <CustomText
-          textType="bold"
-          style={{
-            color: '#fff',
-            fontSize: SIZES.medium,
-          }}>
+        <CustomText textType="bold" style={styles.name}>
           {data?.username}
         </CustomText>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            columnGap: scale(4),
-            flex: 1,
+
+        <TouchableOpacity
+          disabled={!showMoreButton}
+          activeOpacity={0.7}
+          onPress={() => {
+            setIsMoreText(!isMoreText);
           }}>
-          <CustomText
-            textType="medium"
-            numberOfLines={isMoreText ? 0 : 3}
-            style={{
-              color: '#fff',
-              fontSize: SIZES.xMedium,
-            }}>
-            {data?.description}
-          </CustomText>
-          {data?.description?.length >= 120 && (
+          <Collapsible
+            collapsed={!isMoreText && showMoreButton}
+            collapsedHeight={scale(55)}>
             <CustomText
-              textType="bold"
-              onPress={() => setIsMoreText(!isMoreText)}
-              style={{
-                color: '#fff',
-                fontSize: SIZES.xMedium,
-              }}>
-              {isMoreText ? 'Read Less' : 'Read more'}
+              onTextLayout={onTextLayout}
+              textType="medium"
+              numberOfLines={isMoreText ? 0 : 4}
+              style={styles.textDesc}>
+              {data?.description}
             </CustomText>
-          )}
-        </View>
-        <CustomText
-          textType="bold"
-          style={{
-            color: '#fff',
-            fontSize: SIZES.xMedium,
-          }}>
+          </Collapsible>
+        </TouchableOpacity>
+
+        <CustomText textType="bold" style={styles.textDesc}>
           {formatPrice(data?.price)}
-          <CustomText
-            textType="medium"
-            style={{
-              color: '#fff',
-              fontSize: SIZES.xMedium,
-            }}>
-            / {data?.rental}
+          <CustomText textType="medium" style={styles.textDesc}>
+            <CustomText
+              textType="medium"
+              style={{...styles.textDesc, fontSize: SIZES.small}}>
+              /
+            </CustomText>{' '}
+            {data?.rental}
           </CustomText>
         </CustomText>
-        <CustomText
-          textType="medium"
-          style={{
-            color: '#fff',
-            fontSize: SIZES.xMedium,
-          }}>
+
+        <CustomText textType="medium" style={styles.textDesc}>
           {data?.location}
         </CustomText>
       </View>
       <View>
+        {!!showMoreButton && (
+          <CustomText
+            textType="bold"
+            onPress={() => {
+              setIsMoreText(!isMoreText);
+            }}
+            style={{
+              ...styles.textDesc,
+              padding: scale(6),
+              marginBottom: scale(4),
+            }}>
+            {isMoreText ? 'Read less' : 'Read more'}
+          </CustomText>
+        )}
+
         <CustomButton
           text="Check it Out!"
           outline
@@ -114,12 +118,22 @@ const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
     bottom: 0,
-    zIndex: 10,
+    zIndex: 4,
     padding: scale(20),
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     columnGap: scale(10),
+    paddingBottom: scale(20),
+  },
+  name: {
+    color: '#fff',
+    fontSize: SIZES.medium,
+  },
+
+  textDesc: {
+    color: '#fff',
+    fontSize: SIZES.xMedium,
   },
 });
