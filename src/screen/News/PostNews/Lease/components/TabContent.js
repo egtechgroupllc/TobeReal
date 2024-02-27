@@ -19,6 +19,7 @@ import {
   IconCheckBox,
   IconCheckBoxWhite,
   IconDown,
+  IconRight,
   IconUnCheckBox,
   IconUnCheckBoxWhite,
   IconX,
@@ -97,8 +98,6 @@ export default function TabContent() {
   const [openCheckout, setOpenCheckout] = useState(false);
   const [timeCheckout, setTimeCheckout] = useState(new Date());
   const [roomTypes, setRoomTypes] = useState([]);
-  const [description, setDescription] = useState('');
-  const [realesate, setRealEsate] = useState('');
   const [showRealEstateType, setShowRealEstateType] = useState('');
   const [showFacilities, setshowFacilities] = useState('');
   const [showFacilitiesItem, setshowFacilitiesItem] = useState('');
@@ -106,6 +105,37 @@ export default function TabContent() {
   const [selectedFaciCheckBox, setSelectedFaciCheckBox] = useState([]);
   const [dataEstateType, setDataEstateType] = useState(dataRealEstateType);
   const [dataFaci, setDataFaci] = useState(dataFacilities);
+
+  const [viewgeneral, setViewgeneral] = useState(false);
+  const viewGeneral = () => {
+    setViewgeneral(prevViewgeneral => !prevViewgeneral);
+  };
+
+  const [viewdetail, setViewdetail] = useState(false);
+  const viewDetail = () => {
+    setViewdetail(prevViewdetail => !prevViewdetail);
+  };
+
+  const [viewfacilities, setViewfacilities] = useState(false);
+  const viewFacilities = () => {
+    setViewfacilities(prevViewfacilities => !prevViewfacilities);
+  };
+
+  const [viewcontactinfo, setViewcontactinfo] = useState(false);
+  const viewContactinfo = () => {
+    setViewcontactinfo(prevViewcontactinfo => !prevViewcontactinfo);
+  };
+
+  const [viewroom, setViewroom] = useState(false);
+  const viewRoom = () => {
+    setViewroom(prevViewroom => !prevViewroom);
+  };
+
+  const [viewphoto, setViewphoto] = useState(false);
+  const viewPhoto= () => {
+    setViewphoto(prevViewphoto => !prevViewphoto);
+  };
+
   const estateTypeCheckBox = name => {
     setSelectedEstateCheckBox(selectedEstateCheckBox === name ? '' : name);
     setShowRealEstateType(false);
@@ -125,17 +155,6 @@ export default function TabContent() {
   };
   const viewShowFacilities = () => {
     setshowFacilities(prevshowRealEstateType => !prevshowRealEstateType);
-  };
-
-  // const [description, setDescription] = useState([]);
-  // const [acreage, setAcreage] = useState([]);
-  // const [price, setPrice] = useState([]);
-
-  const handleDesciption = text => {
-    setDescription(text);
-  };
-  const handleRealEsate = text => {
-    setRealEsate(text);
   };
 
   const pickImage = () => {
@@ -253,161 +272,180 @@ export default function TabContent() {
           </CustomText>
         </TouchableOpacity>
       </View> */}
-      <CustomInput
-        styleTextLabel={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-        }}
-        label={t('real_estate_title')}
-        control={control}
-        name="RealEstateTitle"
-        multiline
-        numberOfLines={4}
-        maxLength={1000}
-        placeholder={t('enter_real_estate_title')}
-        rules={{
-          ...requireField(t('this_field_required')),
-          ...validateMaxAmount(1000, '1000 characters limit'),
-        }}
-        style={styles.textArea}
-        componentRight={
-          <Text style={{...styles.text, color: COLORS.black}}>
-            {watch('RealEstateTitle')?.length || 0}/{maxCharacters}
-          </Text>
-        }
-      />
-
-      <CustomInput
-        styleTextLabel={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-        }}
-        label={t('description_content')}
-        control={control}
-        name="Description"
-        maxLength={1000}
-        multiline
-        numberOfLines={4}
-        placeholder={t('enter_a_description')}
-        rules={{
-          ...requireField(t('this_field_required')),
-          ...validateMaxAmount(1000, '1000 characters limit'),
-        }}
-        style={styles.textArea}
-        componentRight={
-          <Text style={{...styles.text, color: COLORS.black}}>
-            {watch('Description')?.length || 0}/{maxCharacters}
-          </Text>
-        }
-      />
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-          marginBottom: scale(10),
-          marginTop: scale(20),
-        }}>
-        {t('real_estate_type')}
-      </CustomText>
-      <TouchableOpacity
-        style={
-          !showRealEstateType
-            ? styles.buttonEstateType
-            : styles.buttonEstateTypes
-        }
-        onPress={viewShowRealEstateType}>
-        <CustomText
-          textType="regular"
-          style={{
-            ...styles.text,
-            color: COLORS.black,
-            paddingHorizontal: scale(20),
-          }}>
-          {selectedEstateCheckBox !== ''
-            ? t(selectedEstateCheckBox)
-            : t('real_estate_type')}
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewGeneral}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('General Information')}
         </CustomText>
+        <IconRight />
       </TouchableOpacity>
-      {showRealEstateType && (
-        <FlatList
-          data={dataEstateType}
-          contentContainerStyle={styles.listEstateType}
-          scrollEnabled={false}
-          renderItem={({item}) => (
-            <View
+      {viewgeneral && (
+        <View style={styles.box}>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('real_estate_title')}
+            control={control}
+            name="RealEstateTitle"
+            multiline
+            numberOfLines={4}
+            maxLength={1000}
+            placeholder={t('enter_real_estate_title')}
+            rules={{
+              ...requireField(t('this_field_required')),
+              ...validateMaxAmount(1000, '1000 characters limit'),
+            }}
+            style={styles.textArea}
+            componentRight={
+              <Text style={{...styles.text, color: COLORS.black}}>
+                {watch('RealEstateTitle')?.length || 0}/{maxCharacters}
+              </Text>
+            }
+          />
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('description_content')}
+            control={control}
+            name="Description"
+            maxLength={1000}
+            multiline
+            numberOfLines={4}
+            placeholder={t('enter_a_description')}
+            rules={{
+              ...requireField(t('this_field_required')),
+              ...validateMaxAmount(1000, '1000 characters limit'),
+            }}
+            style={styles.textArea}
+            componentRight={
+              <Text style={{...styles.text, color: COLORS.black}}>
+                {watch('Description')?.length || 0}/{maxCharacters}
+              </Text>
+            }
+          />
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('address')}
+            control={control}
+            name="address"
+            placeholder={t('address')}
+            rules={{
+              ...requireField(t('this_field_required')),
+            }}
+            style={styles.textInput}
+          />
+          <View style={{width: '110%'}}>
+            <Map />
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <View style={{flexDirection: 'row'}}>
+            <CustomText
+              textType="medium"
               style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('country')}
+            </CustomText>
+            <TouchableOpacity
+              style={{
+                height: scale(40),
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                backgroundColor: '#E3E3E3',
+                width: '40%',
                 alignItems: 'center',
-                paddingHorizontal: scale(25),
-                paddingVertical: scale(10),
+                borderRadius: scale(5),
+                marginTop: scale(10),
+                paddingHorizontal: scale(10),
               }}>
               <CustomText
                 textType="medium"
                 style={{
                   ...styles.text,
                   color: '#979797',
-                  width: '50%',
                 }}>
-                {item.name}
+                USA
               </CustomText>
-              <TouchableOpacity
-                onPress={() => estateTypeCheckBox(item.name)}
-                style={{width: '40%', alignItems: 'center'}}>
-                {selectedEstateCheckBox === item.name ? (
-                  <IconCheckBox />
-                ) : (
-                  <IconUnCheckBox />
-                )}
-              </TouchableOpacity>
-            </View>
-          )}
-          keyExtractor={item => item.id}
-        />
-      )}
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
-          marginBottom: scale(10),
-          marginTop: scale(20),
-        }}>
-        {t('Estate Facilities')}
-      </CustomText>
-      <TouchableOpacity
-        style={
-          !showFacilities ? styles.buttonEstateType : styles.buttonEstateTypes
-        }
-        onPress={viewShowFacilities}>
-        <CustomText
-          textType="regular"
-          style={{
-            ...styles.text,
-            color: COLORS.black,
-            paddingHorizontal: scale(20),
-          }}>
-          {t('Estate Facilities')}
-        </CustomText>
-      </TouchableOpacity>
-      {showFacilities && (
-        <FlatList
-          data={dataFaci}
-          contentContainerStyle={styles.listFacilities}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  setshowFacilitiesItem(index);
-                }}>
+              <IconDown />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+
+          <CustomText
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+              marginBottom: scale(10),
+              marginTop: scale(10),
+            }}>
+            {t('real_estate_type')}
+          </CustomText>
+          <TouchableOpacity
+            style={
+              !showRealEstateType
+                ? styles.buttonEstateType
+                : styles.buttonEstateTypes
+            }
+            onPress={viewShowRealEstateType}>
+            <CustomText
+              textType="regular"
+              style={{
+                ...styles.text,
+                color: COLORS.black,
+                paddingHorizontal: scale(20),
+              }}>
+              {selectedEstateCheckBox !== ''
+                ? t(selectedEstateCheckBox)
+                : t('real_estate_type')}
+            </CustomText>
+          </TouchableOpacity>
+          {showRealEstateType && (
+            <FlatList
+              data={dataEstateType}
+              contentContainerStyle={styles.listEstateType}
+              scrollEnabled={false}
+              renderItem={({item}) => (
                 <View
                   style={{
                     flexDirection: 'row',
@@ -415,259 +453,552 @@ export default function TabContent() {
                     alignItems: 'center',
                     paddingHorizontal: scale(25),
                     paddingVertical: scale(10),
-                    backgroundColor: '#EEEEEE',
-                    borderTopWidth: scale(index == 0 ? 0 : 1),
                   }}>
                   <CustomText
                     textType="medium"
                     style={{
                       ...styles.text,
                       color: '#979797',
-                      width: '90%',
+                      width: '50%',
                     }}>
                     {item.name}
                   </CustomText>
+                  <TouchableOpacity
+                    onPress={() => estateTypeCheckBox(item.name)}
+                    style={{width: '40%', alignItems: 'center'}}>
+                    {selectedEstateCheckBox === item.name ? (
+                      <IconCheckBox />
+                    ) : (
+                      <IconUnCheckBox />
+                    )}
+                  </TouchableOpacity>
                 </View>
-              </TouchableOpacity>
-              {index == showFacilitiesItem &&
-                item.include &&
-                item.include.length > 0 && (
-                  <View
-                    style={{
-                      paddingHorizontal: scale(25),
-                      paddingVertical: scale(5),
-                    }}>
-                    {item.include.map((nestedItem, index) => (
-                      <TouchableOpacity
-                        onPress={() => facilitiesCheckBox(nestedItem.title)}
-                        style={{
-                          paddingVertical: scale(5),
-                          // backgroundColor: 'red',
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          paddingHorizontal: scale(10),
-                          alignItems: 'center',
-                        }}
-                        key={index}>
-                        <CustomText>{nestedItem.title}</CustomText>
-                        {selectedFaciCheckBox.includes(nestedItem.title) ? (
-                          <IconCheckBox />
-                        ) : (
-                          <IconUnCheckBox />
-                        )}
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                )}
-            </View>
+              )}
+              keyExtractor={item => item.id}
+            />
           )}
-          keyExtractor={item => item.id}
-        />
+        </View>
       )}
-      <CustomInput
-        styleTextLabel={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-        }}
-        label={t('contact_info')}
-        control={control}
-        name="fullname"
-        placeholder={t('full_name')}
-        rules={{
-          ...requireField(t('this_field_required')),
-        }}
-        style={styles.textInput}
-      />
-      <CustomInput
-        styleTextLabel={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-        }}
-        control={control}
-        name="phone"
-        placeholder={t('phone')}
-        rules={{
-          ...requireField('This field is required'),
-        }}
-        style={styles.textInput}
-      />
-      <View style={{flexDirection: 'row'}}>
-        <CustomText
-          textType="medium"
-          style={{
-            ...styles.text1,
-            color: COLORS.black,
-            marginTop: scale(20),
-            width: '47%',
-          }}>
-          {t('country')}
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewDetail}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Estate detail')}
         </CustomText>
-        <TouchableOpacity
-          style={{
-            height: scale(40),
-            paddingHorizontal: scale(15),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: '#E3E3E3',
-            width: '40%',
-            alignItems: 'center',
-            borderRadius: scale(5),
-            marginTop: scale(10),
-            marginLeft: scale(10),
-          }}>
+        <IconRight />
+      </TouchableOpacity>
+      {viewdetail && (
+        <View style={styles.box}>
+          <View style={{flexDirection: 'row'}}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('Main Currency')}
+            </CustomText>
+            <View
+              style={{
+                height: scale(40),
+                flexDirection: 'row',
+                justifyContent: 'center',
+                // backgroundColor: '#E3E3E3',
+                flex: 1,
+                alignItems: 'center',
+                // borderRadius: scale(5),
+                marginTop: scale(10),
+              }}>
+              <CustomText
+                textType="medium"
+                style={{
+                  ...styles.text,
+                  color: '#979797',
+                }}>
+                Vietnam Dong (VND)
+              </CustomText>
+            </View>
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              borderColor: '#F0B90B',
+            }}></View>
+          <View style={{flexDirection: 'row'}}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              {t('check_in')}
+            </CustomText>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              {t('check_out')}
+            </CustomText>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => setOpenCheckin(true)}
+              style={{
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              <View
+                style={{
+                  backgroundColor: '#E3E3E3',
+                  height: scale(40),
+                  justifyContent: 'center',
+                  borderRadius: scale(5),
+                  width: '70%',
+                  alignItems: 'center',
+                }}>
+                <CustomText
+                  style={{
+                    ...styles.text1,
+                    color: COLORS.black,
+                    borderWidth: scale(0),
+                  }}>
+                  {timeCheckin.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </CustomText>
+              </View>
+              <DatePicker
+                mode="time"
+                modal
+                open={openCheckin}
+                date={timeCheckin}
+                onConfirm={timeCheckin => {
+                  setOpenCheckin(false);
+                  setTimeCheckin(timeCheckin);
+                }}
+                onCancel={() => {
+                  setOpenCheckin(false);
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setOpenCheckout(true)}
+              style={{
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              <View
+                style={{
+                  backgroundColor: '#E3E3E3',
+                  height: scale(40),
+                  justifyContent: 'center',
+                  borderRadius: scale(5),
+                  width: '70%',
+                  alignItems: 'center',
+                }}>
+                <CustomText
+                  style={{
+                    ...styles.text1,
+                    color: COLORS.black,
+                    borderWidth: scale(0),
+                  }}>
+                  {timeCheckout.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </CustomText>
+              </View>
+              <DatePicker
+                mode="time"
+                modal
+                open={openCheckout}
+                date={timeCheckout}
+                onConfirm={timeCheckout => {
+                  setOpenCheckout(false);
+                  setTimeCheckout(timeCheckout);
+                }}
+                onCancel={() => {
+                  setOpenCheckout(false);
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <View>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                // flex: 1,
+              }}>
+              {t('Distance to City Center')}
+            </CustomText>
+            <View
+              style={{
+                height: scale(40),
+                // flexDirection: 'row',
+                justifyContent: 'center',
+                // backgroundColor: '#E3E3E3',
+                // flex: 1,
+                alignItems: 'center',
+                // borderRadius: scale(5),
+                marginTop: scale(10),
+                width: '100%',
+              }}>
+              <CustomInput
+                styleTextLabel={{
+                  ...styles.text1,
+                  color: COLORS.black,
+                  marginTop: scale(10),
+                }}
+                control={control}
+                name="km"
+                placeholder={t('KM')}
+                rules={{
+                  ...requireField(t('this_field_required')),
+                }}
+                style={{...styles.textInput}}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(20),
+              borderColor: '#F0B90B',
+            }}></View>
+          <View>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                // flex: 1,
+              }}>
+              {t('Number of Floors')}
+            </CustomText>
+            <View
+              style={{
+                height: scale(40),
+                // flexDirection: 'row',
+                justifyContent: 'center',
+                // backgroundColor: '#E3E3E3',
+                // flex: 1,
+                alignItems: 'center',
+                // borderRadius: scale(5),
+                marginTop: scale(10),
+                width: '100%',
+              }}>
+              <CustomInput
+                styleTextLabel={{
+                  ...styles.text1,
+                  color: COLORS.black,
+                  marginTop: scale(10),
+                }}
+                control={control}
+                name="floor"
+                placeholder={t('floors')}
+                rules={{
+                  ...requireField(t('this_field_required')),
+                }}
+                style={{...styles.textInput}}
+              />
+            </View>
+          </View>
+        </View>
+      )}
+      <TouchableOpacity
+        style={styles.buttonCategories}
+        onPress={viewFacilities}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Estate facilities')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewfacilities && (
+        <View style={styles.box}>
           <CustomText
             textType="medium"
             style={{
-              ...styles.text,
-              color: '#979797',
+              ...styles.text1,
+              color: COLORS.black,
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+              marginBottom: scale(10),
+              marginTop: scale(20),
             }}>
-            USA
+            {t('Estate Facilities')}
           </CustomText>
-          <IconDown />
-        </TouchableOpacity>
-      </View>
-      <CustomInput
-        styleTextLabel={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(10),
-        }}
-        label={t('address')}
-        control={control}
-        name="address"
-        placeholder={t('address')}
-        rules={{
-          ...requireField(t('this_field_required')),
-        }}
-        style={styles.textInput}
-      />
-      {/* <Image
-        source={images.map}
-        style={{
-          height: scale(323),
-          width: '90%',
-          alignSelf: 'center',
-          marginTop: scale(20),
-        }}></Image> */}
-      <View style={{width: '100%', marginTop: scale(10)}}>
-        <Map />
-      </View>
-      <View style={{flexDirection: 'row'}}>
-        <CustomText
-          textType="medium"
-          style={{
-            ...styles.text1,
-            color: COLORS.black,
-            marginTop: scale(10),
-            width: '45%',
-          }}>
-          {t('check_in')}
-        </CustomText>
-        <CustomText
-          textType="medium"
-          style={{
-            ...styles.text1,
-            color: COLORS.black,
-            marginTop: scale(10),
-            width: '45%',
-          }}>
-          {t('check_out')}
-        </CustomText>
-      </View>
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity
-          onPress={() => setOpenCheckin(true)}
-          style={{
-            marginTop: scale(10),
-            width: '45%',
-          }}>
-          <View
-            style={{
-              backgroundColor: '#E3E3E3',
-              height: scale(40),
-              justifyContent: 'center',
-              borderRadius: scale(5),
-              width: '70%',
-              alignItems: 'center',
-            }}>
+          <TouchableOpacity
+            style={
+              !showFacilities
+                ? styles.buttonEstateType
+                : styles.buttonEstateTypes
+            }
+            onPress={viewShowFacilities}>
             <CustomText
+              textType="regular"
               style={{
-                ...styles.text1,
+                ...styles.text,
                 color: COLORS.black,
-                borderWidth: scale(0),
+                paddingHorizontal: scale(20),
               }}>
-              {timeCheckin.toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
+              {t('Estate Facilities')}
             </CustomText>
-          </View>
-          <DatePicker
-            mode="time"
-            modal
-            open={openCheckin}
-            date={timeCheckin}
-            onConfirm={timeCheckin => {
-              setOpenCheckin(false);
-              setTimeCheckin(timeCheckin);
+          </TouchableOpacity>
+          {showFacilities && (
+            <FlatList
+              data={dataFaci}
+              contentContainerStyle={styles.listFacilities}
+              scrollEnabled={false}
+              renderItem={({item, index}) => (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setshowFacilitiesItem(index);
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        paddingHorizontal: scale(25),
+                        paddingVertical: scale(10),
+                        backgroundColor: '#EEEEEE',
+                        borderTopWidth: scale(index == 0 ? 0 : 1),
+                      }}>
+                      <CustomText
+                        textType="medium"
+                        style={{
+                          ...styles.text,
+                          color: '#979797',
+                          width: '90%',
+                        }}>
+                        {item.name}
+                      </CustomText>
+                    </View>
+                  </TouchableOpacity>
+                  {index == showFacilitiesItem &&
+                    item.include &&
+                    item.include.length > 0 && (
+                      <View
+                        style={{
+                          paddingHorizontal: scale(25),
+                          paddingVertical: scale(5),
+                        }}>
+                        {item.include.map((nestedItem, index) => (
+                          <TouchableOpacity
+                            onPress={() => facilitiesCheckBox(nestedItem.title)}
+                            style={{
+                              paddingVertical: scale(5),
+                              // backgroundColor: 'red',
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              paddingHorizontal: scale(10),
+                              alignItems: 'center',
+                            }}
+                            key={index}>
+                            <CustomText>{nestedItem.title}</CustomText>
+                            {selectedFaciCheckBox.includes(nestedItem.title) ? (
+                              <IconCheckBox />
+                            ) : (
+                              <IconUnCheckBox />
+                            )}
+                          </TouchableOpacity>
+                        ))}
+                      </View>
+                    )}
+                </View>
+              )}
+              keyExtractor={item => item.id}
+            />
+          )}
+        </View>
+      )}
+      <TouchableOpacity
+        style={styles.buttonCategories}
+        onPress={viewContactinfo}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Estate contact info')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewcontactinfo && (
+        <View style={styles.box}>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
             }}
-            onCancel={() => {
-              setOpenCheckin(false);
+            label={t('contact_info')}
+            control={control}
+            name="fullname"
+            placeholder={t('full_name')}
+            rules={{
+              ...requireField(t('this_field_required')),
             }}
+            style={styles.textInput}
           />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setOpenCheckout(true)}
-          style={{
-            marginTop: scale(10),
-            width: '45%',
-          }}>
-          <View
-            style={{
-              backgroundColor: '#E3E3E3',
-              height: scale(40),
-              justifyContent: 'center',
-              borderRadius: scale(5),
-              width: '70%',
-              alignItems: 'center',
-            }}>
-            <CustomText
-              style={{
-                ...styles.text1,
-                color: COLORS.black,
-                borderWidth: scale(0),
-              }}>
-              {timeCheckout.toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </CustomText>
-          </View>
-          <DatePicker
-            mode="time"
-            modal
-            open={openCheckout}
-            date={timeCheckout}
-            onConfirm={timeCheckout => {
-              setOpenCheckout(false);
-              setTimeCheckout(timeCheckout);
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
             }}
-            onCancel={() => {
-              setOpenCheckout(false);
+            control={control}
+            name="phone"
+            placeholder={t('phone')}
+            rules={{
+              ...requireField('This field is required'),
             }}
+            style={styles.textInput}
           />
-        </TouchableOpacity>
-      </View>
-      <CustomText
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            control={control}
+            name="email"
+            placeholder={t('email')}
+            rules={{
+              ...requireField('This field is required'),
+            }}
+            style={styles.textInput}
+          />
+        </View>
+      )}
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewRoom}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Rooms')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewroom && (
+        <View style={styles.box}>
+          {roomTypes.map((room, index) => (
+            <View key={index} style={styles.roomBox}>
+              <View style={{width: '10%'}}>
+                <Image
+                  source={images.sell}
+                  style={{width: scale(25), height: scale(25)}}
+                />
+              </View>
+              <View style={{width: '80%'}}>
+                <CustomText key={index}>{room.RoomTypeTitle}</CustomText>
+              </View>
+              <TouchableOpacity onPress={() => removeRoomType(index)}>
+                <IconX style={{width: scale(20), height: scale(20)}} />
+              </TouchableOpacity>
+            </View>
+          ))}
+          <View style={{width: '100%'}}>
+            <TouchableOpacity onPress={goAddRoom}>
+              <LinearGradient
+                colors={['#F7E75A', '#FFC702']}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                style={styles.buttonAdd}>
+                <IconAdd />
+                <CustomText textType="semiBold" style={styles.text2}>
+                  {t('add_room_type')}
+                </CustomText>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+       <TouchableOpacity
+        style={styles.buttonCategories}
+        onPress={viewContactinfo}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Estate contact info')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewcontactinfo && (
+        <View style={styles.box}>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('contact_info')}
+            control={control}
+            name="fullname"
+            placeholder={t('full_name')}
+            rules={{
+              ...requireField(t('this_field_required')),
+            }}
+            style={styles.textInput}
+          />
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            control={control}
+            name="phone"
+            placeholder={t('phone')}
+            rules={{
+              ...requireField('This field is required'),
+            }}
+            style={styles.textInput}
+          />
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            control={control}
+            name="email"
+            placeholder={t('email')}
+            rules={{
+              ...requireField('This field is required'),
+            }}
+            style={styles.textInput}
+          />
+        </View>
+      )}
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Estate photos')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewphoto && (
+        <View style={styles.box}>
+          <CustomText
         textType="medium"
         style={{
           ...styles.text1,
           color: COLORS.black,
           marginTop: scale(20),
           alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
+          // paddingHorizontal: scale(20),
         }}>
         {t('real_estate_images')}
       </CustomText>
@@ -677,14 +1008,14 @@ export default function TabContent() {
           ...styles.text3,
           color: COLORS.black,
           alignSelf: 'flex-start',
-          paddingHorizontal: scale(20),
+          // paddingHorizontal: scale(20),
         }}>
         {t('update_image_to_maximum')}
       </CustomText>
       <View
         style={{
           alignSelf: 'flex-end',
-          paddingHorizontal: scale(20),
+          // paddingHorizontal: scale(20),
         }}>
         <TouchableOpacity onPress={pickImage}>
           <IconCamera />
@@ -695,6 +1026,7 @@ export default function TabContent() {
           ...styles.textArea1,
           backgroundColor: '#E3E3E3',
           marginBottom: scale(10),
+          width:'100%'
         }}>
         {/* <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -718,6 +1050,19 @@ export default function TabContent() {
           />
         ) : null}
       </View>
+        </View>
+      )}
+
+      {/* <Image
+        source={images.map}
+        style={{
+          height: scale(323),
+          width: '90%',
+          alignSelf: 'center',
+          marginTop: scale(20),
+        }}></Image> */}
+
+      
 
       {/* <TouchableOpacity
         style={{
@@ -740,37 +1085,7 @@ export default function TabContent() {
         <IconDown />
       </TouchableOpacity> */}
 
-      {roomTypes.map((room, index) => (
-        <View key={index} style={styles.roomBox}>
-          <View style={{width: '10%'}}>
-            <Image
-              source={images.sell}
-              style={{width: scale(25), height: scale(25)}}
-            />
-          </View>
-          <View style={{width: '80%'}}>
-            <CustomText key={index}>{room.RoomTypeTitle}</CustomText>
-          </View>
-          <TouchableOpacity onPress={() => removeRoomType(index)}>
-            <IconX style={{width: scale(20), height: scale(20)}} />
-          </TouchableOpacity>
-        </View>
-      ))}
-      <View style={{width: '100%', marginBottom: scale(30)}}>
-        <TouchableOpacity onPress={goAddRoom}>
-          <LinearGradient
-            colors={['#F7E75A', '#FFC702']}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
-            style={styles.buttonAdd}>
-            <IconAdd />
-            <CustomText textType="semiBold" style={styles.text2}>
-              {t('add_room_type')}
-            </CustomText>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', marginTop:scale(20)}}>
         <CustomText
           textType="medium"
           style={{
@@ -821,7 +1136,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#cccccc',
   },
   text1: {
-    fontSize: SIZES.medium,
+    fontSize: SIZES.small,
   },
   text3: {
     fontSize: SIZES.xSmall,
@@ -844,6 +1159,42 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
     elevation: 11,
+  },
+  buttonCategories: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: scale(4),
+    borderWidth: scale(1),
+    borderColor: '#F0B90B80',
+    height: scale(50),
+    width: '90%',
+    justifyContent: 'space-between',
+    marginTop: scale(20),
+    shadowColor: '#00000040',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
+    flexDirection: 'row',
+    paddingHorizontal: scale(20),
+  },
+  box: {
+    minHeight: scale(100),
+    backgroundColor: '#FFFFFF',
+    borderBottomLeftRadius: scale(5),
+    borderBottomRightRadius: scale(5),
+    borderBottomStartRadius: scale(5),
+    borderBottomEndRadius: scale(5),
+    paddingHorizontal: scale(20),
+    alignItems: 'center',
+    borderColor: '#F0B90B80',
+    borderWidth: scale(1),
+    width: '90%',
+    paddingBottom: scale(20),
   },
   buttonSmall: {
     flexDirection: 'row',
@@ -879,7 +1230,7 @@ const styles = StyleSheet.create({
     // borderWidth: scale(2),
     backgroundColor: '#E3E3E3',
     borderColor: '#E3E3E3',
-    width: '90%',
+    width: '100%',
     borderRadius: scale(5),
     height: scale(71),
     justifyContent: 'space-between',
@@ -892,7 +1243,7 @@ const styles = StyleSheet.create({
     marginTop: scale(10),
     borderRadius: scale(5),
     // borderWidth: scale(0),
-    width: '90%',
+    width: '100%',
   },
   text: {
     fontSize: SIZES.small,
@@ -901,7 +1252,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scale(10),
     height: scale(30),
-    width: '60%',
+    width: '100%',
     justifyContent: 'center',
     marginTop: scale(20),
     alignSelf: 'center',
@@ -912,7 +1263,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
   },
   roomBox: {
-    width: '90%',
+    width: '100%',
     borderRadius: scale(10),
     backgroundColor: '#EEEEEE',
     height: scale(40),
@@ -921,12 +1272,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     marginBottom: scale(10),
+    marginTop:scale(20)
   },
   buttonEstateType: {
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
     borderRadius: scale(10),
-    width: '90%',
+    width: '100%',
     height: scale(40),
     justifyContent: 'center',
   },
@@ -936,7 +1288,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(10),
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
-    width: '90%',
+    width: '100%',
     height: scale(40),
     justifyContent: 'center',
   },
@@ -946,7 +1298,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: scale(10),
     backgroundColor: '#EEEEEE',
     justifyContent: 'center',
-    width: '98%',
+    width: '120%',
     minHeight: scale(100),
   },
   listFacilities: {
@@ -956,7 +1308,7 @@ const styles = StyleSheet.create({
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
     justifyContent: 'center',
-    width: '98%',
+    width: '109%',
     minHeight: scale(100),
   },
 });
