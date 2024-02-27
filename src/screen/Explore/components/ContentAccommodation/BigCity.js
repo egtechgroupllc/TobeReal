@@ -5,17 +5,17 @@ import {images, scale} from '../../../../assets/constants';
 const data = [
   {
     id: 1,
-    src: 'https://saveloka.com/images/home/hotel-image/looking-for-place/screenshot-1.png',
+    src: 'https://cdn.tgdd.vn/Files/2021/07/27/1371027/bo-tui-kinh-nghiem-du-lich-jakarta-tu-tuc-sieu-chi-tiet-tu-a-z-202107270720172819.jpg',
     name:'Jakarta',
   },
   {
     id: 2,
-    src: 'https://saveloka.com/images/home/hotel-image/looking-for-place/screenshot-2.png',
+    src: 'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revisi-2020/destinations-thumbnail/Bandung-Thumbnail.jpg',
     name:'Bandung',
   },
   {
     id: 3,
-    src: 'https://saveloka.com/images/home/hotel-image/looking-for-place/screenshot-5.png',
+    src: 'https://content.r9cdn.net/rimg/dimg/02/9b/35b2f30d-city-15965-16a2d1c37d9.jpg?crop=true&width=1020&height=498',
     name:'Tangerang',
   },
   {
@@ -30,12 +30,12 @@ const data = [
   },
   {
     id: 6,
-    src: 'https://saveloka.com/images/home/hotel-image/looking-for-place/screenshot-3.png',
+    src: 'https://media.istockphoto.com/id/1082929112/vi/anh/c%E1%BA%A3nh-quan-th%C3%A0nh-ph%E1%BB%91-surabaya-indonesia.jpg?s=612x612&w=0&k=20&c=BvmYz7JLO7eui-cBLPeqM-XTJSytJFoeZOhFSZus5Do=',
     name:'Surabaya',
   },
   {
     id: 7,
-    src: 'https://saveloka.com/images/home/hotel-image/looking-for-place/screenshot-4.png',
+    src: 'https://ik.imagekit.io/tvlk/image/imageResource/2021/09/19/1632058681028-1e23d643cae19075ed21f570d149ac76.jpeg',
     name:'Medan',
   },
   {

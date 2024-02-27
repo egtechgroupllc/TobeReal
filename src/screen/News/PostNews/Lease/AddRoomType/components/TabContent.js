@@ -258,8 +258,10 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
+       
             }}>
             <CustomText
               textType="medium"
@@ -269,13 +271,15 @@ export default function TabContent() {
               }}>
               Super king bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -284,6 +288,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -295,13 +300,15 @@ export default function TabContent() {
               }}>
               Super queen bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -310,6 +317,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -321,13 +329,15 @@ export default function TabContent() {
               }}>
               King bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -336,6 +346,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -347,13 +358,15 @@ export default function TabContent() {
               }}>
               Queen bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -362,6 +375,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -373,13 +387,15 @@ export default function TabContent() {
               }}>
               Single bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -388,6 +404,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -399,13 +416,15 @@ export default function TabContent() {
               }}>
               Couple bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -414,6 +433,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -425,13 +445,15 @@ export default function TabContent() {
               }}>
               Sofa bed
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -677,7 +699,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: scale(10),
     borderBottomRightRadius: scale(10),
     backgroundColor: '#EEEEEE',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     width: '90%',
     minHeight: scale(100),
   },

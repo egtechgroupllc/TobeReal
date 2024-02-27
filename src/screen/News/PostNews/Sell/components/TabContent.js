@@ -262,6 +262,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -273,13 +274,15 @@ export default function TabContent() {
               }}>
               Toilet
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -288,6 +291,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -299,13 +303,15 @@ export default function TabContent() {
               }}>
               Bed room
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Quantity"
             />
@@ -313,7 +319,8 @@ export default function TabContent() {
           <View
             style={{
               flexDirection: 'row',
-              // justifyContent: 'space-between',
+              justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -336,6 +343,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -347,13 +355,15 @@ export default function TabContent() {
               }}>
               Home direction
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Direction"
             />
@@ -362,6 +372,7 @@ export default function TabContent() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems:'center',
               paddingHorizontal: scale(25),
               paddingVertical: scale(10),
             }}>
@@ -373,13 +384,15 @@ export default function TabContent() {
               }}>
               Balcony direction
             </CustomText>
-            <CustomInput
+            <TextInput
               style={{
                 height: scale(20),
                 backgroundColor: 'white',
                 borderRadius: scale(5),
                 borderWidth: scale(0),
                 width: '40%',
+                paddingHorizontal:scale(10)
+                // flex:1
               }}
               placeholder="Direction"
             />

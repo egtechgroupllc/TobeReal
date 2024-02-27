@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Alert,
+  FlatList,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import React, {useState} from 'react';
@@ -15,8 +16,10 @@ import CustomText from '../../../../../components/CustomText';
 import {
   IconAdd,
   IconCamera,
+  IconCheckBox,
   IconCheckBoxWhite,
   IconDown,
+  IconUnCheckBox,
   IconUnCheckBoxWhite,
   IconX,
 } from '../../../../../assets/icon/Icon';
@@ -30,9 +33,62 @@ import Map from '../../../../Explore/components/DetailAccommodation/Map';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
 import ImageDetail from '../../../../Explore/components/DetailAccommodation/ImageDetail';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+const dataRealEstateType = [
+  {id: '1', name: 'Hotel'},
+  {id: '2', name: 'Hostel'},
+  {id: '3', name: 'Villa'},
+  {id: '4', name: 'Resort'},
+  {id: '5', name: 'Apartment'},
+  {id: '6', name: 'Homestay'},
+];
+const dataFacilities = [
+  {
+    id: '1',
+    name: 'Common',
+    include: [
+      {title: 'Parking Area'},
+      {title: 'Room Service'},
+      {title: 'Safety Deposit Box'},
+      {title: 'Coffee Shop'},
+      {title: 'Restaurant'},
+    ],
+  },
+  {
+    id: '2',
+    name: 'Accessibility',
+    include: [
+      {title: 'Accessible Bathroom'},
+      {title: 'Accessible Parking'},
+      {title: 'Roll In Shower'},
+    ],
+  },
+  {
+    id: '3',
+    name: 'Business',
+    include: [
+      {title: 'Business Center'},
+      {title: 'Meeting Facilities'},
+      {title: 'Computer Station'},
+    ],
+  },
+  {
+    id: '4',
+    name: 'Connectivity',
+    include: [{title: 'Wifi Free'}, {title: 'Wifi Public Area Surcharge'}],
+  },
+  {
+    id: '5',
+    name: 'Facilities',
+    include: [
+      {title: 'Family Room'},
+      {title: 'Smoking Area'},
+      {title: 'Air Conditioning'},
+    ],
+  },
+];
 export default function TabContent() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {control, watch, handleSubmit} = useForm();
 
   const [selectedImage, setSelectedImage] = useState([]);
@@ -43,6 +99,34 @@ export default function TabContent() {
   const [roomTypes, setRoomTypes] = useState([]);
   const [description, setDescription] = useState('');
   const [realesate, setRealEsate] = useState('');
+  const [showRealEstateType, setShowRealEstateType] = useState('');
+  const [showFacilities, setshowFacilities] = useState('');
+  const [showFacilitiesItem, setshowFacilitiesItem] = useState('');
+  const [selectedEstateCheckBox, setSelectedEstateCheckBox] = useState('');
+  const [selectedFaciCheckBox, setSelectedFaciCheckBox] = useState([]);
+  const [dataEstateType, setDataEstateType] = useState(dataRealEstateType);
+  const [dataFaci, setDataFaci] = useState(dataFacilities);
+  const estateTypeCheckBox = name => {
+    setSelectedEstateCheckBox(selectedEstateCheckBox === name ? '' : name);
+    setShowRealEstateType(false);
+  };
+  const facilitiesCheckBox = name => {
+    if (selectedFaciCheckBox.includes(name)) {
+      setSelectedFaciCheckBox(
+        selectedFaciCheckBox.filter(item => item !== name),
+      );
+    } else {
+      setSelectedFaciCheckBox([...selectedFaciCheckBox, name]);
+    }
+  };
+  console.log(selectedFaciCheckBox);
+  const viewShowRealEstateType = () => {
+    setShowRealEstateType(prevshowRealEstateType => !prevshowRealEstateType);
+  };
+  const viewShowFacilities = () => {
+    setshowFacilities(prevshowRealEstateType => !prevshowRealEstateType);
+  };
+
   // const [description, setDescription] = useState([]);
   // const [acreage, setAcreage] = useState([]);
   // const [price, setPrice] = useState([]);
@@ -102,11 +186,7 @@ export default function TabContent() {
   };
   const maxCharacters = 1000;
   const navigation = useNavigation();
-  const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(false);
-  const toggleCheckBox = () => {
-    setCheck(prevCheck => !prevCheck);
-  };
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
@@ -145,7 +225,7 @@ export default function TabContent() {
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-            {t('lease')}
+          {t('lease')}
         </CustomText>
       </View>
       {/* <View
@@ -184,6 +264,7 @@ export default function TabContent() {
         name="RealEstateTitle"
         multiline
         numberOfLines={4}
+        maxLength={1000}
         placeholder={t('enter_real_estate_title')}
         rules={{
           ...requireField(t('this_field_required')),
@@ -206,6 +287,7 @@ export default function TabContent() {
         label={t('description_content')}
         control={control}
         name="Description"
+        maxLength={1000}
         multiline
         numberOfLines={4}
         placeholder={t('enter_a_description')}
@@ -220,6 +302,168 @@ export default function TabContent() {
           </Text>
         }
       />
+      <CustomText
+        textType="medium"
+        style={{
+          ...styles.text1,
+          color: COLORS.black,
+          alignSelf: 'flex-start',
+          paddingHorizontal: scale(20),
+          marginBottom: scale(10),
+          marginTop: scale(20),
+        }}>
+        {t('real_estate_type')}
+      </CustomText>
+      <TouchableOpacity
+        style={
+          !showRealEstateType
+            ? styles.buttonEstateType
+            : styles.buttonEstateTypes
+        }
+        onPress={viewShowRealEstateType}>
+        <CustomText
+          textType="regular"
+          style={{
+            ...styles.text,
+            color: COLORS.black,
+            paddingHorizontal: scale(20),
+          }}>
+          {selectedEstateCheckBox !== ''
+            ? t(selectedEstateCheckBox)
+            : t('real_estate_type')}
+        </CustomText>
+      </TouchableOpacity>
+      {showRealEstateType && (
+        <FlatList
+          data={dataEstateType}
+          contentContainerStyle={styles.listEstateType}
+          scrollEnabled={false}
+          renderItem={({item}) => (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingHorizontal: scale(25),
+                paddingVertical: scale(10),
+              }}>
+              <CustomText
+                textType="medium"
+                style={{
+                  ...styles.text,
+                  color: '#979797',
+                  width: '50%',
+                }}>
+                {item.name}
+              </CustomText>
+              <TouchableOpacity
+                onPress={() => estateTypeCheckBox(item.name)}
+                style={{width: '40%', alignItems: 'center'}}>
+                {selectedEstateCheckBox === item.name ? (
+                  <IconCheckBox />
+                ) : (
+                  <IconUnCheckBox />
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
+          keyExtractor={item => item.id}
+        />
+      )}
+      <CustomText
+        textType="medium"
+        style={{
+          ...styles.text1,
+          color: COLORS.black,
+          alignSelf: 'flex-start',
+          paddingHorizontal: scale(20),
+          marginBottom: scale(10),
+          marginTop: scale(20),
+        }}>
+        {t('Estate Facilities')}
+      </CustomText>
+      <TouchableOpacity
+        style={
+          !showFacilities ? styles.buttonEstateType : styles.buttonEstateTypes
+        }
+        onPress={viewShowFacilities}>
+        <CustomText
+          textType="regular"
+          style={{
+            ...styles.text,
+            color: COLORS.black,
+            paddingHorizontal: scale(20),
+          }}>
+          {t('Estate Facilities')}
+        </CustomText>
+      </TouchableOpacity>
+      {showFacilities && (
+        <FlatList
+          data={dataFaci}
+          contentContainerStyle={styles.listFacilities}
+          scrollEnabled={false}
+          renderItem={({item, index}) => (
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  setshowFacilitiesItem(index);
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingHorizontal: scale(25),
+                    paddingVertical: scale(10),
+                    backgroundColor: '#EEEEEE',
+                    borderTopWidth: scale(index == 0 ? 0 : 1),
+                  }}>
+                  <CustomText
+                    textType="medium"
+                    style={{
+                      ...styles.text,
+                      color: '#979797',
+                      width: '90%',
+                    }}>
+                    {item.name}
+                  </CustomText>
+                </View>
+              </TouchableOpacity>
+              {index == showFacilitiesItem &&
+                item.include &&
+                item.include.length > 0 && (
+                  <View
+                    style={{
+                      paddingHorizontal: scale(25),
+                      paddingVertical: scale(5),
+                    }}>
+                    {item.include.map((nestedItem, index) => (
+                      <TouchableOpacity
+                        onPress={() => facilitiesCheckBox(nestedItem.title)}
+                        style={{
+                          paddingVertical: scale(5),
+                          // backgroundColor: 'red',
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          paddingHorizontal: scale(10),
+                          alignItems: 'center',
+                        }}
+                        key={index}>
+                        <CustomText>{nestedItem.title}</CustomText>
+                        {selectedFaciCheckBox.includes(nestedItem.title) ? (
+                          <IconCheckBox />
+                        ) : (
+                          <IconUnCheckBox />
+                        )}
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                )}
+            </View>
+          )}
+          keyExtractor={item => item.id}
+        />
+      )}
       <CustomInput
         styleTextLabel={{
           ...styles.text1,
@@ -258,7 +502,7 @@ export default function TabContent() {
             marginTop: scale(20),
             width: '47%',
           }}>
-             {t('country')}
+          {t('country')}
         </CustomText>
         <TouchableOpacity
           style={{
@@ -329,7 +573,7 @@ export default function TabContent() {
             marginTop: scale(10),
             width: '45%',
           }}>
-           {t('check_out')}
+          {t('check_out')}
         </CustomText>
       </View>
       <View style={{flexDirection: 'row'}}>
@@ -425,7 +669,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-           {t('real_estate_images')}
+        {t('real_estate_images')}
       </CustomText>
       <CustomText
         textType="regular"
@@ -435,7 +679,7 @@ export default function TabContent() {
           alignSelf: 'flex-start',
           paddingHorizontal: scale(20),
         }}>
-            {t('update_image_to_maximum')}
+        {t('update_image_to_maximum')}
       </CustomText>
       <View
         style={{
@@ -521,7 +765,7 @@ export default function TabContent() {
             style={styles.buttonAdd}>
             <IconAdd />
             <CustomText textType="semiBold" style={styles.text2}>
-            {t('add_room_type')}
+              {t('add_room_type')}
             </CustomText>
           </LinearGradient>
         </TouchableOpacity>
@@ -536,7 +780,7 @@ export default function TabContent() {
             alignSelf: 'flex-start',
             marginTop: scale(5),
           }}>
-                  {t('do_you_agree')}
+          {t('do_you_agree')}
         </CustomText>
         <TouchableOpacity onPress={toggleCheckBox1}>
           {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
@@ -677,5 +921,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     marginBottom: scale(10),
+  },
+  buttonEstateType: {
+    borderWidth: scale(2),
+    borderColor: '#EEEEEE',
+    borderRadius: scale(10),
+    width: '90%',
+    height: scale(40),
+    justifyContent: 'center',
+  },
+  buttonEstateTypes: {
+    borderTopLeftRadius: scale(10),
+    borderTopEndRadius: scale(10),
+    borderTopRightRadius: scale(10),
+    borderWidth: scale(2),
+    borderColor: '#EEEEEE',
+    width: '90%',
+    height: scale(40),
+    justifyContent: 'center',
+  },
+  listEstateType: {
+    borderBottomLeftRadius: scale(10),
+    borderBottomEndRadius: scale(10),
+    borderBottomRightRadius: scale(10),
+    backgroundColor: '#EEEEEE',
+    justifyContent: 'center',
+    width: '98%',
+    minHeight: scale(100),
+  },
+  listFacilities: {
+    borderBottomLeftRadius: scale(10),
+    borderBottomEndRadius: scale(10),
+    borderBottomRightRadius: scale(10),
+    borderWidth: scale(2),
+    borderColor: '#EEEEEE',
+    justifyContent: 'center',
+    width: '98%',
+    minHeight: scale(100),
   },
 });

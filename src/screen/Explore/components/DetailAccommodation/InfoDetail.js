@@ -3,7 +3,7 @@ import React from 'react';
 import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../../components/Ribbon';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconHouse, IconRoom} from '../../../../assets/icon/Icon';
+import { IconHome, IconRoom} from '../../../../assets/icon/Icon';
 import Introduction from './Introduction';
 import { useLanguage } from '../../../../hooks/useLanguage';
 
@@ -27,7 +27,7 @@ export default function InfoDetail({name}) {
 
         <View style={styles.room}>
           <View style={styles.boxRoom}>
-            <IconHouse style={styles.icon} />
+            <IconHome style={styles.icon} />
             <CustomText textType="regular">{t('hotel_residence')}</CustomText>
           </View>
           <View style={styles.boxRoom}>

@@ -3,7 +3,7 @@ import React, {useRef} from 'react';
 import WrapperContent from '../WrapperContent';
 import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconHouse} from '../../../../assets/icon/Icon';
+import {IconHome} from '../../../../assets/icon/Icon';
 import BottomSheet from '../../../../components/BottomSheet';
 import { useLanguage } from '../../../../hooks/useLanguage';
 
@@ -36,7 +36,7 @@ export default function InfoUnitFacilities() {
         rowGap: scale(10),
       }}>
       <View style={styles.header}>
-        <IconHouse
+        <IconHome
           style={{
             width: scale(18),
             height: scale(18),
