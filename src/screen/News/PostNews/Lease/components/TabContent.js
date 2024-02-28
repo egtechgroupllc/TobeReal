@@ -132,8 +132,12 @@ export default function TabContent() {
   };
 
   const [viewphoto, setViewphoto] = useState(false);
-  const viewPhoto= () => {
+  const viewPhoto = () => {
     setViewphoto(prevViewphoto => !prevViewphoto);
+  };
+  const [viewpayment, setViewpayment] = useState(false);
+  const viewPayment = () => {
+    setViewpayment(prevViewpayment => !prevViewpayment);
   };
 
   const estateTypeCheckBox = name => {
@@ -928,61 +932,6 @@ export default function TabContent() {
           </View>
         </View>
       )}
-       <TouchableOpacity
-        style={styles.buttonCategories}
-        onPress={viewContactinfo}>
-        <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate contact info')}
-        </CustomText>
-        <IconRight />
-      </TouchableOpacity>
-      {viewcontactinfo && (
-        <View style={styles.box}>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('contact_info')}
-            control={control}
-            name="fullname"
-            placeholder={t('full_name')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            control={control}
-            name="phone"
-            placeholder={t('phone')}
-            rules={{
-              ...requireField('This field is required'),
-            }}
-            style={styles.textInput}
-          />
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            control={control}
-            name="email"
-            placeholder={t('email')}
-            rules={{
-              ...requireField('This field is required'),
-            }}
-            style={styles.textInput}
-          />
-        </View>
-      )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
         <CustomText textType="medium" style={{...styles.text1}}>
           {t('Estate photos')}
@@ -992,43 +941,43 @@ export default function TabContent() {
       {viewphoto && (
         <View style={styles.box}>
           <CustomText
-        textType="medium"
-        style={{
-          ...styles.text1,
-          color: COLORS.black,
-          marginTop: scale(20),
-          alignSelf: 'flex-start',
-          // paddingHorizontal: scale(20),
-        }}>
-        {t('real_estate_images')}
-      </CustomText>
-      <CustomText
-        textType="regular"
-        style={{
-          ...styles.text3,
-          color: COLORS.black,
-          alignSelf: 'flex-start',
-          // paddingHorizontal: scale(20),
-        }}>
-        {t('update_image_to_maximum')}
-      </CustomText>
-      <View
-        style={{
-          alignSelf: 'flex-end',
-          // paddingHorizontal: scale(20),
-        }}>
-        <TouchableOpacity onPress={pickImage}>
-          <IconCamera />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          ...styles.textArea1,
-          backgroundColor: '#E3E3E3',
-          marginBottom: scale(10),
-          width:'100%'
-        }}>
-        {/* <View></View>
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(20),
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+            }}>
+            {t('real_estate_images')}
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{
+              ...styles.text3,
+              color: COLORS.black,
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+            }}>
+            {t('update_image_to_maximum')}
+          </CustomText>
+          <View
+            style={{
+              alignSelf: 'flex-end',
+              // paddingHorizontal: scale(20),
+            }}>
+            <TouchableOpacity onPress={pickImage}>
+              <IconCamera />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              ...styles.textArea1,
+              backgroundColor: '#E3E3E3',
+              marginBottom: scale(10),
+              width: '100%',
+            }}>
+            {/* <View></View>
         <ScrollView showsVerticalScrollIndicator={false}>
           {selectedImage.map((image, index) => (
             <Image
@@ -1043,13 +992,13 @@ export default function TabContent() {
             />
           ))}
         </ScrollView> */}
-        {selectedImage.length > 0 ? (
-          <ImageDetail
-            dataImg={selectedImage}
-            styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
-          />
-        ) : null}
-      </View>
+            {selectedImage.length > 0 ? (
+              <ImageDetail
+                dataImg={selectedImage}
+                styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
+              />
+            ) : null}
+          </View>
         </View>
       )}
 
@@ -1061,8 +1010,6 @@ export default function TabContent() {
           alignSelf: 'center',
           marginTop: scale(20),
         }}></Image> */}
-
-      
 
       {/* <TouchableOpacity
         style={{
@@ -1084,8 +1031,140 @@ export default function TabContent() {
         </CustomText>
         <IconDown />
       </TouchableOpacity> */}
-
-      <View style={{flexDirection: 'row', alignItems: 'center', marginTop:scale(20)}}>
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewPayment}>
+        <CustomText textType="medium" style={{...styles.text1}}>
+          {t('Payment information')}
+        </CustomText>
+        <IconRight />
+      </TouchableOpacity>
+      {viewpayment && 
+        <View style={styles.box}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                alignSelf:'flex-start'
+              }}>
+              {t('Bank name')}
+            </CustomText>
+            <TouchableOpacity
+              style={{
+                height: scale(40),
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: '#E3E3E3',
+                width: '100%',
+                alignItems: 'center',
+                borderRadius: scale(5),
+                marginTop: scale(10),
+                paddingHorizontal: scale(10),
+              }}>
+              <CustomText
+                textType="medium"
+                style={{
+                  ...styles.text,
+                  color: '#979797',
+                }}>
+                Select
+              </CustomText>
+              <IconDown />
+            </TouchableOpacity>
+            <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                alignSelf:'flex-start'
+              }}>
+              {t('Account number')}
+            </CustomText>
+            <View
+              style={{
+                height: scale(40),
+                // flexDirection: 'row',
+                justifyContent: 'center',
+                // backgroundColor: '#E3E3E3',
+                // flex: 1,
+                alignItems: 'center',
+                // borderRadius: scale(5),
+                marginTop: scale(10),
+                width: '100%',
+              }}>
+              <CustomInput
+                styleTextLabel={{
+                  ...styles.text1,
+                  color: COLORS.black,
+                  marginTop: scale(10),
+                }}
+                control={control}
+                name="AccountNumber"
+                rules={{
+                  ...requireField(t('this_field_required')),
+                }}
+                style={{...styles.textInput}}
+              />
+            </View>
+            <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(20),
+              borderColor: '#F0B90B',
+            }}></View>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(20),
+                alignSelf:'flex-start'
+              }}>
+              {t('Account holder')}
+            </CustomText>
+            <View
+              style={{
+                height: scale(40),
+                // flexDirection: 'row',
+                justifyContent: 'center',
+                // backgroundColor: '#E3E3E3',
+                // flex: 1,
+                alignItems: 'center',
+                // borderRadius: scale(5),
+                marginTop: scale(10),
+                width: '100%',
+              }}>
+              <CustomInput
+                styleTextLabel={{
+                  ...styles.text1,
+                  color: COLORS.black,
+                  marginTop: scale(10),
+                }}
+                control={control}
+                name="AccountHolder"
+                rules={{
+                  ...requireField(t('this_field_required')),
+                }}
+                style={{...styles.textInput}}
+              />
+            </View>
+          </View>
+      }
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: scale(20),
+        }}>
         <CustomText
           textType="medium"
           style={{
@@ -1272,7 +1351,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     marginBottom: scale(10),
-    marginTop:scale(20)
+    marginTop: scale(20),
   },
   buttonEstateType: {
     borderWidth: scale(2),
