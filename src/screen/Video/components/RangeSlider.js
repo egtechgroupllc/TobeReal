@@ -27,7 +27,7 @@ const RangeSlider = ({
 }) => {
   const [isMoveProgress, setIsMoveProgress] = useState(false);
   const [moveProgress, setMoveProgress] = useState(MIN_DEFAULT);
-
+  // console.log(progressValue, maximumValue);
   return (
     <View
       style={{

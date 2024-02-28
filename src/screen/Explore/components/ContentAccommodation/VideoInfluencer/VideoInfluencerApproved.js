@@ -40,10 +40,13 @@ export default function VideoInfluencerApproved() {
         showsHorizontalScrollIndicator={false}
         data={data}
         contentContainerStyle={styles.content}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <VideoCompact
             onPlay={() =>
-              navigate('NoBottomTab', {screen: 'ListVideoInfluencerScreen'})
+              navigate('NoBottomTab', {
+                screen: 'ListVideoInfluencerScreen',
+                params: {index},
+              })
             }
             source={item?.src}
           />

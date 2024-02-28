@@ -5,18 +5,18 @@ import Content from '../Register/components/Content';
 import Wrapper from './Wrapper';
 import {IconHi} from '../../../assets/icon/Icon';
 import MainAuth from '../../../components/MainAuth';
+import MainWrapper from '../../../components/MainWrapper';
 
 export default function Auth({children, heading, subHeading, style}) {
   return (
-    <MainAuth>
+    <MainWrapper>
       <View style={styles.container}>
-        <View
-style={[styles.config, style]}>
+        <View style={[styles.config, style]}>
           <Wrapper Heading1={heading} subHeading={subHeading} />
         </View>
         {children}
       </View>
-    </MainAuth>
+    </MainWrapper>
   );
 }
 
@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     width: '85%',
     alignSelf: 'center',
   },
-  config:{
+  config: {
     flexDirection: 'row',
     marginTop: scale(90),
     alignItems: 'center',
     flex: 1,
-  }
+  },
 });

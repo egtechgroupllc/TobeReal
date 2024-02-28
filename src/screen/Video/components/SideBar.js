@@ -1,11 +1,12 @@
 import LottieView from 'lottie-react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Share, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {animations, scale} from '../../../assets/constants';
+import {SHADOW, animations, images, scale} from '../../../assets/constants';
 import {IconComment, IconShare} from '../../../assets/icon/Icon';
 import CustomText from '../../../components/CustomText';
 import {formatNumber} from '../../../utils/format';
-
+import CustomImage from '../../../components/CustomImage';
+SHADOW;
 export default React.memo(function SideBar({data, isFavourite, onComment}) {
   const refHeart = useRef();
   console.log('SideBar');
@@ -32,6 +33,18 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
 
   return (
     <View style={styles.wrapper}>
+      <View
+        style={{
+          alignItems: 'center',
+          rowGap: scale(6),
+          ...SHADOW,
+        }}>
+        <CustomImage
+          source={images.avatar}
+          style={{height: scale(45), aspectRatio: 1}}
+        />
+      </View>
+
       <TouchableOpacity
         activeOpacity={1}
         style={{
@@ -45,7 +58,7 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
         <View
           style={{
             overflow: 'hidden',
-            // ...SHADOW,
+            ...SHADOW,
           }}>
           <LottieView
             ref={refHeart}
@@ -70,6 +83,7 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
         style={{
           alignItems: 'center',
           rowGap: scale(6),
+          ...SHADOW,
         }}>
         <IconComment
           style={{
@@ -89,6 +103,7 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
           style={{
             width: scale(34),
             height: scale(34),
+            ...SHADOW,
           }}
         />
       </TouchableOpacity>
@@ -103,7 +118,7 @@ const styles = StyleSheet.create({
     right: scale(20),
     zIndex: 999,
     alignItems: 'center',
-    bottom: scale(150),
+    bottom: scale(100),
   },
   favouriteHeart: {
     width: scale(45),

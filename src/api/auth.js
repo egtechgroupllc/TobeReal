@@ -6,30 +6,37 @@ const instance = axios.create({
 });
 
 export const postLogin = async data => {
-  const responsive = await instance.post('/api/v1/user/login', data)
-
-  return responsive.data;
-};
-export const postVerifyEmail = async data => {
-  const responsive = await instance.post('/api/v1/user/verify/verifyEmail', data)
+  const responsive = await instance.post('/api/v1/user/login', data);
 
   return responsive.data;
 };
 
 export const postSignUp = async data => {
-    const responsive = await instance.post('/api/v1/user/signup',data)
+  const responsive = await instance.post('/api/v1/user/sign-up', data);
 
-    return responsive.data;
-  };
-// export const getPost = () => {
-//     const responsive = instance.get('/posts', { data })
-//     return responsive.data
-// }
-// export const getPost = async () => {
-//   const responsive = await axios.get(
-//     'https://jsonplaceholder.typicode.com/posts',
-//     {},
-//   );
+  return responsive.data;
+};
 
-//   return responsive;
-// };
+export const postLogout = async data => {
+  const responsive = await instance.post('/api/v1/user/logout', data);
+
+  return responsive.data;
+};
+
+export const postForgotPassword = async data => {
+  const responsive = await instance.post('/api/v1/user/forgot-password', data);
+
+  return responsive.data;
+};
+
+export const postResetPassword = async data => {
+  const responsive = await instance.post('/api/v1/user/reset-password', data);
+
+  return responsive.data;
+};
+
+export const postChangePassword = async data => {
+  const responsive = await instance.post('/api/v1/user/change-password', data);
+
+  return responsive.data;
+};

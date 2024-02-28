@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+import {useMutation} from '@tanstack/react-query';
+import {postLogin} from '../../../../api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
+import {showMess} from '../../../../assets/constants/Helper';
 import {
   IconUnViewablePassword,
   IconViewablePassword,
@@ -11,18 +14,19 @@ import {
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
-import {requireField} from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {useMutation, useQuery} from '@tanstack/react-query';
-import {postLogin} from '../../../../api/auth';
-import {showMess} from '../../../../assets/constants/Helper';
+import {
+  requireField,
+  validateMinLength,
+  validateEmail,
+} from '../../../../utils/validate';
 
 export default function Content() {
   const {t} = useLanguage();
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
-  const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
+
+  const {navigate} = useNavigation();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const loginMutation = useMutation({
@@ -33,29 +37,26 @@ export default function Content() {
     setPasswordVisible(!passwordVisible);
   };
   const gotoRegister = () => {
-    navigation.navigate('RegisterScreen');
+    navigate('RegisterScreen');
   };
   const gotoForgotPassword = () => {
-    navigation.navigate('ForgotPasswordScreen');
+    navigate('ForgotPasswordScreen');
   };
+
   const handleLogin = value => {
-    setLoading(true);
     loginMutation.mutate(value, {
-      onSuccess: dataInde => {
-        if (dataInde?.status == true) {
-          onSaveToken(dataInde?.data?.accessToken);
-          setTimeout(() => {
-            showMess(dataInde?.message, 'success');
-            navigation.navigate('HomeExploreScreen');
-          }, 2000);
+      onSuccess: dataInside => {
+        if (dataInside?.status) {
+          onSaveToken(dataInside?.data?.token);
+
+          showMess(dataInside?.message, 'success');
+          navigate('HomeExploreScreen');
         } else {
-          showMess(dataInde?.message, 'error');
+          showMess(dataInside?.message, 'error');
         }
-        setLoading(false);
       },
-      onError: errr => {
-        console.log(errr);
-        setLoading(false);
+      onError: err => {
+        console.log(err);
       },
     });
   };
@@ -66,17 +67,23 @@ export default function Content() {
         <CustomInput
           control={control}
           label={t('username_or_email')}
-          name="usernameOrEmail"
+          name="email"
           sizeInput="medium"
           placeholder={t('enter_username_email')}
-          rules={requireField(t('this_field_required'))}
+          rules={{
+            ...requireField(t('this_field_required')),
+            ...validateEmail(t('invalid_email')),
+          }}
         />
 
         <CustomInput
           control={control}
           label={t('password')}
           name="password"
-          rules={requireField(t('this_field_required'))}
+          rules={{
+            ...requireField(t('this_field_required')),
+            ...validateMinLength(t('use_6_characters'), 6),
+          }}
           sizeInput="medium"
           secureTextEntry={passwordVisible}
           placeholder={t('enter_password')}
@@ -85,11 +92,11 @@ export default function Content() {
             passwordVisible ? IconUnViewablePassword : IconViewablePassword
           }
         />
-      {!loading && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#FF8C00" />
-        </View>
-      )}
+        {loginMutation.isPending && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#FF8C00" />
+          </View>
+        )}
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"
@@ -151,10 +158,10 @@ const styles = StyleSheet.create({
     marginTop: scale(40),
     alignItems: 'center',
     justifyContent: 'center',
-  },  
+  },
   loadingContainer: {
-    position:'absolute',
-    marginTop:scale(50),
-    alignSelf:'center'
+    position: 'absolute',
+    marginTop: scale(50),
+    alignSelf: 'center',
   },
 });

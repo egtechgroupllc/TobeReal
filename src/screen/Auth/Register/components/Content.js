@@ -1,25 +1,25 @@
 import {useNavigation} from '@react-navigation/native';
+import {useMutation} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
+
+import {postSignUp} from '../../../../api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
+import {showMess} from '../../../../assets/constants/Helper';
 import {
   IconUnViewablePassword,
   IconViewablePassword,
 } from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
+import {useLanguage} from '../../../../hooks/useLanguage';
 import {
   confirmField,
   requireField,
   validateEmail,
-  validateLength,
+  validateMinLength,
 } from '../../../../utils/validate';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import { useMutation } from '@tanstack/react-query';
-import { postSignUp } from '../../../../api/auth';
-import InputCountry from './InputCountry';
-import { showMess } from '../../../../assets/constants/Helper';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -35,27 +35,24 @@ export default function Content() {
   const toggleViewPasswordConfirm = () => {
     setViewPasswordConfirm(!viewPasswordConfirm);
   };
- 
+
   const navigation = useNavigation();
   const signupMutation = useMutation({
-    mutationFn:postSignUp
+    mutationFn: postSignUp,
   });
-  const handleSignup =  value => {
-    delete value?.passwordConfirm
+  const handleSignup = value => {
+    delete value?.passwordConfirm;
     // console.log(value);
-    signupMutation.mutate(
-      value
-     , {
-       onSuccess: dataInde => {
-
-         if(dataInde?.status){
-             showMess(dataInde?.message, 'success');
-             navigation.navigate('VerifyEmailScreen');
-         }else{
-           showMess(dataInde?.message, 'error');
-         }
-       },
-       onError: error => {
+    signupMutation.mutate(value, {
+      onSuccess: dataInde => {
+        if (dataInde?.status) {
+          showMess(dataInde?.message, 'success');
+          navigation.navigate('VerifyEmailScreen');
+        } else {
+          showMess(dataInde?.message, 'error');
+        }
+      },
+      onError: error => {
         // console.log(error?.response?.data,'3123123213');
         // showMess(error?.response?.data?.message, 'error');
 
@@ -64,12 +61,9 @@ export default function Content() {
         // }
         if (error.response) {
           showMess(error?.response?.data?.message, 'error');
-         
         }
       },
-     });
- 
-  
+    });
   };
   return (
     <View style={styles.container}>
@@ -110,7 +104,7 @@ export default function Content() {
         sizeInput="medium"
         rules={{
           ...requireField(t('this_field_required')),
-          ...validateLength(6, t('use_6_characters')),
+          ...validateMinLength(6, t('use_6_characters')),
         }}
         name="password"
         placeholder={t('enter_password')}
@@ -134,10 +128,10 @@ export default function Content() {
           !viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
         }
       />
-    {/* <InputCountry/> */}
+      {/* <InputCountry/> */}
 
       <CustomButton
-        onPress={(handleSubmit(handleSignup))}
+        onPress={handleSubmit(handleSignup)}
         buttonType="large"
         text={t('signup')}
         linearGradientProps

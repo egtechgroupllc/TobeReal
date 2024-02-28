@@ -19,7 +19,7 @@ export default memo(function VideoCaption({data}) {
   const {navigate} = useNavigation();
 
   const [isMoreText, setIsMoreText] = useState(false);
-  const [showMoreButton, setShowMoreButton] = useState(0);
+  const [showMoreButton, setShowMoreButton] = useState(false);
 
   const onTextLayout = useCallback(e => {
     if (e.nativeEvent.lines.length > 3 && !isMoreText) {

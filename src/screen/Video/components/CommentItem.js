@@ -16,13 +16,16 @@ import {TouchableOpacity} from '@gorhom/bottom-sheet';
 import {images, scale} from '../../../assets/constants';
 import Emojis from './Emojis';
 
-export default function CommentItem({comment}) {
+export default function CommentItem({comment, onReply}) {
   const [lengthReplace, setLengthReplace] = useState(0);
-  console.log(comment);
+
   return (
     <View>
       {comment?.name && (
-        <TouchableOpacity style={styles.wrapper} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.wrapper}
+          activeOpacity={0.7}
+          onPress={() => onReply(comment?.name)}>
           <CustomImage style={styles.avatar} source={images.avatar} />
           <View style={styles.commentContent}>
             <View
@@ -37,8 +40,8 @@ export default function CommentItem({comment}) {
               {comment?.replace && (
                 <>
                   <IconPlayVideo
-                    fill={'#000'}
-                    style={{width: scale(7), height: scale(7)}}
+                    fill={'#aaa'}
+                    style={{width: scale(6), height: scale(7)}}
                   />
                   <CustomText style={styles.name} textType="semiBold">
                     {comment?.replace}
@@ -55,6 +58,7 @@ export default function CommentItem({comment}) {
                   22 time
                 </CustomText>
                 <TouchableOpacity
+                  onPress={() => onReply(comment?.name)}
                   style={{
                     padding: scale(4),
                   }}>
@@ -76,34 +80,38 @@ export default function CommentItem({comment}) {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity
-        style={[
-          comment?.items?.length > 2 && lengthReplace
-            ? styles.replaceMore
-            : styles.viewReplyMore,
-        ]}
-        activeOpacity={0.7}>
-        {comment?.items?.length > 2 && !lengthReplace ? (
-          <>
-            <CustomText style={styles.line} textType="regular" />
-            <CustomText
-              style={styles.commentText}
-              onPress={() => setLengthReplace(true)}>
-              View more {comment?.items?.length} reply
-            </CustomText>
-          </>
-        ) : (
-          <FlatList
-            scrollEnabled={false}
-            data={comment?.items || []}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item, index}) => (
-              <CommentItem key={index} comment={item} />
-            )}
-          />
-          // <ActivityIndicator size={'small'} />
-        )}
-      </TouchableOpacity>
+      {comment?.items?.[0] && (
+        <TouchableOpacity
+          style={[
+            comment?.items?.length > 2 && lengthReplace
+              ? styles.replaceMore
+              : styles.viewReplyMore,
+          ]}
+          activeOpacity={0.7}>
+          {comment?.items?.length > 2 && !lengthReplace ? (
+            <>
+              <CustomText style={styles.line} textType="regular" />
+              <CustomText
+                style={styles.commentText}
+                onPress={() => setLengthReplace(true)}>
+                View more {comment?.items?.length} reply
+              </CustomText>
+            </>
+          ) : (
+            <FlatList
+              scrollEnabled={false}
+              data={comment?.items || []}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item, index}) => (
+                <View style={{marginTop: scale(index === 0 ? -2 : 6)}}>
+                  <CommentItem key={index} comment={item} onReply={onReply} />
+                </View>
+              )}
+            />
+            // <ActivityIndicator size={'small'} />
+          )}
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: scale(6),
     paddingHorizontal: scale(16),
+    marginTop: scale(8),
   },
   avatar: {
     width: scale(34),
@@ -159,7 +168,7 @@ const styles = StyleSheet.create({
     columnGap: scale(6),
     alignItems: 'center',
     marginTop: scale(5),
-    paddingVertical: scale(6),
+    paddingVertical: scale(4),
     alignSelf: 'flex-start',
   },
   line: {

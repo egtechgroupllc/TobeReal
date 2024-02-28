@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {
   forwardRef,
@@ -24,7 +25,7 @@ export default forwardRef(function VideoPlay(
     play,
     resetVideo,
     style,
-    resizeMode = 'cover',
+
     muted,
     onProgress,
     isFavourite,
@@ -40,6 +41,7 @@ export default forwardRef(function VideoPlay(
 
   const [pausedVideo, setPausedVideo] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [resizeMode, setResizeMode] = useState('contain');
 
   useEffect(() => {
     if (play) {
@@ -50,23 +52,16 @@ export default forwardRef(function VideoPlay(
     }
   }, [play]);
 
-  const handleValueChange = useCallback(
-    value => {
-      videoRef.current.seek(value);
-    },
-    [videoRef],
-  );
+  const handleValueChange = useCallback(value => {
+    videoRef.current.seek(value);
+  }, []);
 
   useImperativeHandle(
     ref,
     () => ({
       handleValueChange,
-      paused: () => {
-        setPausedVideo(!pausedVideo);
-      },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pausedVideo],
+    [progress, play],
   );
 
   const singleTap = useMemo(
@@ -88,7 +83,6 @@ export default forwardRef(function VideoPlay(
         .onStart(event => {
           onHeartVideo(event);
         }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -108,12 +102,20 @@ export default forwardRef(function VideoPlay(
           style={[styles.video, style]}
           paused={pausedVideo}
           onProgress={value => {
-            setProgress(value);
             onProgress && onProgress(value);
+          }}
+          onSeek={value => {
+            setProgress(value);
           }}
           repeat
           muted={muted}
           resizeMode={resizeMode}
+          onLoad={response => {
+            const {width, height} = response.naturalSize;
+            const heightScaled = height / width;
+            console.log(heightScaled);
+            setResizeMode(height > width ? 'cover' : 'contain');
+          }}
         />
       </GestureDetector>
 
@@ -138,25 +140,6 @@ export default forwardRef(function VideoPlay(
           )}
         </>
       )}
-
-      {/* {true && (
-        <View
-          style={[
-            {
-              width: '96%',
-              position: 'absolute',
-              alignSelf: 'center',
-              zIndex: 999,
-              top: scale(-50),
-            },
-          ]}>
-          <RangeSlider
-            progressValue={progress.currentTime || 0}
-            onValueChange={handleValueChange}
-            maximumValue={progress.seekableDuration || 0}
-          />
-        </View>
-      )} */}
     </View>
   );
 });

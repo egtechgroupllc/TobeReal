@@ -26,6 +26,7 @@ const BottomSheet = (
     refChild,
     disableScroll,
     onDismiss,
+    onChange,
   },
   ref,
 ) => {
@@ -74,7 +75,10 @@ const BottomSheet = (
       handleHeight={30}
       backdropComponent={BottomSheetBackdrop}
       onDismiss={onDismiss}
-      onChange={index => index === 0 && handleClose()}
+      onChange={index => {
+        index === 0 && handleClose();
+        onChange && onChange(index);
+      }}
       handleIndicatorStyle={{
         width: '20%',
         backgroundColor: '#e6e6e6',

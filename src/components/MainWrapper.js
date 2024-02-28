@@ -15,7 +15,7 @@ export default function MainWrapper({
       style={{...styles.wrapper, backgroundColor: COLORS.primary}}
       edges={['top', 'right', 'left']}>
       <ImageBackground
-        source={images.background1}
+        source={images.background}
         resizeMode="stretch"
         style={[
           {flex: 1, backgroundColor: '#fff'},

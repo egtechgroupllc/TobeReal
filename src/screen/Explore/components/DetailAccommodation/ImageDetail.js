@@ -14,10 +14,10 @@ import ListImg from './ListImg';
 //   'https://pix8.agoda.net/geo/poi/22300/2_22300_04.jpg?ca=7&ce=1&s=512x384',
 // ];
 
-export default function ImageDetail({onLayout,dataImg,styleWrapper}) {
+export default function ImageDetail({onLayout, dataImg, styleWrapper}) {
   const [isViewImg, setIsViewImg] = useState(false);
   console.log('====================================');
-  console.log('dataImg',dataImg);
+  console.log('dataImg', dataImg);
   console.log('====================================');
   return (
     <View
@@ -45,8 +45,8 @@ export default function ImageDetail({onLayout,dataImg,styleWrapper}) {
         <CustomImage
           source={dataImg?.[0]}
           style={{
-            width:'100%',
-            height:'100%'
+            width: '100%',
+            height: '100%',
           }}
         />
       </TouchableOpacity>
@@ -67,8 +67,8 @@ export default function ImageDetail({onLayout,dataImg,styleWrapper}) {
             <CustomImage
               source={dataImg?.[1]}
               style={{
-                width:'100%',
-                height:'100%'
+                width: '100%',
+                height: '100%',
               }}
             />
           </TouchableOpacity>
@@ -82,8 +82,8 @@ export default function ImageDetail({onLayout,dataImg,styleWrapper}) {
               <CustomImage
                 source={dataImg?.[2]}
                 style={{
-                  width:'100%',
-                  height:'100%'
+                  width: '100%',
+                  height: '100%',
                 }}
               />
             </TouchableOpacity>
@@ -98,8 +98,8 @@ export default function ImageDetail({onLayout,dataImg,styleWrapper}) {
               <CustomImage
                 source={dataImg?.[3]}
                 style={{
-                  width:'100%',
-                  height:'100%'
+                  width: '100%',
+                  height: '100%',
                 }}
               />
               {dataImg?.[4] && (

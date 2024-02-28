@@ -1,10 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   createBottomTabNavigator,
   useBottomTabBarHeight,
 } from '@react-navigation/bottom-tabs';
-import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import {Alert, FlatList, StyleSheet, View} from 'react-native';
 import {
   Gesture,
   GestureDetector,
@@ -68,11 +75,30 @@ const listVideo = [
     location: 'HoChiMinh',
     rental: 'night',
   },
+  {
+    id: 6,
+    src: video.video4,
+    username: 'meiyin680',
+    description: 'She’s about to be made into a living human specimen',
+    price: 1000,
+    location: 'HoChiMinh',
+    rental: 'night',
+  },
+  {
+    id: 31,
+    src: video.video1,
+    username: 'quanh1099',
+    price: 200000,
+    location: 'HoChiMinh',
+    rental: 'night',
+    description:
+      'The goal of is expanding the original React Native component by adding animations, style customization options, and new features, while still providing a simple API',
+  },
 ];
 
 const Tab = createBottomTabNavigator();
 export default function ListVideoInfluencerScreen() {
-  const insets = useSafeAreaInsets();
+  const params = useRoute().params;
 
   return (
     <Tab.Navigator
@@ -80,9 +106,14 @@ export default function ListVideoInfluencerScreen() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#000',
+          borderTopWidth: 0,
         },
       }}>
-      <Tab.Screen name="ListVideoInfluencer" component={ListVideoInfluencer} />
+      <Tab.Screen
+        name="ListVideoInfluencer"
+        component={ListVideoInfluencer}
+        initialParams={params}
+      />
     </Tab.Navigator>
   );
 }
@@ -90,8 +121,11 @@ export default function ListVideoInfluencerScreen() {
 export function ListVideoInfluencer() {
   const {goBack, setOptions} = useNavigation();
   const insets = useSafeAreaInsets();
+  const params = useRoute().params;
+
   const videoRef = useRef();
   const commentRef = useRef();
+  const flatListRef = useRef(null);
 
   const [videoPlay, setVideoPlay] = useState(true);
   const [releaseHeart, setReleaseHeart] = useState({x: 0, y: 0});
@@ -100,6 +134,17 @@ export function ListVideoInfluencer() {
     if (viewableItems.length > 0 && viewableItems[0].isViewable) {
       setVideoPlay(viewableItems[0].item?.id);
     }
+  }, []);
+
+  useLayoutEffect(() => {
+    scrollToIndex(params?.index);
+  }, [params?.index]);
+
+  const scrollToIndex = useCallback(index => {
+    flatListRef.current.scrollToIndex({
+      animated: true,
+      index: index,
+    });
   }, []);
 
   const handleProgress = useCallback(value => {
@@ -137,7 +182,6 @@ export function ListVideoInfluencer() {
     return setOptions({
       tabBarButton: () => <Comment />,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onHeartVideo = useCallback(event => {
@@ -152,11 +196,18 @@ export function ListVideoInfluencer() {
   return (
     <View>
       <FlatList
+        data={listVideo}
+        ref={flatListRef}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         pagingEnabled
         snapToAlignment={'start'}
-        data={listVideo}
+        onScrollToIndexFailed={({index}) => {
+          const wait = new Promise(resolve => setTimeout(resolve, 100));
+          wait.then(() => {
+            scrollToIndex(index);
+          });
+        }}
         style={{
           backgroundColor: '#ccc',
           height: '100%',
@@ -169,12 +220,11 @@ export function ListVideoInfluencer() {
           itemVisiblePercentThreshold: 50,
         }}
         onViewableItemsChanged={handlerViewableItemsChanged}
-        onEndReached={e => console.log('cuộn đén cuối')}
-        onEndReachedThreshold={listVideo?.length - 2}
+        onEndReached={e => Alert.alert('Đã gan cuôi r')}
+        onEndReachedThreshold={listVideo?.length - (listVideo?.length - 2)}
         renderItem={({item, index}) => (
           <VideoPlay
             ref={videoRef}
-            fullScreen
             data={item}
             paused={item?.id !== videoPlay}
             play={item?.id === videoPlay}

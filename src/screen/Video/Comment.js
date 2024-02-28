@@ -173,32 +173,33 @@ export default memo(
         style={{
           width: '100%',
         }}>
-        <CustomInput
-          placeholder="Nhập bình luận..."
-          iconRight={IconEmojiFace}
-          onPress={() => {
-            bottomSheetRef.current.open();
-            setIsComment(true);
-          }}
-          style={{
-            width: '100%',
-            height: scale(50),
-            borderWidth: 0,
-          }}
-          styleIcon={{
-            width: scale(20),
-            height: scale(20),
-          }}
-        />
+        {!isComment && (
+          <CustomInput
+            placeholder="Nhập bình luận..."
+            iconRight={IconEmojiFace}
+            onPress={() => {
+              bottomSheetRef.current.open();
+              setTimeout(() => {
+                setIsComment(true);
+              }, 400);
+            }}
+            style={{
+              width: '100%',
+              height: scale(50),
+              borderWidth: 0,
+            }}
+            styleIcon={{
+              width: scale(20),
+              height: scale(20),
+            }}
+          />
+        )}
 
         <BottomSheet
           ref={bottomSheetRef}
           disableScroll
           titleIndicator={`${formatNumber(10000)} Comment`}
           snapPoints={['70%']}
-          styleContent={{
-            rowGap: scale(10),
-          }}
           onDismiss={() => setIsComment(false)}>
           <>
             <BottomSheetScrollView showsVerticalScrollIndicator={false}>
@@ -208,11 +209,20 @@ export default memo(
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                   paddingBottom: scale(50),
+                  rowGap: scale(10),
                 }}
-                renderItem={({item, index}) => <CommentItem comment={item} />}
+                renderItem={({item, index}) => (
+                  <CommentItem
+                    comment={item}
+                    onReply={value => setIsComment(value)}
+                  />
+                )}
               />
             </BottomSheetScrollView>
-            <CommentInput isComment={isComment} />
+            <CommentInput
+              isComment={isComment}
+              onDismiss={() => setIsComment(false)}
+            />
           </>
         </BottomSheet>
       </View>

@@ -88,8 +88,8 @@ export default function ListImg({dataImg, open, onClose}) {
                   <CustomImage
                     source={item}
                     style={{
-                      width:'100%',
-                      height:'100%'
+                      width: '100%',
+                      height: '100%',
                     }}
                   />
                 </TouchableOpacity>

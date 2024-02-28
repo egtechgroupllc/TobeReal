@@ -2,26 +2,27 @@ export const requireField = message => {
   return {required: message};
 };
 
-export const confirmField = (field, message) => {
+export const confirmField = (message, field) => {
   return {validate: value => value === field || message};
 };
 
-export const validateLength = (length, message) => {
+export const validateMinLength = (message, length) => {
   return {minLength: {value: length, message}, required: message};
 };
 
-export const validateEqualLength = (length, message) => {
+export const validateEqualLength = (message, length) => {
   return {validate: value => value?.length === length || message};
 };
 
-export const validateMinAmount = (amount, message) => {
+export const validateMinAmount = (message, amount) => {
   return {validate: value => parseFloat(value) > amount || message};
 };
-export const validateMaxAmount = (max, message) => {
+
+export const validateMaxAmount = (message, max) => {
   return {validate: value => value?.length < max || message};
 };
 
-export const validateMinMaxAmount = (amount, minAmount = 1, message) => {
+export const validateMinMaxAmount = (message, amount, minAmount = 1) => {
   return {
     validate: value =>
       (parseFloat(value) <= amount &&
@@ -46,7 +47,7 @@ export const validateUserName = message => {
 const PNF = require('google-libphonenumber');
 const phoneUtil = PNF.PhoneNumberUtil.getInstance();
 
-export const validatePhone = (countryCode, message) => {
+export const validatePhone = (message, countryCode) => {
   return {
     validate: value => {
       try {
@@ -63,7 +64,7 @@ export const validatePhone = (countryCode, message) => {
   };
 };
 
-export const validatePhoneNotRequire = (countryCode, message) => {
+export const validatePhoneNotRequire = (message, countryCode) => {
   return {
     validate: value => {
       try {
@@ -86,6 +87,6 @@ export const validateCode = message => {
   };
 };
 
-export const validateLengthImage = (length, message) => {
+export const validateLengthImage = (message, length) => {
   return {validate: value => value?.length === length || message};
 };

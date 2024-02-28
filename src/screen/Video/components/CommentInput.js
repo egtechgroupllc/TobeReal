@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import {
   KeyboardEvents,
+  KeyboardControllerView,
   KeyboardStickyView,
 } from 'react-native-keyboard-controller';
 import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, images, scale} from '../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {
   IconEmojiFace,
   IconGoBack,
@@ -22,15 +23,17 @@ import {
 import {CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import Emojis from './Emojis';
+import CustomText from '../../../components/CustomText';
 
 const KeyboardStickyViewAnimated =
   Animated.createAnimatedComponent(KeyboardStickyView);
 
-export default function CommentInput({isComment}) {
+export default function CommentInput({isComment, onDismiss}) {
   const {watch, control, reset, setValue} = useForm();
   const insets = useSafeAreaInsets();
   const [isKBEmojis, setIsKBEmojis] = useState(false);
   const [showKB, setShowKB] = useState(false);
+  const [isMultiLine, setIsMultiLine] = useState(false);
 
   const heightKB = useSharedValue(0);
   const heightKBRef = useRef(0);
@@ -39,13 +42,13 @@ export default function CommentInput({isComment}) {
   useEffect(() => {
     const show = KeyboardEvents.addListener('keyboardWillShow', event => {
       setIsKBEmojis(false);
-      setShowKB(event.height);
+      setShowKB(true);
       heightKB.value = withTiming(event.height);
       heightKBRef.current = event.height;
     });
 
     const hidden = KeyboardEvents.addListener('keyboardWillHide', event => {
-      setShowKB(0);
+      setShowKB(false);
 
       if (!isKBEmojis) {
         heightKB.value = withTiming(0);
@@ -80,6 +83,19 @@ export default function CommentInput({isComment}) {
             bottom: isKBEmojis ? heightKB : showKB ? 0 : insets.bottom,
           },
         ]}>
+        {isComment !== true && isComment && (
+          <CustomText style={{marginBottom: scale(10)}}>
+            Reply{' '}
+            <CustomText textType="semiBold" style={{color: '#2b5db9'}}>
+              {isComment}
+            </CustomText>
+            <CustomText onPress={() => Keyboard.dismiss()}>
+              {' '}
+              - Cancel
+            </CustomText>
+          </CustomText>
+        )}
+
         <View style={styles.content}>
           <CustomImage
             style={{
@@ -94,12 +110,13 @@ export default function CommentInput({isComment}) {
             control={control}
             name="comment"
             maxLength={150}
+            onContentSizeChange={e => {
+              const numLines = e.nativeEvent.contentSize.height / SIZES.medium;
+              setIsMultiLine(numLines >= 3);
+            }}
             placeholder="Nhập bình luận..."
             iconRight={!isKBEmojis ? IconEmojiFace : IconKeyBroad}
-            style={[
-              styles.input,
-              watch('comment')?.length > 60 && {minHeight: scale(40)},
-            ]}
+            style={[styles.input, isMultiLine && {minHeight: scale(40)}]}
             styleIcon={{
               width: scale(20),
               height: scale(20),
@@ -132,6 +149,16 @@ export default function CommentInput({isComment}) {
             </TouchableOpacity>
           )}
         </View>
+        {!isKBEmojis && !!showKB && (
+          <View>
+            <Emojis
+              short
+              onPress={value => {
+                setValue('comment', `${watch('comment') || ''}${value}`);
+              }}
+            />
+          </View>
+        )}
       </KeyboardStickyViewAnimated>
 
       <Animated.View
@@ -156,6 +183,7 @@ export default function CommentInput({isComment}) {
             setIsKBEmojis(false);
             setShowKB(false);
             Keyboard.dismiss();
+            onDismiss();
           }}>
           <View style={styles.overLay} />
         </TouchableWithoutFeedback>
