@@ -208,7 +208,6 @@
   "customer_rent_project": "ลูกค้าเช่าโครงการ",
   "sell": "ขาย",
   "lease": "เช่า",
-  "need_to_rent_buy": "ต้องการเช่า ต้องการซื้อ",
   "real_estate_title": "ชื่อบริษัทอสังหาริมทรัพย์",
   "enter_real_estate_title": "กรอกชื่อบริษัทอสังหาริมทรัพย์",
   "select_the_furniture": "เลือกเฟอร์นิเจอร์",
@@ -250,5 +249,19 @@
   "for_sale":"สำหรับขาย",
   "register_partner":"ลงทะเบียนพาร์ทเนอร์",
   "become_shome_partner":"เป็นพาร์ทเนอร์ SHome",
-  "real_estate_type":"ประเภทอสังหาริมทรัพย์"
+  "real_estate_type":"ประเภทอสังหาริมทรัพย์",
+  "general_information": "ข้อมูลทั่วไป",
+  "estate_detail": "รายละเอียดทรัพย์สิน",
+  "estate_furniture": "เฟอร์นิเจอร์ของทรัพย์สิน",
+  "main_currency": "สกุลเงินหลัก",
+  "distance_to_city": "ระยะทางไปยังใจกลางเมือง",
+  "number_of_floors": "จำนวนชั้น",
+  "estate_facilities": "สิ่งอำนวยความสะดวกของทรัพย์สิน",
+  "estate_contact": "ข้อมูลติดต่อของทรัพย์สิน",
+  "rooms": "ห้อง",
+  "estate_photo": "รูปภาพของทรัพย์สิน",
+  "payment_information": "ข้อมูลการชำระเงิน",
+  "bank_name": "ชื่อธนาคาร",
+  "account_number": "หมายเลขบัญชี",
+  "account_holder": "ผู้ถือบัญชี"
 }

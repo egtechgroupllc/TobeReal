@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import { scale } from '../../../../assets/constants/theme';
 
 
-export default function RentBuyScreen() {
+export default function TourScreen() {
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();

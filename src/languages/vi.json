@@ -208,7 +208,6 @@
   "customer_rent_project": "Khách hàng thuê dự án",
   "sell": "Bán",
   "lease": "Cho thuê",
-  "need_to_rent_buy": "Cần thuê, cần mua",
   "real_estate_title": "Tiêu đề bất động sản",
   "enter_real_estate_title": "Nhập tiêu đề bất động sản",
   "select_the_furniture": "Chọn nội thất",
@@ -250,5 +249,19 @@
   "for_sale":"Đang bán",
   "register_partner":"Đăng ký đối tác",
   "become_shome_partner":"Trở thành đối tác SHome",
-  "real_estate_type":"Loại bất động sản"
+  "real_estate_type":"Loại bất động sản",
+  "general_information": "Thông Tin Tổng Quan",
+  "estate_detail": "Chi Tiết Bất Động Sản",
+  "estate_furniture": "Nội Thất Bất Động Sản",
+  "main_currency": "Đơn Vị Tiền Tệ Chính",
+  "distance_to_city": "Khoảng Cách Đến Trung Tâm Thành Phố",
+  "number_of_floors": "Số Tầng",
+  "estate_facilities": "Tiện Ích Bất Động Sản",
+  "estate_contact": "Thông Tin Liên Hệ Bất Động Sản",
+  "rooms": "Các Phòng",
+  "estate_photo": "Ảnh Bất Động Sản",
+  "payment_information": "Thông Tin Thanh Toán",
+  "bank_name": "Tên Ngân Hàng",
+  "account_number": "Số Tài Khoản",
+  "account_holder": "Chủ Tài Khoản"
 }

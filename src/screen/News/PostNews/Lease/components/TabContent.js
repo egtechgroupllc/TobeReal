@@ -278,7 +278,7 @@ export default function TabContent() {
       </View> */}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewGeneral}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('General Information')}
+          {t('general_information')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -485,7 +485,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewDetail}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate detail')}
+          {t('estate_detail')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -651,7 +651,7 @@ export default function TabContent() {
                 marginTop: scale(20),
                 // flex: 1,
               }}>
-              {t('Distance to City Center')}
+              {t('distance_to_city')}
             </CustomText>
             <View
               style={{
@@ -697,7 +697,7 @@ export default function TabContent() {
                 marginTop: scale(20),
                 // flex: 1,
               }}>
-              {t('Number of Floors')}
+              {t('number_of_floors')}
             </CustomText>
             <View
               style={{
@@ -733,7 +733,7 @@ export default function TabContent() {
         style={styles.buttonCategories}
         onPress={viewFacilities}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate facilities')}
+          {t('estate_facilities')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -749,7 +749,7 @@ export default function TabContent() {
               marginBottom: scale(10),
               marginTop: scale(20),
             }}>
-            {t('Estate Facilities')}
+            {t('estate_facilities')}
           </CustomText>
           <TouchableOpacity
             style={
@@ -765,7 +765,7 @@ export default function TabContent() {
                 color: COLORS.black,
                 paddingHorizontal: scale(20),
               }}>
-              {t('Estate Facilities')}
+              {t('estate_facilities')}
             </CustomText>
           </TouchableOpacity>
           {showFacilities && (
@@ -841,7 +841,7 @@ export default function TabContent() {
         style={styles.buttonCategories}
         onPress={viewContactinfo}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate contact info')}
+          {t('estate_contact')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -894,7 +894,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewRoom}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Rooms')}
+          {t('rooms')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -934,7 +934,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate photos')}
+          {t('estate_photo')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -1033,7 +1033,7 @@ export default function TabContent() {
       </TouchableOpacity> */}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewPayment}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Payment information')}
+          {t('payment_information')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -1047,7 +1047,7 @@ export default function TabContent() {
                 marginTop: scale(20),
                 alignSelf:'flex-start'
               }}>
-              {t('Bank name')}
+              {t('bank_name')}
             </CustomText>
             <TouchableOpacity
               style={{
@@ -1086,7 +1086,7 @@ export default function TabContent() {
                 marginTop: scale(20),
                 alignSelf:'flex-start'
               }}>
-              {t('Account number')}
+              {t('account_number')}
             </CustomText>
             <View
               style={{
@@ -1129,7 +1129,7 @@ export default function TabContent() {
                 marginTop: scale(20),
                 alignSelf:'flex-start'
               }}>
-              {t('Account holder')}
+              {t('account_holder')}
             </CustomText>
             <View
               style={{

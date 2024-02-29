@@ -8,6 +8,7 @@ import philipin from '../languages/ph.json';
 import thailand from '../languages/th.json';
 import malaysia from '../languages/my.json';
 import indonesia from '../languages/id.json';
+import china from '../languages/cn.json';
 interface LanguageTranslations {
   [locale: string]: {[key: string]: string};
 }
@@ -23,7 +24,8 @@ const languageFallback: LanguageTranslations = {
   ph: philipin,
   th: thailand,
   my: malaysia,
-  id: indonesia
+  id: indonesia,
+  cn:china
 };
 
 export const LanguageContext = createContext<LanguageProps>({});

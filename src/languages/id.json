@@ -208,7 +208,6 @@
   "customer_rent_project": "Pelanggan menyewa proyek",
   "sell": "Jual",
   "lease": "Sewa",
-  "need_to_rent_buy": "Perlu disewa, perlu dibeli",
   "real_estate_title": "Judul Properti",
   "enter_real_estate_title": "Masukkan judul properti",
   "select_the_furniture": "Pilih perabot",
@@ -250,5 +249,19 @@
   "for_sale":"Untuk dijual",
   "register_partner":"Daftar mitra",
   "become_shome_partner":"Menjadi mitra SHome",
-  "real_estate_type":"Tipe properti"
+  "real_estate_type":"Tipe properti",
+  "general_information": "Informasi Umum",
+    "estate_detail": "Detail Properti",
+    "estate_furniture": "Perabot Properti",
+    "main_currency": "Mata Uang Utama",
+    "distance_to_city": "Jarak ke Pusat Kota",
+    "number_of_floors": "Jumlah Lantai",
+    "estate_facilities": "Fasilitas Properti",
+    "estate_contact": "Informasi Kontak Properti",
+    "rooms": "Kamar",
+    "estate_photo": "Foto Properti",
+    "payment_information": "Informasi Pembayaran",
+    "bank_name": "Nama Bank",
+    "account_number": "Nomor Rekening",
+    "account_holder": "Pemegang Rekening"
 }

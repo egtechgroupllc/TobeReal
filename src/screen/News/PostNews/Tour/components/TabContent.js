@@ -18,6 +18,7 @@ import {
 } from '../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
+import { useLanguage } from '../../../../../hooks/useLanguage';
 export default function TabContent() {
   const [inputText, setInputText] = useState('');
   const handleInputChange = text => {
@@ -25,6 +26,7 @@ export default function TabContent() {
   };
   const maxCharacters = 2000;
   const navigation = useNavigation();
+  const {t}= useLanguage()
   const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox = () => {
@@ -54,17 +56,12 @@ export default function TabContent() {
           <CustomText
             textType="semiBold"
             style={{...styles.text1, marginLeft: scale(20)}}>
-            Need to rent,
-          </CustomText>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text1, marginLeft: scale(20)}}>
-            Need to buy
+            {t('tour')}
           </CustomText>
         </View>
       </View>
 
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           marginTop: scale(30),
@@ -88,7 +85,7 @@ export default function TabContent() {
             Need to buy
           </CustomText>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <CustomText
         textType="medium"
         style={{

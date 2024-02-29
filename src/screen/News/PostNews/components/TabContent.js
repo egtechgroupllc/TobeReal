@@ -32,7 +32,7 @@ export default function TabContent() {
     navigation.navigate('LeaseScreen')
   }
   const goRentBuy= () =>{
-    navigation.navigate('RentBuyScreen')
+    navigation.navigate('TourScreen')
   }
   return (
     <View
@@ -49,7 +49,7 @@ export default function TabContent() {
           </CustomText>
           <ButtonPost image={images.sell} style={{width:'100%'}} title={t('sell')} styleImage={{width:scale(39), height:scale(39)}} onPress={goSell}/>
           <ButtonPost image={images.lease} style={{width:'100%'}} title={t('lease')} styleImage={{width:scale(39), height:scale(39)}} onPress={goLease}/>
-          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={t('need_to_rent_buy')} styleImage={{width:scale(39), height:scale(39)}}onPress={goRentBuy}/>
+          <ButtonPost image={images.rentbuy} style={{width:'100%'}} title={t('tour')} styleImage={{width:scale(39), height:scale(39)}}onPress={goRentBuy}/>
     </View>
   );
 }

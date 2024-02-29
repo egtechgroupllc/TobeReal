@@ -58,6 +58,13 @@ const listLanguage = [
     languageCode: 'ph',
     checked: false,
   },
+  {
+    id: '7',
+    name: 'China',
+    flag: images.china,
+    languageCode: 'cn',
+    checked: false,
+  },
   // Add more language items as needed
 ];
 export default function Content() {

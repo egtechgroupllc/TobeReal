@@ -203,7 +203,6 @@
   "customer_rent_project": "Mga customer na umarkila ng proyekto",
   "sell": "Ibenta",
   "lease": "Umarkila",
-  "need_to_rent_buy": "Kailangan umarkila, kailangan bumili",
   "real_estate_title": "Pamagat ng Real Estate",
   "enter_real_estate_title": "Ilagay ang pamagat ng real estate",
   "select_the_furniture": "Pumili ng mga kasangkapan",
@@ -245,5 +244,19 @@
   "for_sale":"Para sa benta",
   "register_partner":"Magparehistro ng kasosyo",
   "become_shome_partner":"Maging kasosyo sa SHome",
-  "real_estate_type":"Uri ng real estate"
+  "real_estate_type":"Uri ng real estate",
+  "general_information": "Pangkalahatang Impormasyon",
+  "estate_detail": "Detalye ng Estate",
+  "estate_furniture": "Mga Kasangkapan sa Estate",
+  "main_currency": "Pangunahing Pera",
+  "distance_to_city": "Distansya sa Sentro ng Lungsod",
+  "number_of_floors": "Bilang ng mga Palapag",
+  "estate_facilities": "Mga Pasilidad ng Estate",
+  "estate_contact": "Impormasyon ng Pakikipag-ugnayan sa Estate",
+  "rooms": "Mga Kuwarto",
+  "estate_photo": "Mga Larawan ng Estate",
+  "payment_information": "Impormasyon sa Pagbabayad",
+  "bank_name": "Pangalan ng Bangko",
+  "account_number": "Numero ng Account",
+  "account_holder": "Tagataguyod ng Account"
 }

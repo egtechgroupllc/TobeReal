@@ -26,6 +26,9 @@ export default {
   indonesia:require('../images/indonesia.png'),
   malaysia:require('../images/malaysia.png'),
   thailand:require('../images/thailand.png'),
+  china:require('../images/china.png'),
+  iconTiktok:require('../images/iconTiktok.png'),
+  iconYoutube:require('../images/iconYoutube.png'),
   c15:require('../images/c15.jpg'),
   c15_1:require('../images/c15_1.jpg'),
   c15_2:require('../images/c15_2.jpg'),
@@ -125,4 +128,5 @@ export default {
   m508_1:require('../images/508m2_1.jpg'),
   m508_2:require('../images/508m2_2.jpg'),
   m508_3:require('../images/508m2_3.jpg'),
+
 };

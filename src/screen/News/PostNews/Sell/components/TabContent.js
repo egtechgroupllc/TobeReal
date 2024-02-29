@@ -177,7 +177,7 @@ export default function TabContent() {
       </View> */}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewGeneral}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('General Information')}
+          {t('general_information')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -308,7 +308,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewDetail}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate detail')}
+          {t('estate_detail')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -365,7 +365,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewFurniture}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate furniture')}
+          {t('estate_furniture')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -546,7 +546,7 @@ export default function TabContent() {
         style={styles.buttonCategories}
         onPress={viewContactinfo}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate contact info')}
+          {t('estate_contact')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -600,7 +600,7 @@ export default function TabContent() {
 
 <TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Estate photos')}
+          {t('estate_photo')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
