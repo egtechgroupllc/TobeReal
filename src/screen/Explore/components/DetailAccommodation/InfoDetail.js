@@ -1,14 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../../components/Ribbon';
-import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import { IconHome, IconRoom} from '../../../../assets/icon/Icon';
+import {
+  COLORS,
+  SIZES,
+  WIDTH,
+  images,
+  scale,
+} from '../../../../assets/constants';
+import {IconHome, IconRoom} from '../../../../assets/icon/Icon';
 import Introduction from './Introduction';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import CustomImage from '../../../../components/CustomImage';
 
 export default function InfoDetail({name}) {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
@@ -16,6 +23,7 @@ export default function InfoDetail({name}) {
           <CustomText textType="semiBold" style={styles.name}>
             {name}
           </CustomText>
+
           <View style={styles.boxHot}>
             <CustomText
               textType="semiBold"
@@ -47,6 +55,18 @@ export default function InfoDetail({name}) {
           <View style={styles.boxMore}>
             <CustomText textType="bold">{t('discussion')} (0)</CustomText>
           </View>
+          <TouchableOpacity>
+            <CustomImage
+              source={images.iconTiktok}
+              style={{width: scale(20), height: scale(20)}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <CustomImage
+              source={images.iconYoutube}
+              style={{width: scale(20), height: scale(20)}}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <Introduction />
@@ -82,6 +102,7 @@ const styles = StyleSheet.create({
     rowGap: scale(6),
     flex: 1,
     flexWrap: 'wrap',
+    alignItems:'center'
   },
   boxRoom: {
     flexDirection: 'row',

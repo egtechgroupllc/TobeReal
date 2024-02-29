@@ -64,17 +64,6 @@ export default function Content() {
           marginTop: scale(10),
           color: COLORS.black,
         }}>
-        {t('Select language')}
-      </CustomText>
-      <ButtonAccount title={'English'} />
-      <CustomText
-        textType="medium"
-        style={{
-          ...styles.text,
-          marginBottom: scale(10),
-          marginTop: scale(10),
-          color: COLORS.black,
-        }}>
         {t('Select account type')}
       </CustomText>
       <ButtonAccount title={'Client'} client={client} onPress={viewClient} />

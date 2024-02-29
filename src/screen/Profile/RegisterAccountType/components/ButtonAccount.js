@@ -37,18 +37,7 @@ export default function ButtonAccount({onPress, title, styleImage, image, style,
                 justifyContent: 'space-between',
               }}>
               <CustomText  textType="semiBold" style={{...styles.text2, width:'97%'}}>
-              {t('Real estate seller')}
-              </CustomText>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginTop:scale(5)
-              }}>
-              <CustomText  textType="semiBold" style={{...styles.text2}}>
-              {t('Real estate landlord')}
+              {t('Real estate owner')}
               </CustomText>
             </TouchableOpacity>
             <TouchableOpacity

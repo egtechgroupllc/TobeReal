@@ -598,7 +598,7 @@ export default function TabContent() {
         </View>
       )}
 
-<TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewPhoto}>
         <CustomText textType="medium" style={{...styles.text1}}>
           {t('estate_photo')}
         </CustomText>
