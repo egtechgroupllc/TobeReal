@@ -5,11 +5,12 @@ import HeaderBar from '../../components/HeaderBar';
 import SearchChooseLocation from './SearchChooseLocation';
 import SearchRecent from './SearchRecent';
 import {useNavigation} from '@react-navigation/native';
-import { useLanguage } from '../../hooks/useLanguage';
+import {useLanguage} from '../../hooks/useLanguage';
+import MainWrapper from '../../components/MainWrapper';
 
 export default function HomeSearchAccommodScreen() {
   const {navigate} = useNavigation();
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const handleSelectSearch = value => {
     navigate(t('explore'), {
       screen: 'HomeExploreScreen',
@@ -18,18 +19,20 @@ export default function HomeSearchAccommodScreen() {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <HeaderBar
-        styleWrapper={{
-          height: scale(120),
-        }}
-      />
+    <MainWrapper scrollEnabled={false}>
+      <View style={styles.wrapper}>
+        <HeaderBar
+          styleWrapper={{
+            height: scale(120),
+          }}
+        />
 
-      <View style={styles.content}>
-        <SearchChooseLocation onPress={handleSelectSearch} />
-        <SearchRecent onPress={handleSelectSearch} />
+        <View style={styles.content}>
+          <SearchChooseLocation onPress={handleSelectSearch} />
+          <SearchRecent onPress={handleSelectSearch} />
+        </View>
       </View>
-    </View>
+    </MainWrapper>
   );
 }
 

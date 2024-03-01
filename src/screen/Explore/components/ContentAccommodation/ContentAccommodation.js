@@ -1,17 +1,20 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import WrapperContent from '../WrapperContent';
-import BoxPlaceItem from './BoxPlaceItem';
+import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
-import {formatPrice} from '../../../../utils/format';
-import RecommendedUnitItem from './RecommendedUnitItem';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import WrapperContent from '../WrapperContent';
+import AccommodationPremium from './AccommodationPremium';
+import BestSelling from './BestSelling';
+import BigCity from './BigCity';
+import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
+import FindBest from './FindBest';
+import HotelResidence from './HotelResidence';
+import RecommendedApartments from './RecommendedApartments';
+import RecommendedUnit from './RecommendedUnit';
+import StayMonthly from './StayMonthly ';
 import ThematicInstagram from './ThematicInstagram';
 import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
-import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
-import RecommendedApartments from './RecommendedApartments';
-import BigCity from './BigCity';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import HotelResidence from './HotelResidence';
+import WeeklyHotDeal from './WeeklyHotDeal';
 const data = [
   {
     id: 1,
@@ -201,159 +204,22 @@ export default function ContentAccommodation() {
   return (
     <View style={styles.wrapper}>
       <HotelResidence />
-      <WrapperContent
-        onPressSeeAll={() => console.log(1)}
-        heading={t('saveloka_recommended')}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => <RecommendedUnitItem isButtonBottom />}
-        />
-      </WrapperContent>
-
-      <WrapperContent
-        isSeeAll
-        isCategory
-        onPressSeeAll={() => console.log(1)}
-        onPressCategory={item => console.log(item)}
-        heading={t('stay_monthly')}
-        subHeading={t('disc_upto') + ` ${formatPrice(1000000)}`}
-        styleWrapper={{backgroundColor: 'transparent'}}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => (
-            <BoxPlaceItem
-              isDiscount
-              data={item}
-              rental="night"
-              jsonImage={item?.imgdetail}
-              name={item?.name}
-              price={item?.price}
-            />
-          )}
-        />
-      </WrapperContent>
-
-      <WrapperContent
-        isSeeAll
-        isCategory
-        onPressSeeAll={() => console.log(1)}
-        onPressCategory={item => console.log(item)}
-        heading={t('find_best')}
-        subHeading={t('disc_upto') + ` 30%!`}
-        styleWrapper={{backgroundColor: '#91F2FF'}}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => (
-            <BoxPlaceItem
-              isDiscount
-              data={item}
-              rental="night"
-              jsonImage={item?.imgdetail}
-              name={item?.name}
-              price={item?.price}
-            />
-          )}
-        />
-      </WrapperContent>
-
+      <RecommendedUnit data={data} />
+      <StayMonthly data={data} />
       <ThematicInstagram />
+      <FindBest data={data} />
 
-      <WrapperContent
-        isSeeAll
-        onPressSeeAll={() => console.log(1)}
-        onPressCategory={item => console.log(item)}
-        heading={t('saveloka_premium')}
-        subHeading={t('selected_premium')}
-        styleWrapper={{backgroundColor: '#f8eede'}}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => (
-            <BoxPlaceItem
-              isDiscount
-              data={item}
-              rental="night"
-              jsonImage={item?.imgdetail}
-              name={item?.name}
-              price={item?.price}
-            />
-          )}
-        />
-      </WrapperContent>
-
+      <AccommodationPremium data={data} />
       <VideoInfluencerApproved />
       <FindApartmentFitsBudget />
 
-      <WrapperContent
-        isSeeAll
-        isCategory
-        onPressSeeAll={() => console.log(1)}
-        onPressCategory={item => console.log(item)}
-        heading={t('weekly_hot_deal')}
-        subHeading={t('ends_in')}
-        dayEndDeals={6}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => (
-            <BoxPlaceItem
-              isDiscount
-              data={item}
-              rental="night"
-              jsonImage={item?.imgdetail}
-              name={item?.name}
-              price={item?.price}
-            />
-          )}
-        />
-      </WrapperContent>
+      <WeeklyHotDeal data={data} />
 
-      <WrapperContent
-        isSeeAll
-        isCategory
-        onPressSeeAll={() => console.log(1)}
-        onPressCategory={item => console.log(item)}
-        heading={t('best_selling')}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          contentContainerStyle={styles.content}
-          renderItem={({item}) => (
-            <BoxPlaceItem
-              seeViewNumber={1.5}
-              multiPrice
-              isUnitAvailable
-              isHeart
-              data={item}
-              jsonImage={item?.imgdetail}
-              name={item?.name}
-              price={item?.price}
-            />
-          )}
-        />
-      </WrapperContent>
+      <BestSelling data={data} />
 
       <RecommendedApartments />
 
-      <WrapperContent
-        heading={t('looking_for_a_place')}
-        subHeading={t('find_by_saveloka')}>
-        <BigCity />
-      </WrapperContent>
+      <BigCity />
     </View>
   );
 }

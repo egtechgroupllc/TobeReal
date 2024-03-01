@@ -18,7 +18,7 @@ export const postSignUp = async data => {
 };
 
 export const postLogout = async data => {
-  const responsive = await instance.post('/api/v1/user/logout', data);
+  const responsive = await instance.get('/api/v1/user/logout');
 
   return responsive.data;
 };

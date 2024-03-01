@@ -27,8 +27,8 @@ export default function OptionAccommodation({
   const _keyTextSub = keyTextSub || 'subText';
 
   const valueDefault = useMemo(
-    () => !noSelectDefault && (isSelectForIndex ? 0 : data[0][_keyTextView]),
-    [data[0][_keyTextView]],
+    () => !noSelectDefault && (isSelectForIndex ? 0 : data[0]?.[_keyTextView]),
+    [data[0]?.[_keyTextView]],
   );
 
   const valueDefaultView = useCallback(
@@ -118,7 +118,7 @@ export default function OptionAccommodation({
                 fill={
                   option.includes(valueDefaultView(item, index))
                     ? COLORS.primary
-                    :styleIcon?.color|| COLORS.text
+                    : styleIcon?.color || COLORS.text
                 }
               />
             )}

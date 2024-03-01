@@ -7,12 +7,12 @@ import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
 import EmptyData from '../../components/EmptyData';
-import { useLanguage } from '../../hooks/useLanguage';
+import {useLanguage} from '../../hooks/useLanguage';
 
 const listTab = ['Active Booking', 'Booking History'];
 export default function HomeBookingsScreen() {
   const {navigate} = useNavigation();
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   return (

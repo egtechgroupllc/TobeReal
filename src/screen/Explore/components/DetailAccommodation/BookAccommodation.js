@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {CustomButton} from '../../../../components';
@@ -10,11 +10,12 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 
-export default function BookAccommodation({setBookHeight, price}) {
+export default memo(function BookAccommodation({setBookHeight, price}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {token} = useAuthentication();
   const {navigate} = useNavigation();
+
   return (
     <View
       style={{...styles.wrapper, paddingBottom: insets.bottom - 5}}
@@ -27,17 +28,16 @@ export default function BookAccommodation({setBookHeight, price}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-        {price < 1000000000 ? t('per_month_from') : t('for_sale')}
-         
+          {price < 1000000000 ? t('per_month_from') : t('for_sale')}
         </CustomText>
         <CustomText
           style={{
             fontSize: SIZES.medium,
           }}
           textType="bold">
-            {formatPrice(price, {
-                        locales: 'vi',
-                      })}{' '}
+          {formatPrice(price, {
+            locales: 'vi',
+          })}{' '}
         </CustomText>
       </View>
 
@@ -73,7 +73,7 @@ export default function BookAccommodation({setBookHeight, price}) {
       </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -1,66 +1,48 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useState} from 'react';
-import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
-import {
-  IconCheckBox,
-  IconUnCheckBox,
-  IconViewablePassword,
-} from '../../../../assets/icon/Icon';
-import {CustomInput} from '../../../../components';
-import CustomText from '../../../../components/CustomText';
-import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
-import Wrapper from '../../components/Wrapper';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {requireField} from '../../../../utils/validate';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {SIZES, images, scale} from '../../../../assets/constants';
+import {CustomButton, CustomInput} from '../../../../components';
+import CustomImage from '../../../../components/CustomImage';
+import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {requireField, validateEmail} from '../../../../utils/validate';
+import Wrapper from '../../components/Wrapper';
+import {useMutation} from '@tanstack/react-query';
+import {postForgotPassword} from '../../../../api/auth';
+import {showMess} from '../../../../assets/constants/Helper';
+import VerificationCode from './VerificationCode';
+import ConfirmChangePassword from './ConfirmChangePassword';
 export default function Content() {
   const {t} = useLanguage();
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, reset, watch} = useForm();
   const [phase, setPhase] = useState(1);
-  const navigation = useNavigation();
-  const gotoLogin = () => {
-    navigation.navigate('LoginScreen');
-  };
-  // const setPhase2 = () => {
-  //   setPhase(2);
-  // };
-  const setPhase2 = async data => {
-    try {
-      const response = await fetch(
-        'https://your-api-endpoint.com/api/v1/user/auth/forgot-password',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: data.email,
-          }),
-        },
-      );
+  const {navigate} = useNavigation();
 
-      if (!response.ok) {
-        throw new Error('Login failed');
-      } else {
-        setPhase(2);
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-      Alert.alert('Wrong email', 'Invalid email. Please try again.');
-    }
+  const forgotPasswordMu = useMutation({
+    mutationFn: postForgotPassword,
+  });
+  const gotoLogin = () => {
+    navigate('LoginScreen');
   };
-  const setPhase3 = () => {
-    setPhase(3);
+
+  const submitForgotPassword = data => {
+    console.log(132);
+    forgotPasswordMu.mutate(data, {
+      onSuccess: dataInside => {
+        console.log(dataInside);
+        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+
+        if (dataInside?.status) {
+          // reset();
+          setPhase(2);
+        }
+      },
+    });
   };
-  // const newPassword = async data => {
+
   //   try {
   //     const response = await fetch(
   //       'https://your-api-endpoint.com/api/v1/user/auth/confirm-forgot-password',
@@ -89,161 +71,62 @@ export default function Content() {
   // };
   return (
     <View style={styles.container}>
-      {phase == 1 && (
-        <View>
-          <View style={{marginTop: scale(100), alignItems: 'center'}}>
-            <Image
-              source={images.logo1}
-              style={{
-                width: '35%',
-                height: scale(109),
-                marginBottom: scale(30),
-              }}></Image>
-            <Wrapper
-              Heading1={t('forgot_password')}
-              styleWrapper={{marginBottom: scale(30)}}
-            />
-          </View>
-          <View style={{marginBottom: scale(10)}}>
+      <View
+        style={{
+          rowGap: scale(20),
+        }}>
+        <View
+          style={{
+            alignItems: 'center',
+            rowGap: scale(30),
+          }}>
+          <CustomImage
+            source={images.logo1}
+            style={{
+              width: '35%',
+              height: scale(109),
+            }}
+          />
+          <Wrapper
+            Heading1={t('forgot_password')}
+            styleWrapper={{marginBottom: scale(10)}}
+          />
+        </View>
+
+        {phase === 1 && (
+          <>
             <CustomInput
+              sizeInput="medium"
               placeholder={t('email')}
-              style={{
-                width: scale(312),
-                height: scale(48),
-              }}
               control={control}
               name="email"
-              rules={{
-                ...requireField(t('this_field_required')),
-              }}
+              rules={[
+                requireField(t('this_field_required')),
+                validateEmail(t('invalid_email')),
+              ]}
             />
-          </View>
-          <TouchableOpacity onPress={handleSubmit(setPhase2)}>
-            <LinearGradient
-              colors={['#F7E75A', '#FFC702']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <CustomText textType="semiBold" style={{...styles.text2}}>
-                {t('submit')}
-              </CustomText>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      )}
-      {phase == 2 && (
-        <View>
-          <View style={{marginTop: scale(100), alignItems: 'center'}}>
-            <Image
-              source={images.logo1}
-              style={{
-                width: '35%',
-                height: scale(109),
-                marginBottom: scale(30),
-              }}></Image>
-            <Wrapper
-              Heading1={t('forgot_password')}
-              styleWrapper={{marginBottom: scale(30)}}
-            />
-          </View>
-          <View style={{marginBottom: scale(10)}}>
-            <CustomInput
-              control={control}
-              name="code"
-              rules={{
-                ...requireField(t('this_field_required')),
-              }}
-              placeholder={t('code')}
-              style={{
-                width: scale(312),
-                // marginBottom: scale(25),
-                height: scale(48),
-              }}
-            />
-          </View>
-          <TouchableOpacity onPress={handleSubmit(setPhase3)}>
-            <LinearGradient
-              colors={['#F7E75A', '#FFC702']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <CustomText textType="semiBold" style={{...styles.text2}}>
-                {t('submit')}
-              </CustomText>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      )}
-      {phase == 3 && (
-        <View>
-          <View style={{marginTop: scale(100), alignItems: 'center'}}>
-            <Image
-              source={images.logo1}
-              style={{
-                width: '35%',
-                height: scale(109),
-                marginBottom: scale(30),
-              }}></Image>
-            <Wrapper
-              Heading1={t('enter_new_password')}
-              styleWrapper={{marginBottom: scale(30)}}
-            />
-          </View>
-          <View style={{marginBottom: scale(10)}}>
-            <CustomInput
-              control={control}
-              name="password"
-              rules={{
-                ...requireField(t('this_field_required')),
-              }}
-              placeholder={t('password')}
-              style={{
-                width: scale(312),
-                height: scale(48),
-                marginBottom: scale(5),
-              }}
-            />
-          </View>
-          <View style={{marginBottom: scale(10)}}>
-            <CustomInput
-              control={control}
-              name="passwordconfirm"
-              rules={{
-                ...requireField(t('this_field_required')),
-              }}
-              placeholder={t('confirm_password')}
-              style={{
-                width: scale(312),
-                height: scale(48),
-              }}
-            />
-          </View>
 
-          <TouchableOpacity>
-            <LinearGradient
-              colors={['#F7E75A', '#FFC702']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <CustomText textType="semiBold" style={{...styles.text2}}>
-                {t('submit')}
-              </CustomText>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      )}
+            <CustomButton
+              onPress={handleSubmit(submitForgotPassword)}
+              linearGradientProps
+              buttonType="large"
+              text={t('submit')}
+            />
+          </>
+        )}
+
+        {phase === 2 && <VerificationCode email={watch('email')} />}
+      </View>
+
       <View
         style={{
           flexDirection: 'row',
           marginTop: scale(20),
           justifyContent: 'center',
         }}>
-        <View>
-          <CustomText textType="semiBold" style={{...styles.text}}>
-            {t('already_have_account')}
-          </CustomText>
-          <View style={styles.line} />
-        </View>
+        <CustomText textType="semiBold" style={styles.text}>
+          {t('already_have_account')}
+        </CustomText>
         <TouchableOpacity onPress={gotoLogin}>
           <CustomText
             textType="semiBold"
@@ -258,10 +141,11 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(30),
+    width: '100%',
   },
   text: {
     fontSize: SIZES.small,
+    textDecorationLine: 'underline',
   },
   text1: {
     fontSize: SIZES.small,

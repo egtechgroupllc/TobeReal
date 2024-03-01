@@ -20,15 +20,17 @@ export default function AvatarImage({
   upgrade,
   name,
   camera,
-  onPressCamera
+  onPressCamera,
 }) {
   return (
     <View style={{alignItems: 'center', marginTop: scale(-60)}}>
       <View style={{flexDirection: 'row'}}>
         <Avatar />
-        {camera&&(
-          <TouchableOpacity onPress={onPressCamera} style={{marginTop:scale(100)}}>
-          <IconCamera/>
+        {camera && (
+          <TouchableOpacity
+            onPress={onPressCamera}
+            style={{marginTop: scale(100)}}>
+            <IconCamera />
           </TouchableOpacity>
         )}
         {upgrade && (
@@ -45,12 +47,15 @@ export default function AvatarImage({
           </TouchableOpacity>
         )}
       </View>
-      <View style={{flexDirection: 'row', alignItems:'center'}}>
+
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <CustomText textType="bold" style={styles.text}>
           {name}
         </CustomText>
         {changeName && (
-          <TouchableOpacity onPress={onPressChangeName} style={{marginLeft:scale(10)}}> 
+          <TouchableOpacity
+            onPress={onPressChangeName}
+            style={{marginLeft: scale(10)}}>
             <IconEditProfile />
           </TouchableOpacity>
         )}

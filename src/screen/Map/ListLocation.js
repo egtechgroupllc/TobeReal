@@ -87,69 +87,71 @@ const dataFa = [
     ],
   },
 ];
-export default forwardRef(function ListLocation(
-  {data = [], CARD_WIDTH, scrollOffsetX},
-  ref,
-) {
-  const insets = useSafeAreaInsets();
-  const flatListRef = useRef();
-
-  useImperativeHandle(
+export default memo(
+  forwardRef(function ListLocation(
+    {data = [], CARD_WIDTH, scrollOffsetX},
     ref,
-    () => ({
-      scrollToOffset: (offset = 0) => {
-        flatListRef.current?.scrollToOffset({offset: offset, animated: true});
-      },
-    }),
-    [],
-  );
+  ) {
+    const insets = useSafeAreaInsets();
+    const flatListRef = useRef();
 
-  return (
-    <View
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        // bottom: insets.bottom,
-        width: '100%',
-        alignItems: 'center',
-      }}>
-      <Animated.FlatList
-        ref={flatListRef}
-        data={dataFa}
-        scrollEnabled={!!dataFa[1]}
-        scrollEventThrottle={16}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        snapToAlignment="center"
-        snapToInterval={CARD_WIDTH + scale(18)}
-        horizontal
-        decelerationRate={0}
-        bounces={false}
-        contentContainerStyle={{
-          columnGap: scale(10),
-          padding: scale(20),
-        }}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {x: scrollOffsetX}}}],
-          {
-            useNativeDriver: false,
-          },
-        )}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            key={index}
-            seeViewNumber={1.4}
-            styleWrapper={{
-              height: scale(190),
-            }}
-            data={item}
-            time={item.id < 6 ? true : false}
-            jsonImage={item.imgdetail}
-            name={item?.name}
-            price={item?.price}
-          />
-        )}
-      />
-    </View>
-  );
-});
+    useImperativeHandle(
+      ref,
+      () => ({
+        scrollToOffset: (offset = 0) => {
+          flatListRef.current?.scrollToOffset({offset: offset, animated: true});
+        },
+      }),
+      [],
+    );
+
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          // bottom: insets.bottom,
+          width: '100%',
+          alignItems: 'center',
+        }}>
+        <Animated.FlatList
+          ref={flatListRef}
+          data={dataFa}
+          scrollEnabled={!!dataFa[1]}
+          scrollEventThrottle={16}
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          snapToAlignment="center"
+          snapToInterval={CARD_WIDTH + scale(18)}
+          horizontal
+          decelerationRate={0}
+          bounces={false}
+          contentContainerStyle={{
+            columnGap: scale(10),
+            padding: scale(20),
+          }}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {x: scrollOffsetX}}}],
+            {
+              useNativeDriver: false,
+            },
+          )}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              key={index}
+              seeViewNumber={1.4}
+              styleWrapper={{
+                height: scale(190),
+              }}
+              data={item}
+              time={item.id < 6 ? true : false}
+              jsonImage={item.imgdetail}
+              name={item?.name}
+              price={item?.price}
+            />
+          )}
+        />
+      </View>
+    );
+  }),
+);

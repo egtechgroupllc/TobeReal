@@ -6,6 +6,7 @@ import BoxPlaceItem from '../BoxPlaceItem';
 import VideoCompact from './VideoCompact';
 import {useNavigation} from '@react-navigation/native';
 import video from '../../../../../assets/constants/video';
+import InViewPort from '../../../../../components/InViewport';
 
 const data = [
   {
@@ -32,27 +33,32 @@ const data = [
 
 export default function VideoInfluencerApproved() {
   const {navigate} = useNavigation();
+  const [isRender, setIsRender] = useState(false);
 
   return (
-    <WrapperContent heading="Influencer Approved Units ✨">
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data}
-        contentContainerStyle={styles.content}
-        renderItem={({item, index}) => (
-          <VideoCompact
-            onPlay={() =>
-              navigate('NoBottomTab', {
-                screen: 'ListVideoInfluencerScreen',
-                params: {index},
-              })
-            }
-            source={item?.src}
+    <InViewPort onChange={render => render && setIsRender(render)} delay={190}>
+      {isRender && (
+        <WrapperContent heading="Influencer Approved Units ✨">
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={data}
+            contentContainerStyle={styles.content}
+            renderItem={({item, index}) => (
+              <VideoCompact
+                onPlay={() =>
+                  navigate('NoBottomTab', {
+                    screen: 'ListVideoInfluencerScreen',
+                    params: {index},
+                  })
+                }
+                source={item?.src}
+              />
+            )}
           />
-        )}
-      />
-    </WrapperContent>
+        </WrapperContent>
+      )}
+    </InViewPort>
   );
 }
 

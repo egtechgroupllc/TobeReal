@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import CustomImage from '../../../../components/CustomImage';
 import {SIZES, WIDTH, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
@@ -14,11 +14,9 @@ import ListImg from './ListImg';
 //   'https://pix8.agoda.net/geo/poi/22300/2_22300_04.jpg?ca=7&ce=1&s=512x384',
 // ];
 
-export default function ImageDetail({onLayout, dataImg, styleWrapper}) {
+export default memo(function ImageDetail({onLayout, dataImg, styleWrapper}) {
   const [isViewImg, setIsViewImg] = useState(false);
-  console.log('====================================');
-  console.log('dataImg', dataImg);
-  console.log('====================================');
+
   return (
     <View
       style={[
@@ -116,7 +114,7 @@ export default function ImageDetail({onLayout, dataImg, styleWrapper}) {
       )}
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

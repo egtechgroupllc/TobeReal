@@ -15,115 +15,120 @@ import {
 import {Category, TabSelect} from '../../../../components';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
-import { useLanguage } from '../../../../hooks/useLanguage';
-
+import {useLanguage} from '../../../../hooks/useLanguage';
+import InViewPort from '../../../../components/InViewport';
 
 export default function FindAccommodation() {
-  const {t}= useLanguage()
-const listRent = [
-  // {
-  //   text: t('all'),
-  //   icon: IconCity,
-  // },
-  {
-    text: t('apartment'),
-    icon: IconApartment,
-  },
-  {
-    text: t('hotel'),
-    icon: IconHotel,
-  },
-  {
-    text: t('villa'),
-    icon: IconVilla,
-  },
-  {
-    text: t('home'),
-    icon: IconHome,
-  },
-  // {
-  //   text: t('others'),
-  //   icon: IconAccommodationOther,
-  // },
-];
-const listBuy = [
-  // {
-  //   text: t('all'),
-  //   icon: IconCity,
-  // },
-  {
-    text: t('apartment'),
-    icon: IconApartment,
-  },
-  {
-    text: t('villa'),
-    icon: IconHotel,
-  },
-  {
-    text: t('home'),
-    icon: IconVilla,
-  },
-  {
-    text: t('land'),
-    icon: IconLand,
-  },
-  // {
-  //   text: t('others'),
-  //   icon: IconAccommodationOther,
-  // },
-];
-const listTour = [
-  {
-    text: '',
-    icon: '',
-  },
-];
+  const {t} = useLanguage();
+  const listRent = [
+    // {
+    //   text: t('all'),
+    //   icon: IconCity,
+    // },
+    {
+      text: t('apartment'),
+      icon: IconApartment,
+    },
+    {
+      text: t('hotel'),
+      icon: IconHotel,
+    },
+    {
+      text: t('villa'),
+      icon: IconVilla,
+    },
+    {
+      text: t('home'),
+      icon: IconHome,
+    },
+    // {
+    //   text: t('others'),
+    //   icon: IconAccommodationOther,
+    // },
+  ];
+  const listBuy = [
+    // {
+    //   text: t('all'),
+    //   icon: IconCity,
+    // },
+    {
+      text: t('apartment'),
+      icon: IconApartment,
+    },
+    {
+      text: t('villa'),
+      icon: IconHotel,
+    },
+    {
+      text: t('home'),
+      icon: IconVilla,
+    },
+    {
+      text: t('land'),
+      icon: IconLand,
+    },
+    // {
+    //   text: t('others'),
+    //   icon: IconAccommodationOther,
+    // },
+  ];
+  const listTour = [
+    {
+      text: t('land'),
+      icon: IconLand,
+    },
+  ];
 
   const [tabSelect, setTabSelect] = useState(t('RENT'));
   const [category, setCategory] = useState();
+  const [isRender, setIsRender] = useState();
 
   return (
-    <View
-      style={{
-        width: WIDTH.widthContain,
-        alignSelf: 'center',
-        marginTop:scale(20)
-      }}>
-      <TabSelect
-        data={[t('rent'),  t('buy'), t('tour')]}
-        onChange={value => {
-          setTabSelect(value);
-        }}
-        renderView={() => (
-          <>
-            <View style={styles.category}>
-              {tabSelect !== t('BUY') && tabSelect!==t('TOUR')&&(
-                <Category
-                  data={[t('daily'), t('monthly'), t('yearly')]}
-                  onChange={value => setCategory(value)}
-                />
-              )}
+    <InViewPort onChange={render => render && setIsRender(render)} delay={20}>
+      {isRender && (
+        <View
+          style={{
+            width: WIDTH.widthContain,
+            alignSelf: 'center',
+            marginTop: scale(20),
+          }}>
+          <TabSelect
+            data={[t('RENT'), t('BUY'), t('TOUR')]}
+            onChange={value => {
+              setTabSelect(value);
+            }}
+            renderView={() => (
+              <>
+                <View style={styles.category}>
+                  {tabSelect !== t('BUY') && tabSelect !== t('TOUR') && (
+                    <Category
+                      data={[t('daily'), t('monthly'), t('yearly')]}
+                      onChange={value => setCategory(value)}
+                    />
+                  )}
 
-              <OptionAccommodation
-                styleIcon={{color:'#BCBCBC'}}
-                multiSelect
-                isSelectAll
-                data={
-                  tabSelect === t('RENT')
-                  ? listRent || []
-                  : tabSelect === t('BUY')
-                  ? listBuy || [] 
-                  : tabSelect === t('TOUR')
-                  ? listTour : []
-
-                }
-              />
-            </View>
-            <FindContent isBuy={tabSelect === t('BUY')} rental={category} />
-          </>
-        )}
-      />
-    </View>
+                  <OptionAccommodation
+                    styleIcon={{color: '#BCBCBC'}}
+                    multiSelect
+                    isSelectAll
+                    data={
+                      tabSelect === t('RENT')
+                        ? listRent || []
+                        : tabSelect === t('BUY')
+                        ? listBuy || []
+                        : tabSelect === t('TOUR')
+                        ? listTour
+                        : []
+                    }
+                  />
+                </View>
+                <FindContent isBuy={tabSelect === t('BUY')} rental={category} />
+              </>
+            )}
+          />
+        </View>
+      )}
+    </InViewPort>
   );
 }
 

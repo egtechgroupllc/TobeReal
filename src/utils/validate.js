@@ -40,7 +40,7 @@ export const validateEmail = message => {
 
 export const validateUserName = message => {
   return {
-    pattern: {value: /^[a-zA-Z0-9_]{6,}$/, message},
+    pattern: {value: /^[a-zA-Z][a-zA-Z0-9]{3,29}$/, message},
   };
 };
 

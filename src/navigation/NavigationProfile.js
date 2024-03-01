@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import routerProfile from '../router/routerProfile';
+import {useAuthentication} from '../hooks/useAuthentication';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 

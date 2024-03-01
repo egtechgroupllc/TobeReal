@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
@@ -104,7 +104,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
     flatListRef.current.scrollToOffset(x);
   };
 
-  const currentPosition = async () => {
+  const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
 
     if (coords) {
@@ -118,7 +118,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         animated: true,
       });
     }
-  };
+  }, []);
 
   useEffect(() => {
     getCurrentLocation();
@@ -165,12 +165,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         }}
         onPress={currentPosition}
         iconRight={IconMyLocation}
-        style={{
-          backgroundColor: COLORS.white,
-          width: scale(33),
-          height: scale(33),
-          borderRadius: 99,
-        }}
+        style={styles.btnRegionUser}
         styleIcon={{
           color: '#3b57f8',
         }}
@@ -184,5 +179,11 @@ const styles = StyleSheet.create({
     // width: '100%',
     // height: '100%',
     flex: 1,
+  },
+  btnRegionUser: {
+    backgroundColor: COLORS.white,
+    width: scale(33),
+    height: scale(33),
+    borderRadius: 99,
   },
 });

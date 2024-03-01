@@ -1,7 +1,10 @@
-import {useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import React, {ReactNode, createContext, useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {postLogout} from '../api/auth';
+import {showMess} from '../assets/constants/Helper';
+import RNRestart from 'react-native-restart';
 
 interface AuthProps {
   token?: string;
@@ -28,7 +31,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
 
   const saveToken = async (data: any) => {
     try {
-      axios.defaults.headers.common.Authorization = `${data}`;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data}`;
 
       setToken(data);
 
@@ -41,11 +44,10 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const clearToken = async () => {
     try {
       setToken(undefined);
-      queryClient.clear();
-
-      axios.defaults.headers.common.Authorization = '';
-
+      RNRestart.restart();
+      axios.defaults.headers.common['Authorization'] = '';
       await EncryptedStorage.removeItem(TOKEN_KEY);
+      queryClient.clear();
     } catch (error) {}
   };
 

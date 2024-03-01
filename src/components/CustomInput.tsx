@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, {forwardRef, useEffect, useMemo, useRef} from 'react';
+import React, {forwardRef, useEffect, useMemo, useRef, useState} from 'react';
 import {
   Control,
   Controller,
@@ -19,7 +19,11 @@ import {
 } from 'react-native';
 
 import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
-import {IconError} from '../assets/icon/Icon';
+import {
+  IconError,
+  IconUnViewablePassword,
+  IconViewablePassword,
+} from '../assets/icon/Icon';
 import {arrayToObject} from '../utils/arrayToObject';
 import CustomText from './CustomText';
 import {formatPrice} from '../utils/format';
@@ -41,6 +45,7 @@ type CustomInputProps = {
   styleTextLabel?: TextStyle;
   styleWrapper?: ViewStyle;
   enableFormatNum?: boolean;
+  password?: boolean;
   sizeInput?: 'small' | 'medium' | 'large';
   onPress?: () => void;
   onPressIconRight?: () => void;
@@ -63,29 +68,32 @@ export default forwardRef(function CustomInput(
     name,
     label,
     enableFormatNum,
+    password,
     onPress,
     onPressIconRight,
     onPressIconLeft,
     ...props
   }: CustomInputProps,
-  ref,
+  ref: any,
 ) {
-  const IconRight: any = iconRight;
+  const [viewPassword, setViewPassword] = useState(!!password);
+  const form = useForm();
+
+  const IconRight: any =
+    iconRight || (viewPassword ? IconUnViewablePassword : IconViewablePassword);
   const IconLeft: any = iconLeft;
   const propStyle = arrayToObject(props?.style);
-  // styleWrapper
-  const form = useForm();
+
   const heightSize =
     sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 40;
 
   const ComponentWrapper: any =
     rules || label ? View : TouchableWithoutFeedback;
-  // const inputRef = useRef();
 
   return (
     <Controller
       control={control || form.control}
-      rules={rules}
+      rules={arrayToObject(rules)}
       name={name || ''}
       defaultValue={control && props?.defaultValue}
       render={({field: {onBlur, onChange, value}, fieldState: {error}}) => (
@@ -129,9 +137,11 @@ export default forwardRef(function CustomInput(
               <TextInput
                 ref={ref}
                 placeholderTextColor={COLORS.textSub}
+                secureTextEntry={viewPassword}
                 editable={!onPress}
+                autoCapitalize="none"
                 {...props}
-                onChangeText={onChange}
+                onChangeText={text => onChange(text.trim())}
                 onBlur={onBlur}
                 value={
                   enableFormatNum
@@ -147,15 +157,20 @@ export default forwardRef(function CustomInput(
                 pointerEvents={!!onPress ? 'none' : 'auto'}
               />
 
-              {(iconRight || componentRight) &&
+              {(iconRight || componentRight || password) &&
                 (componentRight ? (
                   componentRight
                 ) : (
                   <TouchableOpacity
                     style={styles.iconBox}
-                    disabled={!onPressIconRight}
+                    disabled={password ? !password : !onPressIconRight}
                     activeOpacity={onPressIconRight ? 0.7 : 1}
-                    onPress={onPressIconRight && onPressIconRight}>
+                    onPress={() => {
+                      console.log(2123);
+
+                      password && setViewPassword(!viewPassword);
+                      onPressIconRight && onPressIconRight();
+                    }}>
                     <IconRight
                       style={{...styles.icon, ...styleIcon}}
                       fill={styleIcon?.color}
@@ -223,7 +238,7 @@ const styles = StyleSheet.create({
   errorBox: {
     marginTop: scale(2),
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     columnGap: scale(6),
   },
 });

@@ -1,13 +1,10 @@
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import {COLORS, SIZES, images, scale} from '../../../assets/constants';
-import Content from '../Register/components/Content';
-import Wrapper from './Wrapper';
-import {IconHi} from '../../../assets/icon/Icon';
-import MainAuth from '../../../components/MainAuth';
+import {StyleSheet, View} from 'react-native';
+import {scale} from '../../../assets/constants';
 import MainWrapper from '../../../components/MainWrapper';
+import Wrapper from './Wrapper';
 
-export default function Auth({children, heading, subHeading, style}) {
+export default function MainAuth({children, heading, subHeading, style}) {
   return (
     <MainWrapper>
       <View style={styles.container}>

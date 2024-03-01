@@ -1,29 +1,29 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
-import Header from './components/Header';
-import FindAccommodation from './components/FindAccommodation/FindAccommodation';
-import {WIDTH, scale} from '../../assets/constants';
+import React, {Suspense} from 'react';
+import {ActivityIndicator} from 'react-native';
+import {COLORS, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
-import ContentAccommodation from './components/ContentAccommodation/ContentAccommodation';
-import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
-import {showMess} from '../../assets/constants/Helper';
+import FindAccommodation from './components/FindAccommodation/FindAccommodation';
+import Header from './components/Header';
+
+const ContentAccommodation = React.lazy(() =>
+  import('./components/ContentAccommodation/ContentAccommodation'),
+);
 
 export default function HomeExploreScreen() {
-
   return (
     <MainWrapper>
       <Header />
       <FindAccommodation />
-      <ContentAccommodation />
+      <Suspense
+        fallback={
+          <ActivityIndicator
+            size={'large'}
+            color={COLORS.primary}
+            style={{marginTop: scale(20)}}
+          />
+        }>
+        <ContentAccommodation />
+      </Suspense>
     </MainWrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    width: WIDTH.widthContain,
-    alignSelf: 'center',
-    flex: 1,
-    maxWidth: scale(400),
-  },
-});

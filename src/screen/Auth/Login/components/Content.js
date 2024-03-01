@@ -20,6 +20,7 @@ import {
   validateMinLength,
   validateEmail,
 } from '../../../../utils/validate';
+import RNRestart from 'react-native-restart';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -27,15 +28,11 @@ export default function Content() {
   const {control, handleSubmit} = useForm();
 
   const {navigate} = useNavigation();
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: postLogin,
   });
 
-  const toggleView = () => {
-    setPasswordVisible(!passwordVisible);
-  };
   const gotoRegister = () => {
     navigate('RegisterScreen');
   };
@@ -51,6 +48,10 @@ export default function Content() {
 
           showMess(dataInside?.message, 'success');
           navigate('HomeExploreScreen');
+
+          setTimeout(() => {
+            RNRestart.restart();
+          }, 1000);
         } else {
           showMess(dataInside?.message, 'error');
         }
@@ -85,18 +86,16 @@ export default function Content() {
             ...validateMinLength(t('use_6_characters'), 6),
           }}
           sizeInput="medium"
-          secureTextEntry={passwordVisible}
           placeholder={t('enter_password')}
-          onPressIconRight={toggleView}
-          iconRight={
-            passwordVisible ? IconUnViewablePassword : IconViewablePassword
-          }
+          password
         />
+
         {loginMutation.isPending && (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#FF8C00" />
           </View>
         )}
+
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"

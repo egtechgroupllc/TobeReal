@@ -44,6 +44,8 @@ export default function SearchChooseLocation({onPress}) {
       </View>
 
       <BigCity
+        noContain
+        renderReply={false}
         styleWrapper={{
           paddingHorizontal: 0,
           columnGap: scale(10),

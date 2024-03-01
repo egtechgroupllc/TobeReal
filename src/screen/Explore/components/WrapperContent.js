@@ -4,7 +4,7 @@ import {Category, CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import BoxPlaceItem from './ContentAccommodation/BoxPlaceItem';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 const funcFallBack = () => {};
 export default function WrapperContent({
@@ -24,9 +24,8 @@ export default function WrapperContent({
   onPressSeeAll = funcFallBack,
   onPressCategory = funcFallBack,
   ...props
-}) 
-{
-  const {t}= useLanguage()
+}) {
+  const {t} = useLanguage();
   return (
     <View {...props} style={[styles.wrapper, styleWrapper]}>
       <View style={[styles.heading, styleHeading]}>

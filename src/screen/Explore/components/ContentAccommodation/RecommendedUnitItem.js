@@ -15,6 +15,8 @@ import {
   IconRoom,
 } from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
+import Skeleton from '../../../../components/Skeleton';
+import CustomImage from '../../../../components/CustomImage';
 
 export default function RecommendedUnitItem({
   isButtonBottom,
@@ -26,7 +28,7 @@ export default function RecommendedUnitItem({
   isCenter,
   onPress,
   data,
-  img
+  img,
 }) {
   return (
     <TouchableOpacity
@@ -41,57 +43,9 @@ export default function RecommendedUnitItem({
               viewShow,
         },
       ]}>
-       {data ? (
-            // <CustomImage source={data?.src} style={styles.img} />
-            <ImageBackground
-            resizeMode="stretch"
-            src={img}
-            style={[
-              styles.img,
-              styesWrapper,
-              isCenter && {
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
-            ]}>
-            {title && (
-              <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
-                {title || 'Title'}
-              </CustomText>
-            )}
-    
-            {isShowDetail && (
-              <View style={styles.detail}>
-                <View style={styles.detailContent}>
-                  <CustomText style={styles.detailText}>
-                    <IconMarker style={styles.icon} fill={COLORS.white} /> Terdekat
-                  </CustomText>
-    
-                  <View
-                    style={{
-                      height: '100%',
-                      width: scale(1),
-                      backgroundColor: '#fff',
-                    }}
-                  />
-    
-                  <CustomText style={styles.detailText}>
-                    <IconRoom style={styles.icon} fill={COLORS.white} /> Terdekat
-                  </CustomText>
-                </View>
-                <CustomText
-                  textType="semiBold"
-                  style={styles.detailText}
-                  numberOfLines={1}>
-                  Terdekat ke Stasiun LRT Cawang
-                </CustomText>
-              </View>
-            )}
-          </ImageBackground>
-          ) : (
-            <ImageBackground
+      <CustomImage
         resizeMode="stretch"
-        src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
+        source="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
         style={[
           styles.img,
           styesWrapper,
@@ -133,62 +87,68 @@ export default function RecommendedUnitItem({
             </CustomText>
           </View>
         )}
-      </ImageBackground>
-          )}
+      </CustomImage>
 
       {/* <ImageBackground
-        resizeMode="stretch"
-        src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
-        style={[
-          styles.img,
-          styesWrapper,
-          isCenter && {
-            justifyContent: 'center',
-            alignItems: 'center',
-          },
-        ]}>
-        {title && (
-          <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
-            {title || 'Title'}
-          </CustomText>
-        )}
-
-        {isShowDetail && (
-          <View style={styles.detail}>
-            <View style={styles.detailContent}>
-              <CustomText style={styles.detailText}>
-                <IconMarker style={styles.icon} fill={COLORS.white} /> Terdekat
-              </CustomText>
-
-              <View
-                style={{
-                  height: '100%',
-                  width: scale(1),
-                  backgroundColor: '#fff',
-                }}
-              />
-
-              <CustomText style={styles.detailText}>
-                <IconRoom style={styles.icon} fill={COLORS.white} /> Terdekat
+          resizeMode="stretch"
+          src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
+          style={[
+            styles.img,
+            styesWrapper,
+            isCenter && {
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          ]}>
+          {title && (
+            <CustomText textType="bold" style={[styles.title, styesTextTitle]}>
+              {title || 'Title'}
+            </CustomText>
+          )}
+  
+          {isShowDetail && (
+            <View style={styles.detail}>
+              <View style={styles.detailContent}>
+                <CustomText style={styles.detailText}>
+                  <IconMarker style={styles.icon} fill={COLORS.white} /> Terdekat
+                </CustomText>
+  
+                <View
+                  style={{
+                    height: '100%',
+                    width: scale(1),
+                    backgroundColor: '#fff',
+                  }}
+                />
+  
+                <CustomText style={styles.detailText}>
+                  <IconRoom style={styles.icon} fill={COLORS.white} /> Terdekat
+                </CustomText>
+              </View>
+              <CustomText
+                textType="semiBold"
+                style={styles.detailText}
+                numberOfLines={1}>
+                Terdekat ke Stasiun LRT Cawang
               </CustomText>
             </View>
-            <CustomText
-              textType="semiBold"
-              style={styles.detailText}
-              numberOfLines={1}>
-              Terdekat ke Stasiun LRT Cawang
-            </CustomText>
-          </View>
-        )}
-      </ImageBackground> */}
+          )}
+        </ImageBackground> */}
 
       {isButtonBottom && (
-        <CustomButton
-          buttonType="large"
-          text="Dekat Stasiun LRT"
-          styleText={styles.btnText}
-          iconRight={IconNext}
-        />
+        <Skeleton
+          visible={true}
+          height={scale(50)}
+          shimmerStyle={{
+            borderRadius: scale(12),
+          }}>
+          <CustomButton
+            buttonType="large"
+            text="Dekat Stasiun LRT"
+            styleText={styles.btnText}
+            iconRight={IconNext}
+          />
+        </Skeleton>
       )}
     </TouchableOpacity>
   );

@@ -7,12 +7,16 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 export default function Wrapper({Heading1, subHeading, styleWrapper}) {
   return (
     <View style={[styles.styleWrapper, styleWrapper]}>
-      <CustomText textType="bold" style={styles.text}>
-        {Heading1}
-      </CustomText>
-      <CustomText textType="semiBold" style={styles.textSub}>
-        {subHeading}
-      </CustomText>
+      {Heading1 && (
+        <CustomText textType="bold" style={styles.text}>
+          {Heading1}
+        </CustomText>
+      )}
+      {subHeading && (
+        <CustomText textType="semiBold" style={styles.textSub}>
+          {subHeading}
+        </CustomText>
+      )}
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef} from 'react';
+import React, {useEffect, useMemo, memo, useRef} from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
@@ -33,7 +33,7 @@ type CustomButtonProps = {
 } & TouchableOpacityProps;
 const funcFallBlack = () => {};
 
-export default function CustomButton({
+export default memo(function CustomButton({
   buttonType,
   text,
   isShadow,
@@ -96,7 +96,11 @@ export default function CustomButton({
       style={[
         styles.wrapper,
         isShadow && SHADOW,
-        propStyle?.flex ? {flex: propStyle?.flex} : {width: propStyle?.width},
+        propStyle?.flex
+          ? {flex: propStyle?.flex}
+          : propStyle.minWidth
+          ? {minWidth: propStyle.minWidth, width: 'auto'}
+          : {width: propStyle?.width || '100%'},
         propStyle?.borderTopWidth && {
           borderTopWidth: propStyle?.borderTopWidth,
           borderTopColor: propStyle?.borderTopColor,
@@ -122,7 +126,9 @@ export default function CustomButton({
             (iconLeft || iconRight) && text && {flexDirection: 'row'},
 
             propStyle,
-            propStyle.minWidth ? propStyle.minWidth : {width: '100%'},
+            propStyle.minWidth
+              ? {minWidth: propStyle.minWidth}
+              : {width: '100%'},
           ]}>
           {iconLeft && (
             <View>
@@ -155,7 +161,7 @@ export default function CustomButton({
       </TouchableOpacity>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

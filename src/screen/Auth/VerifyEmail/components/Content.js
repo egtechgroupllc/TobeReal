@@ -3,79 +3,57 @@ import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+import {useMutation} from '@tanstack/react-query';
+import {postVerifyEmail} from '../../../../api/auth';
 import {SIZES, images, scale} from '../../../../assets/constants';
-import {
-  IconUnViewablePassword,
-  IconViewablePassword,
-} from '../../../../assets/icon/Icon';
+import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
-import CustomText from '../../../../components/CustomText';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
-import {requireField,validateEqualLength} from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {useMutation, useQuery} from '@tanstack/react-query';
-import { postLogin, postVerifyEmail } from '../../../../api/auth';
-import { showMess } from '../../../../assets/constants/Helper';
+import {requireField, validateEqualLength} from '../../../../utils/validate';
 
 export default function Content() {
   const {t} = useLanguage();
-  const {onSaveToken} = useAuthentication();
+
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const loginMutation = useMutation({
-    mutationFn:postVerifyEmail
+    mutationFn: postVerifyEmail,
   });
-  // const {data,isLoading,isError} = useQuery({
-  //   queryKey:['post'],
-  //   queryFn: getPost()
-  // })
 
   const handleVerify = value => {
-    loginMutation.mutate(
-     value
-    , {
+    loginMutation.mutate(value, {
       onSuccess: dataInde => {
         // console.log(dataInde,'onSuccess');
-        if(dataInde?.status){
+        if (dataInde?.status) {
           showMess(dataInde?.message, 'success');
-            navigation.navigate('LoginScreen');
-        }else{
+          navigation.navigate('LoginScreen');
+        } else {
           showMess(dataInde?.message, 'error');
         }
       },
       onError: error => {
         if (error.response) {
           showMess(error?.response?.data?.message, 'error');
-         
         }
       },
     });
-
   };
-  // const handleLogin = async (value) => {
-  //   try {
-  //     const response = await loginMution.mutate({ title: 'foo', body: 'bar', userId: 1 });
-  //     console.log('Response:', response); // Make sure to log the actual response
-  //     // onSaveToken(response);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
-      <Image
-              source={images.logo1}
-              style={{
-                width: '30%',
-                height: scale(165),
-                marginBottom: scale(30),
-                alignSelf:'center'
-              }}></Image>
+        <Image
+          source={images.logo1}
+          style={{
+            width: '30%',
+            height: scale(165),
+            marginBottom: scale(30),
+            alignSelf: 'center',
+          }}></Image>
         <CustomInput
           control={control}
           label={t('code')}
@@ -84,16 +62,16 @@ export default function Content() {
           placeholder="CODE"
           rules={{
             ...requireField(t('this_field_required')),
-            ...validateEqualLength(6,'Code must be exactly 6 digits long')
+            ...validateEqualLength(6, 'Code must be exactly 6 digits long'),
           }}
         />
-       
+
         <CustomButton
           onPress={handleSubmit(handleVerify)}
           buttonType="large"
           text={t('ok')}
           linearGradientProps
-          style={{marginTop:scale(30)}}
+          style={{marginTop: scale(30)}}
         />
       </View>
     </View>

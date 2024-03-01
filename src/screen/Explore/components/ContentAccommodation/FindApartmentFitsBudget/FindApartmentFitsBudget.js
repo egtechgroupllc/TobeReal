@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {
@@ -19,6 +19,7 @@ import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import SelectLocation from './SelectLocation';
 import {useForm} from 'react-hook-form';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import InViewPort from '../../../../../components/InViewport';
 
 const listFrequentlyPrice = [
   {
@@ -56,81 +57,87 @@ export default function FindApartmentFitsBudget() {
     }
   }, [inputState]);
 
+  const [isRender, setIsRender] = useState(false);
+
   return (
-    <WrapperContent
-      heading={t('find_appartment')}
-      subHeading={t('price_below')}
-      styleWrapper={{backgroundColor: '#f8f8f8'}}
-      styleContent={styles.wrapper}>
-      <SelectLocation control={control} name="location" />
+    <InViewPort onChange={render => render && setIsRender(render)} delay={210}>
+      {isRender && (
+        <WrapperContent
+          heading={t('find_appartment')}
+          subHeading={t('price_below')}
+          styleWrapper={{backgroundColor: '#f8f8f8'}}
+          styleContent={styles.wrapper}>
+          <SelectLocation control={control} name="location" />
 
-      <View>
-        <CustomText textType="semiBold" style={styles.title}>
-          Input Price
-        </CustomText>
+          <View>
+            <CustomText textType="semiBold" style={styles.title}>
+              Input Price
+            </CustomText>
 
-        <View style={styles.box}>
-          <CustomInput
-            enableFormatNum
-            control={control}
-            name="lowest"
-            label={t('lowest')}
-            placeholder={t('lowest')}
-            componentRight={renderComponent()}
-            style={{flex: 1}}
-            defaultValue={
-              inputState &&
-              `${formatPrice(inputState?.priceMin, {showCurrency: false})}`
-            }
-          />
-
-          <CustomInput
-            enableFormatNum
-            control={control}
-            name="highest"
-            label={t('highest')}
-            placeholder={t('highest')}
-            componentRight={renderComponent()}
-            style={{flex: 1}}
-            defaultValue={
-              inputState &&
-              `${formatPrice(inputState?.priceMax, {showCurrency: false})}`
-            }
-          />
-        </View>
-      </View>
-
-      <View>
-        <CustomText textType="semiBold" style={styles.title}>
-          {t('frequently')}
-        </CustomText>
-        <View style={styles.box}>
-          {listFrequentlyPrice.map((item, index) => {
-            return (
-              <FrequentlyPriceBox
-                key={`key-${item.textType}-${index}`}
-                icon={item?.icon}
-                textType={item?.textType}
-                priceMin={item?.priceMin}
-                priceMax={item?.priceMax}
-                onPress={() => handleSelectFrequently(item)}
+            <View style={styles.box}>
+              <CustomInput
+                enableFormatNum
+                control={control}
+                name="lowest"
+                label={t('lowest')}
+                placeholder={t('lowest')}
+                componentRight={renderComponent()}
+                style={{flex: 1}}
+                defaultValue={
+                  inputState &&
+                  `${formatPrice(inputState?.priceMin, {showCurrency: false})}`
+                }
               />
-            );
-          })}
-        </View>
-      </View>
 
-      <CustomButton
-        buttonType="medium"
-        text={t('Find_Accommodation')}
-        styleText={{
-          color: '#fff',
-          textType: 'semiBold',
-          textTransform: 'uppercase',
-        }}
-        onPress={handleSubmit(value => console.log(value))}
-      />
-    </WrapperContent>
+              <CustomInput
+                enableFormatNum
+                control={control}
+                name="highest"
+                label={t('highest')}
+                placeholder={t('highest')}
+                componentRight={renderComponent()}
+                style={{flex: 1}}
+                defaultValue={
+                  inputState &&
+                  `${formatPrice(inputState?.priceMax, {showCurrency: false})}`
+                }
+              />
+            </View>
+          </View>
+
+          <View>
+            <CustomText textType="semiBold" style={styles.title}>
+              {t('frequently')}
+            </CustomText>
+            <View style={styles.box}>
+              {listFrequentlyPrice.map((item, index) => {
+                return (
+                  <FrequentlyPriceBox
+                    key={`key-${item.textType}-${index}`}
+                    icon={item?.icon}
+                    textType={item?.textType}
+                    priceMin={item?.priceMin}
+                    priceMax={item?.priceMax}
+                    onPress={() => handleSelectFrequently(item)}
+                  />
+                );
+              })}
+            </View>
+          </View>
+
+          <CustomButton
+            buttonType="medium"
+            text={t('Find_Accommodation')}
+            styleText={{
+              color: '#fff',
+              textType: 'semiBold',
+              textTransform: 'uppercase',
+            }}
+            onPress={handleSubmit(value => console.log(value))}
+          />
+        </WrapperContent>
+      )}
+    </InViewPort>
   );
 }
 const renderComponent = () => (

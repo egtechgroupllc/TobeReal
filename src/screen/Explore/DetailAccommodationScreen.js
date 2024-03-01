@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {WIDTH, scale} from '../../assets/constants';
@@ -29,11 +29,13 @@ export default function DetailAccommodationScreen({route}) {
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
-  const [indexSelect, setIndexSelect] = useState(0);
   const [isSelect, setIsSelect] = useState(true);
 
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
   const scrollRef = useRef();
+  const dynamicHeaderRef = useRef();
+  const timeoutRef = useRef(null);
+
   const ItemView = (item, key) => {
     return (
       <View
@@ -61,23 +63,30 @@ export default function DetailAccommodationScreen({route}) {
     },
   );
 
+  const handleSelect = useCallback(value => {
+    dynamicHeaderRef.current?.setSelect(value);
+  }, []);
+
   const moveNavigateBar = offsetY => {
-    // console.log(indexSelect);
     switch (true) {
       case offsetY < dataSourceCords[1]:
-        setIndexSelect(0);
+        handleSelect(0);
         break;
+
       case dataSourceCords[1] <= offsetY && offsetY < dataSourceCords[2]:
-        setIndexSelect(1);
+        handleSelect(1);
         break;
+
       case dataSourceCords[2] <= offsetY && offsetY < dataSourceCords[3]:
-        setIndexSelect(2);
+        handleSelect(2);
         break;
+
       case dataSourceCords[3] <= offsetY && offsetY < dataSourceCords[4]:
-        setIndexSelect(3);
+        handleSelect(3);
         break;
+
       case dataSourceCords[4] <= offsetY:
-        setIndexSelect(4);
+        handleSelect(4);
         break;
     }
   };
@@ -90,7 +99,8 @@ export default function DetailAccommodationScreen({route}) {
       animated: true,
     });
 
-    setTimeout(() => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
       setIsSelect(true);
     }, 500);
   };
@@ -98,9 +108,9 @@ export default function DetailAccommodationScreen({route}) {
   return (
     <MainWrapper scrollEnabled={false}>
       <DynamicHeader
+        ref={dynamicHeaderRef}
         scrollOffsetY={scrollOffsetY}
         onSelect={selectScrollHandler}
-        indexSelect={indexSelect}
         image={jsondata}
       />
 
@@ -115,7 +125,7 @@ export default function DetailAccommodationScreen({route}) {
         ref={scrollRef}>
         <View style={styles.content}>{listView.map(ItemView)}</View>
       </Animated.ScrollView>
-      <BookAccommodation setBookHeight={setTabBarHeight} price={paramPrice}/>
+      <BookAccommodation setBookHeight={setTabBarHeight} price={paramPrice} />
     </MainWrapper>
   );
 }

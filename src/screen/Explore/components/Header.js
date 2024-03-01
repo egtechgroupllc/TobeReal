@@ -17,7 +17,7 @@ import {
 import {CustomButton, CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import {useNavigation} from '@react-navigation/native';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 const listSocial = [
   {
@@ -38,16 +38,18 @@ const listSocial = [
   },
 ];
 export default function Header() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        <CustomImage
-          source={images.logo}
-          style={styles.img}
-          resizeMode="contain"
-        />
+        <View style={styles.boxHeight}>
+          <CustomImage
+            source={images.logo}
+            resizeMode="contain"
+            style={styles.img}
+          />
+        </View>
         <View
           style={{
             flex: 1,
@@ -62,11 +64,11 @@ export default function Header() {
                 screen: 'HomeSearchAccommodScreen',
               })
             }
-            style={{   borderRadius:scale(20)}}
+            style={{borderRadius: scale(20)}}
           />
         </View>
       </View>
-{/* 
+      {/* 
       <View style={styles.content}>
         <CustomButton
           text={t('we_are_always_here')}
@@ -117,9 +119,13 @@ const styles = StyleSheet.create({
     columnGap: scale(20),
     height: scale(56),
   },
-  img: {
+  boxHeight: {
     height: scale(55),
     width: '40%',
+  },
+  img: {
+    height: '100%',
+    width: '100%',
   },
   socialContain: {
     alignItems: 'center',

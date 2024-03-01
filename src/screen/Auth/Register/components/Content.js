@@ -19,116 +19,92 @@ import {
   requireField,
   validateEmail,
   validateMinLength,
+  validateUserName,
 } from '../../../../utils/validate';
 
 export default function Content() {
   const {t} = useLanguage();
-  const {control, watch, handleSubmit} = useForm();
+  const {control, watch, handleSubmit, reset} = useForm();
   const {goBack} = useNavigation();
 
-  const [viewPassword, setViewPassword] = useState(false);
-  const [viewPasswordConfirm, setViewPasswordConfirm] = useState(false);
-
-  const toggleViewPassword = () => {
-    setViewPassword(!viewPassword);
-  };
-  const toggleViewPasswordConfirm = () => {
-    setViewPasswordConfirm(!viewPasswordConfirm);
-  };
-
-  const navigation = useNavigation();
   const signupMutation = useMutation({
     mutationFn: postSignUp,
   });
+
   const handleSignup = value => {
     delete value?.passwordConfirm;
-    // console.log(value);
+
     signupMutation.mutate(value, {
-      onSuccess: dataInde => {
-        if (dataInde?.status) {
-          showMess(dataInde?.message, 'success');
-          navigation.navigate('VerifyEmailScreen');
-        } else {
-          showMess(dataInde?.message, 'error');
+      onSuccess: dataInside => {
+        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+
+        if (dataInside?.status) {
+          // navigation.navigate('VerifyEmailScreen');
+
+          reset();
         }
       },
-      onError: error => {
-        // console.log(error?.response?.data,'3123123213');
-        // showMess(error?.response?.data?.message, 'error');
 
-        // if (error.response) {
-        //   showMess(error?.response?.data?.message, 'error');
-        // }
+      onError: error => {
         if (error.response) {
           showMess(error?.response?.data?.message, 'error');
         }
       },
     });
   };
+
   return (
     <View style={styles.container}>
       <CustomInput
         control={control}
+        maxLength={30}
         sizeInput="medium"
-        rules={{
-          ...requireField(t('this_field_required')),
-        }}
+        rules={[
+          validateUserName(t('12312')),
+          requireField(t('this_field_required')),
+        ]}
         name="username"
         placeholder={t('enter_username')}
       />
+
       <CustomInput
         control={control}
         sizeInput="medium"
-        rules={{
-          ...requireField(t('this_field_required')),
-          ...validateEmail(t('invalid_email')),
-        }}
+        rules={[
+          requireField(t('this_field_required')),
+          validateEmail(t('invalid_email')),
+        ]}
         name="email"
         placeholder={t('enter_email')}
       />
+
       <CustomInput
         control={control}
         sizeInput="medium"
-        // rules={{
-        //   ...requireField(t('this_field_required')),
-        // }}
-        name="refid"
-        placeholder={t('enter_referral')}
-      />
-      {/* <CustomInput
-        placeholder="Enter Your Phone Number"
-      /> */}
-      <CustomInput
-        secureTextEntry={!viewPassword}
-        control={control}
-        sizeInput="medium"
-        rules={{
-          ...requireField(t('this_field_required')),
-          ...validateMinLength(6, t('use_6_characters')),
-        }}
+        rules={validateMinLength(t('use_6_characters'), 6)}
         name="password"
         placeholder={t('enter_password')}
-        onPressIconRight={toggleViewPassword}
-        iconRight={
-          !viewPassword ? IconUnViewablePassword : IconViewablePassword
-        }
+        password
       />
+
       <CustomInput
-        secureTextEntry={!viewPasswordConfirm}
         control={control}
         sizeInput="medium"
-        rules={{
-          ...requireField(t('this_field_required')),
-          ...confirmField(watch('password'), t('password_not_match')),
-        }}
+        rules={[
+          requireField(t('this_field_required')),
+          confirmField(t('password_not_match'), watch('password')),
+        ]}
         name="passwordConfirm"
         placeholder={t('enter_password_confirm')}
-        onPressIconRight={toggleViewPasswordConfirm}
-        iconRight={
-          !viewPasswordConfirm ? IconUnViewablePassword : IconViewablePassword
-        }
+        password
       />
-      {/* <InputCountry/> */}
+
+      <CustomInput
+        control={control}
+        sizeInput="medium"
+        // name="refid"
+        placeholder={t('enter_referral')}
+      />
 
       <CustomButton
         onPress={handleSubmit(handleSignup)}
@@ -139,6 +115,7 @@ export default function Content() {
           marginTop: scale(20),
         }}
       />
+
       <View
         style={{
           flexDirection: 'row',

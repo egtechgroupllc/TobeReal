@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import {IconMarker} from '../../assets/icon/Icon';
 import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
@@ -6,7 +6,6 @@ import CustomText from '../../components/CustomText';
 import {formatPrice} from '../../utils/format';
 
 const CustomMarker = ({scaleValue, data}) => {
-  console.log(scaleValue === 0.7, scaleValue);
   const scaleStyle = {
     transform: [
       {
@@ -62,4 +61,4 @@ const CustomMarker = ({scaleValue, data}) => {
   );
 };
 
-export default CustomMarker;
+export default memo(CustomMarker);

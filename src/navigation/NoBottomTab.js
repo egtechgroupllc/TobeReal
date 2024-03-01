@@ -16,11 +16,7 @@ export default function NoBottomTab() {
             key={router.name}
             name={router.name}
             component={router.component}
-            options={{
-              contentStyle: {
-                backgroundColor: '#000',
-              },
-            }}
+            options={router?.options}
           />
         ))}
       </Stack.Group>

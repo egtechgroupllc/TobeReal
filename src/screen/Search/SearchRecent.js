@@ -1,9 +1,8 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {IconHistory} from '../../assets/icon/Icon';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
+import {IconHistory} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function SearchRecent({onPress}) {
   return (

@@ -26,5 +26,6 @@ const styles = StyleSheet.create({
   active: {
     minWidth: scale(30),
     backgroundColor: '#fff',
+    width: 'auto',
   },
 });

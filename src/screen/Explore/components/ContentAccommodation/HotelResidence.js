@@ -1,9 +1,10 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
+import InViewPort from '../../../../components/InViewport';
 
 const data = [
   {
@@ -190,32 +191,38 @@ const data = [
 ];
 export default function HotelResidence() {
   const {t} = useLanguage();
+  const [isRender, setIsRender] = useState(false);
+  console.log('HotelResidence', isRender);
   return (
-    <WrapperContent
-      heading={t('hotel_residence')}
-      subHeading={t('seamless_living')}>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data}
-        contentContainerStyle={styles.content}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            key={index}
-            seeViewNumber={1.5}
-            isViewMap
-            isStar
-            rating={2}
-            isHeart
-            data={item}
-            time={item.id < 6 ? true : false}
-            jsonImage={item?.imgdetail}
-            name={item?.name}
-            price={item?.price}
+    <InViewPort onChange={render => render && setIsRender(render)} delay={30}>
+      {isRender && (
+        <WrapperContent
+          heading={t('hotel_residence')}
+          subHeading={t('seamless_living')}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={data}
+            contentContainerStyle={styles.content}
+            renderItem={({item, index}) => (
+              <BoxPlaceItem
+                key={index}
+                seeViewNumber={1.5}
+                isViewMap
+                isStar
+                rating={2}
+                isHeart
+                data={item}
+                time={item.id < 6 ? true : false}
+                jsonImage={item?.imgdetail}
+                name={item?.name}
+                price={item?.price}
+              />
+            )}
           />
-        )}
-      />
-    </WrapperContent>
+        </WrapperContent>
+      )}
+    </InViewPort>
   );
 }
 

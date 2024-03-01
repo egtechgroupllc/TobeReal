@@ -1,33 +1,43 @@
-import {useIsFocused, useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import MainAuth from '../../components/MainAuth';
+import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import React from 'react';
+import {getProfile} from '../../api/user';
+import MainWrapper from '../../components/MainWrapper';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import AvatarImage from './components/AvatarImage';
 import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderAvatar from './components/HeaderAvatar';
+import HeaderNoToken from './components/HeaderNoToken';
+import MainAuth from '../../components/MainAuth';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
 
-  // const {token} = useAuthentication();
-  const {navigate, goBack} = useNavigation();
-//   const isFocused = useIsFocused();
+  const {token} = useAuthentication();
+  const {goBack} = useNavigation();
 
-//   useEffect(() => {
-//     if (!token) {
-//       navigate('NavigationAuth');
-//       if(!isFocused ){
-//         goBack()
-//       }
-//     }
-// console.log(token,3213,isFocused);
-//   }, [isFocused,token]);
+  const {isLoading, isError, data, isPending, error} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: getProfile,
+    enabled: !!token,
+    retry: 3,
+  });
 
   return (
     <MainAuth>
-      <HeaderAvatar noti={true} notify={goBack} heading={'Profile'} />
-      <AvatarImage upgrade={true} name={'John'} onPressUpgrade={upgrade} />
+      {token ? (
+        <>
+          <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} />
+          <AvatarImage
+            upgrade={true}
+            name={data?.data?.username || 'name'}
+            onPressUpgrade={upgrade}
+          />
+        </>
+      ) : (
+        <HeaderNoToken />
+      )}
       <Content />
       <Bottom />
     </MainAuth>
