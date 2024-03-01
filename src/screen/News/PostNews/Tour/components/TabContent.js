@@ -12,6 +12,7 @@ import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import CustomText from '../../../../../components/CustomText';
 import {
+  IconCamera,
   IconCheckBox,
   IconCheckBoxWhite,
   IconDown,
@@ -21,12 +22,20 @@ import {
 } from '../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
-import { useForm } from 'react-hook-form';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import {useForm} from 'react-hook-form';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
+import ImageCropPicker from 'react-native-image-crop-picker';
+import DatePicker from 'react-native-date-picker';
+import ImageDetail from '../../../../Explore/components/DetailAccommodation/ImageDetail';
 export default function TabContent() {
   const [inputText, setInputText] = useState('');
+  const [openCheckin, setOpenCheckin] = useState(false);
+  const [timeCheckin, setTimeCheckin] = useState(new Date());
+  const [openCheckout, setOpenCheckout] = useState(false);
+  const [timeCheckout, setTimeCheckout] = useState(new Date());
   const {control, watch, handleSubmit} = useForm();
+  const [selectedImage, setSelectedImage] = useState([]);
   const handleInputChange = text => {
     setInputText(text);
   };
@@ -35,28 +44,47 @@ export default function TabContent() {
     setViewgeneral(prevViewgeneral => !prevViewgeneral);
   };
   const [viewday, setViewday] = useState(false);
-  const viewDay= () => {
+  const viewDay = () => {
     setViewday(prevViewday => !prevViewday);
   };
   const [viewlocation, setViewlocation] = useState(false);
-  const viewLocation= () => {
+  const viewLocation = () => {
     setViewlocation(prevViewlocation => !prevViewlocation);
   };
   const [viewpicture, setViewpicture] = useState(false);
-  const viewPicture= () => {
-    setViewpicture(prevViewpicture=> !prevViewpicture);
+  const viewPicture = () => {
+    setViewpicture(prevViewpicture => !prevViewpicture);
   };
   const [viewprice, setViewprice] = useState(false);
-  const viewPrice= () => {
-    setViewprice(prevViewprice=> !prevViewprice);
+  const viewPrice = () => {
+    setViewprice(prevViewprice => !prevViewprice);
   };
   const [viewcontactinfo, setViewcontactinfo] = useState(false);
   const viewContactinfo = () => {
     setViewcontactinfo(prevViewcontactinfo => !prevViewcontactinfo);
   };
+
+  const pickImage = () => {
+    ImageCropPicker.openPicker({
+      width: scale(300),
+      height: scale(400),
+      multiple: true,
+      maxFiles: 100,
+    })
+      .then(image => {
+        if (image) {
+          setSelectedImage(image.map(img => img.path));
+          // uploadImage(image.path);
+        }
+      })
+      .catch(error => {
+        console.log('Error picking image:', error);
+      });
+  };
+
   const maxCharacters = 2000;
   const navigation = useNavigation();
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox = () => {
@@ -118,22 +146,22 @@ export default function TabContent() {
       </View> */}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewGeneral}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Tour information')}
+          {t('tour_information')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
       {viewgeneral && (
         <View style={styles.box}>
-        <CustomInput
+          <CustomInput
             styleTextLabel={{
               ...styles.text1,
               color: COLORS.black,
               marginTop: scale(10),
             }}
-            label={t('Title')}
+            label={t('title')}
             control={control}
             name="title"
-            placeholder={t('Title')}
+            placeholder={t('title')}
             rules={{
               ...requireField(t('this_field_required')),
             }}
@@ -152,7 +180,7 @@ export default function TabContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}
-            label={t('Provincial links')}
+            label={t('provincial')}
             control={control}
             name="provincial"
             placeholder={t('Provincial links')}
@@ -174,7 +202,7 @@ export default function TabContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}
-            label={t('Tour code')}
+            label={t('tour_code')}
             control={control}
             name="code"
             placeholder={t('code')}
@@ -197,9 +225,9 @@ export default function TabContent() {
                 ...styles.text1,
                 color: COLORS.black,
                 marginTop: scale(10),
-                alignSelf:'flex-start'
+                alignSelf: 'flex-start',
               }}>
-              {t('Topic')}
+              {t('topic')}
             </CustomText>
             <TouchableOpacity
               style={{
@@ -219,36 +247,93 @@ export default function TabContent() {
                   ...styles.text,
                   color: '#979797',
                 }}>
-                Domestic tourism
+                   {t('domestic')}
               </CustomText>
               <IconDown />
             </TouchableOpacity>
           </View>
         </View>
       )}
-         <TouchableOpacity style={styles.buttonCategories} onPress={viewDay}>
+      <TouchableOpacity style={styles.buttonCategories} onPress={viewDay}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Day')}
+          {t('day')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      {viewday&& (
+      {viewday && (
         <View style={styles.box}>
-        <CustomInput
-            styleTextLabel={{
+          <CustomText
+            textType="medium"
+            style={{
               ...styles.text1,
-              color: COLORS.black,
+              alignSelf: 'flex-start',
               marginTop: scale(10),
-            }}
-            label={t('Title')}
-            control={control}
-            name="title"
-            placeholder={t('Title')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
+            }}>
+            {t('tour_time')}
+          </CustomText>
+          <View style={{flexDirection: 'row'}}>
+            <CustomInput
+              styleTextLabel={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(10),
+              }}
+              control={control}
+              name="title"
+              placeholder={t('day_time')}
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              style={styles.textInputs}
+            />
+            <View
+              style={{
+                backgroundColor: '#E3E3E3',
+                marginTop: scale(10),
+                borderTopRightRadius: scale(5),
+                borderBottomRightRadius: scale(5),
+                justifyContent: 'center',
+                width: '30%',
+              }}>
+              <CustomText
+                textType="medium"
+                style={{...styles.text2, alignSelf: 'center'}}>
+                {t('day')}
+              </CustomText>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <CustomInput
+              styleTextLabel={{
+                ...styles.text1,
+                color: COLORS.black,
+                marginTop: scale(10),
+                marginLeft: scale(30),
+              }}
+              control={control}
+              name="title"
+              placeholder={t('night_time')}
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              style={{...styles.textInputs}}
+            />
+            <View
+              style={{
+                backgroundColor: '#E3E3E3',
+                marginTop: scale(10),
+                borderTopRightRadius: scale(5),
+                borderBottomRightRadius: scale(5),
+                justifyContent: 'center',
+                width: '30%',
+              }}>
+              <CustomText
+                textType="medium"
+                style={{...styles.text2, alignSelf: 'center'}}>
+                {t('night')}
+              </CustomText>
+            </View>
+          </View>
           <View
             style={{
               borderWidth: 0.5,
@@ -262,10 +347,10 @@ export default function TabContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}
-            label={t('Provincial links')}
+            label={t('maximum_seat')}
             control={control}
             name="provincial"
-            placeholder={t('Provincial links')}
+            // placeholder={t('Provincial links')}
             rules={{
               ...requireField(t('this_field_required')),
             }}
@@ -278,388 +363,375 @@ export default function TabContent() {
               marginTop: scale(10),
               borderColor: '#F0B90B',
             }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Tour code')}
-            control={control}
-            name="code"
-            placeholder={t('code')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <View>
+          <View style={{flexDirection: 'row'}}>
             <CustomText
               textType="medium"
               style={{
                 ...styles.text1,
                 color: COLORS.black,
                 marginTop: scale(10),
-                alignSelf:'flex-start'
+                flex: 1,
               }}>
-              {t('Topic')}
+              {t('check_in')}
             </CustomText>
-            <TouchableOpacity
+            <CustomText
+              textType="medium"
               style={{
-                height: scale(40),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                backgroundColor: '#E3E3E3',
-                width: '100%',
-                alignItems: 'center',
-                borderRadius: scale(5),
+                ...styles.text1,
+                color: COLORS.black,
                 marginTop: scale(10),
-                paddingHorizontal: scale(10),
+                flex: 1,
               }}>
-              <CustomText
-                textType="medium"
+              {t('check_out')}
+            </CustomText>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => setOpenCheckin(true)}
+              style={{
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              <View
                 style={{
-                  ...styles.text,
-                  color: '#979797',
+                  backgroundColor: '#E3E3E3',
+                  height: scale(40),
+                  justifyContent: 'center',
+                  borderRadius: scale(5),
+                  width: '70%',
+                  alignItems: 'center',
                 }}>
-                Domestic tourism
-              </CustomText>
-              <IconDown />
+                <CustomText
+                  style={{
+                    ...styles.text1,
+                    color: COLORS.black,
+                    borderWidth: scale(0),
+                  }}>
+                  {timeCheckin.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </CustomText>
+              </View>
+              <DatePicker
+                mode="time"
+                modal
+                open={openCheckin}
+                date={timeCheckin}
+                onConfirm={timeCheckin => {
+                  setOpenCheckin(false);
+                  setTimeCheckin(timeCheckin);
+                }}
+                onCancel={() => {
+                  setOpenCheckin(false);
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setOpenCheckout(true)}
+              style={{
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              <View
+                style={{
+                  backgroundColor: '#E3E3E3',
+                  height: scale(40),
+                  justifyContent: 'center',
+                  borderRadius: scale(5),
+                  width: '70%',
+                  alignItems: 'center',
+                }}>
+                <CustomText
+                  style={{
+                    ...styles.text1,
+                    color: COLORS.black,
+                    borderWidth: scale(0),
+                  }}>
+                  {timeCheckout.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </CustomText>
+              </View>
+              <DatePicker
+                mode="time"
+                modal
+                open={openCheckout}
+                date={timeCheckout}
+                onConfirm={timeCheckout => {
+                  setOpenCheckout(false);
+                  setTimeCheckout(timeCheckout);
+                }}
+                onCancel={() => {
+                  setOpenCheckout(false);
+                }}
+              />
             </TouchableOpacity>
           </View>
         </View>
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewLocation}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Location')}
+          {t('location')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      {viewlocation&& (
+      {viewlocation && (
         <View style={styles.box}>
-        <CustomInput
-            styleTextLabel={{
+          <CustomText
+            textType="medium"
+            style={{
               ...styles.text1,
               color: COLORS.black,
               marginTop: scale(10),
-            }}
-            label={t('Title')}
-            control={control}
-            name="title"
-            placeholder={t('Title')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
+              alignSelf: 'flex-start',
+            }}>
+            {t('starting_gate')}
+          </CustomText>
+          <TouchableOpacity
             style={{
-              borderWidth: 0.5,
+              height: scale(40),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#E3E3E3',
               width: '100%',
+              alignItems: 'center',
+              borderRadius: scale(5),
               marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Provincial links')}
-            control={control}
-            name="provincial"
-            placeholder={t('Provincial links')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Tour code')}
-            control={control}
-            name="code"
-            placeholder={t('code')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <View>
+              paddingHorizontal: scale(10),
+            }}>
             <CustomText
               textType="medium"
               style={{
-                ...styles.text1,
-                color: COLORS.black,
-                marginTop: scale(10),
-                alignSelf:'flex-start'
+                ...styles.text,
+                color: '#979797',
               }}>
-              {t('Topic')}
+              Viet Nam
             </CustomText>
-            <TouchableOpacity
+            <IconDown />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: scale(40),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#E3E3E3',
+              width: '100%',
+              alignItems: 'center',
+              borderRadius: scale(5),
+              marginTop: scale(10),
+              paddingHorizontal: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
               style={{
-                height: scale(40),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                backgroundColor: '#E3E3E3',
-                width: '100%',
-                alignItems: 'center',
-                borderRadius: scale(5),
-                marginTop: scale(10),
-                paddingHorizontal: scale(10),
+                ...styles.text,
+                color: '#979797',
               }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: '#979797',
-                }}>
-                Domestic tourism
-              </CustomText>
-              <IconDown />
-            </TouchableOpacity>
-          </View>
+              Hue
+            </CustomText>
+            <IconDown />
+          </TouchableOpacity>
+          <CustomText
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+              alignSelf: 'flex-start',
+            }}>
+            {t('destination')}
+          </CustomText>
+          <TouchableOpacity
+            style={{
+              height: scale(40),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#E3E3E3',
+              width: '100%',
+              alignItems: 'center',
+              borderRadius: scale(5),
+              marginTop: scale(10),
+              paddingHorizontal: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Viet Nam
+            </CustomText>
+            <IconDown />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: scale(40),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#E3E3E3',
+              width: '100%',
+              alignItems: 'center',
+              borderRadius: scale(5),
+              marginTop: scale(10),
+              paddingHorizontal: scale(10),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: '#979797',
+              }}>
+              Hue
+            </CustomText>
+            <IconDown />
+          </TouchableOpacity>
         </View>
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewPicture}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Picture and video')}
+          {t('picture_video')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      {viewpicture&& (
+      {viewpicture && (
         <View style={styles.box}>
-        <CustomInput
-            styleTextLabel={{
+          <CustomText
+            textType="medium"
+            style={{
               ...styles.text1,
               color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Title')}
-            control={control}
-            name="title"
-            placeholder={t('Title')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
+              marginTop: scale(20),
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+            }}>
+            {t('real_estate_images')}
+          </CustomText>
+          <CustomText
+            textType="regular"
             style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
+              ...styles.text3,
               color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Provincial links')}
-            control={control}
-            name="provincial"
-            placeholder={t('Provincial links')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
+              alignSelf: 'flex-start',
+              // paddingHorizontal: scale(20),
+            }}>
+            {t('update_image_to_maximum')}
+          </CustomText>
           <View
             style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Tour code')}
-            control={control}
-            name="code"
-            placeholder={t('code')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <View>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text1,
-                color: COLORS.black,
-                marginTop: scale(10),
-                alignSelf:'flex-start'
-              }}>
-              {t('Topic')}
-            </CustomText>
-            <TouchableOpacity
-              style={{
-                height: scale(40),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                backgroundColor: '#E3E3E3',
-                width: '100%',
-                alignItems: 'center',
-                borderRadius: scale(5),
-                marginTop: scale(10),
-                paddingHorizontal: scale(10),
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: '#979797',
-                }}>
-                Domestic tourism
-              </CustomText>
-              <IconDown />
+              alignSelf: 'flex-end',
+              // paddingHorizontal: scale(20),
+            }}>
+            <TouchableOpacity onPress={pickImage}>
+              <IconCamera />
             </TouchableOpacity>
           </View>
+          <View
+            style={{
+              ...styles.textArea1,
+              backgroundColor: '#E3E3E3',
+              marginBottom: scale(10),
+              width: '100%',
+            }}>
+            {selectedImage.length > 0 ? (
+              <ImageDetail
+                dataImg={selectedImage}
+                styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
+              />
+            ) : null}
+          </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('link_youtube')}
+            control={control}
+            name="youtube"
+            placeholder={t('link_youtube')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('link_tiktok')}
+            control={control}
+            name="tiktok"
+            placeholder={t('link_tiktok')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
         </View>
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewPrice}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Price')}
+          {t('price')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      {viewprice&& (
+      {viewprice && (
         <View style={styles.box}>
-        <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Title')}
-            control={control}
-            name="title"
-            placeholder={t('Title')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
+          <CustomText
+            textType="medium"
             style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
               ...styles.text1,
-              color: COLORS.black,
+              alignSelf: 'flex-start',
               marginTop: scale(10),
-            }}
-            label={t('Provincial links')}
-            control={control}
-            name="provincial"
-            placeholder={t('Provincial links')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <CustomInput
-            styleTextLabel={{
-              ...styles.text1,
-              color: COLORS.black,
-              marginTop: scale(10),
-            }}
-            label={t('Tour code')}
-            control={control}
-            name="code"
-            placeholder={t('code')}
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={styles.textInput}
-          />
-          <View
-            style={{
-              borderWidth: 0.5,
-              width: '100%',
-              marginTop: scale(10),
-              borderColor: '#F0B90B',
-            }}></View>
-          <View>
-            <CustomText
-              textType="medium"
-              style={{
+            }}>
+            {t('price')}
+          </CustomText>
+          <View style={{flexDirection: 'row'}}>
+            <CustomInput
+              styleTextLabel={{
                 ...styles.text1,
                 color: COLORS.black,
                 marginTop: scale(10),
-                alignSelf:'flex-start'
-              }}>
-              {t('Topic')}
-            </CustomText>
+              }}
+              control={control}
+              name="price"
+              placeholder={t('0')}
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              style={styles.textInputs}
+            />
             <TouchableOpacity
               style={{
-                height: scale(40),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
                 backgroundColor: '#E3E3E3',
-                width: '100%',
-                alignItems: 'center',
-                borderRadius: scale(5),
                 marginTop: scale(10),
-                paddingHorizontal: scale(10),
+                borderTopRightRadius: scale(5),
+                borderBottomRightRadius: scale(5),
+                justifyContent: 'space-between',
+                paddingHorizontal: scale(15),
+                width: '30%',
+                flexDirection: 'row',
+                alignItems: 'center',
               }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: '#979797',
-                }}>
-                Domestic tourism
+              <CustomText textType="medium" style={{...styles.text2}}>
+                {t('USD')}
               </CustomText>
               <IconDown />
             </TouchableOpacity>
@@ -670,7 +742,7 @@ export default function TabContent() {
         style={styles.buttonCategories}
         onPress={viewContactinfo}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Contact info')}
+          {t('contact_info')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
@@ -682,7 +754,7 @@ export default function TabContent() {
               color: COLORS.black,
               marginTop: scale(10),
             }}
-            label={t('Name')}
+            label={t('name')}
             control={control}
             name="fullname"
             placeholder={t('full_name')}
@@ -723,7 +795,12 @@ export default function TabContent() {
           />
         </View>
       )}
-      <View style={{flexDirection: 'row', alignItems: 'center', marginTop:scale(20)}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: scale(20),
+        }}>
         <CustomText
           textType="medium"
           style={{
@@ -736,7 +813,7 @@ export default function TabContent() {
           {t('do_you_agree')}
         </CustomText>
         <TouchableOpacity onPress={toggleCheckBox1}>
-          {check1 ? <IconCheckBoxWhite/> : <IconUnCheckBoxWhite />}
+          {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
         </TouchableOpacity>
       </View>
       <View style={{width: '100%', marginBottom: scale(30)}}>
@@ -760,7 +837,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#cccccc',
   },
   text2: {
-    fontSize: SIZES.xLarge,
+    fontSize: SIZES.medium,
   },
   text1: {
     fontSize: SIZES.small,
@@ -808,12 +885,11 @@ const styles = StyleSheet.create({
   textArea1: {
     borderWidth: scale(2),
     borderColor: '#E3E3E3',
-    borderRadius: scale(5),
-    height: scale(124),
+    borderRadius: scale(8),
+    height: scale(250),
+    overflow: 'hidden',
     justifyContent: 'space-between',
-    paddingHorizontal: scale(10),
-    paddingTop: scale(5),
-    marginTop: scale(20),
+    marginTop: scale(10),
     width: '90%',
   },
   textArea: {
@@ -874,5 +950,14 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     // borderWidth: scale(0),
     width: '100%',
+  },
+  textInputs: {
+    // backgroundColor: '#E3E3E3',
+    borderTopRightRadius: scale(0),
+    borderBottomRightRadius: scale(0),
+    marginTop: scale(10),
+    borderRadius: scale(5),
+    // borderWidth: scale(0),
+    width: '70%',
   },
 });

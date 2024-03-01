@@ -999,6 +999,49 @@ export default function TabContent() {
               />
             ) : null}
           </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('Link youtube')}
+            control={control}
+            name="youtube"
+            placeholder={t('Link youtube')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('Link tiktok')}
+            control={control}
+            name="tiktok"
+            placeholder={t('Link tiktok')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
         </View>
       )}
 
@@ -1037,128 +1080,128 @@ export default function TabContent() {
         </CustomText>
         <IconRight />
       </TouchableOpacity>
-      {viewpayment && 
+      {viewpayment && (
         <View style={styles.box}>
+          <CustomText
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(20),
+              alignSelf: 'flex-start',
+            }}>
+            {t('bank_name')}
+          </CustomText>
+          <TouchableOpacity
+            style={{
+              height: scale(40),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#E3E3E3',
+              width: '100%',
+              alignItems: 'center',
+              borderRadius: scale(5),
+              marginTop: scale(10),
+              paddingHorizontal: scale(10),
+            }}>
             <CustomText
               textType="medium"
               style={{
-                ...styles.text1,
-                color: COLORS.black,
-                marginTop: scale(20),
-                alignSelf:'flex-start'
+                ...styles.text,
+                color: '#979797',
               }}>
-              {t('bank_name')}
+              Select
             </CustomText>
-            <TouchableOpacity
-              style={{
-                height: scale(40),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                backgroundColor: '#E3E3E3',
-                width: '100%',
-                alignItems: 'center',
-                borderRadius: scale(5),
-                marginTop: scale(10),
-                paddingHorizontal: scale(10),
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: '#979797',
-                }}>
-                Select
-              </CustomText>
-              <IconDown />
-            </TouchableOpacity>
-            <View
+            <IconDown />
+          </TouchableOpacity>
+          <View
             style={{
               borderWidth: 0.5,
               width: '100%',
               marginTop: scale(10),
               borderColor: '#F0B90B',
             }}></View>
-            <CustomText
-              textType="medium"
-              style={{
+          <CustomText
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(20),
+              alignSelf: 'flex-start',
+            }}>
+            {t('account_number')}
+          </CustomText>
+          <View
+            style={{
+              height: scale(40),
+              // flexDirection: 'row',
+              justifyContent: 'center',
+              // backgroundColor: '#E3E3E3',
+              // flex: 1,
+              alignItems: 'center',
+              // borderRadius: scale(5),
+              marginTop: scale(10),
+              width: '100%',
+            }}>
+            <CustomInput
+              styleTextLabel={{
                 ...styles.text1,
                 color: COLORS.black,
-                marginTop: scale(20),
-                alignSelf:'flex-start'
-              }}>
-              {t('account_number')}
-            </CustomText>
-            <View
-              style={{
-                height: scale(40),
-                // flexDirection: 'row',
-                justifyContent: 'center',
-                // backgroundColor: '#E3E3E3',
-                // flex: 1,
-                alignItems: 'center',
-                // borderRadius: scale(5),
                 marginTop: scale(10),
-                width: '100%',
-              }}>
-              <CustomInput
-                styleTextLabel={{
-                  ...styles.text1,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                }}
-                control={control}
-                name="AccountNumber"
-                rules={{
-                  ...requireField(t('this_field_required')),
-                }}
-                style={{...styles.textInput}}
-              />
-            </View>
-            <View
+              }}
+              control={control}
+              name="AccountNumber"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              style={{...styles.textInput}}
+            />
+          </View>
+          <View
             style={{
               borderWidth: 0.5,
               width: '100%',
               marginTop: scale(20),
               borderColor: '#F0B90B',
             }}></View>
-            <CustomText
-              textType="medium"
-              style={{
+          <CustomText
+            textType="medium"
+            style={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(20),
+              alignSelf: 'flex-start',
+            }}>
+            {t('account_holder')}
+          </CustomText>
+          <View
+            style={{
+              height: scale(40),
+              // flexDirection: 'row',
+              justifyContent: 'center',
+              // backgroundColor: '#E3E3E3',
+              // flex: 1,
+              alignItems: 'center',
+              // borderRadius: scale(5),
+              marginTop: scale(10),
+              width: '100%',
+            }}>
+            <CustomInput
+              styleTextLabel={{
                 ...styles.text1,
                 color: COLORS.black,
-                marginTop: scale(20),
-                alignSelf:'flex-start'
-              }}>
-              {t('account_holder')}
-            </CustomText>
-            <View
-              style={{
-                height: scale(40),
-                // flexDirection: 'row',
-                justifyContent: 'center',
-                // backgroundColor: '#E3E3E3',
-                // flex: 1,
-                alignItems: 'center',
-                // borderRadius: scale(5),
                 marginTop: scale(10),
-                width: '100%',
-              }}>
-              <CustomInput
-                styleTextLabel={{
-                  ...styles.text1,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                }}
-                control={control}
-                name="AccountHolder"
-                rules={{
-                  ...requireField(t('this_field_required')),
-                }}
-                style={{...styles.textInput}}
-              />
-            </View>
+              }}
+              control={control}
+              name="AccountHolder"
+              rules={{
+                ...requireField(t('this_field_required')),
+              }}
+              style={{...styles.textInput}}
+            />
           </View>
-      }
+        </View>
+      )}
       <View
         style={{
           flexDirection: 'row',

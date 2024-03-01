@@ -269,5 +269,22 @@
     "payment_information":"Payment information",
     "bank_name":"Bank name",
     "account_number":"Account number",
-    "account_holder":"Account holder"
+    "account_holder":"Account holder",
+    "tour_information":"Tour information",
+    "title":"Title",
+    "provincial":"Provincial links",
+    "tour_code":"Tour code",
+    "topic":"Topic",
+    "domestic":"Domestic tourism",
+    "tour_time":"Tour time",
+    "day_time":"Day time",
+    "night_time":"Night time",
+    "night":"Night",
+    "maximum_seat":"Maximum number of seats",
+    "starting_gate":"Starting gate",
+    "destination":"Destination",
+    "picture_video":"Picture and video",
+    "link_youtube":"Link youtube",
+    "link_tiktok":"Link tiktok",
+    "name":"Name"
 }

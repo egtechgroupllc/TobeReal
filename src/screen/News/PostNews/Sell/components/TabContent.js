@@ -665,6 +665,49 @@ export default function TabContent() {
               />
             ) : null}
           </View>
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('Link youtube')}
+            control={control}
+            name="youtube"
+            placeholder={t('Link youtube')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
+          <View
+            style={{
+              borderWidth: 0.5,
+              width: '100%',
+              marginTop: scale(10),
+              borderColor: '#F0B90B',
+            }}></View>
+          <CustomInput
+            styleTextLabel={{
+              ...styles.text1,
+              color: COLORS.black,
+              marginTop: scale(10),
+            }}
+            label={t('Link tiktok')}
+            control={control}
+            name="tiktok"
+            placeholder={t('Link tiktok')}
+            // rules={{
+            //   ...requireField(t('this_field_required')),
+            // }}
+            style={styles.textInput}
+          />
         </View>
       )}
 
@@ -697,7 +740,12 @@ export default function TabContent() {
         </CustomText>
         <IconDown />
       </TouchableOpacity> */}
-      <View style={{flexDirection: 'row', alignItems: 'center', marginTop:scale(20)}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: scale(20),
+        }}>
         <CustomText
           textType="medium"
           style={{
@@ -710,7 +758,7 @@ export default function TabContent() {
           {t('do_you_agree')}
         </CustomText>
         <TouchableOpacity onPress={toggleCheckBox1}>
-          {check1 ? <IconCheckBox/> : <IconUnCheckBox />}
+          {check1 ? <IconCheckBox /> : <IconUnCheckBox />}
         </TouchableOpacity>
       </View>
       {/* <CustomText
