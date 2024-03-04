@@ -242,6 +242,7 @@
   "RENT": "เช่า",
   "BUY": "ซื้อ",
   "TOUR": "ทัวร์",
+  "tour_post":"ทัวร์",
   "wish_list": "รายการสิ่งที่ต้องการ",
   "change_language_success": "เปลี่ยนภาษาสำเร็จ!",
   "username_or_email": "ชื่อผู้ใช้หรืออีเมล",

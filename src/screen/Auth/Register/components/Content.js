@@ -54,6 +54,7 @@ export default function Content() {
   };
 
   return (
+    <View style={styles.wrapper}>
     <View style={styles.container}>
       <CustomInput
         control={control}
@@ -139,6 +140,7 @@ export default function Content() {
         </CustomText>
       </View>
     </View>
+    </View>
   );
 }
 
@@ -146,6 +148,10 @@ const styles = StyleSheet.create({
   container: {
     marginTop: scale(20),
     rowGap: scale(16),
+  },
+  wrapper: {
+    marginTop: scale(20),
+    width: '100%',
   },
   text: {
     fontSize: SIZES.small,

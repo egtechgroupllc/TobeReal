@@ -49,7 +49,7 @@ export default memo(function BookAccommodation({setBookHeight, price}) {
         }}>
         <CustomButton
           onPress={() => {
-            !token ? navigate('NavigationAuth') : '';
+            !token ? navigate('NavigationAuth') : navigate('BookingScreen');
           }}
           outline
           buttonType="large"
@@ -59,9 +59,22 @@ export default memo(function BookAccommodation({setBookHeight, price}) {
             fontSize: SIZES.xMedium,
           }}
         />
-        <CustomButton
+        {/* <CustomButton
           onPress={() => {
-            !token ? navigate('NavigationAuth') : '';
+            !token ? navigate('NavigationAuth') : navigate('BookingScreen');
+          }}
+          buttonType="large"
+          style={{flex: 1}}
+          text={price < 1000000000 ? t('book_now') : t('buy')}
+          styleText={{
+            fontSize: SIZES.xMedium,
+          }}
+        /> */}
+        
+        {/* ------------NO LOGIN----------- */}
+          <CustomButton
+          onPress={() => {
+            token ? navigate('NavigationAuth') : navigate('BookingScreen');
           }}
           buttonType="large"
           style={{flex: 1}}

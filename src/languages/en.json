@@ -245,6 +245,7 @@
     "RENT":"RENT",
     "BUY":"BUY",
     "TOUR":"TOUR",
+    "tour_post":"Tour",
     "wish_list":"Wish list",
     "change_language_success":"Change language success!",
     "username_or_email":"Username or email",

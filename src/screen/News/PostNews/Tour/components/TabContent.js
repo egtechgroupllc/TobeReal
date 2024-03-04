@@ -114,7 +114,7 @@ export default function TabContent() {
           <CustomText
             textType="semiBold"
             style={{...styles.text1, marginLeft: scale(20)}}>
-            {t('tour')}
+            {t('tour_post')}
           </CustomText>
         </View>
       </View>

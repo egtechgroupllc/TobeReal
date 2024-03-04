@@ -74,7 +74,7 @@ export default function FindAccommodation() {
   ];
   const listTour = [
     {
-      text: t('land'),
+      text: t('tour_post'),
       icon: IconLand,
     },
   ];

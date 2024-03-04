@@ -1,15 +1,16 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {TabSelect} from '../../../components';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import CategoriesButton from './CategoriesButton';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../components/CustomText';
-import { IconNoHistory } from '../../../assets/icon/Icon';
+import {IconNoHistory} from '../../../assets/icon/Icon';
 import {useNavigation} from '@react-navigation/native';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
+import CustomImage from '../../../components/CustomImage';
 export default function TabContent() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const navigation = useNavigation();
   const [tabSelect, setTabSelect] = useState('Post news');
   const [viewbenefit, setViewbenefit] = useState(false);
@@ -19,18 +20,18 @@ export default function TabContent() {
   const viewBenefit = () => {
     setViewbenefit(prevViewbenefit => !prevViewbenefit);
   };
-  const viewPackage= () => {
-    setViewpackage(prevViewpackage => !prevViewpackage );
+  const viewPackage = () => {
+    setViewpackage(prevViewpackage => !prevViewpackage);
   };
-  const viewCostnew= () => {
-    setViewcostnew(prevViewcostnew => !prevViewcostnew  );
+  const viewCostnew = () => {
+    setViewcostnew(prevViewcostnew => !prevViewcostnew);
   };
-  const viewTradingflatform= () => {
-    setViewtradingflatform(prevViewtradingflatform => !prevViewtradingflatform  );
+  const viewTradingflatform = () => {
+    setViewtradingflatform(prevViewtradingflatform => !prevViewtradingflatform);
   };
-  const goPostScreen = () =>{
-    navigation.navigate('PostNewsScreen')
-  }
+  const goPostScreen = () => {
+    navigation.navigate('PostNewsScreen');
+  };
   const data = [
     // {
     //   id: 1,
@@ -77,18 +78,37 @@ export default function TabContent() {
             onPress={viewBenefit}
             viewbenefit={viewbenefit}
           />
-          <CategoriesButton title={t('posting_package')} onPress={viewPackage} viewpackage={viewpakage}/>
-          <CategoriesButton title={t('cost_for_each')} viewcostnew={viewcostnew} onPress={viewCostnew}/>
-          <CategoriesButton title={t('create_an_online')} viewtradingflatform={viewtradingflatform} onPress={viewTradingflatform}/>
-          <TouchableOpacity onPress={goPostScreen}
-            style={{alignItems: 'center', marginTop: scale(50), marginBottom:scale(30),width: '50%',alignSelf:'center'}}>
+          <CategoriesButton
+            title={t('posting_package')}
+            onPress={viewPackage}
+            viewpackage={viewpakage}
+          />
+          <CategoriesButton
+            title={t('cost_for_each')}
+            viewcostnew={viewcostnew}
+            onPress={viewCostnew}
+          />
+          <CategoriesButton
+            title={t('create_an_online')}
+            viewtradingflatform={viewtradingflatform}
+            onPress={viewTradingflatform}
+          />
+          <TouchableOpacity
+            onPress={goPostScreen}
+            style={{
+              alignItems: 'center',
+              marginTop: scale(50),
+              marginBottom: scale(30),
+              width: '50%',
+              alignSelf: 'center',
+            }}>
             <LinearGradient
               colors={['#FFE259', '#FFA751']}
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               style={[styles.button]}>
               <CustomText textType="semiBold" style={{...styles.text2}}>
-               {t('post')}
+                {t('post')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -151,11 +171,23 @@ export default function TabContent() {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            alignSelf:'center',
+            alignSelf: 'center',
             marginTop: scale(150),
             width: scale(325),
           }}>
-          <IconNoHistory/>
+          <CustomImage
+            source={images.emptyData}
+            resizeMode="contain"
+            style={styles.img}
+          />
+          <CustomText
+            textType="bold"
+            style={{
+              color: COLORS.primary,
+              fontSize: SIZES.medium,
+            }}>
+            {'No history'}
+          </CustomText>
         </View>
       )}
     </View>
@@ -179,7 +211,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
   },
   button: {
-    width:'100%',
+    width: '100%',
     height: scale(50),
     borderRadius: scale(10),
     alignItems: 'center',
@@ -192,5 +224,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: scale(10),
     marginBottom: scale(20),
+  },
+  img: {
+    width: scale(220),
+    height: scale(220),
   },
 });
