@@ -739,18 +739,6 @@ export default function TabContent() {
       </TouchableOpacity>
       {viewfacilities && (
         <View style={styles.box}>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text1,
-              color: COLORS.black,
-              alignSelf: 'flex-start',
-              // paddingHorizontal: scale(20),
-              marginBottom: scale(10),
-              marginTop: scale(20),
-            }}>
-            {t('estate_facilities')}
-          </CustomText>
           <TouchableOpacity
             style={
               !showFacilities
@@ -763,7 +751,7 @@ export default function TabContent() {
               style={{
                 ...styles.text,
                 color: COLORS.black,
-                paddingHorizontal: scale(20),
+                paddingHorizontal: scale(20)
               }}>
               {t('estate_facilities')}
             </CustomText>
@@ -816,7 +804,7 @@ export default function TabContent() {
                               // backgroundColor: 'red',
                               flexDirection: 'row',
                               justifyContent: 'space-between',
-                              paddingHorizontal: scale(10),
+                              // paddingHorizontal: scale(10),
                               alignItems: 'center',
                             }}
                             key={index}>
@@ -1397,14 +1385,17 @@ const styles = StyleSheet.create({
     marginTop: scale(20),
   },
   buttonEstateType: {
+    marginTop:scale(20),
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
     borderRadius: scale(10),
     width: '100%',
     height: scale(40),
     justifyContent: 'center',
+    // backgroundColor:'#E3E3E3'
   },
   buttonEstateTypes: {
+    marginTop:scale(20),
     borderTopLeftRadius: scale(10),
     borderTopEndRadius: scale(10),
     borderTopRightRadius: scale(10),
@@ -1413,6 +1404,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: scale(40),
     justifyContent: 'center',
+    // backgroundColor:'#E3E3E3'
   },
   listEstateType: {
     borderBottomLeftRadius: scale(10),

@@ -63,7 +63,7 @@ export default function App() {
                 <AuthProvider>
                   <BottomSheetModalProvider>
                     <StatusBar
-                      barStyle="light-content"
+                      barStyle="dark-content"
                       backgroundColor={COLORS.primary}
                     />
                     <Layout />

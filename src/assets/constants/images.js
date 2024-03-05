@@ -29,6 +29,7 @@ export default {
   china:require('../images/china.png'),
   iconTiktok:require('../images/iconTiktok.png'),
   iconYoutube:require('../images/iconYoutube.png'),
+  iconCoupon:require('../images/iconCoupon.png'),
   c15:require('../images/c15.jpg'),
   c15_1:require('../images/c15_1.jpg'),
   c15_2:require('../images/c15_2.jpg'),
