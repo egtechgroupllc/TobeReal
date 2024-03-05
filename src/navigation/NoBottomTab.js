@@ -9,6 +9,7 @@ export default function NoBottomTab() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        header: props => <HeaderBar {...props} />,
       }}>
       <Stack.Group>
         {routerNoBottomTab.map(router => (

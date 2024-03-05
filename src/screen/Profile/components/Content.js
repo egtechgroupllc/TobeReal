@@ -12,9 +12,9 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import CategoriesButton from './CategoriesButton';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
@@ -83,7 +83,7 @@ export default function Content() {
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.white}}>
-                {t('regular_member')}
+              {t('regular_member')}
             </CustomText>
           </View>
           <View>
@@ -132,7 +132,7 @@ export default function Content() {
           </View>
         </View>
       </View>
-      <View style={{alignItems:'center', width:'90%'}}>
+      <View style={{alignItems: 'center', width: '90%'}}>
         <CategoriesButton
           title={t('view_personal')}
           onPress={viewPersonal}
@@ -141,7 +141,12 @@ export default function Content() {
           large={true}
           personalInformation={personalInformation}
         />
-        <View style={{flexDirection: 'row', justifyContent:'space-between', width:'100%'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}>
           <CategoriesButton
             title={t('see_the_news')}
             onPress={seeTheNews}
@@ -159,12 +164,12 @@ export default function Content() {
           onPress={financial}
           large={true}
         />
-          <CategoriesButton
+        <CategoriesButton
           title={t('select_language')}
           onPress={selectLanguage}
           large={true}
         />
-           <CategoriesButton
+        <CategoriesButton
           title={t('become_shome_partner')}
           onPress={AccountType}
           large={true}
@@ -179,7 +184,7 @@ export default function Content() {
           onPress={managingTradeFloor}
           large={true}
         />
-          <CategoriesButton
+        <CategoriesButton
           title={t('wish_list')}
           onPress={wishlist}
           large={true}

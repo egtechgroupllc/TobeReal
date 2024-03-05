@@ -1,9 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, SIZES, scale} from '../assets/constants';
-import BouncyCheckbox, {
-  IBouncyCheckboxProps,
-} from 'react-native-bouncy-checkbox';
 import {
   Control,
   Controller,
@@ -11,8 +6,13 @@ import {
   RegisterOptions,
   useForm,
 } from 'react-hook-form';
-import CustomText from './CustomText';
+import {StyleSheet, View, ViewStyle} from 'react-native';
+import BouncyCheckbox, {
+  IBouncyCheckboxProps,
+} from 'react-native-bouncy-checkbox';
+import {COLORS, scale} from '../assets/constants';
 import {IconError} from '../assets/icon/Icon';
+import CustomText from './CustomText';
 
 type CheckBoxProps = {
   control?: Control<FieldValues>;
@@ -21,7 +21,9 @@ type CheckBoxProps = {
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
   name: string;
+  styleWrapper: ViewStyle;
   textLeft: boolean;
+  isRadio: boolean;
   defaultValue: boolean;
 } & IBouncyCheckboxProps;
 
@@ -29,7 +31,9 @@ export default function CheckBox({
   control,
   rules,
   name,
+  styleWrapper,
   textLeft,
+  isRadio,
   defaultValue,
   ...props
 }: CheckBoxProps) {
@@ -41,13 +45,14 @@ export default function CheckBox({
       rules={rules}
       name={name || ''}
       render={({field: {onChange, value}, fieldState: {error}}) => (
-        <View>
+        <View style={styleWrapper}>
           <BouncyCheckbox
             textComponent={<CustomText>{props.text}</CustomText>}
             onPress={onChange}
             size={scale(16)}
             isChecked={value}
             fillColor={COLORS.primary}
+            disableBuiltInState={isRadio}
             innerIconStyle={{borderWidth: 2, borderRadius: 4}}
             iconStyle={{borderRadius: 4}}
             {...props}

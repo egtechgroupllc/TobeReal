@@ -2,14 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React from 'react';
 import {getProfile} from '../../api/user';
-import MainWrapper from '../../components/MainWrapper';
+import MainAuth from '../../components/MainAuth';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import AvatarImage from './components/AvatarImage';
 import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderAvatar from './components/HeaderAvatar';
 import HeaderNoToken from './components/HeaderNoToken';
-import MainAuth from '../../components/MainAuth';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -21,7 +20,6 @@ export default function ProfileScreen() {
     queryKey: ['user', 'profile'],
     queryFn: getProfile,
     enabled: !!token,
-    retry: 3,
   });
 
   return (

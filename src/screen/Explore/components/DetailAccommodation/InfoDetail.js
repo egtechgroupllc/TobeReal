@@ -1,18 +1,11 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
-import {
-  COLORS,
-  SIZES,
-  WIDTH,
-  images,
-  scale,
-} from '../../../../assets/constants';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {IconHome, IconRoom} from '../../../../assets/icon/Icon';
-import Introduction from './Introduction';
-import {useLanguage} from '../../../../hooks/useLanguage';
 import CustomImage from '../../../../components/CustomImage';
+import CustomText from '../../../../components/CustomText';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import Introduction from './Introduction';
 
 export default function InfoDetail({name}) {
   const {t} = useLanguage();
@@ -69,6 +62,7 @@ export default function InfoDetail({name}) {
           </TouchableOpacity>
         </View>
       </View>
+
       <Introduction />
     </View>
   );
@@ -102,7 +96,7 @@ const styles = StyleSheet.create({
     rowGap: scale(6),
     flex: 1,
     flexWrap: 'wrap',
-    alignItems:'center'
+    alignItems: 'center',
   },
   boxRoom: {
     flexDirection: 'row',

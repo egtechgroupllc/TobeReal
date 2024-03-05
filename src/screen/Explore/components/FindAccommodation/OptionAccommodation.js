@@ -18,6 +18,7 @@ export default function OptionAccommodation({
   isSelectAll,
   isShaDow,
   isSelectForIndex,
+  scrollEnabled,
   noSelectDefault,
   select,
   onSelect,
@@ -84,7 +85,7 @@ export default function OptionAccommodation({
         contentContainerStyle={[styles.content, styleContent]}
         horizontal
         showsHorizontalScrollIndicator={false}
-        scrollEnabled={data.length > 3}
+        scrollEnabled={scrollEnabled || data.length > 3}
         renderItem={({item, index}) => (
           <TouchableOpacity
             key={`key-${item?.[_keyTextView]}-${index}`}

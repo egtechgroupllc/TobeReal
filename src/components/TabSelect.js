@@ -53,6 +53,7 @@ export default function TabSelect({
               key={`key-${item}-${index}`}
               text={item}
               buttonType="large"
+              disabled={tab === item}
               isShadow={isShadow && tab === item}
               style={[
                 styles.tab,
@@ -108,7 +109,7 @@ export default function TabSelect({
             },
             isShadow && SHADOW,
           ]}>
-          {renderView()}
+          {renderView(tab)}
         </View>
       )}
     </View>

@@ -12,9 +12,9 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
-import { useLanguage } from '../../../../hooks/useLanguage';
-export default function MidContent() {
-  const {t}= useLanguage()
+import {useLanguage} from '../../../../hooks/useLanguage';
+export default function MidContent({data}) {
+  const {t} = useLanguage();
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -71,7 +71,7 @@ export default function MidContent() {
           <CustomText
             textType="bold"
             style={{...styles.text1, color: COLORS.white}}>
-                 {t('donated')}
+            {t('donated')}
           </CustomText>
           <CustomText
             textType="bold"
@@ -86,7 +86,7 @@ export default function MidContent() {
             <CustomText
               textType="regular"
               style={{...styles.text, color: COLORS.black}}>
-             {t('main_expiration')}:
+              {t('main_expiration')}:
             </CustomText>
             <CustomText
               textType="regular"
@@ -94,7 +94,7 @@ export default function MidContent() {
                 ...styles.text,
                 color: COLORS.black,
               }}>
-             {t('normal_expiration')}:
+              {t('normal_expiration')}:
             </CustomText>
             <CustomText
               textType="regular"
@@ -102,7 +102,7 @@ export default function MidContent() {
                 ...styles.text,
                 color: COLORS.black,
               }}>
-             {t('gift_expiration')}:
+              {t('gift_expiration')}:
             </CustomText>
           </View>
           <View>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#EEEEEE',
     height: scale(87),
-    width:'90%',
+    width: '90%',
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   box1: {
     backgroundColor: '#EEEEEE',
     height: scale(62),
-    width:'90%',
+    width: '90%',
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(15),

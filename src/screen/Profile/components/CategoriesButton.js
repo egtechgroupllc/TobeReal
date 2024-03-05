@@ -1,17 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {CustomButton} from '../../../components';
-import CustomText from '../../../components/CustomText';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
-import {
-  Avatar,
-  IconEditProfile,
-  IconGoBack,
-  IconNotification,
-  IconRight,
-} from '../../../assets/icon/Icon';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {SIZES, scale} from '../../../assets/constants';
+import {IconRight} from '../../../assets/icon/Icon';
+import CustomText from '../../../components/CustomText';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function CategoriesButton({
   title,
@@ -27,12 +20,11 @@ export default function CategoriesButton({
   contactPurchase,
   personalInformation,
   number,
-  postManagement
-}) 
-{
-  const {t}= useLanguage()
+  postManagement,
+}) {
+  const {t} = useLanguage();
   return (
-    <View >
+    <View>
       {large && (
         <TouchableOpacity onPress={onPress}>
           <LinearGradient
@@ -47,21 +39,22 @@ export default function CategoriesButton({
           </LinearGradient>
         </TouchableOpacity>
       )}
-        {postManagement && (
+      {postManagement && (
         <View>
           <LinearGradient
             colors={['#F0B90B', '#FFFFFF00']}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 0.8}}
             style={styles.button}>
-              <CustomText textType="medium" style={{...styles.text2}}>
+            <CustomText textType="medium" style={{...styles.text2}}>
               {number}
             </CustomText>
-            <CustomText textType="medium"  style={{...styles.text2}}>
+            <CustomText textType="medium" style={{...styles.text2}}>
               {title}
             </CustomText>
-            <CustomText textType="medium" style={{...styles.text2}}>
-            </CustomText>
+            <CustomText
+              textType="medium"
+              style={{...styles.text2}}></CustomText>
           </LinearGradient>
         </View>
       )}
@@ -81,7 +74,10 @@ export default function CategoriesButton({
       )}
       {viewpersonal && (
         <View style={styles.box}>
-            <View>
+          <View
+            style={{
+              rowGap: scale(10),
+            }}>
             <TouchableOpacity
               onPress={changePW}
               style={{
@@ -89,13 +85,16 @@ export default function CategoriesButton({
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
-              {t('change_password')}
+              <CustomText
+                textType="bold"
+                style={{...styles.text2, width: '97%'}}>
+                {t('change_password')}
               </CustomText>
               <View>
                 <IconRight />
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity
               onPress={personalInformation}
               style={{
@@ -104,7 +103,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-              {t('personal_information')}
+                {t('personal_information')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -121,8 +120,10 @@ export default function CategoriesButton({
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <CustomText textType="bold" style={{...styles.text2, width:'97%'}}>
-              {t('customer_buy')}
+              <CustomText
+                textType="bold"
+                style={{...styles.text2, width: '97%'}}>
+                {t('customer_buy')}
               </CustomText>
               <View>
                 <IconRight />
@@ -136,7 +137,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-              {t('customer_rent')}
+                {t('customer_rent')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -148,7 +149,7 @@ export default function CategoriesButton({
                 justifyContent: 'space-between',
               }}>
               <CustomText textType="bold" style={{...styles.text2}}>
-              {t('contact_purchased')}
+                {t('contact_purchased')}
               </CustomText>
               <IconRight />
             </TouchableOpacity>
@@ -160,12 +161,12 @@ export default function CategoriesButton({
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor:'white',
+    backgroundColor: 'white',
     alignItems: 'center',
-    alignSelf:'center',
+    alignSelf: 'center',
     borderRadius: scale(4),
     height: scale(35),
-    width:'100%',
+    width: '100%',
     justifyContent: 'space-between',
     marginTop: scale(20),
     borderWidth: scale(1),
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
     borderColor: '#0000001A',
     flexDirection: 'row',
     paddingHorizontal: scale(7),
-    minWidth:'45%'
+    minWidth: '45%',
   },
   text2: {
     fontSize: SIZES.small,
@@ -200,8 +201,6 @@ const styles = StyleSheet.create({
   box: {
     height: scale(70),
     backgroundColor: '#EEEEEE',
-    borderBottomLeftRadius: scale(5),
-    borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     flexDirection: 'row',

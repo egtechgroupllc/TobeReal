@@ -9,6 +9,7 @@ import {format} from 'date-fns';
 import {formatDateTime} from '../../../../utils/format';
 import ListSelect from '../../../../components/ListSelect';
 import CalendarRange from '../../../../components/CalendarRange';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 const minDate = new Date(); // Today
 let dateEnd = new Date().setDate(minDate.getDate() + 1); // Today
@@ -34,6 +35,7 @@ const listSelectTimeYear = [
 ];
 
 export default function ChooseCalendar({rental}) {
+  const {t} = useLanguage();
   // Khai báo State
   const [selectedStartDate, setSelectedStartDate] = useState(minDate);
   const [selectedEndDate, setSelectedEndDate] = useState(dateEnd);
@@ -45,7 +47,8 @@ export default function ChooseCalendar({rental}) {
 
   // List được Memoized
   const listSelectTime = useMemo(
-    () => (rental === 'Yearly' ? listSelectTimeYear : listSelectTimeMonth),
+    () => (rental === t('yearly') ? listSelectTimeYear : listSelectTimeMonth),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [rental],
   );
   // Bộ xử lý Sự kiện
@@ -70,9 +73,9 @@ export default function ChooseCalendar({rental}) {
 
   // Hiệu ứng cho Sự thay đổi Ngày
   useEffect(() => {
-    if (rental !== 'Daily') {
+    if (rental !== t('daily')) {
       const newDate =
-        rental === 'Yearly'
+        rental === t('yearly')
           ? new Date().setFullYear(
               minDate.getFullYear() + (selected?.value || 1),
             )
@@ -100,7 +103,8 @@ export default function ChooseCalendar({rental}) {
         ref={bottomSheetRef}
         refChild={bottomSheetChild}
         titleIndicator={'Calendar'}
-        snapPoints={['80%']}
+        snapPoints={['75%']}
+        snapPointsChild={['60%']}
         handleChildBottom={
           rental !== 'Daily' &&
           (() => (

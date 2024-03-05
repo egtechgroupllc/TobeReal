@@ -11,6 +11,12 @@ export default routerNoBottomTab = [
   {
     name: 'HomeSearchAccommodScreen',
     component: HomeSearchAccommodScreen,
+    options: {
+      headerShown: true,
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
+    },
   },
   {
     name: 'BookingScreen',

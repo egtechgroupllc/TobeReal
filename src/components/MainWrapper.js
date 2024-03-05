@@ -7,19 +7,23 @@ export default function MainWrapper({
   children,
   backgroundColor,
   styleContent,
+  styleWrapper,
+  noSafeArea,
   scrollEnabled = true,
   onScroll = () => {},
 }) {
   return (
     <SafeAreaView
-      style={{...styles.wrapper, backgroundColor: COLORS.primary}}
-      edges={['top', 'right', 'left']}>
+      style={{flex: 1, backgroundColor: COLORS.primary}}
+      edges={noSafeArea ? [''] : ['top', 'right', 'left']}>
       <ImageBackground
         source={images.background}
         resizeMode="stretch"
         style={[
-          {flex: 1, backgroundColor: '#fff'},
+          styles.wrapper,
+          {backgroundColor: '#fff'},
           backgroundColor && {backgroundColor},
+          styleWrapper,
         ]}>
         <View style={[styles.wrapper]}>
           {scrollEnabled ? (

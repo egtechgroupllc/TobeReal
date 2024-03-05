@@ -44,6 +44,7 @@ export default function Category({
         scrollEnabled={data.length > 3}
         renderItem={({item, index}) => (
           <CustomButton
+            buttonType="normal"
             key={`key-${item}-${index}`}
             text={item}
             isShadow={isShadow}

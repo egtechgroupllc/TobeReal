@@ -17,6 +17,7 @@ import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import InViewPort from '../../../../components/InViewport';
+import FindAccommodationStart from './FindAccommodationStart';
 
 export default function FindAccommodation() {
   const {t} = useLanguage();
@@ -61,7 +62,7 @@ export default function FindAccommodation() {
     },
     {
       text: t('home'),
-      icon: IconVilla,
+      icon: IconHome,
     },
     {
       text: t('land'),
@@ -85,7 +86,7 @@ export default function FindAccommodation() {
 
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={20}>
-      {isRender && (
+      {true && (
         <View
           style={{
             width: WIDTH.widthContain,
@@ -99,30 +100,39 @@ export default function FindAccommodation() {
             }}
             renderView={() => (
               <>
-                <View style={styles.category}>
-                  {tabSelect !== t('BUY') && tabSelect !== t('TOUR') && (
-                    <Category
-                      data={[t('daily'), t('monthly'), t('yearly')]}
-                      onChange={value => setCategory(value)}
-                    />
-                  )}
+                {isRender ? (
+                  <>
+                    <View style={styles.category}>
+                      {tabSelect !== t('BUY') && tabSelect !== t('TOUR') && (
+                        <Category
+                          data={[t('daily'), t('monthly'), t('yearly')]}
+                          onChange={value => setCategory(value)}
+                        />
+                      )}
 
-                  <OptionAccommodation
-                    styleIcon={{color: '#BCBCBC'}}
-                    multiSelect
-                    isSelectAll
-                    data={
-                      tabSelect === t('RENT')
-                        ? listRent || []
-                        : tabSelect === t('BUY')
-                        ? listBuy || []
-                        : tabSelect === t('TOUR')
-                        ? listTour
-                        : []
-                    }
-                  />
-                </View>
-                <FindContent isBuy={tabSelect === t('BUY')} rental={category} />
+                      <OptionAccommodation
+                        styleIcon={{color: '#BCBCBC'}}
+                        multiSelect
+                        isSelectAll
+                        data={
+                          tabSelect === t('RENT')
+                            ? listRent || []
+                            : tabSelect === t('BUY')
+                            ? listBuy || []
+                            : tabSelect === t('TOUR')
+                            ? listTour
+                            : []
+                        }
+                      />
+                    </View>
+                    <FindContent
+                      isBuy={tabSelect === t('BUY')}
+                      rental={category}
+                    />
+                  </>
+                ) : (
+                  <FindAccommodationStart />
+                )}
               </>
             )}
           />

@@ -128,9 +128,8 @@ const BottomSheet = (
         <BottomSheetMain
           ref={bottomSheetChildRef}
           snapPoints={_snapPointsChild}
-          // enablePanDownToClose
-          // backdropComponent={BottomSheetBackdrop}
-        >
+          enablePanDownToClose
+          backdropComponent={BottomSheetBackdrop}>
           {handleChildBottom && handleChildBottom()}
         </BottomSheetMain>
       )}

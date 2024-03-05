@@ -34,7 +34,7 @@ type CustomButtonProps = {
 const funcFallBlack = () => {};
 
 export default memo(function CustomButton({
-  buttonType,
+  buttonType = 'medium',
   text,
   isShadow,
   iconLeft,
@@ -52,7 +52,7 @@ export default memo(function CustomButton({
   const IconLeft: any = iconLeft;
 
   const heightSize = useMemo(() => {
-    return buttonType === 'large' ? 48 : buttonType === 'medium' ? 38 : 31;
+    return buttonType === 'large' ? 48 : buttonType === 'medium' ? 40 : 31;
   }, [buttonType]);
 
   const fontSize = useMemo(() => {

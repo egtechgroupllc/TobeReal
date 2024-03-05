@@ -17,6 +17,7 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 export default function BoxPlaceItem({
   data,
   seeViewNumber = 2.4,
+  isLoading,
   isViewMap,
   isHeart,
   isStar,
@@ -36,7 +37,7 @@ export default function BoxPlaceItem({
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
-      {data ? (
+      {!isLoading ? (
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => {

@@ -70,12 +70,12 @@ export default function BottomTab() {
         }}
       />
       {/* <Tab.Screen
-        name="WishList"
+        name="Short"
         component={NavigationWishList}
         options={{
-          tabBarBadge: 3,
-          title: 'Wish List',
-          tabBarIcon: ({focused}) => <IconHeart fill={focused && '#F0B90B'} />,
+          tabBarIcon: ({focused}) => (
+            <IconMapView fill={focused && '#F0B90B'} />
+          ),
         }}
       /> */}
       <Tab.Screen

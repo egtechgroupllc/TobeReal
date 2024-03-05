@@ -23,6 +23,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../components/Favourite';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import Skeleton from '../../../../components/Skeleton';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
@@ -178,7 +179,6 @@ export default React.memo(
             <ImageDetail dataImg={image} />
           </Animated.View>
 
-          {/* OptionAccommodation */}
           <OptionAccommodation
             isShaDow
             isSelectForIndex

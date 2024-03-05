@@ -11,7 +11,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {Alert, FlatList, StyleSheet, View} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   Gesture,
   GestureDetector,
@@ -25,6 +32,7 @@ import Comment from './Comment';
 import RangeSlider from './components/RangeSlider';
 import VideoPlay from './components/VideoPlay';
 import LottieView from 'lottie-react-native';
+import {IconGoBack} from '../../assets/icon/Icon';
 
 const listVideo = [
   {
@@ -195,6 +203,12 @@ export function ListVideoInfluencer() {
 
   return (
     <View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={goBack}
+        style={{...styles.goBack, top: insets.top}}>
+        <IconGoBack fill={'#fff'} />
+      </TouchableOpacity>
       <FlatList
         data={listVideo}
         ref={flatListRef}
@@ -266,10 +280,12 @@ export function ListVideoInfluencer() {
 
 const styles = StyleSheet.create({
   goBack: {
-    zIndex: 19,
-    left: scale(6),
-    padding: scale(6),
     position: 'absolute',
+    zIndex: 9,
+    padding: scale(6),
+    backgroundColor: '#00000050',
+    borderRadius: scale(10),
+    left: scale(10),
   },
   favouriteHeart: {
     width: scale(100),

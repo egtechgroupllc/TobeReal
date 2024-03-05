@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Animated, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
 import {COLORS, FONTS, SIZES} from '../assets/constants';
 import {arrayToObject} from '../utils/arrayToObject';
@@ -11,7 +11,7 @@ export type CustomTextProps = {
   textType?: 'regular' | 'medium' | 'semiBold' | 'bold' | undefined;
 } & TextProps;
 
-export default function CustomText({
+export default memo(function CustomText({
   children,
   textType,
   isShadow,
@@ -43,7 +43,7 @@ export default function CustomText({
       {children}
     </Component>
   );
-}
+});
 
 const styles = StyleSheet.create({
   text: {

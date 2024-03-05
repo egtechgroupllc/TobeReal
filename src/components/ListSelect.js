@@ -25,6 +25,7 @@ export default function ListSelect({data = [], onSelect}) {
       }}
       renderItem={({item, index}) => (
         <CustomButton
+          buttonType="normal"
           key={index}
           style={[
             index !== 0 && {
@@ -38,6 +39,7 @@ export default function ListSelect({data = [], onSelect}) {
           }}
           iconRight={(select === item?.text || select === item) && IconCheckBox}
           styleText={{
+            textType: 'medium',
             color:
               select === item?.text || select === item
                 ? COLORS.primary

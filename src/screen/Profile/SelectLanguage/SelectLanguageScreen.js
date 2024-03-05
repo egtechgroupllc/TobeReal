@@ -1,12 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import MainAuth from '../../../components/MainAuth';
-import Main from './components/Main';
+import ContentLanguage from './components/ContentLanguage';
+import MainWrapper from '../../../components/MainWrapper';
+import {useLanguage} from '../../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SelectLanguageScreen() {
   return (
-    <MainAuth>
-      <Main />
-    </MainAuth>
+    <MainWrapper scrollEnabled={false} noSafeArea>
+      <ContentLanguage />
+    </MainWrapper>
   );
 }

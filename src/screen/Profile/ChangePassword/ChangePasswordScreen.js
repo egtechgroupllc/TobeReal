@@ -1,13 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import MainAuth from '../../../components/MainAuth';
-import Main from './components/Main';
-
+import Content from './components/Content';
+import MainWrapper from '../../../components/MainWrapper';
+import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ChangePasswordScreen() {
+  const {t} = useLanguage();
+  const {setOptions} = useNavigation();
+
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('change_password'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <MainAuth>
-        <Main/>
-    </MainAuth>
+    <MainWrapper noSafeArea>
+      <Content />
+    </MainWrapper>
   );
 }

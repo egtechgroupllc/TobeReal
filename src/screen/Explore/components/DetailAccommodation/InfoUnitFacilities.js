@@ -5,7 +5,7 @@ import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconHome} from '../../../../assets/icon/Icon';
 import BottomSheet from '../../../../components/BottomSheet';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 const listFacilities = [
   'City View',
@@ -23,7 +23,7 @@ const listFacilities = [
 ];
 
 export default function InfoUnitFacilities() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const bottomSheetRef = useRef();
 
   return (
@@ -48,7 +48,7 @@ export default function InfoUnitFacilities() {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-         {t('room_amenities')}
+          {t('room_amenities')}
         </CustomText>
       </View>
 

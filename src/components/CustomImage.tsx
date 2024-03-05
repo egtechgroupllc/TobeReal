@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {ImageProps} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 
 import Skeleton from './Skeleton';
@@ -9,7 +8,7 @@ type CustomImgProps = {
 
 export default function CustomImage({source, ...props}: CustomImgProps) {
   const isImgAsset = typeof source === 'number';
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   return (
     <Skeleton visible={visible} shimmerStyle={props?.style}>
@@ -27,9 +26,9 @@ export default function CustomImage({source, ...props}: CustomImgProps) {
         onLoadEnd={() => {
           setVisible(true);
         }}
-        // onLoadStart={() => {
-        //   setVisible(false);
-        // }}
+        onLoadStart={() => {
+          setVisible(false);
+        }}
       />
     </Skeleton>
   );

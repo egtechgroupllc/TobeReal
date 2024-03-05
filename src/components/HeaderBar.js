@@ -1,54 +1,67 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import {IconGoBack, IconSearch, IconX} from '../assets/icon/Icon';
-import {COLORS, SIZES, scale} from '../assets/constants';
 import {useNavigation} from '@react-navigation/native';
-import {CustomButton} from '.';
+import React, {memo, useEffect, useRef, useState} from 'react';
+import {Pressable, StyleSheet, View} from 'react-native';
+import {COLORS, SIZES, scale} from '../assets/constants';
+import {IconGoBack} from '../assets/icon/Icon';
 import CustomText from './CustomText';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export default function HeaderBar({styleWrapper}) {
+export default memo(function HeaderBar({back, navigation, options, route}) {
   const {goBack} = useNavigation();
-  return (
-    <View style={[styles.wrapper, styleWrapper]}>
-      <View style={styles.content}>
-        <CustomButton
-          isShadow
-          iconRight={IconX}
-          style={styles.active}
-          onPress={goBack}
-          styleIcon={{
-            width: scale(20),
-            height: scale(20),
-          }}
-        />
-        <CustomText
-          textType="semiBold"
-          style={{
-            fontSize: SIZES.large,
-          }}>
-          Search
-        </CustomText>
+  const insets = useSafeAreaInsets();
 
-        <View>
-          <IconSearch />
-        </View>
+  if (!options?.headerShown) return null;
+  return (
+    <View
+      style={[styles.wrapper, {paddingTop: insets.top}, options?.headerStyle]}>
+      <View
+        style={{
+          flex: options?.headerTitleStyle?.textAlign === 'left' ? 0 : 1,
+        }}>
+        {!!back && !options?.headerLeft && (
+          <Pressable onPress={goBack}>
+            <IconGoBack />
+          </Pressable>
+        )}
+
+        {options?.headerLeft && options?.headerLeft()}
+      </View>
+
+      <CustomText
+        textType="semiBold"
+        style={[
+          {
+            fontSize: SIZES.medium,
+            maxWidth: scale(300),
+            textAlign: 'center',
+          },
+          options?.headerTitleStyle,
+        ]}
+        numberOfLines={1}>
+        {options?.headerTitle || options?.title || route?.name}
+      </CustomText>
+
+      <View
+        style={{
+          alignItems: 'flex-end',
+          flex: options?.headerTitleStyle?.textAlign === 'right' ? 0 : 1,
+        }}>
+        {options?.headerRight && options?.headerRight()}
       </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {
-    // height: scale(120),
+    minHeight: scale(40),
     backgroundColor: COLORS.primary,
-  },
-  content: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingHorizontal: scale(16),
     paddingVertical: scale(4),
     columnGap: scale(10),
+    overflow: 'hidden',
   },
   active: {
     minWidth: scale(30),

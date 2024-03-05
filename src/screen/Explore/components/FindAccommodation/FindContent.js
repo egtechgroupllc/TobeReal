@@ -17,10 +17,10 @@ import OptionAccommodation from './OptionAccommodation';
 import {useForm} from 'react-hook-form';
 import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function FindContent({isBuy, rental}) {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
 
@@ -54,7 +54,7 @@ export default function FindContent({isBuy, rental}) {
           <>
             <ChooseCalendar rental={rental} />
 
-            {rental === 'Daily' && <ChooseOccupancy />}
+            {rental === t('daily') && <ChooseOccupancy />}
           </>
         )}
       </View>
@@ -97,8 +97,7 @@ export default function FindContent({isBuy, rental}) {
         </View>
         <OptionAccommodation
           outline
-          multiSelect
-          isSelectAll
+          scrollEnabled
           styleContent={{
             flex: 1,
             columnGap: scale(8),

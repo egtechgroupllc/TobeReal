@@ -1,7 +1,14 @@
-import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import routerExplore from '../router/routerExplore';
+import {COLORS} from '../assets/constants';
 
 const Stack = createNativeStackNavigator();
 

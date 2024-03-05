@@ -13,9 +13,9 @@ import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {IconAdd, IconEditProfile} from '../../../../assets/icon/Icon';
-import { useLanguage } from '../../../../hooks/useLanguage';
-export default function BotContent() {
-  const {t}= useLanguage()
+import {useLanguage} from '../../../../hooks/useLanguage';
+export default function BotContent({data}) {
+  const {t} = useLanguage();
   const [openView, setOpenView] = useState(false);
   const OpenView = () => {
     setOpenView(prevOpenView => !prevOpenView);
@@ -34,7 +34,7 @@ export default function BotContent() {
           <CustomText
             textType="medium"
             style={{...styles.text, color: COLORS.black}}>
-                 {t('email')}:
+            {t('email')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -43,7 +43,7 @@ export default function BotContent() {
               color: COLORS.black,
               marginLeft: scale(10),
             }}>
-            tobereal@gmail.com
+            {data?.email}
           </CustomText>
         </View>
         <View style={{flexDirection: 'row'}}>
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: '#EEEEEE',
     height: scale(174),
-    width:'90%',
+    width: '90%',
     borderRadius: scale(8),
     paddingHorizontal: scale(20),
     paddingTop: scale(10),
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   box1: {
     backgroundColor: '#EEEEEE',
     height: scale(39),
-    width:'90%',
+    width: '90%',
     borderRadius: scale(8),
     justifyContent: 'center',
     paddingHorizontal: scale(15),
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   box2: {
     backgroundColor: '#EEEEEE',
     minHeight: scale(75),
-    width:'90%',
+    width: '90%',
     borderRadius: scale(4),
     paddingHorizontal: scale(15),
     paddingTop: scale(20),

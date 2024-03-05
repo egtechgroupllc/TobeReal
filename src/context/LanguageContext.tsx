@@ -25,7 +25,7 @@ const languageFallback: LanguageTranslations = {
   th: thailand,
   my: malaysia,
   id: indonesia,
-  cn:china
+  cn: china,
 };
 
 export const LanguageContext = createContext<LanguageProps>({});
@@ -70,7 +70,7 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
         const selectedLanguage = await EncryptedStorage.getItem(
           'selectedLanguage',
         );
-      
+
         if (selectedLanguage) {
           setLocale(selectedLanguage);
         }

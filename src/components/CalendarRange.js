@@ -20,7 +20,18 @@ export default function CalendarRange({
       selectedStartDate={selectedStartDate}
       selectedEndDate={selectedEndDate}
       nextComponent={<IconNext fill={COLORS.primary} />}
-      previousComponent={<IconGoBack fill={COLORS.primary} />}
+      previousComponent={
+        <IconNext
+          fill={COLORS.primary}
+          style={{
+            transform: [
+              {
+                rotate: '-180deg',
+              },
+            ],
+          }}
+        />
+      }
       todayBackgroundColor="transparent"
       todayTextStyle={{color: COLORS.primary}}
       selectedDayColor={COLORS.primary}

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {WIDTH, scale} from '../../assets/constants';
@@ -13,19 +13,20 @@ import InfoDetail from './components/DetailAccommodation/InfoDetail';
 import InfoUnitFacilities from './components/DetailAccommodation/InfoUnitFacilities';
 import Map from './components/DetailAccommodation/Map';
 import Review from './components/DetailAccommodation/Review';
+import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
-  const listView = [
+  const listView = useRef([
     <InfoDetail name={title} />,
     <InfoUnitFacilities />,
     <Map />,
     <Review />,
     <InfoAdditional />,
-    // <SimilarApartmentsNearby />,
-  ];
+    <SimilarApartmentsNearby />,
+  ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
@@ -91,7 +92,7 @@ export default function DetailAccommodationScreen({route}) {
     }
   };
 
-  const selectScrollHandler = value => {
+  const selectScrollHandler = useCallback(value => {
     setIsSelect(false);
 
     scrollRef.current?.scrollTo({
@@ -103,29 +104,40 @@ export default function DetailAccommodationScreen({route}) {
     timeoutRef.current = setTimeout(() => {
       setIsSelect(true);
     }, 500);
-  };
+  }, []);
 
   return (
     <MainWrapper scrollEnabled={false}>
-      <DynamicHeader
-        ref={dynamicHeaderRef}
-        scrollOffsetY={scrollOffsetY}
-        onSelect={selectScrollHandler}
-        image={jsondata}
-      />
+      {true ? (
+        <>
+          <DynamicHeader
+            ref={dynamicHeaderRef}
+            scrollOffsetY={scrollOffsetY}
+            onSelect={selectScrollHandler}
+            image={jsondata}
+          />
 
-      <Animated.ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingTop: Header_Max_Height + scale(50),
-          paddingBottom: tabBarHeight,
-          backgroundColor: '#f1f1f1',
-        }}
-        onScroll={handleScroll}
-        ref={scrollRef}>
-        <View style={styles.content}>{listView.map(ItemView)}</View>
-      </Animated.ScrollView>
-      <BookAccommodation setBookHeight={setTabBarHeight} price={paramPrice} />
+          <Animated.ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingTop: Header_Max_Height + scale(50),
+              paddingBottom: tabBarHeight,
+              backgroundColor: '#f1f1f1',
+            }}
+            onScroll={handleScroll}
+            ref={scrollRef}>
+            <View style={styles.content}>{listView.map(ItemView)}</View>
+          </Animated.ScrollView>
+        </>
+      ) : (
+        <DetailAccommodationLoading heightHeader={Header_Max_Height} />
+      )}
+
+      <BookAccommodation
+        setBookHeight={setTabBarHeight}
+        price={paramPrice}
+        isLoading={false}
+      />
     </MainWrapper>
   );
 }

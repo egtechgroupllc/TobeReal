@@ -9,8 +9,13 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
+import Skeleton from '../../../../components/Skeleton';
 
-export default memo(function BookAccommodation({setBookHeight, price}) {
+export default memo(function BookAccommodation({
+  setBookHeight,
+  isLoading,
+  price,
+}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {token} = useAuthentication();
@@ -23,67 +28,67 @@ export default memo(function BookAccommodation({setBookHeight, price}) {
         const {height} = e.nativeEvent.layout;
         setBookHeight(height);
       }}>
-      <View style={styles.price}>
-        <CustomText
-          style={{
-            fontSize: SIZES.xMedium,
-          }}>
-          {price < 1000000000 ? t('per_month_from') : t('for_sale')}
-        </CustomText>
-        <CustomText
-          style={{
-            fontSize: SIZES.medium,
-          }}
-          textType="bold">
-          {formatPrice(price, {
-            locales: 'vi',
-          })}{' '}
-        </CustomText>
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          columnGap: scale(8),
-          paddingVertical: scale(10),
+      <Skeleton
+        visible={!isLoading}
+        shimmerStyle={{
+          height: scale(20),
+          width: '70%',
         }}>
-        <CustomButton
-          onPress={() => {
-            !token ? navigate('NavigationAuth') : navigate('BookingScreen');
-          }}
-          outline
-          buttonType="large"
-          style={{flex: 0.7}}
-          text={t('contact_host')}
-          styleText={{
-            fontSize: SIZES.xMedium,
-          }}
-        />
-        {/* <CustomButton
-          onPress={() => {
-            !token ? navigate('NavigationAuth') : navigate('BookingScreen');
-          }}
-          buttonType="large"
-          style={{flex: 1}}
-          text={price < 1000000000 ? t('book_now') : t('buy')}
-          styleText={{
-            fontSize: SIZES.xMedium,
-          }}
-        /> */}
-        
-        {/* ------------NO LOGIN----------- */}
+        <View style={styles.price}>
+          <CustomText
+            style={{
+              fontSize: SIZES.xMedium,
+            }}>
+            {price < 1000000000 ? t('per_month_from') : t('for_sale')}
+          </CustomText>
+          <CustomText
+            style={{
+              fontSize: SIZES.medium,
+            }}
+            textType="bold">
+            {formatPrice(price, {
+              locales: 'vi',
+            })}{' '}
+          </CustomText>
+        </View>
+      </Skeleton>
+
+      <Skeleton
+        visible={!isLoading}
+        shimmerStyle={{
+          height: scale(48),
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            columnGap: scale(8),
+            paddingVertical: scale(10),
+          }}>
           <CustomButton
-          onPress={() => {
-            token ? navigate('NavigationAuth') : navigate('BookingScreen');
-          }}
-          buttonType="large"
-          style={{flex: 1}}
-          text={price < 1000000000 ? t('book_now') : t('buy')}
-          styleText={{
-            fontSize: SIZES.xMedium,
-          }}
-        />
-      </View>
+            onPress={() => {
+              !token ? navigate('NavigationAuth') : '';
+            }}
+            outline
+            buttonType="large"
+            style={{flex: 0.7}}
+            text={t('contact_host')}
+            styleText={{
+              fontSize: SIZES.xMedium,
+            }}
+          />
+          <CustomButton
+            onPress={() => {
+              !token ? navigate('NavigationAuth') : '';
+            }}
+            buttonType="large"
+            style={{flex: 1}}
+            text={price < 1000000000 ? t('book_now') : t('BUY')}
+            styleText={{
+              fontSize: SIZES.xMedium,
+            }}
+          />
+        </View>
+      </Skeleton>
     </View>
   );
 });
