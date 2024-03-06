@@ -213,6 +213,9 @@ export default function TabContent() {
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
+  const goContract = () => {
+    navigation.navigate('ContractScreen');
+  };
   const goAddRoom = () => {
     navigation.navigate('AddRoomTypeScreen', {onOk: handleOk});
   };
@@ -228,9 +231,9 @@ export default function TabContent() {
       return updatedRoomTypes;
     });
   };
-  const ok = value => {
-    console.log(value);
-  };
+  // const ok = value => {
+  //   console.log(value);
+  // };
 
   return (
     <View
@@ -1226,7 +1229,7 @@ export default function TabContent() {
         discovered, your account will be permanently banned.
       </CustomText> */}
       <View style={{width: '100%', marginBottom: scale(30)}}>
-        <Button title={t('post')} onPress={handleSubmit(ok)} />
+        <Button title={t('post')} onPress={handleSubmit(goContract)} />
       </View>
     </View>
   );
