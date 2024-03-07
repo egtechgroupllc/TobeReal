@@ -15,7 +15,7 @@ export default function SellScreen() {
   const upgrade = () => {};
   return (
     <MainAuth>
-      <Header goback={true} subHeading={'Post news'} noti={true} onPress={goBack} styleWrapper={{marginTop:scale(40)}}/>
+      <Header goback={true} subHeading={'Post news'} noti={true} onPress={goBack} styleWrapper={{marginTop:scale(40), width:'80%' , alignSelf: 'center'}}/>
       <TabContent/>
     </MainAuth>
   );

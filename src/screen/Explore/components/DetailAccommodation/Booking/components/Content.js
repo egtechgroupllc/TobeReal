@@ -14,8 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 import ButtonAccount from './ButtonAccount';
 import {
   IconCheckBox,
+  IconCheckBoxWhite,
   IconRight,
   IconUnCheckBox,
+  IconUnCheckBoxWhite,
 } from '../../../../../../assets/icon/Icon';
 import Button from '../../../../../Profile/components/Button';
 import CustomText from '../../../../../../components/CustomText';
@@ -78,6 +80,10 @@ export default function Content() {
   const [dataFaci, setDataFaci] = useState(dataFacilities);
   const [viewfacilities, setViewfacilities] = useState(false);
   const [selectedFaciCheckBox, setSelectedFaciCheckBox] = useState([]);
+  const [check1, setCheck1] = useState(false);
+  const toggleCheckBox1 = () => {
+    setCheck1(prevCheck => !prevCheck);
+  };
   const viewFacilities = () => {
     setViewfacilities(prevViewfacilities => !prevViewfacilities);
   };
@@ -114,7 +120,7 @@ export default function Content() {
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
-      <View style={{marginTop: scale(30)}}>
+      <View style={{marginTop: scale(20)}}>
         <Category
           data={[t('daily'), t('monthly'), t('yearly')]}
           onChange={value => setCategory(value)}
@@ -297,53 +303,131 @@ export default function Content() {
             {t('Use Coupons')}
           </CustomText>
         </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'flex-start',
-            paddingHorizontal: scale(20),
-            paddingBottom: scale(30),
-          }}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text,
-              color: COLORS.black,
-              marginTop: scale(20),
-            }}>
-            {t('Total:')}
-          </CustomText>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text,
-              color: COLORS.black,
-              marginTop: scale(20),
-              paddingHorizontal: scale(100),
-            }}>
-            {t('$ 49,888,300')}
-          </CustomText>
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginTop: scale(20),
-        }}>
         <CustomText
           textType="medium"
           style={{
-            ...styles.text1,
+            ...styles.text2,
             color: COLORS.black,
-            marginTop: scale(3),
+            marginTop: scale(10),
+            alignSelf: 'flex-start',
+            paddingHorizontal: scale(20),
           }}>
-          {t('do_you_agree')}
+          {t('Price detail')}:
         </CustomText>
+        <View
+          style={{
+            ...styles.box,
+            marginTop: scale(10),
+            borderTopLeftRadius: scale(5),
+            borderTopRightRadius: scale(5),
+            minHeight: scale(30),
+            paddingBottom: scale(0),
+            marginBottom: scale(20),
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              paddingHorizontal: scale(20),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('Room rates:')}
+            </CustomText>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('$ 49,888,300')}
+            </CustomText>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              paddingHorizontal: scale(20),
+            }}>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.black,
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              {t('Taxes and fees')}:
+            </CustomText>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.black,
+                marginTop: scale(10),
+                flex: 1,
+              }}>
+              {t('$ 49,888,300')}
+            </CustomText>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              paddingHorizontal: scale(20),
+              paddingBottom: scale(30),
+            }}>
+            <CustomText
+              textType="semiBold"
+              style={{
+                ...styles.text,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('Total:')}
+            </CustomText>
+            <CustomText
+              textType="medium"
+              style={{
+                ...styles.text,
+                color: COLORS.black,
+                marginTop: scale(20),
+                flex: 1,
+              }}>
+              {t('$ 49,888,300')}
+            </CustomText>
+          </View>
+        </View>
         <TouchableOpacity
-          onPress={toggleCheckBox}
-          style={{marginLeft: scale(10)}}>
-          {check ? <IconCheckBox /> : <IconUnCheckBox />}
+          onPress={toggleCheckBox1}
+          style={{width: '100%', alignItems: 'center'}}>
+          <LinearGradient
+            colors={['#FADD55', '#D88A00']}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 1}}
+            style={{...styles.box1, marginBottom: scale(20)}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{marginLeft: scale(10)}}>
+                {check1 ? <IconCheckBoxWhite /> : <IconUnCheckBoxWhite />}
+              </View>
+              <View style={{marginLeft: scale(10)}}>
+                <CustomText
+                  textType="semiBold"
+                  style={{...styles.text2, color: COLORS.black}}>
+                  {t('wallet')} Saveloka
+                </CustomText>
+              </View>
+            </View>
+          </LinearGradient>
         </TouchableOpacity>
       </View>
       <Button title={t('Request to BOOK')} onPress={Ok} />
@@ -353,7 +437,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(70),
+    marginTop: scale(30),
     paddingBottom: scale(50),
     width: '90%',
   },
@@ -474,5 +558,13 @@ const styles = StyleSheet.create({
   img: {
     width: scale(21),
     height: scale(10),
+  },
+  box1: {
+    backgroundColor: '#EEEEEE',
+    height: scale(54),
+    borderRadius: scale(8),
+    justifyContent: 'center',
+    paddingHorizontal: scale(10),
+    width: '90%',
   },
 });

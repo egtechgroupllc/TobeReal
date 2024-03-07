@@ -33,20 +33,8 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function TabContent() {
   const {t} = useLanguage();
   const {control, watch, handleSubmit} = useForm();
-  const [description, setDescription] = useState('');
-  const [realesate, setRealEsate] = useState('');
-  const handleDesciption = text => {
-    setDescription(text);
-  };
-  const handleRealEsate = text => {
-    setRealEsate(text);
-  };
-  const handlePrice = text => {
-    setPrice(text);
-  };
   const maxCharacters = 2000;
   const navigation = useNavigation();
-  const [price, setPrice] = useState('');
   const [selectedImage, setSelectedImage] = useState([]);
   const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(false);
@@ -81,8 +69,8 @@ export default function TabContent() {
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
-  const goPostScreen = () => {
-    navigation.navigate('PostNewsScreen');
+  const goContract = () => {
+    navigation.navigate('ContractScreen');
   };
   const pickImage = () => {
     ImageCropPicker.openPicker({
@@ -776,7 +764,7 @@ export default function TabContent() {
         discovered, your account will be permanently banned.
       </CustomText> */}
       <View style={{width: '100%', marginBottom: scale(30)}}>
-        <Button title={t('post')} onPress={handleSubmit(ok)} />
+        <Button title={t('post')} onPress={handleSubmit(goContract)} />
       </View>
     </View>
   );

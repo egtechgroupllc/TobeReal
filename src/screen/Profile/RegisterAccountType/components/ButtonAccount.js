@@ -8,13 +8,12 @@ import { SIZES, scale } from '../../../../assets/constants';
 import { IconDownWhite } from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import { useLanguage } from '../../../../hooks/useLanguage';
-export default function ButtonAccount({onPress, title, styleImage, image, style, client}) {
+export default function ButtonAccount({onPress, title, style, client}) {
   const {t}= useLanguage()
   return (
     <View>
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.button, style]}>
-        <Image source={image} style={styleImage}/>
         <View style={{width:'90%'}}>
         <CustomText
           textType="semiBold"

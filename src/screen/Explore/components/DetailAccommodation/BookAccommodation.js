@@ -66,7 +66,7 @@ export default memo(function BookAccommodation({
           }}>
           <CustomButton
             onPress={() => {
-              !token ? navigate('NavigationAuth') : '';
+              token ? navigate('NavigationAuth') : navigate('BookingScreen');
             }}
             outline
             buttonType="large"
@@ -78,7 +78,7 @@ export default memo(function BookAccommodation({
           />
           <CustomButton
             onPress={() => {
-              !token ? navigate('NavigationAuth') : '';
+              token ? navigate('NavigationAuth') : navigate('BookingScreen');
             }}
             buttonType="large"
             style={{flex: 1}}

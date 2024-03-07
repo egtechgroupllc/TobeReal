@@ -32,59 +32,15 @@ import ImageDetail from '../../../../Explore/components/DetailAccommodation/Imag
 import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function TabContent() {
   const {t} = useLanguage();
-  const {control, watch, handleSubmit} = useForm();
-  const [description, setDescription] = useState('');
-  const [realesate, setRealEsate] = useState('');
-  const handleDesciption = text => {
-    setDescription(text);
-  };
-  const handleRealEsate = text => {
-    setRealEsate(text);
-  };
-  const handlePrice = text => {
-    setPrice(text);
-  };
-  const maxCharacters = 2000;
-  const navigation = useNavigation();
-  const [price, setPrice] = useState('');
-  const [selectedImage, setSelectedImage] = useState([]);
-  const [check, setCheck] = useState(false);
+  const {control, handleSubmit} = useForm();
+  const [idCardImage, setIdCardImage] = useState([]);
+  const [propertyImage, setPropertyImage] = useState([]);
+  const [selfieIdImage, setSelfieIdImage] = useState([]);
   const [check1, setCheck1] = useState(false);
-  const [showFurniture, setShowFurniture] = useState('');
-  const viewShowFurniture = () => {
-    setShowFurniture(prevshowFurniture => !prevshowFurniture);
-  };
-
-  const [viewgeneral, setViewgeneral] = useState(false);
-  const viewGeneral = () => {
-    setViewgeneral(prevViewgeneral => !prevViewgeneral);
-  };
-  const [viewdetail, setViewdetail] = useState(false);
-  const viewDetail = () => {
-    setViewdetail(prevViewdetail => !prevViewdetail);
-  };
-  const [viewfurniture, setViewfurniture] = useState(false);
-  const viewFurniture = () => {
-    setViewfurniture(prevViewfurniture => !prevViewfurniture);
-  };
-  const [viewcontactinfo, setViewcontactinfo] = useState(false);
-  const viewContactinfo = () => {
-    setViewcontactinfo(prevViewcontactinfo => !prevViewcontactinfo);
-  };
-  const [viewphoto, setViewphoto] = useState(false);
-  const viewPhoto = () => {
-    setViewphoto(prevViewphoto => !prevViewphoto);
-  };
-  const toggleCheckBox = () => {
-    setCheck(prevCheck => !prevCheck);
-  };
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
-  const goPostScreen = () => {
-    navigation.navigate('PostNewsScreen');
-  };
-  const pickImage = () => {
+  const uploadIDCARD = () => {
     ImageCropPicker.openPicker({
       width: scale(300),
       height: scale(400),
@@ -93,7 +49,41 @@ export default function TabContent() {
     })
       .then(image => {
         if (image) {
-          setSelectedImage(image.map(img => img.path));
+          setIdCardImage(image.map(img => img.path));
+          // uploadImage(image.path);
+        }
+      })
+      .catch(error => {
+        console.log('Error picking image:', error);
+      });
+  };
+  const uploadProperty = () => {
+    ImageCropPicker.openPicker({
+      width: scale(300),
+      height: scale(400),
+      multiple: true,
+      maxFiles: 100,
+    })
+      .then(image => {
+        if (image) {
+          setPropertyImage(image.map(img => img.path));
+          // uploadImage(image.path);
+        }
+      })
+      .catch(error => {
+        console.log('Error picking image:', error);
+      });
+  };
+  const uploadSelfieImage = () => {
+    ImageCropPicker.openPicker({
+      width: scale(300),
+      height: scale(400),
+      multiple: true,
+      maxFiles: 100,
+    })
+      .then(image => {
+        if (image) {
+          setSelfieIdImage(image.map(img => img.path));
           // uploadImage(image.path);
         }
       })
@@ -211,25 +201,26 @@ export default function TabContent() {
           alignSelf: 'flex-end',
           paddingHorizontal: scale(20),
         }}>
-        <TouchableOpacity onPress={pickImage}>
+        <TouchableOpacity onPress={uploadIDCARD}>
           <IconCamera />
         </TouchableOpacity>
       </View>
-      <View
+      <TouchableOpacity
         style={{
           ...styles.textArea1,
           backgroundColor: '#E3E3E3',
           marginBottom: scale(10),
           width: '90%',
-        }}>
-          
-        {selectedImage.length > 0 ? (
+        }}
+        onPress={uploadIDCARD}
+        >
+        {idCardImage.length > 0 ? (
           <ImageDetail
-            dataImg={selectedImage}
+            dataImg={idCardImage}
             styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
           />
         ) : null}
-      </View>
+      </TouchableOpacity>
       <CustomText
         textType="medium"
         style={{
@@ -246,24 +237,26 @@ export default function TabContent() {
           alignSelf: 'flex-end',
           paddingHorizontal: scale(20),
         }}>
-        <TouchableOpacity onPress={pickImage}>
+        <TouchableOpacity onPress={uploadSelfieImage}>
           <IconCamera />
         </TouchableOpacity>
       </View>
-      <View
+      <TouchableOpacity
         style={{
           ...styles.textArea1,
           backgroundColor: '#E3E3E3',
           marginBottom: scale(10),
           width: '90%',
-        }}>
-        {selectedImage.length > 0 ? (
+        }}
+        onPress={uploadIDCARD}
+        >
+        {selfieIdImage.length > 0 ? (
           <ImageDetail
-            dataImg={selectedImage}
+            dataImg={selfieIdImage}
             styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
           />
         ) : null}
-      </View>
+      </TouchableOpacity>
       <CustomText
         textType="medium"
         style={{
@@ -281,24 +274,26 @@ export default function TabContent() {
           alignSelf: 'flex-end',
           paddingHorizontal: scale(20),
         }}>
-        <TouchableOpacity onPress={pickImage}>
+        <TouchableOpacity onPress={uploadProperty}>
           <IconCamera />
         </TouchableOpacity>
       </View>
-      <View
+      <TouchableOpacity
         style={{
           ...styles.textArea1,
           backgroundColor: '#E3E3E3',
           marginBottom: scale(10),
           width: '90%',
-        }}>
-        {selectedImage.length > 0 ? (
+        }}
+        onPress={uploadProperty}
+        >
+        {propertyImage.length > 0 ? (
           <ImageDetail
-            dataImg={selectedImage}
+            dataImg={propertyImage}
             styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
           />
         ) : null}
-      </View>
+      </TouchableOpacity>
       <View
         style={{
           flexDirection: 'row',

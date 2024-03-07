@@ -31,7 +31,7 @@ export default function Header({
             alignItems: 'center',
             alignSelf: 'center',
             marginTop: scale(10),
-            width: '90%',
+            width: '100%',
           }}>
           {goback && (
             <TouchableOpacity onPress={onPress}>
