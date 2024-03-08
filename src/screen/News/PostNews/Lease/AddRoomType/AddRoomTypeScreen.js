@@ -17,7 +17,7 @@ export default function AddRoomTypeScreen() {
   const upgrade = () => {};
   return (
     <MainAuth>
-      <Header goback={true} subHeading= {t('add_room_type')} noti={true} onPress={goBack} styleWrapper={{marginTop:scale(40)}}/>
+      <Header goback={true} subHeading= {t('add_room')} noti={true} onPress={goBack} styleWrapper={{marginTop:scale(40), width:'80%' , alignSelf: 'center'}}/>
       <TabContent/>
     </MainAuth>
   );

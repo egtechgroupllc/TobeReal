@@ -153,7 +153,7 @@ export default function TabContent() {
       setSelectedFaciCheckBox([...selectedFaciCheckBox, name]);
     }
   };
-  console.log(selectedFaciCheckBox);
+  // console.log(selectedFaciCheckBox);
   const viewShowRealEstateType = () => {
     setShowRealEstateType(prevshowRealEstateType => !prevshowRealEstateType);
   };
@@ -223,7 +223,7 @@ export default function TabContent() {
     // Update the state by adding the new roomDetails to the existing array
     setRoomTypes(prevRoomTypes => [...prevRoomTypes, receivedRoomDetails]);
   };
-  console.log(roomTypes);
+  // console.log(roomTypes);
   const removeRoomType = index => {
     setRoomTypes(prevRoomTypes => {
       const updatedRoomTypes = [...prevRoomTypes];
@@ -423,7 +423,6 @@ export default function TabContent() {
               color: COLORS.black,
               alignSelf: 'flex-start',
               // paddingHorizontal: scale(20),
-              marginBottom: scale(10),
               marginTop: scale(10),
             }}>
             {t('real_estate_type')}
@@ -754,7 +753,7 @@ export default function TabContent() {
               style={{
                 ...styles.text,
                 color: COLORS.black,
-                paddingHorizontal: scale(20)
+                paddingHorizontal: scale(20),
               }}>
               {t('estate_facilities')}
             </CustomText>
@@ -916,7 +915,7 @@ export default function TabContent() {
                 style={styles.buttonAdd}>
                 <IconAdd />
                 <CustomText textType="semiBold" style={styles.text2}>
-                  {t('add_room_type')}
+                  {t('add_room')}
                 </CustomText>
               </LinearGradient>
             </TouchableOpacity>
@@ -1388,7 +1387,7 @@ const styles = StyleSheet.create({
     marginTop: scale(20),
   },
   buttonEstateType: {
-    marginTop:scale(20),
+    marginTop: scale(10),
     borderWidth: scale(2),
     borderColor: '#EEEEEE',
     borderRadius: scale(10),
@@ -1398,7 +1397,7 @@ const styles = StyleSheet.create({
     // backgroundColor:'#E3E3E3'
   },
   buttonEstateTypes: {
-    marginTop:scale(20),
+    marginTop: scale(20),
     borderTopLeftRadius: scale(10),
     borderTopEndRadius: scale(10),
     borderTopRightRadius: scale(10),
