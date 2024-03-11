@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import CustomText from '../../../../../../components/CustomText';
@@ -158,7 +158,7 @@ export default function TabContent() {
   };
   const [yesChecked, setYesChecked] = useState(false);
   const [noChecked, setNoChecked] = useState(false);
-
+  const [breakfast, setBreakfast] = useState('');
   const toggleYes = () => {
     setYesChecked(true);
     setNoChecked(false);
@@ -168,6 +168,13 @@ export default function TabContent() {
     setNoChecked(true);
     setYesChecked(false);
   };
+  
+  useEffect(() => {
+    const breakfastInclude = () => {
+      yesChecked ? setBreakfast('YES') : setBreakfast('NO');
+    }
+    breakfastInclude();
+  }, [yesChecked]);
 
   const [viewgeneral, setViewgeneral] = useState(false);
   const viewGeneral = () => {
@@ -209,7 +216,7 @@ export default function TabContent() {
   const ok = value => {
     // Pass the roomDetails back to the previous screen
     navigation.goBack();
-    route.params.onOk({...value, roomImage, bedType, roomType, laundry, entertainment, food});
+    route.params.onOk({...value, roomImage, bedType, roomType, laundry, entertainment, food, breakfast});
   };
   return (
     <View
@@ -830,7 +837,7 @@ export default function TabContent() {
               // paddingHorizontal: scale(20),
             }}>
             <TouchableOpacity onPress={pickImage}>
-              
+
               <IconCamera />
             </TouchableOpacity>
           </View>
