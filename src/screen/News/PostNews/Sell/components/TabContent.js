@@ -624,7 +624,8 @@ export default function TabContent() {
               <IconCamera />
             </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={pickImage}
             style={{
               ...styles.textArea1,
               backgroundColor: '#E3E3E3',
@@ -652,7 +653,7 @@ export default function TabContent() {
                 styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
               />
             ) : null}
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               borderWidth: 0.5,

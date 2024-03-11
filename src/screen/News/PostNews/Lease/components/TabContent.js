@@ -223,7 +223,7 @@ export default function TabContent() {
     // Update the state by adding the new roomDetails to the existing array
     setRoomTypes(prevRoomTypes => [...prevRoomTypes, receivedRoomDetails]);
   };
-  // console.log(roomTypes);
+  console.log(roomTypes);
   const removeRoomType = index => {
     setRoomTypes(prevRoomTypes => {
       const updatedRoomTypes = [...prevRoomTypes];
@@ -898,7 +898,7 @@ export default function TabContent() {
                   style={{width: scale(25), height: scale(25)}}
                 />
               </View>
-              <View style={{width: '80%'}}>
+              <View style={{width: '75%'}}>
                 <CustomText key={index}>{room.RoomTypeTitle}</CustomText>
               </View>
               <TouchableOpacity onPress={() => removeRoomType(index)}>
@@ -960,7 +960,8 @@ export default function TabContent() {
               <IconCamera />
             </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={pickImage}
             style={{
               ...styles.textArea1,
               backgroundColor: '#E3E3E3',
@@ -988,7 +989,7 @@ export default function TabContent() {
                 styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
               />
             ) : null}
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               borderWidth: 0.5,

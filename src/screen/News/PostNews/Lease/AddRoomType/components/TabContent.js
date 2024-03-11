@@ -93,18 +93,17 @@ export default function TabContent() {
   const [showRoomLaundry, setShowRoomLaundry] = useState('');
   const [showFoodDrink, setShowFoodDrink] = useState('');
   const [showEntertainment, setShowEntertainment] = useState('');
-  const [selectedRoomCheckBox, setSelectedRoomCheckBox] = useState('');
-  const [selectedBedCheckBox, setSelectedBedCheckBox] = useState('');
-  const [selectedLaundryCheckBox, setSelectedLaundryCheckBox] = useState([]);
-  const [selectedFoodCheckBox, setSelectedFoodCheckBox] = useState([]);
-  const [selectedEntertainmentCheckBox, setSelectedEntertainmentCheckBox] =
+  const [roomType, setSelectedRoomCheckBox] = useState('');
+  const [bedType, setSelectedBedCheckBox] = useState('');
+  const [laundry, setSelectedLaundryCheckBox] = useState([]);
+  const [food, setSelectedFoodCheckBox] = useState([]);
+  const [entertainment, setSelectedEntertainmentCheckBox] =
     useState([]);
   const viewShowRoomType = () => {
     setShowRoomType(prevshowRoomType => !prevshowRoomType);
   };
-
   const RoomTypeCheckBox = name => {
-    setSelectedRoomCheckBox(selectedRoomCheckBox === name ? '' : name);
+    setSelectedRoomCheckBox(roomType === name ? '' : name);
     setShowRoomType(false);
   };
   const viewShowBedType = () => {
@@ -112,7 +111,7 @@ export default function TabContent() {
   };
 
   const BedTypeCheckBox = name => {
-    setSelectedBedCheckBox(selectedBedCheckBox === name ? '' : name);
+    setSelectedBedCheckBox(bedType === name ? '' : name);
     setShowBedType(false);
   };
   const viewShowRoomLaundry = () => {
@@ -120,12 +119,12 @@ export default function TabContent() {
   };
 
   const RoomLaundryCheckBox = name => {
-    if (selectedLaundryCheckBox.includes(name)) {
+    if (laundry.includes(name)) {
       setSelectedLaundryCheckBox(
-        selectedLaundryCheckBox.filter(item => item !== name),
+        laundry.filter(item => item !== name),
       );
     } else {
-      setSelectedLaundryCheckBox([...selectedLaundryCheckBox, name]);
+      setSelectedLaundryCheckBox([...laundry, name]);
     }
   };
   const viewShowFoodDrink = () => {
@@ -133,12 +132,12 @@ export default function TabContent() {
   };
 
   const FoodDrinkCheckBox = name => {
-    if (selectedFoodCheckBox.includes(name)) {
+    if (food.includes(name)) {
       setSelectedFoodCheckBox(
-        selectedFoodCheckBox.filter(item => item !== name),
+        food.filter(item => item !== name),
       );
     } else {
-      setSelectedFoodCheckBox([...selectedFoodCheckBox, name]);
+      setSelectedFoodCheckBox([...food, name]);
     }
   };
   const viewShowEntertainment = () => {
@@ -146,13 +145,13 @@ export default function TabContent() {
   };
 
   const EntertainmentCheckBox = name => {
-    if (selectedEntertainmentCheckBox.includes(name)) {
+    if (entertainment.includes(name)) {
       setSelectedEntertainmentCheckBox(
-        selectedEntertainmentCheckBox.filter(item => item !== name),
+        entertainment.filter(item => item !== name),
       );
     } else {
       setSelectedEntertainmentCheckBox([
-        ...selectedEntertainmentCheckBox,
+        ...entertainment,
         name,
       ]);
     }
@@ -210,7 +209,7 @@ export default function TabContent() {
   const ok = value => {
     // Pass the roomDetails back to the previous screen
     navigation.goBack();
-    route.params.onOk({...value, roomImage});
+    route.params.onOk({...value, roomImage, bedType, roomType, laundry, entertainment, food});
   };
   return (
     <View
@@ -356,8 +355,8 @@ export default function TabContent() {
                 color: COLORS.black,
                 paddingHorizontal: scale(20),
               }}>
-              {selectedRoomCheckBox !== ''
-                ? t(selectedRoomCheckBox)
+              {roomType !== ''
+                ? t(roomType)
                 : t('Room type')}
             </CustomText>
           </TouchableOpacity>
@@ -391,7 +390,7 @@ export default function TabContent() {
                     }}>
                     {item.name}
                   </CustomText>
-                  {selectedRoomCheckBox === item.name ? (
+                  {roomType === item.name ? (
                     <IconCheckBox />
                   ) : (
                     <IconUnCheckBox />
@@ -424,8 +423,8 @@ export default function TabContent() {
                 color: COLORS.black,
                 paddingHorizontal: scale(20),
               }}>
-              {selectedBedCheckBox !== ''
-                ? t(selectedBedCheckBox)
+              {bedType !== ''
+                ? t(bedType)
                 : t('Bed type')}
             </CustomText>
           </TouchableOpacity>
@@ -460,7 +459,7 @@ export default function TabContent() {
                     {item.name}
                   </CustomText>
 
-                  {selectedBedCheckBox === item.name ? (
+                  {bedType === item.name ? (
                     <IconCheckBox />
                   ) : (
                     <IconUnCheckBox />
@@ -596,7 +595,7 @@ export default function TabContent() {
                     }}>
                     {item.name}
                   </CustomText>
-                  {selectedLaundryCheckBox.includes(item.name) ? (
+                  {laundry.includes(item.name) ? (
                     <IconCheckBox />
                   ) : (
                     <IconUnCheckBox />
@@ -664,7 +663,7 @@ export default function TabContent() {
                     }}>
                     {item.name}
                   </CustomText>
-                  {selectedFoodCheckBox.includes(item.name) ? (
+                  {food.includes(item.name) ? (
                     <IconCheckBox />
                   ) : (
                     <IconUnCheckBox />
@@ -732,7 +731,7 @@ export default function TabContent() {
                     }}>
                     {item.name}
                   </CustomText>
-                  {selectedEntertainmentCheckBox.includes(item.name) ? (
+                  {entertainment.includes(item.name) ? (
                     <IconCheckBox />
                   ) : (
                     <IconUnCheckBox />
@@ -831,10 +830,12 @@ export default function TabContent() {
               // paddingHorizontal: scale(20),
             }}>
             <TouchableOpacity onPress={pickImage}>
+              
               <IconCamera />
             </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={pickImage}
             style={{
               ...styles.textArea1,
               backgroundColor: '#E3E3E3',
@@ -862,7 +863,7 @@ export default function TabContent() {
                 styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
               />
             ) : null}
-          </View>
+          </TouchableOpacity>
         </View>
       )}
 
