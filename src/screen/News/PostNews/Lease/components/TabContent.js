@@ -415,7 +415,6 @@ export default function TabContent() {
               marginTop: scale(10),
               borderColor: '#F0B90B',
             }}></View>
-
           <CustomText
             textType="medium"
             style={{
@@ -894,7 +893,7 @@ export default function TabContent() {
             <View key={index} style={styles.roomBox}>
               <View style={{width: '10%'}}>
                 <Image
-                  source={images.sell}
+                  source={images.lease}
                   style={{width: scale(25), height: scale(25)}}
                 />
               </View>
@@ -1384,8 +1383,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
-    marginBottom: scale(10),
-    marginTop: scale(20),
+    marginTop: scale(10),
   },
   buttonEstateType: {
     marginTop: scale(10),
