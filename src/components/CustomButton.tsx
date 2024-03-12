@@ -1,20 +1,19 @@
-import React, {useEffect, useMemo, memo, useRef} from 'react';
+import React, { memo, useMemo, useRef } from 'react';
 import {
-  GestureResponderEvent,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
 import LinearGradient, {
   LinearGradientProps,
 } from 'react-native-linear-gradient';
-import {COLORS, scale} from '../assets/constants';
-import {SHADOW} from '../assets/constants/theme';
-import {arrayToObject} from '../utils/arrayToObject';
-import CustomText, {CustomTextProps} from './CustomText';
+import { COLORS, scale } from '../assets/constants';
+import { SHADOW } from '../assets/constants/theme';
+import { arrayToObject } from '../utils/arrayToObject';
+import CustomText, { CustomTextProps } from './CustomText';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
@@ -24,7 +23,7 @@ type CustomButtonProps = {
   linearGradientProps?: LinearGradientProps;
   iconLeft?: React.JSX.Element;
   iconRight?: React.JSX.Element;
-  isDouble?: boolean;
+  noDelay?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
@@ -44,6 +43,7 @@ export default memo(function CustomButton({
   styleIcon,
   styleWrapper,
   linearGradientProps,
+  noDelay,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
   ...props
@@ -81,9 +81,13 @@ export default memo(function CustomButton({
       timer.current = null;
       onDouble();
     } else {
+      if (noDelay) {
+        onSingle();
+      }
+
       timer.current = setTimeout(() => {
         timer.current = null;
-        onSingle();
+        !noDelay && onSingle();
       }, TIMEOUT);
     }
   };

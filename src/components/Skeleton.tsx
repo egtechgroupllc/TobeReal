@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import React from 'react';
 import ShimmerPlaceHolder, {
   ShimmerPlaceholderProps,
@@ -8,10 +8,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import {scale} from '../assets/constants';
 
 type SkeletonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  shimmerStyle?: ViewStyle;
 } & ShimmerPlaceholderProps;
 
-export default function Skeleton({children, ...props}: SkeletonProps) {
+export default function Skeleton({
+  children,
+  shimmerStyle,
+  ...props
+}: SkeletonProps) {
   return (
     <ShimmerPlaceHolder
       LinearGradient={LinearGradient}
@@ -19,8 +24,8 @@ export default function Skeleton({children, ...props}: SkeletonProps) {
       shimmerColors={['#ebebeb', '#fafafa', '#ebebeb']}
       shimmerStyle={[
         styles.shimmerStyle,
-        props?.shimmerStyle,
-        {height: props?.height || props?.shimmerStyle?.height},
+        shimmerStyle,
+        {height: props?.height || shimmerStyle?.height},
       ]}>
       {children}
     </ShimmerPlaceHolder>

@@ -141,7 +141,12 @@ export default forwardRef(function CustomInput(
                 editable={!onPress}
                 autoCapitalize="none"
                 {...props}
-                onChangeText={text => onChange(text.trim())}
+                onChangeText={text => {
+                  const valueText = text.trim();
+                  onChange(
+                    enableFormatNum ? valueText.replaceAll(',', '') : valueText,
+                  );
+                }}
                 onBlur={onBlur}
                 value={
                   enableFormatNum

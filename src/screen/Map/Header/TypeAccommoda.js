@@ -3,33 +3,26 @@ import React from 'react';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import {SIZES, scale} from '../../../assets/constants';
 import {Category} from '../../../components';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
+import CustomText from '../../../components/CustomText';
 
 export default function TypeAccommoda() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   return (
-    <WrapperContent
-      heading={t('type')}
-      styleHeading={{
-        paddingHorizontal: 0,
-      }}
-      styleTextHeading={{
-        fontSize: SIZES.xMedium,
-      }}
-      styleContent={{
-        rowGap: scale(4),
-        alignItem: 'center',
-      }}>
+    <View>
+      <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+        {t('type')}
+      </CustomText>
       <Category
         noSelect
         isShadow={false}
-        data={[t('rent'), t('tour'), t('buy')]}
+        data={[t('RENT'), t('TOUR'), t('BUY')]}
         // onPress={value => setCategory(value)}
         styleWrapper={{
           marginTop: scale(10),
         }}
       />
-    </WrapperContent>
+    </View>
   );
 }
 

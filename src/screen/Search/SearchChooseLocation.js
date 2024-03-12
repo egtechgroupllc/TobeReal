@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     ...SHADOW,
     // minHeight: 200,
+    zIndex: 99,
   },
   searchItem: {
     flexDirection: 'row',

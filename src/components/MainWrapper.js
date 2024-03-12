@@ -2,6 +2,7 @@ import React from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
 import {COLORS, images} from '../assets/constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import CustomImage from './CustomImage';
 
 export default function MainWrapper({
   children,
@@ -16,30 +17,28 @@ export default function MainWrapper({
     <SafeAreaView
       style={{flex: 1, backgroundColor: COLORS.primary}}
       edges={noSafeArea ? [''] : ['top', 'right', 'left']}>
-      <ImageBackground
+      <CustomImage
         source={images.background}
         resizeMode="stretch"
         style={[
           styles.wrapper,
-          {backgroundColor: '#fff'},
+          {backgroundColor: '#f7f9fa'},
           backgroundColor && {backgroundColor},
           styleWrapper,
         ]}>
-        <View style={[styles.wrapper]}>
-          {scrollEnabled ? (
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
-              scrollEnabled={scrollEnabled}
-              onScroll={onScroll}
-              scrollEventThrottle={16}>
-              <View style={{flex: 1, ...styleContent}}>{children}</View>
-            </ScrollView>
-          ) : (
+        {scrollEnabled ? (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            scrollEnabled={scrollEnabled}
+            onScroll={onScroll}
+            scrollEventThrottle={16}>
             <View style={{flex: 1, ...styleContent}}>{children}</View>
-          )}
-        </View>
-      </ImageBackground>
+          </ScrollView>
+        ) : (
+          <View style={{flex: 1, ...styleContent}}>{children}</View>
+        )}
+      </CustomImage>
     </SafeAreaView>
   );
 }

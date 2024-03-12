@@ -30,6 +30,12 @@ export default function FindContent({isBuy, rental}) {
     params && setValue('location', params);
   }, [params]);
 
+  const handleSearch = () => {
+    navigate('NoBottomTab', {
+      screen: 'ListAccommodationSearchScreen',
+    });
+  };
+
   return (
     <View style={styles.findContent}>
       <View
@@ -162,7 +168,7 @@ export default function FindContent({isBuy, rental}) {
       </View>
 
       <CustomButton
-        onPress={handleSubmit(value => console.log(value))}
+        onPress={handleSubmit(handleSearch)}
         buttonType="medium"
         text={t('Find_Accommodation')}
         styleText={{

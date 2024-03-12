@@ -1,13 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {memo, useCallback, useState} from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import LinearGradient from 'react-native-linear-gradient';
 import {SIZES, scale} from '../../../assets/constants';

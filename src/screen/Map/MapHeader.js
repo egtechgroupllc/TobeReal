@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {scale} from '../../assets/constants';
+import {SHADOW, scale} from '../../assets/constants';
 import {CustomInput} from '../../components';
 import BottomSheet from '../../components/BottomSheet';
 import {useLanguage} from '../../hooks/useLanguage';
@@ -34,6 +34,8 @@ export default function MapHeader() {
       style={{
         position: 'absolute',
         top: 0,
+        zIndex: 10,
+        ...SHADOW,
       }}>
       {/* <HeaderBar /> */}
       <View style={{}}>
@@ -50,6 +52,7 @@ export default function MapHeader() {
           ref={bottomSheetRef}
           styleContent={{
             paddingHorizontal: scale(16),
+            rowGap: scale(15),
           }}>
           <CustomInput placeholder={t('accommodation_name')} />
           <TypeAccommoda />

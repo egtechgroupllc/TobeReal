@@ -27,31 +27,32 @@ export default function HomeSearchAccommodScreen() {
   }, []);
 
   return (
-    <MainWrapper scrollEnabled={false}>
-      <View style={styles.wrapper}>
-        <View
-          style={{
-            backgroundColor: COLORS.primary,
-            height: scale(20),
-            position: 'absolute',
-            width: '100%',
-            zIndex: -1,
-          }}
-        />
-        <View style={styles.content}>
-          <SearchChooseLocation onPress={handleSelectSearch} />
-          <SearchRecent onPress={handleSelectSearch} />
-        </View>
+    <MainWrapper
+      scrollEnabled={false}
+      styleWrapper={{
+        marginTop: scale(-50),
+      }}>
+      <View style={styles.content}>
+        <SearchChooseLocation onPress={handleSelectSearch} />
+        <SearchRecent onPress={handleSelectSearch} />
       </View>
+      <View
+        style={{
+          backgroundColor: COLORS.primary,
+          height: scale(60),
+          position: 'absolute',
+          width: '100%',
+        }}
+      />
     </MainWrapper>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    marginTop: scale(-50),
     width: '86%',
     alignSelf: 'center',
     rowGap: scale(14),
+    zIndex: 99,
   },
 });

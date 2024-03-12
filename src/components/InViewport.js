@@ -59,21 +59,25 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
 
   isInViewPort() {
     const window = Dimensions.get('window');
+
     const isVisible =
       this.state.rectBottom !== 0 &&
       this.state.rectTop >= 0 &&
-      this.state.rectBottom <= window.height + (this.props.topHeight || 400) &&
+      this.state.rectBottom <=
+        window.height + (this.props.topHeight || scale(400)) &&
       this.state.rectWidth > 0 &&
       this.state.rectWidth <= window.width;
     if (this.lastValue !== isVisible) {
       this.lastValue = isVisible;
       this.props.onChange(isVisible);
+      isVisible && this.stopWatching();
     }
   }
 
   render() {
     return (
       <View
+        collapsable={this.lastValue}
         ref={component => {
           this.myview = component;
         }}

@@ -1,10 +1,10 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {COLORS, WIDTH, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
 const funcFallBack = () => {};
-export default function Category({
+export default memo(function Category({
   data = [],
   noSelect,
   onPress = funcFallBack,
@@ -17,13 +17,13 @@ export default function Category({
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
 
-  useEffect(() => {
-    if (select && onChange) {
-      onChange(select);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [select]);
-
+  // useEffect(() => {
+  //   if (select && onChange) {
+  //     onChange(select);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [select]);
+  console.log(select);
   return (
     <View
       style={{
@@ -69,6 +69,6 @@ export default function Category({
       />
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({});

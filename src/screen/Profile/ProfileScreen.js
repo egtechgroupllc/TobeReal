@@ -21,7 +21,7 @@ export default function ProfileScreen() {
     queryFn: getProfile,
     enabled: !!token,
   });
-
+  console.log(data, isLoading, error);
   return (
     <MainAuth>
       {token ? (

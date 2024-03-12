@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useMemo, useState} from 'react';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 
 import Skeleton from './Skeleton';
@@ -7,29 +8,40 @@ type CustomImgProps = {
 } & FastImageProps;
 
 export default function CustomImage({source, ...props}: CustomImgProps) {
-  const isImgAsset = typeof source === 'number';
   const [visible, setVisible] = useState(true);
 
+  const sourceNew = useMemo(
+    () => (Array.isArray(source) ? source[0] : source),
+    [],
+  );
+  const isImgAsset = useMemo(() => typeof sourceNew === 'string', []);
+
   return (
-    <Skeleton visible={visible} shimmerStyle={props?.style}>
+    <>
       <FastImage
-        style={{
-          backgroundColor: '#ccc',
-        }}
         {...props}
         source={
-          isImgAsset ? source : {uri: source, priority: FastImage.priority.high}
+          !isImgAsset
+            ? sourceNew
+            : {uri: sourceNew, priority: FastImage.priority.high}
         }
-        onLayout={() => {
-          setVisible(true);
-        }}
         onLoadEnd={() => {
           setVisible(true);
         }}
         onLoadStart={() => {
-          setVisible(false);
+          !!isImgAsset && setVisible(false);
         }}
       />
-    </Skeleton>
+
+      {!visible && (
+        <Skeleton
+          visible={visible}
+          shimmerStyle={{
+            ...props?.style,
+            position: 'absolute',
+          }}
+        />
+      )}
+    </>
   );
 }

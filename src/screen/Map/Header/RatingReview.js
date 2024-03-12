@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import CustomText from '../../../components/CustomText';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 const listSort = [
   {
@@ -27,55 +27,56 @@ const listSort = [
 
 export default function RatingReview({onSort}) {
   const [checked, setChecked] = useState(undefined);
-  const {t}= useLanguage()
-  return (
-    <WrapperContent
-      onPressSeeAll={() => console.log(1)}
-      heading={t('review_score')}
-      styleHeading={{
-        paddingHorizontal: 0,
-      }}
-      styleTextHeading={{
-        fontSize: SIZES.xMedium,
-      }}
-      styleContent={{
-        columnGap: scale(10),
-        alignItem: 'center',
-        flexDirection: 'row',
-      }}>
-      {listSort.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          style={{
-            ...styles.item,
-            borderWidth: checked?.rating === item.rating ? 1.3 : 1,
-            borderColor:
-              checked?.rating === item.rating ? COLORS.primary : '#f1f1f1',
-          }}
-          activeOpacity={0.7}
-          onPress={() => setChecked(item)}>
-          <CustomText
-            textType="semiBold"
-            style={
-              checked?.rating === item.rating && {
-                color: COLORS.primary,
-              }
-            }>
-            {item.rating}+
-          </CustomText>
+  const {t} = useLanguage();
 
-          <CustomText
-            numberOfLines={1}
-            style={
-              checked?.rating === item.rating && {
-                color: COLORS.primary,
-              }
-            }>
-            {item.textRating}
-          </CustomText>
-        </TouchableOpacity>
-      ))}
-    </WrapperContent>
+  return (
+    <View
+      style={{
+        rowGap: scale(10),
+      }}>
+      <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+        {t('review_score')}
+      </CustomText>
+      <View
+        style={{
+          columnGap: scale(10),
+          alignItem: 'center',
+          flexDirection: 'row',
+        }}>
+        {listSort.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={{
+              ...styles.item,
+              borderWidth: checked?.rating === item.rating ? 1.3 : 1,
+              borderColor:
+                checked?.rating === item.rating ? COLORS.primary : '#f1f1f1',
+            }}
+            activeOpacity={0.7}
+            onPress={() => setChecked(item)}>
+            <CustomText
+              textType="semiBold"
+              style={
+                checked?.rating === item.rating && {
+                  color: COLORS.primary,
+                }
+              }>
+              {item.rating}+
+            </CustomText>
+
+            <CustomText
+              numberOfLines={1}
+              style={
+                checked?.rating === item.rating && {
+                  color: COLORS.primary,
+                }
+              }>
+              {item.textRating}
+            </CustomText>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
   );
 }
 

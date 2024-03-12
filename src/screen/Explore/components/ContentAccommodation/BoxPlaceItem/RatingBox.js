@@ -3,9 +3,9 @@ import React from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {SHADOW, scale} from '../../../../../assets/constants';
 
-export default function RatingBox({rating, textRating}) {
+export default function RatingBox({rating, textRating, style}) {
   return (
-    <View style={styles.ratingNumberBox}>
+    <View style={[styles.ratingNumberBox, style]}>
       <View
         style={{
           ...styles.boxIcon,

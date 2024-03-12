@@ -54,7 +54,7 @@ export const MessageStyle = {
     titleStyle: SIZES.medium,
   },
   error: {
-    style: {backgroundColor: '#FB7181' },
+    style: {backgroundColor: '#FB7181'},
     duration: 3000,
     titleStyle: SIZES.medium,
   },

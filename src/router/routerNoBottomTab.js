@@ -1,6 +1,9 @@
 import {DetailAccommodationScreen} from '../screen/Explore';
-import { BookingScreen } from '../screen/Explore/components/DetailAccommodation/Booking';
-import {HomeSearchAccommodScreen} from '../screen/Search';
+import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
+import {
+  HomeSearchAccommodScreen,
+  ListAccommodationSearchScreen,
+} from '../screen/Search';
 import {ListVideoInfluencerScreen} from '../screen/Video';
 
 export default routerNoBottomTab = [
@@ -26,5 +29,9 @@ export default routerNoBottomTab = [
     name: 'ListVideoInfluencerScreen',
     component: ListVideoInfluencerScreen,
     options: {contentStyle: {backgroundColor: '#000'}},
+  },
+  {
+    name: 'ListAccommodationSearchScreen',
+    component: ListAccommodationSearchScreen,
   },
 ];
