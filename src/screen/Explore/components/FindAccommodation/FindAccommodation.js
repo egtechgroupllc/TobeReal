@@ -5,12 +5,14 @@ import {
   IconAccommodationOther,
   IconApartment,
   IconCity,
+  IconEmigrate,
   IconHome,
   IconHotel,
   IconHouse,
   IconLand,
   IconRoom,
   IconVilla,
+  IconWorld,
 } from '../../../../assets/icon/Icon';
 import {Category, TabSelect} from '../../../../components';
 import FindContent from './FindContent';
@@ -79,6 +81,14 @@ export default function FindAccommodation() {
     {
       text: t('tour_post'),
       icon: IconLand,
+    },
+    {
+      text: 'Emigrate',
+      icon: IconEmigrate,
+    },
+    {
+      text: 'World',
+      icon: IconWorld,
     },
   ]).current;
 

@@ -1,8 +1,8 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Category, CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
-import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
 import BoxPlaceItem from './ContentAccommodation/BoxPlaceItem';
 import {useLanguage} from '../../../hooks/useLanguage';
 
@@ -21,84 +21,134 @@ export default function WrapperContent({
   isCategory,
   isShadow,
   dayEndDeals,
+  background,
+  packageTour,
+  themedTour,
+  worldTour,
+  discoveryTour,
   onPressSeeAll = funcFallBack,
   onPressCategory = funcFallBack,
   ...props
 }) {
   const {t} = useLanguage();
   return (
-    <View {...props} style={[styles.wrapper, styleWrapper]}>
-      <View style={[styles.heading, styleHeading]}>
-        <View style={styles.boxHeading}>
-          {heading && (
-            <CustomText textType="bold" style={[styles.text, styleTextHeading]}>
-              {heading}
-            </CustomText>
-          )}
-          {isSeeAll && (
-            <CustomText
-              textType="semiBold"
-              style={{
-                color: COLORS.primary,
-                minWidth: scale(42),
-                lineHeight: scale(20),
-              }}
-              onPress={() => onPressSeeAll()}>
-              {t('see_all')}
-            </CustomText>
+    <ImageBackground source={background}>
+      <View {...props} style={[styles.wrapper, styleWrapper]}>
+        <View style={[styles.heading, styleHeading]}>
+          <View style={styles.boxHeading}>
+            {heading && (
+              <CustomText
+                textType="bold"
+                style={[styles.text, styleTextHeading]}>
+                {heading}
+              </CustomText>
+            )}
+            {isSeeAll && (
+              <CustomText
+                textType="semiBold"
+                style={{
+                  color: COLORS.primary,
+                  minWidth: scale(42),
+                  lineHeight: scale(20),
+                }}
+                onPress={() => onPressSeeAll()}>
+                {t('see_all')}
+              </CustomText>
+            )}
+          </View>
+
+          {subHeading && (
+            <View style={styles.boxSubHeading}>
+              <CustomText textType="regular" style={styles.textSub}>
+                {subHeading}
+              </CustomText>
+              {dayEndDeals && (
+                <View style={styles.boxDayEndDeals}>
+                  <CustomText textType="semiBold" style={styles.dayEndDeals}>
+                    {dayEndDeals} days !
+                  </CustomText>
+                </View>
+              )}
+            </View>
           )}
         </View>
 
-        {subHeading && (
-          <View style={styles.boxSubHeading}>
-            <CustomText textType="regular" style={styles.textSub}>
-              {subHeading}
-            </CustomText>
-            {dayEndDeals && (
-              <View style={styles.boxDayEndDeals}>
-                <CustomText textType="semiBold" style={styles.dayEndDeals}>
-                  {dayEndDeals} days !
-                </CustomText>
-              </View>
-            )}
-          </View>
-        )}
-      </View>
-
-      {isCategory && (
-        <Category
-          data={[
-            'Jakarta',
-            'Bandung',
-            'Tangerang',
-            'Bekasi',
-            'Depok',
-            'Surabaya',
-            'Medan',
-            'Bogor',
-            'Makassar (Ujung Pandang)',
-            'Sumedang',
-            'Sidoarjo',
-            'Yogyakarta (Jogja)',
-            'Semarang',
-          ]}
-          onChange={onPressCategory}
-        />
-      )}
-
-      <View style={[styles.content, styleContent, isShadow && SHADOW]}>
-        {dataList[0] && (
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={dataList}
-            contentContainerStyle={styles.contentList}
-            renderItem={({item, index}) => renderItem({item, index})}
+        {isCategory && (
+          <Category
+            data={[
+              'Jakarta',
+              'Bandung',
+              'Tangerang',
+              'Bekasi',
+              'Depok',
+              'Surabaya',
+              'Medan',
+              'Bogor',
+              'Makassar (Ujung Pandang)',
+              'Sumedang',
+              'Sidoarjo',
+              'Yogyakarta (Jogja)',
+              'Semarang',
+            ]}
+            onChange={onPressCategory}
           />
         )}
-        {children}
+         {packageTour && (
+          <Category
+            data={[
+              'Southeast Asia',
+              'Asia',
+              'Europe',
+              'America',
+            ]}
+            onChange={onPressCategory}
+          />
+        )}
+        {themedTour && (
+          <Category
+            data={[
+              'Sightseeing tour',
+              'Nature tour',
+              'Sea tour',
+              'Other types',
+            ]}
+            onChange={onPressCategory}
+          />
+        )}
+         {worldTour && (
+          <Category
+            data={[
+              'Korean',
+              'Japan',
+              'Thailand',
+              'Singapore',
+            ]}
+            onChange={onPressCategory}
+          />
+        )}
+         {discoveryTour && (
+          <Category
+            data={[
+              'Domestic destination',
+              'International destination',
+            ]}
+            onChange={onPressCategory}
+          />
+        )}
+        <View style={[styles.content, styleContent, isShadow && SHADOW]}>
+          {dataList[0] && (
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={dataList}
+              contentContainerStyle={styles.contentList}
+              renderItem={({item, index}) => renderItem({item, index})}
+            />
+          )}
+          {children}
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
