@@ -90,7 +90,7 @@ export default function WrapperContent({
               'Yogyakarta (Jogja)',
               'Semarang',
             ]}
-            onChange={onPressCategory}
+            onPress={onPressCategory}
           />
         )}
          {packageTour && (
@@ -101,7 +101,7 @@ export default function WrapperContent({
               'Europe',
               'America',
             ]}
-            onChange={onPressCategory}
+            onPress={onPressCategory}
           />
         )}
         {themedTour && (
@@ -112,7 +112,7 @@ export default function WrapperContent({
               'Sea tour',
               'Other types',
             ]}
-            onChange={onPressCategory}
+            onPress={onPressCategory}
           />
         )}
          {worldTour && (
@@ -123,7 +123,7 @@ export default function WrapperContent({
               'Thailand',
               'Singapore',
             ]}
-            onChange={onPressCategory}
+            onPress={onPressCategory}
           />
         )}
          {discoveryTour && (
@@ -132,7 +132,7 @@ export default function WrapperContent({
               'Domestic destination',
               'International destination',
             ]}
-            onChange={onPressCategory}
+            onPress={onPressCategory}
           />
         )}
         <View style={[styles.content, styleContent, isShadow && SHADOW]}>

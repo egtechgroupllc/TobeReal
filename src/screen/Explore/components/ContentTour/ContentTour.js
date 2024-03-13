@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -153,7 +153,7 @@ const dataWorld= [
     ],
   },
 ];
-const dataDiscovery= [
+const dataDomestic= [
   {
     id: 1,
     src: images.dalat,
@@ -282,14 +282,153 @@ const dataDiscovery= [
     ],
   },
 ];
+const dataInternational= [
+  {
+    id: 1,
+    src: images.singapore,
+    name: 'Singapore',
+    price: 224000,
+    imgdetail: [
+      images.c15_1,
+      images.c15_2,
+      images.c15_3,
+      images.c15_4,
+      images.c15_5,
+      images.c15_6,
+    ],
+  },
+  {
+    id: 2,
+    src: images.thailan,
+    name: 'Thailand',
+    price: 995000,
+    imgdetail: [
+      images.c16_1,
+      images.c16_2,
+      images.c16_3,
+      images.c16_4,
+      images.c16_5,
+      images.c16_6,
+      images.c16_7,
+      images.c16_8,
+      images.c16_9,
+    ],
+  },
+  {
+    id: 3,
+    src: images.indo,
+    name: 'Indonesia',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 4,
+    src: images.malay,
+    name: 'Malaysia',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 5,
+    src: images.philip,
+    name: 'Philippines',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 6,
+    src: images.korea,
+    name: 'Korea',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 7,
+    src: images.japan,
+    name: 'Japan',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 8,
+    src: images.taiwan,
+    name: 'Taiwan',
+    price: 280000,
+    imgdetail: [
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+];
 export default function ContentTour() {
+  const [tourData, setTourData] = useState(dataDomestic); 
+
+  const handleCategoryChange = (categoryData) => {
+    if (categoryData === 'Domestic destination') {
+      setTourData(dataDomestic);
+    } else if (categoryData === 'International destination') {
+      setTourData(dataInternational);
+    }
+  };
+  console.log(tourData)
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
       <PackageTour data={dataPackage} />
       <ThemedTour data={dataThemed} />
       <WorldTour data={dataWorld}/>
-      <DiscoveryTour data={dataDiscovery}/>
+      <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange}/>
     </View>
   );
 }

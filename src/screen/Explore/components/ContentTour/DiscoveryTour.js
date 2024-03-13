@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, View} from 'react-native';
+import {StyleSheet, Text, FlatList, } from 'react-native';
 import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import {formatPrice} from '../../../../utils/format';
@@ -9,8 +9,8 @@ import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import BoxDiscoveryItem from './BoxDiscoveryItem';
 
-
-export default function DiscoveryTour({data}) {
+const funcFallBack = () => {};
+export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
 
@@ -21,7 +21,7 @@ export default function DiscoveryTour({data}) {
           isSeeAll
           discoveryTour
           onPressSeeAll={() => console.log(1)}
-          onPressCategory={item => console.log(item)}
+          onPressCategory={onPressCategory}
           heading={t('Discover more tours')}
           subHeading={t('The places are extremely worth the discovery')}
           styleWrapper={{backgroundColor: 'transparent'}}>

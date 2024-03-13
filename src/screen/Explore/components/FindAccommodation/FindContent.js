@@ -19,7 +19,7 @@ import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
-export default function FindContent({isBuy, rental}) {
+export default function FindContent({isBuy, rental, tour}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
@@ -38,148 +38,186 @@ export default function FindContent({isBuy, rental}) {
 
   return (
     <View style={styles.findContent}>
-      <View
-        style={{
-          paddingHorizontal: scale(16),
-          rowGap: scale(10),
-        }}>
-        <CustomInput
-          control={control}
-          rules={requireField('Vui long them')}
-          name="location"
-          defaultValue={t('around_me')}
-          iconLeft={IconMarker}
-          styleIcon={styles.icon}
-          onPress={() =>
-            navigate('NoBottomTab', {
-              screen: 'HomeSearchAccommodScreen',
-            })
-          }
-        />
-        {!isBuy && (
-          <>
-            <ChooseCalendar rental={rental} />
-
-            {rental === t('daily') && <ChooseOccupancy />}
-          </>
-        )}
-      </View>
-      <View style={styles.optionBox}>
-        <View style={styles.boxIcon}>
-          <IconRoom />
-        </View>
-        <OptionAccommodation
-          outline
-          multiSelect
-          isSelectAll
-          styleContent={{
-            flex: 1,
-            columnGap: scale(8),
-            paddingHorizontal: scale(12),
-          }}
-          data={[
-            {
-              text: 'All',
-            },
-            {
-              text: t('studio'),
-            },
-            {
-              text: '1BR',
-            },
-            {
-              text: '2BR',
-            },
-            {
-              text: '3BR+',
-            },
-          ]}
-        />
-      </View>
-
-      <View style={styles.optionBox}>
-        <View style={styles.boxIcon}>
-          <IconFurniture />
-        </View>
-        <OptionAccommodation
-          outline
-          scrollEnabled
-          styleContent={{
-            flex: 1,
-            columnGap: scale(8),
-          }}
-          data={[
-            {
-              text: t('all'),
-            },
-            {
-              text: t('full_furnished'),
-            },
-            {
-              text: t('unfurnished'),
-            },
-          ]}
-        />
-      </View>
-
-      {isBuy && (
-        <View style={styles.optionBox}>
-          <View style={styles.boxIcon}>
-            <IconTag />
+      {tour ? (
+        <View style={styles.findContent}>
+          <CustomInput
+            control={control}
+            rules={requireField('Vui long them')}
+            name="location"
+            defaultValue={t('around_me')}
+            iconLeft={IconMarker}
+            styleIcon={styles.icon}
+            style={{width:'90%'}}
+            onPress={() =>
+              navigate('NoBottomTab', {
+                screen: 'HomeSearchAccommodScreen',
+              })
+            }
+          />
+          <View style={{width:'165%'}}> 
+          <ChooseCalendar rental={rental} />
           </View>
-          <OptionAccommodation
-            outline
-            multiSelect
-            isSelectAll
-            styleContent={{
-              flex: 1,
-              columnGap: scale(8),
+
+          <CustomButton
+            onPress={handleSubmit(handleSearch)}
+            buttonType="medium"
+            text={t('Find Recommended Tour')}
+            styleText={{
+              color: COLORS.white,
+              textType: 'bold',
+              textTransform: 'uppercase',
             }}
-            data={[
-              {
-                text: t('all'),
-              },
-              {
-                text: t('fixed_price'),
-              },
-              {
-                text: t('negotiable'),
-              },
-            ]}
+            style={{
+              width: '92%',
+            }}
+          />
+        </View>
+      ) : (
+        <View
+          style={{
+            paddingHorizontal: scale(16),
+            rowGap: scale(10),
+            alignItems:'center'
+          }}>
+          <CustomInput
+            control={control}
+            rules={requireField('Vui long them')}
+            name="location"
+            defaultValue={t('around_me')}
+            iconLeft={IconMarker}
+            styleIcon={styles.icon}
+            onPress={() =>
+              navigate('NoBottomTab', {
+                screen: 'HomeSearchAccommodScreen',
+              })
+            }
+          />
+          {!isBuy && (
+            <>
+              <ChooseCalendar rental={rental} />
+
+              {rental === t('daily') && <ChooseOccupancy />}
+            </>
+          )}
+          <View style={styles.optionBox}>
+            <View style={styles.boxIcon}>
+              <IconRoom />
+            </View>
+            <OptionAccommodation
+              outline
+              multiSelect
+              isSelectAll
+              styleContent={{
+                flex: 1,
+                columnGap: scale(8),
+                paddingHorizontal: scale(12),
+              }}
+              data={[
+                {
+                  text: 'All',
+                },
+                {
+                  text: t('studio'),
+                },
+                {
+                  text: '1BR',
+                },
+                {
+                  text: '2BR',
+                },
+                {
+                  text: '3BR+',
+                },
+              ]}
+            />
+          </View>
+
+          <View style={styles.optionBox}>
+            <View style={styles.boxIcon}>
+              <IconFurniture />
+            </View>
+            <OptionAccommodation
+              outline
+              scrollEnabled
+              styleContent={{
+                flex: 1,
+                columnGap: scale(8),
+              }}
+              data={[
+                {
+                  text: t('all'),
+                },
+                {
+                  text: t('full_furnished'),
+                },
+                {
+                  text: t('unfurnished'),
+                },
+              ]}
+            />
+          </View>
+
+          {isBuy && (
+            <View style={styles.optionBox}>
+              <View style={styles.boxIcon}>
+                <IconTag />
+              </View>
+              <OptionAccommodation
+                outline
+                multiSelect
+                isSelectAll
+                styleContent={{
+                  flex: 1,
+                  columnGap: scale(8),
+                }}
+                data={[
+                  {
+                    text: t('all'),
+                  },
+                  {
+                    text: t('fixed_price'),
+                  },
+                  {
+                    text: t('negotiable'),
+                  },
+                ]}
+              />
+            </View>
+          )}
+
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(6),
+              marginVertical: scale(6),
+              alignSelf:'center'
+            }}>
+            <CheckBox text={t('im_flexible')} />
+            <CustomButton
+              style={styles.question}
+              text="?"
+              styleText={{
+                color: COLORS.white,
+                textType: 'bold',
+              }}
+            />
+          </View>
+
+          <CustomButton
+            onPress={handleSubmit(handleSearch)}
+            buttonType="medium"
+            text={t('Find_Accommodation')}
+            styleText={{
+              color: COLORS.white,
+              textType: 'bold',
+              textTransform: 'uppercase',
+            }}
+            style={{
+              width: '92%',
+            }}
           />
         </View>
       )}
-
-      <View
-        style={{
-          flexDirection: 'row',
-          columnGap: scale(6),
-          marginVertical: scale(6),
-        }}>
-        <CheckBox text={t('im_flexible')} />
-        <CustomButton
-          style={styles.question}
-          text="?"
-          styleText={{
-            color: COLORS.white,
-            textType: 'bold',
-          }}
-        />
-      </View>
-
-      <CustomButton
-        onPress={handleSubmit(handleSearch)}
-        buttonType="medium"
-        text={t('Find_Accommodation')}
-        styleText={{
-          color: COLORS.white,
-          textType: 'bold',
-          textTransform: 'uppercase',
-        }}
-        style={{
-          width: '92%',
-        }}
-      />
     </View>
   );
 }
@@ -192,7 +230,7 @@ const styles = StyleSheet.create({
   optionBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: '4%',
+    // marginLeft: '4%',
   },
   boxIcon: {
     paddingHorizontal: scale(10),

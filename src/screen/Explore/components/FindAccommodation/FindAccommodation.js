@@ -11,6 +11,7 @@ import {
   IconHouse,
   IconLand,
   IconRoom,
+  IconTourTopic,
   IconVilla,
   IconWorld,
 } from '../../../../assets/icon/Icon';
@@ -79,8 +80,8 @@ export default function FindAccommodation() {
 
   const listTour = useRef([
     {
-      text: t('tour_post'),
-      icon: IconLand,
+      text: 'Tour by topic',
+      icon: IconTourTopic,
     },
     {
       text: 'Emigrate',
@@ -140,10 +141,14 @@ export default function FindAccommodation() {
                       }
                     />
                   </View>
-                  <FindContent
-                    isBuy={tabSelect === t('BUY')}
-                    rental={category}
-                  />
+                  {tabSelect != t('TOUR') ? (
+                    <FindContent
+                      isBuy={tabSelect === t('BUY')}
+                      rental={category}
+                    />
+                  ) : (
+                    <FindContent tour />
+                  )}
                 </>
               ) : (
                 <FindAccommodationStart />

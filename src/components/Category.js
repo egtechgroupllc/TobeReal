@@ -13,7 +13,7 @@ export default memo(function Category({
   styleContent,
   isShadow = true,
 }) {
-  const [select, setSelect] = useState(!noSelect && data[1]);
+  const [select, setSelect] = useState(!noSelect && data[0]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
 
