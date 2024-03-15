@@ -22,6 +22,7 @@ export const WIDTH = {
 };
 export const SIZES = {
   xSmall: scale(10),
+  xxSmall: scale(6),
   small: scale(12),
   xMedium: scale(14),
   medium: scale(16),

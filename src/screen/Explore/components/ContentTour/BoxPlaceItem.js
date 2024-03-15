@@ -44,7 +44,7 @@ export default function BoxPlaceItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailAccommodationScreen',
+                  screen: 'DetailTourScreen',
                   params: {
                     jsondata: jsonImage || [],
                     title: name || '',
