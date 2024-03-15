@@ -92,6 +92,9 @@ const Layout = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        contentStyle: {
+          backgroundColor: '#f7f9fa',
+        },
       }}
       initialRouteName="BottomTab">
       <Stack.Screen name="BottomTab" component={BottomTab} />

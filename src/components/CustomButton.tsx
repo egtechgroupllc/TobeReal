@@ -1,19 +1,19 @@
-import React, { memo, useMemo, useRef } from 'react';
+import React, {memo, useMemo, useRef} from 'react';
 import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewStyle
+  ViewStyle,
 } from 'react-native';
 import LinearGradient, {
   LinearGradientProps,
 } from 'react-native-linear-gradient';
-import { COLORS, scale } from '../assets/constants';
-import { SHADOW } from '../assets/constants/theme';
-import { arrayToObject } from '../utils/arrayToObject';
-import CustomText, { CustomTextProps } from './CustomText';
+import {COLORS, scale} from '../assets/constants';
+import {SHADOW} from '../assets/constants/theme';
+import {arrayToObject} from '../utils/arrayToObject';
+import CustomText, {CustomTextProps} from './CustomText';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
@@ -23,7 +23,7 @@ type CustomButtonProps = {
   linearGradientProps?: LinearGradientProps;
   iconLeft?: React.JSX.Element;
   iconRight?: React.JSX.Element;
-  noDelay?: boolean;
+  isDelay?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
@@ -43,7 +43,7 @@ export default memo(function CustomButton({
   styleIcon,
   styleWrapper,
   linearGradientProps,
-  noDelay,
+  isDelay,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
   ...props
@@ -52,7 +52,7 @@ export default memo(function CustomButton({
   const IconLeft: any = iconLeft;
 
   const heightSize = useMemo(() => {
-    return buttonType === 'large' ? 48 : buttonType === 'medium' ? 40 : 31;
+    return buttonType === 'large' ? 48 : buttonType === 'medium' ? 42 : 31;
   }, [buttonType]);
 
   const fontSize = useMemo(() => {
@@ -70,6 +70,7 @@ export default memo(function CustomButton({
       ? ['#F7E75A', '#FFC702']
       : [backgroundColor, backgroundColor];
   }, [propStyle?.backgroundColor, outline, linearGradientProps]);
+  const ComponentWrapper: any = !linearGradientProps ? View : LinearGradient;
 
   const timer = useRef<any>(null);
   const TIMEOUT = 400;
@@ -81,13 +82,13 @@ export default memo(function CustomButton({
       timer.current = null;
       onDouble();
     } else {
-      if (noDelay) {
+      if (!isDelay) {
         onSingle();
       }
 
       timer.current = setTimeout(() => {
         timer.current = null;
-        !noDelay && onSingle();
+        isDelay && onSingle();
       }, TIMEOUT);
     }
   };
@@ -96,81 +97,71 @@ export default memo(function CustomButton({
   };
 
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.7}
+      {...props}
       style={[
         styles.wrapper,
         isShadow && SHADOW,
         propStyle?.flex
           ? {flex: propStyle?.flex}
           : propStyle.minWidth
-          ? {minWidth: propStyle.minWidth, width: 'auto'}
+          ? {minWidth: propStyle.minWidth}
           : {width: propStyle?.width || '100%'},
-        propStyle?.borderTopWidth && {
-          borderTopWidth: propStyle?.borderTopWidth,
-          borderTopColor: propStyle?.borderTopColor,
-        },
         styleWrapper,
-      ]}>
-      <TouchableOpacity
-        activeOpacity={0.6}
-        {...props}
-        style={{}}
-        onPress={_onPress}>
-        <LinearGradient
-          colors={_backgroundColor}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          {...linearGradientProps}
-          style={[
-            styles.button,
-            !propStyle?.height && {
-              minHeight: scale(heightSize),
-            },
-            outline && styles.outline,
-            (iconLeft || iconRight) && text && {flexDirection: 'row'},
+      ]}
+      onPress={_onPress}>
+      <ComponentWrapper
+        colors={_backgroundColor}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        {...linearGradientProps}
+        style={[
+          styles.button,
+          !propStyle?.height && {
+            minHeight: scale(heightSize),
+          },
+          outline && styles.outline,
+          (iconLeft || iconRight) && text && {flexDirection: 'row'},
 
-            propStyle,
-            propStyle.minWidth
-              ? {minWidth: propStyle.minWidth}
-              : {width: '100%'},
-          ]}>
-          {iconLeft && (
-            <View>
-              <IconLeft
-                style={{...styles.icon, ...styleIcon}}
-                fill={styleIcon?.color}
-              />
-            </View>
-          )}
-          {text && (
-            <CustomText
-              textType={styleText?.textType || (buttonType && 'semiBold')}
-              style={[
-                styles.text,
-                {fontSize: scale(fontSize)},
-                !linearGradientProps && {color: COLORS.white},
-                outline && {color: COLORS.primary},
-                styleText,
-              ]}>
-              {text}
-            </CustomText>
-          )}
-          {iconRight && (
-            <IconRight
+          propStyle,
+          propStyle.minWidth ? {minWidth: propStyle.minWidth} : {width: '100%'},
+        ]}>
+        {iconLeft && (
+          <View>
+            <IconLeft
               style={{...styles.icon, ...styleIcon}}
               fill={styleIcon?.color}
             />
-          )}
-        </LinearGradient>
-      </TouchableOpacity>
-    </View>
+          </View>
+        )}
+        {text && (
+          <CustomText
+            textType={styleText?.textType || (buttonType && 'semiBold')}
+            style={[
+              styles.text,
+              {fontSize: scale(fontSize)},
+              !linearGradientProps && {color: COLORS.white},
+              outline && {color: COLORS.primary},
+              styleText,
+            ]}>
+            {text}
+          </CustomText>
+        )}
+        {iconRight && (
+          <IconRight
+            style={{...styles.icon, ...styleIcon}}
+            fill={styleIcon?.color}
+          />
+        )}
+      </ComponentWrapper>
+    </TouchableOpacity>
   );
 });
 
 const styles = StyleSheet.create({
   wrapper: {
     // alignItems: 'center',
-    width: '100%',
   },
   outline: {
     backgroundColor: 'transparent',
@@ -181,8 +172,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     columnGap: scale(10),
-    paddingHorizontal: scale(7),
+    paddingHorizontal: scale(10),
     borderRadius: scale(10),
+    backgroundColor: COLORS.primary,
   },
   text: {
     textAlign: 'center',

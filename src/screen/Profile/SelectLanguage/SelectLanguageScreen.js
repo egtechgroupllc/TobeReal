@@ -1,10 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useLayoutEffect} from 'react';
-import MainAuth from '../../../components/MainAuth';
-import ContentLanguage from './components/ContentLanguage';
+import React from 'react';
 import MainWrapper from '../../../components/MainWrapper';
-import {useLanguage} from '../../../hooks/useLanguage';
-import {useNavigation} from '@react-navigation/native';
+import ContentLanguage from './components/ContentLanguage';
 
 export default function SelectLanguageScreen() {
   return (

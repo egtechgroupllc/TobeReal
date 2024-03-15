@@ -1,57 +1,32 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import Collapsible from 'react-native-collapsible';
+
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {
-  IconCheckBox,
-  IconDown,
-  IconRight,
-  IconUnCheckBox,
-} from '../../../../../assets/icon/Icon';
+import {IconRight} from '../../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../../components';
-import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
-import Map from '../../../../Explore/components/DetailAccommodation/Map';
-import Collapsible from 'react-native-collapsible';
-import CheckBox from '../../../../../components/CheckBox';
-const dataRealEstateType = [
-  {id: '1', name: 'Hotel'},
-  {id: '2', name: 'Hostel'},
-  {id: '3', name: 'Villa'},
-  {id: '4', name: 'Resort'},
-  {id: '5', name: 'Apartment'},
-  {id: '6', name: 'Homestay'},
-];
+import RealEstateType from '../../components/RealEstateType';
+import SelectCountry from '../../components/SelectCountry';
+import EstateSetMap from './GeneralInformation/EstateSetMap';
 
 export default function GeneralInformation({maxCharacters}) {
-  const {control, watch, handleSubmit, setValue} = useForm();
-
+  const {control, watch, handleSubmit, setValue, getValues} = useForm();
   const {t} = useLanguage();
+
   const [isView, setView] = useState(false);
-  const [showRealEstateType, setShowRealEstateType] = useState('');
-  const viewShowRealEstateType = () => {
-    setShowRealEstateType(prevshowRealEstateType => !prevshowRealEstateType);
-  };
+
   const viewGeneral = () => {
     setView(prev => !prev);
   };
-  const [selectedEstateCheckBox, setSelectedEstateCheckBox] = useState('');
-
-  const estateTypeCheckBox = name => {
-    setSelectedEstateCheckBox(selectedEstateCheckBox === name ? '' : name);
-    setShowRealEstateType(false);
-  };
   useEffect(() => {
-    setValue('real_estate_type', selectedEstateCheckBox);
-  }, [selectedEstateCheckBox]);
+    console.log(watch());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch()]);
 
   return (
     <View>
@@ -61,7 +36,9 @@ export default function GeneralInformation({maxCharacters}) {
         text={t('general_information')}
         iconRight={() => <IconRight />}
         onPress={viewGeneral}
-        noDelay
+        styleText={{
+          color: COLORS.text,
+        }}
       />
 
       <Collapsible collapsed={!isView} style={styles.box}>
@@ -77,7 +54,12 @@ export default function GeneralInformation({maxCharacters}) {
             requireField(t('this_field_required')),
             validateMaxAmount('maxCharacters characters limit', maxCharacters),
           ]}
-          style={styles.textArea}
+          style={[
+            styles.textInput,
+            {
+              height: scale(100),
+            },
+          ]}
           componentRight={
             <Text style={styles.numText}>
               {watch('name')?.length || 0}/{maxCharacters}
@@ -97,7 +79,12 @@ export default function GeneralInformation({maxCharacters}) {
             requireField(t('this_field_required')),
             validateMaxAmount(maxCharacters, 'maxCharacters characters limit'),
           ]}
-          style={styles.textArea}
+          style={[
+            styles.textInput,
+            {
+              height: scale(100),
+            },
+          ]}
           componentRight={
             <Text style={styles.numText}>
               {watch('description')?.length || 0}/{maxCharacters}
@@ -111,98 +98,35 @@ export default function GeneralInformation({maxCharacters}) {
           control={control}
           name="address"
           placeholder={t('address')}
-          rules={{
-            ...requireField(t('this_field_required')),
-          }}
+          rules={requireField(t('this_field_required'))}
           style={styles.textInput}
         />
 
-        <View style={{width: '110%'}}>
-          <Map />
-        </View>
+        <View style={styles.line} />
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            height: scale(40),
-            width: '100%',
-            justifyContent: 'space-between',
-          }}>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text1,
-              color: COLORS.black,
-            }}>
-            {t('country')}
-          </CustomText>
+        <EstateSetMap
+          onChange={value => {
+            setValue('latitude', value?.latitude);
+            setValue('longitude', value?.longitude);
+          }}
+        />
 
-          <CustomInput
-            onPress={() => {}}
-            control={control}
-            name="country_id"
-            placeholder="USA"
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={{
-              backgroundColor: '#E3E3E3',
-              borderColor: '#E3E3E3',
-              width: '50%',
-            }}
-            iconRight={() => <IconDown />}
-          />
-        </View>
+        <View style={styles.line} />
 
-        <View
-          style={{
-            width: '100%',
-          }}>
-          <CustomInput
-            label={t('real_estate_type')}
-            defaultValue={t(selectedEstateCheckBox) || t('real_estate_type')}
-            onPress={viewShowRealEstateType}
-            control={control}
-            name="real_estate_type"
-            rules={{
-              ...requireField(t('this_field_required')),
-            }}
-            style={
-              !showRealEstateType
-                ? styles.buttonEstateType
-                : styles.buttonEstateTypes
-            }
-            iconRight={() => <IconDown />}
-          />
-          <Collapsible collapsed={!showRealEstateType}>
-            <FlatList
-              data={dataRealEstateType}
-              style={{
-                width: '100%',
-              }}
-              contentContainerStyle={styles.listEstateType}
-              scrollEnabled={false}
-              renderItem={({item}) => (
-                <CheckBox
-                  text={item.name}
-                  textLeft
-                  isRadio
-                  disabled={selectedEstateCheckBox === item.name}
-                  onPress={() => estateTypeCheckBox(item.name)}
-                  isChecked={selectedEstateCheckBox === item.name}
-                  style={{
-                    justifyContent: 'space-between',
-                    paddingHorizontal: scale(12),
-                    paddingVertical: scale(5),
-                    width: '100%',
-                  }}
-                />
-              )}
-              keyExtractor={item => item.id}
-            />
-          </Collapsible>
-        </View>
+        <SelectCountry
+          onChange={value => {
+            setValue('country_id', value?.id);
+            setValue('province_id', value?.province?.id);
+          }}
+        />
+
+        <View style={styles.line} />
+
+        <RealEstateType
+          onChange={value => {
+            setValue('accommodation_type_id', value?.id);
+          }}
+        />
       </Collapsible>
     </View>
   );
@@ -236,18 +160,11 @@ const styles = StyleSheet.create({
     rowGap: scale(16),
   },
   line: {
-    borderWidth: 0.5,
+    height: 0.5,
     width: '100%',
-    marginTop: scale(10),
-    borderColor: '#F0B90B',
+    backgroundColor: '#F0B90B',
   },
-  textArea: {
-    backgroundColor: '#E3E3E3',
-    borderColor: '#E3E3E3',
-    borderRadius: scale(6),
-    height: scale(100),
-    paddingHorizontal: scale(10),
-  },
+
   textInput: {
     backgroundColor: '#E3E3E3',
     borderColor: '#E3E3E3',
@@ -259,36 +176,5 @@ const styles = StyleSheet.create({
     top: scale(-20),
     right: 0,
     color: COLORS.black,
-  },
-  text: {
-    fontSize: SIZES.small,
-  },
-
-  text2: {
-    fontSize: SIZES.medium,
-  },
-
-  buttonEstateType: {
-    borderWidth: scale(2),
-    borderColor: '#EEEEEE',
-    borderRadius: scale(10),
-    width: '100%',
-    height: scale(40),
-    justifyContent: 'center',
-    // backgroundColor:'#E3E3E3'
-  },
-  buttonEstateTypes: {
-    borderRadius: scale(10),
-    borderWidth: scale(2),
-    borderColor: '#EEEEEE',
-    width: '100%',
-    height: scale(40),
-    justifyContent: 'center',
-  },
-  listEstateType: {
-    borderRadius: scale(10),
-    backgroundColor: '#EEEEEE',
-    paddingVertical: scale(5),
-    width: '100%',
   },
 });

@@ -1,26 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useRef, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
-import { COLORS, SIZES, scale } from '../../../../assets/constants';
-import { IconCheckBox, IconDown } from '../../../../assets/icon/Icon';
-import { CustomButton, CustomInput } from '../../../../components';
+import {useQuery} from '@tanstack/react-query';
+import React, {useRef, useState} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
+import {IconCheckBox, IconDown} from '../../../../assets/icon/Icon';
+import {CustomButton, CustomInput} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
-import { useLanguage } from '../../../../hooks/useLanguage';
-import { requireField } from '../../../../utils/validate';
-import { getCountry } from '../../../../api/user';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import {requireField} from '../../../../utils/validate';
+import {getCountry} from '../../../../api/common';
 
 export default function InputCountry({control, name}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-  const [select, setSelect] = useState( );
+  const [select, setSelect] = useState();
 
-  const {data,isLoading,isError} = useQuery ({
-    queryKey: ['user','info','listAddress'],
-    queryFn:()=> getCountry()
-  })
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['user', 'info', 'listAddress'],
+    queryFn: () => getCountry(),
+  });
 
-
-console.log(data,isLoading);
+  console.log(data, isLoading);
   return (
     <View>
       <CustomInput
@@ -47,22 +46,22 @@ console.log(data,isLoading);
           data={['123', '7', '8', '1289']}
           renderItem={({item, index}) => (
             <CustomButton
-                style={[
-                  index !== 0 && {
-                    borderTopWidth: 1,
-                  },
-                  styles.item,
-                ]}
-                text={item}
-                onPress={() => {
-                  setSelect(item);
-                  bottomSheetRef.current.close()
-                }}
-                iconRight={select === item && IconCheckBox}
-                styleText={{
-                  color: select === item ? COLORS.primary : COLORS.text,
-                }}
-              />
+              style={[
+                index !== 0 && {
+                  borderTopWidth: 1,
+                },
+                styles.item,
+              ]}
+              text={item}
+              onPress={() => {
+                setSelect(item);
+                bottomSheetRef.current.close();
+              }}
+              iconRight={select === item && IconCheckBox}
+              styleText={{
+                color: select === item ? COLORS.primary : COLORS.text,
+              }}
+            />
           )}
         />
 
@@ -82,7 +81,8 @@ console.log(data,isLoading);
   );
 }
 
-const styles = StyleSheet.create({  item: {
+const styles = StyleSheet.create({
+  item: {
     borderTopColor: '#eee',
     flexDirection: 'row',
     alignItems: 'center',
@@ -91,4 +91,5 @@ const styles = StyleSheet.create({  item: {
     columnGap: scale(10),
     backgroundColor: 'transparent',
     paddingHorizontal: SIZES.large,
-  },});
+  },
+});

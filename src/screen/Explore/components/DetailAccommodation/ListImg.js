@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {
   FlatList,
   Modal,
@@ -16,9 +16,8 @@ export default function ListImg({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
   const flatListRef = useRef(null);
-  let heightHeader = useRef(20);
-  const images = dataImg.map(uri => ({uri}));
-  // const images = dataImg.map(source => ({source}));
+  const images = useMemo(() => dataImg.map(uri => ({uri})), [dataImg]);
+
   const [visible, setIsVisible] = useState(false);
   const [indexNavigation, setIndexNavigation] = useState(1);
 
@@ -45,10 +44,6 @@ export default function ListImg({dataImg, open, onClose}) {
         {dataImg.length > 1 && (
           <>
             <View
-              onLayout={e => {
-                const {height} = e.nativeEvent.layout;
-                heightHeader.current = height;
-              }}
               style={{...styles.headerBar, minHeight: insets.top + scale(35)}}>
               <TouchableOpacity
                 activeOpacity={0.8}
@@ -100,7 +95,7 @@ export default function ListImg({dataImg, open, onClose}) {
 
         {(!!visible || dataImg.length === 1 || visible === 0) && (
           <ImageView
-            images={dataImg}
+            images={images}
             imageIndex={visible}
             visible={dataImg.length === 1 || !!visible || visible === 0}
             onRequestClose={() => {

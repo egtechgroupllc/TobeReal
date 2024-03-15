@@ -27,7 +27,7 @@ import {useForm} from 'react-hook-form';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import DatePicker from 'react-native-date-picker';
-import ImageDetail from '../../../../Explore/components/DetailAccommodation/ImageDetail';
+import ImageDetail from '../../../../components/ImageDetail';
 export default function TabContent() {
   const [inputText, setInputText] = useState('');
   const [openCheckin, setOpenCheckin] = useState(false);
@@ -247,7 +247,7 @@ export default function TabContent() {
                   ...styles.text,
                   color: '#979797',
                 }}>
-                   {t('domestic')}
+                {t('domestic')}
               </CustomText>
               <IconDown />
             </TouchableOpacity>

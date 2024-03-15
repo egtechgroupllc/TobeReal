@@ -13,7 +13,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import ImageDetail from './ImageDetail';
+import ImageDetail from '../../../components/ImageDetail';
 import OptionAccommodation from '../FindAccommodation/OptionAccommodation';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconAdd, IconShare, IconX} from '../../../../assets/icon/Icon';

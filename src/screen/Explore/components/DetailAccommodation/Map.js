@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import MapView, {
   Marker,
@@ -6,14 +6,25 @@ import MapView, {
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
 import {COLORS, scale} from '../../../../assets/constants';
-import {IconMapView} from '../../../../assets/icon/Icon';
+import {IconMapView, IconMarker} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import WrapperContent from '../WrapperContent';
 import CustomMarker from '../../../Map/CustomMarker';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
-export default function Map() {
+export default function Map({region}) {
   const {t} = useLanguage();
+  const [coordinate, setCoordinate] = useState(region);
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    setCoordinate(region);
+    mapRef.current.fitToCoordinates([region], {
+      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+      animated: true,
+    });
+  }, [region]);
+
   return (
     <WrapperContent
       heading={t('map_view')}
@@ -27,23 +38,21 @@ export default function Map() {
           borderRadius: scale(12),
         }}>
         <MapView
+          ref={mapRef}
           provider={PROVIDER_GOOGLE}
           style={{
             flex: 1,
           }}
-          scrollEnabled={false}
-          initialRegion={{
-            latitude: 22.62938671242907,
-            longitude: 88.4354486029795,
-            latitudeDelta: 0.04864195044303443,
-            longitudeDelta: 0.040142817690068,
+          onRegionChangeComplete={region => {
+            console.log({region});
+          }}
+          region={{
+            ...coordinate,
+            latitudeDelta: 0.0006187393884509504,
+            longitudeDelta: 0.0006142258644104004,
           }}>
-          <Marker
-            coordinate={{
-              latitude: 22.62938671242907,
-              longitude: 88.4354486029795,
-            }}>
-            <CustomMarker />
+          <Marker coordinate={coordinate}>
+            <IconMarker />
           </Marker>
         </MapView>
         <View

@@ -133,6 +133,7 @@ export function IconBookingsInactive({fill, ...props}) {
 }
 
 export function IconSearch({fill, ...props}) {
+  console.log(props?.style);
   return (
     <Svg
       width={props?.style?.width || scale(20)}

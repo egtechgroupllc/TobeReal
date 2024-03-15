@@ -47,7 +47,9 @@ export default function CheckBox({
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <View style={styleWrapper}>
           <BouncyCheckbox
-            textComponent={<CustomText>{props.text}</CustomText>}
+            textComponent={
+              <CustomText style={props.textStyle}>{props.text}</CustomText>
+            }
             onPress={onChange}
             size={scale(16)}
             isChecked={value}

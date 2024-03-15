@@ -9,6 +9,9 @@ export default function NoBottomTab() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        contentStyle: {
+          backgroundColor: '#f7f9fa',
+        },
         header: props => <HeaderBar {...props} />,
       }}>
       <Stack.Group>

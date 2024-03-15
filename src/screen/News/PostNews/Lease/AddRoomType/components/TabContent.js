@@ -32,7 +32,7 @@ import {
 } from '../../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
 import ListImg from '../../../../../Explore/components/DetailAccommodation/ListImg';
-import ImageDetail from '../../../../../Explore/components/DetailAccommodation/ImageDetail';
+import ImageDetail from '../../../../../components/ImageDetail';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 const dataRoomType = [
   {id: '1', name: 'Single'},
@@ -97,8 +97,7 @@ export default function TabContent() {
   const [bedType, setSelectedBedCheckBox] = useState('');
   const [laundry, setSelectedLaundryCheckBox] = useState([]);
   const [food, setSelectedFoodCheckBox] = useState([]);
-  const [entertainment, setSelectedEntertainmentCheckBox] =
-    useState([]);
+  const [entertainment, setSelectedEntertainmentCheckBox] = useState([]);
   const viewShowRoomType = () => {
     setShowRoomType(prevshowRoomType => !prevshowRoomType);
   };
@@ -120,9 +119,7 @@ export default function TabContent() {
 
   const RoomLaundryCheckBox = name => {
     if (laundry.includes(name)) {
-      setSelectedLaundryCheckBox(
-        laundry.filter(item => item !== name),
-      );
+      setSelectedLaundryCheckBox(laundry.filter(item => item !== name));
     } else {
       setSelectedLaundryCheckBox([...laundry, name]);
     }
@@ -133,9 +130,7 @@ export default function TabContent() {
 
   const FoodDrinkCheckBox = name => {
     if (food.includes(name)) {
-      setSelectedFoodCheckBox(
-        food.filter(item => item !== name),
-      );
+      setSelectedFoodCheckBox(food.filter(item => item !== name));
     } else {
       setSelectedFoodCheckBox([...food, name]);
     }
@@ -150,10 +145,7 @@ export default function TabContent() {
         entertainment.filter(item => item !== name),
       );
     } else {
-      setSelectedEntertainmentCheckBox([
-        ...entertainment,
-        name,
-      ]);
+      setSelectedEntertainmentCheckBox([...entertainment, name]);
     }
   };
   const [yesChecked, setYesChecked] = useState(false);
@@ -168,11 +160,11 @@ export default function TabContent() {
     setNoChecked(true);
     setYesChecked(false);
   };
-  
+
   useEffect(() => {
     const breakfastInclude = () => {
       yesChecked ? setBreakfast('YES') : setBreakfast('NO');
-    }
+    };
     breakfastInclude();
   }, [yesChecked]);
 
@@ -216,7 +208,16 @@ export default function TabContent() {
   const ok = value => {
     // Pass the roomDetails back to the previous screen
     navigation.goBack();
-    route.params.onOk({...value, roomImage, bedType, roomType, laundry, entertainment, food, breakfast});
+    route.params.onOk({
+      ...value,
+      roomImage,
+      bedType,
+      roomType,
+      laundry,
+      entertainment,
+      food,
+      breakfast,
+    });
   };
   return (
     <View
@@ -362,9 +363,7 @@ export default function TabContent() {
                 color: COLORS.black,
                 paddingHorizontal: scale(20),
               }}>
-              {roomType !== ''
-                ? t(roomType)
-                : t('Room type')}
+              {roomType !== '' ? t(roomType) : t('Room type')}
             </CustomText>
           </TouchableOpacity>
           {showRoomType && (
@@ -430,9 +429,7 @@ export default function TabContent() {
                 color: COLORS.black,
                 paddingHorizontal: scale(20),
               }}>
-              {bedType !== ''
-                ? t(bedType)
-                : t('Bed type')}
+              {bedType !== '' ? t(bedType) : t('Bed type')}
             </CustomText>
           </TouchableOpacity>
           {showBedType && (
@@ -837,7 +834,6 @@ export default function TabContent() {
               // paddingHorizontal: scale(20),
             }}>
             <TouchableOpacity onPress={pickImage}>
-
               <IconCamera />
             </TouchableOpacity>
           </View>

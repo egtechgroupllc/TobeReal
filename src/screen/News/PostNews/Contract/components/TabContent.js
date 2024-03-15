@@ -28,7 +28,7 @@ import axios from 'axios';
 import Map from '../../../../Explore/components/DetailAccommodation/Map';
 import {requireField, validateMaxAmount} from '../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
-import ImageDetail from '../../../../Explore/components/DetailAccommodation/ImageDetail';
+import ImageDetail from '../../../../components/ImageDetail';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function TabContent() {
   const {t} = useLanguage();
@@ -212,8 +212,7 @@ export default function TabContent() {
           marginBottom: scale(10),
           width: '90%',
         }}
-        onPress={uploadIDCARD}
-        >
+        onPress={uploadIDCARD}>
         {idCardImage.length > 0 ? (
           <ImageDetail
             dataImg={idCardImage}
@@ -248,8 +247,7 @@ export default function TabContent() {
           marginBottom: scale(10),
           width: '90%',
         }}
-        onPress={uploadIDCARD}
-        >
+        onPress={uploadIDCARD}>
         {selfieIdImage.length > 0 ? (
           <ImageDetail
             dataImg={selfieIdImage}
@@ -285,8 +283,7 @@ export default function TabContent() {
           marginBottom: scale(10),
           width: '90%',
         }}
-        onPress={uploadProperty}
-        >
+        onPress={uploadProperty}>
         {propertyImage.length > 0 ? (
           <ImageDetail
             dataImg={propertyImage}

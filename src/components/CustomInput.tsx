@@ -142,16 +142,22 @@ export default forwardRef(function CustomInput(
                 autoCapitalize="none"
                 {...props}
                 onChangeText={text => {
-                  const valueText = text.trim();
-                  onChange(
-                    enableFormatNum ? valueText.replaceAll(',', '') : valueText,
-                  );
+                  // const valueText = text.trim();
+                  const newText = enableFormatNum
+                    ? text.replaceAll(',', '')
+                    : text;
+
+                  control
+                    ? onChange(newText)
+                    : props?.onChangeText && props?.onChangeText(newText);
                 }}
                 onBlur={onBlur}
                 value={
                   enableFormatNum
                     ? formatPrice(value, {showCurrency: false})
-                    : value
+                    : control
+                    ? value
+                    : props?.value
                 }
                 style={[
                   styles.input,
@@ -171,8 +177,6 @@ export default forwardRef(function CustomInput(
                     disabled={password ? !password : !onPressIconRight}
                     activeOpacity={onPressIconRight ? 0.7 : 1}
                     onPress={() => {
-                      console.log(2123);
-
                       password && setViewPassword(!viewPassword);
                       onPressIconRight && onPressIconRight();
                     }}>

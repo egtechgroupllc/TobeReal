@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Animated, StyleSheet, View} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+import {Animated, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {scale, COLORS} from '../../assets/constants';
+import {COLORS, scale} from '../../assets/constants';
 import {IconMyLocation} from '../../assets/icon/Icon';
 import {CustomButton} from '../../components';
+import MainWrapper from '../../components/MainWrapper';
+import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import {markers} from '../../utils/mapData';
+import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
-import CustomMarker from './CustomMarker';
-import {getCurrentLocation} from '../../utils/getCurrentLocation';
-import MainWrapper from '../../components/MainWrapper';
 
 const initialMapState = {
   markers,
