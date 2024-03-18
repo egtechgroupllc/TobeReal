@@ -38,6 +38,21 @@ const data = [
 export default function TicketOption() {
   const {t} = useLanguage();
   const { isFocused, dispatch} = useNavigation();
+  // const navigation = useNavigation();
+  const booktour = (selectedItem) => {
+    if (isFocused()) {
+      dispatch(
+        StackActions.push('NoBottomTab', {
+          screen: 'BookTourScreen',
+          params: {
+            jsondata: selectedItem.imgdetail[0] || [],
+            title: selectedItem.title || '',
+            paramPrice: selectedItem.price || '',
+          },
+        }),
+      );
+    }
+  };
   return (
     <View>
       <View style={styles.boxTourTime}>
@@ -137,7 +152,7 @@ export default function TicketOption() {
                   </View>
                 </View>
               </View>
-              <Button title={'Select tickets'} />
+              <Button title={'Select tickets'} onPress={() => booktour(item)}/>
             </View>
           )}
         />

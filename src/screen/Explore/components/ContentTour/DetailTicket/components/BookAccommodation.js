@@ -17,6 +17,7 @@ export default memo(function BookAccommodation({
   setBookHeight,
   isLoading,
   price,
+  onPress
 }) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
@@ -67,9 +68,7 @@ export default memo(function BookAccommodation({
             paddingVertical: scale(10),
           }}>
           <CustomButton
-            // onPress={() => {
-            //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
-            // }}
+            onPress={onPress}
             buttonType="large"
             style={{flex: 1}}
             text={t('Buy ticket')}

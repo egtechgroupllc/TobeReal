@@ -3,14 +3,14 @@ import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-import {COLORS, FONTS, SIZES, WIDTH, scale} from '../../../../../../assets/constants';
+import {COLORS, FONTS, SIZES, WIDTH, scale} from '../../../../../../../assets/constants';
 
 import {useForm} from 'react-hook-form';
 
 
-import ChooseCalendar from '../../../FindAccommodation/ChooseCalendar';
-import ChooseOccupancy from '../../../FindAccommodation/ChooseOccupancy';
-import { useLanguage } from '../../../../../../hooks/useLanguage';
+import ChooseCalendar from '../../../../FindAccommodation/ChooseCalendar';
+import { useLanguage } from '../../../../../../../hooks/useLanguage';
+
 
 export default function FindContent({isBuy, rental}) {
   const {t}= useLanguage()

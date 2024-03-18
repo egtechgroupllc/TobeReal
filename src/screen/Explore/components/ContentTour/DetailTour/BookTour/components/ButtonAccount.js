@@ -4,10 +4,10 @@ import {CustomInput} from '../../../../components';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import { SIZES, scale } from '../../../../../../assets/constants';
-import { IconDownWhite } from '../../../../../../assets/icon/Icon';
-import CustomText from '../../../../../../components/CustomText';
-import { useLanguage } from '../../../../../../hooks/useLanguage';
+import { SIZES, scale } from '../../../../../../../assets/constants';
+import { IconDownWhite } from '../../../../../../../assets/icon/Icon';
+import CustomText from '../../../../../../../components/CustomText';
+import { useLanguage } from '../../../../../../../hooks/useLanguage';
 export default function ButtonAccount({onPress, title, styleImage, image, style, client}) {
   const {t}= useLanguage()
   return (

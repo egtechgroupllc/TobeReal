@@ -14,10 +14,26 @@ import InfoDetail from './components/InfoDetail';
 import GeneralInformation from './components/GeneralInformation';
 import BookAccommodation from './components/BookAccommodation';
 import DynamicHeader from './components/DynamicHeader';
+import { StackActions, useNavigation } from '@react-navigation/native';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
-export default function DetailTourScreen({route}) {
+export default function DetailTicketScreen({route}) {
+  const { isFocused, dispatch} = useNavigation();
   const {jsondata, title, paramPrice} = route.params;
+  const booktour = () => {
+    if (isFocused()) {
+      dispatch(
+        StackActions.push('NoBottomTab', {
+          screen: 'BookTourScreen',
+          params: {
+            jsondata: jsondata || [],
+            title: title || '',
+            paramPrice: paramPrice || '',
+          },
+        }),
+      );
+    }
+  };
   const listView = useRef([
     <InfoDetail name={title} />,
     <GeneralInformation/>
@@ -138,6 +154,7 @@ export default function DetailTourScreen({route}) {
         setBookHeight={setTabBarHeight}
         price={paramPrice}
         isLoading={false}
+        onPress = {booktour}
       />
     </MainWrapper>
   );
