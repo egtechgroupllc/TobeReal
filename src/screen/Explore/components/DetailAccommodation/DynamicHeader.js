@@ -43,14 +43,14 @@ export default React.memo(
       {
         text: t('facilities'),
       },
+      // {
+      //   text: t('location'),
+      // },
       {
-        text: t('location'),
+        text: t('room'),
       },
       {
-        text: t('reviews'),
-      },
-      {
-        text: t('info'),
+        text: t('Review'),
       },
     ];
     const animatedTranslateY = scrollOffsetY.interpolate({

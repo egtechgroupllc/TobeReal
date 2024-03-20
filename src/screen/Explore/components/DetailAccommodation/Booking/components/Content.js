@@ -430,7 +430,7 @@ export default function Content() {
           </LinearGradient>
         </TouchableOpacity>
       </View>
-      <Button title={t('Request to BOOK')} onPress={Ok} />
+      <Button title={t('BOOK')} onPress={Ok} />
     </View>
   );
 }

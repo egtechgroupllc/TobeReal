@@ -15,6 +15,7 @@ import Map from './components/DetailAccommodation/Map';
 import Review from './components/DetailAccommodation/Review';
 import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
+import Room from './components/DetailAccommodation/Rooms/Room';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
@@ -22,7 +23,8 @@ export default function DetailAccommodationScreen({route}) {
   const listView = useRef([
     <InfoDetail name={title} />,
     <InfoUnitFacilities />,
-    <Map />,
+    // <Map />,
+    <Room name={title} />,
     <Review />,
     <InfoAdditional />,
     <SimilarApartmentsNearby />,
@@ -137,6 +139,10 @@ export default function DetailAccommodationScreen({route}) {
         setBookHeight={setTabBarHeight}
         price={paramPrice}
         isLoading={false}
+        onPress={() => {
+          handleSelect(2);
+          selectScrollHandler(2);
+        }}
       />
     </MainWrapper>
   );

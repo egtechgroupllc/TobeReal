@@ -3,6 +3,7 @@ import { DetailTourScreen } from '../screen/Explore/components/ContentTour';
 import { DetailTicketScreen } from '../screen/Explore/components/ContentTour/DetailTicket';
 import { BookTourScreen } from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
 import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
+import { DetailRoomScreen } from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
 import {
   HomeSearchAccommodScreen,
@@ -37,6 +38,10 @@ export default routerNoBottomTab = [
   {
     name: 'BookingScreen',
     component: BookingScreen,
+  },
+  {
+    name: 'DetailRoomScreen',
+    component: DetailRoomScreen,
   },
   {
     name: 'BookTourScreen',
