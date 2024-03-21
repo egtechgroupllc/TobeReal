@@ -129,8 +129,8 @@ export default function WrapperContent({
          {discoveryTour && (
           <Category
             data={[
-              'Domestic destination',
-              'International destination',
+              t('dosmestic_destination'),
+              t('international_destination')
             ]}
             onPress={onPressCategory}
           />

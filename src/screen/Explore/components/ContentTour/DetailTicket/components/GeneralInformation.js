@@ -30,10 +30,10 @@ export default function GeneralInformation() {
       <View style={styles.wrapper}>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-            The price included
+          {t('price_include')}
           </CustomText>
           <CustomText textType="medium" style={styles.text}>
-            Carriage:
+          {t('carriage')}:
           </CustomText>
           <View
             style={{
@@ -45,7 +45,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Round -trip shuttle
+            {t('round_trip')}
             </CustomText>
           </View>
           <View
@@ -58,11 +58,11 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              High speed train
+              {t('high_speed')}
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
-            Tour guide:
+          {t('tour_guide')}:
           </CustomText>
           <View
             style={{
@@ -75,11 +75,11 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Thai-English speaking tour guide
+            {t('thai_english')}
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
-            Meals:
+            {t('meal')}
           </CustomText>
           <View
             style={{
@@ -91,7 +91,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Light breakfast
+            {t('light_breakfast')}
             </CustomText>
           </View>
           <View
@@ -104,11 +104,11 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Lunch optional style (available vegetarian choice)
+            {t('lunch_option')}
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
-            Services/supplements:
+          {t('service_supple')}:
           </CustomText>
           <View
             style={{
@@ -120,7 +120,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Diving mask and life jacket
+            {t('divine_mask')}
             </CustomText>
           </View>
           <View
@@ -132,7 +132,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Admission fee
+            {t('admission_fee')}
             </CustomText>
           </View>
           <View
@@ -144,7 +144,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Insurance provided by the operator
+            {t('insurance_provide')}
             </CustomText>
           </View>
           <View
@@ -156,7 +156,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Soft drink
+            {t('soft_drink')}
             </CustomText>
           </View>
           <View
@@ -168,7 +168,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Seasonal fruits
+            {t('seasonal_fruits')}
             </CustomText>
           </View>
           <View
@@ -180,7 +180,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Cakes and snacks price does not include
+            {t('cake_and_snack')}
             </CustomText>
           </View>
           <View
@@ -192,7 +192,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Other personal expenses
+            {t('other_personal')}
             </CustomText>
           </View>
           <View
@@ -205,19 +205,19 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-              Tip
+            {t('tip')}
             </CustomText>
           </View>
         </View>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-            Voucher validity
+          {t('voucher_validity')}
           </CustomText>
           <View style={{flexDirection: 'row', marginTop: '2%'}}>
             <IconCalendar></IconCalendar>
             <View style={{marginLeft: '5%', marginTop: '1%'}}>
               <CustomText textType="medium" style={styles.text}>
-                Use on the selected date:
+              {t('use_selected_date')}:
               </CustomText>
               <View
                 style={{
@@ -227,7 +227,7 @@ export default function GeneralInformation() {
                 }}>
                 <View style={{...styles.dot, width: '2.5%'}}></View>
                 <CustomText textType="medium" style={styles.text}>
-                  Valid every day normally
+                {t('valid_normally')}
                 </CustomText>
               </View>
               <View
@@ -239,7 +239,7 @@ export default function GeneralInformation() {
                 }}>
                 <View style={{...styles.dot, width: '2.5%'}}></View>
                 <CustomText textType="medium" style={styles.text}>
-                  Valid every holiday
+                {t('valid_holiday')}
                 </CustomText>
               </View>
             </View>
@@ -247,7 +247,7 @@ export default function GeneralInformation() {
         </View>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-            Conversion method
+          {t('conversion_method')}
           </CustomText>
           <View
             style={{
@@ -258,10 +258,10 @@ export default function GeneralInformation() {
             <IconNoCalendar />
             <View style={{marginLeft: '5%'}}>
               <CustomText textType="medium" style={styles.text}>
-                No reservation
+              {t('no_reservation')}
               </CustomText>
               <CustomText textType="medium" style={styles.text}>
-                You do not need to book before coming.
+              {t('do_not_need_book')}.
               </CustomText>
             </View>
           </View>
@@ -275,17 +275,16 @@ export default function GeneralInformation() {
             <IconInputDirectly />
             <View style={{marginLeft: '5%',}}>
               <CustomText textType="bold" style={styles.text}>
-                Input directly
+              {t('input_directly')}
               </CustomText>
             </View>
           </View>
           <CustomText textType="regular" style={styles.text}>
-            - After confirming the reservation, you can see the service voucher
-            in my reservation page or via email.
+        
+            - {t('after_confirming')}.
           </CustomText>
           <CustomText textType="regular" style={styles.text}>
-            - When coming, just submit the service on the phone for the staff at
-            the entrance is done!
+            - {t('when_coming')}!
           </CustomText>
           <View
             style={{
@@ -297,12 +296,12 @@ export default function GeneralInformation() {
             <IconPrint />
             <View style={{marginLeft: '5%'}}>
               <CustomText textType="bold" style={styles.text}>
-              No need to print payment cards
+              {t('no_need_print_card')}
               </CustomText>
             </View>
           </View>
           <CustomText textType="regular" style={styles.text}>
-          Just present the electronic ticket/payment card on your phone when converted or entered the door. Please adjust the appropriate screen brightness.
+          {t('just_present_electronic')}
           </CustomText>
         </View>
       </View>

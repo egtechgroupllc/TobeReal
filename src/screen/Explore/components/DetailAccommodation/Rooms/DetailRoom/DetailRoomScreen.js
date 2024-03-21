@@ -43,7 +43,7 @@ export default function DetailRoomScreen({route}) {
       <View style={styles.container}>
         <Header
           goback={true}
-          subHeading={t('Room detail')}
+          subHeading={t('room_detail')}
           noti={true}
           onPress={goBack}
           notify={notify}
@@ -83,7 +83,7 @@ export default function DetailRoomScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Room information')}:
+            {t('room_information')}:
           </CustomText>
           <View
             style={{
@@ -158,7 +158,7 @@ export default function DetailRoomScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Little convenient')}:
+            {t('little_convenient')}:
           </CustomText>
           <View
             style={{
@@ -231,7 +231,7 @@ export default function DetailRoomScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Price detail')}:
+            {t('price_detail')}:
           </CustomText>
           <View
             style={{
@@ -256,7 +256,7 @@ export default function DetailRoomScreen({route}) {
                   marginTop: scale(20),
                   flex: 1,
                 }}>
-                {t('Room rates:')}
+                {t('room_rate')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -282,7 +282,7 @@ export default function DetailRoomScreen({route}) {
                   marginTop: scale(10),
                   flex: 1,
                 }}>
-                {t('Taxes and fees')}:
+                {t('taxes_and_fees')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -309,7 +309,7 @@ export default function DetailRoomScreen({route}) {
                   marginTop: scale(20),
                   flex: 1,
                 }}>
-                {t('Total:')}
+                {t('total')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -324,7 +324,7 @@ export default function DetailRoomScreen({route}) {
             </View>
           </View>
         </View>
-        <Button title={t('Request to BOOK')} onPress={Ok} />
+        <Button title={t('request_to_book')} onPress={Ok} />
       </View>
     </MainAuth>
   );

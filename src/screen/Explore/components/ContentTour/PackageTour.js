@@ -24,8 +24,8 @@ export default function PackageTour({data}) {
           packageTour
           onPressSeeAll={() => console.log(1)}
           onPressCategory={item => console.log(item)}
-          heading={t('Package tour abroad')}
-          subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
+          heading={t('package_tour_aboard')}
+          subHeading={t('discover_package_family') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal

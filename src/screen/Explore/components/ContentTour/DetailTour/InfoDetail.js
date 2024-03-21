@@ -45,7 +45,7 @@ export default function InfoDetail({name}) {
             />
           </TouchableOpacity>
           <CustomText textType="medium" style={styles.text1}>
-            Watch the most vivid videos about the place you want to travel
+            {t('watch_the_most')}
           </CustomText>
         </View>
       </View>
@@ -61,7 +61,7 @@ export default function InfoDetail({name}) {
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            Latest tour date |
+            {t('lastest_tour')} |
           </CustomText>
           <CustomText
             textType="regular"
@@ -80,12 +80,12 @@ export default function InfoDetail({name}) {
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            Tour time |
+            {t('tour_time')} |
           </CustomText>
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            8 Hours
+            8 {t('hour')}
           </CustomText>
         </View>
       </View>

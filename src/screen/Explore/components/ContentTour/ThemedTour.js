@@ -21,8 +21,8 @@ export default function ThemedTour({data}) {
           themedTour
           onPressSeeAll={() => console.log(1)}
           onPressCategory={item => console.log(item)}
-          heading={t('Themed tours')}
-          subHeading={t('Discover the type of tour you love') + ` ${formatPrice(1000000)}`}
+          heading={t('themed_tour')}
+          subHeading={t('discover_tour_youlove') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal

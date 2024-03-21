@@ -145,7 +145,7 @@ export default function Content() {
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
           }}>
-          {t('Choose time:')}
+          {t('choose_time')}:
         </CustomText>
 
         <FindContent rental={category} />
@@ -158,7 +158,7 @@ export default function Content() {
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
           }}>
-          {t('Contact details:')}
+          {t('contact_detail')}:
         </CustomText>
         <View
           style={{
@@ -300,7 +300,7 @@ export default function Content() {
               color: COLORS.black,
               marginHorizontal: scale(10),
             }}>
-            {t('Use Coupons')}
+            {t('use_coupon')}
           </CustomText>
         </TouchableOpacity>
         <CustomText
@@ -312,7 +312,7 @@ export default function Content() {
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
           }}>
-          {t('Price detail')}:
+          {t('price_detail')}:
         </CustomText>
         <View
           style={{
@@ -338,7 +338,7 @@ export default function Content() {
                 marginTop: scale(20),
                 flex: 1,
               }}>
-              {t('Room rates:')}
+              {t('room_rate')}:
             </CustomText>
             <CustomText
               textType="medium"
@@ -365,7 +365,7 @@ export default function Content() {
                 marginTop: scale(10),
                 flex: 1,
               }}>
-              {t('Taxes and fees')}:
+              {t('taxes_and_fees')}:
             </CustomText>
             <CustomText
               textType="medium"
@@ -393,7 +393,7 @@ export default function Content() {
                 marginTop: scale(20),
                 flex: 1,
               }}>
-              {t('Total:')}
+              {t('total')}:
             </CustomText>
             <CustomText
               textType="medium"
@@ -430,7 +430,7 @@ export default function Content() {
           </LinearGradient>
         </TouchableOpacity>
       </View>
-      <Button title={t('BOOK')} onPress={Ok} />
+      <Button title={t('book')} onPress={Ok} />
     </View>
   );
 }

@@ -59,7 +59,7 @@ export default function TicketOption() {
         <CustomText
           textType="semiBold"
           style={{...styles.name, paddingHorizontal: scale(20)}}>
-          Ticket option
+         {t('ticket_option')}
         </CustomText>
         <View style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
           <ChooseCalendar />
@@ -100,7 +100,7 @@ export default function TicketOption() {
                     marginTop: scale(5),
                     color: COLORS.primary,
                   }}>
-                  See details
+                     {t('see_detail')}
                 </CustomText>
               </TouchableOpacity>
               <View style={styles.line}></View>
@@ -115,7 +115,7 @@ export default function TicketOption() {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    Easy refund
+                        {t('easy_refund')}
                   </CustomText>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: '10%'}}>
@@ -123,7 +123,7 @@ export default function TicketOption() {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    Easy Reschedule
+                           {t('easy_reschdule')}
                   </CustomText>
                 </View>
               </View>
@@ -152,7 +152,7 @@ export default function TicketOption() {
                   </View>
                 </View>
               </View>
-              <Button title={'Select tickets'} onPress={() => booktour(item)}/>
+              <Button title={t('select_ticket')} onPress={() => booktour(item)}/>
             </View>
           )}
         />

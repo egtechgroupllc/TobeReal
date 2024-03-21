@@ -22,8 +22,8 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
           discoveryTour
           onPressSeeAll={() => console.log(1)}
           onPressCategory={onPressCategory}
-          heading={t('Discover more tours')}
-          subHeading={t('The places are extremely worth the discovery')}
+          heading={t('discover_more_tour')}
+          subHeading={t('the_place_discovery')}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             numColumns={2} 

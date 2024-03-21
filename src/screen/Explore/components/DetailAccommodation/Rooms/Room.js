@@ -51,7 +51,7 @@ export default function Room({name}) {
     <WrapperContent
       // isSeeAll
       // onPressSeeAll={() => bottomSheetRef.current.open()}
-      heading={t('Rooms')}>
+      heading={t('room')}>
       {/* <View style={styles.overview}>
         <View style={styles.overviewNumberRating}>
           <CustomText textType="bold" style={styles.numberRating}>

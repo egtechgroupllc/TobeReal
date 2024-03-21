@@ -60,13 +60,13 @@ export default function InfoDetail({name}) {
               color: COLORS.black,
               marginRight: '10%',
             }}>
-            Easy refund
+           {t('easy_refund')}
           </CustomText>
           <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            Easy Reschedule
+            {t('easy_reschedule')}
           </CustomText>
         </View>
         <View

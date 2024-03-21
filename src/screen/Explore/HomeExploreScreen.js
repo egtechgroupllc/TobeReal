@@ -4,11 +4,8 @@ import {COLORS, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
 import Header from './components/Header';
-import ContentTour from './components/ContentTour/ContentTour';
 
-const ContentAccommodation = React.lazy(() =>
-  import('./components/ContentAccommodation/ContentAccommodation'),
-);
+
 
 export default function HomeExploreScreen() {
   return (
@@ -23,8 +20,6 @@ export default function HomeExploreScreen() {
             style={{marginTop: scale(20)}}
           />
         }>
-        <ContentAccommodation />
-        {/* <ContentTour/> */}
       </Suspense>
     </MainWrapper>
   );

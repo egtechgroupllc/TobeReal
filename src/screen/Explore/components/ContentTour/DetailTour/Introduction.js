@@ -9,9 +9,10 @@ import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
 import { TabSelect } from '../../../../../components';
 
-const listTab = ['Trip highlights', 'Tour schedule'];
+
 export default function Introduction() {
   const {t} = useLanguage();
+  const listTab = [t('trip_highlight'), t('tour_schedule')];
   const bottomSheetRef = useRef();
 
   const [tabSelect, setTabSelect] = useState(listTab[0]);

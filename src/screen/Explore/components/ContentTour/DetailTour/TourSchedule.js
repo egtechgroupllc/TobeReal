@@ -18,7 +18,7 @@ export default function TourSchedule() {
 
   return (
     <WrapperContent
-      heading={t('Tour Schedule')}
+      heading={t('tour_schedule')}
       styleWrapper={{marginBottom:scale(100)}}
       styleContent={{
         paddingHorizontal: scale(16),

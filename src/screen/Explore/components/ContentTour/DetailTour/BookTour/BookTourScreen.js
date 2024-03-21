@@ -72,7 +72,7 @@ export default function BookTourScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Choose time:')}
+            {t('choose_time')}:
           </CustomText>
           <View
             style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
@@ -87,7 +87,7 @@ export default function BookTourScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Add the number of guests:')}
+            {t('add_number_guest')}:
           </CustomText>
           <View
             style={{
@@ -105,7 +105,7 @@ export default function BookTourScreen({route}) {
                 marginTop: scale(10),
                 alignSelf: 'flex-start',
               }}>
-              {t('Adult')}
+              {t('adult')}
             </CustomText>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -175,7 +175,7 @@ export default function BookTourScreen({route}) {
                 color: COLORS.grey,
                 alignSelf: 'flex-start',
               }}>
-              {t('Adult (12-60 Year old)')}
+              {t('adult_year_old')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -185,7 +185,7 @@ export default function BookTourScreen({route}) {
                 marginTop: scale(10),
                 alignSelf: 'flex-start',
               }}>
-              {t('Children')}
+              {t('children')}
             </CustomText>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -255,7 +255,7 @@ export default function BookTourScreen({route}) {
                 color: COLORS.grey,
                 alignSelf: 'flex-start',
               }}>
-              Children (4-11 Year old)
+              {t('children_year_old')}
             </CustomText>
           </View>
           <CustomText
@@ -267,7 +267,7 @@ export default function BookTourScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            Things you need to know:
+            {t('things_need_to_know')}:
           </CustomText>
           <View style={{flexDirection:'row', columnGap:scale(30)}}>
           <TouchableOpacity
@@ -286,7 +286,7 @@ export default function BookTourScreen({route}) {
                 ...styles.text2,
                 color: COLORS.black,
               }}>
-              Inexperienced
+              {t('inexperienced')}
             </CustomText>
           </TouchableOpacity>
           <TouchableOpacity
@@ -305,7 +305,7 @@ export default function BookTourScreen({route}) {
                 ...styles.text2,
                 color: COLORS.black,
               }}>
-              Inseparable
+                {t('inseparable')}
             </CustomText>
           </TouchableOpacity>
           </View>
@@ -325,7 +325,7 @@ export default function BookTourScreen({route}) {
                 ...styles.text2,
                 color: COLORS.black,
               }}>
-             No reservation
+                       {t('no_reservation')}
             </CustomText>
           </TouchableOpacity>
           <CustomText
@@ -336,7 +336,7 @@ export default function BookTourScreen({route}) {
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
-            {t('Price detail')}:
+            {t('price_detail')}:
           </CustomText>
           <View
             style={{
@@ -362,7 +362,7 @@ export default function BookTourScreen({route}) {
                   marginTop: scale(10),
                   flex: 1,
                 }}>
-                {t('Adult:')}
+                {t('adult')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -389,7 +389,7 @@ export default function BookTourScreen({route}) {
                   marginTop: scale(10),
                   flex: 1,
                 }}>
-                {t('Children')}:
+                {t('children')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -417,7 +417,7 @@ export default function BookTourScreen({route}) {
                   marginTop: scale(10),
                   flex: 1,
                 }}>
-                {t('Total:')}
+                {t('total')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -438,7 +438,7 @@ export default function BookTourScreen({route}) {
                   paddingHorizontal: scale(20),
                   paddingBottom: scale(10),
                 }}>
-                Included additional surcharges
+                      {t('include_addition')}
               </CustomText>
           </View>
           <TouchableOpacity
@@ -464,7 +464,7 @@ export default function BookTourScreen({route}) {
             </LinearGradient>
           </TouchableOpacity>
         </View>
-        <Button title={t('Request to BOOK')} onPress={Ok} />
+        <Button title={t('request_to_book')} onPress={Ok} />
       </View>
     </MainAuth>
   );

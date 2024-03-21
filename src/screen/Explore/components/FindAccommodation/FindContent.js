@@ -61,7 +61,7 @@ export default function FindContent({isBuy, rental, tour}) {
           <CustomButton
             onPress={handleSubmit(handleSearch)}
             buttonType="medium"
-            text={t('Find Recommended Tour')}
+            text={t('find_recommend_tour')}
             styleText={{
               color: COLORS.white,
               textType: 'bold',

@@ -41,7 +41,7 @@ export default memo(function BookAccommodation({
             style={{
               fontSize: SIZES.xMedium,
             }}>
-            {t('Best price from')}
+            {t('best_price_from')}
           </CustomText>
           <CustomText
             style={{
@@ -85,7 +85,7 @@ export default memo(function BookAccommodation({
             onPress={onPress}
             buttonType="large"
             style={{flex: 1}}
-            text={t('Find tour')}
+            text={t('find_tour')}
             styleText={{
               fontSize: SIZES.xMedium,
             }}

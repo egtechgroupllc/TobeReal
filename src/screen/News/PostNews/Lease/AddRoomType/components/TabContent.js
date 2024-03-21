@@ -334,7 +334,7 @@ export default function TabContent() {
       )}
       <TouchableOpacity style={styles.buttonCategories} onPress={viewDetail}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('Room detail')}
+          {t('room_detail')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>

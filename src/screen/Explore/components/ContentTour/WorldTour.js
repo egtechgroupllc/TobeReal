@@ -22,7 +22,7 @@ export default function WorldTour({data}) {
           worldTour
           onPressSeeAll={() => console.log(1)}
           onPressCategory={item => console.log(item)}
-          heading={t('Travel around the world')}
+          heading={t('travel_around_world')}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
