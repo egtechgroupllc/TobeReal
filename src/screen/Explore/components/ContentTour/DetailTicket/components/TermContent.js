@@ -54,7 +54,7 @@ export default function TermContent() {
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.showContent} onPress={viewChangeVote}>
           <CustomText textType="bold" style={styles.text}>
-            How to change the vote
+          {t('how_to_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -70,8 +70,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Present voucher on your phone or print, along with your
-                passport/ID to exchange gifts for the tour operator.
+              {t('present_voucher')}
               </CustomText>
             </View>
             <View
@@ -84,12 +83,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                You must be willing to take part in the tour and the gathering
-                place has scheduled. If you are not present at the time and
-                place of the meeting, you will be left behind and your
-                reservation will be considered invalid. You can ask for a
-                schedule based on the approval of the tour operator and the
-                space on the day you have chosen.
+              {t('you_must')}
               </CustomText>
             </View>
             <View
@@ -102,16 +96,14 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Please note that only your Traveloka payment card is valid for
-                entry. Payment receipts or payment evidence cannot be used for
-                admission.
+              {t('please_note')}
               </CustomText>
             </View>
           </View>
         )}
         <TouchableOpacity style={styles.showContent} onPress={viewConversion}>
           <CustomText textType="bold" style={styles.text}>
-            Conversion
+          {t('conversion')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -127,8 +119,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Present voucher on your phone or print, along with your
-                passport/ID to exchange gifts for the tour operator.
+              {t('present_voucher')}
               </CustomText>
             </View>
           </View>
@@ -137,7 +128,7 @@ export default function TermContent() {
           style={styles.showContent}
           onPress={viewRefundcalendar}>
           <CustomText textType="bold" style={styles.text}>
-            Refund and change calendar
+          {t('refund_and_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -153,13 +144,13 @@ export default function TermContent() {
               <IconInputDirectly />
               <View style={{marginLeft: '5%'}}>
                 <CustomText textType="bold" style={styles.text}>
-                  Input directly
+                {t('input_directly')}
                 </CustomText>
               </View>
             </View>
             <CustomText textType="regular" style={styles.text}>
-              Can change the calendar in my reservation page before the selected
-              date of arrival.
+            {t('can_change_calendar')}
+            
             </CustomText>
             <View
               style={{
@@ -171,13 +162,12 @@ export default function TermContent() {
               <IconFullyRefund />
               <View style={{marginLeft: '5%'}}>
                 <CustomText textType="bold" style={styles.text}>
-                  Can be fully refunded
+                {t('can_be_fully')}
                 </CustomText>
               </View>
             </View>
             <CustomText textType="regular" style={styles.text}>
-              It is only possible to request a refund process before the
-              selection date. See the refund policy below for more information.
+            {t('it_is_only')}
             </CustomText>
           </View>
         )}
@@ -185,7 +175,7 @@ export default function TermContent() {
           style={styles.showContent}
           onPress={viewChangeCalendar}>
           <CustomText textType="bold" style={styles.text}>
-            Calendar Change Policy
+          {t('calendar_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -201,7 +191,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                You can only change your booking schedule up to 2 times.
+              {t('calendar_change')}
               </CustomText>
             </View>
             <View
@@ -214,8 +204,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Requirement of a schedule can be done up to 1 day before the
-                selected visit date.
+              {t('require_of_schedule')}
               </CustomText>
             </View>
             <View
@@ -228,8 +217,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Your rearrangement schedule will apply to all guests in 1
-                reservation code.
+              {t('your_rearrangement')}
               </CustomText>
             </View>
             <View
@@ -242,11 +230,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                You can schedule your reservation to any day available in the
-                period from the date of issuance of the voucher until after 14
-                days from the date of your original sightseeing. Please note
-                that you can only change the calendar to another day than the
-                same price or lower than your original reservation.
+              {t('you_can_schedule')}
               </CustomText>
             </View>
             <View
@@ -259,14 +243,14 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                The scheduling reservation will not be refunded.
+              {t('the_scheduling')}
               </CustomText>
             </View>
           </View>
         )}
         <TouchableOpacity style={styles.showContent} onPress={viewRefundPolicy}>
           <CustomText textType="bold" style={styles.text}>
-            Refund policy
+          {t('refund_policy')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -282,8 +266,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Requirement for the latest 2 days before your choice to receive
-                100% refund.
+              {t('requirement_for_refund')}
               </CustomText>
             </View>
             <View
@@ -296,8 +279,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                Your reservation will not be refunded if you ask for a refund of
-                less than 2 days before the selected date.
+              {t('your_reservation')}
               </CustomText>
             </View>
             <View
@@ -310,8 +292,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                The final refund will not include service fee, coupon and / or a
-                single bank transfer fee.
+              {t('the_final_refund')}
               </CustomText>
             </View>
             <View
@@ -324,18 +305,14 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-                To cancel your reservation and ask for a refund, please visit my
-                reservation item. In the reservation management section, touch
-                the refund and follow the refund process (available on the
-                Traveloka application version 3.18 or higher or the Traveloka
-                website on the computer).
+              {t('to_cancel_reservation')}
               </CustomText>
             </View>
           </View>
         )}
         <TouchableOpacity style={styles.showContent} onPress={viewTermCondition}>
           <CustomText textType="bold" style={styles.name1}>
-            Term & condition
+          {t('term_condition')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -351,7 +328,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              There is a surcharge of THB 1000 for tours operating during the New Year period and Songkran period. Please pay additional fees directly to the tour operator.
+              {t('there_is_surcharge')}
               </CustomText>
             </View>
             <View
@@ -364,7 +341,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              All travelers must carry identification (or passport) with them at all times.
+              {t('all_travelers')}
               </CustomText>
             </View>
             <View
@@ -377,7 +354,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Child tickets apply to children from 4 to 11 years old or 120cm or less in height.
+              {t('child_ticket')}
               </CustomText>
             </View>
             <View
@@ -390,7 +367,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Adult tickets apply to people from 12 to 60 years old or over 120cm tall.
+              {t('adult_ticket')}
               </CustomText>
             </View>
             <View
@@ -403,7 +380,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Infants under 1 year old, seniors over 60 years old, and pets are not allowed on the tour.
+              {t('infants_under')}
               </CustomText>
             </View>
             <View
@@ -416,7 +393,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Guests with high blood pressure, heart disease, pregnancy, asthma, and bone or orthopedic diseases are not allowed to participate in this tour.
+              {t('guest_with_high')}
               </CustomText>
             </View>
             <View
@@ -429,7 +406,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              If you are allergic to a particular food, please let the operator know before travelling.
+              {t('you_are_allergic')}
               </CustomText>
             </View>
             <View
@@ -442,7 +419,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              This activity is not suitable for children under 2 years old, pregnant women, or people with medical conditions or disabilities.
+              {t('this_activity')}
               </CustomText>
             </View>
             <View
@@ -455,7 +432,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Foreigners must apply for an E-Visa via https://evisa.moip.gov.mm/ and submit the approved visa to the agency 7 days before the travel date.
+              {t('foreigners_must')}
               </CustomText>
             </View>
             <View
@@ -468,7 +445,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              If you plan to travel during a major festival, you should book tickets at least a month in advance.
+              {t('you_plan_to')}
               </CustomText>
             </View>
             <View
@@ -481,7 +458,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              Itineraries and times above are approximate and may be amended without notice to suit local tides and weather conditions.
+              {t('itineraries_time')}
               </CustomText>
             </View>
           </View>
