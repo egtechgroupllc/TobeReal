@@ -25,9 +25,9 @@ import ContentAccommodation from '../ContentAccommodation/ContentAccommodation';
 import ContentTour from '../ContentTour/ContentTour';
 
 export default function FindAccommodation() {
-  const ContentAccommodation = React.lazy(() =>
-    import('../ContentAccommodation/ContentAccommodation'),
-  );
+  // const ContentAccommodation = React.lazy(() =>
+  //   import('../ContentAccommodation/ContentAccommodation'),
+  // );
   const {t} = useLanguage();
   const listRent = useRef([
     // {
