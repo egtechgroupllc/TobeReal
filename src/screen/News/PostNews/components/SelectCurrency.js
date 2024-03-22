@@ -14,12 +14,6 @@ export default function SelectCurrency({control, name, onChange}) {
 
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
-  // useEffect(() => {
-  //   if (dataFromScreen && onChange) {
-  //     onChange(dataFromScreen);
-  //   }
-  // }, [dataFromScreen, onChange]);
-
   return (
     <View style={styles.wrapper}>
       <CustomText style={{color: COLORS.black}}>
@@ -32,9 +26,10 @@ export default function SelectCurrency({control, name, onChange}) {
             screen: 'CurrencyScreen',
             params: {
               onGoBack: data => {
-                onChange(data);
-
-                setDataFromScreen(data);
+                if (data) {
+                  onChange(data);
+                  setDataFromScreen(data);
+                }
               },
               currency: dataFromScreen,
             },
@@ -42,13 +37,13 @@ export default function SelectCurrency({control, name, onChange}) {
         }}
         defaultValue={dataFromScreen?.currency_code}
         control={control}
-        name={name}
-        placeholder={t('Main Currency')}
+        name={'main_currency'}
         rules={requireField(t('this_field_required'))}
+        placeholder={t('Main Currency')}
         style={{
           backgroundColor: '#E3E3E3',
           borderColor: '#E3E3E3',
-          width: '50%',
+          width: '60%',
         }}
         iconRight={() => <IconRight />}
       />
@@ -60,7 +55,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: scale(40),
     width: '100%',
     justifyContent: 'space-between',
   },

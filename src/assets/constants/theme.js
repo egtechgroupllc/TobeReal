@@ -14,6 +14,7 @@ export const COLORS = {
   white: '#fff',
   grey: '#ccc',
   black: '#000000',
+  overlay: '#00000060',
   error: '#FF4500',
 };
 export const WIDTH = {

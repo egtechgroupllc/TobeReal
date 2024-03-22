@@ -12,9 +12,9 @@ export default function CustomImage({source, ...props}: CustomImgProps) {
 
   const sourceNew = useMemo(
     () => (Array.isArray(source) ? source[0] : source),
-    [],
+    [source],
   );
-  const isImgAsset = useMemo(() => typeof sourceNew === 'string', []);
+  const isImgAsset = useMemo(() => typeof sourceNew === 'string', [sourceNew]);
 
   return (
     <>

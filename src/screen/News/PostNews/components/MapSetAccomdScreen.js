@@ -1,20 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useRoute} from '@react-navigation/native';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {CustomButton, CustomInput} from '../../../../components';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {IconMapView, IconMarker} from '../../../../assets/icon/Icon';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import CustomText from '../../../../components/CustomText';
-import {Marquee} from '../../../../components/Marquee';
+
+import {IconMarker} from '../../../../assets/icon/Icon';
+import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
+import MapFooter from './MapSetAccomd.js/MapFooter';
+import MapHeader from './MapSetAccomd.js/MapHeader';
+import {scale} from '../../../../assets/constants';
 
 export default function MapSetAccomdScreen() {
-  const {t} = useLanguage();
-  const insets = useSafeAreaInsets();
-  const {goBack} = useNavigation();
   const router = useRoute().params;
+  const mapRef = useRef(null);
 
   const [moveLocation, setMoveLocation] = useState(
     router?.region || {
@@ -22,36 +20,49 @@ export default function MapSetAccomdScreen() {
       longitude: 88.4354486029795,
     },
   );
-  console.log(router?.region, 381683761286328168);
-  // useEffect(() => {
-  //   setMoveLocation(router?.params);
-  // }, []);
+
+  const [typeMoveLocation, setTypeMoveLocation] = useState('click');
+
+  const animatedMoveCenterMap = arr => {
+    mapRef.current.fitToCoordinates(arr, {
+      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+      animated: true,
+    });
+  };
+  const currentPosition = useCallback(async () => {
+    const {coords} = await getCurrentLocation();
+
+    if (coords || router?.region) {
+      const coordinates = router?.region || {
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+      };
+
+      setMoveLocation(coordinates);
+      animatedMoveCenterMap([coordinates]);
+      return coordinates;
+    }
+  }, []);
+
+  useEffect(() => {
+    currentPosition();
+  }, []);
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <View
-        style={{
-          paddingHorizontal: scale(20),
-          position: 'absolute',
-          top: 0,
-          width: '100%',
-          zIndex: 1,
-          padding: scale(10),
-          rowGap: scale(10),
-        }}>
-        <CustomInput
-          placeholder={t('Search')}
-          style={{
-            backgroundColor: '#fff',
-          }}
-        />
-      </View>
+      <MapHeader
+        onPress={currentPosition}
+        onPressMove={setTypeMoveLocation}
+        typeMove={typeMoveLocation}
+      />
 
       <MapView
+        ref={mapRef}
         provider={PROVIDER_GOOGLE}
         style={{
           ...StyleSheet.absoluteFill,
         }}
+        // mapType="hybrid"
         showsUserLocation
         initialRegion={{
           ...moveLocation,
@@ -60,79 +71,32 @@ export default function MapSetAccomdScreen() {
         }}
         zoomControlEnabled
         onRegionChangeComplete={region => {
-          // setMoveLocation(region);
+          typeMoveLocation === 'move' && setMoveLocation(region);
         }}
-        onPress={e => {
-          const region = e.nativeEvent.coordinate;
-          setMoveLocation(region);
+        onPress={evt => {
+          const region = evt.nativeEvent.coordinate;
+
+          if (typeMoveLocation === 'click') {
+            // animatedMoveCenterMap([region]);
+            setMoveLocation(region);
+          }
         }}>
         <Marker coordinate={moveLocation} />
       </MapView>
-
-      <View
-        style={{
-          position: 'absolute',
-        }}>
-        <IconMarker />
-      </View>
-
-      <View
-        style={{
-          padding: scale(16),
-          rowGap: scale(12),
-          position: 'absolute',
-          bottom: 0,
-          paddingBottom: insets.bottom + scale(10),
-          zIndex: 1,
-          width: '100%',
-          backgroundColor: '#fff',
-        }}>
+      {typeMoveLocation === 'move' && (
         <View
           style={{
-            backgroundColor: '#eee',
-            padding: scale(16),
-            borderRadius: scale(10),
-            flexDirection: 'row',
-            alignItems: 'center',
-            columnGap: scale(20),
+            position: 'absolute',
           }}>
-          <View
+          <IconMarker
             style={{
-              backgroundColor: '#fff',
-              padding: scale(10),
-              borderRadius: scale(10),
-            }}>
-            <IconMapView fill={COLORS.primary} />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              rowGap: scale(4),
-            }}>
-            <Marquee>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  fontSize: SIZES.medium,
-                }}>
-                Lat: {moveLocation?.latitude}
-              </CustomText>
-            </Marquee>
-
-            <CustomText style={styles.numberPiece} numberOfLines={2}>
-              Lng: {moveLocation?.longitude} 21381263712631631 86381638163
-            </CustomText>
-          </View>
+              marginTop: scale(-29),
+            }}
+          />
         </View>
+      )}
 
-        <CustomButton
-          text={t('confirm')}
-          onPress={() => {
-            router.onGoBack(moveLocation);
-            goBack();
-          }}
-        />
-      </View>
+      <MapFooter router={router} moveLocation={moveLocation} />
     </View>
   );
 }

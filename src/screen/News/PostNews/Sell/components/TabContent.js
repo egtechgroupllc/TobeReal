@@ -26,7 +26,10 @@ import Button from '../../../../Profile/components/Button';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import axios from 'axios';
 import Map from '../../../../Explore/components/DetailAccommodation/Map';
-import {requireField, validateMaxAmount} from '../../../../../utils/validate';
+import {
+  requireField,
+  validateMaxLengthText,
+} from '../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
 import ImageDetail from '../../../../components/ImageDetail';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -186,7 +189,7 @@ export default function TabContent() {
             placeholder={t('enter_real_estate_title')}
             rules={{
               ...requireField(t('this_field_required')),
-              ...validateMaxAmount(1000, '1000 characters limit'),
+              ...validateMaxLengthText(1000, '1000 characters limit'),
             }}
             style={styles.textArea}
             componentRight={
@@ -217,7 +220,7 @@ export default function TabContent() {
             placeholder={t('enter_a_description')}
             rules={{
               ...requireField(t('this_field_required')),
-              ...validateMaxAmount(1000, '1000 characters limit'),
+              ...validateMaxLengthText(1000, '1000 characters limit'),
             }}
             style={styles.textArea}
             componentRight={

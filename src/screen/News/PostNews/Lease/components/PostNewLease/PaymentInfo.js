@@ -1,34 +1,32 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../components';
-import {useLanguage} from '../../../../../hooks/useLanguage';
-import {IconDown, IconRight} from '../../../../../assets/icon/Icon';
+import React, {useRef, useState} from 'react';
+import {CustomButton, CustomInput} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {IconDown, IconRight} from '../../../../../../assets/icon/Icon';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {requireField} from '../../../../../utils/validate';
+import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
+import {requireField} from '../../../../../../utils/validate';
+import ButtonTabValidate from './ButtonTabValidate';
 
-export default function PaymentInfo() {
+export default function PaymentInfo({control, errors, watch}) {
   const {t} = useLanguage();
   const [viewContact, setViewContact] = useState(false);
+  const arrKeywords = useRef(['km_to_center']).current;
 
   return (
     <View>
-      <CustomButton
-        outline
-        style={styles.buttonCategories}
-        text={t('payment_information')}
-        iconRight={() => <IconRight />}
+      <ButtonTabValidate
+        title={t('payment_information')}
         onPress={() => setViewContact(prev => !prev)}
-        styleText={{
-          color: COLORS.text,
-        }}
+        errors={errors}
+        watch={watch}
+        arrKeywords={arrKeywords}
       />
 
       <Collapsible collapsed={!viewContact} style={styles.box}>
         <CustomInput
-          label={t('account_number')}
+          label={t('bank_name')}
           placeholder={t('Select')}
-          // value={t(selectedEstateCheckBox.name)}
           onPress={() => {}}
           rules={requireField(t('this_field_required'))}
           style={{...styles.textInput}}
@@ -41,16 +39,20 @@ export default function PaymentInfo() {
         <CustomInput
           label={t('account_number')}
           placeholder={t('account_number')}
-          rules={requireField(t('this_field_required'))}
           style={{...styles.textInput}}
+          control={control}
+          rules={requireField(t('this_field_required'))}
+          name="account_number"
         />
         <View style={styles.line} />
 
         <CustomInput
           label={t('account_holder')}
           placeholder={t('account_holder')}
-          rules={requireField(t('this_field_required'))}
           style={{...styles.textInput}}
+          control={control}
+          rules={requireField(t('this_field_required'))}
+          name="account_holder"
         />
       </Collapsible>
     </View>

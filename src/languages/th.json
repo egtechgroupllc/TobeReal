@@ -257,7 +257,7 @@
   "main_currency": "สกุลเงินหลัก",
   "distance_to_city": "ระยะทางไปยังใจกลางเมือง",
   "number_of_floors": "จำนวนชั้น",
-  "estate_facilities": "สิ่งอำนวยความสะดวกของทรัพย์สิน",
+  "property_facilities":"สิ่งอำนวยความสะดวกของทรัพย์สิน",
   "estate_contact": "ข้อมูลติดต่อของทรัพย์สิน",
   "rooms": "ห้อง",
   "estate_photo": "รูปภาพของทรัพย์สิน",

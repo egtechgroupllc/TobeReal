@@ -11,7 +11,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {
   confirmField,
   requireField,
-  validateMinLength,
+  validateMinLengthText,
 } from '../../../../utils/validate';
 export default function Content() {
   const {t} = useLanguage();
@@ -44,7 +44,7 @@ export default function Content() {
         control={control}
         name="from"
         placeholder={t('enter_password')}
-        rules={validateMinLength(t('use_6_characters'), 6)}
+        rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
       />
 
@@ -53,7 +53,7 @@ export default function Content() {
         control={control}
         name="to"
         placeholder={t('enter_new_password')}
-        rules={validateMinLength(t('use_6_characters'), 6)}
+        rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
       />
 

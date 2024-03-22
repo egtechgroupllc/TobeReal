@@ -45,7 +45,7 @@ export default function CheckBox({
       rules={rules}
       name={name || ''}
       render={({field: {onChange, value}, fieldState: {error}}) => (
-        <View style={styleWrapper}>
+        <View style={[styleWrapper]}>
           <BouncyCheckbox
             textComponent={
               <CustomText style={props.textStyle}>{props.text}</CustomText>
@@ -64,7 +64,7 @@ export default function CheckBox({
               },
               {
                 alignItems: 'center',
-                columnGap: scale(6),
+                columnGap: scale(8),
               },
               props?.style,
             ]}
@@ -99,5 +99,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(6),
+    marginRight: 'auto',
   },
 });

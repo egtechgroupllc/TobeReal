@@ -7,6 +7,7 @@ export interface Iprops {
   onChange: (event: Event) => void;
   topHeight: number;
   delay: number;
+  noLoading: boolean;
 }
 
 const InViewPort = class extends Component<Iprops | ViewProps> {
@@ -82,13 +83,14 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
           this.myview = component;
         }}
         {...this.props}>
-        {this.props.children || (
-          <ActivityIndicator
-            size={'large'}
-            color={COLORS.primary}
-            style={{marginVertical: scale(20)}}
-          />
-        )}
+        {this.props.children ||
+          (!this.props.noLoading && (
+            <ActivityIndicator
+              size={'large'}
+              color={COLORS.primary}
+              style={{marginVertical: scale(20)}}
+            />
+          ))}
       </View>
     );
   }

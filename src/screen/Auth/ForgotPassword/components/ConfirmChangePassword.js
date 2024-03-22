@@ -4,7 +4,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {useForm} from 'react-hook-form';
 import {useMutation} from '@tanstack/react-query';
 import {postChangePassword} from '../../../../api/auth';
-import {requireField, validateMinLength} from '../../../../utils/validate';
+import {requireField, validateMinLengthText} from '../../../../utils/validate';
 import {CustomButton, CustomInput} from '../../../../components';
 import {showMess} from '../../../../assets/constants/Helper';
 
@@ -37,7 +37,7 @@ export default function ConfirmChangePassword() {
         name="from"
         rules={[
           requireField(t('this_field_required')),
-          validateMinLength(t('use_6_characters'), 6),
+          validateMinLengthText(t('use_6_characters'), 6),
         ]}
       />
       <CustomInput
@@ -47,7 +47,7 @@ export default function ConfirmChangePassword() {
         name="to"
         rules={[
           requireField(t('this_field_required')),
-          validateMinLength(t('use_6_characters'), 6),
+          validateMinLengthText(t('use_6_characters'), 6),
         ]}
       />
 

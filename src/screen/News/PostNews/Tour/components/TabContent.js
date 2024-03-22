@@ -24,7 +24,10 @@ import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {useForm} from 'react-hook-form';
-import {requireField, validateMaxAmount} from '../../../../../utils/validate';
+import {
+  requireField,
+  validateMaxLengthText,
+} from '../../../../../utils/validate';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import DatePicker from 'react-native-date-picker';
 import ImageDetail from '../../../../components/ImageDetail';

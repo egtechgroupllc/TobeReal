@@ -1,16 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import MapView, {
-  Marker,
-  MarkerAnimated,
-  PROVIDER_GOOGLE,
-} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {COLORS, scale} from '../../../../assets/constants';
 import {IconMapView, IconMarker} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
-import WrapperContent from '../WrapperContent';
-import CustomMarker from '../../../Map/CustomMarker';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import WrapperContent from '../WrapperContent';
 
 export default function Map({region}) {
   const {t} = useLanguage();
@@ -42,9 +37,6 @@ export default function Map({region}) {
           provider={PROVIDER_GOOGLE}
           style={{
             flex: 1,
-          }}
-          onRegionChangeComplete={region => {
-            console.log({region});
           }}
           region={{
             ...coordinate,

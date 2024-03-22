@@ -17,7 +17,7 @@ import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {
   requireField,
-  validateMinLength,
+  validateMinLengthText,
   validateEmail,
 } from '../../../../utils/validate';
 import RNRestart from 'react-native-restart';
@@ -83,7 +83,7 @@ export default function Content() {
           name="password"
           rules={{
             ...requireField(t('this_field_required')),
-            ...validateMinLength(t('use_6_characters'), 6),
+            ...validateMinLengthText(t('use_6_characters'), 6),
           }}
           sizeInput="medium"
           placeholder={t('enter_password')}

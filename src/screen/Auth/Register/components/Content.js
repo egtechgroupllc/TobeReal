@@ -18,7 +18,7 @@ import {
   confirmField,
   requireField,
   validateEmail,
-  validateMinLength,
+  validateMinLengthText,
   validateUserName,
 } from '../../../../utils/validate';
 
@@ -55,91 +55,91 @@ export default function Content() {
 
   return (
     <View style={styles.wrapper}>
-    <View style={styles.container}>
-      <CustomInput
-        control={control}
-        maxLength={30}
-        sizeInput="medium"
-        rules={[
-          validateUserName(t('12312')),
-          requireField(t('this_field_required')),
-        ]}
-        name="username"
-        placeholder={t('enter_username')}
-      />
+      <View style={styles.container}>
+        <CustomInput
+          control={control}
+          maxLength={30}
+          sizeInput="medium"
+          rules={[
+            validateUserName(t('12312')),
+            requireField(t('this_field_required')),
+          ]}
+          name="username"
+          placeholder={t('enter_username')}
+        />
 
-      <CustomInput
-        control={control}
-        sizeInput="medium"
-        rules={[
-          requireField(t('this_field_required')),
-          validateEmail(t('invalid_email')),
-        ]}
-        name="email"
-        placeholder={t('enter_email')}
-      />
+        <CustomInput
+          control={control}
+          sizeInput="medium"
+          rules={[
+            requireField(t('this_field_required')),
+            validateEmail(t('invalid_email')),
+          ]}
+          name="email"
+          placeholder={t('enter_email')}
+        />
 
-      <CustomInput
-        control={control}
-        sizeInput="medium"
-        rules={validateMinLength(t('use_6_characters'), 6)}
-        name="password"
-        placeholder={t('enter_password')}
-        password
-      />
+        <CustomInput
+          control={control}
+          sizeInput="medium"
+          rules={validateMinLengthText(t('use_6_characters'), 6)}
+          name="password"
+          placeholder={t('enter_password')}
+          password
+        />
 
-      <CustomInput
-        control={control}
-        sizeInput="medium"
-        rules={[
-          requireField(t('this_field_required')),
-          confirmField(t('password_not_match'), watch('password')),
-        ]}
-        name="passwordConfirm"
-        placeholder={t('enter_password_confirm')}
-        password
-      />
+        <CustomInput
+          control={control}
+          sizeInput="medium"
+          rules={[
+            requireField(t('this_field_required')),
+            confirmField(t('password_not_match'), watch('password')),
+          ]}
+          name="passwordConfirm"
+          placeholder={t('enter_password_confirm')}
+          password
+        />
 
-      <CustomInput
-        control={control}
-        sizeInput="medium"
-        // name="refid"
-        placeholder={t('enter_referral')}
-      />
+        <CustomInput
+          control={control}
+          sizeInput="medium"
+          // name="refid"
+          placeholder={t('enter_referral')}
+        />
 
-      <CustomButton
-        onPress={handleSubmit(handleSignup)}
-        buttonType="large"
-        text={t('signup')}
-        linearGradientProps
-        style={{
-          marginTop: scale(20),
-        }}
-      />
-
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: scale(20),
-          justifyContent: 'center',
-        }}>
-        <CustomText
-          textType="semiBold"
+        <CustomButton
+          onPress={handleSubmit(handleSignup)}
+          buttonType="large"
+          text={t('signup')}
+          linearGradientProps
           style={{
-            ...styles.text,
-            textDecorationLine: 'underline',
-          }}>
-          {t('already_have_account')}
-        </CustomText>
+            marginTop: scale(20),
+          }}
+        />
 
-        <CustomText
-          onPress={goBack}
-          textType="semiBold"
-          style={{...styles.text1, marginLeft: scale(5)}}>
-          {t('login')}
-        </CustomText>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: scale(20),
+            justifyContent: 'center',
+          }}>
+          <CustomText
+            textType="semiBold"
+            style={{
+              ...styles.text,
+              textDecorationLine: 'underline',
+            }}>
+            {t('already_have_account')}
+          </CustomText>
+
+          <CustomText
+            onPress={goBack}
+            textType="semiBold"
+            style={{...styles.text1, marginLeft: scale(5)}}>
+            {t('login')}
+          </CustomText>
+        </View>
       </View>
-    </View>
     </View>
   );
 }

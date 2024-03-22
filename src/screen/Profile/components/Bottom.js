@@ -49,6 +49,9 @@ export default function Bottom() {
             onClearToken();
           }
         },
+        onError: error => {
+          onClearToken();
+        },
       },
     );
   };

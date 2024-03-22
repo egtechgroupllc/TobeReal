@@ -940,6 +940,10 @@ PODS:
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
     - React-Core
+  - react-native-image-picker (7.1.2):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - react-native-keyboard-controller (1.11.0):
     - React-Core
   - react-native-maps (1.10.3):
@@ -1212,6 +1216,7 @@ DEPENDENCIES:
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -1333,6 +1338,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-geolocation-service"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-keyboard-controller:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-maps:
@@ -1411,7 +1418,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: 26fad476bfa736552bbfa698a06cc530475c1505
+  boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
   FBLazyVector: 84f6edbe225f38aebd9deaf1540a4160b1f087d7
@@ -1450,6 +1457,7 @@ SPEC CHECKSUMS:
   react-native-encrypted-storage: db300a3f2f0aba1e818417c1c0a6be549038deb7
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-google-maps: 1bcc1f9f13f798fcf230db7fe476f3566d0bc0a3
+  react-native-image-picker: 994a97b28e7f2c2197e21801569bb19f6e494e38
   react-native-keyboard-controller: 30f2304b54b2b34e9a6678c33d8ea12830b9cda1
   react-native-maps: 72a8a903f8a1b53e2c777ba79102078ab502e0bf
   react-native-netinfo: 299dad906cdbf3b67bcc6f693c807f98bdd127cc
@@ -1495,4 +1503,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 579628f3e0d55eb3a33e1fa8911b3520df4189ca
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3

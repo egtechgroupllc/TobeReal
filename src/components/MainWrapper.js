@@ -1,8 +1,9 @@
 import React from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
-import {COLORS, images} from '../assets/constants';
+import {COLORS, images, scale} from '../assets/constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomImage from './CustomImage';
+import {useHeaderHeight} from '@react-navigation/elements';
 
 export default function MainWrapper({
   children,
@@ -13,10 +14,12 @@ export default function MainWrapper({
   scrollEnabled = true,
   onScroll = () => {},
 }) {
+  const headerHeight = useHeaderHeight();
+
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: COLORS.primary}}
-      edges={noSafeArea ? [''] : ['top', 'right', 'left']}>
+      edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
       <CustomImage
         source={images.background}
         resizeMode="stretch"
@@ -33,7 +36,9 @@ export default function MainWrapper({
             scrollEnabled={scrollEnabled}
             onScroll={onScroll}
             scrollEventThrottle={16}>
-            <View style={{flex: 1, ...styleContent}}>{children}</View>
+            <View style={{flex: 1, paddingBottom: scale(20), ...styleContent}}>
+              {children}
+            </View>
           </ScrollView>
         ) : (
           <View style={{flex: 1, ...styleContent}}>{children}</View>

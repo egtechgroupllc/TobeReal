@@ -1,12 +1,18 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
-import {CustomInput} from '../../../../../../components';
-import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {formatDateTime} from '../../../../../../utils/format';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import CustomText from '../../../../../../components/CustomText';
+import {CustomInput} from '../../../../../../../components';
+import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {formatDateTime} from '../../../../../../../utils/format';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import CustomText from '../../../../../../../components/CustomText';
 
+const formatTime = time => {
+  return formatDateTime(time, {
+    isHouse: true,
+    isHour24: true,
+  });
+};
 export default function TimeCheckIn({onChange}) {
   const {t} = useLanguage();
 
@@ -21,7 +27,11 @@ export default function TimeCheckIn({onChange}) {
   );
 
   useEffect(() => {
-    onChange && onChange({timeCheckStart, timeCheckEnd});
+    onChange &&
+      onChange({
+        timeCheckStart: formatTime(timeCheckStart),
+        timeCheckEnd: formatTime(timeCheckEnd),
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeCheckStart, timeCheckEnd]);
 
@@ -41,10 +51,7 @@ export default function TimeCheckIn({onChange}) {
           styleTextLabel={styles.label}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatDateTime(timeCheckStart, {
-            isHouse: true,
-            isHour24: true,
-          })}
+          value={formatTime(timeCheckStart)}
           onPress={() => setOpenCheckStart(true)}
         />
 
@@ -56,10 +63,7 @@ export default function TimeCheckIn({onChange}) {
           }}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatDateTime(timeCheckEnd, {
-            isHouse: true,
-            isHour24: true,
-          })}
+          value={formatTime(timeCheckEnd)}
           onPress={() => setOpenCheckEnd(true)}
         />
 

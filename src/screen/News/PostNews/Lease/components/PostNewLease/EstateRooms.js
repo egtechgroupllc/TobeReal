@@ -1,16 +1,16 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../components';
-import {useLanguage} from '../../../../../hooks/useLanguage';
-import {IconAdd, IconRight, IconX} from '../../../../../assets/icon/Icon';
+import {CustomButton, CustomInput} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {IconAdd, IconRight, IconX} from '../../../../../../assets/icon/Icon';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
-import {requireField} from '../../../../../utils/validate';
+import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
+import {requireField} from '../../../../../../utils/validate';
 import {Image} from 'react-native-svg';
-import CustomText from '../../../../../components/CustomText';
+import CustomText from '../../../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
-import CustomImage from '../../../../../components/CustomImage';
+import CustomImage from '../../../../../../components/CustomImage';
 
 export default function EstateRooms() {
   const {t} = useLanguage();

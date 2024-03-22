@@ -28,7 +28,7 @@ import SelectService from './SelectService';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {
   requireField,
-  validateMaxAmount,
+  validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import {useForm} from 'react-hook-form';
 import ListImg from '../../../../../Explore/components/DetailAccommodation/ListImg';
@@ -297,7 +297,7 @@ export default function TabContent() {
             placeholder={t('enter_room_type')}
             rules={{
               ...requireField(t('this_field_required')),
-              ...validateMaxAmount(1000, '1000 characters limit'),
+              ...validateMaxLengthText(1000, '1000 characters limit'),
             }}
             style={styles.textArea}
             componentRight={
@@ -321,7 +321,7 @@ export default function TabContent() {
             placeholder={t('enter_a_description')}
             rules={{
               ...requireField(t('this_field_required')),
-              ...validateMaxAmount(1000, '1000 characters limit'),
+              ...validateMaxLengthText(1000, '1000 characters limit'),
             }}
             style={styles.textArea}
             componentRight={

@@ -9,20 +9,18 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
 import SelectProvince from './SelectProvince';
 
-export default function SelectCountry({control, name, onChange}) {
+export default function SelectCountry({control, onChange}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
 
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
-  // useEffect(() => {
-  //   if (dataFromScreen && onChange) {
-  //     onChange(dataFromScreen);
-  //   }
-  // }, [dataFromScreen, onChange]);
-
   return (
-    <>
+    <View
+      style={{
+        width: '100%',
+        rowGap: scale(10),
+      }}>
       <View style={styles.wrapper}>
         <CustomText style={{color: COLORS.black}}>{t('country')}</CustomText>
 
@@ -32,7 +30,10 @@ export default function SelectCountry({control, name, onChange}) {
               screen: 'CountryScreen',
               params: {
                 onGoBack: data => {
-                  setDataFromScreen(data);
+                  if (data) {
+                    setDataFromScreen(data);
+                    onChange && onChange(data);
+                  }
                 },
                 country: dataFromScreen,
               },
@@ -40,9 +41,9 @@ export default function SelectCountry({control, name, onChange}) {
           }}
           defaultValue={dataFromScreen?.name}
           control={control}
-          name={name}
-          placeholder="USA"
+          name="country_id"
           rules={requireField(t('this_field_required'))}
+          placeholder="USA"
           style={{
             backgroundColor: '#E3E3E3',
             borderColor: '#E3E3E3',
@@ -54,20 +55,17 @@ export default function SelectCountry({control, name, onChange}) {
 
       {dataFromScreen && (
         <SelectProvince
+          control={control}
           country={dataFromScreen}
           onChange={value => {
             onChange({
               ...dataFromScreen,
               province: value,
             });
-            // setDataFromScreen(prev => ({
-            //   ...prev,
-            //   province: value,
-            // }));
           }}
         />
       )}
-    </>
+    </View>
   );
 }
 
@@ -75,7 +73,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: scale(40),
     width: '100%',
     justifyContent: 'space-between',
   },

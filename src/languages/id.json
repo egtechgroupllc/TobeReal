@@ -257,7 +257,7 @@
   "main_currency": "Mata Uang Utama",
   "distance_to_city": "Jarak ke Pusat Kota",
   "number_of_floors": "Jumlah Lantai",
-  "estate_facilities": "Fasilitas Properti",
+  "property_facilities":"Fasilitas Properti",
   "estate_contact": "Informasi Kontak Properti",
   "rooms": "Kamar",
   "estate_photo": "Foto Properti",

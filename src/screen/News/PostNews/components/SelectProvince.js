@@ -8,7 +8,7 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
 
-export default function SelectProvince({onChange, country}) {
+export default function SelectProvince({onChange, control, country}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
 
@@ -18,7 +18,7 @@ export default function SelectProvince({onChange, country}) {
     if (country?.geoname_id !== dataFromScreen?.parent) {
       setDataFromScreen(null);
     }
-  }, [country, dataFromScreen]);
+  }, [country, onChange, dataFromScreen]);
 
   return (
     <View style={styles.wrapper}>
@@ -32,8 +32,10 @@ export default function SelectProvince({onChange, country}) {
             screen: 'CountryScreen',
             params: {
               onGoBack: data => {
-                setDataFromScreen(data);
-                onChange && onChange(data);
+                if (data) {
+                  setDataFromScreen(data);
+                  onChange && onChange(data);
+                }
               },
               country: country,
               isProvince: true,
@@ -42,7 +44,9 @@ export default function SelectProvince({onChange, country}) {
         }}
         defaultValue={dataFromScreen?.name}
         placeholder={t('province_city')}
+        control={control}
         rules={requireField(t('this_field_required'))}
+        name="province_id"
         style={{
           backgroundColor: '#E3E3E3',
           borderColor: '#E3E3E3',
@@ -58,7 +62,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: scale(40),
     width: '100%',
     justifyContent: 'space-between',
   },

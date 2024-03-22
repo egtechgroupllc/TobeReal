@@ -75,7 +75,8 @@ export default function BoxPlaceItem({
             ) : (
               <CustomImage
                 src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
+                style={styles.img}
+              />
             )}
 
             <TopImg

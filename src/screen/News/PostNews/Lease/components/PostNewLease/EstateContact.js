@@ -1,27 +1,35 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../components';
-import {useLanguage} from '../../../../../hooks/useLanguage';
-import {IconRight} from '../../../../../assets/icon/Icon';
+import React, {useRef, useState} from 'react';
+import {CustomButton, CustomInput} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {IconRight} from '../../../../../../assets/icon/Icon';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {requireField} from '../../../../../utils/validate';
+import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
+import {
+  requireField,
+  validateEmail,
+  validatePhone,
+} from '../../../../../../utils/validate';
+import ButtonTabValidate from './ButtonTabValidate';
 
-export default function EstateContact() {
+export default function EstateContact({control, errors, watch}) {
   const {t} = useLanguage();
   const [viewContact, setViewContact] = useState(false);
 
+  const arrKeywords = useRef([
+    'full_name',
+    'contact_phone',
+    'contact_email',
+  ]).current;
+
   return (
     <View>
-      <CustomButton
-        outline
-        style={styles.buttonCategories}
-        text={t('estate_contact')}
-        iconRight={() => <IconRight />}
+      <ButtonTabValidate
+        title={t('estate_contact')}
         onPress={() => setViewContact(prev => !prev)}
-        styleText={{
-          color: COLORS.text,
-        }}
+        errors={errors}
+        watch={watch}
+        arrKeywords={arrKeywords}
       />
 
       <Collapsible collapsed={!viewContact} style={styles.box}>
@@ -29,18 +37,27 @@ export default function EstateContact() {
           label={`${t('contact_info')}:`}
           styleTextLabel={styles.label}
           placeholder={t('full_name')}
-          rules={requireField(t('this_field_required'))}
+          control={control}
+          name="contact_name"
+          rules={requireField(t('enter_username'))}
           style={{...styles.textInput}}
         />
         <CustomInput
           placeholder={t('phone')}
-          rules={requireField(t('this_field_required'))}
+          control={control}
+          name="contact_phone"
+          rules={[requireField(t('this_field_required'))]}
           style={{...styles.textInput}}
         />
 
         <CustomInput
           placeholder={t('email')}
-          rules={requireField(t('this_field_required'))}
+          control={control}
+          name="contact_email"
+          rules={[
+            requireField(t('this_field_required')),
+            validateEmail(t('invalid_email')),
+          ]}
           style={{...styles.textInput}}
         />
       </Collapsible>

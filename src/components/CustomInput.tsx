@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, {forwardRef, useEffect, useMemo, useRef, useState} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {
   Control,
   Controller,
@@ -25,8 +25,8 @@ import {
   IconViewablePassword,
 } from '../assets/icon/Icon';
 import {arrayToObject} from '../utils/arrayToObject';
-import CustomText from './CustomText';
 import {formatPrice} from '../utils/format';
+import CustomText from './CustomText';
 
 type CustomInputProps = {
   control?: Control<FieldValues>;
@@ -107,7 +107,11 @@ export default forwardRef(function CustomInput(
             styleWrapper,
           ]}>
           <>
-            {label && <CustomText style={styleTextLabel}>{label}</CustomText>}
+            {label && (
+              <CustomText style={[{color: COLORS.black}, styleTextLabel]}>
+                {label}
+              </CustomText>
+            )}
             <TouchableOpacity
               style={[
                 styles.content,
@@ -147,7 +151,7 @@ export default forwardRef(function CustomInput(
                     ? text.replaceAll(',', '')
                     : text;
 
-                  control
+                  name
                     ? onChange(newText)
                     : props?.onChangeText && props?.onChangeText(newText);
                 }}
@@ -155,7 +159,7 @@ export default forwardRef(function CustomInput(
                 value={
                   enableFormatNum
                     ? formatPrice(value, {showCurrency: false})
-                    : control
+                    : name
                     ? value
                     : props?.value
                 }

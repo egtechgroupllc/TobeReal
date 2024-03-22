@@ -6,32 +6,57 @@ export const confirmField = (message, field) => {
   return {validate: value => value === field || message};
 };
 
-export const validateMinLength = (message, length) => {
+export const validateMinLengthText = (message, length) => {
   return {minLength: {value: length, message}, required: message};
+};
+
+export const validateMaxLengthText = (message, length) => {
+  return {maxLength: {value: length, message}};
 };
 
 export const validateEqualLength = (message, length) => {
   return {validate: value => value?.length === length || message};
 };
 
+export const validateMinLength = (message, length) => {
+  return {validate: value => value?.length >= length || message};
+};
+
+export const validateMaxLength = (message, length) => {
+  return {validate: value => value?.length <= length || message};
+};
+
 export const validateMinAmount = (message, amount) => {
-  return {validate: value => parseFloat(value) > amount || message};
-};
-
-export const validateMaxAmount = (message, max) => {
-  return {validate: value => value?.length < max || message};
-};
-
-export const validateMinMaxAmount = (message, amount, minAmount = 1) => {
   return {
-    validate: value =>
-      (parseFloat(value) <= amount &&
-        parseFloat(value) >= (minAmount || 1) &&
-        /^[0-9.]+$/.test(value)) ||
-      message,
+    min: {
+      value: amount || 1,
+      message: message,
+    },
   };
 };
-// /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+export const validateMaxAmount = (message, amount) => {
+  return {
+    max: {
+      value: amount,
+      message: message,
+    },
+  };
+};
+
+export const validateMinMaxAmount = (message, amount, minAmount) => {
+  return {
+    min: {
+      value: minAmount || 1,
+      message: message,
+    },
+    max: {
+      value: amount,
+      message: message,
+    },
+  };
+};
+
 export const validateEmail = message => {
   return {
     pattern: {value: /^[a-zA-Z0-9.]+@gmail\.com$/, message},

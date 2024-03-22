@@ -138,6 +138,7 @@ export default memo(function CustomButton({
         {text && (
           <CustomText
             textType={styleText?.textType || (buttonType && 'semiBold')}
+            numberOfLines={6}
             style={[
               styles.text,
               {fontSize: scale(fontSize)},
@@ -145,7 +146,7 @@ export default memo(function CustomButton({
               outline && {color: COLORS.primary},
               styleText,
             ]}>
-            {text}
+            {text.trim()}
           </CustomText>
         )}
         {iconRight && (

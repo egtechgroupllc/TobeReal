@@ -29,16 +29,9 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
 
       <CustomText
         textType="semiBold"
-        style={[
-          {
-            fontSize: SIZES.medium,
-            maxWidth: scale(300),
-            textAlign: 'center',
-          },
-          options?.headerTitleStyle,
-        ]}
+        style={[styles.textHeader, options?.headerTitleStyle]}
         numberOfLines={1}>
-        {options?.headerTitle || options?.title || route?.name}
+        {options?.headerTitle || options?.title}
       </CustomText>
 
       <View
@@ -66,5 +59,11 @@ const styles = StyleSheet.create({
   active: {
     minWidth: scale(30),
     backgroundColor: '#fff',
+  },
+  textHeader: {
+    fontSize: SIZES.medium,
+    maxWidth: scale(300),
+    textAlign: 'center',
+    color: COLORS.white,
   },
 });

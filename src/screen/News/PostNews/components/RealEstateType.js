@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {getListTypeRent} from '../../../../api/common';
 import {COLORS, scale} from '../../../../assets/constants';
@@ -10,7 +10,7 @@ import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
 
-export default function RealEstateType({onChange}) {
+export default function RealEstateType({onChange, control}) {
   const {t} = useLanguage();
 
   const [showRealEstateType, setShowRealEstateType] = useState('');
@@ -34,7 +34,7 @@ export default function RealEstateType({onChange}) {
   useEffect(() => {
     data?.data && setSelectedEstateCheckBox(data?.data[0]);
   }, [data?.data]);
-
+  console.log(selectedEstateCheckBox);
   return (
     <View
       style={{
@@ -46,6 +46,7 @@ export default function RealEstateType({onChange}) {
         value={selectedEstateCheckBox?.name}
         onPress={() => setShowRealEstateType(prev => !prev)}
         rules={requireField(t('this_field_required'))}
+        control={control}
         style={styles.buttonEstateTypes}
         iconRight={() => <IconDown />}
         styleText={{color: COLORS.black}}
@@ -54,17 +55,23 @@ export default function RealEstateType({onChange}) {
 
       <Collapsible collapsed={!showRealEstateType}>
         <View style={styles.listEstateType}>
-          {data?.data.map((item, index) => (
-            <CheckBox
-              key={`key${item?.id}_${index}`}
-              text={item?.name}
-              textLeft
-              isRadio
-              onPress={() => estateTypeCheckBox(item)}
-              isChecked={selectedEstateCheckBox?.name === item?.name}
-              style={styles.checkBox}
-            />
-          ))}
+          {!isLoading ? (
+            <>
+              {data?.data.map((item, index) => (
+                <CheckBox
+                  key={`key${item?.id}_${index}`}
+                  text={item?.name}
+                  textLeft
+                  isRadio
+                  onPress={() => estateTypeCheckBox(item)}
+                  isChecked={selectedEstateCheckBox?.name === item?.name}
+                  style={styles.checkBox}
+                />
+              ))}
+            </>
+          ) : (
+            <ActivityIndicator size="large" color={COLORS.primary} />
+          )}
         </View>
       </Collapsible>
     </View>
@@ -85,7 +92,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEEEEE',
     paddingVertical: scale(5),
     width: '100%',
-    minHeight: scale(100),
+    minHeight: scale(120),
+    justifyContent: 'center',
   },
   checkBox: {
     justifyContent: 'space-between',
