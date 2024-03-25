@@ -23,6 +23,7 @@ import InViewPort from '../../../../components/InViewport';
 import FindAccommodationStart from './FindAccommodationStart';
 import ContentAccommodation from '../ContentAccommodation/ContentAccommodation';
 import ContentTour from '../ContentTour/ContentTour';
+import ContentBuy from '../ContentBuy/ContentBuy';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -163,7 +164,7 @@ export default function FindAccommodation() {
           />
         </View>
       </InViewPort>
-      {tabSelect != t('TOUR') ? <ContentAccommodation /> : <ContentTour />}
+      {tabSelect === 'TOUR' ? <ContentTour /> : tabSelect === 'RENT' ? <ContentAccommodation /> : <ContentBuy />}
     </View>
   );
 }

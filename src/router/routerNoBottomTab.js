@@ -1,4 +1,5 @@
 import {DetailAccommodationScreen} from '../screen/Explore';
+import { DetailBuyScreen } from '../screen/Explore/components/ContentBuy';
 import { DetailTourScreen } from '../screen/Explore/components/ContentTour';
 import { DetailTicketScreen } from '../screen/Explore/components/ContentTour/DetailTicket';
 import { BookTourScreen } from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
@@ -20,6 +21,10 @@ export default routerNoBottomTab = [
   {
     name: 'DetailTourScreen',
     component: DetailTourScreen,
+  },
+  {
+    name: 'DetailBuyScreen',
+    component: DetailBuyScreen,
   },
   {
     name: 'DetailTicketScreen',
