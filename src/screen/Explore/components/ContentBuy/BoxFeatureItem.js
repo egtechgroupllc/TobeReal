@@ -58,7 +58,7 @@ export default function BoxFeatureItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailTourScreen',
+                  screen: 'DetailBuyScreen',
                   params: {
                     jsondata: jsonImage || [],
                     title: name || '',

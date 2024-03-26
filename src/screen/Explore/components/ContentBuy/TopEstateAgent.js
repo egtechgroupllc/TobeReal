@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, } from 'react-native';
+import {StyleSheet, Text, FlatList, View} from 'react-native';
 import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import {formatPrice} from '../../../../utils/format';
@@ -6,11 +6,10 @@ import {formatPrice} from '../../../../utils/format';
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
-import BoxPlaceItem from './BoxPlaceItem';
-import BoxDiscoveryItem from './BoxDiscoveryItem';
+import BoxEstateAgent from './BoxEstateAgent';
 
-const funcFallBack = () => {};
-export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
+
+export default function TopEstateAgent({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
 
@@ -18,20 +17,21 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
+          // background={images.bgPackageTour}
           isSeeAll
-          discoveryTour
+          // worldTour
           onPressSeeAll={() => console.log(1)}
-          onPressCategory={onPressCategory}
-          heading={t('Discover other real estate')}
-          subHeading={t('the_place_discovery')}
+          onPressCategory={item => console.log(item)}
+          heading={t('Top Estate Agent')}
+          // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
-            numColumns={2} 
+            horizontal
             showsHorizontalScrollIndicator={false}
             data={data}
             contentContainerStyle={styles.content}
             renderItem={({item}) => (
-              <BoxDiscoveryItem
+              <BoxEstateAgent
                 isHeart
                 isStar
                 data={item}
@@ -39,6 +39,7 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
                 jsonImage={item?.imgdetail}
                 name={item?.name}
                 price={item?.price}
+                type={item?.type}
               />
             )}
           />
@@ -50,9 +51,8 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
 
 const styles = StyleSheet.create({
   content: {
-    // columnGap: scale(14),
-    rowGap:scale(14),
+    columnGap: scale(14),
     paddingVertical: scale(6),
-    alignItems:'center'
+    paddingHorizontal: scale(16),
   },
 });

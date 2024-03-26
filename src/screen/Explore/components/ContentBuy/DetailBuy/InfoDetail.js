@@ -2,9 +2,12 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {
+  IconBed,
   IconCalendar,
   IconClock,
   IconHome,
+  IconLand,
+  IconMapView,
   IconRoom,
 } from '../../../../../assets/icon/Icon';
 
@@ -15,8 +18,9 @@ import CustomImage from '../../../../../components/CustomImage';
 import Star from '../../../../../components/Star';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import TicketOption from './TicketOption';
+import {formatPrice} from '../../../../../utils/format';
 
-export default function InfoDetail({name}) {
+export default function InfoDetail({name, price}) {
   const {t} = useLanguage();
   return (
     <View>
@@ -57,11 +61,33 @@ export default function InfoDetail({name}) {
             paddingHorizontal: scale(20),
             alignItems: 'center',
           }}>
+          <IconMapView
+            width={scale(12)}
+            height={scale(12)}
+            fill={COLORS.primary}></IconMapView>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text, marginLeft: '2%', color: COLORS.primary}}>
+            {t('location')} |
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
+            BC 34, Binh Chuan, Thuan An, Binh Duong
+          </CustomText>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            alignItems: 'center',
+            marginTop: scale(5),
+          }}>
           <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            {t('lastest_tour')} |
+            {t('Date posted')} |
           </CustomText>
           <CustomText
             textType="regular"
@@ -80,17 +106,57 @@ export default function InfoDetail({name}) {
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            {t('tour_time')} |
+            {t('Price')} |
           </CustomText>
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            8 {t('hour')}
+            {formatPrice(price, {
+              locales: 'vi',
+            })}{' '}
+          </CustomText>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            alignItems: 'center',
+            marginTop: scale(5),
+          }}>
+          <IconBed width={scale(12)} height={scale(12)} fill={COLORS.primary}/>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            {t('Bedroom')} |
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            3
+          </CustomText>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            alignItems: 'center',
+            marginTop: scale(5),
+          }}>
+          <IconLand width={scale(12)} height={scale(12)} fill={COLORS.primary}/>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            {t('Acreage')} |
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            173m2
           </CustomText>
         </View>
       </View>
-      <View style={styles.line}></View>
-      <TicketOption/>
+      {/* <View style={styles.line}></View>
+      <TicketOption/> */}
       <View style={styles.line}></View>
       <Introduction />
     </View>

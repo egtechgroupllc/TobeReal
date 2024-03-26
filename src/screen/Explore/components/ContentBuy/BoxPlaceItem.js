@@ -56,7 +56,7 @@ export default function BoxPlaceItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailTourScreen',
+                  screen: 'DetailBuyScreen',
                   params: {
                     jsondata: jsonImage || [],
                     title: name || '',
@@ -92,7 +92,7 @@ export default function BoxPlaceItem({
 
             <TopImg
               rating={rating}
-              isStar={isStar}
+              // isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
             />

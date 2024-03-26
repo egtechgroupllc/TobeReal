@@ -70,26 +70,26 @@ export default memo(function BookAccommodation({
             // onPress={() => {
             //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
             // }}
-            outline
+            // outline
             buttonType="large"
-            style={{flex: 0.7}}
+            style={{flex: 1}}
             text={t('contact_host')}
             styleText={{
               fontSize: SIZES.xMedium,
             }}
           />
-          <CustomButton
+          {/* <CustomButton
             // onPress={() => {
             //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
             // }}
             onPress={onPress}
             buttonType="large"
             style={{flex: 1}}
-            text={t('find_tour')}
+            text={t('BUY')}
             styleText={{
               fontSize: SIZES.xMedium,
             }}
-          />
+          /> */}
         </View>
       </Skeleton>
     </View>

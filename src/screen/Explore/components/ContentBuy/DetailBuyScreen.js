@@ -12,19 +12,22 @@ import MainWrapper from '../../../../components/MainWrapper';
 import BookAccommodation from './DetailBuy/BookAccommodation';
 import DynamicHeader from './DetailBuy/DynamicHeader';
 import { scale,WIDTH } from '../../../../assets/constants';
-import TourSchedule from './DetailBuy/TourSchedule';
+import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
+import InfoUnitFacilities from './DetailBuy/InfoUnitFacilities';
+
+
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailBuyScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
   const listView = useRef([
-    <InfoDetail name={title} />,
-    // <InfoUnitFacilities />,
+    <InfoDetail name={title} price={paramPrice} />,
+    <InfoUnitFacilities />,
     <Map />,
     <Review />,
-    <TourSchedule/>
+    // <TourSchedule/>
     // <InfoAdditional />,
-    // <SimilarApartmentsNearby />,
+    <SimilarApartmentsNearby name={title} image={jsondata} price={paramPrice}/>,
   ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);

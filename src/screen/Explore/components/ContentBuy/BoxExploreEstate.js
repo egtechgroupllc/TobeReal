@@ -27,7 +27,7 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
 import { type } from '../../../../components/Marquee';
 
-export default function BoxLocationItem({
+export default function BoxExploreEstate({
   data,
   seeViewNumber = 2.4,
   isLoading,
@@ -45,6 +45,7 @@ export default function BoxLocationItem({
   jsonImage,
   name,
   price,
+  type
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -70,7 +71,7 @@ export default function BoxLocationItem({
           style={[
             styles.wrapper,
             {
-              width: scale(250/ seeViewNumber),
+              width: scale(500 / seeViewNumber),
               // height: scale(200),
             },
             styleWrapper,
@@ -78,11 +79,8 @@ export default function BoxLocationItem({
           ]}>
           <View
             style={{
-              width: scale(40),
-              height: scale(40),
-              flexDirection: 'row',
-              columnGap: scale(5),
-              marginLeft:scale(5)
+              width: '90%',
+              height: scale(190),
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
@@ -94,20 +92,106 @@ export default function BoxLocationItem({
                 style={styles.img}></CustomImage>
             )}
 
-            {/* <TopImg
+            <TopImg
               rating={rating}
               isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
-              type={type}
-            /> */}
-            <View style={{paddingVertical: scale(10), alignSelf:'center'}}>
+              showPrice
+              price={formatPrice(price, {
+                locales: 'vi',
+              })}
+            />
+            <View style={{paddingVertical: scale(10)}}>
               <CustomText
                 textType="bold"
-                style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C'}]}
-                numberOfLines={1}>
+                style={[isStar && {fontSize: SIZES.small, color: '#252B5C'}]}
+                numberOfLines={2}>
                 {data?.name}
               </CustomText>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  columnGap: scale(5),
+                  marginTop: scale(10),
+                }}>
+                <IconMarker width={scale(9)} height={scale(9)} />
+                <CustomText
+                  textType="regular"
+                  style={[isStar && {fontSize: SIZES.xSmall, color: '#53587A'}]}
+                  numberOfLines={2}>
+                  Jakarta, Indonesia
+                </CustomText>
+              </View>
+              <View style={{marginTop: scale(60)}}>
+                {!multiPrice ? (
+                  <>
+                    {isDiscount && (
+                      <View
+                        style={{
+                          ...styles.price,
+                          justifyContent: 'flex-start',
+                        }}>
+                        <CustomText
+                          textType="regular"
+                          style={{...styles.textDiscount, color: COLORS.white}}>
+                          {formatPrice(data?.discount, {
+                            locales: 'vi',
+                          })}{' '}
+                        </CustomText>
+
+                        <CustomText
+                          textType="semiBold"
+                          style={{
+                            color: '#FF0000',
+                            fontSize: SIZES.xSmall,
+                            minWidth: scale(35),
+                          }}>
+                          20% OFF
+                        </CustomText>
+                      </View>
+                    )}
+
+                    {/* <View style={styles.price}>
+                      <CustomText
+                        textType="bold"
+                        style={[
+                          styles.buildingName,
+                          isStar && {fontSize: SIZES.small, color: '#252B5C'},
+                          isDiscount && {color: COLORS.white},
+                        ]}>
+                        {formatPrice(data?.price, {
+                          locales: 'vi',
+                        })}{' '}
+                        {time && (
+                          <CustomText
+                            textType="regular"
+                            style={{
+                              fontSize: SIZES.xSmall,
+                              color: COLORS.white,
+                            }}>
+                            / {rental}
+                          </CustomText>
+                        )}
+                      </CustomText>
+
+                      {isViewMap && (
+                        <TouchableOpacity
+                          activeOpacity={0.7}
+                          style={{padding: scale(4)}}>
+                          <IconMapView />
+                        </TouchableOpacity>
+                      )}
+                    </View> */}
+                  </>
+                ) : (
+                  <ViewMultiPrice
+                    isUnitAvailable={isUnitAvailable}
+                    viewMultiPrice={multiPrice}
+                  />
+                )}
+              </View>
             </View>
           </View>
           {/* <View
@@ -321,16 +405,18 @@ export default function BoxLocationItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    alignItems:'center',
+    paddingVertical:scale(10),
     backgroundColor: '#F5F4F8',
-    minHeight: scale(60),
+    minHeight: scale(284),
     // height: 200,
-    borderRadius: 50,
+    borderRadius: 12,
   },
   img: {
     width: '100%',
     height: '100%',
-    borderRadius: scale(999),
+    borderRadius: scale(12),
   },
   line: {
     backgroundColor: 'white',

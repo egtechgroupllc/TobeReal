@@ -6,26 +6,53 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
+import Star from '../../../../../components/Star';
 
-export default function TopImg({rating, isStar, textRating, isHeart, type, feature}) {
+export default function TopImg({
+  rating,
+  isStar,
+  textRating,
+  isHeart,
+  type,
+  feature,
+  price,
+  showPrice,
+}) {
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>
         {!!rating && !isStar && (
           <RatingBox rating={rating} textRating={textRating} />
         )}
-        {feature &&
+        {feature && (
           <LinearGradient
-          colors={['#F0B90B', '#D88A00']}
-          start={{x: 0, y: 0}}
-          end={{x: 0, y: 1}}
-          style={styles.topBox}>
-          <CustomText style={styles.topName}>{type}</CustomText>
-        </LinearGradient>
-        }
-        
+            colors={['#F0B90B', '#D88A00']}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 1}}
+            style={styles.topBox}>
+            <CustomText style={styles.topName}>{type}</CustomText>
+          </LinearGradient>
+        )}
+        {showPrice && (
+          <View
+            style={{
+              ...styles.topBox,
+              backgroundColor: '#234F68B0',
+              position: 'absolute',
+              marginTop: scale(135),
+              width: scale(100),
+            }}>
+            <CustomText style={styles.topName} numberOfLines={1}>
+              {price}
+            </CustomText>
+          </View>
+        )}
       </View>
-
+      {isStar && (
+        <View style={{position: 'absolute', top: scale(255)}}>
+          <Star rating={3} />
+        </View>
+      )}
       {isHeart && <Favourite />}
     </View>
   );

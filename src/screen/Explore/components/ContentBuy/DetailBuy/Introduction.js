@@ -3,16 +3,14 @@ import React, {useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 
-
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
-import { TabSelect } from '../../../../../components';
-
+import {TabSelect} from '../../../../../components';
 
 export default function Introduction() {
   const {t} = useLanguage();
-  const listTab = [t('trip_highlight'), t('tour_schedule')];
+  const listTab = [t('Description information'), t('Project information')];
   const bottomSheetRef = useRef();
 
   const [tabSelect, setTabSelect] = useState(listTab[0]);
@@ -37,23 +35,20 @@ export default function Introduction() {
               style={{
                 lineHeight: 18,
               }}>
-              Staying at Cochin Sang Hotel is a right choice when you visit
-              visitors to Ben Thanh Ward. The hotel possesses a prime location
-              6.64 km from Tan Son Nhat Airport. Stay at Cochin Sang Hotel is a
-              good choice when you visit Ben Ward Wall. The hotel possesses a
-              prime location away from Tan Airport Son Nhat 6.64 km.
+              The owner needs to urgently sell Hiep Thanh 3 apartment, block B,
+              3rd floor. 1 bedroom. the valid input is at. Selling price: 830
+              million. Surrounded by crowded residents and full amenities. There
+              are 2 Vinmart, 2 Family, Coop Food, Con Cuong, Phuc Long,
+              Highlands, schools...
             </CustomText>
           ) : (
             <CustomText
               style={{
                 lineHeight: 18,
               }}>
-              Enjoy a unique stay experience at the building Cochin Sang Hotel's
-              rich historical imprint, which is difficult for you can be found
-              anywhere. {'\n'}If planning to have a vacation long, then Cochin
-              Sang Hotel is the choice for you. With full amenities and
-              excellent service quality, Cochin Sang Hotel will make you feel
-              comfortable like you are at home.
+              Updating progress {'\n'}
+              Binh Duong Investment Consulting Construction Joint Stock Company
+              (BICONSI)
             </CustomText>
           )
         }
@@ -93,12 +88,9 @@ export default function Introduction() {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Enjoy a unique stay experience at the building Cochin Sang
-                Hotel's rich historical imprint, which is difficult for you can
-                be found anywhere. {'\n'}If planning to have a vacation long,
-                then Cochin Sang Hotel is the choice for you. With full
-                amenities and excellent service quality, Cochin Sang Hotel will
-                make you feel comfortable like you are at home.
+                Updating progress {'\n'}
+                Binh Duong Investment Consulting Construction Joint Stock
+                Company (BICONSI)
               </CustomText>
             </View>
           ))}

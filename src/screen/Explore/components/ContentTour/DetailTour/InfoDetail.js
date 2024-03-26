@@ -5,6 +5,7 @@ import {
   IconCalendar,
   IconClock,
   IconHome,
+  IconMapView,
   IconRoom,
 } from '../../../../../assets/icon/Icon';
 
@@ -51,11 +52,33 @@ export default function InfoDetail({name}) {
       </View>
       <View style={styles.line}></View>
       <View style={styles.boxTourTime}>
+      <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            alignItems: 'center',
+          }}>
+          <IconMapView
+            width={scale(12)}
+            height={scale(12)}
+            fill={COLORS.primary}></IconMapView>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text, marginLeft: '2%', color: COLORS.primary}}>
+            {t('location')} |
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
+            BC 34, Binh Chuan, Thuan An, Binh Duong
+          </CustomText>
+        </View>
         <View
           style={{
             flexDirection: 'row',
             paddingHorizontal: scale(20),
             alignItems: 'center',
+            marginTop:scale(5)
           }}>
           <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
           <CustomText

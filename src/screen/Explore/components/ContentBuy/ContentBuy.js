@@ -8,6 +8,8 @@ import DiscoveryTour from './DiscoveryTour';
 import Discount from './Discount';
 import FeatureEstate from './FeatureEstate';
 import TopLocation from './TopLocation';
+import TopEstateAgent from './TopEstateAgent';
+import ExploreNearbyEstate from './ExploreNearbyEstate';
 const dataPackage = [
   {
     id: 1,
@@ -346,6 +348,68 @@ const dataLocation= [
     ],
   },
 ];
+const dataAgent= [
+  {
+    id: 1,
+    src: images.hanbok,
+    name: 'Bali',
+    price: 224000,
+    type:'Apartment',
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 2,
+    src: images.seoul,
+    name: 'Jakarta',
+    price: 995000,
+    type:'Villa',
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 3,
+    src: images.jejubus,
+    type:'House',
+    name: 'Yogyakarta',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 4,
+    src: images.danang,
+    type:'House',
+    name: 'Semarang',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 5,
+    src: images.halloween,
+    type:'House',
+    name: 'Semarang',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+];
 export default function ContentBuy() {
   const [tourData, setTourData] = useState(dataDomestic); 
 
@@ -364,6 +428,8 @@ export default function ContentBuy() {
       <Discount />
       <FeatureEstate data={dataWorld}/>
       <TopLocation data={dataLocation}/>
+      <TopEstateAgent data={dataAgent}/>
+      <ExploreNearbyEstate data={dataWorld}/>
       <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange}/>
     </View>
   );

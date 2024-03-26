@@ -25,9 +25,9 @@ import TopImg from './BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
-import { type } from '../../../../components/Marquee';
+import {type} from '../../../../components/Marquee';
 
-export default function BoxLocationItem({
+export default function BoxEstateAgent({
   data,
   seeViewNumber = 2.4,
   isLoading,
@@ -49,68 +49,60 @@ export default function BoxLocationItem({
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
-    <View style={styles.wrapper}>
-      {!isLoading ? (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => {
-            if (isFocused()) {
-              dispatch(
-                StackActions.push('NoBottomTab', {
-                  screen: 'DetailBuyScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
-                }),
-              );
-            }
-          }}
-          style={[
-            styles.wrapper,
-            {
-              width: scale(250/ seeViewNumber),
-              // height: scale(200),
-            },
-            styleWrapper,
-            SHADOW,
-          ]}>
-          <View
-            style={{
-              width: scale(40),
-              height: scale(40),
-              flexDirection: 'row',
-              columnGap: scale(5),
-              marginLeft:scale(5)
-            }}>
-            {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
+    <View>
+      <View style={styles.wrapper}>
+        {!isLoading ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              if (isFocused()) {
+                dispatch(
+                  StackActions.push('NoBottomTab', {
+                    screen: 'DetailBuyScreen',
+                    params: {
+                      jsondata: jsonImage || [],
+                      title: name || '',
+                      paramPrice: price || '',
+                    },
+                  }),
+                );
+              }
+            }}
+            style={[
+              styles.wrapper,
+              {
+                width: scale(200 / seeViewNumber),
+                // height: scale(200),
+              },
+              styleWrapper,
+              SHADOW,
+            ]}>
+            <View
+              style={{
+                width: scale(75),
+                height: scale(75),
+                alignSelf:'center'
+              }}>
+              {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
-            )}
+              {data ? (
+                <CustomImage source={data?.src} style={styles.img} />
+              ) : (
+                <CustomImage
+                  src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                  style={styles.img}></CustomImage>
+              )}
 
-            {/* <TopImg
+              {/* <TopImg
               rating={rating}
               isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
               type={type}
             /> */}
-            <View style={{paddingVertical: scale(10), alignSelf:'center'}}>
-              <CustomText
-                textType="bold"
-                style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C'}]}
-                numberOfLines={1}>
-                {data?.name}
-              </CustomText>
             </View>
-          </View>
-          {/* <View
+
+            {/* <View
             style={{
               backgroundColor: COLORS.primary,
               flex: 1,
@@ -301,20 +293,29 @@ export default function BoxLocationItem({
               </View>
             </View>
           </View> */}
-        </TouchableOpacity>
-      ) : (
-        <BoxPlaceItemLoading
-          style={[
-            styles.wrapper,
-            {
-              width: scale(400 / seeViewNumber),
-            },
-            SHADOW,
-          ]}
-          multiPrice={multiPrice}
-          isUnitAvailable={isUnitAvailable}
-        />
-      )}
+          </TouchableOpacity>
+        ) : (
+          <BoxPlaceItemLoading
+            style={[
+              styles.wrapper,
+              {
+                width: scale(400 / seeViewNumber),
+              },
+              SHADOW,
+            ]}
+            multiPrice={multiPrice}
+            isUnitAvailable={isUnitAvailable}
+          />
+        )}
+      </View>
+      <View style={{marginTop:scale(10), width:scale(50), alignSelf:'center'}}>
+        <CustomText
+          textType="bold"
+          style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C',alignSelf:'center'}]}
+          numberOfLines={1}>
+          {data?.name}
+        </CustomText>
+      </View>
     </View>
   );
 }
@@ -323,9 +324,9 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     backgroundColor: '#F5F4F8',
-    minHeight: scale(60),
+    minHeight: scale(80),
     // height: 200,
-    borderRadius: 50,
+    borderRadius: 999,
   },
   img: {
     width: '100%',

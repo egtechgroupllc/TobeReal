@@ -7,27 +7,22 @@ import {
   SIZES,
   images,
   scale,
-} from '../../../../assets/constants';
+} from '../../../../../assets/constants';
 import {
   Avatar,
   IconHeart,
   IconMapView,
   IconMarker,
-} from '../../../../assets/icon/Icon';
-import CustomImage from '../../../../components/CustomImage';
-import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
-import Star from '../../../../components/Star';
-import {formatPrice} from '../../../../utils/format';
-import RatingBox from './BoxPlaceItem/RatingBox';
-import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
-import TopImg from './BoxPlaceItem/TopImg';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
-import LinearGradient from 'react-native-linear-gradient';
-import { type } from '../../../../components/Marquee';
+} from '../../../../../assets/icon/Icon';
+import CustomImage from '../../../../../components/CustomImage';
+import CustomText from '../../../../../components/CustomText';
+import {formatPrice} from '../../../../../utils/format';
+import ViewMultiPrice from '../BoxPlaceItem/ViewMultiPrice';
+import TopImg from '../BoxPlaceItem/TopImg';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import BoxPlaceItemLoading from '../BoxPlaceItem/BoxPlaceItemLoading';
 
-export default function BoxLocationItem({
+export default function BoxSimilarApartment({
   data,
   seeViewNumber = 2.4,
   isLoading,
@@ -70,19 +65,17 @@ export default function BoxLocationItem({
           style={[
             styles.wrapper,
             {
-              width: scale(250/ seeViewNumber),
+              width: scale(600 / seeViewNumber),
               // height: scale(200),
+              padding:scale(10)
             },
             styleWrapper,
             SHADOW,
           ]}>
           <View
             style={{
-              width: scale(40),
-              height: scale(40),
-              flexDirection: 'row',
-              columnGap: scale(5),
-              marginLeft:scale(5)
+              width: '100%',
+              height: styleWrapper?.height ? '60%' : scale(150),
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
@@ -94,23 +87,14 @@ export default function BoxLocationItem({
                 style={styles.img}></CustomImage>
             )}
 
-            {/* <TopImg
-              rating={rating}
-              isStar={isStar}
+            <TopImg
+              // rating={rating}
+              // isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
-              type={type}
-            /> */}
-            <View style={{paddingVertical: scale(10), alignSelf:'center'}}>
-              <CustomText
-                textType="bold"
-                style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C'}]}
-                numberOfLines={1}>
-                {data?.name}
-              </CustomText>
-            </View>
+            />
           </View>
-          {/* <View
+          <View
             style={{
               backgroundColor: COLORS.primary,
               flex: 1,
@@ -128,7 +112,7 @@ export default function BoxLocationItem({
               numberOfLines={1}>
               {data?.name}
             </CustomText>
-
+{/* 
             <View style={{marginTop: scale(5)}}>
               {!multiPrice ? (
                 <>
@@ -177,36 +161,8 @@ export default function BoxLocationItem({
                         </CustomText>
                       )}
                     </CustomText>
-                    <CustomText
-                      textType="bold"
-                      style={{
-                        color: '#0057FF',
-                        fontSize: SIZES.small,
-                        flex: 1,
-                        // minWidth: scale(35),
-                      }}>
-                      189 m2
-                    </CustomText>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        columnGap: scale(5),
-                      }}>
-                      <CustomText
-                        textType="semiBold"
-                        style={{
-                          color: COLORS.white,
-                          fontSize: SIZES.small,
-                          // minWidth: scale(35),
-                        }}>
-                        6
-                      </CustomText>
-                      <CustomImage
-                        source={images.iconBed}
-                        style={{width: scale(12), height: scale(8)}}
-                      />
-                    </View>
+                    
+                    
 
                     {isViewMap && (
                       <TouchableOpacity
@@ -223,7 +179,7 @@ export default function BoxLocationItem({
                   viewMultiPrice={multiPrice}
                 />
               )}
-            </View>
+            </View> */}
             <View style={{marginTop: scale(5)}}>
               <View style={styles.price}>
                 <View
@@ -280,7 +236,8 @@ export default function BoxLocationItem({
                       Posted today
                     </CustomText>
                   </View>
-                  <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
+                  
+                  {/* <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
                      <View style={{backgroundColor:COLORS.primary, width:'20%', height:scale(13), borderRadius:scale(3), alignItems:'center', justifyContent:'center', }}>
                      <CustomImage
                         source={images.iconPhone}
@@ -296,11 +253,43 @@ export default function BoxLocationItem({
                       }}>
                         0984839012
                     </CustomText>
-                  </View>
+                  </View> */}
                 </View>
               </View>
+              
             </View>
-          </View> */}
+            <View style={styles.price}>
+                    <CustomText
+                      textType="bold"
+                      style={[
+                        styles.buildingName,
+                        isStar && {fontSize: SIZES.small, color: COLORS.white, marginTop:scale(5)},
+                        isDiscount && {color: COLORS.white},
+                      ]}>
+                      {formatPrice(data?.price, {
+                        locales: 'vi',
+                      })}{' '}
+                      {time && (
+                        <CustomText
+                          textType="regular"
+                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
+                          / {rental}
+                        </CustomText>
+                      )}
+                    </CustomText>
+                    
+                    
+
+                    {isViewMap && (
+                      <TouchableOpacity
+                        activeOpacity={0.7}
+                        style={{padding: scale(4)}}>
+                        <IconMapView />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+          </View>
+          
         </TouchableOpacity>
       ) : (
         <BoxPlaceItemLoading
@@ -321,16 +310,15 @@ export default function BoxLocationItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    justifyContent: 'center',
-    backgroundColor: '#F5F4F8',
-    minHeight: scale(60),
+    backgroundColor: '#fff',
+    minHeight: scale(200),
     // height: 200,
-    borderRadius: 50,
+    borderRadius: 12,
   },
   img: {
     width: '100%',
     height: '100%',
-    borderRadius: scale(999),
+    borderRadius: scale(12),
   },
   line: {
     backgroundColor: 'white',
