@@ -22,7 +22,7 @@ export default function DetailBuyScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
   const listView = useRef([
     <InfoDetail name={title} price={paramPrice} />,
-    <InfoUnitFacilities />,
+    // <InfoUnitFacilities />,
     <Map />,
     <Review />,
     // <TourSchedule/>

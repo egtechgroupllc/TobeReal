@@ -2410,7 +2410,7 @@ export function IconX({fill, ...props}) {
       {...props}>
       <Path
         d="M7.55 7.429L21.692 21.57M21.692 7.429L7.55 21.57"
-        stroke="#000"
+        stroke= {fill || '#000'}
         strokeWidth={3}
         strokeLinecap="round"
       />

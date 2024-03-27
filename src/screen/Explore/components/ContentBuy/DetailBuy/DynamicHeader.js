@@ -130,7 +130,7 @@ export default React.memo(
               opacity: animatedOpacityText,
             }}
             textType="bold">
-            {data?.name || 'Tour Detail'}
+            {data?.name || 'Estate Detail'}
           </CustomText>
           <View
             style={{
