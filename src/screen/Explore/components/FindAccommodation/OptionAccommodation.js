@@ -1,5 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
@@ -17,10 +24,10 @@ export default function OptionAccommodation({
   keyTextSub,
   isSelectAll,
   isShaDow,
-  isSelectForIndex,
   scrollEnabled,
   noSelectDefault,
   select,
+  selectIndex,
   onSelect,
   onChange,
 }) {
@@ -28,23 +35,49 @@ export default function OptionAccommodation({
   const _keyTextSub = keyTextSub || 'subText';
 
   const valueDefault = useMemo(
-    () => !noSelectDefault && (isSelectForIndex ? 0 : data[0]?.[_keyTextView]),
+    () =>
+      !noSelectDefault && {
+        index: 0,
+        item: data[0]?.[_keyTextView],
+      },
     [data[0]?.[_keyTextView]],
-  );
-
-  const valueDefaultView = useCallback(
-    (item, index) => (isSelectForIndex ? index : item?.[_keyTextView]),
-    [],
   );
 
   const [option, setOption] = useState([valueDefault]);
   useEffect(() => {
-    if (select || select === 0) setOption([select]);
-  }, [select]);
+    if (selectIndex || selectIndex === 0) {
+      setOption([
+        {
+          index: selectIndex,
+        },
+      ]);
+      return;
+    }
 
-  useEffect(() => {
-    if (valueDefault) setOption([valueDefault]);
-  }, [valueDefault]);
+    if (select) {
+      setOption([
+        {
+          index: data.indexOf(select),
+        },
+      ]);
+      return;
+    }
+  }, [select, selectIndex]);
+
+  const valueDefaultView = useCallback(
+    (item, index) => ({
+      index,
+      item: item?.[_keyTextView],
+    }),
+    [],
+  );
+  const checkSelect = useCallback(
+    (value, index) => {
+      const result = option.some(item => item.index === index);
+      return result;
+    },
+    [option],
+  );
 
   const handleSelectOption = value => {
     if (!multiSelect) {
@@ -54,19 +87,19 @@ export default function OptionAccommodation({
     }
 
     setOption(prev => {
-      const check = option.includes(value);
+      const check = checkSelect(value, value?.index);
 
-      if (isSelectAll && value === valueDefault) {
+      if (isSelectAll && value?.index === valueDefault.index) {
         return [value];
       }
       if (check) {
-        return prev.filter(item => item !== value);
+        return prev.filter(item => item?.index !== value?.index);
       } else {
         const resultPrev = !isSelectAll
           ? prev
-          : prev.filter(item => item !== valueDefault);
-
+          : prev.filter(item => item.index !== valueDefault?.index);
         onSelect && onSelect([...resultPrev, value]);
+
         return [...resultPrev, value];
       }
     });
@@ -78,13 +111,33 @@ export default function OptionAccommodation({
     }
   }, [option]);
 
+  const flatRef = useRef();
+  useLayoutEffect(() => {
+    flatRef.current.scrollToIndex({
+      animated: true,
+      index: option[0].index || 0,
+      viewPosition: 0.5,
+    });
+  }, [option]);
+
   return (
     <View style={[styles.wrapper, styleWrapper, isShaDow && SHADOW]}>
       <FlatList
+        ref={flatRef}
         data={data}
         contentContainerStyle={[styles.content, styleContent]}
         horizontal
         showsHorizontalScrollIndicator={false}
+        onScrollToIndexFailed={({index}) => {
+          const wait = new Promise(resolve => setTimeout(resolve, 100));
+          wait.then(() => {
+            setOption([
+              {
+                index: 0,
+              },
+            ]);
+          });
+        }}
         scrollEnabled={scrollEnabled || data.length > 3}
         renderItem={({item, index}) => (
           <TouchableOpacity
@@ -92,7 +145,7 @@ export default function OptionAccommodation({
             activeOpacity={0.7}
             style={[
               styles.option,
-              option.includes(valueDefaultView(item, index)) &&
+              checkSelect(item, index) &&
                 !outline && {
                   borderBottomWidth: 2,
                   paddingBottom: scale(4),
@@ -102,9 +155,7 @@ export default function OptionAccommodation({
                   ? '#f5f5f5'
                   : '#F0B90B20',
               },
-              option.includes(valueDefaultView(item, index)) &&
-                outline &&
-                styles.outline,
+              checkSelect(item, index) && outline && styles.outline,
               styleOption,
               // styleContent?.height && {height: styleContent?.height},
             ]}
@@ -117,7 +168,7 @@ export default function OptionAccommodation({
                   ...styleIcon,
                 }}
                 fill={
-                  option.includes(valueDefaultView(item, index))
+                  checkSelect(item, index)
                     ? COLORS.primary
                     : styleIcon?.color || COLORS.text
                 }
@@ -133,7 +184,7 @@ export default function OptionAccommodation({
                 <CustomText
                   textType={isTextSub && 'semiBold'}
                   style={{
-                    color: option.includes(valueDefaultView(item, index))
+                    color: checkSelect(item, index)
                       ? COLORS.primary
                       : COLORS.text,
                   }}>
@@ -143,7 +194,7 @@ export default function OptionAccommodation({
               {isTextSub && (
                 <CustomText
                   style={{
-                    color: option.includes(valueDefaultView(item, index))
+                    color: checkSelect(item, index)
                       ? COLORS.primary
                       : COLORS.text,
                   }}>

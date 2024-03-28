@@ -24,7 +24,6 @@ import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../../components/Favourite';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;

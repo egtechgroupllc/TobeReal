@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
+import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {
   requireField,
@@ -11,9 +12,10 @@ import {
 } from '../../../../../../utils/validate';
 import RealEstateType from '../../../components/RealEstateType';
 import SelectCountry from '../../../components/SelectCountry';
-import ButtonTabValidate from './ButtonTabValidate';
+import ButtonTabValidate from '../ButtonTabValidate';
 import EstateSetMap from './GeneralInformation/EstateSetMap';
-import InViewPort from '../../../../../../components/InViewport';
+import {useQuery} from '@tanstack/react-query';
+import {getListTypeRent} from '../../../../../../Model/api/common';
 
 export default function GeneralInformation({
   maxCharacters,
@@ -41,6 +43,11 @@ export default function GeneralInformation({
     'accommodation_type_id',
   ]).current;
 
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['common', 'accommodation', 'list-type'],
+    queryFn: getListTypeRent,
+  });
+
   return (
     <View>
       <ButtonTabValidate
@@ -50,25 +57,32 @@ export default function GeneralInformation({
         watch={watch}
         arrKeywords={arrKeywords}
       />
+
       <InViewPort
         noLoading={true}
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!isView} style={styles.box}>
+            <RealEstateType
+              label={t('real_estate_type')}
+              name={'accommodation_type_id'}
+              control={control}
+              data={data?.data}
+              watch={watch}
+            />
+            <View style={styles.line} />
+
             <CustomInput
               styleTextLabel={styles.label}
               label={t('real_estate_title')}
               control={control}
               name="name"
               multiline
-              maxLength={maxCharacters}
+              maxLength={100}
               placeholder={t('enter_real_estate_title')}
               rules={[
                 requireField(t('this_field_required')),
-                validateMaxLengthText(
-                  `${maxCharacters} characters limit`,
-                  maxCharacters,
-                ),
+                validateMaxLengthText(`${100} characters limit`, 100),
               ]}
               style={[
                 styles.textInput,
@@ -78,7 +92,7 @@ export default function GeneralInformation({
               ]}
               componentRight={
                 <Text style={styles.numText}>
-                  {watch('name')?.length || 0}/{maxCharacters}
+                  {watch('name')?.length || 0}/{100}
                 </Text>
               }
             />
@@ -88,15 +102,12 @@ export default function GeneralInformation({
               label={t('description_content')}
               control={control}
               name="description"
-              maxLength={maxCharacters}
+              maxLength={5000}
               multiline
               placeholder={t('enter_a_description')}
               rules={[
                 requireField(t('this_field_required')),
-                validateMaxLengthText(
-                  `${maxCharacters} characters limit`,
-                  maxCharacters,
-                ),
+                validateMaxLengthText(`${5000} characters limit`, 5000),
               ]}
               style={[
                 styles.textInput,
@@ -106,19 +117,9 @@ export default function GeneralInformation({
               ]}
               componentRight={
                 <Text style={styles.numText}>
-                  {watch('description')?.length || 0}/{maxCharacters}
+                  {watch('description')?.length || 0}/{5000}
                 </Text>
               }
-            />
-
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('address')}
-              control={control}
-              name="address"
-              placeholder={t('address')}
-              rules={requireField(t('this_field_required'))}
-              style={styles.textInput}
             />
 
             <View style={styles.line} />
@@ -133,21 +134,16 @@ export default function GeneralInformation({
 
             <View style={styles.line} />
 
-            <SelectCountry
-              control={control}
-              onChange={value => {
-                setValue('country_id', value?.id);
-                setValue('province_id', value?.province?.id);
-              }}
-            />
+            <SelectCountry setValue={setValue} control={control} />
 
-            <View style={styles.line} />
-
-            <RealEstateType
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('address')}
               control={control}
-              onChange={value => {
-                setValue('accommodation_type_id', value?.id);
-              }}
+              name="address"
+              placeholder={t('address')}
+              rules={requireField(t('this_field_required'))}
+              style={styles.textInput}
             />
           </Collapsible>
         )}
@@ -167,7 +163,7 @@ const styles = StyleSheet.create({
     minHeight: scale(100),
     backgroundColor: '#FFFFFF',
     borderRadius: scale(6),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(10),
     alignItems: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),

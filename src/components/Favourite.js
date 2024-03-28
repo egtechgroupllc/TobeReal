@@ -25,7 +25,7 @@ export default function Favourite() {
 const styles = StyleSheet.create({
   active: {
     minWidth: scale(30),
+    height: scale(35),
     backgroundColor: '#fff',
-    width: 'auto',
   },
 });

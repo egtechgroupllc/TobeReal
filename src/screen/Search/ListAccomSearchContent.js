@@ -2,7 +2,7 @@ import {useInfiniteQuery} from '@tanstack/react-query';
 import React, {useMemo} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {getListRent} from '../../api/Accommodation/apiAccom';
+import {getListRent} from '../../Model/api/apiAccom';
 import {animations, scale} from '../../assets/constants';
 import ItemAccommdSearch from './components/ItemAccommdSearch';
 import ItemAccommdSearchLoading from './components/ItemAccommdSearchLoading';

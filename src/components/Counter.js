@@ -1,10 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {Button, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {COLORS, SIZES, scale} from '../assets/constants';
-import {CustomButton} from '.';
+import {CustomButton, CustomInput} from '.';
 import {IconAdd, IconSubtract, IconX} from '../assets/icon/Icon';
 import CustomText from './CustomText';
+import InputCountry from '../screen/Auth/Register/components/InputCountry';
 
 export default function Counter({
   min = 1,
@@ -18,8 +26,10 @@ export default function Counter({
   vertical,
   verticalCounter,
   styleBoxHeading,
+  isInput,
 }) {
   const [quantity, setQuantity] = useState(value || min);
+
   const handleIncrement = () => {
     if (quantity < max) {
       onAdd && onAdd();
@@ -31,11 +41,20 @@ export default function Counter({
     if (quantity > min) {
       onDown && onDown();
       setQuantity(prev => prev - 1);
+      return;
     }
   };
 
   useEffect(() => {
-    onChange && onChange(quantity);
+    if (quantity < min) {
+      setQuantity(min);
+    }
+    if (quantity > max) {
+      setQuantity(max);
+    }
+    if (quantity >= min && quantity <= max) {
+      onChange && onChange(quantity);
+    }
   }, [quantity]);
 
   return (
@@ -69,7 +88,20 @@ export default function Counter({
           }}
         />
 
-        <CustomText style={styles.quantity}>{quantity}</CustomText>
+        {/* <CustomText style={styles.quantity}>{quantity}</CustomText> */}
+
+        <CustomInput
+          inputMode="numeric"
+          rules={'1'}
+          defaultValue={`${quantity}`}
+          style={styles.input}
+          styleText={{
+            textAlign: 'center',
+          }}
+          onChangeText={text => {
+            setQuantity(+text);
+          }}
+        />
 
         <CustomButton
           iconLeft={IconAdd}
@@ -111,5 +143,10 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
     minWidth: scale(20),
     textAlign: 'center',
+  },
+  input: {
+    width: scale(40),
+    height: scale(30),
+    borderRadius: scale(6),
   },
 });

@@ -1,12 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../../components';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import {IconDown, IconRight} from '../../../../../../assets/icon/Icon';
+import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
+import {IconDown} from '../../../../../../assets/icon/Icon';
+import {CustomInput} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {requireField} from '../../../../../../utils/validate';
-import ButtonTabValidate from './ButtonTabValidate';
+import ButtonTabValidate from '../ButtonTabValidate';
 
 export default function PaymentInfo({control, errors, watch}) {
   const {t} = useLanguage();
@@ -60,21 +60,12 @@ export default function PaymentInfo({control, errors, watch}) {
 }
 
 const styles = StyleSheet.create({
-  buttonCategories: {
-    backgroundColor: 'white',
-    borderRadius: scale(6),
-    borderColor: '#F0B90B80',
-    height: scale(50),
-    justifyContent: 'space-between',
-    marginTop: scale(20),
-    paddingHorizontal: scale(20),
-  },
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
     backgroundColor: '#FFFFFF',
     borderRadius: scale(6),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(10),
     alignItems: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),

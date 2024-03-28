@@ -7,15 +7,10 @@ import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import CreateAccomItem from './CreateAccomItem';
 
-export default function ListCreateAccom() {
-  const {isLoading, isError, data} = useQuery({
-    queryKey: ['accommodation', 'my-list', 0],
-    queryFn: () => getMyListCreateAccom({hasRoom: 0}),
-  });
+export default function ListCreateAccom({data}) {
+  const numColumns = Math.ceil(data?.rows?.length / 2);
 
-  const numColumns = Math.ceil(data?.data?.rows?.length / 2);
   if (!numColumns) return null;
-
   return (
     <View
       style={{
@@ -43,14 +38,17 @@ export default function ListCreateAccom() {
           alignItems: 'center',
         }}>
         <FlatList
-          data={data?.data?.rows || [1, 2]}
+          key={'accommodation/my-list-0'}
+          data={data?.rows}
           numColumns={numColumns}
           alwaysBounceVertical={false}
           directionalLockEnabled={true}
           keyExtractor={(item, index) => `$key_${item.id}-${index}`}
-          columnWrapperStyle={{
-            columnGap: scale(10),
-          }}
+          columnWrapperStyle={
+            numColumns >= 2 && {
+              columnGap: scale(10),
+            }
+          }
           contentContainerStyle={{
             paddingHorizontal: scale(20),
             rowGap: scale(10),
@@ -63,6 +61,3 @@ export default function ListCreateAccom() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
-//

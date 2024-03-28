@@ -11,7 +11,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField, validateEmail} from '../../../../utils/validate';
 import Wrapper from '../../components/Wrapper';
 import {useMutation} from '@tanstack/react-query';
-import {postForgotPassword} from '../../../../api/auth';
+import {postForgotPassword} from '../../../../Model/api/auth';
 import {showMess} from '../../../../assets/constants/Helper';
 import VerificationCode from './VerificationCode';
 import ConfirmChangePassword from './ConfirmChangePassword';

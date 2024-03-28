@@ -17,10 +17,13 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
       <View
         style={{
           flex: options?.headerTitleStyle?.textAlign === 'left' ? 0 : 1,
+          alignItems: 'flex-start',
         }}>
         {!!back && !options?.headerLeft && (
-          <Pressable onPress={goBack}>
-            <IconGoBack />
+          <Pressable
+            onPress={goBack}
+            style={{padding: scale(6), paddingHorizontal: scale(8)}}>
+            <IconGoBack fill={'#fff'} />
           </Pressable>
         )}
 

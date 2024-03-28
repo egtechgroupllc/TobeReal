@@ -7,7 +7,7 @@ import {CustomButton, CustomInput} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
-import {getCountry} from '../../../../api/common';
+import {getCountry} from '../../../../Model/api/common';
 
 export default function InputCountry({control, name}) {
   const {t} = useLanguage();

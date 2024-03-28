@@ -5,6 +5,7 @@ import MainWrapper from '../../components/MainWrapper';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
 import Header from './components/Header';
 import ContentTour from './components/ContentTour/ContentTour';
+import ContentAccommodation from './components/ContentAccommodation/ContentAccommodation';
 
 export default function HomeExploreScreen() {
   return (
@@ -19,8 +20,8 @@ export default function HomeExploreScreen() {
             style={{marginTop: scale(20)}}
           />
         }>
-        {/* <ContentAccommodation /> */}
-        <ContentTour />
+        <ContentAccommodation />
+        {/* <ContentTour /> */}
       </Suspense>
     </MainWrapper>
   );

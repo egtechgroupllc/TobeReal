@@ -16,7 +16,7 @@ import CustomText from '../../../components/CustomText';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useMutation} from '@tanstack/react-query';
-import {postLogout} from '../../../api/auth';
+import {postLogout} from '../../../Model/api/auth';
 import {showMess} from '../../../assets/constants/Helper';
 import axios from 'axios';
 

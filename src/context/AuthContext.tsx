@@ -2,7 +2,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import React, {ReactNode, createContext, useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {postLogout} from '../api/auth';
+import {postLogout} from '../Model/api/auth';
 import {showMess} from '../assets/constants/Helper';
 import RNRestart from 'react-native-restart';
 

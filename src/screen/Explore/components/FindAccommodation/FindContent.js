@@ -47,15 +47,15 @@ export default function FindContent({isBuy, rental, tour}) {
             defaultValue={t('around_me')}
             iconLeft={IconMarker}
             styleIcon={styles.icon}
-            style={{width:'90%'}}
+            style={{width: '90%'}}
             onPress={() =>
               navigate('NoBottomTab', {
                 screen: 'HomeSearchAccommodScreen',
               })
             }
           />
-          <View style={{width:'165%'}}> 
-          <ChooseCalendar rental={rental} />
+          <View style={{width: '165%'}}>
+            <ChooseCalendar rental={rental} />
           </View>
 
           <CustomButton
@@ -77,7 +77,7 @@ export default function FindContent({isBuy, rental, tour}) {
           style={{
             paddingHorizontal: scale(16),
             rowGap: scale(10),
-            alignItems:'center'
+            alignItems: 'center',
           }}>
           <CustomInput
             control={control}
@@ -108,9 +108,7 @@ export default function FindContent({isBuy, rental, tour}) {
               multiSelect
               isSelectAll
               styleContent={{
-                flex: 1,
                 columnGap: scale(8),
-                paddingHorizontal: scale(12),
               }}
               data={[
                 {
@@ -190,7 +188,7 @@ export default function FindContent({isBuy, rental, tour}) {
               flexDirection: 'row',
               columnGap: scale(6),
               marginVertical: scale(6),
-              alignSelf:'center'
+              alignSelf: 'center',
             }}>
             <CheckBox text={t('im_flexible')} />
             <CustomButton
@@ -213,7 +211,7 @@ export default function FindContent({isBuy, rental, tour}) {
               textTransform: 'uppercase',
             }}
             style={{
-              width: '92%',
+              minWidth: '90%',
             }}
           />
         </View>

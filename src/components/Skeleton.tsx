@@ -25,7 +25,8 @@ export default function Skeleton({
       shimmerStyle={[
         styles.shimmerStyle,
         shimmerStyle,
-        {height: props?.height || shimmerStyle?.height},
+        {height: props?.height || shimmerStyle?.height || '100%'},
+        {width: props?.width || shimmerStyle?.width || '100%'},
       ]}>
       {children}
     </ShimmerPlaceHolder>

@@ -10,7 +10,7 @@ import {
   validateEmail,
   validatePhone,
 } from '../../../../../../utils/validate';
-import ButtonTabValidate from './ButtonTabValidate';
+import ButtonTabValidate from '../ButtonTabValidate';
 
 export default function EstateContact({control, errors, watch}) {
   const {t} = useLanguage();
@@ -48,6 +48,7 @@ export default function EstateContact({control, errors, watch}) {
           name="contact_phone"
           rules={[requireField(t('this_field_required'))]}
           style={{...styles.textInput}}
+          keyboardType="number-pad"
         />
 
         <CustomInput
@@ -59,6 +60,7 @@ export default function EstateContact({control, errors, watch}) {
             validateEmail(t('invalid_email')),
           ]}
           style={{...styles.textInput}}
+          keyboardType="email-address"
         />
       </Collapsible>
     </View>
@@ -66,21 +68,12 @@ export default function EstateContact({control, errors, watch}) {
 }
 
 const styles = StyleSheet.create({
-  buttonCategories: {
-    backgroundColor: 'white',
-    borderRadius: scale(6),
-    borderColor: '#F0B90B80',
-    height: scale(50),
-    justifyContent: 'space-between',
-    marginTop: scale(20),
-    paddingHorizontal: scale(20),
-  },
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
     backgroundColor: '#FFFFFF',
     borderRadius: scale(6),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(10),
     alignItems: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),

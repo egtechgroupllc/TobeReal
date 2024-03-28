@@ -4,11 +4,12 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
-import {postCreateAccommoLease} from '../../../../../api/Accommodation/apiAccom';
+import {postCreateAccommoLease} from '../../../../../Model/api/apiAccom';
 import {
   COLORS,
   SHADOW,
   SIZES,
+  WIDTH,
   images,
   scale,
 } from '../../../../../assets/constants';
@@ -55,24 +56,46 @@ export default function PostNewLeaseScreen() {
       return item;
     }, formData);
 
-    object?.description_img?.forEach(image => {
+    const arrImage_description = object?.description_img?.map(image => {
       formData.append('description_img', image);
+
+      return {
+        name: image?.name,
+        description: image?.description,
+      };
     });
 
-    object?.kyc?.forEach(image => {
+    const arrImage_Kyc = object?.kyc?.map(image => {
       formData.append('kyc', image);
+      return {
+        name: image?.name,
+        description: image?.description,
+      };
     });
+
+    formData.append(
+      'image_description',
+      JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
+    );
 
     return formData;
   };
+  const checkIsValid = () => {
+    // if (`${errors}` !== '{}') {
+    //   showMess('Vui lòng nhập chính xác thông tin', 'error');
+    //   // return;
+    // }
 
-  const handlePostLease = value => {
+    handleSubmit(handlePostLease)();
+  };
+
+  const handlePostLease = (value = watch()) => {
     delete value?.check;
-
-    if (JSON.parse(value?.features).length <= 0) {
+    if (!value?.features || JSON.parse(value?.features).length <= 0) {
       showMess('Ban chua chon co so vat chat', 'error');
       return;
     }
+
     const formData = getFormData(value);
 
     createAccommodationMu.mutate(formData, {
@@ -165,7 +188,8 @@ export default function PostNewLeaseScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('post')}
-        onPress={handleSubmit(handlePostLease)}
+        // onPress={handleSubmit(handlePostLease)}
+        onPress={checkIsValid}
         style={{
           marginTop: scale(20),
         }}
@@ -176,7 +200,7 @@ export default function PostNewLeaseScreen() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: '90%',
+    width: WIDTH.widthContain,
     alignItems: 'center',
     marginVertical: scale(30),
     rowGap: scale(20),

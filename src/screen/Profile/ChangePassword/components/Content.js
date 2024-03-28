@@ -3,7 +3,7 @@ import {useMutation} from '@tanstack/react-query';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
-import {postChangePassword} from '../../../../api/auth';
+import {postChangePassword} from '../../../../Model/api/auth';
 import {scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';

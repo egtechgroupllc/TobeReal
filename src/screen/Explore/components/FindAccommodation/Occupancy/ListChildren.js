@@ -1,15 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import SelectDropdown from 'react-native-select-dropdown';
-import {COLORS, FONTS, SIZES, scale} from '../../../../../assets/constants';
-import {IconDown} from '../../../../../assets/icon/Icon';
+import {StyleSheet, View} from 'react-native';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import Counter from '../../../../../components/Counter';
-import CustomText from '../../../../../components/CustomText';
 import CustomSelectDropdown from '../../../../../components/CustomSelectDropdown';
+import CustomText from '../../../../../components/CustomText';
+
 const list = [...Array(18)].map((_, index) => (index === 0 ? '< 1' : index));
+
 export default function ListChildren({onChange, quantity}) {
   const [listChild, setListChild] = useState(quantity || []);
-
+  console.log({quantity});
   const handleAdd = () => {
     setListChild(prev => [...prev, 8]);
   };
@@ -46,6 +46,10 @@ export default function ListChildren({onChange, quantity}) {
         max={6}
         onAdd={handleAdd}
         onDown={handleDown}
+        onChange={value => {
+          const result = Array.from({length: value}, (_, index) => 8);
+          setListChild(result);
+        }}
         value={listChild.length}
       />
 

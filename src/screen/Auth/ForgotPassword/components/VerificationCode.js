@@ -3,7 +3,7 @@ import React from 'react';
 import {CustomButton, CustomInput} from '../../../../components';
 import {useMutation} from '@tanstack/react-query';
 import {showMess} from '../../../../assets/constants/Helper';
-import {postResetPassword} from '../../../../api/auth';
+import {postResetPassword} from '../../../../Model/api/auth';
 import {useForm} from 'react-hook-form';
 import {requireField, validateEqualLength} from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';

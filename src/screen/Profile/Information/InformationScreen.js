@@ -10,7 +10,7 @@ import HeaderAvatar from '../components/HeaderAvatar';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useQuery} from '@tanstack/react-query';
-import {getProfile} from '../../../api/common';
+import {getProfile} from '../../../Model/api/common';
 
 export default function InformationScreen() {
   const {t} = useLanguage();

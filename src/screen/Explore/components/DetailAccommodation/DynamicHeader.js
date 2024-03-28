@@ -1,29 +1,14 @@
-import {
-  Animated,
-  ScrollView,
-  Share,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
-import ImageDetail from '../../../components/ImageDetail';
-import OptionAccommodation from '../FindAccommodation/OptionAccommodation';
-import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconAdd, IconShare, IconX} from '../../../../assets/icon/Icon';
-import CustomText from '../../../../components/CustomText';
-import {CustomButton} from '../../../../components';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import {Animated, Share, StyleSheet, View} from 'react-native';
+import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
+import {IconShare, IconX} from '../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../components';
+import CustomText from '../../../../components/CustomText';
 import Favourite from '../../../../components/Favourite';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import Skeleton from '../../../../components/Skeleton';
+import ImageDetail from '../../../components/ImageDetail';
+import OptionAccommodation from '../FindAccommodation/OptionAccommodation';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
@@ -43,14 +28,17 @@ export default React.memo(
       {
         text: t('facilities'),
       },
-      // {
-      //   text: t('location'),
-      // },
+      {
+        text: t('location'),
+      },
       {
         text: t('room'),
       },
       {
         text: t('Review'),
+      },
+      {
+        text: t('info'),
       },
     ];
     const animatedTranslateY = scrollOffsetY.interpolate({
@@ -103,7 +91,7 @@ export default React.memo(
       }),
       [indexSelect],
     );
-
+    console.log(indexSelect);
     return (
       <>
         {/* Header */}
@@ -181,11 +169,10 @@ export default React.memo(
 
           <OptionAccommodation
             isShaDow
-            isSelectForIndex
             styleContent={{
               columnGap: scale(8),
             }}
-            select={indexSelect}
+            selectIndex={indexSelect}
             styleWrapper={{
               flex: 0,
               height: scale(46),
@@ -215,8 +202,8 @@ const styles = StyleSheet.create({
   },
   menu: {
     minWidth: scale(30),
+    height: scale(35),
     backgroundColor: '#fff',
-    width: 'auto',
   },
   textName: {
     fontSize: SIZES.medium,

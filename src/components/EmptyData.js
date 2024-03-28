@@ -7,11 +7,17 @@ import {CustomButton} from '.';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../hooks/useLanguage';
 
-export default function EmptyData({navigation, desc, textBtn, image}) {
+export default function EmptyData({
+  navigation,
+  desc,
+  textBtn,
+  image,
+  styleWrapper,
+}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, styleWrapper]}>
       <CustomImage
         source={image || images.emptyData}
         resizeMode="contain"

@@ -26,7 +26,6 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import ImageDetail from '../../DetailTour/ImageDetail';
 import CustomText from '../../../../../../components/CustomText';
 
-
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
@@ -180,7 +179,6 @@ export default React.memo(
 
           <OptionAccommodation
             isShaDow
-            isSelectForIndex
             styleContent={{
               columnGap: scale(8),
             }}

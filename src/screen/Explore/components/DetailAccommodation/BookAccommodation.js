@@ -17,7 +17,7 @@ export default memo(function BookAccommodation({
   setBookHeight,
   isLoading,
   price,
-  onPress
+  onPress,
 }) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
@@ -84,7 +84,7 @@ export default memo(function BookAccommodation({
             onPress={onPress}
             buttonType="large"
             style={{flex: 1}}
-            text={price < 1000000000 ? t('book_now') : t('BUY')}
+            text={'View Room'}
             styleText={{
               fontSize: SIZES.xMedium,
             }}

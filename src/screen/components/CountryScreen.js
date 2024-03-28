@@ -9,7 +9,7 @@ import React, {
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AlphabetList} from 'react-native-section-alphabet-list';
-import {getListCountry} from '../../api/common';
+import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
@@ -22,8 +22,10 @@ export default function CountryScreen() {
   const {t} = useLanguage();
   const {setOptions, goBack} = useNavigation();
   const router = useRoute().params;
-
-  const [country, setCountry] = useState(router?.country || '');
+  console.log({router});
+  const [country, setCountry] = useState(
+    router?.province || router?.country || '',
+  );
   const [search, setSearch] = useState('');
 
   const deferredValue = useDeferredValue(search);
@@ -86,18 +88,7 @@ export default function CountryScreen() {
 
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          backgroundColor: '#fff',
-          width: WIDTH.widthContain,
-          alignSelf: 'center',
-          marginTop: scale(20),
-          borderRadius: scale(6),
-          rowGap: scale(16),
-          padding: scale(14),
-          flex: 1,
-          ...SHADOW,
-        }}>
+      <View style={styles.content}>
         <CustomInput
           placeholder={t('search')}
           iconLeft={IconSearch}
@@ -109,17 +100,9 @@ export default function CountryScreen() {
         />
         <AlphabetList
           data={dataNew || []}
-          indexLetterStyle={{
-            fontSize: SIZES.small,
-            color: COLORS.black,
-            fontWeight: '500',
-          }}
+          indexLetterStyle={styles.indexLetterStyle}
           listHeaderHeight={-80 + insets.top}
-          indexContainerStyle={{
-            position: 'absolute',
-            right: scale(-25),
-            top: scale(-90),
-          }}
+          indexContainerStyle={styles.indexContainerStyle}
           contentContainerStyle={{
             paddingBottom: insets.bottom + scale(100),
           }}
@@ -161,5 +144,26 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: scale(10),
     width: '100%',
+  },
+  content: {
+    backgroundColor: '#fff',
+    width: WIDTH.widthContain,
+    alignSelf: 'center',
+    marginTop: scale(20),
+    borderRadius: scale(6),
+    rowGap: scale(16),
+    padding: scale(14),
+    flex: 1,
+    ...SHADOW,
+  },
+  indexLetterStyle: {
+    fontSize: SIZES.small,
+    color: COLORS.black,
+    fontWeight: '500',
+  },
+  indexContainerStyle: {
+    position: 'absolute',
+    right: scale(-25),
+    top: scale(-90),
   },
 });

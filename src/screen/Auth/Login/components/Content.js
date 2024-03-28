@@ -4,7 +4,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
-import {postLogin} from '../../../../api/auth';
+import {postLogin} from '../../../../Model/api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {

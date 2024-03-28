@@ -3,12 +3,25 @@ import React from 'react';
 import CustomImage from '../../../../../../components/CustomImage';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomButton} from '../../../../../../components';
-import {IconGoBack} from '../../../../../../assets/icon/Icon';
+import {IconArrowRight, IconGoBack} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CreateAccomItem({data}) {
+  const {navigate} = useNavigation();
+
+  const handleContinue = () => {
+    navigate('AddRoomTypeScreen', data);
+  };
+
   return (
-    <TouchableOpacity activeOpacity={0.7}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={() => {
+        !data?.rooms?.[0]
+          ? handleContinue()
+          : navigate('DetailAccommodationScreen');
+      }}>
       <CustomImage
         source={
           'https://ik.imagekit.io/tvlk/image/imageResource/2021/11/25/1637851894841-e5d7f8e7abc30ff0f1f07f6d7a64eac1.png?tr=dpr-2,q-75,w-320'
@@ -16,9 +29,26 @@ export default function CreateAccomItem({data}) {
         style={{
           borderRadius: scale(7),
           minHeight: scale(160),
-          ...SHADOW,
           width: scale(400 / 1.4),
         }}>
+        <View
+          style={{
+            position: 'absolute',
+            zIndex: 1,
+            right: scale(8),
+            top: scale(6),
+            backgroundColor: COLORS.white,
+            borderRadius: 99,
+            paddingHorizontal: scale(6),
+          }}>
+          <CustomText
+            textType="semiBold"
+            style={{
+              color: COLORS.error,
+            }}>
+            {data?.accommodation_type?.name}
+          </CustomText>
+        </View>
         <View
           style={{
             backgroundColor: COLORS.overlay,
@@ -29,10 +59,12 @@ export default function CreateAccomItem({data}) {
               textType="semiBold"
               style={{
                 color: COLORS.white,
-              }}>
+              }}
+              numberOfLines={2}>
               {data?.name}
             </CustomText>
             <CustomText
+              numberOfLines={2}
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
@@ -51,12 +83,17 @@ export default function CreateAccomItem({data}) {
 
           <View style={styles.bottom}>
             <CustomButton
-              text="Incomplete Property Information"
+              text={
+                data?.rooms?.[0]
+                  ? 'Add Room'
+                  : 'Incomplete Property Information'
+              }
               buttonType="normal"
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,
               }}
+              onPress={handleContinue}
             />
 
             <CustomButton
@@ -64,13 +101,12 @@ export default function CreateAccomItem({data}) {
               buttonType="normal"
               style={styles.continue}
               outline
-              iconRight={IconGoBack}
-              styleIcon={{
-                color: COLORS.primary,
-              }}
+              iconRight={IconArrowRight}
+              styleIcon={styles.iconCon}
               styleText={{
                 fontSize: SIZES.xSmall,
               }}
+              onPress={handleContinue}
             />
           </View>
         </View>
@@ -104,7 +140,13 @@ const styles = StyleSheet.create({
     height: scale(26),
     borderWidth: 0,
     minWidth: scale(80),
-    columnGap: scale(2),
+    columnGap: scale(4),
     paddingHorizontal: 0,
+  },
+  iconCon: {
+    color: COLORS.primary,
+    width: scale(8),
+    height: scale(8),
+    marginTop: scale(1),
   },
 });

@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Map from '../../../../../../Explore/components/DetailAccommodation/Map';
+import {scale} from '../../../../../../../assets/constants';
 
 export default function EstateSetMap({onChange}) {
   const {navigate, setParams} = useNavigation();
@@ -9,7 +10,7 @@ export default function EstateSetMap({onChange}) {
 
   return (
     <TouchableOpacity
-      style={{width: '110%'}}
+      style={{width: '100%'}}
       activeOpacity={0.7}
       onPress={() => {
         navigate('NoBottomTab', {
@@ -27,6 +28,9 @@ export default function EstateSetMap({onChange}) {
         region={{
           latitude: dataFromScreen?.latitude,
           longitude: dataFromScreen?.longitude,
+        }}
+        styleWrapper={{
+          marginHorizontal: scale(0),
         }}
       />
     </TouchableOpacity>

@@ -85,10 +85,7 @@ export default forwardRef(function CustomInput(
   const propStyle = arrayToObject(props?.style);
 
   const heightSize =
-    sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 40;
-
-  const ComponentWrapper: any =
-    rules || label ? View : TouchableWithoutFeedback;
+    sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 38;
 
   return (
     <Controller
@@ -97,7 +94,8 @@ export default forwardRef(function CustomInput(
       name={name || ''}
       defaultValue={control && props?.defaultValue}
       render={({field: {onBlur, onChange, value}, fieldState: {error}}) => (
-        <ComponentWrapper
+        
+        <View
           style={[
             styles.wrapper,
 
@@ -146,16 +144,16 @@ export default forwardRef(function CustomInput(
                 autoCapitalize="none"
                 {...props}
                 onChangeText={text => {
-                  // const valueText = text.trim();
+                  const valueText = enableFormatNum ? text.trim() : text;
                   const newText = enableFormatNum
-                    ? text.replaceAll(',', '')
-                    : text;
+                    ? valueText.replaceAll(',', '')
+                    : valueText;
 
                   name
                     ? onChange(newText)
                     : props?.onChangeText && props?.onChangeText(newText);
                 }}
-                onBlur={onBlur}
+                onBlur={name ? onBlur : props?.onBlur}
                 value={
                   enableFormatNum
                     ? formatPrice(value, {showCurrency: false})
@@ -205,7 +203,7 @@ export default forwardRef(function CustomInput(
               </View>
             )}
           </>
-        </ComponentWrapper>
+        </View>
       )}
     />
   );

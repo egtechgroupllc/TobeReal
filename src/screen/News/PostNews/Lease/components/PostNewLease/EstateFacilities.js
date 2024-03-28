@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
@@ -7,7 +8,7 @@ import {IconDown, IconRight} from '../../../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../../../components';
 import CheckBox from '../../../../../../components/CheckBox';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
-import ButtonTabValidate from './ButtonTabValidate';
+import ButtonTabValidate from '../ButtonTabValidate';
 import InViewPort from '../../../../../../components/InViewport';
 import {dataPropertyFacilities} from '../../../../../../utils/dataPropertyFacilities';
 
@@ -30,11 +31,15 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
       return [...prev, item];
     });
   };
+  useEffect(() => {
+    if (!watch('features')) {
+      setArrFacilities([]);
+      setShowFacilitiesItem(-1);
+    }
+  }, [watch('features')]);
 
   useEffect(() => {
     setValue('features', JSON.stringify(arrFacilities));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrFacilities]);
 
   const arrKeywords = useRef(['features']).current;
@@ -141,16 +146,6 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
   );
 }
 const styles = StyleSheet.create({
-  buttonCategories: {
-    backgroundColor: 'white',
-    borderRadius: scale(6),
-    borderColor: '#F0B90B80',
-    height: scale(50),
-    justifyContent: 'space-between',
-    marginTop: scale(20),
-    paddingHorizontal: scale(20),
-  },
-
   box: {
     paddingVertical: scale(20),
     minHeight: scale(100),

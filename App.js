@@ -1,7 +1,12 @@
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useIsFetching,
+  useIsMutating,
+} from '@tanstack/react-query';
 import React, {useEffect} from 'react';
 import {Platform, StatusBar, StyleSheet, Text, TextInput} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -18,6 +23,7 @@ import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
+import Loading from './src/components/Loading/Loading';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -57,6 +63,7 @@ export default function App() {
         }}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
+            <Loading />
             <KeyboardProvider>
               <LanguageProvider>
                 <AuthProvider>

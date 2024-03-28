@@ -4,7 +4,7 @@ import Collapsible from 'react-native-collapsible';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
-import ButtonTabValidate from './ButtonTabValidate';
+import ButtonTabValidate from '../ButtonTabValidate';
 import TimeCheckIn from './EstateDetail/TimeCheckIn';
 import TimeCheckOut from './EstateDetail/TimeCheckOut';
 
@@ -30,13 +30,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!viewDetail} style={styles.box}>
-            {/* <SelectCurrency
-          control={control}
-          onChange={value => {
-            setValue('main_currency', value?.id);
-          }}
-        /> */}
-
             <View style={styles.line} />
 
             <TimeCheckIn
@@ -77,21 +70,13 @@ const styles = StyleSheet.create({
     fontSize: SIZES.small,
     color: COLORS.black,
   },
-  buttonCategories: {
-    backgroundColor: 'white',
-    borderRadius: scale(6),
-    borderColor: '#F0B90B80',
-    height: scale(50),
-    justifyContent: 'space-between',
-    marginTop: scale(20),
-    paddingHorizontal: scale(20),
-  },
+
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
     backgroundColor: '#FFFFFF',
     borderRadius: scale(6),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(10),
     alignItems: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),

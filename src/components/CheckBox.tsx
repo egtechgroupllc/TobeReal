@@ -24,7 +24,7 @@ type CheckBoxProps = {
   styleWrapper: ViewStyle;
   textLeft: boolean;
   isRadio: boolean;
-  defaultValue: boolean;
+  defaultValue: boolean | number;
 } & IBouncyCheckboxProps;
 
 export default function CheckBox({
@@ -34,7 +34,7 @@ export default function CheckBox({
   styleWrapper,
   textLeft,
   isRadio,
-  defaultValue,
+  defaultValue ,
   ...props
 }: CheckBoxProps) {
   const form = useForm();
@@ -50,7 +50,9 @@ export default function CheckBox({
             textComponent={
               <CustomText style={props.textStyle}>{props.text}</CustomText>
             }
-            onPress={onChange}
+            onPress={valueCheck => {
+              onChange(valueCheck ? 1 : 0);
+            }}
             size={scale(16)}
             isChecked={value}
             fillColor={COLORS.primary}
@@ -76,7 +78,7 @@ export default function CheckBox({
                 style={{
                   color: '#f0334b',
                 }}>
-                {error.message}
+               {error.message}
               </CustomText>
             </View>
           )}

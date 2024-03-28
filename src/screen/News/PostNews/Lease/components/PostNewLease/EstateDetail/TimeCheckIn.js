@@ -13,7 +13,7 @@ const formatTime = time => {
     isHour24: true,
   });
 };
-export default function TimeCheckIn({onChange}) {
+export default function TimeCheckIn({onChange, title}) {
   const {t} = useLanguage();
 
   const [openCheckStart, setOpenCheckStart] = useState(false);
@@ -37,7 +37,7 @@ export default function TimeCheckIn({onChange}) {
 
   return (
     <View style={{width: '100%'}}>
-      <CustomText style={styles.title}>{t('check_in')}:</CustomText>
+      <CustomText style={styles.title}>{title || t('check_in')}:</CustomText>
       <View
         style={{
           flexDirection: 'row',

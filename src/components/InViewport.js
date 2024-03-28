@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, memo} from 'react';
 import {ActivityIndicator, Dimensions, View, ViewProps} from 'react-native';
 import {COLORS, scale} from '../assets/constants';
 
@@ -70,7 +70,7 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
       this.state.rectWidth <= window.width;
     if (this.lastValue !== isVisible) {
       this.lastValue = isVisible;
-      this.props.onChange(isVisible);
+      this.props.onChange && this.props.onChange(isVisible);
       isVisible && this.stopWatching();
     }
   }
@@ -96,4 +96,4 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
   }
 };
 
-export default InViewPort;
+export default memo(InViewPort);

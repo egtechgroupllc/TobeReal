@@ -1,16 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../../components';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import {IconAdd, IconRight, IconX} from '../../../../../../assets/icon/Icon';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
-import {requireField} from '../../../../../../utils/validate';
-import {Image} from 'react-native-svg';
-import CustomText from '../../../../../../components/CustomText';
-import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
+import {IconAdd, IconRight, IconX} from '../../../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../../../components';
 import CustomImage from '../../../../../../components/CustomImage';
+import CustomText from '../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function EstateRooms() {
   const {t} = useLanguage();
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
     minHeight: scale(100),
     backgroundColor: '#FFFFFF',
     borderRadius: scale(6),
-    paddingHorizontal: scale(20),
+    paddingHorizontal: scale(10),
     alignItems: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),

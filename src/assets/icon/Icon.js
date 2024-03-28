@@ -1159,24 +1159,41 @@ export function IconCheckBox({fill, ...props}) {
     </Svg>
   );
 }
-export function IconGoBack({fill, ...props}) {
+export function IconArrowRight({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(30)}
-      height={props?.style?.height || scale(30)}
-      viewBox="0 0 36 36"
+      width={props?.style?.width || scale(16)}
+      height={props?.style?.height || scale(13)}
+      viewBox="0 0 16 13"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}>
       <Path
-        d="M9.141 19h19.5M15.641 26.5l-6.5-7.5 6.5-7.5"
-        stroke={fill || '#000'}
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M10.318 12.759l5.379-5.379c.202-.202.303-.472.303-.741 0-.27-.101-.54-.303-.742L10.318.518a1.058 1.058 0 00-1.483 0 1.058 1.058 0 000 1.484l3.557 3.558H1.045A1.05 1.05 0 000 6.605 1.05 1.05 0 001.045 7.65h11.431l-3.625 3.625a1.058 1.058 0 000 1.484c.405.421 1.029.421 1.467 0z"
+        fill={fill || '#000'}
       />
     </Svg>
   );
+}
+
+export function IconArrowLeft({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(16)}
+      height={props?.style?.height || scale(13)}
+      viewBox="0 0 16 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M5.682.316L.303 5.694A1.046 1.046 0 000 6.436c0 .27.101.54.303.742l5.379 5.378a1.058 1.058 0 001.483 0 1.058 1.058 0 000-1.483L3.608 7.515h11.347A1.05 1.05 0 0016 6.47a1.05 1.05 0 00-1.045-1.045H3.524L7.149 1.8a1.058 1.058 0 000-1.484c-.405-.421-1.029-.421-1.467 0z"
+        fill={fill || '#000'}
+      />
+    </Svg>
+  );
+}
+export function IconGoBack({fill, ...props}) {
+  return <IconArrowLeft fill={fill} {...props} />;
 }
 export function IconHotel({fill, ...props}) {
   return (
@@ -2382,6 +2399,58 @@ export function IconNext({fill, ...props}) {
   );
 }
 
+export function IconPrevious({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(12)}
+      height={props?.style?.height || scale(22)}
+      viewBox="0 0 12 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M11.197 1.303A.928.928 0 0010.524 1a.928.928 0 00-.674.303l-8.561 8.99a1.042 1.042 0 000 1.44l8.537 8.964a.927.927 0 001.371 0 1.042 1.042 0 000-1.44L3.333 11l7.864-8.258a1.042 1.042 0 000-1.439z"
+        fill={fill || '#000'}
+        stroke={fill || '#000'}
+      />
+    </Svg>
+  );
+}
+
+export function IconPreviousAll({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(18)}
+      height={props?.style?.height || scale(16)}
+      viewBox="0 0 18 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M.39 7.059c-.52.52-.52 1.366 0 1.886l6.665 6.665a1.335 1.335 0 001.886-1.887L3.22 8l5.718-5.723A1.335 1.335 0 007.05.39L.386 7.055l.004.004zM15.051.395L8.387 7.059c-.52.52-.52 1.366 0 1.886l6.664 6.665a1.335 1.335 0 001.887-1.887L11.215 8l5.719-5.723A1.335 1.335 0 0015.047.39l.004.005z"
+        fill={fill || '#000'}
+      />
+    </Svg>
+  );
+}
+
+export function IconNextAll({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(18)}
+      height={props?.style?.height || scale(16)}
+      viewBox="0 0 18 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M16.938 8.941c.52-.52.52-1.366 0-1.886L10.274.39a1.335 1.335 0 00-1.887 1.887L14.11 8l-5.719 5.723a1.335 1.335 0 001.887 1.886l6.664-6.664-.004-.004zm-14.66 6.664L8.94 8.941c.52-.52.52-1.366 0-1.886L2.277.39A1.335 1.335 0 00.39 2.277L6.113 8 .395 13.723a1.335 1.335 0 001.886 1.886l-.004-.004z"
+        fill={fill || '#000'}
+      />
+    </Svg>
+  );
+}
+
 // export function IconDown({fill, ...props}) {
 //   return (
 //     <Svg
@@ -2399,6 +2468,7 @@ export function IconNext({fill, ...props}) {
 //     </Svg>
 //   );
 // }
+
 export function IconX({fill, ...props}) {
   return (
     <Svg
@@ -2410,7 +2480,7 @@ export function IconX({fill, ...props}) {
       {...props}>
       <Path
         d="M7.55 7.429L21.692 21.57M21.692 7.429L7.55 21.57"
-        stroke= {fill || '#000'}
+        stroke={fill || '#000'}
         strokeWidth={3}
         strokeLinecap="round"
       />

@@ -1,9 +1,11 @@
-import React from 'react';
-import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
-import {COLORS, images, scale} from '../assets/constants';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import CustomImage from './CustomImage';
 import {useHeaderHeight} from '@react-navigation/elements';
+import {useQueryClient} from '@tanstack/react-query';
+import React, {useState} from 'react';
+import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+import {COLORS, images, scale} from '../assets/constants';
+import CustomImage from './CustomImage';
 
 export default function MainWrapper({
   children,
@@ -11,10 +13,19 @@ export default function MainWrapper({
   styleContent,
   styleWrapper,
   noSafeArea,
+  refreshControl = true,
   scrollEnabled = true,
   onScroll = () => {},
 }) {
   const headerHeight = useHeaderHeight();
+  const [refresh, setRefresh] = useState(false);
+  const queryClient = useQueryClient();
+
+  function pullToRefresh() {
+    setRefresh(true);
+    queryClient.invalidateQueries();
+    setRefresh(false);
+  }
 
   return (
     <SafeAreaView
@@ -31,6 +42,15 @@ export default function MainWrapper({
         ]}>
         {scrollEnabled ? (
           <ScrollView
+            refreshControl={
+              refreshControl && (
+                <RefreshControl
+                  refreshing={refresh}
+                  onRefresh={pullToRefresh}
+                  tintColor={COLORS.primary}
+                />
+              )
+            }
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             scrollEnabled={scrollEnabled}

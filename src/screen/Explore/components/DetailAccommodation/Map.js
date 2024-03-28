@@ -7,7 +7,7 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 
-export default function Map({region}) {
+export default function Map({region, styleWrapper}) {
   const {t} = useLanguage();
   const [coordinate, setCoordinate] = useState(region);
   const mapRef = useRef(null);
@@ -24,7 +24,7 @@ export default function Map({region}) {
     <WrapperContent
       heading={t('map_view')}
       isShadow
-      styleContent={styles.wrapper}>
+      styleContent={[styles.wrapper, styleWrapper]}>
       <View
         style={{
           height: '100%',

@@ -9,7 +9,7 @@ import React, {
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {getListCurrency} from '../../api/common';
+import {getListCurrency} from '../../Model/api/common';
 import {SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
@@ -23,7 +23,7 @@ export default function CurrencyScreen() {
   const {setOptions, goBack} = useNavigation();
   const router = useRoute().params;
 
-  const [currency, setCurrency] = useState(router || '');
+  const [currency, setCurrency] = useState(router?.currency || '');
   const [search, setSearch] = useState('');
 
   const deferredValue = useDeferredValue(search);

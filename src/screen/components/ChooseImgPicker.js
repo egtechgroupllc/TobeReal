@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
-import ImageCropPicker from 'react-native-image-crop-picker';
 
+import {launchImageLibrary} from 'react-native-image-picker';
 import {COLORS, scale} from '../../assets/constants';
-import {IconCamera, IconError} from '../../assets/icon/Icon';
+import {IconCamera, IconError, IconX} from '../../assets/icon/Icon';
+import {CustomInput} from '../../components';
+import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
-import ImageDetail from './ImageDetail';
-import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function ChooseImgPicker({
   title,
@@ -19,7 +19,7 @@ export default function ChooseImgPicker({
   stylesHeader,
   styleContentImg,
   onSelect,
-  maxFiles = 10,
+  maxFiles = 24,
 }) {
   const form = useForm();
 
@@ -28,20 +28,50 @@ export default function ChooseImgPicker({
       {mediaType: 'photo', selectionLimit: maxFiles},
       response => {
         if (response.assets) {
-          const dataImages = response.assets.map(item => ({
-            name: item.fileName,
-            type: item.type,
-            uri:
-              Platform.OS === 'ios'
-                ? item.uri.replace('file://', '')
-                : item.uri,
-          }));
+          const dataImages = response.assets.map((item, index) => {
+            return {
+              name: new Date().getTime() + item.fileName,
+              type: item.type,
+              id: item.fileName + new Date().getTime(),
+              description: '',
+              uri:
+                Platform.OS === 'ios'
+                  ? item.uri.replace('file://', '')
+                  : item.uri,
+            };
+          });
 
           onChange(dataImages);
           onSelect && onSelect(dataImages);
         }
       },
     );
+  };
+  const timer = useRef(null);
+
+  const handleDescriptionChange = (
+    index,
+    description = '',
+    value,
+    onChange,
+  ) => {
+    const updatedValue = [...value];
+
+    updatedValue[index] = {
+      ...updatedValue[index],
+      description: description,
+    };
+
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      onChange(updatedValue);
+    }, 300);
+  };
+
+  const handleDelete = (idImg, dataImg, onChange) => {
+    const result = dataImg.filter(item => item?.id !== idImg);
+    onChange(result);
   };
 
   return (
@@ -50,6 +80,7 @@ export default function ChooseImgPicker({
       rules={arrayToObject(rules)}
       name={name || ''}
       render={({field: {onChange, value = []}, fieldState: {error}}) => {
+        // console.log({value});
         return (
           <View style={{width: '100%', rowGap: scale(12)}}>
             <View style={[styles.header, stylesHeader]}>
@@ -78,7 +109,12 @@ export default function ChooseImgPicker({
               </TouchableOpacity>
             </View>
 
-            <View style={{width: '100%'}}>
+            <View
+              style={{
+                width: '99.3%',
+                alignSelf: 'center',
+                rowGap: scale(8),
+              }}>
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => pickImage(onChange, value)}
@@ -89,11 +125,64 @@ export default function ChooseImgPicker({
                 ]}
                 disabled={value.length > 0}>
                 {value.length > 0 ? (
-                  <ImageDetail
-                    dataImg={value.map(item => item.uri)}
-                    styleWrapper={{flex: 1, backgroundColor: 'transparent'}}
-                  />
-                ) : null}
+                  value.map((img, index) => {
+                    return (
+                      <View
+                        key={index}
+                        style={{
+                          width: value.length <= 1 ? '98%' : '47%',
+                          maxWidth: value.length <= 1 ? '100%' : scale(220),
+                          height: scale(220),
+                          rowGap: scale(10),
+                        }}>
+                        <CustomImage source={img?.uri} style={styles.img} />
+                        <TouchableOpacity
+                          onPress={() => handleDelete(img?.id, value, onChange)}
+                          activeOpacity={0.7}
+                          style={styles.delete}>
+                          <IconX
+                            fill={'#fff'}
+                            style={{
+                              width: scale(18),
+                              height: scale(18),
+                            }}
+                          />
+                        </TouchableOpacity>
+                        <CustomInput
+                          placeholder="Thêm mô tả"
+                          style={{
+                            height: scale(32),
+                            borderRadius: scale(5),
+                          }}
+                          maxLength={45}
+                          onChangeText={valueText =>
+                            handleDescriptionChange(
+                              index,
+                              valueText,
+                              value,
+                              onChange,
+                            )
+                          }
+                        />
+                      </View>
+                    );
+                  })
+                ) : (
+                  <View
+                    style={{
+                      marginTop: '30%',
+                      alignItems: 'center',
+                    }}>
+                    <IconCamera
+                      style={{
+                        width: scale(100),
+                        height: scale(100),
+                      }}
+                    />
+
+                    <CustomText>Bấm để chọn ảnh cần tải lên</CustomText>
+                  </View>
+                )}
               </TouchableOpacity>
 
               {error && (
@@ -132,14 +221,24 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   contentImg: {
-    borderWidth: scale(2),
+    borderWidth: scale(1),
+    borderStyle: 'dashed',
     borderColor: '#E3E3E3',
     borderRadius: scale(8),
-    height: scale(250),
-    backgroundColor: '#E3E3E3',
-    marginBottom: scale(10),
-    width: '100%',
+    minHeight: scale(230),
+    backgroundColor: '#fff',
     overflow: 'hidden',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: scale(8),
+    paddingVertical: scale(6),
+  },
+  img: {
+    width: '100%',
+    height: '80%',
+    borderRadius: scale(5),
   },
   icon: {
     padding: scale(8),
@@ -151,5 +250,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     columnGap: scale(6),
+  },
+  delete: {
+    position: 'absolute',
+    right: 0,
+    padding: scale(4),
+    backgroundColor: COLORS.overlay,
+    borderRadius: scale(5),
   },
 });

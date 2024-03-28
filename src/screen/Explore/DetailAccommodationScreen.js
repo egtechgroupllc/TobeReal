@@ -20,10 +20,11 @@ const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
+
   const listView = useRef([
     <InfoDetail name={title} />,
     <InfoUnitFacilities />,
-    // <Map />,
+    <Map />,
     <Room name={title} />,
     <Review />,
     <InfoAdditional />,
@@ -88,8 +89,12 @@ export default function DetailAccommodationScreen({route}) {
         handleSelect(3);
         break;
 
-      case dataSourceCords[4] <= offsetY:
+      case dataSourceCords[4] <= offsetY && offsetY < dataSourceCords[5]:
         handleSelect(4);
+        break;
+
+      case dataSourceCords[5] <= offsetY:
+        handleSelect(5);
         break;
     }
   };
@@ -98,7 +103,7 @@ export default function DetailAccommodationScreen({route}) {
     setIsSelect(false);
 
     scrollRef.current?.scrollTo({
-      y: dataSourceCords[value],
+      y: dataSourceCords[value?.index],
       animated: true,
     });
 
@@ -140,8 +145,8 @@ export default function DetailAccommodationScreen({route}) {
         price={paramPrice}
         isLoading={false}
         onPress={() => {
-          handleSelect(2);
-          selectScrollHandler(2);
+          handleSelect(3);
+          selectScrollHandler({index: 3});
         }}
       />
     </MainWrapper>

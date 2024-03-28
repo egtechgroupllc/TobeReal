@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 
-import {postSignUp} from '../../../../api/auth';
+import {postSignUp} from '../../../../Model/api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {

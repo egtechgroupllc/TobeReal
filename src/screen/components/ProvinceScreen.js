@@ -9,7 +9,7 @@ import React, {
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AlphabetList} from 'react-native-section-alphabet-list';
-import {getListCountry} from '../../api/common';
+import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
@@ -38,7 +38,7 @@ export default function ProvinceScreen() {
     router.onGoBack(province);
     goBack();
   };
-  console.log(router);
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('province'),

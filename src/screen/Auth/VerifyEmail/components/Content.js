@@ -4,7 +4,7 @@ import {Image, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
-import {postVerifyEmail} from '../../../../api/auth';
+import {postVerifyEmail} from '../../../../Model/api/auth';
 import {SIZES, images, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';

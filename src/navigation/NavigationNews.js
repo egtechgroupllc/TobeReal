@@ -9,6 +9,7 @@ export default function NavigationNews() {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShown: true,
         header: props => <HeaderBar {...props} />,
       }}>
       {routerNews.map(router => (

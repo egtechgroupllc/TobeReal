@@ -137,7 +137,7 @@ export default function DetailRoomScreen({route}) {
                 marginTop: scale(10),
                 alignSelf: 'flex-start',
               }}>
-              <IconLand width={scale(13)} height={scale(13)}/>
+              <IconLand width={scale(13)} height={scale(13)} />
               <CustomText
                 textType="medium"
                 style={{
@@ -401,28 +401,6 @@ const styles = StyleSheet.create({
     paddingBottom: scale(20),
   },
 
-  buttonCategories: {
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    alignSelf: 'center',
-    borderRadius: scale(4),
-    borderWidth: scale(1),
-    borderColor: '#F0B90B80',
-    height: scale(50),
-    width: '90%',
-    justifyContent: 'space-between',
-    marginTop: scale(10),
-    shadowColor: '#00000040',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-    elevation: 11,
-    flexDirection: 'row',
-    paddingHorizontal: scale(20),
-  },
   img: {
     width: scale(21),
     height: scale(10),
