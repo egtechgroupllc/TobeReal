@@ -3,11 +3,11 @@ import React, {useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 
-
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
-import { TabSelect } from '../../../../../components';
+import {TabSelect} from '../../../../../components';
+import LinearGradient from 'react-native-linear-gradient';
 
 const listTab = ['Trip highlights'];
 export default function TourSchedule() {
@@ -19,42 +19,43 @@ export default function TourSchedule() {
   return (
     <WrapperContent
       heading={t('tour_schedule')}
-      styleWrapper={{marginBottom:scale(100)}}
+      styleWrapper={{marginBottom: scale(100)}}
       styleContent={{
         paddingHorizontal: scale(16),
       }}>
-            <CustomText
-              style={{
-                lineHeight: 18,
-              }}>
-              Staying at Cochin Sang Hotel is a right choice when you visit
-              visitors to Ben Thanh Ward. The hotel possesses a prime location
-              6.64 km from Tan Son Nhat Airport. Stay at Cochin Sang Hotel is a
-              good choice when you visit Ben Ward Wall. The hotel possesses a
-              prime location away from Tan Airport Son Nhat 6.64 km.
-            </CustomText>
-      <TouchableOpacity
+      <CustomText
         style={{
-          backgroundColor:'#F7E75A',
-          position:'absolute',
-          top:scale(100),
-          height:scale(35),
-          width:'110%',
-          alignItems:'center',
-          justifyContent:'center'
-        }}
-        onPress={() => bottomSheetRef.current.open()}
-        >
-        <CustomText
-          textType="semiBold"
-          style={{
-            color: COLORS.black,
-            // minWidth: scale(42),
-          }}
-          >
-          {t('see_all')}
-        </CustomText>
-      </TouchableOpacity>
+          lineHeight: 18,
+        }}>
+        Staying at Cochin Sang Hotel is a right choice when you visit visitors
+        to Ben Thanh Ward. The hotel possesses a prime location 6.64 km from Tan
+        Son Nhat Airport. Stay at Cochin Sang Hotel is a good choice when you
+        visit Ben Ward Wall. The hotel possesses a prime location away from Tan
+        Airport Son Nhat 6.64 km.
+      </CustomText>
+      <LinearGradient
+        colors={['#FADD50', '#D88A00']}
+        start={{x: 0, y: 0}}
+        end={{x: 0, y: 1}}
+        style={{
+          position: 'absolute',
+          top: scale(100),
+          height: scale(35),
+          width: '110%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity onPress={() => bottomSheetRef.current.open()}>
+          <CustomText
+            textType="semiBold"
+            style={{
+              color: COLORS.black,
+              // minWidth: scale(42),
+            }}>
+            {t('see_all')}
+          </CustomText>
+        </TouchableOpacity>
+      </LinearGradient>
 
       <BottomSheet
         ref={bottomSheetRef}

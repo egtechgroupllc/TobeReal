@@ -16,8 +16,6 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import Introduction from './Introduction';
 import CustomImage from '../../../../../components/CustomImage';
 import Star from '../../../../../components/Star';
-import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
-import TicketOption from './TicketOption';
 import {formatPrice} from '../../../../../utils/format';
 
 export default function InfoDetail({name, price}) {
@@ -116,7 +114,7 @@ export default function InfoDetail({name, price}) {
               {t('Price')}:
             </CustomText>
             <CustomText
-              textType="regular"
+              textType="bold"
               style={{...styles.name, color: COLORS.primary, marginLeft: '1%'}}>
               {formatPrice(price, {
                 locales: 'vi',

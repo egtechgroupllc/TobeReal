@@ -20,8 +20,6 @@ export default function HomeExploreScreen() {
             style={{marginTop: scale(20)}}
           />
         }>
-        <ContentAccommodation />
-        {/* <ContentTour /> */}
       </Suspense>
     </MainWrapper>
   );

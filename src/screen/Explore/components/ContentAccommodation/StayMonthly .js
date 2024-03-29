@@ -6,20 +6,29 @@ import BoxPlaceItem from './BoxPlaceItem';
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {scale} from '../../../../assets/constants';
+import { useNavigation } from '@react-navigation/native';
 
 export default function StayMonthly({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-
+  const title = [t('stay_monthly')]
+  const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
           isSeeAll
           isCategory
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('stay_monthly')}
+          heading={title}
           subHeading={t('disc_upto') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList

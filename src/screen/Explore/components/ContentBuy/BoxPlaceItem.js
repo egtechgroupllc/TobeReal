@@ -73,7 +73,7 @@ export default function BoxPlaceItem({
               // height: scale(200),
             },
             styleWrapper,
-            SHADOW,
+            // SHADOW,
           ]}>
           <View
             style={{
@@ -102,11 +102,11 @@ export default function BoxPlaceItem({
               backgroundColor: COLORS.primary,
               flex: 1,
               marginTop: scale(18),
-              margin: scale(5),
+              // margin: scale(5),
               // rowGap: scale(4),
               borderRadius: scale(5),
               height: scale(100),
-              width: '95%',
+              width: '100%',
               padding: scale(10),
             }}>
             <CustomText

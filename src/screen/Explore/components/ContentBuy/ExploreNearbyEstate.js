@@ -7,12 +7,14 @@ import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function ExploreNearbyEstate({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-
+  const {navigate} = useNavigation();
+  const title = [t('Explore Nearby Estates')]
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -20,9 +22,16 @@ export default function ExploreNearbyEstate({data}) {
           // background={images.bgPackageTour}
           isSeeAll
           // worldTour
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllBuyScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('Explore Nearby Estates')}
+          heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList

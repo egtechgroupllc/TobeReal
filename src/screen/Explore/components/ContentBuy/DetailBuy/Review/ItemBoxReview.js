@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import CustomText from '../../../../../../components/CustomText';
-import {SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {SHADOW, SIZES, images, scale} from '../../../../../../assets/constants';
 import Star from '../../../../../../components/Star';
 import CustomImage from '../../../../../../components/CustomImage';
 
@@ -18,9 +18,9 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         style,
       ]}>
       <View style={styles.infoCustomer}>
-        <CustomImage
+      <CustomImage
           resizeMode="contain"
-          src="https://down-vn.img.susercontent.com/file/sg-11134004-23030-djahbs14w9nv5f_tn"
+          source={images.avatar}
           style={styles.avatar}
         />
         <View>

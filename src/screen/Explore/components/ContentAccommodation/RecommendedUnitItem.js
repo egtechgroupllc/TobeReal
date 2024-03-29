@@ -45,7 +45,7 @@ export default function RecommendedUnitItem({
       ]}>
       <CustomImage
         resizeMode="stretch"
-        source="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?ca=6&ce=1&s=345x345&ar=1x1"
+        source={data? data?.src : "https://dulichviet.com.vn/images/bandidau/check-in-5-toa-do-du-lich-indonesia-2023-khien-ban-say-me-quen-loi-ve.jpg" }
         style={[
           styles.img,
           styesWrapper,
@@ -59,7 +59,6 @@ export default function RecommendedUnitItem({
             {title || 'Title'}
           </CustomText>
         )}
-
         {isShowDetail && (
           <View style={styles.detail}>
             <View style={styles.detailContent}>

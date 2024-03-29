@@ -3,121 +3,170 @@ import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BuySell from './BuySell';
-import WorldTour from './FeatureEstate';
-import DiscoveryTour from './DiscoveryTour';
 import Discount from './Discount';
 import FeatureEstate from './FeatureEstate';
 import TopLocation from './TopLocation';
 import TopEstateAgent from './TopEstateAgent';
 import ExploreNearbyEstate from './ExploreNearbyEstate';
+import DiscoveryEstate from './DiscoveryEstate';
 const dataPackage = [
   {
     id: 1,
-    src: images.tourthailand,
-    name: 'Thailand tour package ( Bangkok, Pattaya) - 5N4Đ',
-    price: 6690000,
+    src: images.c15,
+    name: 'C15_05_BlockC Emerald',
+    price: 25000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.c15_1,
+      images.c15_2,
+      images.c15_3,
+      images.c15_4,
+      images.c15_5,
+      images.c15_6,
     ],
   },
   {
     id: 2,
-    src: images.tourbali,
-    name: 'Thailand tour Bali( kintamani, Pattaya) ....',
-    price: 10880000,
+    src: images.c16,
+    name: 'D11.06 Emerald',
+    price: 16000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.c16_1,
+      images.c16_2,
+      images.c16_3,
+      images.c16_4,
+      images.c16_5,
+      images.c16_6,
+      images.c16_7,
+      images.c16_8,
+      images.c16_9,
     ],
   },
   {
     id: 3,
-    src: images.toursingapore,
-    name: 'Tour Singapore (Gardens by the Bay, Sentosa, Jurassic Mile)',
-    price: 9900000,
+    src: images.p14,
+    name: 'P14.07 Diamond',
+    price: 28000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
-  },
-];
-const dataThemed = [
-  {
-    id: 1,
-    src: images.tourbana,
-    name: 'Tour to explore Ba Na (Da Nang Golden Bridge) - 1N',
-    price: 722000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
     ],
   },
   {
-    id: 2,
-    src: images.tournhatrang,
-    name: 'Nha Trang vip island tour',
-    price: 750000,
+    id: 4,
+    src: images.q10,
+    name: 'Centrosa Garden Q.10',
+    price: 26000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.q10_1,
+      images.q10_2,
+      images.q10_3,
+      images.q10_4,
+      images.q10_5,
+      images.q10_6,
     ],
   },
   {
-    id: 3,
-    src: images.tourhalong,
-    name: 'Ha Long Bay cruise tour',
-    price: 160000,
+    id: 5,
+    src: images.a6,
+    name: 'A6.7.08 Diamod Alanta Plus',
+    price: 18000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.a6_1,
+      images.a6_2,
+      images.a6_3,
+      images.a6_4,
+      images.a6_5,
     ],
   },
 ];
 const dataWorld= [
   {
     id: 1,
-    src: images.hanbok,
-    name: 'Hanbok Rental & Photoshoot by the D....',
-    price: 224000,
+    src: images.c15,
+    name: 'C15_05_BlockC Emerald',
     type:'Apartment',
+    price: 25000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.c15_1,
+      images.c15_2,
+      images.c15_3,
+      images.c15_4,
+      images.c15_5,
+      images.c15_6,
     ],
   },
   {
     id: 2,
-    src: images.seoul,
-    name: 'Moonlight Seoul Night Tour (Royal Palace, Cheonggyecheon stream, Naksan Park & Foodie Market)',
-    price: 995000,
-    type:'Villa',
+    src: images.c16,
+    name: 'D11.06 Emerald',
+    type:'House',
+    price: 16000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.c16_1,
+      images.c16_2,
+      images.c16_3,
+      images.c16_4,
+      images.c16_5,
+      images.c16_6,
+      images.c16_7,
+      images.c16_8,
+      images.c16_9,
     ],
   },
   {
     id: 3,
-    src: images.jejubus,
-    type:'House',
-    name: 'Bus Tour West Island Jeju one day',
-    price: 280000,
+    src: images.p14,
+    name: 'P14.07 Diamond',
+    type:'Villa',
+    price: 28000000,
     imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
+      images.p14_1,
+      images.p14_2,
+      images.p14_3,
+      images.p14_4,
+      images.p14_5,
+      images.p14_6,
+      images.p14_7,
+      images.p14_8,
+    ],
+  },
+  {
+    id: 4,
+    src: images.q10,
+    name: 'Centrosa Garden Q.10',
+    type:'House',
+    price: 26000000,
+    imgdetail: [
+      images.q10_1,
+      images.q10_2,
+      images.q10_3,
+      images.q10_4,
+      images.q10_5,
+      images.q10_6,
+    ],
+  },
+  {
+    id: 5,
+    src: images.a6,
+    name: 'A6.7.08 Diamod Alanta Plus',
+    type:'House',
+    price: 18000000,
+    imgdetail: [
+      images.a6_1,
+      images.a6_2,
+      images.a6_3,
+      images.a6_4,
+      images.a6_5,
     ],
   },
 ];
+
 const dataDomestic= [
   {
     id: 1,
@@ -301,10 +350,9 @@ const dataInternational= [
 const dataLocation= [
   {
     id: 1,
-    src: images.hanbok,
-    name: 'Bali',
+    src: images.singapore,
+    name: 'Singapore',
     price: 224000,
-    type:'Apartment',
     imgdetail: [
       images.tourthailand,
       images.tourbali,
@@ -313,10 +361,9 @@ const dataLocation= [
   },
   {
     id: 2,
-    src: images.seoul,
-    name: 'Jakarta',
+    src: images.thailan,
+    name: 'Thailand',
     price: 995000,
-    type:'Villa',
     imgdetail: [
       images.tourthailand,
       images.tourbali,
@@ -325,9 +372,8 @@ const dataLocation= [
   },
   {
     id: 3,
-    src: images.jejubus,
-    type:'House',
-    name: 'Yogyakarta',
+    src: images.indo,
+    name: 'Indonesia',
     price: 280000,
     imgdetail: [
       images.tourthailand,
@@ -337,9 +383,52 @@ const dataLocation= [
   },
   {
     id: 4,
-    src: images.danang,
-    type:'House',
-    name: 'Semarang',
+    src: images.malay,
+    name: 'Malaysia',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 5,
+    src: images.philip,
+    name: 'Philippines',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 6,
+    src: images.korea,
+    name: 'Korea',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 7,
+    src: images.japan,
+    name: 'Japan',
+    price: 280000,
+    imgdetail: [
+      images.tourthailand,
+      images.tourbali,
+      images.toursingapore,
+    ],
+  },
+  {
+    id: 8,
+    src: images.taiwan,
+    name: 'Taiwan',
     price: 280000,
     imgdetail: [
       images.tourthailand,
@@ -430,7 +519,7 @@ export default function ContentBuy() {
       <TopLocation data={dataLocation}/>
       <TopEstateAgent data={dataAgent}/>
       <ExploreNearbyEstate data={dataWorld}/>
-      <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange}/>
+      <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange}/>
     </View>
   );
 }

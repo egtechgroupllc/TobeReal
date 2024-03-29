@@ -5,10 +5,13 @@ import BoxPlaceItem from './BoxPlaceItem';
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {scale} from '../../../../assets/constants';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WeeklyHotDeal({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
+  const title = [t('weekly_hot_deal')]
+  const {navigate} = useNavigation();
   console.log('WeeklyHotDeal', isRender);
 
   return (
@@ -17,9 +20,16 @@ export default function WeeklyHotDeal({data}) {
         <WrapperContent
           isSeeAll
           isCategory
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('weekly_hot_deal')}
+          heading={title}
           subHeading={t('ends_in')}
           dayEndDeals={6}>
           <FlatList

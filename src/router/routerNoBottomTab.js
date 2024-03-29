@@ -1,8 +1,11 @@
 import {DetailAccommodationScreen} from '../screen/Explore';
-import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
-import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
-import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
-import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
+import { SeeAllRentScreen } from '../screen/Explore/components/ContentAccommodation/SeeAll';
+import { DetailBuyScreen } from '../screen/Explore/components/ContentBuy';
+import { SeeAllBuyScreen } from '../screen/Explore/components/ContentBuy/SeeAll';
+import { DetailTourScreen } from '../screen/Explore/components/ContentTour';
+import { DetailTicketScreen } from '../screen/Explore/components/ContentTour/DetailTicket';
+import { BookTourScreen } from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
+import { SeeAllTourScreen } from '../screen/Explore/components/ContentTour/SeeAll';
 import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
 import {
   DetailRoomScreen,
@@ -33,6 +36,36 @@ export default routerNoBottomTab = [
   {
     name: 'DetailTicketScreen',
     component: DetailTicketScreen,
+  },
+  {
+    name: 'SeeAllBuyScreen',
+    component: SeeAllBuyScreen,
+    options: {
+      headerShown: true,
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
+    },
+  },
+  {
+    name: 'SeeAllRentScreen',
+    component: SeeAllRentScreen,
+    options: {
+      headerShown: true,
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
+    },
+  },
+  {
+    name: 'SeeAllTourScreen',
+    component: SeeAllTourScreen,
+    options: {
+      headerShown: true,
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
+    },
   },
   {
     name: 'HomeSearchAccommodScreen',

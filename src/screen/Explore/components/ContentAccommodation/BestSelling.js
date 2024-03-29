@@ -5,21 +5,30 @@ import BoxPlaceItem from './BoxPlaceItem';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {scale} from '../../../../assets/constants';
 import InViewPort from '../../../../components/InViewport';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BestSelling({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   console.log('BestSelling', isRender);
-
+  const title = [t('best_selling')]
+  const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={270}>
       {isRender && (
         <WrapperContent
           isSeeAll
           isCategory
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('best_selling')}>
+          heading={title}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

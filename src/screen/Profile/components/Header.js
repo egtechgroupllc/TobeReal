@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
@@ -30,11 +30,13 @@ export default function Header({
             justifyContent: 'space-between',
             alignItems: 'center',
             alignSelf: 'center',
-            marginTop: scale(10),
+            marginTop: Platform.OS == 'ios' ? scale(20) : scale(0),
             width: '100%',
           }}>
           {goback && (
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity
+              onPress={onPress}
+              style={{ width: scale(30), height:scale(20)}}>
               <IconGoBack />
             </TouchableOpacity>
           )}

@@ -95,7 +95,7 @@ export default function DetailTourScreen({route}) {
     setIsSelect(false);
 
     scrollRef.current?.scrollTo({
-      y: dataSourceCords[value],
+      y: dataSourceCords[value?.index],
       animated: true,
     });
 
@@ -136,10 +136,9 @@ export default function DetailTourScreen({route}) {
         setBookHeight={setTabBarHeight}
         price={paramPrice}
         isLoading={false}
-        onPress={()=>{
-        handleSelect(0);
-        selectScrollHandler(0);
-
+        onPress={() => {
+          handleSelect(0);
+          selectScrollHandler({index: 0});
         }}
       />
     </MainWrapper>

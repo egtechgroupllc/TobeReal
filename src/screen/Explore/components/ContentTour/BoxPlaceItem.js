@@ -61,7 +61,7 @@ export default function BoxPlaceItem({
               // height: scale(200),
             },
             styleWrapper,
-            SHADOW,
+            // SHADOW,
           ]}>
           <View
             style={{

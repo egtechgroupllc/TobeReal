@@ -100,7 +100,9 @@ export default React.memo(
       }),
       [indexSelect],
     );
-
+console.log('====================================');
+console.log(indexSelect);
+console.log('====================================');
     return (
       <>
         {/* Header */}
@@ -177,18 +179,17 @@ export default React.memo(
           </Animated.View>
 
           <OptionAccommodation
-            isShaDow
-            isSelectForIndex
-            styleContent={{
-              columnGap: scale(8),
-            }}
-            select={indexSelect}
-            styleWrapper={{
-              flex: 0,
-              height: scale(46),
-            }}
-            data={listInfo}
-            onSelect={onSelect}
+              isShaDow
+              styleContent={{
+                columnGap: scale(8),
+              }}
+              selectIndex={indexSelect}
+              styleWrapper={{
+                flex: 0,
+                height: scale(46),
+              }}
+              data={listInfo}
+              onSelect={onSelect}
           />
         </Animated.View>
       </>

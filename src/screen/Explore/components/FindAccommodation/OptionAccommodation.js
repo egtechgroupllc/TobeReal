@@ -115,7 +115,7 @@ export default function OptionAccommodation({
   useLayoutEffect(() => {
     flatRef.current.scrollToIndex({
       animated: true,
-      index: option[0].index || 0,
+      index: option[0]?.index < 0 ? 0 : option[0]?.index || 0,
       viewPosition: 0.5,
     });
   }, [option]);

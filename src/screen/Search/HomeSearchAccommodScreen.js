@@ -29,9 +29,7 @@ export default function HomeSearchAccommodScreen() {
   return (
     <MainWrapper
       scrollEnabled={false}
-      styleWrapper={{
-        marginTop: scale(-50),
-      }}>
+      >
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
         <SearchRecent onPress={handleSelectSearch} />

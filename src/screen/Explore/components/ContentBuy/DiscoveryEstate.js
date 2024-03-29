@@ -8,21 +8,30 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import BoxDiscoveryItem from './BoxDiscoveryItem';
+import { useNavigation } from '@react-navigation/native';
 
 const funcFallBack = () => {};
-export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
+export default function DiscoveryEstate({data, onPressCategory = funcFallBack}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-
+  const {navigate} = useNavigation();
+  const title = [t('Discover other real estate')]
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
           isSeeAll
           discoveryTour
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllBuyScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={onPressCategory}
-          heading={t('Discover other real estate')}
+          heading={title}
           subHeading={t('the_place_discovery')}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList

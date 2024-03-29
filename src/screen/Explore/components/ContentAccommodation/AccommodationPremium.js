@@ -5,19 +5,28 @@ import BoxPlaceItem from './BoxPlaceItem';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {scale} from '../../../../assets/constants';
 import InViewPort from '../../../../components/InViewport';
+import { useNavigation } from '@react-navigation/native';
 
 export default function AccommodationPremium({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-
+  const title = [t('saveloka_premium')]
+  const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
       {isRender && (
         <WrapperContent
           isSeeAll
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('saveloka_premium')}
+          heading={title}
           subHeading={t('selected_premium')}
           styleWrapper={{backgroundColor: '#f8eede'}}>
           <FlatList

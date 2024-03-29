@@ -8,21 +8,28 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
-
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function BuySell({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-
-  return (
+  const {navigate} = useNavigation();
+  const title = [t('Buy and sell real estate nationwide')]
+    return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
           isSeeAll
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllBuyScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('Buy and sell real estate nationwide')}
+          heading={title}
           subHeading={t('There are 1,000,000 Real Estate')}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList

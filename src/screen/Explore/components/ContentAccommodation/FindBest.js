@@ -5,19 +5,29 @@ import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import InViewPort from '../../../../components/InViewport';
 import {scale} from '../../../../assets/constants';
+import { useNavigation } from '@react-navigation/native';
 
 export default function FindBest({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
+  const title = [t('find_best')]
+  const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={130}>
       {isRender && (
         <WrapperContent
           isSeeAll
           isCategory
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('find_best')}
+          heading={title}
           subHeading={t('disc_upto') + ` 30%!`}
           styleWrapper={{backgroundColor: '#91F2FF'}}>
           <FlatList

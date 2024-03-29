@@ -177,11 +177,10 @@ export default React.memo(
 
           <OptionAccommodation
             isShaDow
-            isSelectForIndex
             styleContent={{
               columnGap: scale(8),
             }}
-            select={indexSelect}
+            selectIndex={indexSelect}
             styleWrapper={{
               flex: 0,
               height: scale(46),

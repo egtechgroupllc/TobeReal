@@ -5,6 +5,7 @@ import BoxPlaceItem from './BoxPlaceItem';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import InViewPort from '../../../../components/InViewport';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -196,16 +197,24 @@ export default function RecommendedApartments({
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   console.log('RecommendedApartments', isRender);
-
+  const title = [t('recommend_apartments')]
+  const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={300}>
       {isRender && (
         <WrapperContent
           isSeeAll={isSeeAll}
           isCategory={isCategory}
-          onPressSeeAll={() => console.log(1)}
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
-          heading={t('recommend_apartments')}>
+          heading={title}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

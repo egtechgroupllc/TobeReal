@@ -9,16 +9,20 @@ import WrapperContent from '../WrapperContent';
 
 export default function Map({region, styleWrapper}) {
   const {t} = useLanguage();
-  const [coordinate, setCoordinate] = useState(region);
+  const [coordinate, setCoordinate] = useState(
+    region || {
+      latitude: 22.62938671242907,
+      longitude: 88.4354486029795,
+    },
+  );
   const mapRef = useRef(null);
 
   useEffect(() => {
-    setCoordinate(region);
-    mapRef.current.fitToCoordinates([region], {
+    mapRef.current.fitToCoordinates([coordinate], {
       edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
       animated: true,
     });
-  }, [region]);
+  }, [coordinate]);
 
   return (
     <WrapperContent

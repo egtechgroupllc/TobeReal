@@ -98,7 +98,7 @@ export default function DetailBuyScreen({route}) {
     setIsSelect(false);
 
     scrollRef.current?.scrollTo({
-      y: dataSourceCords[value],
+      y: dataSourceCords[value?.index],
       animated: true,
     });
 
@@ -139,10 +139,9 @@ export default function DetailBuyScreen({route}) {
         setBookHeight={setTabBarHeight}
         price={paramPrice}
         isLoading={false}
-        onPress={()=>{
-        handleSelect(0);
-        selectScrollHandler(0);
-
+        onPress={() => {
+          handleSelect(3);
+          selectScrollHandler({index: 3});
         }}
       />
     </MainWrapper>
