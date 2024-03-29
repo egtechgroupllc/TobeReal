@@ -60,7 +60,7 @@ export const formatDateTime = (
     formattedDateTime = addDays(formattedDateTime, daysToAdd);
   }
 
-  const dateFormat = dateStyle || 'dd/MM/yyyy';
+  const dateFormat = dateStyle || 'dd MMM yyyy';
 
   return format(formattedDateTime, dateFormat);
 };

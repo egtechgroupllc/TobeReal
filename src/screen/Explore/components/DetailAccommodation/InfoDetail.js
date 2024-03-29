@@ -7,34 +7,41 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import Introduction from './Introduction';
 
-export default function InfoDetail({name}) {
+export default function InfoDetail({name, data}) {
   const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <CustomText textType="semiBold" style={styles.name}>
-            {name}
+            {data?.name || name}
           </CustomText>
 
-          <View style={styles.boxHot}>
-            <CustomText
-              textType="semiBold"
-              style={{textAlign: 'center', color: '#fff'}}>
-              Hotel Residence 🏨
-            </CustomText>
-          </View>
+          {data?.accommodation_type?.id === 1 && (
+            <View style={styles.boxHot}>
+              <CustomText
+                textType="semiBold"
+                style={{textAlign: 'center', color: '#fff'}}>
+                Hotel Residence 🏨
+              </CustomText>
+            </View>
+          )}
         </View>
 
         <View style={styles.room}>
           <View style={styles.boxRoom}>
-            <IconHome style={styles.icon} />
-            <CustomText textType="regular">{t('hotel_residence')}</CustomText>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: '#7906f6',
+              }}>
+              {data?.accommodation_type?.name || 'Hotel'}
+            </CustomText>
           </View>
-          <View style={styles.boxRoom}>
+          {/* <View style={styles.boxRoom}>
             <IconRoom style={styles.icon} />
             <CustomText textType="regular">1</CustomText>
-          </View>
+          </View> */}
         </View>
 
         <View style={styles.room}>
@@ -63,7 +70,7 @@ export default function InfoDetail({name}) {
         </View>
       </View>
 
-      <Introduction />
+      <Introduction data={data} />
     </View>
   );
 }
@@ -102,6 +109,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(4),
+    backgroundColor: '#9681fA90',
+    padding: scale(4),
+    borderRadius: scale(6),
   },
   icon: {
     width: scale(16),

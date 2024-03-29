@@ -19,8 +19,7 @@ export default function HomeExploreScreen() {
             color={COLORS.primary}
             style={{marginTop: scale(20)}}
           />
-        }>
-      </Suspense>
+        }></Suspense>
     </MainWrapper>
   );
 }

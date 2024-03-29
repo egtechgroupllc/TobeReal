@@ -11,18 +11,19 @@ import DetailAccommodationLoading from './DetailTour/DetailAccommodationLoading'
 import MainWrapper from '../../../../components/MainWrapper';
 import BookAccommodation from './DetailTour/BookAccommodation';
 import DynamicHeader from './DetailTour/DynamicHeader';
-import { scale,WIDTH } from '../../../../assets/constants';
+import {scale, WIDTH} from '../../../../assets/constants';
 import TourSchedule from './DetailTour/TourSchedule';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
+  const params = route.params;
   const listView = useRef([
-    <InfoDetail name={title} />,
+    <InfoDetail data={params} name={title} />,
     // <InfoUnitFacilities />,
     <Map />,
     <Review />,
-    <TourSchedule/>
+    <TourSchedule />,
     // <InfoAdditional />,
     // <SimilarApartmentsNearby />,
   ]).current;
@@ -113,7 +114,8 @@ export default function DetailTourScreen({route}) {
             ref={dynamicHeaderRef}
             scrollOffsetY={scrollOffsetY}
             onSelect={selectScrollHandler}
-            image={jsondata}
+            images={jsondata}
+            data={params}
           />
 
           <Animated.ScrollView
@@ -134,7 +136,7 @@ export default function DetailTourScreen({route}) {
 
       <BookAccommodation
         setBookHeight={setTabBarHeight}
-        price={paramPrice}
+        price={1000}
         isLoading={false}
         onPress={() => {
           handleSelect(0);

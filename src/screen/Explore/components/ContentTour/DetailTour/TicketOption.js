@@ -1,7 +1,13 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
-import {COLORS, SIZES, WIDTH, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  WIDTH,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
@@ -10,7 +16,7 @@ import {TabSelect} from '../../../../../components';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import {IconCalendar, IconRefund} from '../../../../../assets/icon/Icon';
 import Button from '../../../../Profile/components/Button';
-import { StackActions, useNavigation } from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
 const data = [
   {
@@ -18,28 +24,20 @@ const data = [
     title:
       'Open trip with round trip transfer - Departure from Phuket (Thai Citizens)',
     price: '56',
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     title: 'Open trip with',
     price: '56',
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
 export default function TicketOption() {
   const {t} = useLanguage();
-  const { isFocused, dispatch} = useNavigation();
+  const {isFocused, dispatch} = useNavigation();
   // const navigation = useNavigation();
-  const booktour = (selectedItem) => {
+  const booktour = selectedItem => {
     if (isFocused()) {
       dispatch(
         StackActions.push('NoBottomTab', {
@@ -59,7 +57,7 @@ export default function TicketOption() {
         <CustomText
           textType="semiBold"
           style={{...styles.name, paddingHorizontal: scale(20)}}>
-         {t('ticket_option')}
+          {t('ticket_option')}
         </CustomText>
         <View style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
           <ChooseCalendar />
@@ -72,8 +70,8 @@ export default function TicketOption() {
           renderItem={({item}) => (
             <View style={styles.boxItem}>
               <TouchableOpacity
-                onPress={() =>
-                  {if (isFocused()) {
+                onPress={() => {
+                  if (isFocused()) {
                     dispatch(
                       StackActions.push('NoBottomTab', {
                         screen: 'DetailTicketScreen',
@@ -84,8 +82,8 @@ export default function TicketOption() {
                         },
                       }),
                     );
-                  }}
-                }>
+                  }
+                }}>
                 <CustomText
                   textType="semiBold"
                   style={{...styles.text, paddingHorizontal: scale(10)}}>
@@ -100,7 +98,7 @@ export default function TicketOption() {
                     marginTop: scale(5),
                     color: COLORS.primary,
                   }}>
-                     {t('see_detail')}
+                  {t('see_detail')}
                 </CustomText>
               </TouchableOpacity>
               <View style={styles.line}></View>
@@ -115,7 +113,7 @@ export default function TicketOption() {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                        {t('easy_refund')}
+                    {t('easy_refund')}
                   </CustomText>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: '10%'}}>
@@ -123,7 +121,7 @@ export default function TicketOption() {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                           {t('easy_reschdule')}
+                    {t('easy_reschdule')}
                   </CustomText>
                 </View>
               </View>
@@ -152,7 +150,10 @@ export default function TicketOption() {
                   </View>
                 </View>
               </View>
-              <Button title={t('select_ticket')} onPress={() => booktour(item)}/>
+              <Button
+                title={t('select_ticket')}
+                onPress={() => booktour(item)}
+              />
             </View>
           )}
         />

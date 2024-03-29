@@ -7,6 +7,8 @@ import {animations, scale} from '../../assets/constants';
 import ItemAccommdSearch from './components/ItemAccommdSearch';
 import ItemAccommdSearchLoading from './components/ItemAccommdSearchLoading';
 import LottieView from 'lottie-react-native';
+import {getListSell} from '../../Model/api/apiEstate';
+import {getListTour} from '../../Model/api/apiTour';
 
 export default function ListAccomSearchContent() {
   const insets = useSafeAreaInsets();
@@ -18,11 +20,10 @@ export default function ListAccomSearchContent() {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['accommodation', 'list-rent', 1],
-    queryFn: getListRent,
+    queryKey: ['estate', 'list-sell'],
+    queryFn: getListSell,
     getNextPageParam: (lastPage, allPages) => {
-      if (!(lastPage?.data?.data?.rows?.length <= 0))
-        return allPages.length + 1;
+      if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
 
       return undefined;
     },
@@ -33,7 +34,7 @@ export default function ListAccomSearchContent() {
       data?.pages
         .map(page => {
           if (!page) return undefined;
-          return page?.data?.data?.rows;
+          return page?.data?.rows;
         })
         .flat(),
     [data?.pages],

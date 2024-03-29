@@ -22,10 +22,10 @@ const listFacilities = [
   'TV',
 ];
 
-export default function InfoUnitFacilities() {
+export default function InfoUnitFacilities({data}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-
+  console.log(data?.features, 321231);
   return (
     <WrapperContent
       isSeeAll
@@ -53,7 +53,7 @@ export default function InfoUnitFacilities() {
       </View>
 
       <View style={styles.content}>
-        {listFacilities.slice(0, 10).map((item, index) => (
+        {(data?.features || listFacilities).slice(0, 10).map((item, index) => (
           <View key={`key-${item}-${index}`} style={styles.itemFac}>
             <View style={styles.dot} />
             <CustomText
@@ -72,17 +72,16 @@ export default function InfoUnitFacilities() {
         snapPoints={['50%', '86%']}
         titleIndicator="Unit Facilities">
         <View style={styles.content}>
-          {[
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-            ...listFacilities,
-          ].map((item, index) => (
+          {(
+            data?.features || [
+              ...listFacilities,
+              ...listFacilities,
+              ...listFacilities,
+              ...listFacilities,
+              ...listFacilities,
+              ...listFacilities,
+            ]
+          ).map((item, index) => (
             <View key={`key-${item}-${index}`} style={styles.itemFac}>
               <View style={styles.dot} />
               <CustomText

@@ -32,3 +32,11 @@ export const postAddTicket = async ({data, tour_id}) => {
 
   return responsive.data;
 };
+
+export const getListTour = async ({pageParam = 1}) => {
+  const responsive = await instance.get(
+    `/list-sell?page=${pageParam}&limit=10`,
+  );
+
+  return responsive.data;
+};

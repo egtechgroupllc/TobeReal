@@ -67,7 +67,7 @@ export default function PostConfigurationScreen() {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
-          navigate('SellScreen', {status: true});
+          navigate('PostNewSellScreen', {status: true});
           queryClient.invalidateQueries(['estate', 'my-list']);
         }
       },

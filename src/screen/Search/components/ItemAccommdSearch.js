@@ -8,6 +8,7 @@ import {formatPrice} from '../../../utils/format';
 import RatingBox from '../../Explore/components/ContentAccommodation/BoxPlaceItem/RatingBox';
 import ListFacilities from './ListFacilities';
 import Bottom from './Bottom';
+import ImageDetail from '../../components/ImageDetail';
 
 export default function ItemAccommdSearch({data}) {
   const {navigate} = useNavigation();
@@ -19,7 +20,7 @@ export default function ItemAccommdSearch({data}) {
       onPress={() => {
         navigate('DetailAccommodationScreen', data);
       }}>
-      <CustomImage source={data?.images_url} style={styles.img} />
+      <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
       <View
         style={{
@@ -31,7 +32,7 @@ export default function ItemAccommdSearch({data}) {
             alignItems: 'flex-start',
           }}>
           <CustomText textType="semiBold" style={styles.name}>
-            {data?.name}
+            {data?.name || data?.title}
           </CustomText>
           <RatingBox rating={4.0} />
         </View>

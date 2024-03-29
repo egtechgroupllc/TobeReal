@@ -4,12 +4,12 @@ import WrapperContent from '../WrapperContent';
 import {SIZES, scale} from '../../../../assets/constants';
 import {TabSelect} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
-import {formatPrice} from '../../../../utils/format';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {formatDateTime, formatPrice} from '../../../../utils/format';
+import {useLanguage} from '../../../../hooks/useLanguage';
 const listTab = ['Building', 'Deposit'];
 
-export default function InfoAdditional() {
-  const {t}= useLanguage()
+export default function InfoAdditional({data}) {
+  const {t} = useLanguage();
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   return (
@@ -34,21 +34,24 @@ export default function InfoAdditional() {
                 rowGap: scale(20),
               }}>
               <CustomText style={{fontSize: SIZES.xMedium}}>
-              {t('property_live_date')} {'\n'}
+                {t('property_live_date')} {'\n'}
                 <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
-                  14 Dec 2023
+                  {formatDateTime(data?.createdAt) || '14 Dec 2023'}
                 </CustomText>
               </CustomText>
               <CustomText style={{fontSize: SIZES.xMedium}}>
-              {t('check_in')}{'\n'}
+                {t('check_in')}
+                {'\n'}
                 <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
-                {t('From')} 12:00
+                  {data?.check_in_time_start || '6:00'} -{' '}
+                  {data?.check_in_time_end || '12:00'}
                 </CustomText>
               </CustomText>
               <CustomText style={{fontSize: SIZES.xMedium}}>
-              {t('check_out')} {'\n'}
+                {t('check_out')} {'\n'}
                 <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
-                {t('To')} 13:00
+                  {data?.check_out_time_start || '13:00'} -{' '}
+                  {data?.check_out_time_end || '17:00'}
                 </CustomText>
               </CustomText>
             </View>

@@ -6,7 +6,7 @@ import WrapperContent from '../../WrapperContent';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import ItemBox from './components/ItemBox';
 import {StackActions, useNavigation} from '@react-navigation/native';
-const data = [
+const dataRom = [
   {
     id: 1,
     title: 'STANDARD',
@@ -44,7 +44,7 @@ const data = [
     price: '$ 40,06',
   },
 ];
-export default function Room({name}) {
+export default function Room({name, data}) {
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
   return (
@@ -77,7 +77,7 @@ export default function Room({name}) {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={data}
+        data={dataRom}
         contentContainerStyle={{
           columnGap: scale(10),
           marginVertical: scale(10),
@@ -89,7 +89,7 @@ export default function Room({name}) {
             image={item.img}
             acreage={item.acreage}
             info={item.info}
-            title={item.title}
+            title={item.name || item.title}
             description={item.description}
             price={item.price}
             onPress={() => {

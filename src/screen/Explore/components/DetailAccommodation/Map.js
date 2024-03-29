@@ -7,13 +7,18 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 
-export default function Map({region, styleWrapper}) {
+export default function Map({region, data, styleWrapper}) {
   const {t} = useLanguage();
   const [coordinate, setCoordinate] = useState(
-    region || {
-      latitude: 22.62938671242907,
-      longitude: 88.4354486029795,
-    },
+    data
+      ? {
+          latitude: data?.latitude,
+          longitude: data?.longitude,
+        }
+      : {
+          latitude: 22.62938671242907,
+          longitude: 88.4354486029795,
+        },
   );
   const mapRef = useRef(null);
 
@@ -75,7 +80,8 @@ export default function Map({region, styleWrapper}) {
             />
           </View>
           <CustomText style={{flex: 1}} numberOfLines={5}>
-            Jl. HR Rasuna Said Kav X-0 Kuningan, Setiabudi, Jakarta Selatan Jl.
+            {data?.address ||
+              'Jl. HR Rasuna Said Kav X-0 Kuningan, Setiabudi, Jakarta Selatan Jl.'}
           </CustomText>
         </View>
       </View>

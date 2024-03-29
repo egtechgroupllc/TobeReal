@@ -16,19 +16,21 @@ import Review from './components/DetailAccommodation/Review';
 import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 import Room from './components/DetailAccommodation/Rooms/Room';
+import {useRoute} from '@react-navigation/native';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
   const {jsondata, title, paramPrice} = route.params;
+  const params = useRoute().params;
 
   const listView = useRef([
-    <InfoDetail name={title} />,
-    <InfoUnitFacilities />,
-    <Map />,
-    <Room name={title} />,
-    <Review />,
-    <InfoAdditional />,
-    <SimilarApartmentsNearby />,
+    <InfoDetail name={title} data={params} />,
+    <InfoUnitFacilities data={params} />,
+    <Map data={params} />,
+    <Room name={title} data={params} />,
+    <Review data={params} />,
+    <InfoAdditional data={params} />,
+    <SimilarApartmentsNearby data={params} />,
   ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
@@ -121,7 +123,8 @@ export default function DetailAccommodationScreen({route}) {
             ref={dynamicHeaderRef}
             scrollOffsetY={scrollOffsetY}
             onSelect={selectScrollHandler}
-            image={jsondata}
+            images={jsondata}
+            data={params}
           />
 
           <Animated.ScrollView

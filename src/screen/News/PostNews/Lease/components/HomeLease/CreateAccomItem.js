@@ -20,7 +20,10 @@ export default function CreateAccomItem({data, isTour}) {
       onPress={() => {
         data?.rooms?.length <= 0 || data?.tour_tickets?.length <= 0
           ? handleContinue()
-          : navigate('DetailAccommodationScreen', data);
+          : navigate(
+              isTour ? 'DetailTourScreen' : 'DetailAccommodationScreen',
+              data,
+            );
       }}>
       <CustomImage
         source={data?.images[0]?.url}
@@ -76,7 +79,9 @@ export default function CreateAccomItem({data, isTour}) {
             <CustomButton
               text={
                 !data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0
-                  ? 'Add Room'
+                  ? isTour
+                    ? 'Thêm Vé'
+                    : 'Add Room'
                   : 'Incomplete Property Information'
               }
               buttonType="normal"

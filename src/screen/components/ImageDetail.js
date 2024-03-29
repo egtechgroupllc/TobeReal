@@ -1,9 +1,9 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {memo, useState} from 'react';
-import CustomImage from '../../components/CustomImage';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SIZES, WIDTH, scale} from '../../assets/constants';
+import {IconImg} from '../../assets/icon/Icon';
+import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
-import {IconApartment, IconImg} from '../../assets/icon/Icon';
 import ListImg from '../Explore/components/DetailAccommodation/ListImg';
 
 export default memo(function ImageDetail({onLayout, dataImg, styleWrapper}) {

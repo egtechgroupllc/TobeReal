@@ -16,15 +16,16 @@ import CustomImage from '../../../../../components/CustomImage';
 import Star from '../../../../../components/Star';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import TicketOption from './TicketOption';
+import {formatDateTime} from '../../../../../utils/format';
 
-export default function InfoDetail({name}) {
+export default function InfoDetail({data, name}) {
   const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <CustomText textType="semiBold" style={styles.name}>
-            {name}
+            {data?.name || name}
           </CustomText>
         </View>
 
@@ -50,9 +51,9 @@ export default function InfoDetail({name}) {
           </CustomText>
         </View>
       </View>
-      <View style={styles.line}></View>
+      <View style={styles.line} />
       <View style={styles.boxTourTime}>
-      <View
+        <View
           style={{
             flexDirection: 'row',
             paddingHorizontal: scale(20),
@@ -61,7 +62,8 @@ export default function InfoDetail({name}) {
           <IconMapView
             width={scale(12)}
             height={scale(12)}
-            fill={COLORS.primary}></IconMapView>
+            fill={COLORS.primary}
+          />
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.primary}}>
@@ -70,26 +72,7 @@ export default function InfoDetail({name}) {
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
-            BC 34, Binh Chuan, Thuan An, Binh Duong
-          </CustomText>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            alignItems: 'center',
-            marginTop:scale(5)
-          }}>
-          <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            {t('lastest_tour')} |
-          </CustomText>
-          <CustomText
-            textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            Thursday, March 14, 2024
+            {data?.address || ' BC 34, Binh Chuan, Thuan An, Binh Duong'}
           </CustomText>
         </View>
         <View
@@ -99,7 +82,26 @@ export default function InfoDetail({name}) {
             alignItems: 'center',
             marginTop: scale(5),
           }}>
-          <IconClock width={scale(12)} height={scale(12)}></IconClock>
+          <IconCalendar width={scale(12)} height={scale(12)} />
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            {t('lastest_tour')} |
+          </CustomText>
+          <CustomText
+            textType="regular"
+            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            {formatDateTime(data?.tour_tickets?.[0]?.createdAt)}
+          </CustomText>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            alignItems: 'center',
+            marginTop: scale(5),
+          }}>
+          <IconClock width={scale(12)} height={scale(12)} />
           <CustomText
             textType="semiBold"
             style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
@@ -112,10 +114,10 @@ export default function InfoDetail({name}) {
           </CustomText>
         </View>
       </View>
-      <View style={styles.line}></View>
-      <TicketOption/>
-      <View style={styles.line}></View>
-      <Introduction />
+      <View style={styles.line} />
+      <TicketOption data={data} />
+      <View style={styles.line} />
+      <Introduction data={data} />
     </View>
   );
 }

@@ -8,7 +8,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import BottomSheet from '../../../../components/BottomSheet';
 
 const listTab = ['Description', 'Nearby'];
-export default function Introduction() {
+export default function Introduction({data}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
 
@@ -34,11 +34,8 @@ export default function Introduction() {
               style={{
                 lineHeight: 18,
               }}>
-              Staying at Cochin Sang Hotel is a right choice when you visit
-              visitors to Ben Thanh Ward. The hotel possesses a prime location
-              6.64 km from Tan Son Nhat Airport. Stay at Cochin Sang Hotel is a
-              good choice when you visit Ben Ward Wall. The hotel possesses a
-              prime location away from Tan Airport Son Nhat 6.64 km.
+              {data?.description ||
+                'Staying at Cochin Sang Hotel is a right choice when you visit visitors to Ben Thanh Ward. The hotel possesses a prime location 6.64 km from Tan Son Nhat Airport. Stay at Cochin Sang Hotel is a good choice when you visit Ben Ward Wall. The hotel possesses a prime location away from Tan Airport Son Nhat 6.64 km.'}
             </CustomText>
           ) : (
             <CustomText

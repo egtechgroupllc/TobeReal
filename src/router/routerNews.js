@@ -6,6 +6,7 @@ import {LeaseScreen, PostNewLeaseScreen} from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import {
   PostConfigurationScreen,
+  PostNewSellScreen,
   SellScreen,
 } from '../screen/News/PostNews/Sell';
 import {
@@ -58,5 +59,9 @@ export default routerNews = [
   {
     name: 'AddTicketScreen',
     component: AddTicketScreen,
+  },
+  {
+    name: 'PostNewSellScreen',
+    component: PostNewSellScreen,
   },
 ];

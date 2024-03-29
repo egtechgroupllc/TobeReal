@@ -10,16 +10,27 @@ import CreateAccomItem from './components/HomeLease/CreateAccomItem';
 import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {getMyListCreateTour} from '../../../../Model/api/apiTour';
+import {getMyListCreateSell} from '../../../../Model/api/apiEstate';
 
 export default function AccommoManagementScreen() {
   const params = useRoute().params;
   const {setOptions} = useNavigation();
   const {data, page, isLoading, setPage} = usePagination(
-    params?.isTour ? ['accommodation', 'my-list', 1] : ['tour', 'my-list', 1],
-    params?.isTour ? getMyListCreateTour : getMyListCreateAccom,
+    params?.isTour
+      ? ['accommodation', 'my-list', 1]
+      : params?.isSell
+      ? ['estate', 'my-list']
+      : ['tour', 'my-list', 1],
+    params?.isTour
+      ? getMyListCreateTour
+      : params?.isSell
+      ? getMyListCreateSell
+      : getMyListCreateAccom,
     {
       keyQuery: params?.isTour
         ? {hasTicket: 1, limit: 12}
+        : params?.isSell
+        ? {limit: 12}
         : {hasRoom: 1, limit: 12},
     },
   );
@@ -28,6 +39,8 @@ export default function AccommoManagementScreen() {
     return setOptions({
       headerTitle: params?.isTour
         ? 'Danh Sách Tour Đã Tạo'
+        : params?.isSell
+        ? 'Danh Sách Bất Động Sản Ở Đã Tạo'
         : 'Danh Sách Chỗ Ở Đã Tạo',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,6 +88,7 @@ export default function AccommoManagementScreen() {
                     <CreateAccomItem
                       key={`key_${item?.id}-${index}`}
                       data={item}
+                      isTour={params?.isTour}
                     />
                   ) : (
                     <ListCreateAccomLoading key={`key_${index}`} />

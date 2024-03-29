@@ -164,9 +164,9 @@ export default function FindAccommodation() {
           />
         </View>
       </InViewPort>
-      {tabSelect === 'TOUR' ? (
+      {tabSelect === t('TOUR') ? (
         <ContentTour />
-      ) : tabSelect === 'RENT' ? (
+      ) : tabSelect === t('RENT') ? (
         <ContentAccommodation />
       ) : (
         <ContentBuy />

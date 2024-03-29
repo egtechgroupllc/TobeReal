@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 import ImageView from 'react-native-image-viewing';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, WIDTH, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 import {IconGoBack} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
+import CustomText from '../../../../components/CustomText';
 export default function ListImg({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
@@ -104,6 +105,26 @@ export default function ListImg({dataImg, open, onClose}) {
             }}
             onImageIndexChange={e => e && setIndexNavigation(e - 1)}
             swipeToCloseEnabled={false}
+            FooterComponent={({imageIndex}) => {
+              const imgDetail = images?.find(
+                item => item?.index === imageIndex,
+              );
+              console.log({imgDetail});
+              return (
+                imgDetail?.description && (
+                  <View style={styles.footer}>
+                    <CustomText
+                      style={{
+                        color: COLORS.white,
+                        fontSize: SIZES.medium,
+                        flex: 1,
+                      }}>
+                      {imgDetail?.description}
+                    </CustomText>
+                  </View>
+                )
+              );
+            }}
           />
         )}
       </View>

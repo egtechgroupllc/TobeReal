@@ -30,7 +30,7 @@ const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 
 export default React.memo(
   forwardRef(function DynamicHeader(
-    {scrollOffsetY, onSelect, data, image},
+    {scrollOffsetY, onSelect, data, images},
     ref,
   ) {
     const {t} = useLanguage();
@@ -99,6 +99,14 @@ export default React.memo(
       }),
       [indexSelect],
     );
+
+    const dataImg = data?.images
+      ? data?.images?.map((img, index) => ({
+          ...img,
+          index,
+          uri: img?.url,
+        }))
+      : images;
 
     return (
       <>
@@ -172,7 +180,7 @@ export default React.memo(
                 opacity: animatedOpacityImg,
               },
             ]}>
-            <ImageDetail dataImg={image} />
+            <ImageDetail dataImg={dataImg} />
           </Animated.View>
 
           <OptionAccommodation
