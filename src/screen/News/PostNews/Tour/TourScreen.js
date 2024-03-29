@@ -20,21 +20,21 @@ const list = [
   {
     title: 'Tôi muốn đăng ký tour mới',
     desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
-    textBtn: 'List New Accommodation',
+    textBtn: 'List New Tour',
     navigate: 'PostNewTourScreen',
   },
 ];
 export default function TourScreen() {
   const {navigate} = useNavigation();
 
-  const {isLoading, isError, isFetching, data} = useQuery({
-    queryKey: ['tour', 'my-list', 0],
-    queryFn: () => getMyListCreateTour({hasRoom: 0}),
-  });
-
   return (
     <MainWrapper>
-      <ListCreateAccom data={data?.data} />
+      <ListCreateAccom
+        keyArr={['tour', 'my-list', 0]}
+        callFunc={getMyListCreateTour}
+        keyQuery={{hasTicket: 0}}
+        isTour
+      />
 
       <View style={styles.content}>
         {list.map((item, index) => (
@@ -58,6 +58,7 @@ export default function TourScreen() {
                   item.navigate,
                   item?.screen && {
                     screen: item.screen,
+                    params: {isTour: true},
                   },
                 );
               }}

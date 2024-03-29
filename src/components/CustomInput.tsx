@@ -26,7 +26,7 @@ import {
 } from '../assets/icon/Icon';
 import {arrayToObject} from '../utils/arrayToObject';
 import {formatPrice} from '../utils/format';
-import CustomText from './CustomText';
+import CustomText, {CustomTextProps} from './CustomText';
 
 type CustomInputProps = {
   control?: Control<FieldValues>;
@@ -42,7 +42,7 @@ type CustomInputProps = {
   componentLeft?: React.ReactNode;
   styleIcon?: TextStyle;
   styleText?: TextStyle;
-  styleTextLabel?: TextStyle;
+  styleTextLabel?: Pick<CustomTextProps, 'textType'> & TextStyle;
   styleWrapper?: ViewStyle;
   enableFormatNum?: boolean;
   password?: boolean;
@@ -94,7 +94,6 @@ export default forwardRef(function CustomInput(
       name={name || ''}
       defaultValue={control && props?.defaultValue}
       render={({field: {onBlur, onChange, value}, fieldState: {error}}) => (
-        
         <View
           style={[
             styles.wrapper,
@@ -106,7 +105,9 @@ export default forwardRef(function CustomInput(
           ]}>
           <>
             {label && (
-              <CustomText style={[{color: COLORS.black}, styleTextLabel]}>
+              <CustomText
+                textType={styleTextLabel?.textType}
+                style={[{color: COLORS.black}, styleTextLabel]}>
                 {label}
               </CustomText>
             )}

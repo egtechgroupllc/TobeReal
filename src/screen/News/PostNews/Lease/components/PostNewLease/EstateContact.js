@@ -25,7 +25,7 @@ export default function EstateContact({control, errors, watch}) {
   return (
     <View>
       <ButtonTabValidate
-        title={t('estate_contact')}
+        title={t('contact_info')}
         onPress={() => setViewContact(prev => !prev)}
         errors={errors}
         watch={watch}

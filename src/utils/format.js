@@ -52,22 +52,25 @@ function formatWithComma(value, suffix) {
 
 export const formatDateTime = (
   date = new Date(),
-  {noDate, noHour, isHour24, isHouse, addDays: daysToAdd} = {},
+  {dateStyle, addDays: daysToAdd} = {},
 ) => {
   let formattedDateTime = new Date(date);
 
-  // Thêm số ngày vào ngày hiện tại nếu có
   if (daysToAdd) {
     formattedDateTime = addDays(formattedDateTime, daysToAdd);
   }
 
-  const dateFormat = noDate ? '' : 'dd MMM yyyy';
+  const dateFormat = dateStyle || 'dd/MM/yyyy';
 
-  const timeFormat = !isHouse ? '' : isHour24 ? 'HH:mm' : 'h:mm a';
+  return format(formattedDateTime, dateFormat);
+};
 
-  const formatString = `${isHouse ? '' : dateFormat} ${
-    noHour ? '' : timeFormat
-  }`.trim();
+export const formatTime = (date = new Date(), {isHour24} = {}) => {
+  let formattedDateTime = new Date(date);
+
+  const timeFormat = isHour24 ? 'HH:mm' : 'h:mm a';
+
+  const formatString = `${timeFormat}`.trim();
 
   return format(formattedDateTime, formatString);
 };

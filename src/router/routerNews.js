@@ -8,7 +8,11 @@ import {
   PostConfigurationScreen,
   SellScreen,
 } from '../screen/News/PostNews/Sell';
-import {PostNewTourScreen, TourScreen} from '../screen/News/PostNews/Tour';
+import {
+  AddTicketScreen,
+  PostNewTourScreen,
+  TourScreen,
+} from '../screen/News/PostNews/Tour';
 
 export default routerNews = [
   {
@@ -50,5 +54,9 @@ export default routerNews = [
   {
     name: 'PostConfigurationScreen',
     component: PostConfigurationScreen,
+  },
+  {
+    name: 'AddTicketScreen',
+    component: AddTicketScreen,
   },
 ];

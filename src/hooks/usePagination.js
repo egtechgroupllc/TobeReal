@@ -10,11 +10,10 @@ export default function usePagination(
 
   const [page, setPage] = useState(1);
 
-  const {isLoading, isError, data} = useQuery({
+  const {isLoading, isError, data, ...props} = useQuery({
     queryKey: [...keyArr, page],
     queryFn: () => callFunc({page, ...keyQuery}),
-    keepPreviousData: true,
-
+    placeholderData: e => console.log(e, 127367812387),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [...keyArr, page + 1],
@@ -29,5 +28,6 @@ export default function usePagination(
     setPage,
     isLoading,
     isError,
+    ...props,
   };
 }

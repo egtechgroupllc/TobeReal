@@ -22,7 +22,7 @@ export default function EstatePhoto({control, errors, watch}) {
   return (
     <View>
       <ButtonTabValidate
-        title={t('estate_photo')}
+        title={t('Thêm Ảnh')}
         onPress={() => setView(prev => !prev)}
         errors={errors}
         watch={watch}
@@ -38,7 +38,9 @@ export default function EstatePhoto({control, errors, watch}) {
               title={t('real_estate_images')}
               subHeading={t('update_image_to_maximum')}
               control={control}
-              rules={[validateMinLength(t('this_field_required'), 1)]}
+              rules={[
+                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+              ]}
               name={'description_img'}
             />
 
@@ -51,7 +53,7 @@ export default function EstatePhoto({control, errors, watch}) {
               name={'kyc'}
             />
 
-            <CustomInput
+            {/* <CustomInput
               label={t('Link youtube')}
               placeholder={t('Link youtube')}
               style={{...styles.textInput}}
@@ -61,7 +63,7 @@ export default function EstatePhoto({control, errors, watch}) {
               label={t('Link tiktok')}
               placeholder={t('Link tiktok')}
               style={{...styles.textInput}}
-            />
+            /> */}
           </Collapsible>
         )}
       </InViewPort>

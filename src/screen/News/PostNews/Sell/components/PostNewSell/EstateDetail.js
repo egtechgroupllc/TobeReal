@@ -19,42 +19,78 @@ import {requireField} from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import SelectCurrency from '../../../components/SelectCurrency';
 import RealEstateType from '../../../components/RealEstateType';
+import {getListDirection} from '../../../../../../Model/api/common';
 
 const listLegalDoc = [
   {
     id: 1,
-    name: 'Sổ đỏ/ Sổ hồng',
+    name: 'Red Book / Pink Book',
   },
   {
     id: 2,
-    name: 'Hợp đồng mua bán',
+    name: 'Sales Contract',
   },
   {
     id: 3,
-    name: 'Hợp đồng đặt cọc',
+    name: 'Deposit Agreement',
   },
   {
     id: 4,
-    name: 'Đang chờ sổ',
+    name: 'Awaiting Title Deed',
   },
 ];
 
 const listInterior = [
   {
     id: 1,
-    name: 'Nội thất đầy đủ',
+    name: 'Fully Furnished',
   },
   {
     id: 2,
-    name: 'Nội thất cao cấp',
+    name: 'High-end Furnishings',
   },
   {
     id: 3,
-    name: 'Hoàn thiện cơ bản',
+    name: 'Basic Finishes',
   },
   {
     id: 4,
-    name: 'Không nội thất',
+    name: 'Unfurnished',
+  },
+];
+
+const adasdasd = [
+  {
+    id: 1,
+    name: 'Đông',
+  },
+  {
+    id: 2,
+    name: 'Tây',
+  },
+  {
+    id: 3,
+    name: 'Nam',
+  },
+  {
+    id: 4,
+    name: 'Вắс',
+  },
+  {
+    id: 5,
+    name: 'Đông Bắc',
+  },
+  {
+    id: 6,
+    name: 'Tây Bắc',
+  },
+  {
+    id: 7,
+    name: 'Tây Nam',
+  },
+  {
+    id: 8,
+    name: 'Đông Name',
   },
 ];
 
@@ -63,19 +99,20 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
   const [viewDetail, setViewDetail] = useState(false);
 
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['accommodation', 'room', 'list-type'],
-    queryFn: getListTypeRoom,
+  const arrKeywords = useRef([
+    'currency_id',
+    'direction_main',
+    'size',
+    'price',
+    'legal_documents',
+    'furnish',
+  ]).current;
+
+  const {data} = useQuery({
+    queryKey: ['common', 'list-direction'],
+    queryFn: getListDirection,
   });
 
-  const listBedType = useQuery({
-    queryKey: ['accommodation', 'room', 'list-bed-type'],
-    queryFn: getListTypeBed,
-  });
-
-  const arrKeywords = useRef(['currency_id', 'size', 'price']).current;
-  console.log(watch('furnish'), 'furnish');
-  console.log(watch('legal_documents'), 'legal_documents');
   return (
     <View>
       <ButtonTabValidate
@@ -91,20 +128,20 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             <RealEstateType
               label={'Hướng cửa chính'}
               data={data?.data}
-              name={'direction_main'}
+              name={'direction_main_id'}
               control={control}
               styleWrapper={styles.buttonStyle}
               watch={watch}
             />
 
-            <RealEstateType
+            {/* <RealEstateType
               label={'Hướng ban công'}
               data={data?.data}
               name={'room_type_id1'}
               control={control}
               styleWrapper={styles.buttonStyle}
               watch={watch}
-            />
+            /> */}
           </View>
 
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
@@ -141,10 +178,10 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             style={{...styles.textInput}}
             keyboardType="numeric"
           />
-
+          {/* 
           <Counter heading={'Số phòng'} min={0} max={255} />
 
-          <Counter heading={'Số phòng tắm, vệ sinh'} min={0} max={255} />
+          <Counter heading={'Số phòng tắm, vệ sinh'} min={0} max={255} /> */}
 
           <View style={styles.line} />
 
@@ -166,6 +203,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             styleWrapper={{
               width: '100%',
             }}
+            checkedNumber
             control={control}
             name="is_negotiated"
             defaultValue={0}

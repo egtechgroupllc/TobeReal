@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -24,10 +24,12 @@ import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import EstateDetail from '../components/PostNewSell/EstateDetail';
 import GeneralInformation from '../components/PostNewSell/GeneralInformation';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const maxCharacters = 1000;
 export default function PostNewSellScreen() {
+  const params = useRoute().params;
+
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const {
@@ -39,68 +41,18 @@ export default function PostNewSellScreen() {
     formState: {errors},
   } = useForm();
 
-  const queryClient = useQueryClient();
-  const createEstateSellMu = useMutation({
-    mutationFn: postCreateEstatSell,
-  });
-
-  const getFormData = (object = {}) => {
-    const formData = new FormData();
-
-    Object.keys(object).reduce((item, key) => {
-      if (key !== 'description_img' && key !== 'kyc') {
-        item.append(key, object[key]);
-      }
-
-      return item;
-    }, formData);
-
-    const arrImage_description = object?.description_img?.map(image => {
-      formData.append('description_img', image);
-
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
-
-    const arrImage_Kyc = object?.kyc?.map(image => {
-      formData.append('kyc', image);
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
-
-    formData.append(
-      'image_description',
-      JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
-    );
-
-    return formData;
-  };
-
   const handlePostLease = value => {
     delete value?.check;
-    // const formData = getFormData(value);
-    navigate('PostConfigurationScreen');
-    // createEstateSellMu.mutate(formData, {
-    //   onSuccess: dataInside => {
-    //     showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-
-    //     if (dataInside?.status) {
-    //       reset();
-    //       queryClient.invalidateQueries(['estate', 'my-list']);
-    //     }
-    //   },
-    //   onError: err => {
-    //     console.log({err});
-    //   },
-    // });
+    navigate('PostConfigurationScreen', value);
   };
 
+  useEffect(() => {
+    params?.status && reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
   return (
-    <MainWrapper styleContent={styles.wrapper}>
+    <MainWrapper refreshControl={false} styleContent={styles.wrapper}>
       <View style={styles.button}>
         <Image
           source={images.sell}
@@ -167,8 +119,7 @@ export default function PostNewSellScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('Next')}
-        // onPress={handleSubmit(handlePostLease)}
-        onPress={handlePostLease}
+        onPress={handleSubmit(handlePostLease)}
         style={{
           marginTop: scale(20),
           width: '40%',

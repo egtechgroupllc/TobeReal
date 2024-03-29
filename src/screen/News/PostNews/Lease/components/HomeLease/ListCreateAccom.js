@@ -1,22 +1,32 @@
-import {useQuery} from '@tanstack/react-query';
 import React from 'react';
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import {FlatList, ScrollView, View} from 'react-native';
 
-import {getMyListCreateAccom} from '../../../../../../api/Accommodation/apiAccom';
+import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
+import Pagination from '../../../../../../components/Pagination';
+import usePagination from '../../../../../../hooks/usePagination';
 import CreateAccomItem from './CreateAccomItem';
+import ListCreateAccomLoading from './ListCreateAccomLoading';
 
-export default function ListCreateAccom({data}) {
-  const numColumns = Math.ceil(data?.rows?.length / 2);
+export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
+  const {navigate} = useNavigation();
+
+  const {data, page, isLoading, setPage} = usePagination(keyArr, callFunc, {
+    keyQuery: keyQuery,
+  });
+
+  const dataNew = data?.data?.rows || (isLoading && [1, 2, 3]);
+  const numColumns = Math.ceil(dataNew?.length / 2);
 
   if (!numColumns) return null;
+
   return (
     <View
       style={{
         backgroundColor: COLORS.primary,
-        rowGap: scale(20),
-        paddingVertical: scale(20),
+        rowGap: scale(16),
+        paddingVertical: scale(16),
       }}>
       <CustomText
         textType="bold"
@@ -38,8 +48,8 @@ export default function ListCreateAccom({data}) {
           alignItems: 'center',
         }}>
         <FlatList
-          key={'accommodation/my-list-0'}
-          data={data?.rows}
+          key={`${keyArr}-${page}_${data?.data?.count}_${numColumns}`}
+          data={dataNew}
           numColumns={numColumns}
           alwaysBounceVertical={false}
           directionalLockEnabled={true}
@@ -53,11 +63,27 @@ export default function ListCreateAccom({data}) {
             paddingHorizontal: scale(20),
             rowGap: scale(10),
           }}
-          renderItem={({item, index}) => (
-            <CreateAccomItem key={`key_${item?.id}-${index}`} data={item} />
-          )}
+          renderItem={({item, index}) =>
+            item?.id ? (
+              <CreateAccomItem
+                key={`key_${item?.id}-${index}`}
+                data={item}
+                isTour={isTour}
+              />
+            ) : (
+              <ListCreateAccomLoading />
+            )
+          }
         />
       </ScrollView>
+      <Pagination
+        currentPage={page}
+        totalPages={data?.data?.count}
+        onChange={num => setPage(num)}
+        styleWrapper={{
+          marginVertical: 0,
+        }}
+      />
     </View>
   );
 }

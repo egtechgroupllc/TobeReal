@@ -30,7 +30,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!viewDetail} style={styles.box}>
-            <View style={styles.line} />
+            {/* <View style={styles.line} /> */}
 
             <TimeCheckIn
               onChange={value => {
@@ -45,7 +45,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               }}
             />
 
-            <View style={styles.line} />
+            {/* <View style={styles.line} /> */}
 
             {/* <CustomInput
           label={t('distance_to_city')}
@@ -56,8 +56,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           rules={requireField(t('this_field_required'))}
           style={{...styles.textInput}}
         /> */}
-
-            <View style={styles.line} />
           </Collapsible>
         )}
       </InViewPort>

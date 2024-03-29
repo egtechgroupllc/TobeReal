@@ -1,14 +1,21 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import {launchImageLibrary} from 'react-native-image-picker';
-import {COLORS, scale} from '../../assets/constants';
+import {COLORS, SIZES, scale} from '../../assets/constants';
 import {IconCamera, IconError, IconX} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
+import ImageView from 'react-native-image-viewing';
 
 export default function ChooseImgPicker({
   title,
@@ -22,6 +29,7 @@ export default function ChooseImgPicker({
   maxFiles = 24,
 }) {
   const form = useForm();
+  const [viewImg, setViewImg] = useState(false);
 
   const pickImage = async (onChange, value) => {
     await launchImageLibrary(
@@ -32,7 +40,7 @@ export default function ChooseImgPicker({
             return {
               name: new Date().getTime() + item.fileName,
               type: item.type,
-              id: item.fileName + new Date().getTime(),
+              index: index,
               description: '',
               uri:
                 Platform.OS === 'ios'
@@ -69,8 +77,8 @@ export default function ChooseImgPicker({
     }, 300);
   };
 
-  const handleDelete = (idImg, dataImg, onChange) => {
-    const result = dataImg.filter(item => item?.id !== idImg);
+  const handleDelete = (nameImg, dataImg, onChange) => {
+    const result = dataImg.filter(item => item?.name !== nameImg);
     onChange(result);
   };
 
@@ -135,9 +143,23 @@ export default function ChooseImgPicker({
                           height: scale(220),
                           rowGap: scale(10),
                         }}>
-                        <CustomImage source={img?.uri} style={styles.img} />
                         <TouchableOpacity
-                          onPress={() => handleDelete(img?.id, value, onChange)}
+                          activeOpacity={0.7}
+                          style={styles.img}
+                          onPress={() => setViewImg(img)}>
+                          <CustomImage
+                            source={img?.uri}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
+                          />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                          onPress={() =>
+                            handleDelete(img?.name, value, onChange)
+                          }
                           activeOpacity={0.7}
                           style={styles.delete}>
                           <IconX
@@ -198,6 +220,38 @@ export default function ChooseImgPicker({
                 </View>
               )}
             </View>
+
+            {(viewImg || viewImg === 0) && (
+              <ImageView
+                images={value}
+                imageIndex={viewImg?.index}
+                visible={!!viewImg || viewImg?.index === 0}
+                onRequestClose={() => {
+                  setViewImg(false);
+                }}
+                swipeToCloseEnabled={false}
+                FooterComponent={({imageIndex}) => {
+                  const imgDetail = value.find(
+                    item => item?.index === imageIndex,
+                  );
+
+                  return (
+                    imgDetail?.description && (
+                      <View style={styles.footer}>
+                        <CustomText
+                          style={{
+                            color: COLORS.white,
+                            fontSize: SIZES.medium,
+                            flex: 1,
+                          }}>
+                          {imgDetail?.description}
+                        </CustomText>
+                      </View>
+                    )
+                  );
+                }}
+              />
+            )}
           </View>
         );
       }}
@@ -239,6 +293,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '80%',
     borderRadius: scale(5),
+    overflow: 'hidden',
   },
   icon: {
     padding: scale(8),
@@ -257,5 +312,13 @@ const styles = StyleSheet.create({
     padding: scale(4),
     backgroundColor: COLORS.overlay,
     borderRadius: scale(5),
+  },
+  footer: {
+    backgroundColor: COLORS.overlay,
+    padding: scale(10),
+    borderRadius: scale(10),
+    marginBottom: scale(80),
+    marginHorizontal: scale(20),
+    alignSelf: 'flex-start',
   },
 });

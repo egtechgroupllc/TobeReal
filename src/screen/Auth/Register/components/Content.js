@@ -25,7 +25,7 @@ import {
 export default function Content() {
   const {t} = useLanguage();
   const {control, watch, handleSubmit, reset} = useForm();
-  const {goBack} = useNavigation();
+  const {goBack, navigate} = useNavigation();
 
   const signupMutation = useMutation({
     mutationFn: postSignUp,
@@ -39,7 +39,7 @@ export default function Content() {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
-          // navigation.navigate('VerifyEmailScreen');
+          navigate('LoginScreen');
 
           reset();
         }
@@ -133,7 +133,7 @@ export default function Content() {
           </CustomText>
 
           <CustomText
-            onPress={goBack}
+            onPress={() => navigate('LoginScreen')}
             textType="semiBold"
             style={{...styles.text1, marginLeft: scale(5)}}>
             {t('login')}

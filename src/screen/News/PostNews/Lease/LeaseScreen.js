@@ -39,14 +39,15 @@ export default function LeaseScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const {isLoading, isError, isFetching, data} = useQuery({
-    queryKey: ['accommodation', 'my-list', 0],
-    queryFn: () => getMyListCreateAccom({hasRoom: 0}),
-  });
-
   return (
     <MainWrapper>
-      <ListCreateAccom data={data?.data} />
+      <ListCreateAccom
+        keyArr={['accommodation', 'my-list', 0]}
+        callFunc={getMyListCreateAccom}
+        keyQuery={{hasRoom: 0}}
+        navigateAdd="AddRoomTypeScreen"
+        navigateDetail="DetailAccommodationScreen"
+      />
 
       <View style={styles.content}>
         {list.map((item, index) => (

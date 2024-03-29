@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -20,11 +20,10 @@ import {requireField} from '../../../../../utils/validate';
 
 import MainWrapper from '../../../../../components/MainWrapper';
 
-import GeneralInformation from '../components/PostNewTour/GeneralInformation';
-import EstateDetail from '../components/PostNewTour/EstateDetail';
+import {postCreateTour} from '../../../../../Model/api/apiTour';
 import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
-import {postCreateTour} from '../../../../../Model/api/apiTour';
+import GeneralInformation from '../components/PostNewTour/GeneralInformation';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
@@ -79,13 +78,12 @@ export default function PostNewTourScreen() {
     return formData;
   };
 
-  const handlePostLease = value => {
+  const handlePostTour = value => {
     delete value?.check;
     const formData = getFormData(value);
 
     createTourMu.mutate(formData, {
       onSuccess: dataInside => {
-        console.log({dataInside});
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
@@ -120,12 +118,12 @@ export default function PostNewTourScreen() {
           watch={watch}
           errors={errors}
         />
-        <EstateDetail
+        {/* <EstateDetail
           control={control}
           setValue={setValue}
           watch={watch}
           errors={errors}
-        />
+        /> */}
         <EstateContact control={control} watch={watch} errors={errors} />
 
         <EstatePhoto
@@ -155,14 +153,12 @@ export default function PostNewTourScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('Next')}
-        onPress={handleSubmit(handlePostLease)}
+        onPress={handleSubmit(handlePostTour)}
         style={{
           marginTop: scale(20),
-          width: '40%',
+          width: '100%',
         }}
-        styleWrapper={{
-          alignSelf: 'flex-end',
-        }}
+        disabled={createTourMu.isPending}
       />
     </MainWrapper>
   );

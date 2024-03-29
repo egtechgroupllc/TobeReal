@@ -3013,3 +3013,34 @@ export function IconKeyBroad({fill, ...props}) {
     </Svg>
   );
 }
+
+export function IconViewRatingPostNormal({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(21)}
+      height={props?.style?.height || scale(12)}
+      viewBox="0 0 21 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M7.368 1H20M7.368 3.632H20M7.368 6.263H20"
+        stroke="#CCC"
+        strokeWidth={1.15385}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M7.368 8.895H20"
+        stroke={fill || '#505050'}
+        strokeWidth={1.15385}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M2.743 10.65l1.276.842c.164.107.366-.053.318-.25l-.369-1.51A.24.24 0 014.04 9.5l1.144-.99c.15-.13.073-.39-.12-.403l-1.495-.1a.208.208 0 01-.111-.044.22.22 0 01-.072-.098l-.558-1.46a.218.218 0 00-.077-.102.205.205 0 00-.239 0 .218.218 0 00-.077.102l-.558 1.46a.22.22 0 01-.072.098.208.208 0 01-.111.043l-1.495.1c-.193.014-.27.274-.12.404l1.144.99a.24.24 0 01.072.234l-.342 1.399c-.058.238.185.43.381.3l1.186-.781a.202.202 0 01.223 0z"
+        fill={fill || '#505050'}
+      />
+    </Svg>
+  );
+}

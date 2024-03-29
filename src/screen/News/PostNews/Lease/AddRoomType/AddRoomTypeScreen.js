@@ -69,7 +69,7 @@ export default function AddRoomTypeScreen() {
   };
   const handlePostRoom = value => {
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
-      showMess('Ban chua chon co so vat chat', 'error');
+      showMess('Ban chua chon tien ich cho phong', 'error');
       return;
     }
 

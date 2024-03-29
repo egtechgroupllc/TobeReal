@@ -74,7 +74,7 @@ const Pagination = ({
         </PageBox>
 
         <PageBox
-          onPress={() => onChange(currentPage - 1)}
+          onPress={() => onChange(--currentPage)}
           disabled={currentPage <= 1}>
           <IconPrevious
             style={styles.styleIcon}
@@ -105,7 +105,7 @@ const Pagination = ({
 
       <>
         <PageBox
-          onPress={() => onChange(1)}
+          onPress={() => onChange(++currentPage)}
           disabled={currentPage === countPage}>
           <IconNext
             style={styles.styleIcon}
@@ -114,7 +114,7 @@ const Pagination = ({
         </PageBox>
 
         <PageBox
-          onPress={() => onChange((currentPage = 1 - 1))}
+          onPress={() => onChange(countPage)}
           disabled={currentPage === countPage}>
           <IconNextAll
             style={styles.styleIcon}

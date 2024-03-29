@@ -188,6 +188,7 @@ export default function PostNewLeaseScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('post')}
+        disabled={createAccommodationMu.isPending}
         // onPress={handleSubmit(handlePostLease)}
         onPress={checkIsValid}
         style={{

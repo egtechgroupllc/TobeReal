@@ -1,17 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {CustomInput} from '../../../../../../../components';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {formatDateTime} from '../../../../../../../utils/format';
-import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {CustomInput} from '../../../../../../../components';
 import CustomText from '../../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {formatTime} from '../../../../../../../utils/format';
 
-const formatTime = time => {
-  return formatDateTime(time, {
-    isHouse: true,
-    isHour24: true,
-  });
+const formatTime24 = date => {
+  return formatTime(date, {isHour24: true});
 };
 export default function TimeCheckIn({onChange, title}) {
   const {t} = useLanguage();
@@ -29,8 +26,8 @@ export default function TimeCheckIn({onChange, title}) {
   useEffect(() => {
     onChange &&
       onChange({
-        timeCheckStart: formatTime(timeCheckStart),
-        timeCheckEnd: formatTime(timeCheckEnd),
+        timeCheckStart: formatTime24(timeCheckStart),
+        timeCheckEnd: formatTime24(timeCheckEnd),
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeCheckStart, timeCheckEnd]);
@@ -51,7 +48,7 @@ export default function TimeCheckIn({onChange, title}) {
           styleTextLabel={styles.label}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatTime(timeCheckStart)}
+          value={formatTime24(timeCheckStart)}
           onPress={() => setOpenCheckStart(true)}
         />
 
@@ -63,7 +60,7 @@ export default function TimeCheckIn({onChange, title}) {
           }}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatTime(timeCheckEnd)}
+          value={formatTime24(timeCheckEnd)}
           onPress={() => setOpenCheckEnd(true)}
         />
 

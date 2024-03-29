@@ -13,13 +13,22 @@ export const postCreateTour = async data => {
   return responsive.data;
 };
 
-export const getMyListCreateTour = async ({page = 1, hasRoom, limit = 10}) => {
-  // const responsive = await instance.get(
-  //   `/my-list?page=${page}&limit=${limit}${
-  //     hasRoom || hasRoom === 0 ? `&hasRoom=${hasRoom}` : ''
-  //   }`,
-  // );
-  const responsive = await instance.get(`/my-list`);
+export const getMyListCreateTour = async ({
+  page = 1,
+  hasTicket,
+  limit = 10,
+}) => {
+  const responsive = await instance.get(
+    `/my-list?page=${page}&limit=${limit}${
+      hasTicket || hasTicket === 0 ? `&hasTicket=${hasTicket}` : ''
+    }`,
+  );
+
+  return responsive.data;
+};
+
+export const postAddTicket = async ({data, tour_id}) => {
+  const responsive = await instance.post(`/${tour_id}/add-ticket`, data);
 
   return responsive.data;
 };

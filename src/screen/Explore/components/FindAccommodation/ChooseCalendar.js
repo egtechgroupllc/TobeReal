@@ -1,15 +1,14 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {COLORS, FONTS, SIZES, scale} from '../../../../assets/constants';
-import {IconCalendar, IconGoBack, IconNext} from '../../../../assets/icon/Icon';
+import {scale} from '../../../../assets/constants';
+import {IconCalendar} from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
-import TopCalendar from './Calendar/TopCalendar';
-import {format} from 'date-fns';
-import {formatDateTime} from '../../../../utils/format';
-import ListSelect from '../../../../components/ListSelect';
 import CalendarRange from '../../../../components/CalendarRange';
+import ListSelect from '../../../../components/ListSelect';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {formatDateTime} from '../../../../utils/format';
+import TopCalendar from './Calendar/TopCalendar';
 
 const minDate = new Date(); // Today
 let dateEnd = new Date().setDate(minDate.getDate() + 1); // Today

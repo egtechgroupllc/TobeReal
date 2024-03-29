@@ -37,3 +37,9 @@ export const getListTypeEstateSell = async () => {
 
   return responsive.data;
 };
+
+export const getListDirection = async () => {
+  const responsive = await instance.get('common/list-direction');
+
+  return responsive.data;
+};

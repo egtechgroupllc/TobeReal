@@ -1,26 +1,40 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import MainWrapper from '../../../../components/MainWrapper';
-import {useQuery, useQueryClient} from '@tanstack/react-query';
+import React, {useLayoutEffect} from 'react';
+import {FlatList, ScrollView} from 'react-native';
 import {getMyListCreateAccom} from '../../../../Model/api/apiAccom';
 import {scale} from '../../../../assets/constants';
-import CreateAccomItem from './components/HomeLease/CreateAccomItem';
-import Pagination from '../../../../components/Pagination';
 import EmptyData from '../../../../components/EmptyData';
-import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
-import {useLanguage} from '../../../../hooks/useLanguage';
+import MainWrapper from '../../../../components/MainWrapper';
+import Pagination from '../../../../components/Pagination';
 import usePagination from '../../../../hooks/usePagination';
+import CreateAccomItem from './components/HomeLease/CreateAccomItem';
+import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {getMyListCreateTour} from '../../../../Model/api/apiTour';
 
 export default function AccommoManagementScreen() {
+  const params = useRoute().params;
+  const {setOptions} = useNavigation();
   const {data, page, isLoading, setPage} = usePagination(
-    ['accommodation', 'my-list', 1],
-    getMyListCreateAccom,
+    params?.isTour ? ['accommodation', 'my-list', 1] : ['tour', 'my-list', 1],
+    params?.isTour ? getMyListCreateTour : getMyListCreateAccom,
     {
-      keyQuery: {hasRoom: 1, limit: 12},
+      keyQuery: params?.isTour
+        ? {hasTicket: 1, limit: 12}
+        : {hasRoom: 1, limit: 12},
     },
   );
 
-  const numColumns = Math.ceil(data?.data?.rows?.length / 4);
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: params?.isTour
+        ? 'Danh Sách Tour Đã Tạo'
+        : 'Danh Sách Chỗ Ở Đã Tạo',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
+  const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4, 4]);
+  const numColumns = Math.ceil(dataNew?.length / 4);
 
   return (
     <MainWrapper
@@ -28,69 +42,63 @@ export default function AccommoManagementScreen() {
       styleContent={{
         marginVertical: scale(20),
       }}>
-      {!isLoading ? (
-        <>
-          {numColumns ? (
-            <>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
+      <>
+        {numColumns ? (
+          <>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              alwaysBounceVertical={false}
+              directionalLockEnabled={true}
+              contentContainerStyle={{
+                gap: scale(10),
+                alignItems: 'center',
+              }}>
+              <FlatList
+                key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
+                data={dataNew}
+                numColumns={numColumns}
                 alwaysBounceVertical={false}
                 directionalLockEnabled={true}
-                contentContainerStyle={{
-                  gap: scale(10),
-                  alignItems: 'center',
-                }}>
-                <FlatList
-                  key={`accommodation/my-list-1-${page}`}
-                  data={data?.data?.rows}
-                  numColumns={numColumns}
-                  alwaysBounceVertical={false}
-                  directionalLockEnabled={true}
-                  keyExtractor={(item, index) => `$key_${item.id}-${index}`}
-                  columnWrapperStyle={
-                    numColumns >= 2 && {
-                      columnGap: scale(10),
-                    }
+                keyExtractor={(item, index) => `$key_${item.id}-${index}`}
+                columnWrapperStyle={
+                  numColumns >= 2 && {
+                    columnGap: scale(10),
                   }
-                  contentContainerStyle={{
-                    paddingHorizontal: scale(20),
-                    rowGap: scale(10),
-                  }}
-                  renderItem={({item, index}) => (
+                }
+                contentContainerStyle={{
+                  paddingHorizontal: scale(20),
+                  rowGap: scale(10),
+                }}
+                renderItem={({item, index}) =>
+                  item?.id ? (
                     <CreateAccomItem
                       key={`key_${item?.id}-${index}`}
                       data={item}
                     />
-                  )}
-                />
-              </ScrollView>
-
-              <Pagination
-                currentPage={page}
-                totalPages={data?.data?.count}
-                onChange={num => setPage(num)}
+                  ) : (
+                    <ListCreateAccomLoading key={`key_${index}`} />
+                  )
+                }
               />
-            </>
-          ) : (
-            <EmptyData
-              styleWrapper={{
-                marginTop: '40%',
-                justifyContent: 'center',
-              }}
+            </ScrollView>
+
+            <Pagination
+              pageSize={12}
+              currentPage={page}
+              totalPages={data?.data?.count}
+              onChange={num => setPage(num)}
             />
-          )}
-        </>
-      ) : (
-        <View
-          style={{
-            paddingHorizontal: scale(20),
-            rowGap: scale(10),
-          }}>
-          <ListCreateAccomLoading />
-          <ListCreateAccomLoading />
-        </View>
-      )}
+          </>
+        ) : (
+          <EmptyData
+            styleWrapper={{
+              marginTop: '40%',
+              justifyContent: 'center',
+            }}
+          />
+        )}
+      </>
     </MainWrapper>
   );
 }

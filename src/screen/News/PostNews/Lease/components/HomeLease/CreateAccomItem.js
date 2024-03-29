@@ -7,48 +7,39 @@ import {IconArrowRight, IconGoBack} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
 
-export default function CreateAccomItem({data}) {
+export default function CreateAccomItem({data, isTour}) {
   const {navigate} = useNavigation();
 
   const handleContinue = () => {
-    navigate('AddRoomTypeScreen', data);
+    navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
 
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={() => {
-        !data?.rooms?.[0]
+        data?.rooms?.length <= 0 || data?.tour_tickets?.length <= 0
           ? handleContinue()
-          : navigate('DetailAccommodationScreen');
+          : navigate('DetailAccommodationScreen', data);
       }}>
       <CustomImage
-        source={
-          'https://ik.imagekit.io/tvlk/image/imageResource/2021/11/25/1637851894841-e5d7f8e7abc30ff0f1f07f6d7a64eac1.png?tr=dpr-2,q-75,w-320'
-        }
+        source={data?.images[0]?.url}
         style={{
           borderRadius: scale(7),
           minHeight: scale(160),
           width: scale(400 / 1.4),
         }}>
-        <View
-          style={{
-            position: 'absolute',
-            zIndex: 1,
-            right: scale(8),
-            top: scale(6),
-            backgroundColor: COLORS.white,
-            borderRadius: 99,
-            paddingHorizontal: scale(6),
-          }}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              color: COLORS.error,
-            }}>
-            {data?.accommodation_type?.name}
-          </CustomText>
-        </View>
+        {data?.accommodation_type?.name && (
+          <View style={styles.type}>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: COLORS.error,
+              }}>
+              {data?.accommodation_type?.name}
+            </CustomText>
+          </View>
+        )}
         <View
           style={{
             backgroundColor: COLORS.overlay,
@@ -84,7 +75,7 @@ export default function CreateAccomItem({data}) {
           <View style={styles.bottom}>
             <CustomButton
               text={
-                data?.rooms?.[0]
+                !data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0
                   ? 'Add Room'
                   : 'Incomplete Property Information'
               }
@@ -121,6 +112,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: scale(10),
     rowGap: scale(3),
+  },
+  type: {
+    position: 'absolute',
+    zIndex: 1,
+    right: scale(8),
+    top: scale(6),
+    backgroundColor: COLORS.white,
+    borderRadius: 99,
+    paddingHorizontal: scale(6),
   },
   bottom: {
     backgroundColor: COLORS.white,

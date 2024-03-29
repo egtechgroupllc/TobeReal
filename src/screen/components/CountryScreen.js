@@ -22,7 +22,7 @@ export default function CountryScreen() {
   const {t} = useLanguage();
   const {setOptions, goBack} = useNavigation();
   const router = useRoute().params;
-  console.log({router});
+
   const [country, setCountry] = useState(
     router?.province || router?.country || '',
   );

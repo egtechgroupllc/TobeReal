@@ -4,15 +4,12 @@ import DatePicker from 'react-native-date-picker';
 
 import {CustomInput} from '../../../../../../../components';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {formatDateTime} from '../../../../../../../utils/format';
+import {formatTime} from '../../../../../../../utils/format';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../../components/CustomText';
 
-const formatTime = time => {
-  return formatDateTime(time, {
-    isHouse: true,
-    isHour24: true,
-  });
+const formatTime24 = date => {
+  return formatTime(date, {isHour24: true});
 };
 
 export default function TimeCheckOut({onChange}) {
@@ -32,8 +29,8 @@ export default function TimeCheckOut({onChange}) {
   useEffect(() => {
     onChange &&
       onChange({
-        timeCheckStart: formatTime(timeCheckStart),
-        timeCheckEnd: formatTime(timeCheckEnd),
+        timeCheckStart: formatTime24(timeCheckStart),
+        timeCheckEnd: formatTime24(timeCheckEnd),
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeCheckStart, timeCheckEnd]);
@@ -54,7 +51,7 @@ export default function TimeCheckOut({onChange}) {
           styleTextLabel={styles.label}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatTime(timeCheckStart)}
+          value={formatTime24(timeCheckStart)}
           onPress={() => setOpenCheckStart(true)}
         />
 
@@ -66,7 +63,7 @@ export default function TimeCheckOut({onChange}) {
           }}
           style={styles.input}
           styleText={styles.textInput}
-          value={formatTime(timeCheckEnd)}
+          value={formatTime24(timeCheckEnd)}
           onPress={() => setOpenCheckEnd(true)}
         />
 

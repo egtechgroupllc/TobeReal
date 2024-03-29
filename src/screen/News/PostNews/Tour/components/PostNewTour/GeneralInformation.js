@@ -82,7 +82,7 @@ export default function GeneralInformation({
               ]}
               componentRight={
                 <Text style={styles.numText}>
-                  {watch('title')?.length || 0}/{100}
+                  {watch('name')?.length || 0}/{100}
                 </Text>
               }
             />

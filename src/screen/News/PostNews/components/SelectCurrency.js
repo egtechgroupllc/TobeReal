@@ -7,7 +7,7 @@ import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, useController, useForm} from 'react-hook-form';
 
 export default function SelectCurrency({
   control,
@@ -35,7 +35,11 @@ export default function SelectCurrency({
       control={control || form.control}
       rules={rules || requireField(t('this_field_required'))}
       name={name || 'currency_id'}
-      render={({field: {onChange, value}, fieldState: {error}}) => {
+      render={({
+        field: {onChange, value},
+
+        fieldState: {error},
+      }) => {
         return (
           <View style={styles.wrapper}>
             <CustomText style={{color: COLORS.black}}>

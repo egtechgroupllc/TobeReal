@@ -537,7 +537,7 @@ export default function TabContent() {
         style={styles.buttonCategories}
         onPress={viewContactinfo}>
         <CustomText textType="medium" style={{...styles.text1}}>
-          {t('estate_contact')}
+          {t('contact_info')}
         </CustomText>
         <IconRight />
       </TouchableOpacity>
