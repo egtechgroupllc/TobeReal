@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../assets/constants';
-import CustomSelectDropdown from '../../../../components/CustomSelectDropdown';
-import CustomText from '../../../../components/CustomText';
+import {COLORS, SIZES, WIDTH, scale} from '../../../../../../assets/constants';
 
-export default memo(function RealEstateType({
+
+import Price from './Price';
+import CustomSelectDropdown from '../../../../../../components/CustomSelectDropdown';
+import CustomText from '../../../../../../components/CustomText';
+import Acreage from './Acreage';
+
+export default memo(function DropDown({
   onSelect,
   styleWrapper,
   label,
@@ -13,6 +17,8 @@ export default memo(function RealEstateType({
   control,
   getKeyValue = 'id',
   data = [],
+  price,
+  acreage,
   watch = () => {},
 }) {
   return (
@@ -28,6 +34,10 @@ export default memo(function RealEstateType({
         getKeyValue={getKeyValue}
         control={control}
         buttonStyle={styles.buttonEstateTypes}
+        rowStyle={{
+          height:'auto',
+          paddingVertical:scale(10)
+        }}
         onSelect={(selectedItem, i) => {
           onSelect && onSelect(selectedItem);
         }}
@@ -43,16 +53,24 @@ export default memo(function RealEstateType({
             </CustomText>
           );
         }}
-        renderCustomizedRowChild={item => {
+        renderCustomizedRowChild={(item, index) => {
           return (
             <View>
-              <CustomText
+              {index == 0 && price &&(
+                <Price/>
+              )}
+                {index == 0 && acreage &&(
+                <Acreage/>
+              )}
+             <View>
+             <CustomText
                 style={{
                   paddingHorizontal: SIZES.medium,
                   fontSize: scale(13),
                 }}>
                 {item?.name}
               </CustomText>
+             </View>
             </View>
           );
         }}

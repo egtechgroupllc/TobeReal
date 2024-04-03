@@ -8,9 +8,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {COLORS} from '../../assets/constants';
+import {COLORS, images, scale} from '../../assets/constants';
 import CustomText from '../CustomText';
 import styles from './styles';
+import CustomImage from '../CustomImage';
 
 export interface LoadingPropTypes {
   cancelable?: boolean;
@@ -67,8 +68,22 @@ const Loading = ({
 
   const _renderDefaultContent = () => {
     return (
+      <CustomImage
+        source={images.logoLoading}
+        style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
+        resizeMode="cover"
+      />
+    );
+
+    return (
       <View style={[styles.background, indicatorStyle]}>
-        {customIndicator || <ActivityIndicator color={color} size={size} />}
+        {/* {customIndicator || <ActivityIndicator color={color} size={size} />}
+         */}
+        <CustomImage
+          source={images.logoLoading}
+          style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
+          resizeMode="cover"
+        />
         <CustomText style={[styles.textContent, textStyle]}>
           {textContent}
         </CustomText>

@@ -1,6 +1,6 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useRef} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {COLORS, images, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -8,6 +8,7 @@ import SearchChooseLocation from './SearchChooseLocation';
 import SearchRecent from './SearchRecent';
 import MainWrapper from '../../../../../components/MainWrapper';
 import BoxPlaceItem from './components/BoxPlaceItem';
+import FilterMore from './FilterMore';
 
 const dataPackage = [
   {
@@ -99,11 +100,15 @@ const dataPackage = [
   },
 ];
 
-export default function SeeAllBuyScreen({route}) {
+export default function SeeAllRentScreen({route}) {
   const {title} = route.params;
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
-
+  const Press = () => {
+    navigate(t('explore'), {
+      screen: 'HomeExploreScreen',
+    });
+  };
   const handleSelectSearch = value => {
     navigate(t('explore'), {
       screen: 'HomeExploreScreen',
@@ -118,11 +123,11 @@ export default function SeeAllBuyScreen({route}) {
   }, []);
 
   return (
-    <MainWrapper
-      scrollEnabled={false}>
+    <MainWrapper>
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
-        <SearchRecent onPress={handleSelectSearch} />
+        {/* <SearchRecent onPress={handleSelectSearch} /> */}
+        <FilterMore/>
       </View>
       <View
         style={{
@@ -134,6 +139,7 @@ export default function SeeAllBuyScreen({route}) {
       />
       <FlatList
         // horizontal
+        scrollEnabled={false}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         data={dataPackage}
@@ -163,10 +169,13 @@ const styles = StyleSheet.create({
   },
   content1: {
     alignItems: 'center',
-    rowGap:scale(14),
+    rowGap: scale(14),
     marginTop: scale(10),
     columnGap: scale(14),
     paddingVertical: scale(6),
-    paddingBottom:scale(100)
+    paddingBottom: scale(100),
+  },
+  buttonStyle: {
+    width: '100%',
   },
 });

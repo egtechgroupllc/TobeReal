@@ -26,7 +26,7 @@ export default function DetailAccommodationScreen({route}) {
   const listView = useRef([
     <InfoDetail name={title} data={params} />,
     <InfoUnitFacilities data={params} />,
-    <Map data={params} />,
+    // <Map data={params} />,
     <Room name={title} data={params} />,
     <Review data={params} />,
     <InfoAdditional data={params} />,

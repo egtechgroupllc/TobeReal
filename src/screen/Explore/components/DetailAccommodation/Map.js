@@ -21,14 +21,18 @@ export default function Map({region, data, styleWrapper}) {
         },
   );
   const mapRef = useRef(null);
-
-  useEffect(() => {
-    mapRef.current.fitToCoordinates([coordinate], {
-      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
-      animated: true,
-    });
-  }, [coordinate]);
-
+useEffect(() =>{
+  region && setCoordinate(region);
+},[region])
+  // useEffect(() => {
+  //   mapRef.current.fitToCoordinates([coordinate], {
+  //     edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+  //     animated: true,
+  //   });
+  // }, [coordinate]);
+console.log('====================================');
+console.log(coordinate);
+console.log('====================================');
   return (
     <WrapperContent
       heading={t('map_view')}

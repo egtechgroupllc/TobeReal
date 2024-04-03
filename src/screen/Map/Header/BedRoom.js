@@ -14,6 +14,7 @@ export default function BedRoom() {
   return (
     <WrapperContent
       heading={t('number_of_bedrooms')}
+      styleWrapper={{marginBottom:scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,
       }}

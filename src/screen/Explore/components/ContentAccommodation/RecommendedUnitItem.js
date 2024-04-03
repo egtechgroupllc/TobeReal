@@ -17,6 +17,7 @@ import {
 import CustomText from '../../../../components/CustomText';
 import Skeleton from '../../../../components/Skeleton';
 import CustomImage from '../../../../components/CustomImage';
+import { StackActions, useNavigation } from '@react-navigation/native';
 
 export default function RecommendedUnitItem({
   isButtonBottom,
@@ -29,10 +30,28 @@ export default function RecommendedUnitItem({
   onPress,
   data,
   img,
+  jsonImage,
+  name,
+  price,
 }) {
+  const {navigate, isFocused, dispatch} = useNavigation();
   return (
+    
     <TouchableOpacity
-      onPress={onPress && onPress}
+    onPress={() => {
+      if (isFocused()) {
+        dispatch(
+          StackActions.push('NoBottomTab', {
+            screen: 'SeeAllRentScreen',
+            params: {
+              jsondata: jsonImage || [],
+              title: name || '',
+              paramPrice: price || '',
+            },
+          }),
+        );
+      }
+    }}
       activeOpacity={0.7}
       style={[
         styles.wrapper,

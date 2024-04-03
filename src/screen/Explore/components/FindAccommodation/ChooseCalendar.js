@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {IconCalendar} from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
@@ -9,6 +9,7 @@ import ListSelect from '../../../../components/ListSelect';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatDateTime} from '../../../../utils/format';
 import TopCalendar from './Calendar/TopCalendar';
+import CustomText from '../../../../components/CustomText';
 
 const minDate = new Date(); // Today
 let dateEnd = new Date().setDate(minDate.getDate() + 1); // Today
@@ -33,7 +34,7 @@ const listSelectTimeYear = [
   {text: '3 Yearly', value: 3},
 ];
 
-export default function ChooseCalendar({rental}) {
+export default function ChooseCalendar({rental, style, Checkin}) {
   const {t} = useLanguage();
   // Khai báo State
   const [selectedStartDate, setSelectedStartDate] = useState(minDate);
@@ -87,7 +88,8 @@ export default function ChooseCalendar({rental}) {
   }, [selected, rental]);
 
   return (
-    <View>
+    <View style={style}>
+         {Checkin&&<CustomText style={{fontSize: SIZES.xMedium, paddingBottom:scale(5)}}>Check in - Check out</CustomText>}
       <CustomInput
         // name="calendar"
         defaultValue={`${formatDateTime(selectedStartDate)} - ${formatDateTime(

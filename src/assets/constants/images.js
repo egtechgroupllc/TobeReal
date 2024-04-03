@@ -66,6 +66,8 @@ export default {
   toilet: require('../images/toilet.png'),
   interior: require('../images/interior.png'),
   juridical: require('../images/juridical.png'),
+  logoLoading: require('../images/logoLoading.gif'),
+  logoSaveloka: require('../images/logoSaveloka.gif'),
   c15: require('../images/c15.jpg'),
   c15_1: require('../images/c15_1.jpg'),
   c15_2: require('../images/c15_2.jpg'),

@@ -34,7 +34,6 @@ export default function BottomTab() {
         tabBarActiveTintColor: '#F0B90B',
         tabBarInactiveTintColor: '#000000',
         tabBarItemStyle: {
-          // height: scale(90),
           columnGap: scale(4),
         },
         // tabBarHideOnKeyboard: true,

@@ -80,12 +80,13 @@ export default memo(function BookAccommodation({
             flexDirection: 'row',
             columnGap: scale(8),
             paddingVertical: scale(10),
+            alignSelf:'center'
           }}>
           <CustomButton
             onPress={() => setOpenContact(true)}
             // outline
             buttonType="large"
-            style={{flex: 1}}
+            style={{width:'70%'}}
             text={t('contact_host')}
             styleText={{
               fontSize: SIZES.xMedium,

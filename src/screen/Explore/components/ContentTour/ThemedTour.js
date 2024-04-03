@@ -23,7 +23,7 @@ export default function ThemedTour({data}) {
           themedTour
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
+              screen: 'SeeAllTourScreen',
               params: {
                 title: title || '',
               },

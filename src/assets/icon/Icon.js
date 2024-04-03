@@ -2504,6 +2504,24 @@ export function IconMyLocation({fill, ...props}) {
     </Svg>
   );
 }
+export function IconFilter({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(12)}
+      height={props?.style?.height || scale(19)}
+      viewBox="0 0 12 19"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M10.5 6.398H.6l4 5.85v6.75l1.75-1.575v-5.175l4.15-5.85z"
+        fill="#B4B4B4"
+      />
+      <Path d="M7.35 4.602h-3.6M9.6 2.8H1.5M11.4 1H.6" stroke="#B4B4B4" />
+    </Svg>
+  );
+}
 
 export function LogoZalo({fill, ...props}) {
   return (

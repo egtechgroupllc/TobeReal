@@ -7,15 +7,22 @@ import {
   useIsFetching,
   useIsMutating,
 } from '@tanstack/react-query';
-import React, {useEffect} from 'react';
-import {Platform, StatusBar, StyleSheet, Text, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {useNetInfo} from '@react-native-community/netinfo';
 import FlashMessage from 'react-native-flash-message';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
 
-import {COLORS} from './src/assets/constants';
+import {COLORS, images, scale} from './src/assets/constants';
 import {showMess} from './src/assets/constants/Helper';
 import {AuthProvider} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
@@ -24,7 +31,9 @@ import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
 import Loading from './src/components/Loading/Loading';
-
+import {Image} from 'react-native-svg';
+import CustomImage from './src/components/CustomImage';
+import LottieView from 'lottie-react-native';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -46,6 +55,15 @@ const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
 export default function App() {
+  const [splashScreenVisible, setSplashScreenVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashScreenVisible(false);
+    }, 2000); // Adjust the duration as needed
+
+    return () => clearTimeout(timer);
+  }, []);
   const netInfo = useNetInfo();
   useEffect(() => {
     if (netInfo.isConnected) {
@@ -54,12 +72,27 @@ export default function App() {
       showMess('Disconnected!', 'error');
     }
   }, [netInfo.isConnected]);
+  const SplashScreen = () => (
+    <View
+      style={{
+        backgroundColor: COLORS.white,
+        height: '100%',
+        justifyContent: 'center',
+      }}>
+      <CustomImage
+        source={images.logoLoading}
+        style={{height: '70%', width: '70%', alignSelf: 'center'}}
+        resizeMode="contain"></CustomImage>
+    </View>
+  );
 
-  return (
+  return splashScreenVisible ? (
+    <SplashScreen />
+  ) : (
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider
         style={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.white,
         }}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>

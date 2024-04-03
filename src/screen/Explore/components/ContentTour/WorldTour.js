@@ -24,7 +24,7 @@ export default function WorldTour({data}) {
           worldTour
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
+              screen: 'SeeAllTourScreen',
               params: {
                 title: title || '',
               },

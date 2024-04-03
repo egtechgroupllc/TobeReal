@@ -30,7 +30,7 @@ export default function ThematicInstagram() {
           <Carousel
             loop
             autoplay
-            autoplayInterval={5000}
+            autoplayInterval={3000}
             layout={'default'}
             layoutCardOffset={10}
             data={[...Array(40)]}

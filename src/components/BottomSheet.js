@@ -27,6 +27,7 @@ const BottomSheet = (
     disableScroll,
     onDismiss,
     onChange,
+    ComponentFooter
   },
   ref,
 ) => {
@@ -111,17 +112,20 @@ const BottomSheet = (
           {children}
         </View>
       ) : (
-        <BottomSheetScrollView
-          scrollEnabled={!disableScroll}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingVertical: scale(16),
-            paddingBottom: insets.bottom + scale(10),
-          }}>
-          <View style={[styles.contentContainer, styleContent]}>
-            {children}
-          </View>
-        </BottomSheetScrollView>
+    <>
+          <BottomSheetScrollView
+            scrollEnabled={!disableScroll}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingVertical: scale(16),
+              paddingBottom: insets.bottom + scale(10),
+            }}>
+            <View style={[styles.contentContainer, styleContent]}>
+              {children}
+            </View>
+          </BottomSheetScrollView>
+          {ComponentFooter}
+    </>
       )}
 
       {bottomSheetChildRef && (

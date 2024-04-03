@@ -45,7 +45,7 @@ export default function Header() {
       <View style={styles.header}>
         <View style={styles.boxHeight}>
           <CustomImage
-            source={images.logo}
+            source={images.logoSaveloka}
             resizeMode="contain"
             style={styles.img}
           />

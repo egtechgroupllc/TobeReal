@@ -68,7 +68,8 @@ export default function BoxPlaceItem({
           style={[
             styles.wrapper,
             {
-              width: scale(400/ seeViewNumber),
+              width: scale(410/ seeViewNumber),
+              alignItems:'center'
               // height: scale(200),
             },
             styleWrapper,
@@ -76,7 +77,7 @@ export default function BoxPlaceItem({
           ]}>
           <View
             style={{
-              width: '100%',
+              width: '97%',
               height: styleWrapper?.height ? '60%' : scale(150),
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
@@ -99,13 +100,12 @@ export default function BoxPlaceItem({
           <View
             style={{
               backgroundColor: COLORS.primary,
-              flex: 1,
+              // flex: 1,
               marginTop: scale(18),
-              margin: scale(5),
               // rowGap: scale(4),
               borderRadius: scale(5),
               height: scale(100),
-              width: '95%',
+              width: '97%',
               padding: scale(10),
             }}>
             <CustomText

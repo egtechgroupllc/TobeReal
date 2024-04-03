@@ -24,7 +24,7 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
           discoveryTour
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
+              screen: 'SeeAllTourScreen',
               params: {
                 title: title || '',
               },

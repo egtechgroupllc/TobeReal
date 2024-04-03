@@ -44,7 +44,7 @@ export default function BoxDiscoveryItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailTourScreen',
+                  screen: 'SeeAllBuyScreen',
                   params: {
                     jsondata: jsonImage || [],
                     title: name || '',

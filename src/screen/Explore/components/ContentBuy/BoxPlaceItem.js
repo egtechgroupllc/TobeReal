@@ -267,7 +267,7 @@ export default function BoxPlaceItem({
                       Posted today
                     </CustomText>
                   </View>
-                  <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
+                  {/* <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
                      <View style={{backgroundColor:COLORS.primary, width:'20%', height:scale(13), borderRadius:scale(3), alignItems:'center', justifyContent:'center', }}>
                      <CustomImage
                         source={images.iconPhone}
@@ -283,7 +283,7 @@ export default function BoxPlaceItem({
                       }}>
                         0984839012
                     </CustomText>
-                  </View>
+                  </View> */}
                 </View>
               </View>
             </View>
