@@ -26,6 +26,7 @@ export default function Counter({
   vertical,
   verticalCounter,
   styleBoxHeading,
+  styleWrapper,
   isInput,
 }) {
   const [quantity, setQuantity] = useState(value || min);
@@ -62,6 +63,7 @@ export default function Counter({
       style={[
         styles.wrapper,
         styles.row,
+        styleWrapper,
         vertical && {flexDirection: 'column'},
       ]}>
       {heading && (
@@ -101,6 +103,11 @@ export default function Counter({
           onChangeText={text => {
             setQuantity(+text);
           }}
+          styleIcon={{
+            color: COLORS.white,
+            width: scale(14),
+            height: scale(14),
+          }}
         />
 
         <CustomButton
@@ -112,6 +119,8 @@ export default function Counter({
           }}
           styleIcon={{
             color: COLORS.white,
+            width: scale(14),
+            height: scale(14),
           }}
         />
       </View>

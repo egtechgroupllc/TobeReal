@@ -13,7 +13,7 @@ export default function MainWrapper({
   styleContent,
   styleWrapper,
   noSafeArea,
-  refreshControl = true,
+  refreshControl = false,
   scrollEnabled = true,
   onScroll = () => {},
 }) {

@@ -8,7 +8,7 @@ import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
 import {TabSelect} from '../../../../../components';
 
-export default function Introduction() {
+export default function Introduction({data}) {
   const {t} = useLanguage();
   const listTab = [t('Description information'), t('Project information')];
   const bottomSheetRef = useRef();
@@ -28,6 +28,7 @@ export default function Introduction() {
         }}
         styleContent={{
           padding: scale(12),
+          maxHeight: scale(200),
         }}
         renderView={() =>
           tabSelect === listTab[0] ? (
@@ -35,11 +36,7 @@ export default function Introduction() {
               style={{
                 lineHeight: 18,
               }}>
-              The owner needs to urgently sell Hiep Thanh 3 apartment, block B,
-              3rd floor. 1 bedroom. the valid input is at. Selling price: 830
-              million. Surrounded by crowded residents and full amenities. There
-              are 2 Vinmart, 2 Family, Coop Food, Con Cuong, Phuc Long,
-              Highlands, schools...
+              {data?.description}
             </CustomText>
           ) : (
             <CustomText
@@ -88,9 +85,7 @@ export default function Introduction() {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Updating progress {'\n'}
-                Binh Duong Investment Consulting Construction Joint Stock
-                Company (BICONSI)
+                {data?.description}
               </CustomText>
             </View>
           ))}

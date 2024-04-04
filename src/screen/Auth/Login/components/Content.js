@@ -1,26 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
-
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
+import RNRestart from 'react-native-restart';
+
 import {postLogin} from '../../../../Model/api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
-import {
-  IconUnViewablePassword,
-  IconViewablePassword,
-} from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {
   requireField,
-  validateMinLengthText,
   validateEmail,
+  validateMinLengthText,
 } from '../../../../utils/validate';
-import RNRestart from 'react-native-restart';
 
 export default function Content() {
   const {t} = useLanguage();

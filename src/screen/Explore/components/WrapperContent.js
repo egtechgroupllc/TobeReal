@@ -93,14 +93,9 @@ export default function WrapperContent({
             onPress={onPressCategory}
           />
         )}
-         {packageTour && (
+        {packageTour && (
           <Category
-            data={[
-              'Southeast Asia',
-              'Asia',
-              'Europe',
-              'America',
-            ]}
+            data={['Southeast Asia', 'Asia', 'Europe', 'America']}
             onPress={onPressCategory}
           />
         )}
@@ -115,23 +110,15 @@ export default function WrapperContent({
             onPress={onPressCategory}
           />
         )}
-         {worldTour && (
+        {worldTour && (
           <Category
-            data={[
-              'Korean',
-              'Japan',
-              'Thailand',
-              'Singapore',
-            ]}
+            data={['Korean', 'Japan', 'Thailand', 'Singapore']}
             onPress={onPressCategory}
           />
         )}
-         {discoveryTour && (
+        {discoveryTour && (
           <Category
-            data={[
-              t('dosmestic_destination'),
-              t('international_destination')
-            ]}
+            data={[t('dosmestic_destination'), t('international_destination')]}
             onPress={onPressCategory}
           />
         )}
@@ -169,7 +156,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    fontSize: SIZES.medium,
+    fontSize: SIZES.xMedium,
     flex: 1,
   },
   textSub: {

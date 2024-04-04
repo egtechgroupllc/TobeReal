@@ -1,17 +1,18 @@
 import {DetailAccommodationScreen} from '../screen/Explore';
-import { SeeAllRentScreen } from '../screen/Explore/components/ContentAccommodation/SeeAll';
-import { DetailBuyScreen } from '../screen/Explore/components/ContentBuy';
-import { SeeAllBuyScreen } from '../screen/Explore/components/ContentBuy/SeeAll';
-import { DetailTourScreen } from '../screen/Explore/components/ContentTour';
-import { DetailTicketScreen } from '../screen/Explore/components/ContentTour/DetailTicket';
-import { BookTourScreen } from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
-import { SeeAllTourScreen } from '../screen/Explore/components/ContentTour/SeeAll';
+import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
+import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
+import {SeeAllBuyScreen} from '../screen/Explore/components/ContentBuy/SeeAll';
+import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
+import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
+import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
+import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
 import {
   DetailRoomScreen,
   ViewRoomScreen,
 } from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
 import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
+import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
 import {
   HomeSearchAccommodScreen,
@@ -97,6 +98,9 @@ export default routerNoBottomTab = [
   {
     name: 'ListAccommodationSearchScreen',
     component: ListAccommodationSearchScreen,
+    options: {
+      headerShown: true,
+    },
   },
   {
     name: 'CountryScreen',
@@ -129,6 +133,13 @@ export default routerNoBottomTab = [
   {
     name: 'ViewRoomScreen',
     component: ViewRoomScreen,
+    options: {
+      headerShown: true,
+    },
+  },
+  {
+    name: 'SellManagementScreen',
+    component: SellManagementScreen,
     options: {
       headerShown: true,
     },

@@ -11,6 +11,7 @@ import {markers} from '../../utils/mapData';
 import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
+import {KEY_MAP} from '../../Model/url';
 
 const initialMapState = {
   markers,
@@ -111,7 +112,14 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         latitude: coords?.latitude,
         longitude: coords?.longitude,
       };
+      return coordinates;
+    }
+  }, []);
 
+  const moveCurrentPosition = useCallback(async () => {
+    const coordinates = await currentPosition();
+
+    if (coordinates) {
       mapRef.current.fitToCoordinates([coordinates], {
         edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
         animated: true,
@@ -119,8 +127,22 @@ export default function HomeMapScreen({children, showListLocation, style}) {
     }
   }, []);
 
+  const radius = 4 * 1000;
+
+  const fetchPlaces = async () => {
+    const location = await currentPosition();
+
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=${radius}&key=${KEY_MAP}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log('data', data.results);
+      });
+  };
+
   useEffect(() => {
-    getCurrentLocation();
+    fetchPlaces();
   }, []);
 
   return (
@@ -162,7 +184,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
           top: '15%',
           right: scale(10),
         }}
-        onPress={currentPosition}
+        onPress={moveCurrentPosition}
         iconRight={IconMyLocation}
         style={styles.btnRegionUser}
         styleIcon={{

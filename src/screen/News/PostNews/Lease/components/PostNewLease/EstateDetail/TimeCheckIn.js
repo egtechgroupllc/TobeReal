@@ -17,7 +17,7 @@ export default function TimeCheckIn({onChange, title}) {
   const [openCheckEnd, setOpenCheckEnd] = useState(false);
 
   const [timeCheckStart, setTimeCheckStart] = useState(
-    new Date('2024-01-01T6:00:00'),
+    new Date('2024-01-01T06:00:00'),
   );
   const [timeCheckEnd, setTimeCheckEnd] = useState(
     new Date('2024-01-01T12:00:00'),

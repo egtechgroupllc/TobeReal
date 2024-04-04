@@ -36,6 +36,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
                 ? COLORS.error
                 : '#000',
             fontSize: SIZES.xMedium,
+            textTransform: 'uppercase',
           }}>
           {data?.name}
         </CustomText>
@@ -88,7 +89,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
         )}
       </View>
 
-      <Collapsible collapsed={!seeMore}>
+      <Collapsible collapsed={seeMore}>
         <View
           style={{
             alignItems: 'center',

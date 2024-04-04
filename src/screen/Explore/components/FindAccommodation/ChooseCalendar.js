@@ -5,7 +5,7 @@ import {IconCalendar} from '../../../../assets/icon/Icon';
 import {CustomButton, CustomInput} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
 import CalendarRange from '../../../../components/CalendarRange';
-import ListSelect from '../../../../components/ListSelect';
+import ListSelect from '../../../../components/BottomSheetListSelect';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatDateTime} from '../../../../utils/format';
 import TopCalendar from './Calendar/TopCalendar';

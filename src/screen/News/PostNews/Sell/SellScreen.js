@@ -14,7 +14,7 @@ const list = [
     desc: 'View and manage your registered properties',
     textBtn: 'Continue',
     navigate: 'NoBottomTab',
-    screen: 'AccommoManagementScreen',
+    screen: 'SellManagementScreen',
   },
   {
     title: 'Tôi muốn bán bất động sản',
@@ -61,7 +61,6 @@ export default function SellScreen() {
       </View>
     </MainWrapper>
   );
-  return <PostNewSellScreen />;
 }
 const styles = StyleSheet.create({
   content: {

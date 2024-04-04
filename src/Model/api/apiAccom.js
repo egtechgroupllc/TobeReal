@@ -51,3 +51,12 @@ export const postCreateAccommoRoomLease = async ({id_accomo, formData}) => {
 
   return responsive.data;
 };
+
+// ==> LIST REVIEW ACCOMO <==
+export const getListReviewAccmo = async ({id_accomo, pageParam = 1}) => {
+  const responsive = await instance.get(
+    `/${id_accomo}/list-review?limit=10&page=${pageParam}`,
+  );
+
+  return responsive.data;
+};

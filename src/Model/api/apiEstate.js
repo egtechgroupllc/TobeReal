@@ -20,8 +20,21 @@ export const getMyListCreateSell = async ({page = 1, limit = 10}) => {
 };
 export const getListSell = async ({pageParam = 1}) => {
   const responsive = await instance.get(
-    `/list-sell?page=${pageParam}&limit=10`,
+    `/list-post?page=${pageParam}&limit=10`,
   );
+
+  return responsive.data;
+};
+
+export const deleteEstate = async ({id_estate}) => {
+  const responsive = await instance.delete(`/${id_estate}/delete`);
+  return responsive.data;
+};
+
+export const postUpdateEstate = async ({id_estate, data}) => {
+  const responsive = await instance.post(`/${id_estate}/update`, data, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
 
   return responsive.data;
 };

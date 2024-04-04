@@ -1,6 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useState} from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Linking,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   COLORS,
   SHADOW,
@@ -22,6 +29,7 @@ import {
   IconPhone,
   IconSupporter,
   IconSupporterYellow,
+  IconUnViewablePassword,
   IconX,
   LogoLine,
   LogoMessageFB,
@@ -42,6 +50,13 @@ export default memo(function BookAccommodation({
   const {token} = useAuthentication();
   const {navigate} = useNavigation();
   const [openContact, setOpenContact] = useState(false);
+
+  const makeCallPhone = num => {
+    Linking.openURL(
+      `${Platform.OS === 'ios' && num ? 'telprompt:' : 'tel:'}${num}`,
+    );
+  };
+
   return (
     <View
       style={{...styles.wrapper, paddingBottom: insets.bottom - 5}}
@@ -49,31 +64,6 @@ export default memo(function BookAccommodation({
         const {height} = e.nativeEvent.layout;
         setBookHeight(height);
       }}>
-      <Skeleton
-        visible={!isLoading}
-        shimmerStyle={{
-          height: scale(20),
-          width: '70%',
-        }}>
-        <View style={styles.price}>
-          <CustomText
-            style={{
-              fontSize: SIZES.xMedium,
-            }}>
-            {t('best_price_from')}
-          </CustomText>
-          <CustomText
-            style={{
-              fontSize: SIZES.medium,
-            }}
-            textType="bold">
-            {formatPrice(price, {
-              locales: 'vi',
-            })}{' '}
-          </CustomText>
-        </View>
-      </Skeleton>
-
       <Skeleton
         visible={!isLoading}
         shimmerStyle={{
@@ -87,13 +77,40 @@ export default memo(function BookAccommodation({
             alignSelf: 'center',
           }}>
           <CustomButton
-            onPress={() => setOpenContact(true)}
-            // outline
+            onPress={() => {
+              // makeCallPhone('0824232339');
+              Linking.openURL('https://chat.zalo.me/?phone=0824232339');
+              setOpenContact(true);
+            }}
             buttonType="large"
-            style={{width: '70%'}}
-            text={t('contact_host')}
+            style={{flex: 1, borderColor: '#ccc'}}
+            text={'Chat qua Zalo'}
+            styleText={{
+              color: COLORS.black,
+              fontSize: SIZES.xMedium,
+            }}
+            iconLeft={LogoZalo}
+            styleIcon={{
+              width: scale(26),
+              height: scale(26),
+            }}
+            outline
+          />
+
+          <CustomButton
+            onPress={() => {
+              makeCallPhone('0824232339');
+              setOpenContact(true);
+            }}
+            buttonType="large"
+            style={{flex: 1}}
+            text={'0824232339'}
             styleText={{
               fontSize: SIZES.xMedium,
+            }}
+            iconLeft={IconPhone}
+            styleIcon={{
+              color: '#fff',
             }}
           />
 
@@ -111,9 +128,8 @@ export default memo(function BookAccommodation({
           /> */}
         </View>
       </Skeleton>
-      {openContact && (
-        <View
-          style={styles.contact}>
+      {/* {openContact && (
+        <View style={styles.contact}>
           <LinearGradient
             colors={['#FFE55A', '#F0B90B']}
             start={{x: 1.2, y: 0}}
@@ -345,7 +361,7 @@ export default memo(function BookAccommodation({
             </View>
           </View>
         </View>
-      )}
+      )} */}
     </View>
   );
 });
@@ -365,7 +381,7 @@ const styles = StyleSheet.create({
       height: -2,
     },
   },
-  contact:{
+  contact: {
     height: scale(260),
     position: 'absolute',
     backgroundColor: COLORS.white,

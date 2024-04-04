@@ -9,25 +9,20 @@ import ItemAccommdSearchLoading from './components/ItemAccommdSearchLoading';
 import LottieView from 'lottie-react-native';
 import {getListSell} from '../../Model/api/apiEstate';
 import {getListTour} from '../../Model/api/apiTour';
+import EmptyData from '../../components/EmptyData';
 
 export default function ListAccomSearchContent() {
   const insets = useSafeAreaInsets();
-  const {
-    isLoading,
-    isError,
-    data,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['estate', 'list-sell'],
-    queryFn: getListSell,
-    getNextPageParam: (lastPage, allPages) => {
-      if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
+  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
+    useInfiniteQuery({
+      queryKey: ['estate', 'list-post'],
+      queryFn: getListSell,
+      getNextPageParam: (lastPage, allPages) => {
+        if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
 
-      return undefined;
-    },
-  });
+        return undefined;
+      },
+    });
 
   const dataArr = useMemo(
     () =>
@@ -47,7 +42,7 @@ export default function ListAccomSearchContent() {
           flex: 1,
         }}
         showsVerticalScrollIndicator={false}
-        data={dataArr || [...Array(2)]}
+        data={dataArr || (isLoading && [...Array(2)])}
         contentContainerStyle={{
           ...styles.content,
           paddingBottom: insets.bottom + scale(20),
@@ -68,6 +63,13 @@ export default function ListAccomSearchContent() {
             </View>
           )
         }
+        ListEmptyComponent={() => (
+          <EmptyData
+            styleWrapper={{
+              marginTop: '40%',
+            }}
+          />
+        )}
         onEndReached={hasNextPage && fetchNextPage}
         onEndReachedThreshold={0.5}
         renderItem={({item, index}) => {

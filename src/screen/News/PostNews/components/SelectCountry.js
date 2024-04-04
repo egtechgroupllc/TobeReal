@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -17,6 +18,7 @@ export default function SelectCountry({
   defaultValue,
   setValue = () => {},
   onSelect = () => {},
+  watch = () => {},
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -24,6 +26,12 @@ export default function SelectCountry({
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
   const form = useForm();
+
+  useEffect(() => {
+    if (watch('country')) {
+      setDataFromScreen(watch('country'));
+    }
+  }, [watch('country')]);
 
   const onGoBack = (value, onChange) => {
     if (value) {
@@ -106,6 +114,7 @@ export default function SelectCountry({
               <SelectProvince
                 control={control}
                 setValue={setValue}
+                watch={watch}
                 country={dataFromScreen}
                 onSelect={data => {
                   onSelect({

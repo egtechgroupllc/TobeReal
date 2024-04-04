@@ -1,32 +1,27 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
-import {IconHome, IconRoom} from '../../../../assets/icon/Icon';
+import {
+  IconHome,
+  IconLocation,
+  IconMarker,
+  IconMyLocation,
+  IconRoom,
+} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import Introduction from './Introduction';
+import Star from '../../../../components/Star';
 
 export default function InfoDetail({name, data}) {
   const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
-        <View style={styles.header}>
-          <CustomText textType="semiBold" style={styles.name}>
-            {data?.name || name}
-          </CustomText>
-
-          {data?.accommodation_type?.id === 1 && (
-            <View style={styles.boxHot}>
-              <CustomText
-                textType="semiBold"
-                style={{textAlign: 'center', color: '#fff'}}>
-                Hotel Residence 🏨
-              </CustomText>
-            </View>
-          )}
-        </View>
+        <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
+          {data?.name}
+        </CustomText>
 
         <View style={styles.room}>
           <View style={styles.boxRoom}>
@@ -35,13 +30,28 @@ export default function InfoDetail({name, data}) {
               style={{
                 color: '#7906f6',
               }}>
-              {data?.accommodation_type?.name || 'Hotel'}
+              {data?.accommodation_type?.name}
             </CustomText>
           </View>
-          {/* <View style={styles.boxRoom}>
-            <IconRoom style={styles.icon} />
-            <CustomText textType="regular">1</CustomText>
-          </View> */}
+          <Star rating={4} />
+        </View>
+
+        <View
+          style={{
+            alignItems: 'flex-start',
+            flexDirection: 'row',
+          }}>
+          <IconLocation
+            fill={COLORS.text}
+            style={{
+              width: scale(15),
+              height: scale(15),
+            }}
+          />
+          <CustomText textType="regular" numberOfLines={2}>
+            {' '}
+            {data?.address}
+          </CustomText>
         </View>
 
         <View style={styles.room}>
@@ -83,11 +93,7 @@ const styles = StyleSheet.create({
     padding: scale(16),
     paddingBottom: scale(4),
   },
-  header: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'flex-start',
-  },
+
   name: {flex: 1, fontSize: SIZES.xMedium},
   boxHot: {
     backgroundColor: '#9681fA',

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, scale} from '../../../../../../assets/constants';
@@ -11,13 +11,48 @@ import InViewPort from '../../../../../../components/InViewport';
 import CustomText from '../../../../../../components/CustomText';
 import RulesPostImg from '../../../components/RulesPostImg';
 
-export default function EstatePhoto({control, errors, watch}) {
+export default function EstatePhoto({control, errors, setValue, watch}) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
   const arrKeywords = useRef(['description_img', 'kyc']).current;
+
+  const formatImgEdit = images => {
+    const result = images.map((item, index) => {
+      var filename = item.file_name;
+
+      var parts = filename.split('.');
+
+      var extension = parts[parts.length - 1];
+
+      return {
+        name: new Date().getTime() + item.file_name,
+        type: `image/${extension}`,
+        id: item.id,
+        description: item?.description,
+        uri: item.url,
+      };
+    });
+
+    return result;
+  };
+
+  useEffect(() => {
+    if (watch('images')) {
+      const description_img = watch('images').filter(item => !item?.is_kyc);
+
+      const image_descriptionFormat = formatImgEdit(description_img);
+
+      const kyc_img = watch('images').filter(item => item?.is_kyc);
+      const image_kycFormat = formatImgEdit(kyc_img);
+
+      setValue('description_img', image_descriptionFormat);
+      setValue('kyc', image_kycFormat);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch('images')]);
 
   return (
     <View>

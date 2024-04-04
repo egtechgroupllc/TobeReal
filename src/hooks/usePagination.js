@@ -10,7 +10,7 @@ export default function usePagination(
 
   const [page, setPage] = useState(1);
 
-  const {isLoading, isError, data, isFetching, ...props} = useQuery({
+  const {data, isFetching, ...props} = useQuery({
     queryKey: [...keyArr, page],
     queryFn: () => callFunc({page, ...keyQuery}),
     placeholderData: placeData => {
@@ -26,8 +26,6 @@ export default function usePagination(
     data: data,
     page,
     setPage,
-    isLoading,
-    isError,
     ...props,
   };
 }

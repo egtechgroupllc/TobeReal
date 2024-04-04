@@ -13,7 +13,7 @@ export type CustomTextProps = {
 
 export default memo(function CustomText({
   children,
-  textType,
+  textType = 'regular',
   isShadow,
   isAnimated,
   shaDowColor,

@@ -5,6 +5,7 @@ export const formatPrice = (
   {
     showCurrency = true,
     currency = '',
+    unit = '',
     locales = 'en-US',
     decimalPlaces = 3,
   } = {},
@@ -20,11 +21,14 @@ export const formatPrice = (
     currency: currency || locales.startsWith('vi') ? 'VND' : 'USD',
     maximumSignificantDigits: decimalPlaces,
   };
-  !showCurrency && delete option.style;
+  (!showCurrency || unit) && delete option.style;
 
   const numberFormat = new Intl.NumberFormat(locales, option);
 
-  return numberFormat.format(numericPrice);
+  const formattedPrice = numberFormat.format(numericPrice);
+
+  // Thêm đơn vị tự chọn
+  return formattedPrice + (unit ? ` ${unit}` : '');
 };
 
 export function formatNumber(num) {

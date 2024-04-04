@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import Map from '../../../../../../Explore/components/DetailAccommodation/Map';
+import Map from '../../../../../../Explore/components/DetailAccommodation/DetailAccommoMap';
 
 export default function EstateSetMap({onChange}) {
   const {navigate, setParams} = useNavigation();

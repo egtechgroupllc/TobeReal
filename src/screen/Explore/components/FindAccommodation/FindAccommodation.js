@@ -2,34 +2,46 @@ import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {WIDTH, scale} from '../../../../assets/constants';
 import {
-  IconAccommodationOther,
   IconApartment,
-  IconCity,
   IconEmigrate,
   IconHome,
   IconHotel,
-  IconHouse,
   IconLand,
-  IconRoom,
   IconTourTopic,
   IconVilla,
   IconWorld,
 } from '../../../../assets/icon/Icon';
 import {Category, TabSelect} from '../../../../components';
+import InViewPort from '../../../../components/InViewport';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import ContentAccommodation from '../ContentAccommodation/ContentAccommodation';
+import ContentBuy from '../ContentBuy/ContentBuy';
+import ContentTour from '../ContentTour/ContentTour';
+import FindAccommodationStart from './FindAccommodationStart';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import InViewPort from '../../../../components/InViewport';
-import FindAccommodationStart from './FindAccommodationStart';
-import ContentAccommodation from '../ContentAccommodation/ContentAccommodation';
-import ContentTour from '../ContentTour/ContentTour';
-import ContentBuy from '../ContentBuy/ContentBuy';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
   //   import('../ContentAccommodation/ContentAccommodation'),
   // );
   const {t} = useLanguage();
+
+  const listMenu = useRef([
+    {
+      id: 'RENT',
+      name: t('RENT'),
+    },
+    {
+      id: 'BUY',
+      name: t('BUY'),
+    },
+    {
+      id: 'TOUR',
+      name: t('TOUR'),
+    },
+  ]).current;
+
   const listRent = useRef([
     // {
     //   text: t('all'),
@@ -99,7 +111,7 @@ export default function FindAccommodation() {
     },
   ]).current;
 
-  const [tabSelect, setTabSelect] = useState(t('RENT'));
+  const [tabSelect, setTabSelect] = useState(listMenu[0]?.id);
   const [category, setCategory] = useState();
   const [isRender, setIsRender] = useState();
 
@@ -117,17 +129,19 @@ export default function FindAccommodation() {
             marginTop: scale(20),
           }}>
           <TabSelect
-            data={[t('RENT'), t('BUY'), t('TOUR')]}
+            isObj
+            data={listMenu}
             onChange={value => {
-              setTabSelect(value);
+              setTabSelect(value?.id);
             }}
             renderView={() => (
               <>
                 {isRender ? (
                   <>
                     <View style={styles.category}>
-                      {tabSelect === t('RENT') && (
+                      {tabSelect === 'RENT' && (
                         <Category
+                          indexDefault={1}
                           data={[t('daily'), t('monthly'), t('yearly')]}
                           onPress={value => setCategory(value)}
                         />
@@ -137,19 +151,19 @@ export default function FindAccommodation() {
                         multiSelect
                         isSelectAll
                         data={
-                          tabSelect === t('RENT')
-                            ? listRent || []
-                            : tabSelect === t('BUY')
-                            ? listBuy || []
-                            : tabSelect === t('TOUR')
+                          tabSelect === 'RENT'
+                            ? listRent
+                            : tabSelect === 'BUY'
+                            ? listBuy
+                            : tabSelect === 'TOUR'
                             ? listTour
                             : []
                         }
                       />
                     </View>
-                    {tabSelect !== t('TOUR') ? (
+                    {tabSelect !== 'TOUR' ? (
                       <FindContent
-                        isBuy={tabSelect === t('BUY')}
+                        isBuy={tabSelect === 'BUY'}
                         rental={category}
                       />
                     ) : (
@@ -164,9 +178,9 @@ export default function FindAccommodation() {
           />
         </View>
       </InViewPort>
-      {tabSelect === t('TOUR') ? (
+      {tabSelect === 'TOUR' ? (
         <ContentTour />
-      ) : tabSelect === t('RENT') ? (
+      ) : tabSelect === 'RENT' ? (
         <ContentAccommodation />
       ) : (
         <ContentBuy />

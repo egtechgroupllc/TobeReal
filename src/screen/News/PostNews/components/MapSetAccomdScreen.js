@@ -16,8 +16,8 @@ export default function MapSetAccomdScreen() {
 
   const [moveLocation, setMoveLocation] = useState(
     router?.region || {
-      latitude: 22.62938671242907,
-      longitude: 88.4354486029795,
+      latitude: 0,
+      longitude: 0,
     },
   );
 
@@ -29,23 +29,23 @@ export default function MapSetAccomdScreen() {
       animated: true,
     });
   };
-  const currentPosition = useCallback(async () => {
+  const currentPosition = useCallback(async region => {
     const {coords} = await getCurrentLocation();
 
-    if (coords || router?.region) {
-      const coordinates = router?.region || {
+    if (coords || region) {
+      const coordinates = region || {
         latitude: coords?.latitude,
         longitude: coords?.longitude,
       };
 
-      setMoveLocation(coordinates);
+      // setMoveLocation(coordinates);
       animatedMoveCenterMap([coordinates]);
       return coordinates;
     }
   }, []);
 
   useEffect(() => {
-    currentPosition();
+    currentPosition(router?.region);
   }, []);
 
   return (

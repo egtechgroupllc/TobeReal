@@ -31,7 +31,7 @@ export default function ItemAccommdSearch({data}) {
             flexDirection: 'row',
             alignItems: 'flex-start',
           }}>
-          <CustomText textType="semiBold" style={styles.name}>
+          <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
             {data?.name || data?.title}
           </CustomText>
           <RatingBox rating={4.0} />
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: scale(10),
     borderTopRightRadius: scale(10),
     width: '100%',
-    height: '60%',
+    height: '55%',
     backgroundColor: '#000',
   },
   name: {

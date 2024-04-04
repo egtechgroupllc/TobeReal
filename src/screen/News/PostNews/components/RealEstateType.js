@@ -14,6 +14,7 @@ export default memo(function RealEstateType({
   getKeyValue = 'id',
   data = [],
   watch = () => {},
+  valueEdit,
 }) {
   return (
     <View
@@ -32,7 +33,7 @@ export default memo(function RealEstateType({
           onSelect && onSelect(selectedItem);
         }}
         renderCustomizedButtonChild={item => {
-          const value = !watch(name) ? {} : item;
+          const value = !watch(name) ? {} : item || valueEdit;
 
           return (
             <CustomText

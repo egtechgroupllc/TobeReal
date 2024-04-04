@@ -1,46 +1,52 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {
+  IconAcreage,
   IconBed,
+  IconBookings,
   IconCalendar,
   IconClock,
-  IconHome,
-  IconLand,
+  IconDirection,
+  IconFurniture,
+  IconLocation,
   IconMapView,
   IconRoom,
 } from '../../../../../assets/icon/Icon';
 
-import CustomText from '../../../../../components/CustomText';
-import {useLanguage} from '../../../../../hooks/useLanguage';
-import Introduction from './Introduction';
 import CustomImage from '../../../../../components/CustomImage';
+import CustomText from '../../../../../components/CustomText';
 import Star from '../../../../../components/Star';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
+import Introduction from '../../DetailAccommodation/Introduction';
+import InfoItem from './Info/InfoItem';
+import TicketOption from '../../ContentTour/DetailTour/TicketOption';
+import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
+// import Introduction from './Introduction';
 
-export default function InfoDetail({name, price}) {
+export default function InfoDetail({data, price}) {
   const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <CustomText textType="semiBold" style={styles.name}>
-            {name}
+            {data?.title}
           </CustomText>
         </View>
 
         <View style={styles.room}>
           <Star />
-          <CustomText textType="medium" style={styles.text}>
-            (10 Evaluate)
-          </CustomText>
-          <TouchableOpacity>
+
+          <CustomText textType="medium">(10 Evaluate)</CustomText>
+          <TouchableOpacity activeOpacity={0.7}>
             <CustomImage
               source={images.iconTiktok}
               style={{width: scale(20), height: scale(20)}}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7}>
             <CustomImage
               source={images.iconYoutube}
               style={{width: scale(20), height: scale(20)}}
@@ -50,253 +56,128 @@ export default function InfoDetail({name, price}) {
             {t('watch_the_most')}
           </CustomText>
         </View>
+
+        <View style={styles.itemHear}>
+          <IconLocation width={scale(14)} height={scale(14)} />
+          <CustomText textType="regular" style={{flex: 1}}>
+            {data?.address}
+          </CustomText>
+        </View>
+
+        <View style={styles.itemHear}>
+          <IconClock width={scale(14)} height={scale(14)} fill={'#ccc'} />
+          <CustomText textType="regular" style={{flex: 1}}>
+            {calculateTimeElapsed(data.createdAt)}
+          </CustomText>
+        </View>
       </View>
+
       {/* <View style={styles.line}></View> */}
       <View style={styles.boxTourTime}>
         <View
           style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            alignItems: 'center',
-          }}>
-          <IconMapView
-            width={scale(12)}
-            height={scale(12)}
-            fill={COLORS.primary}></IconMapView>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.primary}}>
-            {t('location')} |
-          </CustomText>
-          <CustomText
-            textType="regular"
-            style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
-            BC 34, Binh Chuan, Thuan An, Binh Duong
-          </CustomText>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            alignItems: 'center',
-            marginTop: scale(5),
-            marginBottom: scale(10),
-          }}>
-          <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-            {t('Date posted')} |
-          </CustomText>
-          <CustomText
-            textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            Thursday, March 14, 2024
-          </CustomText>
-        </View>
-        <View
-          style={{
-            width: '100%',
             backgroundColor: '#F5F5F5',
             height: scale(10),
-          }}></View>
+          }}
+        />
         <View
           style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            paddingVertical:scale(10),
-            justifyContent: 'space-between',
-          }}>
-          <View style={{flexDirection: 'row', alignItems: 'baseline'}}>
-            <CustomText
-              textType="semiBold"
-              style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-              {t('Price')}:
-            </CustomText>
-            <CustomText
-              textType="bold"
-              style={{...styles.name, color: COLORS.primary, marginLeft: '1%'}}>
-              {formatPrice(price, {
-                locales: 'vi',
-              })}{' '}
-            </CustomText>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'baseline'}}>
-            <CustomText
-              textType="regular"
-              style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
-              {t('Acreage')}:
-            </CustomText>
-            <CustomText
-              textType="semiBold"
-              style={{...styles.name, color: COLORS.black, marginLeft: '1%'}}>
-              173m2
-            </CustomText>
-          </View>
-        </View>
-        <View
-          style={{...styles.line, width: '90%', alignSelf: 'center'}}></View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: scale(20),
-            marginTop: scale(5),
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: scale(5),
-              flex: 1,
-              columnGap:scale(5)
-            }}>
-            <Image source={images.bedroom} style={styles.image} />
-            <CustomText
-              textType="semiBold"
-              style={{...styles.text, color: COLORS.black}}>
-              {t('Bedroom')}:
-            </CustomText>
-            <CustomText
-              textType="regular"
-              style={{...styles.text, color: COLORS.black}}>
-              3
-            </CustomText>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: scale(5),
-              flex: 0.5,
-              columnGap:scale(5)
-            }}>
-            <Image source={images.toilet} style={styles.image} />
-            <CustomText
-              textType="semiBold"
-              style={{...styles.text, color: COLORS.black}}>
-              {t('Toilet')}:
-            </CustomText>
-            <CustomText
-              textType="regular"
-              numberOfLines={1}
-              style={{...styles.text, color: COLORS.black, width: '50%'}}>
-              3
-            </CustomText>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
             paddingHorizontal: scale(20),
           }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: scale(5),
-              flex: 1,
-              columnGap:scale(5)
-            }}>
-            <Image source={images.livingroom} style={styles.image} />
-            <CustomText
-              textType="semiBold"
-              style={{...styles.text, color: COLORS.black}}>
-              {t('Acreage')}:
+          <View style={styles.listInfo}>
+            <CustomText textType="semiBold" style={{color: COLORS.black}}>
+              {t('Price')}:{' '}
+              <CustomText
+                textType="bold"
+                style={{...styles.name, color: COLORS.primary}}>
+                {formatPrice(data?.price, {
+                  locales: 'vi',
+                })}
+              </CustomText>
             </CustomText>
-            <CustomText
-              textType="regular"
-              numberOfLines={1}
-              style={{...styles.text, color: COLORS.black, width: '50%'}}>
-              173m2
-            </CustomText>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: scale(5),
-              flex: 0.5,
-              columnGap:scale(5)
-            }}>
-            <Image source={images.interior} style={styles.image} />
-            <CustomText
-              textType="semiBold"
-              style={{...styles.text, color: COLORS.black}}>
-              {t('Interior')}:
-            </CustomText>
-            <CustomText
-              textType="regular"
-              numberOfLines={1}
-              style={{...styles.text, color: COLORS.black, width: '50%'}}>
-              Full
-            </CustomText>
-          </View>
-        </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            alignItems: 'center',
-            marginTop: scale(5),
-            columnGap:scale(5)
-          }}>
-          <Image source={images.direction} style={styles.image} />
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text, color: COLORS.black}}>
-            {t('House direction')}:
-          </CustomText>
-          <CustomText
-            textType="regular"
-            numberOfLines={1}
-            style={{...styles.text, color: COLORS.black, width: '50%'}}>
-            East
-          </CustomText>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingHorizontal: scale(20),
-            alignItems: 'center',
-            marginTop: scale(5),
-            marginBottom:scale(10),
-            columnGap:scale(5)
-          }}>
-          <Image source={images.juridical} style={styles.image} />
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text, color: COLORS.black}}>
-            {t('Juridical')}:
-          </CustomText>
-          <CustomText
-            textType="regular"
-            numberOfLines={1}
-            style={{...styles.text, color: COLORS.black, width: '50%'}}>
-            Land ownership certificate
-          </CustomText>
-        </View>
+            <CustomText textType="regular" style={styles.text}>
+              {t('Acreage')}:{' '}
+              <CustomText textType="semiBold" style={styles.name}>
+                {formatPrice(data?.size, {unit: 'm²'})}
+              </CustomText>
+            </CustomText>
+          </View>
 
-        {/* <View style={styles.line}></View> */}
+          <View style={styles.line} />
+          <View
+            style={{
+              justifyContent: 'space-between',
+              marginTop: scale(10),
+              rowGap: scale(7),
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <InfoItem
+                Icon={IconRoom}
+                name={t('Bedroom')}
+                value={3}
+                styleIcon={{
+                  height: scale(16),
+                }}
+              />
+              <InfoItem Icon={IconBed} name={t('Toilet')} value={3} />
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <InfoItem
+                Icon={IconAcreage}
+                name={t('Acreage')}
+                value={formatPrice(data?.size, {unit: 'm²'})}
+                styleIcon={{
+                  width: scale(20),
+                  height: scale(20),
+                }}
+              />
+              <InfoItem
+                Icon={IconFurniture}
+                name={t('Interior')}
+                value={data?.furnish}
+              />
+            </View>
+
+            <InfoItem
+              Icon={IconDirection}
+              name={t('House direction')}
+              value={data?.direction_main}
+              styleIcon={{
+                height: scale(16),
+              }}
+            />
+            <InfoItem
+              Icon={IconBookings}
+              name={t('Juridical')}
+              value={data?.legal_documents}
+            />
+          </View>
+        </View>
       </View>
-      {/* <View style={styles.line}></View>
-      <TicketOption/> */}
+
       <View
         style={{
-          width: '100%',
           backgroundColor: '#F5F5F5',
           height: scale(10),
-        }}></View>
-      <Introduction />
+        }}
+      />
+      <Introduction data={data} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    // width: WIDTH.widthContain,
     rowGap: scale(8),
     backgroundColor: '#fff',
     padding: scale(16),
@@ -304,16 +185,24 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    width: '100%',
-    alignItems: 'flex-start',
   },
-  name: {fontSize: SIZES.large},
-  text: {fontSize: SIZES.small, color: COLORS.grey},
+  itemHear: {
+    flexDirection: 'row',
+    alignItems: 'center  ',
+    columnGap: scale(5),
+  },
+  name: {fontSize: SIZES.medium},
   text1: {fontSize: SIZES.xxSmall, width: '30%'},
   line: {
     width: '100%',
     height: scale(1),
     backgroundColor: COLORS.grey,
+  },
+  listInfo: {
+    flexDirection: 'row',
+    paddingBottom: scale(6),
+    paddingTop: scale(12),
+    justifyContent: 'space-between',
   },
   boxTourTime: {
     backgroundColor: COLORS.white,
@@ -335,29 +224,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     alignItems: 'center',
-  },
-  image: {
-    width: scale(12),
-    height: scale(12),
-  },
-  boxRoom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: scale(4),
-  },
-  icon: {
-    width: scale(16),
-    height: scale(16),
-  },
-  boxMore: {
-    borderWidth: 1,
-    borderColor: COLORS.grey,
-    borderRadius: scale(6),
-    padding: scale(5),
-    overflow: 'hidden',
-  },
-  rating: {
-    borderWidth: 0,
-    backgroundColor: '#de4e4e',
   },
 });

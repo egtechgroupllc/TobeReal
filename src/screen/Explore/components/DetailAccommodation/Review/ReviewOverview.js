@@ -4,6 +4,7 @@ import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {formatNumber} from '../../../../../utils/format';
 import ItemOverviewRating from './ItemOverviewRating';
+import RangeSlider from '../../../../Video/components/RangeSlider';
 
 export default function ReviewOverview() {
   return (

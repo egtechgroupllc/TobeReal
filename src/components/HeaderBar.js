@@ -7,7 +7,7 @@ import CustomText from './CustomText';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default memo(function HeaderBar({back, navigation, options, route}) {
-  const {goBack} = useNavigation();
+  const {goBack, navigate} = useNavigation();
   const insets = useSafeAreaInsets();
 
   if (!options?.headerShown) return null;
@@ -21,7 +21,11 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
         }}>
         {!!back && !options?.headerLeft && (
           <Pressable
-            onPress={goBack}
+            onPress={() => {
+              options?.headerLeftNavigate
+                ? navigate(options?.headerLeftNavigate)
+                : goBack();
+            }}
             style={{padding: scale(6), paddingHorizontal: scale(8)}}>
             <IconGoBack fill={'#fff'} />
           </Pressable>

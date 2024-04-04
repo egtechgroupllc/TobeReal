@@ -1,5 +1,4 @@
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -11,20 +10,18 @@ import {
   images,
   scale,
 } from '../../../../../assets/constants';
-import {showMess} from '../../../../../assets/constants/Helper';
 import {CustomButton} from '../../../../../components';
 import CheckBox from '../../../../../components/CheckBox';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {requireField} from '../../../../../utils/validate';
 
-import {postCreateEstatSell} from '../../../../../Model/api/apiEstate';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import MainWrapper from '../../../../../components/MainWrapper';
 import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import EstateDetail from '../components/PostNewSell/EstateDetail';
 import GeneralInformation from '../components/PostNewSell/GeneralInformation';
-import {useNavigation, useRoute} from '@react-navigation/native';
 
 const maxCharacters = 1000;
 export default function PostNewSellScreen() {
@@ -43,11 +40,32 @@ export default function PostNewSellScreen() {
 
   const handlePostLease = value => {
     delete value?.check;
+    delete value?.direction_main;
+    delete value?.estate_type;
+    delete value?.country;
+    delete value?.currency;
+    delete value?.images;
+    delete value?.province;
+
+    // reset();
     navigate('PostConfigurationScreen', value);
   };
 
   useEffect(() => {
-    params?.status && reset();
+    if (params?.address) {
+      const entries = Object.entries(params);
+      const arrKeyno = ['status', 'user_id', 'createdAt', 'updatedAt', 'note'];
+
+      entries.map(item => {
+        if (!arrKeyno.includes(item[0])) {
+          setValue(item[0], item[1]);
+        }
+      });
+    }
+
+    if (params?.success) {
+      reset();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
@@ -120,6 +138,7 @@ export default function PostNewSellScreen() {
         buttonType="medium"
         text={t('Next')}
         onPress={handleSubmit(handlePostLease)}
+        // onPress={handlePostLease}
         style={{
           marginTop: scale(20),
           width: '40%',

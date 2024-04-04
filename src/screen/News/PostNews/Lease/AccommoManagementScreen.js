@@ -1,6 +1,8 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 import {getMyListCreateAccom} from '../../../../Model/api/apiAccom';
+import {getMyListCreateTour} from '../../../../Model/api/apiTour';
 import {scale} from '../../../../assets/constants';
 import EmptyData from '../../../../components/EmptyData';
 import MainWrapper from '../../../../components/MainWrapper';
@@ -8,29 +10,16 @@ import Pagination from '../../../../components/Pagination';
 import usePagination from '../../../../hooks/usePagination';
 import CreateAccomItem from './components/HomeLease/CreateAccomItem';
 import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {getMyListCreateTour} from '../../../../Model/api/apiTour';
-import {getMyListCreateSell} from '../../../../Model/api/apiEstate';
 
 export default function AccommoManagementScreen() {
   const params = useRoute().params;
   const {setOptions} = useNavigation();
-  const {data, page, isLoading, setPage} = usePagination(
-    params?.isTour
-      ? ['accommodation', 'my-list', 1]
-      : params?.isSell
-      ? ['estate', 'my-list']
-      : ['tour', 'my-list', 1],
-    params?.isTour
-      ? getMyListCreateTour
-      : params?.isSell
-      ? getMyListCreateSell
-      : getMyListCreateAccom,
+  const {data, page, isLoading, isError, setPage} = usePagination(
+    params?.isTour ? ['accommodation', 'my-list', 1] : ['tour', 'my-list', 1],
+    params?.isTour ? getMyListCreateTour : getMyListCreateAccom,
     {
       keyQuery: params?.isTour
         ? {hasTicket: 1, limit: 12}
-        : params?.isSell
-        ? {limit: 12}
         : {hasRoom: 1, limit: 12},
     },
   );
@@ -39,8 +28,6 @@ export default function AccommoManagementScreen() {
     return setOptions({
       headerTitle: params?.isTour
         ? 'Danh Sách Tour Đã Tạo'
-        : params?.isSell
-        ? 'Danh Sách Bất Động Sản Ở Đã Tạo'
         : 'Danh Sách Chỗ Ở Đã Tạo',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,6 +39,7 @@ export default function AccommoManagementScreen() {
   return (
     <MainWrapper
       scrollEnabled={!isLoading}
+      refreshControl
       styleContent={{
         marginVertical: scale(20),
       }}>
@@ -65,7 +53,6 @@ export default function AccommoManagementScreen() {
               directionalLockEnabled={true}
               contentContainerStyle={{
                 gap: scale(10),
-                alignItems: 'center',
               }}>
               <FlatList
                 key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}

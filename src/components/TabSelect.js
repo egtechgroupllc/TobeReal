@@ -16,8 +16,11 @@ export default function TabSelect({
   styleContent,
   styleTabActive,
   styleTabDefault,
+  isLine,
+  keyView = 'name',
+  isObj,
 }) {
-  const [tab, setTab] = useState(data[0]);
+  const [tab, setTab] = useState(0);
 
   if (data.length <= 0) return null;
   return (
@@ -33,7 +36,7 @@ export default function TabSelect({
         }}>
         {data.map((item, index) => (
           <View
-            key={`key-${item}-${index}`}
+            key={`key-${index}`}
             style={[
               data[2]
                 ? {
@@ -44,41 +47,41 @@ export default function TabSelect({
                   },
               {
                 height:
-                  tab === item
+                  tab === index
                     ? styleTabActive?.height || '100%'
                     : styleTabDefault?.height || '86%',
               },
             ]}>
             <CustomButton
               key={`key-${item}-${index}`}
-              text={item}
+              text={isObj ? item?.[keyView] : item}
               buttonType="large"
-              isShadow={isShadow && tab === item}
+              isShadow={isShadow && tab === index}
               style={[
                 styles.tab,
-                tab === item ? styleTabActive : styleTabDefault,
+                tab === index ? styleTabActive : styleTabDefault,
                 {
                   height: '100%',
                   backgroundColor:
-                    tab === item
+                    tab === index
                       ? styleTabActive?.backgroundColor || '#fff'
                       : styleTabDefault?.backgroundColor || '#e1e1e1',
                 },
               ]}
               styleText={{
                 color:
-                  tab === item
+                  tab === index
                     ? styleTabActive?.color || '#F0B90B'
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
                 fontSize: SIZES.xMedium,
               }}
               onPress={() => {
-                setTab(item);
+                setTab(index);
                 onChange(item);
               }}
             />
-            {tab === item && (
+            {tab === index && isLine && (
               <IconBorderBottom
                 style={{
                   position: 'absolute',

@@ -1,7 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
+import {useQuery} from '@tanstack/react-query';
 
+import {getListTypeEstateSell} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import InViewPort from '../../../../../../components/InViewport';
@@ -11,14 +13,9 @@ import {
   validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
+import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
 import RealEstateType from '../../../components/RealEstateType';
 import SelectCountry from '../../../components/SelectCountry';
-import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
-import {useQuery} from '@tanstack/react-query';
-import {
-  getListTypeEstateSell,
-  getListTypeRent,
-} from '../../../../../../Model/api/common';
 
 export default function GeneralInformation({
   maxCharacters,
@@ -72,6 +69,7 @@ export default function GeneralInformation({
               name={'estate_type_id'}
               control={control}
               watch={watch}
+              valueEdit={watch('estate_type')}
             />
             <View style={styles.line} />
 
@@ -130,6 +128,7 @@ export default function GeneralInformation({
 
             <EstateSetMap
               control={control}
+              watch={watch}
               onChange={value => {
                 setValue('latitude', value?.latitude);
                 setValue('longitude', value?.longitude);
@@ -141,6 +140,7 @@ export default function GeneralInformation({
             <SelectCountry
               control={control}
               setValue={setValue}
+              watch={watch}
               // onChange={value => {
               //   setValue('country_id', value?.id);
               //   setValue('province_id', value?.province?.id);

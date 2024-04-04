@@ -1,20 +1,27 @@
+import {useQuery} from '@tanstack/react-query';
 import React, {useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+import {getListReviewAccmo} from '../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import BottomSheet from '../../../../components/BottomSheet';
+import ListSelect from '../../../../components/BottomSheetListSelect';
 import CustomText from '../../../../components/CustomText';
+import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 import ItemBoxReview from './Review/ItemBoxReview';
 import ReviewAll from './Review/ReviewAll';
-import ListSelect from '../../../../components/ListSelect';
-import {useLanguage} from '../../../../hooks/useLanguage';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
-export default function Review() {
+export default function Review({dataP}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const [select, setSelect] = useState();
+
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['accommodation', 'list-review'],
+    queryFn: () => getListReviewAccmo({id_accomo: dataP.id}),
+  });
 
   return (
     <WrapperContent
@@ -74,6 +81,7 @@ export default function Review() {
         <ReviewAll
           onSort={() => bottomSheetChildRef.current.openChild()}
           valueSort={select}
+          id_accomo={dataP.id}
         />
       </BottomSheet>
     </WrapperContent>

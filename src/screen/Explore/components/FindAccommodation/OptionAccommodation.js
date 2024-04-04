@@ -71,6 +71,7 @@ export default function OptionAccommodation({
     }),
     [],
   );
+
   const checkSelect = useCallback(
     (value, index) => {
       const result = option.some(item => item.index === index);
@@ -112,13 +113,13 @@ export default function OptionAccommodation({
   }, [option]);
 
   const flatRef = useRef();
-  useLayoutEffect(() => {
-    flatRef.current.scrollToIndex({
-      animated: true,
-      index: option[0]?.index < 0 ? 0 : option[0]?.index || 0,
-      viewPosition: 0.5,
-    });
-  }, [option]);
+  // useLayoutEffect(() => {
+  //   flatRef.current.scrollToIndex({
+  //     animated: true,
+  //     index: option[0]?.index || 0,
+  //     viewPosition: 0.5,
+  //   });
+  // }, [option]);
 
   return (
     <View style={[styles.wrapper, styleWrapper, isShaDow && SHADOW]}>

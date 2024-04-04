@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {
+  Image,
   Platform,
   StyleSheet,
   TouchableOpacity,
@@ -40,7 +41,7 @@ export default function ChooseImgPicker({
             return {
               name: new Date().getTime() + item.fileName,
               type: item.type,
-              index: index,
+              id: index,
               description: '',
               uri:
                 Platform.OS === 'ios'
@@ -77,8 +78,8 @@ export default function ChooseImgPicker({
     }, 300);
   };
 
-  const handleDelete = (nameImg, dataImg, onChange) => {
-    const result = dataImg.filter(item => item?.name !== nameImg);
+  const handleDelete = (idImg, dataImg, onChange) => {
+    const result = dataImg.filter(item => item?.id !== idImg);
     onChange(result);
   };
 
@@ -88,7 +89,6 @@ export default function ChooseImgPicker({
       rules={arrayToObject(rules)}
       name={name || ''}
       render={({field: {onChange, value = []}, fieldState: {error}}) => {
-        // console.log({value});
         return (
           <View style={{width: '100%', rowGap: scale(12)}}>
             <View style={[styles.header, stylesHeader]}>
@@ -146,7 +146,7 @@ export default function ChooseImgPicker({
                         <TouchableOpacity
                           activeOpacity={0.7}
                           style={styles.img}
-                          onPress={() => setViewImg(img)}>
+                          onPress={() => setViewImg(index)}>
                           <CustomImage
                             source={img?.uri}
                             style={{
@@ -157,9 +157,7 @@ export default function ChooseImgPicker({
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                          onPress={() =>
-                            handleDelete(img?.name, value, onChange)
-                          }
+                          onPress={() => handleDelete(img?.id, value, onChange)}
                           activeOpacity={0.7}
                           style={styles.delete}>
                           <IconX
@@ -176,6 +174,7 @@ export default function ChooseImgPicker({
                             height: scale(32),
                             borderRadius: scale(5),
                           }}
+                          defaultValue={img?.description}
                           maxLength={45}
                           onChangeText={valueText =>
                             handleDescriptionChange(
@@ -224,16 +223,16 @@ export default function ChooseImgPicker({
             {(viewImg || viewImg === 0) && (
               <ImageView
                 images={value}
-                imageIndex={viewImg?.index}
-                visible={!!viewImg || viewImg?.index === 0}
+                imageIndex={viewImg}
+                visible={!!viewImg || viewImg === 0}
                 onRequestClose={() => {
                   setViewImg(false);
                 }}
                 swipeToCloseEnabled={false}
                 FooterComponent={({imageIndex}) => {
-                  const imgDetail = value.find(
-                    item => item?.index === imageIndex,
-                  );
+                  const imgDetail = value
+                    ?.map((img, index) => ({...img, index}))
+                    .find(item => item?.index === imageIndex);
 
                   return (
                     imgDetail?.description && (

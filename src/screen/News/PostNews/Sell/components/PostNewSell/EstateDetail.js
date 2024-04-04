@@ -1,25 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 
-import {
-  getListTypeBed,
-  getListTypeRoom,
-} from '../../../../../../Model/api/apiAccom';
+import {getListDirection} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CheckBox from '../../../../../../components/CheckBox';
-import Counter from '../../../../../../components/Counter';
-import CustomSelectDropdown from '../../../../../../components/CustomSelectDropdown';
-import CustomText from '../../../../../../components/CustomText';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {requireField} from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
-import SelectCurrency from '../../../components/SelectCurrency';
 import RealEstateType from '../../../components/RealEstateType';
-import {getListDirection} from '../../../../../../Model/api/common';
+import SelectCurrency from '../../../components/SelectCurrency';
 
 const listLegalDoc = [
   {
@@ -59,41 +53,6 @@ const listInterior = [
   },
 ];
 
-const adasdasd = [
-  {
-    id: 1,
-    name: 'Đông',
-  },
-  {
-    id: 2,
-    name: 'Tây',
-  },
-  {
-    id: 3,
-    name: 'Nam',
-  },
-  {
-    id: 4,
-    name: 'Вắс',
-  },
-  {
-    id: 5,
-    name: 'Đông Bắc',
-  },
-  {
-    id: 6,
-    name: 'Tây Bắc',
-  },
-  {
-    id: 7,
-    name: 'Tây Nam',
-  },
-  {
-    id: 8,
-    name: 'Đông Name',
-  },
-];
-
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
 
@@ -112,6 +71,12 @@ export default function EstateDetail({control, errors, watch, setValue}) {
     queryKey: ['common', 'list-direction'],
     queryFn: getListDirection,
   });
+
+  useEffect(() => {
+    if (watch('is_negotiated') || watch('is_negotiated') === false) {
+      setValue('is_negotiated', watch('is_negotiated') ? 1 : 0);
+    }
+  }, [watch('is_negotiated')]);
 
   return (
     <View>
@@ -132,8 +97,9 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               control={control}
               styleWrapper={styles.buttonStyle}
               watch={watch}
+              valueEdit={{name: watch('direction_main')}}
             />
-
+            {/* watch('estate_type') */}
             {/* <RealEstateType
               label={'Hướng ban công'}
               data={data?.data}
@@ -153,6 +119,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styleWrapper={styles.buttonStyle}
               getKeyValue="name"
               watch={watch}
+              valueEdit={{name: watch('legal_documents')}}
             />
 
             <RealEstateType
@@ -163,6 +130,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styleWrapper={styles.buttonStyle}
               getKeyValue="name"
               watch={watch}
+              valueEdit={{name: watch('furnish')}}
             />
           </View>
 
@@ -173,11 +141,13 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             styleTextLabel={styles.label}
             control={control}
             name="size"
+            defaultValue={watch('size') && String(watch('size'))}
             placeholder={'M²'}
             rules={requireField(t('this_field_required'))}
             style={{...styles.textInput}}
             keyboardType="numeric"
           />
+
           {/* 
           <Counter heading={'Số phòng'} min={0} max={255} />
 
@@ -185,7 +155,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={styles.line} />
 
-          <SelectCurrency control={control} setValue={setValue} />
+          <SelectCurrency control={control} setValue={setValue} watch={watch} />
 
           <CustomInput
             label={t('price')}
@@ -198,6 +168,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             keyboardType="number-pad"
             enableFormatNum
           />
+
           <CheckBox
             text="Giá có thể thoả thuận"
             styleWrapper={{
@@ -206,6 +177,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             checkedNumber
             control={control}
             name="is_negotiated"
+            isChecked={!!watch('is_negotiated')}
+            isRadio
             defaultValue={0}
           />
         </Collapsible>

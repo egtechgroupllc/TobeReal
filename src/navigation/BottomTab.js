@@ -43,9 +43,11 @@ export default function BottomTab() {
         },
       }}>
       <Tab.Screen
-        name={t('explore')}
+        name={'Explore'}
         component={NavigationExplore}
         options={{
+          tabBarLabel: t('explore'),
+
           tabBarIcon: ({focused}) => (
             <CustomImage source={images.kinhlup} style={{width:scale(25), height:scale(25)}} resizeMode='cover'/>
             // <IconExplore fill={focused && '#F0B90B'} />
@@ -53,18 +55,21 @@ export default function BottomTab() {
         }}
       />
       <Tab.Screen
-        name={t('booking')}
+        name={'Booking'}
         component={NavigationBookings}
         options={{
+          tabBarLabel: t('booking'),
           tabBarIcon: ({focused}) => (
             <IconBookings fill={focused && '#F0B90B'} />
           ),
         }}
       />
       <Tab.Screen
-        name={t('promotion')}
+        name={'Promotion'}
         component={NavigationPromotion}
         options={{
+          tabBarLabel: t('promotion'),
+
           tabBarIcon: ({focused}) => (
             <IconPromotion fill={focused && '#F0B90B'} />
           ),
@@ -80,25 +85,28 @@ export default function BottomTab() {
         }}
       /> */}
       <Tab.Screen
-        name={t('map')}
+        name={'Map'}
         component={HomeMapScreen}
         options={{
+          tabBarLabel: t('map'),
           tabBarIcon: ({focused}) => (
             <IconMapView fill={focused && '#F0B90B'} />
           ),
         }}
       />
       <Tab.Screen
-        name={t('post_new')}
+        name={'POST'}
         component={NavigationNews}
         options={{
+          tabBarLabel: t('post_new'),
           tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
         }}
       />
       <Tab.Screen
-        name={t('profile')}
+        name={'Profile'}
         component={NavigationProfile}
         options={{
+          tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
             <IconProfile fill={focused && '#F0B90B'} />
           ),

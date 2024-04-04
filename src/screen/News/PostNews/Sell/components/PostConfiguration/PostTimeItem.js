@@ -1,10 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
 
-export default function PostTimeItem({onPress, data, isSelect}) {
+export default function PostTimeItem({onPress, data, cost, isSelect}) {
+  const price = useMemo(
+    () => cost - data?.discount * cost,
+    [cost, data?.discount],
+  );
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -24,13 +30,13 @@ export default function PostTimeItem({onPress, data, isSelect}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          {data.numDays} ngày
+          {data.number_day} ngày
         </CustomText>
         <CustomText
           style={{
             color: COLORS.text,
           }}>
-          {formatPrice(data.price)}/ngày
+          {formatPrice(price)}/ngày
         </CustomText>
       </View>
       {!!data.discount && (
@@ -46,7 +52,7 @@ export default function PostTimeItem({onPress, data, isSelect}) {
               color: '#e03c31',
               fontSize: SIZES.xSmall,
             }}>
-            -{data.discount}%
+            -{data?.discount * 100}%
           </CustomText>
         </View>
       )}

@@ -6,7 +6,7 @@ import CustomText from '../../../../../components/CustomText';
 import WrapperContent from '../../WrapperContent';
 import ItemBoxReview from './Review/ItemBoxReview';
 import ReviewAll from './Review/ReviewAll';
-import ListSelect from '../../../../../components/ListSelect';
+import ListSelect from '../../../../../components/BottomSheetListSelect';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 

@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, scale} from '../../../../assets/constants';
 import {IconError, IconRight} from '../../../../assets/icon/Icon';
@@ -15,6 +16,7 @@ export default function SelectCurrency({
   rules,
   defaultValue,
   onSelect,
+  watch = () => {},
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -28,6 +30,12 @@ export default function SelectCurrency({
       setDataFromScreen(value);
     }
   };
+
+  useEffect(() => {
+    if (watch('currency')) {
+      setDataFromScreen(watch('currency'));
+    }
+  }, [watch('currency')]);
 
   return (
     <Controller

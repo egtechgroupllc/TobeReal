@@ -4,30 +4,29 @@ import {CustomInput} from '../../../../components';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import { SIZES, scale } from '../../../../assets/constants';
-import { IconDownWhite } from '../../../../assets/icon/Icon';
+import {SIZES, scale} from '../../../../assets/constants';
+import {IconDownWhite} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 export default function ButtonAccount({onPress, title, style, client}) {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   return (
     <View>
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.button, style]}>
-        <View style={{width:'90%'}}>
-        <CustomText
-          textType="semiBold"
-          style={{...styles.text2, marginLeft:scale(10)}}>
-          {title}
-        </CustomText>
+      <TouchableOpacity onPress={onPress}>
+        <View style={[styles.button, style]}>
+          <View style={{width: '90%'}}>
+            <CustomText
+              textType="semiBold"
+              style={{...styles.text2, marginLeft: scale(10)}}>
+              {title}
+            </CustomText>
+          </View>
+
+          <IconDownWhite />
         </View>
-     
-        <IconDownWhite/>
-      </View>
-    </TouchableOpacity>
-    {
-        client&&(
-          <View style={styles.box}>
+      </TouchableOpacity>
+      {client && (
+        <View style={styles.box}>
           <View>
             <TouchableOpacity
               style={{
@@ -35,8 +34,10 @@ export default function ButtonAccount({onPress, title, style, client}) {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <CustomText  textType="semiBold" style={{...styles.text2, width:'97%'}}>
-              {t('Real estate owner')}
+              <CustomText
+                textType="semiBold"
+                style={{...styles.text2, width: '97%'}}>
+                {t('Real estate owner')}
               </CustomText>
             </TouchableOpacity>
             <TouchableOpacity
@@ -44,18 +45,16 @@ export default function ButtonAccount({onPress, title, style, client}) {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginTop:scale(5)
+                marginTop: scale(5),
               }}>
-              <CustomText  textType="semiBold" style={{...styles.text2}}>
-              {t('Collaborators')}
+              <CustomText textType="semiBold" style={{...styles.text2}}>
+                {t('Collaborators')}
               </CustomText>
             </TouchableOpacity>
           </View>
         </View>
-        )
-      }
+      )}
     </View>
-
   );
 }
 const styles = StyleSheet.create({
@@ -63,11 +62,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scale(5),
     height: scale(40),
-    paddingHorizontal:scale(10),
+    paddingHorizontal: scale(10),
     // marginTop: scale(20),
-    flexDirection:'row',
-    backgroundColor:'#E3E3E3',
-    borderRadius: scale(8)
+    flexDirection: 'row',
+    backgroundColor: '#E3E3E3',
+    borderRadius: scale(8),
   },
   box: {
     height: scale(80),

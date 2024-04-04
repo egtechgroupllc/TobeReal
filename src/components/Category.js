@@ -12,8 +12,9 @@ export default memo(function Category({
   styleWrapper,
   styleContent,
   isShadow = true,
+  indexDefault = 0,
 }) {
-  const [select, setSelect] = useState(!noSelect && data[0]);
+  const [select, setSelect] = useState(!noSelect && data[indexDefault]);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
 

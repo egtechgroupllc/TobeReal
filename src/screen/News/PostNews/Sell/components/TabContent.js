@@ -25,7 +25,7 @@ import {CustomInput} from '../../../../../components';
 import Button from '../../../../Profile/components/Button';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import axios from 'axios';
-import Map from '../../../../Explore/components/DetailAccommodation/Map';
+import Map from '../../../../Explore/components/DetailAccommodation/DetailAccommoMap';
 import {
   requireField,
   validateMaxLengthText,

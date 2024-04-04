@@ -179,8 +179,8 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				5716A07777490E3A58FDE7F4 /* [CP] Embed Pods Frameworks */,
 				80FCA507D2E8E7854F3181E3 /* [CP] Copy Pods Resources */,
+				777557B1B9394EBBC394A03C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,8 +201,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				6C2D2D141673F435F21807F7 /* [CP] Embed Pods Frameworks */,
 				22851C610DADD04DDAE038DE /* [CP] Copy Pods Resources */,
+				A04E4DE33AF7BD8BB96F4D9E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,23 +305,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5716A07777490E3A58FDE7F4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5A379AA760E4252919ED4768 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,21 +327,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6C2D2D141673F435F21807F7 /* [CP] Embed Pods Frameworks */ = {
+		777557B1B9394EBBC394A03C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		80FCA507D2E8E7854F3181E3 /* [CP] Copy Pods Resources */ = {
@@ -376,6 +359,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A04E4DE33AF7BD8BB96F4D9E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka/Pods-Saveloka-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BF345E7A75E1E5D1C0D8FFC3 /* [CP] Check Pods Manifest.lock */ = {

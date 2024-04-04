@@ -4,14 +4,14 @@ import {IconHeart} from '../assets/icon/Icon';
 import {COLORS, SHADOW, scale} from '../assets/constants';
 import {CustomButton} from '.';
 
-export default function Favourite() {
+export default function Favourite({styleWrapper}) {
   const [isFavourite, setIsFavourite] = useState(false);
 
   return (
     <CustomButton
       isShadow
       iconRight={IconHeart}
-      style={styles.active}
+      style={{...styles.active, ...styleWrapper}}
       onPress={() => setIsFavourite(!isFavourite)}
       styleIcon={{
         color: isFavourite && COLORS.primary,

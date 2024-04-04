@@ -27,7 +27,8 @@ const BottomSheet = (
     disableScroll,
     onDismiss,
     onChange,
-    ComponentFooter
+    ComponentFooter,
+    index,
   },
   ref,
 ) => {
@@ -71,14 +72,14 @@ const BottomSheet = (
   return (
     <BottomSheetModal
       ref={bottomSheetModalRef}
-      index={_snapPoints.length - 1}
+      index={index || _snapPoints.length - 1}
       snapPoints={_snapPoints}
       handleHeight={30}
       backdropComponent={BottomSheetBackdrop}
       onDismiss={onDismiss}
-      onChange={index => {
-        index === 0 && handleClose();
-        onChange && onChange(index);
+      onChange={_index => {
+        _index === 0 && handleClose();
+        onChange && onChange(_index);
       }}
       handleIndicatorStyle={{
         width: '20%',
@@ -112,7 +113,7 @@ const BottomSheet = (
           {children}
         </View>
       ) : (
-    <>
+        <>
           <BottomSheetScrollView
             scrollEnabled={!disableScroll}
             showsVerticalScrollIndicator={false}
@@ -125,7 +126,7 @@ const BottomSheet = (
             </View>
           </BottomSheetScrollView>
           {ComponentFooter}
-    </>
+        </>
       )}
 
       {bottomSheetChildRef && (

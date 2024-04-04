@@ -1,34 +1,25 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
-import CustomText from '../../../../../../components/CustomText';
-import {COLORS, FONTS, SIZES, scale} from '../../../../../../assets/constants';
-import {formatDateTime, formatPrice} from '../../../../../../utils/format';
-import PostTimeItem from './PostTimeItem';
-import {CustomInput} from '../../../../../../components';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {memo, useEffect, useMemo, useState} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import {COLORS, FONTS, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCalendar} from '../../../../../../assets/icon/Icon';
-const postDate = [
-  {
-    numDays: 10,
-    price: 2591,
-    discount: 0,
-  },
-  {
-    numDays: 15,
-    price: 2331,
-    discount: 15,
-  },
-  {
-    numDays: 30,
-    price: 2073,
-    discount: 20,
-  },
-];
-export default function ChoosePostTime({setValue}) {
-  const [select, setSelect] = useState(postDate[0]);
+import {CustomInput} from '../../../../../../components';
+import CustomText from '../../../../../../components/CustomText';
+import {formatDateTime} from '../../../../../../utils/format';
+import PostTimeItem from './PostTimeItem';
+
+export default memo(function ChoosePostTime({
+  setValue,
+  data,
+  params,
+  onChangeDateEnd,
+}) {
+  const [select, setSelect] = useState(data?.package_post_items?.[0]);
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(
+    params?.date_start ? new Date(params?.date_start) : new Date(),
+  );
 
   const dateStart = useMemo(
     () =>
@@ -41,7 +32,7 @@ export default function ChoosePostTime({setValue}) {
   const dateEnd = useMemo(
     () =>
       formatDateTime(date, {
-        addDays: select?.numDays,
+        addDays: select?.number_day,
         dateStyle: 'yyyy-MM-dd',
       }),
     [select, date],
@@ -49,9 +40,27 @@ export default function ChoosePostTime({setValue}) {
 
   useEffect(() => {
     setValue('date_start', dateStart);
-    setValue('date_end', dateEnd);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateStart, dateEnd]);
+    setValue('package_post_item_id', select?.id);
+  }, [dateStart, select]);
+
+  useEffect(() => {
+    onChangeDateEnd &&
+      onChangeDateEnd({
+        date,
+        number_day: select?.number_day,
+        id: select?.id,
+      });
+  }, [dateEnd]);
+
+  useEffect(() => {
+    if (params?.package_post_item) {
+      const result = data?.package_post_items?.find(item => {
+        return item?.id === params?.package_post_item?.id;
+      });
+
+      setSelect(result);
+    }
+  }, [data, params?.package_post_item]);
 
   return (
     <View style={styles.wrapper}>
@@ -78,14 +87,15 @@ export default function ChoosePostTime({setValue}) {
             padding: scale(10),
           }}
           showsHorizontalScrollIndicator={false}
-          data={postDate}
+          data={data?.package_post_items}
           horizontal
           renderItem={({item, index}) => {
             return (
               <PostTimeItem
                 onPress={() => setSelect(item)}
-                isSelect={select?.numDays === item?.numDays}
+                isSelect={select?.id === item?.id}
                 data={item}
+                cost={data?.price}
               />
             );
           }}
@@ -137,7 +147,7 @@ export default function ChoosePostTime({setValue}) {
       </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

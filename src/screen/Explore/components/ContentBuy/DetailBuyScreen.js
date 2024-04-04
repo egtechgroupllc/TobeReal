@@ -1,33 +1,43 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import {useRoute} from '@react-navigation/native';
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
-import InfoDetail from './DetailBuy/InfoDetail';
-import Map from './DetailBuy/Map';
-import Review from './DetailBuy/Review';
-import DetailAccommodationLoading from './DetailBuy/DetailAccommodationLoading';
+import {scale, WIDTH} from '../../../../assets/constants';
 import MainWrapper from '../../../../components/MainWrapper';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import DetailAccommoMap from '../DetailAccommodation/DetailAccommoMap';
+import DynamicHeader from '../DetailAccommodation/DynamicHeader';
+import ConfigDetail from './ConfigDetail';
 import BookAccommodation from './DetailBuy/BookAccommodation';
-import DynamicHeader from './DetailBuy/DynamicHeader';
-import { scale,WIDTH } from '../../../../assets/constants';
+import ContactInfo from './DetailBuy/ContactInfo';
+import DetailAccommodationLoading from './DetailBuy/DetailAccommodationLoading';
+import InfoDetail from './DetailBuy/InfoDetail';
+import Review from './DetailBuy/Review';
 import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
-import InfoUnitFacilities from './DetailBuy/InfoUnitFacilities';
-
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailBuyScreen({route}) {
-  const {jsondata, title, paramPrice} = route.params;
+  const {jsondata, title, paramPrice} = {jsondata, title, paramPrice};
+  const params = useRoute().params;
+  const {t} = useLanguage();
+
   const listView = useRef([
-    <InfoDetail name={title} price={paramPrice} />,
-    // <InfoUnitFacilities />,
-    <Map />,
+    <InfoDetail data={params} />,
+    <DetailAccommoMap data={params} />,
     <Review />,
-    // <TourSchedule/>
-    // <InfoAdditional />,
-    <SimilarApartmentsNearby name={title} image={jsondata} price={paramPrice}/>,
+    <View>
+      <ContactInfo data={params} />
+      <ConfigDetail data={params} />
+    </View>,
+    <SimilarApartmentsNearby
+      name={title}
+      image={jsondata || []}
+      price={paramPrice}
+    />,
   ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
@@ -116,7 +126,24 @@ export default function DetailBuyScreen({route}) {
             ref={dynamicHeaderRef}
             scrollOffsetY={scrollOffsetY}
             onSelect={selectScrollHandler}
-            image={jsondata}
+            data={params}
+            listNav={[
+              {
+                text: t('detail'),
+              },
+              {
+                text: t('location'),
+              },
+              {
+                text: t('reviews'),
+              },
+              {
+                text: t('info'),
+              },
+              {
+                text: t('others'),
+              },
+            ]}
           />
 
           <Animated.ScrollView

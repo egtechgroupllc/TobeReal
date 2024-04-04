@@ -4,19 +4,19 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
+import {useRoute} from '@react-navigation/native';
 import {WIDTH, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
 import BookAccommodation from './components/DetailAccommodation/BookAccommodation';
+import DetailAccommoMap from './components/DetailAccommodation/DetailAccommoMap';
+import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
 import DynamicHeader from './components/DetailAccommodation/DynamicHeader';
 import InfoAdditional from './components/DetailAccommodation/InfoAdditional';
 import InfoDetail from './components/DetailAccommodation/InfoDetail';
 import InfoUnitFacilities from './components/DetailAccommodation/InfoUnitFacilities';
-import Map from './components/DetailAccommodation/Map';
 import Review from './components/DetailAccommodation/Review';
-import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
-import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 import Room from './components/DetailAccommodation/Rooms/Room';
-import {useRoute} from '@react-navigation/native';
+import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
@@ -24,11 +24,11 @@ export default function DetailAccommodationScreen({route}) {
   const params = useRoute().params;
 
   const listView = useRef([
-    <InfoDetail name={title} data={params} />,
+    <InfoDetail data={params} />,
     <InfoUnitFacilities data={params} />,
-    // <Map data={params} />,
+    <DetailAccommoMap data={params} />,
     <Room name={title} data={params} />,
-    <Review data={params} />,
+    <Review dataP={params} />,
     <InfoAdditional data={params} />,
     <SimilarApartmentsNearby data={params} />,
   ]).current;
@@ -158,7 +158,7 @@ export default function DetailAccommodationScreen({route}) {
 
 const styles = StyleSheet.create({
   content: {
-    rowGap: scale(10),
+    rowGap: scale(8),
     marginTop: scale(-4),
     // alignItems: 'center',
   },

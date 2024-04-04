@@ -7,7 +7,7 @@ export const scale = (value = 0) => {
 };
 
 export const COLORS = {
-  blue:'#0057FF',
+  blue: '#0057FF',
   primary: '#F0B90B',
   text: '#3b3a3a',
   textSub: '#7d7d7d',
@@ -15,7 +15,7 @@ export const COLORS = {
   grey: '#ccc',
   black: '#000000',
   overlay: '#00000060',
-  error: '#FF4500',
+  error: '#e03c31',
 };
 export const WIDTH = {
   widthScreen: width,

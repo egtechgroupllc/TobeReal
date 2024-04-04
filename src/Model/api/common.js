@@ -43,3 +43,9 @@ export const getListDirection = async () => {
 
   return responsive.data;
 };
+
+export const getListPackagePost = async () => {
+  const responsive = await instance.get('common/list-package-post');
+
+  return responsive.data;
+};

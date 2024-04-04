@@ -43,6 +43,33 @@ export default function CreateAccomItem({data, isTour}) {
             </CustomText>
           </View>
         )}
+
+        {data?.status &&
+          (!data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0) && (
+            <View
+              style={{
+                ...styles.type,
+                left: scale(8),
+                right: 'auto',
+                borderRadius: scale(5),
+                paddingVertical: scale(2),
+                backgroundColor:
+                  data?.status === 'VERIFIED'
+                    ? '#42b00b'
+                    : data?.status === 'VERIFYING'
+                    ? COLORS.primary
+                    : '#e03c31',
+              }}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  color: COLORS.white,
+                }}>
+                {data?.status}
+              </CustomText>
+            </View>
+          )}
+
         <View
           style={{
             backgroundColor: COLORS.overlay,

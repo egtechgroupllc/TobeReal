@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useMemo, useState} from 'react';
 import {Animated, Share, StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconShare, IconX} from '../../../../assets/icon/Icon';
+import {IconGoBack, IconShare, IconX} from '../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import Favourite from '../../../../components/Favourite';
@@ -16,31 +17,35 @@ const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 
 export default React.memo(
   forwardRef(function DynamicHeader(
-    {scrollOffsetY, onSelect, data, images},
+    {scrollOffsetY, onSelect, data, listNav},
     ref,
   ) {
     const {t} = useLanguage();
     const {goBack} = useNavigation();
-    const listInfo = [
-      {
-        text: t('detail'),
-      },
-      {
-        text: t('facilities'),
-      },
-      {
-        text: t('location'),
-      },
-      {
-        text: t('room'),
-      },
-      {
-        text: t('Review'),
-      },
-      {
-        text: t('info'),
-      },
-    ];
+    const listInfo = useMemo(
+      () =>
+        listNav || [
+          {
+            text: t('detail'),
+          },
+          {
+            text: t('facilities'),
+          },
+          {
+            text: t('location'),
+          },
+          {
+            text: t('room'),
+          },
+          {
+            text: t('Review'),
+          },
+          {
+            text: t('info'),
+          },
+        ],
+      [listNav],
+    );
     const animatedTranslateY = scrollOffsetY.interpolate({
       inputRange: [0, Scroll_Distance],
       outputRange: [0, -Scroll_Distance],
@@ -91,13 +96,12 @@ export default React.memo(
       }),
       [indexSelect],
     );
-    const dataImg = data?.images
-      ? data?.images?.map((img, index) => ({
-          ...img,
-          index,
-          uri: img?.url,
-        }))
-      : images;
+    const dataImg = data?.images?.map((img, index) => ({
+      id: img?.id,
+      description: img?.description,
+      index,
+      uri: img?.url,
+    }));
 
     return (
       <>
@@ -112,12 +116,12 @@ export default React.memo(
           ]}>
           <CustomButton
             isShadow
-            iconRight={IconX}
+            iconRight={IconGoBack}
             style={styles.menu}
             onPress={goBack}
             styleIcon={{
-              width: scale(20),
-              height: scale(20),
+              width: scale(14),
+              height: scale(14),
             }}
           />
           <CustomText
@@ -128,14 +132,14 @@ export default React.memo(
               opacity: animatedOpacityText,
             }}
             textType="bold">
-            {data?.name || 'Name Location'}
+            {data?.name || data?.title}
           </CustomText>
           <View
             style={{
               flexDirection: 'row',
               columnGap: scale(10),
             }}>
-            <Favourite />
+            <Favourite styleWrapper={styles.menu} />
             <CustomButton
               isShadow
               // text="Share"
@@ -208,8 +212,8 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
   },
   menu: {
-    minWidth: scale(30),
-    height: scale(35),
+    width: scale(30),
+    height: scale(30),
     backgroundColor: '#fff',
   },
   textName: {

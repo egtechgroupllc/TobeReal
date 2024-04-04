@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -17,6 +18,7 @@ export default function SelectProvince({
   rules,
   country,
   setValue,
+  watch = () => {},
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -38,9 +40,14 @@ export default function SelectProvince({
       setDataFromScreen(null);
       setValue(name, null);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataFromScreen, country]);
+
+  useEffect(() => {
+    if (watch('province')) {
+      setDataFromScreen(watch('province'));
+      setValue(name, watch('province')?.id);
+    }
+  }, [watch('province')]);
 
   return (
     <Controller

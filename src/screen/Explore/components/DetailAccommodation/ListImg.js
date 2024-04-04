@@ -17,7 +17,7 @@ export default function ListImg({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
   const flatListRef = useRef(null);
-  const images = useMemo(() => dataImg.map(uri => ({uri})), [dataImg]);
+  // const images = useMemo(() => dataImg.map(uri => ({uri})), [dataImg]);
 
   const [visible, setIsVisible] = useState(false);
   const [indexNavigation, setIndexNavigation] = useState(1);
@@ -30,7 +30,7 @@ export default function ListImg({dataImg, open, onClose}) {
       });
     }
   }, [indexNavigation]);
-
+  console.log(dataImg[0]);
   return (
     <Modal
       visible={!!open}
@@ -96,9 +96,9 @@ export default function ListImg({dataImg, open, onClose}) {
 
         {(!!visible || dataImg.length === 1 || visible === 0) && (
           <ImageView
-            images={images}
+            images={dataImg}
             imageIndex={visible}
-            visible={dataImg.length === 1 || !!visible || visible === 0}
+            visible={true}
             onRequestClose={() => {
               setIsVisible(false);
               dataImg.length === 1 && onClose && onClose();
@@ -106,13 +106,13 @@ export default function ListImg({dataImg, open, onClose}) {
             onImageIndexChange={e => e && setIndexNavigation(e - 1)}
             swipeToCloseEnabled={false}
             FooterComponent={({imageIndex}) => {
-              const imgDetail = images?.find(
+              const imgDetail = dataImg?.find(
                 item => item?.index === imageIndex,
               );
-              console.log({imgDetail});
+
               return (
                 imgDetail?.description && (
-                  <View style={styles.footer}>
+                  <View style={styles.footer} key={imageIndex}>
                     <CustomText
                       style={{
                         color: COLORS.white,
@@ -147,5 +147,13 @@ const styles = StyleSheet.create({
     width: scale(20),
     height: scale(20),
     zIndex: 9,
+  },
+  footer: {
+    backgroundColor: COLORS.overlay,
+    padding: scale(10),
+    borderRadius: scale(10),
+    marginBottom: scale(80),
+    marginHorizontal: scale(20),
+    alignSelf: 'flex-start',
   },
 });
