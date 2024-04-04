@@ -68,6 +68,8 @@ export default {
   juridical: require('../images/juridical.png'),
   logoLoading: require('../images/logoLoading.gif'),
   logoSaveloka: require('../images/logoSaveloka.gif'),
+  logoSplash: require('../images/logoSplash.gif'),
+  kinhlup: require('../images/kinhlup.gif'),
   c15: require('../images/c15.jpg'),
   c15_1: require('../images/c15_1.jpg'),
   c15_2: require('../images/c15_2.jpg'),

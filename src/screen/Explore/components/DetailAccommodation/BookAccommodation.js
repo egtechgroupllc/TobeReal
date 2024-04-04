@@ -10,7 +10,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 import Skeleton from '../../../../components/Skeleton';
-import { IconSupporter, IconX, LogoLine, LogoMessageFB, LogoWhatApp, LogoZalo } from '../../../../assets/icon/Icon';
+import { IconMess, IconPhone, IconSupporter, IconSupporterYellow, IconX, LogoLine, LogoMessageFB, LogoWhatApp, LogoZalo } from '../../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default memo(function BookAccommodation({
@@ -93,61 +93,52 @@ export default memo(function BookAccommodation({
       </Skeleton>
       {openContact && (
         <View
-          style={{
-            height: scale(240),
-            position: 'absolute',
-            backgroundColor: COLORS.white,
-            borderRadius: scale(20),
-            borderWidth: scale(1),
-            borderColor: COLORS.grey,
-            width: '90%',
-            alignSelf: 'center',
-            top: scale(-300),
-          }}>
-          <View
+          style={styles.contact}>
+          <LinearGradient
+            colors={['#FFE55A', '#F0B90B']}
+            start={{x: 1.2, y: 0}}
+            end={{x: 0, y: 0}}
             style={{
               height: scale(50),
               width: '100%',
-              backgroundColor: COLORS.primary,
+              // backgroundColor: COLORS.primary,
               borderTopLeftRadius: 20,
               borderTopRightRadius: 20,
               alignItems: 'center',
               paddingHorizontal: scale(20),
               flexDirection: 'row',
+              columnGap: scale(20),
             }}>
-            <IconSupporter height={scale(40)} />
+            <IconSupporterYellow height={scale(20)} width={scale(20)} />
             <CustomText
               style={{
                 fontSize: SIZES.small,
-                color: COLORS.white,
+                color: COLORS.black,
               }}
               textType="bold">
               We are always here to support you
             </CustomText>
-          </View>
+          </LinearGradient>
           <TouchableOpacity
             style={{
               position: 'absolute',
               alignSelf: 'flex-end',
-              padding: scale(10),
+              padding: scale(15),
             }}
             onPress={() => setOpenContact(false)}>
-            <IconX fill={'white'} />
+            <IconX fill={'white'} width={scale(20)} height={scale(20)} />
           </TouchableOpacity>
           <View
             style={{
               alignItems: 'center',
-              paddingVertical: scale(10),
+              paddingVertical: scale(15),
               rowGap: scale(10),
             }}>
-            <LinearGradient
-              colors={['#FFC702', '#FFA800']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
+            <View
               style={{
                 width: '80%',
-                height: scale(30),
-                backgroundColor: COLORS.primary,
+                height: scale(35),
+                backgroundColor: '#C9C9C933',
                 borderRadius: scale(10),
                 justifyContent: 'center',
               }}>
@@ -156,33 +147,46 @@ export default memo(function BookAccommodation({
                   style={{
                     height: scale(22),
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     borderRadius: scale(50),
                     flexDirection: 'row',
                     columnGap: scale(10),
                     paddingHorizontal: scale(20),
                   }}>
-                  <LogoZalo />
-                  <CustomText
+                  <View
                     style={{
-                      fontSize: SIZES.medium,
-                      color: COLORS.white,
-                    }}
-                    textType="bold">
-                    Zalo
-                  </CustomText>
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(20),
+                    }}>
+                    <LogoZalo />
+                    <CustomText
+                      style={{
+                        fontSize: SIZES.small,
+                        color: COLORS.black,
+                      }}
+                      textType="bold">
+                      Zalo
+                    </CustomText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(10),
+                    }}>
+                    <IconPhone />
+                    <IconMess />
+                  </View>
                 </View>
               </TouchableOpacity>
-            </LinearGradient>
+            </View>
 
-            <LinearGradient
-              colors={['#FFC702', '#FFA800']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
+            <View
               style={{
                 width: '80%',
-                height: scale(30),
-                backgroundColor: COLORS.primary,
+                height: scale(35),
+                backgroundColor: '#C9C9C933',
                 borderRadius: scale(10),
                 justifyContent: 'center',
               }}>
@@ -191,32 +195,45 @@ export default memo(function BookAccommodation({
                   style={{
                     height: scale(22),
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     borderRadius: scale(50),
                     flexDirection: 'row',
                     columnGap: scale(10),
                     paddingHorizontal: scale(20),
                   }}>
-                  <LogoLine/>
-                  <CustomText
+                  <View
                     style={{
-                      fontSize: SIZES.medium,
-                      color: COLORS.white,
-                    }}
-                    textType="bold">
-                    Line
-                  </CustomText>
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(20),
+                    }}>
+                    <LogoLine />
+                    <CustomText
+                      style={{
+                        fontSize: SIZES.small,
+                        color: COLORS.black,
+                      }}
+                      textType="bold">
+                      Line
+                    </CustomText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(10),
+                    }}>
+                    <IconPhone />
+                    <IconMess />
+                  </View>
                 </View>
               </TouchableOpacity>
-            </LinearGradient>
-            <LinearGradient
-              colors={['#FFC702', '#FFA800']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
+            </View>
+            <View
               style={{
                 width: '80%',
-                height: scale(30),
-                backgroundColor: COLORS.primary,
+                height: scale(35),
+                backgroundColor: '#C9C9C933',
                 borderRadius: scale(10),
                 justifyContent: 'center',
               }}>
@@ -225,32 +242,45 @@ export default memo(function BookAccommodation({
                   style={{
                     height: scale(22),
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     borderRadius: scale(50),
                     flexDirection: 'row',
                     columnGap: scale(10),
                     paddingHorizontal: scale(20),
                   }}>
-                  <LogoWhatApp/>
-                  <CustomText
+                  <View
                     style={{
-                      fontSize: SIZES.medium,
-                      color: COLORS.white,
-                    }}
-                    textType="bold">
-                    WhatsApp
-                  </CustomText>
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(20),
+                    }}>
+                    <LogoWhatApp />
+                    <CustomText
+                      style={{
+                        fontSize: SIZES.small,
+                        color: COLORS.black,
+                      }}
+                      textType="bold">
+                      WhatsApp
+                    </CustomText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(10),
+                    }}>
+                    <IconPhone />
+                    <IconMess />
+                  </View>
                 </View>
               </TouchableOpacity>
-            </LinearGradient>
-            <LinearGradient
-              colors={['#FFC702', '#FFA800']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
+            </View>
+            <View
               style={{
                 width: '80%',
-                height: scale(30),
-                backgroundColor: COLORS.primary,
+                height: scale(35),
+                backgroundColor: '#C9C9C933',
                 borderRadius: scale(10),
                 justifyContent: 'center',
               }}>
@@ -259,23 +289,40 @@ export default memo(function BookAccommodation({
                   style={{
                     height: scale(22),
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     borderRadius: scale(50),
                     flexDirection: 'row',
                     columnGap: scale(10),
+                    paddingHorizontal: scale(20),
                   }}>
-                  <LogoMessageFB/>
-                  <CustomText
+                  <View
                     style={{
-                      fontSize: SIZES.medium,
-                      color: COLORS.white,
-                    }}
-                    textType="bold">
-                    Messenger
-                  </CustomText>
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(20),
+                    }}>
+                    <LogoMessageFB />
+                    <CustomText
+                      style={{
+                        fontSize: SIZES.small,
+                        color: COLORS.black,
+                      }}
+                      textType="bold">
+                      Messenger
+                    </CustomText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: scale(10),
+                    }}>
+                    <IconPhone />
+                    <IconMess />
+                  </View>
                 </View>
               </TouchableOpacity>
-            </LinearGradient>
+            </View>
           </View>
         </View>
       )}
@@ -297,6 +344,18 @@ const styles = StyleSheet.create({
       width: 0,
       height: -2,
     },
+  },
+  contact:{
+    height: scale(260),
+    position: 'absolute',
+    backgroundColor: COLORS.white,
+    borderRadius: scale(20),
+    borderWidth: scale(1),
+    borderColor: '#CDCDCD',
+    width: '90%',
+    alignSelf: 'center',
+    top: scale(-300),
+    ...SHADOW,
   },
   price: {
     flexDirection: 'row',

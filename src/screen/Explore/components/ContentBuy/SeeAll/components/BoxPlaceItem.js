@@ -77,7 +77,7 @@ export default function BoxPlaceItem({
           ]}>
           <View
             style={{
-              width: '97%',
+              width: '100%',
               height: styleWrapper?.height ? '60%' : scale(150),
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
@@ -105,7 +105,7 @@ export default function BoxPlaceItem({
               // rowGap: scale(4),
               borderRadius: scale(5),
               height: scale(100),
-              width: '97%',
+              width: '100%',
               padding: scale(10),
             }}>
             <CustomText

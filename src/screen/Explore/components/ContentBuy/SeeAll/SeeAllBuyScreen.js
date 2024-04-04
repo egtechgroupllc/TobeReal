@@ -141,6 +141,9 @@ export default function SeeAllRentScreen({route}) {
         // horizontal
         scrollEnabled={false}
         numColumns={2}
+        columnWrapperStyle={{
+          columnGap: scale(10),
+        }}
         showsVerticalScrollIndicator={false}
         data={dataPackage}
         contentContainerStyle={styles.content1}

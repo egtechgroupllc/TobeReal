@@ -1,28 +1,17 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {
-  COLORS,
-  SHADOW,
-  SIZES,
-  images,
-  scale,
-} from '../../../../../../assets/constants';
-import {
-  Avatar,
-  IconHeart,
-  IconMapView,
-  IconMarker,
-} from '../../../../../../assets/icon/Icon';
-
-import CustomText from '../../../../../../components/CustomText';
-
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {IconHeart, IconMapView, IconMarker} from '../../../../../../assets/icon/Icon';
+import Ribbon from '../../../../../../components/Ribbon';
+import Star from '../../../../../../components/Star';
 import {formatPrice} from '../../../../../../utils/format';
 
 import TopImg from '../../BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from '../../BoxPlaceItem/BoxPlaceItemLoading';
 import CustomImage from '../../../../../../components/CustomImage';
+import CustomText from '../../../../../../components/CustomText';
 import ViewMultiPrice from '../../BoxPlaceItem/ViewMultiPrice';
 
 export default function BoxPlaceItem({
@@ -55,7 +44,7 @@ export default function BoxPlaceItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailBuyScreen',
+                  screen: 'DetailAccommodationScreen',
                   params: {
                     jsondata: jsonImage || [],
                     title: name || '',
@@ -68,54 +57,55 @@ export default function BoxPlaceItem({
           style={[
             styles.wrapper,
             {
-              width: scale(410/ seeViewNumber),
-              alignItems:'center'
+              width: scale(400 / seeViewNumber),
               // height: scale(200),
+        
             },
             styleWrapper,
             SHADOW,
           ]}>
           <View
             style={{
-              width: '97%',
+              width: '100%',
               height: styleWrapper?.height ? '60%' : scale(150),
             }}>
-            {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
+            <Ribbon text={t('promotion') + ' 30%  🏨'} />
 
             {data ? (
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
                 src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
+                style={styles.img}
+              />
             )}
 
             <TopImg
               rating={rating}
-              // isStar={isStar}
+              isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
             />
           </View>
+
           <View
             style={{
-              backgroundColor: COLORS.primary,
-              // flex: 1,
+              flex: 1,
               marginTop: scale(18),
-              // rowGap: scale(4),
-              borderRadius: scale(5),
-              height: scale(100),
-              width: '97%',
-              padding: scale(10),
+              margin: scale(10),
+              rowGap: scale(4),
             }}>
             <CustomText
-              textType="bold"
-              style={[isStar && {fontSize: SIZES.xSmall, color: COLORS.white}]}
+              textType="semiBold"
+              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
+            {isStar && <Star rating={rating} />}
 
-            <View style={{marginTop: scale(5)}}>
+            <View style={styles.line} />
+
+            <View>
               {!multiPrice ? (
                 <>
                   {isDiscount && (
@@ -126,7 +116,7 @@ export default function BoxPlaceItem({
                       }}>
                       <CustomText
                         textType="regular"
-                        style={{...styles.textDiscount, color: COLORS.white}}>
+                        style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
                           locales: 'vi',
                         })}{' '}
@@ -146,11 +136,11 @@ export default function BoxPlaceItem({
 
                   <View style={styles.price}>
                     <CustomText
-                      textType="bold"
+                      textType="semiBold"
                       style={[
                         styles.buildingName,
-                        isStar && {fontSize: SIZES.small, color: '#0057FF'},
-                        isDiscount && {color: COLORS.white},
+                        isStar && {fontSize: SIZES.xMedium},
+                        isDiscount && {color: COLORS.primary},
                       ]}>
                       {formatPrice(data?.price, {
                         locales: 'vi',
@@ -158,7 +148,7 @@ export default function BoxPlaceItem({
                       {time && (
                         <CustomText
                           textType="regular"
-                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
+                          style={{fontSize: SIZES.xSmall}}>
                           / {rental}
                         </CustomText>
                       )}
@@ -179,65 +169,6 @@ export default function BoxPlaceItem({
                   viewMultiPrice={multiPrice}
                 />
               )}
-            </View>
-            <View style={{marginTop: scale(5)}}>
-              <View style={styles.price}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: scale(5),
-                  }}>
-                  <IconMapView
-                    fill={COLORS.white}
-                    width={scale(14)}
-                    height={scale(14)}
-                  />
-                  <CustomText
-                    textType="bold"
-                    style={{
-                      color: COLORS.white,
-                      fontSize: SIZES.xSmall,
-                      // minWidth: scale(35),
-                    }}>
-                    Thuy Nguyen, Hai Phong
-                  </CustomText>
-                </View>
-              </View>
-            </View>
-            <View style={{marginTop: scale(5)}}>
-              <View style={styles.price}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: scale(5),
-                  }}>
-                  <Avatar width={scale(20)} height={scale(20)}></Avatar>
-                  <View>
-                    <CustomText
-                      textType="bold"
-                      numberOfLines={1}
-                      style={{
-                        color: COLORS.white,
-                        fontSize: SIZES.xSmall,
-                        minWidth: scale(35),
-                      }}>
-                      Mr
-                    </CustomText>
-                    <CustomText
-                      textType="bold"
-                      numberOfLines={1}
-                      style={{
-                        color: '#FFE259',
-                        fontSize: SIZES.xSmall,
-                        minWidth: scale(35),
-                      }}>
-                      Posted today
-                    </CustomText>
-                  </View>
-                </View>
-              </View>
             </View>
           </View>
         </TouchableOpacity>
@@ -260,18 +191,20 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     // minHeight: scale(200),
     // height: 200,
-    borderRadius: 12,
+    borderRadius: scale(12),
+
   },
   img: {
     width: '100%',
     height: '100%',
-    borderRadius: scale(12),
+    borderTopLeftRadius: scale(12),
+    borderTopRightRadius: scale(12),
   },
   line: {
-    backgroundColor: 'white',
+    backgroundColor: '#ccc',
     width: '100%',
     height: 1,
     marginVertical: scale(3),
@@ -284,7 +217,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     columnGap: scale(6),
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   textDiscount: {
     textDecorationLine: 'line-through',

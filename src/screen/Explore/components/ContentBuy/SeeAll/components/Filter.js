@@ -15,7 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 
 export default function Filter() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const renderItem = ({ item, index }) => {
     return (

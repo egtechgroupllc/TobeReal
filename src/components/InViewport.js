@@ -86,6 +86,7 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
         {...this.props}>
         {this.props.children ||
           (!this.props.noLoading && (
+            // <></>
             <CustomImage
             source={images.logoLoading}
             style={{height: scale(50), width: scale(50), alignSelf: 'center'}}

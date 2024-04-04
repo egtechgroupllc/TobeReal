@@ -17,10 +17,11 @@ import NavigationExplore from './NavigationExplore';
 import NavigationProfile from './NavigationProfile';
 import NavigationPromotion from './NavigationPromotion';
 import NavigationWishList from './NavigationWishList';
-import {scale} from '../assets/constants';
+import {images, scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
 import {HomeMapScreen} from '../components';
 import {useLanguage} from '../hooks/useLanguage';
+import CustomImage from '../components/CustomImage';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +47,8 @@ export default function BottomTab() {
         component={NavigationExplore}
         options={{
           tabBarIcon: ({focused}) => (
-            <IconExplore fill={focused && '#F0B90B'} />
+            <CustomImage source={images.kinhlup} style={{width:scale(25), height:scale(25)}} resizeMode='cover'/>
+            // <IconExplore fill={focused && '#F0B90B'} />
           ),
         }}
       />

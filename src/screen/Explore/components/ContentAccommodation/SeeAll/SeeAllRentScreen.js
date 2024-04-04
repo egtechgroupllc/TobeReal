@@ -9,7 +9,7 @@ import SearchRecent from './SearchRecent';
 import MainWrapper from '../../../../../components/MainWrapper';
 
 import FilterMore from './FilterMore';
-import BoxPlaceItem from '../BoxPlaceItem';
+import BoxPlaceItem from './components/BoxPlaceItem';
 
 const dataPackage = [
   {
@@ -128,7 +128,7 @@ export default function SeeAllRentScreen({route}) {
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
         {/* <SearchRecent onPress={handleSelectSearch} /> */}
-        <FilterMore/>
+        <FilterMore />
       </View>
       <View
         style={{
@@ -142,8 +142,14 @@ export default function SeeAllRentScreen({route}) {
         // horizontal
         scrollEnabled={false}
         numColumns={2}
+        columnWrapperStyle={{
+          columnGap: scale(10),
+        }}
         showsVerticalScrollIndicator={false}
         data={dataPackage}
+        style={{
+          columnGap: scale(10),
+        }}
         contentContainerStyle={styles.content1}
         renderItem={({item}) => (
           <BoxPlaceItem
@@ -172,7 +178,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     rowGap: scale(14),
     marginTop: scale(10),
-    columnGap: scale(14),
     paddingVertical: scale(6),
     paddingBottom: scale(100),
   },

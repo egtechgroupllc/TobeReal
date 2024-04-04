@@ -8,7 +8,8 @@ import SearchChooseLocation from './SearchChooseLocation';
 import SearchRecent from './SearchRecent';
 import MainWrapper from '../../../../../components/MainWrapper';
 import FilterMore from './FilterMore';
-import BoxPlaceItem from '../BoxPlaceItem';
+import BoxPlaceItem from './components/BoxPlaceItem';
+
 
 const dataPackage = [
   {
@@ -120,6 +121,9 @@ export default function SeeAllRentScreen({route}) {
         // horizontal
         scrollEnabled={false}
         numColumns={2}
+        columnWrapperStyle={{
+          columnGap: scale(10),
+        }}
         showsVerticalScrollIndicator={false}
         data={dataPackage}
         contentContainerStyle={styles.content1}

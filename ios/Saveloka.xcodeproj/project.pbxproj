@@ -11,6 +11,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		164AC7D25348AAFD0B671772 /* libPods-Saveloka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBB60FFA4207EEA1AC22518 /* libPods-Saveloka.a */; };
+		4C6556FA2BBEA0B6009FE858 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		4C6556FB2BBEA0C2009FE858 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		4C6556FC2BBEA0CF009FE858 /* AppDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FAF1A68108700A75B9A /* AppDelegate.h */; };
+		4C6556FD2BBEA0CF009FE858 /* AppDelegate.mm in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+		4C6556FF2BBEA0CF009FE858 /* main.m in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		D3D9CCE926F086DA04FBBD23 /* libPods-Saveloka-SavelokaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6895109918EF342E8D0D26E /* libPods-Saveloka-SavelokaTests.a */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +261,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6556FC2BBEA0CF009FE858 /* AppDelegate.h in Resources */,
+				4C6556FD2BBEA0CF009FE858 /* AppDelegate.mm in Resources */,
+				4C6556FF2BBEA0CF009FE858 /* main.m in Resources */,
+				4C6556FB2BBEA0C2009FE858 /* LaunchScreen.storyboard in Resources */,
+				4C6556FA2BBEA0B6009FE858 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@ import {
   View,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useNetInfo} from '@react-native-community/netinfo';
 import FlashMessage from 'react-native-flash-message';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
@@ -80,7 +80,7 @@ export default function App() {
         justifyContent: 'center',
       }}>
       <CustomImage
-        source={images.logoLoading}
+        source={images.logoSplash}
         style={{height: '70%', width: '70%', alignSelf: 'center'}}
         resizeMode="contain"></CustomImage>
     </View>
