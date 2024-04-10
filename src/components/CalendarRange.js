@@ -10,11 +10,12 @@ export default function CalendarRange({
   selectedStartDate,
   selectedEndDate,
   onDateChange,
+  allowRangeSelection = true,
 }) {
   return (
     <CalendarPicker
       startFromMonday={true}
-      allowRangeSelection={true}
+      allowRangeSelection={allowRangeSelection}
       minDate={minDate}
       initialDate={selectedStartDate}
       selectedStartDate={selectedStartDate}

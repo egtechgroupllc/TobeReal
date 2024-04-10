@@ -1,6 +1,6 @@
 import React, {Component, memo} from 'react';
-import {ActivityIndicator, Dimensions, View, ViewProps} from 'react-native';
-import {COLORS, images, scale} from '../assets/constants';
+import {Dimensions, View, ViewProps} from 'react-native';
+import {images, scale} from '../assets/constants';
 import CustomImage from './CustomImage';
 
 export interface Iprops {
@@ -9,6 +9,7 @@ export interface Iprops {
   topHeight: number;
   delay: number;
   noLoading: boolean;
+  ComponentLoading: any;
 }
 
 const InViewPort = class extends Component<Iprops | ViewProps> {
@@ -84,20 +85,27 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
           this.myview = component;
         }}
         {...this.props}>
-        {this.props.children ||
-          (!this.props.noLoading && (
-            // <></>
-            <CustomImage
-              source={images.logoLoading}
-              style={{height: scale(30), width: scale(30), alignSelf: 'center'}}
-              resizeMode="cover"
-            />
-            // <ActivityIndicator
-            //   size={'large'}
-            //   color={COLORS.primary}
-            //   style={{marginVertical: scale(20)}}
-            // />
-          ))}
+        {
+          this.props.children ||
+            (!this.props.noLoading &&
+              // <></>
+              (this.props.ComponentLoading || (
+                <CustomImage
+                  source={images.logoLoading}
+                  style={{
+                    height: scale(50),
+                    width: scale(50),
+                    alignSelf: 'center',
+                  }}
+                  resizeMode="cover"
+                />
+              )))
+          // <ActivityIndicator
+          //   size={'large'}
+          //   color={COLORS.primary}
+          //   style={{marginVertical: scale(20)}}
+          // />
+        }
       </View>
     );
   }

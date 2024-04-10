@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import ImageView from 'react-native-image-viewing';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconGoBack} from '../../../../assets/icon/Icon';
-import CustomImage from '../../../../components/CustomImage';
-import CustomText from '../../../../components/CustomText';
-export default function ListImg({dataImg, open, onClose}) {
+import {COLORS, SIZES, WIDTH, scale} from '../../assets/constants';
+import {IconGoBack} from '../../assets/icon/Icon';
+import CustomImage from '../../components/CustomImage';
+import CustomText from '../../components/CustomText';
+export default function ListImgView({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
   const flatListRef = useRef(null);
@@ -30,7 +30,7 @@ export default function ListImg({dataImg, open, onClose}) {
       });
     }
   }, [indexNavigation]);
-  console.log(dataImg[0]);
+
   return (
     <Modal
       visible={!!open}

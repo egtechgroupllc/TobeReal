@@ -89,7 +89,7 @@ export default function PostNewLeaseScreen() {
     handleSubmit(handlePostLease)();
   };
 
-  const handlePostLease = (value = watch()) => {
+  const handlePostLease = value => {
     delete value?.check;
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
       showMess('Ban chua chon co so vat chat', 'error');

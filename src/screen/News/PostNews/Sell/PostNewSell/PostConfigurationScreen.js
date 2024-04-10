@@ -72,7 +72,7 @@ export default function PostConfigurationScreen() {
     delete params?.package_post_item_number_repost;
     delete params?.package_post_item_id_repost;
     delete params?.package_post_item;
-    // delete params?.date_start;
+    delete params?.date_start;
     // delete value?.date_start;
 
     const formData = getFormData({...params, ...value});

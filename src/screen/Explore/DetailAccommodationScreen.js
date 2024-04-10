@@ -1,37 +1,28 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {useRoute} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {getDetailAccmo} from '../../Model/api/apiAccom';
 import {WIDTH, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
-import BookAccommodation from './components/DetailAccommodation/BookAccommodation';
-import DetailAccommoMap from './components/DetailAccommodation/DetailAccommoMap';
-import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
-import DynamicHeader from './components/DetailAccommodation/DynamicHeader';
-import InfoAdditional from './components/DetailAccommodation/InfoAdditional';
-import InfoDetail from './components/DetailAccommodation/InfoDetail';
-import InfoUnitFacilities from './components/DetailAccommodation/InfoUnitFacilities';
-import Review from './components/DetailAccommodation/Review';
-import Room from './components/DetailAccommodation/Rooms/Room';
-import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
+import AccommoPolicy from './components/DetailAccommodation/Detail/AccommoPolicy';
+import BookAccommodation from './components/DetailAccommodation/Detail/BookAccommodation';
+import DetailAccommoMap from './components/DetailAccommodation/Detail/DetailAccommoMap';
+import DetailAccommodationLoading from './components/DetailAccommodation/Detail/DetailAccommodationLoading';
+import DynamicHeader from './components/DetailAccommodation/Detail/DynamicHeader';
+import InfoDetail from './components/DetailAccommodation/Detail/InfoDetail';
+import InfoUnitFacilities from './components/DetailAccommodation/Detail/InfoUnitFacilities';
+import Review from './components/DetailAccommodation/Detail/Review';
+import SimilarApartmentsNearby from './components/DetailAccommodation/Detail/SimilarApartmentsNearby';
+import TimeCheckInOut from './components/DetailAccommodation/Detail/TimeCheckInOut';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
-  const {jsondata, title, paramPrice} = route.params;
   const params = useRoute().params;
-
-  const listView = useRef([
-    <InfoDetail data={params} />,
-    <InfoUnitFacilities data={params} />,
-    <DetailAccommoMap data={params} />,
-    <Room name={title} data={params} />,
-    <Review dataP={params} />,
-    <InfoAdditional data={params} />,
-    <SimilarApartmentsNearby data={params} />,
-  ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
@@ -41,21 +32,6 @@ export default function DetailAccommodationScreen({route}) {
   const scrollRef = useRef();
   const dynamicHeaderRef = useRef();
   const timeoutRef = useRef(null);
-
-  const ItemView = (item, key) => {
-    return (
-      <View
-        key={key}
-        onLayout={e => {
-          const layout = e.nativeEvent.layout;
-          const heightHearBar = Header_Max_Height - 50;
-          dataSourceCords[key] = Math.round(layout.y + heightHearBar);
-          setDataSourceCords(dataSourceCords);
-        }}>
-        {item}
-      </View>
-    );
-  };
 
   const handleScroll = Animated.event(
     [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
@@ -115,16 +91,51 @@ export default function DetailAccommodationScreen({route}) {
     }, 500);
   }, []);
 
+  const {data, isLoading} = useQuery({
+    queryKey: ['accommodation', 'detail', params?.id],
+    queryFn: () => getDetailAccmo(params?.id),
+  });
+
+  const listView = useMemo(() => {
+    const dataDetail = data?.data;
+
+    return [
+      <InfoDetail data={dataDetail} />,
+      <InfoUnitFacilities data={dataDetail} />,
+      <View style={{rowGap: scale(8)}}>
+        <DetailAccommoMap data={dataDetail} />
+        <TimeCheckInOut data={dataDetail} />
+      </View>,
+      <Review dataP={dataDetail} />,
+      <AccommoPolicy data={dataDetail} />,
+      <SimilarApartmentsNearby data={dataDetail} />,
+    ];
+  }, [data?.data]);
+
+  const ItemView = (item, key) => {
+    return (
+      <View
+        key={key}
+        onLayout={e => {
+          const layout = e.nativeEvent.layout;
+          const heightHearBar = Header_Max_Height - 50;
+          dataSourceCords[key] = Math.round(layout.y + heightHearBar);
+          setDataSourceCords(dataSourceCords);
+        }}>
+        {item}
+      </View>
+    );
+  };
+
   return (
     <MainWrapper scrollEnabled={false}>
-      {true ? (
+      {!isLoading ? (
         <>
           <DynamicHeader
             ref={dynamicHeaderRef}
             scrollOffsetY={scrollOffsetY}
             onSelect={selectScrollHandler}
-            images={jsondata}
-            data={params}
+            data={data?.data}
           />
 
           <Animated.ScrollView
@@ -145,12 +156,12 @@ export default function DetailAccommodationScreen({route}) {
 
       <BookAccommodation
         setBookHeight={setTabBarHeight}
-        price={paramPrice}
         isLoading={false}
-        onPress={() => {
-          handleSelect(3);
-          selectScrollHandler({index: 3});
-        }}
+        data={data?.data}
+        // onPress={() => {
+        //   handleSelect(3);
+        //   selectScrollHandler({index: 3});
+        // }}
       />
     </MainWrapper>
   );

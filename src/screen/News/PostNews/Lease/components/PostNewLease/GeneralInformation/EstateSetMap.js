@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {scale} from '../../../../../../../assets/constants';
-import DetailAccommoMap from '../../../../../../Explore/components/DetailAccommodation/DetailAccommoMap';
+import DetailAccommoMap from '../../../../../../Explore/components/DetailAccommodation/Detail/DetailAccommoMap';
 
 export default function EstateSetMap({onChange, watch = () => {}}) {
   const {navigate} = useNavigation();

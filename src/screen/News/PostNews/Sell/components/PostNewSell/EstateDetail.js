@@ -136,7 +136,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={styles.line} />
 
-          <CustomInput
+          {/* <CustomInput
             label={t('Diện tích (m²)')}
             styleTextLabel={styles.label}
             control={control}
@@ -146,7 +146,38 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             rules={requireField(t('this_field_required'))}
             style={{...styles.textInput}}
             keyboardType="numeric"
-          />
+          /> */}
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(30),
+            }}>
+            <CustomInput
+              label={'Chiều rộng'}
+              placeholder="Chiều rộng"
+              name="size_width"
+              rules={requireField(t('this_field_required'))}
+              styleWrapper={{
+                flex: 1,
+              }}
+              control={control}
+              styleTextLabel={styles.label}
+              style={styles.textInput}
+            />
+
+            <CustomInput
+              label={'Chiều dài'}
+              placeholder="Chiều dài"
+              name="size_length"
+              control={control}
+              rules={requireField(t('this_field_required'))}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              style={styles.textInput}
+            />
+          </View>
 
           {/* 
           <Counter heading={'Số phòng'} min={0} max={255} />
@@ -178,7 +209,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             control={control}
             name="is_negotiated"
             isChecked={!!watch('is_negotiated')}
-            isRadio
+            // isRadio={!!watch('is_negotiated')}
             defaultValue={0}
           />
         </Collapsible>

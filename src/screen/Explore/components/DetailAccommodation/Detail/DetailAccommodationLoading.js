@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Skeleton from '../../../../components/Skeleton';
-import {IconHome} from '../../../../assets/icon/Icon';
-import {scale} from '../../../../assets/constants';
+import Skeleton from '../../../../../components/Skeleton';
+import {IconHome} from '../../../../../assets/icon/Icon';
+import {scale} from '../../../../../assets/constants';
 
 export default function DetailAccommodationLoading({heightHeader = 100}) {
   return (

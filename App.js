@@ -1,12 +1,8 @@
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {useNetInfo} from '@react-native-community/netinfo';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useIsFetching,
-  useIsMutating,
-} from '@tanstack/react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
   Platform,
@@ -16,24 +12,21 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import {useNetInfo} from '@react-native-community/netinfo';
 import FlashMessage from 'react-native-flash-message';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {COLORS, images, scale} from './src/assets/constants';
+import {COLORS, images} from './src/assets/constants';
 import {showMess} from './src/assets/constants/Helper';
+import CustomImage from './src/components/CustomImage';
+import Loading from './src/components/Loading/Loading';
 import {AuthProvider} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
 import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
-import Loading from './src/components/Loading/Loading';
-import {Image} from 'react-native-svg';
-import CustomImage from './src/components/CustomImage';
-import LottieView from 'lottie-react-native';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {

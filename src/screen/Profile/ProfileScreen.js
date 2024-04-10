@@ -9,6 +9,9 @@ import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderAvatar from './components/HeaderAvatar';
 import HeaderNoToken from './components/HeaderNoToken';
+import {Alert} from 'react-native';
+import axios, {AxiosError} from 'axios';
+import {showMess} from '../../assets/constants/Helper';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -21,7 +24,7 @@ export default function ProfileScreen() {
     queryFn: getProfile,
     enabled: !!token,
   });
-  console.log(data, isLoading, error);
+
   return (
     <MainAuth>
       {token ? (

@@ -82,6 +82,79 @@ export default function AddTicketScreen() {
           style={{...styles.text2, marginLeft: scale(10)}}>
           {t('Add ticket')}
         </CustomText>
+
+        <CustomInput
+          label={t('Tên Tour')}
+          control={control}
+          name="name"
+          multiline
+          maxLength={100}
+          placeholder={t('Tên Tour')}
+          rules={[
+            requireField(t('this_field_required')),
+            validateMaxLengthText(`${100} characters limit`, 100),
+          ]}
+          style={[
+            styles.textInput,
+            {
+              height: scale(50),
+            },
+          ]}
+          componentRight={
+            <Text style={styles.numText}>
+              {watch('name')?.length || 0}/{100}
+            </Text>
+          }
+        />
+        <CustomInput
+          label={t('description_content')}
+          control={control}
+          name="description"
+          multiline
+          maxLength={5000}
+          placeholder={t('description_content')}
+          rules={[
+            requireField(t('this_field_required')),
+            validateMaxLengthText(`${5000} characters limit`, 5000),
+          ]}
+          style={[
+            styles.textInput,
+            {
+              minHeight: scale(130),
+              maxHeight: scale(500),
+            },
+          ]}
+          componentRight={
+            <Text style={styles.numText}>
+              {watch('description')?.length || 0}/{5000}
+            </Text>
+          }
+        />
+        <View style={styles.line} />
+        <CustomInput
+          label={t('Số lượng vé')}
+          control={control}
+          name="quantity"
+          placeholder={t('quantity')}
+          rules={[requireField(t('this_field_required'))]}
+          style={[styles.textInput]}
+          keyboardType="number-pad"
+        />
+
+        <View style={styles.line} />
+
+        <SelectCurrency control={control} />
+
+        <CustomInput
+          label={t('price')}
+          control={control}
+          name="price"
+          placeholder={t('enter_price')}
+          rules={requireField(t('this_field_required'))}
+          style={{...styles.textInput}}
+          keyboardType="number-pad"
+          enableFormatNum
+        />
       </View>
       <General
         control={control}

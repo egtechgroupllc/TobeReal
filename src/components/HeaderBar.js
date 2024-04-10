@@ -18,6 +18,7 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
         style={{
           flex: options?.headerTitleStyle?.textAlign === 'left' ? 0 : 1,
           alignItems: 'flex-start',
+          ...options?.headerLeftStyle,
         }}>
         {!!back && !options?.headerLeft && (
           <Pressable
@@ -34,17 +35,22 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
         {options?.headerLeft && options?.headerLeft()}
       </View>
 
-      <CustomText
-        textType="semiBold"
-        style={[styles.textHeader, options?.headerTitleStyle]}
-        numberOfLines={1}>
-        {options?.headerTitle || options?.title}
-      </CustomText>
+      {!options?.headerTitleComponent ? (
+        <CustomText
+          textType="semiBold"
+          style={[styles.textHeader, options?.headerTitleStyle]}
+          numberOfLines={1}>
+          {options?.headerTitle || options?.title}
+        </CustomText>
+      ) : (
+        options?.headerTitleComponent()
+      )}
 
       <View
         style={{
           alignItems: 'flex-end',
           flex: options?.headerTitleStyle?.textAlign === 'right' ? 0 : 1,
+          ...options?.headerRight,
         }}>
         {options?.headerRight && options?.headerRight()}
       </View>

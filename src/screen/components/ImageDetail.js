@@ -4,7 +4,7 @@ import {SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconImg} from '../../assets/icon/Icon';
 import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
-import ListImg from '../Explore/components/DetailAccommodation/ListImg';
+import ListImgView from './ListImgView';
 
 export default memo(function ImageDetail({onLayout, dataImg, styleWrapper}) {
   const [isViewImg, setIsViewImg] = useState(false);
@@ -20,7 +20,7 @@ export default memo(function ImageDetail({onLayout, dataImg, styleWrapper}) {
       ]}
       onLayout={onLayout}>
       {isViewImg && (
-        <ListImg
+        <ListImgView
           dataImg={dataImg}
           open={isViewImg}
           onClose={() => setIsViewImg(false)}

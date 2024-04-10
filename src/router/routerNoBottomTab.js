@@ -1,4 +1,4 @@
-import {DetailAccommodationScreen} from '../screen/Explore';
+import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
 import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
 import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/DetailBuy/DetailBroker';
@@ -8,10 +8,7 @@ import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/Detai
 import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
-import {
-  DetailRoomScreen,
-  ViewRoomScreen,
-} from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
+import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
 import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
@@ -137,8 +134,8 @@ export default routerNoBottomTab = [
     },
   },
   {
-    name: 'ViewRoomScreen',
-    component: ViewRoomScreen,
+    name: 'RoomScreen',
+    component: RoomScreen,
     options: {
       headerShown: true,
     },

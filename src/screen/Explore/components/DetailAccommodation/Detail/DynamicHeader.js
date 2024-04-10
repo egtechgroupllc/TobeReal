@@ -2,14 +2,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {forwardRef, useImperativeHandle, useMemo, useState} from 'react';
 import {Animated, Share, StyleSheet, View} from 'react-native';
-import {COLORS, SIZES, WIDTH, scale} from '../../../../assets/constants';
-import {IconGoBack, IconShare, IconX} from '../../../../assets/icon/Icon';
-import {CustomButton} from '../../../../components';
-import CustomText from '../../../../components/CustomText';
-import Favourite from '../../../../components/Favourite';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import ImageDetail from '../../../components/ImageDetail';
-import OptionAccommodation from '../FindAccommodation/OptionAccommodation';
+import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
+import {IconGoBack, IconShare, IconX} from '../../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../../components';
+import CustomText from '../../../../../components/CustomText';
+import Favourite from '../../../../../components/Favourite';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import ImageDetail from '../../../../components/ImageDetail';
+import OptionAccommodation from '../../FindAccommodation/OptionAccommodation';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 const Header_Min_Height = scale(50);
@@ -26,7 +26,7 @@ export default React.memo(
       () =>
         listNav || [
           {
-            text: t('detail'),
+            text: 'Tổng quan',
           },
           {
             text: t('facilities'),
@@ -34,14 +34,15 @@ export default React.memo(
           {
             text: t('location'),
           },
-          {
-            text: t('room'),
-          },
+
           {
             text: t('Review'),
           },
           {
-            text: t('info'),
+            text: 'Chính sách',
+          },
+          {
+            text: t('others'),
           },
         ],
       [listNav],

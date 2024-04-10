@@ -7,13 +7,22 @@ import {CustomButton} from '.';
 import {COLORS, SIZES, scale} from '../assets/constants';
 import {IconCheckBox} from '../assets/icon/Icon';
 
-export default function ListSelect({data = [], onSelect}) {
-  const [select, setSelect] = useState(data[0]);
+export default function BottomSheetListSelect({
+  data = [],
+  onChange,
+  onSelect,
+  value,
+}) {
+  const [select, setSelect] = useState(value || data[0]);
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    onSelect && onSelect(select);
+    onChange && onChange(select);
   }, [select]);
+
+  useEffect(() => {
+    value && setSelect(value);
+  }, [value]);
 
   return (
     <BottomSheetFlatList
@@ -36,6 +45,7 @@ export default function ListSelect({data = [], onSelect}) {
           text={item?.text || item}
           onPress={() => {
             setSelect(item);
+            onSelect && onSelect(item);
           }}
           iconRight={(select === item?.text || select === item) && IconCheckBox}
           styleText={{

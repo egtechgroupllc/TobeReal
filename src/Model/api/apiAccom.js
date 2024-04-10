@@ -60,3 +60,39 @@ export const getListReviewAccmo = async ({id_accomo, pageParam = 1}) => {
 
   return responsive.data;
 };
+
+// ==> DETAIL ACCOMO <==
+export const getDetailAccmo = async id_accomo => {
+  const responsive = await instance.get(`/detail/${id_accomo}`);
+
+  return responsive.data;
+};
+
+// ==> LIST ROOM DETAIL ACCOMO <==
+export const getListRoomDetailAccmo = async ({
+  id_accomo,
+  date_start,
+  date_end,
+  status = 'AVAILABLE',
+}) => {
+  const responsive = await instance.get(
+    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}`,
+  );
+
+  return responsive.data;
+};
+
+// ==> BOOKING ROOM <==
+export const postBookingRoom = async ({id_room, data}) => {
+  const responsive = await instance.post(`room/${id_room}/booking`, data);
+
+  return responsive.data;
+};
+
+export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
+  const responsive = await instance.get(
+    `room/${id_room}/list-room-date?date_start=${date_start}&date_end=${date_end}`,
+  );
+
+  return responsive.data;
+};

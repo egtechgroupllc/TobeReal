@@ -8,6 +8,7 @@ import CustomText from '../../../../components/CustomText';
 export default memo(function RealEstateType({
   onSelect,
   styleWrapper,
+  buttonEstateTypes,
   label,
   name = '',
   control,
@@ -15,6 +16,7 @@ export default memo(function RealEstateType({
   data = [],
   watch = () => {},
   valueEdit,
+  isDefaultValue,
 }) {
   return (
     <View
@@ -28,7 +30,9 @@ export default memo(function RealEstateType({
         name={name}
         getKeyValue={getKeyValue}
         control={control}
-        buttonStyle={styles.buttonEstateTypes}
+        defaultValue={isDefaultValue && data?.[0]}
+        defaultValueByIndex={isDefaultValue && 0}
+        buttonStyle={(styles.buttonEstateTypes, {...buttonEstateTypes})}
         onSelect={(selectedItem, i) => {
           onSelect && onSelect(selectedItem);
         }}
@@ -40,7 +44,7 @@ export default memo(function RealEstateType({
               style={{
                 fontSize: scale(13),
               }}>
-              {value?.name || 'Select'}
+              {(name ? value?.name : item?.name) || 'Select'}
             </CustomText>
           );
         }}

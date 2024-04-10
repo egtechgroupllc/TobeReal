@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  createBottomTabNavigator,
-  useBottomTabBarHeight,
-} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import React, {
   useCallback,
   useEffect,
@@ -15,24 +13,16 @@ import {
   Alert,
   FlatList,
   StyleSheet,
-  Touchable,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  Gesture,
-  GestureDetector,
-  PanGestureHandler,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {WIDTH, animations, scale} from '../../assets/constants';
+import {animations, scale} from '../../assets/constants';
 import video from '../../assets/constants/video';
+import {IconGoBack} from '../../assets/icon/Icon';
 import Comment from './Comment';
 import RangeSlider from './components/RangeSlider';
 import VideoPlay from './components/VideoPlay';
-import LottieView from 'lottie-react-native';
-import {IconGoBack} from '../../assets/icon/Icon';
 
 const listVideo = [
   {

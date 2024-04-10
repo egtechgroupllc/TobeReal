@@ -22,7 +22,6 @@ export default function VerificationCode({email}) {
       {email: email, ...data},
       {
         onSuccess: dataInside => {
-          console.log(dataInside);
           showMess(
             dataInside?.message,
             dataInside?.status ? 'success' : 'error',

@@ -13,7 +13,7 @@ import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 import {IconGoBack} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
-export default function ListImg({dataImg, open, onClose}) {
+export default function ListImgView({dataImg, open, onClose}) {
   const insets = useSafeAreaInsets();
 
   const flatListRef = useRef(null);

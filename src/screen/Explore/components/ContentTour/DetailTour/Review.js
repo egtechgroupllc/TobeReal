@@ -6,8 +6,8 @@ import CustomText from '../../../../../components/CustomText';
 import WrapperContent from '../../WrapperContent';
 import ItemBoxReview from './Review/ItemBoxReview';
 import ReviewAll from './Review/ReviewAll';
-import ListSelect from '../../../../../components/BottomSheetListSelect';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import BottomSheetListSelect from '../../../../../components/BottomSheetListSelect';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review() {
@@ -62,9 +62,9 @@ export default function Review() {
         refChild={bottomSheetChildRef}
         snapPoints={['50%', '86%']}
         handleChildBottom={() => (
-          <ListSelect
+          <BottomSheetListSelect
             data={listSort}
-            onSelect={value => {
+            onChange={value => {
               bottomSheetChildRef.current.closeChild();
               setSelect(value);
             }}

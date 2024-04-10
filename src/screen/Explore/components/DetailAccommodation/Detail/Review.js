@@ -1,15 +1,15 @@
 import {useQuery} from '@tanstack/react-query';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {getListReviewAccmo} from '../../../../Model/api/apiAccom';
-import {COLORS, SIZES, scale} from '../../../../assets/constants';
-import BottomSheet from '../../../../components/BottomSheet';
-import ListSelect from '../../../../components/BottomSheetListSelect';
-import CustomText from '../../../../components/CustomText';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import WrapperContent from '../WrapperContent';
-import ItemBoxReview from './Review/ItemBoxReview';
-import ReviewAll from './Review/ReviewAll';
+import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import BottomSheet from '../../../../../components/BottomSheet';
+import CustomText from '../../../../../components/CustomText';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import WrapperContent from '../../WrapperContent';
+import ItemBoxReview from '../Review/ItemBoxReview';
+import ReviewAll from '../Review/ReviewAll';
+import BottomSheetListSelect from '../../../../../components/BottomSheetListSelect';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review({dataP}) {
@@ -17,6 +17,13 @@ export default function Review({dataP}) {
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const [select, setSelect] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      bottomSheetRef.current.open();
+    }
+  }, [isOpen]);
 
   const {data, isLoading, error} = useQuery({
     queryKey: ['accommodation', 'list-review'],
@@ -26,7 +33,7 @@ export default function Review({dataP}) {
   return (
     <WrapperContent
       isSeeAll
-      onPressSeeAll={() => bottomSheetRef.current.open()}
+      onPressSeeAll={() => setIsOpen(true)}
       heading={t('reviews')}>
       <View style={styles.overview}>
         <View style={styles.overviewNumberRating}>
@@ -64,26 +71,31 @@ export default function Review({dataP}) {
         )}
       />
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        refChild={bottomSheetChildRef}
-        snapPoints={['50%', '86%']}
-        handleChildBottom={() => (
-          <ListSelect
-            data={listSort}
-            onSelect={value => {
-              bottomSheetChildRef.current.closeChild();
-              setSelect(value);
-            }}
+      {isOpen && (
+        <BottomSheet
+          ref={bottomSheetRef}
+          refChild={bottomSheetChildRef}
+          snapPoints={['50%', '86%']}
+          onDismiss={() => {
+            setIsOpen(false);
+          }}
+          handleChildBottom={() => (
+            <BottomSheetListSelect
+              data={listSort}
+              onChange={value => {
+                bottomSheetChildRef.current.closeChild();
+                setSelect(value);
+              }}
+            />
+          )}
+          titleIndicator="Đánh giá">
+          <ReviewAll
+            onSort={() => bottomSheetChildRef.current.openChild()}
+            valueSort={select}
+            id_accomo={dataP.id}
           />
-        )}
-        titleIndicator="Đánh giá">
-        <ReviewAll
-          onSort={() => bottomSheetChildRef.current.openChild()}
-          valueSort={select}
-          id_accomo={dataP.id}
-        />
-      </BottomSheet>
+        </BottomSheet>
+      )}
     </WrapperContent>
   );
 }

@@ -85,7 +85,7 @@ export default function AddRoomTypeScreen() {
           );
 
           if (dataInside?.status) {
-            reset();
+            // reset();
             queryClient.invalidateQueries(['accommodation', 'my-list']);
           }
         },
@@ -142,6 +142,7 @@ export default function AddRoomTypeScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('post')}
+        disabled={createAccommodationRoomMu.isPending}
         onPress={handleSubmit(handlePostRoom)}
         style={{
           marginTop: scale(20),

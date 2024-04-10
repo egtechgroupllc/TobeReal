@@ -19,7 +19,7 @@ import CustomText from '../../../../../components/CustomText';
 import Star from '../../../../../components/Star';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
-import Introduction from '../../DetailAccommodation/Introduction';
+import Introduction from '../../DetailAccommodation/Detail/Introduction';
 import InfoItem from './Info/InfoItem';
 import TicketOption from '../../ContentTour/DetailTour/TicketOption';
 import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
@@ -37,7 +37,17 @@ export default function InfoDetail({data, price}) {
         </View>
 
         <View style={styles.room}>
-          <Star />
+          <View style={styles.boxRoom}>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: '#7906f6',
+              }}>
+              {data?.accommodation_type?.name}
+            </CustomText>
+          </View>
+
+          <Star rating={4} />
 
           <CustomText textType="medium">(10 Evaluate)</CustomText>
           <TouchableOpacity activeOpacity={0.7}>
@@ -64,12 +74,14 @@ export default function InfoDetail({data, price}) {
           </CustomText>
         </View>
 
-        <View style={styles.itemHear}>
-          <IconClock width={scale(14)} height={scale(14)} fill={'#ccc'} />
-          <CustomText textType="regular" style={{flex: 1}}>
-            {calculateTimeElapsed(data.createdAt)}
-          </CustomText>
-        </View>
+        {new Date() - new Date(data.date_start) > 0 && (
+          <View style={styles.itemHear}>
+            <IconClock width={scale(14)} height={scale(14)} fill={'#ccc'} />
+            <CustomText textType="regular" style={{flex: 1}}>
+              {calculateTimeElapsed(data.date_start)}
+            </CustomText>
+          </View>
+        )}
       </View>
 
       {/* <View style={styles.line}></View> */}
@@ -209,13 +221,6 @@ const styles = StyleSheet.create({
     minHeight: scale(50),
     paddingVertical: scale(10),
   },
-  boxHot: {
-    backgroundColor: '#9681fA',
-    paddingHorizontal: scale(6),
-    paddingVertical: scale(4),
-    borderRadius: scale(6),
-    maxWidth: scale(110),
-  },
 
   room: {
     flexDirection: 'row',
@@ -224,5 +229,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     alignItems: 'center',
+  },
+  boxRoom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(4),
+    backgroundColor: '#9681fA90',
+    padding: scale(4),
+    borderRadius: scale(6),
   },
 });

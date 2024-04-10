@@ -9,6 +9,7 @@ import FilterSort from './FilterSort';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
 import ItemBoxReviewLoading from './ItemBoxReviewLoading';
+import EmptyData from '../../../../../components/EmptyData';
 
 export default function ReviewAll({valueSort, onSort, id_accomo}) {
   const {
@@ -59,13 +60,22 @@ export default function ReviewAll({valueSort, onSort, id_accomo}) {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[...Array(3)]}
+        data={dataArr || (isLoading && [...Array(3)])}
         contentContainerStyle={{
           marginTop: scale(20),
           rowGap: scale(30),
           paddingHorizontal: scale(20),
         }}
         scrollEnabled={false}
+        ListEmptyComponent={() => {
+          return (
+            <EmptyData
+              styleWrapper={{
+                marginTop: '10%',
+              }}
+            />
+          );
+        }}
         renderItem={({item, index}) =>
           item ? (
             <ItemBoxReview

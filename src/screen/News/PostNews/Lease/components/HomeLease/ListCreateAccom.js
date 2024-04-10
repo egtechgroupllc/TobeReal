@@ -20,7 +20,6 @@ export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
   const numColumns = Math.ceil(dataNew?.length / 2);
 
   if (!numColumns) return null;
-
   return (
     <View
       style={{

@@ -74,7 +74,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styles.textInput,
               {
                 minHeight: scale(130),
-                maxHeight: scale(300),
+                maxHeight: scale(500),
               },
             ]}
             componentRight={

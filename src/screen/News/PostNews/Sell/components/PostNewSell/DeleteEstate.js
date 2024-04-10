@@ -90,7 +90,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
                 {data?.id}
               </CustomText>
             </View>
-            <View
+            {/* <View
               style={{
                 ...styles.row,
                 borderTopWidth: 1.5,
@@ -112,7 +112,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
                   VND
                 </CustomText>
               </CustomText>
-            </View>
+            </View> */}
           </View>
 
           <View style={styles.warning}>

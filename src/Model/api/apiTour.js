@@ -5,6 +5,28 @@ const instance = axios.create({
   baseURL: `${baseUrl}/api/v1/tour`,
 });
 
+// Định nghĩa hàm xử lý lỗi toàn cục
+const handleGlobalError = err => {
+  const status = err.response?.status || 500;
+  switch (status) {
+    case 401:
+    case 403:
+    case 400:
+    case 404:
+    case 409:
+    case 422:
+    default:
+  }
+};
+
+// Thiết lập interceptor để xử lý lỗi toàn cục
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    handleGlobalError(error);
+    return Promise.reject(error);
+  },
+);
 export const postCreateTour = async data => {
   const responsive = await instance.post('/create', data, {
     headers: {'Content-Type': 'multipart/form-data'},

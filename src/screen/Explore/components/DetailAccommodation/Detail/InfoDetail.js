@@ -1,26 +1,28 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {
   IconHome,
   IconLocation,
   IconMarker,
   IconMyLocation,
   IconRoom,
-} from '../../../../assets/icon/Icon';
-import CustomImage from '../../../../components/CustomImage';
-import CustomText from '../../../../components/CustomText';
-import {useLanguage} from '../../../../hooks/useLanguage';
+} from '../../../../../assets/icon/Icon';
+import CustomImage from '../../../../../components/CustomImage';
+import CustomText from '../../../../../components/CustomText';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 import Introduction from './Introduction';
-import Star from '../../../../components/Star';
+import Star from '../../../../../components/Star';
+import {formatNumber} from '../../../../../utils/format';
 
-export default function InfoDetail({name, data}) {
+export default function InfoDetail({data}) {
   const {t} = useLanguage();
+
   return (
     <View>
       <View style={styles.wrapper}>
         <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
-          {data?.name}
+          {data.name}
         </CustomText>
 
         <View style={styles.room}>
@@ -30,10 +32,14 @@ export default function InfoDetail({name, data}) {
               style={{
                 color: '#7906f6',
               }}>
-              {data?.accommodation_type?.name}
+              {data.accommodation_type.name}
             </CustomText>
           </View>
-          <Star rating={4} />
+          {data.review_average ? (
+            <Star rating={data.review_average} />
+          ) : (
+            <CustomText textType="regular">(Chưa có đánh giá)</CustomText>
+          )}
         </View>
 
         <View
@@ -50,7 +56,7 @@ export default function InfoDetail({name, data}) {
           />
           <CustomText textType="regular" numberOfLines={2}>
             {' '}
-            {data?.address}
+            {data.address}
           </CustomText>
         </View>
 
@@ -63,7 +69,9 @@ export default function InfoDetail({name, data}) {
             </CustomText>
           </View>
           <View style={styles.boxMore}>
-            <CustomText textType="bold">{t('discussion')} (0)</CustomText>
+            <CustomText textType="bold">
+              {t('discussion')} ({formatNumber(data?.review_count)})
+            </CustomText>
           </View>
           <TouchableOpacity>
             <CustomImage
@@ -95,13 +103,6 @@ const styles = StyleSheet.create({
   },
 
   name: {flex: 1, fontSize: SIZES.xMedium},
-  boxHot: {
-    backgroundColor: '#9681fA',
-    paddingHorizontal: scale(6),
-    paddingVertical: scale(4),
-    borderRadius: scale(6),
-    maxWidth: scale(110),
-  },
 
   room: {
     flexDirection: 'row',

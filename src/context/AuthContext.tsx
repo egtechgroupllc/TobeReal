@@ -1,6 +1,6 @@
-import { useQueryClient } from '@tanstack/react-query';
+import {useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
-import React, { ReactNode, createContext, useEffect, useState } from 'react';
+import React, {ReactNode, createContext, useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNRestart from 'react-native-restart';
 

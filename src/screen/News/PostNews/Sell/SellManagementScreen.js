@@ -101,7 +101,7 @@ export default function SellManagementScreen() {
           <BottomSheet
             ref={bottomSheetRef}
             titleIndicator={'Thao Tác'}
-            snapPoints={['35%']}
+            snapPoints={['30%']}
             disableScroll
             styleContent={styles.bottomSheet}>
             <DeleteEstate

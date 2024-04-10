@@ -13,6 +13,7 @@ export default memo(function Category({
   styleContent,
   isShadow = true,
   indexDefault = 0,
+  backgroundColorSelect = COLORS.primary,
 }) {
   const [select, setSelect] = useState(!noSelect && data[indexDefault]);
 
@@ -24,7 +25,7 @@ export default memo(function Category({
   //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [select]);
-  console.log(select);
+
   return (
     <View
       style={{
@@ -53,7 +54,8 @@ export default memo(function Category({
               {
                 width: 'auto',
                 minWidth: widthSize,
-                backgroundColor: select === item ? COLORS.primary : '#f1f1f1',
+                backgroundColor:
+                  select === item ? backgroundColorSelect : '#f1f1f1',
               },
             ]}
             styleText={[

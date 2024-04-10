@@ -7,6 +7,8 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import ButtonTabValidate from '../ButtonTabValidate';
 import TimeCheckIn from './EstateDetail/TimeCheckIn';
 import TimeCheckOut from './EstateDetail/TimeCheckOut';
+import {CustomInput} from '../../../../../../components';
+import {requireField} from '../../../../../../utils/validate';
 
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
@@ -14,7 +16,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
   const [viewDetail, setViewDetail] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
-  const arrKeywords = useRef(['km_to_center']).current;
+  const arrKeywords = useRef([
+    'km_to_center',
+    'size_width',
+    'size_length',
+  ]).current;
 
   return (
     <View>
@@ -56,6 +62,38 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           rules={requireField(t('this_field_required'))}
           style={{...styles.textInput}}
         /> */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                columnGap: scale(30),
+              }}>
+              <CustomInput
+                label={'Chiều rộng'}
+                placeholder="Chiều rộng"
+                name="size_width"
+                rules={requireField(t('this_field_required'))}
+                styleWrapper={{
+                  flex: 1,
+                }}
+                control={control}
+                styleTextLabel={styles.label}
+                style={styles.textInput}
+              />
+
+              <CustomInput
+                label={'Chiều dài'}
+                placeholder="Chiều dài"
+                name="size_length"
+                control={control}
+                rules={requireField(t('this_field_required'))}
+                styleTextLabel={styles.label}
+                styleWrapper={{
+                  flex: 1,
+                }}
+                style={styles.textInput}
+              />
+            </View>
           </Collapsible>
         )}
       </InViewPort>

@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import RecommendedUnitItem from './RecommendedUnitItem';
 import {COLORS, WIDTH, scale} from '../../../../assets/constants';
-import Carousel from 'react-native-new-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import InViewPort from '../../../../components/InViewport';

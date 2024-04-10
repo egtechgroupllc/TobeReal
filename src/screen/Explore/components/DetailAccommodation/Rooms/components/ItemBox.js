@@ -19,6 +19,8 @@ export default function ItemBox({
   description,
   onPress,
   price,
+
+  data,
 }) {
   return (
     <TouchableOpacity

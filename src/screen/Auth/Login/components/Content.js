@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -57,6 +57,12 @@ export default function Content() {
       },
     });
   };
+  // useEffect(() => {
+  //   handleLogin({
+  //     email: 'choemodo@gmail.com',
+  //     password: '123456',
+  //   });
+  // }, []);
 
   return (
     <View style={styles.wrapper}>

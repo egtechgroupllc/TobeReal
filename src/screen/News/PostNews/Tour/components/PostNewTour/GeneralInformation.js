@@ -103,7 +103,7 @@ export default function GeneralInformation({
                 styles.textInput,
                 {
                   minHeight: scale(130),
-                  maxHeight: scale(300),
+                  maxHeight: scale(500),
                 },
               ]}
               componentRight={
