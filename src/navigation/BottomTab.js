@@ -49,7 +49,11 @@ export default function BottomTab() {
           tabBarLabel: t('explore'),
 
           tabBarIcon: ({focused}) => (
-            <CustomImage source={images.kinhlup} style={{width:scale(25), height:scale(25)}} resizeMode='cover'/>
+            <CustomImage
+              source={images.iconSaveloka}
+              style={{width: scale(25), height: scale(25)}}
+              resizeMode="cover"
+            />
             // <IconExplore fill={focused && '#F0B90B'} />
           ),
         }}

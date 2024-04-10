@@ -1,6 +1,7 @@
 import {DetailAccommodationScreen} from '../screen/Explore';
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
 import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
+import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/DetailBuy/DetailBroker';
 import {SeeAllBuyScreen} from '../screen/Explore/components/ContentBuy/SeeAll';
 import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
@@ -21,6 +22,7 @@ import {
 import {ListVideoInfluencerScreen} from '../screen/Video';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
 
+// eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
   {
     name: 'DetailAccommodationScreen',
@@ -33,6 +35,10 @@ export default routerNoBottomTab = [
   {
     name: 'DetailBuyScreen',
     component: DetailBuyScreen,
+  },
+  {
+    name: 'DetailBrokerScreen',
+    component: DetailBrokerScreen,
   },
   {
     name: 'DetailTicketScreen',

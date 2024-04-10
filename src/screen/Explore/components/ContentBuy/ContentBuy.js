@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -85,12 +85,12 @@ const dataPackage = [
     ],
   },
 ];
-const dataWorld= [
+const dataWorld = [
   {
     id: 1,
     src: images.c15,
     name: 'C15_05_BlockC Emerald',
-    type:'Apartment',
+    type: 'Apartment',
     price: 25000000,
     imgdetail: [
       images.c15_1,
@@ -105,7 +105,7 @@ const dataWorld= [
     id: 2,
     src: images.c16,
     name: 'D11.06 Emerald',
-    type:'House',
+    type: 'House',
     price: 16000000,
     imgdetail: [
       images.c16_1,
@@ -123,7 +123,7 @@ const dataWorld= [
     id: 3,
     src: images.p14,
     name: 'P14.07 Diamond',
-    type:'Villa',
+    type: 'Villa',
     price: 28000000,
     imgdetail: [
       images.p14_1,
@@ -140,7 +140,7 @@ const dataWorld= [
     id: 4,
     src: images.q10,
     name: 'Centrosa Garden Q.10',
-    type:'House',
+    type: 'House',
     price: 26000000,
     imgdetail: [
       images.q10_1,
@@ -155,7 +155,7 @@ const dataWorld= [
     id: 5,
     src: images.a6,
     name: 'A6.7.08 Diamod Alanta Plus',
-    type:'House',
+    type: 'House',
     price: 18000000,
     imgdetail: [
       images.a6_1,
@@ -167,359 +167,243 @@ const dataWorld= [
   },
 ];
 
-const dataDomestic= [
+const dataDomestic = [
   {
     id: 1,
     src: images.dalat,
     name: 'Đà Lạt',
     price: 224000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.danang,
     name: 'Đà Nẵng',
     price: 995000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.halong,
     name: 'Hạ Long',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.hanoi,
     name: 'Hà Nội',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.hoian,
     name: 'Hội An',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.nhatrang,
     name: 'Nha Trang',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 7,
     src: images.phuquoc,
     name: 'Phú Quốc',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 8,
     src: images.ninhbinh,
     name: 'Ninh Bình',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-const dataInternational= [
+const dataInternational = [
   {
     id: 1,
     src: images.singapore,
     name: 'Singapore',
     price: 224000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.thailan,
     name: 'Thailand',
     price: 995000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.indo,
     name: 'Indonesia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.malay,
     name: 'Malaysia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.philip,
     name: 'Philippines',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.korea,
     name: 'Korea',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 7,
     src: images.japan,
     name: 'Japan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 8,
     src: images.taiwan,
     name: 'Taiwan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-const dataLocation= [
+const dataLocation = [
   {
     id: 1,
     src: images.singapore,
     name: 'Singapore',
     price: 224000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.thailan,
     name: 'Thailand',
     price: 995000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.indo,
     name: 'Indonesia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.malay,
     name: 'Malaysia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.philip,
     name: 'Philippines',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.korea,
     name: 'Korea',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 7,
     src: images.japan,
     name: 'Japan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 8,
     src: images.taiwan,
     name: 'Taiwan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-const dataAgent= [
+const dataAgent = [
   {
     id: 1,
     src: images.hanbok,
     name: 'Bali',
     price: 224000,
-    type:'Apartment',
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    type: 'Apartment',
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.seoul,
     name: 'Jakarta',
     price: 995000,
-    type:'Villa',
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    type: 'Villa',
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.jejubus,
-    type:'House',
+    type: 'House',
     name: 'Yogyakarta',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.danang,
-    type:'House',
+    type: 'House',
     name: 'Semarang',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.halloween,
-    type:'House',
+    type: 'House',
     name: 'Semarang',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
 export default function ContentBuy() {
-  const [tourData, setTourData] = useState(dataDomestic); 
+  const [tourData, setTourData] = useState(dataDomestic);
 
-  const handleCategoryChange = (categoryData) => {
+  const handleCategoryChange = categoryData => {
     if (categoryData === 'Domestic destination') {
       setTourData(dataDomestic);
     } else if (categoryData === 'International destination') {
       setTourData(dataInternational);
     }
   };
-  console.log(tourData)
+  console.log(tourData);
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
       <BuySell data={dataPackage} />
       <Discount />
-      <FeatureEstate data={dataWorld}/>
-      <TopLocation data={dataLocation}/>
-      <TopEstateAgent data={dataAgent}/>
-      <ExploreNearbyEstate data={dataWorld}/>
-      <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange}/>
+      <FeatureEstate data={dataWorld} />
+      <TopLocation data={dataLocation} />
+      <TopEstateAgent data={dataAgent} />
+      <ExploreNearbyEstate data={dataWorld} />
+      <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} />
     </View>
   );
 }

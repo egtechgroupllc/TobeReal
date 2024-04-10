@@ -88,10 +88,10 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
           (!this.props.noLoading && (
             // <></>
             <CustomImage
-            source={images.logoLoading}
-            style={{height: scale(50), width: scale(50), alignSelf: 'center'}}
-            resizeMode="cover"
-          />
+              source={images.logoLoading}
+              style={{height: scale(30), width: scale(30), alignSelf: 'center'}}
+              resizeMode="cover"
+            />
             // <ActivityIndicator
             //   size={'large'}
             //   color={COLORS.primary}

@@ -4,7 +4,7 @@ import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {CustomInput} from '../../../../../components';
 import {IconCalendar, IconDown} from '../../../../../assets/icon/Icon';
-import {formatDateTime} from '../../../../../utils/format';
+import {formatDate} from '../../../../../utils/format';
 
 export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
   return (
@@ -22,7 +22,7 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
               color: checkIn ? COLORS.text : COLORS.textSub,
             }}
             textType="semiBold">
-            {checkIn ? formatDateTime(checkIn) : 'Check-in'}
+            {checkIn ? formatDate(checkIn) : 'Check-in'}
           </CustomText>
         </View>
 
@@ -38,7 +38,7 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
               color: checkOut ? COLORS.text : COLORS.textSub,
             }}
             textType="semiBold">
-            {checkOut ? formatDateTime(checkOut) : 'Check-out'}
+            {checkOut ? formatDate(checkOut) : 'Check-out'}
           </CustomText>
         </View>
       </View>

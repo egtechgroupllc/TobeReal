@@ -9,16 +9,25 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAuthentication} from '../../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 import Skeleton from '../../../../../components/Skeleton';
-import { useLanguage } from '../../../../../hooks/useLanguage';
-import { formatPrice } from '../../../../../utils/format';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../../utils/format';
 import LinearGradient from 'react-native-linear-gradient';
-import { IconMess, IconPhone, IconSupporterYellow, IconX, LogoLine, LogoMessageFB, LogoWhatApp, LogoZalo } from '../../../../../assets/icon/Icon';
+import {
+  IconEmail,
+  IconPhone,
+  IconSupporterYellow,
+  IconX,
+  LogoLine,
+  LogoMessageFB,
+  LogoWhatApp,
+  LogoZalo,
+} from '../../../../../assets/icon/Icon';
 
 export default memo(function BookAccommodation({
   setBookHeight,
   isLoading,
   price,
-  onPress
+  onPress,
 }) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
@@ -96,8 +105,7 @@ export default memo(function BookAccommodation({
         </View>
       </Skeleton>
       {openContact && (
-        <View
-          style={styles.contact}>
+        <View style={styles.contact}>
           <LinearGradient
             colors={['#FFE55A', '#F0B90B']}
             start={{x: 1.2, y: 0}}
@@ -180,7 +188,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -228,7 +236,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -275,7 +283,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -322,7 +330,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -353,5 +361,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     columnGap: scale(10),
+  },
+  contact: {
+    height: scale(260),
+    position: 'absolute',
+    backgroundColor: COLORS.white,
+    borderRadius: scale(20),
+    borderWidth: scale(1),
+    borderColor: '#CDCDCD',
+    width: '90%',
+    alignSelf: 'center',
+    top: scale(-300),
+    ...SHADOW,
   },
 });

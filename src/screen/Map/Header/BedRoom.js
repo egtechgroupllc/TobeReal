@@ -4,17 +4,17 @@ import {SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 const listSort = ['Studio', '1 Bedroom', '2 Bedrooms', '3 Bedrooms +'];
 export default function BedRoom() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const [checked, setChecked] = useState(undefined);
 
   return (
     <WrapperContent
       heading={t('number_of_bedrooms')}
-      styleWrapper={{marginBottom:scale(-10)}}
+      styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,
       }}

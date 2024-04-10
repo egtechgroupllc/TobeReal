@@ -21,9 +21,11 @@ import {requireField} from '../../../../../utils/validate';
 import MainWrapper from '../../../../../components/MainWrapper';
 
 import {postCreateTour} from '../../../../../Model/api/apiTour';
-import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
+
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import GeneralInformation from '../components/PostNewTour/GeneralInformation';
+import TourSchedule from '../components/PostNewTour/TourSchedule';
+import EstateContact from '../components/PostNewTour/EstateContact';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
@@ -34,6 +36,7 @@ export default function PostNewTourScreen() {
     setValue,
     watch,
     reset,
+    unregister,
     formState: {errors},
   } = useForm();
 
@@ -80,6 +83,7 @@ export default function PostNewTourScreen() {
 
   const handlePostTour = value => {
     delete value?.check;
+    // delete value?.description_0;
     const formData = getFormData(value);
 
     createTourMu.mutate(formData, {
@@ -124,6 +128,13 @@ export default function PostNewTourScreen() {
           watch={watch}
           errors={errors}
         /> */}
+        <TourSchedule
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
+          unregister={unregister}
+        />
         <EstateContact control={control} watch={watch} errors={errors} />
 
         <EstatePhoto

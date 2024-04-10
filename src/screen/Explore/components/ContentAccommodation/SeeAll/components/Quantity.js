@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   ScrollView,
@@ -29,11 +29,12 @@ export default function Quantity({title}) {
       </CustomText>
       <View
         style={{
-          flexDirection: 'row', width:'35%'
+          flexDirection: 'row',
+          width: '35%',
         }}>
-        <Box title={'Room'}/>
-        <Box title={'Adult'}/>
-        <Box title={'Children'}/>
+        <Box title={'Room'} />
+        <Box title={'Adult'} />
+        <Box title={'Children'} />
       </View>
     </View>
   );

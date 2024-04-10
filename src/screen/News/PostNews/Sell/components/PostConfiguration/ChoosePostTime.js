@@ -6,7 +6,7 @@ import {COLORS, FONTS, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCalendar} from '../../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
-import {formatDateTime} from '../../../../../../utils/format';
+import {formatDate} from '../../../../../../utils/format';
 import PostTimeItem from './PostTimeItem';
 
 export default memo(function ChoosePostTime({
@@ -23,7 +23,7 @@ export default memo(function ChoosePostTime({
 
   const dateStart = useMemo(
     () =>
-      formatDateTime(date, {
+      formatDate(date, {
         dateStyle: 'yyyy-MM-dd',
       }),
     [date],
@@ -31,7 +31,7 @@ export default memo(function ChoosePostTime({
 
   const dateEnd = useMemo(
     () =>
-      formatDateTime(date, {
+      formatDate(date, {
         addDays: select?.number_day,
         dateStyle: 'yyyy-MM-dd',
       }),

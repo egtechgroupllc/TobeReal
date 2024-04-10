@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {
   COLORS,
   SHADOW,
@@ -12,14 +12,23 @@ import {
   IconEmail,
   IconPhone,
   IconProfile,
+  IconRight,
 } from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ContactInfo({data}) {
+  const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
-      <View style={styles.content}>
+      <TouchableOpacity
+        style={styles.content}
+        onPress={() =>
+          navigate('NoBottomTab', {
+            screen: 'DetailBrokerScreen',
+          })
+        }>
         <View style={styles.header}>
           <CustomText
             textType="bold"
@@ -28,6 +37,7 @@ export default function ContactInfo({data}) {
             }}>
             Information
           </CustomText>
+          <IconRight />
         </View>
 
         <View style={styles.center}>
@@ -117,7 +127,7 @@ export default function ContactInfo({data}) {
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -137,6 +147,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFCE00',
     padding: scale(10),
     borderRadius: scale(10),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(20),
   },
   center: {
     flexDirection: 'row',

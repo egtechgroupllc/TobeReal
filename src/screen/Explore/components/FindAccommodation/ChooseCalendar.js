@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
@@ -7,7 +8,7 @@ import BottomSheet from '../../../../components/BottomSheet';
 import CalendarRange from '../../../../components/CalendarRange';
 import ListSelect from '../../../../components/BottomSheetListSelect';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {formatDateTime} from '../../../../utils/format';
+import {formatDate} from '../../../../utils/format';
 import TopCalendar from './Calendar/TopCalendar';
 import CustomText from '../../../../components/CustomText';
 
@@ -89,10 +90,14 @@ export default function ChooseCalendar({rental, style, Checkin}) {
 
   return (
     <View style={style}>
-         {Checkin&&<CustomText style={{fontSize: SIZES.xMedium, paddingBottom:scale(5)}}>Check in - Check out</CustomText>}
+      {Checkin && (
+        <CustomText style={{fontSize: SIZES.xMedium, paddingBottom: scale(5)}}>
+          Check in - Check out
+        </CustomText>
+      )}
       <CustomInput
         // name="calendar"
-        defaultValue={`${formatDateTime(selectedStartDate)} - ${formatDateTime(
+        defaultValue={`${formatDate(selectedStartDate)} - ${formatDate(
           selectedEndDate || dateEnd,
         )}`}
         iconLeft={IconCalendar}

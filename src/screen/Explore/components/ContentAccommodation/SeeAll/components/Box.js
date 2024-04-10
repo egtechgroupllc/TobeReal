@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   ScrollView,
@@ -10,11 +10,11 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
-import { IconAdd } from '../../../../../../assets/icon/Icon';
+import {IconAdd} from '../../../../../../assets/icon/Icon';
 import Counter from '../../../../../../components/Counter';
 
 export default function Box({title}) {
-    const [numAdult, setNumAdult] = useState(1);
+  const [numAdult, setNumAdult] = useState();
   return (
     <View
       style={{
@@ -30,7 +30,7 @@ export default function Box({title}) {
         {title}
       </CustomText>
       <View style={styles.button}>
-      <Counter onChange={setNumAdult} value={numAdult} />
+        <Counter onChange={setNumAdult} value={numAdult} />
       </View>
     </View>
   );
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: scale(27),
     minWidth: scale(83),
     borderRadius: scale(5),
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'center',
     // flex: 1,
   },

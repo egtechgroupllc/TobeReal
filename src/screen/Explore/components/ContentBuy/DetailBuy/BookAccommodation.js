@@ -25,7 +25,7 @@ import Skeleton from '../../../../../components/Skeleton';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
 import {
-  IconMess,
+  IconEmail,
   IconPhone,
   IconSupporter,
   IconSupporterYellow,
@@ -48,7 +48,7 @@ export default memo(function BookAccommodation({
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {token} = useAuthentication();
-  const {navigate} = useNavigation();
+
   const [openContact, setOpenContact] = useState(false);
 
   const makeCallPhone = num => {
@@ -67,6 +67,30 @@ export default memo(function BookAccommodation({
       <Skeleton
         visible={!isLoading}
         shimmerStyle={{
+          height: scale(20),
+          width: '70%',
+        }}>
+        <View style={styles.price}>
+          <CustomText
+            style={{
+              fontSize: SIZES.xMedium,
+            }}>
+            {t('price')}
+          </CustomText>
+          <CustomText
+            style={{
+              fontSize: SIZES.medium,
+            }}
+            textType="bold">
+            {formatPrice(price, {
+              locales: 'vi',
+            })}{' '}
+          </CustomText>
+        </View>
+      </Skeleton>
+      <Skeleton
+        visible={!isLoading}
+        shimmerStyle={{
           height: scale(48),
         }}>
         <View
@@ -76,7 +100,7 @@ export default memo(function BookAccommodation({
             paddingVertical: scale(10),
             alignSelf: 'center',
           }}>
-          <CustomButton
+          {/* <CustomButton
             onPress={() => {
               // makeCallPhone('0824232339');
               Linking.openURL('https://chat.zalo.me/?phone=0824232339');
@@ -95,16 +119,16 @@ export default memo(function BookAccommodation({
               height: scale(26),
             }}
             outline
-          />
+          /> */}
 
           <CustomButton
             onPress={() => {
               makeCallPhone('0824232339');
               setOpenContact(true);
             }}
-            buttonType="large"
-            style={{flex: 1}}
-            text={'0824232339'}
+            buttonType="medium"
+            style={{flex: 0.7}}
+            text={t('contact_host')}
             styleText={{
               fontSize: SIZES.xMedium,
             }}
@@ -128,7 +152,7 @@ export default memo(function BookAccommodation({
           /> */}
         </View>
       </Skeleton>
-      {/* {openContact && (
+      {openContact && (
         <View style={styles.contact}>
           <LinearGradient
             colors={['#FFE55A', '#F0B90B']}
@@ -212,7 +236,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -260,7 +284,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -307,7 +331,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -354,14 +378,14 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
             </View>
           </View>
         </View>
-      )} */}
+      )}
     </View>
   );
 });

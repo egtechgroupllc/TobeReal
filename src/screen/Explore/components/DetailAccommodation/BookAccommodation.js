@@ -10,7 +10,17 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 import Skeleton from '../../../../components/Skeleton';
-import { IconMess, IconPhone, IconSupporter, IconSupporterYellow, IconX, LogoLine, LogoMessageFB, LogoWhatApp, LogoZalo } from '../../../../assets/icon/Icon';
+import {
+  IconEmail,
+  IconPhone,
+  IconSupporter,
+  IconSupporterYellow,
+  IconX,
+  LogoLine,
+  LogoMessageFB,
+  LogoWhatApp,
+  LogoZalo,
+} from '../../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default memo(function BookAccommodation({
@@ -92,8 +102,7 @@ export default memo(function BookAccommodation({
         </View>
       </Skeleton>
       {openContact && (
-        <View
-          style={styles.contact}>
+        <View style={styles.contact}>
           <LinearGradient
             colors={['#FFE55A', '#F0B90B']}
             start={{x: 1.2, y: 0}}
@@ -176,7 +185,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -224,7 +233,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -271,7 +280,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -318,7 +327,7 @@ export default memo(function BookAccommodation({
                       columnGap: scale(10),
                     }}>
                     <IconPhone />
-                    <IconMess />
+                    <IconEmail />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -345,7 +354,7 @@ const styles = StyleSheet.create({
       height: -2,
     },
   },
-  contact:{
+  contact: {
     height: scale(260),
     position: 'absolute',
     backgroundColor: COLORS.white,

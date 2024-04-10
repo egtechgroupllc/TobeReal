@@ -15,8 +15,9 @@ import {
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
 import SelectCountry from '../../../components/SelectCountry';
+import SelectCurrency from '../../../components/SelectCurrency';
 
-export default function GeneralInformation({
+export default function General({
   maxCharacters,
   control,
   setValue,
@@ -32,25 +33,16 @@ export default function GeneralInformation({
     setView(prev => !prev);
   };
   const arrKeywords = useRef([
-    'title',
+    'name',
     'description',
-    'address',
-    'latitude',
-    'longitude',
-    'country_id',
-    'province_id',
-    'estate_type_id',
+    'quantity',
+    'price',
   ]).current;
-
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['common', 'estate', 'list-type'],
-    queryFn: getListTypeEstateSell,
-  });
 
   return (
     <View>
       <ButtonTabValidate
-        title={t('tour_information')}
+        title={t('general_information')}
         onPress={viewGeneral}
         errors={errors}
         watch={watch}
@@ -63,13 +55,12 @@ export default function GeneralInformation({
         {isRender && (
           <Collapsible collapsed={!isView} style={styles.box}>
             <CustomInput
-              styleTextLabel={styles.label}
-              label={t('title')}
+              label={t('Tên Tour')}
               control={control}
               name="name"
               multiline
               maxLength={100}
-              placeholder={t('title')}
+              placeholder={t('Tên Tour')}
               rules={[
                 requireField(t('this_field_required')),
                 validateMaxLengthText(`${100} characters limit`, 100),
@@ -77,7 +68,7 @@ export default function GeneralInformation({
               style={[
                 styles.textInput,
                 {
-                  height: scale(60),
+                  height: scale(50),
                 },
               ]}
               componentRight={
@@ -115,33 +106,26 @@ export default function GeneralInformation({
 
             <View style={styles.line} />
 
-            <EstateSetMap
-              control={control}
-              onChange={value => {
-                setValue('latitude', value?.latitude);
-                setValue('longitude', value?.longitude);
-              }}
-            />
-
-            <View style={styles.line} />
-
-            <SelectCountry
-              setValue={setValue}
-              control={control}
-              // onChange={value => {
-              //   setValue('country_id', value?.id);
-              //   setValue('province_id', value?.province?.id);
-              // }}
-            />
-
             <CustomInput
-              styleTextLabel={styles.label}
-              label={t('address')}
+              label={t('Số lượng vé')}
               control={control}
-              name="address"
-              placeholder={t('address')}
+              name="quantity"
+              placeholder={t('quantity')}
+              rules={[requireField(t('this_field_required'))]}
+              style={[styles.textInput]}
+              keyboardType="number-pad"
+            />
+
+            <SelectCurrency control={control} />
+            <CustomInput
+              label={t('price')}
+              control={control}
+              name="price"
+              placeholder={t('enter_price')}
               rules={requireField(t('this_field_required'))}
-              style={styles.textInput}
+              style={{...styles.textInput}}
+              keyboardType="number-pad"
+              enableFormatNum
             />
           </Collapsible>
         )}

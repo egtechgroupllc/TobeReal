@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 
 import {
   IconFilter,
@@ -87,8 +87,15 @@ const content = [
 ];
 export default function FilterMore() {
   const {t} = useLanguage();
+  const {control, watch, setValue} = useForm();
   const bottomSheetRef = useRef();
-  const {control, watch} = useForm();
+  const [reset, setReset] = useState(false);
+  const handleReset = () => {
+    setValue('legal_documents', listLegalDoc[0]);
+    setValue('interior', listInterior[0]);
+    setReset(true);
+  };
+
   return (
     <View style={styles.search}>
       <BottomSheet
@@ -111,6 +118,7 @@ export default function FilterMore() {
               // onPress={() => {
               //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
               // }}
+              onPress={handleReset}
               outline
               buttonType="normal"
               style={{flex: 0.5}}
@@ -142,6 +150,7 @@ export default function FilterMore() {
           name={'legal_documents'}
           control={control}
           data={listLegalDoc}
+          status={reset ? 'Select' : listLegalDoc[0]}
           style={{rowGap: scale(10)}}
           styleWrapper={styles.buttonStyle}
           price
@@ -150,9 +159,10 @@ export default function FilterMore() {
         />
         <DropDown
           label={'Acreage'}
-          name={'legal_documents'}
+          name={'interior'}
           control={control}
           data={listInterior}
+          status={reset ? 'Select' : listInterior[0]}
           acreage
           styleWrapper={styles.buttonStyle}
           getKeyValue="name"

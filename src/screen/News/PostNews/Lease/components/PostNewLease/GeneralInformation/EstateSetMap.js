@@ -5,7 +5,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {scale} from '../../../../../../../assets/constants';
 import DetailAccommoMap from '../../../../../../Explore/components/DetailAccommodation/DetailAccommoMap';
 
-export default function EstateSetMap({onChange, watch}) {
+export default function EstateSetMap({onChange, watch = () => {}}) {
   const {navigate} = useNavigation();
 
   const [dataFromScreen, setDataFromScreen] = useState(null);

@@ -14,8 +14,8 @@ export default function BuySell({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Buy and sell real estate nationwide')]
-    return (
+  const title = [t('Buy and sell real estate nationwide')];
+  return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
