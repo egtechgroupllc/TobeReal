@@ -9,7 +9,7 @@ import {
 import {CustomButton} from '../../../../../components';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
-import {formatDateTime} from '../../../../../utils/format';
+import {formatDate} from '../../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
 
 export default function CreateSellItem({data, onPressMore, onEdit}) {
@@ -101,7 +101,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày hết hạn</CustomText>
           <CustomText textType="medium">
-            {formatDateTime(data.date_start, {
+            {formatDate(data.date_start, {
               addDays: data.package_post_item.number_day,
               dateStyle: 'yyyy-MM-dd',
             })}

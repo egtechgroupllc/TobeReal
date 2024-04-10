@@ -1,16 +1,16 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SIZES, scale} from '../../../../../../assets/constants';
 import Counter from '../../../../../../components/Counter';
 import CustomText from '../../../../../../components/CustomText';
-import {formatDateTime} from '../../../../../../utils/format';
+import {formatDate} from '../../../../../../utils/format';
 
 export default function AutoPostTop({date, setValue, onCount, countNum}) {
   const [count, setCount] = useState(1);
 
   const dateEnd = useMemo(
     () =>
-      formatDateTime(date?.date, {
+      formatDate(date?.date, {
         addDays: date?.number_day * count,
         dateStyle: 'yyyy-MM-dd',
       }),

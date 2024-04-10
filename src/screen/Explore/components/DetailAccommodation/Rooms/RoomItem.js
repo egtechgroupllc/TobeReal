@@ -39,7 +39,6 @@ export default function RoomItem({dataP, onBooking, date}) {
     return result / data?.data?.data?.count;
   }, [data?.data?.data]);
 
-  console.log({priceAverage});
   return (
     <InViewport
       onChange={render => render && setIsRender(render)}

@@ -68,6 +68,7 @@ export const formatDate = (
 
   return format(formattedDateTime, dateFormat);
 };
+
 export const formatDateTime = (
   date = new Date(),
   {noDate, noHour, isHour24, addDays: daysToAdd} = {},

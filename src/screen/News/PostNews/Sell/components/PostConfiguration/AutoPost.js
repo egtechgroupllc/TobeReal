@@ -7,7 +7,7 @@ import {IconEditProfile, IconReset} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import BottomSheet from '../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../components/CustomText';
-import {formatDateTime} from '../../../../../../utils/format';
+import {formatDate} from '../../../../../../utils/format';
 import AutoPostTop from './AutoPostTop';
 
 export default function AutoPost({setValue, date, params, unregister}) {
@@ -18,7 +18,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
   const bottomSheetRef = useRef();
   const dateEnd = useMemo(
     () =>
-      formatDateTime(date?.date, {
+      formatDate(date?.date, {
         addDays: date?.number_day * count?.count,
         dateStyle: 'yyyy-MM-dd',
       }),

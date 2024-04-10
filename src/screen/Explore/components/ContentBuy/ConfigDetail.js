@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
-import {formatDateTime} from '../../../../utils/format';
+import {formatDate} from '../../../../utils/format';
 
 export default function ConfigDetail({data}) {
   return (
@@ -16,7 +16,7 @@ export default function ConfigDetail({data}) {
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày hết hạn</CustomText>
           <CustomText textType="medium">
-            {formatDateTime(data?.date_start, {
+            {formatDate(data?.date_start, {
               addDays: data?.package_post_item?.number_day,
               dateStyle: 'yyyy-MM-dd',
             })}

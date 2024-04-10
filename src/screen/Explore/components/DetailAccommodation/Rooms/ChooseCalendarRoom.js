@@ -9,11 +9,11 @@ import BottomSheet from '../../../../../components/BottomSheet';
 import BottomSheetListSelect from '../../../../../components/BottomSheetListSelect';
 import CalendarRange from '../../../../../components/CalendarRange';
 import CustomText from '../../../../../components/CustomText';
-import {formatDateTime} from '../../../../../utils/format';
+import {formatDate} from '../../../../../utils/format';
 import TopCalendar from '../../FindAccommodation/Calendar/TopCalendar';
 
 const formatDateStyle = (date, add = 0) => {
-  const newDate = formatDateTime(date, {
+  const newDate = formatDate(date, {
     addDays: add,
     dateStyle: 'yyyy-MM-dd',
   });
@@ -85,8 +85,8 @@ export default function ChooseCalendarRoom({onSelectDate}) {
         onPress={() => bottomSheetRef.current.open()}>
         <IconCalendar style={styles.icon} />
         <CustomText textType="medium">
-          {formatDateTime(selectedStartDate)} -{' '}
-          {selectedEndDate ? formatDateTime(selectedEndDate) : '_'},{' '}
+          {formatDate(selectedStartDate)} -{' '}
+          {selectedEndDate ? formatDate(selectedEndDate) : '_'},{' '}
           {selected?.text}
         </CustomText>
       </TouchableOpacity>
@@ -105,11 +105,7 @@ export default function ChooseCalendarRoom({onSelectDate}) {
             onSelect={value => {
               setSelected(value);
               bottomSheetChild.current.closeChild();
-              const newDate = formatDateTime(selectedStartDate, {
-                addDays: value?.value,
-                dateStyle: 'yyyy-MM-dd',
-              });
-
+              const newDate = formatDateStyle(selectedStartDate, value?.value);
               setSelectedEndDate(newDate);
             }}
           />

@@ -3,16 +3,10 @@ import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {CustomInput} from '../../../../../../../components';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {formatDateTime} from '../../../../../../../utils/format';
+import {formatDateTime, formatTime} from '../../../../../../../utils/format';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../../components/CustomText';
 
-const formatTime = time => {
-  return formatDateTime(time, {
-    isHouse: true,
-    isHour24: true,
-  });
-};
 export default function TimeCheckIn({onChange}) {
   const {t} = useLanguage();
 

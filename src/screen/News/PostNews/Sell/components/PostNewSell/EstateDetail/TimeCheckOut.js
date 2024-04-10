@@ -1,19 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-import {CustomInput} from '../../../../../../../components';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {formatDateTime} from '../../../../../../../utils/format';
-import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {CustomInput} from '../../../../../../../components';
 import CustomText from '../../../../../../../components/CustomText';
-
-const formatTime = time => {
-  return formatDateTime(time, {
-    isHouse: true,
-    isHour24: true,
-  });
-};
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {formatTime} from '../../../../../../../utils/format';
 
 export default function TimeCheckOut({onChange}) {
   const {t} = useLanguage();

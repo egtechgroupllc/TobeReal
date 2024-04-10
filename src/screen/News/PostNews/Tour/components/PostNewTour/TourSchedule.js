@@ -1,29 +1,21 @@
-import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 
-import {getListTypeEstateSell} from '../../../../../../Model/api/common';
+import DatePicker from 'react-native-date-picker';
+import {ScrollView} from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
+import CustomText from '../../../../../../components/CustomText';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {formatDateTime} from '../../../../../../utils/format';
 import {
   requireField,
   validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
-import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
-import SelectCountry from '../../../components/SelectCountry';
-import {
-  formatDate,
-  formatDateTime,
-  formatTime,
-} from '../../../../../../utils/format';
-import DatePicker from 'react-native-date-picker';
-import CustomText from '../../../../../../components/CustomText';
-import {ScrollView} from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
 
 const caculateDays = (dateStart, dateEnd) => {
   const startDate = new Date(dateStart);
@@ -117,6 +109,7 @@ export default function TourSchedule({
       unregister(`description_${index}`);
       console.log('====================================');
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numDays.days]);
 
   return (
