@@ -97,12 +97,6 @@ export default React.memo(
       }),
       [indexSelect],
     );
-    const dataImg = data?.images?.map((img, index) => ({
-      id: img?.id,
-      description: img?.description,
-      index,
-      uri: img?.url,
-    }));
 
     return (
       <>
@@ -176,7 +170,7 @@ export default React.memo(
                 opacity: animatedOpacityImg,
               },
             ]}>
-            <ImageDetail dataImg={dataImg} />
+            <ImageDetail arrImg={data?.images} />
           </Animated.View>
 
           <OptionAccommodation

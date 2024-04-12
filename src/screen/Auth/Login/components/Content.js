@@ -92,12 +92,6 @@ export default function Content() {
           password
         />
 
-        {loginMutation.isPending && (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#FF8C00" />
-          </View>
-        )}
-
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"

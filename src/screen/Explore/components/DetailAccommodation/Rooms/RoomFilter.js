@@ -5,7 +5,7 @@ import {IconPeople, IconWifi} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import ChooseCalendarRoom from './ChooseCalendarRoom';
 
-export default memo(function RoomFilter({onSelectDate}) {
+export default memo(function RoomFilter({onSelectDate, data}) {
   return (
     <View
       style={{
@@ -18,6 +18,7 @@ export default memo(function RoomFilter({onSelectDate}) {
         onSelectDate={value => {
           onSelectDate && onSelectDate(value);
         }}
+        data={data}
       />
 
       <View style={{...styles.row, flex: 0.5, columnGap: scale(10)}}>

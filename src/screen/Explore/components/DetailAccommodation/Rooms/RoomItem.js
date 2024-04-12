@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
-import React, {useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useMemo, useState} from 'react';
+import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {getListPriceRoomDate} from '../../../../../Model/api/apiAccom';
 import {
@@ -18,9 +18,11 @@ import {formatPrice} from '../../../../../utils/format';
 import ItemAccommdSearchLoading from '../../../../Search/components/ItemAccommdSearchLoading';
 import RoomUntil from './components/RoomUntil';
 import SelectRoom from './components/SelectRoom';
+import {useNavigation} from '@react-navigation/native';
 
 export default function RoomItem({dataP, onBooking, date}) {
   const [isRender, setIsRender] = useState(false);
+  const {navigate} = useNavigation();
 
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'detail', 'list-room-date', dataP?.id],
@@ -73,7 +75,7 @@ export default function RoomItem({dataP, onBooking, date}) {
               style={{
                 fontSize: SIZES.xMedium,
               }}>
-              {dataP.room_type.name}
+              {dataP?.room_type?.name}
             </CustomText>
             <View
               style={{
@@ -94,36 +96,39 @@ export default function RoomItem({dataP, onBooking, date}) {
             </View>
           </View>
 
-          <View style={styles.content}>
-            <View
-              style={{
-                ...styles.row,
-                ...styles.header,
-              }}>
-              <CustomText
-                textType="bold"
-                style={{color: '#0194f3', flex: 1}}
-                numberOfLines={1}>
-                {dataP.name}
-              </CustomText>
-              <IconNext
+          <TouchableNativeFeedback
+            onPress={() => navigate('DetailRoomScreen', dataP)}>
+            <View style={styles.content}>
+              <View
                 style={{
-                  width: scale(14),
-                  height: scale(14),
-                }}
-                fill={'#0194f3'}
-              />
-            </View>
+                  ...styles.row,
+                  ...styles.header,
+                }}>
+                <CustomText
+                  textType="bold"
+                  style={{color: '#0194f3', flex: 1}}
+                  numberOfLines={1}>
+                  {dataP.name}
+                </CustomText>
+                <IconNext
+                  style={{
+                    width: scale(14),
+                    height: scale(14),
+                  }}
+                  fill={'#0194f3'}
+                />
+              </View>
 
-            <View
-              style={{
-                padding: scale(8),
-                rowGap: scale(7),
-              }}>
-              <RoomUntil data={dataP} price={priceAverage} />
-              <SelectRoom onPress={() => onBooking(dataP?.id)} />
+              <View
+                style={{
+                  padding: scale(8),
+                  rowGap: scale(7),
+                }}>
+                <RoomUntil data={dataP} price={priceAverage} />
+                <SelectRoom onPress={() => onBooking(dataP?.id)} data={dataP} />
+              </View>
             </View>
-          </View>
+          </TouchableNativeFeedback>
         </View>
       )}
     </InViewport>

@@ -10,11 +10,8 @@ type CustomImgProps = {
 export default function CustomImage({source, ...props}: CustomImgProps) {
   const [visible, setVisible] = useState(true);
 
-  const sourceNew = useMemo(
-    () => (Array.isArray(source) ? source[0] : source),
-    [source],
-  );
-  const isImgAsset = useMemo(() => typeof sourceNew === 'string', [sourceNew]);
+
+  const isImgAsset = useMemo(() => typeof source === 'string', [source]);
 
   return (
     <>
@@ -22,8 +19,8 @@ export default function CustomImage({source, ...props}: CustomImgProps) {
         {...props}
         source={
           !isImgAsset
-            ? sourceNew
-            : {uri: sourceNew, priority: FastImage.priority.high}
+            ? source
+            : {uri: source, priority: FastImage.priority.high}
         }
         onLoadEnd={() => {
           setVisible(true);

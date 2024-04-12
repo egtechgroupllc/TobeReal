@@ -96,7 +96,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
                 flex: 1,
               }}
               control={control}
-              styleTextLabel={styles.label}
               style={styles.textInput}
               styleText={styles.textInput}
             />
@@ -107,13 +106,44 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               name="size_length"
               control={control}
               rules={requireField(t('this_field_required'))}
-              styleTextLabel={styles.label}
               styleWrapper={{
                 flex: 1,
               }}
               style={styles.textInput}
               styleText={styles.textInput}
             />
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(30),
+            }}>
+            <CustomInput
+              label={'Số lượng phòng'}
+              placeholder="Số lượng phòng"
+              name="number_room"
+              control={control}
+              rules={requireField(t('this_field_required'))}
+              styleWrapper={{
+                flex: 1,
+              }}
+              style={styles.textInput}
+              styleText={styles.textInput}
+            />
+
+            {/* <CustomInput
+              label={'Số khách'}
+              placeholder="Chiều rộng"
+              name="number_user"
+              rules={requireField(t('this_field_required'))}
+              styleWrapper={{
+                flex: 1,
+              }}
+              control={control}
+              style={styles.textInput}
+              styleText={styles.textInput}
+            /> */}
           </View>
           <View style={styles.line} />
 

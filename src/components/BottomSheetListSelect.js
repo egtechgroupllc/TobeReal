@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
-import React, {useEffect, useState} from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CustomButton} from '.';
@@ -13,8 +19,9 @@ export default function BottomSheetListSelect({
   onSelect,
   value,
 }) {
-  const [select, setSelect] = useState(value || data[0]);
+  const [select, setSelect] = useState(data[0]);
   const insets = useSafeAreaInsets();
+  const flatListRef = useRef(null);
 
   useEffect(() => {
     onChange && onChange(select);
@@ -24,8 +31,25 @@ export default function BottomSheetListSelect({
     value && setSelect(value);
   }, [value]);
 
+  const scrollToIndex = (index = 0) => {
+    flatListRef.current.scrollToIndex({
+      animated: true,
+      index: index,
+      viewPosition: 0.5,
+    });
+  };
+
+  const handlePress = (item, index) => {
+    setSelect(item);
+    setTimeout(() => {
+      onSelect && onSelect(item);
+    }, 0);
+    scrollToIndex(index);
+  };
+
   return (
     <BottomSheetFlatList
+      ref={flatListRef}
       data={data}
       keyExtractor={(item, index) => `key-${index}`}
       showsVerticalScrollIndicator={false}
@@ -44,8 +68,7 @@ export default function BottomSheetListSelect({
           ]}
           text={item?.text || item}
           onPress={() => {
-            setSelect(item);
-            onSelect && onSelect(item);
+            handlePress(item, index);
           }}
           iconRight={(select === item?.text || select === item) && IconCheckBox}
           styleText={{

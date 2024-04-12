@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {
+  IconBookings,
   IconNews,
   IconPeople,
   IconRoom,
@@ -9,12 +10,13 @@ import {
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
+import ItemUtil from './ItemUtil';
 
 export default function RoomUntil({data, price}) {
   return (
     <>
       <ItemUtil
-        Icon={IconNews}
+        Icon={IconBookings}
         value={`Miễn phí hủy phòng trước 10 Apr 13:00`}
         color={'#00875a'}
         backgroundColor={'#e8fef5'}
@@ -44,6 +46,7 @@ export default function RoomUntil({data, price}) {
         <View
           style={{
             rowGap: scale(7),
+            alignItems: 'flex-end',
           }}>
           <View>
             <View style={styles.boxDiscount}>
@@ -58,7 +61,7 @@ export default function RoomUntil({data, price}) {
               </CustomText>
             </View>
             <CustomText style={styles.priceDiscount}>
-              {formatPrice(87281331223)}
+              {formatPrice(23)}
             </CustomText>
           </View>
 
@@ -73,27 +76,7 @@ export default function RoomUntil({data, price}) {
     </>
   );
 }
-const ItemUtil = ({value, Icon, color, backgroundColor, styleWrapper}) => {
-  return (
-    <View style={{...styles.boxIcon, backgroundColor, ...styleWrapper}}>
-      {Icon && (
-        <Icon
-          fill={color || '#aaa'}
-          style={{
-            width: scale(13),
-            height: scale(13),
-          }}
-        />
-      )}
-      <CustomText
-        style={{
-          color: color,
-        }}>
-        {value}
-      </CustomText>
-    </View>
-  );
-};
+
 const styles = StyleSheet.create({
   boxDiscount: {
     position: 'absolute',
@@ -112,17 +95,10 @@ const styles = StyleSheet.create({
   price: {
     color: COLORS.primary,
     fontSize: SIZES.xMedium,
+    textAlign: 'right',
   },
   night: {
     color: COLORS.text,
     fontSize: SIZES.xSmall,
-    textAlign: 'right',
-  },
-  boxIcon: {
-    flexDirection: 'row',
-    columnGap: scale(6),
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    padding: scale(4),
   },
 });

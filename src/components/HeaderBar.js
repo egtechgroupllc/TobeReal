@@ -28,7 +28,13 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
                 : goBack();
             }}
             style={{padding: scale(6), paddingHorizontal: scale(8)}}>
-            <IconGoBack fill={'#fff'} />
+            <IconGoBack
+              fill={'#fff'}
+              style={{
+                width: scale(16),
+                height: scale(16),
+              }}
+            />
           </Pressable>
         )}
 

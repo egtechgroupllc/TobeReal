@@ -1,4 +1,4 @@
-import {addDays, format} from 'date-fns';
+import {addDays, addMonths, addYears, format} from 'date-fns';
 
 export const formatPrice = (
   price = 0,
@@ -56,7 +56,7 @@ function formatWithComma(value, suffix) {
 
 export const formatDate = (
   date = new Date(),
-  {dateStyle, addDays: daysToAdd} = {},
+  {dateStyle, addDays: daysToAdd, monthsToAdd, yearsToAdd} = {},
 ) => {
   let formattedDateTime = new Date(date);
 
@@ -64,7 +64,15 @@ export const formatDate = (
     formattedDateTime = addDays(formattedDateTime, daysToAdd);
   }
 
-  const dateFormat = dateStyle || 'dd MMM yyyy';
+  if (monthsToAdd) {
+    formattedDateTime = addMonths(formattedDateTime, monthsToAdd);
+  }
+
+  if (yearsToAdd) {
+    formattedDateTime = addYears(formattedDateTime, yearsToAdd);
+  }
+
+  const dateFormat = dateStyle || 'yyyy-MM-dd';
 
   return format(formattedDateTime, dateFormat);
 };

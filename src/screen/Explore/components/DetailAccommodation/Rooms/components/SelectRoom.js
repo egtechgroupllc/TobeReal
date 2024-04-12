@@ -5,7 +5,8 @@ import CustomText from '../../../../../../components/CustomText';
 import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
 import {CustomButton} from '../../../../../../components';
 
-export default function SelectRoom({onPress}) {
+export default function SelectRoom({onPress, data}) {
+  console.log(data?.number_room);
   return (
     <View
       style={{
@@ -16,7 +17,7 @@ export default function SelectRoom({onPress}) {
         style={{
           color: COLORS.error,
         }}>
-        Còn 3 phòng
+        Còn {data?.room_dates[0]?.number_room} phòng
       </CustomText>
 
       <View
@@ -27,10 +28,12 @@ export default function SelectRoom({onPress}) {
         <RealEstateType
           isDefaultValue
           styleWrapper={{width: '40%'}}
-          data={[...Array(4)].map((_, index) => ({
-            name: `${index + 1} phòng`,
-            value: index,
-          }))}
+          data={[...Array(data?.room_dates[0]?.number_room)].map(
+            (_, index) => ({
+              name: `${index + 1} phòng`,
+              value: index,
+            }),
+          )}
           buttonEstateTypes={{
             height: scale(32),
           }}

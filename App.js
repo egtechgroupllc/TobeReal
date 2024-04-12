@@ -27,6 +27,7 @@ import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
+import DetailPriceRoom from './src/screen/Explore/components/DetailAccommodation/Rooms/DetailRoom/DetailPriceRoom';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -130,7 +131,7 @@ const Layout = () => {
         },
       }}
       initialRouteName="BottomTab">
-      <Stack.Screen name="BottomTab" component={BottomTab} />
+      <Stack.Screen name="BottomTab" component={DetailPriceRoom} />
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 

@@ -6,8 +6,15 @@ import CustomImage from '../../components/CustomImage';
 import CustomText from '../../components/CustomText';
 import ListImgView from './ListImgView';
 
-export default memo(function ImageDetail({onLayout, dataImg, styleWrapper}) {
+export default memo(function ImageDetail({onLayout, arrImg, styleWrapper}) {
   const [isViewImg, setIsViewImg] = useState(false);
+
+  const dataImg = arrImg?.map((img, index) => ({
+    id: img?.id,
+    description: img?.description,
+    index,
+    uri: img?.url,
+  }));
 
   return (
     <View

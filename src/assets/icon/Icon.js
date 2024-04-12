@@ -3324,3 +3324,26 @@ export function IconArmorial({fill, ...props}) {
     </Svg>
   );
 }
+
+export function IconCoinPoint({fill, ...props}) {
+  return (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={props?.style?.width || scale(12)}
+      height={props?.style?.height || scale(12)}
+      viewBox="0 0 12 12"
+      fill="none"
+      className="mdl-js"
+      {...props}>
+      <G clipPath="url(#clip0_7118_57)">
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10.286 5.143A5.143 5.143 0 110 5.143a5.143 5.143 0 0110.286 0zm-6-1.5a.214.214 0 00-.215.214v3.857a.643.643 0 01-1.285 0V3.857a1.5 1.5 0 011.5-1.5H6a1.5 1.5 0 011.5 1.5v1.714a1.5 1.5 0 01-1.5 1.5h-.429a.643.643 0 010-1.285H6a.214.214 0 00.214-.215V3.857A.214.214 0 006 3.643H4.286zm6.857 1.928a5.571 5.571 0 01-7.66 5.167 5.143 5.143 0 007.256-7.256c.26.645.404 1.35.404 2.09z"
+          fill="#E1CB37"
+        />
+      </G>
+      <Defs />
+    </Svg>
+  );
+}

@@ -57,6 +57,7 @@ export default function RoomScreen() {
         data: {
           check_in_date: date?.selectedStartDate,
           check_out_date: date?.selectedEndDate,
+          number_room: 2,
         },
         id_room: value,
       },
@@ -72,6 +73,9 @@ export default function RoomScreen() {
             'list-room',
             params?.id,
           ]);
+        },
+        onError: err => {
+          console.log({err}, 213587137821);
         },
       },
     );
@@ -111,7 +115,7 @@ export default function RoomScreen() {
 
   return (
     <MainWrapper scrollEnabled={false}>
-      <RoomFilter onSelectDate={setDate} />
+      <RoomFilter onSelectDate={setDate} data={data?.data?.[0]} />
       <RoomFilterType />
 
       <FlatList

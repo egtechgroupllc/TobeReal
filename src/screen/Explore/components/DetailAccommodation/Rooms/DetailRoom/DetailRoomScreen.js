@@ -1,358 +1,280 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
-import MainAuth from '../../../../../../components/MainAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-import {Category} from '../../../../../../components';
-import LinearGradient from 'react-native-linear-gradient';
-import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
-import CustomText from '../../../../../../components/CustomText';
-import CustomImage from '../../../../../../components/CustomImage';
-import Button from '../../../../../Profile/components/Button';
-import Header from '../../../../../Profile/components/Header';
-import Star from '../../../../../../components/Star';
-import {useAuthentication} from '../../../../../../hooks/useAuthentication';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {
+  IconAcreage,
   IconBed,
   IconConditioner,
   IconFridge,
   IconLand,
   IconPeople,
+  IconRoom,
   IconTV,
   IconWifi,
 } from '../../../../../../assets/icon/Icon';
+import CustomText from '../../../../../../components/CustomText';
+import MainWrapper from '../../../../../../components/MainWrapper';
+import {useAuthentication} from '../../../../../../hooks/useAuthentication';
+import Button from '../../../../../Profile/components/Button';
+import ImageDetail from '../../../../../components/ImageDetail';
+import ItemUtil from '../components/ItemUtil';
+import {formatPrice} from '../../../../../../utils/format';
+import {CustomButton} from '../../../../../../components';
+import BookRoom from './BookRoom';
 
 export default function DetailRoomScreen({route}) {
-  const {image, title, price, acreage, info, name, description} = route.params;
+  const {image, title, price, acreage, info, name, description} = {};
+  const data = route.params;
+
   const {token} = useAuthentication();
   const {t} = useLanguage();
   const navigation = useNavigation();
-  const goBack = () => {
-    navigation.goBack();
-  };
-  const notify = () => {};
+
   const Ok = () => {
     token
       ? navigation.navigate('NavigationAuth')
       : navigation.navigate('BookingScreen');
   };
   return (
-    <MainAuth>
-      <View style={styles.container}>
-        <Header
-          goback={true}
-          subHeading={t('room_detail')}
-          noti={true}
-          onPress={goBack}
-          notify={notify}
-        />
-        <View style={{alignItems: 'center', rowGap: scale(10)}}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.textLarge,
-              color: COLORS.black,
-              marginTop: scale(20),
-            }}>
-            {name}
-          </CustomText>
-          <Star />
-        </View>
+    <>
+      <MainWrapper
+        styleContent={{
+          paddingHorizontal: scale(10),
+          alignItems: 'center',
+        }}>
+        <CustomText
+          textType="semiBold"
+          style={{
+            ...styles.textLarge,
+            color: COLORS.black,
+            marginTop: scale(20),
+          }}>
+          {data.name}
+        </CustomText>
 
         <View style={styles.view}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              paddingVertical: scale(10),
-              paddingHorizontal: scale(20),
-            }}>
-            {title}
-          </CustomText>
-
-          <CustomImage resizeMode="cover" source={image} style={styles.image} />
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              marginTop: scale(10),
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-            }}>
-            {t('room_information')}:
-          </CustomText>
+          <ImageDetail arrImg={data.images} styleWrapper={styles.image} />
           <View
             style={{
-              ...styles.box,
-              marginTop: scale(10),
-              borderTopLeftRadius: scale(5),
-              borderTopRightRadius: scale(5),
-              minHeight: scale(30),
+              padding: scale(10),
+              rowGap: scale(10),
             }}>
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                columnGap: scale(10),
-                marginTop: scale(10),
                 alignSelf: 'flex-start',
-              }}>
-              <IconPeople />
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text1,
-                  color: COLORS.black,
-                }}>
-                {description}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                columnGap: scale(10),
-                marginTop: scale(10),
-                alignSelf: 'flex-start',
-              }}>
-              <IconBed />
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text1,
-                  color: COLORS.black,
-                }}>
-                {info}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                columnGap: scale(10),
-                marginTop: scale(10),
-                alignSelf: 'flex-start',
-              }}>
-              <IconLand width={scale(13)} height={scale(13)} />
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text1,
-                  color: COLORS.black,
-                  alignSelf: 'flex-start',
-                }}>
-                {acreage}
-              </CustomText>
-            </View>
-          </View>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              marginTop: scale(10),
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-            }}>
-            {t('little_convenient')}:
-          </CustomText>
-          <View
-            style={{
-              ...styles.box,
-              marginTop: scale(10),
-              borderTopLeftRadius: scale(5),
-              borderTopRightRadius: scale(5),
-              minHeight: scale(30),
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                columnGap: scale(20),
-                marginTop: scale(10),
-                alignSelf: 'flex-start',
-              }}>
-              <View style={{alignItems: 'center', rowGap: scale(5)}}>
-                <IconWifi width={scale(20)} height={scale(20)} />
-                <CustomText
-                  textType="medium"
-                  style={{
-                    ...styles.text2,
-                    color: COLORS.black,
-                  }}>
-                  Free wifi
-                </CustomText>
-              </View>
-              <View style={{alignItems: 'center', rowGap: scale(5)}}>
-                <IconConditioner />
-                <CustomText
-                  textType="medium"
-                  style={{
-                    ...styles.text2,
-                    color: COLORS.black,
-                  }}>
-                  Air conditioner
-                </CustomText>
-              </View>
-              <View style={{alignItems: 'center', rowGap: scale(5)}}>
-                <IconTV width={scale(20)} height={scale(20)} />
-                <CustomText
-                  textType="medium"
-                  style={{
-                    ...styles.text2,
-                    color: COLORS.black,
-                  }}>
-                  TV
-                </CustomText>
-              </View>
-              <View style={{alignItems: 'center', rowGap: scale(5)}}>
-                <IconFridge width={scale(20)} height={scale(20)} />
-                <CustomText
-                  textType="medium"
-                  style={{
-                    ...styles.text2,
-                    color: COLORS.black,
-                  }}>
-                  Fridge
-                </CustomText>
-              </View>
-            </View>
-          </View>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              marginTop: scale(10),
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-            }}>
-            {t('price_detail')}:
-          </CustomText>
-          <View
-            style={{
-              ...styles.box,
-              marginTop: scale(10),
-              borderTopLeftRadius: scale(5),
-              borderTopRightRadius: scale(5),
-              minHeight: scale(30),
-              paddingBottom: scale(0),
-              marginBottom: scale(20),
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(20),
-                  flex: 1,
-                }}>
-                {t('room_rate')}:
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(20),
-                  flex: 1,
-                }}>
-                {t('$ 14,06')}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('taxes_and_fees')}:
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('$ 14,06 ')}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-                paddingBottom: scale(30),
+                rowGap: scale(10),
               }}>
               <CustomText
                 textType="semiBold"
                 style={{
-                  ...styles.text,
-                  color: COLORS.black,
-                  marginTop: scale(20),
-                  flex: 1,
+                  fontSize: SIZES.medium,
                 }}>
-                {t('total')}:
+                {data?.room_type?.name}
               </CustomText>
-              <CustomText
-                textType="medium"
+              <View
                 style={{
-                  ...styles.text,
-                  color: COLORS.black,
-                  marginTop: scale(20),
-                  flex: 1,
+                  backgroundColor: '#06c17520',
+                  paddingVertical: scale(4),
+                  paddingHorizontal: scale(6),
+                  borderRadius: scale(99),
                 }}>
-                {price}
-              </CustomText>
+                <CustomText
+                  style={{
+                    fontSize: SIZES.xMedium,
+                    color: '#00875a',
+                  }}>
+                  Miễn phí huỷ phòng
+                </CustomText>
+              </View>
             </View>
+
+            <Box
+              title={t('room_information')}
+              styleContent={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+              }}>
+              <ItemUtil
+                Icon={IconPeople}
+                value={`${2} khách`}
+                title={'Khách'}
+                styleWrapper={{
+                  width: '45%',
+                }}
+              />
+              <ItemUtil
+                Icon={IconRoom}
+                value={data.room_bed_type.name}
+                title={'Loại giường'}
+                styleWrapper={{
+                  width: '45%',
+                }}
+              />
+              <ItemUtil
+                title={'Kích thước phòng'}
+                Icon={IconAcreage}
+                value={formatPrice(data.size_width * data.size_length, {
+                  unit: 'm²',
+                })}
+                styleIcon={{
+                  width: scale(20),
+                  height: scale(20),
+                  color: '#000',
+                }}
+                styleWrapper={{
+                  width: '45%',
+                }}
+              />
+            </Box>
+            {/* t('little_convenient') */}
+            <Box
+              title={'Tiên nghi cơ bản'}
+              styleContent={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              <ItemUtil
+                Icon={IconWifi}
+                value={'Free wifi'}
+                styleIcon={styles.iconFac}
+                valueBold
+                vertical
+              />
+              <ItemUtil
+                Icon={IconConditioner}
+                value={'Air conditioner '}
+                styleIcon={styles.iconFac}
+                valueBold
+                vertical
+              />
+              <ItemUtil
+                Icon={IconTV}
+                value={'TV'}
+                styleIcon={styles.iconFac}
+                valueBold
+                vertical
+              />
+              <ItemUtil
+                Icon={IconFridge}
+                value={'Fridge'}
+                styleIcon={styles.iconFac}
+                valueBold
+                vertical
+              />
+            </Box>
+            <Box title={'Tiên nghi khác'}>
+              <View
+                style={{
+                  width: '100%',
+                  rowGap: scale(10),
+                }}>
+                <CustomText textType="semiBold">Tiện nghi phòng:</CustomText>
+
+                <View style={styles.contentFeat}>
+                  {data?.features?.map(item => (
+                    <View style={styles.boxFeat}>
+                      <View style={styles.dot} />
+                      <CustomText>{item}</CustomText>
+                    </View>
+                  ))}
+                </View>
+              </View>
+
+              <View
+                style={{
+                  width: '100%',
+                  rowGap: scale(10),
+                }}>
+                <CustomText textType="semiBold">Phòng tắm:</CustomText>
+
+                <View style={styles.contentFeat}>
+                  {data?.features?.map(item => (
+                    <View style={styles.boxFeat}>
+                      <View style={styles.dot} />
+                      <CustomText>{item}</CustomText>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            </Box>
           </View>
         </View>
-        <Button title={t('request_to_book')} onPress={Ok} />
-      </View>
-    </MainAuth>
+      </MainWrapper>
+      <BookRoom />
+    </>
   );
 }
+
+const Box = ({children, title, styleContent}) => {
+  return (
+    <View
+      style={{
+        rowGap: scale(10),
+      }}>
+      <CustomText
+        textType="semiBold"
+        style={{
+          fontSize: SIZES.xMedium,
+        }}>
+        {title}:
+      </CustomText>
+      <View
+        style={{
+          ...styles.box,
+          minHeight: scale(30),
+          ...styleContent,
+        }}>
+        {children}
+      </View>
+    </View>
+  );
+};
 const styles = StyleSheet.create({
-  container: {
-    marginTop: scale(30),
-    paddingBottom: scale(50),
-    width: '90%',
-    alignSelf: 'center',
-  },
   view: {
     marginTop: scale(10),
     minHeight: scale(63),
     borderRadius: scale(20),
-    alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: scale(1),
     borderColor: '#F0B90B40',
     backgroundColor: '#FFFFFF',
-    shadowColor: '#F0B90B40',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-    elevation: 11,
+    ...SHADOW,
+    // shadowColor: '#F0B90B40',
+    width: '100%',
+  },
+
+  image: {
+    width: '100%',
+    height: scale(200),
+    borderTopLeftRadius: scale(10),
+    borderTopRightRadius: scale(10),
+    overflow: 'hidden',
+  },
+  iconFac: {
+    width: scale(20),
+    height: scale(20),
+    color: '#000',
+  },
+  contentFeat: {
+    rowGap: scale(6),
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    columnGap: scale(20),
+  },
+  boxFeat: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(4),
+  },
+  dot: {
+    width: scale(4),
+    aspectRatio: 1,
+    backgroundColor: COLORS.primary,
+    borderRadius: 99,
   },
   text: {
     fontSize: SIZES.medium,
@@ -360,9 +282,7 @@ const styles = StyleSheet.create({
   text1: {
     fontSize: SIZES.xSmall,
   },
-  text2: {
-    fontSize: SIZES.small,
-  },
+
   textLarge: {
     fontSize: SIZES.xMedium,
   },
@@ -387,30 +307,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   box: {
-    minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
-    borderBottomLeftRadius: scale(5),
-    borderBottomRightRadius: scale(5),
-    borderBottomStartRadius: scale(5),
-    borderBottomEndRadius: scale(5),
-    paddingHorizontal: scale(20),
+    minHeight: scale(200),
+    borderRadius: scale(5),
     alignItems: 'center',
+    justifyContent: 'center',
     borderColor: '#F0B90B80',
     borderWidth: scale(1),
-    width: '90%',
-    paddingBottom: scale(20),
+    padding: scale(10),
+    gap: scale(10),
   },
 
   img: {
     width: scale(21),
     height: scale(10),
   },
-  image: {
-    width: '90%',
-    // aspectRatio: 1,
-    borderRadius: 15,
-    height: scale(170),
-  },
+
   box1: {
     backgroundColor: '#EEEEEE',
     height: scale(54),

@@ -68,6 +68,7 @@ export default function AddRoomTypeScreen() {
     return formData;
   };
   const handlePostRoom = value => {
+    delete value?.number_user;
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
       showMess('Ban chua chon tien ich cho phong', 'error');
       return;
@@ -85,7 +86,7 @@ export default function AddRoomTypeScreen() {
           );
 
           if (dataInside?.status) {
-            // reset();
+            reset();
             queryClient.invalidateQueries(['accommodation', 'my-list']);
           }
         },

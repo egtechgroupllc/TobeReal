@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {addDays, differenceInDays} from 'date-fns';
+import {differenceInDays} from 'date-fns';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {scale} from '../../../../../assets/constants';
@@ -13,10 +13,12 @@ import {formatDate} from '../../../../../utils/format';
 import TopCalendar from '../../FindAccommodation/Calendar/TopCalendar';
 
 const formatDateStyle = (date, add = 0) => {
-  const newDate = formatDate(date, {
-    addDays: add,
-    dateStyle: 'yyyy-MM-dd',
-  });
+  const newDate = formatDate(
+    date,
+    add && {
+      addDays: add,
+    },
+  );
 
   return newDate;
 };
@@ -25,7 +27,7 @@ const minDate = formatDateStyle(minDate);
 
 const dateEnd = formatDateStyle(minDate, 1);
 
-export default function ChooseCalendarRoom({onSelectDate}) {
+export default function ChooseCalendarRoom({onSelectDate, data}) {
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
 
@@ -40,12 +42,9 @@ export default function ChooseCalendarRoom({onSelectDate}) {
 
   const [selected, setSelected] = useState(listSelectTime[0]);
 
-  const onDateChange = (date, type) => {
-    if (type === 'END_DATE') {
-      setSelectedEndDate(!date ? date : formatDateStyle(date));
-    } else {
-      setSelectedStartDate(formatDateStyle(date));
-    }
+  const onDateChange = date => {
+    setSelectedEndDate(date?.date_end);
+    setSelectedStartDate(date?.date_start);
   };
 
   useEffect(() => {
@@ -85,8 +84,7 @@ export default function ChooseCalendarRoom({onSelectDate}) {
         onPress={() => bottomSheetRef.current.open()}>
         <IconCalendar style={styles.icon} />
         <CustomText textType="medium">
-          {formatDate(selectedStartDate)} -{' '}
-          {selectedEndDate ? formatDate(selectedEndDate) : '_'},{' '}
+          {selectedStartDate} - {selectedEndDate ? selectedEndDate : '_'},{' '}
           {selected?.text}
         </CustomText>
       </TouchableOpacity>
@@ -126,9 +124,10 @@ export default function ChooseCalendarRoom({onSelectDate}) {
         <View style={{flex: 1}}>
           <CalendarRange
             minDate={minDate}
-            selectedStartDate={selectedStartDate}
-            selectedEndDate={selectedEndDate}
+            startDate={selectedStartDate}
+            endDate={selectedEndDate}
             onDateChange={onDateChange}
+            id={data?.id}
           />
         </View>
 

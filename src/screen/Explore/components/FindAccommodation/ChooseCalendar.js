@@ -12,8 +12,8 @@ import {formatDate} from '../../../../utils/format';
 import TopCalendar from './Calendar/TopCalendar';
 import CustomText from '../../../../components/CustomText';
 
-const minDate = new Date(); // Today
-let dateEnd = new Date().setDate(minDate.getDate() + 1); // Today
+const minDate = formatDate(new Date()); // Today
+let dateEnd = formatDate(minDate, {addDays: 1});
 
 const listSelectTimeMonth = [
   {text: '1 Month', value: 1},
@@ -41,7 +41,6 @@ export default function ChooseCalendar({rental, style, Checkin}) {
   const [selectedStartDate, setSelectedStartDate] = useState(minDate);
   const [selectedEndDate, setSelectedEndDate] = useState(dateEnd);
   const [selected, setSelected] = useState(null);
-
   // Refs
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
@@ -52,20 +51,16 @@ export default function ChooseCalendar({rental, style, Checkin}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [rental],
   );
-  // Bộ xử lý Sự kiện
+
   const onDateChange = (date, type) => {
-    if (type === 'END_DATE') {
-      setSelectedEndDate(date);
-    } else {
-      setSelectedStartDate(date);
-    }
+    setSelectedEndDate(date?.date_end);
+    setSelectedStartDate(date?.date_start);
   };
 
   const handleSelectDate = () => {
     bottomSheetRef.current.close();
 
-    const dateEndFallback = new Date(selectedStartDate);
-    dateEndFallback.setDate(selectedStartDate.getDate() + 1);
+    const dateEndFallback = formatDate(selectedStartDate, {addDays: 1});
 
     if (!selectedEndDate || `${selectedStartDate}` === `${selectedEndDate}`) {
       setSelectedEndDate(dateEndFallback);
@@ -77,10 +72,12 @@ export default function ChooseCalendar({rental, style, Checkin}) {
     if (rental !== t('daily')) {
       const newDate =
         rental === t('yearly')
-          ? new Date().setFullYear(
-              minDate.getFullYear() + (selected?.value || 1),
-            )
-          : new Date().setMonth(minDate.getMonth() + (selected?.value || 1));
+          ? formatDate(selectedStartDate || minDate, {
+              yearsToAdd: selected?.value || 1,
+            })
+          : formatDate(selectedStartDate || minDate, {
+              monthsToAdd: selected?.value || 1,
+            });
 
       setSelectedEndDate(newDate);
     } else {
@@ -142,8 +139,8 @@ export default function ChooseCalendar({rental, style, Checkin}) {
         <View style={{flex: 1}}>
           <CalendarRange
             minDate={minDate}
-            selectedStartDate={selectedStartDate}
-            selectedEndDate={selectedEndDate}
+            startDate={selectedStartDate}
+            endDate={selectedEndDate}
             onDateChange={onDateChange}
           />
         </View>

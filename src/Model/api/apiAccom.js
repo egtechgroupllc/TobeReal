@@ -43,15 +43,6 @@ export const getMyListCreateAccom = async ({page = 1, hasRoom, limit = 10}) => {
   return responsive.data;
 };
 
-// ==> API CREATE ROOM FOR ACCOMO <==
-export const postCreateAccommoRoomLease = async ({id_accomo, formData}) => {
-  const responsive = await instance.post(`/${id_accomo}/add-room`, formData, {
-    headers: {'Content-Type': 'multipart/form-data'},
-  });
-
-  return responsive.data;
-};
-
 // ==> LIST REVIEW ACCOMO <==
 export const getListReviewAccmo = async ({id_accomo, pageParam = 1}) => {
   const responsive = await instance.get(
@@ -68,21 +59,29 @@ export const getDetailAccmo = async id_accomo => {
   return responsive.data;
 };
 
-// ==> LIST ROOM DETAIL ACCOMO <==
+// ==> API  ROOM  <==
+export const postCreateAccommoRoomLease = async ({id_accomo, formData}) => {
+  const responsive = await instance.post(`/${id_accomo}/add-room`, formData, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
+
+  return responsive.data;
+};
+
 export const getListRoomDetailAccmo = async ({
   id_accomo,
   date_start,
   date_end,
-  status = 'AVAILABLE',
+  status = 'ACTIVE',
+  number_room = 1,
 }) => {
   const responsive = await instance.get(
-    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}`,
+    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}&number_room=${number_room}`,
   );
 
   return responsive.data;
 };
 
-// ==> BOOKING ROOM <==
 export const postBookingRoom = async ({id_room, data}) => {
   const responsive = await instance.post(`room/${id_room}/booking`, data);
 
@@ -96,3 +95,11 @@ export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
 
   return responsive.data;
 };
+
+// export const getDetailRoom = async ({id_room, date_start, date_end}) => {
+//   const responsive = await instance.get(
+//     `room/${id_room}/list-room-date?date_start=${date_start}&date_end=${date_end}`,
+//   );
+
+//   return responsive.data;
+// };
