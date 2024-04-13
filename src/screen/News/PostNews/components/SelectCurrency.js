@@ -50,7 +50,7 @@ export default function SelectCurrency({
       }) => {
         return (
           <View style={styles.wrapper}>
-            <CustomText style={{color: COLORS.black}}>
+            <CustomText style={{color: COLORS.white}}>
               {t('Main Currency')}
             </CustomText>
 

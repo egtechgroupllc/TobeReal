@@ -27,8 +27,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.xLarge,
+    color: COLORS.white,
   },
   textSub: {
     fontSize: SIZES.small,
+    color: COLORS.white,
   },
 });

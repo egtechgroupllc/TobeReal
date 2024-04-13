@@ -11,7 +11,8 @@ export const markers = [
     image: images.background,
     rating: 4,
     reviews: 99,
-    price: 100000,
+    price: 2500,
+    type: 'RENT',
   },
   {
     coordinate: {
@@ -23,7 +24,8 @@ export const markers = [
     image: images.wishList,
     rating: 5,
     reviews: 102,
-    price: 50000,
+    price: 160000,
+    type: 'HOUSE',
   },
   {
     coordinate: {
@@ -35,7 +37,8 @@ export const markers = [
     image: images.emptyData,
     rating: 3,
     reviews: 220,
-    price: 200000,
+    price: 1000,
+    type: 'TOUR',
   },
   {
     coordinate: {
@@ -47,7 +50,8 @@ export const markers = [
     image: images.voucher25,
     rating: 4,
     reviews: 48,
-    price: 9000000,
+    price: 2600,
+    type: 'RENT',
   },
   {
     coordinate: {
@@ -59,7 +63,21 @@ export const markers = [
     image: images.voucher50,
     rating: 4,
     reviews: 178,
-    price: 1000000,
+    price: 100000,
+    type: 'HOUSE',
+  },
+  {
+    coordinate: {
+      latitude: 22.6492757,
+      longitude: 88.434781,
+    },
+    title: 'Fifth Amazing Food Place',
+    description: 'This is the fifth best food place',
+    image: images.voucher50,
+    rating: 4,
+    reviews: 178,
+    price: 180000,
+    type: 'HOUSE',
   },
 ];
 

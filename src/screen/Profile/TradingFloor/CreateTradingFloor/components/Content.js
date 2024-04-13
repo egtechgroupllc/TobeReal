@@ -21,9 +21,9 @@ import {
 } from '../../../../../assets/icon/Icon';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../../../components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const navigation = useNavigation();
   const [inputText, setInputText] = useState('');
   const handleInputChange = text => {
@@ -47,19 +47,19 @@ export default function Content() {
       <TouchableOpacity style={styles.chooseLogo}>
         <CustomText
           textType="bold"
-          style={{...styles.text1, color: COLORS.black}}>
+          style={{...styles.text1, color: COLORS.white}}>
           {t('choose_logo')}
         </CustomText>
       </TouchableOpacity>
       <CustomText
         textType="medium"
-        style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-      {t('name_of_trading')}
+        style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
+        {t('name_of_trading')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
@@ -68,31 +68,33 @@ export default function Content() {
       />
       <CustomText
         textType="regular"
-        style={{...styles.text2, color: COLORS.black, marginTop: scale(20)}}>
-         {t('description_content')}
+        style={{...styles.text2, color: COLORS.white, marginTop: scale(20)}}>
+        {t('description_content')}
       </CustomText>
       <View style={styles.textArea}>
         <ScrollView>
           <TextInput
             multiline
             numberOfLines={4} // You can adjust the number of lines as needed
-            placeholder= {t('enter_a_description')}
+            placeholder={t('enter_a_description')}
+            placeholderTextColor={COLORS.grey}
             value={inputText}
             onChangeText={handleInputChange}
-            style={{...styles.text, color: COLORS.black}}
+            style={{...styles.text, color: COLORS.white}}
           />
         </ScrollView>
-        <Text style={{...styles.text, color: COLORS.black}}>
+        <Text style={{...styles.text, color: COLORS.white}}>
           {inputText.length}/{maxCharacters}
         </Text>
       </View>
       <CustomText
         textType="medium"
-        style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-         {t('introductory_photo')}
+        style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
+        {t('introductory_photo')}
       </CustomText>
-      <View style={{...styles.textArea1, backgroundColor: '#E3E3E3'}}>
-        <Text style={{...styles.text, color: COLORS.black}}>0/10</Text>
+      <View
+        style={{...styles.textArea1, backgroundColor: COLORS.transparentGrey}}>
+        <Text style={{...styles.text, color: COLORS.white}}>0/10</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -107,88 +109,95 @@ export default function Content() {
       </View>
       <CustomText
         textType="medium"
-        style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-       {t('headquarter_information')}
+        style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
+        {t('headquarter_information')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder= {t('office_address')}
+        placeholderTextColor={COLORS.grey}
+        placeholder={t('office_address')}
       />
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <CustomInput
           style={{
             height: scale(40),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             marginTop: scale(10),
             borderRadius: scale(5),
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder= {t('province_city')}
+          placeholder={t('province_city')}
+          placeholderTextColor={COLORS.grey}
         />
         <CustomInput
           style={{
             height: scale(40),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             marginTop: scale(10),
             borderRadius: scale(5),
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder= {t('country')}
+          placeholder={t('country')}
+          placeholderTextColor={COLORS.grey}
         />
         <CustomInput
           style={{
             height: scale(40),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             marginTop: scale(10),
             borderRadius: scale(5),
             borderWidth: scale(0),
             width: '30%',
           }}
-          placeholder= {t('ward_commune')}
+          placeholderTextColor={COLORS.grey}
+          placeholder={t('ward_commune')}
         />
       </View>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder= {t('phone')}
+        placeholderTextColor={COLORS.grey}
+        placeholder={t('phone')}
       />
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder= {t('hotline')}
+        placeholderTextColor={COLORS.grey}
+        placeholder={t('hotline')}
       />
       <CustomText
         textType="medium"
-        style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
-         {t('website')}
+        style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
+        {t('website')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder= {t('website')}
+        placeholder={t('website')}
+        placeholderTextColor={COLORS.grey}
       />
       <Image
         source={images.map}
@@ -201,17 +210,17 @@ export default function Content() {
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
+          style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
           {t('branch_information')}
         </CustomText>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black, marginTop: scale(20)}}>
+          style={{...styles.text, color: COLORS.white, marginTop: scale(20)}}>
           0/10
         </CustomText>
       </View>
       <LinearGradient
-        colors={['#F0B90B', '#FFEC88']}
+        colors={COLORS.backgroundLinear}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={{
@@ -221,25 +230,29 @@ export default function Content() {
         }}>
         <TouchableOpacity style={styles.addbank}>
           <View style={{marginLeft: scale(20)}}>
-            <IconAddBranch />
+            <IconAddBranch fill={COLORS.primary} />
           </View>
 
           <CustomText
             textType="medium"
-            style={{...styles.text, marginLeft: scale(20)}}>
-             {t('add_branch')}
+            style={{
+              ...styles.text,
+              marginLeft: scale(20),
+              color: COLORS.white,
+            }}>
+            {t('add_branch')}
           </CustomText>
         </TouchableOpacity>
       </LinearGradient>
       <CustomText
         textType="medium"
-        style={{...styles.text, color: COLORS.black}}>
+        style={{...styles.text, color: COLORS.white}}>
         {t('contact_person_information')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
@@ -249,35 +262,35 @@ export default function Content() {
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder=  {t('position')}
+        placeholder={t('position')}
       />
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder=  {t('email')}
+        placeholder={t('email')}
       />
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           marginTop: scale(10),
           borderRadius: scale(5),
           borderWidth: scale(0),
         }}
-        placeholder=  {t('phone')}
+        placeholder={t('phone')}
       />
       <View style={{marginBottom: scale(30)}}>
-        <Button title=  {t('create')}/>
+        <Button title={t('create')} />
       </View>
     </View>
   );
@@ -309,24 +322,25 @@ const styles = StyleSheet.create({
   },
   line: {
     height: scale(1),
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   chooseLogo: {
     width: scale(142),
     height: scale(142),
-    backgroundColor: '#ECECEC',
+    backgroundColor: COLORS.transparentGrey,
     alignSelf: 'center',
     borderRadius: scale(999),
     borderWidth: scale(5),
-    borderColor: '#F8F8F8',
+    borderColor: COLORS.transparentGrey,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: scale(20),
   },
   textArea: {
     flexDirection: 'row',
-    borderWidth: scale(2),
-    borderColor: '#E3E3E3',
+    // borderWidth: scale(1),
+    // borderColor: '#E3E3E3',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(5),
     height: scale(71),
     justifyContent: 'space-between',
@@ -335,8 +349,8 @@ const styles = StyleSheet.create({
     marginTop: scale(10),
   },
   textArea1: {
-    borderWidth: scale(2),
-    borderColor: '#E3E3E3',
+    // borderWidth: scale(1),
+    // borderColor: '#E3E3E3',
     borderRadius: scale(5),
     height: scale(124),
     justifyContent: 'space-between',

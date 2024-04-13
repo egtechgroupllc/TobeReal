@@ -30,14 +30,14 @@ export default function Header({
             justifyContent: 'space-between',
             alignItems: 'center',
             alignSelf: 'center',
-            marginTop: Platform.OS == 'ios' ? scale(20) : scale(0),
-            width: '100%',
+            marginTop: Platform.OS == 'ios' ? scale(30) : scale(0),
+            width: '95%',
           }}>
           {goback && (
             <TouchableOpacity
               onPress={onPress}
-              style={{ width: scale(30), height:scale(20)}}>
-              <IconGoBack />
+              style={{width: scale(30), height: scale(20)}}>
+              <IconGoBack fill={COLORS.white} />
             </TouchableOpacity>
           )}
           <View style={{flexDirection: 'row'}}>
@@ -60,7 +60,7 @@ export default function Header({
                 <TouchableOpacity key={option} onPress={() => pressTab(option)}>
                   {activeOption === option ? (
                     <LinearGradient
-                      colors={['#F7E75A', '#FFC702']}
+                      colors={COLORS.backgroundLinear}
                       start={{x: 0, y: 0}}
                       end={{x: 1, y: 0}}
                       style={styles.buttonActive}>
@@ -87,7 +87,7 @@ export default function Header({
 
           {noti && (
             <TouchableOpacity onPress={notify}>
-              <IconNotification fill={'#000000'} />
+              <IconNotification fill={COLORS.white} />
             </TouchableOpacity>
           )}
         </View>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
   },
   textHeading: {
     fontSize: SIZES.xxLarge,

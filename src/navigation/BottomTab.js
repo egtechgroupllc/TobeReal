@@ -1,27 +1,24 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useEffect, useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {COLORS, images, scale} from '../assets/constants';
 import {
   IconBookings,
-  IconExplore,
-  IconHeart,
   IconMapView,
   IconNews,
   IconProfile,
-  IconProfileInactive,
   IconPromotion,
+  IconVideo,
 } from '../assets/icon/Icon';
+import {HomeMapScreen} from '../components';
+import CustomImage from '../components/CustomImage';
+import {useLanguage} from '../hooks/useLanguage';
 import NavigationBookings from './NavigationBookings';
 import NavigationExplore from './NavigationExplore';
-import NavigationProfile from './NavigationProfile';
-import NavigationPromotion from './NavigationPromotion';
-import NavigationWishList from './NavigationWishList';
-import {images, scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
-import {HomeMapScreen} from '../components';
-import {useLanguage} from '../hooks/useLanguage';
-import CustomImage from '../components/CustomImage';
+import NavigationProfile from './NavigationProfile';
+import NavigationVideo from './NavigationVideo';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,27 +29,28 @@ export default function BottomTab() {
       initialRouteName="Explore"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.white,
         tabBarItemStyle: {
           columnGap: scale(4),
         },
         // tabBarHideOnKeyboard: true,
         tabBarStyle: {
           zIndex: -1,
+          backgroundColor: COLORS.theme,
         },
       }}>
       <Tab.Screen
         name={'Explore'}
         component={NavigationExplore}
         options={{
-          tabBarLabel: t('explore'),
+          tabBarLabel: t('home'),
 
           tabBarIcon: ({focused}) => (
             <CustomImage
-              source={images.iconSaveloka}
-              style={{width: scale(25), height: scale(25)}}
-              resizeMode="cover"
+              source={images.iconNowTravel}
+              style={{width: scale(20), height: scale(20)}}
+              resizeMode="contain"
             />
             // <IconExplore fill={focused && '#F0B90B'} />
           ),
@@ -64,18 +62,29 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('booking'),
           tabBarIcon: ({focused}) => (
-            <IconBookings fill={focused && '#F0B90B'} />
+            <IconBookings fill={focused && COLORS.primary} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={'Promotion'}
         component={NavigationPromotion}
         options={{
           tabBarLabel: t('promotion'),
 
           tabBarIcon: ({focused}) => (
-            <IconPromotion fill={focused && '#F0B90B'} />
+            <IconPromotion fill={focused && COLORS.primary} />
+          ),
+        }}
+      /> */}
+      <Tab.Screen
+        name={'Video'}
+        component={NavigationVideo}
+        options={{
+          tabBarLabel: t('Reviews'),
+
+          tabBarIcon: ({focused}) => (
+            <IconVideo fill={focused && COLORS.primary} />
           ),
         }}
       />
@@ -94,7 +103,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('map'),
           tabBarIcon: ({focused}) => (
-            <IconMapView fill={focused && '#F0B90B'} />
+            <IconMapView fill={focused && COLORS.primary} />
           ),
         }}
       />
@@ -103,7 +112,9 @@ export default function BottomTab() {
         component={NavigationNews}
         options={{
           tabBarLabel: t('post_new'),
-          tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
+          tabBarIcon: ({focused}) => (
+            <IconNews fill={focused && COLORS.primary} />
+          ),
         }}
       />
       <Tab.Screen
@@ -112,7 +123,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
-            <IconProfile fill={focused && '#F0B90B'} />
+            <IconProfile fill={focused && COLORS.primary} />
           ),
         }}
       />

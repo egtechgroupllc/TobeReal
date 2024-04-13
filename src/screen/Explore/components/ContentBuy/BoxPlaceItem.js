@@ -129,7 +129,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -154,7 +154,7 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText

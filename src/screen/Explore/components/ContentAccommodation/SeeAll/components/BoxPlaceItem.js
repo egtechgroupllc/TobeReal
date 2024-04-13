@@ -2,7 +2,11 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import {IconHeart, IconMapView, IconMarker} from '../../../../../../assets/icon/Icon';
+import {
+  IconHeart,
+  IconMapView,
+  IconMarker,
+} from '../../../../../../assets/icon/Icon';
 import Ribbon from '../../../../../../components/Ribbon';
 import Star from '../../../../../../components/Star';
 import {formatPrice} from '../../../../../../utils/format';
@@ -59,7 +63,6 @@ export default function BoxPlaceItem({
             {
               width: scale(400 / seeViewNumber),
               // height: scale(200),
-        
             },
             styleWrapper,
             SHADOW,
@@ -118,7 +121,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -143,7 +146,7 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.primary},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -195,7 +198,6 @@ const styles = StyleSheet.create({
     // minHeight: scale(200),
     // height: 200,
     borderRadius: scale(12),
-
   },
   img: {
     width: '100%',

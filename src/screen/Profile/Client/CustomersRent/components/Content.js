@@ -13,9 +13,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const data = [
     {
       id: 1,
@@ -60,7 +60,7 @@ export default function Content() {
     <View style={styles.container}>
       <Header
         goback={true}
-        subHeading=  {t('customer_rent_project')}
+        subHeading={t('customer_rent_project')}
         noti={true}
         onPress={goBack}
         notify={notify}></Header>
@@ -70,27 +70,29 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(60),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
-       {t('select_province_city')}:
+        {t('select_province_city')}:
       </CustomText>
       <CustomInput
         style={{
           marginBottom: scale(25),
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
+          borderWidth: scale(0),
         }}
       />
       <CustomText
         textType="medium"
-        style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
+        style={{...styles.text, marginBottom: scale(10), color: COLORS.white}}>
         {t('select_district')}:
       </CustomText>
       <CustomInput
         style={{
           marginBottom: scale(25),
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
+          borderWidth: scale(0),
         }}
       />
       <Button title={t('search')} onPress={Search} />
@@ -111,7 +113,7 @@ export default function Content() {
                     marginTop: scale(20),
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: COLORS.transparentGrey,
                     borderRadius: scale(10),
                     width: '100%',
                     minHeight: scale(94),
@@ -188,13 +190,13 @@ export default function Content() {
                       top: scale(10),
                     }}>
                     <LinearGradient
-                      colors={['#F7E75A', '#FFC702']}
+                      colors={COLORS.backgroundLinear}
                       start={{x: 0, y: 0}}
-                      end={{x: 1, y: 0}}
+                      end={{x: 0, y: 1}}
                       style={styles.button1}>
                       <CustomText
                         textType="bold"
-                        style={{...styles.text2, color: COLORS.black}}>
+                        style={{...styles.text2, color: COLORS.white}}>
                         {t('buy')}
                       </CustomText>
                     </LinearGradient>
@@ -229,9 +231,11 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: SIZES.xSmall,
+    color: COLORS.white,
   },
   text2: {
     fontSize: SIZES.medium,
+    color: COLORS.white,
   },
   button: {
     alignItems: 'center',

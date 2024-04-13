@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, View} from 'react-native';
+import {StyleSheet, Text, FlatList, View, ImageBackground} from 'react-native';
 import React, {useState} from 'react';
 
 import {formatPrice} from '../../../../utils/format';
@@ -8,15 +8,13 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
-import { useNavigation } from '@react-navigation/native';
-
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function PackageTour({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('package_tour_aboard')]
+  const title = [t('package_tour_aboard')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (

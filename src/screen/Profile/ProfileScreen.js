@@ -26,7 +26,7 @@ export default function ProfileScreen() {
     <MainAuth>
       {token ? (
         <>
-          <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} />
+          {/* <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} /> */}
           <AvatarImage
             upgrade={true}
             name={data?.data?.username || 'name'}

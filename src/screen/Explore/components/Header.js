@@ -45,7 +45,7 @@ export default function Header() {
       <View style={styles.header}>
         <View style={styles.boxHeight}>
           <CustomImage
-            source={images.logoSaveloka}
+            source={images.logoNowTravel}
             resizeMode="contain"
             style={styles.img}
           />
@@ -55,7 +55,19 @@ export default function Header() {
             flex: 1,
             height: scale(33),
           }}>
-          <CustomInput
+          <CustomButton
+            styleText={{color: COLORS.white}}
+            linearGradientProps
+            iconLeft={IconSearch}
+            text={t('find_accommodation')}
+            styleIcon={{color: COLORS.white}}
+            onPress={() =>
+              navigate('NoBottomTab', {
+                screen: 'HomeSearchAccommodScreen',
+              })
+            }
+          />
+          {/* <CustomInput
             iconLeft={IconSearch}
             placeholder={t('find_accommodation')}
             editable={false}
@@ -65,7 +77,7 @@ export default function Header() {
               })
             }
             style={{borderRadius: scale(20)}}
-          />
+          /> */}
         </View>
       </View>
       {/* 
@@ -109,7 +121,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     rowGap: scale(20),
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     paddingHorizontal: scale(16),
   },
   header: {
@@ -121,7 +133,8 @@ const styles = StyleSheet.create({
   },
   boxHeight: {
     height: scale(55),
-    width: '40%',
+    width: '35%',
+    marginTop: scale(10),
   },
   img: {
     height: '100%',

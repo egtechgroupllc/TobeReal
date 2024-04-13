@@ -24,8 +24,8 @@ export default function Favourite({styleWrapper}) {
 
 const styles = StyleSheet.create({
   active: {
-    minWidth: scale(30),
-    height: scale(35),
+    minWidth: scale(42),
+    height: scale(42),
     backgroundColor: '#fff',
   },
 });

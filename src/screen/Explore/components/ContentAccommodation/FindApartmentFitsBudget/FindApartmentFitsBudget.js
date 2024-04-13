@@ -65,7 +65,7 @@ export default function FindApartmentFitsBudget() {
         <WrapperContent
           heading={t('find_appartment')}
           subHeading={t('price_below')}
-          styleWrapper={{backgroundColor: '#f8f8f8'}}
+          styleWrapper={{backgroundColor: COLORS.transparentGreyLight}}
           styleContent={styles.wrapper}>
           <SelectLocation control={control} name="location" />
 
@@ -81,6 +81,7 @@ export default function FindApartmentFitsBudget() {
                 name="lowest"
                 label={t('lowest')}
                 placeholder={t('lowest')}
+                placeholderTextColor={COLORS.white}
                 componentRight={renderComponent()}
                 style={{flex: 1}}
                 defaultValue={
@@ -95,6 +96,7 @@ export default function FindApartmentFitsBudget() {
                 name="highest"
                 label={t('highest')}
                 placeholder={t('highest')}
+                placeholderTextColor={COLORS.white}
                 componentRight={renderComponent()}
                 style={{flex: 1}}
                 defaultValue={
@@ -142,12 +144,12 @@ export default function FindApartmentFitsBudget() {
 }
 const renderComponent = () => (
   <View style={styles.componentRight}>
-    <CustomText>$</CustomText>
+    <CustomText style={{color: COLORS.white}}>$</CustomText>
   </View>
 );
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.transparentGrey,
     margin: scale(12),
     padding: scale(12),
     rowGap: scale(16),
@@ -156,6 +158,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: SIZES.xMedium,
+    color: COLORS.white,
     marginBottom: scale(8),
   },
   box: {

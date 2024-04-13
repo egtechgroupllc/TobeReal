@@ -95,7 +95,10 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.white},
+              ]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
@@ -116,7 +119,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -137,11 +140,14 @@ export default function BoxPlaceItem({
                       textType="semiBold"
                       style={[
                         styles.buildingName,
-                        isStar && {fontSize: SIZES.xMedium},
-                        isDiscount && {color: COLORS.black},
+                        isStar && {
+                          fontSize: SIZES.xMedium,
+                          color: COLORS.white,
+                        },
+                        isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -197,7 +203,7 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: '100%',
-   borderRadius:scale(12)
+    borderRadius: scale(12),
   },
   line: {
     backgroundColor: 'white',
@@ -219,5 +225,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+    color: COLORS.white,
   },
 });

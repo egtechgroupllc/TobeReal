@@ -14,9 +14,9 @@ import BoxPlaceItem from './components/BoxPlaceItem';
 const dataPackage = [
   {
     id: 1,
-    src: images.c15,
+    src: images.c15_1,
     name: 'C15_05_BlockC Emerald',
-    price: 25000000,
+    price: 2500,
     imgdetail: [
       images.c15_1,
       images.c15_2,
@@ -30,7 +30,7 @@ const dataPackage = [
     id: 2,
     src: images.c16,
     name: 'D11.06 Emerald',
-    price: 16000000,
+    price: 1600,
     imgdetail: [
       images.c16_1,
       images.c16_2,
@@ -47,7 +47,7 @@ const dataPackage = [
     id: 3,
     src: images.p14,
     name: 'P14.07 Diamond',
-    price: 28000000,
+    price: 2800,
     imgdetail: [
       images.p14_1,
       images.p14_2,
@@ -63,7 +63,7 @@ const dataPackage = [
     id: 4,
     src: images.q10,
     name: 'Centrosa Garden Q.10',
-    price: 26000000,
+    price: 2600,
     imgdetail: [
       images.q10_1,
       images.q10_2,
@@ -77,7 +77,7 @@ const dataPackage = [
     id: 5,
     src: images.a6,
     name: 'A6.7.08 Diamod Alanta Plus',
-    price: 18000000,
+    price: 1800,
     imgdetail: [
       images.a6_1,
       images.a6_2,
@@ -90,7 +90,7 @@ const dataPackage = [
     id: 6,
     src: images.c2,
     name: 'C2.17',
-    price: 19500000000,
+    price: 195000,
     imgdetail: [
       images.c2_1,
       images.c2_2,

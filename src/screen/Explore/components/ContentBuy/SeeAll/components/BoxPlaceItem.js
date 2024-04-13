@@ -68,8 +68,8 @@ export default function BoxPlaceItem({
           style={[
             styles.wrapper,
             {
-              width: scale(410/ seeViewNumber),
-              alignItems:'center'
+              width: scale(410 / seeViewNumber),
+              alignItems: 'center',
               // height: scale(200),
             },
             styleWrapper,
@@ -128,7 +128,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -153,7 +153,7 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText

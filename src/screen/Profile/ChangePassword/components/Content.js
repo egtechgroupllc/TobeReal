@@ -4,7 +4,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {postChangePassword} from '../../../../Model/api/auth';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -71,10 +71,11 @@ export default function Content() {
 
       <CustomButton
         linearGradientProps
-        text={t('ok')}
+        text={t('confirm')}
         onPress={handleSubmit(handleChangePass)}
         buttonType="medium"
         style={styles.button}
+        styleText={{color: COLORS.white}}
       />
     </View>
   );
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    backgroundColor: '#f1f1f2',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(8),
     borderColor: '#1618230f',
   },

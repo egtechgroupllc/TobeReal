@@ -12,6 +12,7 @@ export default function SearchRecent({onPress}) {
           textType="semiBold"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
           }}>
           Recent searches
         </CustomText>
@@ -53,6 +54,7 @@ export default function SearchRecent({onPress}) {
               numberOfLines={1}
               style={{
                 flex: 1,
+                color: COLORS.white,
               }}>
               {item}
             </CustomText>
@@ -66,7 +68,7 @@ export default function SearchRecent({onPress}) {
 const styles = StyleSheet.create({
   search: {
     borderRadius: scale(10),
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.transparentGrey,
     ...SHADOW,
     maxHeight: WIDTH.heightScreen / 1.9,
   },

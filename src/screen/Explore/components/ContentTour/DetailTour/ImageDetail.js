@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: WIDTH.heightScreen / 3,
     gap: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
   },
   totalImg: {
     color: '#fff',

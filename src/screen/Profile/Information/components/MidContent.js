@@ -18,7 +18,7 @@ export default function MidContent({data}) {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['#FADD55', '#D88A00']}
+        colors={COLORS.profileLinear}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={styles.box}>
@@ -63,7 +63,7 @@ export default function MidContent({data}) {
         </View>
       </LinearGradient>
       <LinearGradient
-        colors={['#FADD55', '#D88A00']}
+        colors={COLORS.profileLinear}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={{...styles.box, marginTop: scale(15)}}>
@@ -85,14 +85,14 @@ export default function MidContent({data}) {
           <View>
             <CustomText
               textType="regular"
-              style={{...styles.text, color: COLORS.black}}>
+              style={{...styles.text, color: COLORS.white}}>
               {t('main_expiration')}:
             </CustomText>
             <CustomText
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
               }}>
               {t('normal_expiration')}:
             </CustomText>
@@ -100,7 +100,7 @@ export default function MidContent({data}) {
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
               }}>
               {t('gift_expiration')}:
             </CustomText>
@@ -108,14 +108,14 @@ export default function MidContent({data}) {
           <View>
             <CustomText
               textType="regular"
-              style={{...styles.text, color: COLORS.black}}>
+              style={{...styles.text, color: COLORS.white}}>
               00:00:00
             </CustomText>
             <CustomText
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 alignSelf: 'center',
               }}>
               00:00:00
@@ -124,7 +124,7 @@ export default function MidContent({data}) {
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 alignSelf: 'center',
               }}>
               00:00:00
@@ -133,14 +133,14 @@ export default function MidContent({data}) {
           <View>
             <CustomText
               textType="regular"
-              style={{...styles.text, color: COLORS.black}}>
+              style={{...styles.text, color: COLORS.white}}>
               20/10/2023
             </CustomText>
             <CustomText
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 alignSelf: 'center',
               }}>
               20/10/2023
@@ -149,7 +149,7 @@ export default function MidContent({data}) {
               textType="regular"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 alignSelf: 'center',
               }}>
               20/10/2023
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
   },
   box1: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.transparentGrey,
     height: scale(62),
     width: '90%',
     borderRadius: scale(8),

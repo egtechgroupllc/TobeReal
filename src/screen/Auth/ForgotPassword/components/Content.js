@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
@@ -81,11 +81,12 @@ export default function Content() {
             rowGap: scale(30),
           }}>
           <CustomImage
-            source={images.logo1}
+            source={images.iconNowTravel}
             style={{
-              width: '35%',
-              height: scale(109),
+              width: scale(96),
+              height: scale(75),
             }}
+            resizeMode="cover"
           />
           <Wrapper
             Heading1={t('forgot_password')}
@@ -111,6 +112,7 @@ export default function Content() {
               linearGradientProps
               buttonType="large"
               text={t('submit')}
+              styleText={{color: COLORS.white}}
             />
           </>
         )}
@@ -142,10 +144,12 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    marginTop: scale(60),
   },
   text: {
     fontSize: SIZES.small,
     textDecorationLine: 'underline',
+    color: COLORS.white,
   },
   text1: {
     fontSize: SIZES.small,

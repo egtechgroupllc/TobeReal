@@ -17,7 +17,7 @@ const list = [
     screen: 'SellManagementScreen',
   },
   {
-    title: 'Tôi muốn bán bất động sản',
+    title: 'I want to sell real estate',
     desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
     textBtn: 'List New Sell',
     navigate: 'PostNewSellScreen',
@@ -32,8 +32,12 @@ export default function SellScreen() {
       <View style={styles.content}>
         {list.map((item, index) => (
           <View style={styles.box} key={index}>
-            <CustomText textType="bold">{item.title}</CustomText>
-            <CustomText textType="regular">{item.desc}</CustomText>
+            <CustomText textType="bold" style={{color: COLORS.white}}>
+              {item.title}
+            </CustomText>
+            <CustomText textType="regular" style={{color: COLORS.white}}>
+              {item.desc}
+            </CustomText>
 
             <CustomButton
               text={item.textBtn}
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: '30%',
   },
   box: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.transparentGrey,
     padding: scale(10),
     borderRadius: scale(6),
     rowGap: scale(10),

@@ -1,6 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {SHADOW, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import {IconHeart} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
@@ -44,7 +50,7 @@ export default function ItemBox({style, isShadow = true}) {
               flex: 1,
             }}
             numberOfLines={1}>
-            Tuan Kiet
+            Now Travel
           </CustomText>
 
           <Star rating={4.5} />

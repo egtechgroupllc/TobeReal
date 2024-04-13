@@ -10,73 +10,48 @@ import MainWrapper from '../../../../../components/MainWrapper';
 import FilterMore from './FilterMore';
 import BoxPlaceItem from './components/BoxPlaceItem';
 
-
 const dataPackage = [
   {
     id: 1,
     src: images.tourthailand,
     name: 'Thailand tour package ( Bangkok, Pattaya) - 5N4Đ',
     price: 6690000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.tourbali,
     name: 'Thailand tour Bali( kintamani, Pattaya) ....',
     price: 10880000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.toursingapore,
     name: 'Tour Singapore (Gardens by the Bay, Sentosa, Jurassic Mile)',
     price: 9900000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.tourthailand,
     name: 'Thailand tour package ( Bangkok, Pattaya) - 5N4Đ',
     price: 6690000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.tourbali,
     name: 'Thailand tour Bali( kintamani, Pattaya) ....',
     price: 10880000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.toursingapore,
     name: 'Tour Singapore (Gardens by the Bay, Sentosa, Jurassic Mile)',
     price: 9900000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
 
@@ -107,11 +82,11 @@ export default function SeeAllRentScreen({route}) {
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
         {/* <SearchRecent onPress={handleSelectSearch} /> */}
-        <FilterMore/>
+        <FilterMore />
       </View>
       <View
         style={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.theme,
           height: scale(60),
           position: 'absolute',
           width: '100%',

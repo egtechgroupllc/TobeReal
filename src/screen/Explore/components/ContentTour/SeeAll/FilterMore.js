@@ -175,13 +175,14 @@ export default function FilterMore() {
             flexDirection: 'row',
             alignItems: 'center',
             borderRadius: scale(5),
+            marginRight: scale(5),
             columnGap: scale(5),
           }}>
-          <IconSort width={scale(15)} height={scale(15)} />
+          <IconSort width={scale(15)} height={scale(15)} fill={COLORS.white} />
           <CustomText
             textType="bold"
             style={{
-              color: COLORS.black,
+              color: COLORS.white,
             }}>
             Filter
           </CustomText>

@@ -31,7 +31,7 @@ export const formatPrice = (
   return formattedPrice + (unit ? ` ${unit}` : '');
 };
 
-export function formatNumber(num) {
+export function formatNumber(num = 0) {
   if (num > 1e11) return '100B+';
 
   if (num >= 1e9) {

@@ -1,32 +1,41 @@
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
-import { SIZES, scale} from '../../../../assets/constants';
+import {SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/Header';
 import CategoriesButton from '../../components/CategoriesButton';
-import { useLanguage } from '../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
   };
-  const listCustomers= () => {
-    navigation.navigate("ListOfCustomersScreen")
+  const listCustomers = () => {
+    navigation.navigate('ListOfCustomersScreen');
   };
-  const onPress= () => {
-  };
-  const notify = () => {
-  };
+  const onPress = () => {};
+  const notify = () => {};
   return (
     <View style={styles.container}>
-          <Header goback={true} subHeading={t('customer_management')} noti={true} onPress={goBack} notify={notify}></Header>
-          <CategoriesButton title={t('list_of_customers')} onPress={listCustomers} large={true} style={{marginTop:scale(10)}}/>
-          <CategoriesButton title={t('customers_see_posting')} onPress={onPress} large={true}/>
+      <Header
+        goback={true}
+        subHeading={t('customer_management')}
+        noti={true}
+        onPress={goBack}
+        notify={notify}></Header>
+      <CategoriesButton
+        title={t('list_of_customers')}
+        onPress={listCustomers}
+        large={true}
+        style={{marginTop: scale(10)}}
+      />
+      <CategoriesButton
+        title={t('customers_see_posting')}
+        onPress={onPress}
+        large={true}
+      />
     </View>
   );
 }
@@ -34,7 +43,7 @@ export default function Content() {
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(30),
-    width:'90%'
+    width: '90%',
   },
   text: {
     fontSize: SIZES.small,
@@ -53,7 +62,7 @@ const styles = StyleSheet.create({
     width: scale(283),
     justifyContent: 'center',
     marginTop: scale(20),
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   line: {
     height: scale(1),

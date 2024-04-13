@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import CheckBox from '../../../../components/CheckBox';
 import CustomImage from '../../../../components/CustomImage';
 
@@ -10,6 +10,7 @@ export default function ItemLanguage({item, onPress, check}) {
       <CustomImage source={item.flag} style={styles.image} />
       <CheckBox
         text={item.name}
+        textStyle={{color: COLORS.white}}
         textLeft
         isChecked={check}
         onPress={onPress}
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: scale(15),
     borderWidth: scale(1),
-    borderColor: '#C2C2C2',
+    borderColor: COLORS.transparentGrey,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),

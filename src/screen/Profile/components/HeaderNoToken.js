@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextStyle} from 'react-native';
 import React from 'react';
 import {COLORS, WIDTH, scale} from '../../../assets/constants';
 import {CustomButton} from '../../../components';
@@ -13,12 +13,13 @@ export default function HeaderNoToken() {
   return (
     <View style={{...styles.wrapper, paddingTop: insets.top + scale(20)}}>
       <CustomButton
+        styleText={{color: COLORS.white}}
         text={t('login')}
         buttonType="large"
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.primary,
           flex: 0.5,
-          borderColor: '#fff',
+          // borderColor: '#fff',
         }}
         outline
         onPress={() => {
@@ -46,7 +47,7 @@ export default function HeaderNoToken() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.theme,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingVertical: scale(10),

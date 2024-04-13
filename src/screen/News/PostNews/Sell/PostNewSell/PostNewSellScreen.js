@@ -74,12 +74,12 @@ export default function PostNewSellScreen() {
       <View style={styles.button}>
         <Image
           source={images.sell}
-          style={{width: scale(38), height: scale(38)}}
+          style={{width: scale(45), height: scale(38)}}
         />
         <CustomText
           textType="medium"
-          style={{...styles.text2, marginLeft: scale(20)}}>
-          {t('sell')}
+          style={{...styles.text2, marginLeft: scale(20), color: COLORS.white}}>
+          {t('House')}
         </CustomText>
       </View>
 
@@ -124,7 +124,7 @@ export default function PostNewSellScreen() {
         rules={requireField(t('this_field_required'))}
         text={t('do_you_agree')}
         textStyle={{
-          color: COLORS.black,
+          color: COLORS.white,
           fontSize: SIZES.xSmall,
           flex: 0,
         }}
@@ -137,6 +137,7 @@ export default function PostNewSellScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('Next')}
+        styleText={{color: COLORS.white}}
         onPress={handleSubmit(handlePostLease)}
         // onPress={handlePostLease}
         style={{
@@ -165,16 +166,16 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    // borderWidth: scale(1),
+    // borderColor: COLORS.primary,
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     ...SHADOW,
     shadowOffset: {
       width: 0,
       height: 6,
     },
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.primary,
   },
 
   text2: {

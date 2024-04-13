@@ -67,7 +67,7 @@ export default function BoxSimilarApartment({
             {
               width: scale(600 / seeViewNumber),
               // height: scale(200),
-              padding:scale(10)
+              padding: scale(10),
             },
             styleWrapper,
             SHADOW,
@@ -112,7 +112,7 @@ export default function BoxSimilarApartment({
               numberOfLines={1}>
               {data?.name}
             </CustomText>
-{/* 
+            {/* 
             <View style={{marginTop: scale(5)}}>
               {!multiPrice ? (
                 <>
@@ -126,7 +126,7 @@ export default function BoxSimilarApartment({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -151,7 +151,7 @@ export default function BoxSimilarApartment({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -236,7 +236,7 @@ export default function BoxSimilarApartment({
                       Posted today
                     </CustomText>
                   </View>
-                  
+
                   {/* <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
                      <View style={{backgroundColor:COLORS.primary, width:'20%', height:scale(13), borderRadius:scale(3), alignItems:'center', justifyContent:'center', }}>
                      <CustomImage
@@ -256,40 +256,40 @@ export default function BoxSimilarApartment({
                   </View> */}
                 </View>
               </View>
-              
             </View>
             <View style={styles.price}>
-                    <CustomText
-                      textType="bold"
-                      style={[
-                        styles.buildingName,
-                        isStar && {fontSize: SIZES.small, color: COLORS.white, marginTop:scale(5)},
-                        isDiscount && {color: COLORS.white},
-                      ]}>
-                      {formatPrice(data?.price, {
-                        locales: 'vi',
-                      })}{' '}
-                      {time && (
-                        <CustomText
-                          textType="regular"
-                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
-                          / {rental}
-                        </CustomText>
-                      )}
-                    </CustomText>
-                    
-                    
+              <CustomText
+                textType="bold"
+                style={[
+                  styles.buildingName,
+                  isStar && {
+                    fontSize: SIZES.small,
+                    color: COLORS.white,
+                    marginTop: scale(5),
+                  },
+                  isDiscount && {color: COLORS.white},
+                ]}>
+                {formatPrice(data?.price, {
+                  locales: 'en',
+                })}{' '}
+                {time && (
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
+                    / {rental}
+                  </CustomText>
+                )}
+              </CustomText>
 
-                    {isViewMap && (
-                      <TouchableOpacity
-                        activeOpacity={0.7}
-                        style={{padding: scale(4)}}>
-                        <IconMapView />
-                      </TouchableOpacity>
-                    )}
-                  </View>
+              {isViewMap && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={{padding: scale(4)}}>
+                  <IconMapView />
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-          
         </TouchableOpacity>
       ) : (
         <BoxPlaceItemLoading

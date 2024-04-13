@@ -73,7 +73,7 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
         <CustomText
           textType="semiBold"
           style={{color: '#fff', marginTop: scale(-6)}}>
-          {formatNumber(10000)}
+          {formatNumber(data?.quantityHeart)}
         </CustomText>
       </TouchableOpacity>
 
@@ -94,7 +94,7 @@ export default React.memo(function SideBar({data, isFavourite, onComment}) {
         <CustomText
           textType="semiBold"
           style={{color: '#fff', marginTop: scale(-6)}}>
-          {formatNumber(10000)}
+          {formatNumber(data?.quantityComment)}
         </CustomText>
       </TouchableOpacity>
 

@@ -18,7 +18,9 @@ export default function SearchChooseLocation({onPress}) {
         <CustomInput
           autoFocus
           iconLeft={IconSearch}
+          styleIcon={{color: COLORS.white}}
           placeholder="Where would you like to go?"
+          placeholderTextColor={COLORS.white}
         />
 
         <TouchableOpacity
@@ -26,7 +28,9 @@ export default function SearchChooseLocation({onPress}) {
           onPress={() => onPress('Around me')}
           style={[styles.searchItem, {borderBottomWidth: 1}]}>
           <IconMyLocation fill={COLORS.primary} />
-          <CustomText style={{fontSize: SIZES.xMedium}}>Around me</CustomText>
+          <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
+            Around me
+          </CustomText>
         </TouchableOpacity>
 
         {/* <TouchableOpacity activeOpacity={0.7} style={styles.searchItem}>
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   search: {
     padding: scale(12),
     borderRadius: scale(10),
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.transparentGrey,
     ...SHADOW,
     // minHeight: 200,
     zIndex: 99,

@@ -18,9 +18,9 @@ import WeeklyHotDeal from './WeeklyHotDeal';
 const data = [
   {
     id: 1,
-    src: images.c15,
+    src: images.c15_1,
     name: 'C15_05_BlockC Emerald',
-    price: 25000000,
+    price: 2500,
     imgdetail: [
       images.c15_1,
       images.c15_2,
@@ -34,7 +34,7 @@ const data = [
     id: 2,
     src: images.c16,
     name: 'D11.06 Emerald',
-    price: 16000000,
+    price: 1600,
     imgdetail: [
       images.c16_1,
       images.c16_2,
@@ -51,7 +51,7 @@ const data = [
     id: 3,
     src: images.p14,
     name: 'P14.07 Diamond',
-    price: 28000000,
+    price: 2800,
     imgdetail: [
       images.p14_1,
       images.p14_2,
@@ -67,7 +67,7 @@ const data = [
     id: 4,
     src: images.q10,
     name: 'Centrosa Garden Q.10',
-    price: 26000000,
+    price: 2600,
     imgdetail: [
       images.q10_1,
       images.q10_2,
@@ -81,7 +81,7 @@ const data = [
     id: 5,
     src: images.a6,
     name: 'A6.7.08 Diamod Alanta Plus',
-    price: 18000000,
+    price: 1800,
     imgdetail: [
       images.a6_1,
       images.a6_2,
@@ -94,7 +94,7 @@ const data = [
     id: 6,
     src: images.c2,
     name: 'C2.17',
-    price: 19500000000,
+    price: 195000,
     imgdetail: [
       images.c2_1,
       images.c2_2,
@@ -107,7 +107,7 @@ const data = [
     id: 7,
     src: images.c127,
     name: 'Duplex 127.7m2 Block C Emerald',
-    price: 6300000000,
+    price: 630000,
     imgdetail: [
       images.c127_1,
       images.c127_2,
@@ -123,7 +123,7 @@ const data = [
     id: 8,
     src: images.b15,
     name: 'Duplex B15.20 Emeral',
-    price: 8000000000,
+    price: 800000,
     imgdetail: [
       images.b15_1,
       images.b15_2,
@@ -140,7 +140,7 @@ const data = [
     id: 9,
     src: images.f3,
     name: 'F303 Emerald',
-    price: 5600000000,
+    price: 560000,
     imgdetail: [
       images.f3_1,
       images.f3_2,
@@ -157,7 +157,7 @@ const data = [
     id: 10,
     src: images.a3,
     name: 'Ruby A3.12 Celadon Tan Phu',
-    price: 3500000000,
+    price: 350000,
     imgdetail: [
       images.a3_1,
       images.a3_2,
@@ -174,14 +174,14 @@ const data = [
     id: 11,
     src: images.m253,
     name: '253m2 Duc Hoa Dong, Long An',
-    price: 2100000000,
+    price: 210000,
     imgdetail: [images.m253_1, images.m253_2, images.m253_3, images.m253_4],
   },
   {
     id: 12,
     src: images.m1030,
     name: '1030m2 Dat Trong Nhan Bau Don Tay Ninh',
-    price: 2400000000,
+    price: 240000,
     imgdetail: [
       images.m1030_1,
       images.m1030_2,
@@ -194,7 +194,7 @@ const data = [
     id: 13,
     src: images.m508,
     name: 'Lo 508m2 Huu Thanh, Long An',
-    price: 3500000000,
+    price: 350000,
     imgdetail: [images.m508_1, images.m508_2, images.m508_3],
   },
 ];

@@ -91,7 +91,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Hướng cửa chính'}
+              label={'Main door direction'}
               data={data?.data}
               name={'direction_main_id'}
               control={control}
@@ -112,7 +112,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Giấy tờ pháp lý'}
+              label={'Legal documents'}
               name={'legal_documents'}
               control={control}
               data={listLegalDoc}
@@ -123,7 +123,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <RealEstateType
-              label={'Nội thất'}
+              label={'Interior'}
               name={'furnish'}
               control={control}
               data={listInterior}
@@ -137,7 +137,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           <View style={styles.line} />
 
           <CustomInput
-            label={t('Diện tích (m²)')}
+            label={t('Acreage (m²)')}
+            placeholderTextColor={COLORS.grey}
             styleTextLabel={styles.label}
             control={control}
             name="size"
@@ -159,6 +160,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <CustomInput
             label={t('price')}
+            placeholderTextColor={COLORS.grey}
             styleTextLabel={styles.label}
             control={control}
             name="price"
@@ -170,10 +172,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <CheckBox
-            text="Giá có thể thoả thuận"
+            text="Price can be negotiated"
             styleWrapper={{
               width: '100%',
             }}
+            textStyle={{color: COLORS.white}}
             checkedNumber
             control={control}
             name="is_negotiated"
@@ -190,32 +193,30 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 const styles = StyleSheet.create({
   label: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
   },
 
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
-
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
     rowGap: scale(16),
   },
   line: {
-    borderWidth: 0.5,
+    height: 0.5,
     width: '100%',
-    marginTop: scale(10),
-    borderColor: '#F0B90B',
+    backgroundColor: COLORS.white,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: COLORS.transparentGrey,
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

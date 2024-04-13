@@ -29,7 +29,7 @@ export default function MainWrapper({
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: COLORS.primary}}
+      style={{flex: 1, backgroundColor: COLORS.theme}}
       edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
       <CustomImage
         source={images.background}

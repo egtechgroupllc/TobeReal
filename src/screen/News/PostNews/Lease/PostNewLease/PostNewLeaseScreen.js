@@ -175,7 +175,7 @@ export default function PostNewLeaseScreen() {
         rules={requireField(t('this_field_required'))}
         text={t('do_you_agree')}
         textStyle={{
-          color: COLORS.black,
+          color: COLORS.white,
           fontSize: SIZES.xSmall,
           flex: 0,
         }}
@@ -188,6 +188,7 @@ export default function PostNewLeaseScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('post')}
+        styleText={{color: COLORS.white}}
         disabled={createAccommodationMu.isPending}
         // onPress={handleSubmit(handlePostLease)}
         onPress={checkIsValid}
@@ -213,10 +214,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    // borderWidth: scale(1),
+    // borderColor: '#F0B90B40',
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     ...SHADOW,
     shadowOffset: {
       width: 0,
@@ -227,5 +228,6 @@ const styles = StyleSheet.create({
 
   text2: {
     fontSize: SIZES.medium,
+    color: COLORS.white,
   },
 });

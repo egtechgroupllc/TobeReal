@@ -18,7 +18,7 @@ export default function Filter() {
   const renderItem = ({item, index}) => {
     return activeIndex === index ? (
       <LinearGradient
-        colors={['#F0B90B', '#FFE55A']}
+        colors={COLORS.backgroundLinear}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
         style={{

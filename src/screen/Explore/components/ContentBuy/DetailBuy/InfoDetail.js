@@ -91,7 +91,7 @@ export default function InfoDetail({data, price}) {
                 textType="bold"
                 style={{...styles.name, color: COLORS.primary}}>
                 {formatPrice(data?.price, {
-                  locales: 'vi',
+                  locales: 'en',
                 })}
               </CustomText>
             </CustomText>

@@ -1,12 +1,12 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View, TextStyle} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
 import RNRestart from 'react-native-restart';
 
 import {postLogin} from '../../../../Model/api/auth';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
@@ -43,7 +43,6 @@ export default function Content() {
           onSaveToken(dataInside?.data?.token);
 
           showMess(dataInside?.message, 'success');
-          navigate('HomeExploreScreen');
 
           setTimeout(() => {
             RNRestart.restart();
@@ -86,12 +85,6 @@ export default function Content() {
           password
         />
 
-        {loginMutation.isPending && (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#FF8C00" />
-          </View>
-        )}
-
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"
@@ -104,6 +97,7 @@ export default function Content() {
           buttonType="large"
           text={t('login')}
           linearGradientProps
+          styleText={{color: COLORS.white}}
         />
       </View>
 
@@ -134,9 +128,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.small,
+    color: COLORS.white,
   },
   text1: {
-    color: '#F0B90B',
+    color: COLORS.primary,
   },
   text2: {
     fontSize: SIZES.medium,

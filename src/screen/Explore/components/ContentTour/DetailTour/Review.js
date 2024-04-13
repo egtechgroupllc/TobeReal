@@ -9,7 +9,27 @@ import ReviewAll from './Review/ReviewAll';
 import ListSelect from '../../../../../components/BottomSheetListSelect';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
-
+const data = [
+  {
+    id: 1,
+    user: 'John',
+    content:
+      'Central location, friendly staff, full and delicious buffet breakfast.',
+    date: '12-02-2024 21:08',
+  },
+  {
+    id: 2,
+    user: 'David',
+    content: "I really like the hotel's shower gel and shampoo! tasty!",
+    date: '27-01-2024 21:08',
+  },
+  {
+    id: 3,
+    user: 'Jack',
+    content: 'Very good!',
+    date: '17-03-2024 21:08',
+  },
+];
 export default function Review() {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
@@ -37,7 +57,7 @@ export default function Review() {
             style={{fontSize: SIZES.xMedium, color: COLORS.primary}}>
             {t('overview')}
           </CustomText>
-          <CustomText style={{fontSize: SIZES.xMedium}}>
+          <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
             146 {t('reviews')}
           </CustomText>
         </View>
@@ -46,17 +66,21 @@ export default function Review() {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={[...Array(5)]}
+        data={data}
         contentContainerStyle={{
           columnGap: scale(10),
           marginVertical: scale(10),
           paddingHorizontal: scale(16),
         }}
         renderItem={({item, index}) => (
-          <ItemBoxReview key={`key-${item}-${index}`} />
+          <ItemBoxReview
+            color={COLORS.white}
+            key={`key-${item}-${index}`}
+            data={item}
+          />
         )}
       />
-
+      <View style={styles.line} />
       <BottomSheet
         ref={bottomSheetRef}
         refChild={bottomSheetChildRef}
@@ -70,7 +94,7 @@ export default function Review() {
             }}
           />
         )}
-        titleIndicator="Đánh giá">
+        titleIndicator="Review">
         <ReviewAll
           onSort={() => bottomSheetChildRef.current.openChild()}
           valueSort={select}
@@ -86,6 +110,11 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
     alignItems: 'center',
     paddingHorizontal: scale(16),
+  },
+  line: {
+    width: '100%',
+    height: scale(1),
+    backgroundColor: COLORS.grey,
   },
   overviewNumberRating: {
     backgroundColor: COLORS.primary,

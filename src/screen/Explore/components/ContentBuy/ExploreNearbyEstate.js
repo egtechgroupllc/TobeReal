@@ -7,14 +7,13 @@ import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function ExploreNearbyEstate({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Explore Nearby Estates')]
+  const title = [t('Explore Nearby Estates')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -61,7 +60,7 @@ export default function ExploreNearbyEstate({data}) {
 const styles = StyleSheet.create({
   content: {
     columnGap: scale(14),
-    rowGap:scale(14),
+    rowGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
   },

@@ -4,6 +4,7 @@ import {
   Share,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {
@@ -16,9 +17,14 @@ import React, {
 import ImageDetail from './ImageDetail';
 import OptionAccommodation from '../../FindAccommodation/OptionAccommodation';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
-import {IconAdd, IconShare, IconX} from '../../../../../assets/icon/Icon';
+import {
+  IconAdd,
+  IconQRScan,
+  IconShare,
+  IconX,
+} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
-import {CustomButton} from '../../../../../components';
+import {CustomButton, CustomInput} from '../../../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import Favourite from '../../../../../components/Favourite';
@@ -66,12 +72,7 @@ export default React.memo(
     });
     const animatedBackgroundHeader = scrollOffsetY.interpolate({
       inputRange: [-1, 0, Scroll_Distance, Scroll_Distance + 1],
-      outputRange: [
-        'transparent',
-        'transparent',
-        COLORS.primary,
-        COLORS.primary,
-      ],
+      outputRange: ['transparent', 'transparent', COLORS.theme, COLORS.theme],
       extrapolate: 'clamp',
     });
 
@@ -107,6 +108,8 @@ export default React.memo(
           uri: img?.url,
         }))
       : images;
+
+    const [openContact, setOpenContact] = useState(false);
 
     return (
       <>
@@ -181,8 +184,92 @@ export default React.memo(
               },
             ]}>
             <ImageDetail dataImg={dataImg} />
+            {/* <CustomButton
+              numberOfLines={1}
+              text="dasdsadsaddsad"
+              styleText={{color: COLORS.black, flex: 1}}
+              styleWrapper={{
+                alignSelf: 'center',
+              }}
+              isShadow
+              propsText={{}}
+              // text="Share"
+              onPress={onShare}
+              iconRight={IconQRScan}
+              style={{
+                backgroundColor: '#f0e6ff',
+                width: '50%',
+                position: 'absolute',
+                top: scale(-40),
+              }}
+              styleIcon={{
+                width: scale(20),
+                height: scale(20),
+              }}
+            /> */}
+            <CustomInput
+              placeholder="54rteyueytd645ew67fegd"
+              placeholderTextColor={COLORS.white}
+              onPress={() => setOpenContact(true)}
+              numberOfLines={1}
+              editable={false}
+              iconRight={IconQRScan}
+              styleWrapper={{
+                alignSelf: 'center',
+              }}
+              style={{
+                paddingHorizontal: scale(15),
+                backgroundColor: COLORS.theme,
+                width: '50%',
+                position: 'absolute',
+                top: scale(-40),
+              }}
+            />
           </Animated.View>
+          {openContact && (
+            <View style={styles.contact}>
+              <CustomText
+                style={{
+                  fontSize: SIZES.medium,
+                  color: COLORS.black,
+                }}
+                textType="bold">
+                Identification address
+              </CustomText>
+              <TouchableOpacity
+                onPress={() => setOpenContact(false)}
+                style={{
+                  position: 'absolute',
+                  left: scale(230),
+                  top: scale(10),
+                }}>
+                <IconX fill={'black'} width={scale(30)} height={scale(30)} />
+              </TouchableOpacity>
 
+              <View
+                style={{
+                  rowGap: scale(10),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '70%',
+                }}>
+                <IconQRScan
+                  width={scale(120)}
+                  height={scale(120)}
+                  fill={'#000'}
+                />
+                <CustomText
+                  numberOfLines={3}
+                  style={{
+                    fontSize: SIZES.small,
+                    color: COLORS.black,
+                  }}
+                  textType="bold">
+                  54rteyueytd645ew67fegdh
+                </CustomText>
+              </View>
+            </View>
+          )}
           <OptionAccommodation
             isShaDow
             styleContent={{
@@ -226,5 +313,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     flex: 1,
     textAlign: 'center',
+  },
+  contact: {
+    height: scale(260),
+    position: 'absolute',
+    backgroundColor: COLORS.white,
+    borderRadius: scale(20),
+    borderWidth: scale(1),
+    borderColor: '#CDCDCD',
+    rowGap: scale(20),
+    width: '70%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: scale(200),
+    zIndex: 999,
   },
 });

@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 
 import {postSignUp} from '../../../../Model/api/auth';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {
   IconUnViewablePassword,
@@ -114,6 +114,7 @@ export default function Content() {
           buttonType="large"
           text={t('signup')}
           linearGradientProps
+          styleText={{color: COLORS.white}}
           style={{
             marginTop: scale(20),
           }}
@@ -157,10 +158,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.small,
+    color: COLORS.white,
   },
   text1: {
     fontSize: SIZES.small,
-    color: '#F0B90B',
+    color: COLORS.primary,
   },
   text2: {
     fontSize: SIZES.medium,

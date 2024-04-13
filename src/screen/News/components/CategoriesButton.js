@@ -195,7 +195,9 @@ export default function CategoriesButton({
     <View>
       <TouchableOpacity onPress={onPress}>
         <View style={styles.button}>
-          <CustomText textType="semiBold" style={{...styles.text2}}>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.text2, color: COLORS.white}}>
             {title}
           </CustomText>
           <IconRight />
@@ -204,7 +206,7 @@ export default function CategoriesButton({
       {postManagement && (
         <View>
           <LinearGradient
-            colors={['#F0B90B', '#FFFFFF00']}
+            colors={COLORS.backgroundLinear}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 0.8}}
             style={styles.button}>
@@ -245,17 +247,17 @@ export default function CategoriesButton({
             renderItem={({item}) =>
               item.id !== 4 ? (
                 <LinearGradient
-                  colors={['#F0B90B', '#FFFFFF']}
-                  start={{x: 0, y: 0}}
-                  end={{x: 0, y: 1}}
-                  style={{...styles.item, height:scale(330)}}>
+                  colors={COLORS.backgroundLinear}
+                  start={{x: 0, y: 1}}
+                  end={{x: 0, y: 0}}
+                  style={{...styles.item, height: scale(330)}}>
                   <CustomText
                     textType="bold"
                     style={{...styles.text, color: COLORS.white}}>
                     {item.type}
                   </CustomText>
                   <LinearGradient
-                    colors={['#FF8A00', '#8F6F00']}
+                    colors={['#FF00D6', '#8F0067']}
                     start={{x: 0, y: 0}}
                     end={{x: 0, y: 1}}
                     style={{
@@ -265,7 +267,7 @@ export default function CategoriesButton({
                       borderTopRightRadius: scale(10),
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginTop:scale(10)
+                      marginTop: scale(10),
                     }}>
                     <CustomText
                       textType="bold"
@@ -284,12 +286,12 @@ export default function CategoriesButton({
                     <View>
                       <CustomText
                         textType="bold"
-                        style={{...styles.text, color: COLORS.black}}>
+                        style={{...styles.text, color: COLORS.white}}>
                         Avatar
                       </CustomText>
                       <CustomText
                         textType="bold"
-                        style={{...styles.text, color: COLORS.black}}>
+                        style={{...styles.text, color: COLORS.white}}>
                         Border
                       </CustomText>
                     </View>
@@ -307,7 +309,7 @@ export default function CategoriesButton({
                   </View>
                   <View
                     style={{
-                      backgroundColor: '#997006',
+                      backgroundColor: COLORS.primary,
                       height: scale(32),
                       width: '100%',
                       alignItems: 'center',
@@ -333,19 +335,19 @@ export default function CategoriesButton({
                     }}>
                     <CustomText
                       textType="bold"
-                      style={{...styles.text3, color: COLORS.black}}>
+                      style={{...styles.text3, color: COLORS.white}}>
                       Post 3-star vip news for free
                     </CustomText>
                     <CustomText
                       textType="medium"
-                      style={{...styles.text3, color: COLORS.black}}>
+                      style={{...styles.text3, color: COLORS.white}}>
                       {item.post3stars}
                     </CustomText>
                   </View>
                   <View
                     style={{
                       marginTop: scale(10),
-                      backgroundColor: '#997006',
+                      backgroundColor: COLORS.primary,
                       height: scale(32),
                       width: '100%',
                       alignItems: 'center',
@@ -354,7 +356,7 @@ export default function CategoriesButton({
                     <CustomText
                       textType="bold"
                       style={{...styles.text3, color: COLORS.white}}>
-                       Post super vip news for free
+                      Post super vip news for free
                     </CustomText>
                     <CustomText
                       textType="semiBold"
@@ -499,7 +501,7 @@ export default function CategoriesButton({
             scrollEnabled={true}
             renderItem={({item}) => (
               <LinearGradient
-                colors={['#F0B90B', '#FFFFFF']}
+                colors={COLORS.backgroundLinear}
                 start={{x: 0, y: 0}}
                 end={{x: 0, y: 1}}
                 style={[styles.item]}>
@@ -509,7 +511,7 @@ export default function CategoriesButton({
                   {item.type}
                 </CustomText>
                 <LinearGradient
-                  colors={['#FF8A00', '#8F6F00']}
+                  colors={['#FF00D6', '#8F0067']}
                   start={{x: 0, y: 0}}
                   end={{x: 0, y: 1}}
                   style={{
@@ -546,7 +548,7 @@ export default function CategoriesButton({
                 </View>
                 <View
                   style={{
-                    backgroundColor: '#997006',
+                    backgroundColor: COLORS.primary,
                     height: scale(41),
                     width: '100%',
                     alignItems: 'center',
@@ -597,7 +599,7 @@ export default function CategoriesButton({
             scrollEnabled={true}
             renderItem={({item}) => (
               <LinearGradient
-                colors={['#F0B90B', '#FFFFFF']}
+                colors={COLORS.backgroundLinear}
                 start={{x: 0, y: 0}}
                 end={{x: 0, y: 1}}
                 style={{...styles.item, height: scale(417)}}>
@@ -610,7 +612,7 @@ export default function CategoriesButton({
                   <View
                     style={{
                       height: scale(1),
-                      backgroundColor: COLORS.black,
+                      backgroundColor: COLORS.white,
                       width: '80%',
                       marginTop: scale(10),
                     }}></View>
@@ -618,7 +620,7 @@ export default function CategoriesButton({
                 <View style={{marginTop: scale(30)}}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Description of where it appears
                   </CustomText>
                 </View>
@@ -632,13 +634,13 @@ export default function CategoriesButton({
                   }}>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     {item.desciption}
                   </CustomText>
                 </View>
                 <View
                   style={{
-                    backgroundColor: '#997006',
+                    backgroundColor: COLORS.primary,
                     height: scale(55),
                     width: '100%',
                     alignItems: 'center',
@@ -669,18 +671,18 @@ export default function CategoriesButton({
                   }}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Inside page
                   </CustomText>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     {item.inside}
                   </CustomText>
                 </View>
                 <View
                   style={{
-                    backgroundColor: '#997006',
+                    backgroundColor: COLORS.primary,
                     height: scale(41),
                     width: '100%',
                     alignItems: 'center',
@@ -706,12 +708,12 @@ export default function CategoriesButton({
                   }}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     SHARE FANPAGES
                   </CustomText>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     {item.inside}
                   </CustomText>
                 </View>
@@ -730,7 +732,7 @@ export default function CategoriesButton({
             scrollEnabled={true}
             renderItem={({item}) => (
               <LinearGradient
-                colors={['#F0B90B', '#FFFFFF']}
+                colors={COLORS.backgroundLinear}
                 start={{x: 0, y: 0}}
                 end={{x: 0, y: 1}}
                 style={{...styles.item, height: scale(291)}}>
@@ -749,18 +751,18 @@ export default function CategoriesButton({
                 <View style={{marginTop: scale(15), alignItems: 'center'}}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Suitable object
                   </CustomText>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     {item.suitable}
                   </CustomText>
                 </View>
                 <View
                   style={{
-                    backgroundColor: '#997006',
+                    backgroundColor: COLORS.primary,
                     height: scale(55),
                     width: '100%',
                     alignItems: 'center',
@@ -786,18 +788,18 @@ export default function CategoriesButton({
                   }}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Path map
                   </CustomText>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Yes
                   </CustomText>
                 </View>
                 <View
                   style={{
-                    backgroundColor: '#997006',
+                    backgroundColor: COLORS.primary,
                     height: scale(41),
                     width: '100%',
                     alignItems: 'center',
@@ -823,12 +825,12 @@ export default function CategoriesButton({
                   }}>
                   <CustomText
                     textType="bold"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Contact
                   </CustomText>
                   <CustomText
                     textType="medium"
-                    style={{...styles.text3, color: COLORS.black}}>
+                    style={{...styles.text3, color: COLORS.white}}>
                     Yes
                   </CustomText>
                 </View>
@@ -842,12 +844,10 @@ export default function CategoriesButton({
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.transparentGrey,
     alignItems: 'center',
     alignSelf: 'center',
     borderRadius: scale(4),
-    borderWidth: scale(1),
-    borderColor: '#F0B90B80',
     height: scale(50),
     width: '100%',
     justifyContent: 'space-between',
@@ -887,7 +887,7 @@ const styles = StyleSheet.create({
   },
   box: {
     height: scale(362),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGreyLight,
     borderBottomLeftRadius: scale(5),
     borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),
@@ -896,7 +896,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     paddingTop: scale(10),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
   },
   item: {

@@ -2,7 +2,11 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import {IconHeart, IconMapView, IconMarker} from '../../../../../../assets/icon/Icon';
+import {
+  IconHeart,
+  IconMapView,
+  IconMarker,
+} from '../../../../../../assets/icon/Icon';
 
 import CustomText from '../../../../../../components/CustomText';
 import Star from '../../../../../../components/Star';
@@ -95,11 +99,14 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.white},
+              ]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
-            {isStar && <Star rating={rating} />}
+            {isStar && <Star rating={(rating = 2.5)} />}
 
             {/* <View style={styles.line} /> */}
 
@@ -116,7 +123,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -141,7 +148,7 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.black},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: '100%',
-   borderRadius:scale(12)
+    borderRadius: scale(12),
   },
   line: {
     backgroundColor: 'white',
@@ -208,6 +215,7 @@ const styles = StyleSheet.create({
 
   buildingName: {
     flex: 1,
+    color: COLORS.white,
   },
   price: {
     flexDirection: 'row',

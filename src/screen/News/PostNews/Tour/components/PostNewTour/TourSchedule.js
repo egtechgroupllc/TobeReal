@@ -210,7 +210,7 @@ export default function TourSchedule({
               </>
             </View>
             <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
-              Thời lượng Tour: {numDays.days} days {numDays.hours} hours
+              Tour Duration: {numDays.days} days {numDays.hours} hours
             </CustomText>
             <ScrollView
               horizontal
@@ -224,7 +224,7 @@ export default function TourSchedule({
                 (_, dayNumber) =>
                   selectedDay === dayNumber ? (
                     <LinearGradient
-                      colors={['#F0B90B', '#FFE55A']}
+                      colors={COLORS.backgroundLinear}
                       start={{x: 0, y: 0}}
                       end={{x: 0, y: 1}}
                       style={{
@@ -304,17 +304,17 @@ export default function TourSchedule({
 const styles = StyleSheet.create({
   label: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.grey,
   },
 
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: scale(-20),
     right: 0,
-    color: COLORS.black,
+    color: COLORS.white,
   },
 
   title: {

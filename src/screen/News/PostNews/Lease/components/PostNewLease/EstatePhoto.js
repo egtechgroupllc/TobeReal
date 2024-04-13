@@ -74,7 +74,10 @@ export default function EstatePhoto({control, errors, setValue, watch}) {
               subHeading={t('update_image_to_maximum')}
               control={control}
               rules={[
-                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+                validateMinLength(
+                  t('Minimum 4 photos and maximum 24 photos'),
+                  4,
+                ),
               ]}
               name={'description_img'}
             />
@@ -110,11 +113,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
+  ImageBackground,
   Platform,
   StatusBar,
   StyleSheet,
@@ -73,17 +74,17 @@ export default function App() {
     }
   }, [netInfo.isConnected]);
   const SplashScreen = () => (
-    <View
+    <ImageBackground
+      source={images.background}
       style={{
-        backgroundColor: COLORS.white,
         height: '100%',
         justifyContent: 'center',
       }}>
       <CustomImage
-        source={images.logoSplash}
-        style={{height: '70%', width: '70%', alignSelf: 'center'}}
+        source={images.iconSplash}
+        style={{height: '60%', width: '60%', alignSelf: 'center'}}
         resizeMode="contain"></CustomImage>
-    </View>
+    </ImageBackground>
   );
 
   return splashScreenVisible ? (
@@ -92,7 +93,7 @@ export default function App() {
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider
         style={{
-          backgroundColor: COLORS.white,
+          backgroundColor: '#371E71',
         }}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
@@ -110,8 +111,8 @@ export default function App() {
                   />
                   <BottomSheetModalProvider>
                     <StatusBar
-                      barStyle="dark-content"
-                      backgroundColor={COLORS.primary}
+                      barStyle="white-content"
+                      backgroundColor={'#371E71'}
                     />
                     <Layout />
                   </BottomSheetModalProvider>

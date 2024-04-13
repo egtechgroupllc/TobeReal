@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <View style={styles.wrapper}>
       <CustomImage
-        source={images.logo}
+        source={images.logoNowTravel}
         style={styles.img}
         resizeMode="contain"
       />

@@ -147,7 +147,7 @@ export default function BoxLocationItem({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -172,7 +172,7 @@ export default function BoxLocationItem({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText

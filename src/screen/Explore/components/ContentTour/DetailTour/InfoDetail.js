@@ -24,7 +24,9 @@ export default function InfoDetail({data, name}) {
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
-          <CustomText textType="semiBold" style={styles.name}>
+          <CustomText
+            textType="semiBold"
+            style={{...styles.name, color: COLORS.white}}>
             {data?.name || name}
           </CustomText>
         </View>
@@ -46,7 +48,9 @@ export default function InfoDetail({data, name}) {
               style={{width: scale(20), height: scale(20)}}
             />
           </TouchableOpacity>
-          <CustomText textType="medium" style={styles.text1}>
+          <CustomText
+            textType="medium"
+            style={{...styles.text1, color: COLORS.white}}>
             {t('watch_the_most')}
           </CustomText>
         </View>
@@ -85,12 +89,12 @@ export default function InfoDetail({data, name}) {
           <IconCalendar width={scale(12)} height={scale(12)} />
           <CustomText
             textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            style={{...styles.text, marginLeft: '2%', color: COLORS.white}}>
             {t('lastest_tour')} |
           </CustomText>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             {formatDateTime(data?.tour_tickets?.[0]?.createdAt)}
           </CustomText>
         </View>
@@ -104,12 +108,12 @@ export default function InfoDetail({data, name}) {
           <IconClock width={scale(12)} height={scale(12)} />
           <CustomText
             textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            style={{...styles.text, marginLeft: '2%', color: COLORS.white}}>
             {t('tour_time')} |
           </CustomText>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             8 {t('hour')}
           </CustomText>
         </View>
@@ -118,6 +122,7 @@ export default function InfoDetail({data, name}) {
       <TicketOption data={data} />
       <View style={styles.line} />
       <Introduction data={data} />
+      <View style={styles.line} />
     </View>
   );
 }
@@ -126,7 +131,7 @@ const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -144,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.grey,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },

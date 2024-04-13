@@ -70,7 +70,9 @@ function TextPrice({price, rental}) {
   return (
     <CustomText textType="semiBold" style={[styles.buildingName]}>
       {formatPrice(price)}{' '}
-      <CustomText textType="regular" style={{fontSize: SIZES.xSmall}}>
+      <CustomText
+        textType="regular"
+        style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
         / {rental}
       </CustomText>
     </CustomText>
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
   },
   buildingName: {
     flex: 1,
+    color: COLORS.white,
   },
   unitAvailable: {
     borderRadius: scale(10),

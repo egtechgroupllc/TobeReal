@@ -83,7 +83,7 @@ export default memo(function BookAccommodation({
             }}
             textType="bold">
             {formatPrice(price, {
-              locales: 'vi',
+              locales: 'en',
             })}{' '}
           </CustomText>
         </View>

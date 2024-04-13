@@ -16,6 +16,7 @@ export default function Ribbon({text, iconRight, iconLeft}) {
           textType="medium"
           style={{
             fontSize: SIZES.xSmall,
+            color: COLORS.white,
           }}>
           {text}
         </CustomText>

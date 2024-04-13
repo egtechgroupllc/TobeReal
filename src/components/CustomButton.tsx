@@ -14,6 +14,7 @@ import {COLORS, scale} from '../assets/constants';
 import {SHADOW} from '../assets/constants/theme';
 import {arrayToObject} from '../utils/arrayToObject';
 import CustomText, {CustomTextProps} from './CustomText';
+import {TextProps} from 'react-native-svg';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
@@ -26,6 +27,7 @@ type CustomButtonProps = {
   isDelay?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
+  propsText?: TextProps;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
   onPress: () => void;
   onDoublePress: () => void;
@@ -44,6 +46,7 @@ export default memo(function CustomButton({
   styleWrapper,
   linearGradientProps,
   isDelay,
+  propsText,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
   ...props
@@ -67,7 +70,7 @@ export default memo(function CustomButton({
     return outline
       ? ['transparent', 'transparent']
       : linearGradientProps
-      ? ['#F7E75A', '#FFC702']
+      ? COLORS.backgroundLinear
       : [backgroundColor, backgroundColor];
   }, [propStyle?.backgroundColor, outline, linearGradientProps]);
   const ComponentWrapper: any = !linearGradientProps ? View : LinearGradient;
@@ -113,8 +116,8 @@ export default memo(function CustomButton({
       onPress={_onPress}>
       <ComponentWrapper
         colors={_backgroundColor}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
+        start={{x: 0, y: 1}}
+        end={{x: 0, y: 0}}
         {...linearGradientProps}
         style={[
           styles.button,
@@ -139,6 +142,7 @@ export default memo(function CustomButton({
           <CustomText
             textType={styleText?.textType || (buttonType && 'semiBold')}
             numberOfLines={6}
+            {...propsText}
             style={[
               styles.text,
               {fontSize: scale(fontSize)},

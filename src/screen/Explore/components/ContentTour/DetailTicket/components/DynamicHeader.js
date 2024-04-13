@@ -68,12 +68,7 @@ export default React.memo(
     });
     const animatedBackgroundHeader = scrollOffsetY.interpolate({
       inputRange: [-1, 0, Scroll_Distance, Scroll_Distance + 1],
-      outputRange: [
-        'transparent',
-        'transparent',
-        COLORS.primary,
-        COLORS.primary,
-      ],
+      outputRange: ['transparent', 'transparent', COLORS.theme, COLORS.theme],
       extrapolate: 'clamp',
     });
 

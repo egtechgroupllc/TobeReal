@@ -41,7 +41,7 @@ export default function ItemBox({
               flex: 1,
             }}
             numberOfLines={1}>
-            Tuan Kiet
+             Now Travel
           </CustomText>
 
           <Star rating={4.5} />

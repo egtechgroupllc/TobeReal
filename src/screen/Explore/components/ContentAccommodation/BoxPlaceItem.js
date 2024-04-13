@@ -96,7 +96,10 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.white},
+              ]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
@@ -117,7 +120,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -138,16 +141,19 @@ export default function BoxPlaceItem({
                       textType="semiBold"
                       style={[
                         styles.buildingName,
-                        isStar && {fontSize: SIZES.xMedium},
-                        isDiscount && {color: COLORS.primary},
+                        isStar && {
+                          fontSize: SIZES.xMedium,
+                          color: COLORS.white,
+                        },
+                        isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
                           textType="regular"
-                          style={{fontSize: SIZES.xSmall}}>
+                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
                           / {rental}
                         </CustomText>
                       )}
@@ -190,7 +196,7 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
@@ -210,6 +216,7 @@ const styles = StyleSheet.create({
 
   buildingName: {
     flex: 1,
+    color: COLORS.white,
   },
   price: {
     flexDirection: 'row',
@@ -221,5 +228,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+    color: COLORS.primary,
   },
 });

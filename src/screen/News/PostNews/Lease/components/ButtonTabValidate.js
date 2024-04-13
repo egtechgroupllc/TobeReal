@@ -5,6 +5,7 @@ import {StyleSheet} from 'react-native';
 import {COLORS, scale} from '../../../../../assets/constants';
 import {IconRight} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
+import {TextStyle} from 'react-native';
 
 export default memo(function ButtonTabValidate({
   onPress,
@@ -12,6 +13,7 @@ export default memo(function ButtonTabValidate({
   arrKeywords,
   title,
   errors,
+  styleWrapper,
 }) {
   const [isValid, setIsValid] = useState(false);
 
@@ -33,21 +35,26 @@ export default memo(function ButtonTabValidate({
   return (
     <CustomButton
       outline
-      style={[styles.buttonCategories, isValid && {borderColor: '#f6465d'}]}
+      style={[
+        styles.buttonCategories,
+        styleWrapper,
+        isValid && {borderWidth: 0},
+      ]}
       text={title}
       iconRight={() => <IconRight />}
       onPress={onPress}
       styleText={{
-        color: COLORS.text,
+        color: COLORS.white,
       }}
     />
   );
 });
 const styles = StyleSheet.create({
   buttonCategories: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
-    borderColor: '#F0B90B80',
+    borderWidth: 0,
+    // borderColor: COLORS.primary,
     height: scale(50),
     justifyContent: 'space-between',
     marginTop: scale(20),

@@ -27,31 +27,31 @@ export default function HeaderAvatar({
           {heading}
         </CustomText>
       </View>
-      <View style={[styles.wrapper, styleWrapper]}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: scale(10),
-            marginHorizontal: scale(10),
-          }}>
-          {goback && (
-            <TouchableOpacity onPress={onPress}>
-              <IconGoBack />
-            </TouchableOpacity>
-          )}
-          <CustomText textType="semiBold" style={styles.text}>
-            {subHeading}
-          </CustomText>
-          {noti && (
-            <TouchableOpacity onPress={notify}>
-              <IconNotification />
-            </TouchableOpacity>
-          )}
-        </View>
-        <View style={styles.content}>{children}</View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: scale(10),
+          marginHorizontal: scale(10),
+          alignSelf: 'center',
+          width: '90%',
+        }}>
+        {goback && (
+          <TouchableOpacity onPress={onPress}>
+            <IconGoBack fill={COLORS.white} />
+          </TouchableOpacity>
+        )}
+        <CustomText textType="semiBold" style={styles.text}>
+          {subHeading}
+        </CustomText>
+        {noti && (
+          <TouchableOpacity onPress={notify}>
+            <IconNotification />
+          </TouchableOpacity>
+        )}
       </View>
+      <View style={styles.content}>{children}</View>
     </View>
   );
 }
@@ -59,6 +59,7 @@ export default function HeaderAvatar({
 const styles = StyleSheet.create({
   head: {
     // marginTop: scale(50),
+
     marginLeft: scale(40),
   },
   wrapper: {
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
   },
   textHeading: {
     fontSize: SIZES.xxLarge,
-    color: 'black',
+    color: COLORS.white,
   },
   textSub: {
     fontSize: SIZES.xSmall,

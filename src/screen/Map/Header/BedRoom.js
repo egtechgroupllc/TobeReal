@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {SIZES, scale} from '../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';
@@ -14,12 +14,13 @@ export default function BedRoom() {
   return (
     <WrapperContent
       heading={t('number_of_bedrooms')}
-      styleWrapper={{marginBottom: scale(-10)}}
+      styleWrapper={{marginBottom: scale(-10), backgroundColor: COLORS.white}}
       styleHeading={{
         paddingHorizontal: 0,
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(4),

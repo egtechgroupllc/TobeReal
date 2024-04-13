@@ -14,9 +14,9 @@ import {CustomInput} from '../../../../../../components';
 import {IconAdd, IconShield} from '../../../../../../assets/icon/Icon';
 import Button from '../../../../components/Button';
 import Header from '../../../../components/Header';
-import { useLanguage } from '../../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const data = [
     {
       id: 1,
@@ -63,11 +63,11 @@ export default function Content() {
       <View style={{marginTop: scale(50)}}>
         <CustomText
           textType="semiBold"
-          style={{...styles.text1, color: COLORS.black}}>
+          style={{...styles.text1, color: COLORS.white}}>
           {t('add_tag')}
         </CustomText>
         <LinearGradient
-          colors={['#FFC700', '#FADD55']}
+          colors={COLORS.backgroundLinear}
           start={{x: 0, y: 0}}
           end={{x: 0, y: 1}}
           style={{borderRadius: scale(8), marginTop: scale(20)}}>
@@ -75,7 +75,7 @@ export default function Content() {
             <IconShield />
             <CustomText
               textType="semiBold"
-              style={{...styles.text, color: COLORS.black}}>
+              style={{...styles.text, color: COLORS.white}}>
               {t('your_card_information')}
             </CustomText>
           </TouchableOpacity>
@@ -85,40 +85,46 @@ export default function Content() {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomText
             textType="semiBold"
-            style={{...styles.text1, color: COLORS.black}}>
-             {t('card_detail')}
+            style={{...styles.text1, color: COLORS.white}}>
+            {t('card_detail')}
           </CustomText>
           <Image
             source={images.visa}
             style={{width: scale(34), height: scale(11)}}></Image>
         </View>
         <CustomInput
-          placeholder= {t('card_number')}
+          placeholder={t('card_number')}
+          placeholderTextColor={COLORS.grey}
           style={{
             marginBottom: scale(15),
             height: scale(36),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             marginTop: scale(10),
             borderRadius: scale(5),
+            borderWidth: scale(0),
           }}
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomInput
-            placeholder= {t('expiration_date') +" (MM/YY)" }
+            placeholderTextColor={COLORS.grey}
+            placeholder={t('expiration_date') + ' (MM/YY)'}
             style={{
               marginBottom: scale(15),
               height: scale(36),
-              backgroundColor: '#E3E3E3',
+              backgroundColor: COLORS.transparentGrey,
               borderRadius: scale(5),
               width: '60%',
+              borderWidth: scale(0),
             }}
           />
           <CustomInput
-            placeholder={t('code') +" CVV" }
+            placeholder={t('code') + ' CVV'}
+            placeholderTextColor={COLORS.grey}
             style={{
+              borderWidth: scale(0),
               marginBottom: scale(15),
               height: scale(36),
-              backgroundColor: '#E3E3E3',
+              backgroundColor: COLORS.transparentGrey,
               borderRadius: scale(5),
               width: '30%',
             }}
@@ -126,34 +132,40 @@ export default function Content() {
         </View>
         <CustomInput
           placeholder={t('full_name_cardholder')}
+          placeholderTextColor={COLORS.grey}
           style={{
+            borderWidth: scale(0),
             marginBottom: scale(15),
             height: scale(36),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             borderRadius: scale(5),
           }}
         />
         <CustomText
           textType="semiBold"
-          style={{...styles.text1, color: COLORS.black}}>
+          style={{...styles.text1, color: COLORS.white}}>
           {t('address_for_credit')}
         </CustomText>
         <CustomInput
           placeholder={t('address')}
+          placeholderTextColor={COLORS.grey}
           style={{
             marginBottom: scale(15),
             height: scale(36),
-            backgroundColor: '#E3E3E3',
+            backgroundColor: COLORS.transparentGrey,
             borderRadius: scale(5),
             marginTop: scale(20),
+            borderWidth: scale(0),
           }}
         />
         <CustomInput
-          placeholder={"Zip " + t('code')  }
+          placeholder={'Zip ' + t('code')}
+          placeholderTextColor={COLORS.grey}
           style={{
             marginBottom: scale(15),
             height: scale(36),
-            backgroundColor: '#E3E3E3',
+            borderWidth: scale(0),
+            backgroundColor: COLORS.transparentGrey,
             borderRadius: scale(5),
           }}
         />
@@ -166,6 +178,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
+    width: '90%',
     marginTop: scale(30),
     shadowColor: '#000',
     shadowOffset: {

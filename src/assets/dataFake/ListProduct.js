@@ -21,7 +21,7 @@ export const listProduct = [
     location: 'A6. 7.08 Diamond Alanta Plus',
     price: {
       dailyPrice: 0,
-      monthlyPrice: 18000000,
+      monthlyPrice: 1800,
       YearlyPrice: 0,
     },
     currencyUnit: 'vnd',
@@ -308,7 +308,7 @@ export const listProduct = [
     },
     location: 'C15.05 Block C Emerald',
     price: {
-      monthlyPrice: 25000000,
+      monthlyPrice: 2500,
     },
     currencyUnit: 'vnd',
     size: '90,9m2',
@@ -352,7 +352,7 @@ export const listProduct = [
     },
     location: 'D11.06 Emerald',
     price: {
-      monthlyPrice: 16000000,
+      monthlyPrice: 1600,
     },
     currencyUnit: 'vnd',
     size: '84m2',
@@ -414,7 +414,7 @@ export const listProduct = [
     },
     location: 'P14.07 Diamond',
     price: {
-      monthlyPrice: 28000000,
+      monthlyPrice: 2800,
     },
     currencyUnit: 'vnd',
     size: '84m2',
@@ -464,7 +464,7 @@ export const listProduct = [
     },
     location: 'Hà Đô Centrosa Garden Q.10',
     price: {
-      monthlyPrice: 26000000,
+      monthlyPrice: 2600,
     },
     currencyUnit: 'vnd',
     size: '108m2',

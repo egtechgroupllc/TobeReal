@@ -3,14 +3,14 @@ import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import InViewPort from '../../../../components/InViewport';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function AccommodationPremium({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  const title = [t('saveloka_premium')]
+  const title = [t('saveloka_premium')];
   const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
@@ -28,7 +28,7 @@ export default function AccommodationPremium({data}) {
           onPressCategory={item => console.log(item)}
           heading={title}
           subHeading={t('selected_premium')}
-          styleWrapper={{backgroundColor: '#f8eede'}}>
+          styleWrapper={{backgroundColor: COLORS.transparentGreyLight}}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

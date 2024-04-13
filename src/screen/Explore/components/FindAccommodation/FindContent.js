@@ -104,6 +104,7 @@ export default function FindContent({isBuy, rental, tour}) {
               <IconRoom />
             </View>
             <OptionAccommodation
+              styleWrapper={{backgroundColor: 'transparent'}}
               outline
               multiSelect
               isSelectAll
@@ -135,6 +136,7 @@ export default function FindContent({isBuy, rental, tour}) {
               <IconFurniture />
             </View>
             <OptionAccommodation
+              styleWrapper={{backgroundColor: 'transparent'}}
               outline
               scrollEnabled
               styleContent={{
@@ -161,6 +163,7 @@ export default function FindContent({isBuy, rental, tour}) {
                 <IconTag />
               </View>
               <OptionAccommodation
+                styleWrapper={{backgroundColor: 'transparent'}}
                 outline
                 multiSelect
                 isSelectAll
@@ -190,7 +193,10 @@ export default function FindContent({isBuy, rental, tour}) {
               marginVertical: scale(6),
               alignSelf: 'center',
             }}>
-            <CheckBox text={t('im_flexible')} />
+            <CheckBox
+              text={t('im_flexible')}
+              textStyle={{color: COLORS.white}}
+            />
             <CustomButton
               style={styles.question}
               text="?"

@@ -107,7 +107,7 @@ export default forwardRef(function CustomInput(
             {label && (
               <CustomText
                 textType={styleTextLabel?.textType}
-                style={[{color: COLORS.black}, styleTextLabel]}>
+                style={[{color: COLORS.white}, styleTextLabel]}>
                 {label}
               </CustomText>
             )}
@@ -216,7 +216,8 @@ const styles = StyleSheet.create({
     rowGap: scale(6),
   },
   content: {
-    borderWidth: 1,
+    backgroundColor: '#FFFFFF33',
+    borderWidth: 0.5,
     borderColor: '#cccccc',
     borderStyle: 'solid',
     paddingHorizontal: scale(8),
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(4),
     fontFamily: FONTS.medium,
     fontSize: SIZES.small,
-    color: COLORS.text,
+    color: COLORS.white,
     height: '100%',
   },
   iconBox: {

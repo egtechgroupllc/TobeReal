@@ -9,10 +9,13 @@ import {
 import React, {useState} from 'react';
 
 import {useNavigation} from '@react-navigation/native';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import CategoriesButton from './CategoriesButton';
 import {useLanguage} from '../../../hooks/useLanguage';
+import CustomImage from '../../../components/CustomImage';
+import {CustomButton, CustomInput} from '../../../components';
+import {IconCopy, IconViewablePassword} from '../../../assets/icon/Icon';
 export default function Content() {
   const {t} = useLanguage();
   const navigation = useNavigation();
@@ -70,6 +73,7 @@ export default function Content() {
   const gotoHome = () => {
     navigation.navigate('BottomTab');
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -218,7 +222,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   box: {
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.transparentGrey,
     height: scale(85),
     width: '90%',
     borderRadius: scale(5),

@@ -19,37 +19,51 @@ export default function TourSchedule() {
   return (
     <WrapperContent
       heading={t('tour_schedule')}
-      styleWrapper={{marginBottom: scale(100)}}
+      styleWrapper={{
+        marginBottom: scale(10),
+        marginTop: scale(-20),
+        alignItems: 'center',
+      }}
       styleContent={{
         paddingHorizontal: scale(16),
+        backgroundColor: COLORS.box,
+        width: '90%',
+        paddingVertical: scale(10),
       }}>
       <CustomText
         style={{
           lineHeight: 18,
+          color: COLORS.white,
         }}>
-        Staying at Cochin Sang Hotel is a right choice when you visit visitors
-        to Ben Thanh Ward. The hotel possesses a prime location 6.64 km from Tan
-        Son Nhat Airport. Stay at Cochin Sang Hotel is a good choice when you
-        visit Ben Ward Wall. The hotel possesses a prime location away from Tan
-        Airport Son Nhat 6.64 km.
+        08:15-21:00 Participants will be picked up by tour leader at Tan Son
+        Nhat International Airport for flight check-in to Phuket. Start your
+        tour and visit: - Prom Thep Cape - located at the southern tip of the
+        island, offering the most spectacular sunset views in Phuket. Thousands
+        of tourists flock here to witness the sunset and capture the moment as
+        the sun slowly sets on the horizon. - Chalong Temple - an iconic
+        Buddhist temple that cannot be missed when visiting Phuket. Here, you
+        can purchase blessed threads made by the monks to bring peace and
+        prosperity to your home. Enjoy a Thai-style BBQ dinner before returning
+        to the hotel for free leisure time to explore Phuket at night.
       </CustomText>
       <LinearGradient
-        colors={['#FADD50', '#D88A00']}
+        colors={COLORS.backgroundLinear}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={{
-          position: 'absolute',
-          top: scale(100),
           height: scale(35),
-          width: '110%',
           alignItems: 'center',
           justifyContent: 'center',
+          borderRadius: scale(20),
+          marginVertical: scale(10),
         }}>
-        <TouchableOpacity onPress={() => bottomSheetRef.current.open()}>
+        <TouchableOpacity
+          onPress={() => bottomSheetRef.current.open()}
+          style={{alignItems: 'center'}}>
           <CustomText
             textType="semiBold"
             style={{
-              color: COLORS.black,
+              color: COLORS.white,
               // minWidth: scale(42),
             }}>
             {t('see_all')}

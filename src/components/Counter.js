@@ -99,6 +99,7 @@ export default function Counter({
           style={styles.input}
           styleText={{
             textAlign: 'center',
+            color: COLORS.black,
           }}
           onChangeText={text => {
             setQuantity(+text);

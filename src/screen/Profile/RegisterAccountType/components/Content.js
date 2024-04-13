@@ -51,7 +51,7 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(40),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
         {t('Select country')}
       </CustomText>
@@ -62,7 +62,7 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(10),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
         {t('Select account type')}
       </CustomText>
@@ -73,14 +73,14 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(10),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
         {t('phone')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           borderWidth: scale(0),
           borderRadius: scale(8),
         }}
@@ -91,14 +91,14 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(10),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
         {t('email')}
       </CustomText>
       <CustomInput
         style={{
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           borderWidth: scale(0),
           borderRadius: scale(8),
         }}
@@ -109,7 +109,7 @@ export default function Content() {
           ...styles.text,
           marginBottom: scale(10),
           marginTop: scale(10),
-          color: COLORS.black,
+          color: COLORS.white,
         }}>
         {t('password')}
       </CustomText>
@@ -117,7 +117,7 @@ export default function Content() {
         style={{
           marginBottom: scale(15),
           height: scale(40),
-          backgroundColor: '#E3E3E3',
+          backgroundColor: COLORS.transparentGrey,
           borderWidth: scale(0),
           borderRadius: scale(8),
         }}
@@ -127,7 +127,7 @@ export default function Content() {
           textType="medium"
           style={{
             ...styles.text1,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(3),
           }}>
           {t('do_you_agree')}

@@ -81,7 +81,7 @@ export default function BoxEstateAgent({
               style={{
                 width: scale(75),
                 height: scale(75),
-                alignSelf:'center'
+                alignSelf: 'center',
               }}>
               {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
@@ -134,7 +134,7 @@ export default function BoxEstateAgent({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -159,7 +159,7 @@ export default function BoxEstateAgent({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -308,10 +308,17 @@ export default function BoxEstateAgent({
           />
         )}
       </View>
-      <View style={{marginTop:scale(10), width:scale(50), alignSelf:'center'}}>
+      <View
+        style={{marginTop: scale(10), width: scale(50), alignSelf: 'center'}}>
         <CustomText
           textType="bold"
-          style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C',alignSelf:'center'}]}
+          style={[
+            isStar && {
+              fontSize: SIZES.xSmall,
+              color: COLORS.white,
+              alignSelf: 'center',
+            },
+          ]}
           numberOfLines={1}>
           {data?.name}
         </CustomText>

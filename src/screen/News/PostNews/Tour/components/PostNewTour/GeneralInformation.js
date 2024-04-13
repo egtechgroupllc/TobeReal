@@ -66,6 +66,7 @@ export default function GeneralInformation({
               styleTextLabel={styles.label}
               label={t('title')}
               control={control}
+              placeholderTextColor={COLORS.grey}
               name="name"
               multiline
               maxLength={100}
@@ -89,6 +90,7 @@ export default function GeneralInformation({
 
             <CustomInput
               styleTextLabel={styles.label}
+              placeholderTextColor={COLORS.grey}
               label={t('description_content')}
               control={control}
               name="description"
@@ -137,6 +139,7 @@ export default function GeneralInformation({
             <CustomInput
               styleTextLabel={styles.label}
               label={t('address')}
+              placeholderTextColor={COLORS.grey}
               control={control}
               name="address"
               placeholder={t('address')}
@@ -153,17 +156,17 @@ export default function GeneralInformation({
 const styles = StyleSheet.create({
   label: {
     fontSize: SIZES.xMedium,
-    color: COLORS.black,
+    color: COLORS.white,
   },
 
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -172,11 +175,11 @@ const styles = StyleSheet.create({
   line: {
     height: 0.5,
     width: '100%',
-    backgroundColor: '#F0B90B',
+    backgroundColor: COLORS.white,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: COLORS.transparentGrey,
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },
@@ -185,6 +188,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: scale(-20),
     right: 0,
-    color: COLORS.black,
+    color: COLORS.white,
   },
 });

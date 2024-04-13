@@ -33,14 +33,14 @@ export default function BotContent({data}) {
         <View style={{flexDirection: 'row'}}>
           <CustomText
             textType="medium"
-            style={{...styles.text, color: COLORS.black}}>
+            style={{...styles.text, color: COLORS.white}}>
             {t('email')}:
           </CustomText>
           <CustomText
             textType="regular"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginLeft: scale(10),
             }}>
             {data?.email}
@@ -51,7 +51,7 @@ export default function BotContent({data}) {
             textType="medium"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
             }}>
             {t('phone')}:
@@ -60,7 +60,7 @@ export default function BotContent({data}) {
             textType="regular"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginLeft: scale(10),
               marginTop: scale(10),
             }}>
@@ -72,7 +72,7 @@ export default function BotContent({data}) {
             textType="medium"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
             }}>
             {t('gender')}:
@@ -81,7 +81,7 @@ export default function BotContent({data}) {
             textType="regular"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginLeft: scale(10),
               marginTop: scale(10),
             }}>
@@ -93,7 +93,7 @@ export default function BotContent({data}) {
             textType="medium"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
             }}>
             {t('address')}:
@@ -102,7 +102,7 @@ export default function BotContent({data}) {
             textType="regular"
             style={{
               ...styles.text,
-              color: COLORS.black,
+              color: COLORS.white,
               marginLeft: scale(10),
               marginTop: scale(10),
             }}>
@@ -114,7 +114,7 @@ export default function BotContent({data}) {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomText
             textType="medium"
-            style={{...styles.text, color: COLORS.black}}>
+            style={{...styles.text, color: COLORS.white}}>
             {t('link_website')}:
           </CustomText>
           <TouchableOpacity>
@@ -132,7 +132,7 @@ export default function BotContent({data}) {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomText
             textType="medium"
-            style={{...styles.text, color: COLORS.black}}>
+            style={{...styles.text, color: COLORS.white}}>
             {t('social_network_link')}:
           </CustomText>
           <IconEditProfile />
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   box: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.transparentGrey,
     height: scale(174),
     width: '90%',
     borderRadius: scale(8),
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     paddingTop: scale(10),
   },
   box1: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.transparentGrey,
     height: scale(39),
     width: '90%',
     borderRadius: scale(8),
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   line: {
     height: scale(0.5),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     marginTop: scale(10),
     marginBottom: scale(10),
   },

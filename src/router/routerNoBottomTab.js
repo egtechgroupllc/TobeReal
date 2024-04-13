@@ -19,8 +19,8 @@ import {
   HomeSearchAccommodScreen,
   ListAccommodationSearchScreen,
 } from '../screen/Search';
-import {ListVideoInfluencerScreen} from '../screen/Video';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
+import ListVideoInfluencerScreen from '../screen/Video/ListVideoInfluencerScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [

@@ -41,7 +41,7 @@ export default function ListImg({dataImg, open, onClose}) {
       <View
         style={{
           flex: 1,
-          backgroundColor: dataImg.length === 1 ? 'transparent' : '#fff',
+          backgroundColor: dataImg.length === 1 ? 'transparent' : COLORS.theme,
         }}>
         {dataImg.length > 1 && (
           <>
@@ -139,7 +139,7 @@ export default function ListImg({dataImg, open, onClose}) {
 
 const styles = StyleSheet.create({
   headerBar: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.theme,
     position: 'absolute',
     zIndex: 99,
     width: '100%',

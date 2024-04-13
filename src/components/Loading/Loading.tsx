@@ -70,7 +70,7 @@ const Loading = ({
     return (
       <CustomImage
         source={images.logoLoading}
-        style={{height: scale(120), width: scale(120), alignSelf: 'center'}}
+        style={{height: scale(300), width: scale(300), alignSelf: 'center'}}
         resizeMode="cover"
       />
     );

@@ -18,10 +18,11 @@ export default function Price() {
   const [multiSliderValue, setMultiSliderValue] = useState([min, max]);
   return (
     <WrapperContent
+      styleWrapper={{backgroundColor: COLORS.white}}
       styleContent={{
         rowGap: scale(10),
         alignItem: 'center',
-        marginTop:scale(-20)
+        marginTop: scale(-20),
       }}>
       <View
         style={{
@@ -35,21 +36,25 @@ export default function Price() {
           styleWrapper={{
             flex: 1,
           }}
-          label='Min'
+          styleTextLabel={{color: COLORS.black}}
+          label="Min"
           onChangeText={num => {
             setMultiSliderValue([+num, multiSliderValue[1]]);
           }}
-          keyboardType='numeric'
+          styleText={{color: COLORS.black}}
+          keyboardType="numeric"
         />
         <CustomInput
           defaultValue={String(multiSliderValue[1])}
           styleWrapper={{
             flex: 1,
           }}
-          keyboardType='numeric'
-          label='Max'
+          styleTextLabel={{color: COLORS.black}}
+          styleText={{color: COLORS.black}}
+          keyboardType="numeric"
+          label="Max"
           onChangeText={num => {
-            setMultiSliderValue([ multiSliderValue[0], +num]);
+            setMultiSliderValue([multiSliderValue[0], +num]);
           }}
         />
       </View>
@@ -57,7 +62,7 @@ export default function Price() {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          paddingHorizontal:scale(20)
+          paddingHorizontal: scale(20),
         }}>
         <CustomText>{formatPrice(multiSliderValue[0])}</CustomText>
         <CustomText>{formatPrice(multiSliderValue[1])}</CustomText>

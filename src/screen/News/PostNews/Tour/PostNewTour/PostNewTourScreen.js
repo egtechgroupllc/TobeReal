@@ -151,7 +151,7 @@ export default function PostNewTourScreen() {
         rules={requireField(t('this_field_required'))}
         text={t('do_you_agree')}
         textStyle={{
-          color: COLORS.black,
+          color: COLORS.white,
           fontSize: SIZES.xSmall,
           flex: 0,
         }}
@@ -164,6 +164,7 @@ export default function PostNewTourScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('Next')}
+        styleText={{color: COLORS.white}}
         onPress={handleSubmit(handlePostTour)}
         style={{
           marginTop: scale(20),
@@ -189,10 +190,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    // borderWidth: scale(1),
+    // borderColor: '#F0B90B40',
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     ...SHADOW,
     shadowOffset: {
       width: 0,
@@ -203,5 +204,6 @@ const styles = StyleSheet.create({
 
   text2: {
     fontSize: SIZES.medium,
+    color: COLORS.white,
   },
 });

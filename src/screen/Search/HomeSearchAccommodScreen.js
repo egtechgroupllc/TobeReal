@@ -27,16 +27,14 @@ export default function HomeSearchAccommodScreen() {
   }, []);
 
   return (
-    <MainWrapper
-      scrollEnabled={false}
-      >
+    <MainWrapper scrollEnabled={false}>
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
         <SearchRecent onPress={handleSelectSearch} />
       </View>
       <View
         style={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.theme,
           height: scale(60),
           position: 'absolute',
           width: '100%',

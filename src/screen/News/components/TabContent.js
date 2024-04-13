@@ -103,11 +103,13 @@ export default function TabContent() {
               alignSelf: 'center',
             }}>
             <LinearGradient
-              colors={['#FFE259', '#FFA751']}
+              colors={COLORS.backgroundLinear}
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               style={[styles.button]}>
-              <CustomText textType="semiBold" style={{...styles.text2}}>
+              <CustomText
+                textType="semiBold"
+                style={{...styles.text2, color: COLORS.white}}>
                 {t('post')}
               </CustomText>
             </LinearGradient>

@@ -28,6 +28,7 @@ export default function HomeBookingsScreen() {
           styleTabActive={styles.tabActive}
           styleTabDefault={{
             backgroundColor: 'transparent',
+            color: COLORS.black,
           }}
           onChange={e => setTabSelect(e)}
         />
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     padding: scale(4),
   },
   tabActive: {
-    color: COLORS.primary,
+    color: COLORS.white,
     borderRadius: scale(12),
     borderTopLeftRadius: scale(12),
     borderTopRightRadius: scale(12),

@@ -9,9 +9,9 @@ import CustomText from '../../../../../components/CustomText';
 import {CustomInput} from '../../../../../components';
 import {IconAdd} from '../../../../../assets/icon/Icon';
 import Button from '../../../components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const data = [
     {
       id: 1,
@@ -59,25 +59,25 @@ export default function Content() {
       />
 
       <LinearGradient
-        colors={['#FADD55', '#D88A00']}
+        colors={COLORS.profileLinear}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={{...styles.box, marginTop: scale(25)}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           {/* <CustomText
             textType="bold"
-            style={{...styles.text, color: COLORS.black}}>
+            style={{...styles.text, color: COLORS.white}}>
             Logo
           </CustomText> */}
           <View style={{marginLeft: scale(30)}}>
             <CustomText
               textType="medium"
-              style={{...styles.text1, color: COLORS.black}}>
-             {t('wallet')} Saveloka
+              style={{...styles.text1, color: COLORS.white}}>
+              {t('wallet')} NOW Travel
             </CustomText>
             <CustomText
               textType="bold"
-              style={{...styles.text1, color: COLORS.black}}>
+              style={{...styles.text1, color: COLORS.white}}>
               0$
             </CustomText>
           </View>
@@ -86,7 +86,7 @@ export default function Content() {
       <View style={{marginTop: scale(20)}}>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
+          style={{...styles.text, color: COLORS.white}}>
           {t('amount_deposit')}
         </CustomText>
         <CustomInput
@@ -101,19 +101,23 @@ export default function Content() {
         />
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
-         {t('from_money_source')}
+          style={{...styles.text, color: COLORS.white}}>
+          {t('from_money_source')}
         </CustomText>
       </View>
 
-      <LinearGradient
-        colors={['#FFF4C0', '#FFF4C0']}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        style={{borderRadius: scale(8), marginTop: scale(20)}}>
+      <View
+        // colors={COLORS.backgroundLinear}
+        // start={{x: 0, y: 0}}
+        // end={{x: 1, y: 0}}
+        style={{
+          borderRadius: scale(8),
+          marginTop: scale(20),
+          backgroundColor: COLORS.transparentGrey,
+        }}>
         <TouchableOpacity style={styles.addbank} onPress={AddBank}>
           <View style={{marginLeft: scale(20)}}>
-            <IconAdd />
+            <IconAdd fill={COLORS.white} />
           </View>
 
           <CustomText
@@ -122,27 +126,27 @@ export default function Content() {
             {t('add_bank')}
           </CustomText>
         </TouchableOpacity>
-      </LinearGradient>
+      </View>
       <Button title={t('submit')} onPress={Submit} />
       <View style={styles.historyHeader}>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
+          style={{...styles.text, color: COLORS.white}}>
           STT
         </CustomText>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
+          style={{...styles.text, color: COLORS.white}}>
           {t('day')}
         </CustomText>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
+          style={{...styles.text, color: COLORS.white}}>
           {t('quantity')}
         </CustomText>
         <CustomText
           textType="medium"
-          style={{...styles.text, color: COLORS.black}}>
+          style={{...styles.text, color: COLORS.white}}>
           {t('status')}
         </CustomText>
       </View>
@@ -153,7 +157,7 @@ export default function Content() {
             // horizontal={true}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <View>
                 <View
                   key={`${item?.id}`}
@@ -162,6 +166,7 @@ export default function Content() {
                     marginTop: scale(20),
                     justifyContent: 'space-between',
                     alignItems: 'center',
+                    marginBottom: scale(15),
                   }}>
                   {item?.id && (
                     <View
@@ -170,7 +175,11 @@ export default function Content() {
                         alignItems: 'center',
                         left: scale(10),
                       }}>
-                      <CustomText textType="medium">{item?.id}</CustomText>
+                      <CustomText
+                        textType="medium"
+                        style={{color: COLORS.white}}>
+                        {item?.id}
+                      </CustomText>
                     </View>
                   )}
                   {item?.date && (
@@ -180,7 +189,11 @@ export default function Content() {
                         alignItems: 'center',
                         right: 20,
                       }}>
-                      <CustomText textType="medium">{item?.date}</CustomText>
+                      <CustomText
+                        textType="medium"
+                        style={{color: COLORS.white}}>
+                        {item?.date}
+                      </CustomText>
                     </View>
                   )}
                   {item?.quantity && (
@@ -190,7 +203,9 @@ export default function Content() {
                         alignItems: 'center',
                         right: 35,
                       }}>
-                      <CustomText textType="medium">
+                      <CustomText
+                        textType="medium"
+                        style={{color: COLORS.white}}>
                         {item?.quantity}
                       </CustomText>
                     </View>
@@ -202,11 +217,15 @@ export default function Content() {
                         alignItems: 'center',
                         right: 15,
                       }}>
-                      <CustomText textType="medium">{item?.status}</CustomText>
+                      <CustomText
+                        textType="medium"
+                        style={{color: COLORS.white}}>
+                        {item?.status}
+                      </CustomText>
                     </View>
                   )}
                 </View>
-                <View style={styles.line}></View>
+                {data.length - 1 !== index && <View style={styles.line}></View>}
               </View>
             )}
           />
@@ -218,6 +237,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
+    width: '90%',
     marginTop: scale(30),
     shadowColor: '#000',
     shadowOffset: {
@@ -234,6 +254,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.small,
+    color: COLORS.white,
   },
   text1: {
     fontSize: SIZES.medium,
@@ -241,15 +262,6 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontSize: SIZES.medium,
-  },
-  button: {
-    alignItems: 'center',
-    borderRadius: scale(10),
-    height: scale(25),
-    width: scale(147),
-    justifyContent: 'center',
-    marginTop: scale(20),
-    alignSelf: 'center',
   },
   button1: {
     alignItems: 'center',
@@ -278,7 +290,7 @@ const styles = StyleSheet.create({
   historyHeader: {
     flexDirection: 'row',
     height: scale(29),
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.transparentGrey,
     borderTopLeftRadius: scale(8),
     borderTopRightRadius: scale(8),
     justifyContent: 'space-between',
@@ -289,7 +301,7 @@ const styles = StyleSheet.create({
   historyBox: {
     // flexDirection: 'row',
     // justifyContent: 'space-between',
-    backgroundColor: '#EEEEEE',
+    backgroundColor: '#FFFFFF1A',
     borderBottomLeftRadius: scale(8),
     borderBottomRightRadius: scale(8),
   },
@@ -299,7 +311,6 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     marginTop: scale(10),
-    marginBottom: scale(20),
   },
   addbank: {
     height: scale(48),
@@ -315,7 +326,6 @@ const styles = StyleSheet.create({
     height: scale(40),
     width: scale(283),
     justifyContent: 'center',
-    marginTop: scale(20),
     alignSelf: 'center',
   },
 });

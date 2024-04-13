@@ -73,6 +73,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                     text={item?.name}
                     iconRight={() => (
                       <IconDown
+                        fill={COLORS.black}
                         style={
                           isActive && {
                             transform: [
@@ -100,8 +101,8 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       style={{
                         borderWidth: 0,
                       }}
-                      styleText={{color: COLORS.black}}
-                      styleTextLabel={{color: COLORS.black}}
+                      styleText={{color: COLORS.white}}
+                      styleTextLabel={{color: COLORS.white}}
                       editable={false}
                     />
                   )
@@ -131,6 +132,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                           style={styles.checkBox}
                           textStyle={{
                             flex: 1,
+                            color: COLORS.white,
                           }}
                         />
                       )
@@ -149,11 +151,11 @@ const styles = StyleSheet.create({
   box: {
     paddingVertical: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
   },
   select: {

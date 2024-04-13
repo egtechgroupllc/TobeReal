@@ -29,29 +29,29 @@ export default function TabContent() {
       }}>
       <CustomText
         textType="bold"
-        style={{...styles.text2, color: COLORS.black}}>
+        style={{...styles.text2, color: COLORS.white}}>
         {t('post')}
       </CustomText>
       <ButtonPost
         image={images.sell}
-        style={{width: '100%'}}
-        title={t('sell')}
-        styleImage={{width: scale(39), height: scale(39)}}
+        style={{width: '100%', height: scale(60)}}
+        title={t('House')}
+        styleImage={{width: scale(50), height: scale(39)}}
         onPress={goSell}
       />
       <ButtonPost
         image={images.lease}
-        style={{width: '100%'}}
+        style={{width: '100%', height: scale(60)}}
         title={t('lease')}
-        styleImage={{width: scale(39), height: scale(39)}}
+        styleImage={{width: scale(50), height: scale(50)}}
         onPress={goLease}
       />
 
       <ButtonPost
         image={images.rentbuy}
-        style={{width: '100%'}}
+        style={{width: '100%', height: scale(60)}}
         title={t('tour_post')}
-        styleImage={{width: scale(39), height: scale(39)}}
+        styleImage={{width: scale(50), height: scale(50)}}
         onPress={goRentBuy}
       />
     </View>

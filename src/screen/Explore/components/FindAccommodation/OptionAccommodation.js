@@ -153,7 +153,7 @@ export default function OptionAccommodation({
                 },
               outline && {
                 backgroundColor: !option.includes(valueDefaultView(item, index))
-                  ? '#f5f5f5'
+                  ? COLORS.transparentGrey
                   : '#F0B90B20',
               },
               checkSelect(item, index) && outline && styles.outline,
@@ -187,7 +187,7 @@ export default function OptionAccommodation({
                   style={{
                     color: checkSelect(item, index)
                       ? COLORS.primary
-                      : COLORS.text,
+                      : COLORS.white,
                   }}>
                   {item?.[_keyTextView]}
                 </CustomText>
@@ -197,7 +197,7 @@ export default function OptionAccommodation({
                   style={{
                     color: checkSelect(item, index)
                       ? COLORS.primary
-                      : COLORS.text,
+                      : COLORS.white,
                   }}>
                   {item?.[_keyTextSub]}
                 </CustomText>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     height: scale(38),
     zIndex: 1,
   },

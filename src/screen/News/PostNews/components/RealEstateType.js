@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomSelectDropdown from '../../../../components/CustomSelectDropdown';
 import CustomText from '../../../../components/CustomText';
 
@@ -39,6 +39,7 @@ export default memo(function RealEstateType({
             <CustomText
               style={{
                 fontSize: scale(13),
+                color: COLORS.white,
               }}>
               {value?.name || 'Select'}
             </CustomText>

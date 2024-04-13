@@ -3,7 +3,6 @@ import React, {memo, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../../assets/constants';
 
-
 import Price from './Price';
 import CustomSelectDropdown from '../../../../../../components/CustomSelectDropdown';
 import CustomText from '../../../../../../components/CustomText';
@@ -28,6 +27,7 @@ export default memo(function DropDown({
         ...styleWrapper,
       }}>
       <CustomSelectDropdown
+        styleTextLabel={{color: COLORS.black}}
         label={label}
         data={data}
         name={name}
@@ -35,8 +35,8 @@ export default memo(function DropDown({
         control={control}
         buttonStyle={styles.buttonEstateTypes}
         rowStyle={{
-          height:'auto',
-          paddingVertical:scale(10)
+          height: 'auto',
+          paddingVertical: scale(10),
         }}
         onSelect={(selectedItem, i) => {
           onSelect && onSelect(selectedItem);
@@ -56,21 +56,17 @@ export default memo(function DropDown({
         renderCustomizedRowChild={(item, index) => {
           return (
             <View>
-              {index == 0 && price &&(
-                <Price/>
-              )}
-                {index == 0 && acreage &&(
-                <Acreage/>
-              )}
-             <View>
-             <CustomText
-                style={{
-                  paddingHorizontal: SIZES.medium,
-                  fontSize: scale(13),
-                }}>
-                {item?.name}
-              </CustomText>
-             </View>
+              {index == 0 && price && <Price />}
+              {index == 0 && acreage && <Acreage />}
+              <View>
+                <CustomText
+                  style={{
+                    paddingHorizontal: SIZES.medium,
+                    fontSize: scale(13),
+                  }}>
+                  {item?.name}
+                </CustomText>
+              </View>
             </View>
           );
         }}

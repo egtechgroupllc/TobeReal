@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomButton} from '../../../../../../components';
 
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -9,15 +9,15 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAuthentication} from '../../../../../../hooks/useAuthentication';
 import {useNavigation} from '@react-navigation/native';
 import Skeleton from '../../../../../../components/Skeleton';
-import { useLanguage } from '../../../../../../hooks/useLanguage';
-import { formatPrice } from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../../../utils/format';
 import CustomText from '../../../../../../components/CustomText';
 
 export default memo(function BookAccommodation({
   setBookHeight,
   isLoading,
   price,
-  onPress
+  onPress,
 }) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
@@ -41,16 +41,18 @@ export default memo(function BookAccommodation({
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.white,
             }}>
             {t('for_sale')}
           </CustomText>
           <CustomText
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.white,
             }}
             textType="bold">
             {formatPrice(price, {
-              locales: 'vi',
+              locales: 'en',
             })}{' '}
           </CustomText>
         </View>
@@ -84,13 +86,15 @@ export default memo(function BookAccommodation({
 
 const styles = StyleSheet.create({
   wrapper: {
+    borderTopWidth: scale(1),
+    borderColor: COLORS.grey,
     width: '100%',
     minHeight: scale(100),
     rowGap: scale(10),
     padding: scale(16),
     position: 'absolute',
     bottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     ...SHADOW,
     shadowOffset: {
       width: 0,

@@ -201,7 +201,7 @@ export default function ChooseImgPicker({
                       }}
                     />
 
-                    <CustomText>Bấm để chọn ảnh cần tải lên</CustomText>
+                    <CustomText>Click to select the photo to upload</CustomText>
                   </View>
                 )}
               </TouchableOpacity>
@@ -267,11 +267,11 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: COLORS.black,
+    color: COLORS.white,
     alignSelf: 'flex-start',
   },
   label: {
-    color: COLORS.black,
+    color: COLORS.white,
   },
   contentImg: {
     borderWidth: scale(1),

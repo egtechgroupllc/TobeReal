@@ -411,7 +411,7 @@ export default function Content() {
           onPress={toggleCheckBox1}
           style={{width: '100%', alignItems: 'center'}}>
           <LinearGradient
-            colors={['#FADD55', '#D88A00']}
+            colors={COLORS.backgroundLinear}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 1}}
             style={{...styles.box1, marginBottom: scale(20)}}>
@@ -423,7 +423,7 @@ export default function Content() {
                 <CustomText
                   textType="semiBold"
                   style={{...styles.text2, color: COLORS.black}}>
-                  {t('wallet')} Saveloka
+                  {t('wallet')} NOW Travel
                 </CustomText>
               </View>
             </View>

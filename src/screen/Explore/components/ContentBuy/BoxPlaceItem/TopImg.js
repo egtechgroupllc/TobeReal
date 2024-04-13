@@ -26,9 +26,9 @@ export default function TopImg({
         )}
         {feature && (
           <LinearGradient
-            colors={['#F0B90B', '#D88A00']}
+            colors={COLORS.backgroundLinear}
             start={{x: 0, y: 0}}
-            end={{x: 0, y: 1}}
+            end={{x: 1, y: 0}}
             style={styles.topBox}>
             <CustomText style={styles.topName}>{type}</CustomText>
           </LinearGradient>

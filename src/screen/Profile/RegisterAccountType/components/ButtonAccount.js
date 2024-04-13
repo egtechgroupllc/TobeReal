@@ -4,7 +4,7 @@ import {CustomInput} from '../../../../components';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {IconDownWhite} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -17,7 +17,11 @@ export default function ButtonAccount({onPress, title, style, client}) {
           <View style={{width: '90%'}}>
             <CustomText
               textType="semiBold"
-              style={{...styles.text2, marginLeft: scale(10)}}>
+              style={{
+                ...styles.text2,
+                marginLeft: scale(10),
+                color: COLORS.white,
+              }}>
               {title}
             </CustomText>
           </View>
@@ -36,7 +40,7 @@ export default function ButtonAccount({onPress, title, style, client}) {
               }}>
               <CustomText
                 textType="semiBold"
-                style={{...styles.text2, width: '97%'}}>
+                style={{...styles.text2, width: '97%', color: COLORS.white}}>
                 {t('Real estate owner')}
               </CustomText>
             </TouchableOpacity>
@@ -47,7 +51,9 @@ export default function ButtonAccount({onPress, title, style, client}) {
                 justifyContent: 'space-between',
                 marginTop: scale(5),
               }}>
-              <CustomText textType="semiBold" style={{...styles.text2}}>
+              <CustomText
+                textType="semiBold"
+                style={{...styles.text2, color: COLORS.white}}>
                 {t('Collaborators')}
               </CustomText>
             </TouchableOpacity>
@@ -65,12 +71,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     // marginTop: scale(20),
     flexDirection: 'row',
-    backgroundColor: '#E3E3E3',
-    borderRadius: scale(8),
+    backgroundColor: COLORS.transparentGrey,
+    // borderRadius: scale(8),
+    borderTopLeftRadius: scale(8),
+    borderTopRightRadius: scale(8),
   },
   box: {
     height: scale(80),
-    backgroundColor: '#EEEEEE',
+    backgroundColor: '#FFFFFF1A',
     borderBottomLeftRadius: scale(5),
     borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),

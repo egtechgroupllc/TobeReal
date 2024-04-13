@@ -18,7 +18,7 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         style,
       ]}>
       <View style={styles.infoCustomer}>
-      <CustomImage
+        <CustomImage
           resizeMode="contain"
           source={images.avatar}
           style={styles.avatar}
@@ -31,7 +31,7 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
               flex: 1,
             }}
             numberOfLines={1}>
-            Tuan Kiet
+            Now Travel
           </CustomText>
 
           <Star rating={4.5} />
@@ -42,10 +42,10 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         textType="medium"
         style={{fontSize: SIZES.xMedium}}
         numberOfLines={numberOfLines}>
-        Central location, friendly staff, full and delicious buffet breakfast.
-        I really like the hotel's shower gel and shampoo! tasty. I really like
-        hotel shower gel and shampoo! really liked the customer's shower gel and shampoo
-        hotel! really liked the hotel's shower gel and shampoo!
+        Central location, friendly staff, full and delicious buffet breakfast. I
+        really like the hotel's shower gel and shampoo! tasty. I really like
+        hotel shower gel and shampoo! really liked the customer's shower gel and
+        shampoo hotel! really liked the hotel's shower gel and shampoo!
       </CustomText>
 
       <CustomText

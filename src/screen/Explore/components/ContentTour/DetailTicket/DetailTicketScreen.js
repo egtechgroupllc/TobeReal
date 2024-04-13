@@ -4,21 +4,19 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
-
 import DetailAccommodationLoading from '../DetailTour/DetailAccommodationLoading';
 import MainWrapper from '../../../../../components/MainWrapper';
 
-
-import { scale,WIDTH } from '../../../../../assets/constants';
+import {scale, WIDTH} from '../../../../../assets/constants';
 import InfoDetail from './components/InfoDetail';
 import GeneralInformation from './components/GeneralInformation';
 import BookAccommodation from './components/BookAccommodation';
 import DynamicHeader from './components/DynamicHeader';
-import { StackActions, useNavigation } from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTicketScreen({route}) {
-  const { isFocused, dispatch} = useNavigation();
+  const {isFocused, dispatch} = useNavigation();
   const {jsondata, title, paramPrice} = route.params;
   const booktour = () => {
     if (isFocused()) {
@@ -36,7 +34,7 @@ export default function DetailTicketScreen({route}) {
   };
   const listView = useRef([
     <InfoDetail name={title} />,
-    <GeneralInformation/>
+    <GeneralInformation />,
     // <InfoUnitFacilities />,
     // <Map />,
     // <Review />,
@@ -139,7 +137,7 @@ export default function DetailTicketScreen({route}) {
             contentContainerStyle={{
               paddingTop: Header_Max_Height + scale(50),
               paddingBottom: tabBarHeight,
-              backgroundColor: '#f1f1f1',
+              // backgroundColor: '#f1f1f1',
             }}
             onScroll={handleScroll}
             ref={scrollRef}>
@@ -154,7 +152,7 @@ export default function DetailTicketScreen({route}) {
         setBookHeight={setTabBarHeight}
         price={paramPrice}
         isLoading={false}
-        onPress = {booktour}
+        onPress={booktour}
       />
     </MainWrapper>
   );

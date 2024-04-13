@@ -44,6 +44,7 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
       </View>
       {onPressTime && (
         <CustomInput
+          styleText={{color: COLORS.black}}
           iconLeft={IconCalendar}
           iconRight={IconDown}
           defaultValue={value}

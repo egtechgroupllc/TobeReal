@@ -25,7 +25,7 @@ import TopImg from './BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
-import { type } from '../../../../components/Marquee';
+import {type} from '../../../../components/Marquee';
 
 export default function BoxFeatureItem({
   data,
@@ -45,7 +45,7 @@ export default function BoxFeatureItem({
   jsonImage,
   name,
   price,
-  type
+  type,
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -137,7 +137,7 @@ export default function BoxFeatureItem({
                           textType="regular"
                           style={{...styles.textDiscount, color: COLORS.white}}>
                           {formatPrice(data?.discount, {
-                            locales: 'vi',
+                            locales: 'en',
                           })}{' '}
                         </CustomText>
 
@@ -162,7 +162,7 @@ export default function BoxFeatureItem({
                           isDiscount && {color: COLORS.white},
                         ]}>
                         {formatPrice(data?.price, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                         {time && (
                           <CustomText
@@ -226,7 +226,7 @@ export default function BoxFeatureItem({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -251,7 +251,7 @@ export default function BoxFeatureItem({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText

@@ -25,7 +25,7 @@ import TopImg from './BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
-import { type } from '../../../../components/Marquee';
+import {type} from '../../../../components/Marquee';
 
 export default function BoxExploreEstate({
   data,
@@ -45,7 +45,7 @@ export default function BoxExploreEstate({
   jsonImage,
   name,
   price,
-  type
+  type,
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -99,7 +99,7 @@ export default function BoxExploreEstate({
               isHeart={isHeart}
               showPrice
               price={formatPrice(price, {
-                locales: 'vi',
+                locales: 'en',
               })}
             />
             <View style={{paddingVertical: scale(10)}}>
@@ -137,7 +137,7 @@ export default function BoxExploreEstate({
                           textType="regular"
                           style={{...styles.textDiscount, color: COLORS.white}}>
                           {formatPrice(data?.discount, {
-                            locales: 'vi',
+                            locales: 'en',
                           })}{' '}
                         </CustomText>
 
@@ -162,7 +162,7 @@ export default function BoxExploreEstate({
                           isDiscount && {color: COLORS.white},
                         ]}>
                         {formatPrice(data?.price, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                         {time && (
                           <CustomText
@@ -226,7 +226,7 @@ export default function BoxExploreEstate({
                         textType="regular"
                         style={{...styles.textDiscount, color: COLORS.white}}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -251,7 +251,7 @@ export default function BoxExploreEstate({
                         isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
                       {time && (
                         <CustomText
@@ -406,8 +406,8 @@ export default function BoxExploreEstate({
 const styles = StyleSheet.create({
   wrapper: {
     // justifyContent: 'center',
-    alignItems:'center',
-    paddingVertical:scale(10),
+    alignItems: 'center',
+    paddingVertical: scale(10),
     backgroundColor: '#F5F4F8',
     minHeight: scale(284),
     // height: 200,

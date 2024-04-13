@@ -60,7 +60,7 @@ export default function CustomSelectDropdown({
               styleWrapper,
             ]}>
             {label && (
-              <CustomText style={[{color: COLORS.black}, styleTextLabel]}>
+              <CustomText style={[{color: COLORS.white}, styleTextLabel]}>
                 {label}
               </CustomText>
             )}

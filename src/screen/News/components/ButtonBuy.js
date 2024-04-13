@@ -4,18 +4,16 @@ import {CustomInput} from '../../../../components';
 
 import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../components/CustomText';
-import { SIZES, scale } from '../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../assets/constants';
 export default function ButtonBuy({onPress, title, style}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <LinearGradient
-        colors={['#F7E75A', '#FFC702']}
+        colors={['#E80274', '#7D0D6A']}
         start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
+        end={{x: 0, y: 1}}
         style={styles.button}>
-        <CustomText
-          textType="semiBold"
-          style={[styles.text2, style]}>
+        <CustomText textType="semiBold" style={[styles.text2, style]}>
           {title}
         </CustomText>
       </LinearGradient>
@@ -28,12 +26,13 @@ const styles = StyleSheet.create({
     borderRadius: scale(10),
     height: scale(32),
     width: '100%',
-    paddingHorizontal:scale(10),
+    paddingHorizontal: scale(10),
     justifyContent: 'center',
     marginTop: scale(20),
     alignSelf: 'center',
   },
   text2: {
     fontSize: SIZES.medium,
+    color: COLORS.white,
   },
 });

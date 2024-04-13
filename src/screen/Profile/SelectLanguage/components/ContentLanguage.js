@@ -2,7 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
-import {SIZES, WIDTH, images} from '../../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  WIDTH,
+  images,
+  scale,
+} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -17,41 +23,83 @@ const listLanguage = [
   },
   {
     id: '2',
-    name: 'Vietnamese',
+    name: 'France',
+    flag: images.france,
+    languageCode: 'fr',
+    checked: false,
+  },
+  {
+    id: '3',
+    name: 'Rusia',
+    flag: images.rusia,
+    languageCode: 'ru',
+    checked: false,
+  },
+  {
+    id: '4',
+    name: 'Italy',
+    flag: images.italy,
+    languageCode: 'it',
+    checked: false,
+  },
+  {
+    id: '5',
+    name: 'Germany',
+    flag: images.germany,
+    languageCode: 'ge',
+    checked: false,
+  },
+  {
+    id: '6',
+    name: 'Japan',
+    flag: images.japanese,
+    languageCode: 'jp',
+    checked: false,
+  },
+  {
+    id: '7',
+    name: 'Belgium',
+    flag: images.belgium,
+    languageCode: 'be',
+    checked: false,
+  },
+  {
+    id: '8',
+    name: 'Viet Nam',
     flag: images.vietnam,
     languageCode: 'vi',
     checked: false,
   },
   {
-    id: '3',
+    id: '9',
     name: 'Indonesia',
     flag: images.indonesia,
     languageCode: 'id',
     checked: false,
   },
   {
-    id: '4',
+    id: '10',
     name: 'Malaysia',
     flag: images.malaysia,
     languageCode: 'my',
     checked: false,
   },
   {
-    id: '5',
+    id: '11',
     name: 'Thailand',
     flag: images.thailand,
     languageCode: 'th',
     checked: false,
   },
   {
-    id: '6',
+    id: '12',
     name: 'Philippines',
     flag: images.philipin,
     languageCode: 'ph',
     checked: false,
   },
   {
-    id: '7',
+    id: '13',
     name: 'China',
     flag: images.china,
     languageCode: 'cn',
@@ -100,8 +148,10 @@ export default function ContentLanguage() {
           alignSelf: 'center',
         }}
         contentContainerStyle={{
-          marginTop: '10%',
+          marginTop: '5%',
+          paddingBottom: scale(100),
         }}
+        showsVerticalScrollIndicator={false}
         scrollEnabled={true}
         renderItem={({item}) => (
           <ItemLanguage

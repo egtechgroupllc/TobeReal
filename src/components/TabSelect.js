@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {CustomButton} from '.';
 import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
 import {IconBorderBottom} from '../assets/icon/Icon';
+import LinearGradient from 'react-native-linear-gradient';
 
 const funcFallBlack = () => {};
 export default function TabSelect({
@@ -64,15 +65,16 @@ export default function TabSelect({
                   height: '100%',
                   backgroundColor:
                     tab === index
-                      ? styleTabActive?.backgroundColor || '#fff'
-                      : styleTabDefault?.backgroundColor || '#e1e1e1',
+                      ? styleTabActive?.backgroundColor || COLORS.primary
+                      : styleTabDefault?.backgroundColor ||
+                        COLORS.transparentGrey,
                 },
               ]}
               styleText={{
                 color:
                   tab === index
-                    ? styleTabActive?.color || '#F0B90B'
-                    : styleTabDefault?.color || COLORS.textSub,
+                    ? styleTabActive?.color || COLORS.white
+                    : styleTabDefault?.color || COLORS.white,
                 textType: 'bold',
                 fontSize: SIZES.xMedium,
               }}
@@ -95,7 +97,10 @@ export default function TabSelect({
       </View>
 
       {!!renderView && (
-        <View
+        <LinearGradient
+          colors={['#502D9F66', '#99999966']}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
           style={[
             styles.content,
             styleContent,
@@ -112,7 +117,7 @@ export default function TabSelect({
             isShadow && SHADOW,
           ]}>
           {renderView(tab)}
-        </View>
+        </LinearGradient>
       )}
     </View>
   );
@@ -126,7 +131,6 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     minHeight: scale(200),
-    backgroundColor: '#fff',
     borderRadius: 12,
     paddingVertical: scale(16),
     rowGap: scale(14),

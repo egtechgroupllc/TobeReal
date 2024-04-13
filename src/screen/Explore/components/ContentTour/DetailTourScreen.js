@@ -21,7 +21,7 @@ export default function DetailTourScreen({route}) {
   const listView = useRef([
     <InfoDetail data={params} name={title} />,
     // <InfoUnitFacilities />,
-    <Map />,
+
     <Review />,
     <TourSchedule />,
     // <InfoAdditional />,
@@ -123,7 +123,7 @@ export default function DetailTourScreen({route}) {
             contentContainerStyle={{
               paddingTop: Header_Max_Height + scale(50),
               paddingBottom: tabBarHeight,
-              backgroundColor: '#f1f1f1',
+              // backgroundColor: '#f1f1f1',
             }}
             onScroll={handleScroll}
             ref={scrollRef}>

@@ -32,12 +32,14 @@ export default function FrequentlyPriceBox({
           )}
         </View>
 
-        <CustomText>{textType}</CustomText>
+        <CustomText style={{color: COLORS.white}}>{textType}</CustomText>
       </View>
 
       <View style={styles.line} />
 
-      <CustomText textType="bold" style={{letterSpacing: 1}}>
+      <CustomText
+        textType="bold"
+        style={{letterSpacing: 1, color: COLORS.white}}>
         {priceMin <= 0
           ? `< $${formatNumber(priceMax)}`
           : priceMax < priceMin

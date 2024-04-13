@@ -29,16 +29,16 @@ export default function FindAccommodation() {
 
   const listMenu = useRef([
     {
+      id: 'TOUR',
+      name: t('TOUR'),
+    },
+    {
       id: 'RENT',
       name: t('RENT'),
     },
     {
-      id: 'BUY',
-      name: t('BUY'),
-    },
-    {
-      id: 'TOUR',
-      name: t('TOUR'),
+      id: 'HOUSE',
+      name: t('HOUSE'),
     },
   ]).current;
 
@@ -150,10 +150,14 @@ export default function FindAccommodation() {
                         styleIcon={{color: '#BCBCBC'}}
                         multiSelect
                         isSelectAll
+                        styleWrapper={{
+                          backgroundColor: 'transparent',
+                          marginBottom: scale(20),
+                        }}
                         data={
                           tabSelect === 'RENT'
                             ? listRent
-                            : tabSelect === 'BUY'
+                            : tabSelect === 'HOUSE'
                             ? listBuy
                             : tabSelect === 'TOUR'
                             ? listTour

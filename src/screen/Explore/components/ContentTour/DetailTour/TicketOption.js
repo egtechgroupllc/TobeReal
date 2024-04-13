@@ -56,7 +56,11 @@ export default function TicketOption() {
       <View style={styles.boxTourTime}>
         <CustomText
           textType="semiBold"
-          style={{...styles.name, paddingHorizontal: scale(20)}}>
+          style={{
+            ...styles.name,
+            paddingHorizontal: scale(20),
+            color: COLORS.white,
+          }}>
           {t('ticket_option')}
         </CustomText>
         <View style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
@@ -86,7 +90,11 @@ export default function TicketOption() {
                 }}>
                 <CustomText
                   textType="semiBold"
-                  style={{...styles.text, paddingHorizontal: scale(10)}}>
+                  style={{
+                    ...styles.text,
+                    paddingHorizontal: scale(10),
+                    color: COLORS.white,
+                  }}>
                   {item.title}
                 </CustomText>
 
@@ -112,7 +120,11 @@ export default function TicketOption() {
                   <IconRefund width={scale(15)} height={scale(15)} />
                   <CustomText
                     textType="semiBold"
-                    style={{...styles.text, paddingHorizontal: scale(10)}}>
+                    style={{
+                      ...styles.text,
+                      paddingHorizontal: scale(10),
+                      color: COLORS.white,
+                    }}>
                     {t('easy_refund')}
                   </CustomText>
                 </View>
@@ -120,7 +132,11 @@ export default function TicketOption() {
                   <IconCalendar width={scale(15)} height={scale(15)} />
                   <CustomText
                     textType="semiBold"
-                    style={{...styles.text, paddingHorizontal: scale(10)}}>
+                    style={{
+                      ...styles.text,
+                      paddingHorizontal: scale(10),
+                      color: COLORS.white,
+                    }}>
                     {t('easy_reschdule')}
                   </CustomText>
                 </View>
@@ -144,7 +160,7 @@ export default function TicketOption() {
                   <View style={styles.discount}>
                     <CustomText
                       textType="semiBold"
-                      style={{...styles.text1, color: COLORS.primary}}>
+                      style={{...styles.text1, color: COLORS.white}}>
                       -25%
                     </CustomText>
                   </View>
@@ -175,7 +191,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },
@@ -187,7 +203,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   discount: {
-    backgroundColor: '#FF00001A',
+    backgroundColor: COLORS.primary,
     height: scale(15),
     width: '35%',
     borderRadius: scale(20),

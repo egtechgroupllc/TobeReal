@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, View} from 'react-native';
+import {StyleSheet, Text, FlatList, View, ImageBackground} from 'react-native';
 import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import {formatPrice} from '../../../../utils/format';
@@ -7,14 +7,13 @@ import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function WorldTour({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('travel_around_world')]
+  const title = [t('travel_around_world')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -33,7 +32,9 @@ export default function WorldTour({data}) {
           onPressCategory={item => console.log(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          styleWrapper={{
+            backgroundColor: 'transparent',
+          }}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

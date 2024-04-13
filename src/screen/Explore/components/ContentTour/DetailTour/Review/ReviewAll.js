@@ -7,6 +7,27 @@ import ItemBoxReview from './ItemBoxReview';
 import ReviewOverview from './ReviewOverview';
 import FilterSort from './FilterSort';
 
+const data = [
+  {
+    id: 1,
+    user: 'John',
+    content:
+      'Central location, friendly staff, full and delicious buffet breakfast.',
+    date: '12-02-2024 21:08',
+  },
+  {
+    id: 2,
+    user: 'David',
+    content: "I really like the hotel's shower gel and shampoo! tasty!",
+    date: '27-01-2024 21:08',
+  },
+  {
+    id: 3,
+    user: 'Jack',
+    content: 'Very good!',
+    date: '17-03-2024 21:08',
+  },
+];
 export default function ReviewAll({valueSort, onSort}) {
   return (
     <View>
@@ -28,10 +49,11 @@ export default function ReviewAll({valueSort, onSort}) {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[...Array(10)]}
+        data={data}
         contentContainerStyle={{
           rowGap: scale(10),
-          alignItems: 'center',
+          // alignItems: 'center',
+          paddingHorizontal: scale(20),
         }}
         scrollEnabled={false}
         renderItem={({item, index}) => (
@@ -39,9 +61,11 @@ export default function ReviewAll({valueSort, onSort}) {
             style={{
               width: '100%',
               borderTopWidth: 1,
-              borderRadius: 0,
               borderTopColor: '#eee',
+              borderRadius: scale(10),
+              backgroundColor: COLORS.grey,
             }}
+            data={item}
             numberOfLines={0}
             isShadow={false}
             key={`key-${item}-${index}`}

@@ -18,10 +18,11 @@ export default function Acreage() {
   const [multiSliderValue, setMultiSliderValue] = useState([min, max]);
   return (
     <WrapperContent
+      styleWrapper={{backgroundColor: COLORS.white}}
       styleContent={{
         rowGap: scale(10),
         alignItem: 'center',
-        marginTop:scale(-20)
+        marginTop: scale(-20),
       }}>
       <View
         style={{
@@ -35,21 +36,25 @@ export default function Acreage() {
           styleWrapper={{
             flex: 1,
           }}
-          label='Min'
+          styleText={{color: COLORS.black}}
+          styleTextLabel={{color: COLORS.black}}
+          label="Min"
           onChangeText={num => {
             setMultiSliderValue([+num, multiSliderValue[1]]);
           }}
-          keyboardType='numeric'
+          keyboardType="numeric"
         />
         <CustomInput
+          styleTextLabel={{color: COLORS.black}}
           defaultValue={String(multiSliderValue[1])}
           styleWrapper={{
             flex: 1,
           }}
-          keyboardType='numeric'
-          label='Max'
+          styleText={{color: COLORS.black}}
+          keyboardType="numeric"
+          label="Max"
           onChangeText={num => {
-            setMultiSliderValue([ multiSliderValue[0], +num]);
+            setMultiSliderValue([multiSliderValue[0], +num]);
           }}
         />
       </View>
@@ -57,7 +62,7 @@ export default function Acreage() {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          paddingHorizontal:scale(20)
+          paddingHorizontal: scale(20),
         }}>
         <CustomText>{multiSliderValue[0]} m²</CustomText>
         <CustomText>{multiSliderValue[1]} m²</CustomText>

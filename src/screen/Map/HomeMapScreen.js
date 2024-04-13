@@ -85,12 +85,12 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         });
         const backgroundColor = scrollOffsetX.interpolate({
           inputRange,
-          outputRange: ['#deaf02', '#fff', '#deaf02'],
+          outputRange: ['#fff', COLORS.primary, '#fff'],
           extrapolate: 'clamp',
         });
         const color = scrollOffsetX.interpolate({
           inputRange,
-          outputRange: ['#fff', COLORS.primary, '#fff'],
+          outputRange: ['#E80274', '#fff', '#E80274'],
           extrapolate: 'clamp',
         });
 

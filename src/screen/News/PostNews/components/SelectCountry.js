@@ -55,7 +55,7 @@ export default function SelectCountry({
               rowGap: scale(10),
             }}>
             <View style={styles.wrapper}>
-              <CustomText style={{color: COLORS.black}}>
+              <CustomText style={{color: COLORS.white}}>
                 {t('country')}
               </CustomText>
 

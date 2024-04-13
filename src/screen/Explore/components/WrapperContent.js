@@ -47,7 +47,7 @@ export default function WrapperContent({
               <CustomText
                 textType="semiBold"
                 style={{
-                  color: COLORS.primary,
+                  color: COLORS.white,
                   minWidth: scale(42),
                   lineHeight: scale(20),
                 }}
@@ -118,7 +118,7 @@ export default function WrapperContent({
         )}
         {discoveryTour && (
           <Category
-            data={[t('dosmestic_destination'), t('international_destination')]}
+            data={[t('international_destination'), t('dosmestic_destination')]}
             onPress={onPressCategory}
           />
         )}
@@ -141,7 +141,7 @@ export default function WrapperContent({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: '#00000040',
     paddingVertical: scale(16),
     rowGap: scale(10),
   },
@@ -157,10 +157,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.xMedium,
+    color: COLORS.white,
     flex: 1,
   },
   textSub: {
     fontSize: SIZES.xSmall,
+    color: COLORS.white,
   },
   content: {
     borderRadius: scale(12),

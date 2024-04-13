@@ -60,7 +60,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'Saveloka' do
+target 'NOWTravel' do
   config = use_native_modules!
 
   use_react_native!(
@@ -79,7 +79,7 @@ target 'Saveloka' do
 rn_maps_path = '../node_modules/react-native-maps'
 pod 'react-native-google-maps', :path => rn_maps_path
 
-  target 'SavelokaTests' do
+  target 'NOWTravelTests' do
     inherit! :complete
     # Pods for testing
   end

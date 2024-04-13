@@ -51,16 +51,18 @@ export default memo(function BookAccommodation({
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.white,
             }}>
             {t('best_price_from')}
           </CustomText>
           <CustomText
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.white,
             }}
             textType="bold">
             {formatPrice(price, {
-              locales: 'vi',
+              locales: 'en',
             })}{' '}
           </CustomText>
         </View>
@@ -350,7 +352,7 @@ const styles = StyleSheet.create({
     padding: scale(16),
     position: 'absolute',
     bottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     ...SHADOW,
     shadowOffset: {
       width: 0,

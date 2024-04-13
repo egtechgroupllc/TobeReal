@@ -46,8 +46,11 @@ export default function FilterSort({
               width: scale(14),
               height: scale(14),
             }}
+            fill={COLORS.white}
           />
-          <CustomText>{text || 'Filter'}</CustomText>
+          <CustomText style={{color: COLORS.white}}>
+            {text || 'Filter'}
+          </CustomText>
         </View>
         {sort && (
           <CustomText
@@ -70,11 +73,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(10),
     paddingVertical: scale(4),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     columnGap: scale(10),
   },
   sort: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(6),
     paddingVertical: scale(4),

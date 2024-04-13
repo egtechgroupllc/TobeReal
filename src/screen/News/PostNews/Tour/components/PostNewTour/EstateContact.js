@@ -37,6 +37,7 @@ export default function EstateContact({control, errors, watch}) {
           label={`${t('contact_info')}:`}
           styleTextLabel={styles.label}
           placeholder={t('full_name')}
+          placeholderTextColor={COLORS.grey}
           control={control}
           name="business_name"
           rules={requireField(t('enter_username'))}
@@ -44,6 +45,7 @@ export default function EstateContact({control, errors, watch}) {
         />
         <CustomInput
           placeholder={t('phone')}
+          placeholderTextColor={COLORS.grey}
           control={control}
           name="business_phone"
           rules={[requireField(t('this_field_required'))]}
@@ -53,6 +55,7 @@ export default function EstateContact({control, errors, watch}) {
 
         <CustomInput
           placeholder={t('email')}
+          placeholderTextColor={COLORS.grey}
           control={control}
           name="business_email"
           rules={[
@@ -71,24 +74,30 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
     rowGap: scale(16),
   },
+  line: {
+    height: 0.5,
+    width: '100%',
+    backgroundColor: COLORS.white,
+  },
+
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: COLORS.transparentGrey,
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },
   label: {
     fontSize: SIZES.xMedium,
-    color: COLORS.black,
+    color: COLORS.white,
     marginBottom: SIZES.xSmall,
   },
 });

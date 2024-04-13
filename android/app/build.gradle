@@ -93,9 +93,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.saveloka.shome"
+    namespace "com.nowblockchain.nowtravel"
     defaultConfig {
-        applicationId "com.saveloka.shome"
+        applicationId "com.nowblockchain.nowtravel"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

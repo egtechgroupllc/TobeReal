@@ -91,7 +91,12 @@ export default function ChooseCalendar({rental, style, Checkin}) {
   return (
     <View style={style}>
       {Checkin && (
-        <CustomText style={{fontSize: SIZES.xMedium, paddingBottom: scale(5)}}>
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            paddingBottom: scale(5),
+            color: COLORS.white,
+          }}>
           Check in - Check out
         </CustomText>
       )}

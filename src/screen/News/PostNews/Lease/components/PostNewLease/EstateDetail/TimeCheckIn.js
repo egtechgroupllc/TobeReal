@@ -104,11 +104,11 @@ export default function TimeCheckIn({onChange, title}) {
 const styles = StyleSheet.create({
   label: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
   },
   title: {
     fontSize: SIZES.xMedium,
-    color: COLORS.black,
+    color: COLORS.white,
     marginBottom: scale(10),
   },
   input: {

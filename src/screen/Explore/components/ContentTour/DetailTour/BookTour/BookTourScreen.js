@@ -39,7 +39,11 @@ export default function BookTourScreen({route}) {
           noti={true}
           onPress={goBack}
           notify={notify}></Header>
-        <View style={styles.view}>
+        <LinearGradient
+          colors={['#502D9F66', '#502D9F66']}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          style={styles.view}>
           <View
             style={{
               flexDirection: 'row',
@@ -55,19 +59,24 @@ export default function BookTourScreen({route}) {
               textType="semiBold"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 width: '80%',
                 paddingHorizontal: scale(10),
               }}>
               {title}
             </CustomText>
           </View>
-          <View style={{...styles.line, marginTop:scale(10), backgroundColor:'#F0B90B80'}}></View>
+          <View
+            style={{
+              ...styles.line,
+              marginTop: scale(10),
+              backgroundColor: COLORS.grey,
+            }}></View>
           <CustomText
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
@@ -82,7 +91,7 @@ export default function BookTourScreen({route}) {
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
@@ -101,7 +110,7 @@ export default function BookTourScreen({route}) {
               textType="medium"
               style={{
                 ...styles.text1,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(10),
                 alignSelf: 'flex-start',
               }}>
@@ -141,7 +150,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     -
                   </CustomText>
@@ -151,7 +160,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text1,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     1
                   </CustomText>
@@ -161,7 +170,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     +
                   </CustomText>
@@ -181,7 +190,7 @@ export default function BookTourScreen({route}) {
               textType="medium"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(10),
                 alignSelf: 'flex-start',
               }}>
@@ -221,7 +230,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     -
                   </CustomText>
@@ -231,7 +240,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text1,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     0
                   </CustomText>
@@ -241,7 +250,7 @@ export default function BookTourScreen({route}) {
                     textType="medium"
                     style={{
                       ...styles.text,
-                      color: COLORS.grey,
+                      color: COLORS.black,
                     }}>
                     +
                   </CustomText>
@@ -262,52 +271,52 @@ export default function BookTourScreen({route}) {
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
             {t('things_need_to_know')}:
           </CustomText>
-          <View style={{flexDirection:'row', columnGap:scale(30)}}>
-          <TouchableOpacity
-            style={{
-              height: scale(30),
-              marginTop: scale(10),
-              width: '40%',
-              backgroundColor: '#F2F2F2',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: scale(33),
-            }}>
-            <CustomText
-              textType="semiBold"
+          <View style={{flexDirection: 'row', columnGap: scale(30)}}>
+            <TouchableOpacity
               style={{
-                ...styles.text2,
-                color: COLORS.black,
+                height: scale(30),
+                marginTop: scale(10),
+                width: '40%',
+                backgroundColor: '#F2F2F2',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: scale(33),
               }}>
-              {t('inexperienced')}
-            </CustomText>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              height: scale(30),
-              marginTop: scale(10),
-              width: '40%',
-              backgroundColor: '#F2F2F2',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: scale(33),
-            }}>
-            <CustomText
-              textType="semiBold"
+              <CustomText
+                textType="semiBold"
+                style={{
+                  ...styles.text2,
+                  color: COLORS.black,
+                }}>
+                {t('inexperienced')}
+              </CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={{
-                ...styles.text2,
-                color: COLORS.black,
+                height: scale(30),
+                marginTop: scale(10),
+                width: '40%',
+                backgroundColor: '#F2F2F2',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: scale(33),
               }}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  ...styles.text2,
+                  color: COLORS.black,
+                }}>
                 {t('inseparable')}
-            </CustomText>
-          </TouchableOpacity>
+              </CustomText>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity
             style={{
@@ -325,14 +334,14 @@ export default function BookTourScreen({route}) {
                 ...styles.text2,
                 color: COLORS.black,
               }}>
-                       {t('no_reservation')}
+              {t('no_reservation')}
             </CustomText>
           </TouchableOpacity>
           <CustomText
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
             }}>
@@ -358,7 +367,7 @@ export default function BookTourScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -368,7 +377,7 @@ export default function BookTourScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -385,7 +394,7 @@ export default function BookTourScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -395,7 +404,7 @@ export default function BookTourScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -413,7 +422,7 @@ export default function BookTourScreen({route}) {
                 textType="semiBold"
                 style={{
                   ...styles.text,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -423,7 +432,7 @@ export default function BookTourScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -431,21 +440,21 @@ export default function BookTourScreen({route}) {
               </CustomText>
             </View>
             <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  paddingHorizontal: scale(20),
-                  paddingBottom: scale(10),
-                }}>
-                      {t('include_addition')}
-              </CustomText>
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.white,
+                paddingHorizontal: scale(20),
+                paddingBottom: scale(10),
+              }}>
+              {t('include_addition')}
+            </CustomText>
           </View>
           <TouchableOpacity
             onPress={toggleCheckBox1}
             style={{width: '100%', alignItems: 'center'}}>
             <LinearGradient
-              colors={['#FADD55', '#D88A00']}
+              colors={['#FA54E9', '#DA03C4']}
               start={{x: 0, y: 0}}
               end={{x: 0, y: 1}}
               style={{...styles.box1, marginBottom: scale(20)}}>
@@ -456,14 +465,14 @@ export default function BookTourScreen({route}) {
                 <View style={{marginLeft: scale(10)}}>
                   <CustomText
                     textType="semiBold"
-                    style={{...styles.text2, color: COLORS.black}}>
-                    {t('wallet')} Saveloka
+                    style={{...styles.text2, color: COLORS.white}}>
+                    {t('wallet')} NOW Travel
                   </CustomText>
                 </View>
               </View>
             </LinearGradient>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
         <Button title={t('request_to_book')} onPress={Ok} />
       </View>
     </MainAuth>
@@ -483,8 +492,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
-    backgroundColor: '#FFFFFF',
+    borderColor: COLORS.grey,
+    backgroundColor: 'transparent',
     shadowColor: '#F0B90B40',
     shadowOffset: {
       width: 0,
@@ -549,13 +558,13 @@ const styles = StyleSheet.create({
 
   box: {
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
     borderBottomLeftRadius: scale(5),
     borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     paddingHorizontal: scale(20),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.white,
     borderWidth: scale(1),
     width: '90%',
     paddingBottom: scale(20),
