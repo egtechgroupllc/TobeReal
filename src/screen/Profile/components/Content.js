@@ -13,13 +13,15 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import CategoriesButton from './CategoriesButton';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {IconAdd} from '../../../assets/icon/Icon';
+import BoxItemProfile from './BoxItemProfile';
 export default function Content() {
   const {t} = useLanguage();
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
   const toggleCheckBox = () => {
-    setCheck(prevCheck => !prevCheck);
+    // setCheck(prevCheck => !prevCheck);
   };
   const viewPersonal = () => {
     setViewpersonal(prevViewpersonal => !prevViewpersonal);
@@ -141,6 +143,7 @@ export default function Content() {
           large={true}
           personalInformation={personalInformation}
         />
+
         <View
           style={{
             flexDirection: 'row',
@@ -159,11 +162,18 @@ export default function Content() {
             style={{marginLeft: scale(15)}}
           />
         </View>
+
         <CategoriesButton
           title={t('financial_management')}
           onPress={financial}
           large={true}
         />
+        {/* <BoxItemProfile
+          title={t('financial_management')}
+          subTitle={t('financial_management')}
+          onPress={financial}
+          Icon={IconAdd}
+        /> */}
         <CategoriesButton
           title={t('select_language')}
           onPress={selectLanguage}

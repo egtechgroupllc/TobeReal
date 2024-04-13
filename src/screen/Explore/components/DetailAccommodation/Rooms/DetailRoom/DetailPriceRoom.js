@@ -1,21 +1,28 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCoinPoint} from '../../../../../../assets/icon/Icon';
 import BottomSheet from '../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../components/CustomText';
-import {formatPrice} from '../../../../../../utils/format';
+import {formatDate, formatPrice} from '../../../../../../utils/format';
+import {getDate} from 'date-fns';
 
-export default function DetailPriceRoom({isOpen, onClose}) {
+export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
   const bottomSheetRef = useRef();
 
   useEffect(() => {
-    !isOpen && bottomSheetRef.current.open();
+    isOpen && bottomSheetRef.current.open();
   }, [isOpen]);
+
+  const priceAverage = useMemo(
+    () => numRoom * data?.priceAverage * data?.date?.numNight,
+    [numRoom, data?.date?.numNight, data?.priceAverage],
+  );
+
   return (
     <>
-      {!isOpen && (
+      {isOpen && (
         <BottomSheet
           ref={bottomSheetRef}
           onDismiss={() => onClose()}
@@ -25,8 +32,16 @@ export default function DetailPriceRoom({isOpen, onClose}) {
             paddingHorizontal: scale(20),
             rowGap: scale(10),
           }}>
-          <Row title={'Ngày'} value={'12 - 13 tháng 4 2024'} />
-          <Row title={'Số phòng'} value={'1 phòng'} />
+          <Row
+            title={'Ngày'}
+            value={`${getDate(data?.date?.selectedStartDate)} - ${formatDate(
+              data?.date?.selectedEndDate,
+              {
+                dateStyle: 'dd MMM yyyy',
+              },
+            )}`}
+          />
+          <Row title={'Số phòng'} value={`${numRoom} phòng`} />
           <View
             style={{
               rowGap: scale(10),
@@ -34,17 +49,17 @@ export default function DetailPriceRoom({isOpen, onClose}) {
             }}>
             <Row
               title={'Giá mỗi đêm'}
-              value={formatPrice(12312231)}
+              value={formatPrice(data?.priceAverage * numRoom)}
               colorValue={COLORS.primary}
               textType="semiBold"
             />
             <Row
-              title={'Tổng giá cho 5 đem'}
-              value={formatPrice(5 * 12312231)}
+              title={`Tổng giá cho ${data?.date?.numNight} đêm`}
+              value={formatPrice(priceAverage)}
             />
             <Row
               title={'Thuế và phí'}
-              value={formatPrice(5 * 12312231)}
+              value={formatPrice(numRoom * data?.priceAverage)}
               textType="regular"
               colorValue={COLORS.text}
             />
@@ -58,7 +73,10 @@ export default function DetailPriceRoom({isOpen, onClose}) {
             <CustomText>
               Đặt chỗ và nhận ngay{' '}
               <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                {formatPrice(5 * 12312231)} điểm
+                {formatPrice(numRoom * 3111, {
+                  showCurrency: false,
+                })}{' '}
+                điểm
               </CustomText>
             </CustomText>
           </View>

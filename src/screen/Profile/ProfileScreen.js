@@ -12,6 +12,7 @@ import HeaderNoToken from './components/HeaderNoToken';
 import {Alert} from 'react-native';
 import axios, {AxiosError} from 'axios';
 import {showMess} from '../../assets/constants/Helper';
+import MainWrapper from '../../components/MainWrapper';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -26,7 +27,10 @@ export default function ProfileScreen() {
   });
 
   return (
-    <MainAuth>
+    <MainWrapper
+      styleContent={{
+        backgroundColor: '#f7f9fa',
+      }}>
       {token ? (
         <>
           <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} />
@@ -41,6 +45,6 @@ export default function ProfileScreen() {
       )}
       <Content />
       <Bottom />
-    </MainAuth>
+    </MainWrapper>
   );
 }

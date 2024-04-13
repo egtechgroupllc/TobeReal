@@ -1,12 +1,21 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {memo, useMemo, useState} from 'react';
 import {COLORS, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
 import {CustomButton} from '../../../../../../components';
 
-export default function SelectRoom({onPress, data}) {
-  console.log(data?.number_room);
+export default memo(function SelectRoom({onPress, data, onSelect}) {
+  const [selectRoom, setSelectRoom] = useState(1);
+
+  const roomsAverage = useMemo(() => {
+    const result = data?.room_dates?.map(item => {
+      return item?.number_room_real;
+    });
+
+    return Math.min(...result);
+  }, [data?.room_dates]);
+
   return (
     <View
       style={{
@@ -17,7 +26,7 @@ export default function SelectRoom({onPress, data}) {
         style={{
           color: COLORS.error,
         }}>
-        Còn {data?.room_dates[0]?.number_room} phòng
+        Còn {roomsAverage} phòng
       </CustomText>
 
       <View
@@ -26,21 +35,24 @@ export default function SelectRoom({onPress, data}) {
           columnGap: scale(10),
         }}>
         <RealEstateType
+          getKeyValue="value"
           isDefaultValue
           styleWrapper={{width: '40%'}}
-          data={[...Array(data?.room_dates[0]?.number_room)].map(
-            (_, index) => ({
-              name: `${index + 1} phòng`,
-              value: index,
-            }),
-          )}
+          data={[...Array(roomsAverage)].map((_, index) => ({
+            name: `${index + 1} phòng`,
+            value: index + 1,
+          }))}
           buttonEstateTypes={{
             height: scale(32),
+          }}
+          onSelect={value => {
+            onSelect && onSelect(value);
+            setSelectRoom(value);
           }}
         />
 
         <CustomButton
-          onPress={onPress}
+          onPress={() => onPress(selectRoom)}
           buttonType="normal"
           text="Đặt phòng"
           styleWrapper={{
@@ -50,7 +62,7 @@ export default function SelectRoom({onPress, data}) {
       </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   row: {

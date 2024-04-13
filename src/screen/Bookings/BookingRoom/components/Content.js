@@ -6,8 +6,8 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
-import {Category, CustomInput} from '../../../../../../components';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
+import {Category, CustomInput} from '../../../../components';
 
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
@@ -18,14 +18,14 @@ import {
   IconRight,
   IconUnCheckBox,
   IconUnCheckBoxWhite,
-} from '../../../../../../assets/icon/Icon';
-import Button from '../../../../../Profile/components/Button';
-import CustomText from '../../../../../../components/CustomText';
+} from '../../../../assets/icon/Icon';
+import Button from '../../../Profile/components/Button';
+import CustomText from '../../../../components/CustomText';
 
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import Header from '../../../../../Profile/components/Header';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import Header from '../../../Profile/components/Header';
 import FindContent from './FindContent';
-import CustomImage from '../../../../../../components/CustomImage';
+import CustomImage from '../../../../components/CustomImage';
 const dataFacilities = [
   {
     id: '1',

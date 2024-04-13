@@ -131,7 +131,7 @@ const Layout = () => {
         },
       }}
       initialRouteName="BottomTab">
-      <Stack.Screen name="BottomTab" component={DetailPriceRoom} />
+      <Stack.Screen name="BottomTab" component={BottomTab} />
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 

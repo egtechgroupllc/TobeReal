@@ -116,7 +116,7 @@ export default function FilterMore() {
             }}>
             <CustomButton
               // onPress={() => {
-              //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
+              //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
               // }}
               onPress={handleReset}
               outline
@@ -129,7 +129,7 @@ export default function FilterMore() {
             />
             <CustomButton
               // onPress={() => {
-              //   token ? navigate('NavigationAuth') : navigate('BookingScreen');
+              //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
               // }}
               // onPress={onPress}
               buttonType="normal"

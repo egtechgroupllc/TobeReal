@@ -3,17 +3,16 @@ import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-import {COLORS, FONTS, SIZES, WIDTH, scale} from '../../../../../../assets/constants';
+import {COLORS, FONTS, SIZES, WIDTH, scale} from '../../../../assets/constants';
 
 import {useForm} from 'react-hook-form';
 
-
-import ChooseCalendar from '../../../FindAccommodation/ChooseCalendar';
-import ChooseOccupancy from '../../../FindAccommodation/ChooseOccupancy';
-import { useLanguage } from '../../../../../../hooks/useLanguage';
+import ChooseCalendar from '../../../Explore/components/FindAccommodation/ChooseCalendar';
+import ChooseOccupancy from '../../../Explore/components/FindAccommodation/ChooseOccupancy';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function FindContent({isBuy, rental}) {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
 
@@ -29,7 +28,7 @@ export default function FindContent({isBuy, rental}) {
         style={{
           paddingHorizontal: scale(16),
           rowGap: scale(10),
-          width:'175%'
+          width: '175%',
         }}>
         {!isBuy && (
           <>
@@ -45,7 +44,7 @@ export default function FindContent({isBuy, rental}) {
 
 const styles = StyleSheet.create({
   findContent: {
-    marginTop:scale(10),
+    marginTop: scale(10),
     alignItems: 'center',
     rowGap: scale(10),
   },

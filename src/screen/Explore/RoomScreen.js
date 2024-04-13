@@ -1,34 +1,34 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../assets/constants';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import React, {useLayoutEffect, useRef, useState} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {COLORS, SIZES, scale} from '../../assets/constants';
 
 import {
   getListRoomDetailAccmo,
   postBookingRoom,
 } from '../../Model/api/apiAccom';
+import {showMess} from '../../assets/constants/Helper';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
 import Favourite from '../../components/Favourite';
 import MainWrapper from '../../components/MainWrapper';
-import {useLanguage} from '../../hooks/useLanguage';
 import ItemAccommdSearchLoading from '../Search/components/ItemAccommdSearchLoading';
 import RoomFilter from './components/DetailAccommodation/Rooms/RoomFilter';
 import RoomFilterType from './components/DetailAccommodation/Rooms/RoomFilterType';
 import RoomItem from './components/DetailAccommodation/Rooms/RoomItem';
-import {showMess} from '../../assets/constants/Helper';
 
 export default function RoomScreen() {
-  const {t} = useLanguage();
-  const {setOptions} = useNavigation();
+  const {setOptions, navigate} = useNavigation();
 
   const queryClient = useQueryClient();
   const params = useRoute().params;
   const insets = useSafeAreaInsets();
+  const fillRef = useRef();
 
   const [date, setDate] = useState();
+  const [numRoomGuest, setNumRoomGuest] = useState();
 
   const {data, isLoading} = useQuery({
     queryKey: [
@@ -38,12 +38,14 @@ export default function RoomScreen() {
       params?.id,
       date?.selectedStartDate,
       date?.selectedEndDate,
+      numRoomGuest?.numRooms,
     ],
     queryFn: () =>
       getListRoomDetailAccmo({
         id_accomo: params?.id,
         date_start: date?.selectedStartDate,
         date_end: date?.selectedEndDate,
+        number_room: numRoomGuest?.numRooms,
       }),
   });
 
@@ -57,9 +59,9 @@ export default function RoomScreen() {
         data: {
           check_in_date: date?.selectedStartDate,
           check_out_date: date?.selectedEndDate,
-          number_room: 2,
+          number_room: value?.numRoom,
         },
-        id_room: value,
+        id_room: value?.id,
       },
       {
         onSuccess: dataInside => {
@@ -75,7 +77,7 @@ export default function RoomScreen() {
           ]);
         },
         onError: err => {
-          console.log({err}, 213587137821);
+          console.log({err});
         },
       },
     );
@@ -115,7 +117,12 @@ export default function RoomScreen() {
 
   return (
     <MainWrapper scrollEnabled={false}>
-      <RoomFilter onSelectDate={setDate} data={data?.data?.[0]} />
+      <RoomFilter
+        onSelectDate={setDate}
+        data={data?.data?.[0]}
+        onChangeNum={setNumRoomGuest}
+        ref={fillRef}
+      />
       <RoomFilterType />
 
       <FlatList
@@ -134,6 +141,14 @@ export default function RoomScreen() {
               key={index}
               onBooking={handleBookingRoom}
               date={date}
+              onDetail={priceAverage =>
+                navigate('DetailRoomScreen', {
+                  ...item,
+                  priceAverage,
+                  date,
+                  numRoomGuest: fillRef.current?.numRoomGuest(),
+                })
+              }
             />
           ) : (
             <ItemAccommdSearchLoading key={index} />

@@ -20,5 +20,5 @@ export const showMess = (message, type = 'error') => {
   });
 };
 export const secondsToStringTime = seconds => {
-  return new Date(seconds * 3000).toISOString().substr(11, 8).split(':');
+  return new Date(seconds * 3000).toISOString().substring(11, 8).split(':');
 };

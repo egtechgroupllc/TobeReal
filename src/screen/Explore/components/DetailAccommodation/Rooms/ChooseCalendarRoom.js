@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {differenceInDays} from 'date-fns';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {memo, useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {scale} from '../../../../../assets/constants';
 import {IconCalendar} from '../../../../../assets/icon/Icon';
@@ -27,7 +27,7 @@ const minDate = formatDateStyle(minDate);
 
 const dateEnd = formatDateStyle(minDate, 1);
 
-export default function ChooseCalendarRoom({onSelectDate, data}) {
+export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
 
@@ -59,7 +59,12 @@ export default function ChooseCalendarRoom({onSelectDate, data}) {
   }, [selectedEndDate]);
 
   useEffect(() => {
-    onSelectDate && onSelectDate({selectedEndDate, selectedStartDate});
+    onSelectDate &&
+      onSelectDate({
+        selectedEndDate,
+        selectedStartDate,
+        numNight: selected?.value,
+      });
   }, []);
 
   const handleSelectDate = () => {
@@ -70,7 +75,12 @@ export default function ChooseCalendarRoom({onSelectDate, data}) {
       setSelectedEndDate(newDate);
     }
 
-    selectedEndDate && onSelectDate({selectedEndDate, selectedStartDate});
+    selectedEndDate &&
+      onSelectDate({
+        selectedEndDate,
+        selectedStartDate,
+        numNight: selected?.value,
+      });
   };
 
   return (
@@ -145,7 +155,7 @@ export default function ChooseCalendarRoom({onSelectDate, data}) {
       </BottomSheet>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   row: {

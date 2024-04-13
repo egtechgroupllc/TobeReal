@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {
   useCallback,
   useDeferredValue,
@@ -13,6 +13,7 @@ import {CustomButton, CustomInput} from '.';
 import {IconAdd, IconSubtract, IconX} from '../assets/icon/Icon';
 import CustomText from './CustomText';
 import InputCountry from '../screen/Auth/Register/components/InputCountry';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 export default function Counter({
   min = 1,
@@ -28,6 +29,8 @@ export default function Counter({
   styleBoxHeading,
   styleWrapper,
   isInput,
+  Icon,
+  editable = true,
 }) {
   const [quantity, setQuantity] = useState(value || min);
 
@@ -47,17 +50,23 @@ export default function Counter({
   };
 
   useEffect(() => {
-    if (quantity < min) {
-      setQuantity(min);
-    }
-    if (quantity > max) {
-      setQuantity(max);
-    }
     if (quantity >= min && quantity <= max) {
       onChange && onChange(quantity);
     }
   }, [quantity]);
-
+  const singleTap = useMemo(
+    () =>
+      Gesture.Tap()
+        .runOnJS(true)
+        .onStart(event => {
+          if (quantity < min) {
+            setQuantity(min);
+          } else {
+            setQuantity(max);
+          }
+        }),
+    [],
+  );
   return (
     <View
       style={[
@@ -66,14 +75,21 @@ export default function Counter({
         styleWrapper,
         vertical && {flexDirection: 'column'},
       ]}>
-      {heading && (
-        <View style={{rowGap: scale(2), styleBoxHeading}}>
-          <CustomText style={{fontSize: SIZES.xMedium}}>{heading}</CustomText>
-          {subHeading && (
-            <CustomText textType="regular">{subHeading}</CustomText>
-          )}
-        </View>
-      )}
+      <GestureDetector gesture={Gesture.Exclusive(singleTap)}>
+        {heading && (
+          <View style={styles.boxHeading}>
+            {Icon}
+            <View style={{rowGap: scale(2), styleBoxHeading}}>
+              <CustomText style={{fontSize: SIZES.xMedium}}>
+                {heading}
+              </CustomText>
+              {subHeading && (
+                <CustomText textType="regular">{subHeading}</CustomText>
+              )}
+            </View>
+          </View>
+        )}
+      </GestureDetector>
 
       <View
         style={[
@@ -85,9 +101,7 @@ export default function Counter({
           iconLeft={IconSubtract}
           onPress={handleDecrement}
           style={{...styles.dot, opacity: quantity <= min ? 0.4 : 1}}
-          styleIcon={{
-            color: COLORS.white,
-          }}
+          styleIcon={styles.icon}
         />
 
         {/* <CustomText style={styles.quantity}>{quantity}</CustomText> */}
@@ -100,13 +114,16 @@ export default function Counter({
           styleText={{
             textAlign: 'center',
           }}
+          editable={editable}
           onChangeText={text => {
             setQuantity(+text);
           }}
-          styleIcon={{
-            color: COLORS.white,
-            width: scale(14),
-            height: scale(14),
+          onBlur={() => {
+            if (quantity < min) {
+              setQuantity(min);
+            } else {
+              setQuantity(max);
+            }
           }}
         />
 
@@ -117,11 +134,7 @@ export default function Counter({
             ...styles.dot,
             opacity: quantity >= max ? 0.4 : 1,
           }}
-          styleIcon={{
-            color: COLORS.white,
-            width: scale(14),
-            height: scale(14),
-          }}
+          styleIcon={styles.icon}
         />
       </View>
     </View>
@@ -133,6 +146,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // flex: 1,
     width: '100%',
+  },
+  boxHeading: {
+    flexDirection: 'row',
+    columnGap: scale(10),
+    alignItems: 'center',
+    flex: 1,
   },
   counter: {
     justifyContent: 'center',
@@ -157,5 +176,10 @@ const styles = StyleSheet.create({
     width: scale(40),
     height: scale(30),
     borderRadius: scale(6),
+  },
+  icon: {
+    color: COLORS.white,
+    width: scale(12),
+    height: scale(12),
   },
 });

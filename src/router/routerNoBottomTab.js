@@ -1,4 +1,6 @@
+import {BookingRoomScreen} from '../screen/Bookings';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
+
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
 import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
 import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/DetailBuy/DetailBroker';
@@ -7,11 +9,14 @@ import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
 import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
-import {BookingScreen} from '../screen/Explore/components/DetailAccommodation/Booking';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
 import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
+import {
+  DepositScreen,
+  DetailDepositScreen,
+} from '../screen/Profile/FinancialManagement';
 import {
   HomeSearchAccommodScreen,
   ListAccommodationSearchScreen,
@@ -82,8 +87,11 @@ export default routerNoBottomTab = [
     },
   },
   {
-    name: 'BookingScreen',
-    component: BookingScreen,
+    name: 'BookingRoomScreen',
+    component: BookingRoomScreen,
+    options: {
+      headerShown: true,
+    },
   },
   {
     name: 'BookTourScreen',
@@ -146,6 +154,20 @@ export default routerNoBottomTab = [
   {
     name: 'SellManagementScreen',
     component: SellManagementScreen,
+    options: {
+      headerShown: true,
+    },
+  },
+  {
+    name: 'DepositScreen',
+    component: DepositScreen,
+    options: {
+      headerShown: true,
+    },
+  },
+  {
+    name: 'DetailDepositScreen',
+    component: DetailDepositScreen,
     options: {
       headerShown: true,
     },

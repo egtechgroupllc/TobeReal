@@ -9,6 +9,7 @@ export default function NavigationProfile() {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShown: true,
         header: props => <HeaderBar {...props} />,
       }}>
       {routerProfile.map(router => (

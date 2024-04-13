@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+
 import {getListPriceRoomDate} from '../../../../../Model/api/apiAccom';
 import {
   COLORS,
@@ -18,11 +19,10 @@ import {formatPrice} from '../../../../../utils/format';
 import ItemAccommdSearchLoading from '../../../../Search/components/ItemAccommdSearchLoading';
 import RoomUntil from './components/RoomUntil';
 import SelectRoom from './components/SelectRoom';
-import {useNavigation} from '@react-navigation/native';
 
-export default function RoomItem({dataP, onBooking, date}) {
+export default function RoomItem({dataP, onBooking, date, onDetail}) {
   const [isRender, setIsRender] = useState(false);
-  const {navigate} = useNavigation();
+  const [numRoom, setNumRoom] = useState(1);
 
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'detail', 'list-room-date', dataP?.id],
@@ -97,7 +97,9 @@ export default function RoomItem({dataP, onBooking, date}) {
           </View>
 
           <TouchableNativeFeedback
-            onPress={() => navigate('DetailRoomScreen', dataP)}>
+            onPress={() => {
+              onDetail(priceAverage);
+            }}>
             <View style={styles.content}>
               <View
                 style={{
@@ -124,8 +126,12 @@ export default function RoomItem({dataP, onBooking, date}) {
                   padding: scale(8),
                   rowGap: scale(7),
                 }}>
-                <RoomUntil data={dataP} price={priceAverage} />
-                <SelectRoom onPress={() => onBooking(dataP?.id)} data={dataP} />
+                <RoomUntil data={dataP} price={priceAverage * numRoom} />
+                <SelectRoom
+                  onPress={value => onBooking({numRoom: value, id: dataP?.id})}
+                  data={dataP}
+                  onSelect={setNumRoom}
+                />
               </View>
             </View>
           </TouchableNativeFeedback>

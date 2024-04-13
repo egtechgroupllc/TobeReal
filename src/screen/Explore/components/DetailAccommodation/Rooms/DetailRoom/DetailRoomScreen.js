@@ -7,10 +7,8 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {
   IconAcreage,
-  IconBed,
   IconConditioner,
   IconFridge,
-  IconLand,
   IconPeople,
   IconRoom,
   IconTV,
@@ -19,26 +17,15 @@ import {
 import CustomText from '../../../../../../components/CustomText';
 import MainWrapper from '../../../../../../components/MainWrapper';
 import {useAuthentication} from '../../../../../../hooks/useAuthentication';
-import Button from '../../../../../Profile/components/Button';
+import {formatPrice} from '../../../../../../utils/format';
 import ImageDetail from '../../../../../components/ImageDetail';
 import ItemUtil from '../components/ItemUtil';
-import {formatPrice} from '../../../../../../utils/format';
-import {CustomButton} from '../../../../../../components';
 import BookRoom from './BookRoom';
 
 export default function DetailRoomScreen({route}) {
-  const {image, title, price, acreage, info, name, description} = {};
   const data = route.params;
-
-  const {token} = useAuthentication();
   const {t} = useLanguage();
-  const navigation = useNavigation();
 
-  const Ok = () => {
-    token
-      ? navigation.navigate('NavigationAuth')
-      : navigation.navigate('BookingScreen');
-  };
   return (
     <>
       <MainWrapper
@@ -109,7 +96,7 @@ export default function DetailRoomScreen({route}) {
               />
               <ItemUtil
                 Icon={IconRoom}
-                value={data.room_bed_type.name}
+                value={data?.room_bed_type?.name}
                 title={'Loại giường'}
                 styleWrapper={{
                   width: '45%',
@@ -176,8 +163,8 @@ export default function DetailRoomScreen({route}) {
                 <CustomText textType="semiBold">Tiện nghi phòng:</CustomText>
 
                 <View style={styles.contentFeat}>
-                  {data?.features?.map(item => (
-                    <View style={styles.boxFeat}>
+                  {data?.features?.map((item, index) => (
+                    <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
                       <CustomText>{item}</CustomText>
                     </View>
@@ -193,8 +180,8 @@ export default function DetailRoomScreen({route}) {
                 <CustomText textType="semiBold">Phòng tắm:</CustomText>
 
                 <View style={styles.contentFeat}>
-                  {data?.features?.map(item => (
-                    <View style={styles.boxFeat}>
+                  {data?.features?.map((item, index) => (
+                    <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
                       <CustomText>{item}</CustomText>
                     </View>
@@ -205,7 +192,7 @@ export default function DetailRoomScreen({route}) {
           </View>
         </View>
       </MainWrapper>
-      <BookRoom />
+      <BookRoom data={data} />
     </>
   );
 }

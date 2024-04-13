@@ -13,7 +13,6 @@ import {
   TextInputProps,
   TextStyle,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';

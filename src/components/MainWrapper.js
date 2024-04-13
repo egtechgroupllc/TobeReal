@@ -15,6 +15,7 @@ export default function MainWrapper({
   noSafeArea,
   refreshControl = false,
   scrollEnabled = true,
+  noImgColor,
   onScroll = () => {},
 }) {
   const headerHeight = useHeaderHeight();
@@ -26,12 +27,13 @@ export default function MainWrapper({
     queryClient.invalidateQueries();
     setRefresh(false);
   }
+  const Component = noImgColor ? View : CustomImage;
 
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: COLORS.primary}}
       edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
-      <CustomImage
+      <Component
         source={images.background}
         resizeMode="stretch"
         style={[
@@ -40,6 +42,7 @@ export default function MainWrapper({
           backgroundColor && {backgroundColor},
           styleWrapper,
         ]}>
+        <View />
         {scrollEnabled ? (
           <ScrollView
             refreshControl={
@@ -63,7 +66,7 @@ export default function MainWrapper({
         ) : (
           <View style={{flex: 1, ...styleContent}}>{children}</View>
         )}
-      </CustomImage>
+      </Component>
     </SafeAreaView>
   );
 }
