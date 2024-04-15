@@ -100,6 +100,7 @@ export default function Bottom() {
       {token && (
         <CustomButton
           text={t('log_out')}
+          styleText={{color: COLORS.white}}
           onPress={handleLogOut}
           buttonType="large"
           linearGradientProps

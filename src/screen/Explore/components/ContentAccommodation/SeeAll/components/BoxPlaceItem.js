@@ -7,16 +7,15 @@ import {
   IconMapView,
   IconMarker,
 } from '../../../../../../assets/icon/Icon';
+import CustomImage from '../../../../../../components/CustomImage';
+import CustomText from '../../../../../../components/CustomText';
 import Ribbon from '../../../../../../components/Ribbon';
 import Star from '../../../../../../components/Star';
 import {formatPrice} from '../../../../../../utils/format';
-
+import ViewMultiPrice from '../../BoxPlaceItem/ViewMultiPrice';
 import TopImg from '../../BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from '../../BoxPlaceItem/BoxPlaceItemLoading';
-import CustomImage from '../../../../../../components/CustomImage';
-import CustomText from '../../../../../../components/CustomText';
-import ViewMultiPrice from '../../BoxPlaceItem/ViewMultiPrice';
 
 export default function BoxPlaceItem({
   data,
@@ -78,7 +77,7 @@ export default function BoxPlaceItem({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                 style={styles.img}
               />
             )}
@@ -100,7 +99,10 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.white},
+              ]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
@@ -142,8 +144,11 @@ export default function BoxPlaceItem({
                       textType="semiBold"
                       style={[
                         styles.buildingName,
-                        isStar && {fontSize: SIZES.xMedium},
-                        isDiscount && {color: COLORS.primary},
+                        isStar && {
+                          fontSize: SIZES.xMedium,
+                          color: COLORS.white,
+                        },
+                        isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(data?.price, {
                         locales: 'en',
@@ -151,7 +156,7 @@ export default function BoxPlaceItem({
                       {time && (
                         <CustomText
                           textType="regular"
-                          style={{fontSize: SIZES.xSmall}}>
+                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
                           / {rental}
                         </CustomText>
                       )}
@@ -194,10 +199,10 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     // minHeight: scale(200),
     // height: 200,
-    borderRadius: scale(12),
+    borderRadius: 12,
   },
   img: {
     width: '100%',
@@ -214,6 +219,7 @@ const styles = StyleSheet.create({
 
   buildingName: {
     flex: 1,
+    color: COLORS.white,
   },
   price: {
     flexDirection: 'row',
@@ -225,5 +231,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+    color: COLORS.primary,
   },
 });

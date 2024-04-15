@@ -19,12 +19,14 @@ export default function Info() {
               width: scale(12),
               height: scale(12),
             }}
+            fill={COLORS.white}
           />
         </View>
         <CustomText
           textType="medium"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
             // flex: 1,
           }}>
           Have a broker certificate
@@ -37,16 +39,17 @@ export default function Info() {
               width: scale(12),
               height: scale(12),
             }}
-            fill={'#000'}
+            fill={COLORS.white}
           />
         </View>
         <CustomText
           textType="medium"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
             // flex: 1,
           }}>
-          7 years participating in Saveloka.vn
+          7 years participating in nowtravel.vn
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>
@@ -56,12 +59,14 @@ export default function Info() {
               width: scale(12),
               height: scale(12),
             }}
+            fill={COLORS.white}
           />
         </View>
         <CustomText
           textType="medium"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
             // flex: 1,
           }}>
           Phone: 0984839994
@@ -74,12 +79,14 @@ export default function Info() {
               width: scale(12),
               height: scale(12),
             }}
+            fill={COLORS.white}
           />
         </View>
         <CustomText
           textType="medium"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
             // flex: 1,
           }}>
           Email: hoangminh9876@gmail.com

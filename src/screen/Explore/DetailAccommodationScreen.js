@@ -10,13 +10,13 @@ import MainWrapper from '../../components/MainWrapper';
 import BookAccommodation from './components/DetailAccommodation/BookAccommodation';
 import DetailAccommoMap from './components/DetailAccommodation/DetailAccommoMap';
 import DetailAccommodationLoading from './components/DetailAccommodation/DetailAccommodationLoading';
-import DynamicHeader from './components/DetailAccommodation/DynamicHeader';
 import InfoAdditional from './components/DetailAccommodation/InfoAdditional';
 import InfoDetail from './components/DetailAccommodation/InfoDetail';
 import InfoUnitFacilities from './components/DetailAccommodation/InfoUnitFacilities';
-import Review from './components/DetailAccommodation/Review';
 import Room from './components/DetailAccommodation/Rooms/Room';
 import SimilarApartmentsNearby from './components/DetailAccommodation/SimilarApartmentsNearby';
+import Review from './components/ContentTour/DetailTour/Review';
+import DynamicHeader from './components/ContentTour/DetailTour/DynamicHeader';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailAccommodationScreen({route}) {
@@ -29,6 +29,8 @@ export default function DetailAccommodationScreen({route}) {
     <DetailAccommoMap data={params} />,
     <Room name={title} data={params} />,
     <Review dataP={params} />,
+    // <Review dataP={params} />,
+
     <InfoAdditional data={params} />,
     <SimilarApartmentsNearby data={params} />,
   ]).current;
@@ -132,7 +134,7 @@ export default function DetailAccommodationScreen({route}) {
             contentContainerStyle={{
               paddingTop: Header_Max_Height + scale(50),
               paddingBottom: tabBarHeight,
-              backgroundColor: '#f1f1f1',
+              // backgroundColor: '#f1f1f1',
             }}
             onScroll={handleScroll}
             ref={scrollRef}>

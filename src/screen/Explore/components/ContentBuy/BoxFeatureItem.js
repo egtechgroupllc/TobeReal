@@ -90,7 +90,7 @@ export default function BoxFeatureItem({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                 style={styles.img}></CustomImage>
             )}
 
@@ -105,7 +105,7 @@ export default function BoxFeatureItem({
             <View style={{paddingVertical: scale(10)}}>
               <CustomText
                 textType="bold"
-                style={[isStar && {fontSize: SIZES.small, color: '#252B5C'}]}
+                style={[isStar && {fontSize: SIZES.small, color: COLORS.white}]}
                 numberOfLines={2}>
                 {data?.name}
               </CustomText>
@@ -119,7 +119,9 @@ export default function BoxFeatureItem({
                 <IconMarker width={scale(9)} height={scale(9)} />
                 <CustomText
                   textType="regular"
-                  style={[isStar && {fontSize: SIZES.xSmall, color: '#53587A'}]}
+                  style={[
+                    isStar && {fontSize: SIZES.xSmall, color: COLORS.white},
+                  ]}
                   numberOfLines={2}>
                   Jakarta, Indonesia
                 </CustomText>
@@ -158,7 +160,10 @@ export default function BoxFeatureItem({
                         textType="bold"
                         style={[
                           styles.buildingName,
-                          isStar && {fontSize: SIZES.small, color: '#252B5C'},
+                          isStar && {
+                            fontSize: SIZES.small,
+                            color: COLORS.white,
+                          },
                           isDiscount && {color: COLORS.white},
                         ]}>
                         {formatPrice(data?.price, {
@@ -406,7 +411,7 @@ export default function BoxFeatureItem({
 const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
-    backgroundColor: '#F5F4F8',
+    backgroundColor: COLORS.theme,
     minHeight: scale(170),
     // height: 200,
     borderRadius: 12,

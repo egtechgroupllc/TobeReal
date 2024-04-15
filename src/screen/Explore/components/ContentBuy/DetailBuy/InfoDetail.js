@@ -39,7 +39,9 @@ export default function InfoDetail({data, price}) {
         <View style={styles.room}>
           <Star />
 
-          <CustomText textType="medium">(10 Evaluate)</CustomText>
+          <CustomText textType="medium" style={{color: COLORS.white}}>
+            (10 Evaluate)
+          </CustomText>
           <TouchableOpacity activeOpacity={0.7}>
             <CustomImage
               source={images.iconTiktok}
@@ -58,15 +60,19 @@ export default function InfoDetail({data, price}) {
         </View>
 
         <View style={styles.itemHear}>
-          <IconLocation width={scale(14)} height={scale(14)} />
-          <CustomText textType="regular" style={{flex: 1}}>
+          <IconLocation
+            width={scale(14)}
+            height={scale(14)}
+            fill={COLORS.white}
+          />
+          <CustomText textType="regular" style={{flex: 1, color: COLORS.white}}>
             {data?.address}
           </CustomText>
         </View>
 
         <View style={styles.itemHear}>
-          <IconClock width={scale(14)} height={scale(14)} fill={'#ccc'} />
-          <CustomText textType="regular" style={{flex: 1}}>
+          <IconClock width={scale(14)} height={scale(14)} fill={COLORS.white} />
+          <CustomText textType="regular" style={{flex: 1, color: COLORS.white}}>
             {calculateTimeElapsed(data.createdAt)}
           </CustomText>
         </View>
@@ -76,7 +82,7 @@ export default function InfoDetail({data, price}) {
       <View style={styles.boxTourTime}>
         <View
           style={{
-            backgroundColor: '#F5F5F5',
+            backgroundColor: COLORS.theme,
             height: scale(10),
           }}
         />
@@ -85,7 +91,7 @@ export default function InfoDetail({data, price}) {
             paddingHorizontal: scale(20),
           }}>
           <View style={styles.listInfo}>
-            <CustomText textType="semiBold" style={{color: COLORS.black}}>
+            <CustomText textType="semiBold" style={{color: COLORS.white}}>
               {t('Price')}:{' '}
               <CustomText
                 textType="bold"
@@ -96,7 +102,7 @@ export default function InfoDetail({data, price}) {
               </CustomText>
             </CustomText>
 
-            <CustomText textType="regular" style={styles.text}>
+            <CustomText textType="regular" style={{color: COLORS.white}}>
               {t('Acreage')}:{' '}
               <CustomText textType="semiBold" style={styles.name}>
                 {formatPrice(data?.size, {unit: 'm²'})}
@@ -167,7 +173,7 @@ export default function InfoDetail({data, price}) {
 
       <View
         style={{
-          backgroundColor: '#F5F5F5',
+          backgroundColor: COLORS.theme,
           height: scale(10),
         }}
       />
@@ -179,7 +185,7 @@ export default function InfoDetail({data, price}) {
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -191,8 +197,8 @@ const styles = StyleSheet.create({
     alignItems: 'center  ',
     columnGap: scale(5),
   },
-  name: {fontSize: SIZES.medium},
-  text1: {fontSize: SIZES.xxSmall, width: '30%'},
+  name: {fontSize: SIZES.medium, color: COLORS.white},
+  text1: {fontSize: SIZES.xxSmall, width: '30%', color: COLORS.white},
   line: {
     width: '100%',
     height: scale(1),
@@ -205,7 +211,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.transparentGrey,
     minHeight: scale(50),
     paddingVertical: scale(10),
   },

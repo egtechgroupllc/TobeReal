@@ -8,10 +8,17 @@ export default function InfoItem({Icon, name, value, styleIcon}) {
   return (
     <View style={styles.box}>
       {Icon && (
-        <IconComponent style={{...styles.image, ...styleIcon}} fill={'#aaa'} />
+        <IconComponent
+          style={{...styles.image, ...styleIcon}}
+          fill={COLORS.white}
+        />
       )}
-      <CustomText textType="semiBold">{name}:</CustomText>
-      <CustomText textType="regular">{value}</CustomText>
+      <CustomText textType="semiBold" style={{color: COLORS.white}}>
+        {name}:
+      </CustomText>
+      <CustomText textType="regular" style={{color: COLORS.white}}>
+        {value}{' '}
+      </CustomText>
     </View>
   );
 }

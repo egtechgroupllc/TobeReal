@@ -6,11 +6,18 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AlphabetList} from 'react-native-section-alphabet-list';
 import {getListCountry} from '../../Model/api/common';
-import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  WIDTH,
+  images,
+  scale,
+} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CheckBox from '../../components/CheckBox';
@@ -87,14 +94,16 @@ export default function CountryScreen() {
   }, [data?.data, deferredValue]);
 
   return (
-    <View style={{flex: 1}}>
+    <ImageBackground style={{flex: 1}} source={images.background}>
       <View style={styles.content}>
         <CustomInput
           placeholder={t('search')}
+          placeholderTextColor={COLORS.white}
           iconLeft={IconSearch}
           styleIcon={{
             width: scale(16),
             height: scale(16),
+            color: COLORS.white,
           }}
           onChangeText={setSearch}
         />
@@ -113,6 +122,7 @@ export default function CountryScreen() {
           ListEmptyComponent={() => <EmptyData />}
           renderCustomItem={item => (
             <CheckBox
+              textStyle={{color: COLORS.white}}
               key={`key_${item?.id}`}
               text={`${item?.flag ? item?.flag : ''} ${item?.name}`}
               textLeft
@@ -125,17 +135,19 @@ export default function CountryScreen() {
           renderCustomSectionHeader={section => (
             <View
               style={{
-                backgroundColor: COLORS.white,
+                backgroundColor: COLORS.theme,
                 paddingVertical: scale(4),
               }}>
-              <CustomText style={{fontSize: SIZES.medium}} textType="semiBold">
+              <CustomText
+                style={{fontSize: SIZES.medium, color: COLORS.primary}}
+                textType="semiBold">
                 {section?.title}
               </CustomText>
             </View>
           )}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.transparentGrey,
     width: WIDTH.widthContain,
     alignSelf: 'center',
     marginTop: scale(20),
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
   },
   indexLetterStyle: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
     fontWeight: '500',
   },
   indexContainerStyle: {

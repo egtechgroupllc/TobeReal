@@ -4,11 +4,11 @@ import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import SearchChooseLocation from './SearchChooseLocation';
 import SearchRecent from './SearchRecent';
 import MainWrapper from '../../../../../components/MainWrapper';
 import BoxPlaceItem from './components/BoxPlaceItem';
-import FilterMore from './FilterMore';
+import FilterMore from '../../ContentTour/SeeAll/FilterMore';
+import SearchChooseLocation from '../../ContentTour/SeeAll/SearchChooseLocation';
 
 const dataPackage = [
   {
@@ -131,7 +131,7 @@ export default function SeeAllRentScreen({route}) {
       </View>
       <View
         style={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.theme,
           height: scale(60),
           position: 'absolute',
           width: '100%',

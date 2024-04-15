@@ -25,7 +25,7 @@ export default function ItemBox({
       style={[
         styles.content,
         isShadow && {
-          backgroundColor: '#ECECEC',
+          backgroundColor: COLORS.transparentGrey,
           ...SHADOW,
         },
         style,
@@ -49,23 +49,33 @@ export default function ItemBox({
       </View> */}
       <CustomText
         textType="semiBold"
-        style={{fontSize: SIZES.large, alignSelf: 'center'}}>
+        style={{
+          fontSize: SIZES.large,
+          alignSelf: 'center',
+          color: COLORS.white,
+        }}>
         {title}
       </CustomText>
 
       <CustomImage resizeMode="contain" source={image} style={styles.image} />
-      <CustomText textType="bold" style={{fontSize: SIZES.small}}>
+      <CustomText
+        textType="bold"
+        style={{fontSize: SIZES.small, color: COLORS.white}}>
         {description}
       </CustomText>
       <CustomText
         textType="semiBold"
-        style={{fontSize: SIZES.small, marginTop: 'auto'}}>
+        style={{fontSize: SIZES.small, marginTop: 'auto', color: COLORS.white}}>
         {acreage}
       </CustomText>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <CustomText
           textType="medium"
-          style={{fontSize: SIZES.small, marginTop: 'auto'}}>
+          style={{
+            fontSize: SIZES.small,
+            marginTop: 'auto',
+            color: COLORS.white,
+          }}>
           {info}
         </CustomText>
         {/* <CustomText

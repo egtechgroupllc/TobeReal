@@ -22,7 +22,7 @@ export default function SellManagementScreen() {
   const [dataItemEstate, setDataItemEstate] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Danh Sách Bất Động Sản Đã Tạo',
+      headerTitle: 'Real Estate Listing Created',
     });
   }, [params]);
 
@@ -100,7 +100,7 @@ export default function SellManagementScreen() {
 
           <BottomSheet
             ref={bottomSheetRef}
-            titleIndicator={'Thao Tác'}
+            titleIndicator={'Operation'}
             snapPoints={['35%']}
             disableScroll
             styleContent={styles.bottomSheet}>

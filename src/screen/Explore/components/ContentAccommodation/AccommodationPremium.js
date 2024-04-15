@@ -10,7 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 export default function AccommodationPremium({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  const title = [t('saveloka_premium')];
+  const title = [t('nowtravel_premium')];
   const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
@@ -28,7 +28,7 @@ export default function AccommodationPremium({data}) {
           onPressCategory={item => console.log(item)}
           heading={title}
           subHeading={t('selected_premium')}
-          styleWrapper={{backgroundColor: COLORS.transparentGreyLight}}>
+          styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

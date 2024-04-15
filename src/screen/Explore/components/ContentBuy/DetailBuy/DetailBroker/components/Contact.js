@@ -5,15 +5,15 @@ import {
   LogoMessageFB,
   LogoZalo,
 } from '../../../../../../../assets/icon/Icon';
-import {SIZES, scale} from '../../../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../../../../../components/CustomText';
 
 export default function Contact() {
   const data = [
     {
-      name: 'Zalo',
-      icon: <LogoZalo />,
+      name: 'Skype',
+      icon: '',
     },
     {
       name: 'Messenger',
@@ -29,7 +29,7 @@ export default function Contact() {
       {data.map((item, index) => (
         <TouchableOpacity key={index}>
           <LinearGradient
-            colors={['#FFE55A', '#F0B90B']}
+            colors={COLORS.backgroundLinear}
             start={{x: 0, y: 1.5}}
             end={{x: 0, y: 0}}
             style={{...styles.button}}>
@@ -38,6 +38,7 @@ export default function Contact() {
               textType="bold"
               style={{
                 fontSize: SIZES.xSmall,
+                color: COLORS.white,
               }}>
               {item.name}
             </CustomText>

@@ -6,11 +6,24 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {
+  FlatList,
+  ImageBackground,
+  StyleSheet,
+  View,
+  TextStyle,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {getListCurrency} from '../../Model/api/common';
-import {SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  WIDTH,
+  images,
+  scale,
+} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CheckBox from '../../components/CheckBox';
@@ -70,10 +83,10 @@ export default function CurrencyScreen() {
   }, [currency]);
 
   return (
-    <View style={{flex: 1}}>
+    <ImageBackground style={{flex: 1}} source={images.background}>
       <View
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.transparentGrey,
           width: WIDTH.widthContain,
           alignSelf: 'center',
           marginTop: scale(20),
@@ -85,10 +98,12 @@ export default function CurrencyScreen() {
         }}>
         <CustomInput
           placeholder={t('search')}
+          placeholderTextColor={COLORS.white}
           iconLeft={IconSearch}
           styleIcon={{
             width: scale(16),
             height: scale(16),
+            color: COLORS.white,
           }}
           onChangeText={setSearch}
         />
@@ -110,6 +125,7 @@ export default function CurrencyScreen() {
                 text={item?.currency_code}
                 textLeft
                 isRadio
+                textStyle={{color: COLORS.white}}
                 onPress={() => setCurrency(item)}
                 isChecked={currency?.id === item?.id}
                 style={styles.checkBox}
@@ -118,7 +134,7 @@ export default function CurrencyScreen() {
           }}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 

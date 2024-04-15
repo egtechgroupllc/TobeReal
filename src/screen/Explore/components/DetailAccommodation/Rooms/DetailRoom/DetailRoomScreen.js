@@ -35,8 +35,8 @@ export default function DetailRoomScreen({route}) {
   const notify = () => {};
   const Ok = () => {
     token
-      ? navigation.navigate('NavigationAuth')
-      : navigation.navigate('BookingScreen');
+      ? navigation.navigate('BookingScreen')
+      : navigation.navigate('NavigationAuth');
   };
   return (
     <MainAuth>
@@ -53,8 +53,9 @@ export default function DetailRoomScreen({route}) {
             textType="semiBold"
             style={{
               ...styles.textLarge,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(20),
+              color: COLORS.white,
             }}>
             {name}
           </CustomText>
@@ -66,7 +67,7 @@ export default function DetailRoomScreen({route}) {
             textType="semiBold"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               paddingVertical: scale(10),
               paddingHorizontal: scale(20),
             }}>
@@ -78,7 +79,7 @@ export default function DetailRoomScreen({route}) {
             textType="semiBold"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
@@ -106,7 +107,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text1,
-                  color: COLORS.black,
+                  color: COLORS.white,
                 }}>
                 {description}
               </CustomText>
@@ -124,7 +125,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text1,
-                  color: COLORS.black,
+                  color: COLORS.white,
                 }}>
                 {info}
               </CustomText>
@@ -142,7 +143,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text1,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   alignSelf: 'flex-start',
                 }}>
                 {acreage}
@@ -153,7 +154,7 @@ export default function DetailRoomScreen({route}) {
             textType="semiBold"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
@@ -182,7 +183,7 @@ export default function DetailRoomScreen({route}) {
                   textType="medium"
                   style={{
                     ...styles.text2,
-                    color: COLORS.black,
+                    color: COLORS.white,
                   }}>
                   Free wifi
                 </CustomText>
@@ -193,7 +194,7 @@ export default function DetailRoomScreen({route}) {
                   textType="medium"
                   style={{
                     ...styles.text2,
-                    color: COLORS.black,
+                    color: COLORS.white,
                   }}>
                   Air conditioner
                 </CustomText>
@@ -204,7 +205,7 @@ export default function DetailRoomScreen({route}) {
                   textType="medium"
                   style={{
                     ...styles.text2,
-                    color: COLORS.black,
+                    color: COLORS.white,
                   }}>
                   TV
                 </CustomText>
@@ -215,7 +216,7 @@ export default function DetailRoomScreen({route}) {
                   textType="medium"
                   style={{
                     ...styles.text2,
-                    color: COLORS.black,
+                    color: COLORS.white,
                   }}>
                   Fridge
                 </CustomText>
@@ -226,7 +227,7 @@ export default function DetailRoomScreen({route}) {
             textType="semiBold"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
@@ -252,7 +253,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(20),
                   flex: 1,
                 }}>
@@ -262,7 +263,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(20),
                   flex: 1,
                 }}>
@@ -278,7 +279,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -288,7 +289,7 @@ export default function DetailRoomScreen({route}) {
                 textType="medium"
                 style={{
                   ...styles.text2,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(10),
                   flex: 1,
                 }}>
@@ -302,20 +303,20 @@ export default function DetailRoomScreen({route}) {
                 paddingBottom: scale(30),
               }}>
               <CustomText
-                textType="semiBold"
+                textType="bold"
                 style={{
                   ...styles.text,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(20),
                   flex: 1,
                 }}>
                 {t('total')}:
               </CustomText>
               <CustomText
-                textType="medium"
+                textType="bold"
                 style={{
                   ...styles.text,
-                  color: COLORS.black,
+                  color: COLORS.white,
                   marginTop: scale(20),
                   flex: 1,
                 }}>
@@ -343,9 +344,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#F0B90B40',
+    borderColor: COLORS.transparentGrey,
+    backgroundColor: COLORS.transparentGrey,
+    shadowColor: COLORS.primary,
     shadowOffset: {
       width: 0,
       height: 5,
@@ -384,18 +385,18 @@ const styles = StyleSheet.create({
   },
   line: {
     height: scale(1),
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   box: {
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderBottomLeftRadius: scale(5),
     borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '90%',
     paddingBottom: scale(20),

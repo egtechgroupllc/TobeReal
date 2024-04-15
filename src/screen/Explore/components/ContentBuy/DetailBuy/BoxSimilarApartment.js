@@ -83,7 +83,7 @@ export default function BoxSimilarApartment({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                 style={styles.img}></CustomImage>
             )}
 
@@ -96,7 +96,7 @@ export default function BoxSimilarApartment({
           </View>
           <View
             style={{
-              backgroundColor: COLORS.primary,
+              backgroundColor: COLORS.theme,
               flex: 1,
               marginTop: scale(18),
               margin: scale(5),
@@ -264,7 +264,7 @@ export default function BoxSimilarApartment({
                   styles.buildingName,
                   isStar && {
                     fontSize: SIZES.small,
-                    color: COLORS.white,
+                    color: COLORS.primary,
                     marginTop: scale(5),
                   },
                   isDiscount && {color: COLORS.white},
@@ -310,7 +310,7 @@ export default function BoxSimilarApartment({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.transparentGrey,
     minHeight: scale(200),
     // height: 200,
     borderRadius: 12,

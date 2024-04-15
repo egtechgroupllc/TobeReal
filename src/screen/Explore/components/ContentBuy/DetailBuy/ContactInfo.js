@@ -34,6 +34,7 @@ export default function ContactInfo({data}) {
             textType="bold"
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.white,
             }}>
             Information
           </CustomText>
@@ -60,7 +61,7 @@ export default function ContactInfo({data}) {
                 style={{
                   color: '#009BA1',
                 }}>
-                Môi giới chuyên nghiệp
+                Professional broker
               </CustomText>
             )}
           </View>
@@ -81,6 +82,7 @@ export default function ContactInfo({data}) {
                 style={{
                   fontSize: SIZES.xMedium,
                   flex: 1,
+                  color: COLORS.white,
                 }}>
                 {data?.contact_name}
               </CustomText>
@@ -94,6 +96,7 @@ export default function ContactInfo({data}) {
                       width: scale(12),
                       height: scale(12),
                     }}
+                    fill={COLORS.white}
                   />
                 </View>
                 <CustomText
@@ -101,6 +104,7 @@ export default function ContactInfo({data}) {
                   style={{
                     fontSize: SIZES.xMedium,
                     flex: 1,
+                    color: COLORS.white,
                   }}>
                   {data?.contact_phone}
                 </CustomText>
@@ -113,6 +117,7 @@ export default function ContactInfo({data}) {
                       width: scale(12),
                       height: scale(12),
                     }}
+                    fill={COLORS.white}
                   />
                 </View>
                 <CustomText
@@ -120,6 +125,7 @@ export default function ContactInfo({data}) {
                   style={{
                     fontSize: SIZES.xMedium,
                     flex: 1,
+                    color: COLORS.white,
                   }}>
                   {data?.contact_email}
                 </CustomText>
@@ -134,17 +140,17 @@ export default function ContactInfo({data}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     paddingVertical: scale(16),
     paddingHorizontal: scale(20),
   },
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(10),
     ...SHADOW,
   },
   header: {
-    backgroundColor: '#FFCE00',
+    backgroundColor: COLORS.primary,
     padding: scale(10),
     borderRadius: scale(10),
     alignItems: 'center',

@@ -58,7 +58,7 @@ export default function SelectProvince({
       render={({field: {onChange}, fieldState: {error}}) => {
         return (
           <View style={styles.wrapper}>
-            <CustomText style={{color: COLORS.black}}>
+            <CustomText style={{color: COLORS.white}}>
               {t('province_city')}
             </CustomText>
 

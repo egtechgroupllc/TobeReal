@@ -5,94 +5,62 @@ import {images, scale} from '../../../../assets/constants';
 import WrapperContent from '../WrapperContent';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import InViewPort from '../../../../components/InViewport';
-const dataInternational= [
+const dataInternational = [
   {
     id: 1,
     src: images.singapore,
     name: 'Singapore',
     price: 224000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.thailan,
     name: 'Thailand',
     price: 995000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.indo,
     name: 'Indonesia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.malay,
     name: 'Malaysia',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.philip,
     name: 'Philippines',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.korea,
     name: 'Korea',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 7,
     src: images.japan,
     name: 'Japan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 8,
     src: images.taiwan,
     name: 'Taiwan',
     price: 280000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
 
@@ -144,7 +112,7 @@ const ComponentContain = ({children, noContain}) => {
   ) : (
     <WrapperContent
       heading={t('looking_for_a_place')}
-      subHeading={t('find_by_saveloka')}>
+      subHeading={t('find_by_nowtravel')}>
       {children}
     </WrapperContent>
   );

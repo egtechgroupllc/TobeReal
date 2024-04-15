@@ -29,7 +29,7 @@ export default function FindBest({data}) {
           onPressCategory={item => console.log(item)}
           heading={title}
           subHeading={t('disc_upto') + ` 30%!`}
-          styleWrapper={{backgroundColor: COLORS.transparentGreyLight}}>
+          styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

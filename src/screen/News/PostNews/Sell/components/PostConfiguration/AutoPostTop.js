@@ -29,16 +29,16 @@ export default function AutoPostTop({date, setValue, onCount, countNum}) {
             fontSize: SIZES.xMedium,
             marginBottom: scale(5),
           }}>
-          Tự động đăng lại
+          Automatically repost
         </CustomText>
 
         <CustomText>
-          Số lần còn lại
-          <CustomText textType="semiBold"> {count} lần</CustomText>
+          Number of times remaining
+          <CustomText textType="semiBold"> {count} time</CustomText>
         </CustomText>
 
         <CustomText>
-          Lần đăng lại cuối dự kiến
+          Last repost expected
           <CustomText textType="semiBold"> {dateEnd}</CustomText>
         </CustomText>
       </View>

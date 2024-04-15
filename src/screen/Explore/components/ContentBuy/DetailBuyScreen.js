@@ -15,8 +15,9 @@ import BookAccommodation from './DetailBuy/BookAccommodation';
 import ContactInfo from './DetailBuy/ContactInfo';
 import DetailAccommodationLoading from './DetailBuy/DetailAccommodationLoading';
 import InfoDetail from './DetailBuy/InfoDetail';
-import Review from './DetailBuy/Review';
+
 import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
+import Review from '../ContentTour/DetailTour/Review';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
@@ -151,7 +152,6 @@ export default function DetailBuyScreen({route}) {
             contentContainerStyle={{
               paddingTop: Header_Max_Height + scale(50),
               paddingBottom: tabBarHeight,
-              backgroundColor: '#f1f1f1',
             }}
             onScroll={handleScroll}
             ref={scrollRef}>

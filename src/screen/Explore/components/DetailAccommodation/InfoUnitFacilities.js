@@ -32,6 +32,7 @@ export default function InfoUnitFacilities({data}) {
           textType="semiBold"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.white,
           }}>
           {t('room_amenities')}
         </CustomText>
@@ -46,6 +47,7 @@ export default function InfoUnitFacilities({data}) {
                 textType="regular"
                 style={{
                   fontSize: SIZES.xMedium,
+                  color: COLORS.white,
                 }}>
                 {item}
               </CustomText>

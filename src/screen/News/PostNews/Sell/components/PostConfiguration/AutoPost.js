@@ -2,7 +2,7 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, Switch, TouchableOpacity, View} from 'react-native';
 
-import {SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {IconEditProfile, IconReset} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import BottomSheet from '../../../../../../components/BottomSheet';
@@ -49,8 +49,9 @@ export default function AutoPost({setValue, date, params, unregister}) {
         textType="semiBold"
         style={{
           fontSize: SIZES.medium,
+          color: COLORS.white,
         }}>
-        Tiện ích
+        Utilities
       </CustomText>
 
       <View style={styles.content}>
@@ -71,18 +72,23 @@ export default function AutoPost({setValue, date, params, unregister}) {
             textType="semiBold"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.white,
             }}>
-            Tự động đăng lại
+            Automatically repost
           </CustomText>
           {isConfirm ? (
             <View>
-              <CustomText>- Tự động đăng lại {count.count} lần</CustomText>
-              <CustomText>- Lần đăng cuối vào ngày {dateEnd}</CustomText>
+              <CustomText style={{color: COLORS.white}}>
+                - Automatically repost {count.count} time
+              </CustomText>
+              <CustomText style={{color: COLORS.white}}>
+                - Last posted on date {dateEnd}
+              </CustomText>
             </View>
           ) : (
-            <CustomText>
-              Tin sẽ được đăng lại ngay khi tin vừa hết hạn. Mỗi lần đăng lại,
-              hệ thống chỉ trừ tiền của lần đăng lại đó.
+            <CustomText style={{color: COLORS.white}}>
+              News will be reposted as soon as it expires. Every time I repost,
+              The system only deducts money for that repost.
             </CustomText>
           )}
         </View>
@@ -120,7 +126,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
         />
 
         <BottomSheet
-          titleIndicator={'Tự động đăng lại'}
+          titleIndicator={'Automatically repost'}
           snapPoints={['40%']}
           ref={bottomSheetRef}
           onDismiss={() => !isConfirm && setIsEnabled(false)}
@@ -137,23 +143,23 @@ export default function AutoPost({setValue, date, params, unregister}) {
 
           <View>
             <CustomText>
-              - Tin sẽ được đăng lại ngay khi tin vừa hết hạn.
+              - News will be reposted as soon as it expires.
             </CustomText>
             <CustomText>
-              - Đến thời điểm đăng lại, hệ thống mới thực hiện trừ tiền.
+              - At the time of re-posting, the system will deduct money.
             </CustomText>
             <CustomText>
-              - Mỗi lần tin được đăng lại, hệ thống chỉ trừ tiền của lần đăng
-              lại đó.
+              - Each time a post is reposted, the system only deducts the post
+              fee there again.
             </CustomText>
             <CustomText>
-              - Mỗi lần tin được đăng lại, hệ thống chỉ trừ tiền của lần đăng
-              lại đó.
+              - Each time a post is reposted, the system only deducts the post
+              fee there again.
             </CustomText>
           </View>
 
           <CustomButton
-            text="Xác nhận"
+            text="Confirm"
             onPress={() => {
               setIsConfirm(true);
               bottomSheetRef.current.close();
@@ -168,7 +174,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(12),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.transparentGrey,
     padding: scale(10),
     ...SHADOW,
   },

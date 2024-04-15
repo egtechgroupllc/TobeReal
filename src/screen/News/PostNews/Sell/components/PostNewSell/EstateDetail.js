@@ -61,10 +61,12 @@ export default function EstateDetail({control, errors, watch, setValue}) {
   const arrKeywords = useRef([
     'currency_id',
     'direction_main',
-    'size',
+    'size_width',
+    'size_length',
     'price',
     'legal_documents',
     'furnish',
+    'price_lock',
   ]).current;
 
   const {data} = useQuery({
@@ -136,18 +138,39 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={styles.line} />
 
-          <CustomInput
-            label={t('Acreage (m²)')}
-            placeholderTextColor={COLORS.grey}
-            styleTextLabel={styles.label}
-            control={control}
-            name="size"
-            defaultValue={watch('size') && String(watch('size'))}
-            placeholder={'M²'}
-            rules={requireField(t('this_field_required'))}
-            style={{...styles.textInput}}
-            keyboardType="numeric"
-          />
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(30),
+            }}>
+            <CustomInput
+              label={'Chiều rộng'}
+              placeholder="Chiều rộng"
+              placeholderTextColor={COLORS.grey}
+              name="size_width"
+              rules={requireField(t('this_field_required'))}
+              styleWrapper={{
+                flex: 1,
+              }}
+              control={control}
+              styleTextLabel={styles.label}
+              style={styles.textInput}
+            />
+
+            <CustomInput
+              label={'Chiều dài'}
+              placeholder="Chiều dài"
+              placeholderTextColor={COLORS.grey}
+              name="size_length"
+              control={control}
+              rules={requireField(t('this_field_required'))}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              style={styles.textInput}
+            />
+          </View>
 
           {/* 
           <Counter heading={'Số phòng'} min={0} max={255} />
@@ -170,7 +193,18 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             keyboardType="number-pad"
             enableFormatNum
           />
-
+          <CustomInput
+            label={t('Price lock')}
+            placeholderTextColor={COLORS.grey}
+            styleTextLabel={styles.label}
+            control={control}
+            name="price_lock"
+            placeholder={t('enter_price')}
+            rules={requireField(t('this_field_required'))}
+            style={{...styles.textInput}}
+            keyboardType="number-pad"
+            enableFormatNum
+          />
           <CheckBox
             text="Price can be negotiated"
             styleWrapper={{

@@ -29,7 +29,7 @@ export default function HeadContent() {
           <CustomText
             textType="regular"
             style={{
-              color: '#00A3FF',
+              color: COLORS.primary,
               fontSize: SIZES.xSmall,
             }}>
             Professional broker
@@ -40,7 +40,7 @@ export default function HeadContent() {
           <CustomText
             textType="bold"
             style={{
-              color: COLORS.black,
+              color: COLORS.white,
               fontSize: SIZES.large,
               minWidth: scale(35),
             }}>
@@ -56,7 +56,7 @@ export default function HeadContent() {
             <CustomText
               textType="regular"
               style={{
-                color: COLORS.black,
+                color: COLORS.white,
                 fontSize: SIZES.xSmall,
                 minWidth: scale(35),
               }}>

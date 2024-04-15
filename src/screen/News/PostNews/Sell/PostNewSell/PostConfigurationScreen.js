@@ -119,8 +119,9 @@ export default function PostConfigurationScreen() {
             style={{
               fontSize: SIZES.large,
               paddingHorizontal: scale(10),
+              color: COLORS.white,
             }}>
-            Cấu hình tin đăng
+            Post configuration
           </CustomText>
 
           <PostType
@@ -148,7 +149,7 @@ export default function PostConfigurationScreen() {
             width: '35%',
             alignSelf: 'center',
           }}
-          text="Quay lại"
+          text="Back"
           outline
           iconLeft={IconGoBack}
           styleIcon={{
@@ -166,7 +167,7 @@ export default function PostConfigurationScreen() {
             width: '80%',
             alignSelf: 'center',
           }}
-          text="Xác nhận"
+          text="Confirm"
           onPress={handleSubmit(handlePostLease)}
           disabled={createEstateSellMu.isPending}
         />
@@ -178,13 +179,13 @@ export default function PostConfigurationScreen() {
 const styles = StyleSheet.create({
   content: {
     rowGap: scale(20),
-    backgroundColor: '#fff',
+    // backgroundColor: COLORS.transparentGrey,
     padding: scale(10),
     ...SHADOW,
   },
   footer: {
     rowGap: scale(20),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.theme,
     paddingVertical: scale(10),
     ...SHADOW,
     flexDirection: 'row',

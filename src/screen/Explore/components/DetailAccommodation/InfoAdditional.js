@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {TabSelect} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {formatDateTime, formatPrice} from '../../../../utils/format';
@@ -33,32 +33,32 @@ export default function InfoAdditional({data}) {
               style={{
                 rowGap: scale(20),
               }}>
-              <CustomText style={{fontSize: SIZES.xMedium}}>
+              <CustomText style={styles.text}>
                 {t('property_live_date')} {'\n'}
-                <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+                <CustomText textType="bold" style={styles.text}>
                   {formatDateTime(data?.createdAt) || '14 Dec 2023'}
                 </CustomText>
               </CustomText>
-              <CustomText style={{fontSize: SIZES.xMedium}}>
+              <CustomText style={styles.text}>
                 {t('check_in')}
                 {'\n'}
-                <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+                <CustomText textType="bold" style={styles.text}>
                   {data?.check_in_time_start || '6:00'} -{' '}
                   {data?.check_in_time_end || '12:00'}
                 </CustomText>
               </CustomText>
-              <CustomText style={{fontSize: SIZES.xMedium}}>
+              <CustomText style={styles.text}>
                 {t('check_out')} {'\n'}
-                <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+                <CustomText textType="bold" style={styles.text}>
                   {data?.check_out_time_start || '13:00'} -{' '}
                   {data?.check_out_time_end || '17:00'}
                 </CustomText>
               </CustomText>
             </View>
           ) : (
-            <CustomText style={{fontSize: SIZES.xMedium}}>
+            <CustomText style={styles.text}>
               {t('monthly_deposit')} {'\n'}
-              <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+              <CustomText textType="bold" style={styles.text}>
                 {formatPrice(2000000)}
               </CustomText>
             </CustomText>
@@ -69,4 +69,9 @@ export default function InfoAdditional({data}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    color: COLORS.white,
+    fontSize: SIZES.xMedium,
+  },
+});

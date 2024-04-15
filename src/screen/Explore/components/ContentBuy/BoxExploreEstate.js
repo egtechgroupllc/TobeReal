@@ -73,6 +73,7 @@ export default function BoxExploreEstate({
             {
               width: scale(500 / seeViewNumber),
               // height: scale(200),
+              backgroundColor: COLORS.transparentGrey,
             },
             styleWrapper,
             SHADOW,
@@ -88,7 +89,7 @@ export default function BoxExploreEstate({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                 style={styles.img}></CustomImage>
             )}
 
@@ -105,7 +106,7 @@ export default function BoxExploreEstate({
             <View style={{paddingVertical: scale(10)}}>
               <CustomText
                 textType="bold"
-                style={[isStar && {fontSize: SIZES.small, color: '#252B5C'}]}
+                style={[isStar && {fontSize: SIZES.small, color: COLORS.white}]}
                 numberOfLines={2}>
                 {data?.name}
               </CustomText>
@@ -119,7 +120,9 @@ export default function BoxExploreEstate({
                 <IconMarker width={scale(9)} height={scale(9)} />
                 <CustomText
                   textType="regular"
-                  style={[isStar && {fontSize: SIZES.xSmall, color: '#53587A'}]}
+                  style={[
+                    isStar && {fontSize: SIZES.xSmall, color: COLORS.white},
+                  ]}
                   numberOfLines={2}>
                   Jakarta, Indonesia
                 </CustomText>
@@ -408,7 +411,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: scale(10),
-    backgroundColor: '#F5F4F8',
+    backgroundColor: COLORS.theme,
     minHeight: scale(284),
     // height: 200,
     borderRadius: 12,

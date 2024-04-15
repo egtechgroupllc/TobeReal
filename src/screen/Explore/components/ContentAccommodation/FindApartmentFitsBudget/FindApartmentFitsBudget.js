@@ -65,7 +65,7 @@ export default function FindApartmentFitsBudget() {
         <WrapperContent
           heading={t('find_appartment')}
           subHeading={t('price_below')}
-          styleWrapper={{backgroundColor: COLORS.transparentGreyLight}}
+          styleWrapper={{backgroundColor: 'transparent'}}
           styleContent={styles.wrapper}>
           <SelectLocation control={control} name="location" />
 

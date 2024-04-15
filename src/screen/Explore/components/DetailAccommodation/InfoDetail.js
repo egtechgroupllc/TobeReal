@@ -63,7 +63,9 @@ export default function InfoDetail({name, data}) {
             </CustomText>
           </View>
           <View style={styles.boxMore}>
-            <CustomText textType="bold">{t('discussion')} (0)</CustomText>
+            <CustomText textType="bold" style={{color: COLORS.white}}>
+              {t('discussion')} (0)
+            </CustomText>
           </View>
           <TouchableOpacity>
             <CustomImage
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },

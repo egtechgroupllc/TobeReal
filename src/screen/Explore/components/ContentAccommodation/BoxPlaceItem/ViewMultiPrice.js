@@ -56,7 +56,9 @@ export default function ViewMultiPrice({
         <View style={styles.unitAvailable}>
           <CustomText textType="semiBold" style={styles.textUnitAvailable}>
             86{'\n'}
-            <CustomText textType="regular" style={{fontSize: scale(8)}}>
+            <CustomText
+              textType="regular"
+              style={{fontSize: scale(8), color: COLORS.white}}>
               Unit {'\n'} Available
             </CustomText>
           </CustomText>
@@ -90,13 +92,17 @@ function TextPrice2({price, rental, isBorder}) {
         },
       ]}>
       <View>
-        <CustomText textType="semiBold" style={{textTransform: 'capitalize'}}>
+        <CustomText
+          textType="semiBold"
+          style={{textTransform: 'capitalize', color: COLORS.white}}>
           {rental}
         </CustomText>
       </View>
 
       <View style={[styles.buildingName, {alignItems: 'flex-end'}]}>
-        <CustomText textType="semiBold">{formatPrice(price)}</CustomText>
+        <CustomText textType="semiBold" style={{color: COLORS.white}}>
+          {formatPrice(price)}
+        </CustomText>
       </View>
     </View>
   );
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   viewMultiPrice2: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: COLORS.transparentGrey,
     borderRadius: scale(10),
     padding: scale(10),
   },
@@ -122,13 +128,13 @@ const styles = StyleSheet.create({
     borderRadius: scale(10),
     borderWidth: 1,
     borderColor: '#ccc',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: COLORS.transparentGrey,
     alignItems: 'center',
     padding: scale(4),
     paddingHorizontal: scale(6),
   },
   textUnitAvailable: {
-    color: COLORS.text,
+    color: COLORS.white,
     textAlign: 'center',
     fontSize: SIZES.xSmall,
   },

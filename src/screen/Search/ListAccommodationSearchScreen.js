@@ -5,13 +5,14 @@ import FilterSort from '../Explore/components/DetailAccommodation/Review/FilterS
 import {useLanguage} from '../../hooks/useLanguage';
 import MapHeader from '../Map/MapHeader';
 import ListAccomSearchContent from './ListAccomSearchContent';
+import {COLORS} from '../../assets/constants';
 
 export default function ListAccommodationSearchScreen() {
   const {t} = useLanguage();
   return (
     <MainWrapper
       scrollEnabled={false}
-      styleContent={{backgroundColor: '#f7f9fa'}}>
+      styleContent={{backgroundColor: 'transparent'}}>
       <View
         style={{
           flex: 1,

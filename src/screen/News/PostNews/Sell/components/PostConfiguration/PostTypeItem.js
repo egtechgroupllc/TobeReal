@@ -44,11 +44,11 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
           style={{
             color: COLORS.text,
           }}>
-          Từ{' '}
+          From{' '}
           <CustomText textType="semiBold">
             {formatPrice(data?.price)}
           </CustomText>
-          /ngày
+          /day
         </CustomText>
 
         {!!data?.numView && (
@@ -83,7 +83,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
               style={{
                 fontSize: SIZES.xSmall,
               }}>
-              Lượt xem tin
+              News views
             </CustomText>
           </View>
         )}
@@ -127,7 +127,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
       <CustomButton
         onPress={onPress}
         buttonType="normal"
-        text={isSelect ? 'Đã chọn' : 'Chọn'}
+        text={isSelect ? 'Selected' : 'Select'}
         outline={isSelect}
         styleWrapper={{
           marginTop: 'auto',

@@ -1,7 +1,12 @@
 import {FlatList, StyleSheet, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../../../components/CustomText';
-import {SIZES, images, scale} from '../../../../../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 
 const data = [
@@ -87,6 +92,7 @@ export default function Posted() {
         textType="bold"
         style={{
           fontSize: SIZES.medium,
+          color: COLORS.white,
         }}>
         Posted for sale
       </CustomText>

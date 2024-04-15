@@ -210,7 +210,7 @@ export default function ContentAccommodation() {
       <FindBest data={data} />
 
       <AccommodationPremium data={data} />
-      <VideoInfluencerApproved />
+      {/* <VideoInfluencerApproved /> */}
       <FindApartmentFitsBudget />
 
       <WeeklyHotDeal data={data} />

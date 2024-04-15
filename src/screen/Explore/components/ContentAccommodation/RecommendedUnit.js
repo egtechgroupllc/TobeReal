@@ -15,7 +15,7 @@ export default function RecommendedUnit({data}) {
       {isRender && (
         <WrapperContent
           onPressSeeAll={() => console.log(1)}
-          heading={t('saveloka_recommended')}>
+          heading={t('nowtravel_recommended')}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

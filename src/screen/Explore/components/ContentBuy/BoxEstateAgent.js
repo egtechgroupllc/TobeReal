@@ -89,7 +89,7 @@ export default function BoxEstateAgent({
                 <CustomImage source={data?.src} style={styles.img} />
               ) : (
                 <CustomImage
-                  src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                  src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                   style={styles.img}></CustomImage>
               )}
 

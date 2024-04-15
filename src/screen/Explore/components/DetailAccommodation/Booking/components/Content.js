@@ -131,7 +131,7 @@ export default function Content() {
           textType="semiBold"
           style={{
             ...styles.text2,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(20),
           }}>
           {t('Tamansari Semanggi Apartment')}
@@ -140,7 +140,7 @@ export default function Content() {
           textType="medium"
           style={{
             ...styles.text2,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(10),
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
@@ -153,7 +153,7 @@ export default function Content() {
           textType="medium"
           style={{
             ...styles.text2,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(10),
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
@@ -172,7 +172,7 @@ export default function Content() {
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
             }}>
@@ -182,7 +182,7 @@ export default function Content() {
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginTop: scale(10),
               alignSelf: 'flex-start',
             }}>
@@ -193,7 +193,7 @@ export default function Content() {
           textType="medium"
           style={{
             ...styles.text2,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(10),
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
@@ -203,7 +203,9 @@ export default function Content() {
         <TouchableOpacity
           style={styles.buttonCategories}
           onPress={viewFacilities}>
-          <CustomText textType="medium" style={{...styles.text2}}>
+          <CustomText
+            textType="medium"
+            style={{...styles.text2, color: COLORS.white}}>
             {t('facilities')}
           </CustomText>
           <IconRight />
@@ -227,14 +229,15 @@ export default function Content() {
                         alignItems: 'center',
                         paddingHorizontal: scale(25),
                         paddingVertical: scale(10),
-                        backgroundColor: '#EEEEEE',
+                        backgroundColor: COLORS.transparentGrey,
                         borderTopWidth: scale(index == 0 ? 0 : 1),
+                        borderColor: COLORS.transparentGrey,
                       }}>
                       <CustomText
                         textType="medium"
                         style={{
                           ...styles.text2,
-                          color: '#979797',
+                          color: COLORS.white,
                           width: '90%',
                         }}>
                         {item.name}
@@ -261,7 +264,9 @@ export default function Content() {
                               alignItems: 'center',
                             }}
                             key={index}>
-                            <CustomText>{nestedItem.title}</CustomText>
+                            <CustomText style={{color: COLORS.white}}>
+                              {nestedItem.title}
+                            </CustomText>
                             {selectedFaciCheckBox.includes(nestedItem.title) ? (
                               <IconCheckBox />
                             ) : (
@@ -297,7 +302,7 @@ export default function Content() {
             textType="medium"
             style={{
               ...styles.text2,
-              color: COLORS.black,
+              color: COLORS.white,
               marginHorizontal: scale(10),
             }}>
             {t('use_coupon')}
@@ -307,7 +312,7 @@ export default function Content() {
           textType="medium"
           style={{
             ...styles.text2,
-            color: COLORS.black,
+            color: COLORS.white,
             marginTop: scale(10),
             alignSelf: 'flex-start',
             paddingHorizontal: scale(20),
@@ -334,7 +339,7 @@ export default function Content() {
               textType="medium"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(20),
                 flex: 1,
               }}>
@@ -344,7 +349,7 @@ export default function Content() {
               textType="medium"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(20),
                 flex: 1,
               }}>
@@ -361,7 +366,7 @@ export default function Content() {
               textType="medium"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(10),
                 flex: 1,
               }}>
@@ -371,7 +376,7 @@ export default function Content() {
               textType="medium"
               style={{
                 ...styles.text2,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(10),
                 flex: 1,
               }}>
@@ -386,20 +391,20 @@ export default function Content() {
               paddingBottom: scale(30),
             }}>
             <CustomText
-              textType="semiBold"
+              textType="bold"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(20),
                 flex: 1,
               }}>
               {t('total')}:
             </CustomText>
             <CustomText
-              textType="medium"
+              textType="bold"
               style={{
                 ...styles.text,
-                color: COLORS.black,
+                color: COLORS.white,
                 marginTop: scale(20),
                 flex: 1,
               }}>
@@ -422,7 +427,7 @@ export default function Content() {
               <View style={{marginLeft: scale(10)}}>
                 <CustomText
                   textType="semiBold"
-                  style={{...styles.text2, color: COLORS.black}}>
+                  style={{...styles.text2, color: COLORS.white}}>
                   {t('wallet')} NOW Travel
                 </CustomText>
               </View>
@@ -448,9 +453,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#F0B90B40',
+    borderColor: COLORS.transparentGrey,
+    backgroundColor: COLORS.transparentGrey,
+    shadowColor: COLORS.primary,
     shadowOffset: {
       width: 0,
       height: 5,
@@ -486,18 +491,18 @@ const styles = StyleSheet.create({
   },
   line: {
     height: scale(1),
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   box: {
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     borderBottomLeftRadius: scale(5),
     borderBottomRightRadius: scale(5),
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     borderWidth: scale(1),
     width: '90%',
     paddingBottom: scale(20),
@@ -534,12 +539,12 @@ const styles = StyleSheet.create({
     // backgroundColor:'#E3E3E3'
   },
   buttonCategories: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.transparentGrey,
     alignItems: 'center',
     alignSelf: 'center',
     borderRadius: scale(4),
     borderWidth: scale(1),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.transparentGrey,
     height: scale(50),
     width: '90%',
     justifyContent: 'space-between',
