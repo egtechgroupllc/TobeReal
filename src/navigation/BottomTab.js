@@ -11,17 +11,19 @@ import {
   IconProfile,
   IconProfileInactive,
   IconPromotion,
+  IconVideo,
 } from '../assets/icon/Icon';
 import NavigationBookings from './NavigationBookings';
 import NavigationExplore from './NavigationExplore';
 import NavigationProfile from './NavigationProfile';
 import NavigationPromotion from './NavigationPromotion';
 import NavigationWishList from './NavigationWishList';
-import {images, scale} from '../assets/constants';
+import {COLORS, images, scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
 import {HomeMapScreen} from '../components';
 import {useLanguage} from '../hooks/useLanguage';
 import CustomImage from '../components/CustomImage';
+import NavigationVideo from './NavigationVideo';
 
 const Tab = createBottomTabNavigator();
 
@@ -68,7 +70,7 @@ export default function BottomTab() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={'Promotion'}
         component={NavigationPromotion}
         options={{
@@ -76,6 +78,17 @@ export default function BottomTab() {
 
           tabBarIcon: ({focused}) => (
             <IconPromotion fill={focused && '#F0B90B'} />
+          ),
+        }}
+      /> */}
+      <Tab.Screen
+        name={'Video'}
+        component={NavigationVideo}
+        options={{
+          tabBarLabel: t('Reviews'),
+
+          tabBarIcon: ({focused}) => (
+            <IconVideo fill={focused && COLORS.primary} />
           ),
         }}
       />

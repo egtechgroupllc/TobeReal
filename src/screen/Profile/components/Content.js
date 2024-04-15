@@ -84,32 +84,32 @@ export default function Content() {
           <View>
             <CustomText
               textType="bold"
-              style={{...styles.text, color: COLORS.white}}>
+              style={{...styles.text, color: COLORS.black}}>
               {t('regular_member')}
             </CustomText>
           </View>
           <View>
             <CustomText
               textType="bold"
-              style={{...styles.text, color: COLORS.white}}>
+              style={{...styles.text, color: COLORS.black}}>
               {t('accumulated_points')}:
             </CustomText>
             <CustomText
               textType="bold"
-              style={{...styles.text1, color: COLORS.white}}>
+              style={{...styles.text1, color: COLORS.black}}>
               0.0 {t('point')}
             </CustomText>
             <View style={{flexDirection: 'row'}}>
               <CustomText
                 textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
+                style={{...styles.text, color: COLORS.black}}>
                 {t('view_plot')}:
               </CustomText>
             </View>
             <View style={{flexDirection: 'row'}}>
               <CustomText
                 textType="bold"
-                style={{...styles.text, color: COLORS.white}}>
+                style={{...styles.text, color: COLORS.black}}>
                 {t('free_new')}:
               </CustomText>
             </View>
@@ -123,12 +123,12 @@ export default function Content() {
               style={{...styles.text, color: COLORS.white}}></CustomText>
             <CustomText
               textType="bold"
-              style={{...styles.text, color: COLORS.white}}>
+              style={{...styles.text, color: COLORS.black}}>
               0/3
             </CustomText>
             <CustomText
               textType="bold"
-              style={{...styles.text, color: COLORS.white}}>
+              style={{...styles.text, color: COLORS.black}}>
               0/15
             </CustomText>
           </View>
@@ -228,12 +228,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   box: {
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.white,
     height: scale(85),
     width: '90%',
     borderRadius: scale(5),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
+    shadowColor: '#00000040',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
   },
   text: {
     fontSize: SIZES.small,

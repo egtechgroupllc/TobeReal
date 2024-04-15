@@ -2,17 +2,18 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
+
 import {IconHeart, IconMapView, IconMarker} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
 import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/format';
-import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
-import TopImg from './BoxPlaceItem/TopImg';
-import {useLanguage} from '../../../../hooks/useLanguage';
+
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import TopImg from './BoxPlaceItem/TopImg';
+import Ribbon from '../../../../components/Ribbon';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function BoxPlaceItem({
   data,
@@ -32,6 +33,7 @@ export default function BoxPlaceItem({
   jsonImage,
   name,
   price,
+  type,
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -74,7 +76,7 @@ export default function BoxPlaceItem({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
                 style={styles.img}
               />
             )}
@@ -84,6 +86,7 @@ export default function BoxPlaceItem({
               isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
+              type={type}
             />
           </View>
 
@@ -117,7 +120,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'vi',
+                          locales: 'en',
                         })}{' '}
                       </CustomText>
 
@@ -142,9 +145,9 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.primary},
                       ]}>
                       {formatPrice(data?.price, {
-                        locales: 'vi',
+                        locales: 'en',
                       })}{' '}
-                      {time && (
+                      {time && type === 'RENT' && (
                         <CustomText
                           textType="regular"
                           style={{fontSize: SIZES.xSmall}}>

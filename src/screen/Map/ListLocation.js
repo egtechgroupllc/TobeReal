@@ -14,9 +14,10 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 const dataFa = [
   {
     id: 1,
-    src: images.c15,
+    src: images.c15_1,
     name: 'C15_05_BlockC Emerald',
-    price: 25000000,
+    price: 2500,
+    type: 'RENT',
     imgdetail: [
       images.c15_1,
       images.c15_2,
@@ -30,7 +31,8 @@ const dataFa = [
     id: 2,
     src: images.c16,
     name: 'D11.06 Emerald',
-    price: 16000000,
+    price: 160000,
+    type: 'HOUSE',
     imgdetail: [
       images.c16_1,
       images.c16_2,
@@ -45,9 +47,10 @@ const dataFa = [
   },
   {
     id: 3,
-    src: images.p14,
-    name: 'P14.07 Diamond',
-    price: 28000000,
+    src: images.thailan,
+    name: 'Thailand Full Package Tour (Bangkok & Pattaya) - 5D4N Tour',
+    price: 1000,
+    type: 'TOUR',
     imgdetail: [
       images.p14_1,
       images.p14_2,
@@ -63,7 +66,8 @@ const dataFa = [
     id: 4,
     src: images.q10,
     name: 'Centrosa Garden Q.10',
-    price: 26000000,
+    type: 'RENT',
+    price: 2600,
     imgdetail: [
       images.q10_1,
       images.q10_2,
@@ -77,7 +81,22 @@ const dataFa = [
     id: 5,
     src: images.a6,
     name: 'A6.7.08 Diamod Alanta Plus',
-    price: 18000000,
+    price: 100000,
+    type: 'HOUSE',
+    imgdetail: [
+      images.a6_1,
+      images.a6_2,
+      images.a6_3,
+      images.a6_4,
+      images.a6_5,
+    ],
+  },
+  {
+    id: 6,
+    src: images.b15,
+    name: 'B2.19.02 Emerald',
+    price: 180000,
+    type: 'HOUSE',
     imgdetail: [
       images.a6_1,
       images.a6_2,
@@ -148,6 +167,7 @@ export default memo(
               jsonImage={item.imgdetail}
               name={item?.name}
               price={item?.price}
+              type={item?.type}
             />
           )}
         />

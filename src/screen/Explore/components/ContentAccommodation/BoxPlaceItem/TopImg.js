@@ -6,7 +6,7 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../../components/Favourite';
 
-export default function TopImg({rating, isStar, textRating, isHeart}) {
+export default function TopImg({rating, isStar, textRating, isHeart, type}) {
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>
@@ -22,7 +22,7 @@ export default function TopImg({rating, isStar, textRating, isHeart}) {
               height: scale(10),
             }}
           />
-          <CustomText style={styles.topName}>Hotel</CustomText>
+          <CustomText style={styles.topName}>{type}</CustomText>
         </View>
       </View>
 

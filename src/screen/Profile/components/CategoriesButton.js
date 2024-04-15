@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SIZES, scale} from '../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {IconRight} from '../../../assets/icon/Icon';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -27,24 +27,24 @@ export default function CategoriesButton({
     <View>
       {large && (
         <TouchableOpacity onPress={onPress}>
-          <LinearGradient
-            colors={['#F0B90B', '#FFFFFF00']}
-            start={{x: 0, y: 0}}
-            end={{x: 0, y: 0.8}}
+          <View
+            // colors={COLORS.backgroundLinear}
+            // start={{x: 0, y: 0}}
+            // end={{x: 0, y: 1}}
             style={styles.button}>
             <CustomText textType="bold" style={{...styles.text2}}>
               {title}
             </CustomText>
             <IconRight />
-          </LinearGradient>
+          </View>
         </TouchableOpacity>
       )}
       {postManagement && (
         <View>
-          <LinearGradient
-            colors={['#F0B90B', '#FFFFFF00']}
-            start={{x: 0, y: 0}}
-            end={{x: 0, y: 0.8}}
+          <View
+            // colors={COLORS.backgroundLinear}
+            // start={{x: 0, y: 0}}
+            // end={{x: 0, y: 0.8}}
             style={styles.button}>
             <CustomText textType="medium" style={{...styles.text2}}>
               {number}
@@ -55,21 +55,21 @@ export default function CategoriesButton({
             <CustomText
               textType="medium"
               style={{...styles.text2}}></CustomText>
-          </LinearGradient>
+          </View>
         </View>
       )}
       {small && (
         <TouchableOpacity onPress={onPress}>
-          <LinearGradient
-            colors={['#F0B90B', '#FFFFFF00']}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
+          <View
+            // colors={COLORS.backgroundLinear}
+            // start={{x: 0, y: 0}}
+            // end={{x: 0, y: 1}}
             style={[styles.buttonSmall]}>
             <CustomText textType="bold" style={{...styles.text2}}>
               {title}
             </CustomText>
             <IconRight />
-          </LinearGradient>
+          </View>
         </TouchableOpacity>
       )}
       {viewpersonal && (
@@ -161,16 +161,16 @@ export default function CategoriesButton({
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     alignSelf: 'center',
     borderRadius: scale(4),
-    height: scale(35),
+    height: scale(30),
     width: '100%',
     justifyContent: 'space-between',
-    marginTop: scale(20),
-    borderWidth: scale(1),
-    borderColor: '#F0B90B',
+    marginTop: scale(15),
+    // borderWidth: scale(1),
+    // borderColor: COLORS.primary,
     shadowColor: '#00000040',
     shadowOffset: {
       width: 0,
@@ -184,8 +184,9 @@ const styles = StyleSheet.create({
   },
   buttonSmall: {
     alignItems: 'center',
-    borderRadius: scale(36),
+    borderRadius: scale(4),
     height: scale(29),
+    backgroundColor: COLORS.white,
     justifyContent: 'space-between',
     marginTop: scale(20),
     // flex:1,
@@ -197,10 +198,11 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontSize: SIZES.small,
+    color: COLORS.black,
   },
   box: {
     height: scale(70),
-    backgroundColor: '#EEEEEE',
+    backgroundColor: '#e3e2de',
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     flexDirection: 'row',

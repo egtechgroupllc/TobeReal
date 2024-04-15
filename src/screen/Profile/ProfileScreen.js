@@ -27,13 +27,10 @@ export default function ProfileScreen() {
   });
 
   return (
-    <MainWrapper
-      styleContent={{
-        backgroundColor: '#f7f9fa',
-      }}>
+    <MainWrapper>
       {token ? (
         <>
-          <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} />
+          {/* <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} /> */}
           <AvatarImage
             upgrade={true}
             name={data?.data?.username || 'name'}

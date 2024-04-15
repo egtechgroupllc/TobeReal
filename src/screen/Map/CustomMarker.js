@@ -24,28 +24,60 @@ const CustomMarker = ({scaleValue, data}) => {
         },
         scaleValue && scaleStyle,
       ]}>
-      <Animated.View
+      <View
         style={{
-          backgroundColor: scaleValue?.backgroundColor,
-          paddingHorizontal: scale(6),
-          paddingVertical: scale(4),
-          borderRadius: 99,
-          marginBottom: scale(-12),
-          maxWidth: scale(140),
-          borderWidth: 1,
-          borderColor: scaleValue?.color,
+          flexDirection: 'row',
+          columnGap: scale(5),
+          width: '100%',
+          justifyContent: 'center',
         }}>
-        <Animated.Text
-          numberOfLines={1}
-          textType="bold"
+        <Animated.View
           style={{
-            fontSize: SIZES.medium,
-            color: scaleValue?.color,
-            fontFamily: FONTS.semiBold,
+            backgroundColor: scaleValue?.backgroundColor,
+            paddingHorizontal: scale(6),
+            paddingVertical: scale(4),
+            borderRadius: 10,
+            marginBottom: scale(-12),
+            maxWidth: scale(140),
+            borderWidth: 1,
+            borderColor: COLORS.primary,
+            justifyContent: 'center',
           }}>
-          {formatPrice(data?.price)}
-        </Animated.Text>
-      </Animated.View>
+          <Animated.Text
+            numberOfLines={1}
+            textType="bold"
+            style={{
+              fontSize: SIZES.xMedium,
+              color: scaleValue?.color,
+              fontFamily: FONTS.semiBold,
+            }}>
+            {data?.type}
+          </Animated.Text>
+        </Animated.View>
+        <Animated.View
+          style={{
+            backgroundColor: scaleValue?.backgroundColor,
+            paddingHorizontal: scale(6),
+            paddingVertical: scale(4),
+            borderRadius: 10,
+            marginBottom: scale(-12),
+            maxWidth: scale(140),
+            borderWidth: 1,
+            borderColor: scaleValue?.color,
+          }}>
+          <Animated.Text
+            numberOfLines={1}
+            textType="bold"
+            style={{
+              fontSize: SIZES.medium,
+              color: scaleValue?.color,
+              fontFamily: FONTS.semiBold,
+            }}>
+            {formatPrice(data?.price)}
+          </Animated.Text>
+        </Animated.View>
+      </View>
+
       <IconMarker
         style={{
           width: '100%',

@@ -71,7 +71,34 @@ export function IconBookings({fill, ...props}) {
     </Svg>
   );
 }
-
+export function IconVideo({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(16)}
+      height={props?.style?.height || scale(16)}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <G
+        clipPath="url(#clip0_3417_4629)"
+        stroke={fill || '#BCBCBC'}
+        strokeMiterlimit={10}>
+        <Path d="M1.3 8c0-3.676 3.024-6.7 6.7-6.7s6.7 3.024 6.7 6.7-3.024 6.7-6.7 6.7a6.708 6.708 0 01-5.803-3.35" />
+        <Path
+          d="M11.766 7.595L6.387 4.489a.468.468 0 00-.702.405v6.211c0 .36.39.586.702.405l5.379-3.105a.468.468 0 000-.81v0z"
+          fill={fill || '#BCBCBC'}
+          strokeWidth={0.5}
+        />
+      </G>
+      <Defs>
+        <ClipPath id="clip0_3417_4629">
+          <Path fill={fill || '#BCBCBC'} d="M0 0H16V16H0z" />
+        </ClipPath>
+      </Defs>
+    </Svg>
+  );
+}
 export function IconNews({fill, ...props}) {
   return (
     <Svg
@@ -1137,6 +1164,34 @@ export function IconEditProfile({fill, ...props}) {
     </Svg>
   );
 }
+export function IconCopy({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(11)}
+      height={props?.style?.height || scale(13)}
+      viewBox="0 0 11 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Rect
+        x={0.5}
+        y={3.5}
+        width={7}
+        height={9}
+        rx={1.5}
+        stroke={fill || '#fff'}
+      />
+      <Rect
+        x={3.5}
+        y={0.5}
+        width={7}
+        height={9}
+        rx={1.5}
+        stroke={fill || '#fff'}
+      />
+    </Svg>
+  );
+}
 export function Avatar({fill, ...props}) {
   return (
     <Svg
@@ -1187,6 +1242,35 @@ export function IconUnViewablePassword({fill, ...props}) {
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+export function IconQrcode({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(75)}
+      height={props?.style?.height || scale(75)}
+      viewBox="0 0 75 75"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path d="M9.375 9.375h9.375v9.375H9.375V9.375z" fill={fill || '#fff'} />
+      <Path
+        d="M28.125 0v28.125H0V0h28.125zm-4.688 4.688H4.688v18.75h18.75V4.688zM18.75 56.25H9.375v9.375h9.375V56.25z"
+        fill={fill || '#fff'}
+      />
+      <Path
+        d="M28.125 46.875V75H0V46.875h28.125zM4.687 51.563v18.75h18.75v-18.75H4.688zM56.25 9.374h9.375v9.375H56.25V9.375z"
+        fill={fill || '#fff'}
+      />
+      <Path
+        d="M46.875 0v28.125H75V0H46.875zm23.437 4.688v18.75h-18.75V4.688h18.75zm-32.812 0V0h4.688v9.375H37.5v9.375h-4.688V4.687H37.5zm0 23.437V18.75h4.688v9.375H37.5zM28.125 37.5v-4.688h4.688v-4.687H37.5V37.5h4.688v-4.688h23.437V37.5h-18.75v4.688H32.812V37.5h-4.687zm0 0v4.688H9.375V37.5H4.687v4.688H0v-9.376h14.063V37.5h14.062zM75 42.188h-4.688v-9.376H75v9.376zm-4.688 0h-4.687v9.374H75v-4.687h-4.688v-4.688zm-18.75 0h9.376v4.687H56.25v4.688h-4.688v-9.376zm9.376 14.062v-4.688H56.25v4.688h-4.688v4.688h-9.374v4.687H56.25V56.25h4.688zm0 0H75v4.688h-9.375v4.687h-4.688V56.25zm-18.75-4.688v4.688h4.687v-9.375H32.812v4.688h9.376z"
+        fill={fill || '#fff'}
+      />
+      <Path
+        d="M32.813 56.25H37.5v14.063h18.75V75H32.812V56.25zM75 65.625V75H60.937v-4.688h9.376v-4.687H75z"
+        fill={fill || '#fff'}
       />
     </Svg>
   );
