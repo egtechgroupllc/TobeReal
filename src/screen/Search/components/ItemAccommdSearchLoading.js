@@ -69,28 +69,4 @@ const styles = StyleSheet.create({
     borderRadius: scale(0),
     height: '55%',
   },
-  line: {
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    margin: -1,
-    marginBottom: 0,
-    overflow: 'hidden',
-  },
-  price: {
-    fontSize: SIZES.medium,
-    color: COLORS.primary,
-  },
-  discountText: {
-    fontSize: SIZES.xSmall,
-    color: 'red',
-    paddingHorizontal: scale(4),
-    paddingVertical: scale(2),
-  },
-  priceOld: {
-    textDecorationLine: 'line-through',
-    color: COLORS.textSub,
-    fontSize: SIZES.xMedium,
-    marginBottom: scale(4),
-  },
 });

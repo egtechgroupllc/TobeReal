@@ -53,3 +53,18 @@ export const postInitOrderDeposit = async data => {
 
   return responsive.data;
 };
+
+export const postConfirmDeposit = async data => {
+  const responsive = await instance.post('/deposit/create-order', data, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
+
+  return responsive.data;
+};
+export const getHistoryDeposit = async ({pageParam = 1}) => {
+  const responsive = await instance.get(
+    `/deposit/my-order?page=${pageParam}&limit=10`,
+  );
+
+  return responsive.data;
+};

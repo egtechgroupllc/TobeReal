@@ -6,7 +6,8 @@ export const formatPrice = (
     showCurrency = true,
     currency = '',
     unit = '',
-    locales = 'en-US',
+    // locales = 'en-US',
+    locales = 'vi',
     decimalPlaces = 3,
   } = {},
 ) => {
@@ -21,6 +22,7 @@ export const formatPrice = (
     currency: currency || locales.startsWith('vi') ? 'VND' : 'USD',
     maximumSignificantDigits: decimalPlaces,
   };
+
   (!showCurrency || unit) && delete option.style;
 
   const numberFormat = new Intl.NumberFormat(locales, option);
@@ -79,9 +81,9 @@ export const formatDate = (
 
 export const formatDateTime = (
   date = new Date(),
-  {noDate, noHour, isHour24, addDays: daysToAdd} = {},
+  {noDate, noHour, isHour24, addDays: daysToAdd, dateStyle} = {},
 ) => {
-  let formattedDateTime = date;
+  let formattedDateTime = new Date(date);
 
   // Thêm số ngày vào ngày hiện tại nếu có
   if (daysToAdd) {
@@ -90,7 +92,7 @@ export const formatDateTime = (
 
   const dateFormat = noDate ? '' : 'dd MMM yyyy';
   const timeFormat = noHour ? '' : !isHour24 ? 'HH:mm ' : 'hh:mm a';
-  const formatString = `${dateFormat} ${timeFormat}`.trim();
+  const formatString = dateStyle || `${dateFormat} ${timeFormat}`.trim();
 
   return format(formattedDateTime, formatString);
 };
@@ -98,7 +100,7 @@ export const formatDateTime = (
 export const formatTime = (date = new Date(), {isHour24} = {}) => {
   let formattedDateTime = new Date(date);
 
-  const timeFormat = isHour24 ? 'HH:mm' : 'h:mm a';
+  const timeFormat = !isHour24 ? 'HH:mm' : 'h:mm a';
 
   const formatString = `${timeFormat}`.trim();
 

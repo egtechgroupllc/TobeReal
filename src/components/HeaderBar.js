@@ -1,10 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {memo, useEffect, useRef, useState} from 'react';
+import React, {memo} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, SIZES, scale} from '../assets/constants';
 import {IconGoBack} from '../assets/icon/Icon';
 import CustomText from './CustomText';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default memo(function HeaderBar({back, navigation, options, route}) {
   const {goBack, navigate} = useNavigation();
@@ -20,7 +20,7 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
           alignItems: 'flex-start',
           ...options?.headerLeftStyle,
         }}>
-        {!!back && !options?.headerLeft && (
+        {(options?.isGoBack || (!!back && !options?.headerLeft)) && (
           <Pressable
             onPress={() => {
               options?.headerLeftNavigate

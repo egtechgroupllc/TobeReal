@@ -8,6 +8,8 @@ export type CustomTextProps = {
   isShadow?: boolean;
   isAnimated?: boolean;
   shaDowColor?: string;
+  color?: string;
+  size?: number;
   textType?: 'regular' | 'medium' | 'semiBold' | 'bold' | undefined;
 } & TextProps;
 
@@ -17,6 +19,8 @@ export default memo(function CustomText({
   isShadow,
   isAnimated,
   shaDowColor,
+  size,
+  color,
   ...props
 }: CustomTextProps) {
   const textWeight: TextStyle =
@@ -37,6 +41,8 @@ export default memo(function CustomText({
       style={[
         styles.text,
         isShadow && {...styles.shaDow, textShadowColor: shaDowColor},
+        size && {fontSize: size},
+        color && {color: color},
         propStyle,
         textWeight,
       ]}>

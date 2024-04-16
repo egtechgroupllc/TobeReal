@@ -8,7 +8,7 @@ export default function NoBottomTab() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         contentStyle: {
           backgroundColor: '#f7f9fa',
         },

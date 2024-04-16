@@ -42,6 +42,7 @@ type CustomInputProps = {
   styleIcon?: TextStyle;
   styleText?: TextStyle;
   styleTextLabel?: Pick<CustomTextProps, 'textType'> & TextStyle;
+  textType?: 'regular' | 'medium' | 'semiBold' | 'bold' | undefined;
   styleWrapper?: ViewStyle;
   enableFormatNum?: boolean;
   password?: boolean;
@@ -68,6 +69,7 @@ export default forwardRef(function CustomInput(
     label,
     enableFormatNum,
     password,
+    textType,
     onPress,
     onPressIconRight,
     onPressIconLeft,
@@ -85,6 +87,17 @@ export default forwardRef(function CustomInput(
 
   const heightSize =
     sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 38;
+
+    const textWeight: TextStyle =
+    textType === 'regular'
+      ? {fontFamily: FONTS.regular, fontWeight: '400'}
+      : textType === 'semiBold'
+      ? {fontFamily: FONTS.semiBold, fontWeight: '600'}
+      : textType === 'bold'
+      ? {fontFamily: FONTS.bold, fontWeight: '700'}
+      : {fontFamily: FONTS.medium, fontWeight: '500'};
+
+
 
   return (
     <Controller
@@ -165,6 +178,7 @@ export default forwardRef(function CustomInput(
                   styles.input,
                   propStyle?.maxHeight && {maxHeight: propStyle?.maxHeight},
                   props?.multiline && {lineHeight: scale(16)},
+                 textWeight,
                   styleText,
                 ]}
                 pointerEvents={!!onPress ? 'none' : 'auto'}

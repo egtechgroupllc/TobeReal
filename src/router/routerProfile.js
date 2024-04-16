@@ -4,10 +4,7 @@ import {CustomersBuyScreen} from '../screen/Profile/Client/CustomersBuy';
 import {CustomersRentScreen} from '../screen/Profile/Client/CustomersRent';
 import CustomerManagementScreen from '../screen/Profile/CustomerManagement/CustomerManagementScreen';
 import {ListOfCustomersScreen} from '../screen/Profile/CustomerManagement/ListOfCustomers';
-import {
-  DepositScreen,
-  DetailDepositScreen,
-} from '../screen/Profile/FinancialManagement';
+
 import {DepositWithdrawScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw';
 import {AddBankScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw/AddBank';
 

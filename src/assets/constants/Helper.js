@@ -1,7 +1,6 @@
 import {showMessage} from 'react-native-flash-message';
-import {MessageStyle} from './theme';
-export const showMess = (message, type = 'error') => {
-  // console.tron.log({ message })
+import {FONTS, MessageStyle, SIZES} from './theme';
+export const showMess = (message, type = 'success') => {
   if (type === 'success') {
     return showMessage({
       message,

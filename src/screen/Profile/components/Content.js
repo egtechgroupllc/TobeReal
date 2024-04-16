@@ -36,7 +36,9 @@ export default function Content() {
     navigation.navigate('InformationScreen');
   };
   const financial = () => {
-    navigation.navigate('FinancialScreen');
+    navigation.navigate('NoBottomTab', {
+      screen: 'FinancialScreen',
+    });
   };
   const wishlist = () => {
     navigation.navigate('HomeWishListScreen');

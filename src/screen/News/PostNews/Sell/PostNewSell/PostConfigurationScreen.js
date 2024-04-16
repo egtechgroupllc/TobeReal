@@ -81,11 +81,9 @@ export default function PostConfigurationScreen() {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
-          params?.package_post_item_id
-            ? navigate('NoBottomTab', {
-                screen: 'SellManagementScreen',
-              })
-            : navigate('PostNewSellScreen', {success: true});
+          navigate('NoBottomTab', {
+            screen: 'SellManagementScreen',
+          });
 
           queryClient.invalidateQueries(['estate', 'my-list']);
         }

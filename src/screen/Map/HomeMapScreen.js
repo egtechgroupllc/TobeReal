@@ -158,6 +158,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
           return (
             <Marker
               key={index}
+              tracksViewChanges={false}
               coordinate={marker.coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>

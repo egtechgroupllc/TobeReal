@@ -188,17 +188,41 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <SelectCurrency control={control} setValue={setValue} watch={watch} />
 
-          <CustomInput
-            label={t('price')}
-            styleTextLabel={styles.label}
-            control={control}
-            name="price"
-            placeholder={t('enter_price')}
-            rules={requireField(t('this_field_required'))}
-            style={{...styles.textInput}}
-            keyboardType="number-pad"
-            enableFormatNum
-          />
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(10),
+            }}>
+            <CustomInput
+              label={t('price')}
+              styleTextLabel={styles.label}
+              control={control}
+              name="price"
+              placeholder={t('enter_price')}
+              rules={requireField(t('this_field_required'))}
+              style={{...styles.textInput}}
+              styleWrapper={{
+                flex: 1,
+              }}
+              keyboardType="number-pad"
+              enableFormatNum
+            />
+
+            <CustomInput
+              label={'Giá khoá tin'}
+              placeholder="Giá khoá tin"
+              name="price_lock"
+              control={control}
+              rules={requireField(t('this_field_required'))}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              style={styles.textInput}
+              keyboardType="number-pad"
+              enableFormatNum
+            />
+          </View>
 
           <CheckBox
             text="Giá có thể thoả thuận"

@@ -1,19 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {
-  useCallback,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import {COLORS, SIZES, scale} from '../assets/constants';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {CustomButton, CustomInput} from '.';
-import {IconAdd, IconSubtract, IconX} from '../assets/icon/Icon';
+import {COLORS, SIZES, scale} from '../assets/constants';
+import {IconAdd, IconSubtract} from '../assets/icon/Icon';
 import CustomText from './CustomText';
-import InputCountry from '../screen/Auth/Register/components/InputCountry';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 export default function Counter({
   min = 1,
@@ -54,19 +45,7 @@ export default function Counter({
       onChange && onChange(quantity);
     }
   }, [quantity]);
-  const singleTap = useMemo(
-    () =>
-      Gesture.Tap()
-        .runOnJS(true)
-        .onStart(event => {
-          if (quantity < min) {
-            setQuantity(min);
-          } else {
-            setQuantity(max);
-          }
-        }),
-    [],
-  );
+
   return (
     <View
       style={[
@@ -75,21 +54,17 @@ export default function Counter({
         styleWrapper,
         vertical && {flexDirection: 'column'},
       ]}>
-      <GestureDetector gesture={Gesture.Exclusive(singleTap)}>
-        {heading && (
-          <View style={styles.boxHeading}>
-            {Icon}
-            <View style={{rowGap: scale(2), styleBoxHeading}}>
-              <CustomText style={{fontSize: SIZES.xMedium}}>
-                {heading}
-              </CustomText>
-              {subHeading && (
-                <CustomText textType="regular">{subHeading}</CustomText>
-              )}
-            </View>
+      {heading && (
+        <View style={styles.boxHeading}>
+          {Icon}
+          <View style={{rowGap: scale(2), styleBoxHeading}}>
+            <CustomText style={{fontSize: SIZES.xMedium}}>{heading}</CustomText>
+            {subHeading && (
+              <CustomText textType="regular">{subHeading}</CustomText>
+            )}
           </View>
-        )}
-      </GestureDetector>
+        </View>
+      )}
 
       <View
         style={[

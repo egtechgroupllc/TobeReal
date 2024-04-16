@@ -1,4 +1,11 @@
-import {Animated, FlatList, StyleSheet, Text, View} from 'react-native';
+import {
+  Animated,
+  FlatList,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {
   forwardRef,
   memo,
@@ -123,7 +130,7 @@ export default memo(
       }),
       [],
     );
-
+    console.log();
     return (
       <View
         style={{
@@ -152,7 +159,7 @@ export default memo(
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollOffsetX}}}],
             {
-              useNativeDriver: false,
+              useNativeDriver: Platform.OS === 'android' ? true : false,
             },
           )}
           renderItem={({item, index}) => (

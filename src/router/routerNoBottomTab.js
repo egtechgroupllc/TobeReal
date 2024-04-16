@@ -14,8 +14,10 @@ import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
 import {
+  ConfirmDepositScreen,
   DepositScreen,
-  DetailDepositScreen,
+  DetailHistoryDeposit,
+  FinancialScreen,
 } from '../screen/Profile/FinancialManagement';
 import {
   HomeSearchAccommodScreen,
@@ -29,28 +31,42 @@ export default routerNoBottomTab = [
   {
     name: 'DetailAccommodationScreen',
     component: DetailAccommodationScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'DetailTourScreen',
     component: DetailTourScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'DetailBuyScreen',
     component: DetailBuyScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'DetailBrokerScreen',
     component: DetailBrokerScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'DetailTicketScreen',
     component: DetailTicketScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'SeeAllBuyScreen',
     component: SeeAllBuyScreen,
     options: {
-      headerShown: true,
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -60,7 +76,6 @@ export default routerNoBottomTab = [
     name: 'SeeAllRentScreen',
     component: SeeAllRentScreen,
     options: {
-      headerShown: true,
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -70,7 +85,6 @@ export default routerNoBottomTab = [
     name: 'SeeAllTourScreen',
     component: SeeAllTourScreen,
     options: {
-      headerShown: true,
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -80,7 +94,6 @@ export default routerNoBottomTab = [
     name: 'HomeSearchAccommodScreen',
     component: HomeSearchAccommodScreen,
     options: {
-      headerShown: true,
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -90,12 +103,15 @@ export default routerNoBottomTab = [
     name: 'BookingRoomScreen',
     component: BookingRoomScreen,
     options: {
-      headerShown: true,
+      headerShown: false,
     },
   },
   {
     name: 'BookTourScreen',
     component: BookTourScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'ListVideoInfluencerScreen',
@@ -105,71 +121,57 @@ export default routerNoBottomTab = [
   {
     name: 'ListAccommodationSearchScreen',
     component: ListAccommodationSearchScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'CountryScreen',
     component: CountryScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'CurrencyScreen',
     component: CurrencyScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'MapSetAccomdScreen',
     component: MapSetAccomdScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'AccommoManagementScreen',
     component: AccommoManagementScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'RoomScreen',
     component: RoomScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'DetailRoomScreen',
     component: DetailRoomScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'SellManagementScreen',
     component: SellManagementScreen,
-    options: {
-      headerShown: true,
-    },
   },
   {
     name: 'DepositScreen',
     component: DepositScreen,
+  },
+  {
+    name: 'ConfirmDepositScreen',
+    component: ConfirmDepositScreen,
+  },
+  {
+    name: 'DetailHistoryDeposit',
+    component: DetailHistoryDeposit,
     options: {
-      headerShown: true,
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
     },
   },
   {
-    name: 'DetailDepositScreen',
-    component: DetailDepositScreen,
+    name: 'FinancialScreen',
+    component: FinancialScreen,
     options: {
-      headerShown: true,
+      headerShown: false,
     },
   },
 ];

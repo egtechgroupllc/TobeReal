@@ -1,12 +1,27 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
-import {formatPrice} from '../../../../utils/format';
-import CustomText from '../../../../components/CustomText';
-import {CustomInput} from '../../../../components';
-import {requireField} from '../../../../utils/validate';
-import {useLanguage} from '../../../../hooks/useLanguage';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {formatPrice} from '../../../../../utils/format';
+import CustomText from '../../../../../components/CustomText';
+import {CustomInput} from '../../../../../components';
+import {
+  requireField,
+  validateMaxAmount,
+  validateMaxLengthText,
+  validateMinAmount,
+} from '../../../../../utils/validate';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import CustomImage from '../../../../../components/CustomImage';
 const listPrice = [
+  {
+    value: 50000,
+  },
+  {
+    value: 100000,
+  },
+  {
+    value: 200000,
+  },
   {
     value: 500000,
   },
@@ -26,35 +41,16 @@ const listPrice = [
     value: 10000000,
   },
 ];
-export default function ListPriceSelect({control, setValue}) {
-  const {t} = useLanguage();
+export default function ListPriceSelect({control, setValue, typeAccountBank}) {
   const [select, setSelect] = useState(listPrice[0]);
 
   useEffect(() => {
     setValue('amount', select.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select.value]);
 
   return (
     <>
-      <View
-        style={{
-          backgroundColor: COLORS.white,
-          //   height: scale(100),
-          borderRadius: scale(10),
-          padding: scale(10),
-        }}>
-        <CustomInput
-          label="Nhập số tiền bạn muốn nạp"
-          styleTextLabel={{
-            textType: 'medium',
-            fontSize: SIZES.xMedium,
-          }}
-          control={control}
-          value={String(select.value)}
-          placeholder={`Nhâp tối thiểu ${formatPrice(100)} `}
-          rules={[requireField(t('this_field_required'))]}
-        />
-      </View>
       <View style={styles.wrapper}>
         {listPrice.map((item, index) => {
           const isSelect = select?.value === item.value;
@@ -92,17 +88,18 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     paddingVertical: scale(20),
     flexDirection: 'row',
-    gap: scale(10),
+    gap: scale(5),
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   box: {
     borderRadius: scale(5),
-    padding: scale(10),
+    padding: scale(7),
     justifyContent: 'center',
     width: '31%',
-    aspectRatio: 1.8,
+    aspectRatio: 2,
     backgroundColor: COLORS.white,
     ...SHADOW,
     shadowOffset: {

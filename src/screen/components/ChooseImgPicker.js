@@ -28,6 +28,7 @@ export default function ChooseImgPicker({
   styleContentImg,
   onSelect,
   maxFiles = 24,
+  isDescriptionImg = true,
 }) {
   const form = useForm();
   const [viewImg, setViewImg] = useState(false);
@@ -140,12 +141,12 @@ export default function ChooseImgPicker({
                         style={{
                           width: value.length <= 1 ? '98%' : '47%',
                           maxWidth: value.length <= 1 ? '100%' : scale(220),
-                          height: scale(220),
+
                           rowGap: scale(10),
                         }}>
                         <TouchableOpacity
                           activeOpacity={0.7}
-                          style={styles.img}
+                          style={[styles.img]}
                           onPress={() => setViewImg(index)}>
                           <CustomImage
                             source={img?.uri}
@@ -168,23 +169,25 @@ export default function ChooseImgPicker({
                             }}
                           />
                         </TouchableOpacity>
-                        <CustomInput
-                          placeholder="Thêm mô tả"
-                          style={{
-                            height: scale(32),
-                            borderRadius: scale(5),
-                          }}
-                          defaultValue={img?.description}
-                          maxLength={45}
-                          onChangeText={valueText =>
-                            handleDescriptionChange(
-                              index,
-                              valueText,
-                              value,
-                              onChange,
-                            )
-                          }
-                        />
+                        {isDescriptionImg && (
+                          <CustomInput
+                            placeholder="Thêm mô tả"
+                            style={{
+                              height: scale(32),
+                              borderRadius: scale(5),
+                            }}
+                            defaultValue={img?.description}
+                            maxLength={45}
+                            onChangeText={valueText =>
+                              handleDescriptionChange(
+                                index,
+                                valueText,
+                                value,
+                                onChange,
+                              )
+                            }
+                          />
+                        )}
                       </View>
                     );
                   })
@@ -290,7 +293,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
-    height: '80%',
+    height: scale(180),
     borderRadius: scale(5),
     overflow: 'hidden',
   },

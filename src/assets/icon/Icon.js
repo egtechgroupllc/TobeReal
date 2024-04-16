@@ -1164,34 +1164,7 @@ export function IconEditProfile({fill, ...props}) {
     </Svg>
   );
 }
-export function IconCopy({fill, ...props}) {
-  return (
-    <Svg
-      width={props?.style?.width || scale(11)}
-      height={props?.style?.height || scale(13)}
-      viewBox="0 0 11 13"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <Rect
-        x={0.5}
-        y={3.5}
-        width={7}
-        height={9}
-        rx={1.5}
-        stroke={fill || '#fff'}
-      />
-      <Rect
-        x={3.5}
-        y={0.5}
-        width={7}
-        height={9}
-        rx={1.5}
-        stroke={fill || '#fff'}
-      />
-    </Svg>
-  );
-}
+
 export function Avatar({fill, ...props}) {
   return (
     <Svg
@@ -3428,6 +3401,36 @@ export function IconCoinPoint({fill, ...props}) {
         />
       </G>
       <Defs />
+    </Svg>
+  );
+}
+export function IconCopy({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(17)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Rect
+        x={0.75}
+        y={5.36572}
+        width={10.8074}
+        height={13.8842}
+        rx={1.25}
+        stroke={fill || '#000'}
+        strokeWidth={1.5}
+      />
+      <Rect
+        x={5.36523}
+        y={0.75}
+        width={10.8074}
+        height={13.8842}
+        rx={1.25}
+        stroke={fill || '#000'}
+        strokeWidth={1.5}
+      />
     </Svg>
   );
 }
