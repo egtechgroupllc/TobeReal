@@ -5,12 +5,10 @@ import {
   IconAcreage,
   IconBed,
   IconBookings,
-  IconCalendar,
   IconClock,
   IconDirection,
   IconFurniture,
   IconLocation,
-  IconMapView,
   IconRoom,
 } from '../../../../../assets/icon/Icon';
 
@@ -18,15 +16,15 @@ import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import Star from '../../../../../components/Star';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
 import {formatPrice} from '../../../../../utils/format';
 import Introduction from '../../DetailAccommodation/Detail/Introduction';
 import InfoItem from './Info/InfoItem';
-import TicketOption from '../../ContentTour/DetailTour/TicketOption';
-import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
 // import Introduction from './Introduction';
 
 export default function InfoDetail({data, price}) {
   const {t} = useLanguage();
+  console.log(data);
   return (
     <View>
       <View style={styles.wrapper}>
@@ -160,14 +158,14 @@ export default function InfoDetail({data, price}) {
               />
             </View>
 
-            <InfoItem
+            {/* <InfoItem
               Icon={IconDirection}
               name={t('House direction')}
               value={data?.direction_main}
               styleIcon={{
                 height: scale(16),
               }}
-            />
+            /> */}
             <InfoItem
               Icon={IconBookings}
               name={t('Juridical')}

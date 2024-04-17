@@ -6,7 +6,7 @@ import CustomText from '../../../components/CustomText';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import CustomImage from '../../../components/CustomImage';
 import {formatDateTime, formatPrice} from '../../../utils/format';
-import {IconSupporter} from '../../../assets/icon/Icon';
+import {IconCopy, IconSupporter} from '../../../assets/icon/Icon';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
@@ -196,7 +196,14 @@ const Item = ({name, value, color, backgroundColor, isCopy}) => {
           size={SIZES.xMedium}
           color={color}
           style={{flex: 1, textAlign: 'right'}}>
-          {value}
+          {value}{' '}
+          {isCopy && (
+            <IconCopy
+              width={scale(14)}
+              height={scale(14)}
+              fill={COLORS.primary}
+            />
+          )}
         </CustomText>
       )}
     </View>
@@ -220,6 +227,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flex: 1,
     borderColor: '#ccc',
+    alignItems: 'center',
   },
   line: {
     borderStyle: 'dashed',

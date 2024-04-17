@@ -19,7 +19,6 @@ export default function InputCountry({control, name}) {
     queryFn: () => getCountry(),
   });
 
-  console.log(data, isLoading);
   return (
     <View>
       <CustomInput

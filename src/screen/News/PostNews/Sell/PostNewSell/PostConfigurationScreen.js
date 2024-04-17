@@ -19,12 +19,14 @@ import AutoPost from '../components/PostConfiguration/AutoPost';
 import PostType from '../components/PostConfiguration/PostType';
 
 export default function PostConfigurationScreen() {
-  const {goBack, navigate} = useNavigation();
   const params = useRoute().params;
-
-  const {handleSubmit, control, setValue, unregister} = useForm();
-  const [dateEnd, setDateEnd] = useState(new Date());
   const queryClient = useQueryClient();
+
+  const {goBack, navigate} = useNavigation();
+  const {handleSubmit, control, setValue, unregister} = useForm();
+
+  const [dateEnd, setDateEnd] = useState(new Date());
+
   const createEstateSellMu = useMutation({
     mutationFn: postCreateEstatSell,
   });
@@ -32,38 +34,78 @@ export default function PostConfigurationScreen() {
     mutationFn: postUpdateEstate,
   });
 
+  const filterEmptyValues = object => {
+    return Object.fromEntries(
+      Object.entries(object).filter(([key, value]) => value),
+    );
+  };
+  const processImages = (images, formData) =>
+    images?.map(image => {
+      formData.append(image.type, image);
+      return {name: image.name, description: image.description};
+    });
+
   const getFormData = (object = {}) => {
     const formData = new FormData();
 
     Object.keys(object).reduce((item, key) => {
-      if (key !== 'description_img' && key !== 'kyc' && key !== 'id') {
-        item.append(key, object[key]);
+      if (
+        ![
+          'description_img',
+          'kyc',
+          'id',
+          'image_update_description',
+          'image_update_description_kyc',
+          'image_delete',
+        ].includes(key)
+      ) {
+        formData.append(key, object[key]);
       }
 
       return item;
     }, formData);
 
-    const arrImage_description = object?.description_img?.map(image => {
-      formData.append('description_img', image);
+    if (object?.image_delete) {
+      formData.append('image_delete', JSON.stringify(object?.image_delete));
+    }
 
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+    const imageDescription = processImages(object?.description_img);
+    const imageKyc = processImages(object?.kyc);
 
-    const arrImage_Kyc = object?.kyc?.map(image => {
-      formData.append('kyc', image);
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+    if (object?.kyc || object?.description_img) {
+      formData.append(
+        'image_description',
+        JSON.stringify([...imageDescription, ...imageKyc]),
+      );
+    }
 
-    formData.append(
-      'image_description',
-      JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
-    );
+    if (
+      object?.image_update_description &&
+      object?.image_update_description_kyc
+    ) {
+      const arrImage_descriptionUp = object?.image_update_description?.map(
+        image => {
+          return {
+            id: image?.id,
+            description: image?.description,
+          };
+        },
+      );
+
+      const arrImage_Kyc_Up = object?.image_update_description_kyc?.map(
+        image => {
+          return {
+            id: image?.id,
+            description: image?.description,
+          };
+        },
+      );
+
+      formData.append(
+        'image_update_description',
+        JSON.stringify([...arrImage_descriptionUp, ...arrImage_Kyc_Up]),
+      );
+    }
 
     return formData;
   };
@@ -73,9 +115,8 @@ export default function PostConfigurationScreen() {
     delete params?.package_post_item_id_repost;
     delete params?.package_post_item;
     delete params?.date_start;
-    // delete value?.date_start;
 
-    const formData = getFormData({...params, ...value});
+    const formData = getFormData({...filterEmptyValues(params), ...value});
 
     const mutationConfig = {
       onSuccess: dataInside => {

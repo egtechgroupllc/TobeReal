@@ -37,9 +37,7 @@ export default function Content() {
     signupMutation.mutate(value, {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-        console.log('====================================');
-        console.log(dataInside);
-        console.log('====================================');
+
         if (dataInside?.status) {
           navigate('LoginScreen');
 

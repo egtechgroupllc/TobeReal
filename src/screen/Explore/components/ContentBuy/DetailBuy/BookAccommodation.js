@@ -77,7 +77,7 @@ export default memo(function BookAccommodation({
 
   return (
     <View
-      style={{...styles.wrapper, paddingBottom: insets.bottom - 5}}
+      style={{...styles.wrapper}}
       onLayout={e => {
         const {height} = e.nativeEvent.layout;
         setBookHeight(height);
@@ -253,17 +253,6 @@ const Item = ({title, icon}) => {
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
-    minHeight: scale(90),
-    rowGap: scale(8),
-    padding: scale(10),
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#fff',
-    ...SHADOW,
-    shadowOffset: {
-      width: 0,
-      height: -2,
-    },
   },
   contact: {
     backgroundColor: COLORS.white,

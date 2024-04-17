@@ -44,28 +44,34 @@ export default function PostNewSellScreen() {
     delete value?.estate_type;
     delete value?.country;
     delete value?.currency;
-    delete value?.images;
     delete value?.province;
 
-    // reset();
     navigate('PostConfigurationScreen', value);
   };
 
   useEffect(() => {
     if (params?.address) {
+      reset();
+
       const entries = Object.entries(params);
-      const arrKeyno = ['status', 'user_id', 'createdAt', 'updatedAt', 'note'];
+      const arrKeyno = [
+        'status',
+        'user_id',
+        'createdAt',
+        'updatedAt',
+        'note',
+        'wallet_address',
+        'images',
+      ];
 
       entries.map(item => {
         if (!arrKeyno.includes(item[0])) {
-          setValue(item[0], item[1]);
+          const checkNum = typeof item[1] === 'number';
+          setValue(item[0], checkNum ? String(item[1]) : item[1]);
         }
       });
     }
 
-    if (params?.success) {
-      reset();
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
@@ -108,6 +114,7 @@ export default function PostNewSellScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          arrImg={params?.images}
         />
 
         {/* <PaymentInfo
@@ -118,7 +125,7 @@ export default function PostNewSellScreen() {
           /> */}
       </View>
 
-      <CheckBox
+      {/* <CheckBox
         name="check"
         control={control}
         rules={requireField(t('this_field_required'))}
@@ -131,7 +138,7 @@ export default function PostNewSellScreen() {
         styleWrapper={{
           alignItems: 'center',
         }}
-      />
+      /> */}
 
       <CustomButton
         linearGradientProps

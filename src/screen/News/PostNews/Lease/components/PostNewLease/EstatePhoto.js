@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, scale} from '../../../../../../assets/constants';
@@ -11,7 +11,13 @@ import InViewPort from '../../../../../../components/InViewport';
 import CustomText from '../../../../../../components/CustomText';
 import RulesPostImg from '../../../components/RulesPostImg';
 
-export default function EstatePhoto({control, errors, setValue, watch}) {
+export default function EstatePhoto({
+  control,
+  errors,
+  setValue,
+  watch,
+  arrImg,
+}) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
@@ -28,7 +34,7 @@ export default function EstatePhoto({control, errors, setValue, watch}) {
       var extension = parts[parts.length - 1];
 
       return {
-        name: new Date().getTime() + item.file_name,
+        name: filename,
         type: `image/${extension}`,
         id: item.id,
         description: item?.description,
@@ -39,20 +45,37 @@ export default function EstatePhoto({control, errors, setValue, watch}) {
     return result;
   };
 
-  useEffect(() => {
-    if (watch('images')) {
-      const description_img = watch('images').filter(item => !item?.is_kyc);
+  // useEffect(() => {
+  //   if (watch('images')) {
+  //     const description_img = watch('images').filter(item => !item?.is_kyc);
 
+  //     const image_descriptionFormat = formatImgEdit(description_img);
+
+  //     const kyc_img = watch('images').filter(item => item?.is_kyc);
+  //     const image_kycFormat = formatImgEdit(kyc_img);
+
+  //     setValue('description_img', image_descriptionFormat);
+  //     setValue('kyc', image_kycFormat);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [watch('images')]);
+
+  const imgKyc = useMemo(() => {
+    if (arrImg) {
+      const kyc_img = arrImg.filter(item => item?.is_kyc);
+      const image_kycFormat = formatImgEdit(kyc_img);
+      return image_kycFormat;
+    }
+  }, [arrImg]);
+
+  const imgDes = useMemo(() => {
+    if (arrImg) {
+      const description_img = arrImg.filter(item => !item?.is_kyc);
       const image_descriptionFormat = formatImgEdit(description_img);
 
-      const kyc_img = watch('images').filter(item => item?.is_kyc);
-      const image_kycFormat = formatImgEdit(kyc_img);
-
-      setValue('description_img', image_descriptionFormat);
-      setValue('kyc', image_kycFormat);
+      return image_descriptionFormat;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watch('images')]);
+  }, [arrImg]);
 
   return (
     <View>
@@ -73,20 +96,63 @@ export default function EstatePhoto({control, errors, setValue, watch}) {
               title={t('real_estate_images')}
               subHeading={t('update_image_to_maximum')}
               control={control}
-              rules={[
-                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
-              ]}
+              rules={
+                !imgDes && [
+                  validateMinLength(
+                    t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'),
+                    4,
+                  ),
+                ]
+              }
               name={'description_img'}
             />
+
+            {imgDes && (
+              <ChooseImgPicker
+                defaultValue={imgDes}
+                isAddWhenEmpty={true}
+                isAddMore={false}
+                name={'image_update_description'}
+                control={control}
+                onDelete={id => {
+                  setValue(
+                    'image_delete',
+                    watch('image_delete')
+                      ? [id, ...watch('image_delete')]
+                      : [id],
+                  );
+                }}
+              />
+            )}
 
             <ChooseImgPicker
               title={t(
                 'Add images to prove ownership of your Real Estate assets',
               )}
               control={control}
-              rules={[validateMinLength(t('this_field_required'), 1)]}
+              rules={
+                !imgKyc && [validateMinLength(t('this_field_required'), 1)]
+              }
               name={'kyc'}
             />
+
+            {imgKyc && (
+              <ChooseImgPicker
+                defaultValue={imgKyc}
+                isAddWhenEmpty={true}
+                isAddMore={false}
+                name={'image_update_description_kyc'}
+                control={control}
+                onDelete={id => {
+                  setValue(
+                    'image_delete',
+                    watch('image_delete')
+                      ? [id, ...watch('image_delete')]
+                      : [id],
+                  );
+                }}
+              />
+            )}
 
             {/* <CustomInput
               label={t('Link youtube')}

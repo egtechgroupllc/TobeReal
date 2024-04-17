@@ -62,6 +62,7 @@ export default memo(function PostType({
           }}>
           Chọn loại tin đăng:
         </CustomText>
+
         <FlatList
           contentContainerStyle={{
             columnGap: scale(10),

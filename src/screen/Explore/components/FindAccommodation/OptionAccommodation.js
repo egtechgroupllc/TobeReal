@@ -122,7 +122,19 @@ export default function OptionAccommodation({
   }, [option]);
 
   return (
-    <View style={[styles.wrapper, styleWrapper, isShaDow && SHADOW]}>
+    <View
+      style={[
+        styles.wrapper,
+        styleWrapper,
+        isShaDow && {
+          ...SHADOW,
+
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+        },
+      ]}>
       <FlatList
         ref={flatRef}
         data={data}

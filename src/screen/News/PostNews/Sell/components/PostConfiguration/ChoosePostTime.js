@@ -53,14 +53,17 @@ export default memo(function ChoosePostTime({
   }, [dateEnd]);
 
   useEffect(() => {
+    setSelect(data?.package_post_items?.[0]);
+  }, [data?.package_post_items?.[0]?.id]);
+
+  useEffect(() => {
     if (params?.package_post_item) {
       const result = data?.package_post_items?.find(item => {
         return item?.id === params?.package_post_item?.id;
       });
-
       setSelect(result);
     }
-  }, [data, params?.package_post_item]);
+  }, [params?.package_post_item]);
 
   return (
     <View style={styles.wrapper}>

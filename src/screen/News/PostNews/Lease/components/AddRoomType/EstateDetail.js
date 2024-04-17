@@ -18,6 +18,8 @@ import {requireField} from '../../../../../../utils/validate';
 import SelectCurrency from '../../../components/SelectCurrency';
 import ButtonTabValidate from '../ButtonTabValidate';
 import RealEstateType from '../../../components/RealEstateType';
+import Counter from '../../../../../../components/Counter';
+const list = [...Array(17)].map((_, index) => (index === 0 ? '< 1' : index));
 
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
@@ -72,16 +74,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={styles.line} />
 
-          {/* <CustomInput
-            label={t('Room Size (m²)')}
-            styleTextLabel={styles.label}
-            control={control}
-            name="size"
-            placeholder={'M²'}
-            rules={requireField(t('this_field_required'))}
-            style={{...styles.textInput}}
-            keyboardType="numeric"
-          /> */}
           <View
             style={{
               flexDirection: 'row',
@@ -113,46 +105,62 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styleText={styles.textInput}
             />
           </View>
+          <CustomInput
+            label={'Số lượng phòng'}
+            placeholder="Số lượng phòng"
+            name="number_room"
+            control={control}
+            rules={requireField(t('this_field_required'))}
+            style={styles.textInput}
+            styleText={styles.textInput}
+          />
+
+          <Counter
+            heading={'Số người lớn tối đa'}
+            min={1}
+            max={20}
+            value={watch('max_occupancy')}
+            onChange={value => {
+              setValue('max_occupancy', value);
+            }}
+          />
+          <Counter
+            heading={'Số trẻ em tối đa'}
+            min={0}
+            max={20}
+            value={watch('max_child_occupancy')}
+            onChange={value => {
+              setValue('max_child_occupancy', value);
+            }}
+          />
 
           <View
             style={{
               flexDirection: 'row',
-              columnGap: scale(30),
+              alignItems: 'center',
+              columnGap: scale(20),
+              justifyContent: 'space-between',
             }}>
-            <CustomInput
-              label={'Số lượng phòng'}
-              placeholder="Số lượng phòng"
-              name="number_room"
-              control={control}
-              rules={requireField(t('this_field_required'))}
-              styleWrapper={{
-                flex: 1,
-              }}
-              style={styles.textInput}
-              styleText={styles.textInput}
-            />
+            <CustomText size={SIZES.xMedium} style={{flex: 1}}>
+              Số tuổi trẻ em tối đa
+            </CustomText>
 
-            {/* <CustomInput
-              label={'Số khách'}
-              placeholder="Chiều rộng"
-              name="number_user"
-              rules={requireField(t('this_field_required'))}
-              styleWrapper={{
-                flex: 1,
+            <CustomSelectDropdown
+              data={list}
+              defaultValueByIndex={watch('max_child_age') || 6}
+              defaultValue={watch('max_child_age') || 6}
+              onSelect={(selectedItem, i) => {
+                setValue('max_child_age', selectedItem);
               }}
-              control={control}
-              style={styles.textInput}
-              styleText={styles.textInput}
-            /> */}
+              styleWrapper={{
+                flex: 0.6,
+              }}
+            />
           </View>
+
           <View style={styles.line} />
 
-          <SelectCurrency
-            control={control}
-            // onChange={value => {
-            //   setValue('currency_id', value?.id);
-            // }}
-          />
+          <SelectCurrency control={control} />
 
           <CustomInput
             label={t('price')}

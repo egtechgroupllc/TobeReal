@@ -36,7 +36,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
   });
 
   const arrKeywords = useRef(['currency_id', 'size', 'price']).current;
-  console.log(watch('description'));
+
   return (
     <View>
       <ButtonTabValidate

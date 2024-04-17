@@ -14,6 +14,7 @@ import {requireField} from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import RealEstateType from '../../../components/RealEstateType';
 import SelectCurrency from '../../../components/SelectCurrency';
+import Counter from '../../../../../../components/Counter';
 
 const listLegalDoc = [
   {
@@ -65,6 +66,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
     'price',
     'legal_documents',
     'furnish',
+    'size_width',
+    'size_length',
   ]).current;
 
   const {data} = useQuery({
@@ -77,7 +80,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
       setValue('is_negotiated', watch('is_negotiated') ? 1 : 0);
     }
   }, [watch('is_negotiated')]);
-
+  console.log(watch('number_bedroom'), watch('number_bathroom'));
   return (
     <View>
       <ButtonTabValidate
@@ -97,9 +100,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               control={control}
               styleWrapper={styles.buttonStyle}
               watch={watch}
-              valueEdit={{name: watch('direction_main')}}
+              value={watch('direction_main')}
             />
-            {/* watch('estate_type') */}
             {/* <RealEstateType
               label={'Hướng ban công'}
               data={data?.data}
@@ -119,7 +121,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styleWrapper={styles.buttonStyle}
               getKeyValue="name"
               watch={watch}
-              valueEdit={{name: watch('legal_documents')}}
+              value={{name: watch('legal_documents')}}
             />
 
             <RealEstateType
@@ -130,7 +132,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               styleWrapper={styles.buttonStyle}
               getKeyValue="name"
               watch={watch}
-              valueEdit={{name: watch('furnish')}}
+              value={{name: watch('furnish')}}
             />
           </View>
 
@@ -156,11 +158,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               label={'Chiều rộng'}
               placeholder="Chiều rộng"
               name="size_width"
+              control={control}
               rules={requireField(t('this_field_required'))}
               styleWrapper={{
                 flex: 1,
               }}
-              control={control}
               styleTextLabel={styles.label}
               style={styles.textInput}
             />
@@ -179,10 +181,25 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
           </View>
 
-          {/* 
-          <Counter heading={'Số phòng'} min={0} max={255} />
+          <Counter
+            heading={'Số phòng'}
+            min={0}
+            max={255}
+            value={watch('number_bedroom')}
+            onChange={value => {
+              setValue('number_bedroom', value);
+            }}
+          />
 
-          <Counter heading={'Số phòng tắm, vệ sinh'} min={0} max={255} /> */}
+          <Counter
+            heading={'Số phòng tắm, vệ sinh'}
+            min={0}
+            max={255}
+            value={watch('number_bathroom')}
+            onChange={value => {
+              setValue('number_bathroom', value);
+            }}
+          />
 
           <View style={styles.line} />
 

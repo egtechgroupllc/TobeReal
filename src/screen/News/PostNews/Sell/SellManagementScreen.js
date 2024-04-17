@@ -39,7 +39,7 @@ export default function SellManagementScreen() {
       }),
     [],
   );
-  const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4, 5]);
+  const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4]);
 
   return (
     <MainWrapper

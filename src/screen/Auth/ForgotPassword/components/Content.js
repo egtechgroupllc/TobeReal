@@ -29,7 +29,6 @@ export default function Content() {
   };
 
   const submitForgotPassword = data => {
-    console.log(132);
     forgotPasswordMu.mutate(data, {
       onSuccess: dataInside => {
         console.log(dataInside);

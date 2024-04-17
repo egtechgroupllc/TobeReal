@@ -13,7 +13,7 @@ export default function CreateAccomItem({data, isTour}) {
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
-  console.log(data?.images);
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}

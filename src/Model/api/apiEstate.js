@@ -38,3 +38,9 @@ export const postUpdateEstate = async ({id_estate, data}) => {
 
   return responsive.data;
 };
+
+export const getDetailEstate = async id_estate => {
+  const responsive = await instance.get(`/detail/${id_estate}`);
+
+  return responsive.data;
+};

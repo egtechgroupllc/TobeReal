@@ -4,24 +4,25 @@
 import {useRoute} from '@react-navigation/native';
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
+import {useQuery} from '@tanstack/react-query';
 
 import {scale, WIDTH} from '../../../../assets/constants';
 import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {getDetailEstate} from '../../../../Model/api/apiEstate';
+import DetailAccommodationLoading from '../DetailAccommodation/Detail/DetailAccommodationLoading';
 import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
 import DynamicHeader from '../DetailAccommodation/Detail/DynamicHeader';
 import ConfigDetail from './ConfigDetail';
 import BookAccommodation from './DetailBuy/BookAccommodation';
 import ContactInfo from './DetailBuy/ContactInfo';
-import DetailAccommodationLoading from './DetailBuy/DetailAccommodationLoading';
 import InfoDetail from './DetailBuy/InfoDetail';
 import Review from './DetailBuy/Review';
-import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
+import AnimateScrollWrapper from '../AnimateScrollWrapper';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailBuyScreen({route}) {
-  const {jsondata, title, paramPrice} = {jsondata, title, paramPrice};
   const params = useRoute().params;
   const {t} = useLanguage();
 
@@ -33,143 +34,56 @@ export default function DetailBuyScreen({route}) {
       <ContactInfo data={params} />
       <ConfigDetail data={params} />
     </View>,
-    <SimilarApartmentsNearby
-      name={title}
-      image={jsondata || []}
-      price={paramPrice}
-    />,
+    // <SimilarApartmentsNearby
+    //   name={title}
+    //   image={jsondata || []}
+    //   price={paramPrice}
+    // />,
+  ]).current;
+  const listNavBar = useRef([
+    {
+      text: 'Tổng quan',
+    },
+    {
+      text: t('facilities'),
+    },
+    {
+      text: t('location'),
+    },
+
+    {
+      text: t('Review'),
+    },
+    {
+      text: 'Chính sách',
+    },
+    {
+      text: t('others'),
+    },
   ]).current;
 
   const [tabBarHeight, setTabBarHeight] = useState(0);
-  const [dataSourceCords, setDataSourceCords] = useState([]);
-  const [isSelect, setIsSelect] = useState(true);
 
-  const scrollOffsetY = useRef(new Animated.Value(0)).current;
-  const scrollRef = useRef();
-  const dynamicHeaderRef = useRef();
-  const timeoutRef = useRef(null);
-
-  const ItemView = (item, key) => {
-    return (
-      <View
-        key={key}
-        onLayout={e => {
-          const layout = e.nativeEvent.layout;
-          const heightHearBar = Header_Max_Height - 50;
-          dataSourceCords[key] = Math.round(layout.y + heightHearBar);
-          setDataSourceCords(dataSourceCords);
-        }}>
-        {item}
-      </View>
-    );
-  };
-
-  const handleScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
-    {
-      useNativeDriver: true,
-      listener: event => {
-        const offsetY = Math.floor(event.nativeEvent.contentOffset.y);
-
-        if (isSelect) moveNavigateBar(offsetY);
-      },
-    },
-  );
-
-  const handleSelect = useCallback(value => {
-    dynamicHeaderRef.current?.setSelect(value);
-  }, []);
-
-  const moveNavigateBar = offsetY => {
-    switch (true) {
-      case offsetY < dataSourceCords[1]:
-        handleSelect(0);
-        break;
-
-      case dataSourceCords[1] <= offsetY && offsetY < dataSourceCords[2]:
-        handleSelect(1);
-        break;
-
-      case dataSourceCords[2] <= offsetY && offsetY < dataSourceCords[3]:
-        handleSelect(2);
-        break;
-
-      case dataSourceCords[3] <= offsetY && offsetY < dataSourceCords[4]:
-        handleSelect(3);
-        break;
-
-      case dataSourceCords[4] <= offsetY:
-        handleSelect(4);
-        break;
-    }
-  };
-
-  const selectScrollHandler = useCallback(value => {
-    setIsSelect(false);
-
-    scrollRef.current?.scrollTo({
-      y: dataSourceCords[value?.index],
-      animated: true,
-    });
-
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setIsSelect(true);
-    }, 500);
-  }, []);
+  const {data, isLoading} = useQuery({
+    queryKey: ['estate', 'detail', params?.id],
+    queryFn: () => getDetailEstate(params?.id),
+  });
 
   return (
-    <MainWrapper scrollEnabled={false}>
-      {true ? (
-        <>
-          <DynamicHeader
-            ref={dynamicHeaderRef}
-            scrollOffsetY={scrollOffsetY}
-            onSelect={selectScrollHandler}
-            data={params}
-            listNav={[
-              {
-                text: t('detail'),
-              },
-              {
-                text: t('location'),
-              },
-              {
-                text: t('reviews'),
-              },
-              {
-                text: t('info'),
-              },
-              {
-                text: t('others'),
-              },
-            ]}
+    <MainWrapper scrollEnabled={false} noImgColor>
+      <AnimateScrollWrapper
+        tabBarHeight={tabBarHeight}
+        lisViewComponent={listView}
+        listNav={listNavBar}
+        dataDetail={data?.data}
+        ContentComponent={
+          <BookAccommodation
+            setBookHeight={setTabBarHeight}
+            price={123213}
+            isLoading={false}
+            onPress={() => {}}
           />
-
-          <Animated.ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingTop: Header_Max_Height + scale(50),
-              paddingBottom: tabBarHeight,
-              backgroundColor: '#f1f1f1',
-            }}
-            onScroll={handleScroll}
-            ref={scrollRef}>
-            <View style={styles.content}>{listView.map(ItemView)}</View>
-          </Animated.ScrollView>
-        </>
-      ) : (
-        <DetailAccommodationLoading heightHeader={Header_Max_Height} />
-      )}
-
-      <BookAccommodation
-        setBookHeight={setTabBarHeight}
-        price={paramPrice}
-        isLoading={false}
-        onPress={() => {
-          handleSelect(3);
-          selectScrollHandler({index: 3});
-        }}
+        }
       />
     </MainWrapper>
   );

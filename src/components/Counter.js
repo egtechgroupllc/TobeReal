@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CustomButton, CustomInput} from '.';
 import {COLORS, SIZES, scale} from '../assets/constants';
@@ -19,11 +19,14 @@ export default function Counter({
   verticalCounter,
   styleBoxHeading,
   styleWrapper,
-  isInput,
   Icon,
-  editable = true,
+  editable = false,
 }) {
-  const [quantity, setQuantity] = useState(value || min);
+  const [quantity, setQuantity] = useState(min);
+
+  useEffect(() => {
+    value && setQuantity(Number(value));
+  }, [value]);
 
   const handleIncrement = () => {
     if (quantity < max) {
@@ -43,6 +46,12 @@ export default function Counter({
   useEffect(() => {
     if (quantity >= min && quantity <= max) {
       onChange && onChange(quantity);
+    }
+
+    if (quantity < min) {
+      setQuantity(min);
+    } else if (quantity > max) {
+      setQuantity(max);
     }
   }, [quantity]);
 
@@ -84,7 +93,7 @@ export default function Counter({
         <CustomInput
           inputMode="numeric"
           rules={'1'}
-          defaultValue={`${quantity}`}
+          value={String(quantity)}
           style={styles.input}
           styleText={{
             textAlign: 'center',
@@ -92,13 +101,6 @@ export default function Counter({
           editable={editable}
           onChangeText={text => {
             setQuantity(+text);
-          }}
-          onBlur={() => {
-            if (quantity < min) {
-              setQuantity(min);
-            } else {
-              setQuantity(max);
-            }
           }}
         />
 
@@ -151,6 +153,7 @@ const styles = StyleSheet.create({
     width: scale(40),
     height: scale(30),
     borderRadius: scale(6),
+    paddingHorizontal: scale(4),
   },
   icon: {
     color: COLORS.white,

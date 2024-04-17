@@ -1,22 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
+import ImageView from 'react-native-image-viewing';
+
 import {COLORS, SIZES, scale} from '../../assets/constants';
-import {IconCamera, IconError, IconX} from '../../assets/icon/Icon';
-import {CustomInput} from '../../components';
-import CustomImage from '../../components/CustomImage';
+import {IconCamera, IconError} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
-import ImageView from 'react-native-image-viewing';
+import ImgItem from './ChooseImg/ImgItem';
 
 export default function ChooseImgPicker({
   title,
@@ -27,8 +19,12 @@ export default function ChooseImgPicker({
   stylesHeader,
   styleContentImg,
   onSelect,
+  onDelete,
   maxFiles = 24,
   isDescriptionImg = true,
+  defaultValue,
+  isAddMore = true,
+  isAddWhenEmpty = false,
 }) {
   const form = useForm();
   const [viewImg, setViewImg] = useState(false);
@@ -39,10 +35,11 @@ export default function ChooseImgPicker({
       response => {
         if (response.assets) {
           const dataImages = response.assets.map((item, index) => {
+            const timeNu = new Date().getTime();
             return {
-              name: new Date().getTime() + item.fileName,
+              name: timeNu + item.fileName,
               type: item.type,
-              id: index,
+              id: index + timeNu,
               description: '',
               uri:
                 Platform.OS === 'ios'
@@ -51,7 +48,7 @@ export default function ChooseImgPicker({
             };
           });
 
-          onChange(dataImages);
+          onChange(isAddMore ? [...dataImages, ...value] : dataImages);
           onSelect && onSelect(dataImages);
         }
       },
@@ -80,6 +77,7 @@ export default function ChooseImgPicker({
   };
 
   const handleDelete = (idImg, dataImg, onChange) => {
+    onDelete && onDelete(idImg, dataImg);
     const result = dataImg.filter(item => item?.id !== idImg);
     onChange(result);
   };
@@ -89,172 +87,161 @@ export default function ChooseImgPicker({
       control={control || form?.control}
       rules={arrayToObject(rules)}
       name={name || ''}
+      defaultValue={defaultValue}
       render={({field: {onChange, value = []}, fieldState: {error}}) => {
+        const valueImg = value;
+        const isShow = isAddWhenEmpty && valueImg.length <= 0;
+
         return (
-          <View style={{width: '100%', rowGap: scale(12)}}>
-            <View style={[styles.header, stylesHeader]}>
-              <View style={{flex: 1, columnGap: scale(10)}}>
+          !isShow && (
+            <View style={{width: '100%', rowGap: scale(12)}}>
+              <View style={[styles.header, stylesHeader]}>
+                <View style={{flex: 1, columnGap: scale(10)}}>
+                  {title && (
+                    <CustomText
+                      textType="medium"
+                      style={{
+                        ...styles.text,
+                        marginTop: scale(20),
+                      }}>
+                      {title}
+                    </CustomText>
+                  )}
+                  {subHeading && (
+                    <CustomText textType="regular" style={styles.text}>
+                      {subHeading}
+                    </CustomText>
+                  )}
+                </View>
+
                 {title && (
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text,
-                      marginTop: scale(20),
-                    }}>
-                    {title}
-                  </CustomText>
-                )}
-                {subHeading && (
-                  <CustomText textType="regular" style={styles.text}>
-                    {subHeading}
-                  </CustomText>
+                  <TouchableOpacity
+                    onPress={() => pickImage(onChange, valueImg)}
+                    style={styles.icon}>
+                    <IconCamera />
+                  </TouchableOpacity>
                 )}
               </View>
 
-              <TouchableOpacity
-                onPress={() => pickImage(onChange, value)}
-                style={styles.icon}>
-                <IconCamera />
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                width: '99.3%',
-                alignSelf: 'center',
-                rowGap: scale(8),
-              }}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => pickImage(onChange, value)}
-                style={[
-                  styles.contentImg,
-                  styleContentImg,
-                  error && {borderColor: '#f6465d'},
-                ]}
-                disabled={value.length > 0}>
-                {value.length > 0 ? (
-                  value.map((img, index) => {
-                    return (
-                      <View
-                        key={index}
+              <View
+                style={{
+                  width: '99.6%',
+                  alignSelf: 'center',
+                  rowGap: scale(8),
+                }}>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={() => pickImage(onChange, valueImg)}
+                  style={[
+                    styles.contentImg,
+                    (valueImg.length <= 0 || error) && styles.border,
+                    valueImg.length <= 0 && {alignItems: 'center'},
+                    styleContentImg,
+                    error && {borderColor: '#f6465d'},
+                  ]}
+                  disabled={valueImg.length > 0}>
+                  {valueImg.length > 0 && isAddMore && (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      onPress={() => pickImage(onChange, valueImg)}
+                      style={[styles.img, styles.border, styles.addImg]}>
+                      <IconCamera
                         style={{
-                          width: value.length <= 1 ? '98%' : '47%',
-                          maxWidth: value.length <= 1 ? '100%' : scale(220),
+                          width: scale(50),
+                          height: scale(50),
+                        }}
+                      />
+                      <CustomText>Thêm ảnh</CustomText>
+                    </TouchableOpacity>
+                  )}
 
-                          rowGap: scale(10),
-                        }}>
-                        <TouchableOpacity
-                          activeOpacity={0.7}
-                          style={[styles.img]}
-                          onPress={() => setViewImg(index)}>
-                          <CustomImage
-                            source={img?.uri}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                            }}
-                          />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                          onPress={() => handleDelete(img?.id, value, onChange)}
-                          activeOpacity={0.7}
-                          style={styles.delete}>
-                          <IconX
-                            fill={'#fff'}
-                            style={{
-                              width: scale(18),
-                              height: scale(18),
-                            }}
-                          />
-                        </TouchableOpacity>
-                        {isDescriptionImg && (
-                          <CustomInput
-                            placeholder="Thêm mô tả"
-                            style={{
-                              height: scale(32),
-                              borderRadius: scale(5),
-                            }}
-                            defaultValue={img?.description}
-                            maxLength={45}
-                            onChangeText={valueText =>
-                              handleDescriptionChange(
-                                index,
-                                valueText,
-                                value,
-                                onChange,
-                              )
-                            }
-                          />
-                        )}
-                      </View>
-                    );
-                  })
-                ) : (
-                  <View
-                    style={{
-                      marginTop: '30%',
-                      alignItems: 'center',
-                    }}>
-                    <IconCamera
+                  {valueImg.length > 0 ? (
+                    valueImg.map((img, index) => {
+                      return (
+                        <ImgItem
+                          isDescriptionImg={isDescriptionImg}
+                          arrImg={valueImg}
+                          data={img}
+                          onViewImg={() => setViewImg(index)}
+                          key={`key_${index}-${img?.id}`}
+                          onDelete={() =>
+                            handleDelete(img?.id, valueImg, onChange)
+                          }
+                          onChangeDescription={valueText =>
+                            handleDescriptionChange(
+                              index,
+                              valueText,
+                              valueImg,
+                              onChange,
+                            )
+                          }
+                        />
+                      );
+                    })
+                  ) : (
+                    <View
                       style={{
-                        width: scale(100),
-                        height: scale(100),
-                      }}
-                    />
+                        marginTop: '30%',
+                        alignItems: 'center',
+                      }}>
+                      <IconCamera
+                        style={{
+                          width: scale(90),
+                          height: scale(90),
+                        }}
+                      />
+                      <CustomText>Bấm để chọn ảnh cần tải lên</CustomText>
+                    </View>
+                  )}
+                </TouchableOpacity>
 
-                    <CustomText>Bấm để chọn ảnh cần tải lên</CustomText>
+                {error && (
+                  <View style={styles.errorBox}>
+                    <IconError fill="#f0334b" />
+                    <CustomText
+                      style={{
+                        color: '#f0334b',
+                        flex: 1,
+                      }}>
+                      {error.message}
+                    </CustomText>
                   </View>
                 )}
-              </TouchableOpacity>
+              </View>
 
-              {error && (
-                <View style={styles.errorBox}>
-                  <IconError fill="#f0334b" />
-                  <CustomText
-                    style={{
-                      color: '#f0334b',
-                      flex: 1,
-                    }}>
-                    {error.message}
-                  </CustomText>
-                </View>
+              {(viewImg || viewImg === 0) && (
+                <ImageView
+                  images={valueImg}
+                  imageIndex={viewImg}
+                  visible={!!viewImg || viewImg === 0}
+                  onRequestClose={() => {
+                    setViewImg(false);
+                  }}
+                  swipeToCloseEnabled={false}
+                  FooterComponent={({imageIndex}) => {
+                    const imgDetail = valueImg
+                      ?.map((img, index) => ({...img, index}))
+                      .find(item => item?.index === imageIndex);
+
+                    return (
+                      imgDetail?.description && (
+                        <View style={styles.footer}>
+                          <CustomText
+                            style={{
+                              color: COLORS.white,
+                              fontSize: SIZES.medium,
+                              flex: 1,
+                            }}>
+                            {imgDetail?.description}
+                          </CustomText>
+                        </View>
+                      )
+                    );
+                  }}
+                />
               )}
             </View>
-
-            {(viewImg || viewImg === 0) && (
-              <ImageView
-                images={value}
-                imageIndex={viewImg}
-                visible={!!viewImg || viewImg === 0}
-                onRequestClose={() => {
-                  setViewImg(false);
-                }}
-                swipeToCloseEnabled={false}
-                FooterComponent={({imageIndex}) => {
-                  const imgDetail = value
-                    ?.map((img, index) => ({...img, index}))
-                    .find(item => item?.index === imageIndex);
-
-                  return (
-                    imgDetail?.description && (
-                      <View style={styles.footer}>
-                        <CustomText
-                          style={{
-                            color: COLORS.white,
-                            fontSize: SIZES.medium,
-                            flex: 1,
-                          }}>
-                          {imgDetail?.description}
-                        </CustomText>
-                      </View>
-                    )
-                  );
-                }}
-              />
-            )}
-          </View>
+          )
         );
       }}
     />
@@ -276,45 +263,39 @@ const styles = StyleSheet.create({
   label: {
     color: COLORS.black,
   },
-  contentImg: {
+  border: {
     borderWidth: scale(1),
     borderStyle: 'dashed',
     borderColor: '#E3E3E3',
+  },
+  contentImg: {
     borderRadius: scale(8),
-    minHeight: scale(230),
+    minHeight: scale(220),
     backgroundColor: '#fff',
     overflow: 'hidden',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
     justifyContent: 'center',
-    gap: scale(8),
+    gap: scale(6),
     paddingVertical: scale(6),
   },
   img: {
-    width: '100%',
-    height: scale(180),
+    height: scale(170),
     borderRadius: scale(5),
     overflow: 'hidden',
   },
-  icon: {
-    padding: scale(8),
-    paddingHorizontal: scale(10),
-    marginBottom: scale(-8),
-    marginLeft: scale(-8),
+  addImg: {
+    width: '48%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
   errorBox: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     columnGap: scale(6),
   },
-  delete: {
-    position: 'absolute',
-    right: 0,
-    padding: scale(4),
-    backgroundColor: COLORS.overlay,
-    borderRadius: scale(5),
-  },
+
   footer: {
     backgroundColor: COLORS.overlay,
     padding: scale(10),

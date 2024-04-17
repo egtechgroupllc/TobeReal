@@ -1,15 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, scale} from '../../../../../../assets/constants';
+import {scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
+import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {validateMinLength} from '../../../../../../utils/validate';
 import ChooseImgPicker from '../../../../../components/ChooseImgPicker';
-import ButtonTabValidate from '../ButtonTabValidate';
-import InViewPort from '../../../../../../components/InViewport';
-import CustomText from '../../../../../../components/CustomText';
 import RulesPostImg from '../../../components/RulesPostImg';
+import ButtonTabValidate from '../ButtonTabValidate';
 
 export default function EstatePhoto({control, errors, watch}) {
   const {t} = useLanguage();

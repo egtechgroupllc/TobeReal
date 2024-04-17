@@ -9,7 +9,7 @@ const list = [...Array(18)].map((_, index) => (index === 0 ? '< 1' : index));
 
 export default function ListChildren({onChange, quantity}) {
   const [listChild, setListChild] = useState(quantity || []);
-  console.log({quantity});
+
   const handleAdd = () => {
     setListChild(prev => [...prev, 8]);
   };
