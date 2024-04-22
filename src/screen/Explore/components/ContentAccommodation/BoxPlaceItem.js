@@ -37,6 +37,7 @@ export default function BoxPlaceItem({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
+  console.log(data?.id);
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -47,11 +48,7 @@ export default function BoxPlaceItem({
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailAccommodationScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
+                  params: data,
                 }),
               );
             }
@@ -70,23 +67,19 @@ export default function BoxPlaceItem({
               width: '100%',
               height: styleWrapper?.height ? '60%' : scale(150),
             }}>
-            <Ribbon text={t('promotion') + ' 30%  🏨'} />
+            <Ribbon
+              text={t('promotion') + ' 30%  🏨'}
+              numberRoom={data?.rooms?.length}
+            />
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://nowtravel.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}
-              />
-            )}
+            <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
               rating={rating}
               isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
-              type={type}
+              type={data?.accommodation_type?.name}
             />
           </View>
 
@@ -159,7 +152,14 @@ export default function BoxPlaceItem({
                     {isViewMap && (
                       <TouchableOpacity
                         activeOpacity={0.7}
-                        style={{padding: scale(4)}}>
+                        style={{
+                          padding: scale(4),
+                          flexDirection: 'row',
+                          columnGap: scale(10),
+                        }}>
+                        <CustomText>
+                          {data?.country?.name}, {data?.province?.name}
+                        </CustomText>
                         <IconMapView />
                       </TouchableOpacity>
                     )}

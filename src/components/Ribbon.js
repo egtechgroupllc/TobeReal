@@ -4,7 +4,7 @@ import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
 import CustomText from './CustomText';
 import {IconRoom} from '../assets/icon/Icon';
 
-export default function Ribbon({text, iconRight, iconLeft}) {
+export default function Ribbon({text, iconRight, iconLeft, numberRoom}) {
   const IconRight = iconRight;
   const IconLeft = iconLeft;
 
@@ -29,7 +29,7 @@ export default function Ribbon({text, iconRight, iconLeft}) {
           style={{
             fontSize: SIZES.xSmall,
           }}>
-          🛌 1
+          🛌 {numberRoom}
         </CustomText>
       </View>
     </View>

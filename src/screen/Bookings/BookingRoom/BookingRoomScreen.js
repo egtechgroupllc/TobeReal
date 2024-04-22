@@ -8,8 +8,8 @@ import HorizontalStepIndicator from './components/HorizontalStepIndicator';
 export default function BookingRoomScreen() {
   return (
     <MainWrapper>
-      {/* <Content /> */}
       <HorizontalStepIndicator />
+      <Content />
     </MainWrapper>
   );
 }

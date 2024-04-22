@@ -6,8 +6,18 @@ import FindAccommodation from './components/FindAccommodation/FindAccommodation'
 import Header from './components/Header';
 import ContentTour from './components/ContentTour/ContentTour';
 import ContentAccommodation from './components/ContentAccommodation/ContentAccommodation';
+import {getProfile} from '../../Model/api/common';
+import {useAuthentication} from '../../hooks/useAuthentication';
+import {useQuery} from '@tanstack/react-query';
 
 export default function HomeExploreScreen() {
+  const {token} = useAuthentication();
+
+  const {isLoading, isError, data, isPending, error} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(token),
+    enabled: !!token,
+  });
   return (
     <MainWrapper>
       <Header />

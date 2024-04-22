@@ -19,6 +19,7 @@ export default function WrapperContent({
   styleTextHeading,
   isSeeAll,
   isCategory,
+  dataCategory,
   isShadow,
   dayEndDeals,
   background,
@@ -75,21 +76,23 @@ export default function WrapperContent({
 
         {isCategory && (
           <Category
-            data={[
-              'Jakarta',
-              'Bandung',
-              'Tangerang',
-              'Bekasi',
-              'Depok',
-              'Surabaya',
-              'Medan',
-              'Bogor',
-              'Makassar (Ujung Pandang)',
-              'Sumedang',
-              'Sidoarjo',
-              'Yogyakarta (Jogja)',
-              'Semarang',
-            ]}
+            data={
+              dataCategory || [
+                'Jakarta',
+                'Bandung',
+                'Tangerang',
+                'Bekasi',
+                'Depok',
+                'Surabaya',
+                'Medan',
+                'Bogor',
+                'Makassar (Ujung Pandang)',
+                'Sumedang',
+                'Sidoarjo',
+                'Yogyakarta (Jogja)',
+                'Semarang',
+              ]
+            }
             onPress={onPressCategory}
           />
         )}

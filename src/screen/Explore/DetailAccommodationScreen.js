@@ -95,21 +95,22 @@ export default function DetailAccommodationScreen({route}) {
     queryKey: ['accommodation', 'detail', params?.id],
     queryFn: () => getDetailAccmo(params?.id),
   });
-
   const listView = useMemo(() => {
     const dataDetail = data?.data;
 
-    return [
-      <InfoDetail data={dataDetail} />,
-      <InfoUnitFacilities data={dataDetail} />,
-      <View style={{rowGap: scale(8)}}>
-        <DetailAccommoMap data={dataDetail} />
-        <TimeCheckInOut data={dataDetail} />
-      </View>,
-      <Review dataP={dataDetail} />,
-      <AccommoPolicy data={dataDetail} />,
-      <SimilarApartmentsNearby data={dataDetail} />,
-    ];
+    return !dataDetail
+      ? []
+      : [
+          <InfoDetail data={dataDetail} />,
+          <InfoUnitFacilities data={dataDetail} />,
+          <View style={{rowGap: scale(8)}}>
+            <DetailAccommoMap data={dataDetail} />
+            <TimeCheckInOut data={dataDetail} />
+          </View>,
+          <Review dataP={dataDetail} />,
+          <AccommoPolicy data={dataDetail} />,
+          <SimilarApartmentsNearby data={dataDetail} />,
+        ];
   }, [data?.data]);
 
   const ItemView = (item, key) => {

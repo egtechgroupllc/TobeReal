@@ -4,6 +4,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
 import RNRestart from 'react-native-restart';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {postLogin} from '../../../../Model/api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
@@ -41,7 +42,15 @@ export default function Content() {
       onSuccess: dataInside => {
         if (dataInside?.status) {
           onSaveToken(dataInside?.data?.token);
-
+          const storeData = async () => {
+            try {
+              const jsonValue = dataInside?.data?.token;
+              await AsyncStorage.setItem('my-key', jsonValue);
+            } catch (e) {
+              // saving error
+            }
+          };
+          storeData();
           showMess(dataInside?.message, 'success');
           navigate('HomeExploreScreen');
 

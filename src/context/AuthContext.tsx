@@ -31,7 +31,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     try {
       axios.defaults.headers.common['Authorization'] = `Bearer ${data}`;
 
-      setToken(data);
+      setToken(`Bearer ${data}`);
 
       await EncryptedStorage.setItem(TOKEN_KEY, data);
     } catch (error) {

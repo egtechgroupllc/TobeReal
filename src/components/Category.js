@@ -14,8 +14,9 @@ export default memo(function Category({
   isShadow = true,
   indexDefault = 0,
   backgroundColorSelect = COLORS.primary,
+  isObject = true,
 }) {
-  const [select, setSelect] = useState(!noSelect && data[indexDefault]);
+  const [select, setSelect] = useState(!noSelect && 0);
 
   const widthSize = WIDTH.widthScreen / (data.length > 3 ? 5 : 4);
 
@@ -48,23 +49,23 @@ export default memo(function Category({
           <CustomButton
             buttonType="normal"
             key={`key-${item}-${index}`}
-            text={item}
+            text={isObject ? item?.name : item}
             isShadow={isShadow}
             style={[
               {
                 width: 'auto',
                 minWidth: widthSize,
                 backgroundColor:
-                  select === item ? backgroundColorSelect : '#f1f1f1',
+                  select === index ? backgroundColorSelect : '#f1f1f1',
               },
             ]}
             styleText={[
-              select !== item && {
+              select !== index && {
                 color: COLORS.text,
               },
             ]}
             onPress={() => {
-              setSelect(item);
+              setSelect(index);
               onPress(item);
             }}
           />

@@ -1,11 +1,15 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import InViewPort from '../../../../components/InViewport';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {getListRent} from '../../../../Model/api/apiAccom';
+import {formatDate} from '../../../../utils/format';
+import {getListCountry} from '../../../../Model/api/common';
 
 const data = [
   {
@@ -197,14 +201,42 @@ export default function RecommendedApartments({
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   console.log('RecommendedApartments', isRender);
-  const title = [t('recommend_apartments')]
+  const title = [t('recommend_apartments')];
   const {navigate} = useNavigation();
+  const [filter, setFilter] = useState();
+  const {data, isLoading, isError, error} = useQuery({
+    queryKey: [
+      'accommodation',
+      'list-rent',
+      {
+        accommodation_type_id: 6,
+        province_id: filter?.id,
+        country_id: 241,
+      },
+    ],
+    queryFn: () =>
+      getListRent({
+        accommodation_type_id: 6,
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
+        country_id: 241,
+        province_id: filter?.id,
+      }),
+  });
+  const listCountry = useQuery({
+    queryKey: ['common', 'list-country', 1562822],
+    queryFn: () => getListCountry(1562822),
+  });
+  useEffect(() => {
+    setFilter(listCountry.data?.data?.[0]);
+  }, [listCountry.data?.data]);
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={300}>
       {isRender && (
         <WrapperContent
           isSeeAll={isSeeAll}
           isCategory={isCategory}
+          dataCategory={listCountry.data?.data?.slice(0, 9)}
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
               screen: 'SeeAllRentScreen',
@@ -213,26 +245,22 @@ export default function RecommendedApartments({
               },
             })
           }
-          onPressCategory={item => console.log(item)}
+          onPressCategory={item => setFilter(item)}
           heading={title}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={data}
+            data={data?.data?.rows}
             contentContainerStyle={styles.content}
             renderItem={({item, index}) => (
               <BoxPlaceItem
                 key={`key-${item}-${index}`}
                 seeViewNumber={1.5}
-                multiPrice="viewMultiPrice2"
                 data={item}
                 isUnitAvailable
                 rating={4}
                 textRating={index % 2 !== 0 && 'New'}
                 isHeart
-                price={item?.price}
-                name={item?.name}
-                jsonImage={item?.imgdetail}
               />
             )}
           />

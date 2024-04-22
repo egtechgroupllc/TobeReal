@@ -204,18 +204,18 @@ export default function ContentAccommodation() {
   return (
     <View style={styles.wrapper}>
       <HotelResidence />
-      <RecommendedUnit data={data} />
-      <StayMonthly data={data} />
+      {/* <RecommendedUnit data={data} /> */}
+      {/* <StayMonthly /> */}
       <ThematicInstagram />
-      <FindBest data={data} />
+      <FindBest />
 
-      <AccommodationPremium data={data} />
-      <VideoInfluencerApproved />
-      <FindApartmentFitsBudget />
+      <AccommodationPremium />
+      {/* <VideoInfluencerApproved /> */}
+      {/* <FindApartmentFitsBudget /> */}
 
-      <WeeklyHotDeal data={data} />
+      <WeeklyHotDeal />
 
-      <BestSelling data={data} />
+      {/* <BestSelling /> */}
 
       <RecommendedApartments />
 

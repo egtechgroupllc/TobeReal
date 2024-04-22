@@ -6,8 +6,12 @@ const instance = axios.create({
 });
 // ============================ Common =====================================
 
-export const getProfile = async () => {
-  const responsive = await instance.get('/user/profile');
+export const getProfile = async token => {
+  const responsive = await instance.get('/user/profile', {
+    headers: {
+      Authorization: token,
+    },
+  });
 
   return responsive.data;
 };

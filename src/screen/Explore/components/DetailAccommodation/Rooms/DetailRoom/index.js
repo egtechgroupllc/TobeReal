@@ -1,1 +1,1 @@
-export {default as DetailRoomScreen} from './DetailRoomScreen';
+export {default as DetailRoomScreen} from '../DetailRoomScreen';

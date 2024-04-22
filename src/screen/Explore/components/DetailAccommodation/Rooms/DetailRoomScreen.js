@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {
   IconAcreage,
   IconConditioner,
@@ -13,14 +13,14 @@ import {
   IconRoom,
   IconTV,
   IconWifi,
-} from '../../../../../../assets/icon/Icon';
-import CustomText from '../../../../../../components/CustomText';
-import MainWrapper from '../../../../../../components/MainWrapper';
-import {useAuthentication} from '../../../../../../hooks/useAuthentication';
-import {formatPrice} from '../../../../../../utils/format';
-import ImageDetail from '../../../../../components/ImageDetail';
-import ItemUtil from '../components/ItemUtil';
-import BookRoom from './BookRoom';
+} from '../../../../../assets/icon/Icon';
+import CustomText from '../../../../../components/CustomText';
+import MainWrapper from '../../../../../components/MainWrapper';
+import {useAuthentication} from '../../../../../hooks/useAuthentication';
+import {formatPrice} from '../../../../../utils/format';
+import ImageDetail from '../../../../components/ImageDetail';
+import ItemUtil from './components/ItemUtil';
+import BookRoom from './DetailRoom/BookRoom';
 
 export default function DetailRoomScreen({route}) {
   const data = route.params;
