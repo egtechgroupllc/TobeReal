@@ -2,8 +2,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import MainWrapper from '../../../components/MainWrapper';
-import Content from './components/Content';
-import HorizontalStepIndicator from './components/HorizontalStepIndicator';
+import HorizontalStepIndicator from '../components/BookingRoom/HorizontalStepIndicator';
+import Content from '../components/BookingRoom/Content';
 
 export default function BookingRoomScreen() {
   return (

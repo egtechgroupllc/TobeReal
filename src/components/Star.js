@@ -1,21 +1,53 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useMemo} from 'react';
-import {IconStar} from '../assets/icon/Icon';
-import {COLORS, scale} from '../assets/constants';
+import React, {memo, useMemo, useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-export default function Star({rating = 0}) {
+import {COLORS, scale} from '../assets/constants';
+import {IconStar} from '../assets/icon/Icon';
+
+export default memo(function Star({
+  rating = 0,
+  size,
+  onChange,
+  isSetRating,
+  style,
+}) {
+  const [point, setPoint] = useState(rating);
+
   const stars = useMemo(() => {
     const starArray = [];
     for (let i = 0; i < 5; i++) {
       starArray.push(
-        <IconStar key={i} fill={i < Math.floor(rating) && COLORS.primary} />,
+        <ComponentContent
+          key={i}
+          isSetRating={isSetRating}
+          onChange={() => {
+            setPoint(i + 1);
+            onChange && onChange(i + 1);
+          }}>
+          <IconStar
+            fill={i < Math.floor(point) && COLORS.primary}
+            width={size || scale(12)}
+            height={size || scale(12)}
+          />
+        </ComponentContent>,
       );
     }
     return starArray;
-  }, [rating]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [point, size, rating]);
 
-  return <View style={styles.star}>{stars}</View>;
-}
+  return <View style={[styles.star, style]}>{stars}</View>;
+});
+
+const ComponentContent = ({children, onChange, isSetRating}) => {
+  return isSetRating ? (
+    <TouchableOpacity activeOpacity={0.7} onPress={onChange}>
+      {children}
+    </TouchableOpacity>
+  ) : (
+    children
+  );
+};
 
 const styles = StyleSheet.create({
   star: {

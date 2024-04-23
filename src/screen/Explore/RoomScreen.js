@@ -25,7 +25,6 @@ export default function RoomScreen() {
   const queryClient = useQueryClient();
   const params = useRoute().params;
   const insets = useSafeAreaInsets();
-  const fillRef = useRef();
 
   const [date, setDate] = useState();
   const [numRoomGuest, setNumRoomGuest] = useState();
@@ -39,6 +38,7 @@ export default function RoomScreen() {
       date?.selectedStartDate,
       date?.selectedEndDate,
       numRoomGuest?.numRooms,
+      numRoomGuest?.numGuest,
     ],
     queryFn: () =>
       getListRoomDetailAccmo({
@@ -46,6 +46,7 @@ export default function RoomScreen() {
         date_start: date?.selectedStartDate,
         date_end: date?.selectedEndDate,
         number_room: numRoomGuest?.numRooms,
+        number_occupancy: numRoomGuest?.numGuest,
       }),
   });
 
@@ -121,7 +122,6 @@ export default function RoomScreen() {
         onSelectDate={setDate}
         data={data?.data?.[0]}
         onChangeNum={setNumRoomGuest}
-        ref={fillRef}
       />
       <RoomFilterType />
 
@@ -146,7 +146,7 @@ export default function RoomScreen() {
                   ...item,
                   priceAverage,
                   date,
-                  numRoomGuest: fillRef.current?.numRoomGuest(),
+                  numRoomGuest,
                 })
               }
             />

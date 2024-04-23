@@ -36,14 +36,17 @@ export default function PostConfigurationScreen() {
 
   const filterEmptyValues = object => {
     return Object.fromEntries(
-      Object.entries(object).filter(([key, value]) => value),
+      Object.entries(object).filter(
+        ([key, value]) => value !== undefined && value !== null,
+      ),
     );
   };
-  const processImages = (images, formData) =>
-    images?.map(image => {
-      formData.append(image.type, image);
+  const processImages = (images = [], formData, key) => {
+    return images?.map(image => {
+      formData.append(key, image);
       return {name: image.name, description: image.description};
     });
+  };
 
   const getFormData = (object = {}) => {
     const formData = new FormData();
@@ -69,8 +72,13 @@ export default function PostConfigurationScreen() {
       formData.append('image_delete', JSON.stringify(object?.image_delete));
     }
 
-    const imageDescription = processImages(object?.description_img);
-    const imageKyc = processImages(object?.kyc);
+    const imageDescription = processImages(
+      object?.description_img,
+      formData,
+      'description_img',
+    );
+
+    const imageKyc = processImages(object?.kyc, formData, 'kyc');
 
     if (object?.kyc || object?.description_img) {
       formData.append(
@@ -117,7 +125,7 @@ export default function PostConfigurationScreen() {
     delete params?.date_start;
 
     const formData = getFormData({...filterEmptyValues(params), ...value});
-
+    console.log(formData);
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');

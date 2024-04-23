@@ -3,9 +3,15 @@ import {StyleSheet, View} from 'react-native';
 import {scale} from '../../../../../assets/constants';
 import Skeleton from '../../../../../components/Skeleton';
 
-export default function ItemBoxReviewLoading({style, isShadow = true}) {
+export default function ItemBoxReviewLoading({isWidthFull}) {
   return (
-    <View style={styles.content}>
+    <View
+      style={[
+        styles.content,
+        isWidthFull && {
+          width: '100%',
+        },
+      ]}>
       <View style={styles.infoCustomer}>
         <Skeleton style={styles.avatar} />
         <View
@@ -28,13 +34,14 @@ export default function ItemBoxReviewLoading({style, isShadow = true}) {
           />
         </View>
       </View>
+
       <View
         style={{
           rowGap: scale(8),
         }}>
         <Skeleton height={scale(60)} />
 
-        <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+        <View style={{flexDirection: 'row', columnGap: scale(5)}}>
           {[...Array(4)].map((_, index) => (
             <Skeleton
               key={index}
@@ -70,7 +77,7 @@ export default function ItemBoxReviewLoading({style, isShadow = true}) {
 
 const styles = StyleSheet.create({
   content: {
-    width: '100%',
+    width: scale(400 / 1.5),
     // height: scale(100),
     rowGap: scale(8),
   },

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {getProfile} from '../../Model/api/common';
 import MainAuth from '../../components/MainAuth';
@@ -22,13 +22,10 @@ export default function ProfileScreen() {
   const upgrade = () => {};
 
   const {token} = useAuthentication();
-  const {goBack} = useNavigation();
+  const queryClient = useQueryClient();
 
-  const {isLoading, isError, data, isPending, isFetching} = useQuery({
-    queryKey: ['user', 'profile'],
-    queryFn: getProfile,
-  });
-  console.log({isLoading, isError, data, isPending, isFetching});
+  const profile = queryClient.getQueryData(['user', 'profile'])?.data;
+
   return (
     <MainWrapper refreshControl>
       {token ? (
@@ -40,14 +37,14 @@ export default function ProfileScreen() {
               textType="bold"
               numberOfLines={1}
               style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
-              {formatPrice(data?.data?.balance, {
+              {formatPrice(profile?.balance, {
                 locales: 'vi',
               })}
             </CustomText>
           </View>
           <AvatarImage
             upgrade={true}
-            name={data?.data?.username || 'name'}
+            name={profile?.username || 'name'}
             onPressUpgrade={upgrade}
           />
         </>

@@ -9,9 +9,9 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export default function HeaderNoToken() {
   const {t} = useLanguage();
   const {navigate, goBack} = useNavigation();
-  const insets = useSafeAreaInsets();
+
   return (
-    <View style={{...styles.wrapper, paddingTop: insets.top + scale(20)}}>
+    <View style={{...styles.wrapper}}>
       <CustomButton
         text={t('login')}
         buttonType="large"

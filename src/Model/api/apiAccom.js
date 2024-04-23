@@ -5,7 +5,7 @@ export const instanceAccom = axios.create({
   baseURL: `${baseUrl}/api/v1/accommodation`,
 });
 
-export const getListTypeRoom = async () => {
+export const getListTypeRoom = async token => {
   const responsive = await instanceAccom.get('/room/list-type');
 
   return responsive.data;
@@ -55,15 +55,6 @@ export const getMyListCreateAccom = async ({page = 1, hasRoom, limit = 10}) => {
   return responsive.data;
 };
 
-// ==> LIST REVIEW ACCOMO <==
-export const getListReviewAccmo = async ({id_accomo, pageParam = 1}) => {
-  const responsive = await instanceAccom.get(
-    `/${id_accomo}/list-review?limit=10&page=${pageParam}`,
-  );
-
-  return responsive.data;
-};
-
 // ==> DETAIL ACCOMO <==
 export const getDetailAccmo = async id_accomo => {
   const responsive = await instanceAccom.get(`/detail/${id_accomo}`);
@@ -90,9 +81,10 @@ export const getListRoomDetailAccmo = async ({
   date_end,
   status = 'ACTIVE',
   number_room = 1,
+  number_occupancy = 1,
 }) => {
   const responsive = await instanceAccom.get(
-    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}&number_room=${number_room}`,
+    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}&number_room=${number_room}&number_occupancy=${number_occupancy}`,
   );
 
   return responsive.data;
@@ -119,3 +111,34 @@ export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
 
 //   return responsive.data;
 // };
+
+// ==> API REVIEW  <==
+
+export const postReviewAccmo = async data => {
+  const responsive = await instanceAccom.post('room/post-review', data, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
+
+  return responsive.data;
+};
+
+export const getListReviewAccmo = async ({
+  id_accomo,
+  pageParam = 1,
+  limit = 10,
+}) => {
+  const responsive = await instanceAccom.get(
+    `/${id_accomo}/list-review?limit=${limit}&page=${pageParam}`,
+  );
+
+  return responsive.data;
+};
+
+// ==> API LIST BOOKING  <==
+export const getListBookingAccomo = async ({pageParam = 1, limit = 10}) => {
+  const responsive = await instanceAccom.get(
+    `/room/my-booking?limit=${limit}&page=${pageParam}`,
+  );
+
+  return responsive.data;
+};

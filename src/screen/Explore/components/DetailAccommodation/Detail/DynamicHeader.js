@@ -20,33 +20,9 @@ export default React.memo(
     {scrollOffsetY, onSelect, data, listNav},
     ref,
   ) {
-    const {t} = useLanguage();
     const {goBack} = useNavigation();
-    const listInfo = useMemo(
-      () =>
-        listNav || [
-          {
-            text: 'Tổng quan',
-          },
-          {
-            text: t('facilities'),
-          },
-          {
-            text: t('location'),
-          },
+    const listInfo = useMemo(() => listNav, [listNav]);
 
-          {
-            text: t('Review'),
-          },
-          {
-            text: 'Chính sách',
-          },
-          {
-            text: t('others'),
-          },
-        ],
-      [listNav],
-    );
     const animatedTranslateY = scrollOffsetY.interpolate({
       inputRange: [0, Scroll_Distance],
       outputRange: [0, -Scroll_Distance],
@@ -75,7 +51,7 @@ export default React.memo(
 
     const onShare = async () => {
       Share.share({
-        message: `Temukan kenyamanan dan kemudahan di jantung kawasan Mangga Besar Jakarta yang ramai di Belvena Hotel, di mana studio yang nyaman dan dirancang secara efisien ini menjanjikan masa menginap yang nyaman bagi penjelajah perkotaan dan pelancong bisnis.`,
+        message: data?.name || data?.title,
         url: 'https://www.agoda.com/?cid=1891474&tag=c0ba56c3-f836-b8c6-7f0e-8ab5ff0441fe&gclid=Cj0KCQiAwbitBhDIARIsABfFYIL1meATggkwP30pbwJEWDr94Q57mesRYq9RE14HRI-FIxhht18AEu4aAvGlEALw_wcB&ds=gL2Af8%2BwwrSh7B8d',
       })
         .then(res => {

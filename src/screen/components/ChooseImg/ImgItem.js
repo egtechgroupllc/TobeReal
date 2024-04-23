@@ -21,7 +21,6 @@ export default function ImgItem({
         style={{
           width: arrImg.length <= 1 ? '98%' : '48%',
           maxWidth: arrImg.length <= 1 ? '100%' : scale(220),
-
           rowGap: scale(10),
         }}>
         <TouchableOpacity

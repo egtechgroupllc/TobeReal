@@ -22,7 +22,7 @@ export default function Counter({
   Icon,
   editable = false,
 }) {
-  const [quantity, setQuantity] = useState(min);
+  const [quantity, setQuantity] = useState(value || min);
 
   useEffect(() => {
     value && setQuantity(Number(value));

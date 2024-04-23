@@ -10,7 +10,7 @@ export default function InfoItem({Icon, name, value, styleIcon}) {
       {Icon && (
         <IconComponent style={{...styles.image, ...styleIcon}} fill={'#aaa'} />
       )}
-      <CustomText textType="semiBold">{name}:</CustomText>
+      {name && <CustomText textType="semiBold">{name}:</CustomText>}
       <CustomText textType="regular">{value}</CustomText>
     </View>
   );
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // flex: 1,
-    width: '50%',
+    minWidth: '40%',
     columnGap: scale(5),
   },
   image: {

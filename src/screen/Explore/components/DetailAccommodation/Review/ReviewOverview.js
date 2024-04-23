@@ -6,7 +6,7 @@ import {formatNumber} from '../../../../../utils/format';
 import ItemOverviewRating from './ItemOverviewRating';
 import RangeSlider from '../../../../Video/components/RangeSlider';
 
-export default function ReviewOverview() {
+export default function ReviewOverview({dataP}) {
   return (
     <View style={styles.reviewOverview}>
       <View style={styles.overviewLeft}>
@@ -16,11 +16,11 @@ export default function ReviewOverview() {
             fontSize: SIZES.xxLarge,
             color: COLORS.primary,
           }}>
-          4.5
+          {dataP?.review_average || 0}
           <CustomText>/5</CustomText>
         </CustomText>
         <CustomText textType="semiBold">Rat tot</CustomText>
-        <CustomText>{formatNumber(9999)} danh gia</CustomText>
+        <CustomText>{formatNumber(dataP?.review_count)} danh gia</CustomText>
       </View>
 
       <View style={styles.overviewRight}>

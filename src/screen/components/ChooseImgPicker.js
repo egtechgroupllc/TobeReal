@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {memo, useRef, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -10,7 +10,7 @@ import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
 import ImgItem from './ChooseImg/ImgItem';
 
-export default function ChooseImgPicker({
+export default memo(function ChooseImgPicker({
   title,
   subHeading,
   control,
@@ -18,6 +18,8 @@ export default function ChooseImgPicker({
   name,
   stylesHeader,
   styleContentImg,
+  styleContent,
+  sizeIcon,
   onSelect,
   onDelete,
   maxFiles = 24,
@@ -25,6 +27,7 @@ export default function ChooseImgPicker({
   defaultValue,
   isAddMore = true,
   isAddWhenEmpty = false,
+  descContent,
 }) {
   const form = useForm();
   const [viewImg, setViewImg] = useState(false);
@@ -125,9 +128,9 @@ export default function ChooseImgPicker({
 
               <View
                 style={{
-                  width: '99.6%',
-                  alignSelf: 'center',
-                  rowGap: scale(8),
+                  // width: '99.6%',
+                  // rowGap: scale(8),
+                  ...styleContent,
                 }}>
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -186,11 +189,13 @@ export default function ChooseImgPicker({
                       }}>
                       <IconCamera
                         style={{
-                          width: scale(90),
-                          height: scale(90),
+                          width: sizeIcon || scale(90),
+                          height: sizeIcon || scale(90),
                         }}
                       />
-                      <CustomText>Bấm để chọn ảnh cần tải lên</CustomText>
+                      <CustomText>
+                        {descContent || 'Bấm để chọn ảnh cần tải lên'}
+                      </CustomText>
                     </View>
                   )}
                 </TouchableOpacity>
@@ -246,7 +251,7 @@ export default function ChooseImgPicker({
       }}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   header: {
@@ -270,7 +275,6 @@ const styles = StyleSheet.create({
   },
   contentImg: {
     borderRadius: scale(8),
-    minHeight: scale(220),
     backgroundColor: '#fff',
     overflow: 'hidden',
     flexDirection: 'row',

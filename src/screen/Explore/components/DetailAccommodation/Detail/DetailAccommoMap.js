@@ -40,7 +40,6 @@ export default function DetailAccommoMap({
     });
   }, [coordinate]);
 
-  console.log({coordinate});
   const radius = 9 * 1000;
 
   const fetchPlaces = async () => {

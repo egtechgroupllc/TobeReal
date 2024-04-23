@@ -37,7 +37,9 @@ export default memo(function RealEstateType({
           onSelect && onSelect(selectedItem);
         }}
         renderCustomizedButtonChild={item => {
-          const valueConvert = (!watch(name) ? {} : item) || value;
+          const valueConvert = !control
+            ? item
+            : (!watch(name) ? {} : item) || value;
 
           return (
             <CustomText

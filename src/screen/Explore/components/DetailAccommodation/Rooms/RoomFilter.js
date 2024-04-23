@@ -4,42 +4,30 @@ import {scale} from '../../../../../assets/constants';
 import ChooseCalendarRoom from './ChooseCalendarRoom';
 import SelectNumGuestRoom from './SelectNumGuestRoom';
 
-export default memo(
-  forwardRef(function RoomFilter({onSelectDate, data, onChangeNum}, ref) {
-    const [numRoomGuest, setNumRoomGuest] = useState(null);
-    useImperativeHandle(
-      ref,
-      () => ({
-        numRoomGuest: () => numRoomGuest,
-      }),
-      [numRoomGuest],
-    );
+export default memo(function RoomFilter({onSelectDate, data, onChangeNum}) {
+  return (
+    <View
+      style={{
+        ...styles.row,
+        backgroundColor: '#fff',
+        paddingHorizontal: scale(8),
+        paddingVertical: scale(10),
+      }}>
+      <ChooseCalendarRoom
+        onSelectDate={value => {
+          onSelectDate && onSelectDate(value);
+        }}
+        data={data}
+      />
 
-    return (
-      <View
-        style={{
-          ...styles.row,
-          backgroundColor: '#fff',
-          paddingHorizontal: scale(8),
-          paddingVertical: scale(10),
-        }}>
-        <ChooseCalendarRoom
-          onSelectDate={value => {
-            onSelectDate && onSelectDate(value);
-          }}
-          data={data}
-        />
-
-        <SelectNumGuestRoom
-          onChangeNum={value => {
-            setNumRoomGuest(value);
-            onChangeNum && onChangeNum(value);
-          }}
-        />
-      </View>
-    );
-  }),
-);
+      <SelectNumGuestRoom
+        onChangeNum={value => {
+          onChangeNum && onChangeNum(value);
+        }}
+      />
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   row: {

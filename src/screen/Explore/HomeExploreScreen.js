@@ -1,13 +1,11 @@
-import React, {Suspense} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {COLORS, scale} from '../../assets/constants';
+import {useQuery} from '@tanstack/react-query';
+import React from 'react';
+import {instanceAccom} from '../../Model/api/apiAccom';
+import {getProfile} from '../../Model/api/common';
 import MainWrapper from '../../components/MainWrapper';
+import {useAuthentication} from '../../hooks/useAuthentication';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
 import Header from './components/Header';
-import {getProfile, instanceCommon} from '../../Model/api/common';
-import {useAuthentication} from '../../hooks/useAuthentication';
-import {useQuery} from '@tanstack/react-query';
-import {instanceAccom} from '../../Model/api/apiAccom';
 
 export default function HomeExploreScreen() {
   const {token} = useAuthentication();
@@ -22,14 +20,6 @@ export default function HomeExploreScreen() {
     <MainWrapper refreshControl>
       <Header />
       <FindAccommodation />
-      <Suspense
-        fallback={
-          <ActivityIndicator
-            size={'large'}
-            color={COLORS.primary}
-            style={{marginTop: scale(20)}}
-          />
-        }></Suspense>
     </MainWrapper>
   );
 }

@@ -1,4 +1,4 @@
-import {BookingRoomScreen} from '../screen/Bookings';
+import {BookingRoomScreen, PostReviewScreen} from '../screen/Bookings';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
@@ -173,5 +173,9 @@ export default routerNoBottomTab = [
     options: {
       headerShown: false,
     },
+  },
+  {
+    name: 'PostReviewScreen',
+    component: PostReviewScreen,
   },
 ];

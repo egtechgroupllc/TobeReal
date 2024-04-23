@@ -1,33 +1,27 @@
-import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-import React, {useMemo} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
-import {COLORS, scale} from '../../../../../assets/constants';
-import ItemBoxReview from './ItemBoxReview';
-import ReviewOverview from './ReviewOverview';
-import FilterSort from './FilterSort';
 import {useInfiniteQuery} from '@tanstack/react-query';
+import LottieView from 'lottie-react-native';
+import React, {useMemo} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
+
 import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
-import ItemBoxReviewLoading from './ItemBoxReviewLoading';
+import {COLORS, animations, scale} from '../../../../../assets/constants';
 import EmptyData from '../../../../../components/EmptyData';
+import FilterSort from './FilterSort';
+import ItemBoxReview from './ItemBoxReview';
+import ItemBoxReviewLoading from './ItemBoxReviewLoading';
+import ReviewOverview from './ReviewOverview';
 
-export default function ReviewAll({valueSort, onSort, id_accomo}) {
-  const {
-    isLoading,
-    isError,
-    data,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['accommodation', 'list-review', 1],
-    queryFn: () => getListReviewAccmo({id_accomo}),
-    getNextPageParam: (lastPage, allPages) => {
-      if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
+export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
+  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
+    useInfiniteQuery({
+      queryKey: ['accommodation', 'list-review', 1],
+      queryFn: () => getListReviewAccmo({id_accomo}),
+      getNextPageParam: (lastPage, allPages) => {
+        if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
 
-      return undefined;
-    },
-  });
+        return undefined;
+      },
+    });
 
   const dataArr = useMemo(
     () =>
@@ -42,7 +36,7 @@ export default function ReviewAll({valueSort, onSort, id_accomo}) {
 
   return (
     <View>
-      <ReviewOverview />
+      <ReviewOverview dataP={dataP} />
 
       <FilterSort
         isSelectAll
@@ -67,6 +61,8 @@ export default function ReviewAll({valueSort, onSort, id_accomo}) {
           paddingHorizontal: scale(20),
         }}
         scrollEnabled={false}
+        onEndReached={hasNextPage && fetchNextPage}
+        onEndReachedThreshold={0.5}
         ListEmptyComponent={() => {
           return (
             <EmptyData
@@ -76,8 +72,24 @@ export default function ReviewAll({valueSort, onSort, id_accomo}) {
             />
           );
         }}
+        ListFooterComponent={() =>
+          isFetchingNextPage && (
+            <View
+              style={{
+                height: scale(30),
+              }}>
+              <LottieView
+                autoPlay={true}
+                source={animations.loading}
+                style={{
+                  height: '100%',
+                }}
+              />
+            </View>
+          )
+        }
         renderItem={({item, index}) =>
-          item ? (
+          item?.id ? (
             <ItemBoxReview
               style={{
                 width: '100%',
@@ -90,7 +102,7 @@ export default function ReviewAll({valueSort, onSort, id_accomo}) {
               key={`key-${item}-${index}`}
             />
           ) : (
-            <ItemBoxReviewLoading />
+            <ItemBoxReviewLoading isWidthFull />
           )
         }
       />

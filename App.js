@@ -23,11 +23,9 @@ import CustomImage from './src/components/CustomImage';
 import Loading from './src/components/Loading/Loading';
 import {AuthProvider} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
-import {useAuthentication} from './src/hooks/useAuthentication';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
-import DetailPriceRoom from './src/screen/Explore/components/DetailAccommodation/Rooms/DetailRoom/DetailPriceRoom';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -66,6 +64,7 @@ export default function App() {
       showMess('Disconnected!', 'error');
     }
   }, [netInfo.isConnected]);
+
   const SplashScreen = () => (
     <View
       style={{
@@ -120,8 +119,6 @@ export default function App() {
 }
 
 const Layout = () => {
-  const {token} = useAuthentication();
-
   return (
     <Stack.Navigator
       screenOptions={{

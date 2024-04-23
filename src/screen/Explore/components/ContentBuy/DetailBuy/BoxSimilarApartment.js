@@ -1,26 +1,14 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {
-  COLORS,
-  SHADOW,
-  SIZES,
-  images,
-  scale,
-} from '../../../../../assets/constants';
-import {
-  Avatar,
-  IconHeart,
-  IconMapView,
-  IconMarker,
-} from '../../../../../assets/icon/Icon';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {Avatar, IconMapView} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
-import {formatPrice} from '../../../../../utils/format';
-import ViewMultiPrice from '../BoxPlaceItem/ViewMultiPrice';
-import TopImg from '../BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../../utils/format';
 import BoxPlaceItemLoading from '../BoxPlaceItem/BoxPlaceItemLoading';
+import TopImg from '../BoxPlaceItem/TopImg';
 import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
 import LinearGradient from 'react-native-linear-gradient';
 

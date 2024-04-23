@@ -1,6 +1,6 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 import React, {useMemo} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {getHistoryDeposit} from '../../../Model/api/auth';
 import EmptyData from '../../../components/EmptyData';
 import MainWrapper from '../../../components/MainWrapper';
@@ -8,9 +8,10 @@ import BoxPlaceItemLoading from '../../Explore/components/ContentAccommodation/B
 import ItemHistoryTrans from './components/HistoryTransaction/ItemHistoryTrans';
 import ListCreateAccomLoading from '../../News/PostNews/Lease/components/HomeLease/ListCreateAccomLoading';
 import ItemHistoryTransLoading from './components/HistoryTransaction/ItemHistoryTransLoading';
-import {scale} from '../../../assets/constants';
+import {animations, scale} from '../../../assets/constants';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
 import {useNavigation} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 const listInfo = [
   {
     text: 'Tất cả',
@@ -68,6 +69,22 @@ export default function HistoryTransactionScreen() {
             }}
           />
         )}
+        ListFooterComponent={() =>
+          isFetchingNextPage && (
+            <View
+              style={{
+                height: scale(30),
+              }}>
+              <LottieView
+                autoPlay={true}
+                source={animations.loading}
+                style={{
+                  height: '100%',
+                }}
+              />
+            </View>
+          )
+        }
         onEndReached={hasNextPage && fetchNextPage}
         onEndReachedThreshold={0.5}
         contentContainerStyle={{

@@ -20,6 +20,12 @@ import ContentTour from '../ContentTour/ContentTour';
 import FindAccommodationStart from './FindAccommodationStart';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
+import {useQuery} from '@tanstack/react-query';
+import {
+  getListTypeRoom,
+  getMyListCreateAccom,
+} from '../../../../Model/api/apiAccom';
+import {useAuthentication} from '../../../../hooks/useAuthentication';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -42,6 +48,14 @@ export default function FindAccommodation() {
     },
   ]).current;
 
+  const {token} = useAuthentication();
+
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['accommodation', 'my', 0],
+    queryFn: () => getMyListCreateAccom({token, hasRoom: 0}),
+    enabled: !!token,
+  });
+  console.log(data, 1239218739813);
   const listRent = useRef([
     // {
     //   text: t('all'),

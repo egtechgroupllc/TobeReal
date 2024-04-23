@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {CustomButton} from '../../../../../components';
 import CustomText from '../../../../../components/CustomText';
 
-import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import Modal from 'react-native-modal';
 import {
   IconEmail,
   IconPhone,
@@ -25,10 +24,8 @@ import {
   LogoZalo,
 } from '../../../../../assets/icon/Icon';
 import Skeleton from '../../../../../components/Skeleton';
-import {useAuthentication} from '../../../../../hooks/useAuthentication';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
-import Modal from 'react-native-modal';
 
 const listContact = [
   {
@@ -57,15 +54,8 @@ const listContact = [
   },
 ];
 
-export default memo(function BookAccommodation({
-  setBookHeight,
-  isLoading,
-  price,
-  onPress,
-}) {
-  const insets = useSafeAreaInsets();
+export default memo(function BookAccommodation({isLoading, price, onPress}) {
   const {t} = useLanguage();
-  const {token} = useAuthentication();
 
   const [openContact, setOpenContact] = useState(false);
 
@@ -76,12 +66,7 @@ export default memo(function BookAccommodation({
   };
 
   return (
-    <View
-      style={{...styles.wrapper}}
-      onLayout={e => {
-        const {height} = e.nativeEvent.layout;
-        setBookHeight(height);
-      }}>
+    <View style={{...styles.wrapper}}>
       <Skeleton
         visible={!isLoading}
         shimmerStyle={{

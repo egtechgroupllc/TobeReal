@@ -8,22 +8,8 @@ import {IconArrowRight} from '../../../../../assets/icon/Icon';
 export default function TimeCheckInOut({data}) {
   const {t} = useLanguage();
   return (
-    <View
-      style={{
-        backgroundColor: '#fff',
-        padding: scale(10),
-      }}>
-      <View
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: scale(10),
-          borderRadius: scale(8),
-          flexDirection: 'row',
-          columnGap: scale(10),
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginHorizontal: scale(30),
-        }}>
+    <View style={styles.wrapper}>
+      <View style={styles.content}>
         <View style={{flex: 1, alignItems: 'center'}}>
           <CustomText style={{fontSize: SIZES.xMedium}}>
             {t('check_in')}
@@ -49,4 +35,19 @@ export default function TimeCheckInOut({data}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: '#fff',
+    padding: scale(10),
+  },
+  content: {
+    backgroundColor: '#f5f5f5',
+    padding: scale(10),
+    borderRadius: scale(8),
+    flexDirection: 'row',
+    columnGap: scale(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: scale(30),
+  },
+});

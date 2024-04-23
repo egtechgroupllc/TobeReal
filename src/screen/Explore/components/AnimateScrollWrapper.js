@@ -11,7 +11,8 @@ export default function AnimateScrollWrapper({
   lisViewComponent = [],
   listNav = [{text: ''}],
   dataDetail,
-  ContentComponent,
+  ContentBookComponent,
+  isLoading,
 }) {
   const [dataSourceCords, setDataSourceCords] = useState([]);
   const [isSelect, setIsSelect] = useState(true);
@@ -81,41 +82,43 @@ export default function AnimateScrollWrapper({
 
   return (
     <>
-      <View>
-        {true ? (
-          <>
-            <DynamicHeader
-              ref={dynamicHeaderRef}
-              scrollOffsetY={scrollOffsetY}
-              onSelect={selectScrollHandler}
-              data={dataDetail}
-              listNav={listNav}
-            />
+      {!isLoading ? (
+        <>
+          <DynamicHeader
+            ref={dynamicHeaderRef}
+            scrollOffsetY={scrollOffsetY}
+            onSelect={selectScrollHandler}
+            data={dataDetail}
+            listNav={listNav}
+          />
 
-            <Animated.ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingTop: Header_Max_Height + scale(50),
-                paddingBottom: tabBarHeight,
-              }}
-              onScroll={handleScroll}
-              ref={scrollRef}>
-              <View style={styles.content}>
-                {lisViewComponent.map(ItemView)}
-              </View>
-            </Animated.ScrollView>
-          </>
-        ) : (
-          <DetailAccommodationLoading heightHeader={Header_Max_Height} />
-        )}
-      </View>
+          <Animated.ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingTop: Header_Max_Height + scale(50),
+              paddingBottom: tabBarHeight,
+            }}
+            onScroll={handleScroll}
+            ref={scrollRef}>
+            <View style={styles.content}>{lisViewComponent.map(ItemView)}</View>
+          </Animated.ScrollView>
+        </>
+      ) : (
+        <DetailAccommodationLoading heightHeader={Header_Max_Height} />
+      )}
       <BookAccommodation
         setBookHeight={setTabBarHeight}
         isLoading={false}
-        ContentComponent={ContentComponent}
+        ContentComponent={ContentBookComponent}
       />
     </>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  content: {
+    rowGap: scale(8),
+    marginTop: scale(-4),
+    // alignItems: 'center',
+  },
+});

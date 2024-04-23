@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {
@@ -13,8 +13,13 @@ import {formatDate} from '../../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
 
 export default function CreateSellItem({data, onPressMore, onEdit}) {
-  const dataPackagePost = data.package_post_item?.package_post;
   const {navigate} = useNavigation();
+
+  const dataPackagePost = useMemo(
+    () => data.package_post_item.package_post,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data.package_post_item.package_post.level],
+  );
 
   return (
     <TouchableOpacity
@@ -47,7 +52,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
             top: scale(-5),
           }}>
           <CustomText textType="semiBold" style={{color: COLORS.white}}>
-            {dataPackagePost?.name}
+            {dataPackagePost?.name}{' '}
           </CustomText>
         </View>
 
@@ -58,6 +63,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
           }}>
           <CustomText
             textType="semiBold"
+            numberOfLines={5}
             style={{
               flex: 1,
             }}>
@@ -109,7 +115,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
         </View>
       </View>
 
-      {data?.note && (
+      {data?.note && data.status === 'NOT_APPROVED' && (
         <View style={{flexDirection: 'row', columnGap: scale(6)}}>
           <IconError />
           <CustomText
