@@ -258,6 +258,7 @@ export default function RecommendedApartments({
                 seeViewNumber={1.5}
                 data={item}
                 isUnitAvailable
+                isStar
                 rating={4}
                 textRating={index % 2 !== 0 && 'New'}
                 isHeart

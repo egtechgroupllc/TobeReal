@@ -109,7 +109,7 @@ export default function DetailAccommodationScreen({route}) {
           </View>,
           <Review dataP={dataDetail} />,
           <AccommoPolicy data={dataDetail} />,
-          <SimilarApartmentsNearby data={dataDetail} />,
+          <SimilarApartmentsNearby />,
         ];
   }, [data?.data]);
 

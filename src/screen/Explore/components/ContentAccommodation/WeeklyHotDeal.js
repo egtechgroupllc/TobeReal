@@ -73,6 +73,8 @@ export default function WeeklyHotDeal() {
                 isDiscount
                 data={item}
                 rental="night"
+                isStar
+                rating={3}
                 jsonImage={item?.imgdetail}
                 name={item?.name}
                 price={item?.price}

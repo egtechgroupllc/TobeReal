@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
     elevation: 11,
   },
+
   wrapper: {
     backgroundColor: COLORS.grey,
     height: scale(188),

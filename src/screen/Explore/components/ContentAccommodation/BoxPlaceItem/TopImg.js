@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import RatingBox from './RatingBox';
 import {IconHeart, IconMarker} from '../../../../../assets/icon/Icon';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../../components/Favourite';
 
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(4),
     borderRadius: 99,
     columnGap: scale(4),
+    ...SHADOW,
   },
   boxIcon: {
     backgroundColor: '#fff',

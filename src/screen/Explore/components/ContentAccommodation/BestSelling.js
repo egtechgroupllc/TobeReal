@@ -72,9 +72,6 @@ export default function BestSelling() {
                 isUnitAvailable
                 isHeart
                 data={item}
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
               />
             )}
           />

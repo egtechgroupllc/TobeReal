@@ -19,7 +19,7 @@ export default function WrapperContent({
   styleTextHeading,
   isSeeAll,
   isCategory,
-  dataCategory,
+  dataCategory = [],
   isShadow,
   dayEndDeals,
   background,
@@ -75,33 +75,14 @@ export default function WrapperContent({
         </View>
 
         {isCategory && (
-          <Category
-            data={
-              dataCategory || [
-                'Jakarta',
-                'Bandung',
-                'Tangerang',
-                'Bekasi',
-                'Depok',
-                'Surabaya',
-                'Medan',
-                'Bogor',
-                'Makassar (Ujung Pandang)',
-                'Sumedang',
-                'Sidoarjo',
-                'Yogyakarta (Jogja)',
-                'Semarang',
-              ]
-            }
-            onPress={onPressCategory}
-          />
+          <Category isObject data={dataCategory} onPress={onPressCategory} />
         )}
-        {packageTour && (
+        {/* {packageTour && (
           <Category
             data={['Southeast Asia', 'Asia', 'Europe', 'America']}
             onPress={onPressCategory}
           />
-        )}
+        )} */}
         {themedTour && (
           <Category
             data={[

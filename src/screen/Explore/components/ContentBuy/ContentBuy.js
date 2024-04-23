@@ -397,9 +397,9 @@ export default function ContentBuy() {
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
-      <BuySell data={dataPackage} />
-      <Discount />
-      <FeatureEstate data={dataWorld} />
+      <BuySell />
+      {/* <Discount /> */}
+      <FeatureEstate />
       <TopLocation data={dataLocation} />
       <TopEstateAgent data={dataAgent} />
       <ExploreNearbyEstate data={dataWorld} />

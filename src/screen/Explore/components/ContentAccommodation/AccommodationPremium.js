@@ -56,6 +56,8 @@ export default function AccommodationPremium() {
               <BoxPlaceItem
                 isHeart
                 isDiscount
+                isStar
+                rating={3}
                 data={item}
                 rental="night"
                 jsonImage={item?.imgdetail}

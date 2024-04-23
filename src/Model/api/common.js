@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {baseUrl} from '../url';
 
-const instance = axios.create({
+export const instanceCommon = axios.create({
   baseURL: baseUrl + '/api/v1',
 });
 // ============================ Common =====================================
 
 export const getProfile = async token => {
-  const responsive = await instance.get('/user/profile', {
+  const responsive = await instanceCommon.get('/user/profile', {
     headers: {
       Authorization: token,
     },
@@ -17,7 +17,7 @@ export const getProfile = async token => {
 };
 
 export const getListCountry = async (province_id = '') => {
-  const responsive = await instance.get(
+  const responsive = await instanceCommon.get(
     `/common/list-country?geoname_id=${province_id}`,
   );
 
@@ -25,31 +25,31 @@ export const getListCountry = async (province_id = '') => {
 };
 
 export const getListCurrency = async () => {
-  const responsive = await instance.get('/common/list-currency');
+  const responsive = await instanceCommon.get('/common/list-currency');
 
   return responsive.data;
 };
 
 export const getListTypeRent = async () => {
-  const responsive = await instance.get('/accommodation/list-type');
+  const responsive = await instanceCommon.get('/accommodation/list-type');
 
   return responsive.data;
 };
 
 export const getListTypeEstateSell = async () => {
-  const responsive = await instance.get('/estate/list-type');
+  const responsive = await instanceCommon.get('/estate/list-type');
 
   return responsive.data;
 };
 
 export const getListDirection = async () => {
-  const responsive = await instance.get('common/list-direction');
+  const responsive = await instanceCommon.get('common/list-direction');
 
   return responsive.data;
 };
 
 export const getListPackagePost = async () => {
-  const responsive = await instance.get('common/list-package-post');
+  const responsive = await instanceCommon.get('common/list-package-post');
 
   return responsive.data;
 };

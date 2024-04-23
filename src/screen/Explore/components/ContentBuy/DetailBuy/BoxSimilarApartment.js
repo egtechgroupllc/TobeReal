@@ -21,6 +21,8 @@ import ViewMultiPrice from '../BoxPlaceItem/ViewMultiPrice';
 import TopImg from '../BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from '../BoxPlaceItem/BoxPlaceItemLoading';
+import calculateTimeElapsed from '../../../../../utils/calculateTimeElapsed';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function BoxSimilarApartment({
   data,
@@ -67,7 +69,7 @@ export default function BoxSimilarApartment({
             {
               width: scale(600 / seeViewNumber),
               // height: scale(200),
-              padding:scale(10)
+              padding: scale(10),
             },
             styleWrapper,
             SHADOW,
@@ -79,13 +81,7 @@ export default function BoxSimilarApartment({
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
-            )}
+            <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
               // rating={rating}
@@ -94,9 +90,12 @@ export default function BoxSimilarApartment({
               isHeart={isHeart}
             />
           </View>
-          <View
+          <LinearGradient
+            colors={['#fffad9', '#ffcb0f']}
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
             style={{
-              backgroundColor: COLORS.primary,
+              // backgroundColor: COLORS.primary,
               flex: 1,
               marginTop: scale(18),
               margin: scale(5),
@@ -108,11 +107,11 @@ export default function BoxSimilarApartment({
             }}>
             <CustomText
               textType="bold"
-              style={[isStar && {fontSize: SIZES.xSmall, color: COLORS.white}]}
+              style={[isStar && {fontSize: SIZES.small, color: COLORS.white}]}
               numberOfLines={1}>
-              {data?.name}
+              {data?.title}
             </CustomText>
-{/* 
+            {/* 
             <View style={{marginTop: scale(5)}}>
               {!multiPrice ? (
                 <>
@@ -200,10 +199,42 @@ export default function BoxSimilarApartment({
                       fontSize: SIZES.xSmall,
                       // minWidth: scale(35),
                     }}>
-                    Thuy Nguyen, Hai Phong
+                    {data?.country?.name}, {data?.province?.name}
                   </CustomText>
                 </View>
               </View>
+            </View>
+            <View style={styles.price}>
+              <CustomText
+                textType="bold"
+                style={[
+                  styles.buildingName,
+                  isStar && {
+                    fontSize: SIZES.small,
+                    color: COLORS.white,
+                    marginTop: scale(5),
+                  },
+                  isDiscount && {color: COLORS.white},
+                ]}>
+                {formatPrice(data?.price, {
+                  locales: 'vi',
+                })}{' '}
+                {time && (
+                  <CustomText
+                    textType="regular"
+                    style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
+                    / {rental}
+                  </CustomText>
+                )}
+              </CustomText>
+
+              {isViewMap && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={{padding: scale(4)}}>
+                  <IconMapView />
+                </TouchableOpacity>
+              )}
             </View>
             <View style={{marginTop: scale(5)}}>
               <View style={styles.price}>
@@ -223,7 +254,7 @@ export default function BoxSimilarApartment({
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Mr
+                      {data?.contact_name}
                     </CustomText>
                     <CustomText
                       textType="bold"
@@ -233,10 +264,10 @@ export default function BoxSimilarApartment({
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Posted today
+                      {calculateTimeElapsed(data.date_start)}
                     </CustomText>
                   </View>
-                  
+
                   {/* <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
                      <View style={{backgroundColor:COLORS.primary, width:'20%', height:scale(13), borderRadius:scale(3), alignItems:'center', justifyContent:'center', }}>
                      <CustomImage
@@ -256,40 +287,8 @@ export default function BoxSimilarApartment({
                   </View> */}
                 </View>
               </View>
-              
             </View>
-            <View style={styles.price}>
-                    <CustomText
-                      textType="bold"
-                      style={[
-                        styles.buildingName,
-                        isStar && {fontSize: SIZES.small, color: COLORS.white, marginTop:scale(5)},
-                        isDiscount && {color: COLORS.white},
-                      ]}>
-                      {formatPrice(data?.price, {
-                        locales: 'vi',
-                      })}{' '}
-                      {time && (
-                        <CustomText
-                          textType="regular"
-                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
-                          / {rental}
-                        </CustomText>
-                      )}
-                    </CustomText>
-                    
-                    
-
-                    {isViewMap && (
-                      <TouchableOpacity
-                        activeOpacity={0.7}
-                        style={{padding: scale(4)}}>
-                        <IconMapView />
-                      </TouchableOpacity>
-                    )}
-                  </View>
-          </View>
-          
+          </LinearGradient>
         </TouchableOpacity>
       ) : (
         <BoxPlaceItemLoading
@@ -319,6 +318,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: scale(12),
+    backgroundColor: '#f5f5f5',
   },
   line: {
     backgroundColor: 'white',

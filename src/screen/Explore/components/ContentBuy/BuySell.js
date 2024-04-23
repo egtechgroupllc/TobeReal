@@ -9,12 +9,25 @@ import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {getListSell} from '../../../../Model/api/apiEstate';
 
-export default function BuySell({data}) {
+export default function BuySell() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
   const title = [t('Buy and sell real estate nationwide')];
+  const {data, isLoading, isError, error} = useQuery({
+    queryKey: [
+      'estate',
+      'list-post',
+      {
+        estate_type_id: 1,
+        country_id: 241,
+      },
+    ],
+    queryFn: () => getListSell({country_id: 241}),
+  });
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -35,17 +48,15 @@ export default function BuySell({data}) {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={data}
+            data={data?.data?.rows?.slice(0, 9)}
             contentContainerStyle={styles.content}
             renderItem={({item}) => (
               <BoxPlaceItem
                 isHeart
                 isStar
+                textRating={2}
                 data={item}
                 rental="night"
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
               />
             )}
           />

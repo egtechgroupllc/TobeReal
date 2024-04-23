@@ -70,6 +70,8 @@ export default function FindBest() {
               <BoxPlaceItem
                 isHeart
                 isDiscount
+                isStar
+                rating={5}
                 data={item}
                 rental="night"
                 jsonImage={item?.imgdetail}

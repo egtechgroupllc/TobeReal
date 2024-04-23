@@ -156,7 +156,7 @@ export default memo(function BookAccommodation({
             }}
           />
 
-          <CustomButton
+          {/* <CustomButton
             testID={'modal-open-button'}
             onPress={() => {
               // makeCallPhone('0824232339');
@@ -172,7 +172,7 @@ export default memo(function BookAccommodation({
             styleIcon={{
               color: '#fff',
             }}
-          />
+          /> */}
         </View>
       </Skeleton>
       <Modal

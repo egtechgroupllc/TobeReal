@@ -142,7 +142,6 @@ export default function FindAccommodation() {
                       {tabSelect === 'RENT' && (
                         <Category
                           indexDefault={1}
-                          isObject={false}
                           data={[t('daily'), t('monthly'), t('yearly')]}
                           onPress={value => setCategory(value)}
                         />

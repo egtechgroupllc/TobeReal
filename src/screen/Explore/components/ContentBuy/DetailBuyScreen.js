@@ -19,6 +19,7 @@ import ContactInfo from './DetailBuy/ContactInfo';
 import InfoDetail from './DetailBuy/InfoDetail';
 import Review from './DetailBuy/Review';
 import AnimateScrollWrapper from '../AnimateScrollWrapper';
+import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
 
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
@@ -34,11 +35,7 @@ export default function DetailBuyScreen({route}) {
       <ContactInfo data={params} />
       <ConfigDetail data={params} />
     </View>,
-    // <SimilarApartmentsNearby
-    //   name={title}
-    //   image={jsondata || []}
-    //   price={paramPrice}
-    // />,
+    <SimilarApartmentsNearby />,
   ]).current;
   const listNavBar = useRef([
     {

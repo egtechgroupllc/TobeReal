@@ -4,11 +4,10 @@ import {COLORS, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
 import Header from './components/Header';
-import ContentTour from './components/ContentTour/ContentTour';
-import ContentAccommodation from './components/ContentAccommodation/ContentAccommodation';
-import {getProfile} from '../../Model/api/common';
+import {getProfile, instanceCommon} from '../../Model/api/common';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useQuery} from '@tanstack/react-query';
+import {instanceAccom} from '../../Model/api/apiAccom';
 
 export default function HomeExploreScreen() {
   const {token} = useAuthentication();
@@ -18,8 +17,9 @@ export default function HomeExploreScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
+  instanceAccom.defaults.headers.common['Authorization'] = token;
   return (
-    <MainWrapper>
+    <MainWrapper refreshControl>
       <Header />
       <FindAccommodation />
       <Suspense

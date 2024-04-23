@@ -14,7 +14,7 @@ export default memo(function Category({
   isShadow = true,
   indexDefault = 0,
   backgroundColorSelect = COLORS.primary,
-  isObject = true,
+  isObject = false,
 }) {
   const [select, setSelect] = useState(!noSelect && 0);
 

@@ -23,8 +23,9 @@ export default function MainWrapper({
   const queryClient = useQueryClient();
 
   function pullToRefresh() {
+    console.log(24932789);
     setRefresh(true);
-    queryClient.invalidateQueries();
+    queryClient.invalidateQueries(['user', 'profile']);
     setRefresh(false);
   }
   const Component = noImgColor ? View : CustomImage;

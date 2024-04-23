@@ -7,30 +7,35 @@ import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
 import Star from '../../../../../components/Star';
+import {formatPrice} from '../../../../../utils/format';
 
 export default function TopImg({
   rating,
   isStar,
   textRating,
   isHeart,
-  type,
   feature,
-  price,
   showPrice,
+  data,
+  level,
 }) {
+  const dataPackagePost = data?.package_post_item?.package_post;
+  console.log(dataPackagePost);
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>
-        {!!rating && !isStar && (
+        {/* {!!rating && !isStar && (
           <RatingBox rating={rating} textRating={textRating} />
-        )}
+        )} */}
         {feature && (
           <LinearGradient
             colors={['#F0B90B', '#D88A00']}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 1}}
             style={styles.topBox}>
-            <CustomText style={styles.topName}>{type}</CustomText>
+            <CustomText style={styles.topName}>
+              {data?.estate_type?.name}
+            </CustomText>
           </LinearGradient>
         )}
         {showPrice && (
@@ -39,21 +44,45 @@ export default function TopImg({
               ...styles.topBox,
               backgroundColor: '#234F68B0',
               position: 'absolute',
-              marginTop: scale(135),
+              marginTop: scale(105),
               width: scale(100),
             }}>
             <CustomText style={styles.topName} numberOfLines={1}>
-              {price}
+              {formatPrice(data?.price, {
+                locales: 'vi',
+              })}{' '}
             </CustomText>
           </View>
         )}
       </View>
-      {isStar && (
+      {/* {isStar && (
         <View style={{position: 'absolute', top: scale(255)}}>
           <Star rating={3} />
         </View>
-      )}
+      )} */}
       {isHeart && <Favourite />}
+      {level && (
+        <View
+          style={{
+            backgroundColor:
+              dataPackagePost?.level === 2
+                ? '#009ba1'
+                : dataPackagePost?.level === 3
+                ? COLORS.primary
+                : dataPackagePost?.level === 4
+                ? COLORS.error
+                : '#ccc',
+            padding: scale(3),
+            position: 'absolute',
+            borderRadius: scale(3),
+            left: scale(-3),
+            top: scale(-3),
+          }}>
+          <CustomText textType="semiBold" style={{color: COLORS.white}}>
+            {dataPackagePost?.name}
+          </CustomText>
+        </View>
+      )}
     </View>
   );
 }

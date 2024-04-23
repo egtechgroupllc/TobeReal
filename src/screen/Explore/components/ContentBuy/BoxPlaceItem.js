@@ -10,9 +10,13 @@ import {
 } from '../../../../assets/constants';
 import {
   Avatar,
+  IconAcreage,
+  IconBed,
+  IconFurniture,
   IconHeart,
   IconMapView,
   IconMarker,
+  IconRoom,
 } from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
@@ -25,6 +29,7 @@ import TopImg from './BoxPlaceItem/TopImg';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
+import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 
 export default function BoxPlaceItem({
   data,
@@ -57,11 +62,7 @@ export default function BoxPlaceItem({
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailBuyScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
+                  params: data,
                 }),
               );
             }
@@ -82,38 +83,38 @@ export default function BoxPlaceItem({
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
-            )}
+            <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
-              rating={rating}
+              // rating={rating}
               // isStar={isStar}
-              textRating={textRating}
+              feature
+              // textRating={textRating}
               isHeart={isHeart}
+              level
+              data={data}
             />
           </View>
-          <View
+          <LinearGradient
+            colors={['#f5f5f5', '#F5F4F8']}
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
             style={{
-              backgroundColor: COLORS.primary,
+              // backgroundColor: '#ffd847',
               flex: 1,
               marginTop: scale(18),
               // margin: scale(5),
               // rowGap: scale(4),
               borderRadius: scale(5),
-              height: scale(100),
+              height: scale(110),
               width: '100%',
               padding: scale(10),
             }}>
             <CustomText
               textType="bold"
-              style={[isStar && {fontSize: SIZES.xSmall, color: COLORS.white}]}
+              style={[isStar && {fontSize: SIZES.xSmall}]}
               numberOfLines={1}>
-              {data?.name}
+              {data?.title}
             </CustomText>
 
             <View style={{marginTop: scale(5)}}>
@@ -127,7 +128,7 @@ export default function BoxPlaceItem({
                       }}>
                       <CustomText
                         textType="regular"
-                        style={{...styles.textDiscount, color: COLORS.white}}>
+                        style={{...styles.textDiscount}}>
                         {formatPrice(data?.discount, {
                           locales: 'vi',
                         })}{' '}
@@ -146,12 +147,40 @@ export default function BoxPlaceItem({
                   )}
 
                   <View style={styles.price}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        columnGap: scale(5),
+                      }}>
+                      <IconMapView
+                        width={scale(14)}
+                        height={scale(14)}
+                        fill={'#373535'}
+                      />
+                      <CustomText
+                        textType="medium"
+                        style={{
+                          fontSize: SIZES.xSmall,
+                          // minWidth: scale(35),
+                        }}>
+                        {data?.country?.name}, {data?.province?.name}
+                      </CustomText>
+                    </View>
+                  </View>
+
+                  <View
+                    style={{
+                      ...styles.price,
+                      marginTop: scale(5),
+                    }}>
                     <CustomText
                       textType="bold"
+                      numberOfLines={1}
                       style={[
                         styles.buildingName,
                         isStar && {fontSize: SIZES.small, color: '#0057FF'},
-                        isDiscount && {color: COLORS.white},
+                        isDiscount,
                       ]}>
                       {formatPrice(data?.price, {
                         locales: 'vi',
@@ -159,21 +188,26 @@ export default function BoxPlaceItem({
                       {time && (
                         <CustomText
                           textType="regular"
-                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
+                          style={{fontSize: SIZES.xSmall}}>
                           / {rental}
                         </CustomText>
                       )}
                     </CustomText>
-                    <CustomText
-                      textType="bold"
-                      style={{
-                        color: '#0057FF',
-                        fontSize: SIZES.small,
-                        flex: 1,
-                        // minWidth: scale(35),
-                      }}>
-                      189 m2
-                    </CustomText>
+                    <View style={{flexDirection: 'row', columnGap: scale(5)}}>
+                      <IconAcreage width={scale(15)} height={scale(15)} />
+                      <CustomText
+                        textType="medium"
+                        style={{
+                          fontSize: SIZES.small,
+                          // flex: 1,
+                          // minWidth: scale(35),
+                        }}>
+                        {formatPrice(data?.size_width * data?.size_length, {
+                          unit: 'm²',
+                        })}
+                      </CustomText>
+                    </View>
+
                     <View
                       style={{
                         flexDirection: 'row',
@@ -181,17 +215,17 @@ export default function BoxPlaceItem({
                         columnGap: scale(5),
                       }}>
                       <CustomText
-                        textType="semiBold"
+                        textType="medium"
                         style={{
-                          color: COLORS.white,
                           fontSize: SIZES.small,
                           // minWidth: scale(35),
                         }}>
-                        6
+                        {data?.number_bedroom}
                       </CustomText>
-                      <CustomImage
-                        source={images.iconBed}
-                        style={{width: scale(12), height: scale(8)}}
+                      <IconRoom
+                        width={scale(10)}
+                        height={scale(10)}
+                        fill={'#4e4c4c'}
                       />
                     </View>
 
@@ -211,31 +245,7 @@ export default function BoxPlaceItem({
                 />
               )}
             </View>
-            <View style={{marginTop: scale(5)}}>
-              <View style={styles.price}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: scale(5),
-                  }}>
-                  <IconMapView
-                    fill={COLORS.white}
-                    width={scale(14)}
-                    height={scale(14)}
-                  />
-                  <CustomText
-                    textType="bold"
-                    style={{
-                      color: COLORS.white,
-                      fontSize: SIZES.xSmall,
-                      // minWidth: scale(35),
-                    }}>
-                    Thuy Nguyen, Hai Phong
-                  </CustomText>
-                </View>
-              </View>
-            </View>
+
             <View style={{marginTop: scale(5)}}>
               <View style={styles.price}>
                 <View
@@ -250,44 +260,36 @@ export default function BoxPlaceItem({
                       textType="bold"
                       numberOfLines={1}
                       style={{
-                        color: COLORS.white,
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Mr
+                      {data?.contact_name}
                     </CustomText>
                     <CustomText
                       textType="bold"
                       numberOfLines={1}
                       style={{
-                        color: '#FFE259',
+                        color: '#949090',
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Posted today
+                      {calculateTimeElapsed(data.date_start)}
                     </CustomText>
                   </View>
-                  {/* <View style={{backgroundColor:COLORS.white, width:'50%', height:scale(15), borderRadius:scale(3), marginLeft:'5%', padding:scale(1), flexDirection:'row', columnGap:scale(5)}}>
-                     <View style={{backgroundColor:COLORS.primary, width:'20%', height:scale(13), borderRadius:scale(3), alignItems:'center', justifyContent:'center', }}>
-                     <CustomImage
-                        source={images.iconPhone}
-                        style={{width: scale(8), height: scale(8)}}
-                      />
-                     </View>
-                     <CustomText
-                      textType="bold"
-                      numberOfLines={1}
-                      style={{
-                        fontSize: SIZES.xSmall,
-                        width:'50%'
-                      }}>
-                        0984839012
-                    </CustomText>
-                  </View> */}
                 </View>
               </View>
             </View>
-          </View>
+            {/* <View style={{marginTop: scale(5)}}>
+              {!!rating && !isStar && (
+                <RatingBox rating={rating} textRating={textRating} />
+              )}
+              {isStar && (
+                <View>
+                  <Star rating={3} />
+                </View>
+              )}
+            </View> */}
+          </LinearGradient>
         </TouchableOpacity>
       ) : (
         <BoxPlaceItemLoading
@@ -312,11 +314,13 @@ const styles = StyleSheet.create({
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
+    ...SHADOW,
   },
   img: {
     width: '100%',
     height: '100%',
     borderRadius: scale(12),
+    backgroundColor: '#f5f5f5',
   },
   line: {
     backgroundColor: 'white',
@@ -330,9 +334,9 @@ const styles = StyleSheet.create({
   },
   price: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    columnGap: scale(6),
-    alignItems: 'center',
+    // justifyContent: 'space-between',
+    columnGap: scale(15),
+    // alignItems: 'center',
   },
   textDiscount: {
     textDecorationLine: 'line-through',
