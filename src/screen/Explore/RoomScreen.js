@@ -147,6 +147,7 @@ export default function RoomScreen() {
                   priceAverage,
                   date,
                   numRoomGuest,
+                  nameAccom: params?.name,
                 })
               }
             />

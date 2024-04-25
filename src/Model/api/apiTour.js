@@ -55,10 +55,27 @@ export const postAddTicket = async ({data, tour_id}) => {
   return responsive.data;
 };
 
-export const getListTour = async ({pageParam = 1}) => {
+export const getListTour = async ({pageParam = 1, country_id, province_id}) => {
+  const province = province_id ? `province_id=${province_id}` : '';
+  const country = country_id ? `country_id=${country_id}` : '';
   const responsive = await instance.get(
-    `/list-sell?page=${pageParam}&limit=10`,
+    `/list-sell?page=${pageParam}&limit=10&${country}&${province}`,
   );
+
+  return responsive.data;
+};
+export const getDetailTour = async id_tour => {
+  const responsive = await instance.get(`/detail/${id_tour}`);
+
+  return responsive.data;
+};
+export const getListTicket = async id_tour => {
+  const responsive = await instance.get(`/detail/${id_tour}/list-ticket`);
+
+  return responsive.data;
+};
+export const getDetailTicket = async id_ticket => {
+  const responsive = await instance.get(`/ticket/${id_ticket}`);
 
   return responsive.data;
 };

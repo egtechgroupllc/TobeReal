@@ -173,8 +173,22 @@ export default function BoxPlaceItem({
                     style={{
                       ...styles.price,
                       marginTop: scale(5),
+                      alignItems: 'center',
                     }}>
-                    <CustomText
+                    <View
+                      style={{
+                        ...styles.topBox,
+                        backgroundColor: '#234F68B0',
+                        width: scale(80),
+                        // marginTop: scale(25),
+                      }}>
+                      <CustomText style={styles.topName} numberOfLines={1}>
+                        {formatPrice(data?.price, {
+                          locales: 'vi',
+                        })}{' '}
+                      </CustomText>
+                    </View>
+                    {/* <CustomText
                       textType="bold"
                       numberOfLines={1}
                       style={[
@@ -192,7 +206,7 @@ export default function BoxPlaceItem({
                           / {rental}
                         </CustomText>
                       )}
-                    </CustomText>
+                    </CustomText> */}
                     <View style={{flexDirection: 'row', columnGap: scale(5)}}>
                       <IconAcreage width={scale(15)} height={scale(15)} />
                       <CustomText
@@ -342,5 +356,19 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+  },
+  topBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: scale(6),
+    paddingVertical: scale(4),
+    borderRadius: 8,
+    height: scale(20),
+    width: scale(70),
+    // columnGap: scale(4),
+  },
+  topName: {
+    fontSize: SIZES.xSmall,
+    color: COLORS.white,
   },
 });

@@ -11,14 +11,22 @@ import {
   IconCheckBoxWhite,
   IconUnCheckBoxWhite,
 } from '../../../../../../assets/icon/Icon';
-import {COLORS, SIZES, images, scale} from '../../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../../assets/constants';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import CustomImage from '../../../../../../components/CustomImage';
 import ChooseCalendar from '../../../FindAccommodation/ChooseCalendar';
 
 export default function BookTourScreen({route}) {
-  const {title, jsondata} = route.params;
-
+  const data = route.params;
+  console.log('====================================');
+  console.log(data, 21312);
+  console.log('====================================');
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
@@ -30,6 +38,9 @@ export default function BookTourScreen({route}) {
   };
   const notify = () => {};
   const Ok = () => {};
+  console.log('====================================');
+  console.log(data?.images[0]?.url);
+  console.log('====================================');
   return (
     <MainAuth>
       <View style={styles.container}>
@@ -47,7 +58,7 @@ export default function BookTourScreen({route}) {
               alignItems: 'center',
             }}>
             <CustomImage
-              source={jsondata}
+              source={data?.images?.[0]?.url}
               resizeMode="contain"
               style={styles.image}
             />
@@ -59,10 +70,15 @@ export default function BookTourScreen({route}) {
                 width: '80%',
                 paddingHorizontal: scale(10),
               }}>
-              {title}
+              {data?.name}
             </CustomText>
           </View>
-          <View style={{...styles.line, marginTop:scale(10), backgroundColor:'#F0B90B80'}}></View>
+          <View
+            style={{
+              ...styles.line,
+              marginTop: scale(10),
+              backgroundColor: '#F0B90B80',
+            }}></View>
           <CustomText
             textType="medium"
             style={{
@@ -269,65 +285,46 @@ export default function BookTourScreen({route}) {
             }}>
             {t('things_need_to_know')}:
           </CustomText>
-          <View style={{flexDirection:'row', columnGap:scale(30)}}>
-          <TouchableOpacity
-            style={{
-              height: scale(30),
-              marginTop: scale(10),
-              width: '40%',
-              backgroundColor: '#F2F2F2',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: scale(33),
-            }}>
-            <CustomText
-              textType="semiBold"
+          <View style={{flexDirection: 'row', columnGap: scale(30)}}>
+            <TouchableOpacity
               style={{
-                ...styles.text2,
-                color: COLORS.black,
+                height: scale(30),
+                marginTop: scale(10),
+                width: '40%',
+                backgroundColor: '#F2F2F2',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: scale(33),
               }}>
-              {t('inexperienced')}
-            </CustomText>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              height: scale(30),
-              marginTop: scale(10),
-              width: '40%',
-              backgroundColor: '#F2F2F2',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: scale(33),
-            }}>
-            <CustomText
-              textType="semiBold"
+              <CustomText
+                textType="semiBold"
+                style={{
+                  ...styles.text2,
+                  color: COLORS.black,
+                }}>
+                {t('inexperienced')}
+              </CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={{
-                ...styles.text2,
-                color: COLORS.black,
+                height: scale(30),
+                marginTop: scale(10),
+                width: '40%',
+                backgroundColor: '#F2F2F2',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: scale(33),
               }}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  ...styles.text2,
+                  color: COLORS.black,
+                }}>
                 {t('inseparable')}
-            </CustomText>
-          </TouchableOpacity>
+              </CustomText>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={{
-              height: scale(30),
-              marginTop: scale(10),
-              width: '40%',
-              backgroundColor: '#F2F2F2',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: scale(33),
-            }}>
-            <CustomText
-              textType="semiBold"
-              style={{
-                ...styles.text2,
-                color: COLORS.black,
-              }}>
-                       {t('no_reservation')}
-            </CustomText>
-          </TouchableOpacity>
           <CustomText
             textType="medium"
             style={{
@@ -335,6 +332,7 @@ export default function BookTourScreen({route}) {
               color: COLORS.black,
               alignSelf: 'flex-start',
               paddingHorizontal: scale(20),
+              marginTop: scale(10),
             }}>
             {t('price_detail')}:
           </CustomText>
@@ -431,15 +429,15 @@ export default function BookTourScreen({route}) {
               </CustomText>
             </View>
             <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  paddingHorizontal: scale(20),
-                  paddingBottom: scale(10),
-                }}>
-                      {t('include_addition')}
-              </CustomText>
+              textType="medium"
+              style={{
+                ...styles.text2,
+                color: COLORS.black,
+                paddingHorizontal: scale(20),
+                paddingBottom: scale(10),
+              }}>
+              {t('include_addition')}
+            </CustomText>
           </View>
           <TouchableOpacity
             onPress={toggleCheckBox1}
@@ -620,6 +618,8 @@ const styles = StyleSheet.create({
   image: {
     width: scale(43),
     height: scale(43),
+    // backgroundColor: '#f5f5f5',
+    // ...SHADOW,
   },
   box1: {
     backgroundColor: '#EEEEEE',

@@ -1449,6 +1449,71 @@ export function IconWallet({fill, ...props}) {
     </Svg>
   );
 }
+export function IconApp({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(25)}
+      height={props?.style?.height || scale(25)}
+      viewBox="0 0 39 39"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M2.042 16.96L16.945 2.056A3.604 3.604 0 0119.495 1c.923 0 1.846.35 2.55 1.056l14.9 14.904A3.606 3.606 0 0138 19.51h-.004c0 .927-.35 1.85-1.047 2.551L22.05 36.966a3.603 3.603 0 01-2.55 1.056c-.923 0-1.845-.35-2.55-1.056L2.05 22.062a3.6 3.6 0 01-1.047-2.551H1c0-.923.35-1.846 1.056-2.551h-.014z"
+        fill="#fff"
+        stroke="url(#paint0_linear_3415_4086)"
+        strokeMiterlimit={10}
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10.745 13.68l7.234-7.236a2.146 2.146 0 013.03 0l7.233 7.237c.222.222.386.483.488.758h-9.239v10.13H18.6l-7.86-7.862a2.148 2.148 0 010-3.03l.005.004zm8.96 11.825l.048.222-.222-.222H19.704z"
+        fill="url(#paint1_linear_3415_4086)"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M20.387 14.445l7.855 7.858a2.148 2.148 0 010 3.03l-7.234 7.237a2.146 2.146 0 01-3.03 0l-7.234-7.236a2.119 2.119 0 01-.487-.76h9.239V14.446h.891z"
+        fill="url(#paint2_linear_3415_4086)"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_3415_4086"
+          x1={0.76936}
+          y1={19.511}
+          x2={38.2173}
+          y2={19.511}
+          gradientUnits="userSpaceOnUse">
+          <Stop stopColor="#00B9CB" />
+          <Stop offset={1} stopColor="#FF7800" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_3415_4086"
+          x1={19.4246}
+          y1={5.81836}
+          x2={19.4246}
+          y2={25.727}
+          gradientUnits="userSpaceOnUse">
+          <Stop stopColor="#FFDA00" />
+          <Stop offset={0.54} stopColor="#B11E2E" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_3415_4086"
+          x1={19.5621}
+          y1={14.4453}
+          x2={19.5621}
+          y2={33.2003}
+          gradientUnits="userSpaceOnUse">
+          <Stop stopColor="#25ABDD" />
+          <Stop offset={0.48} stopColor="#25ABDD" />
+          <Stop offset={1} stopColor="#2D408B" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+  );
+}
 export function IconLand({fill, ...props}) {
   return (
     <Svg

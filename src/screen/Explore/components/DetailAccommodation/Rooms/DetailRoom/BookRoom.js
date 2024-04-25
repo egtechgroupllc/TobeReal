@@ -34,7 +34,7 @@ export default function BookRoom({data}) {
   const {token} = useAuthentication();
 
   const Ok = () => {
-    !token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
+    !token ? navigate('NavigationAuth') : navigate('BookingRoomScreen', data);
   };
   const [selectRoom, setSelectRoom] = useState(1);
 
@@ -84,7 +84,6 @@ export default function BookRoom({data}) {
     () => selectRoom * data?.priceAverage * data?.date?.numNight,
     [selectRoom, data?.date?.numNight, data?.priceAverage],
   );
-
   return (
     <View
       style={[styles.wrapper, {paddingBottom: insets.bottom + scale(6)}]}

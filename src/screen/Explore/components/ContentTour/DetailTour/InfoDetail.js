@@ -11,12 +11,12 @@ import {
 
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import Introduction from './Introduction';
 import CustomImage from '../../../../../components/CustomImage';
 import Star from '../../../../../components/Star';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import TicketOption from './TicketOption';
 import {formatDateTime} from '../../../../../utils/format';
+import Introduction from '../../DetailAccommodation/Detail/Introduction';
 
 export default function InfoDetail({data, name}) {
   const {t} = useLanguage();
@@ -72,7 +72,7 @@ export default function InfoDetail({data, name}) {
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
-            {data?.address || ' BC 34, Binh Chuan, Thuan An, Binh Duong'}
+            {data?.address || ''}
           </CustomText>
         </View>
         <View
@@ -110,14 +110,14 @@ export default function InfoDetail({data, name}) {
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            8 {t('hour')}
+            {data?.total_hours} {t('hour')}
           </CustomText>
         </View>
       </View>
       <View style={styles.line} />
-      <TicketOption data={data} />
-      <View style={styles.line} />
       <Introduction data={data} />
+      <View style={styles.line} />
+      <TicketOption data={data} />
     </View>
   );
 }

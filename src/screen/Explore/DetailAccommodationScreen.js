@@ -50,7 +50,6 @@ export default function DetailAccommodationScreen() {
 
   const listView = useMemo(() => {
     const dataDetail = data?.data;
-
     return !dataDetail
       ? []
       : [

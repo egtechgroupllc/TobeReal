@@ -16,7 +16,9 @@ import {TabSelect} from '../../../../../components';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import {IconCalendar, IconRefund} from '../../../../../assets/icon/Icon';
 import Button from '../../../../Profile/components/Button';
-import {StackActions, useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {getListTicket} from '../../../../../Model/api/apiTour';
 
 const data = [
   {
@@ -34,23 +36,27 @@ const data = [
   },
 ];
 export default function TicketOption() {
+  const params = useRoute().params;
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['tour', 'detail', 'list-ticket', params?.id],
+    queryFn: () => getListTicket(params?.id),
+  });
+  console.log(data, 123);
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
   // const navigation = useNavigation();
-  const booktour = selectedItem => {
+  const booktour = item => {
     if (isFocused()) {
       dispatch(
         StackActions.push('NoBottomTab', {
           screen: 'BookTourScreen',
-          params: {
-            jsondata: selectedItem.imgdetail[0] || [],
-            title: selectedItem.title || '',
-            paramPrice: selectedItem.price || '',
-          },
+          params: {...item, images: params?.images},
         }),
       );
     }
   };
+
   return (
     <View>
       <View style={styles.boxTourTime}>
@@ -64,7 +70,7 @@ export default function TicketOption() {
         </View>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          data={data}
+          data={data?.data}
           contentContainerStyle={styles.content}
           style={{alignSelf: 'center', width: '100%'}}
           renderItem={({item}) => (
@@ -75,11 +81,7 @@ export default function TicketOption() {
                     dispatch(
                       StackActions.push('NoBottomTab', {
                         screen: 'DetailTicketScreen',
-                        params: {
-                          jsondata: item.imgdetail || [],
-                          title: item.title || '',
-                          paramPrice: item.price || '',
-                        },
+                        params: {...item, images: params?.images},
                       }),
                     );
                   }
@@ -87,7 +89,7 @@ export default function TicketOption() {
                 <CustomText
                   textType="semiBold"
                   style={{...styles.text, paddingHorizontal: scale(10)}}>
-                  {item.title}
+                  {item.name}
                 </CustomText>
 
                 <CustomText

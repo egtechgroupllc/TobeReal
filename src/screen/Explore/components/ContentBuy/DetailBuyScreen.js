@@ -16,7 +16,7 @@ import InfoDetail from './DetailBuy/InfoDetail';
 import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
 import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
 
-export default function DetailBuyScreen({route}) {
+export default function DetailBuyScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
 

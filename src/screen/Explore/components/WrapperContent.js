@@ -94,12 +94,12 @@ export default function WrapperContent({
             onPress={onPressCategory}
           />
         )}
-        {worldTour && (
+        {/* {worldTour && (
           <Category
             data={['Korean', 'Japan', 'Thailand', 'Singapore']}
             onPress={onPressCategory}
           />
-        )}
+        )} */}
         {discoveryTour && (
           <Category
             data={[t('dosmestic_destination'), t('international_destination')]}

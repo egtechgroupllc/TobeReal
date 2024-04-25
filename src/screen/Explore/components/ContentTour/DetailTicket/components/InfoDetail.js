@@ -18,14 +18,14 @@ import Star from '../../../../../../components/Star';
 import TicketOption from '../../DetailTour/TicketOption';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-export default function InfoDetail({name}) {
+export default function InfoDetail({data}) {
   const {t} = useLanguage();
   return (
     <View>
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <CustomText textType="semiBold" style={styles.name}>
-            {name}
+            {data?.name}
           </CustomText>
         </View>
 
@@ -33,13 +33,7 @@ export default function InfoDetail({name}) {
           <CustomText
             textType="medium"
             style={{...styles.text, color: COLORS.black}}>
-            Sightseeing time: 1 day of shuttle service: Welcome time: 06:30 -
-            07:30. Free round -trip shuttle from Phuket, Patong, Kalim, Kata,
-            Karon, Kamala, Kamala, Siray and Chalong 200 THB applied for round
-            -trip shuttle services from these areas in Phuket: (Naihan, Rawai,
-            Tri Trang, Panwa, Siray, Cape Yamu, Ao Po, Laguna, Bang Tao, Layan,
-            Naimon, Nai Yang and Natai). The additional fee is paid directly to
-            the operator in cash.
+            {data?.description}
           </CustomText>
         </View>
       </View>
@@ -60,7 +54,7 @@ export default function InfoDetail({name}) {
               color: COLORS.black,
               marginRight: '10%',
             }}>
-           {t('easy_refund')}
+            {t('easy_refund')}
           </CustomText>
           <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
           <CustomText

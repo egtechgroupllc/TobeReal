@@ -102,9 +102,6 @@ export default routerNoBottomTab = [
   {
     name: 'BookingRoomScreen',
     component: BookingRoomScreen,
-    options: {
-      headerShown: false,
-    },
   },
   {
     name: 'BookTourScreen',

@@ -30,14 +30,11 @@ export default function BoxPlaceItem({
   isUnitAvailable,
   styleWrapper,
   time,
-  jsonImage,
-  name,
-  price,
   type,
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
-  console.log(data?.id);
+  const price = data?.rooms?.[0]?.room_dates?.[0]?.price;
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -96,6 +93,7 @@ export default function BoxPlaceItem({
               numberOfLines={1}>
               {data?.name}
             </CustomText>
+
             {isStar && <Star rating={rating} />}
 
             <View style={styles.line} />
@@ -137,7 +135,7 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.primary},
                       ]}>
-                      {formatPrice(data?.price, {
+                      {formatPrice(price, {
                         locales: 'en',
                       })}{' '}
                       {time && type === 'RENT' && (

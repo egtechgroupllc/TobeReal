@@ -5,7 +5,7 @@ export const instanceAccom = axios.create({
   baseURL: `${baseUrl}/api/v1/accommodation`,
 });
 
-export const getListTypeRoom = async token => {
+export const getListTypeRoom = async () => {
   const responsive = await instanceAccom.get('/room/list-type');
 
   return responsive.data;

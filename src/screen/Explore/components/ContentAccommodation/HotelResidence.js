@@ -233,7 +233,6 @@ export default function HotelResidence() {
                 rating={2}
                 isHeart
                 data={item}
-                time={item.id < 6 ? true : false}
               />
             )}
           />

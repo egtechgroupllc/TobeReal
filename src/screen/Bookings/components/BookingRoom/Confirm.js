@@ -20,7 +20,8 @@ import {formatPrice} from '../../../../utils/format';
 import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import {useQueryClient} from '@tanstack/react-query';
 import CustomImage from '../../../../components/CustomImage';
-export default function Content({onPress, data}) {
+
+export default function Confirm({onPress, data}) {
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
   const {t} = useLanguage();

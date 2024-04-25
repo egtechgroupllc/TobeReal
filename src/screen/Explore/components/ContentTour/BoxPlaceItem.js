@@ -29,11 +29,9 @@ export default function BoxPlaceItem({
   isUnitAvailable,
   styleWrapper,
   time,
-  jsonImage,
-  name,
-  price,
 }) {
   const {t} = useLanguage();
+  const price = data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price;
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -45,11 +43,7 @@ export default function BoxPlaceItem({
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailTourScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
+                  params: data,
                 }),
               );
             }
@@ -70,13 +64,7 @@ export default function BoxPlaceItem({
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
-            )}
+            <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
               rating={rating}
@@ -140,7 +128,7 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.black},
                       ]}>
-                      {formatPrice(data?.price, {
+                      {formatPrice(price, {
                         locales: 'vi',
                       })}{' '}
                       {time && (
@@ -197,7 +185,9 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: '100%',
-   borderRadius:scale(12)
+    borderRadius: scale(12),
+    backgroundColor: '#f5f5f5',
+    ...SHADOW,
   },
   line: {
     backgroundColor: 'white',
