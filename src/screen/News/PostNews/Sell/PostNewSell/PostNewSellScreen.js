@@ -62,6 +62,7 @@ export default function PostNewSellScreen() {
         'note',
         'wallet_address',
         'images',
+        'active',
       ];
 
       entries.map(item => {
