@@ -66,11 +66,11 @@ export default function HorizontalStepIndicator({data}) {
   React.useLayoutEffect(() => {
     return setOptions({
       headerTitleComponent: () => (
-        <View style={{width: 200}}>
+        <View style={{width: scale(250)}}>
           <StepIndicator
             customStyles={firstIndicatorStyles}
             currentPosition={currentPage}
-            labels={['Đặt', 'Thanh toán']}
+            labels={['Reservations', 'Pay']}
             stepCount={stepCount}
             renderLabel={renderLabel}
             onPress={position =>

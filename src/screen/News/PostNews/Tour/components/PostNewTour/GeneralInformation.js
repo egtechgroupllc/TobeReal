@@ -32,7 +32,7 @@ export default function GeneralInformation({
     setView(prev => !prev);
   };
   const arrKeywords = useRef([
-    'title',
+    'name',
     'description',
     'address',
     'latitude',

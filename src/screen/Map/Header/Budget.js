@@ -10,9 +10,9 @@ import WrapperContent from '../../Explore/components/WrapperContent';
 
 const min = 0;
 const max = 100000;
-export default function Budget() {
+export default function Budget({onBudget, value}) {
   const {t} = useLanguage();
-  const [multiSliderValue, setMultiSliderValue] = useState([min, max]);
+  const [multiSliderValue, setMultiSliderValue] = useState(value || [min, max]);
 
   return (
     <WrapperContent
@@ -45,7 +45,7 @@ export default function Budget() {
         max={max}
         allowOverlap
         // onValuesChangeFinish={onValuesChangeFinish}
-        values={[min, max]}
+        values={value || [min, max]}
         enableLabel={false}
         trackStyle={{
           height: scale(8),
@@ -65,6 +65,9 @@ export default function Budget() {
           borderColor: COLORS.primary,
         }}
         onValuesChange={values => setMultiSliderValue(values)}
+        onValuesChangeFinish={value => {
+          value && onBudget && onBudget(value);
+        }}
       />
     </WrapperContent>
   );

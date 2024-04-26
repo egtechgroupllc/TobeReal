@@ -16,7 +16,6 @@ export default function WeeklyHotDeal() {
   const [isRender, setIsRender] = useState(false);
   const title = [t('weekly_hot_deal')];
   const {navigate} = useNavigation();
-  console.log('WeeklyHotDeal', isRender);
   const [filter, setFilter] = useState();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [

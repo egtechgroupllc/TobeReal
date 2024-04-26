@@ -12,7 +12,7 @@ import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 
 export default function OptionAccommodation({
-  data = [],
+  data = [{text: ''}],
   outline,
   styleWrapper,
   styleContent,
@@ -68,6 +68,7 @@ export default function OptionAccommodation({
     (item, index) => ({
       index,
       item: item?.[_keyTextView],
+      ...item,
     }),
     [],
   );

@@ -14,7 +14,6 @@ import RoomInformation from './DetailRoom/RoomInformation';
 export default function DetailRoomScreen({route}) {
   const data = route.params;
   const {t} = useLanguage();
-
   return (
     <>
       <MainWrapper
@@ -49,7 +48,7 @@ export default function DetailRoomScreen({route}) {
 
               <View style={styles.boxFreeUnRoom}>
                 <CustomText size={SIZES.xMedium} color="#00875a">
-                  Miễn phí huỷ phòng
+                  Free cancellation
                 </CustomText>
               </View>
             </View>
@@ -65,7 +64,7 @@ export default function DetailRoomScreen({route}) {
             </Box>
             {/* t('little_convenient') */}
             <Box
-              title={'Tiên nghi cơ bản'}
+              title={'Basic amenities'}
               styleContent={{
                 flexDirection: 'row',
                 flexWrap: 'wrap',
@@ -73,13 +72,13 @@ export default function DetailRoomScreen({route}) {
               <BasicFacilities data={data} />
             </Box>
 
-            <Box title={'Tiên nghi khác'}>
+            <Box title={'Other amenities'}>
               <View
                 style={{
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Tiện nghi phòng:</CustomText>
+                <CustomText textType="semiBold">Room amenities:</CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (
@@ -96,7 +95,7 @@ export default function DetailRoomScreen({route}) {
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Phòng tắm:</CustomText>
+                <CustomText textType="semiBold">Bathroom:</CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (

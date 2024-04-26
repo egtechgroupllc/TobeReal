@@ -41,12 +41,12 @@ export default function GeneralInformation({
         <Collapsible collapsed={!isView} style={styles.box}>
           <CustomInput
             styleTextLabel={styles.label}
-            label={t('Tên phòng')}
+            label={t('Room name')}
             control={control}
             name="name"
             multiline
             maxLength={maxCharacters}
-            placeholder={t('Tên phòng')}
+            placeholder={t('Room name')}
             rules={[
               requireField(t('this_field_required')),
               validateMaxLengthText(

@@ -18,11 +18,18 @@ export const getMyListCreateSell = async ({page = 1, limit = 10}) => {
 
   return responsive.data;
 };
-export const getListSell = async ({pageParam = 1, country_id, province_id}) => {
+export const getListSell = async ({
+  pageParam = 1,
+  country_id,
+  province_id,
+  estate_type_id,
+  title = '',
+}) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
+  const estate_type = estate_type_id ? `estate_type_id=${estate_type_id}` : '';
   const responsive = await instance.get(
-    `/list-post?page=${pageParam}&limit=10&${country}&${province}`,
+    `/list-post?page=${pageParam}&limit=10&${country}&${province}&${estate_type}&title=${title}`,
   );
 
   return responsive.data;

@@ -7,7 +7,7 @@ import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 
 const listSort = ['Studio', '1 Bedroom', '2 Bedrooms', '3 Bedrooms +'];
-export default function BedRoom() {
+export default function BedRoom({onNumBed}) {
   const {t} = useLanguage();
   const [checked, setChecked] = useState(undefined);
 
@@ -35,7 +35,7 @@ export default function BedRoom() {
             justifyContent: 'space-between',
             paddingVertical: scale(5),
           }}
-          // onPress={e => setChecked(index)}
+          onPress={e => onNumBed && onNumBed(index)}
         />
       ))}
     </WrapperContent>

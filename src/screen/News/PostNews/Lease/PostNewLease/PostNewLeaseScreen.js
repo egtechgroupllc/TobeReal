@@ -92,10 +92,10 @@ export default function PostNewLeaseScreen() {
   const handlePostLease = value => {
     delete value?.check;
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
-      showMess('Ban chua chon co so vat chat', 'error');
+      showMess('You have not selected a facility yet', 'error');
       return;
     }
-
+    console.log(value);
     const formData = getFormData(value);
 
     createAccommodationMu.mutate(formData, {

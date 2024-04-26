@@ -48,9 +48,6 @@ export default function DetailTourScreen() {
     queryKey: ['tour', 'detail', params?.id],
     queryFn: () => getDetailTour(params?.id),
   });
-  // console.log('====================================');
-  // console.log(params, 123123312);
-  // console.log('====================================');
   const listView = useMemo(() => {
     const dataDetail = data?.data;
     return [

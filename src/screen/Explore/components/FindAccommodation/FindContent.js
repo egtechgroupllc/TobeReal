@@ -19,20 +19,23 @@ import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
-export default function FindContent({isBuy, rental, tour}) {
+export default function FindContent({isBuy, rental, tour, dataFind}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
-
-  const {control, setValue, handleSubmit} = useForm();
+  const {control, setValue, watch, handleSubmit} = useForm();
 
   useEffect(() => {
     params && setValue('location', params);
   }, [params]);
 
-  const handleSearch = () => {
+  const handleSearch = value => {
     navigate('NoBottomTab', {
       screen: 'ListAccommodationSearchScreen',
+      params: {
+        ...dataFind,
+        ...value,
+      },
     });
   };
 
@@ -94,7 +97,12 @@ export default function FindContent({isBuy, rental, tour}) {
           />
           {!isBuy && (
             <>
-              <ChooseCalendar rental={rental} />
+              <ChooseCalendar
+                rental={rental}
+                onDate={value => {
+                  setValue('date', value);
+                }}
+              />
 
               {rental === t('daily') && <ChooseOccupancy />}
             </>
@@ -183,7 +191,7 @@ export default function FindContent({isBuy, rental, tour}) {
             </View>
           )}
 
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               columnGap: scale(6),
@@ -199,7 +207,7 @@ export default function FindContent({isBuy, rental, tour}) {
                 textType: 'bold',
               }}
             />
-          </View>
+          </View> */}
 
           <CustomButton
             onPress={handleSubmit(handleSearch)}

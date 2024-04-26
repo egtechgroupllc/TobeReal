@@ -44,7 +44,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
           style={{
             color: COLORS.text,
           }}>
-          Từ{' '}
+          From{' '}
           <CustomText textType="semiBold">
             {formatPrice(data?.price)}
           </CustomText>

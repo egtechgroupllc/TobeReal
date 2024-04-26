@@ -24,9 +24,6 @@ import ChooseCalendar from '../../../FindAccommodation/ChooseCalendar';
 
 export default function BookTourScreen({route}) {
   const data = route.params;
-  console.log('====================================');
-  console.log(data, 21312);
-  console.log('====================================');
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
@@ -38,9 +35,6 @@ export default function BookTourScreen({route}) {
   };
   const notify = () => {};
   const Ok = () => {};
-  console.log('====================================');
-  console.log(data?.images[0]?.url);
-  console.log('====================================');
   return (
     <MainAuth>
       <View style={styles.container}>

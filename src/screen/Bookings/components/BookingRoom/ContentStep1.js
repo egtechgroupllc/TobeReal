@@ -96,12 +96,12 @@ export default function ContentStep1({onPress, data}) {
             }}>
             <ItemUtil
               Icon={IconBan}
-              value={'Đặt phòng này không được hoàn tiền.'}
+              value={'This booking is non-refundable.'}
               valueBold={'regular'}
             />
             <ItemUtil
               Icon={IconBan}
-              value={'Không áp dụng đổi lịch'}
+              value={'Rescheduling is not applicable'}
               valueBold={'regular'}
             />
           </View>
@@ -119,7 +119,7 @@ export default function ContentStep1({onPress, data}) {
           <ItemUtil
             Icon={IconBookings}
             title={
-              'Thuế và phí là các khoản được Traveloka chuyển trả cho khách sạn. Mọi thắc mắc về thuế và hóa đơn, vui lòng tham khảo Điều khoản và Điều kiện của Saveloka để được giải đáp'
+              "Taxes and fees are amounts remitted by Traveloka to the hotel. For questions about taxes and invoices, please refer to Saveloka's Terms and Conditions for answers"
             }
             styleTextTitle={{
               fontSize: SIZES.small,

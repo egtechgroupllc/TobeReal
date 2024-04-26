@@ -5,19 +5,52 @@ import {useNavigation} from '@react-navigation/native';
 import ButtonPost from '../../components/ButtonPost';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {useQueryClient} from '@tanstack/react-query';
+import {showMess} from '../../../../assets/constants/Helper';
 export default function TabContent() {
   const {t} = useLanguage();
   const navigation = useNavigation();
+  const queryClient = useQueryClient();
+
+  const profile = queryClient.getQueryData(['user', 'profile'])?.data;
+  const handleCheckAccc = () => {
+    if (profile?.role_id === 2 || profile?.role_id === undefined) {
+      showMess(
+        profile?.status === 'VERIFYING_BUSINESS'
+          ? 'Your account is waiting for approval'
+          : 'Please become Saveloka partner to post news',
+        'error',
+      );
+      return false;
+    }
+    return true;
+  };
 
   const goSell = () => {
-    navigation.navigate('SellScreen');
+    if (handleCheckAccc()) {
+      navigation.navigate('SellScreen');
+    }
   };
   const goLease = () => {
-    navigation.navigate('LeaseScreen');
+    if (handleCheckAccc()) {
+      navigation.navigate('LeaseScreen');
+    }
   };
   const goRentBuy = () => {
-    navigation.navigate('TourScreen');
+    if (handleCheckAccc()) {
+      navigation.navigate('TourScreen');
+    }
   };
+
+  // const goSell = () => {
+  //   navigation.navigate('SellScreen');
+  // };
+  // const goLease = () => {
+  //   navigation.navigate('LeaseScreen');
+  // };
+  // const goRentBuy = () => {
+  //   navigation.navigate('TourScreen');
+  // };
 
   return (
     <View

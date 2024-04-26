@@ -35,7 +35,7 @@ const listSelectTimeYear = [
   {text: '3 Yearly', value: 3},
 ];
 
-export default function ChooseCalendar({rental, style, Checkin}) {
+export default function ChooseCalendar({rental, style, Checkin, onDate}) {
   const {t} = useLanguage();
   // Khai báo State
   const [selectedStartDate, setSelectedStartDate] = useState(minDate);
@@ -51,6 +51,13 @@ export default function ChooseCalendar({rental, style, Checkin}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [rental],
   );
+  useEffect(() => {
+    onDate &&
+      onDate({
+        date_start: selectedStartDate,
+        date_end: selectedEndDate,
+      });
+  }, []);
 
   const onDateChange = (date, type) => {
     setSelectedEndDate(date?.date_end);
@@ -65,6 +72,12 @@ export default function ChooseCalendar({rental, style, Checkin}) {
     if (!selectedEndDate || `${selectedStartDate}` === `${selectedEndDate}`) {
       setSelectedEndDate(dateEndFallback);
     }
+
+    onDate &&
+      onDate({
+        date_start: selectedStartDate,
+        date_end: selectedEndDate,
+      });
   };
 
   // Hiệu ứng cho Sự thay đổi Ngày
@@ -108,6 +121,7 @@ export default function ChooseCalendar({rental, style, Checkin}) {
         titleIndicator={'Calendar'}
         snapPoints={['75%']}
         snapPointsChild={['60%']}
+        onDismiss={handleSelectDate}
         handleChildBottom={
           rental !== 'Daily' &&
           (() => (

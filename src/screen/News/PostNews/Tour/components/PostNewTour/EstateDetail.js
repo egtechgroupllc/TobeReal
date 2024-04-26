@@ -85,7 +85,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <CheckBox
-            text="Huỷ miễn phí"
+            text="Free cancellation"
             styleWrapper={{
               width: '100%',
             }}

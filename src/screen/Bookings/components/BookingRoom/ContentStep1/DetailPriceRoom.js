@@ -28,7 +28,7 @@ export default function DetailPriceRoom({data}) {
         }}>
         <Row
           textTypeTitle={'bold'}
-          title={'Tổng giá tiền'}
+          title={'Total price'}
           styleTitle={{
             fontSize: SIZES.medium,
           }}
@@ -61,20 +61,20 @@ export default function DetailPriceRoom({data}) {
         }}>
         <View style={styles.line} />
 
-        <Row title={`Số phòng`} value={numRoom} />
+        <Row title={`Room number`} value={numRoom} />
 
         <Row
-          title={'Giá mỗi đêm'}
+          title={'Price per night'}
           value={formatPrice(data?.priceAverage * numRoom)}
           colorValue={COLORS.primary}
           textType="semiBold"
         />
         <Row
-          title={`Tổng giá cho ${data?.date?.numNight} đêm`}
+          title={`Total price for ${data?.date?.numNight} night`}
           value={formatPrice(priceAverage)}
         />
         <Row
-          title={'Thuế và phí'}
+          title={'Taxes and fees'}
           value={formatPrice(feePrice)}
           textType="regular"
           colorValue={COLORS.text}

@@ -26,7 +26,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
         style={{
           color: COLORS.error,
         }}>
-        Còn {roomsAverage} phòng
+        {roomsAverage} room left
       </CustomText>
 
       <View
@@ -39,7 +39,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
           isDefaultValue
           styleWrapper={{width: '40%'}}
           data={[...Array(roomsAverage)].map((_, index) => ({
-            name: `${index + 1} phòng`,
+            name: `${index + 1} room`,
             value: index + 1,
           }))}
           buttonEstateTypes={{
@@ -54,7 +54,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
         <CustomButton
           onPress={() => onPress(selectRoom)}
           buttonType="normal"
-          text="Đặt phòng"
+          text="Book room"
           styleWrapper={{
             flex: 1,
           }}

@@ -9,10 +9,10 @@ export default function RoomFilterType() {
       <Category
         isShadow={false}
         data={[
-          'Huỷ miễn phí',
-          'Thanh toán tại khách sạn',
-          'Giường lớn',
-          'Miễn phí bữa sáng',
+          'Free cancellation',
+          'Pay at the hotel',
+          'Big bed',
+          'Free breakfast',
         ]}
       />
     </View>

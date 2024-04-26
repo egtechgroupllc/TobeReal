@@ -1,8 +1,8 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {SHADOW, scale} from '../../assets/constants';
-import {CustomInput} from '../../components';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
+import {CustomButton, CustomInput} from '../../components';
 import BottomSheet from '../../components/BottomSheet';
 import {useLanguage} from '../../hooks/useLanguage';
 import FilterSort from '../Explore/components/DetailAccommodation/Review/FilterSort';
@@ -11,6 +11,7 @@ import Budget from './Header/Budget';
 import RatingReview from './Header/RatingReview';
 import SortBy from './Header/SortBy';
 import TypeAccommoda from './Header/TypeAccommoda';
+import {useForm} from 'react-hook-form';
 const listFill = [
   {
     text: 'On Promotion',
@@ -25,10 +26,14 @@ const listFill = [
     text: 'Unfurnished',
   },
 ];
-export default function MapHeader() {
+export default function MapHeader({onFilter = () => {}}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-
+  const {control, handleSubmit, watch, setValue} = useForm();
+  const handelFiter = value => {
+    onFilter && onFilter(value);
+    bottomSheetRef.current.close();
+  };
   return (
     <View
       style={{
@@ -38,7 +43,7 @@ export default function MapHeader() {
         ...SHADOW,
       }}>
       {/* <HeaderBar /> */}
-      <View style={{}}>
+      <View>
         <FilterSort
           text={t('filter')}
           listFill={listFill}
@@ -50,16 +55,72 @@ export default function MapHeader() {
           snapPoints={['50%', '80%']}
           titleIndicator={t('filter&sort')}
           ref={bottomSheetRef}
+          ComponentFooter={
+            <View
+              style={{
+                borderTopWidth: scale(1),
+                borderColor: COLORS.grey,
+                backgroundColor: 'white',
+                height: scale(100),
+                flexDirection: 'row',
+                columnGap: scale(20),
+                paddingVertical: scale(20),
+                paddingHorizontal: scale(40),
+              }}>
+              <CustomButton
+                outline
+                buttonType="normal"
+                style={{flex: 0.5}}
+                text={t('Reset')}
+                styleText={{
+                  fontSize: SIZES.xMedium,
+                }}
+              />
+              <CustomButton
+                // onPress={() => {
+                //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
+                // }}
+                // onPress={onPress}
+                buttonType="normal"
+                style={{flex: 0.5}}
+                text={t('Apply')}
+                onPress={handleSubmit(handelFiter)}
+                styleText={{
+                  fontSize: SIZES.xMedium,
+                }}
+              />
+            </View>
+          }
           styleContent={{
             paddingHorizontal: scale(16),
             rowGap: scale(15),
           }}>
-          <CustomInput placeholder={t('accommodation_name')} />
-          <TypeAccommoda />
-          <RatingReview />
-          <SortBy />
-          <Budget />
-          <BedRoom />
+          <CustomInput
+            placeholder={t('accommodation_name')}
+            name="name"
+            control={control}
+          />
+
+          {/* <RatingReview /> */}
+          <SortBy
+            value={watch('sortPrice')}
+            onSort={value => {
+              setValue('sortPrice', value);
+            }}
+          />
+          <Budget
+            value={watch('budget')}
+            onBudget={value => {
+              setValue('budget', value);
+            }}
+          />
+          <TypeAccommoda
+            value={watch('type')}
+            onType={value => {
+              setValue('type', value?.id);
+            }}
+          />
+          {/* <BedRoom /> */}
         </BottomSheet>
       </View>
     </View>

@@ -7,13 +7,14 @@ import WrapperContent from '../../Explore/components/WrapperContent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import FilterSort from '../../Explore/components/DetailAccommodation/Review/FilterSort';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useLanguage } from '../../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 const listSort = ['Lowest Price', 'Highest Price', 'Best Rating'];
 
-export default function SortBy({onSort}) {
-  const [checked, setChecked] = useState(undefined);
-  const {t}= useLanguage()
+export default function SortBy({onSort, value}) {
+  const [checked, setChecked] = useState(value || undefined);
+
+  const {t} = useLanguage();
   return (
     <WrapperContent
       onPressSeeAll={() => console.log(1)}
@@ -33,11 +34,14 @@ export default function SortBy({onSort}) {
           key={index}
           style={styles.item}
           activeOpacity={0.7}
-          onPress={() => setChecked(index)}>
+          onPress={() => {
+            setChecked(item);
+            item && onSort && onSort(item);
+          }}>
           <CustomText>{item}</CustomText>
 
           <View style={styles.radio}>
-            {checked === index ? <View style={styles.dot} /> : null}
+            {checked === item ? <View style={styles.dot} /> : null}
           </View>
         </TouchableOpacity>
       ))}

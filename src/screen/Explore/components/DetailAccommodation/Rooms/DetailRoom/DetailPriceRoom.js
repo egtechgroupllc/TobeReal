@@ -33,7 +33,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
             rowGap: scale(10),
           }}>
           <Row
-            title={'Ngày'}
+            title={'Date'}
             value={`${getDate(data?.date?.selectedStartDate)} - ${formatDate(
               data?.date?.selectedEndDate,
               {
@@ -41,24 +41,25 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               },
             )}`}
           />
-          <Row title={'Số phòng'} value={`${numRoom} phòng`} />
+          <Row title={'Room number'} value={`${numRoom} room`} />
           <View
             style={{
               rowGap: scale(10),
               marginTop: scale(10),
             }}>
             <Row
-              title={'Giá mỗi đêm'}
+              title={'Price per night'}
               value={formatPrice(data?.priceAverage * numRoom)}
               colorValue={COLORS.primary}
               textType="semiBold"
             />
             <Row
-              title={`Tổng giá cho ${data?.date?.numNight} đêm`}
+              title={`
+              Total price for ${data?.date?.numNight} night`}
               value={formatPrice(priceAverage)}
             />
             <Row
-              title={'Thuế và phí'}
+              title={'Taxes and fees'}
               value={formatPrice(feePrice)}
               textType="regular"
               colorValue={COLORS.text}
@@ -69,7 +70,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               ...styles.point,
             }}>
             <Row
-              title={'Tổng giá tiền'}
+              title={'Total price'}
               value={formatPrice(priceAverage + feePrice)}
               colorValue={COLORS.primary}
               textType="bold"
@@ -80,12 +81,12 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               }}>
               <IconCoinPoint />
               <CustomText>
-                Đặt chỗ và nhận ngay{' '}
+                Book and receive now{' '}
                 <CustomText textType="medium" style={{color: '#ff5e1f'}}>
                   {formatPrice(numRoom * 3111, {
                     showCurrency: false,
                   })}{' '}
-                  điểm
+                  point
                 </CustomText>
               </CustomText>
             </View>

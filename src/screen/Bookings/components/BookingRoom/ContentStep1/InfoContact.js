@@ -6,8 +6,8 @@ import FormChangeContact from './FormChangeContact';
 
 export default function InfoContact({data}) {
   const typePeopleBooking = useRef([
-    'Cá nhân',
-    'Tôi đặt cho người khác',
+    'Individual',
+    'I booked for someone else',
   ]).current;
 
   const [userBooking, setUserBooking] = useState(typePeopleBooking[0]);

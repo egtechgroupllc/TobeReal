@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
@@ -9,19 +9,36 @@ import RatingBox from '../../Explore/components/ContentAccommodation/BoxPlaceIte
 import ListFacilities from './ListFacilities';
 import Bottom from './Bottom';
 import ImageDetail from '../../components/ImageDetail';
+import TopImg from './TopImg';
+import {IconMapView} from '../../../assets/icon/Icon';
 
 export default function ItemAccommdSearch({data}) {
   const {navigate} = useNavigation();
-
+  const params = useRoute().params;
+  const detail = () => {
+    if (params?.menu === 'RENT') {
+      navigate('DetailAccommodationScreen', data);
+    } else if (params?.menu === 'BUY') {
+      navigate('DetailBuyScreen', data);
+    } else if (params?.menu === 'TOUR') {
+      navigate('DetailTourScreen', data);
+    }
+  };
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       style={styles.wrapper}
       onPress={() => {
-        navigate('DetailAccommodationScreen', data);
+        detail();
       }}>
       <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
-
+      <TopImg
+        rating
+        isStar
+        isHeart
+        feature
+        type={data?.accommodation_type?.name || data?.estate_type?.name}
+      />
       <View
         style={{
           padding: scale(12),
@@ -37,22 +54,43 @@ export default function ItemAccommdSearch({data}) {
           <RatingBox rating={4.0} />
         </View>
 
-        <CustomText textType="medium" style={styles.address} numberOfLines={1}>
+        <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+          <IconMapView />
+          <CustomText>
+            {data?.country?.name}, {data?.province?.name}
+          </CustomText>
+        </View>
+        {/* <CustomText textType="medium" style={styles.address} numberOfLines={1}>
           {data?.address}
-        </CustomText>
+        </CustomText> */}
 
-        <ListFacilities accom_type={data?.accommodation_type} />
+        {/* <ListFacilities
+          accom_type={
+            params?.menu === 'RENT'
+              ? data?.accommodation_type
+              : data?.estate_type
+          }
+        /> */}
 
         <View
           style={{
             marginTop: scale(8),
-            alignItems: 'flex-end',
+            // alignItems: 'flex-end',
           }}>
           <View style={{overflow: 'hidden', width: '100%'}}>
             <View style={styles.line} />
           </View>
 
-          <Bottom data={data?.rooms} />
+          <CustomText
+            textType="medium"
+            style={{marginTop: scale(10)}}
+            numberOfLines={1}>
+            {formatPrice(
+              data?.price ||
+                data?.rooms?.[0]?.room_dates?.[0]?.price ||
+                data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
+            )}{' '}
+          </CustomText>
         </View>
       </View>
     </TouchableOpacity>
@@ -63,7 +101,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#fff',
     width: '100%',
-    height: scale(380),
+    height: scale(220),
     borderRadius: scale(10),
     ...SHADOW,
   },

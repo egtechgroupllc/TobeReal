@@ -19,7 +19,7 @@ export default memo(function BookAccommodation({data}) {
         style={{
           rowGap: scale(2),
         }}>
-        <CustomText>Khởi điểm:</CustomText>
+        <CustomText>Starting point:</CustomText>
         <CustomText
           textType="bold"
           style={{

@@ -393,7 +393,6 @@ export default function ContentBuy() {
       setTourData(dataInternational);
     }
   };
-  console.log(tourData);
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>

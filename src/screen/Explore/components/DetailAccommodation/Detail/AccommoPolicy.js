@@ -10,27 +10,9 @@ import BottomSheet from '../../../../../components/BottomSheet';
 const listPolicy = [
   {
     icon: IconClock,
-    name: 'Giấy tờ bắt buộc',
+    name: 'Required documents',
     value:
-      'Khi nhận phòng, bạn cần cung cấp CMND/CCCD. Vui lòng mang theo các giấy tờ cần thiết dưới dạng bản cứng.',
-  },
-  {
-    icon: IconClock,
-    name: 'Giấy tờ bắt buộc',
-    value:
-      'Khi nhận phòng, bạn cần cung cấp CMND/CCCD. Vui lòng mang theo các giấy tờ cần thiết dưới dạng bản cứng.',
-  },
-  {
-    icon: IconClock,
-    name: 'Giấy tờ bắt buộc',
-    value:
-      'Khi nhận phòng, bạn cần cung cấp CMND/CCCD. Vui lòng mang theo các giấy tờ cần thiết dưới dạng bản cứng.',
-  },
-  {
-    icon: IconClock,
-    name: 'Giấy tờ bắt buộc',
-    value:
-      'Khi nhận phòng, bạn cần cung cấp CMND/CCCD. Vui lòng mang theo các giấy tờ cần thiết dưới dạng bản cứng.',
+      'When checking in, you need to provide ID card/CCCD. Please bring necessary documents in hard copy.',
   },
 ];
 export default function AccommoPolicy({data}) {
@@ -44,7 +26,7 @@ export default function AccommoPolicy({data}) {
   }, [isOpen]);
   return (
     <WrapperContent
-      heading={'Chính sách lưu trú'}
+      heading={'Accommodation policy'}
       isSeeAll
       onPressSeeAll={() => {
         setIsOpen(true);

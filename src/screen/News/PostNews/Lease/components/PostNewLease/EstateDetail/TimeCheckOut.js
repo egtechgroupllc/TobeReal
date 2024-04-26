@@ -9,7 +9,7 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../../components/CustomText';
 
 const formatTime24 = date => {
-  return formatTime(date, {isHour24: true});
+  return formatTime(date);
 };
 
 export default function TimeCheckOut({onChange}) {

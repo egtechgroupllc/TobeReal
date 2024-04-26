@@ -120,7 +120,7 @@ export default function BoxFeatureItem({
                   textType="medium"
                   style={[isStar && {fontSize: SIZES.xSmall}]}
                   numberOfLines={2}>
-                  {data?.province?.name}
+                  {data?.country?.name}, {data?.province?.name}
                 </CustomText>
               </View>
               <View

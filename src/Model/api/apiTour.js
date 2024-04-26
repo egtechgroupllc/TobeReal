@@ -55,11 +55,16 @@ export const postAddTicket = async ({data, tour_id}) => {
   return responsive.data;
 };
 
-export const getListTour = async ({pageParam = 1, country_id, province_id}) => {
+export const getListTour = async ({
+  pageParam = 1,
+  country_id,
+  province_id,
+  name = '',
+}) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
   const responsive = await instance.get(
-    `/list-sell?page=${pageParam}&limit=10&${country}&${province}`,
+    `/list-sell?page=${pageParam}&limit=10&${country}&${province}&name=${name}`,
   );
 
   return responsive.data;

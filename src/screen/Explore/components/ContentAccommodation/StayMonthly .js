@@ -43,7 +43,6 @@ export default function StayMonthly() {
   useEffect(() => {
     setFilter(listCountry.data?.data?.[0]);
   }, [listCountry.data?.data]);
-  console.log(data);
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (

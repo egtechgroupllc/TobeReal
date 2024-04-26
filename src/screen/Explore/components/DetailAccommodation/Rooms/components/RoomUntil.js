@@ -17,7 +17,7 @@ export default function RoomUntil({data, price}) {
     <>
       <ItemUtil
         Icon={IconBookings}
-        value={`Miễn phí hủy phòng trước 10 Apr 13:00`}
+        value={`Free cancellation before 10 Apr 13:00`}
         color={'#00875a'}
         backgroundColor={'#e8fef5'}
         styleWrapper={{
@@ -25,7 +25,7 @@ export default function RoomUntil({data, price}) {
         }}
       />
       <View>
-        <ItemUtil Icon={IconPeople} value={`${2} khách`} />
+        <ItemUtil Icon={IconPeople} value={`${2} guest`} />
         <ItemUtil Icon={IconRoom} value={data.room_bed_type.name} />
       </View>
       <View
@@ -34,13 +34,9 @@ export default function RoomUntil({data, price}) {
           justifyContent: 'space-between',
         }}>
         <View>
-          <ItemUtil Icon={IconPeople} value={`Không gồm bữa sáng`} />
-          <ItemUtil Icon={IconRoom} value={'Không hoàn tiền'} />
-          <ItemUtil
-            Icon={IconWifi}
-            value={'Không hoàn tiền'}
-            color={'#00875a'}
-          />
+          <ItemUtil Icon={IconPeople} value={`Breakfast not included`} />
+          <ItemUtil Icon={IconRoom} value={'No refunds'} />
+          <ItemUtil Icon={IconWifi} value={'Wifi free'} color={'#00875a'} />
         </View>
 
         <View
@@ -69,7 +65,7 @@ export default function RoomUntil({data, price}) {
             <CustomText textType="bold" style={styles.price}>
               {formatPrice(price)}
             </CustomText>
-            <CustomText style={styles.night}>/Phòng/đêm</CustomText>
+            <CustomText style={styles.night}>/Room/night</CustomText>
           </View>
         </View>
       </View>

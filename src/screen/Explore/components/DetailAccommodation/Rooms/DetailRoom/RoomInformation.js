@@ -14,8 +14,8 @@ export default function RoomInformation({data}) {
     <>
       <ItemUtil
         Icon={IconPeople}
-        value={`${2} khách`}
-        title={'Khách'}
+        value={`${2} guest`}
+        title={'Guest'}
         styleWrapper={{
           width: '45%',
         }}
@@ -23,13 +23,13 @@ export default function RoomInformation({data}) {
       <ItemUtil
         Icon={IconRoom}
         value={data?.room_bed_type?.name}
-        title={'Loại giường'}
+        title={'Bed type'}
         styleWrapper={{
           width: '45%',
         }}
       />
       <ItemUtil
-        title={'Kích thước phòng'}
+        title={'Room size'}
         Icon={IconAcreage}
         value={formatPrice(data.size_width * data.size_length, {
           unit: 'm²',

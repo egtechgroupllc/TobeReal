@@ -200,7 +200,6 @@ export default function RecommendedApartments({
 }) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  console.log('RecommendedApartments', isRender);
   const title = [t('recommend_apartments')];
   const {navigate} = useNavigation();
   const [filter, setFilter] = useState();

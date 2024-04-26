@@ -12,12 +12,13 @@ import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
 import {KEY_MAP} from '../../Model/url';
+import {useQuery} from '@tanstack/react-query';
+import {formatDate} from 'date-fns';
+import {getListRent} from '../../Model/api/apiAccom';
 
 const initialMapState = {
-  markers,
+  markers: [],
   region: {
-    latitude: 22.62938671242907,
-    longitude: 88.4354486029795,
     latitudeDelta: 0.04864195044303443,
     longitudeDelta: 0.040142817690068,
   },
@@ -29,11 +30,34 @@ export default function HomeMapScreen({children, showListLocation, style}) {
   const [focusedItem, setFocusedItem] = useState(0);
 
   const mapRef = useRef(null);
+
+  const {data, isLoading, isError, error} = useQuery({
+    queryKey: [
+      'accommodation',
+      'list-rent',
+      {
+        accommodation_type_id: 1,
+        country_id: 241,
+        // province_id: 1,
+      },
+    ],
+    queryFn: () =>
+      getListRent({
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
+        country_id: 241,
+        // province_id: 1,
+      }),
+  });
+
   const [state, setState] = useState(initialMapState);
 
   useEffect(() => {
-    setState(initialMapState);
-  }, [initialMapState]);
+    setState({
+      ...initialMapState,
+      markers: data?.data?.rows,
+    });
+  }, [data?.data?.count]);
 
   let mapIndex = 0;
 
@@ -46,6 +70,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
       if (index <= 0) {
         index = 0;
       }
+
       setFocusedItem(index);
 
       clearTimeout(regionTimeout);
@@ -53,7 +78,11 @@ export default function HomeMapScreen({children, showListLocation, style}) {
       const regionTimeout = setTimeout(() => {
         if (mapIndex !== index) {
           mapIndex = index;
-          const {coordinate} = state.markers[index];
+          const {latitude, longitude} = state.markers[index];
+          const coordinate = {
+            latitude,
+            longitude,
+          };
           mapRef.current.animateToRegion(
             {
               ...coordinate,
@@ -67,7 +96,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
     };
 
     scrollOffsetX.addListener(handleScroll);
-  }, []);
+  }, [state.markers]);
 
   const interpolations = useMemo(
     () =>
@@ -96,7 +125,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
 
         return {scale, backgroundColor, color};
       }),
-    [],
+    [state.markers],
   );
 
   const onMarkerPress = index => {
@@ -151,15 +180,25 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         ref={mapRef}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={[styles.map, style]}
-        region={state.region}
+        region={{
+          latitude: state.markers?.[0]?.latitude,
+          longitude: state.markers?.[0]?.longitude,
+          latitudeDelta: 0.04864195044303443,
+          longitudeDelta: 0.040142817690068,
+        }}
         zoomControlEnabled
         showsUserLocation>
         {state.markers.map((marker, index) => {
+          const coordinate = {
+            latitude: marker?.latitude,
+            longitude: marker?.longitude,
+          };
+          console.log(interpolations[index], index);
           return (
             <Marker
               key={index}
               tracksViewChanges={index === focusedItem}
-              coordinate={marker.coordinate}
+              coordinate={coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>
               <CustomMarker scaleValue={interpolations[index]} data={marker} />

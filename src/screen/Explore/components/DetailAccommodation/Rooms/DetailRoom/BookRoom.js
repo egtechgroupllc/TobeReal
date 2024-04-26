@@ -109,10 +109,10 @@ export default function BookRoom({data}) {
             }}
           />
           <CustomText style={{color: COLORS.text}}>
-            Tổng gía phòng cho{' '}
-            <CustomText textType="medium"> {selectRoom} phòng</CustomText>,
+            Total price for the room{' '}
+            <CustomText textType="medium"> {selectRoom} room</CustomText>,
             <CustomText textType="medium">
-              {data?.date?.numNight} đêm
+              {data?.date?.numNight} night
             </CustomText>
           </CustomText>
         </View>
@@ -149,7 +149,7 @@ export default function BookRoom({data}) {
                   fontSize: SIZES.xSmall,
                   color: COLORS.text,
                 }}>
-                Giá cuối cùng
+                Last price
               </CustomText>
               <View
                 style={{
@@ -158,9 +158,9 @@ export default function BookRoom({data}) {
                 }}>
                 <IconCoinPoint />
                 <CustomText>
-                  Nhận{' '}
+                  Receive{' '}
                   <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                    {formatPrice(selectRoom * 12312231)} điểm
+                    {formatPrice(selectRoom * 12312231)} points
                   </CustomText>
                 </CustomText>
               </View>
@@ -174,7 +174,7 @@ export default function BookRoom({data}) {
             isDefaultValue
             styleWrapper={{width: '100%'}}
             data={[...Array(roomsAverage)].map((_, index) => ({
-              name: `${index + 1} phòng`,
+              name: `${index + 1} room`,
               value: index + 1,
             }))}
             buttonEstateTypes={{

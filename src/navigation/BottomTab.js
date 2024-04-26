@@ -1,28 +1,22 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useEffect, useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {COLORS, images, scale} from '../assets/constants';
 import {
   IconBookings,
-  IconExplore,
-  IconHeart,
   IconMapView,
   IconNews,
   IconProfile,
-  IconProfileInactive,
-  IconPromotion,
   IconVideo,
 } from '../assets/icon/Icon';
+import {HomeMapScreen} from '../components';
+import CustomImage from '../components/CustomImage';
+import {useLanguage} from '../hooks/useLanguage';
 import NavigationBookings from './NavigationBookings';
 import NavigationExplore from './NavigationExplore';
-import NavigationProfile from './NavigationProfile';
-import NavigationPromotion from './NavigationPromotion';
-import NavigationWishList from './NavigationWishList';
-import {COLORS, images, scale} from '../assets/constants';
 import NavigationNews from './NavigationNews';
-import {HomeMapScreen} from '../components';
-import {useLanguage} from '../hooks/useLanguage';
-import CustomImage from '../components/CustomImage';
+import NavigationProfile from './NavigationProfile';
 import NavigationVideo from './NavigationVideo';
 
 const Tab = createBottomTabNavigator();
@@ -119,6 +113,7 @@ export default function BottomTab() {
           tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
         }}
       />
+
       <Tab.Screen
         name={'Profile'}
         component={NavigationProfile}

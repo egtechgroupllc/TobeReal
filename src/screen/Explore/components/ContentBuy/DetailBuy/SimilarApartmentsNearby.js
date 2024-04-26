@@ -46,7 +46,6 @@ export default function SimilarApartmentsNearby() {
     ],
     queryFn: () => getListSell({country_id: 241}),
   });
-  console.log(data, 321312);
   return (
     <WrapperContent
       // background={images.bgPackageTour}

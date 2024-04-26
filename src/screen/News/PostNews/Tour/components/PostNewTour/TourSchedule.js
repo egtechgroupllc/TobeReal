@@ -64,6 +64,9 @@ export default function TourSchedule({
     'country_id',
     'province_id',
     'estate_type_id',
+    'schedule',
+    'total_hours',
+    'time_options',
   ]).current;
 
   const [openCheckStart, setOpenCheckStart] = useState(false);
@@ -82,9 +85,6 @@ export default function TourSchedule({
   //   watch(`description_${selectedDay}`),
   // );
   // console.log('====================================');
-  console.log('====================================');
-  console.log(selectedDay);
-  console.log('====================================');
   const handleDayClick = dayNumber => {
     setSelectedDay(dayNumber);
   };
@@ -98,10 +98,6 @@ export default function TourSchedule({
 
   useEffect(() => {
     setSelectedDay(0);
-    const dads = numDays.days;
-    console.log('====================================');
-    console.log({dads});
-    console.log('====================================');
     [...Array(numDays.days)].map((_, index) => {
       console.log('====================================');
       console.log(watch(`description_${index}`));
@@ -111,6 +107,15 @@ export default function TourSchedule({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numDays.days]);
+
+  useEffect(() => {
+    setValue(
+      'schedule',
+      JSON.stringify([{title: 'Day 1', description: 'Day 1'}]),
+    );
+    setValue('total_hours', 48);
+    setValue('time_options', JSON.stringify(['23:59']));
+  }, []);
 
   return (
     <View>
@@ -203,7 +208,7 @@ export default function TourSchedule({
               </>
             </View>
             <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
-              Thời lượng Tour: {numDays.days} days {numDays.hours} hours
+              Tour Duration: {numDays.days} days {numDays.hours} hours
             </CustomText>
             <ScrollView
               horizontal

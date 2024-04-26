@@ -1,4 +1,5 @@
-import React, {useRef, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {WIDTH, scale} from '../../../../assets/constants';
 import {
@@ -26,6 +27,10 @@ import {
   getMyListCreateAccom,
 } from '../../../../Model/api/apiAccom';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
+import {
+  getListTypeEstateSell,
+  getListTypeRent,
+} from '../../../../Model/api/common';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -48,79 +53,26 @@ export default function FindAccommodation() {
     },
   ]).current;
 
-  const {token} = useAuthentication();
-
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['accommodation', 'my', 0],
-    queryFn: () => getMyListCreateAccom({token, hasRoom: 0}),
-    enabled: !!token,
+  const typeRent = useQuery({
+    queryKey: ['common', 'accommodation', 'list-type'],
+    queryFn: () => getListTypeRent(),
   });
-  console.log(data, 1239218739813);
-  const listRent = useRef([
-    // {
-    //   text: t('all'),
-    //   icon: IconCity,
-    // },
-    {
-      text: t('apartment'),
-      icon: IconApartment,
-    },
-    {
-      text: t('hotel'),
-      icon: IconHotel,
-    },
-    {
-      text: t('villa'),
-      icon: IconVilla,
-    },
-    {
-      text: t('home'),
-      icon: IconHome,
-    },
-    // {
-    //   text: t('others'),
-    //   icon: IconAccommodationOther,
-    // },
-  ]).current;
-
-  const listBuy = useRef([
-    // {
-    //   text: t('all'),
-    //   icon: IconCity,
-    // },
-    {
-      text: t('apartment'),
-      icon: IconApartment,
-    },
-    {
-      text: t('villa'),
-      icon: IconHotel,
-    },
-    {
-      text: t('home'),
-      icon: IconHome,
-    },
-    {
-      text: t('land'),
-      icon: IconLand,
-    },
-    // {
-    //   text: t('others'),
-    //   icon: IconAccommodationOther,
-    // },
-  ]).current;
+  const typeBuy = useQuery({
+    queryKey: ['common', 'estate', 'list-type'],
+    queryFn: () => getListTypeEstateSell(),
+  });
 
   const listTour = useRef([
     {
-      text: t('tour_by_topic'),
+      name: t('tour_by_topic'),
       icon: IconTourTopic,
     },
     {
-      text: t('emigrate'),
+      name: t('emigrate'),
       icon: IconEmigrate,
     },
     {
-      text: t('world'),
+      name: t('world'),
       icon: IconWorld,
     },
   ]).current;
@@ -128,7 +80,14 @@ export default function FindAccommodation() {
   const [tabSelect, setTabSelect] = useState(listMenu[0]?.id);
   const [category, setCategory] = useState();
   const [isRender, setIsRender] = useState();
-
+  const [selectedId, setSelectedId] = useState(null);
+  useEffect(() => {
+    const typeId =
+      tabSelect === 'RENT'
+        ? typeRent?.data?.data?.[0]?.id
+        : typeBuy?.data?.data?.[0]?.id;
+    setSelectedId(typeId);
+  }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
   return (
     <View>
       <InViewPort
@@ -162,13 +121,15 @@ export default function FindAccommodation() {
                       )}
                       <OptionAccommodation
                         styleIcon={{color: '#BCBCBC'}}
-                        multiSelect
-                        isSelectAll
+                        // multiSelect
+                        // isSelectAll
+                        onSelect={value => setSelectedId(value.id)}
+                        keyTextView={'name'}
                         data={
                           tabSelect === 'RENT'
-                            ? listRent
+                            ? typeRent?.data?.data
                             : tabSelect === 'BUY'
-                            ? listBuy
+                            ? typeBuy?.data?.data
                             : tabSelect === 'TOUR'
                             ? listTour
                             : []
@@ -179,9 +140,13 @@ export default function FindAccommodation() {
                       <FindContent
                         isBuy={tabSelect === 'BUY'}
                         rental={category}
+                        dataFind={{type: selectedId, menu: tabSelect}}
                       />
                     ) : (
-                      <FindContent tour />
+                      <FindContent
+                        tour
+                        dataFind={{type: selectedId, menu: tabSelect}}
+                      />
                     )}
                   </>
                 ) : (

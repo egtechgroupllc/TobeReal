@@ -86,7 +86,7 @@ export default function ItemBox({style, isShadow = true}) {
           style={{
             color: '#687176',
           }}>
-          <CustomText textType="semiBold">Từ chủ Khách sạn: </CustomText>
+          <CustomText textType="semiBold">From the Hotel owner: </CustomText>
           Central location, friendly staff, full and delicious buffet breakfast.
           I really like the hotel's shower gel and shampoo! tasty. I really like
           hotel shower gel and shampoo! really liked the customer's shower gel

@@ -155,7 +155,10 @@ export default function BoxPlaceItem({
                           flexDirection: 'row',
                           columnGap: scale(10),
                         }}>
-                        <CustomText>{data?.province?.name}</CustomText>
+                        <CustomText>
+                          {' '}
+                          {data?.country?.name}, {data?.province?.name}
+                        </CustomText>
                         <IconMapView />
                       </TouchableOpacity>
                     )}

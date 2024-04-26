@@ -155,8 +155,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(30),
             }}>
             <CustomInput
-              label={'Chiều rộng'}
-              placeholder="Chiều rộng"
+              label={'Width'}
+              placeholder="Width"
               name="size_width"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -168,8 +168,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Chiều dài'}
-              placeholder="Chiều dài"
+              label={'Length'}
+              placeholder="Length"
               name="size_length"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -182,7 +182,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           </View>
 
           <Counter
-            heading={'Số phòng'}
+            heading={'Room number'}
             min={0}
             max={255}
             value={watch('number_bedroom')}
@@ -192,7 +192,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <Counter
-            heading={'Số phòng tắm, vệ sinh'}
+            heading={'Number of bathrooms and toilets'}
             min={0}
             max={255}
             value={watch('number_bathroom')}
@@ -226,8 +226,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Giá khoá tin'}
-              placeholder="Giá khoá tin"
+              label={'Price for locking information'}
+              placeholder="Price for locking informationn"
               name="price_lock"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -242,7 +242,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           </View>
 
           <CheckBox
-            text="Giá có thể thoả thuận"
+            text="Price can be negotiated"
             styleWrapper={{
               width: '100%',
             }}

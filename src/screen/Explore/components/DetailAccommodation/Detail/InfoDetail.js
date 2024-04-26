@@ -38,7 +38,9 @@ export default function InfoDetail({data}) {
           {data.review_average ? (
             <Star rating={data.review_average} />
           ) : (
-            <CustomText textType="regular">(Chưa có đánh giá)</CustomText>
+            <CustomText textType="regular">
+              (There are no reviews yet)
+            </CustomText>
           )}
         </View>
 

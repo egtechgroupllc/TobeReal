@@ -21,10 +21,11 @@ import {
   validateMinLengthText,
   validateUserName,
 } from '../../../../utils/validate';
+import SelectCountry from '../../../News/PostNews/components/SelectCountry';
 
-export default function Content() {
+export default function ContentPartner() {
   const {t} = useLanguage();
-  const {control, watch, handleSubmit, reset} = useForm();
+  const {control, watch, handleSubmit, reset, setValue} = useForm();
   const {goBack, navigate} = useNavigation();
 
   const signupMutation = useMutation({
@@ -33,7 +34,7 @@ export default function Content() {
 
   const handleSignup = value => {
     delete value?.passwordConfirm;
-
+    delete value?.province_id;
     signupMutation.mutate(value, {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
@@ -85,6 +86,7 @@ export default function Content() {
           name="phone"
           placeholder={t('Enter phone')}
         />
+        <SelectCountry setValue={setValue} control={control} />
         <CustomInput
           control={control}
           sizeInput="medium"
@@ -105,6 +107,22 @@ export default function Content() {
           placeholder={t('enter_password_confirm')}
           password
         />
+        <CustomInput
+          control={control}
+          maxLength={30}
+          sizeInput="medium"
+          rules={[requireField(t('this_field_required'))]}
+          name="business_name"
+          placeholder={t('Enter business name')}
+        />
+        <CustomInput
+          control={control}
+          maxLength={30}
+          sizeInput="medium"
+          rules={[requireField(t('this_field_required'))]}
+          name="business_category"
+          placeholder={t('Enter business category')}
+        />
 
         <CustomInput
           control={control}
@@ -119,44 +137,9 @@ export default function Content() {
           text={t('signup')}
           linearGradientProps
           style={{
-            marginTop: scale(20),
+            marginTop: scale(10),
           }}
         />
-
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: scale(20),
-            justifyContent: 'center',
-          }}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              ...styles.text,
-              textDecorationLine: 'underline',
-            }}>
-            {t('already_have_account')}
-          </CustomText>
-
-          <CustomText
-            onPress={() => navigate('LoginScreen')}
-            textType="semiBold"
-            style={{...styles.text1, marginLeft: scale(5)}}>
-            {t('login')}
-          </CustomText>
-        </View>
-        <TouchableOpacity
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <CustomText
-            onPress={() => navigate('RegisterPartnerScreen')}
-            textType="semiBold"
-            style={{...styles.text2, color: COLORS.primary}}>
-            {t('Become a partner of saveloka')}
-          </CustomText>
-        </TouchableOpacity>
       </View>
     </View>
   );

@@ -85,14 +85,13 @@ export default function PostNewTourScreen() {
     delete value?.check;
     // delete value?.description_0;
     const formData = getFormData(value);
-
     createTourMu.mutate(formData, {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
           reset();
-          queryClient.invalidateQueries(['estate', 'my-list']);
+          queryClient.invalidateQueries(['tour', 'create']);
         }
       },
       onError: err => {
@@ -169,7 +168,7 @@ export default function PostNewTourScreen() {
           marginTop: scale(20),
           width: '100%',
         }}
-        disabled={createTourMu.isPending}
+        // disabled={createTourMu.isPending}
       />
     </MainWrapper>
   );

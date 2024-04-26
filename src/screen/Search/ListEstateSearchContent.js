@@ -13,33 +13,29 @@ import EmptyData from '../../components/EmptyData';
 import {useRoute} from '@react-navigation/native';
 import {type} from '../../components/Marquee';
 
-export default function ListAccomSearchContent({paramsFilter}) {
+export default function ListEstateSearchContent({paramsFilter}) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
   const filter = {...params, ...paramsFilter};
-
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
-      'accommodation',
-      'list-rent',
+      'estate',
+      'list-post',
       'search',
       {
-        accommodation_type_id: filter?.type,
+        estate_type_id: filter?.type,
         country_id: 241,
-        name: filter?.name,
+        title: filter?.name,
+        // province_id: 1,
       },
     ],
     queryFn: () =>
-      getListRent({
-        date_end: filter?.date?.date_end,
-        date_start: filter?.date?.date_start,
+      getListSell({
         country_id: 241,
-        accommodation_type_id: filter?.type,
-        name: filter?.name,
-        // province_id: 1,
+        estate_type_id: filter?.type,
+        title: filter?.name,
       }),
   });
-
   // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
   //   useInfiniteQuery({
   //     queryKey: ['accommodation', 'list-rent'],

@@ -93,8 +93,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Chiều dài'}
-              placeholder="Chiều dài"
+              label={'Length'}
+              placeholder="Length"
               name="size_length"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -106,8 +106,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
           </View>
           <CustomInput
-            label={'Số lượng phòng'}
-            placeholder="Số lượng phòng"
+            label={'Number of rooms'}
+            placeholder="Number of rooms"
             name="number_room"
             control={control}
             rules={requireField(t('this_field_required'))}
@@ -116,7 +116,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <Counter
-            heading={'Số người lớn tối đa'}
+            heading={'Maximum number of adults'}
             min={1}
             max={20}
             value={watch('max_occupancy')}
@@ -125,7 +125,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             }}
           />
           <Counter
-            heading={'Số trẻ em tối đa'}
+            heading={'Maximum number of children'}
             min={0}
             max={20}
             value={watch('max_child_occupancy')}
@@ -142,7 +142,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               justifyContent: 'space-between',
             }}>
             <CustomText size={SIZES.xMedium} style={{flex: 1}}>
-              Số tuổi trẻ em tối đa
+              Maximum age of children
             </CustomText>
 
             <CustomSelectDropdown

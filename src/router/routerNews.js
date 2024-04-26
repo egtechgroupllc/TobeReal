@@ -16,10 +16,10 @@ import {
 } from '../screen/News/PostNews/Tour';
 
 export default routerNews = [
-  {
-    name: 'NewsScreen',
-    component: NewsScreen,
-  },
+  // {
+  //   name: 'NewsScreen',
+  //   component: NewsScreen,
+  // },
   {
     name: 'PostNewsScreen',
     component: PostNewsScreen,
