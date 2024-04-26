@@ -53,8 +53,8 @@ export function IconDownWhite({fill, ...props}) {
 export function IconBookings({fill, ...props}) {
   return (
     <Svg
-      width={scale(14)}
-      height={scale(14)}
+      width={props?.style?.width || scale(14)}
+      height={props?.style?.height || scale(14)}
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -384,8 +384,8 @@ export function IconRight({fill, ...props}) {
       {...props}>
       <Path
         d="M1.598 11.49a.604.604 0 00.374-.13l5.795-4.661a.598.598 0 000-.931l-5.77-4.636a.597.597 0 00-.748.93l5.19 4.172-5.216 4.194a.597.597 0 00.375 1.063z"
-        fill="#000"
-        stroke="#000"
+        fill={fill || '#000'}
+        stroke={fill || '#000'}
       />
     </Svg>
   );
@@ -401,8 +401,8 @@ export function IconDown({fill, ...props}) {
       {...props}>
       <Path
         d="M1 1.598c0 .131.044.264.131.374l4.661 5.795a.598.598 0 00.931 0l4.636-5.77a.597.597 0 00-.93-.748L6.256 6.44 2.062 1.223A.597.597 0 001 1.598z"
-        fill="#000"
-        stroke="#000"
+        fill={fill || '#000'}
+        stroke={fill || '#000'}
       />
     </Svg>
   );
@@ -3510,6 +3510,55 @@ export function IconCopy({fill, ...props}) {
         rx={1.25}
         stroke={fill || '#000'}
         strokeWidth={1.5}
+      />
+    </Svg>
+  );
+}
+export function IconBan({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(20)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      data-id="IcSystemStatusDecline16"
+      {...props}>
+      <G clipPath="url(#clip0_8414_35)">
+        <Path
+          d="M12.95 3.05a7 7 0 00-9.9 9.9m9.9-9.9a7 7 0 11-9.9 9.9m9.9-9.9l-9.9 9.9"
+          stroke={fill || '#687176'}
+          strokeWidth="2px"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+    </Svg>
+  );
+}
+export function IconInvoice({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(20)}
+      height={props?.style?.height || scale(20)}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      data-id="IcUserReceipt"
+      {...props}>
+      <Path
+        d="M9 14h8M6 21V4a1 1 0 011-1v0c.552 0 .972.56 1.44.855.138.088.32.145.56.145.24 0 .422-.057.56-.145C10.028 3.561 10.448 3 11 3v0c.552 0 .972.56 1.44.855.138.088.32.145.56.145.24 0 .422-.057.56-.145C14.028 3.561 14.448 3 15 3v0c.552 0 .972.56 1.44.855.138.088.32.145.56.145.24 0 .422-.057.56-.145C18.028 3.561 18.448 3 19 3v0a1 1 0 011 1v13a4 4 0 01-4 4H6zm0-8H3v5.002A2.998 2.998 0 005.998 21v0L6 13z"
+        stroke="#687176"
+        strokeWidth="2px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M14 17h2.5M9 11h4M9 8h4m3 3h1m-1-3h1"
+        stroke="#0194F3"
+        strokeWidth="2px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   );

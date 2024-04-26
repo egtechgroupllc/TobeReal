@@ -15,7 +15,9 @@ export default function HomeExploreScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
+
   instanceAccom.defaults.headers.common['Authorization'] = token;
+
   return (
     <MainWrapper refreshControl>
       <Header />

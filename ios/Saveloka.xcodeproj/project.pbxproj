@@ -180,7 +180,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				80FCA507D2E8E7854F3181E3 /* [CP] Copy Pods Resources */,
-				777557B1B9394EBBC394A03C /* [CP] Embed Pods Frameworks */,
+				64A2D86430B0684B5AFB10D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,7 +202,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				22851C610DADD04DDAE038DE /* [CP] Copy Pods Resources */,
-				A04E4DE33AF7BD8BB96F4D9E /* [CP] Embed Pods Frameworks */,
+				9CF4ED27E440840F0FBC4685 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,7 +327,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		777557B1B9394EBBC394A03C /* [CP] Embed Pods Frameworks */ = {
+		64A2D86430B0684B5AFB10D8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,7 +361,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Saveloka-SavelokaTests/Pods-Saveloka-SavelokaTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A04E4DE33AF7BD8BB96F4D9E /* [CP] Embed Pods Frameworks */ = {
+		9CF4ED27E440840F0FBC4685 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

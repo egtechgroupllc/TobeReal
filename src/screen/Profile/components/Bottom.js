@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
+import {useMutation} from '@tanstack/react-query';
+import {postLogout} from '../../../Model/api/auth';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {showMess} from '../../../assets/constants/Helper';
 import {
   IconFacebook,
   IconInstagram,
@@ -15,10 +17,6 @@ import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLanguage} from '../../../hooks/useLanguage';
-import {useMutation} from '@tanstack/react-query';
-import {postLogout} from '../../../Model/api/auth';
-import {showMess} from '../../../assets/constants/Helper';
-import axios from 'axios';
 
 const listSocial = [
   IconShare,

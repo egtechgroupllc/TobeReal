@@ -24,7 +24,11 @@ export default function ProfileScreen() {
   const {token} = useAuthentication();
   const queryClient = useQueryClient();
 
-  const profile = queryClient.getQueryData(['user', 'profile'])?.data;
+  const {isLoading, data} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(token),
+    enabled: !!token,
+  });
 
   return (
     <MainWrapper refreshControl>
@@ -37,14 +41,14 @@ export default function ProfileScreen() {
               textType="bold"
               numberOfLines={1}
               style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
-              {formatPrice(profile?.balance, {
+              {formatPrice(data?.data.balance, {
                 locales: 'vi',
               })}
             </CustomText>
           </View>
           <AvatarImage
             upgrade={true}
-            name={profile?.username || 'name'}
+            name={data?.data?.username || 'name'}
             onPressUpgrade={upgrade}
           />
         </>

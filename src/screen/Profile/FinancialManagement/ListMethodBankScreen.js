@@ -30,7 +30,7 @@ export default function ListMethodBankScreen() {
       </CustomText>
 
       <FlatList
-        data={data?.data}
+        data={data?.data || (isLoading && [1, 2, 3])}
         style={{
           height: '100%',
         }}

@@ -9,7 +9,7 @@ import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
 import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
-import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms/DetailRoom';
+import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';

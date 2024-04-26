@@ -98,7 +98,7 @@ export default function RoomItem({dataP, onBooking, date, onDetail}) {
 
           <TouchableNativeFeedback
             onPress={() => {
-              onDetail(priceAverage);
+              onDetail({priceAverage});
             }}>
             <View style={styles.content}>
               <View
@@ -128,7 +128,13 @@ export default function RoomItem({dataP, onBooking, date, onDetail}) {
                 }}>
                 <RoomUntil data={dataP} price={priceAverage * numRoom} />
                 <SelectRoom
-                  onPress={value => onBooking({numRoom: value, id: dataP?.id})}
+                  onPress={value =>
+                    onBooking({
+                      numRoomSelect: value,
+                      id: dataP?.id,
+                      priceAverage,
+                    })
+                  }
                   data={dataP}
                   onSelect={setNumRoom}
                 />

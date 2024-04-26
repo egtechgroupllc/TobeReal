@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, SIZES, scale} from '../../assets/constants';
@@ -22,7 +22,6 @@ import RoomItem from './components/DetailAccommodation/Rooms/RoomItem';
 export default function RoomScreen() {
   const {setOptions, navigate} = useNavigation();
 
-  const queryClient = useQueryClient();
   const params = useRoute().params;
   const insets = useSafeAreaInsets();
 
@@ -50,38 +49,8 @@ export default function RoomScreen() {
       }),
   });
 
-  const bookingRoomMu = useMutation({
-    mutationFn: postBookingRoom,
-  });
-
   const handleBookingRoom = value => {
-    bookingRoomMu.mutate(
-      {
-        data: {
-          check_in_date: date?.selectedStartDate,
-          check_out_date: date?.selectedEndDate,
-          number_room: value?.numRoom,
-        },
-        id_room: value?.id,
-      },
-      {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message,
-            dataInside?.status ? 'success' : 'error',
-          );
-          queryClient.invalidateQueries([
-            'accommodation',
-            'detail',
-            'list-room',
-            params?.id,
-          ]);
-        },
-        onError: err => {
-          console.log({err});
-        },
-      },
-    );
+    navigate('BookingRoomScreen', {...params, ...value});
   };
 
   useLayoutEffect(() => {
@@ -139,15 +108,26 @@ export default function RoomScreen() {
             <RoomItem
               dataP={item}
               key={index}
-              onBooking={handleBookingRoom}
-              date={date}
-              onDetail={priceAverage =>
-                navigate('DetailRoomScreen', {
+              onBooking={value =>
+                handleBookingRoom({
                   ...item,
-                  priceAverage,
+                  ...value,
                   date,
                   numRoomGuest,
                   nameAccom: params?.name,
+                  idAccom: params?.id,
+                })
+              }
+              date={date}
+              onDetail={value =>
+                navigate('DetailRoomScreen', {
+                  ...params,
+                  ...item,
+                  ...value,
+                  date,
+                  numRoomGuest,
+                  nameAccom: params?.name,
+                  idAccom: params?.id,
                 })
               }
             />

@@ -25,6 +25,7 @@ type CheckBoxProps = {
   textLeft: boolean;
   isRadio: boolean;
   checkedNumber: boolean;
+  textBold: boolean;
   defaultValue: boolean | number;
 } & IBouncyCheckboxProps;
 
@@ -37,6 +38,7 @@ export default function CheckBox({
   isRadio,
   defaultValue = false,
   checkedNumber,
+  textBold,
   ...props
 }: CheckBoxProps) {
   const form = useForm();
@@ -50,7 +52,7 @@ export default function CheckBox({
         <View style={[styleWrapper]}>
           <BouncyCheckbox
             textComponent={
-              <CustomText style={props.textStyle}>{props.text}</CustomText>
+              <CustomText textType={textBold && 'medium'} style={props.textStyle}>{props.text}</CustomText>
             }
             onPress={valueCheck => {
               onChange(checkedNumber ? (valueCheck ? 1 : 0) : valueCheck);

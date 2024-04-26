@@ -1,26 +1,19 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {CustomButton} from '../../../../../../components';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import CustomText from '../../../../../../components/CustomText';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import {formatPrice} from '../../../../../../utils/format';
-import {IconCoinPoint, IconNext} from '../../../../../../assets/icon/Icon';
-import BottomSheet from '../../../../../../components/BottomSheet';
-import DetailPriceRoom from './DetailPriceRoom';
-import {showMess} from '../../../../../../assets/constants/Helper';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {postBookingRoom} from '../../../../../../Model/api/apiAccom';
 import {useNavigation} from '@react-navigation/native';
-import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import React, {useMemo, useState} from 'react';
+import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+import {postBookingRoom} from '../../../../../../Model/api/apiAccom';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {IconCoinPoint, IconNext} from '../../../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../../../components';
+import CustomText from '../../../../../../components/CustomText';
 import {useAuthentication} from '../../../../../../hooks/useAuthentication';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../../../utils/format';
+import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
+import DetailPriceRoom from './DetailPriceRoom';
 
 export default function BookRoom({data}) {
   const {t} = useLanguage();
@@ -33,9 +26,6 @@ export default function BookRoom({data}) {
   const {goBack, navigate} = useNavigation();
   const {token} = useAuthentication();
 
-  const Ok = () => {
-    !token ? navigate('NavigationAuth') : navigate('BookingRoomScreen', data);
-  };
   const [selectRoom, setSelectRoom] = useState(1);
 
   const roomsAverage = useMemo(() => {
@@ -46,8 +36,20 @@ export default function BookRoom({data}) {
     return Math.min(...result);
   }, [data?.room_dates]);
 
+  const priceAverage = useMemo(
+    () => selectRoom * data?.priceAverage * data?.date?.numNight,
+    [selectRoom, data?.date?.numNight, data?.priceAverage],
+  );
+  const feePrice = priceAverage * (11.8165 / 100);
+
   const handleBookingRoom = value => {
-    Ok();
+    !token
+      ? navigate('NavigationAuth')
+      : navigate('BookingRoomScreen', {
+          ...data,
+          numRoomSelect: selectRoom,
+          total: priceAverage,
+        });
     // bookingRoomMu.mutate(
     //   {
     //     data: {
@@ -80,10 +82,6 @@ export default function BookRoom({data}) {
     // );
   };
 
-  const priceAverage = useMemo(
-    () => selectRoom * data?.priceAverage * data?.date?.numNight,
-    [selectRoom, data?.date?.numNight, data?.priceAverage],
-  );
   return (
     <View
       style={[styles.wrapper, {paddingBottom: insets.bottom + scale(6)}]}
@@ -143,7 +141,7 @@ export default function BookRoom({data}) {
                 color: COLORS.primary,
                 fontSize: SIZES.xMedium,
               }}>
-              {formatPrice(priceAverage)}
+              {formatPrice(priceAverage + feePrice)}
             </CustomText>
             <View>
               <CustomText

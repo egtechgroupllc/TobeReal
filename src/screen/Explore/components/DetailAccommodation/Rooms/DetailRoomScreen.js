@@ -1,26 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
-import {
-  IconAcreage,
-  IconConditioner,
-  IconFridge,
-  IconPeople,
-  IconRoom,
-  IconTV,
-  IconWifi,
-} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import MainWrapper from '../../../../../components/MainWrapper';
-import {useAuthentication} from '../../../../../hooks/useAuthentication';
-import {formatPrice} from '../../../../../utils/format';
 import ImageDetail from '../../../../components/ImageDetail';
-import ItemUtil from './components/ItemUtil';
+import BasicFacilities from './DetailRoom/BasicFacilities';
 import BookRoom from './DetailRoom/BookRoom';
+import RoomInformation from './DetailRoom/RoomInformation';
 
 export default function DetailRoomScreen({route}) {
   const data = route.params;
@@ -37,7 +26,6 @@ export default function DetailRoomScreen({route}) {
           textType="semiBold"
           style={{
             ...styles.textLarge,
-            color: COLORS.black,
             marginTop: scale(20),
           }}>
           {data.name}
@@ -55,25 +43,12 @@ export default function DetailRoomScreen({route}) {
                 alignSelf: 'flex-start',
                 rowGap: scale(10),
               }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  fontSize: SIZES.medium,
-                }}>
+              <CustomText textType="semiBold" size={SIZES.medium}>
                 {data?.room_type?.name}
               </CustomText>
-              <View
-                style={{
-                  backgroundColor: '#06c17520',
-                  paddingVertical: scale(4),
-                  paddingHorizontal: scale(6),
-                  borderRadius: scale(99),
-                }}>
-                <CustomText
-                  style={{
-                    fontSize: SIZES.xMedium,
-                    color: '#00875a',
-                  }}>
+
+              <View style={styles.boxFreeUnRoom}>
+                <CustomText size={SIZES.xMedium} color="#00875a">
                   Miễn phí huỷ phòng
                 </CustomText>
               </View>
@@ -86,37 +61,7 @@ export default function DetailRoomScreen({route}) {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
-              <ItemUtil
-                Icon={IconPeople}
-                value={`${2} khách`}
-                title={'Khách'}
-                styleWrapper={{
-                  width: '45%',
-                }}
-              />
-              <ItemUtil
-                Icon={IconRoom}
-                value={data?.room_bed_type?.name}
-                title={'Loại giường'}
-                styleWrapper={{
-                  width: '45%',
-                }}
-              />
-              <ItemUtil
-                title={'Kích thước phòng'}
-                Icon={IconAcreage}
-                value={formatPrice(data.size_width * data.size_length, {
-                  unit: 'm²',
-                })}
-                styleIcon={{
-                  width: scale(20),
-                  height: scale(20),
-                  color: '#000',
-                }}
-                styleWrapper={{
-                  width: '45%',
-                }}
-              />
+              <RoomInformation data={data} />
             </Box>
             {/* t('little_convenient') */}
             <Box
@@ -125,35 +70,9 @@ export default function DetailRoomScreen({route}) {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              <ItemUtil
-                Icon={IconWifi}
-                value={'Free wifi'}
-                styleIcon={styles.iconFac}
-                valueBold
-                vertical
-              />
-              <ItemUtil
-                Icon={IconConditioner}
-                value={'Air conditioner '}
-                styleIcon={styles.iconFac}
-                valueBold
-                vertical
-              />
-              <ItemUtil
-                Icon={IconTV}
-                value={'TV'}
-                styleIcon={styles.iconFac}
-                valueBold
-                vertical
-              />
-              <ItemUtil
-                Icon={IconFridge}
-                value={'Fridge'}
-                styleIcon={styles.iconFac}
-                valueBold
-                vertical
-              />
+              <BasicFacilities data={data} />
             </Box>
+
             <Box title={'Tiên nghi khác'}>
               <View
                 style={{
@@ -230,7 +149,6 @@ const styles = StyleSheet.create({
     borderColor: '#F0B90B40',
     backgroundColor: '#FFFFFF',
     ...SHADOW,
-    // shadowColor: '#F0B90B40',
     width: '100%',
   },
 
@@ -241,11 +159,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(10),
     overflow: 'hidden',
   },
-  iconFac: {
-    width: scale(20),
-    height: scale(20),
-    color: '#000',
-  },
+
   contentFeat: {
     rowGap: scale(6),
     flexDirection: 'row',
@@ -304,17 +218,10 @@ const styles = StyleSheet.create({
     gap: scale(10),
   },
 
-  img: {
-    width: scale(21),
-    height: scale(10),
-  },
-
-  box1: {
-    backgroundColor: '#EEEEEE',
-    height: scale(54),
-    borderRadius: scale(8),
-    justifyContent: 'center',
-    paddingHorizontal: scale(10),
-    width: '90%',
+  boxFreeUnRoom: {
+    backgroundColor: '#06c17520',
+    paddingVertical: scale(4),
+    paddingHorizontal: scale(6),
+    borderRadius: scale(99),
   },
 });

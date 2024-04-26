@@ -19,7 +19,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
     () => numRoom * data?.priceAverage * data?.date?.numNight,
     [numRoom, data?.date?.numNight, data?.priceAverage],
   );
-
+  const feePrice = priceAverage * (11.8165 / 100);
   return (
     <>
       {isOpen && (
@@ -59,26 +59,36 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
             />
             <Row
               title={'Thuế và phí'}
-              value={formatPrice(numRoom * data?.priceAverage)}
+              value={formatPrice(feePrice)}
               textType="regular"
               colorValue={COLORS.text}
             />
           </View>
           <View
             style={{
-              ...styles.row,
               ...styles.point,
             }}>
-            <IconCoinPoint />
-            <CustomText>
-              Đặt chỗ và nhận ngay{' '}
-              <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                {formatPrice(numRoom * 3111, {
-                  showCurrency: false,
-                })}{' '}
-                điểm
+            <Row
+              title={'Tổng giá tiền'}
+              value={formatPrice(priceAverage + feePrice)}
+              colorValue={COLORS.primary}
+              textType="bold"
+            />
+            <View
+              style={{
+                ...styles.row,
+              }}>
+              <IconCoinPoint />
+              <CustomText>
+                Đặt chỗ và nhận ngay{' '}
+                <CustomText textType="medium" style={{color: '#ff5e1f'}}>
+                  {formatPrice(numRoom * 3111, {
+                    showCurrency: false,
+                  })}{' '}
+                  điểm
+                </CustomText>
               </CustomText>
-            </CustomText>
+            </View>
           </View>
         </BottomSheet>
       )}
@@ -112,5 +122,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#ddd',
     paddingVertical: scale(10),
+    rowGap: scale(10),
   },
 });

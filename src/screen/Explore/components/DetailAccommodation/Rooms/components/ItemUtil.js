@@ -11,6 +11,8 @@ export default function ItemUtil({
   backgroundColor,
   styleWrapper,
   styleIcon,
+  styleTextValue,
+  styleTextTitle,
   vertical,
   valueBold,
 }) {
@@ -43,14 +45,16 @@ export default function ItemUtil({
             style={{
               color: color,
               fontSize: SIZES.xMedium,
+              ...styleTextTitle,
             }}>
             {title}
           </CustomText>
         )}
         <CustomText
-          textType={valueBold && 'medium'}
+          textType={valueBold ? valueBold || 'medium' : 'regular'}
           style={{
             color: color,
+            ...styleTextValue,
           }}>
           {value}
         </CustomText>

@@ -1,38 +1,35 @@
+import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {
+  Alert,
   Image,
   StyleSheet,
-  TouchableOpacity,
-  View,
   Text,
   TextInput,
-  Alert,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
-import {useNavigation} from '@react-navigation/native';
-import CustomText from '../../../../../components/CustomText';
 import {
   IconCamera,
   IconCheckBox,
-  IconCheckBoxWhite,
   IconDown,
   IconRight,
   IconUnCheckBox,
-  IconUnCheckBoxWhite,
 } from '../../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../../components';
-import Button from '../../../../Profile/components/Button';
-import ImageCropPicker from 'react-native-image-crop-picker';
-import axios from 'axios';
-import Map from '../../../../Explore/components/DetailAccommodation/Detail/DetailAccommoMap';
+import CustomText from '../../../../../components/CustomText';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 import {
   requireField,
   validateMaxLengthText,
 } from '../../../../../utils/validate';
-import {useForm} from 'react-hook-form';
+import Map from '../../../../Explore/components/DetailAccommodation/Detail/DetailAccommoMap';
+import Button from '../../../../Profile/components/Button';
 import ImageDetail from '../../../../components/ImageDetail';
-import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function TabContent() {
   const {t} = useLanguage();
   const {control, watch, handleSubmit} = useForm();

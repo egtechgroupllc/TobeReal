@@ -1,17 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import CustomText from '../../../components/CustomText';
-import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../../assets/constants';
-import {CustomButton} from '../../../components';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconMarker} from '../../../assets/icon/Icon';
-import {formatPrice} from '../../../utils/format';
+import {CustomButton} from '../../../components';
+import CustomText from '../../../components/CustomText';
+import {formatDateTime, formatPrice} from '../../../utils/format';
 
-export default function BookingItem({data}) {
-  console.log(data);
+export default function BookingItem({data, onPress}) {
+  const objAccom = data?.accommodation;
   return (
-    <View style={styles.box}>
+    <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
       <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
-        {data?.room?.name}
+        {objAccom?.name}
       </CustomText>
 
       <View style={styles.code}>
@@ -30,75 +30,65 @@ export default function BookingItem({data}) {
         </CustomText>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          columnGap: scale(10),
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            columnGap: scale(5),
-            flex: 1,
-          }}>
+      <View style={styles.address}>
+        <View style={styles.address}>
           <IconMarker width={scale(15)} height={scale(15)} />
           <CustomText
             numberOfLines={2}
-            textType="semiBold"
+            textType="medium"
             style={{
               flex: 1,
             }}>
-            {data.location}
+            {objAccom?.country?.name}, {objAccom?.province?.name}
           </CustomText>
         </View>
-        {/* 
-        <View
-          style={{
-            flexDirection: 'row',
-            flex: 1,
-            columnGap: scale(5),
-          }}>
-          <CustomButton
-            styleWrapper={{flex: 1}}
-            text="PAY"
-            style={{height: scale(25)}}
-          />
-          <CustomButton
-            text="CANCEL"
-            styleWrapper={{flex: 1}}
-            outline
-            style={{
-              height: scale(25),
-              borderColor: COLORS.grey,
-            }}
-            styleText={{color: COLORS.black, textType: 'regular'}}
-          />
-        </View> */}
+
+        {data.status !== 'SUCCESS' && (
+          <View style={styles.address}>
+            <CustomButton
+              styleWrapper={{flex: 1}}
+              text="PAY"
+              style={{height: scale(25)}}
+            />
+            <CustomButton
+              text="CANCEL"
+              styleWrapper={{flex: 1}}
+              outline
+              style={{
+                height: scale(25),
+                borderColor: COLORS.grey,
+              }}
+              styleText={{color: COLORS.black, textType: 'regular'}}
+            />
+          </View>
+        )}
       </View>
       <View style={styles.line} />
-      <View
-        style={{
-          backgroundColor: data.status === 'SUCCESS' ? 'green' : 'red',
-          width: '50%',
-          height: scale(20),
-          borderRadius: scale(10),
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <CustomText
-          textType="bold"
+      <View style={styles.address}>
+        <View
           style={{
-            color: COLORS.white,
-            fontSize: SIZES.xSmall,
+            backgroundColor: data.status === 'SUCCESS' ? '#42b00b' : '#e03c31',
+            ...styles.boxStatus,
           }}>
-          {data.status === 'SUCCESS'
-            ? 'Successful transaction'
-            : 'Exceeded specified time limit'}
+          <CustomText size={SIZES.xSmall} textType="bold" color={COLORS.white}>
+            {data.status === 'SUCCESS'
+              ? 'Successful transaction'
+              : 'Exceeded specified time limit'}
+          </CustomText>
+        </View>
+        <CustomText
+          textType="regular"
+          size={SIZES.xSmall}
+          color={COLORS.text}
+          style={{
+            position: 'absolute',
+            right: 0,
+            bottom: scale(-2),
+          }}>
+          {formatDateTime(data?.createdAt)}
         </CustomText>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -111,8 +101,15 @@ const styles = StyleSheet.create({
     borderColor: '#DADADA4D',
     paddingHorizontal: scale(10),
     paddingVertical: scale(10),
-    rowGap: scale(5),
     ...SHADOW,
+    rowGap: scale(10),
+  },
+  address: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(5),
+    flex: 1,
+    justifyContent: 'space-between',
   },
   code: {
     borderWidth: scale(1),
@@ -122,12 +119,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(10),
     paddingVertical: scale(6),
-    marginTop: scale(5),
     columnGap: scale(10),
   },
   line: {
     backgroundColor: COLORS.grey,
     height: scale(1),
     width: '100%',
+  },
+  boxStatus: {
+    minWidth: '50%',
+    height: scale(20),
+    borderRadius: scale(10),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

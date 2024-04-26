@@ -42,10 +42,11 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const clearToken = async () => {
     try {
       setToken(undefined);
-      RNRestart.restart();
       axios.defaults.headers.common['Authorization'] = '';
       await EncryptedStorage.removeItem(TOKEN_KEY);
       queryClient.clear();
+      RNRestart.restart();
+
     } catch (error) {}
   };
 

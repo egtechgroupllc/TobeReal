@@ -2,14 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
-
 import {getListBookingAccomo} from '../../../Model/api/apiAccom';
 import {scale} from '../../../assets/constants';
 import EmptyData from '../../../components/EmptyData';
 import BookingItem from './BookingItem';
 import BookingItemLoading from './BookingItemLoading';
 
-export default function BookingHistory() {
+export default function BookingActive() {
   const {navigate} = useNavigation();
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'room', 'my-booking'],
@@ -40,3 +39,5 @@ export default function BookingHistory() {
     />
   );
 }
+
+const styles = StyleSheet.create({});

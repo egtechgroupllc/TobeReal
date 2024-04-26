@@ -14,12 +14,17 @@ export const formatPrice = (
     return '';
   }
   // Remove non-digit characters from price
-  const numericPrice = parseFloat(price.toString().replace(/[^\d.-]/g, ''));
+  const numericPrice = parseFloat(
+    Number(price)
+      .toFixed(decimalPlaces)
+      .toString()
+      .replace(/[^\d.-]/g, ''),
+  );
 
   let option = {
     style: 'currency',
     currency: currency || locales.startsWith('vi') ? 'VND' : 'USD',
-    maximumSignificantDigits: decimalPlaces,
+    maximumSignificantDigits: 14,
   };
 
   (!showCurrency || unit) && delete option.style;

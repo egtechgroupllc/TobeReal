@@ -1,17 +1,15 @@
-import {useInfiniteQuery} from '@tanstack/react-query';
-import React, {useMemo} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useInfiniteQuery, useQueryClient} from '@tanstack/react-query';
+import LottieView from 'lottie-react-native';
+import React, {useMemo, useRef, useState} from 'react';
+import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
 import {getHistoryDeposit} from '../../../Model/api/auth';
+import {COLORS, animations, scale} from '../../../assets/constants';
 import EmptyData from '../../../components/EmptyData';
 import MainWrapper from '../../../components/MainWrapper';
-import BoxPlaceItemLoading from '../../Explore/components/ContentAccommodation/BoxPlaceItem/BoxPlaceItemLoading';
-import ItemHistoryTrans from './components/HistoryTransaction/ItemHistoryTrans';
-import ListCreateAccomLoading from '../../News/PostNews/Lease/components/HomeLease/ListCreateAccomLoading';
-import ItemHistoryTransLoading from './components/HistoryTransaction/ItemHistoryTransLoading';
-import {animations, scale} from '../../../assets/constants';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
-import {useNavigation} from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
+import ItemHistoryTrans from './components/HistoryTransaction/ItemHistoryTrans';
+import ItemHistoryTransLoading from './components/HistoryTransaction/ItemHistoryTransLoading';
 const listInfo = [
   {
     text: 'Tất cả',
@@ -45,7 +43,14 @@ export default function HistoryTransactionScreen() {
         .flat(),
     [data?.pages],
   );
+  const queryClient = useQueryClient();
 
+  const refresh = useRef(false);
+  function pullToRefresh(value) {
+    refresh.current = true;
+    queryClient.invalidateQueries();
+    refresh.current = false;
+  }
   return (
     <MainWrapper
       noImgColor
@@ -62,6 +67,13 @@ export default function HistoryTransactionScreen() {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={dataArr || (isLoading && [1, 2, 3, 5])}
+        refreshControl={
+          <RefreshControl
+            refreshing={refresh.current}
+            onRefresh={pullToRefresh}
+            tintColor={COLORS.primary}
+          />
+        }
         ListEmptyComponent={() => (
           <EmptyData
             styleWrapper={{

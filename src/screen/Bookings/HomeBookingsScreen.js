@@ -11,6 +11,7 @@ import CustomText from '../../components/CustomText';
 import MainWrapper from '../../components/MainWrapper';
 import {useLanguage} from '../../hooks/useLanguage';
 import BookingHistory from './components/BookingHistory';
+import BookingActive from './components/BookingActive';
 
 const listTab = ['Active Booking', 'Booking History'];
 const dataWaiting = [
@@ -78,132 +79,8 @@ export default function HomeBookingsScreen() {
           }}
           onChange={e => setTabSelect(e)}
         />
-        {tabSelect === listTab[0] ? (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingVertical: scale(10),
-              rowGap: scale(10),
-            }}>
-            {/* <CustomButton
-              buttonType="medium"
-              text={t('add_booking')}
-              style={styles.btnAdd}
-              styleText={{
-                textType: 'semiBold',
-              }}
-              isShadow
-            /> */}
-            {dataWaiting.map(item => (
-              <View style={styles.box}>
-                <CustomText
-                  textType="bold"
-                  numberOfLines={2}
-                  style={{
-                    color: COLORS.black,
-                    fontSize: SIZES.xMedium,
-                  }}>
-                  {item.title}
-                </CustomText>
-                <View style={styles.code}>
-                  <CustomText
-                    textType="regular"
-                    style={{
-                      color: COLORS.black,
-                      fontSize: SIZES.small,
-                    }}>
-                    Booking code: {item.code}
-                  </CustomText>
-                  <CustomText
-                    textType="regular"
-                    style={{
-                      color: COLORS.black,
-                      fontSize: SIZES.xMedium,
-                    }}>
-                    Price: {item.price}$
-                  </CustomText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: scale(10),
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      columnGap: scale(5),
-                      flex: 1,
-                    }}>
-                    <IconMarker width={scale(15)} height={scale(15)} />
-                    <CustomText
-                      numberOfLines={2}
-                      textType="semiBold"
-                      style={{
-                        color: COLORS.black,
-                        fontSize: SIZES.small,
-                        flex: 1,
-                      }}>
-                      {item.location}
-                    </CustomText>
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      flex: 1.3,
-                      columnGap: scale(5),
-                    }}>
-                    <CustomButton
-                      styleWrapper={{flex: 1}}
-                      text="PAY"
-                      style={{height: scale(25)}}
-                    />
-                    <CustomButton
-                      text="CANCEL"
-                      styleWrapper={{flex: 1}}
-                      style={{
-                        height: scale(25),
-                        backgroundColor: COLORS.white,
-                        borderWidth: scale(1),
-                        borderColor: COLORS.grey,
-                      }}
-                      styleText={{color: COLORS.black, textType: 'regular'}}
-                    />
-                  </View>
-                </View>
-                <View style={styles.line} />
-                <View
-                  style={{
-                    backgroundColor: '#0794f3',
-                    width: '50%',
-                    height: scale(20),
-                    borderRadius: scale(10),
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <CustomText
-                    textType="bold"
-                    style={{
-                      color: COLORS.white,
-                      fontSize: SIZES.xSmall,
-                    }}>
-                    Waiting transaction 15:00
-                  </CustomText>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-        ) : (
-          <BookingHistory />
-        )}
+        {tabSelect === listTab[0] ? <BookingActive /> : <BookingHistory />}
       </View>
-
-      {/* <EmptyData
-        desc={t('no_active_booking')}
-        textBtn={t('explore_accommodation')}
-      /> */}
     </MainWrapper>
   );
 }

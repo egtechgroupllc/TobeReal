@@ -1,6 +1,6 @@
 import {useHeaderHeight} from '@react-navigation/elements';
 import {useQueryClient} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -19,14 +19,13 @@ export default function MainWrapper({
   onScroll = () => {},
 }) {
   const headerHeight = useHeaderHeight();
-  const [refresh, setRefresh] = useState(false);
   const queryClient = useQueryClient();
 
-  function pullToRefresh() {
-    console.log(24932789);
-    setRefresh(true);
-    queryClient.invalidateQueries(['user', 'profile']);
-    setRefresh(false);
+  const refresh = useRef(false);
+  function pullToRefresh(value) {
+    refresh.current = true;
+    queryClient.invalidateQueries();
+    refresh.current = false;
   }
   const Component = noImgColor ? View : CustomImage;
 
@@ -46,10 +45,12 @@ export default function MainWrapper({
         <View />
         {scrollEnabled ? (
           <ScrollView
+            overScrollMode="never"
+            nestedScrollEnabled
             refreshControl={
               refreshControl && (
                 <RefreshControl
-                  refreshing={refresh}
+                  refreshing={refresh.current}
                   onRefresh={pullToRefresh}
                   tintColor={COLORS.primary}
                 />
