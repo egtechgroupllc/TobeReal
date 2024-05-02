@@ -24,6 +24,8 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from '../../BoxPlaceItem/BoxPlaceItemLoading';
 import CustomImage from '../../../../../../components/CustomImage';
 import ViewMultiPrice from '../../BoxPlaceItem/ViewMultiPrice';
+import calculateTimeElapsed from '../../../../../../utils/calculateTimeElapsed';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function BoxPlaceItem({
   data,
@@ -56,11 +58,7 @@ export default function BoxPlaceItem({
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailBuyScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
+                  params: data,
                 }),
               );
             }
@@ -68,8 +66,8 @@ export default function BoxPlaceItem({
           style={[
             styles.wrapper,
             {
-              width: scale(410/ seeViewNumber),
-              alignItems:'center'
+              width: scale(410 / seeViewNumber),
+              alignItems: 'center',
               // height: scale(200),
             },
             styleWrapper,
@@ -82,13 +80,7 @@ export default function BoxPlaceItem({
             }}>
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
-            {data ? (
-              <CustomImage source={data?.src} style={styles.img} />
-            ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}></CustomImage>
-            )}
+            <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
               rating={rating}
@@ -97,9 +89,12 @@ export default function BoxPlaceItem({
               isHeart={isHeart}
             />
           </View>
-          <View
+          <LinearGradient
+            colors={['#f5f5f5', '#F5F4F8']}
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
             style={{
-              backgroundColor: COLORS.primary,
+              // backgroundColor: COLORS.primary,
               // flex: 1,
               marginTop: scale(18),
               // rowGap: scale(4),
@@ -110,9 +105,9 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="bold"
-              style={[isStar && {fontSize: SIZES.xSmall, color: COLORS.white}]}
+              style={[isStar && {fontSize: SIZES.xSmall}]}
               numberOfLines={1}>
-              {data?.name}
+              {data?.title}
             </CustomText>
 
             <View style={{marginTop: scale(5)}}>
@@ -126,7 +121,7 @@ export default function BoxPlaceItem({
                       }}>
                       <CustomText
                         textType="regular"
-                        style={{...styles.textDiscount, color: COLORS.white}}>
+                        style={{...styles.textDiscount}}>
                         {formatPrice(data?.discount, {
                           locales: 'vi',
                         })}{' '}
@@ -145,24 +140,26 @@ export default function BoxPlaceItem({
                   )}
 
                   <View style={styles.price}>
-                    <CustomText
-                      textType="bold"
-                      style={[
-                        styles.buildingName,
-                        isStar && {fontSize: SIZES.small, color: '#0057FF'},
-                        isDiscount && {color: COLORS.white},
-                      ]}>
-                      {formatPrice(data?.price, {
-                        locales: 'vi',
-                      })}{' '}
-                      {time && (
-                        <CustomText
-                          textType="regular"
-                          style={{fontSize: SIZES.xSmall, color: COLORS.white}}>
-                          / {rental}
-                        </CustomText>
-                      )}
-                    </CustomText>
+                    <View
+                      style={{
+                        ...styles.topBox,
+                        backgroundColor: '#234F68B0',
+                        minWidth: scale(50),
+                        // marginTop: scale(25),
+                      }}>
+                      <CustomText
+                        textType="bold"
+                        numberOfLines={1}
+                        style={[
+                          styles.topName,
+                          isStar && {fontSize: SIZES.small},
+                          isDiscount && {color: COLORS.white},
+                        ]}>
+                        {formatPrice(data?.price, {
+                          locales: 'vi',
+                        })}{' '}
+                      </CustomText>
+                    </View>
 
                     {isViewMap && (
                       <TouchableOpacity
@@ -188,19 +185,14 @@ export default function BoxPlaceItem({
                     alignItems: 'center',
                     columnGap: scale(5),
                   }}>
-                  <IconMapView
-                    fill={COLORS.white}
-                    width={scale(14)}
-                    height={scale(14)}
-                  />
+                  <IconMapView width={scale(14)} height={scale(14)} />
                   <CustomText
                     textType="bold"
                     style={{
-                      color: COLORS.white,
                       fontSize: SIZES.xSmall,
                       // minWidth: scale(35),
                     }}>
-                    Thuy Nguyen, Hai Phong
+                    {data?.country?.name}, {data?.province?.name}
                   </CustomText>
                 </View>
               </View>
@@ -219,27 +211,26 @@ export default function BoxPlaceItem({
                       textType="bold"
                       numberOfLines={1}
                       style={{
-                        color: COLORS.white,
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Mr
+                      {data?.contact_name}
                     </CustomText>
                     <CustomText
                       textType="bold"
                       numberOfLines={1}
                       style={{
-                        color: '#FFE259',
+                        color: COLORS.grey,
                         fontSize: SIZES.xSmall,
                         minWidth: scale(35),
                       }}>
-                      Posted today
+                      {calculateTimeElapsed(data.date_start)}
                     </CustomText>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
+          </LinearGradient>
         </TouchableOpacity>
       ) : (
         <BoxPlaceItemLoading
@@ -264,6 +255,7 @@ const styles = StyleSheet.create({
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
+    ...SHADOW,
   },
   img: {
     width: '100%',
@@ -290,5 +282,17 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+  },
+  topBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: scale(6),
+    paddingVertical: scale(4),
+    borderRadius: 8,
+    height: scale(20),
+  },
+  topName: {
+    fontSize: SIZES.xSmall,
+    color: COLORS.white,
   },
 });

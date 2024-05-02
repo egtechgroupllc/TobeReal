@@ -1,29 +1,22 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {
-  IconFilter,
-  IconMapView,
-  IconMyLocation,
-  IconSearch,
-  IconSort,
-} from '../../../../../assets/icon/Icon';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {IconSort} from '../../../../../assets/icon/Icon';
 
 import {useNavigation} from '@react-navigation/native';
-import CustomText from '../../../../../components/CustomText';
-import BigCity from '../../ContentAccommodation/BigCity';
-import {CustomButton, CustomInput} from '../../../../../components';
-import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import {useForm} from 'react-hook-form';
-import DropDown from './components/DropDown';
+import {CustomButton} from '../../../../../components';
 import BottomSheet from '../../../../../components/BottomSheet';
+import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import RatingReview from '../../../../Map/Header/RatingReview';
-import BedRoom from '../../../../Map/Header/BedRoom';
 import ContentFilter from './components/ContentFilter';
+
 import Filter from './components/Filter';
 import Quantity from './components/Quantity';
+import TypeEstate from './components/TypeEstate';
+import DropDown from '../../ContentAccommodation/SeeAll/components/DropDown';
 
 const listLegalDoc = [
   {
@@ -95,10 +88,21 @@ const direction = [
   'West - South',
   'South - East',
 ];
-export default function FilterMore() {
+export default function FilterMore({onFilter = () => {}}) {
   const {t} = useLanguage();
+  const {control, setValue, watch, handleSubmit} = useForm();
   const bottomSheetRef = useRef();
-  const {control, watch} = useForm();
+  const [reset, setReset] = useState(false);
+  const {navigate} = useNavigation();
+  const handleReset = () => {
+    setValue('legal_documents', listLegalDoc[0]);
+    setValue('interior', listInterior[0]);
+    setReset(true);
+  };
+  const handelFiter = value => {
+    onFilter && onFilter(value);
+    bottomSheetRef.current.close();
+  };
   return (
     <View style={styles.search}>
       <BottomSheet
@@ -121,6 +125,7 @@ export default function FilterMore() {
               // onPress={() => {
               //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
               // }}
+              onPress={handleReset}
               outline
               buttonType="normal"
               style={{flex: 0.5}}
@@ -133,7 +138,7 @@ export default function FilterMore() {
               // onPress={() => {
               //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
               // }}
-              // onPress={onPress}
+              onPress={handleSubmit(handelFiter)}
               buttonType="normal"
               style={{flex: 0.5}}
               text={t('Apply')}
@@ -149,29 +154,40 @@ export default function FilterMore() {
         }}>
         <DropDown
           label={'Price'}
-          name={'legal_documents'}
-          control={control}
           data={listLegalDoc}
+          status={reset ? 'Select' : listLegalDoc[0]}
           style={{rowGap: scale(10)}}
           styleWrapper={styles.buttonStyle}
           price
-          getKeyValue="name"
+          getKeyValue="value"
           watch={watch}
+          onSelect={selectedItem => {
+            setValue('min_price', selectedItem[0]);
+            setValue('max_price', selectedItem[1]);
+          }}
         />
         <DropDown
           label={'Acreage'}
-          name={'legal_documents'}
-          control={control}
           data={listInterior}
+          status={reset ? 'Select' : listInterior[0]}
           acreage
           styleWrapper={styles.buttonStyle}
-          getKeyValue="name"
+          getKeyValue="value"
           watch={watch}
+          onSelect={selectedItem => {
+            setValue('min_acreage', selectedItem[0]);
+            setValue('max_acreage', selectedItem[1]);
+          }}
         />
         <RatingReview />
-        <BedRoom />
-        <Quantity title={'Quantiy room and guest'} />
-        <ContentFilter data={direction} title={'The direction of the house'} />
+        {/* <BedRoom /> */}
+        <TypeEstate
+          value={watch('type')}
+          onType={value => {
+            setValue('type', value?.id);
+          }}
+        />
+        {/* <Quantity title={'Quantiy room and guest'} setValue={setValue} /> */}
         <ContentFilter data={content} title={'News content is available'} />
       </BottomSheet>
       <View style={{flexDirection: 'row'}}>

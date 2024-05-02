@@ -16,9 +16,9 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
   const {navigate} = useNavigation();
 
   const dataPackagePost = useMemo(
-    () => data.package_post_item.package_post,
+    () => data.package_post_item?.package_post,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data.package_post_item.package_post.level],
+    [data.package_post_item?.package_post?.level],
   );
 
   return (
@@ -72,9 +72,9 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
                 borderRadius: scale(3),
                 padding: scale(3),
                 backgroundColor:
-                  data.status === 'VERIFIED'
+                  data?.status === 'VERIFIED'
                     ? '#42b00b'
-                    : data.status === 'VERIFYING'
+                    : data?.status === 'VERIFYING'
                     ? COLORS.primary
                     : '#e03c31',
               }}>
@@ -84,11 +84,11 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
                   color: COLORS.white,
                   fontSize: SIZES.xSmall,
                 }}>
-                {data.status}
+                {data?.status}
               </CustomText>
             </View>
             {'  '}
-            {data.title}
+            {data?.title}
           </CustomText>
         </View>
       </View>
@@ -97,32 +97,32 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Mã tin</CustomText>
           <CustomText textType="medium" numberOfLines={1}>
-            {data.id}
+            {data?.id}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày đăng</CustomText>
-          <CustomText textType="medium">{data.date_start}</CustomText>
+          <CustomText textType="medium">{data?.date_start}</CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày hết hạn</CustomText>
           <CustomText textType="medium">
-            {formatDate(data.date_start, {
-              addDays: data.package_post_item.number_day,
+            {formatDate(data?.date_start, {
+              addDays: data?.package_post_item?.number_day,
               dateStyle: 'yyyy-MM-dd',
             })}
           </CustomText>
         </View>
       </View>
 
-      {data?.note && data.status === 'NOT_APPROVED' && (
+      {data?.note && data?.status === 'NOT_APPROVED' && (
         <View style={{flexDirection: 'row', columnGap: scale(6)}}>
           <IconError />
           <CustomText
             style={{
               color: COLORS.error,
             }}>
-            {data.note}
+            {data?.note}
           </CustomText>
         </View>
       )}

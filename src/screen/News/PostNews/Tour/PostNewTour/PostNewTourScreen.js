@@ -25,7 +25,7 @@ import {postCreateTour} from '../../../../../Model/api/apiTour';
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import GeneralInformation from '../components/PostNewTour/GeneralInformation';
 import TourSchedule from '../components/PostNewTour/TourSchedule';
-import EstateContact from '../components/PostNewTour/EstateContact';
+import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
@@ -49,7 +49,10 @@ export default function PostNewTourScreen() {
     const formData = new FormData();
 
     Object.keys(object).reduce((item, key) => {
-      if (key !== 'description_img' && key !== 'kyc') {
+      if (
+        !['description_img', 'schedule'].includes(key) &&
+        !key.includes('description_day')
+      ) {
         item.append(key, object[key]);
       }
 
@@ -57,7 +60,7 @@ export default function PostNewTourScreen() {
     }, formData);
 
     const arrImage_description = object?.description_img?.map(image => {
-      formData.append('description_img', image);
+      formData.append('files', image);
 
       return {
         name: image?.name,
@@ -65,18 +68,9 @@ export default function PostNewTourScreen() {
       };
     });
 
-    const arrImage_Kyc = object?.kyc?.map(image => {
-      formData.append('kyc', image);
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+    formData.append('schedule', JSON.stringify(object?.schedule));
 
-    formData.append(
-      'image_description',
-      JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
-    );
+    formData.append('image_description', JSON.stringify(arrImage_description));
 
     return formData;
   };

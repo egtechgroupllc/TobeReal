@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {
   Control,
   Controller,
@@ -31,17 +31,20 @@ type CusSelectDropdownProps = {
   name: string;
 } & SelectDropdownProps;
 
-export default function CustomSelectDropdown({
-  label,
-  getKeyValue,
-  styleTextLabel,
-  styleWrapper,
-  control,
-  rules,
-  name,
-  defaultValue,
-  ...props
-}: CusSelectDropdownProps) {
+export default forwardRef(function CustomSelectDropdown(
+  {
+    label,
+    getKeyValue,
+    styleTextLabel,
+    styleWrapper,
+    control,
+    rules,
+    name,
+    defaultValue,
+    ...props
+  }: CusSelectDropdownProps,
+  ref: any,
+) {
   const form = useForm();
   const {t} = useLanguage();
   return (
@@ -65,6 +68,7 @@ export default function CustomSelectDropdown({
               </CustomText>
             )}
             <SelectDropdown
+              ref={ref && ref}
               defaultButtonText="Select"
               dropdownIconPosition="right"
               renderDropdownIcon={IconDown}
@@ -121,7 +125,7 @@ export default function CustomSelectDropdown({
       }}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   buttonStyle: {

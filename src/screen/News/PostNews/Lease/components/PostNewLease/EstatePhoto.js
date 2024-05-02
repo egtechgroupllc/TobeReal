@@ -23,7 +23,7 @@ export default function EstatePhoto({
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
-  const arrKeywords = useRef(['description_img', 'kyc']).current;
+  const arrKeywords = useRef(['files']).current;
 
   const formatImgEdit = images => {
     const result = images.map((item, index) => {
@@ -125,7 +125,7 @@ export default function EstatePhoto({
               />
             )}
 
-            <ChooseImgPicker
+            {/* <ChooseImgPicker
               title={t(
                 'Add images to prove ownership of your Real Estate assets',
               )}
@@ -152,7 +152,7 @@ export default function EstatePhoto({
                   );
                 }}
               />
-            )}
+            )} */}
 
             {/* <CustomInput
               label={t('Link youtube')}

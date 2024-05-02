@@ -13,8 +13,7 @@ import CustomText from '../../../../../../components/CustomText';
 import {IconAdd} from '../../../../../../assets/icon/Icon';
 import Counter from '../../../../../../components/Counter';
 
-export default function Box({title}) {
-  const [numAdult, setNumAdult] = useState();
+export default function Box({title, onChange}) {
   return (
     <View
       style={{
@@ -30,7 +29,7 @@ export default function Box({title}) {
         {title}
       </CustomText>
       <View style={styles.button}>
-        <Counter onChange={setNumAdult} value={numAdult} />
+        <Counter onChange={onChange} />
       </View>
     </View>
   );

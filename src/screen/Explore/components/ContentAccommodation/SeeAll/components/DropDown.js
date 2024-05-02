@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {memo, useEffect} from 'react';
+import React, {memo, useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../../assets/constants';
 
@@ -15,12 +15,16 @@ export default memo(function DropDown({
   name = '',
   control,
   status,
-  getKeyValue = 'id',
+  getKeyValue = 'value',
   data = [],
   price,
   acreage,
   watch = () => {},
 }) {
+  const [filterPrice, setFilterPrice] = useState(null);
+  const [filterAcreage, setFilterAcreage] = useState(null);
+  const refDrop = useRef();
+
   return (
     <View
       style={{
@@ -28,9 +32,11 @@ export default memo(function DropDown({
         ...styleWrapper,
       }}>
       <CustomSelectDropdown
+        ref={refDrop}
         label={label}
         data={data}
         name={name}
+        rules={[]}
         getKeyValue={getKeyValue}
         control={control}
         buttonStyle={styles.buttonEstateTypes}
@@ -40,24 +46,47 @@ export default memo(function DropDown({
         }}
         onSelect={(selectedItem, i) => {
           onSelect && onSelect(selectedItem);
+
+          setFilterPrice(null);
+          setFilterAcreage(null);
         }}
         renderCustomizedButtonChild={item => {
-          const value = !watch(name) ? {} : item;
+          const value = !control ? item : !watch(name) ? {} : item;
 
           return (
             <CustomText
               style={{
                 fontSize: scale(13),
               }}>
-              {value?.name || 'Select' || status}
+              {filterPrice
+                ? `${filterPrice[0]}$ - ${filterPrice[1]}$`
+                : filterAcreage
+                ? `${filterAcreage[0]}m² - ${filterAcreage[1]}m²`
+                : value?.name || 'Select' || status}
             </CustomText>
           );
         }}
         renderCustomizedRowChild={(item, index) => {
           return (
             <View>
-              {index == 0 && price && <Price />}
-              {index == 0 && acreage && <Acreage />}
+              {index === 0 && price && (
+                <Price
+                  onPress={value => {
+                    setFilterPrice(value);
+                    onSelect(value);
+                    refDrop.current?.closeDropdown();
+                  }}
+                />
+              )}
+              {index === 0 && acreage && (
+                <Acreage
+                  onPress={value => {
+                    setFilterAcreage(value);
+                    onSelect(value);
+                    refDrop.current?.closeDropdown();
+                  }}
+                />
+              )}
               <View>
                 <CustomText
                   style={{

@@ -17,7 +17,7 @@ export default function EstateContact({control, errors, watch}) {
   const [viewContact, setViewContact] = useState(false);
 
   const arrKeywords = useRef([
-    'business_name',
+    'contact_name',
     'business_phone',
     'business_email',
   ]).current;

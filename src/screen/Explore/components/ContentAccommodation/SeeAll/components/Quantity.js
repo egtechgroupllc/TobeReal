@@ -11,8 +11,9 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import Box from './Box';
+import {useForm} from 'react-hook-form';
 
-export default function Quantity({title}) {
+export default function Quantity({title, setValue}) {
   return (
     <View
       style={{
@@ -30,11 +31,14 @@ export default function Quantity({title}) {
       <View
         style={{
           flexDirection: 'row',
-          width: '35%',
+          width: '50%',
         }}>
-        <Box title={'Room'} />
-        <Box title={'Adult'} />
-        <Box title={'Children'} />
+        <Box title={'Room'} onChange={value => setValue('room', value)} />
+        <Box title={'Adult'} onChange={value => setValue('adult', value)} />
+        {/* <Box
+          title={'Children'}
+          onChange={value => setValue('children', value)}
+        /> */}
       </View>
     </View>
   );

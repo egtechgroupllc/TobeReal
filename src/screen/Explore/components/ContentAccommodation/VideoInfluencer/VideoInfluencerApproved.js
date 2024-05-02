@@ -14,10 +14,6 @@ const data = [
     src: video.video1,
   },
   {
-    id: 2,
-    src: video.video2,
-  },
-  {
     id: 3,
     src: video.video3,
   },

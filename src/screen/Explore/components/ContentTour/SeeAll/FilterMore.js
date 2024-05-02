@@ -92,7 +92,7 @@ export default function FilterMore() {
   return (
     <View style={styles.search}>
       <BottomSheet
-        snapPoints={['50%', '80%']}
+        snapPoints={['50%', '60%']}
         titleIndicator={t('Filter more')}
         ref={bottomSheetRef}
         ComponentFooter={
@@ -148,19 +148,9 @@ export default function FilterMore() {
           getKeyValue="name"
           watch={watch}
         />
-        <DropDown
-          label={'Acreage'}
-          name={'legal_documents'}
-          control={control}
-          data={listInterior}
-          acreage
-          styleWrapper={styles.buttonStyle}
-          getKeyValue="name"
-          watch={watch}
-        />
         <RatingReview />
-        <BedRoom />
-        <Quantity title={'Quantiy room and guest'} />
+        {/* <BedRoom />
+        <Quantity title={'Quantiy room and guest'} /> */}
         <ContentFilter data={content} title={'News content is available'} />
       </BottomSheet>
       <View style={{flexDirection: 'row'}}>

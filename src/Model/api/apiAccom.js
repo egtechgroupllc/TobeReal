@@ -27,12 +27,15 @@ export const getListRent = async ({
   country_id,
   number_occupancy = 1,
   name = '',
+  min_price,
+  max_price,
 }) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
-
+  const minprice = min_price ? `min_price=${min_price}` : '';
+  const maxprice = max_price ? `max_price=${max_price}` : '';
   const responsive = await instanceAccom.get(
-    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&accommodation_type_id=${accommodation_type_id}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}`,
+    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&accommodation_type_id=${accommodation_type_id}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}&${minprice}&${maxprice}`,
   );
 
   return responsive.data;

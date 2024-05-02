@@ -23,7 +23,7 @@ export default function ThematicInstagram() {
     <InViewPort onChange={render => render && setIsRender(render)} delay={400}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           onPressSeeAll={() => console.log(1)}
           heading={t('thematic_instagram')}
           subHeading={t('stay_with')}>

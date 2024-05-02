@@ -20,7 +20,6 @@ export default function TopImg({
   level,
 }) {
   const dataPackagePost = data?.package_post_item?.package_post;
-  console.log(dataPackagePost);
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>

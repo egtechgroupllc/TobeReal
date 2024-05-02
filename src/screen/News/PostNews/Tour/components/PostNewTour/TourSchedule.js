@@ -6,7 +6,7 @@ import DatePicker from 'react-native-date-picker';
 import {ScrollView} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
+import {CustomButton, CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
@@ -79,43 +79,48 @@ export default function TourSchedule({
 
   const [selectedDay, setSelectedDay] = useState(0);
   const inputRef = useRef();
-  // console.log('====================================');
-  // console.log(
-  //   `description_${selectedDay}`,
-  //   watch(`description_${selectedDay}`),
-  // );
-  // console.log('====================================');
+
   const handleDayClick = dayNumber => {
     setSelectedDay(dayNumber);
   };
-  // useEffect(() => {
-  //   !watch(`description_${selectedDay}`) && inputRef.current?.clear();
-  // }, [watch(`description_${selectedDay}`)]);
+
   const numDays = caculateDays(timeCheckStart, timeCheckEnd);
-  // console.log('====================================');
-  // console.log(numDays.days || (numDays.hours ? 1 : 0));
-  // console.log('====================================');
 
   useEffect(() => {
-    setSelectedDay(0);
-    [...Array(numDays.days)].map((_, index) => {
-      console.log('====================================');
-      console.log(watch(`description_${index}`));
-      // console.log(`description_${index}`);
-      unregister(`description_${index}`);
-      console.log('====================================');
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numDays.days]);
-
-  useEffect(() => {
-    setValue(
-      'schedule',
-      JSON.stringify([{title: 'Day 1', description: 'Day 1'}]),
-    );
-    setValue('total_hours', 48);
+    setValue('total_hours', numDays.days * 24 + numDays.hours);
     setValue('time_options', JSON.stringify(['23:59']));
   }, []);
+  console.log('====================================');
+  console.log(watch('schedule'));
+  console.log('====================================');
+  const handleConfirm = value => {
+    if (numDays.days > value) {
+      setSelectedDay(value);
+    }
+    const result = watch('schedule')?.filter(
+      item =>
+        item?.description !== watch(`description_day${selectedDay}`) &&
+        item?.title !== `Day ${selectedDay + 1}`,
+    );
+
+    setValue(
+      'schedule',
+      watch('schedule')
+        ? [
+            ...result,
+            {
+              title: `Day ${selectedDay + 1}`,
+              description: watch(`description_day${selectedDay}`),
+            },
+          ]
+        : [
+            {
+              title: `Day ${selectedDay + 1}`,
+              description: watch(`description_day${selectedDay}`),
+            },
+          ],
+    );
+  };
 
   return (
     <View>
@@ -262,34 +267,43 @@ export default function TourSchedule({
               {length: numDays.days || (numDays.hours ? 1 : 0)},
               (_, dayNumber) =>
                 dayNumber === selectedDay && (
-                  <CustomInput
-                    ref={inputRef}
-                    styleTextLabel={styles.label}
-                    label={t('description_content')}
-                    control={control}
-                    name={`description_${selectedDay}`}
-                    maxLength={5000}
-                    multiline
-                    value={watch(`description_${selectedDay}`)}
-                    placeholder={t('enter_a_description')}
-                    rules={[
-                      requireField(t('this_field_required')),
-                      validateMaxLengthText(`${5000} characters limit`, 5000),
-                    ]}
-                    style={[
-                      styles.textDesc,
-                      {
-                        minHeight: scale(130),
-                        maxHeight: scale(300),
-                      },
-                    ]}
-                    componentRight={
-                      <Text style={styles.numText}>
-                        {watch(`description_${selectedDay}`)?.length || 0}/
-                        {5000}
-                      </Text>
-                    }
-                  />
+                  <>
+                    <CustomInput
+                      ref={inputRef}
+                      styleTextLabel={styles.label}
+                      label={t('description_content')}
+                      control={control}
+                      name={`description_day${selectedDay}`}
+                      maxLength={5000}
+                      multiline
+                      value={watch(`description_day${selectedDay}`)}
+                      placeholder={t('enter_a_description')}
+                      rules={[
+                        requireField(t('this_field_required')),
+                        validateMaxLengthText(`${5000} characters limit`, 5000),
+                      ]}
+                      style={[
+                        styles.textDesc,
+                        {
+                          minHeight: scale(130),
+                          maxHeight: scale(300),
+                        },
+                      ]}
+                      componentRight={
+                        <Text style={styles.numText}>
+                          {watch(`description_${selectedDay}`)?.length || 0}/
+                          {5000}
+                        </Text>
+                      }
+                    />
+
+                    <CustomButton
+                      styleWrapper={{width: '20%', alignSelf: 'flex-end'}}
+                      buttonType="small"
+                      text="Ok"
+                      onPress={() => handleConfirm(dayNumber + 1)}
+                    />
+                  </>
                 ),
             )}
           </Collapsible>

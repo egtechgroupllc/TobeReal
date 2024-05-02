@@ -74,9 +74,6 @@ export default function FindBest() {
                 rating={5}
                 data={item}
                 rental="night"
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
               />
             )}
           />

@@ -15,11 +15,13 @@ import CategoriesButton from './CategoriesButton';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {IconAdd} from '../../../assets/icon/Icon';
 import BoxItemProfile from './BoxItemProfile';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 export default function Content() {
   const {t} = useLanguage();
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
+  const {token} = useAuthentication();
   const toggleCheckBox = () => {
     // setCheck(prevCheck => !prevCheck);
   };
@@ -36,9 +38,13 @@ export default function Content() {
     navigation.navigate('InformationScreen');
   };
   const financial = () => {
-    navigation.navigate('NoBottomTab', {
-      screen: 'FinancialScreen',
-    });
+    !token
+      ? navigation.navigate('NavigationAuth', {
+          screen: 'RegisterScreen',
+        })
+      : navigation.navigate('NoBottomTab', {
+          screen: 'FinancialScreen',
+        });
   };
   const wishlist = () => {
     navigation.navigate('HomeWishListScreen');
@@ -137,16 +143,16 @@ export default function Content() {
         </View>
       </View>
       <View style={{alignItems: 'center', width: '90%'}}>
-        <CategoriesButton
+        {/* <CategoriesButton
           title={t('view_personal')}
           onPress={viewPersonal}
           viewpersonal={viewpersonal}
           changePW={changePW}
           large={true}
           personalInformation={personalInformation}
-        />
+        /> */}
 
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -163,7 +169,7 @@ export default function Content() {
             small={true}
             style={{marginLeft: scale(15)}}
           />
-        </View>
+        </View> */}
 
         <CategoriesButton
           title={t('financial_management')}
@@ -181,7 +187,7 @@ export default function Content() {
           onPress={selectLanguage}
           large={true}
         />
-        <CategoriesButton
+        {/* <CategoriesButton
           title={t('become_shome_partner')}
           onPress={AccountType}
           large={true}
@@ -218,7 +224,7 @@ export default function Content() {
           title={t('install_faceid')}
           onPress={FaceId}
           large={true}
-        />
+        /> */}
       </View>
     </View>
   );

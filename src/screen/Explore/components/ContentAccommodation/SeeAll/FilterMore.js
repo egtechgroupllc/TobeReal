@@ -10,7 +10,7 @@ import {
 } from '../../../../../assets/icon/Icon';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import CustomText from '../../../../../components/CustomText';
 import BigCity from '../../ContentAccommodation/BigCity';
 import {CustomButton, CustomInput} from '../../../../../components';
@@ -24,57 +24,75 @@ import BedRoom from '../../../../Map/Header/BedRoom';
 import ContentFilter from './components/ContentFilter';
 import Filter from './components/Filter';
 import Quantity from './components/Quantity';
+import TypeAccommoda from '../../../../Map/Header/TypeAccommoda';
 
 const listLegalDoc = [
   {
     id: 1,
     name: 'All prices',
+    value: [],
   },
   {
     id: 2,
     name: 'Under 500 million',
+    value: [0, 500],
   },
   {
     id: 3,
     name: '500 - 800 million',
+    value: [500, 800],
   },
   {
     id: 4,
     name: '800 million - 1 billion',
+    value: [800, 1000],
   },
   {
     id: 5,
     name: '1 - 2 billion',
+    value: [1000, 2000],
   },
   {
     id: 6,
     name: '2 - 3 billion',
+    value: [2000, 3000],
   },
   {
     id: 7,
     name: '3 - 5 billion',
+    value: [3000, 5000],
   },
   {
     id: 8,
     name: '5 - 7 billion',
+    value: [5000, 7000],
   },
 ];
 const listInterior = [
   {
     id: 1,
     name: 'All area',
+    value: [],
   },
   {
     id: 2,
     name: 'Under 30 m²',
+    value: [0, 30],
   },
   {
     id: 3,
     name: '30 - 50 m²',
+    value: [30, 50],
   },
   {
     id: 4,
+    name: '50 - 80 m²',
+    value: [30, 50],
+  },
+  {
+    id: 5,
     name: '80 - 100 m²',
+    value: [80, 100],
   },
 ];
 
@@ -85,17 +103,21 @@ const content = [
   'Video Tiktok',
   'Video Youtube',
 ];
-export default function FilterMore() {
+export default function FilterMore({onFilter = () => {}}) {
   const {t} = useLanguage();
-  const {control, watch, setValue} = useForm();
+  const {control, setValue, watch, handleSubmit} = useForm();
   const bottomSheetRef = useRef();
   const [reset, setReset] = useState(false);
+  const {navigate} = useNavigation();
   const handleReset = () => {
     setValue('legal_documents', listLegalDoc[0]);
     setValue('interior', listInterior[0]);
     setReset(true);
   };
-
+  const handelFiter = value => {
+    onFilter && onFilter(value);
+    bottomSheetRef.current.close();
+  };
   return (
     <View style={styles.search}>
       <BottomSheet
@@ -131,7 +153,7 @@ export default function FilterMore() {
               // onPress={() => {
               //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
               // }}
-              // onPress={onPress}
+              onPress={handleSubmit(handelFiter)}
               buttonType="normal"
               style={{flex: 0.5}}
               text={t('Apply')}
@@ -147,30 +169,40 @@ export default function FilterMore() {
         }}>
         <DropDown
           label={'Price'}
-          name={'legal_documents'}
-          control={control}
           data={listLegalDoc}
           status={reset ? 'Select' : listLegalDoc[0]}
           style={{rowGap: scale(10)}}
           styleWrapper={styles.buttonStyle}
           price
-          getKeyValue="name"
+          getKeyValue="value"
           watch={watch}
+          onSelect={selectedItem => {
+            setValue('min_price', selectedItem[0]);
+            setValue('max_price', selectedItem[1]);
+          }}
         />
         <DropDown
           label={'Acreage'}
-          name={'interior'}
-          control={control}
           data={listInterior}
           status={reset ? 'Select' : listInterior[0]}
           acreage
           styleWrapper={styles.buttonStyle}
-          getKeyValue="name"
+          getKeyValue="value"
           watch={watch}
+          onSelect={selectedItem => {
+            setValue('min_acreage', selectedItem[0]);
+            setValue('max_acreage', selectedItem[1]);
+          }}
         />
         <RatingReview />
-        <BedRoom />
-        <Quantity title={'Quantiy room and guest'} />
+        {/* <BedRoom /> */}
+        <TypeAccommoda
+          value={watch('type')}
+          onType={value => {
+            setValue('type', value?.id);
+          }}
+        />
+        <Quantity title={'Quantiy room and guest'} setValue={setValue} />
         <ContentFilter data={content} title={'News content is available'} />
       </BottomSheet>
       <View style={{flexDirection: 'row'}}>

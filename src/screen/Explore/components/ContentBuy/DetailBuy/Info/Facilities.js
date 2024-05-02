@@ -45,7 +45,7 @@ export default function Facilities({data}) {
           <CustomText textType="regular" style={styles.text}>
             {t('acreage')}:{' '}
             <CustomText textType="semiBold" style={styles.name}>
-              {formatPrice(data.size_width * data.size_length, {
+              {formatPrice(data?.size_width * data?.size_length, {
                 unit: 'm²',
               })}
             </CustomText>
@@ -88,7 +88,7 @@ export default function Facilities({data}) {
 
           <InfoItem
             Icon={IconAcreage}
-            value={`${data.size_width}m x ${data.size_length}m`}
+            value={`${data?.size_width}m x ${data?.size_length}m`}
             styleIcon={{
               width: scale(20),
               height: scale(20),

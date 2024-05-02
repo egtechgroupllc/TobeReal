@@ -17,7 +17,7 @@ export default function TypeAccommoda({onType, value}) {
   });
   return (
     <WrapperContent
-      heading={t('number_of_bedrooms')}
+      heading={t('Type')}
       styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,

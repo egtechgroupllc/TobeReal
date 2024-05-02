@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 
@@ -9,7 +9,9 @@ import SearchRecent from './SearchRecent';
 import MainWrapper from '../../../../../components/MainWrapper';
 import FilterMore from './FilterMore';
 import BoxPlaceItem from './components/BoxPlaceItem';
-
+import {useQuery} from '@tanstack/react-query';
+import {getListTour} from '../../../../../Model/api/apiTour';
+import EmptyData from '../../../../../components/EmptyData';
 
 const dataPackage = [
   {
@@ -17,66 +19,42 @@ const dataPackage = [
     src: images.tourthailand,
     name: 'Thailand tour package ( Bangkok, Pattaya) - 5N4Đ',
     price: 6690000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 2,
     src: images.tourbali,
     name: 'Thailand tour Bali( kintamani, Pattaya) ....',
     price: 10880000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 3,
     src: images.toursingapore,
     name: 'Tour Singapore (Gardens by the Bay, Sentosa, Jurassic Mile)',
     price: 9900000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 4,
     src: images.tourthailand,
     name: 'Thailand tour package ( Bangkok, Pattaya) - 5N4Đ',
     price: 6690000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 5,
     src: images.tourbali,
     name: 'Thailand tour Bali( kintamani, Pattaya) ....',
     price: 10880000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
   {
     id: 6,
     src: images.toursingapore,
     name: 'Tour Singapore (Gardens by the Bay, Sentosa, Jurassic Mile)',
     price: 9900000,
-    imgdetail: [
-      images.tourthailand,
-      images.tourbali,
-      images.toursingapore,
-    ],
+    imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
 
@@ -84,6 +62,17 @@ export default function SeeAllRentScreen({route}) {
   const {title} = route.params;
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
+  const [filter, setFilter] = useState();
+  const {data, isLoading, isError, error} = useQuery({
+    queryKey: [
+      'tour',
+      'list-tour',
+      {
+        country_id: 241,
+      },
+    ],
+    queryFn: () => getListTour({country_id: 241}),
+  });
   const Press = () => {
     navigate(t('explore'), {
       screen: 'HomeExploreScreen',
@@ -107,7 +96,7 @@ export default function SeeAllRentScreen({route}) {
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
         {/* <SearchRecent onPress={handleSelectSearch} /> */}
-        <FilterMore/>
+        <FilterMore onFilter={value => setFilter(value)} />
       </View>
       <View
         style={{
@@ -124,19 +113,12 @@ export default function SeeAllRentScreen({route}) {
         columnWrapperStyle={{
           columnGap: scale(10),
         }}
+        ListEmptyComponent={() => <EmptyData />}
         showsVerticalScrollIndicator={false}
-        data={dataPackage}
+        data={data?.data?.rows}
         contentContainerStyle={styles.content1}
         renderItem={({item}) => (
-          <BoxPlaceItem
-            isHeart
-            isStar
-            data={item}
-            rental="night"
-            jsonImage={item?.imgdetail}
-            name={item?.name}
-            price={item?.price}
-          />
+          <BoxPlaceItem isHeart isStar data={item} rental="night" />
         )}
       />
     </MainWrapper>
@@ -151,10 +133,10 @@ const styles = StyleSheet.create({
     zIndex: 99,
   },
   content1: {
-    alignItems: 'center',
     rowGap: scale(14),
     marginTop: scale(10),
     columnGap: scale(14),
+    paddingHorizontal: scale(30),
     paddingVertical: scale(6),
     paddingBottom: scale(100),
   },

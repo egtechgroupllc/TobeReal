@@ -12,7 +12,7 @@ import ListTourSearchContent from './ListTourSearchContent';
 export default function ListAccommodationSearchScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
-  const [filter, setFirst] = useState();
+  const [filter, setFilter] = useState();
   return (
     <MainWrapper
       scrollEnabled={false}
@@ -22,7 +22,7 @@ export default function ListAccommodationSearchScreen() {
           flex: 1,
           width: '100%',
         }}>
-        <MapHeader onFilter={value => setFirst(value)} />
+        <MapHeader onFilter={value => setFilter(value)} />
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />
         ) : params?.menu === 'RENT' ? (
