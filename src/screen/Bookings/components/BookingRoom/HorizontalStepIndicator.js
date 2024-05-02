@@ -5,7 +5,6 @@ import {StyleSheet, View} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
-import Confirm from './Confirm';
 import ContentStep1 from './ContentStep1';
 import ContentStep2 from './ContentStep2';
 
@@ -50,14 +49,12 @@ export default function HorizontalStepIndicator({data}) {
       case 1: {
         return (
           <ContentStep2
-            onPress={() => setCurrentPage(pageNum + 1)}
+            // onPress={() => setCurrentPage(pageNum + 1)}
             data={data}
           />
         );
       }
-      case 2: {
-        return <Confirm onPress={() => {}} />;
-      }
+
       default: {
         break;
       }

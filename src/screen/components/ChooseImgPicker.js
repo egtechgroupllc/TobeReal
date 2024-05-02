@@ -127,20 +127,23 @@ export default memo(function ChooseImgPicker({
               </View>
 
               <View
-                style={{
-                  // width: '99.6%',
-                  // rowGap: scale(8),
-                  ...styleContent,
-                }}>
+                style={[
+                  styleContent,
+                  {
+                    minHeight: scale(170),
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  },
+                  (valueImg.length <= 0 || error) && styles.border,
+                  error && {borderColor: '#f6465d'},
+                ]}>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => pickImage(onChange, valueImg)}
                   style={[
                     styles.contentImg,
-                    (valueImg.length <= 0 || error) && styles.border,
                     valueImg.length <= 0 && {alignItems: 'center'},
                     styleContentImg,
-                    error && {borderColor: '#f6465d'},
                   ]}
                   disabled={valueImg.length > 0}>
                   {valueImg.length > 0 && isAddMore && (
@@ -184,7 +187,6 @@ export default memo(function ChooseImgPicker({
                   ) : (
                     <View
                       style={{
-                        marginTop: '30%',
                         alignItems: 'center',
                       }}>
                       <IconCamera
@@ -199,21 +201,19 @@ export default memo(function ChooseImgPicker({
                     </View>
                   )}
                 </TouchableOpacity>
-
-                {error && (
-                  <View style={styles.errorBox}>
-                    <IconError fill="#f0334b" />
-                    <CustomText
-                      style={{
-                        color: '#f0334b',
-                        flex: 1,
-                      }}>
-                      {error.message}
-                    </CustomText>
-                  </View>
-                )}
               </View>
-
+              {error && (
+                <View style={styles.errorBox}>
+                  <IconError fill="#f0334b" />
+                  <CustomText
+                    style={{
+                      color: '#f0334b',
+                      flex: 1,
+                    }}>
+                    {error.message}
+                  </CustomText>
+                </View>
+              )}
               {(viewImg || viewImg === 0) && (
                 <ImageView
                   images={valueImg}
@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
     borderWidth: scale(1),
     borderStyle: 'dashed',
     borderColor: '#E3E3E3',
+    borderRadius: scale(8),
   },
   contentImg: {
     borderRadius: scale(8),
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
   errorBox: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    columnGap: scale(6),
+    columnGap: scale(5),
   },
 
   footer: {

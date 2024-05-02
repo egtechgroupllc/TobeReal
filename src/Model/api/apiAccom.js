@@ -119,9 +119,13 @@ export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
 // ==> API REVIEW  <==
 
 export const postReviewAccmo = async data => {
-  const responsive = await instanceAccom.post('room/post-review', data, {
-    headers: {'Content-Type': 'multipart/form-data'},
-  });
+  const responsive = await instanceAccom.post(
+    'room/booking/post-review',
+    data,
+    {
+      headers: {'Content-Type': 'multipart/form-data'},
+    },
+  );
 
   return responsive.data;
 };

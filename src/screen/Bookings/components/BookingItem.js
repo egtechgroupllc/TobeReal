@@ -6,8 +6,9 @@ import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {formatDateTime, formatPrice} from '../../../utils/format';
 
-export default function BookingItem({data, onPress}) {
+export default function BookingItem({data, onPress, onReView}) {
   const objAccom = data?.accommodation;
+
   return (
     <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
       <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
@@ -43,7 +44,7 @@ export default function BookingItem({data, onPress}) {
           </CustomText>
         </View>
 
-        {data.status !== 'SUCCESS' && (
+        {data.status !== 'SUCCESS' ? (
           <View style={styles.address}>
             <CustomButton
               styleWrapper={{flex: 1}}
@@ -61,6 +62,13 @@ export default function BookingItem({data, onPress}) {
               styleText={{color: COLORS.black, textType: 'regular'}}
             />
           </View>
+        ) : (
+          <CustomButton
+            styleWrapper={{flex: 0.4}}
+            text="Review"
+            style={{height: scale(25)}}
+            onPress={onReView}
+          />
         )}
       </View>
       <View style={styles.line} />

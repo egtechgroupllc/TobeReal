@@ -16,14 +16,9 @@ import ButtonTabValidate from '../ButtonTabValidate';
 import EstateSetMap from './GeneralInformation/EstateSetMap';
 import {useQuery} from '@tanstack/react-query';
 import {getListTypeRent} from '../../../../../../Model/api/common';
+import InputLeaseMulti from './GeneralInformation/InputLeaseMulti';
 
-export default function GeneralInformation({
-  maxCharacters,
-  control,
-  setValue,
-  watch,
-  errors,
-}) {
+export default function GeneralInformation({control, setValue, watch, errors}) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
@@ -72,55 +67,25 @@ export default function GeneralInformation({
             />
             <View style={styles.line} />
 
-            <CustomInput
-              styleTextLabel={styles.label}
+            <InputLeaseMulti
               label={t('real_estate_title')}
-              control={control}
               name="name"
-              multiline
+              control={control}
               maxLength={100}
               placeholder={t('enter_real_estate_title')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${100} characters limit`, 100),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  height: scale(60),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('name')?.length || 0}/{100}
-                </Text>
-              }
             />
 
-            <CustomInput
-              styleTextLabel={styles.label}
+            <InputLeaseMulti
               label={t('description_content')}
-              control={control}
               name="description"
+              control={control}
               maxLength={5000}
-              multiline
               placeholder={t('enter_a_description')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${5000} characters limit`, 5000),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  minHeight: scale(120),
-                  maxHeight: scale(500),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('description')?.length || 0}/{5000}
-                </Text>
-              }
+              styleInput={{
+                minHeight: scale(120),
+                maxHeight: scale(500),
+                height: 'auto',
+              }}
             />
 
             <View style={styles.line} />

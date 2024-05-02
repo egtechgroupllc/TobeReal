@@ -1,4 +1,8 @@
-import {BookingRoomScreen, PostReviewScreen} from '../screen/Bookings';
+import {
+  BookingRoomScreen,
+  ListPaymentMethodsScreen,
+  PostReviewScreen,
+} from '../screen/Bookings';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
@@ -174,5 +178,9 @@ export default routerNoBottomTab = [
   {
     name: 'PostReviewScreen',
     component: PostReviewScreen,
+  },
+  {
+    name: 'ListPaymentMethodsScreen',
+    component: ListPaymentMethodsScreen,
   },
 ];

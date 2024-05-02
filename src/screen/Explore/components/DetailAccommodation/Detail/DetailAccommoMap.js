@@ -80,6 +80,7 @@ export default function DetailAccommoMap({
             provider={PROVIDER_GOOGLE}
             style={{
               flex: 1,
+              borderRadius: scale(10),
             }}
             region={{
               ...coordinate,

@@ -1,12 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import Star from '../../../components/Star';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 import {COLORS, scale} from '../../../assets/constants';
-import CustomText from '../../../components/CustomText';
 import {CustomInput} from '../../../components';
+import CustomText from '../../../components/CustomText';
+import Star from '../../../components/Star';
 import ChooseImgPicker from '../../components/ChooseImgPicker';
 
 export default function ContentReview({control, setValue}) {
+  const [lengthContent, setLengthContent] = useState(0);
   return (
     <View style={{width: '100%', alignItems: 'center'}}>
       <Star
@@ -26,6 +27,7 @@ export default function ContentReview({control, setValue}) {
         name="content"
         placeholder="Bạn thích hoặc không thích điều gì về chỗ ở này?"
         multiline
+        maxLength={300}
         label={'Viết 1 đánh giá'}
         styleTextLabel={{
           textType: 'bold',
@@ -34,16 +36,19 @@ export default function ContentReview({control, setValue}) {
           minHeight: scale(120),
           maxHeight: scale(200),
         }}
+        onChange={value => {
+          const {text} = value.nativeEvent;
+          setLengthContent(text?.length);
+        }}
         componentRight={
           <CustomText
-            textType="semiBold"
             color={COLORS.textSub}
             style={{
               position: 'absolute',
               top: scale(-20),
               right: 0,
             }}>
-            0/300
+            {lengthContent}/300
           </CustomText>
         }
       />

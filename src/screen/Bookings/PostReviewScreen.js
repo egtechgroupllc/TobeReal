@@ -8,7 +8,9 @@ import {scale} from '../../assets/constants';
 import BottomReview from './Review/BottomReview';
 import {useForm} from 'react-hook-form';
 
-export default function PostReviewScreen() {
+export default function PostReviewScreen({route}) {
+  const paramData = route.params;
+  console.log(paramData?.room_id);
   const {control, watch, setValue, handleSubmit} = useForm();
   return (
     <>
@@ -16,7 +18,7 @@ export default function PostReviewScreen() {
         <TopReview />
         <ContentReview control={control} setValue={setValue} />
       </MainWrapper>
-      <BottomReview handleSubmit={handleSubmit} />
+      <BottomReview handleSubmit={handleSubmit} roomID={paramData?.id} />
     </>
   );
 }

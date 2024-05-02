@@ -27,7 +27,6 @@ import EstatePhoto from '../components/PostNewLease/EstatePhoto';
 import GeneralInformation from '../components/PostNewLease/GeneralInformation';
 import MainWrapper from '../../../../../components/MainWrapper';
 
-const maxCharacters = 1000;
 export default function PostNewLeaseScreen() {
   const {t} = useLanguage();
 
@@ -39,8 +38,9 @@ export default function PostNewLeaseScreen() {
     reset,
     formState: {errors},
   } = useForm();
-
+  const {navigate} = useNavigation();
   const queryClient = useQueryClient();
+
   const createAccommodationMu = useMutation({
     mutationFn: postCreateAccommoLease,
   });
@@ -81,10 +81,12 @@ export default function PostNewLeaseScreen() {
     return formData;
   };
   const checkIsValid = () => {
-    // if (`${errors}` !== '{}') {
-    //   showMess('Vui lòng nhập chính xác thông tin', 'error');
-    //   // return;
-    // }
+    navigate('AddRoomTypeScreen');
+
+    if (`${errors}` !== '{}') {
+      showMess('Vui lòng nhập chính xác thông tin', 'error');
+      // return;
+    }
 
     handleSubmit(handlePostLease)();
   };
@@ -95,7 +97,6 @@ export default function PostNewLeaseScreen() {
       showMess('You have not selected a facility yet', 'error');
       return;
     }
-    console.log(value);
     const formData = getFormData(value);
 
     createAccommodationMu.mutate(formData, {
@@ -105,6 +106,7 @@ export default function PostNewLeaseScreen() {
         if (dataInside?.status) {
           reset();
           queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
+          navigate('AddRoomTypeScreen');
         }
       },
       onError: err => {
@@ -129,7 +131,6 @@ export default function PostNewLeaseScreen() {
 
       <View>
         <GeneralInformation
-          maxCharacters={maxCharacters}
           control={control}
           setValue={setValue}
           watch={watch}
@@ -169,7 +170,7 @@ export default function PostNewLeaseScreen() {
           /> */}
       </View>
 
-      <CheckBox
+      {/* <CheckBox
         name="check"
         control={control}
         rules={requireField(t('this_field_required'))}
@@ -182,7 +183,7 @@ export default function PostNewLeaseScreen() {
         styleWrapper={{
           alignItems: 'center',
         }}
-      />
+      /> */}
 
       <CustomButton
         linearGradientProps

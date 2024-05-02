@@ -1,16 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SHADOW, scale} from '../../../assets/constants';
-import CustomText from '../../../components/CustomText';
-import CheckBox from '../../../components/CheckBox';
-import {CustomButton} from '../../../components';
-import {useMutation} from '@tanstack/react-query';
 import {postReviewAccmo} from '../../../Model/api/apiAccom';
+import {SHADOW, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
+import {CustomButton} from '../../../components';
 
-export default function BottomReview({handleSubmit}) {
+export default function BottomReview({handleSubmit, roomID}) {
   const insets = useSafeAreaInsets();
+  const {goBack} = useNavigation();
+  const queryClient = useQueryClient();
 
   const postReviewAccmoMu = useMutation({
     mutationFn: postReviewAccmo,
@@ -31,6 +32,8 @@ export default function BottomReview({handleSubmit}) {
       formData.append('files', image);
     });
 
+    formData.append('room_booking_id', roomID);
+
     return formData;
   };
 
@@ -42,7 +45,15 @@ export default function BottomReview({handleSubmit}) {
 
     postReviewAccmoMu.mutate(formData, {
       onSuccess: dataInside => {
-        console.log({dataInside});
+        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        if (dataInside?.status) {
+          queryClient.invalidateQueries([
+            'accommodation',
+            'room',
+            'my-booking',
+          ]);
+          goBack();
+        }
       },
       onError: err => {
         console.log({err});
