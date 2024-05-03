@@ -12,6 +12,8 @@ import RatingReview from './Header/RatingReview';
 import SortBy from './Header/SortBy';
 import TypeAccommoda from './Header/TypeAccommoda';
 import {useForm} from 'react-hook-form';
+import TypeEstate from './Header/TypeEstate';
+import Menubar from './Header/Menubar';
 const listFill = [
   {
     text: 'On Promotion',
@@ -26,7 +28,7 @@ const listFill = [
     text: 'Unfurnished',
   },
 ];
-export default function MapHeader({onFilter = () => {}}) {
+export default function MapHeader({onFilter = () => {}, accom, estate, menu}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
   const {control, handleSubmit, watch, setValue} = useForm();
@@ -93,13 +95,40 @@ export default function MapHeader({onFilter = () => {}}) {
           }
           styleContent={{
             paddingHorizontal: scale(16),
-            rowGap: scale(15),
+            rowGap: scale(5),
           }}>
           <CustomInput
             placeholder={t('accommodation_name')}
             name="name"
             control={control}
           />
+          {menu && (
+            <>
+              <Menubar
+                value={watch('menu')?.id}
+                onType={value => {
+                  setValue('menu', value);
+                }}
+              />
+              {watch('menu')?.name === 'RENT' || !watch('menu') ? (
+                <TypeAccommoda
+                  value={watch('type')}
+                  onType={value => {
+                    setValue('type', value?.id);
+                  }}
+                />
+              ) : watch('menu')?.name === 'BUY' ? (
+                <TypeEstate
+                  value={watch('type')}
+                  onType={value => {
+                    setValue('type', value?.id);
+                  }}
+                />
+              ) : (
+                <View></View>
+              )}
+            </>
+          )}
 
           {/* <RatingReview /> */}
           <SortBy
@@ -114,12 +143,22 @@ export default function MapHeader({onFilter = () => {}}) {
               setValue('budget', value);
             }}
           />
-          <TypeAccommoda
-            value={watch('type')}
-            onType={value => {
-              setValue('type', value?.id);
-            }}
-          />
+          {accom && (
+            <TypeAccommoda
+              value={watch('type')}
+              onType={value => {
+                setValue('type', value?.id);
+              }}
+            />
+          )}
+          {estate && (
+            <TypeEstate
+              value={watch('type')}
+              onType={value => {
+                setValue('type', value?.id);
+              }}
+            />
+          )}
           {/* <BedRoom /> */}
         </BottomSheet>
       </View>

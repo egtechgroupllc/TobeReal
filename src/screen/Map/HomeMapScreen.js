@@ -13,8 +13,10 @@ import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
 import {KEY_MAP} from '../../Model/url';
 import {useQuery} from '@tanstack/react-query';
-import {formatDate} from 'date-fns';
 import {getListRent} from '../../Model/api/apiAccom';
+import {getListSell} from '../../Model/api/apiEstate';
+import {getListTour} from '../../Model/api/apiTour';
+import {formatDate} from '../../utils/format';
 
 const initialMapState = {
   markers: [],
@@ -24,46 +26,62 @@ const initialMapState = {
   },
 };
 const CARD_WIDTH = scale(400 / 1.4);
-export default function HomeMapScreen({children, showListLocation, style}) {
+export default function HomeMapScreen({showListLocation, style}) {
+  const [filter, setFilter] = useState();
   const scrollOffsetX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(0);
   const [focusedItem, setFocusedItem] = useState(0);
 
   const mapRef = useRef(null);
+  const objRent = {
+    date_end: formatDate(new Date(), {addDays: 1}),
+    date_start: formatDate(),
+    accommodation_type_id: filter?.type,
+    country_id: 241,
+    name: filter?.name,
+    max_price: filter?.budget ? filter?.budget[1] : '',
+    min_price: filter?.budget ? filter?.budget[0] : '',
+  };
 
+  const objBuy = {
+    estate_type_id: filter?.type,
+    country_id: 241,
+    title: filter?.name,
+    max_price: filter?.budget ? filter?.budget[1] : '',
+    min_price: filter?.budget ? filter?.budget[0] : '',
+  };
+  const objTour = {
+    country_id: 241,
+  };
   const {data, isLoading, isError, error} = useQuery({
-    queryKey: [
-      'accommodation',
-      'list-rent',
-      {
-        accommodation_type_id: 1,
-        country_id: 241,
-        // province_id: 1,
-      },
-    ],
-    queryFn: () =>
-      getListRent({
-        date_end: formatDate(new Date(), {addDays: 1}),
-        date_start: formatDate(),
-        country_id: 241,
-        // province_id: 1,
-      }),
+    queryKey:
+      filter?.menu?.name === 'RENT' || !filter?.menu?.name
+        ? ['accommodation', 'list-rent', objRent]
+        : filter?.menu?.name === 'TOUR'
+        ? ['tour', 'list-tour', objTour]
+        : ['estate', 'list-post', objBuy],
+    queryFn:
+      filter?.menu?.name === 'RENT' || !filter?.menu?.name
+        ? () => getListRent(objRent)
+        : filter?.menu?.name === 'BUY'
+        ? () => getListSell(objBuy)
+        : () => getListTour(objTour),
   });
-
+  console.log(filter, 12321, data);
   const [state, setState] = useState(initialMapState);
 
   useEffect(() => {
     setState({
       ...initialMapState,
-      markers: data?.data?.rows,
+      markers: data?.data?.rows || [],
     });
-  }, [data?.data?.count]);
+  }, [data?.data]);
 
   let mapIndex = 0;
 
   useMemo(() => {
     const handleScroll = ({value}) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / CARD_WIDTH + 0.3);
       if (index >= state.markers.length) {
         index = state.markers.length - 1;
       }
@@ -193,7 +211,6 @@ export default function HomeMapScreen({children, showListLocation, style}) {
             latitude: marker?.latitude,
             longitude: marker?.longitude,
           };
-          console.log(interpolations[index], index);
           return (
             <Marker
               key={index}
@@ -207,7 +224,7 @@ export default function HomeMapScreen({children, showListLocation, style}) {
         })}
         {/* {children} */}
       </MapView>
-      <MapHeader />
+      <MapHeader menu onFilter={value => setFilter(value)} />
       {!showListLocation && (
         <ListLocation
           ref={flatListRef}

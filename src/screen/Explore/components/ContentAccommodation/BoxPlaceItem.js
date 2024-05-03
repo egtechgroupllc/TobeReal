@@ -44,7 +44,11 @@ export default function BoxPlaceItem({
             if (isFocused()) {
               dispatch(
                 StackActions.push('NoBottomTab', {
-                  screen: 'DetailAccommodationScreen',
+                  screen: data?.accommodation_type_id
+                    ? 'DetailAccommodationScreen'
+                    : data?.estate_type_id
+                    ? 'DetailBuyScreen'
+                    : 'DetailTourScreen',
                   params: data,
                 }),
               );
@@ -64,10 +68,12 @@ export default function BoxPlaceItem({
               width: '100%',
               height: styleWrapper?.height ? '60%' : scale(150),
             }}>
-            <Ribbon
-              text={t('promotion') + ' 30%  🏨'}
-              numberRoom={data?.rooms?.length}
-            />
+            {data?.rooms?.length && (
+              <Ribbon
+                text={t('promotion') + ' 30%  🏨'}
+                numberRoom={data?.rooms?.length}
+              />
+            )}
 
             <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
@@ -76,7 +82,7 @@ export default function BoxPlaceItem({
               isStar={isStar}
               textRating={textRating}
               isHeart={isHeart}
-              type={data?.accommodation_type?.name}
+              type={data?.accommodation_type?.name || data?.estate_type?.name}
             />
           </View>
 
@@ -91,7 +97,7 @@ export default function BoxPlaceItem({
               textType="semiBold"
               style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
               numberOfLines={1}>
-              {data?.name}
+              {data?.name || data?.title}
             </CustomText>
 
             {isStar && <Star rating={rating} />}
@@ -135,7 +141,7 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.primary},
                       ]}>
-                      {formatPrice(price, {
+                      {formatPrice(price || data?.price, {
                         locales: 'en',
                       })}{' '}
                       {time && type === 'RENT' && (

@@ -22,7 +22,13 @@ export default function ListAccommodationSearchScreen() {
           flex: 1,
           width: '100%',
         }}>
-        <MapHeader onFilter={value => setFilter(value)} />
+        {params?.menu === 'TOUR' ? (
+          <MapHeader onFilter={value => setFilter(value)} accom />
+        ) : params?.menu === 'RENT' ? (
+          <MapHeader onFilter={value => setFilter(value)} accom />
+        ) : (
+          <MapHeader onFilter={value => setFilter(value)} estate />
+        )}
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />
         ) : params?.menu === 'RENT' ? (

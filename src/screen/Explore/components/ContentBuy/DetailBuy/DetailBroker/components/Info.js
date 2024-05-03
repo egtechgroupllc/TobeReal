@@ -9,7 +9,7 @@ import {
 import CustomText from '../../../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 
-export default function Info() {
+export default function Info({data}) {
   return (
     <View style={{paddingVertical: scale(20), paddingHorizontal: scale(50)}}>
       <View style={styles.boxInfoItem}>
@@ -64,7 +64,7 @@ export default function Info() {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          Phone: 0984839994
+          Phone: {data?.contact_phone}
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>
@@ -82,7 +82,7 @@ export default function Info() {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          Email: hoangminh9876@gmail.com
+          Email: {data?.contact_email}
         </CustomText>
       </View>
     </View>

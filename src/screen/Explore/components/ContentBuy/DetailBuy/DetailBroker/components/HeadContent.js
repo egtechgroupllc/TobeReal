@@ -8,7 +8,7 @@ import {
 import CustomText from '../../../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 
-export default function HeadContent() {
+export default function HeadContent({data}) {
   return (
     <View
       style={{
@@ -44,7 +44,7 @@ export default function HeadContent() {
               fontSize: SIZES.large,
               minWidth: scale(35),
             }}>
-            John
+            {data?.contact_name}
           </CustomText>
           <View
             style={{

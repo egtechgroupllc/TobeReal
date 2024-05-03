@@ -39,7 +39,6 @@ export default memo(
       }),
       [],
     );
-    console.log();
 
     return (
       <View
@@ -81,10 +80,6 @@ export default memo(
               }}
               data={item}
               time={item.id < 6 ? true : false}
-              jsonImage={item.imgdetail}
-              name={item?.name}
-              price={item?.price}
-              type={item?.type}
             />
           )}
         />

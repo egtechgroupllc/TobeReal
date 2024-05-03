@@ -52,7 +52,7 @@ const CustomMarker = ({scaleValue, data}) => {
               color: scaleValue?.color,
               fontFamily: FONTS.semiBold,
             }}>
-            {data?.accommodation_type?.name}
+            {data?.accommodation_type?.name || data?.estate_type?.name}
           </Animated.Text>
         </Animated.View>
         <Animated.View
@@ -74,7 +74,7 @@ const CustomMarker = ({scaleValue, data}) => {
               color: scaleValue?.color,
               fontFamily: FONTS.semiBold,
             }}>
-            {formatPrice(price)}
+            {formatPrice(price || data?.price)}
           </Animated.Text>
         </Animated.View>
       </View>

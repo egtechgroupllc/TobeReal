@@ -6,18 +6,18 @@ import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useQuery} from '@tanstack/react-query';
-import {getListTypeRent} from '../../../Model/api/common';
+import {getListTypeEstateSell} from '../../../Model/api/common';
 
-export default function TypeAccommoda({onType, value}) {
+export default function TypeEstate({onType, value}) {
   const {t} = useLanguage();
   const [checked, setChecked] = useState(value || undefined);
   const {data} = useQuery({
-    queryKey: ['common', 'accommodation', 'list-type'],
-    queryFn: () => getListTypeRent(),
+    queryKey: ['common', 'estate', 'list-type'],
+    queryFn: () => getListTypeEstateSell(),
   });
   return (
     <WrapperContent
-      heading={t('Type accommodation')}
+      heading={t('Type estate')}
       styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,

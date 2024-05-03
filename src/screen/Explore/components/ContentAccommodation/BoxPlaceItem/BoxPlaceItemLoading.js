@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Skeleton from '../../../../../components/Skeleton';
-import {scale} from '../../../../../assets/constants';
+import {SHADOW, scale} from '../../../../../assets/constants';
 
 export default function BoxPlaceItemLoading({
   style,
@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
     height: scale(236),
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    ...SHADOW,
   },
   img: {
     height: '60%',

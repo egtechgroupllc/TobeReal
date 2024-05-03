@@ -1,27 +1,29 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
-import WrapperContent from '../../Explore/components/WrapperContent';
-import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
-import {useQuery} from '@tanstack/react-query';
-import {getListTypeRent} from '../../../Model/api/common';
+import WrapperContent from '../../Explore/components/WrapperContent';
 
-export default function TypeAccommoda({onType, value}) {
+export default function Menubar({onType, value}) {
   const {t} = useLanguage();
   const [checked, setChecked] = useState(value || undefined);
-  const {data} = useQuery({
-    queryKey: ['common', 'accommodation', 'list-type'],
-    queryFn: () => getListTypeRent(),
-  });
+  const data = [
+    {
+      id: 1,
+      name: 'RENT',
+    },
+    {
+      id: 2,
+      name: 'BUY',
+    },
+    {
+      id: 3,
+      name: 'TOUR',
+    },
+  ];
   return (
     <WrapperContent
-      heading={t('Type accommodation')}
-      styleWrapper={{marginBottom: scale(-10)}}
-      styleHeading={{
-        paddingHorizontal: 0,
-      }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
       }}
@@ -33,7 +35,7 @@ export default function TypeAccommoda({onType, value}) {
         flexWrap: 'wrap',
         justifyContent: 'space-between',
       }}>
-      {data?.data?.map((item, index) => (
+      {data?.map((item, index) => (
         // <CheckBox
         //   key={index}
         //   textLeft

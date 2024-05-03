@@ -103,9 +103,15 @@ const content = [
   'Video Tiktok',
   'Video Youtube',
 ];
-export default function FilterMore({onFilter = () => {}}) {
+export default function FilterMore({
+  onFilter = () => {},
+  setValue,
+  watch,
+  control,
+  handleSubmit,
+}) {
   const {t} = useLanguage();
-  const {control, setValue, watch, handleSubmit} = useForm();
+
   const bottomSheetRef = useRef();
   const [reset, setReset] = useState(false);
   const {navigate} = useNavigation();

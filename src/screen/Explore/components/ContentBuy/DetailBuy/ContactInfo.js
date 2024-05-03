@@ -27,6 +27,7 @@ export default function ContactInfo({data}) {
         onPress={() =>
           navigate('NoBottomTab', {
             screen: 'DetailBrokerScreen',
+            params: data,
           })
         }>
         <View style={styles.header}>

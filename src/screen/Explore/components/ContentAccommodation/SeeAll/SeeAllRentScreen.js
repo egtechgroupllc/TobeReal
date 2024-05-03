@@ -1,4 +1,11 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {
+  useDeferredValue,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 
@@ -16,9 +23,24 @@ import {useQuery} from '@tanstack/react-query';
 import BoxPlaceItem from '../BoxPlaceItem';
 import {type} from '../../../../../components/CustomText';
 import EmptyData from '../../../../../components/EmptyData';
+import {useForm} from 'react-hook-form';
+import BoxPlaceItemLoading from '../BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function SeeAllRentScreen({route}) {
   const [filter, setFilter] = useState();
+  const {control, setValue, watch, handleSubmit} = useForm();
+  const timer = useRef(null);
+  useEffect(() => {
+    clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      setValue('nameSearch', watch('name'));
+    }, 400);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch('name')]);
+
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',
@@ -31,6 +53,7 @@ export default function SeeAllRentScreen({route}) {
         number_occupancy: filter?.adult,
         number_room: filter?.room,
         // province_id: 1,
+        name: watch('nameSearch'),
       },
     ],
     queryFn: () =>
@@ -44,6 +67,7 @@ export default function SeeAllRentScreen({route}) {
         number_occupancy: filter?.adult,
         number_room: filter?.room,
         // province_id: 1,
+        name: watch('nameSearch'),
       }),
   });
   const {title} = route.params;
@@ -66,13 +90,18 @@ export default function SeeAllRentScreen({route}) {
       headerTitle: title,
     });
   }, []);
-
   return (
     <MainWrapper>
       <View style={styles.content}>
-        <SearchChooseLocation onPress={handleSelectSearch} />
+        <SearchChooseLocation onPress={handleSelectSearch} control={control} />
         {/* <SearchRecent onPress={handleSelectSearch} /> */}
-        <FilterMore onFilter={value => setFilter(value)} />
+        <FilterMore
+          onFilter={value => setFilter(value)}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          handleSubmit={handleSubmit}
+        />
       </View>
       <View
         style={{
@@ -91,14 +120,28 @@ export default function SeeAllRentScreen({route}) {
         }}
         ListEmptyComponent={() => <EmptyData />}
         showsVerticalScrollIndicator={false}
-        data={data?.data?.rows}
+        data={data?.data?.rows || (isLoading && [...Array(4)])}
         style={{
           columnGap: scale(10),
         }}
         contentContainerStyle={styles.content1}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem isHeart isStar data={item} key={index} rental="night" />
-        )}
+        renderItem={({item, index}) =>
+          item?.id ? (
+            <BoxPlaceItem
+              isHeart
+              isStar
+              data={item}
+              key={index}
+              rental="night"
+            />
+          ) : (
+            <BoxPlaceItemLoading
+              style={{
+                width: '50%',
+              }}
+            />
+          )
+        }
       />
     </MainWrapper>
   );

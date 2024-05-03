@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {
   IconFilter,
@@ -94,18 +94,20 @@ const content = [
   'Video Tiktok',
   'Video Youtube',
 ];
-export default function SearchChooseLocation({onPress}) {
+export default function SearchChooseLocation({onPress, control}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-  const {control, watch} = useForm();
+
   return (
     <View style={styles.search}>
       <View>
         <CustomInput
           autoFocus
           iconLeft={IconSearch}
-          placeholder="Where would you like to go?"
+          placeholder="Find best place to stay"
+          name="name"
+          control={control}
         />
 
         <TouchableOpacity
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.grey,
   },
   buttonStyle: {
-    width:'100%',
-    paddingVertical:scale(5)
+    width: '100%',
+    paddingVertical: scale(5),
   },
 });

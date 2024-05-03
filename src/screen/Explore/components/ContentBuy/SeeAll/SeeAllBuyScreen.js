@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 
@@ -12,12 +12,25 @@ import FilterMore from './FilterMore';
 import {getListSell} from '../../../../../Model/api/apiEstate';
 import {useQuery} from '@tanstack/react-query';
 import EmptyData from '../../../../../components/EmptyData';
+import {useForm} from 'react-hook-form';
 
 export default function SeeAllBuyScreen({route}) {
   const {title} = route.params;
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
+  const {control, setValue, watch, handleSubmit} = useForm();
   const [filter, setFilter] = useState();
+  const timer = useRef(null);
+  useEffect(() => {
+    clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      setValue('nameSearch', watch('name'));
+    }, 400);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch('name')]);
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'estate',
@@ -25,9 +38,15 @@ export default function SeeAllBuyScreen({route}) {
       {
         estate_type_id: filter?.type,
         country_id: 241,
+        title: watch('nameSearch'),
       },
     ],
-    queryFn: () => getListSell({country_id: 241, estate_type_id: filter?.type}),
+    queryFn: () =>
+      getListSell({
+        country_id: 241,
+        estate_type_id: filter?.type,
+        title: watch('nameSearch'),
+      }),
   });
   const Press = () => {
     navigate(t('explore'), {
@@ -50,9 +69,15 @@ export default function SeeAllBuyScreen({route}) {
   return (
     <MainWrapper>
       <View style={styles.content}>
-        <SearchChooseLocation onPress={handleSelectSearch} />
+        <SearchChooseLocation onPress={handleSelectSearch} control={control} />
         {/* <SearchRecent onPress={handleSelectSearch} /> */}
-        <FilterMore onFilter={value => setFilter(value)} />
+        <FilterMore
+          onFilter={value => setFilter(value)}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          handleSubmit={handleSubmit}
+        />
       </View>
       <View
         style={{
