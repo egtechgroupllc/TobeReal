@@ -12,7 +12,7 @@ import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import TopImg from './BoxPlaceItem/TopImg';
-import Ribbon from '../../../../components/Ribbon';
+import Ribbon from '../../../components/Ribbon';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function BoxPlaceItem({

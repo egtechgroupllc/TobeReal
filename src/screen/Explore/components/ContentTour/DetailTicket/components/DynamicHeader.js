@@ -21,7 +21,7 @@ import {IconAdd, IconShare, IconX} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-import Favourite from '../../../../../../components/Favourite';
+import Favourite from '../../../../../components/Favourite';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import ImageDetail from '../../DetailTour/ImageDetail';
 import CustomText from '../../../../../../components/CustomText';

@@ -53,3 +53,8 @@ export const getListPackagePost = async () => {
 
   return responsive.data;
 };
+export const getListConstant = async () => {
+  const responsive = await instanceCommon.get('common/list-constant');
+
+  return responsive.data;
+};

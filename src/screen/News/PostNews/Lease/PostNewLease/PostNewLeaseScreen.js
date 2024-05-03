@@ -81,8 +81,6 @@ export default function PostNewLeaseScreen() {
     return formData;
   };
   const checkIsValid = () => {
-    navigate('AddRoomTypeScreen');
-
     if (`${errors}` !== '{}') {
       showMess('Vui lòng nhập chính xác thông tin', 'error');
       // return;
@@ -106,7 +104,7 @@ export default function PostNewLeaseScreen() {
         if (dataInside?.status) {
           reset();
           queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
-          navigate('AddRoomTypeScreen');
+          navigate('AddRoomTypeScreen', dataInside?.data);
         }
       },
       onError: err => {
@@ -194,6 +192,7 @@ export default function PostNewLeaseScreen() {
         onPress={checkIsValid}
         style={{
           marginTop: scale(20),
+          width: '80%',
         }}
       />
     </MainWrapper>

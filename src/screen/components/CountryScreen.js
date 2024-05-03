@@ -44,7 +44,11 @@ export default function CountryScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: router?.isProvince ? t('province_city') : t('country'),
+      headerTitle: router?.isProvince
+        ? t('province_city')
+        : router?.isPhone
+        ? t('Phone area code')
+        : t('country'),
 
       headerRight: () =>
         country?.name && (
@@ -63,14 +67,6 @@ export default function CountryScreen() {
   }, [country?.name]);
 
   const dataNew = useMemo(() => {
-    // const countryGroups = data?.data
-    //   ?.sort((a, b) => a?.name - b?.name)
-    //   ?.reduce((acc, item) => {
-    //     const initial = item?.name.charAt(0).toUpperCase();
-    //     acc[initial] = [...(acc[initial] || []), item];
-    //     return acc;
-    //   }, {});
-
     const dataFilter = data?.data?.filter((item, index) => {
       return item?.name?.toLowerCase().includes(deferredValue?.toLowerCase());
     });
@@ -114,7 +110,9 @@ export default function CountryScreen() {
           renderCustomItem={item => (
             <CheckBox
               key={`key_${item?.id}`}
-              text={`${item?.flag ? item?.flag : ''} ${item?.name}`}
+              text={`${item?.flag ? item?.flag : ''} ${item?.name}${
+                router?.isPhone ? ` (${item?.phone_code})` : ''
+              }`}
               textLeft
               isRadio
               onPress={() => setCountry(item)}

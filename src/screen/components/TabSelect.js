@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {CustomButton} from '.';
-import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
-import {IconBorderBottom} from '../assets/icon/Icon';
+import {CustomButton} from '../../components';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
+import {IconBorderBottom} from '../../assets/icon/Icon';
 
 const funcFallBlack = () => {};
 export default function TabSelect({

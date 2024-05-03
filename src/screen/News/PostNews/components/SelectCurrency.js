@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, scale} from '../../../../assets/constants';
 import {IconError, IconRight} from '../../../../assets/icon/Icon';

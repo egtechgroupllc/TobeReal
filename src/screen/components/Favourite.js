@@ -1,8 +1,8 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import {IconHeart} from '../assets/icon/Icon';
-import {COLORS, SHADOW, scale} from '../assets/constants';
-import {CustomButton} from '.';
+import {IconHeart} from '../../assets/icon/Icon';
+import {COLORS, SHADOW, scale} from '../../assets/constants';
+import {CustomButton} from '../../components';
 
 export default function Favourite({styleWrapper}) {
   const [isFavourite, setIsFavourite] = useState(false);

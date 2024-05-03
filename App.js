@@ -26,6 +26,7 @@ import {LanguageProvider} from './src/context/LanguageContext';
 import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
+import {AddPolicyScreen} from './src/screen/News/PostNews/Lease';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {

@@ -2,13 +2,13 @@
 import {useRoute} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 import {IconMarker} from '../../../../assets/icon/Icon';
 import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 import MapFooter from './MapSetAccomd.js/MapFooter';
 import MapHeader from './MapSetAccomd.js/MapHeader';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 
 export default function MapSetAccomdScreen() {
   const router = useRoute().params;
@@ -82,6 +82,12 @@ export default function MapSetAccomdScreen() {
           }
         }}>
         <Marker coordinate={moveLocation} />
+        <Circle
+          center={moveLocation}
+          radius={2}
+          fillColor={'#F4007420'}
+          strokeColor={COLORS.primary}
+        />
       </MapView>
       {typeMoveLocation === 'move' && (
         <View

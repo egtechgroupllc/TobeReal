@@ -16,7 +16,7 @@ import {
 } from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
+import Ribbon from '../../../components/Ribbon';
 import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
@@ -81,7 +81,7 @@ export default function BoxEstateAgent({
               style={{
                 width: scale(75),
                 height: scale(75),
-                alignSelf:'center'
+                alignSelf: 'center',
               }}>
               {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
@@ -308,10 +308,17 @@ export default function BoxEstateAgent({
           />
         )}
       </View>
-      <View style={{marginTop:scale(10), width:scale(50), alignSelf:'center'}}>
+      <View
+        style={{marginTop: scale(10), width: scale(50), alignSelf: 'center'}}>
         <CustomText
           textType="bold"
-          style={[isStar && {fontSize: SIZES.xSmall, color: '#252B5C',alignSelf:'center'}]}
+          style={[
+            isStar && {
+              fontSize: SIZES.xSmall,
+              color: '#252B5C',
+              alignSelf: 'center',
+            },
+          ]}
           numberOfLines={1}>
           {data?.name}
         </CustomText>

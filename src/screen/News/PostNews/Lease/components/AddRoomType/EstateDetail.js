@@ -19,6 +19,7 @@ import SelectCurrency from '../../../components/SelectCurrency';
 import ButtonTabValidate from '../ButtonTabValidate';
 import RealEstateType from '../../../components/RealEstateType';
 import Counter from '../../../../../../components/Counter';
+import InputPriceRoom from './InputPriceRoom';
 const list = [...Array(17)].map((_, index) => (index === 0 ? '< 1' : index));
 
 export default function EstateDetail({control, errors, watch, setValue}) {
@@ -80,7 +81,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(30),
             }}>
             <CustomInput
-              label={'Chiều rộng'}
+              label={'Chiều rộng (m)'}
               placeholder="Chiều rộng"
               name="size_width"
               rules={requireField(t('this_field_required'))}
@@ -90,10 +91,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               control={control}
               style={styles.textInput}
               styleText={styles.textInput}
+              keyboardType="numeric"
             />
 
             <CustomInput
-              label={'Length'}
+              label={'Length (m)'}
               placeholder="Length"
               name="size_length"
               control={control}
@@ -103,6 +105,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               }}
               style={styles.textInput}
               styleText={styles.textInput}
+              keyboardType="numeric"
             />
           </View>
           <CustomInput
@@ -113,6 +116,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             rules={requireField(t('this_field_required'))}
             style={styles.textInput}
             styleText={styles.textInput}
+            keyboardType="numeric"
           />
 
           <Counter
@@ -131,6 +135,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             value={watch('max_child_occupancy')}
             onChange={value => {
               setValue('max_child_occupancy', value);
+              !watch('max_child_age') && setValue('max_child_age', 6);
             }}
           />
 
@@ -160,18 +165,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={styles.line} />
 
-          <SelectCurrency control={control} />
-
-          <CustomInput
-            label={t('price')}
-            styleTextLabel={styles.label}
+          <InputPriceRoom
             control={control}
-            name="price"
-            placeholder={t('enter_price')}
-            rules={requireField(t('this_field_required'))}
-            style={{...styles.textInput}}
-            keyboardType="number-pad"
-            enableFormatNum
+            priceValue={watch('price')}
+            currencyValue={watch('currency_id')}
+            setValue={setValue}
           />
         </Collapsible>
       </InViewPort>

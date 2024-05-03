@@ -17,7 +17,7 @@ import {
 } from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
+import Ribbon from '../../../components/Ribbon';
 import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
@@ -27,7 +27,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
 import {type} from '../../../../components/Marquee';
-import Favourite from '../../../../components/Favourite';
+import Favourite from '../../../components/Favourite';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 
 export default function BoxFeatureItem({

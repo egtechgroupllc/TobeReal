@@ -11,9 +11,10 @@ import {
   validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../ButtonTabValidate';
+import InputLeaseMulti from '../PostNewLease/GeneralInformation/InputLeaseMulti';
 
 export default function GeneralInformation({
-  maxCharacters,
+  maxCharacters = 100,
   control,
   setValue,
   watch,
@@ -39,32 +40,12 @@ export default function GeneralInformation({
       />
       <InViewPort noLoading={true}>
         <Collapsible collapsed={!isView} style={styles.box}>
-          <CustomInput
-            styleTextLabel={styles.label}
-            label={t('Room name')}
+          <InputLeaseMulti
             control={control}
-            name="name"
-            multiline
+            label={t('Room name')}
             maxLength={maxCharacters}
             placeholder={t('Room name')}
-            rules={[
-              requireField(t('this_field_required')),
-              validateMaxLengthText(
-                `${maxCharacters} characters limit`,
-                maxCharacters,
-              ),
-            ]}
-            style={[
-              styles.textInput,
-              {
-                height: scale(50),
-              },
-            ]}
-            componentRight={
-              <Text style={styles.numText}>
-                {watch('name')?.length || 0}/{maxCharacters}
-              </Text>
-            }
+            name="name"
           />
         </Collapsible>
       </InViewPort>

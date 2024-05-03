@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Animated, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+
+import {getListRent} from '../../Model/api/apiAccom';
+import {getListSell} from '../../Model/api/apiEstate';
+import {getListTour} from '../../Model/api/apiTour';
+import {KEY_MAP} from '../../Model/url';
 import {COLORS, scale} from '../../assets/constants';
 import {IconMyLocation} from '../../assets/icon/Icon';
 import {CustomButton} from '../../components';
 import MainWrapper from '../../components/MainWrapper';
+import {formatDate} from '../../utils/format';
 import {getCurrentLocation} from '../../utils/getCurrentLocation';
-import {markers} from '../../utils/mapData';
 import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
-import {KEY_MAP} from '../../Model/url';
-import {useQuery} from '@tanstack/react-query';
-import {getListRent} from '../../Model/api/apiAccom';
-import {getListSell} from '../../Model/api/apiEstate';
-import {getListTour} from '../../Model/api/apiTour';
-import {formatDate} from '../../utils/format';
 
 const initialMapState = {
   markers: [],
@@ -183,8 +183,8 @@ export default function HomeMapScreen({showListLocation, style}) {
 
     fetch(url)
       .then(response => response.json())
-      .then(data => {
-        console.log('data', data.results);
+      .then(dataPlaces => {
+        console.log('data', dataPlaces.results);
       });
   };
 

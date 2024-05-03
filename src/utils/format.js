@@ -14,16 +14,11 @@ export const formatPrice = (
     return '';
   }
   // Remove non-digit characters from price
-  const numericPrice = parseFloat(
-    Number(price)
-      .toFixed(decimalPlaces)
-      .toString()
-      .replace(/[^\d.-]/g, ''),
-  );
+  const numericPrice = parseFloat(price.toString().replace(/[^\d.-]/g, ''));
 
   let option = {
     style: 'currency',
-    currency: currency || locales.startsWith('vi') ? 'VND' : 'USD',
+    currency: currency || (locales.startsWith('vi') ? 'VND' : 'USD'),
     maximumSignificantDigits: 14,
   };
 
@@ -31,7 +26,9 @@ export const formatPrice = (
 
   const numberFormat = new Intl.NumberFormat(locales, option);
 
-  const formattedPrice = numberFormat.format(numericPrice);
+  const formattedPrice = numberFormat.format(
+    numericPrice.toFixed(decimalPlaces),
+  );
 
   // Thêm đơn vị tự chọn
   return formattedPrice + (unit ? ` ${unit}` : '');

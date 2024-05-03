@@ -58,6 +58,7 @@ export default function CheckBox({
               onChange(checkedNumber ? (valueCheck ? 1 : 0) : valueCheck);
             }}
             size={scale(16)}
+            
             isChecked={value}
             fillColor={COLORS.primary}
             disableBuiltInState={isRadio}

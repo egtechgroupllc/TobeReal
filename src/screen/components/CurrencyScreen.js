@@ -1,9 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {
+  useCallback,
   useDeferredValue,
+  useEffect,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
@@ -66,8 +70,29 @@ export default function CurrencyScreen() {
           </CustomText>
         ),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
+
+  const flatListRef = useRef();
+
+  const indexData = useMemo(() => {
+    const dataFilter = data?.data?.findIndex(item => {
+      return item?.id === currency?.id;
+    });
+
+    return dataFilter;
+  }, [router]);
+
+  const scrollToIndex = useCallback((index = 0) => {
+    flatListRef.current.scrollToIndex({
+      animated: true,
+      index: index,
+      viewPosition: 0.1,
+    });
+  }, []);
+
+  useEffect(() => {
+    indexData && scrollToIndex(indexData);
+  }, [indexData]);
 
   return (
     <View style={{flex: 1}}>
@@ -94,6 +119,7 @@ export default function CurrencyScreen() {
         />
 
         <FlatList
+          ref={flatListRef}
           data={dataNew}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -102,6 +128,12 @@ export default function CurrencyScreen() {
           keyExtractor={(item, index) =>
             `key_${item?.id}-${item?.currency_code}-${index}`
           }
+          onScrollToIndexFailed={({index}) => {
+            const wait = new Promise(resolve => setTimeout(resolve, 100));
+            wait.then(() => {
+              scrollToIndex(indexData);
+            });
+          }}
           ListEmptyComponent={() => <EmptyData />}
           renderItem={({item}) => {
             return (

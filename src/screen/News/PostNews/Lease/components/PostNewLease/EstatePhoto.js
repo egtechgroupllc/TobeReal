@@ -1,15 +1,14 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
+
+import {scale} from '../../../../../../assets/constants';
+import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {validateMinLength} from '../../../../../../utils/validate';
 import ChooseImgPicker from '../../../../../components/ChooseImgPicker';
-import ButtonTabValidate from '../ButtonTabValidate';
-import InViewPort from '../../../../../../components/InViewport';
-import CustomText from '../../../../../../components/CustomText';
 import RulesPostImg from '../../../components/RulesPostImg';
+import ButtonTabValidate from '../ButtonTabValidate';
 
 export default function EstatePhoto({
   control,
@@ -17,13 +16,14 @@ export default function EstatePhoto({
   setValue,
   watch,
   arrImg,
+  isKyc = true,
 }) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
-  const arrKeywords = useRef(['files']).current;
+  const arrKeywords = useRef(['description_img', 'kyc']).current;
 
   const formatImgEdit = images => {
     const result = images.map((item, index) => {
@@ -69,13 +69,13 @@ export default function EstatePhoto({
   }, [arrImg]);
 
   const imgDes = useMemo(() => {
-    if (arrImg) {
+    if (arrImg && isKyc) {
       const description_img = arrImg.filter(item => !item?.is_kyc);
       const image_descriptionFormat = formatImgEdit(description_img);
 
       return image_descriptionFormat;
     }
-  }, [arrImg]);
+  }, [arrImg, isKyc]);
 
   return (
     <View>
@@ -86,6 +86,7 @@ export default function EstatePhoto({
         watch={watch}
         arrKeywords={arrKeywords}
       />
+
       <InViewPort
         noLoading={true}
         onChange={render => render && setIsRender(render)}>
@@ -125,35 +126,38 @@ export default function EstatePhoto({
               />
             )}
 
-            {/* <ChooseImgPicker
-              title={t(
-                'Add images to prove ownership of your Real Estate assets',
-              )}
-              control={control}
-              rules={
-                !imgKyc && [validateMinLength(t('this_field_required'), 1)]
-              }
-              name={'kyc'}
-            />
+            {isKyc && (
+              <>
+                <ChooseImgPicker
+                  title={t(
+                    'Add images to prove ownership of your Real Estate assets',
+                  )}
+                  control={control}
+                  rules={
+                    !imgKyc && [validateMinLength(t('this_field_required'), 1)]
+                  }
+                  name={'kyc'}
+                />
 
-            {imgKyc && (
-              <ChooseImgPicker
-                defaultValue={imgKyc}
-                isAddWhenEmpty={true}
-                isAddMore={false}
-                name={'image_update_description_kyc'}
-                control={control}
-                onDelete={id => {
-                  setValue(
-                    'image_delete',
-                    watch('image_delete')
-                      ? [id, ...watch('image_delete')]
-                      : [id],
-                  );
-                }}
-              />
-            )} */}
-
+                {imgKyc && (
+                  <ChooseImgPicker
+                    defaultValue={imgKyc}
+                    isAddWhenEmpty={true}
+                    isAddMore={false}
+                    name={'image_update_description_kyc'}
+                    control={control}
+                    onDelete={id => {
+                      setValue(
+                        'image_delete',
+                        watch('image_delete')
+                          ? [id, ...watch('image_delete')]
+                          : [id],
+                      );
+                    }}
+                  />
+                )}
+              </>
+            )}
             {/* <CustomInput
               label={t('Link youtube')}
               placeholder={t('Link youtube')}

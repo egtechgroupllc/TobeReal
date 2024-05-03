@@ -11,6 +11,7 @@ import {
   validatePhone,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../ButtonTabValidate';
+import InputPhone from '../../../../../components/InputPhone';
 
 export default function EstateContact({control, errors, watch}) {
   const {t} = useLanguage();
@@ -42,13 +43,11 @@ export default function EstateContact({control, errors, watch}) {
           rules={requireField(t('enter_username'))}
           style={{...styles.textInput}}
         />
-        <CustomInput
+        <InputPhone
           placeholder={t('phone')}
           control={control}
-          name="contact_phone"
           rules={[requireField(t('this_field_required'))]}
           style={{...styles.textInput}}
-          keyboardType="number-pad"
         />
 
         <CustomInput

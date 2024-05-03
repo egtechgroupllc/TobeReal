@@ -4,7 +4,7 @@ import RatingBox from './RatingBox';
 import {IconHeart, IconMarker} from '../../../../../assets/icon/Icon';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
-import Favourite from '../../../../../components/Favourite';
+import Favourite from '../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
 import Star from '../../../../../components/Star';
 import {formatPrice} from '../../../../../utils/format';

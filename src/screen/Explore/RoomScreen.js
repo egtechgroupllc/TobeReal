@@ -12,7 +12,7 @@ import {
 import {showMess} from '../../assets/constants/Helper';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
-import Favourite from '../../components/Favourite';
+import Favourite from '../components/Favourite';
 import MainWrapper from '../../components/MainWrapper';
 import ItemAccommdSearchLoading from '../Search/components/ItemAccommdSearchLoading';
 import RoomFilter from './components/DetailAccommodation/Rooms/RoomFilter';

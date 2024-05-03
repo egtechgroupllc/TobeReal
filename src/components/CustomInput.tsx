@@ -88,7 +88,7 @@ export default forwardRef(function CustomInput(
   const heightSize =
     sizeInput === 'large' ? 50 : sizeInput === 'medium' ? 45 : 38;
 
-    const textWeight: TextStyle =
+  const textWeight: TextStyle =
     textType === 'regular'
       ? {fontFamily: FONTS.regular, fontWeight: '400'}
       : textType === 'semiBold'
@@ -96,8 +96,6 @@ export default forwardRef(function CustomInput(
       : textType === 'bold'
       ? {fontFamily: FONTS.bold, fontWeight: '700'}
       : {fontFamily: FONTS.medium, fontWeight: '500'};
-
-
 
   return (
     <Controller
@@ -178,7 +176,7 @@ export default forwardRef(function CustomInput(
                   styles.input,
                   propStyle?.maxHeight && {maxHeight: propStyle?.maxHeight},
                   props?.multiline && {lineHeight: scale(16)},
-                 textWeight,
+                  textWeight,
                   styleText,
                 ]}
                 pointerEvents={!!onPress ? 'none' : 'auto'}

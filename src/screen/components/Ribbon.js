@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
-import CustomText from './CustomText';
-import {IconRoom} from '../assets/icon/Icon';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
+import CustomText from '../../components/CustomText';
+import {IconRoom} from '../../assets/icon/Icon';
 
 export default function Ribbon({text, iconRight, iconLeft, numberRoom}) {
   const IconRight = iconRight;

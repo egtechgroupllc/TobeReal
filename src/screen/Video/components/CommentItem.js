@@ -11,7 +11,7 @@ import React, {useState} from 'react';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import {IconHeart, IconPlayVideo} from '../../../assets/icon/Icon';
-import Favourite from '../../../components/Favourite';
+import Favourite from '../../components/Favourite';
 import {TouchableOpacity} from '@gorhom/bottom-sheet';
 import {images, scale} from '../../../assets/constants';
 import Emojis from './Emojis';

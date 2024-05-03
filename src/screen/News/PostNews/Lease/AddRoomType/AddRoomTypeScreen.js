@@ -22,11 +22,9 @@ import EstateFacilities from '../components/AddRoomType/EstateFacilities';
 import EstatePhoto from '../components/AddRoomType/EstatePhoto';
 import GeneralInformation from '../components/AddRoomType/GeneralInformation';
 
-const maxCharacters = 1000;
-
 export default function AddRoomTypeScreen() {
   const {t} = useLanguage();
-  const navigation = useNavigation();
+  const {navigate} = useNavigation();
   const params = useRoute().params;
 
   const {
@@ -88,6 +86,9 @@ export default function AddRoomTypeScreen() {
           if (dataInside?.status) {
             reset();
             queryClient.invalidateQueries(['accommodation', 'my-list']);
+            navigate('NoBottomTab', {
+              screen: 'AccommoManagementScreen',
+            });
           }
         },
         onError: err => {
@@ -107,12 +108,11 @@ export default function AddRoomTypeScreen() {
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-          {t('lease')}
+          {t('add_room')}
         </CustomText>
       </View>
 
       <GeneralInformation
-        maxCharacters={maxCharacters}
         control={control}
         setValue={setValue}
         watch={watch}

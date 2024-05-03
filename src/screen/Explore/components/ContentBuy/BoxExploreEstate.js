@@ -17,7 +17,7 @@ import {
 } from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../../components/Ribbon';
+import Ribbon from '../../../components/Ribbon';
 import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';

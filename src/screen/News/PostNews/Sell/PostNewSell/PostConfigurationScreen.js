@@ -125,14 +125,14 @@ export default function PostConfigurationScreen() {
     delete params?.date_start;
 
     const formData = getFormData({...filterEmptyValues(params), ...value});
-    console.log(formData);
+
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
-          navigate('NoBottomTab', {
-            screen: 'SellManagementScreen',
-          });
+          // navigate('NoBottomTab', {
+          //   screen: 'SellManagementScreen',
+          // });
 
           queryClient.invalidateQueries(['estate', 'my-list']);
         }
@@ -239,3 +239,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(20),
   },
 });
+//

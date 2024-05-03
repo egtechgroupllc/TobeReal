@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {memo, useEffect, useState} from 'react';
-import {COLORS, WIDTH, scale} from '../assets/constants';
-import {CustomButton} from '.';
+import {COLORS, WIDTH, scale} from '../../assets/constants';
+import {CustomButton} from '../../components';
 
 const funcFallBack = () => {};
 export default memo(function Category({

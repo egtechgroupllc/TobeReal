@@ -6,7 +6,7 @@ import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 import {IconGoBack, IconShare, IconX} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 import CustomText from '../../../../../components/CustomText';
-import Favourite from '../../../../../components/Favourite';
+import Favourite from '../../../../components/Favourite';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import ImageDetail from '../../../../components/ImageDetail';
 import OptionAccommodation from '../../FindAccommodation/OptionAccommodation';

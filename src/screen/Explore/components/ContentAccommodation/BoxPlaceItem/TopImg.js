@@ -4,7 +4,7 @@ import RatingBox from './RatingBox';
 import {IconHeart, IconMarker} from '../../../../../assets/icon/Icon';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
-import Favourite from '../../../../../components/Favourite';
+import Favourite from '../../../../components/Favourite';
 
 export default function TopImg({rating, isStar, textRating, isHeart, type}) {
   return (
