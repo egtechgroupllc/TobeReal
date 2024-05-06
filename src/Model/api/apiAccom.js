@@ -155,3 +155,11 @@ export const getListBookingAccomo = async ({pageParam = 1, limit = 10}) => {
 
   return responsive.data;
 };
+
+// API CREATE POLICY
+
+export const postCreatePolicyToAccom = async data => {
+  const responsive = await instanceAccom.post('policy/create', data);
+
+  return responsive.data;
+};

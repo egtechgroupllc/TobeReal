@@ -1,25 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 import {CustomInput} from '../../components';
 import CustomText from '../../components/CustomText';
-import {validatePhone} from '../../utils/validate';
 import {useLanguage} from '../../hooks/useLanguage';
+import {validatePhone} from '../../utils/validate';
 
-export default function InputPhone({
-  name,
+export default (function InputPhone({
+  name = 'contact_phone',
   control,
   rules,
+  setValue,
   valuePhone,
   label,
   placeholder,
   style,
+  onChangeCountry,
   onChange,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const [numPhone, setNumPhone] = useState('');
+
   const [dataFromScreen, setDataFromScreen] = useState({
     currency_code: 'USD',
     id: 233,
@@ -34,16 +38,26 @@ export default function InputPhone({
   };
 
   useEffect(() => {
-    if (onChange) {
-      onChange(dataFromScreen);
+    if (onChangeCountry) {
+      onChangeCountry(dataFromScreen);
     }
   }, [dataFromScreen?.phone_code]);
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(dataFromScreen?.phone_code + numPhone);
+    }
+
+    // if (setValue) {
+    //   setValue(name, dataFromScreen?.phone_code + numPhone);
+    // }
+  }, [dataFromScreen?.phone_code, numPhone]);
 
   return (
     <CustomInput
       label={label}
       styleTextLabel={styles.label}
-      name={name || 'contact_phone'}
+      name={name}
       control={control}
       rules={[rules, validatePhone(t('invalidPhone'), dataFromScreen?.iso2)]}
       placeholder={placeholder}
@@ -51,6 +65,11 @@ export default function InputPhone({
       keyboardType="number-pad"
       maxLength={17}
       inputMode="numeric"
+      onChange={valueText => {
+        const {text} = valueText.nativeEvent;
+
+        setNumPhone(text);
+      }}
       componentLeft={
         <TouchableOpacity
           activeOpacity={0.7}
@@ -81,7 +100,7 @@ export default function InputPhone({
       }
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   boxCurrency: {

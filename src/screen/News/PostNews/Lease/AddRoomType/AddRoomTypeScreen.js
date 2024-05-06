@@ -66,12 +66,16 @@ export default function AddRoomTypeScreen() {
     return formData;
   };
   const handlePostRoom = value => {
+    navigate('AddPolicyScreen', {id: params?.id});
+
     delete value?.number_user;
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
       showMess('Ban chua chon tien ich cho phong', 'error');
       return;
     }
-
+    navigate('NoBottomTab', {
+      screen: 'AccommoManagementScreen',
+    });
     const formData = getFormData(value);
 
     createAccommodationRoomMu.mutate(
@@ -144,7 +148,8 @@ export default function AddRoomTypeScreen() {
         buttonType="medium"
         text={t('post')}
         disabled={createAccommodationRoomMu.isPending}
-        onPress={handleSubmit(handlePostRoom)}
+        // onPress={handleSubmit(handlePostRoom)}
+        onPress={handlePostRoom}
         style={{
           marginTop: scale(20),
         }}

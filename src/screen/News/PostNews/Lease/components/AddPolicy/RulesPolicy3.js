@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {COLORS, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 
-export default function RulesPolicy3() {
+export default function RulesPolicy3({setValue, unregister}) {
   const {navigate} = useNavigation();
 
   return (
@@ -19,7 +19,7 @@ export default function RulesPolicy3() {
       <CustomText
         color={COLORS.blue}
         textType="medium"
-        onPress={() => navigate('')}>
+        onPress={() => navigate('FeaturesPolicyScreen')}>
         Thêm dịch vụ giá trị gia tăng mới
       </CustomText>
     </View>

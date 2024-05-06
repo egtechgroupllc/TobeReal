@@ -4,6 +4,7 @@ import {PostNewsScreen} from '../screen/News/PostNews';
 import {ContractScreen} from '../screen/News/PostNews/Contract';
 import {
   AddPolicyScreen,
+  FeaturesPolicyScreen,
   LeaseScreen,
   PostNewLeaseScreen,
 } from '../screen/News/PostNews/Lease';
@@ -71,5 +72,9 @@ export default routerNews = [
   {
     name: 'AddPolicyScreen',
     component: AddPolicyScreen,
+  },
+  {
+    name: 'FeaturesPolicyScreen',
+    component: FeaturesPolicyScreen,
   },
 ];

@@ -4,7 +4,6 @@ import {COLORS, scale} from '../../assets/constants';
 import CustomText from '../../components/CustomText';
 
 export default function RadioButton({title, isCheck, onPress}) {
-  console.log({isCheck});
   return (
     <TouchableOpacity
       activeOpacity={0.7}

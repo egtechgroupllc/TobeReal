@@ -149,7 +149,12 @@ export default function PostNewLeaseScreen() {
           errors={errors}
         />
 
-        <EstateContact control={control} watch={watch} errors={errors} />
+        <EstateContact
+          control={control}
+          watch={watch}
+          errors={errors}
+          setValue={setValue}
+        />
 
         {/* <EstateRooms /> */}
 

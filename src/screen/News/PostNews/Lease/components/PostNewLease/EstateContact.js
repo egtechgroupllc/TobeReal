@@ -1,19 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
-import {CustomButton, CustomInput} from '../../../../../../components';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
-import {IconRight} from '../../../../../../assets/icon/Icon';
+import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {
-  requireField,
-  validateEmail,
-  validatePhone,
-} from '../../../../../../utils/validate';
-import ButtonTabValidate from '../ButtonTabValidate';
+import {CustomInput} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {requireField, validateEmail} from '../../../../../../utils/validate';
 import InputPhone from '../../../../../components/InputPhone';
+import ButtonTabValidate from '../ButtonTabValidate';
 
-export default function EstateContact({control, errors, watch}) {
+export default function EstateContact({control, errors, watch, setValue}) {
   const {t} = useLanguage();
   const [viewContact, setViewContact] = useState(false);
 
@@ -43,11 +38,17 @@ export default function EstateContact({control, errors, watch}) {
           rules={requireField(t('enter_username'))}
           style={{...styles.textInput}}
         />
+
         <InputPhone
           placeholder={t('phone')}
           control={control}
           rules={[requireField(t('this_field_required'))]}
           style={{...styles.textInput}}
+          // onChange={value => {
+          //   console.log({value});
+          //   setValue('contact_phone', value);
+          // }}
+          setValue={setValue}
         />
 
         <CustomInput

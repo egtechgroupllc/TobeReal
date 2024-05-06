@@ -10,8 +10,55 @@ import RulesPolicy5 from './components/AddPolicy/RulesPolicy5';
 import SetNamePolicy from './components/AddPolicy/SetNamePolicy';
 import RulesPolicy6 from './components/AddPolicy/RulesPolicy6';
 import RulesPolicy3 from './components/AddPolicy/RulesPolicy3';
+import {useForm} from 'react-hook-form';
+import {useMutation} from '@tanstack/react-query';
+import {postCreatePolicyToAccom} from '../../../../Model/api/apiAccom';
+import {CustomButton} from '../../../../components';
 
-export default function AddPolicyScreen() {
+export default function AddPolicyScreen({route}) {
+  const dataParams = route?.params;
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    unregister,
+    formState: {errors},
+  } = useForm();
+
+  const createPolicy = useMutation({
+    mutationFn: postCreatePolicyToAccom,
+  });
+
+  const handleCreatePolicy = value => {
+    const price_percent = value?.isDiscount
+      ? value?.price_percent / 100
+      : value?.price_percent / 100 + 1;
+
+    delete value?.isDiscount;
+    createPolicy.mutate(
+      {
+        accommodation_id: dataParams?.id,
+        ...value,
+        refund_fee: value?.refund_fee ? value?.refund_fee / 100 : 1,
+        price_percent,
+      },
+      {
+        onSuccess: dataInside => {
+          console.log(dataInside);
+
+          if (dataInside?.status) {
+            reset();
+          }
+        },
+
+        onError: err => {
+          console.log(err);
+        },
+      },
+    );
+  };
+
   return (
     <MainWrapper
       noImgColor
@@ -22,40 +69,56 @@ export default function AddPolicyScreen() {
         <Box
           title="Quý vị muốn sử dụng chính sách hủy phòng nào cho loại giá này?"
           num="1">
-          <RulesPolicy1 />
+          <RulesPolicy1
+            setValue={setValue}
+            control={control}
+            unregister={unregister}
+          />
         </Box>
 
         <Box num="2" title="Quý vị có muốn bao gồm bữa ăn trong loại giá này?">
-          <RulesPolicy2 />
+          <RulesPolicy2 setValue={setValue} unregister={unregister} />
         </Box>
 
         <Box
           num="3"
           title="Quý vị muốn thêm dịch vụ giá trị gia tăng vào loại giá này?">
-          <RulesPolicy3 />
+          <RulesPolicy3 setValue={setValue} unregister={unregister} />
         </Box>
 
         <Box
           num="4"
           title="Quý vị có muốn thiết lập thời gian lưu trú tối thiểu cho loại giá này không?">
-          <RulesPolicy4 />
+          <RulesPolicy4
+            setValue={setValue}
+            control={control}
+            unregister={unregister}
+          />
         </Box>
 
         <Box
           num="5"
           title="Khách có thể đặt với loại giá này bao nhiêu ngày trước khi nhận phòng?">
-          <RulesPolicy5 />
+          <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
         <Box
           num="6"
           title="Quý vị muốn loại giá mới này rẻ hơn hay đắt hơn Loại giá cho khách đặt sớm (15+ ngày)?">
-          <RulesPolicy6 />
+          <RulesPolicy6
+            control={control}
+            unregister={unregister}
+            setValue={setValue}
+          />
         </Box>
 
         <Box num="7" title="Quý vị có muốn đặt tên cho loại giá này là gì?">
-          <SetNamePolicy />
+          <SetNamePolicy control={control} />
         </Box>
+        <CustomButton
+          text="Submit"
+          onPress={handleSubmit(handleCreatePolicy)}
+        />
       </View>
     </MainWrapper>
   );

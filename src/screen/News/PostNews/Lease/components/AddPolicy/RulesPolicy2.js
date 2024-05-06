@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import RadioButton from '../../../../../components/RadioButton';
 import {scale} from '../../../../../../assets/constants';
 import CheckBox from '../../../../../../components/CheckBox';
@@ -33,8 +33,45 @@ const listHasMeal = [
     title: 'Bao gồm tất cả',
   },
 ];
-export default function RulesPolicy2() {
+export default function RulesPolicy2({setValue, unregister}) {
   const [isSelect, setIsSelect] = useState(0);
+  const [arrFacilities, setArrFacilities] = useState([listHasMeal[0].title]);
+
+  useEffect(() => {
+    const checkAll = arrFacilities?.includes(listHasMeal[3].title);
+
+    if (isSelect === 1) {
+      setValue('features', arrFacilities);
+      if (checkAll) {
+        setValue('features', [listHasMeal[3].title]);
+      } else {
+        setValue('features', arrFacilities);
+      }
+    } else {
+      unregister('features');
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSelect, arrFacilities]);
+
+  const facilitiesCheckBox = useCallback(item => {
+    setArrFacilities(prev => {
+      const check = prev?.includes(item);
+
+      if (check) {
+        return prev?.filter(feature => feature !== item);
+      }
+
+      return [...prev, item];
+    });
+  }, []);
+
+  useEffect(() => {
+    const checkAll = arrFacilities?.includes(listHasMeal[3].title);
+    if (checkAll) {
+      setArrFacilities([listHasMeal[3].title]);
+    }
+  }, [isSelect]);
 
   return (
     <View>
@@ -56,7 +93,16 @@ export default function RulesPolicy2() {
       <Collapsible collapsed={isSelect === 0}>
         <View style={styles.boxCheckMeal}>
           {listHasMeal.map((item, index) => {
-            return <CheckBox key={index} text={item?.title} />;
+            return (
+              <CheckBox
+                key={index}
+                text={item?.title}
+                isChecked={arrFacilities?.includes(item?.title)}
+                onPress={evt => {
+                  facilitiesCheckBox(item?.title);
+                }}
+              />
+            );
           })}
         </View>
       </Collapsible>

@@ -6,6 +6,12 @@ import CheckBox from '../../../../../../components/CheckBox';
 import Collapsible from 'react-native-collapsible';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {
+  requireField,
+  validateMinMaxAmount,
+} from '../../../../../../utils/validate';
+import {IconAdd} from '../../../../../../assets/icon/Icon';
 
 const list = [
   {
@@ -18,8 +24,14 @@ const list = [
   },
 ];
 
-export default function RulesPolicy6() {
+export default function RulesPolicy6({control, unregister, setValue}) {
+  const {t} = useLanguage();
+
   const [isSelect, setIsSelect] = useState(list[0]);
+
+  useEffect(() => {
+    setValue('isDiscount', isSelect.id === 1);
+  }, [isSelect.id]);
 
   return (
     <View>
@@ -42,17 +54,28 @@ export default function RulesPolicy6() {
         <View
           style={{
             flexDirection: 'row',
-            alignItems: 'center',
             columnGap: scale(10),
           }}>
           <View
             style={{
-              width: scale(10),
-              backgroundColor: '#000',
-              height: scale(1.4),
-            }}
-          />
+              height: scale(38),
+              justifyContent: 'center',
+            }}>
+            {isSelect.id !== 1 ? (
+              <IconAdd />
+            ) : (
+              <View
+                style={{
+                  width: scale(14),
+                  backgroundColor: '#000',
+                  height: scale(1.4),
+                }}
+              />
+            )}
+          </View>
+
           <CustomInput
+            control={control}
             defaultValue="10"
             placeholder="%"
             style={styles.textInput}
@@ -63,6 +86,14 @@ export default function RulesPolicy6() {
             styleText={{
               fontSize: SIZES.xMedium,
             }}
+            name="price_percent"
+            rules={[
+              requireField(t('this_field_required')),
+              validateMinMaxAmount(
+                'Tỉ lệ chênh lệch không hợp lệ (1% -> 100%)',
+                100,
+              ),
+            ]}
             componentRight={
               <View style={styles.componentRight}>
                 <CustomText textType="semiBold" size={SIZES.xMedium}>

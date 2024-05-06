@@ -1,11 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import RadioButton from '../../../../../components/RadioButton';
-import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import CheckBox from '../../../../../../components/CheckBox';
+import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
+import {SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
+import RadioButton from '../../../../../components/RadioButton';
+import {
+  requireField,
+  validateMinAmount,
+  validateMinMaxAmount,
+} from '../../../../../../utils/validate';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 const list = [
   {
@@ -18,8 +23,15 @@ const list = [
   },
 ];
 
-export default function RulesPolicy4() {
-  const [isSelect, setIsSelect] = useState(1);
+export default function RulesPolicy4({control, unregister}) {
+  const {t} = useLanguage();
+  const [isSelect, setIsSelect] = useState(0);
+
+  useEffect(() => {
+    if (isSelect === 0) {
+      unregister('min_number_day');
+    }
+  }, [isSelect]);
 
   return (
     <View>
@@ -47,6 +59,15 @@ export default function RulesPolicy4() {
             styleText={{
               fontSize: SIZES.xMedium,
             }}
+            control={control}
+            name="min_number_day"
+            rules={[
+              requireField(t('this_field_required')),
+              validateMinMaxAmount(
+                'Đêm lưu trú tối thiểu không hợp lệ (1 -> 28)',
+                28,
+              ),
+            ]}
           />
           <CustomText>Đêm lưu trú tối thiểu</CustomText>
 

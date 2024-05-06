@@ -128,7 +128,12 @@ export default function PostNewTourScreen() {
           errors={errors}
           unregister={unregister}
         />
-        <EstateContact control={control} watch={watch} errors={errors} />
+        <EstateContact
+          control={control}
+          watch={watch}
+          errors={errors}
+          setValue={setValue}
+        />
 
         <EstatePhoto
           control={control}

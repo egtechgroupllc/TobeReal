@@ -6,6 +6,11 @@ import CheckBox from '../../../../../../components/CheckBox';
 import Collapsible from 'react-native-collapsible';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
+import {
+  requireField,
+  validateMinMaxAmount,
+} from '../../../../../../utils/validate';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 const list = [
   {
@@ -18,8 +23,16 @@ const list = [
   },
 ];
 
-export default function RulesPolicy5() {
-  const [isSelect, setIsSelect] = useState(1);
+export default function RulesPolicy5({control, unregister}) {
+  const {t} = useLanguage();
+
+  const [isSelect, setIsSelect] = useState(0);
+
+  useEffect(() => {
+    if (isSelect === 0) {
+      unregister('min_number_day_before');
+    }
+  }, [isSelect]);
 
   return (
     <View>
@@ -47,6 +60,15 @@ export default function RulesPolicy5() {
             styleText={{
               fontSize: SIZES.xMedium,
             }}
+            control={control}
+            name="min_number_day_before"
+            rules={[
+              requireField(t('this_field_required')),
+              validateMinMaxAmount(
+                'Số ngày đặt trước phải hợp lệ (1 -> 28)',
+                28,
+              ),
+            ]}
           />
           <CustomText>Ngày hoặc hơn trước khi nhận phòng</CustomText>
         </View>
