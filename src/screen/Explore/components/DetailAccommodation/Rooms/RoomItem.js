@@ -20,7 +20,13 @@ import ItemAccommdSearchLoading from '../../../../Search/components/ItemAccommdS
 import RoomUntil from './components/RoomUntil';
 import SelectRoom from './components/SelectRoom';
 
-export default function RoomItem({dataP, onBooking, date, onDetail}) {
+export default function RoomItem({
+  dataP,
+  onBooking,
+  date,
+  onDetail,
+  isFilterChildren,
+}) {
   const [isRender, setIsRender] = useState(false);
   const [numRoom, setNumRoom] = useState(1);
 
@@ -126,7 +132,11 @@ export default function RoomItem({dataP, onBooking, date, onDetail}) {
                   padding: scale(8),
                   rowGap: scale(7),
                 }}>
-                <RoomUntil data={dataP} price={priceAverage * numRoom} />
+                <RoomUntil
+                  data={dataP}
+                  price={priceAverage * numRoom}
+                  isFilterChildren={isFilterChildren}
+                />
                 <SelectRoom
                   onPress={value =>
                     onBooking({

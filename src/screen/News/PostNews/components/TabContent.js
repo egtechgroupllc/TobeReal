@@ -28,7 +28,7 @@ export default function TabContent() {
 
   const goSell = () => {
     if (handleCheckAccc()) {
-      navigation.navigate('SellScreen');
+      navigation.navigate('LeaseScreen');
     }
   };
   const goLease = () => {

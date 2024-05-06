@@ -1,24 +1,31 @@
 import React, {memo, useEffect, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {images, scale} from '../../../../../assets/constants';
-import {IconPeople} from '../../../../../assets/icon/Icon';
+import {COLORS, images, scale} from '../../../../../assets/constants';
+import {
+  IconChild,
+  IconPeople,
+  IconProfile,
+} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 import BottomSheet from '../../../../../components/BottomSheet';
 import Counter from '../../../../../components/Counter';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
+import ListChildren from '../../FindAccommodation/Occupancy/ListChildren';
 
-export default memo(function SelectNumGuestRoom({onChangeNum}) {
+export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
   const bottomSheetRef = useRef();
-  const [numRooms, setNumRooms] = useState(1);
-  const [numGuest, setNumGuest] = useState(1);
+  const [numRooms, setNumRooms] = useState(data?.dataFilter?.numRooms || 1);
+  const [numAdult, setNumAdult] = useState(data?.dataFilter?.numAdult || 1);
+  const [numChild, setNumChild] = useState(data?.dataFilter?.numChild || []);
 
   useEffect(() => {
     onChangeNum &&
       onChangeNum({
         numRooms,
-        numGuest,
+        numAdult,
+        numChild: numChild,
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -28,10 +35,13 @@ export default memo(function SelectNumGuestRoom({onChangeNum}) {
     onChangeNum &&
       onChangeNum({
         numRooms,
-        numGuest,
+        numAdult,
+        numChild: numChild,
       });
   };
-
+  console.log('====================================');
+  console.log(234567890);
+  console.log('====================================');
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -39,7 +49,11 @@ export default memo(function SelectNumGuestRoom({onChangeNum}) {
       onPress={() => bottomSheetRef.current.open()}>
       <View style={{...styles.row}}>
         <IconPeople style={styles.icon} />
-        <CustomText>{numGuest}</CustomText>
+        <CustomText>{numAdult}</CustomText>
+      </View>
+      <View style={{...styles.row}}>
+        <IconChild style={styles.icon} />
+        <CustomText>{numChild?.length}</CustomText>
       </View>
       <View style={{...styles.row}}>
         <CustomImage source={images.lease} style={styles.icon} />
@@ -50,7 +64,7 @@ export default memo(function SelectNumGuestRoom({onChangeNum}) {
         ref={bottomSheetRef}
         onDismiss={handleApply}
         titleIndicator={'Add Guest(s) & Room(s)'}
-        snapPoints={['30%']}
+        snapPoints={['50%']}
         styleContent={{
           rowGap: scale(14),
           paddingHorizontal: scale(20),
@@ -62,19 +76,21 @@ export default memo(function SelectNumGuestRoom({onChangeNum}) {
           <Counter
             editable={false}
             heading={'Room(s)'}
-            max={8}
+            max={numAdult}
             Icon={<CustomImage source={images.lease} style={styles.iconShe} />}
-            value={numRooms}
+            // value={numRooms > numAdult ? numAdult : numRooms}
             onChange={setNumRooms}
           />
           <Counter
             editable={false}
-            heading={'Total Guest(s)'}
+            heading={'Total Adult'}
             max={30}
             Icon={<IconPeople style={styles.iconShe} />}
-            value={numGuest}
-            onChange={setNumGuest}
+            // value={data?.dataFilter?.numAdult}
+            min={numRooms}
+            onChange={setNumAdult}
           />
+          <ListChildren quantity={numChild} onChange={setNumChild} />
         </View>
         <CustomButton
           onPress={handleApply}
@@ -98,8 +114,8 @@ const styles = StyleSheet.create({
     columnGap: scale(6),
   },
   icon: {
-    width: scale(13),
-    height: scale(13),
+    width: scale(16),
+    height: scale(16),
   },
   iconShe: {
     width: scale(20),

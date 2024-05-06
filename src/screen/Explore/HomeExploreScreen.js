@@ -19,7 +19,7 @@ export default function HomeExploreScreen() {
   instanceAccom.defaults.headers.common['Authorization'] = token;
 
   return (
-    <MainWrapper refreshControl>
+    <MainWrapper refreshControl scrollEnabled={false}>
       <Header />
       <FindAccommodation />
     </MainWrapper>

@@ -54,7 +54,7 @@ export default function TypeAccommoda({onType, value}) {
           key={index}
           style={{
             borderWidth: 1,
-            minWidth: '30%',
+            minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
             borderColor: checked === item?.id ? COLORS.primary : '#ccc',

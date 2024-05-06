@@ -21,6 +21,7 @@ import {
   validateMinLengthText,
   validateUserName,
 } from '../../../../utils/validate';
+import InputPhone from '../../../components/InputPhone';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -78,12 +79,12 @@ export default function Content() {
           name="email"
           placeholder={t('enter_email')}
         />
-        <CustomInput
+        <InputPhone
+          name={'phone'}
+          placeholder={t('phone')}
           control={control}
-          sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
-          name="phone"
-          placeholder={t('Enter phone')}
+          style={{height: scale(45)}}
         />
         <CustomInput
           control={control}

@@ -64,7 +64,7 @@ export default function DetailBuyScreen() {
         isLoading={isLoading}
         ContentBookComponent={
           <BookAccommodation
-            price={123213}
+            price={data?.data?.price}
             isLoading={false}
             onPress={() => {}}
           />

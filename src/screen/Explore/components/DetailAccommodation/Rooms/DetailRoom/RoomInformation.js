@@ -9,17 +9,9 @@ import ItemUtil from '../components/ItemUtil';
 import {formatPrice} from '../../../../../../utils/format';
 import {scale} from '../../../../../../assets/constants';
 
-export default function RoomInformation({data}) {
+export default function RoomInformation({data, isFilterChildren}) {
   return (
     <>
-      <ItemUtil
-        Icon={IconPeople}
-        value={`${2} guest`}
-        title={'Guest'}
-        styleWrapper={{
-          width: '45%',
-        }}
-      />
       <ItemUtil
         Icon={IconRoom}
         value={data?.room_bed_type?.name}
@@ -41,6 +33,18 @@ export default function RoomInformation({data}) {
         }}
         styleWrapper={{
           width: '45%',
+        }}
+      />
+      <ItemUtil
+        Icon={IconPeople}
+        value={
+          !isFilterChildren
+            ? `Max ${data?.max_occupancy} adult(s)`
+            : `Max ${data?.max_occupancy} adult(s), ${data?.max_child_occupancy} children`
+        }
+        title={'Guest'}
+        styleWrapper={{
+          width: '60%',
         }}
       />
     </>

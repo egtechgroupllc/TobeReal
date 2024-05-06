@@ -24,6 +24,7 @@ export default memo(function RoomFilter({onSelectDate, data, onChangeNum}) {
         onChangeNum={value => {
           onChangeNum && onChangeNum(value);
         }}
+        data={data}
       />
     </View>
   );

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {COLORS, images, scale} from '../../../assets/constants';
 import {
+  IconNotification,
   IconSearch,
   LogoLine,
   LogoMessageFB,
@@ -37,9 +38,15 @@ const listSocial = [
     link: 'https://www.facebook.com/',
   },
 ];
+
 export default function Header() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const goNotify = () => {
+    navigate('NoBottomTab', {
+      screen: 'NotifyScreen',
+    });
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -57,6 +64,8 @@ export default function Header() {
           }}>
           <CustomInput
             iconLeft={IconSearch}
+            styleIcon={{color: COLORS.white}}
+            placeholderTextColor={COLORS.white}
             placeholder={t('find_accommodation')}
             editable={false}
             onPress={() =>
@@ -64,9 +73,12 @@ export default function Header() {
                 screen: 'HomeSearchAccommodScreen',
               })
             }
-            style={{borderRadius: scale(20)}}
+            style={{borderRadius: scale(20), borderColor: COLORS.white}}
           />
         </View>
+        <TouchableOpacity onPress={goNotify}>
+          <IconNotification fill={COLORS.white} />
+        </TouchableOpacity>
       </View>
       {/* 
       <View style={styles.content}>
@@ -109,7 +121,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     rowGap: scale(20),
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.primary,
     paddingHorizontal: scale(16),
   },
   header: {

@@ -31,6 +31,8 @@ import {
   getListTypeEstateSell,
   getListTypeRent,
 } from '../../../../Model/api/common';
+import {ScrollView} from 'react-native-gesture-handler';
+import MainWrapper from '../../../../components/MainWrapper';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -89,7 +91,7 @@ export default function FindAccommodation() {
     setSelectedId(typeId);
   }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
   return (
-    <View>
+    <MainWrapper refreshControl noSafeArea>
       <InViewPort
         onChange={render => {
           render && setIsRender(render);
@@ -164,7 +166,7 @@ export default function FindAccommodation() {
       ) : (
         <ContentBuy />
       )}
-    </View>
+    </MainWrapper>
   );
 }
 

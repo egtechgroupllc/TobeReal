@@ -37,7 +37,9 @@ export default function RoomScreen() {
       date?.selectedStartDate,
       date?.selectedEndDate,
       numRoomGuest?.numRooms,
-      numRoomGuest?.numGuest,
+      numRoomGuest?.numAdult,
+      numRoomGuest?.numChild.length,
+      numRoomGuest?.numChild,
     ],
     queryFn: () =>
       getListRoomDetailAccmo({
@@ -45,14 +47,14 @@ export default function RoomScreen() {
         date_start: date?.selectedStartDate,
         date_end: date?.selectedEndDate,
         number_room: numRoomGuest?.numRooms,
-        number_occupancy: numRoomGuest?.numGuest,
+        number_occupancy: numRoomGuest?.numAdult,
+        number_child_occupancy: numRoomGuest?.numChild.length,
+        child_age: JSON.stringify(numRoomGuest?.numChild),
       }),
   });
-
   const handleBookingRoom = value => {
     navigate('BookingRoomScreen', {...params, ...value});
   };
-
   useLayoutEffect(() => {
     return setOptions({
       headerTitleComponent: () => (
@@ -84,12 +86,11 @@ export default function RoomScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
   return (
     <MainWrapper scrollEnabled={false}>
       <RoomFilter
         onSelectDate={setDate}
-        data={data?.data?.[0]}
+        data={{...data?.data?.[0], dataFilter: params?.dataFilter}}
         onChangeNum={setNumRoomGuest}
       />
       <RoomFilterType />
@@ -106,6 +107,7 @@ export default function RoomScreen() {
         renderItem={({item, index}) => {
           return item?.id ? (
             <RoomItem
+              isFilterChildren={!!numRoomGuest?.numChild.length}
               dataP={item}
               key={index}
               onBooking={value =>

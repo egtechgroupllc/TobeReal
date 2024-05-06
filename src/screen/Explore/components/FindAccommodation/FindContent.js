@@ -104,64 +104,67 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
                 }}
               />
 
-              {rental === t('daily') && <ChooseOccupancy />}
+              <ChooseOccupancy setValue={setValue} />
             </>
           )}
-          <View style={styles.optionBox}>
-            <View style={styles.boxIcon}>
-              <IconRoom />
+          {isBuy && (
+            <View style={styles.optionBox}>
+              <View style={styles.boxIcon}>
+                <IconRoom />
+              </View>
+              <OptionAccommodation
+                outline
+                multiSelect
+                isSelectAll
+                styleContent={{
+                  columnGap: scale(8),
+                }}
+                data={[
+                  {
+                    text: 'All',
+                  },
+                  {
+                    text: t('studio'),
+                  },
+                  {
+                    text: '1BR',
+                  },
+                  {
+                    text: '2BR',
+                  },
+                  {
+                    text: '3BR+',
+                  },
+                ]}
+              />
             </View>
-            <OptionAccommodation
-              outline
-              multiSelect
-              isSelectAll
-              styleContent={{
-                columnGap: scale(8),
-              }}
-              data={[
-                {
-                  text: 'All',
-                },
-                {
-                  text: t('studio'),
-                },
-                {
-                  text: '1BR',
-                },
-                {
-                  text: '2BR',
-                },
-                {
-                  text: '3BR+',
-                },
-              ]}
-            />
-          </View>
-
-          <View style={styles.optionBox}>
-            <View style={styles.boxIcon}>
-              <IconFurniture />
+          )}
+          {isBuy && (
+            <View style={styles.optionBox}>
+              <View style={styles.boxIcon}>
+                <IconFurniture />
+              </View>
+              <OptionAccommodation
+                outline
+                scrollEnabled
+                styleContent={{
+                  flex: 1,
+                  columnGap: scale(8),
+                }}
+                data={[
+                  {
+                    text: t('all'),
+                  },
+                  {
+                    text: t('full_furnished'),
+                  },
+                  {
+                    text: t('unfurnished'),
+                  },
+                ]}
+              />
             </View>
-            <OptionAccommodation
-              outline
-              scrollEnabled
-              styleContent={{
-                flex: 1,
-                columnGap: scale(8),
-              }}
-              data={[
-                {
-                  text: t('all'),
-                },
-                {
-                  text: t('full_furnished'),
-                },
-                {
-                  text: t('unfurnished'),
-                },
-              ]}
-            />
-          </View>
+          )}
 
           {isBuy && (
             <View style={styles.optionBox}>
@@ -212,7 +215,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
           <CustomButton
             onPress={handleSubmit(handleSearch)}
             buttonType="medium"
-            text={t('Find_Accommodation')}
+            text={!isBuy ? t('Find_Accommodation') : t('Find real estate')}
             styleText={{
               color: COLORS.white,
               textType: 'bold',

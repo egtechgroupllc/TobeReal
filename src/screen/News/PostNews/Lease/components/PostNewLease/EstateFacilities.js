@@ -19,7 +19,6 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
   const [showFacilitiesItem, setShowFacilitiesItem] = useState('');
   const [arrFacilities, setArrFacilities] = useState([]);
   const [isRender, setIsRender] = useState(false);
-
   const facilitiesCheckBox = item => {
     setArrFacilities(prev => {
       const check = prev?.includes(item);

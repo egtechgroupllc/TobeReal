@@ -2,10 +2,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {Category} from '../../../../../components';
+import {scale} from '../../../../../assets/constants';
 
 export default function RoomFilterType() {
   return (
-    <View>
+    <View style={{marginTop: scale(10)}}>
       <Category
         isShadow={false}
         data={[

@@ -60,7 +60,10 @@ export default function DetailRoomScreen({route}) {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
-              <RoomInformation data={data} />
+              <RoomInformation
+                data={data}
+                isFilterChildren={!!data?.dataFilter?.numChild.length}
+              />
             </Box>
             {/* t('little_convenient') */}
             <Box

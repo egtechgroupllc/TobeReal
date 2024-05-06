@@ -8,7 +8,7 @@ export default function RegisterPartnerScreen() {
     <MainAuth
       heading={'Create an account'}
       subHeading={'Connect with your friends today!'}
-      style={{marginTop: scale(10)}}>
+      style={{marginTop: scale(30)}}>
       <ContentPartner />
     </MainAuth>
   );

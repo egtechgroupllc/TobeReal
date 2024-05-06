@@ -22,6 +22,7 @@ import {
   validateUserName,
 } from '../../../../utils/validate';
 import SelectCountry from '../../../News/PostNews/components/SelectCountry';
+import InputPhone from '../../../components/InputPhone';
 
 export default function ContentPartner() {
   const {t} = useLanguage();
@@ -79,12 +80,12 @@ export default function ContentPartner() {
           name="email"
           placeholder={t('enter_email')}
         />
-        <CustomInput
+        <InputPhone
+          name={'phone'}
+          placeholder={t('phone')}
           control={control}
-          sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
-          name="phone"
-          placeholder={t('Enter phone')}
+          style={{height: scale(45)}}
         />
         <SelectCountry setValue={setValue} control={control} />
         <CustomInput
@@ -147,8 +148,9 @@ export default function ContentPartner() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(20),
-    rowGap: scale(16),
+    marginTop: scale(30),
+    rowGap: scale(10),
+    paddingBottom: scale(50),
   },
   wrapper: {
     marginTop: scale(20),

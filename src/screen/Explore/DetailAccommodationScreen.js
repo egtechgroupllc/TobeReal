@@ -73,7 +73,10 @@ export default function DetailAccommodationScreen() {
         dataDetail={data?.data}
         isLoading={isLoading}
         ContentBookComponent={
-          <BookAccommodation isLoading={false} data={data?.data} />
+          <BookAccommodation
+            isLoading={false}
+            data={{...data?.data, dataFilter: params?.dataFilter}}
+          />
         }
       />
     </MainWrapper>

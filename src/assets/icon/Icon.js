@@ -749,6 +749,30 @@ export function IconPeople({fill, ...props}) {
     </Svg>
   );
 }
+export function IconChild({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(24)}
+      height={props?.style?.height || scale(24)}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      data-id="IcKidOccupancy"
+      {...props}>
+      <Path
+        d="M1.761 19.355c-.2.804.455 1.52 1.284 1.52h10.41c.829 0 1.484-.716 1.284-1.52-.571-2.293-2.178-5.395-6.489-5.395s-5.918 3.102-6.489 5.395zM4.393 9.72a3.857 3.857 0 007.714 0v-.738a3.857 3.857 0 10-7.714 0v.737z"
+        fill="#687176"
+      />
+      <Path
+        d="M15.75 16s2-1 2.5-3.5c.404-2.021 0-3 0-3m0 0c-1 0-2.5-1.5-2.5-3.5s1-3 2.5-3 2.5 1 2.5 3-1.5 3.5-2.5 3.5z"
+        stroke="#687176"
+        strokeWidth="2px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
 export function IconWifi({fill, ...props}) {
   return (
     <Svg

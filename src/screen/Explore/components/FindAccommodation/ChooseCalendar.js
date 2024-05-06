@@ -58,7 +58,6 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
         date_end: selectedEndDate,
       });
   }, []);
-
   const onDateChange = (date, type) => {
     setSelectedEndDate(date?.date_end);
     setSelectedStartDate(date?.date_start);

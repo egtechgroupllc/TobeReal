@@ -31,8 +31,12 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
 
-  const [selectedStartDate, setSelectedStartDate] = useState(minDate);
-  const [selectedEndDate, setSelectedEndDate] = useState(dateEnd);
+  const [selectedStartDate, setSelectedStartDate] = useState(
+    data?.dataFilter?.date?.date_start || minDate,
+  );
+  const [selectedEndDate, setSelectedEndDate] = useState(
+    data?.dataFilter?.date?.date_end || dateEnd,
+  );
 
   const listSelectTime = useMemo(() => {
     return [...Array(30)].map((_, index) => {
@@ -46,7 +50,6 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
     setSelectedEndDate(date?.date_end);
     setSelectedStartDate(date?.date_start);
   };
-
   useEffect(() => {
     if (selectedEndDate) {
       const difference = differenceInDays(selectedEndDate, selectedStartDate);

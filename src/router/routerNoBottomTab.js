@@ -14,6 +14,7 @@ import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/Detai
 import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
+import {NotifyScreen} from '../screen/Explore/components/Notify';
 import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
@@ -182,5 +183,9 @@ export default routerNoBottomTab = [
   {
     name: 'ListPaymentMethodsScreen',
     component: ListPaymentMethodsScreen,
+  },
+  {
+    name: 'NotifyScreen',
+    component: NotifyScreen,
   },
 ];

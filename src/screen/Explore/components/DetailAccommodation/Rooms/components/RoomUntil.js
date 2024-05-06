@@ -12,7 +12,7 @@ import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
 import ItemUtil from './ItemUtil';
 
-export default function RoomUntil({data, price}) {
+export default function RoomUntil({data, price, isFilterChildren}) {
   return (
     <>
       <ItemUtil
@@ -25,7 +25,14 @@ export default function RoomUntil({data, price}) {
         }}
       />
       <View>
-        <ItemUtil Icon={IconPeople} value={`${2} guest`} />
+        <ItemUtil
+          Icon={IconPeople}
+          value={
+            !isFilterChildren
+              ? `Max ${data?.max_occupancy} adult(s)`
+              : `Max ${data?.max_occupancy} adult(s), ${data?.max_child_occupancy} children`
+          }
+        />
         <ItemUtil Icon={IconRoom} value={data.room_bed_type.name} />
       </View>
       <View

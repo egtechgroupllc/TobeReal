@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {memo} from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -12,7 +12,6 @@ import {formatPrice} from '../../../../../utils/format';
 export default memo(function BookAccommodation({data}) {
   const {token} = useAuthentication();
   const {navigate} = useNavigation();
-
   return (
     <View style={styles.wrapper}>
       <View
@@ -26,7 +25,7 @@ export default memo(function BookAccommodation({data}) {
             fontSize: SIZES.xMedium,
             color: COLORS.primary,
           }}>
-          {formatPrice(2313132)}
+          {formatPrice(100)}
         </CustomText>
       </View>
       <CustomButton

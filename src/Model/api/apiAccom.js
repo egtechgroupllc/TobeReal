@@ -86,9 +86,14 @@ export const getListRoomDetailAccmo = async ({
   status = 'ACTIVE',
   number_room = 1,
   number_occupancy = 1,
+  number_child_occupancy,
+  child_age = [],
 }) => {
+  const number_child = number_child_occupancy
+    ? `number_child_occupancy=${number_child_occupancy}&child_age=${child_age}`
+    : '';
   const responsive = await instanceAccom.get(
-    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}&number_room=${number_room}&number_occupancy=${number_occupancy}`,
+    `/detail/${id_accomo}/list-room?date_start=${date_start}&date_end=${date_end}&status=${status}&number_room=${number_room}&number_occupancy=${number_occupancy}&${number_child}`,
   );
 
   return responsive.data;

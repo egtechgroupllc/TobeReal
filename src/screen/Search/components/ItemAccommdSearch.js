@@ -17,11 +17,11 @@ export default function ItemAccommdSearch({data}) {
   const params = useRoute().params;
   const detail = () => {
     if (params?.menu === 'RENT') {
-      navigate('DetailAccommodationScreen', data);
+      navigate('DetailAccommodationScreen', {...data, dataFilter: params});
     } else if (params?.menu === 'BUY') {
-      navigate('DetailBuyScreen', data);
+      navigate('DetailBuyScreen', {...data, dataFilter: params});
     } else if (params?.menu === 'TOUR') {
-      navigate('DetailTourScreen', data);
+      navigate('DetailTourScreen', {...data, dataFilter: params});
     }
   };
   return (
