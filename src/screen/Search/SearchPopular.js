@@ -4,7 +4,7 @@ import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconHistory} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 
-export default function SearchRecent({onPress}) {
+export default function SearchPopular({onPress, data}) {
   return (
     <View style={styles.search}>
       <View style={styles.title}>
@@ -13,35 +13,40 @@ export default function SearchRecent({onPress}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Recent searches
+          Popular destination
         </CustomText>
       </View>
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={['Jakarta', 'Bandung', 'Tangerang']}
-        scrollEnabled={false}
+        data={data}
         contentContainerStyle={{
           paddingHorizontal: scale(16),
         }}
+        scrollEnabled={false}
         renderItem={({item, index}) => (
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => onPress(item)}
-            style={[styles.searchItem, {borderTopWidth: index === 0 ? 0 : 1}]}>
-            <IconHistory
+            style={[
+              styles.searchItem,
+              {
+                borderTopWidth: index === 0 ? 0 : 1,
+              },
+            ]}>
+            {/* <IconHistory
               fill={COLORS.textSub}
               style={{
                 height: scale(16),
                 width: scale(16),
               }}
-            />
+            /> */}
             <CustomText
               numberOfLines={1}
               style={{
                 flex: 1,
               }}>
-              {item}
+              {item?.name}
             </CustomText>
           </TouchableOpacity>
         )}

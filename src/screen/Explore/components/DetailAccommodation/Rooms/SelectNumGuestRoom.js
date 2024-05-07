@@ -39,9 +39,6 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
         numChild: numChild,
       });
   };
-  console.log('====================================');
-  console.log(234567890);
-  console.log('====================================');
   return (
     <TouchableOpacity
       activeOpacity={0.7}

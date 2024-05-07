@@ -14,6 +14,7 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import TopImg from './BoxPlaceItem/TopImg';
 import Ribbon from '../../../components/Ribbon';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import RatingBox from './BoxPlaceItem/RatingBox';
 
 export default function BoxPlaceItem({
   data,
@@ -31,6 +32,7 @@ export default function BoxPlaceItem({
   styleWrapper,
   time,
   type,
+  isRating,
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
@@ -78,9 +80,9 @@ export default function BoxPlaceItem({
             <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
 
             <TopImg
-              rating={rating}
-              isStar={isStar}
-              textRating={textRating}
+              // rating={rating}
+              // isStar={isStar}
+              // textRating={textRating}
               isHeart={isHeart}
               type={data?.accommodation_type?.name || data?.estate_type?.name}
             />
@@ -91,7 +93,7 @@ export default function BoxPlaceItem({
               flex: 1,
               marginTop: scale(18),
               margin: scale(10),
-              rowGap: scale(4),
+              rowGap: scale(2),
             }}>
             <CustomText
               textType="semiBold"
@@ -100,8 +102,20 @@ export default function BoxPlaceItem({
               {data?.name || data?.title}
             </CustomText>
 
-            {isStar && <Star rating={rating} />}
-
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                columnGap: scale(20),
+              }}>
+              {isStar && <Star rating={rating} />}
+              {isRating && data?.review_count > 0 && (
+                <RatingBox
+                  rating={data?.review_average}
+                  textRating={data?.review_count}
+                />
+              )}
+            </View>
             <View style={styles.line} />
 
             <View>
@@ -121,7 +135,7 @@ export default function BoxPlaceItem({
                         })}{' '}
                       </CustomText>
 
-                      <CustomText
+                      {/* <CustomText
                         textType="semiBold"
                         style={{
                           color: '#FF0000',
@@ -129,7 +143,7 @@ export default function BoxPlaceItem({
                           minWidth: scale(35),
                         }}>
                         20% OFF
-                      </CustomText>
+                      </CustomText> */}
                     </View>
                   )}
 
@@ -157,15 +171,15 @@ export default function BoxPlaceItem({
                       <TouchableOpacity
                         activeOpacity={0.7}
                         style={{
-                          padding: scale(4),
+                          // padding: scale(4),
                           flexDirection: 'row',
-                          columnGap: scale(10),
+                          columnGap: scale(5),
                         }}>
-                        <CustomText>
+                        <IconMapView />
+                        <CustomText numberOfLines={2} style={{flex: 1}}>
                           {' '}
                           {data?.country?.name}, {data?.province?.name}
                         </CustomText>
-                        <IconMapView />
                       </TouchableOpacity>
                     )}
                   </View>
@@ -216,14 +230,15 @@ const styles = StyleSheet.create({
     marginVertical: scale(3),
   },
 
-  buildingName: {
-    flex: 1,
-  },
+  // buildingName: {
+  //   flex: 1,
+  // },
   price: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    columnGap: scale(6),
+    // justifyContent: 'space-between',
+    columnGap: scale(15),
     alignItems: 'flex-start',
+    width: '85%',
   },
   textDiscount: {
     textDecorationLine: 'line-through',

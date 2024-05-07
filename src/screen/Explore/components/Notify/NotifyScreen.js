@@ -1,52 +1,67 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useLayoutEffect, useMemo} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
 import {COLORS, SHADOW, WIDTH, scale} from '../../../../assets/constants';
 import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import EmptyData from '../../../../components/EmptyData';
+import NotifyItems from './components/NotifyItems';
+import {useInfiniteQuery, useQueryClient} from '@tanstack/react-query';
+import {getHistoryDeposit} from '../../../../Model/api/auth';
 
 const dataWaiting = [
   {
     id: 1,
-    title: 'Hotel Marine',
-    code: '15532131',
-    price: 500,
-    location: 'Indonesia',
+    desc: ' Congratulations on your successful booking at Marine Hotel.',
+    type: 'Booking',
   },
   {
     id: 2,
-    title: 'Hotel Marine',
-    code: '15532131',
-    price: 500,
-    location: 'Indonesia',
+    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
+    type: 'Deposit',
   },
   {
     id: 3,
-    title: 'Hotel Marine',
-    code: '15532131',
-    price: 500,
-    location: 'Indonesia',
+    desc: ' Congratulations on your successful booking at Marine Hotel.',
+    type: 'Booking',
   },
   {
     id: 4,
-    title: 'Hotel Marine',
-    code: '15532131',
-    price: 500,
-    location: 'Indonesia',
+    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
+    type: 'Deposit',
   },
   {
     id: 5,
-    title: 'Hotel Marine',
-    code: '15532131',
-    price: 500,
-    location: 'Indonesia',
+    desc: ' Congratulations on your successful booking at Marine Hotel.',
+    type: 'Booking',
   },
 ];
 
 export default function NotifyScreen() {
-  const {navigate} = useNavigation();
   const {t} = useLanguage();
+  const {navigate} = useNavigation();
+  // const queryClient = useQueryClient();
+  // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
+  //   useInfiniteQuery({
+  //     queryKey: ['deposit', 'my-order'],
+  //     queryFn: getHistoryDeposit,
+  //     getNextPageParam: (lastPage, allPages) => {
+  //       if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
+
+  //       return undefined;
+  //     },
+  //   });
+  // const dataArr = useMemo(
+  //   () =>
+  //     data?.pages
+  //       .map(page => {
+  //         if (!page) return undefined;
+  //         return page?.data?.rows;
+  //       })
+  //       .flat(),
+  //   [data?.pages],
+  // );
+
   const {setOptions} = useNavigation();
   useLayoutEffect(() => {
     return setOptions({
@@ -59,7 +74,21 @@ export default function NotifyScreen() {
   }, []);
   return (
     <MainWrapper scrollEnabled={false}>
-      <EmptyData />
+      <FlatList
+        data={dataWaiting}
+        style={{
+          height: '100%',
+        }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          rowGap: scale(10),
+          padding: scale(20),
+        }}
+        renderItem={({item, index}) => <NotifyItems data={item} />}
+        ListEmptyComponent={() => (
+          <EmptyData styleWrapper={{marginTop: '40%'}} />
+        )}
+      />
     </MainWrapper>
   );
 }

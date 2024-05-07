@@ -32,20 +32,20 @@ export default function HotelResidence() {
         // province_id: 1,
       }),
   });
-  const title = [t('hotel_residence')];
+  const title = [t('Recently viewed')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={30}>
       {isRender && (
         <WrapperContent
-          isSeeAll
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // isSeeAll
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllRentScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           heading={title}
           subHeading={t('seamless_living')}>
           <FlatList
@@ -59,7 +59,9 @@ export default function HotelResidence() {
                 seeViewNumber={1.5}
                 isViewMap
                 isStar
-                rating={2}
+                isRating
+                isDiscount
+                // rating={2}
                 isHeart
                 data={item}
               />

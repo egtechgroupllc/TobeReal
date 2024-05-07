@@ -121,7 +121,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       isActive && (
                         <CheckBox
                           key={index}
-                          text={item}
+                          text={t(item)}
                           textLeft
                           isChecked={arrFacilities.includes(item)}
                           onPress={evt => {

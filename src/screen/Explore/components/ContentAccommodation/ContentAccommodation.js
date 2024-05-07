@@ -21,20 +21,20 @@ export default function ContentAccommodation() {
   return (
     <View style={styles.wrapper}>
       <HotelResidence />
+      <ThematicInstagram />
       {/* <RecommendedUnit data={data} /> */}
       {/* <StayMonthly /> */}
-      <ThematicInstagram />
       <FindBest />
 
-      <AccommodationPremium />
+      {/* <AccommodationPremium /> */}
       {/* <VideoInfluencerApproved /> */}
       {/* <FindApartmentFitsBudget /> */}
 
-      <WeeklyHotDeal />
+      {/* <WeeklyHotDeal /> */}
 
       {/* <BestSelling /> */}
 
-      <RecommendedApartments />
+      {/* <RecommendedApartments /> */}
 
       <BigCity />
     </View>

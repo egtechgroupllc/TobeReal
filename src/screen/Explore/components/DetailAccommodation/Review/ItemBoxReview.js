@@ -5,18 +5,23 @@ import {IconHeart} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import Star from '../../../../../components/Star';
+import {formatDateTime} from '../../../../../utils/format';
 
-export default function ItemBox({style, isShadow = true}) {
+export default function ItemBox({style, isShadow = true, data}) {
   const [seeMoreOwn, setSeeMoreOwn] = useState(false);
   const [isBtnSeeMoreOwn, setIsBtnSeeMoreOwn] = useState(false);
 
   const [seeMoreUser, setSeeMoreUser] = useState(false);
   const [isBtnSeeMoreUser, setIsBtnSeeMoreUser] = useState(false);
 
-  const onTextLayout = useCallback(e => {
+  const onTextLayoutUser = useCallback(e => {
+    if (e.nativeEvent.lines.length > 3) {
+      setIsBtnSeeMoreUser(true);
+    }
+  }, []);
+  const onTextLayoutOwn = useCallback(e => {
     if (e.nativeEvent.lines.length > 3) {
       setIsBtnSeeMoreOwn(true);
-      setIsBtnSeeMoreUser(true);
     }
   }, []);
 
@@ -44,10 +49,10 @@ export default function ItemBox({style, isShadow = true}) {
               flex: 1,
             }}
             numberOfLines={1}>
-            Tuan Kiet
+            {data?.user?.username}
           </CustomText>
 
-          <Star rating={4.5} />
+          <Star rating={data?.rating} />
         </View>
       </View>
 
@@ -55,11 +60,8 @@ export default function ItemBox({style, isShadow = true}) {
         <CustomText
           textType="regular"
           numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
-          onTextLayout={onTextLayout}>
-          Central location, friendly staff, full and delicious buffet breakfast.
-          I really like the hotel's shower gel and shampoo! tasty. I really like
-          hotel shower gel and shampoo! really liked the customer's shower gel
-          and shampoo hotel! really liked the hotel's shower gel and shampoo!
+          onTextLayout={onTextLayoutUser}>
+          {data?.content}
         </CustomText>
 
         {isBtnSeeMoreUser && !seeMoreUser && (
@@ -81,7 +83,7 @@ export default function ItemBox({style, isShadow = true}) {
       <View style={styles.boxOwn}>
         <CustomText
           numberOfLines={seeMoreOwn ? 0 : isBtnSeeMoreOwn ? 3 : 4}
-          onTextLayout={onTextLayout}
+          onTextLayout={onTextLayoutOwn}
           textType="regular"
           style={{
             color: '#687176',
@@ -113,7 +115,9 @@ export default function ItemBox({style, isShadow = true}) {
         <CustomText
           textType="regular"
           style={{marginTop: 'auto', color: '#687176'}}>
-          27-04-2023 21:08
+          {formatDateTime(data?.updatedAt, {
+            dateStyle: 'dd-MM-yyyy, HH:mm',
+          })}
         </CustomText>
         <TouchableOpacity
           style={{

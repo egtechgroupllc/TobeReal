@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, scale} from '../../assets/constants';
 import HeaderBar from '../../components/HeaderBar';
@@ -7,6 +7,9 @@ import SearchRecent from './SearchRecent';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../hooks/useLanguage';
 import MainWrapper from '../../components/MainWrapper';
+import SearchPopular from './SearchPopular';
+import {useQuery} from '@tanstack/react-query';
+import {getListCountry} from '../../Model/api/common';
 
 export default function HomeSearchAccommodScreen() {
   const {navigate, setOptions} = useNavigation();
@@ -25,14 +28,20 @@ export default function HomeSearchAccommodScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const listCountry = useQuery({
+    queryKey: ['common', 'list-country', 1562822],
+    queryFn: () => getListCountry(1562822),
+  });
+  // useEffect(() => {
+  //   setFilter(listCountry.data?.data?.[0]);
+  // }, [listCountry.data?.data]);
+  const data = listCountry.data?.data?.slice(0, 9);
   return (
-    <MainWrapper
-      scrollEnabled={false}
-      >
+    <MainWrapper>
       <View style={styles.content}>
         <SearchChooseLocation onPress={handleSelectSearch} />
-        <SearchRecent onPress={handleSelectSearch} />
+        {/* <SearchRecent onPress={handleSelectSearch} /> */}
+        <SearchPopular onPress={handleSelectSearch} data={data} />
       </View>
       <View
         style={{
@@ -52,5 +61,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     rowGap: scale(14),
     zIndex: 99,
+    paddingBottom: scale(50),
   },
 });

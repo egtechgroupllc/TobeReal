@@ -17,13 +17,16 @@ export default function ListAccomSearchContent({paramsFilter}) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
   const filter = {...params, ...paramsFilter};
-
+  console.log('====================================');
+  console.log(params);
+  console.log('====================================');
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',
       'list-rent',
       'search',
       {
+        ...filter,
         accommodation_type_id: filter?.type,
         country_id: 241,
         name: filter?.name,
@@ -31,6 +34,7 @@ export default function ListAccomSearchContent({paramsFilter}) {
     ],
     queryFn: () =>
       getListRent({
+        ...filter,
         date_end: filter?.date?.date_end,
         date_start: filter?.date?.date_start,
         country_id: 241,
@@ -110,7 +114,11 @@ export default function ListAccomSearchContent({paramsFilter}) {
             <ItemAccommdSearch
               key={`key_${item?.id}-${index}`}
               isButtonBottom
+              isStar
+              isRating
+              rating={3}
               data={item}
+              isDiscount
             />
           ) : (
             <ItemAccommdSearchLoading key={index} />

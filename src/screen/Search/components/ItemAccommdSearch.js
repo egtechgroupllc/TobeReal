@@ -11,8 +11,15 @@ import Bottom from './Bottom';
 import ImageDetail from '../../components/ImageDetail';
 import TopImg from './TopImg';
 import {IconMapView} from '../../../assets/icon/Icon';
+import Star from '../../../components/Star';
 
-export default function ItemAccommdSearch({data}) {
+export default function ItemAccommdSearch({
+  data,
+  isStar,
+  rating,
+  isRating,
+  isDiscount,
+}) {
   const {navigate} = useNavigation();
   const params = useRoute().params;
   const detail = () => {
@@ -33,8 +40,8 @@ export default function ItemAccommdSearch({data}) {
       }}>
       <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
       <TopImg
-        rating
-        isStar
+        // rating
+        // isStar
         isHeart
         feature
         type={data?.accommodation_type?.name || data?.estate_type?.name}
@@ -42,23 +49,30 @@ export default function ItemAccommdSearch({data}) {
       <View
         style={{
           padding: scale(12),
+          // flex: 1,
         }}>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'flex-start',
           }}>
-          <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
+          <CustomText textType="semiBold" style={styles.name} numberOfLines={1}>
             {data?.name || data?.title}
           </CustomText>
-          <RatingBox rating={4.0} />
         </View>
-
-        <View style={{flexDirection: 'row', columnGap: scale(10)}}>
-          <IconMapView />
-          <CustomText>
-            {data?.country?.name}, {data?.province?.name}
-          </CustomText>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: scale(50),
+          }}>
+          {isStar && <Star rating={rating} style={{marginTop: scale(2)}} />}
+          {isRating && data?.review_count > 0 && (
+            <RatingBox
+              rating={data?.review_average ? data?.review_average : 0}
+              textRating={data?.review_count}
+            />
+          )}
         </View>
         {/* <CustomText textType="medium" style={styles.address} numberOfLines={1}>
           {data?.address}
@@ -80,17 +94,53 @@ export default function ItemAccommdSearch({data}) {
           <View style={{overflow: 'hidden', width: '100%'}}>
             <View style={styles.line} />
           </View>
+          {isDiscount && (
+            <View
+              style={{
+                ...styles.price,
+                justifyContent: 'flex-start',
+                marginTop: scale(5),
+              }}>
+              <CustomText textType="regular" style={styles.textDiscount}>
+                {formatPrice(data?.discount, {
+                  locales: 'en',
+                })}{' '}
+              </CustomText>
 
-          <CustomText
-            textType="medium"
-            style={{marginTop: scale(10)}}
-            numberOfLines={1}>
-            {formatPrice(
-              data?.price ||
-                data?.rooms?.[0]?.room_dates?.[0]?.price ||
-                data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
-            )}{' '}
-          </CustomText>
+              {/* <CustomText
+                        textType="semiBold"
+                        style={{
+                          color: '#FF0000',
+                          fontSize: SIZES.xSmall,
+                          minWidth: scale(35),
+                        }}>
+                        20% OFF
+                      </CustomText> */}
+            </View>
+          )}
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: scale(5),
+              justifyContent: 'space-between',
+            }}>
+            <CustomText
+              textType="medium"
+              numberOfLines={1}
+              style={{color: COLORS.primary}}>
+              {formatPrice(
+                data?.price ||
+                  data?.rooms?.[0]?.room_dates?.[0]?.price ||
+                  data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
+              )}{' '}
+            </CustomText>
+            <View style={{flexDirection: 'row'}}>
+              <IconMapView />
+              <CustomText>
+                {data?.country?.name}, {data?.province?.name}
+              </CustomText>
+            </View>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -101,7 +151,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#fff',
     width: '100%',
-    height: scale(220),
+    height: scale(240),
     borderRadius: scale(10),
     ...SHADOW,
   },
@@ -126,5 +176,16 @@ const styles = StyleSheet.create({
     margin: -1,
     marginBottom: 0,
     overflow: 'hidden',
+  },
+  price: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: scale(6),
+    alignItems: 'flex-start',
+  },
+  textDiscount: {
+    textDecorationLine: 'line-through',
+    fontSize: SIZES.xSmall,
+    flex: 1,
   },
 });

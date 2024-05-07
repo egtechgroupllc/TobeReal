@@ -23,10 +23,12 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
-  const {control, setValue, watch, handleSubmit} = useForm();
+  const {control, setValue, unregister, handleSubmit} = useForm();
 
   useEffect(() => {
-    params && setValue('location', params);
+    params?.id && setValue('province_id', params?.id);
+    params?.name && setValue('name', params?.name);
+    params?.id && unregister('name');
   }, [params]);
 
   const handleSearch = value => {
@@ -44,10 +46,10 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
       {tour ? (
         <View style={styles.findContent}>
           <CustomInput
-            control={control}
+            // control={control}
             rules={requireField('Vui long them')}
-            name="location"
-            defaultValue={t('around_me')}
+            // name="location"
+            value={params?.name || t('around_me')}
             iconLeft={IconMarker}
             styleIcon={styles.icon}
             style={{width: '90%'}}
@@ -83,10 +85,11 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
             alignItems: 'center',
           }}>
           <CustomInput
-            control={control}
-            rules={requireField('Vui long them')}
-            name="location"
-            defaultValue={t('around_me')}
+            // control={control}
+            // rules={requireField('Vui long them')}
+            // name="location"
+            value={params?.name || t('around_me')}
+            // defaultValue={t('around_me')}
             iconLeft={IconMarker}
             styleIcon={styles.icon}
             onPress={() =>

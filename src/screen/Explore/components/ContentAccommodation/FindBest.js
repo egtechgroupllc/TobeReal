@@ -66,14 +66,17 @@ export default function FindBest() {
             showsHorizontalScrollIndicator={false}
             data={data?.data?.rows}
             contentContainerStyle={styles.content}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <BoxPlaceItem
-                isHeart
-                isDiscount
+                key={index}
+                seeViewNumber={1.6}
+                isViewMap
                 isStar
-                rating={5}
+                isRating
+                isDiscount
+                rating={2}
+                isHeart
                 data={item}
-                rental="night"
               />
             )}
           />

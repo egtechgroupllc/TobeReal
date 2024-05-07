@@ -17,7 +17,7 @@ import {
 import CustomText from '../../../../components/CustomText';
 import Skeleton from '../../../../components/Skeleton';
 import CustomImage from '../../../../components/CustomImage';
-import { StackActions, useNavigation } from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
 export default function RecommendedUnitItem({
   isButtonBottom,
@@ -36,22 +36,21 @@ export default function RecommendedUnitItem({
 }) {
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
-    
     <TouchableOpacity
-    onPress={() => {
-      if (isFocused()) {
-        dispatch(
-          StackActions.push('NoBottomTab', {
-            screen: 'SeeAllRentScreen',
-            params: {
-              jsondata: jsonImage || [],
-              title: name || '',
-              paramPrice: price || '',
-            },
-          }),
-        );
-      }
-    }}
+      onPress={() => {
+        if (isFocused()) {
+          dispatch(
+            StackActions.push('NoBottomTab', {
+              screen: 'SeeAllRentScreen',
+              params: {
+                jsondata: jsonImage || [],
+                title: name || '',
+                paramPrice: price || '',
+              },
+            }),
+          );
+        }
+      }}
       activeOpacity={0.7}
       style={[
         styles.wrapper,
@@ -64,7 +63,11 @@ export default function RecommendedUnitItem({
       ]}>
       <CustomImage
         resizeMode="stretch"
-        source={data? data?.src : "https://dulichviet.com.vn/images/bandidau/check-in-5-toa-do-du-lich-indonesia-2023-khien-ban-say-me-quen-loi-ve.jpg" }
+        source={
+          data
+            ? data?.src
+            : 'https://dulichviet.com.vn/images/bandidau/check-in-5-toa-do-du-lich-indonesia-2023-khien-ban-say-me-quen-loi-ve.jpg'
+        }
         style={[
           styles.img,
           styesWrapper,

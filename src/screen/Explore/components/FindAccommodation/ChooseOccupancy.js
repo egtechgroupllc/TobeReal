@@ -20,9 +20,6 @@ export default function ChooseOccupancy({setValue}) {
     setValue('numChild', numChild);
     setValue('numRoom', numRooms);
   }, [numAdult, numChild, numRooms]);
-  console.log('====================================');
-  console.log(234567890);
-  console.log('====================================');
   return (
     <View>
       <CustomInput

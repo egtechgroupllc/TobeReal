@@ -15,7 +15,8 @@ export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
     useInfiniteQuery({
       queryKey: ['accommodation', 'list-review', 1],
-      queryFn: () => getListReviewAccmo({id_accomo}),
+      queryFn: params =>
+        getListReviewAccmo({id_accomo, pageParam: params.pageParam}),
       getNextPageParam: (lastPage, allPages) => {
         if (!(lastPage?.data?.rows?.length <= 0)) return allPages.length + 1;
 
@@ -91,6 +92,7 @@ export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
         renderItem={({item, index}) =>
           item?.id ? (
             <ItemBoxReview
+              data={item}
               style={{
                 width: '100%',
                 borderTopWidth: 1,

@@ -47,7 +47,7 @@ export default function InfoUnitFacilities({data}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                {item}
+                {t(item)}
               </CustomText>
             </View>
           ))}
@@ -69,7 +69,7 @@ export default function InfoUnitFacilities({data}) {
                   style={{
                     fontSize: SIZES.xMedium,
                   }}>
-                  {item}
+                  {t(item)}
                 </CustomText>
               </View>
             ))}
