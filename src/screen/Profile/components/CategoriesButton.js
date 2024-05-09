@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {IconRight} from '../../../assets/icon/Icon';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
+import CustomImage from '../../../components/CustomImage';
 
 export default function CategoriesButton({
   title,
@@ -21,6 +22,9 @@ export default function CategoriesButton({
   personalInformation,
   number,
   postManagement,
+  IconSource,
+  styleIcon,
+  nameCountry,
 }) {
   const {t} = useLanguage();
   return (
@@ -35,7 +39,26 @@ export default function CategoriesButton({
             <CustomText textType="bold" style={{...styles.text2}}>
               {title}
             </CustomText>
-            <IconRight />
+            <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+              {!nameCountry && (
+                <CustomImage
+                  source={IconSource || images.iconRight}
+                  style={[styleIcon, {width: scale(10), height: scale(15)}]}
+                />
+              )}
+              {nameCountry && (
+                <>
+                  <CustomImage
+                    source={IconSource}
+                    style={[
+                      styleIcon,
+                      {width: scale(15), height: scale(15), borderRadius: 999},
+                    ]}
+                  />
+                  <CustomText textType="semiBold">{nameCountry}</CustomText>
+                </>
+              )}
+            </View>
           </View>
         </TouchableOpacity>
       )}

@@ -17,11 +17,13 @@ import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 import {formatPrice} from '../../utils/format';
+import {useCountry} from '../../hooks/useCountry';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
 
   const {token} = useAuthentication();
+  const {country} = useCountry();
   const queryClient = useQueryClient();
 
   const {isLoading, data} = useQuery({
@@ -42,7 +44,7 @@ export default function ProfileScreen() {
               numberOfLines={1}
               style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
               {formatPrice(data?.data.balance, {
-                locales: 'vi',
+                currency: country?.currency_code,
               })}
             </CustomText>
           </View>

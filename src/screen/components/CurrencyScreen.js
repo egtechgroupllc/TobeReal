@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React, {
   useCallback,
   useDeferredValue,
@@ -21,6 +21,7 @@ import CheckBox from '../../components/CheckBox';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useCountry} from '../../hooks/useCountry';
 
 export default function CurrencyScreen() {
   const {t} = useLanguage();
@@ -32,26 +33,32 @@ export default function CurrencyScreen() {
 
   const deferredValue = useDeferredValue(search);
   const insets = useSafeAreaInsets();
+  const queryClient = useQueryClient();
 
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['common', 'list-currency'],
-    queryFn: getListCurrency,
-  });
+  const data = queryClient.getQueryData(['common', 'list-currency']);
 
   const handleDone = () => {
-    router.onGoBack(currency);
+    router && router.onGoBack(currency);
     goBack();
   };
 
+  const {country, onSaveCurrency} = useCountry();
   const dataNew = useMemo(() => {
     const dataFilter = data?.data?.filter((item, index) => {
+      if (country?.currency_code === item?.currency_code) {
+        setCurrency(item);
+        onSaveCurrency(item);
+      }
+
       return item?.currency_code
         ?.toLowerCase()
-        .includes(deferredValue?.toLowerCase());
+        .includes(
+          country?.currency_code?.toLowerCase() || deferredValue?.toLowerCase(),
+        );
     });
 
     return dataFilter;
-  }, [data?.data, deferredValue]);
+  }, [data?.data, deferredValue, country]);
 
   useLayoutEffect(() => {
     return setOptions({
@@ -74,25 +81,25 @@ export default function CurrencyScreen() {
 
   const flatListRef = useRef();
 
-  const indexData = useMemo(() => {
-    const dataFilter = data?.data?.findIndex(item => {
-      return item?.id === currency?.id;
-    });
+  // const indexData = useMemo(() => {
+  //   const dataFilter = data?.data?.findIndex(item => {
+  //     return item?.id === currency?.id;
+  //   });
 
-    return dataFilter;
-  }, [router]);
+  //   return dataFilter;
+  // }, [router]);
 
-  const scrollToIndex = useCallback((index = 0) => {
-    flatListRef.current.scrollToIndex({
-      animated: true,
-      index: index,
-      viewPosition: 0.1,
-    });
-  }, []);
+  // const scrollToIndex = useCallback((index = 0) => {
+  //   flatListRef.current.scrollToIndex({
+  //     animated: true,
+  //     index: index,
+  //     viewPosition: 0.1,
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    indexData && scrollToIndex(indexData);
-  }, [indexData]);
+  // useEffect(() => {
+  //   indexData && scrollToIndex(indexData);
+  // }, [indexData]);
 
   return (
     <View style={{flex: 1}}>
@@ -131,7 +138,7 @@ export default function CurrencyScreen() {
           onScrollToIndexFailed={({index}) => {
             const wait = new Promise(resolve => setTimeout(resolve, 100));
             wait.then(() => {
-              scrollToIndex(indexData);
+              // scrollToIndex(indexData);
             });
           }}
           ListEmptyComponent={() => <EmptyData />}
@@ -143,7 +150,7 @@ export default function CurrencyScreen() {
                 textLeft
                 isRadio
                 onPress={() => setCurrency(item)}
-                isChecked={currency?.id === item?.id}
+                isChecked={currency?.currency_code === item?.currency_code}
                 style={styles.checkBox}
               />
             );

@@ -2,6 +2,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {
   useDeferredValue,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useState,
@@ -17,12 +18,14 @@ import CheckBox from '../../components/CheckBox';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
 import {useLanguage} from '../../hooks/useLanguage';
+import RNRestart from 'react-native-restart';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../hooks/useCountry';
 
 export default function CountryScreen() {
   const {t} = useLanguage();
   const {setOptions, goBack} = useNavigation();
   const router = useRoute().params;
-
   const [country, setCountry] = useState(
     router?.province || router?.country || '',
   );
@@ -36,11 +39,25 @@ export default function CountryScreen() {
     queryFn: () =>
       getListCountry(router?.isProvince ? router?.country?.geoname_id : ''),
   });
+  const {onSaveCountry, country: countryStore} = useCountry();
 
-  const handleDone = () => {
-    router.onGoBack(country);
-    goBack();
+  const handleDone = async () => {
+    if (!router) {
+      onSaveCountry(country);
+
+      setTimeout(() => {
+        RNRestart.restart();
+      }, 1000);
+    } else {
+      router.onGoBack(country);
+      goBack();
+    }
   };
+
+  useEffect(() => {
+    countryStore && setCountry(countryStore);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countryStore?.id]);
 
   useLayoutEffect(() => {
     return setOptions({

@@ -5,14 +5,16 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
+import {SIZES, images, scale} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
 import {useNavigation} from '@react-navigation/native';
 import {getListCountry} from '../../../../Model/api/common';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
+import {IconBookings} from '../../../../assets/icon/Icon';
+import CustomText from '../../../../components/CustomText';
 
-export default function ExploreNearbyEstate() {
+export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
@@ -30,13 +32,13 @@ export default function ExploreNearbyEstate() {
     ],
     queryFn: () => getListSell({country_id: 241, province_id: filter?.id}),
   });
-  const listCountry = useQuery({
-    queryKey: ['common', 'list-country', 1562822],
-    queryFn: () => getListCountry(1562822),
+  const listProvince = useQuery({
+    queryKey: ['common', 'list-country', country?.geoname_id],
+    queryFn: () => getListCountry(country?.geoname_id),
   });
   useEffect(() => {
-    setFilter(listCountry.data?.data?.[0]);
-  }, [listCountry.data?.data]);
+    setFilter(listProvince.data?.data?.[0]);
+  }, [listProvince?.data?.data]);
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -45,7 +47,7 @@ export default function ExploreNearbyEstate() {
           isSeeAll
           // worldTour
           isCategory
-          dataCategory={listCountry.data?.data?.slice(0, 9)}
+          dataCategory={listProvince.data?.data?.slice(0, 9)}
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
               screen: 'SeeAllBuyScreen',
@@ -58,15 +60,24 @@ export default function ExploreNearbyEstate() {
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxExploreEstate isHeart isStar data={item} rental="night" />
-            )}
-          />
+          {data?.data?.count !== 0 ? (
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={data?.data?.rows}
+              contentContainerStyle={styles.content}
+              renderItem={({item}) => (
+                <BoxExploreEstate isHeart isStar data={item} rental="night" />
+              )}
+            />
+          ) : (
+            <View style={{alignItems: 'center', rowGap: scale(10)}}>
+              <IconBookings width={scale(50)} height={scale(50)} />
+              <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
+                No data
+              </CustomText>
+            </View>
+          )}
         </WrapperContent>
       )}
     </InViewPort>

@@ -17,9 +17,6 @@ export default function ListAccomSearchContent({paramsFilter}) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
   const filter = {...params, ...paramsFilter};
-  console.log('====================================');
-  console.log(params);
-  console.log('====================================');
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',

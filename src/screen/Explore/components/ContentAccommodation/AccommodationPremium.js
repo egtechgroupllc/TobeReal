@@ -5,32 +5,40 @@ import BoxPlaceItem from './BoxPlaceItem';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {scale} from '../../../../assets/constants';
 import InViewPort from '../../../../components/InViewport';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../utils/format';
 import {useQuery} from '@tanstack/react-query';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../../hooks/useCountry';
 
-export default function AccommodationPremium() {
+export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  const title = [t('saveloka_premium')];
+  const title = [t('Popular in the area')];
   const {navigate} = useNavigation();
+  const {country} = useCountry();
+
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',
       'list-rent',
       {
         accommodation_type_id: 1,
-        country_id: 241,
+        country_id: country?.id,
+        currency_id: currency?.id,
       },
     ],
     queryFn: () =>
       getListRent({
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
-        country_id: 241,
+        country_id: country?.id,
+        currency_id: currency?.id,
       }),
   });
+
+  if (!(data?.data?.count !== 0)) return null;
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
       {isRender && (
@@ -45,7 +53,7 @@ export default function AccommodationPremium() {
             })
           }
           heading={title}
-          subHeading={t('selected_premium')}
+          subHeading={t('Find popular accomodation in your area')}
           styleWrapper={{backgroundColor: '#f8eede'}}>
           <FlatList
             horizontal
@@ -57,12 +65,11 @@ export default function AccommodationPremium() {
                 isHeart
                 isDiscount
                 isStar
+                isRating
                 rating={3}
                 data={item}
-                rental="night"
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
+                seeViewNumber={1.6}
+                isViewMap
               />
             )}
           />

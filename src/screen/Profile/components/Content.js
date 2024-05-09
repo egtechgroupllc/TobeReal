@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
@@ -16,12 +16,24 @@ import {useLanguage} from '../../../hooks/useLanguage';
 import {IconAdd} from '../../../assets/icon/Icon';
 import BoxItemProfile from './BoxItemProfile';
 import {useAuthentication} from '../../../hooks/useAuthentication';
+import {useCountry} from '../../../hooks/useCountry';
+import EncryptedStorage from 'react-native-encrypted-storage';
 export default function Content() {
   const {t} = useLanguage();
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
   const {token} = useAuthentication();
+  const {country} = useCountry();
+  const [selectedLanguage, setSelectedLanguage] = useState([]);
+  useEffect(() => {
+    const loadSavedLanguage = async () => {
+      const result = await EncryptedStorage.getItem('@selectedLanguage');
+      // const result = await EncryptedStorage.removeItem('save_name');
+      setSelectedLanguage(JSON.parse(result));
+    };
+    loadSavedLanguage();
+  }, []);
   const toggleCheckBox = () => {
     // setCheck(prevCheck => !prevCheck);
   };
@@ -49,8 +61,18 @@ export default function Content() {
   const wishlist = () => {
     navigation.navigate('HomeWishListScreen');
   };
+  const selectCountry = () => {
+    navigation.navigate('NoBottomTab', {
+      screen: 'CountryScreen',
+    });
+  };
   const selectLanguage = () => {
     navigation.navigate('SelectLanguageScreen');
+  };
+  const selectCurrency = () => {
+    navigation.navigate('NoBottomTab', {
+      screen: 'CurrencyScreen',
+    });
   };
   const AccountType = () => {
     navigation.navigate('RegisterAccountTypeScreen');
@@ -183,10 +205,25 @@ export default function Content() {
           Icon={IconAdd}
         /> */}
         <CategoriesButton
+          title={t('Select country')}
+          onPress={selectCountry}
+          large={true}
+          nameCountry={`${country?.flag}  ${country?.name}`}
+        />
+        <CategoriesButton
+          title={t('Main currency')}
+          onPress={selectCurrency}
+          large={true}
+          nameCountry={`${country?.currency_code}`}
+        />
+        <CategoriesButton
           title={t('select_language')}
           onPress={selectLanguage}
           large={true}
+          IconSource={selectedLanguage?.flag}
+          nameCountry={selectedLanguage?.name}
         />
+
         {/* <CategoriesButton
           title={t('become_shome_partner')}
           onPress={AccountType}

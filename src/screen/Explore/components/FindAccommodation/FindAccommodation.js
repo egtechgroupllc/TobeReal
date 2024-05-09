@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {WIDTH, scale} from '../../../../assets/constants';
+import {WIDTH, images, scale} from '../../../../assets/constants';
 import {
   IconApartment,
   IconEmigrate,
@@ -90,6 +90,50 @@ export default function FindAccommodation() {
         : typeBuy?.data?.data?.[0]?.id;
     setSelectedId(typeId);
   }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
+  const listRent = useRef([
+    {
+      id: 1,
+      name: t('Hotel'),
+      icon: IconHotel,
+    },
+    {
+      id: 2,
+      name: t('Apartment'),
+      icon: IconApartment,
+    },
+    {
+      id: 3,
+      name: t('House'),
+      icon: IconHome,
+    },
+    {
+      id: 4,
+      name: t('Villa'),
+      icon: IconVilla,
+    },
+  ]).current;
+  const listBuy = useRef([
+    {
+      id: 1,
+      name: t('Apartment'),
+      icon: IconApartment,
+    },
+    {
+      id: 2,
+      name: t('House'),
+      icon: IconHome,
+    },
+    {
+      id: 3,
+      name: t('Villa'),
+      icon: IconVilla,
+    },
+    {
+      id: 4,
+      name: t('Land'),
+      icon: IconLand,
+    },
+  ]).current;
   return (
     <MainWrapper refreshControl noSafeArea>
       <InViewPort
@@ -129,9 +173,9 @@ export default function FindAccommodation() {
                         keyTextView={'name'}
                         data={
                           tabSelect === 'RENT'
-                            ? typeRent?.data?.data
+                            ? listRent || typeRent?.data?.data
                             : tabSelect === 'BUY'
-                            ? typeBuy?.data?.data
+                            ? listBuy || typeBuy?.data?.data
                             : tabSelect === 'TOUR'
                             ? listTour
                             : []

@@ -1,28 +1,28 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import {CustomInput} from '../../components';
-import {
-  IconHistory,
-  IconMapView,
-  IconMyLocation,
-  IconSearch,
-} from '../../assets/icon/Icon';
-import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
-import CustomText from '../../components/CustomText';
-import RecommendedUnitItem from '../Explore/components/ContentAccommodation/RecommendedUnitItem';
-import WrapperContent from '../Explore/components/WrapperContent';
-import BigCity from '../Explore/components/ContentAccommodation/BigCity';
 import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
+import {IconHistory, IconMyLocation, IconSearch} from '../../assets/icon/Icon';
+import {CustomInput} from '../../components';
+import CustomText from '../../components/CustomText';
 
 export default function SearchChooseLocation({onPress}) {
   const {navigate} = useNavigation();
   const {control, setValue, watch, handleSubmit} = useForm();
+  const [listSearchHistory, setListSearchHistory] = useState([]);
 
+  useEffect(() => {
+    const loadSearchRecent = async () => {
+      const result = await EncryptedStorage.getItem('search_recent');
+      setListSearchHistory(JSON.parse(result));
+    };
+    loadSearchRecent();
+  }, []);
   const goHome = value => {
     navigate('HomeExploreScreen', value);
   };
-
   return (
     <View style={styles.search}>
       <View>
@@ -67,7 +67,7 @@ export default function SearchChooseLocation({onPress}) {
         </View>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={['Jakarta', 'Bandung', 'Tangerang']}
+          data={listSearchHistory}
           scrollEnabled={false}
           // contentContainerStyle={{
           //   paddingHorizontal: scale(16),
@@ -89,7 +89,7 @@ export default function SearchChooseLocation({onPress}) {
                 style={{
                   flex: 1,
                 }}>
-                {item}
+                {item?.name}
               </CustomText>
             </TouchableOpacity>
           )}

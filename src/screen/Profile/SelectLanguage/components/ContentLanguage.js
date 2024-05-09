@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import {SIZES, WIDTH, images} from '../../../../assets/constants';
@@ -7,6 +7,8 @@ import {showMess} from '../../../../assets/constants/Helper';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import ItemLanguage from './ItemLanguage';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import RNRestart from 'react-native-restart';
 const listLanguage = [
   {
     id: '1',
@@ -65,11 +67,29 @@ export default function ContentLanguage() {
   const {goBack, setOptions} = useNavigation();
 
   const [language, setLanguage] = useState(locale);
+  const onSaveLanguage = async () => {
+    await EncryptedStorage.setItem(
+      '@selectedLanguage',
+      JSON.stringify(language),
+    );
+  };
+
+  useEffect(() => {
+    const loadSavedLanguage = async () => {
+      const result = await EncryptedStorage.getItem('@selectedLanguage');
+      setLanguage(JSON.parse(result));
+    };
+    loadSavedLanguage();
+  }, []);
 
   const changeLanguage = () => {
-    changeLocale(language);
+    onSaveLanguage();
+    changeLocale(language?.languageCode);
     showMess(t('change_language_success'), 'success');
-    goBack();
+
+    setTimeout(() => {
+      RNRestart.restart();
+    }, 500);
   };
 
   useLayoutEffect(() => {
@@ -78,7 +98,7 @@ export default function ContentLanguage() {
       headerRight: () => (
         <CustomText
           textType="semiBold"
-          disabled={language === locale}
+          // disabled={language === locale}
           style={{
             color: language !== locale ? '#fff' : '#eee',
             fontSize: SIZES.xMedium,
@@ -103,14 +123,15 @@ export default function ContentLanguage() {
           marginTop: '10%',
         }}
         scrollEnabled={true}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <ItemLanguage
+            key={index}
             item={item}
-            check={language === item.languageCode}
-            onPress={() => setLanguage(item?.languageCode)}
+            check={language?.languageCode === item?.languageCode}
+            onPress={() => setLanguage(item)}
           />
         )}
-        keyExtractor={item => item.languageCode}
+        keyExtractor={item => item?.languageCode}
       />
     </View>
   );

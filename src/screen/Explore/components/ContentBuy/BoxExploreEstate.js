@@ -28,6 +28,7 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
 import {type} from '../../../../components/Marquee';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export default function BoxExploreEstate({
   data,
@@ -51,6 +52,17 @@ export default function BoxExploreEstate({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
+  const onSavedName = async () => {
+    const result = await EncryptedStorage.getItem('@save_name_estate');
+
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.title !== data?.title)
+      : [];
+    await EncryptedStorage.setItem(
+      '@save_name_estate',
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
+    );
+  };
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -58,6 +70,7 @@ export default function BoxExploreEstate({
           activeOpacity={0.7}
           onPress={() => {
             if (isFocused()) {
+              onSavedName();
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailBuyScreen',
@@ -71,6 +84,7 @@ export default function BoxExploreEstate({
             {
               width: scale(500 / seeViewNumber),
               // height: scale(200),
+              flex: 1,
             },
             styleWrapper,
             SHADOW,
@@ -200,7 +214,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: scale(10),
     backgroundColor: '#F5F4F8',
-    minHeight: scale(230),
+    // minHeight: scale(230),
     // height: 200,
     borderRadius: 12,
     ...SHADOW,

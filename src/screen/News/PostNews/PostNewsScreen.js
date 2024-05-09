@@ -16,7 +16,7 @@ export default function PostNewsScreen() {
   const queryClient = useQueryClient();
 
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
-  console.log(profile);
+
   const {navigate} = useNavigation();
   const goBack = () => {};
   const upgrade = () => {};

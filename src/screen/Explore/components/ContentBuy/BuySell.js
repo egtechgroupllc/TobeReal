@@ -12,22 +12,23 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
 
-export default function BuySell() {
+export default function BuySell({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Buy and sell real estate nationwide')];
-  const {data, isLoading, isError, error} = useQuery({
-    queryKey: [
-      'estate',
-      'list-post',
-      {
-        estate_type_id: 1,
-        country_id: 241,
-      },
-    ],
-    queryFn: () => getListSell({country_id: 241}),
-  });
+  const title = [t('Recently viewed')];
+
+  // const {data, isLoading, isError, error} = useQuery({
+  //   queryKey: [
+  //     'estate',
+  //     'list-post',
+  //     {
+  //       estate_type_id: 1,
+  //       country_id: 241,
+  //     },
+  //   ],
+  //   queryFn: () => getListSell({country_id: 241}),
+  // });
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
@@ -48,7 +49,7 @@ export default function BuySell() {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows?.slice(0, 9)}
+            data={data}
             contentContainerStyle={styles.content}
             renderItem={({item}) => (
               <BoxPlaceItem

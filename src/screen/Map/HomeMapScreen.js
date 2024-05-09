@@ -67,7 +67,6 @@ export default function HomeMapScreen({showListLocation, style}) {
         ? () => getListSell(objBuy)
         : () => getListTour(objTour),
   });
-  console.log(filter, 12321, data);
   const [state, setState] = useState(initialMapState);
 
   useEffect(() => {

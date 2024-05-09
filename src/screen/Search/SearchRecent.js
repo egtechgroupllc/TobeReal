@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconHistory} from '../../assets/icon/Icon';

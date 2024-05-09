@@ -27,6 +27,7 @@ import {BottomTab, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
 import {AddPolicyScreen} from './src/screen/News/PostNews/Lease';
+import {CountryProvider} from './src/context/CountryContent';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -92,25 +93,27 @@ export default function App() {
           <QueryClientProvider client={queryClient}>
             <Loading />
             <KeyboardProvider>
-              <LanguageProvider>
-                <AuthProvider>
-                  <FlashMessage
-                    position={
-                      Platform.OS === 'ios'
-                        ? 'top'
-                        : {top: StatusBar.currentHeight, left: 0, right: 0}
-                    }
-                    floating={Platform.OS !== 'ios'}
-                  />
-                  <BottomSheetModalProvider>
-                    <StatusBar
-                      barStyle="dark-content"
-                      backgroundColor={COLORS.primary}
+              <CountryProvider>
+                <LanguageProvider>
+                  <AuthProvider>
+                    <FlashMessage
+                      position={
+                        Platform.OS === 'ios'
+                          ? 'top'
+                          : {top: StatusBar.currentHeight, left: 0, right: 0}
+                      }
+                      floating={Platform.OS !== 'ios'}
                     />
-                    <Layout />
-                  </BottomSheetModalProvider>
-                </AuthProvider>
-              </LanguageProvider>
+                    <BottomSheetModalProvider>
+                      <StatusBar
+                        barStyle="dark-content"
+                        backgroundColor={COLORS.primary}
+                      />
+                      <Layout />
+                    </BottomSheetModalProvider>
+                  </AuthProvider>
+                </LanguageProvider>
+              </CountryProvider>
             </KeyboardProvider>
           </QueryClientProvider>
         </NavigationContainer>

@@ -74,12 +74,20 @@ export default memo(
           renderItem={({item, index}) => (
             <BoxPlaceItem
               key={index}
-              seeViewNumber={1.4}
-              styleWrapper={{
-                height: scale(190),
-              }}
+              // seeViewNumber={1.4}
+              // styleWrapper={{
+              //   height: scale(190),
+              // }}
+              // data={item}
+              // time={item.id < 6 ? true : false}
+              isHeart
+              isDiscount
+              isStar
+              isRating
+              rating={3}
               data={item}
-              time={item.id < 6 ? true : false}
+              seeViewNumber={1.4}
+              // isViewMap
             />
           )}
         />

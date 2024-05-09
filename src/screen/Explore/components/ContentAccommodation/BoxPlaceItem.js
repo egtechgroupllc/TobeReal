@@ -15,6 +15,8 @@ import TopImg from './BoxPlaceItem/TopImg';
 import Ribbon from '../../../components/Ribbon';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import RatingBox from './BoxPlaceItem/RatingBox';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function BoxPlaceItem({
   data,
@@ -36,7 +38,22 @@ export default function BoxPlaceItem({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
-  const price = data?.rooms?.[0]?.room_dates?.[0]?.price;
+  const price = data?.rooms?.[0]?.room_dates?.[0]?.price_final;
+
+  const onSavedName = async () => {
+    const result = await EncryptedStorage.getItem('save_name');
+
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.name !== data?.name)
+      : [];
+    await EncryptedStorage.setItem(
+      'save_name',
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
+    );
+  };
+
+  const {country} = useCountry();
+
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -44,6 +61,7 @@ export default function BoxPlaceItem({
           activeOpacity={0.7}
           onPress={() => {
             if (isFocused()) {
+              onSavedName();
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: data?.accommodation_type_id
@@ -60,7 +78,8 @@ export default function BoxPlaceItem({
             styles.wrapper,
             {
               width: scale(400 / seeViewNumber),
-              // height: scale(200),
+              // height: scale(265),
+              flex: 1,
             },
             styleWrapper,
             SHADOW,
@@ -90,7 +109,7 @@ export default function BoxPlaceItem({
 
           <View
             style={{
-              flex: 1,
+              // flex: 1,
               marginTop: scale(18),
               margin: scale(10),
               rowGap: scale(2),
@@ -107,18 +126,25 @@ export default function BoxPlaceItem({
                 flexDirection: 'row',
                 alignItems: 'center',
                 columnGap: scale(20),
+                // height: scale(25),
               }}>
               {isStar && <Star rating={rating} />}
-              {isRating && data?.review_count > 0 && (
+              {isRating && data?.review_count > 0 ? (
                 <RatingBox
                   rating={data?.review_average}
                   textRating={data?.review_count}
                 />
+              ) : (
+                <View style={styles.boxIcon}>
+                  <CustomText style={{color: COLORS.grey}} textType="semiBold">
+                    No review
+                  </CustomText>
+                </View>
               )}
             </View>
             <View style={styles.line} />
 
-            <View>
+            <View style={{rowGap: scale(2)}}>
               {!multiPrice ? (
                 <>
                   {isDiscount && (
@@ -156,7 +182,7 @@ export default function BoxPlaceItem({
                         isDiscount && {color: COLORS.primary},
                       ]}>
                       {formatPrice(price || data?.price, {
-                        locales: 'en',
+                        currency: country?.currency_code,
                       })}{' '}
                       {time && type === 'RENT' && (
                         <CustomText
@@ -166,23 +192,22 @@ export default function BoxPlaceItem({
                         </CustomText>
                       )}
                     </CustomText>
-
-                    {isViewMap && (
-                      <TouchableOpacity
-                        activeOpacity={0.7}
-                        style={{
-                          // padding: scale(4),
-                          flexDirection: 'row',
-                          columnGap: scale(5),
-                        }}>
-                        <IconMapView />
-                        <CustomText numberOfLines={2} style={{flex: 1}}>
-                          {' '}
-                          {data?.country?.name}, {data?.province?.name}
-                        </CustomText>
-                      </TouchableOpacity>
-                    )}
                   </View>
+                  {isViewMap && (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={{
+                        // padding: scale(4),
+                        flexDirection: 'row',
+                        columnGap: scale(5),
+                      }}>
+                      <IconMapView />
+                      <CustomText numberOfLines={2} style={{flex: 1}}>
+                        {' '}
+                        {data?.country?.name}, {data?.province?.name}
+                      </CustomText>
+                    </TouchableOpacity>
+                  )}
                 </>
               ) : (
                 <ViewMultiPrice
@@ -244,5 +269,11 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+  },
+  boxIcon: {
+    backgroundColor: '#f5f5f5',
+    padding: scale(4),
+    paddingHorizontal: scale(6),
+    borderRadius: 6,
   },
 });

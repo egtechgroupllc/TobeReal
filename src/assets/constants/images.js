@@ -70,6 +70,7 @@ export default {
   logoSaveloka: require('../images/logoSaveloka.gif'),
   logoSplash: require('../images/logoSplash.gif'),
   iconSaveloka: require('../images/iconSaveloka.gif'),
+  iconRight: require('../images/iconRight.png'),
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),
   // c15_2: require('../images/c15_2.jpg'),

@@ -1,32 +1,47 @@
-import React from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {images, scale} from '../../../../assets/constants';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import WrapperContent from '../WrapperContent';
 import AccommodationPremium from './AccommodationPremium';
-import BestSelling from './BestSelling';
 import BigCity from './BigCity';
-import FindApartmentFitsBudget from './FindApartmentFitsBudget/FindApartmentFitsBudget';
 import FindBest from './FindBest';
 import HotelResidence from './HotelResidence';
-import RecommendedApartments from './RecommendedApartments';
-import RecommendedUnit from './RecommendedUnit';
-import StayMonthly from './StayMonthly ';
 import ThematicInstagram from './ThematicInstagram';
-import VideoInfluencerApproved from './VideoInfluencer/VideoInfluencerApproved';
-import WeeklyHotDeal from './WeeklyHotDeal';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function ContentAccommodation() {
   const {t} = useLanguage();
+
+  const [listSavedName, setListSavedName] = useState([]);
+  const {country, currency} = useCountry();
+
+  useEffect(() => {
+    const loadSavedName = async () => {
+      const result = await EncryptedStorage.getItem('save_name');
+      // const result = await EncryptedStorage.removeItem('save_name');
+      setListSavedName(JSON.parse(result));
+    };
+    loadSavedName();
+  }, []);
+
+  const dataNew = useMemo(
+    () =>
+      listSavedName.filter(item => {
+        return item?.country_id === country?.id;
+      }),
+    [listSavedName[0]?.id, country?.id],
+  );
+  console.log(listSavedName[0]?.id);
   return (
     <View style={styles.wrapper}>
-      <HotelResidence />
+      {dataNew?.length > 0 ? <HotelResidence data={dataNew} /> : <View />}
+      <AccommodationPremium currency={currency} />
+      <FindBest country={country} currency={currency} />
       <ThematicInstagram />
       {/* <RecommendedUnit data={data} /> */}
       {/* <StayMonthly /> */}
-      <FindBest />
 
-      {/* <AccommodationPremium /> */}
       {/* <VideoInfluencerApproved /> */}
       {/* <FindApartmentFitsBudget /> */}
 

@@ -1,22 +1,19 @@
-import React, {useEffect, useLayoutEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {COLORS, scale} from '../../assets/constants';
-import HeaderBar from '../../components/HeaderBar';
-import SearchChooseLocation from './SearchChooseLocation';
-import SearchRecent from './SearchRecent';
 import {useNavigation} from '@react-navigation/native';
-import {useLanguage} from '../../hooks/useLanguage';
-import MainWrapper from '../../components/MainWrapper';
-import SearchPopular from './SearchPopular';
 import {useQuery} from '@tanstack/react-query';
+import React, {useLayoutEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {getListCountry} from '../../Model/api/common';
-
+import {COLORS, scale} from '../../assets/constants';
+import MainWrapper from '../../components/MainWrapper';
+import {useLanguage} from '../../hooks/useLanguage';
+import SearchChooseLocation from './SearchChooseLocation';
+import SearchPopular from './SearchPopular';
 export default function HomeSearchAccommodScreen() {
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
 
   const handleSelectSearch = value => {
-    navigate(t('explore'), {
+    navigate('Explore', {
       screen: 'HomeExploreScreen',
       params: value,
     });

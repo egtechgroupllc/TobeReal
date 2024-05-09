@@ -30,6 +30,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export default function BoxPlaceItem({
   data,
@@ -52,6 +53,18 @@ export default function BoxPlaceItem({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
+  const onSavedName = async () => {
+    const result = await EncryptedStorage.getItem('@save_name_estate');
+
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.title !== data?.title)
+      : [];
+    await EncryptedStorage.setItem(
+      '@save_name_estate',
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
+    );
+  };
+
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -59,6 +72,7 @@ export default function BoxPlaceItem({
           activeOpacity={0.7}
           onPress={() => {
             if (isFocused()) {
+              onSavedName();
               dispatch(
                 StackActions.push('NoBottomTab', {
                   screen: 'DetailBuyScreen',

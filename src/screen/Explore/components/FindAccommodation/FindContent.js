@@ -18,6 +18,7 @@ import {useForm} from 'react-hook-form';
 import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export default function FindContent({isBuy, rental, tour, dataFind}) {
   const {t} = useLanguage();
@@ -30,8 +31,23 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
     params?.name && setValue('name', params?.name);
     params?.id && unregister('name');
   }, [params]);
+  const saveRecentSearch = async () => {
+    const result = await EncryptedStorage.getItem('search_recent');
+    // const result = await EncryptedStorage.removeItem('search_recent');
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.name !== params?.name)
+      : [];
+
+    params?.name &&
+      (await EncryptedStorage.setItem(
+        'search_recent',
+        JSON.stringify(result ? [params, ...arrsdf.slice(0, 4)] : [params]),
+      ));
+  };
 
   const handleSearch = value => {
+    saveRecentSearch();
+
     navigate('NoBottomTab', {
       screen: 'ListAccommodationSearchScreen',
       params: {

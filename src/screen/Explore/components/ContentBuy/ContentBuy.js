@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -9,82 +9,9 @@ import TopLocation from './TopLocation';
 import TopEstateAgent from './TopEstateAgent';
 import ExploreNearbyEstate from './ExploreNearbyEstate';
 import DiscoveryEstate from './DiscoveryEstate';
-const dataPackage = [
-  {
-    id: 1,
-    src: images.c15,
-    name: 'C15_05_BlockC Emerald',
-    price: 25000000,
-    imgdetail: [
-      images.c15_1,
-      images.c15_2,
-      images.c15_3,
-      images.c15_4,
-      images.c15_5,
-      images.c15_6,
-    ],
-  },
-  {
-    id: 2,
-    src: images.c16,
-    name: 'D11.06 Emerald',
-    price: 16000000,
-    imgdetail: [
-      images.c16_1,
-      images.c16_2,
-      images.c16_3,
-      images.c16_4,
-      images.c16_5,
-      images.c16_6,
-      images.c16_7,
-      images.c16_8,
-      images.c16_9,
-    ],
-  },
-  {
-    id: 3,
-    src: images.p14,
-    name: 'P14.07 Diamond',
-    price: 28000000,
-    imgdetail: [
-      images.p14_1,
-      images.p14_2,
-      images.p14_3,
-      images.p14_4,
-      images.p14_5,
-      images.p14_6,
-      images.p14_7,
-      images.p14_8,
-    ],
-  },
-  {
-    id: 4,
-    src: images.q10,
-    name: 'Centrosa Garden Q.10',
-    price: 26000000,
-    imgdetail: [
-      images.q10_1,
-      images.q10_2,
-      images.q10_3,
-      images.q10_4,
-      images.q10_5,
-      images.q10_6,
-    ],
-  },
-  {
-    id: 5,
-    src: images.a6,
-    name: 'A6.7.08 Diamod Alanta Plus',
-    price: 18000000,
-    imgdetail: [
-      images.a6_1,
-      images.a6_2,
-      images.a6_3,
-      images.a6_4,
-      images.a6_5,
-    ],
-  },
-];
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../../hooks/useCountry';
+
 const dataWorld = [
   {
     id: 1,
@@ -384,8 +311,10 @@ const dataAgent = [
   },
 ];
 export default function ContentBuy() {
+  const {t} = useLanguage();
   const [tourData, setTourData] = useState(dataDomestic);
-
+  const {country} = useCountry();
+  const [listSavedName, setListSavedName] = useState([]);
   const handleCategoryChange = categoryData => {
     if (categoryData === 'Domestic destination') {
       setTourData(dataDomestic);
@@ -393,15 +322,31 @@ export default function ContentBuy() {
       setTourData(dataInternational);
     }
   };
-  const {t} = useLanguage();
+
+  useEffect(() => {
+    const loadSavedName = async () => {
+      const result = await EncryptedStorage.getItem('@save_name_estate');
+
+      setListSavedName(JSON.parse(result));
+    };
+    loadSavedName();
+  }, []);
+
+  const dataNew = useMemo(
+    () =>
+      listSavedName.filter(item => {
+        return item?.country_id === country?.id;
+      }),
+    [listSavedName[0]?.id, country?.id],
+  );
   return (
     <View style={styles.wrapper}>
-      <BuySell />
+      {dataNew?.length > 0 ? <BuySell data={dataNew} /> : <View />}
       {/* <Discount /> */}
       <FeatureEstate />
       <TopLocation data={dataLocation} />
       <TopEstateAgent data={dataAgent} />
-      <ExploreNearbyEstate data={dataWorld} />
+      <ExploreNearbyEstate country={country} />
       <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} />
     </View>
   );

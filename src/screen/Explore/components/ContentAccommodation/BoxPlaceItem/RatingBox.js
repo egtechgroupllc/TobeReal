@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SHADOW, scale} from '../../../../../assets/constants';
+import {formatNumber} from '../../../../../utils/format';
 
 export default function RatingBox({rating, textRating, style}) {
   return (
@@ -22,7 +23,7 @@ export default function RatingBox({rating, textRating, style}) {
           textType="semiBold"
           style={{color: '#013b96'}}
           numberOfLines={1}>
-          {textRating} {textRating > 1 ? 'reviews' : 'review'}
+          {formatNumber(textRating)} {textRating > 1 ? 'reviews' : 'review'}
         </CustomText>
       </View>
     </View>
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
   },
   boxIcon: {
     backgroundColor: '#f5f5f5',
-    padding: scale(5),
-    paddingHorizontal: scale(10),
+    padding: scale(4),
+    paddingHorizontal: scale(6),
     borderRadius: 6,
   },
 });

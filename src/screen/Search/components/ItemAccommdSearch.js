@@ -12,6 +12,7 @@ import ImageDetail from '../../components/ImageDetail';
 import TopImg from './TopImg';
 import {IconMapView} from '../../../assets/icon/Icon';
 import Star from '../../../components/Star';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export default function ItemAccommdSearch({
   data,
@@ -24,13 +25,39 @@ export default function ItemAccommdSearch({
   const params = useRoute().params;
   const detail = () => {
     if (params?.menu === 'RENT') {
+      onSavedName();
       navigate('DetailAccommodationScreen', {...data, dataFilter: params});
     } else if (params?.menu === 'BUY') {
+      onSavedNameEstate();
       navigate('DetailBuyScreen', {...data, dataFilter: params});
     } else if (params?.menu === 'TOUR') {
       navigate('DetailTourScreen', {...data, dataFilter: params});
     }
   };
+  const onSavedName = async () => {
+    const result = await EncryptedStorage.getItem('save_name');
+
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.name !== data?.name)
+      : [];
+    await EncryptedStorage.setItem(
+      'save_name',
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 4)] : [data]),
+    );
+  };
+
+  const onSavedNameEstate = async () => {
+    const result = await EncryptedStorage.getItem('@save_name_estate');
+
+    const arrsdf = result
+      ? JSON.parse(result).filter(item => item?.title !== data?.title)
+      : [];
+    await EncryptedStorage.setItem(
+      '@save_name_estate',
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
+    );
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}
