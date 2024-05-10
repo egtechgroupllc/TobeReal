@@ -1,5 +1,5 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 
@@ -51,6 +51,19 @@ export default function BoxPlaceItem({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
+  const priceFinal = useMemo(() => {
+    if (data?.rooms) {
+      let min = 0;
+      data?.rooms?.map(element => {
+        const result = element?.room_dates.map(room => {
+          return room?.price_final;
+        });
+
+        min = Math.min(...result);
+      });
+      return min;
+    }
+  }, [data?.rooms]);
 
   const {country} = useCountry();
 
@@ -69,7 +82,7 @@ export default function BoxPlaceItem({
                     : data?.estate_type_id
                     ? 'DetailBuyScreen'
                     : 'DetailTourScreen',
-                  params: data,
+                  params: {...data, priceFinal},
                 }),
               );
             }
@@ -181,7 +194,7 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.primary},
                       ]}>
-                      {formatPrice(price || data?.price, {
+                      {formatPrice(priceFinal || data?.price, {
                         currency: country?.currency_code,
                       })}{' '}
                       {time && type === 'RENT' && (

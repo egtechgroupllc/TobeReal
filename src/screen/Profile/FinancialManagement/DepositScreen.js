@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useMemo, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
@@ -16,6 +17,8 @@ import {
 import FooterDeposit from './components/Deposit/FooterDeposit';
 import ListAccountBank from './components/Deposit/ListAccountBank';
 import ListPriceSelect from './components/Deposit/ListPriceSelect';
+import {useCountry} from '../../../hooks/useCountry';
+import CustomText from '../../../components/CustomText';
 
 export default function DepositScreen({route}) {
   const {t} = useLanguage();
@@ -32,6 +35,10 @@ export default function DepositScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const {currency} = useCountry();
+
+  const minPrice = 1 * currency?.exchange_rate;
+  const maxPrice = 1000 * currency?.exchange_rate;
 
   return (
     <>
@@ -42,57 +49,69 @@ export default function DepositScreen({route}) {
         styleContent={{
           paddingHorizontal: scale(10),
           paddingVertical: scale(20),
+          rowGap: scale(20),
         }}>
         <View style={styles.hear}>
-          <View style={styles.boxImg}>
-            <CustomImage
-              source={typeAccountBank?.logo_url}
-              style={{
-                width: '90%',
-                height: '90%',
+          <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+            <View style={styles.boxImg}>
+              <CustomImage
+                source={typeAccountBank?.logo_url}
+                style={{
+                  width: '90%',
+                  height: '90%',
+                }}
+                resizeMode="contain"
+              />
+            </View>
+            <CustomInput
+              label="Nhập số tiền bạn muốn nạp"
+              control={control}
+              name="amount"
+              styleTextLabel={{
+                position: 'absolute',
+                top: scale(-10),
               }}
-              resizeMode="contain"
+              enableFormatNum
+              placeholder={`Nhập tối thiểu ${formatPrice(minPrice, {
+                currency: currency?.currency_code,
+              })} `}
+              rules={[
+                requireField(t('this_field_required')),
+                validateMaxAmount(
+                  `Số tiền tối đa là ${formatPrice(maxPrice, {
+                    currency: currency?.currency_code,
+                  })}`,
+                  maxPrice,
+                ),
+                validateMinAmount(
+                  `Số tiền tối thiểu là ${formatPrice(minPrice, {
+                    currency: currency?.currency_code,
+                  })}`,
+                  minPrice,
+                ),
+              ]}
+              style={styles.input}
+              textType="bold"
+              styleText={{
+                fontSize: SIZES.large,
+              }}
+              styleWrapper={{
+                flex: 1,
+              }}
+              maxLength={10}
             />
           </View>
-
-          <CustomInput
-            label="Nhập số tiền bạn muốn nạp"
-            control={control}
-            name="amount"
-            styleTextLabel={{
-              position: 'absolute',
-              top: scale(-10),
-            }}
-            enableFormatNum
-            placeholder={`Nhâp tối thiểu ${formatPrice(20000)} `}
-            rules={[
-              requireField(t('this_field_required')),
-              validateMaxAmount(
-                `Số tiền tối đa là ${formatPrice(20000000)}`,
-                20000000,
-              ),
-              validateMinAmount(
-                `Số tiền tối thiểu là ${formatPrice(20000)}`,
-                20000,
-              ),
-            ]}
-            style={styles.input}
-            textType="bold"
-            styleText={{
-              fontSize: SIZES.large,
-            }}
-            styleWrapper={{
-              flex: 1,
-            }}
-            maxLength={10}
-          />
+          {/* <CustomText>
+            Giá trị quy đổi (theo USD): {`${watch('amount')} USD `}={' '}
+            {calculatedExchange()} {`${currency?.currency_code}`}
+          </CustomText> */}
         </View>
 
-        <ListPriceSelect
+        {/* <ListPriceSelect
           control={control}
           setValue={setValue}
           typeAccountBank={typeAccountBank}
-        />
+        /> */}
 
         <ListAccountBank
           data={data}
@@ -103,6 +122,8 @@ export default function DepositScreen({route}) {
       <FooterDeposit
         handleSubmit={handleSubmit}
         watch={watch}
+        // total={calculatedExchange()}
+        // currency={currency?.currency_code}
         typeAccountBank={{
           ...typeAccountBank,
           bank_name: typeAccountBank?.bank_name || data?.name,
@@ -117,9 +138,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderRadius: scale(10),
     padding: scale(20),
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // alignItems: 'center',
-    columnGap: scale(10),
+    rowGap: scale(10),
   },
   boxImg: {
     borderWidth: 1,

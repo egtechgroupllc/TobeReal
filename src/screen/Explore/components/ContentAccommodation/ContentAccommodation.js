@@ -32,7 +32,6 @@ export default function ContentAccommodation() {
       }),
     [listSavedName[0]?.id, country?.id],
   );
-  console.log(listSavedName[0]?.id);
   return (
     <View style={styles.wrapper}>
       {dataNew?.length > 0 ? <HotelResidence data={dataNew} /> : <View />}

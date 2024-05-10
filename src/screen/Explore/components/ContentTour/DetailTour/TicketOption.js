@@ -42,7 +42,6 @@ export default function TicketOption() {
     queryKey: ['tour', 'detail', 'list-ticket', params?.id],
     queryFn: () => getListTicket(params?.id),
   });
-  console.log(data, 123);
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
   // const navigation = useNavigation();

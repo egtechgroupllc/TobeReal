@@ -17,6 +17,7 @@ import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
+import {useCountry} from '../../hooks/useCountry';
 
 const initialMapState = {
   markers: [],
@@ -31,27 +32,32 @@ export default function HomeMapScreen({showListLocation, style}) {
   const scrollOffsetX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(0);
   const [focusedItem, setFocusedItem] = useState(0);
-
+  const [current, setCurrent] = useState({});
+  const {country} = useCountry();
   const mapRef = useRef(null);
   const objRent = {
     date_end: formatDate(new Date(), {addDays: 1}),
     date_start: formatDate(),
     accommodation_type_id: filter?.type,
-    country_id: 241,
+    country_id: country?.id,
     name: filter?.name,
     max_price: filter?.budget ? filter?.budget[1] : '',
     min_price: filter?.budget ? filter?.budget[0] : '',
+    ...current,
+    distance: current?.longitude && 5000,
   };
 
   const objBuy = {
     estate_type_id: filter?.type,
-    country_id: 241,
+    country_id: country?.id,
     title: filter?.name,
     max_price: filter?.budget ? filter?.budget[1] : '',
     min_price: filter?.budget ? filter?.budget[0] : '',
+    ...current,
+    distance: current?.longitude && 5000,
   };
   const objTour = {
-    country_id: 241,
+    country_id: country?.id,
   };
   const {data, isLoading, isError, error} = useQuery({
     queryKey:
@@ -77,7 +83,6 @@ export default function HomeMapScreen({showListLocation, style}) {
   }, [data?.data]);
 
   let mapIndex = 0;
-
   useMemo(() => {
     const handleScroll = ({value}) => {
       let index = Math.floor(value / CARD_WIDTH + 0.3);
@@ -149,7 +154,6 @@ export default function HomeMapScreen({showListLocation, style}) {
     const x = index * CARD_WIDTH;
     flatListRef.current.scrollToOffset(x);
   };
-
   const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
 
@@ -158,14 +162,14 @@ export default function HomeMapScreen({showListLocation, style}) {
         latitude: coords?.latitude,
         longitude: coords?.longitude,
       };
+      setCurrent(coordinates);
       return coordinates;
     }
   }, []);
-
   const moveCurrentPosition = useCallback(async () => {
     const coordinates = await currentPosition();
-
     if (coordinates) {
+      setCurrent(coordinates);
       mapRef.current.fitToCoordinates([coordinates], {
         edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
         animated: true,
@@ -223,7 +227,20 @@ export default function HomeMapScreen({showListLocation, style}) {
         })}
         {/* {children} */}
       </MapView>
-      <MapHeader menu onFilter={value => setFilter(value)} />
+      <MapHeader
+        menu
+        onFilter={value => {
+          !value?.name && delete value?.name;
+          const arrKeys = Object.keys(value);
+
+          JSON.stringify(value) !== '{}' && setCurrent({});
+          (JSON.stringify(value) === '{}' ||
+            (arrKeys?.length === 1 && value?.menu)) &&
+            moveCurrentPosition();
+
+          setFilter(value);
+        }}
+      />
       {!showListLocation && (
         <ListLocation
           ref={flatListRef}

@@ -13,6 +13,7 @@ import TopImg from './TopImg';
 import {IconMapView} from '../../../assets/icon/Icon';
 import Star from '../../../components/Star';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../hooks/useCountry';
 
 export default function ItemAccommdSearch({
   data,
@@ -45,7 +46,10 @@ export default function ItemAccommdSearch({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 4)] : [data]),
     );
   };
-
+  const {currency} = useCountry();
+  console.log('====================================');
+  console.log(data);
+  console.log('====================================');
   const onSavedNameEstate = async () => {
     const result = await EncryptedStorage.getItem('@save_name_estate');
 
@@ -157,8 +161,9 @@ export default function ItemAccommdSearch({
               style={{color: COLORS.primary}}>
               {formatPrice(
                 data?.price ||
-                  data?.rooms?.[0]?.room_dates?.[0]?.price ||
+                  data?.rooms?.[0]?.room_dates?.[0]?.price_final ||
                   data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
+                {currency: currency?.currency_code},
               )}{' '}
             </CustomText>
             <View style={{flexDirection: 'row'}}>

@@ -99,7 +99,6 @@ export default function Posted({dataPost}) {
       return item;
     }
   });
-  console.log(dataFilter);
   return (
     <View style={styles.container}>
       <CustomText

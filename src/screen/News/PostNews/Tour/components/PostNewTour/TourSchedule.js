@@ -90,9 +90,6 @@ export default function TourSchedule({
     setValue('total_hours', numDays.days * 24 + numDays.hours);
     setValue('time_options', JSON.stringify(['23:59']));
   }, []);
-  console.log('====================================');
-  console.log(watch('schedule'));
-  console.log('====================================');
   const handleConfirm = value => {
     if (numDays.days > value) {
       setSelectedDay(value);

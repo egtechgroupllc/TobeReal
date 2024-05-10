@@ -13,7 +13,12 @@ import EmptyData from '../../components/EmptyData';
 import {useRoute} from '@react-navigation/native';
 import {type} from '../../components/Marquee';
 
-export default function ListEstateSearchContent({paramsFilter}) {
+export default function ListEstateSearchContent({
+  paramsFilter,
+  location,
+  country,
+  currency,
+}) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
   const filter = {...params, ...paramsFilter};
@@ -23,19 +28,30 @@ export default function ListEstateSearchContent({paramsFilter}) {
       'list-post',
       'search',
       {
+        ...filter,
         estate_type_id: filter?.type,
-        country_id: 241,
+        country_id: country?.id,
         title: filter?.name,
+        latitude: params?.near_me ? location?.latitude : '',
+        longitude: params?.near_me ? location?.longitude : '',
+        distance: params?.near_me ? 5000 : '',
+        currency_id: currency?.id,
         // province_id: 1,
       },
     ],
     queryFn: () =>
       getListSell({
-        country_id: 241,
+        ...filter,
+        country_id: country?.id,
         estate_type_id: filter?.type,
         title: filter?.name,
+        latitude: params?.near_me ? location?.latitude : '',
+        longitude: params?.near_me ? location?.longitude : '',
+        distance: params?.near_me ? 5000 : '',
+        currency_id: currency?.id,
       }),
   });
+
   // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
   //   useInfiniteQuery({
   //     queryKey: ['accommodation', 'list-rent'],

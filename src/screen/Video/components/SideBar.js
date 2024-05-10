@@ -9,7 +9,6 @@ import CustomImage from '../../../components/CustomImage';
 SHADOW;
 export default React.memo(function SideBar({data, isFavourite, onComment}) {
   const refHeart = useRef();
-  console.log('SideBar');
   const [isHeart, setIsHeart] = useState(true);
 
   const onShare = async () => {

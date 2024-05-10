@@ -23,7 +23,7 @@ export default function ProfileScreen() {
   const upgrade = () => {};
 
   const {token} = useAuthentication();
-  const {country} = useCountry();
+  const {currency} = useCountry();
   const queryClient = useQueryClient();
 
   const {isLoading, data} = useQuery({
@@ -43,8 +43,8 @@ export default function ProfileScreen() {
               textType="bold"
               numberOfLines={1}
               style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
-              {formatPrice(data?.data.balance, {
-                currency: country?.currency_code,
+              {formatPrice(data?.data.balance * currency?.exchange_rate, {
+                currency: currency?.currency_code,
               })}
             </CustomText>
           </View>

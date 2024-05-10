@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import MainWrapper from '../../components/MainWrapper';
 import FilterSort from '../Explore/components/DetailAccommodation/Review/FilterSort';
 import {useLanguage} from '../../hooks/useLanguage';
@@ -8,11 +8,30 @@ import ListAccomSearchContent from './ListAccomSearchContent';
 import {useRoute} from '@react-navigation/native';
 import ListEstateSearchContent from './ListEstateSearchContent';
 import ListTourSearchContent from './ListTourSearchContent';
+import {getCurrentLocation} from '../../utils/getCurrentLocation';
+import {useCountry} from '../../hooks/useCountry';
 
 export default function ListAccommodationSearchScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
+  const {country, currency} = useCountry();
   const [filter, setFilter] = useState();
+  const [current, setCurrent] = useState({});
+  const currentPosition = useCallback(async () => {
+    const {coords} = await getCurrentLocation();
+
+    if (coords) {
+      const coordinates = {
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+      };
+      setCurrent(coordinates);
+      return coordinates;
+    }
+  }, []);
+  useEffect(() => {
+    currentPosition();
+  }, []);
   return (
     <MainWrapper
       scrollEnabled={false}
@@ -32,9 +51,19 @@ export default function ListAccommodationSearchScreen() {
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />
         ) : params?.menu === 'RENT' ? (
-          <ListAccomSearchContent paramsFilter={filter} />
+          <ListAccomSearchContent
+            paramsFilter={filter}
+            location={current}
+            country={country}
+            currency={currency}
+          />
         ) : (
-          <ListEstateSearchContent paramsFilter={filter} />
+          <ListEstateSearchContent
+            paramsFilter={filter}
+            location={current}
+            country={country}
+            currency={currency}
+          />
         )}
       </View>
     </MainWrapper>

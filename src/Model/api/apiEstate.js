@@ -26,14 +26,20 @@ export const getListSell = async ({
   title = '',
   min_price,
   max_price,
+  latitude,
+  longitude,
+  distance,
 }) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
   const estate_type = estate_type_id ? `estate_type_id=${estate_type_id}` : '';
   const minprice = min_price ? `min_price=${min_price}` : '';
   const maxprice = max_price ? `max_price=${max_price}` : '';
+  const lat = latitude ? `latitude=${latitude}` : '';
+  const long = longitude ? `longitude=${longitude}` : '';
+  const dist = distance ? `distance=${distance}` : '';
   const responsive = await instance.get(
-    `/list-post?page=${pageParam}&limit=10&${country}&${province}&${estate_type}&title=${title}&${minprice}&${maxprice}`,
+    `/list-post?page=${pageParam}&limit=10&${country}&${province}&${estate_type}&title=${title}&${minprice}&${maxprice}&${lat}&${long}&${dist}`,
   );
 
   return responsive.data;

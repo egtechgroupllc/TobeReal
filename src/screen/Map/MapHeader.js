@@ -31,9 +31,10 @@ const listFill = [
 export default function MapHeader({onFilter = () => {}, accom, estate, menu}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-  const {control, handleSubmit, watch, setValue} = useForm();
+  const {control, handleSubmit, watch, setValue, reset, unregister} = useForm();
   const handelFiter = value => {
     onFilter && onFilter(value);
+
     bottomSheetRef.current.close();
   };
   return (
@@ -76,6 +77,13 @@ export default function MapHeader({onFilter = () => {}, accom, estate, menu}) {
                 text={t('Reset')}
                 styleText={{
                   fontSize: SIZES.xMedium,
+                }}
+                onPress={() => {
+                  const keyReset = Object.keys(watch());
+
+                  reset();
+                  unregister(keyReset);
+                  bottomSheetRef.current.close();
                 }}
               />
               <CustomButton

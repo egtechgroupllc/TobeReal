@@ -22,7 +22,6 @@ import Posted from './components/Posted';
 
 export default function DetailBrokerScreen() {
   const params = useRoute().params;
-  console.log(params);
   const navigation = useNavigation();
   const {t} = useLanguage();
   const goBack = () => {

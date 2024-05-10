@@ -12,33 +12,34 @@ import {
 } from '../../../../../utils/validate';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import CustomImage from '../../../../../components/CustomImage';
+import {useCountry} from '../../../../../hooks/useCountry';
 const listPrice = [
   {
-    value: 50000,
+    value: 5,
   },
   {
-    value: 100000,
+    value: 10,
   },
   {
-    value: 200000,
+    value: 20,
   },
   {
-    value: 500000,
+    value: 50,
   },
   {
-    value: 1000000,
+    value: 100,
   },
   {
-    value: 2000000,
+    value: 200,
   },
   {
-    value: 3000000,
+    value: 300,
   },
   {
-    value: 5000000,
+    value: 500,
   },
   {
-    value: 10000000,
+    value: 1000,
   },
 ];
 export default function ListPriceSelect({control, setValue, typeAccountBank}) {
@@ -48,6 +49,7 @@ export default function ListPriceSelect({control, setValue, typeAccountBank}) {
     setValue('amount', select.value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select.value]);
+  const {currency} = useCountry();
 
   return (
     <>
@@ -73,7 +75,10 @@ export default function ListPriceSelect({control, setValue, typeAccountBank}) {
                   textAlign: 'center',
                   color: isSelect ? COLORS.primary : COLORS.black,
                 }}>
-                {formatPrice(item.value)}
+                {formatPrice(item?.value)}
+                {/* {formatPrice(item?.value * currency?.exchange_rate, {
+                  currency: currency?.currency_code,
+                })} */}
               </CustomText>
             </TouchableOpacity>
           );

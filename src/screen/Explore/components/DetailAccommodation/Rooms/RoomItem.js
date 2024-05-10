@@ -19,6 +19,7 @@ import {formatPrice} from '../../../../../utils/format';
 import ItemAccommdSearchLoading from '../../../../Search/components/ItemAccommdSearchLoading';
 import RoomUntil from './components/RoomUntil';
 import SelectRoom from './components/SelectRoom';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function RoomItem({
   dataP,
@@ -29,7 +30,6 @@ export default function RoomItem({
 }) {
   const [isRender, setIsRender] = useState(false);
   const [numRoom, setNumRoom] = useState(1);
-
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'detail', 'list-room-date', dataP?.id],
     queryFn: () =>
@@ -46,7 +46,6 @@ export default function RoomItem({
     }, 0);
     return result / data?.data?.data?.count;
   }, [data?.data?.data]);
-
   return (
     <InViewport
       onChange={render => render && setIsRender(render)}
@@ -116,7 +115,7 @@ export default function RoomItem({
                   textType="bold"
                   style={{color: '#0194f3', flex: 1}}
                   numberOfLines={1}>
-                  {dataP.name}
+                  {dataP?.name}
                 </CustomText>
                 <IconNext
                   style={{

@@ -1,21 +1,24 @@
-import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import React, {useMemo} from 'react';
+import {useRoute} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import React from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {getListRent} from '../../Model/api/apiAccom';
-import {animations, scale} from '../../assets/constants';
+import {scale} from '../../assets/constants';
+import EmptyData from '../../components/EmptyData';
+import {useCountry} from '../../hooks/useCountry';
 import ItemAccommdSearch from './components/ItemAccommdSearch';
 import ItemAccommdSearchLoading from './components/ItemAccommdSearchLoading';
-import LottieView from 'lottie-react-native';
-import {getListSell} from '../../Model/api/apiEstate';
-import {getListTour} from '../../Model/api/apiTour';
-import EmptyData from '../../components/EmptyData';
-import {useRoute} from '@react-navigation/native';
-import {type} from '../../components/Marquee';
 
-export default function ListAccomSearchContent({paramsFilter}) {
+export default function ListAccomSearchContent({
+  paramsFilter,
+  location,
+  country,
+  currency,
+}) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
+
   const filter = {...params, ...paramsFilter};
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -25,8 +28,12 @@ export default function ListAccomSearchContent({paramsFilter}) {
       {
         ...filter,
         accommodation_type_id: filter?.type,
-        country_id: 241,
+        country_id: country?.id,
         name: filter?.name,
+        latitude: params?.near_me ? location?.latitude : '',
+        longitude: params?.near_me ? location?.longitude : '',
+        distance: params?.near_me ? 5000 : '',
+        currency_id: currency?.id,
       },
     ],
     queryFn: () =>
@@ -34,9 +41,13 @@ export default function ListAccomSearchContent({paramsFilter}) {
         ...filter,
         date_end: filter?.date?.date_end,
         date_start: filter?.date?.date_start,
-        country_id: 241,
+        country_id: country?.id,
         accommodation_type_id: filter?.type,
         name: filter?.name,
+        latitude: params?.near_me ? location?.latitude : '',
+        longitude: params?.near_me ? location?.longitude : '',
+        distance: params?.near_me ? 5000 : '',
+        currency_id: currency?.id,
         // province_id: 1,
       }),
   });

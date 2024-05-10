@@ -10,13 +10,14 @@ import {postInitOrderDeposit} from '../../../../../Model/api/auth';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
   const {navigate} = useNavigation();
   const initOrderDepositMu = useMutation({
     mutationFn: postInitOrderDeposit,
   });
-
+  const {currency} = useCountry();
   const handleInitOrder = value => {
     initOrderDepositMu.mutate(
       {
@@ -55,7 +56,9 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
           style={{
             fontSize: SIZES.large,
           }}>
-          {formatPrice(watch('amount'))}
+          {formatPrice(watch('amount') || 0, {
+            currency: currency?.currency_code,
+          })}
         </CustomText>
       </View>
       <CustomButton

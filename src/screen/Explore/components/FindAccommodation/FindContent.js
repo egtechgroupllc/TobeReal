@@ -30,7 +30,15 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
     params?.id && setValue('province_id', params?.id);
     params?.name && setValue('name', params?.name);
     params?.id && unregister('name');
+
+    if (params === 'Around me') {
+      unregister(['name', 'province_id']);
+      setValue('near_me', true);
+    } else {
+      unregister(['near_me']);
+    }
   }, [params]);
+
   const saveRecentSearch = async () => {
     const result = await EncryptedStorage.getItem('search_recent');
     // const result = await EncryptedStorage.removeItem('search_recent');

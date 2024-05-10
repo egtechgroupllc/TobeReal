@@ -8,10 +8,14 @@ import {CustomButton} from '../../../../../components';
 import CustomText from '../../../../../components/CustomText';
 import {useAuthentication} from '../../../../../hooks/useAuthentication';
 import {formatPrice} from '../../../../../utils/format';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default memo(function BookAccommodation({data}) {
-  const {token} = useAuthentication();
   const {navigate} = useNavigation();
+  const {token} = useAuthentication();
+  const params = useRoute().params;
+  const {currency} = useCountry();
+
   return (
     <View style={styles.wrapper}>
       <View
@@ -25,7 +29,7 @@ export default memo(function BookAccommodation({data}) {
             fontSize: SIZES.xMedium,
             color: COLORS.primary,
           }}>
-          {formatPrice(100)}
+          {formatPrice(params?.priceFinal, {currency: currency?.currency_code})}
         </CustomText>
       </View>
       <CustomButton

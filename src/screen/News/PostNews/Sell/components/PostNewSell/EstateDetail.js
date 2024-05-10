@@ -80,7 +80,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
       setValue('is_negotiated', watch('is_negotiated') ? 1 : 0);
     }
   }, [watch('is_negotiated')]);
-  console.log(watch('number_bedroom'), watch('number_bathroom'));
   return (
     <View>
       <ButtonTabValidate
