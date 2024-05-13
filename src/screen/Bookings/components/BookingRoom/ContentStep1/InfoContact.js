@@ -19,7 +19,10 @@ export default function InfoContact({data}) {
         ...SHADOW,
         borderRadius: scale(10),
       }}>
-      <FormChangeContact data={data} />
+      <FormChangeContact
+        data={data}
+        isOpen={userBooking === typePeopleBooking[1]}
+      />
 
       <View style={styles.typePeople}>
         {typePeopleBooking?.map((item, index) => {

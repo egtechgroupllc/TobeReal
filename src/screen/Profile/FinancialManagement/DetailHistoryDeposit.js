@@ -19,7 +19,7 @@ export default function DetailHistoryDeposit({route}) {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Chi tiếc giao dịch',
+      headerTitle: 'Chi tiết giao dịch',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

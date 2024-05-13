@@ -3,24 +3,35 @@ import React from 'react';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import CustomText from '../../components/CustomText';
 import {IconRoom} from '../../assets/icon/Icon';
+import {useLanguage} from '../../hooks/useLanguage';
 
-export default function Ribbon({text, iconRight, iconLeft, numberRoom}) {
+export default function Ribbon({
+  text,
+  iconRight,
+  iconLeft,
+  numberRoom,
+  freeCancel,
+}) {
   const IconRight = iconRight;
   const IconLeft = iconLeft;
-
+  const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
-      <View style={styles.left}>
-        {iconLeft && <IconLeft style={styles.icon} />}
-        <CustomText
-          textType="medium"
-          style={{
-            fontSize: SIZES.xSmall,
-          }}>
-          {text}
-        </CustomText>
-        {iconRight && <IconRight style={styles.icon} />}
-      </View>
+      {freeCancel === 0 ? (
+        <View style={styles.left}>
+          {iconLeft && <IconLeft style={styles.icon} />}
+          <CustomText
+            textType="medium"
+            style={{
+              fontSize: SIZES.xSmall,
+            }}>
+            {t('Free cancellation') + ' 30% 🏨'}
+          </CustomText>
+          {iconRight && <IconRight style={styles.icon} />}
+        </View>
+      ) : (
+        <View></View>
+      )}
 
       <View style={{...styles.left, ...styles.right, ...SHADOW}}>
         {/* <IconRoom style={styles.icon} /> */}

@@ -39,7 +39,6 @@ export default function BoxPlaceItem({
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
   const price = data?.rooms?.[0]?.room_dates?.[0]?.price_final;
-
   const onSavedName = async () => {
     const result = await EncryptedStorage.getItem('save_name');
 
@@ -58,13 +57,24 @@ export default function BoxPlaceItem({
         const result = element?.room_dates.map(room => {
           return room?.price_final;
         });
-
         min = Math.min(...result);
       });
       return min;
     }
   }, [data?.rooms]);
-
+  const freeCancel = useMemo(() => {
+    if (data?.rooms) {
+      let num = 0;
+      data?.rooms?.map(element => {
+        const result = element?.accommodation_policies.map(room => {
+          return room?.refund_fee;
+        });
+        num = Math.min(...result);
+      });
+      return num;
+    }
+  }, [data?.rooms]);
+  // console.log(priceFinal);
   const {country} = useCountry();
 
   return (
@@ -104,7 +114,7 @@ export default function BoxPlaceItem({
             }}>
             {data?.rooms?.length && (
               <Ribbon
-                text={t('promotion') + ' 30%  🏨'}
+                freeCancel={freeCancel}
                 numberRoom={data?.rooms?.length}
               />
             )}

@@ -10,7 +10,7 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import {requireField, validateEmail} from '../../../../../utils/validate';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export default function FormChangeContact({data}) {
+export default function FormChangeContact({data, isOpen}) {
   const {t} = useLanguage();
   const {control, handleSubmit} = useForm();
 
@@ -26,6 +26,10 @@ export default function FormChangeContact({data}) {
     };
     loadInfoBooking();
   }, []);
+
+  useEffect(() => {
+    isOpen && bottomSheetRef.current.open();
+  }, [isOpen]);
 
   const handleApply = async value => {
     await EncryptedStorage.setItem('@infoBooking', JSON.stringify(value));

@@ -35,7 +35,6 @@ export default function AccommoManagementScreen() {
 
   const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4, 4]);
   const numColumns = Math.ceil(dataNew?.length / 4);
-
   return (
     <MainWrapper
       scrollEnabled={!isLoading}

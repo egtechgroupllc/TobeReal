@@ -5,10 +5,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 
-import {
-  getListRoomDetailAccmo,
-  postBookingRoom,
-} from '../../Model/api/apiAccom';
+import {getListRoomDetailAccmo} from '../../Model/api/apiAccom';
 import {showMess} from '../../assets/constants/Helper';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
@@ -52,6 +49,7 @@ export default function RoomScreen() {
         child_age: JSON.stringify(numRoomGuest?.numChild),
       }),
   });
+
   const handleBookingRoom = value => {
     navigate('BookingRoomScreen', {...params, ...value});
   };

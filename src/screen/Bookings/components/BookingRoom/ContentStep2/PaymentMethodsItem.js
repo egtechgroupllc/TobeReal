@@ -19,6 +19,7 @@ export default function PaymentMethodsItem({
   isDot,
   isShadow,
   onPress,
+  image,
 }) {
   return (
     <View
@@ -52,7 +53,11 @@ export default function PaymentMethodsItem({
           activeOpacity={0.7}
           onPress={onPress}>
           <View style={styles.left}>
-            <CustomImage source={images.logo1} style={styles.img} />
+            <CustomImage
+              source={image}
+              style={styles.img}
+              resizeMode="contain"
+            />
             <View style={{rowGap: scale(4)}}>
               <CustomText textType="semiBold" size={scale(13)}>
                 {title}
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
   img: {
     width: scale(35),
     height: scale(35),
-    borderRadius: scale(6),
+    // borderRadius: scale(6),
   },
   left: {
     flexDirection: 'row',

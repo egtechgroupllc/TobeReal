@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   IconBookings,
   IconNews,
@@ -9,17 +9,32 @@ import {
 } from '../../../../../../assets/icon/Icon';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
-import {formatPrice} from '../../../../../../utils/format';
+import {formatPrice, formatDate} from '../../../../../../utils/format';
 import ItemUtil from './ItemUtil';
+import {useCountry} from '../../../../../../hooks/useCountry';
 
 export default function RoomUntil({data, price, isFilterChildren}) {
+  const dataPolicies = data?.accommodation_policies;
+  const RefundCondition = dataPolicies[0]?.refund_fee;
+  const {currency} = useCountry();
+  const feeCancel = useMemo(() => {
+    if (RefundCondition === 1) {
+      return 'Cancellation without refund';
+    } else {
+      return `Free cancelation before ${formatDate(new Date(), {
+        addDays: -dataPolicies[0]?.refund_number_day,
+      })}`;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [RefundCondition]);
+
   return (
     <>
       <ItemUtil
         Icon={IconBookings}
-        value={`Free cancellation before 10 Apr 13:00`}
-        color={'#00875a'}
-        backgroundColor={'#e8fef5'}
+        value={feeCancel}
+        color={RefundCondition !== 1 ? '#00875a' : COLORS.grey}
+        backgroundColor={RefundCondition !== 1 ? '#e8fef5' : COLORS.white}
         styleWrapper={{
           borderRadius: 99,
         }}
@@ -70,7 +85,9 @@ export default function RoomUntil({data, price, isFilterChildren}) {
 
           <View>
             <CustomText textType="bold" style={styles.price}>
-              {formatPrice(price)}
+              {formatPrice(price * currency?.exchange_rate, {
+                currency: currency?.currency_code,
+              })}
             </CustomText>
             <CustomText style={styles.night}>/Room/night</CustomText>
           </View>

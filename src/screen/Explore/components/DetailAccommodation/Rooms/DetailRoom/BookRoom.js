@@ -1,10 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useQueryClient} from '@tanstack/react-query';
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {postBookingRoom} from '../../../../../../Model/api/apiAccom';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCoinPoint, IconNext} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
@@ -16,14 +15,11 @@ import RealEstateType from '../../../../../News/PostNews/components/RealEstateTy
 import DetailPriceRoom from './DetailPriceRoom';
 
 export default function BookRoom({data}) {
+  const {navigate} = useNavigation();
   const {t} = useLanguage();
   const insets = useSafeAreaInsets();
   const [isOpen, setIsOpen] = useState(false);
-  const queryClient = useQueryClient();
-  const bookingRoomMu = useMutation({
-    mutationFn: postBookingRoom,
-  });
-  const {goBack, navigate} = useNavigation();
+
   const {token} = useAuthentication();
 
   const [selectRoom, setSelectRoom] = useState(1);
@@ -50,36 +46,6 @@ export default function BookRoom({data}) {
           numRoomSelect: selectRoom,
           total: priceAverage,
         });
-    // bookingRoomMu.mutate(
-    //   {
-    //     data: {
-    //       check_in_date: data?.date?.selectedStartDate,
-    //       check_out_date: data?.date?.selectedEndDate,
-    //       number_room: selectRoom,
-    //     },
-    //     id_room: data?.id,
-    //   },
-    //   {
-    //     onSuccess: dataInside => {
-    //       showMess(
-    //         dataInside?.message,
-    //         dataInside?.status ? 'success' : 'error',
-    //       );
-    //       if (dataInside?.status) {
-    //         queryClient.invalidateQueries([
-    //           'accommodation',
-    //           'detail',
-    //           'list-room',
-    //           data?.id,
-    //         ]);
-    //         goBack();
-    //       }
-    //     },
-    //     onError: err => {
-    //       console.log({err});
-    //     },
-    //   },
-    // );
   };
 
   return (

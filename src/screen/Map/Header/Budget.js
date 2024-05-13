@@ -7,13 +7,14 @@ import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
 import WrapperContent from '../../Explore/components/WrapperContent';
-
+import {useCountry} from '../../../hooks/useCountry';
 const min = 0;
-const max = 100000;
+const max = 2000;
 export default function Budget({onBudget, value}) {
+  const {currency} = useCountry();
+
   const {t} = useLanguage();
   const [multiSliderValue, setMultiSliderValue] = useState(value || [min, max]);
-
   return (
     <WrapperContent
       heading={t('budget')}
@@ -32,8 +33,16 @@ export default function Budget({onBudget, value}) {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <CustomText>{formatPrice(multiSliderValue[0])}</CustomText>
-        <CustomText>{formatPrice(multiSliderValue[1])}</CustomText>
+        <CustomText>
+          {formatPrice(multiSliderValue[0] * currency?.exchange_rate, {
+            currency: currency?.currency_code,
+          })}
+        </CustomText>
+        <CustomText>
+          {formatPrice(multiSliderValue[1] * currency?.exchange_rate, {
+            currency: currency?.currency_code,
+          })}
+        </CustomText>
       </View>
       <MultiSlider
         containerStyle={{

@@ -1,15 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import CustomImage from '../../../../../components/CustomImage';
-import CustomText from '../../../../../components/CustomText';
+import {StyleSheet, View} from 'react-native';
 import {COLORS, scale} from '../../../../../assets/constants';
 import {IconClock, IconDown} from '../../../../../assets/icon/Icon';
+import CustomImage from '../../../../../components/CustomImage';
+import CustomText from '../../../../../components/CustomText';
+import {formatDate} from '../../../../../utils/format';
 import ItemUtil from '../../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import PaymentMethods from './PaymentMethods';
-import {formatDate} from '../../../../../utils/format';
-import {useNavigation} from '@react-navigation/native';
 
-export default function TopStep2({data}) {
+export default function TopStep2({data, onChange}) {
   return (
     <View style={styles.top}>
       <View style={styles.topContent}>
@@ -53,7 +52,7 @@ export default function TopStep2({data}) {
           styleWrapper={styles.roomCode}
         />
 
-        <PaymentMethods data={data} />
+        <PaymentMethods data={data} onChange={onChange} />
       </View>
     </View>
   );

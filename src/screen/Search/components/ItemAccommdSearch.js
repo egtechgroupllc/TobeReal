@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import CustomImage from '../../../components/CustomImage';
@@ -47,9 +47,6 @@ export default function ItemAccommdSearch({
     );
   };
   const {currency} = useCountry();
-  console.log('====================================');
-  console.log(data);
-  console.log('====================================');
   const onSavedNameEstate = async () => {
     const result = await EncryptedStorage.getItem('@save_name_estate');
 
@@ -61,7 +58,6 @@ export default function ItemAccommdSearch({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
-
   return (
     <TouchableOpacity
       activeOpacity={0.7}

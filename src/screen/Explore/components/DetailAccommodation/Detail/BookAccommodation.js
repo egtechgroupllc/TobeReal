@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
@@ -15,6 +15,19 @@ export default memo(function BookAccommodation({data}) {
   const {token} = useAuthentication();
   const params = useRoute().params;
   const {currency} = useCountry();
+  const priceFinal = useMemo(() => {
+    if (params?.rooms) {
+      let min = 0;
+      params?.rooms?.map(element => {
+        const result = element?.room_dates?.map(room => {
+          return room?.price_final;
+        });
+        console.log(result);
+        min = Math.min(...result);
+      });
+      return min;
+    }
+  }, [params?.rooms]);
 
   return (
     <View style={styles.wrapper}>
@@ -29,7 +42,9 @@ export default memo(function BookAccommodation({data}) {
             fontSize: SIZES.xMedium,
             color: COLORS.primary,
           }}>
-          {formatPrice(params?.priceFinal, {currency: currency?.currency_code})}
+          {formatPrice(params?.priceFinal || priceFinal, {
+            currency: currency?.currency_code,
+          })}
         </CustomText>
       </View>
       <CustomButton

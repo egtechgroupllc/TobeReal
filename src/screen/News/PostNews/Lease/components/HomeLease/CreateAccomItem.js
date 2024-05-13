@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import CustomImage from '../../../../../../components/CustomImage';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomButton} from '../../../../../../components';
@@ -14,16 +14,21 @@ export default function CreateAccomItem({data, isTour}) {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
 
+  const navigateDetail = () => {
+    navigate(isTour ? 'DetailTourScreen' : 'DetailAccommodationScreen', {
+      ...data,
+    });
+  };
+  const handleTouch = () => {
+    data?.rooms?.length <= 0 || data?.tour_tickets?.length <= 0
+      ? handleContinue()
+      : navigateDetail();
+  };
   return (
-    <TouchableOpacity
+    <View
       activeOpacity={0.7}
       onPress={() => {
-        data?.rooms?.length <= 0 || data?.tour_tickets?.length <= 0
-          ? handleContinue()
-          : navigate(
-              isTour ? 'DetailTourScreen' : 'DetailAccommodationScreen',
-              data,
-            );
+        handleTouch();
       }}>
       <CustomImage
         source={data?.images[0]?.url}
@@ -134,7 +139,7 @@ export default function CreateAccomItem({data, isTour}) {
           </View>
         </View>
       </CustomImage>
-    </TouchableOpacity>
+    </View>
   );
 }
 

@@ -13,10 +13,9 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import RatingReview from '../../../../Map/Header/RatingReview';
 import ContentFilter from './components/ContentFilter';
 
-import Filter from './components/Filter';
-import Quantity from './components/Quantity';
-import TypeEstate from './components/TypeEstate';
 import DropDown from '../../ContentAccommodation/SeeAll/components/DropDown';
+import Filter from './components/Filter';
+import TypeEstate from './components/TypeEstate';
 
 const listLegalDoc = [
   {

@@ -25,7 +25,7 @@ export default function DetailBookingScreen() {
             padding: scale(10),
           }}>
           <CustomText textType="bold" size={SIZES.large}>
-            Chi tiếc chỗ đặt
+            Chi tiết chỗ đặt
           </CustomText>
           <CustomText size={SIZES.xMedium} color={COLORS.textSub}>
             Booking code: {data?.id}

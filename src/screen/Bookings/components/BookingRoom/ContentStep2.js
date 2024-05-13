@@ -1,42 +1,73 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Linking, StyleSheet, View} from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, images, scale} from '../../../../assets/constants';
-import {IconClock, IconCoinPoint, IconDown} from '../../../../assets/icon/Icon';
+import {postBookingRoom, postPaypal} from '../../../../Model/api/apiAccom';
+import {COLORS, scale} from '../../../../assets/constants';
+import {showMess} from '../../../../assets/constants/Helper';
+import {IconCoinPoint} from '../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../components';
-import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
+import {formatPrice} from '../../../../utils/format';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
-import PaymentMethods from './ContentStep2/PaymentMethods';
-import {formatDate, formatPrice} from '../../../../utils/format';
-import {postBookingRoom} from '../../../../Model/api/apiAccom';
-import {showMess} from '../../../../assets/constants/Helper';
-import {useNavigation} from '@react-navigation/native';
 import TopStep2 from './ContentStep2/TopStep2';
 export default function ContentStep2({onPress, data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-
+  const [contact, setContact] = useState([]);
+  const [typePayment, setTypePayment] = useState();
   const insets = useSafeAreaInsets();
-
+  const policyId = data?.accommodation_policies[0]?.id;
   const queryClient = useQueryClient();
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
 
+  useEffect(() => {
+    const loadInfoBooking = async () => {
+      const result = await EncryptedStorage.getItem('@infoBooking');
+      setContact(JSON.parse(result));
+    };
+    loadInfoBooking();
+  }, []);
+  const paypalMutation = useMutation({
+    mutationFn: postPaypal,
+  });
+  const handlePaypal = value => {
+    paypalMutation.mutate(
+      {
+        id: value,
+        type: 'ROOM',
+      },
+      {
+        onSuccess: dataInside => {
+          Linking.openURL(dataInside?.data?.links[1].href);
+          navigate('Booking', {
+            screen: 'HomeBookingsScreen',
+          });
+        },
+        onError: err => {
+          console.log(err);
+        },
+      },
+    );
+  };
   const handleBookingRoom = value => {
     bookingRoomMu.mutate(
       {
-        data: {
-          check_in_date: data?.date?.selectedStartDate,
-          check_out_date: data?.date?.selectedEndDate,
-          number_room: data?.numRoomSelect,
-        },
-        id_room: data?.id,
+        check_in_date: data?.date?.selectedStartDate,
+        check_out_date: data?.date?.selectedEndDate,
+        number_room: data?.numRoomSelect,
+        accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
+        room_id: data?.id, //id của phòng
+        contact_name: contact?.name,
+        contact_email: contact?.email,
+        contact_phone: contact?.phone,
+        payment: typePayment,
       },
       {
         onSuccess: dataInside => {
@@ -44,17 +75,23 @@ export default function ContentStep2({onPress, data}) {
             dataInside?.message,
             dataInside?.status ? 'success' : 'error',
           );
-          queryClient.invalidateQueries([
-            'accommodation',
-            'detail',
-            'list-room',
-            data?.idAccom,
-          ]);
-          queryClient.invalidateQueries(['user', 'profile']);
 
-          navigate('Booking', {
-            screen: 'HomeBookingsScreen',
-          });
+          if (dataInside?.status) {
+            queryClient.invalidateQueries([
+              'accommodation',
+              'detail',
+              'list-room',
+              data?.idAccom,
+            ]);
+            queryClient.invalidateQueries(['user', 'profile']);
+            if (dataInside?.data?.payment === 'PAYPAL') {
+              handlePaypal(dataInside?.data?.id);
+              return;
+            }
+            navigate('Booking', {
+              screen: 'HomeBookingsScreen',
+            });
+          }
         },
         onError: err => {
           console.log({err});
@@ -65,7 +102,8 @@ export default function ContentStep2({onPress, data}) {
 
   return (
     <View style={styles.container}>
-      <TopStep2 data={data} />
+      <TopStep2 data={data} onChange={value => setTypePayment(value?.type)} />
+
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
           <DetailPriceRoom data={data} />

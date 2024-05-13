@@ -4,7 +4,6 @@ import {baseUrl} from '../url';
 export const instanceAccom = axios.create({
   baseURL: `${baseUrl}/api/v1/accommodation`,
 });
-
 export const getListTypeRoom = async () => {
   const responsive = await instanceAccom.get('/room/list-type');
 
@@ -106,12 +105,19 @@ export const getListRoomDetailAccmo = async ({
   return responsive.data;
 };
 
-export const postBookingRoom = async ({id_room, data}) => {
-  const responsive = await instanceAccom.post(`room/${id_room}/booking`, data);
+export const postBookingRoom = async data => {
+  const responsive = await instanceAccom.post(
+    'room/booking/create-order',
+    data,
+  );
 
   return responsive.data;
 };
+export const postPaypal = async data => {
+  const responsive = await axios.post(baseUrl + '/api/v1/paypal/pay', data);
 
+  return responsive.data;
+};
 export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
   const responsive = await instanceAccom.get(
     `room/${id_room}/list-room-date?date_start=${date_start}&date_end=${date_end}`,

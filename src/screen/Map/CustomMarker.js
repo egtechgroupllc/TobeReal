@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import {IconMarker} from '../../assets/icon/Icon';
 import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
@@ -15,6 +15,18 @@ const CustomMarker = ({scaleValue, data}) => {
   };
 
   const price = data?.rooms?.[0]?.room_dates?.[0]?.price;
+  const priceFinal = useMemo(() => {
+    if (data?.rooms) {
+      let min = 0;
+      data?.rooms?.map(element => {
+        const result = element?.room_dates.map(room => {
+          return room?.price_final;
+        });
+        min = Math.min(...result);
+      });
+      return min;
+    }
+  }, [data?.rooms]);
   return (
     <Animated.View
       style={[
@@ -74,7 +86,7 @@ const CustomMarker = ({scaleValue, data}) => {
               color: scaleValue?.color,
               fontFamily: FONTS.semiBold,
             }}>
-            {formatPrice(price || data?.price)}
+            {formatPrice(priceFinal || data?.price)}
           </Animated.Text>
         </Animated.View>
       </View>

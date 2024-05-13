@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -14,6 +14,7 @@ import RoomInformation from './DetailRoom/RoomInformation';
 export default function DetailRoomScreen({route}) {
   const data = route.params;
   const {t} = useLanguage();
+
   return (
     <>
       <MainWrapper

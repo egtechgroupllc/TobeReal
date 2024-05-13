@@ -43,6 +43,7 @@ export default function HorizontalStepIndicator({data}) {
           <ContentStep1
             onPress={() => setCurrentPage(pageNum + 1)}
             data={data}
+            dataContact
           />
         );
       }

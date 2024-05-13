@@ -14,6 +14,7 @@ import TypeAccommoda from './Header/TypeAccommoda';
 import {useForm} from 'react-hook-form';
 import TypeEstate from './Header/TypeEstate';
 import Menubar from './Header/Menubar';
+import {useCountry} from '../../hooks/useCountry';
 const listFill = [
   {
     text: 'On Promotion',
@@ -37,6 +38,7 @@ export default function MapHeader({onFilter = () => {}, accom, estate, menu}) {
 
     bottomSheetRef.current.close();
   };
+  const {currency} = useCountry();
   return (
     <View
       style={{

@@ -33,8 +33,9 @@ export default function HomeMapScreen({showListLocation, style}) {
   const flatListRef = useRef(0);
   const [focusedItem, setFocusedItem] = useState(0);
   const [current, setCurrent] = useState({});
-  const {country} = useCountry();
+  const {country, currency} = useCountry();
   const mapRef = useRef(null);
+  console.log(currency);
   const objRent = {
     date_end: formatDate(new Date(), {addDays: 1}),
     date_start: formatDate(),
@@ -45,6 +46,7 @@ export default function HomeMapScreen({showListLocation, style}) {
     min_price: filter?.budget ? filter?.budget[0] : '',
     ...current,
     distance: current?.longitude && 5000,
+    currency_id: currency?.id,
   };
 
   const objBuy = {
@@ -55,6 +57,7 @@ export default function HomeMapScreen({showListLocation, style}) {
     min_price: filter?.budget ? filter?.budget[0] : '',
     ...current,
     distance: current?.longitude && 5000,
+    currency_id: currency?.id,
   };
   const objTour = {
     country_id: country?.id,
