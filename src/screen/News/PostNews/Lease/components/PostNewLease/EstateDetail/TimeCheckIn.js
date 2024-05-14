@@ -34,7 +34,9 @@ export default function TimeCheckIn({onChange, title}) {
 
   return (
     <View style={{width: '100%'}}>
-      <CustomText style={styles.title}>{title || t('check_in')}:</CustomText>
+      <CustomText style={styles.title} textType="medium">
+        {title || t('check_in')}:
+      </CustomText>
       <View
         style={{
           flexDirection: 'row',

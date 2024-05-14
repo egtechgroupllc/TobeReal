@@ -1,11 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
-import {IconHeart, IconMarker} from '../../../../../assets/icon/Icon';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
-import Favourite from '../../components/Favourite';
-import LinearGradient from 'react-native-linear-gradient';
 import {formatPrice} from '../../../utils/format';
+import Favourite from '../../components/Favourite';
 
 export default function TopImg({isHeart, feature, showPrice, data, type}) {
   return (

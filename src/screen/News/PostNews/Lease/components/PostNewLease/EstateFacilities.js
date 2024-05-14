@@ -11,6 +11,7 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import ButtonTabValidate from '../ButtonTabValidate';
 import InViewPort from '../../../../../../components/InViewport';
 import {dataPropertyFacilities} from '../../../../../../utils/dataPropertyFacilities';
+import CustomText from '../../../../../../components/CustomText';
 
 export default function EstateFacilities({control, setValue, errors, watch}) {
   const {t} = useLanguage();
@@ -94,15 +95,12 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
               renderSectionTitle={(item, index) => {
                 return (
                   index === 0 && (
-                    <CustomInput
-                      value={t('property_facilities')}
+                    <CustomText
                       style={{
-                        borderWidth: 0,
-                      }}
-                      styleText={{color: COLORS.black}}
-                      styleTextLabel={{color: COLORS.black}}
-                      editable={false}
-                    />
+                        padding: scale(12),
+                      }}>
+                      Khách có thể sử dụng gì tại nơi lưu trú của bạn?
+                    </CustomText>
                   )
                 );
               }}

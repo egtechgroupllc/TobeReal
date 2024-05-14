@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {COLORS, scale} from '../../../assets/constants';
-import {CustomInput} from '../../../components';
+import {CustomInput, StarRating} from '../../../components';
 import CustomText from '../../../components/CustomText';
-import Star from '../../../components/Star';
 import ChooseImgPicker from '../../components/ChooseImgPicker';
 
 export default function ContentReview({control, setValue}) {
   const [lengthContent, setLengthContent] = useState(0);
   return (
     <View style={{width: '100%', alignItems: 'center'}}>
-      <Star
+      <StarRating
         size={scale(30)}
         isSetRating
         onChange={value => {

@@ -4,7 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, scale} from '../assets/constants';
 import {IconStar} from '../assets/icon/Icon';
 
-export default memo(function Star({
+export default (function StarRating({
   rating = 0,
   size,
   onChange,
@@ -25,7 +25,7 @@ export default memo(function Star({
             onChange && onChange(i + 1);
           }}>
           <IconStar
-            fill={i < Math.floor(point) && COLORS.primary}
+            fill={i < Math.floor(point) && '#FFB700'}
             width={size || scale(12)}
             height={size || scale(12)}
           />

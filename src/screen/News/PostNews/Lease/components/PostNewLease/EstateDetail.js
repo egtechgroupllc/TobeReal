@@ -9,6 +9,10 @@ import TimeCheckIn from './EstateDetail/TimeCheckIn';
 import TimeCheckOut from './EstateDetail/TimeCheckOut';
 import {CustomInput} from '../../../../../../components';
 import {requireField} from '../../../../../../utils/validate';
+import RatingBox from '../../../../../Explore/components/ContentAccommodation/BoxPlaceItem/RatingBox';
+import Star from '../../../../../../components/StarRating';
+import CustomText from '../../../../../../components/CustomText';
+import SetStartAccomo from './EstateDetail/SetStartAccomo';
 
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
@@ -36,70 +40,84 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!viewDetail} style={styles.box}>
+            <Box title={'Nơi lưu trú của bạn đạt tiêu chuẩn mấy sao?'}>
+              <SetStartAccomo onChange={value => console.log({value})} />
+            </Box>
+
+            <Box title={'Giờ nhận/trả phòng của nơi lưu trú là khi nào?'}>
+              <>
+                <TimeCheckIn
+                  onChange={value => {
+                    setValue('check_in_time_start', value?.timeCheckStart);
+                    setValue('check_in_time_end', value?.timeCheckEnd);
+                  }}
+                />
+                <TimeCheckOut
+                  onChange={value => {
+                    setValue('check_out_time_start', value?.timeCheckStart);
+                    setValue('check_out_time_end', value?.timeCheckEnd);
+                  }}
+                />
+              </>
+            </Box>
+
             {/* <View style={styles.line} /> */}
 
-            <TimeCheckIn
-              onChange={value => {
-                setValue('check_in_time_start', value?.timeCheckStart);
-                setValue('check_in_time_end', value?.timeCheckEnd);
-              }}
-            />
-            <TimeCheckOut
-              onChange={value => {
-                setValue('check_out_time_start', value?.timeCheckStart);
-                setValue('check_out_time_end', value?.timeCheckEnd);
-              }}
-            />
+            <Box title={'Diện tích của nơi lưu trú của bạn?'}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  columnGap: scale(30),
+                }}>
+                <CustomInput
+                  label={'Chiều rộng'}
+                  placeholder="Chiều rộng"
+                  name="size_width"
+                  rules={requireField(t('this_field_required'))}
+                  styleWrapper={{
+                    flex: 1,
+                  }}
+                  control={control}
+                  styleTextLabel={styles.label}
+                  style={styles.textInput}
+                />
 
-            {/* <View style={styles.line} /> */}
-
-            {/* <CustomInput
-          label={t('distance_to_city')}
-          styleTextLabel={styles.label}
-          control={control}
-          name="km_to_center"
-          placeholder={t('KM')}
-          rules={requireField(t('this_field_required'))}
-          style={{...styles.textInput}}
-        /> */}
-
-            <View
-              style={{
-                flexDirection: 'row',
-                columnGap: scale(30),
-              }}>
-              <CustomInput
-                label={'Chiều rộng'}
-                placeholder="Chiều rộng"
-                name="size_width"
-                rules={requireField(t('this_field_required'))}
-                styleWrapper={{
-                  flex: 1,
-                }}
-                control={control}
-                styleTextLabel={styles.label}
-                style={styles.textInput}
-              />
-
-              <CustomInput
-                label={'Chiều dài'}
-                placeholder="Chiều dài"
-                name="size_length"
-                control={control}
-                rules={requireField(t('this_field_required'))}
-                styleTextLabel={styles.label}
-                styleWrapper={{
-                  flex: 1,
-                }}
-                style={styles.textInput}
-              />
-            </View>
+                <CustomInput
+                  label={'Chiều dài'}
+                  placeholder="Chiều dài"
+                  name="size_length"
+                  control={control}
+                  rules={requireField(t('this_field_required'))}
+                  styleTextLabel={styles.label}
+                  styleWrapper={{
+                    flex: 1,
+                  }}
+                  style={styles.textInput}
+                />
+              </View>
+            </Box>
           </Collapsible>
         )}
       </InViewPort>
     </View>
   );
 }
+
+const Box = ({title, children}) => {
+  return (
+    <View
+      style={{
+        alignItems: 'flex-start',
+        width: '100%',
+        rowGap: scale(10),
+      }}>
+      <CustomText textType="semiBold" size={SIZES.xMedium}>
+        {title}
+      </CustomText>
+      {children}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   label: {
@@ -118,7 +136,7 @@ const styles = StyleSheet.create({
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
-    rowGap: scale(16),
+    rowGap: scale(20),
   },
   line: {
     borderWidth: 0.5,

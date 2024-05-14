@@ -43,7 +43,7 @@ export default function InfoDetail({data, price}) {
             </CustomText>
           </View>
 
-          {/* <Star rating={4} />
+          {/* <StarRating rating={4} />
 
           <CustomText textType="medium">(10 Evaluate)</CustomText> */}
           <TouchableOpacity activeOpacity={0.7}>

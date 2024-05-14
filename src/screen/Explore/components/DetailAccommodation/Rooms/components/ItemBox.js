@@ -46,7 +46,7 @@ export default function ItemBox({
             Tuan Kiet
           </CustomText>
 
-          <Star rating={4.5} />
+          <StarRating rating={4.5} />
         </View>
       </View> */}
       <CustomText

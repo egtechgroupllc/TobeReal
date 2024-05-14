@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
-import CustomText from '../../../../../../components/CustomText';
 import {SHADOW, SIZES, images, scale} from '../../../../../../assets/constants';
-import Star from '../../../../../../components/Star';
 import CustomImage from '../../../../../../components/CustomImage';
+import CustomText from '../../../../../../components/CustomText';
+import StarRating from '../../../../../../components/StarRating';
 
 export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
   return (
@@ -18,7 +18,7 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         style,
       ]}>
       <View style={styles.infoCustomer}>
-      <CustomImage
+        <CustomImage
           resizeMode="contain"
           source={images.avatar}
           style={styles.avatar}
@@ -34,7 +34,7 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
             Tuan Kiet
           </CustomText>
 
-          <Star rating={4.5} />
+          <StarRating rating={4.5} />
         </View>
       </View>
 
@@ -42,10 +42,10 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
         textType="medium"
         style={{fontSize: SIZES.xMedium}}
         numberOfLines={numberOfLines}>
-        Central location, friendly staff, full and delicious buffet breakfast.
-        I really like the hotel's shower gel and shampoo! tasty. I really like
-        hotel shower gel and shampoo! really liked the customer's shower gel and shampoo
-        hotel! really liked the hotel's shower gel and shampoo!
+        Central location, friendly staff, full and delicious buffet breakfast. I
+        really like the hotel's shower gel and shampoo! tasty. I really like
+        hotel shower gel and shampoo! really liked the customer's shower gel and
+        shampoo hotel! really liked the hotel's shower gel and shampoo!
       </CustomText>
 
       <CustomText

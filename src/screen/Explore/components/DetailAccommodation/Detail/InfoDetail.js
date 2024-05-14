@@ -1,19 +1,13 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
-import {
-  IconHome,
-  IconLocation,
-  IconMarker,
-  IconMyLocation,
-  IconRoom,
-} from '../../../../../assets/icon/Icon';
+import {IconLocation} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
+import StarRating from '../../../../../components/StarRating';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import Introduction from './Introduction';
-import Star from '../../../../../components/Star';
 import {formatNumber} from '../../../../../utils/format';
+import Introduction from './Introduction';
 
 export default function InfoDetail({data}) {
   const {t} = useLanguage();
@@ -36,7 +30,7 @@ export default function InfoDetail({data}) {
             </CustomText>
           </View>
           {data.review_average ? (
-            <Star rating={data.review_average} />
+            <StarRating rating={data.review_average} />
           ) : (
             <CustomText textType="regular">
               (There are no reviews yet)

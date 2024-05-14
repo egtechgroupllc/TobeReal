@@ -5,18 +5,16 @@ import {StyleSheet, View} from 'react-native';
 
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {IconBan, IconBookings} from '../../../../assets/icon/Icon';
+import {CustomButton, StarRating} from '../../../../components';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Star from '../../../../components/Star';
+import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import RoomInformation from '../../../Explore/components/DetailAccommodation/Rooms/DetailRoom/RoomInformation';
 import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
-import Button from '../../../Profile/components/Button';
 import TimeBookingCheckInOut from '../DetailBooking/TimeBookingCheckInOut';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import InfoContact from './ContentStep1/InfoContact';
-import {CustomButton} from '../../../../components';
-import MainWrapper from '../../../../components/MainWrapper';
 export default function ContentStep1({onPress, data}) {
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
@@ -69,7 +67,7 @@ export default function ContentStep1({onPress, data}) {
             <CustomText textType="semiBold" size={SIZES.xMedium}>
               {data?.room_type?.name}
             </CustomText>
-            <Star rating={2} />
+            <StarRating rating={2} />
           </View>
         </View>
 

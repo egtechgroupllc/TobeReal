@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, scale} from '../../assets/constants';
 import CustomText from '../../components/CustomText';
 
-export default function RadioButton({title, isCheck, onPress}) {
+export default function RadioButton({title, isCheck, onPress, textComponent}) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -14,9 +14,11 @@ export default function RadioButton({title, isCheck, onPress}) {
         columnGap: scale(7),
       }}>
       <View style={styles.radio}>{isCheck && <View style={styles.dot} />}</View>
-      <CustomText textType="medium" color={COLORS.text} style={{flex: 1}}>
-        {title}
-      </CustomText>
+      {textComponent || (
+        <CustomText textType="medium" color={COLORS.text} style={{flex: 1}}>
+          {title}
+        </CustomText>
+      )}
     </TouchableOpacity>
   );
 }

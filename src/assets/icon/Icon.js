@@ -2304,14 +2304,14 @@ export function IconSort({fill, ...props}) {
 export function IconStar({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(12)}
-      height={props?.style?.height || scale(12)}
-      viewBox="0 0 10 10"
+      width={props?.style?.width || scale(24)}
+      height={props?.style?.height || scale(24)}
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}>
       <Path
-        d="M5 0l1.123 3.455h3.632L6.816 5.59 7.94 9.045 5 6.91 2.061 9.045 3.184 5.59.244 3.455h3.633L5 0z"
+        d="M23.555 8.729a1.505 1.505 0 00-1.406-.98h-6.087a.5.5 0 01-.472-.334l-2.185-6.193a1.5 1.5 0 00-2.81 0l-.005.016-2.18 6.177a.5.5 0 01-.471.334H1.85A1.5 1.5 0 00.887 10.4l5.184 4.3a.5.5 0 01.155.543l-2.178 6.531a1.5 1.5 0 002.31 1.684l5.346-3.92a.5.5 0 01.591 0l5.344 3.919a1.5 1.5 0 002.312-1.683l-2.178-6.535a.5.5 0 01.155-.543l5.194-4.306a1.5 1.5 0 00.433-1.661z"
         fill={fill || '#D9D9D9'}
       />
     </Svg>

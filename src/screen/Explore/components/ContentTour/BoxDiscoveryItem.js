@@ -6,7 +6,7 @@ import {IconHeart, IconMapView, IconMarker} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../components/Ribbon';
-import Star from '../../../../components/Star';
+import Star from '../../../../components/StarRating';
 import {formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';

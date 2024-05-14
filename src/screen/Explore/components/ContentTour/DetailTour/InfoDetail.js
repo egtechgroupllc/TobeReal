@@ -4,19 +4,16 @@ import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {
   IconCalendar,
   IconClock,
-  IconHome,
   IconMapView,
-  IconRoom,
 } from '../../../../../assets/icon/Icon';
 
-import CustomText from '../../../../../components/CustomText';
-import {useLanguage} from '../../../../../hooks/useLanguage';
 import CustomImage from '../../../../../components/CustomImage';
-import Star from '../../../../../components/Star';
-import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
-import TicketOption from './TicketOption';
+import CustomText from '../../../../../components/CustomText';
+import StarRating from '../../../../../components/StarRating';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatDateTime} from '../../../../../utils/format';
 import Introduction from '../../DetailAccommodation/Detail/Introduction';
+import TicketOption from './TicketOption';
 
 export default function InfoDetail({data, name}) {
   const {t} = useLanguage();
@@ -30,7 +27,7 @@ export default function InfoDetail({data, name}) {
         </View>
 
         <View style={styles.room}>
-          <Star />
+          <StarRating />
           <CustomText textType="medium" style={styles.text}>
             (10 Evaluate)
           </CustomText>

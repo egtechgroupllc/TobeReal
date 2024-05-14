@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import Video from 'react-native-video';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconMarker, IconPlayVideo} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
-import Video from 'react-native-video';
 
 export default function VideoCompact({onPlay, source}) {
   return (

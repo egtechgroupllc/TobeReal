@@ -3,17 +3,17 @@ import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 
-import {IconHeart, IconMapView, IconMarker} from '../../../../assets/icon/Icon';
+import {IconMapView} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Star from '../../../../components/Star';
 import {formatPrice} from '../../../../utils/format';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 
+import StarRating from '../../../../components/StarRating';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import Ribbon from '../../../components/Ribbon';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import TopImg from './BoxPlaceItem/TopImg';
-import Ribbon from '../../../components/Ribbon';
-import {useLanguage} from '../../../../hooks/useLanguage';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
@@ -151,7 +151,7 @@ export default function BoxPlaceItem({
                 columnGap: scale(20),
                 // height: scale(25),
               }}>
-              {isStar && <Star rating={rating} />}
+              {isStar && <StarRating rating={rating} />}
               {isRating && data?.review_count > 0 ? (
                 <RatingBox
                   rating={data?.review_average}

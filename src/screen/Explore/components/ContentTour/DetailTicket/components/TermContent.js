@@ -19,7 +19,7 @@ import CustomText from '../../../../../../components/CustomText';
 import CustomImage from '../../../../../../components/CustomImage';
 
 import Introduction from '../../DetailTour/Introduction';
-import Star from '../../../../../../components/Star';
+import Star from '../../../../../../components/StarRating';
 import TicketOption from '../../DetailTour/TicketOption';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
@@ -54,7 +54,7 @@ export default function TermContent() {
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.showContent} onPress={viewChangeVote}>
           <CustomText textType="bold" style={styles.text}>
-          {t('how_to_change')}
+            {t('how_to_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -70,7 +70,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('present_voucher')}
+                {t('present_voucher')}
               </CustomText>
             </View>
             <View
@@ -83,7 +83,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('you_must')}
+                {t('you_must')}
               </CustomText>
             </View>
             <View
@@ -96,14 +96,14 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('please_note')}
+                {t('please_note')}
               </CustomText>
             </View>
           </View>
         )}
         <TouchableOpacity style={styles.showContent} onPress={viewConversion}>
           <CustomText textType="bold" style={styles.text}>
-          {t('conversion')}
+            {t('conversion')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -119,7 +119,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('present_voucher')}
+                {t('present_voucher')}
               </CustomText>
             </View>
           </View>
@@ -128,7 +128,7 @@ export default function TermContent() {
           style={styles.showContent}
           onPress={viewRefundcalendar}>
           <CustomText textType="bold" style={styles.text}>
-          {t('refund_and_change')}
+            {t('refund_and_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -144,13 +144,12 @@ export default function TermContent() {
               <IconInputDirectly />
               <View style={{marginLeft: '5%'}}>
                 <CustomText textType="bold" style={styles.text}>
-                {t('input_directly')}
+                  {t('input_directly')}
                 </CustomText>
               </View>
             </View>
             <CustomText textType="regular" style={styles.text}>
-            {t('can_change_calendar')}
-            
+              {t('can_change_calendar')}
             </CustomText>
             <View
               style={{
@@ -162,12 +161,12 @@ export default function TermContent() {
               <IconFullyRefund />
               <View style={{marginLeft: '5%'}}>
                 <CustomText textType="bold" style={styles.text}>
-                {t('can_be_fully')}
+                  {t('can_be_fully')}
                 </CustomText>
               </View>
             </View>
             <CustomText textType="regular" style={styles.text}>
-            {t('it_is_only')}
+              {t('it_is_only')}
             </CustomText>
           </View>
         )}
@@ -175,7 +174,7 @@ export default function TermContent() {
           style={styles.showContent}
           onPress={viewChangeCalendar}>
           <CustomText textType="bold" style={styles.text}>
-          {t('calendar_change')}
+            {t('calendar_change')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -191,7 +190,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('calendar_change')}
+                {t('calendar_change')}
               </CustomText>
             </View>
             <View
@@ -204,7 +203,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('require_of_schedule')}
+                {t('require_of_schedule')}
               </CustomText>
             </View>
             <View
@@ -217,7 +216,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('your_rearrangement')}
+                {t('your_rearrangement')}
               </CustomText>
             </View>
             <View
@@ -230,7 +229,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('you_can_schedule')}
+                {t('you_can_schedule')}
               </CustomText>
             </View>
             <View
@@ -243,14 +242,14 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('the_scheduling')}
+                {t('the_scheduling')}
               </CustomText>
             </View>
           </View>
         )}
         <TouchableOpacity style={styles.showContent} onPress={viewRefundPolicy}>
           <CustomText textType="bold" style={styles.text}>
-          {t('refund_policy')}
+            {t('refund_policy')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -266,7 +265,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('requirement_for_refund')}
+                {t('requirement_for_refund')}
               </CustomText>
             </View>
             <View
@@ -279,7 +278,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('your_reservation')}
+                {t('your_reservation')}
               </CustomText>
             </View>
             <View
@@ -292,7 +291,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('the_final_refund')}
+                {t('the_final_refund')}
               </CustomText>
             </View>
             <View
@@ -305,14 +304,16 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('to_cancel_reservation')}
+                {t('to_cancel_reservation')}
               </CustomText>
             </View>
           </View>
         )}
-        <TouchableOpacity style={styles.showContent} onPress={viewTermCondition}>
+        <TouchableOpacity
+          style={styles.showContent}
+          onPress={viewTermCondition}>
           <CustomText textType="bold" style={styles.name1}>
-          {t('term_condition')}
+            {t('term_condition')}
           </CustomText>
           <IconRight />
         </TouchableOpacity>
@@ -328,7 +329,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('there_is_surcharge')}
+                {t('there_is_surcharge')}
               </CustomText>
             </View>
             <View
@@ -341,7 +342,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('all_travelers')}
+                {t('all_travelers')}
               </CustomText>
             </View>
             <View
@@ -354,7 +355,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('child_ticket')}
+                {t('child_ticket')}
               </CustomText>
             </View>
             <View
@@ -367,7 +368,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('adult_ticket')}
+                {t('adult_ticket')}
               </CustomText>
             </View>
             <View
@@ -380,7 +381,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('infants_under')}
+                {t('infants_under')}
               </CustomText>
             </View>
             <View
@@ -393,7 +394,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('guest_with_high')}
+                {t('guest_with_high')}
               </CustomText>
             </View>
             <View
@@ -406,7 +407,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('you_are_allergic')}
+                {t('you_are_allergic')}
               </CustomText>
             </View>
             <View
@@ -419,7 +420,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('this_activity')}
+                {t('this_activity')}
               </CustomText>
             </View>
             <View
@@ -432,7 +433,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('foreigners_must')}
+                {t('foreigners_must')}
               </CustomText>
             </View>
             <View
@@ -445,7 +446,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('you_plan_to')}
+                {t('you_plan_to')}
               </CustomText>
             </View>
             <View
@@ -458,7 +459,7 @@ export default function TermContent() {
               }}>
               <View style={styles.dot}></View>
               <CustomText textType="medium" style={styles.text}>
-              {t('itineraries_time')}
+                {t('itineraries_time')}
               </CustomText>
             </View>
           </View>

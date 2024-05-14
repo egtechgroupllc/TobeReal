@@ -6,7 +6,7 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
-import Star from '../../../../../components/Star';
+import Star from '../../../../../components/StarRating';
 import {formatPrice} from '../../../../../utils/format';
 
 export default function TopImg({

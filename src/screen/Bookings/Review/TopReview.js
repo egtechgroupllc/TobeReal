@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
-import Star from '../../../components/Star';
+import Star from '../../../components/StarRating';
 
 export default function TopReview() {
   return (

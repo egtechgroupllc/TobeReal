@@ -29,6 +29,7 @@ export default function PostNewsScreen() {
   return (
     <MainWrapper>
       <TabContent />
+
       {(profile?.role_id === 2 || profile?.role_id === undefined) &&
         (profile?.status === 'VERIFYING_BUSINESS' ? (
           <View style={{marginTop: scale(50), alignItems: 'center'}}>

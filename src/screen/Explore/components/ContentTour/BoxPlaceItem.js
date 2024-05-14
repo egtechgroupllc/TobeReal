@@ -2,17 +2,15 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
-import {IconHeart, IconMapView, IconMarker} from '../../../../assets/icon/Icon';
+import {IconMapView} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import Ribbon from '../../../components/Ribbon';
-import Star from '../../../../components/Star';
-import {formatPrice} from '../../../../utils/format';
-import RatingBox from './BoxPlaceItem/RatingBox';
-import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
-import TopImg from './BoxPlaceItem/TopImg';
+import StarRating from '../../../../components/StarRating';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../utils/format';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import TopImg from './BoxPlaceItem/TopImg';
+import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 
 export default function BoxPlaceItem({
   data,
@@ -87,7 +85,7 @@ export default function BoxPlaceItem({
               numberOfLines={1}>
               {data?.name}
             </CustomText>
-            {isStar && <Star rating={rating} />}
+            {isStar && <StarRating rating={rating} />}
 
             {/* <View style={styles.line} /> */}
 

@@ -37,7 +37,9 @@ export default function TimeCheckOut({onChange}) {
 
   return (
     <View style={{width: '100%'}}>
-      <CustomText style={styles.title}>{t('check_out')}:</CustomText>
+      <CustomText style={styles.title} textType="medium">
+        {t('check_out')}:
+      </CustomText>
       <View
         style={{
           flexDirection: 'row',

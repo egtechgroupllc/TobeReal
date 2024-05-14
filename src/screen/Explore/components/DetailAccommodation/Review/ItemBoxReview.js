@@ -4,7 +4,7 @@ import {SHADOW, SIZES, images, scale} from '../../../../../assets/constants';
 import {IconHeart} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
-import Star from '../../../../../components/Star';
+import {StarRating} from '../../../../../components';
 import {formatDateTime} from '../../../../../utils/format';
 
 export default function ItemBox({style, isShadow = true, data}) {
@@ -52,7 +52,7 @@ export default function ItemBox({style, isShadow = true, data}) {
             {data?.user?.username}
           </CustomText>
 
-          <Star rating={data?.rating} />
+          <StarRating rating={4.5} />
         </View>
       </View>
 

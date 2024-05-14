@@ -14,7 +14,7 @@ import CustomText from '../../../../../../components/CustomText';
 import CustomImage from '../../../../../../components/CustomImage';
 
 import Introduction from '../../DetailTour/Introduction';
-import Star from '../../../../../../components/Star';
+import Star from '../../../../../../components/StarRating';
 import TicketOption from '../../DetailTour/TicketOption';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 

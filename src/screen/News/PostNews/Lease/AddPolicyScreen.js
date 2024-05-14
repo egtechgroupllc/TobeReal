@@ -104,7 +104,7 @@ export default function AddPolicyScreen({route}) {
 
         <Box
           num="6"
-          title="Quý vị muốn loại giá mới này rẻ hơn hay đắt hơn Loại giá cho khách đặt sớm (15+ ngày)?">
+          title="Quý vị muốn loại giá mới này rẻ hơn hay đắt hơn so với giá trên lịch?">
           <RulesPolicy6
             control={control}
             unregister={unregister}

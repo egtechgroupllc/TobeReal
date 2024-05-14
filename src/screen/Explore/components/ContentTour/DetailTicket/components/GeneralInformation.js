@@ -18,7 +18,7 @@ import CustomText from '../../../../../../components/CustomText';
 import CustomImage from '../../../../../../components/CustomImage';
 
 import Introduction from '../../DetailTour/Introduction';
-import Star from '../../../../../../components/Star';
+import Star from '../../../../../../components/StarRating';
 import TicketOption from '../../DetailTour/TicketOption';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import TermContent from './TermContent';
@@ -30,10 +30,10 @@ export default function GeneralInformation() {
       <View style={styles.wrapper}>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-          {t('price_include')}
+            {t('price_include')}
           </CustomText>
           <CustomText textType="medium" style={styles.text}>
-          {t('carriage')}:
+            {t('carriage')}:
           </CustomText>
           <View
             style={{
@@ -45,7 +45,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('round_trip')}
+              {t('round_trip')}
             </CustomText>
           </View>
           <View
@@ -62,7 +62,7 @@ export default function GeneralInformation() {
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
-          {t('tour_guide')}:
+            {t('tour_guide')}:
           </CustomText>
           <View
             style={{
@@ -75,7 +75,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('thai_english')}
+              {t('thai_english')}
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
@@ -91,7 +91,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('light_breakfast')}
+              {t('light_breakfast')}
             </CustomText>
           </View>
           <View
@@ -104,11 +104,11 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('lunch_option')}
+              {t('lunch_option')}
             </CustomText>
           </View>
           <CustomText textType="medium" style={styles.text}>
-          {t('service_supple')}:
+            {t('service_supple')}:
           </CustomText>
           <View
             style={{
@@ -120,7 +120,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('divine_mask')}
+              {t('divine_mask')}
             </CustomText>
           </View>
           <View
@@ -132,7 +132,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('admission_fee')}
+              {t('admission_fee')}
             </CustomText>
           </View>
           <View
@@ -144,7 +144,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('insurance_provide')}
+              {t('insurance_provide')}
             </CustomText>
           </View>
           <View
@@ -156,7 +156,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('soft_drink')}
+              {t('soft_drink')}
             </CustomText>
           </View>
           <View
@@ -168,7 +168,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('seasonal_fruits')}
+              {t('seasonal_fruits')}
             </CustomText>
           </View>
           <View
@@ -180,7 +180,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('cake_and_snack')}
+              {t('cake_and_snack')}
             </CustomText>
           </View>
           <View
@@ -192,7 +192,7 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('other_personal')}
+              {t('other_personal')}
             </CustomText>
           </View>
           <View
@@ -205,19 +205,19 @@ export default function GeneralInformation() {
             }}>
             <View style={styles.dot}></View>
             <CustomText textType="medium" style={styles.text}>
-            {t('tip')}
+              {t('tip')}
             </CustomText>
           </View>
         </View>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-          {t('voucher_validity')}
+            {t('voucher_validity')}
           </CustomText>
           <View style={{flexDirection: 'row', marginTop: '2%'}}>
             <IconCalendar></IconCalendar>
             <View style={{marginLeft: '5%', marginTop: '1%'}}>
               <CustomText textType="medium" style={styles.text}>
-              {t('use_selected_date')}:
+                {t('use_selected_date')}:
               </CustomText>
               <View
                 style={{
@@ -227,7 +227,7 @@ export default function GeneralInformation() {
                 }}>
                 <View style={{...styles.dot, width: '2.5%'}}></View>
                 <CustomText textType="medium" style={styles.text}>
-                {t('valid_normally')}
+                  {t('valid_normally')}
                 </CustomText>
               </View>
               <View
@@ -239,7 +239,7 @@ export default function GeneralInformation() {
                 }}>
                 <View style={{...styles.dot, width: '2.5%'}}></View>
                 <CustomText textType="medium" style={styles.text}>
-                {t('valid_holiday')}
+                  {t('valid_holiday')}
                 </CustomText>
               </View>
             </View>
@@ -247,7 +247,7 @@ export default function GeneralInformation() {
         </View>
         <View>
           <CustomText textType="semiBold" style={styles.text}>
-          {t('conversion_method')}
+            {t('conversion_method')}
           </CustomText>
           <View
             style={{
@@ -258,10 +258,10 @@ export default function GeneralInformation() {
             <IconNoCalendar />
             <View style={{marginLeft: '5%'}}>
               <CustomText textType="medium" style={styles.text}>
-              {t('no_reservation')}
+                {t('no_reservation')}
               </CustomText>
               <CustomText textType="medium" style={styles.text}>
-              {t('do_not_need_book')}.
+                {t('do_not_need_book')}.
               </CustomText>
             </View>
           </View>
@@ -270,17 +270,16 @@ export default function GeneralInformation() {
               flexDirection: 'row',
               marginTop: '2%',
               alignItems: 'center',
-              paddingBottom:'2%'
+              paddingBottom: '2%',
             }}>
             <IconInputDirectly />
-            <View style={{marginLeft: '5%',}}>
+            <View style={{marginLeft: '5%'}}>
               <CustomText textType="bold" style={styles.text}>
-              {t('input_directly')}
+                {t('input_directly')}
               </CustomText>
             </View>
           </View>
           <CustomText textType="regular" style={styles.text}>
-        
             - {t('after_confirming')}.
           </CustomText>
           <CustomText textType="regular" style={styles.text}>
@@ -291,21 +290,21 @@ export default function GeneralInformation() {
               flexDirection: 'row',
               marginTop: '2%',
               alignItems: 'center',
-              paddingBottom:'2%'
+              paddingBottom: '2%',
             }}>
             <IconPrint />
             <View style={{marginLeft: '5%'}}>
               <CustomText textType="bold" style={styles.text}>
-              {t('no_need_print_card')}
+                {t('no_need_print_card')}
               </CustomText>
             </View>
           </View>
           <CustomText textType="regular" style={styles.text}>
-          {t('just_present_electronic')}
+            {t('just_present_electronic')}
           </CustomText>
         </View>
       </View>
-      <TermContent/>
+      <TermContent />
       {/* <View style={styles.line}></View>
       <Introduction /> */}
     </View>
