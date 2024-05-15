@@ -8,6 +8,7 @@ import Favourite from '../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
 import Star from '../../../../../components/StarRating';
 import {formatPrice} from '../../../../../utils/format';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function TopImg({
   rating,
@@ -20,6 +21,7 @@ export default function TopImg({
   level,
 }) {
   const dataPackagePost = data?.package_post_item?.package_post;
+  const {currency} = useCountry();
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>
@@ -47,8 +49,8 @@ export default function TopImg({
               width: scale(100),
             }}>
             <CustomText style={styles.topName} numberOfLines={1}>
-              {formatPrice(data?.price, {
-                locales: 'vi',
+              {formatPrice(data?.price * currency?.exchange_rate, {
+                currency: currency?.currency_code,
               })}{' '}
             </CustomText>
           </View>

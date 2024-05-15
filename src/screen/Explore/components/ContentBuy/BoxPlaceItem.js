@@ -31,6 +31,7 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import LinearGradient from 'react-native-linear-gradient';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function BoxPlaceItem({
   data,
@@ -64,7 +65,7 @@ export default function BoxPlaceItem({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
-
+  const {currency} = useCountry();
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -197,8 +198,8 @@ export default function BoxPlaceItem({
                         // marginTop: scale(25),
                       }}>
                       <CustomText style={styles.topName} numberOfLines={1}>
-                        {formatPrice(data?.price, {
-                          locales: 'vi',
+                        {formatPrice(data?.price * currency?.exchange_rate, {
+                          currency: currency?.currency_code,
                         })}{' '}
                       </CustomText>
                     </View>

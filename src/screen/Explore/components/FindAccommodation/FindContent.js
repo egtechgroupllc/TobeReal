@@ -141,7 +141,6 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
               </View>
               <OptionAccommodation
                 outline
-                multiSelect
                 isSelectAll
                 styleContent={{
                   columnGap: scale(8),
@@ -174,6 +173,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
               <OptionAccommodation
                 outline
                 scrollEnabled
+                isSelectAll
                 styleContent={{
                   flex: 1,
                   columnGap: scale(8),
@@ -200,7 +200,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
               </View>
               <OptionAccommodation
                 outline
-                multiSelect
+                // multiSelect
                 isSelectAll
                 styleContent={{
                   flex: 1,

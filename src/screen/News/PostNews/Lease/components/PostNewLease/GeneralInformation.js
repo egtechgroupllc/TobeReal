@@ -17,6 +17,7 @@ import EstateSetMap from './GeneralInformation/EstateSetMap';
 import {useQuery} from '@tanstack/react-query';
 import {getListTypeRent} from '../../../../../../Model/api/common';
 import InputLeaseMulti from './GeneralInformation/InputLeaseMulti';
+import CustomText from '../../../../../../components/CustomText';
 
 export default function GeneralInformation({control, setValue, watch, errors}) {
   const {t} = useLanguage();
@@ -42,7 +43,6 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
     queryKey: ['common', 'accommodation', 'list-type'],
     queryFn: getListTypeRent,
   });
-
   return (
     <View>
       <ButtonTabValidate
@@ -96,8 +96,13 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
                 setValue('latitude', value?.latitude);
                 setValue('longitude', value?.longitude);
               }}
+              address={watch('address')}
             />
-
+            {!watch('latitude') && (
+              <CustomText style={{color: COLORS.error}}>
+                Please choose coordinates of your estate in Map!
+              </CustomText>
+            )}
             <View style={styles.line} />
 
             <SelectCountry setValue={setValue} control={control} />

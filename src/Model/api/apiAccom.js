@@ -176,3 +176,25 @@ export const postCreatePolicyToAccom = async data => {
 
   return responsive.data;
 };
+
+export const getListPolicy = async ({accommodation_id}) => {
+  const accomId = accommodation_id
+    ? `accommodation_id=${accommodation_id}`
+    : '';
+  const responsive = await instanceAccom.get(`/policy/list?${accomId}`);
+
+  return responsive.data;
+};
+export const postPolicyToRoom = async data => {
+  const responsive = await instanceAccom.post('/policy/policy-to-room', data);
+
+  return responsive.data;
+};
+export const deleteAccom = async ({id_room}) => {
+  const responsive = await instanceAccom.delete(`/room/${id_room}`);
+  return responsive.data;
+};
+export const deletePolicy = async ({id_policy}) => {
+  const responsive = await instanceAccom.delete(`/policy/${id_policy}`);
+  return responsive.data;
+};

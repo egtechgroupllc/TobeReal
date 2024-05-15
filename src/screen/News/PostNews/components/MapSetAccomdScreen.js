@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useRoute} from '@react-navigation/native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import MapView, {Circle, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
@@ -9,16 +9,22 @@ import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 import MapFooter from './MapSetAccomd.js/MapFooter';
 import MapHeader from './MapSetAccomd.js/MapHeader';
 import {COLORS, scale} from '../../../../assets/constants';
-
+import getDistance from 'geolib/es/getDistance';
+import CustomText from '../../../../components/CustomText';
 export default function MapSetAccomdScreen() {
   const router = useRoute().params;
   const mapRef = useRef(null);
-
+  const [myLocation, setMyLocation] = useState([]);
   const [moveLocation, setMoveLocation] = useState(
     router?.region || {
       latitude: 0,
       longitude: 0,
     },
+  );
+
+  const distance = useMemo(
+    () => getDistance(myLocation, moveLocation),
+    [myLocation, moveLocation],
   );
 
   const [typeMoveLocation, setTypeMoveLocation] = useState('click');
@@ -32,14 +38,15 @@ export default function MapSetAccomdScreen() {
   const currentPosition = useCallback(async region => {
     const {coords} = await getCurrentLocation();
 
-    if (coords || region) {
-      const coordinates = region || {
+    if (coords || region?.latitude) {
+      const coordinates = (region?.latitude && region) || {
         latitude: coords?.latitude,
         longitude: coords?.longitude,
       };
 
-      // setMoveLocation(coordinates);
+      setMoveLocation(coordinates);
       animatedMoveCenterMap([coordinates]);
+      setMyLocation(coordinates);
       return coordinates;
     }
   }, []);
@@ -102,7 +109,11 @@ export default function MapSetAccomdScreen() {
         </View>
       )}
 
-      <MapFooter router={router} moveLocation={moveLocation} />
+      <MapFooter
+        router={router}
+        moveLocation={moveLocation}
+        distance={distance}
+      />
     </View>
   );
 }

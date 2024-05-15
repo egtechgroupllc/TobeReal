@@ -1,13 +1,16 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
-import CustomImage from '../../../../../../components/CustomImage';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomButton} from '../../../../../../components';
-import {IconArrowRight, IconGoBack} from '../../../../../../assets/icon/Icon';
-import CustomText from '../../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {CustomButton} from '../../../../../../../components';
+import CustomImage from '../../../../../../../components/CustomImage';
+import CustomText from '../../../../../../../components/CustomText';
+import {
+  IconEditProfile,
+  IconTrash,
+} from '../../../../../../../assets/icon/Icon';
 
-export default function CreateAccomItem({data, isTour}) {
+export default function RoomItem({data, isTour, onPressMore, onEdit}) {
   const {navigate} = useNavigation();
 
   const handleContinue = () => {
@@ -24,10 +27,10 @@ export default function CreateAccomItem({data, isTour}) {
     //   ? handleContinue()
     //   : navigateDetail();
     // handleContinue();
-    navigate('AdminManageLeaseScreen', data);
+    navigate('DetailRoomManageScreen', {...data});
   };
   return (
-    <TouchableOpacity
+    <View
       activeOpacity={0.7}
       onPress={() => {
         handleTouch();
@@ -39,44 +42,6 @@ export default function CreateAccomItem({data, isTour}) {
           minHeight: scale(160),
           width: scale(400 / 1.4),
         }}>
-        {data?.accommodation_type?.name && (
-          <View style={styles.type}>
-            <CustomText
-              textType="semiBold"
-              style={{
-                color: COLORS.error,
-              }}>
-              {data?.accommodation_type?.name}
-            </CustomText>
-          </View>
-        )}
-
-        {data?.status &&
-          (!data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0) && (
-            <View
-              style={{
-                ...styles.type,
-                left: scale(8),
-                right: 'auto',
-                borderRadius: scale(5),
-                paddingVertical: scale(2),
-                backgroundColor:
-                  data?.status === 'VERIFIED'
-                    ? '#42b00b'
-                    : data?.status === 'VERIFYING'
-                    ? COLORS.primary
-                    : '#e03c31',
-              }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  color: COLORS.white,
-                }}>
-                {data?.status}
-              </CustomText>
-            </View>
-          )}
-
         <View
           style={{
             backgroundColor: COLORS.overlay,
@@ -92,20 +57,12 @@ export default function CreateAccomItem({data, isTour}) {
               {data?.name}
             </CustomText>
             <CustomText
-              numberOfLines={2}
-              style={{
-                color: COLORS.white,
-                fontSize: SIZES.xSmall,
-              }}>
-              {data?.address}
-            </CustomText>
-            <CustomText
               textType="semiBold"
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
               }}>
-              RegID: {data?.id}
+              Room id: {data?.id}
             </CustomText>
           </View>
 
@@ -142,17 +99,28 @@ export default function CreateAccomItem({data, isTour}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text="Management"
+              text="Edit"
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,
               }}
-              onPress={handleTouch}
+              onPress={onEdit}
             />
+            <TouchableOpacity
+              style={styles.box}
+              activeOpacity={0.7}
+              onPress={onPressMore}>
+              <IconTrash
+                style={{
+                  width: scale(20),
+                  height: scale(20),
+                }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </CustomImage>
-    </TouchableOpacity>
+    </View>
   );
 }
 
@@ -162,6 +130,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: scale(10),
     rowGap: scale(3),
+  },
+  box: {
+    borderRadius: scale(4),
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    aspectRatio: 1,
+    backgroundColor: COLORS.white,
+    borderColor: '#ccc',
+    flexDirection: 'row',
+    columnGap: scale(2),
   },
   type: {
     position: 'absolute',
@@ -174,13 +153,15 @@ const styles = StyleSheet.create({
   },
   bottom: {
     // backgroundColor: COLORS.white,
-    // flexDirection: 'row',
-    width: '50%',
+    flexDirection: 'row',
+    // width: '50%',
     padding: scale(8),
-    alignSelf: 'center',
+    paddingHorizontal: scale(50),
+    alignItems: 'center',
+    // justifyContent: 'center',
     marginTop: 'auto',
     columnGap: scale(4),
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
   },
   btnInfo: {
     height: scale(26),

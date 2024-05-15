@@ -91,10 +91,17 @@ export default function PostNewLeaseScreen() {
 
   const handlePostLease = value => {
     delete value?.check;
+
+    if (!value?.latitude) {
+      showMess('Please choose coordinates of your estate in Map', 'error');
+      return;
+    }
+
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
       showMess('You have not selected a facility yet', 'error');
       return;
     }
+
     const formData = getFormData(value);
 
     createAccommodationMu.mutate(formData, {
@@ -104,7 +111,7 @@ export default function PostNewLeaseScreen() {
         if (dataInside?.status) {
           reset();
           queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
-          navigate('AddRoomTypeScreen', dataInside?.data);
+          navigate('AddPolicyScreen', dataInside?.data);
         }
       },
       onError: err => {

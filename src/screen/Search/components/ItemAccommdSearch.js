@@ -11,9 +11,10 @@ import Bottom from './Bottom';
 import ImageDetail from '../../components/ImageDetail';
 import TopImg from './TopImg';
 import {IconMapView} from '../../../assets/icon/Icon';
-import Star from '../../../components/Star';
+
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../hooks/useCountry';
+import {StarRating} from '../../../components';
 
 export default function ItemAccommdSearch({
   data,
@@ -93,7 +94,9 @@ export default function ItemAccommdSearch({
             alignItems: 'center',
             columnGap: scale(50),
           }}>
-          {isStar && <Star rating={rating} style={{marginTop: scale(2)}} />}
+          {isStar && (
+            <StarRating rating={rating} style={{marginTop: scale(2)}} />
+          )}
           {isRating && data?.review_count > 0 && (
             <RatingBox
               rating={data?.review_average ? data?.review_average : 0}

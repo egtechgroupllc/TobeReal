@@ -9,6 +9,10 @@ import {
   PostNewLeaseScreen,
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
+import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
+import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/PolicyManage/PolicyManageScreen';
+import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
+import RoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomManageScreen';
 import {
   PostConfigurationScreen,
   PostNewSellScreen,
@@ -76,5 +80,21 @@ export default routerNews = [
   {
     name: 'FeaturesPolicyScreen',
     component: FeaturesPolicyScreen,
+  },
+  {
+    name: 'AdminManageLeaseScreen',
+    component: AdminManageLeaseScreen,
+  },
+  {
+    name: 'RoomManageScreen',
+    component: RoomManageScreen,
+  },
+  {
+    name: 'DetailRoomManageScreen',
+    component: DetailRoomManageScreen,
+  },
+  {
+    name: 'PolicyManageScreen',
+    component: PolicyManageScreen,
   },
 ];

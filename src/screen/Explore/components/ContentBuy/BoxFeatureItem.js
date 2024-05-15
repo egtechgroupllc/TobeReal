@@ -30,6 +30,7 @@ import {type} from '../../../../components/Marquee';
 import Favourite from '../../../components/Favourite';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function BoxFeatureItem({
   data,
@@ -53,6 +54,7 @@ export default function BoxFeatureItem({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
+  const {currency} = useCountry();
   const onSavedName = async () => {
     const result = await EncryptedStorage.getItem('@save_name_estate');
 
@@ -168,8 +170,8 @@ export default function BoxFeatureItem({
                         <CustomText
                           textType="regular"
                           style={{...styles.textDiscount, color: COLORS.white}}>
-                          {formatPrice(data?.discount, {
-                            locales: 'vi',
+                          {formatPrice(data?.price * currency?.exchange_rate, {
+                            currency: currency?.currency_code,
                           })}{' '}
                         </CustomText>
 
@@ -194,8 +196,8 @@ export default function BoxFeatureItem({
                           marginTop: scale(25),
                         }}>
                         <CustomText style={styles.topName} numberOfLines={1}>
-                          {formatPrice(data?.price, {
-                            locales: 'vi',
+                          {formatPrice(data?.price * currency?.exchange_rate, {
+                            currency: currency?.currency_code,
                           })}{' '}
                         </CustomText>
                       </View>

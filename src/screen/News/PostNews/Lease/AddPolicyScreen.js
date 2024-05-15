@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
@@ -11,12 +11,14 @@ import SetNamePolicy from './components/AddPolicy/SetNamePolicy';
 import RulesPolicy6 from './components/AddPolicy/RulesPolicy6';
 import RulesPolicy3 from './components/AddPolicy/RulesPolicy3';
 import {useForm} from 'react-hook-form';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postCreatePolicyToAccom} from '../../../../Model/api/apiAccom';
 import {CustomButton} from '../../../../components';
+import {useNavigation} from '@react-navigation/native';
 
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
+  const {navigate, setOptions} = useNavigation();
   const {
     handleSubmit,
     control,
@@ -25,11 +27,22 @@ export default function AddPolicyScreen({route}) {
     unregister,
     formState: {errors},
   } = useForm();
-
+  const queryClient = useQueryClient();
   const createPolicy = useMutation({
     mutationFn: postCreatePolicyToAccom,
   });
-
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: 'Policy screen',
+      headerTitleStyle: {
+        textAlign: 'center',
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log('====================================');
+  console.log(dataParams);
+  console.log('====================================');
   const handleCreatePolicy = value => {
     const price_percent = value?.isDiscount
       ? value?.price_percent / 100
@@ -47,8 +60,21 @@ export default function AddPolicyScreen({route}) {
         onSuccess: dataInside => {
           console.log(dataInside);
 
+          // navigate('NoBottomTab', {
+          //   screen: 'AccommoManagementScreen',
+          // });
+
           if (dataInside?.status) {
-            reset();
+            queryClient.invalidateQueries([
+              'accommodation',
+              'list-policy',
+              dataParams?.id,
+            ]);
+            {
+              !dataParams?.policyScreen
+                ? navigate('AddRoomTypeScreen', {accomId: dataParams?.id})
+                : navigate('PolicyManageScreen', {id: dataParams?.id});
+            }
           }
         },
 
@@ -112,7 +138,7 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="7" title="Quý vị có muốn đặt tên cho loại giá này là gì?">
+        <Box num="7" title="Quý vị  đặt tên cho loại chính sách này là gì?">
           <SetNamePolicy control={control} />
         </Box>
         <CustomButton

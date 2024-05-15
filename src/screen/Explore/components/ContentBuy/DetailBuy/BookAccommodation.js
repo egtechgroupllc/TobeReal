@@ -26,6 +26,7 @@ import {
 import Skeleton from '../../../../../components/Skeleton';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 const listContact = [
   {
@@ -56,7 +57,7 @@ const listContact = [
 
 export default memo(function BookAccommodation({isLoading, price, onPress}) {
   const {t} = useLanguage();
-
+  const {currency} = useCountry();
   const [openContact, setOpenContact] = useState(false);
 
   const makeCallPhone = num => {
@@ -85,8 +86,8 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
               fontSize: SIZES.medium,
             }}
             textType="bold">
-            {formatPrice(price, {
-              locales: 'vi',
+            {formatPrice(price * currency?.exchange_rate, {
+              currency: currency?.currency_code,
             })}{' '}
           </CustomText>
         </View>

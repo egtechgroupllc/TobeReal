@@ -5,6 +5,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 import {CustomInput} from '../../components';
 import CustomText from '../../components/CustomText';
+import {useCountry} from '../../hooks/useCountry';
 
 export default function InputPrice({
   name,
@@ -20,6 +21,7 @@ export default function InputPrice({
   style,
   onChangeCurrency,
 }) {
+  const {currency} = useCountry();
   const {navigate} = useNavigation();
   const [dataFromScreen, setDataFromScreen] = useState({
     currency_code: 'USD',
@@ -57,7 +59,7 @@ export default function InputPrice({
       maxLength={14}
       inputMode="numeric"
       componentLeft={
-        <TouchableOpacity
+        <View
           activeOpacity={0.7}
           onPress={() => {
             navigate('NoBottomTab', {
@@ -78,10 +80,11 @@ export default function InputPrice({
               minWidth: scale(26),
               textAlign: 'center',
             }}>
-            {dataFromScreen?.currency_code}
+            {/* {dataFromScreen?.currency_code} */}
+            {currency?.currency_code}
           </CustomText>
           <View style={styles.border} />
-        </TouchableOpacity>
+        </View>
       }
     />
   );

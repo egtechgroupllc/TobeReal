@@ -12,6 +12,7 @@ export default memo(function ButtonTabValidate({
   arrKeywords,
   title,
   errors,
+  style,
 }) {
   const [isValid, setIsValid] = useState(false);
 
@@ -33,7 +34,10 @@ export default memo(function ButtonTabValidate({
   return (
     <CustomButton
       outline
-      style={[styles.buttonCategories, isValid && {borderColor: '#f6465d'}]}
+      style={[
+        style || styles.buttonCategories,
+        isValid && {borderColor: '#f6465d'},
+      ]}
       text={title}
       iconRight={() => <IconRight />}
       onPress={onPress}

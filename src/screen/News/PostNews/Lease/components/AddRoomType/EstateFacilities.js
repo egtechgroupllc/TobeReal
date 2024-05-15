@@ -35,11 +35,13 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
     if (!watch('features')) {
       setArrFacilities([]);
       setShowFacilitiesItem(-1);
+    } else {
+      setArrFacilities(watch('features'));
     }
   }, [watch('features')]);
 
   useEffect(() => {
-    setValue('features', JSON.stringify(arrFacilities));
+    !watch('features') && setValue('features', JSON.stringify(arrFacilities));
   }, [arrFacilities]);
 
   const arrKeywords = useRef(['features']).current;

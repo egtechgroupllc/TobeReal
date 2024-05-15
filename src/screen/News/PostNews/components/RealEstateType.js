@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {memo, useEffect} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SIZES, scale} from '../../../../assets/constants';
 import CustomSelectDropdown from '../../../../components/CustomSelectDropdown';
@@ -17,7 +17,34 @@ export default memo(function RealEstateType({
   watch = () => {},
   value,
   isDefaultValue,
+  valueFind = 'id',
 }) {
+  // const [dataFind, setDataFind] = useState([]);
+  // const Finding = () => {
+  //   const result = data?.find(
+  //     item => {
+  //       item?.[valueFind] === Number(watch(name));
+  //       console.log(item);
+  //       return result;
+  //     },
+
+  //     console.log(result, 1111),
+  //     // setDataFind(result),
+  //   );
+  // };
+  // useEffect(() => {
+  //   Finding();
+  // }, []);
+
+  const dataFind = useMemo(
+    () =>
+      valueFind &&
+      data?.find(item => {
+        return item?.[valueFind] === Number(watch(name));
+      }),
+    [valueFind, watch(name), data],
+  );
+  console.log(watch(name), dataFind, valueFind, 1232123213);
   return (
     <View
       style={{
@@ -46,7 +73,7 @@ export default memo(function RealEstateType({
               style={{
                 fontSize: scale(13),
               }}>
-              {valueConvert?.name || 'Select'}
+              {valueFind ? dataFind?.name : valueConvert?.name || 'Select'}
             </CustomText>
           );
         }}

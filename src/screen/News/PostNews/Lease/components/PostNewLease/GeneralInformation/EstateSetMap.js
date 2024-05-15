@@ -4,10 +4,10 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {scale} from '../../../../../../../assets/constants';
 import DetailAccommoMap from '../../../../../../Explore/components/DetailAccommodation/Detail/DetailAccommoMap';
+import CustomText from '../../../../../../../components/CustomText';
 
-export default function EstateSetMap({onChange, watch = () => {}}) {
+export default function EstateSetMap({onChange, watch = () => {}, address}) {
   const {navigate} = useNavigation();
-
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
   useEffect(() => {
@@ -36,9 +36,7 @@ export default function EstateSetMap({onChange, watch = () => {}}) {
         });
       }}>
       <DetailAccommoMap
-        address={
-          '333 Soi Phahonyathin 34, Senanikhom, Sena Nikhom, Chatuchak, Bangkok, Thailand, 10900'
-        }
+        address={address ? address : 'Address'}
         region={dataFromScreen}
         styleWrapper={{
           marginHorizontal: scale(0),

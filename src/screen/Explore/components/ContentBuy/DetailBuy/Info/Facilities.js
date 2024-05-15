@@ -13,10 +13,11 @@ import {
   IconFurniture,
   IconRoom,
 } from '../../../../../../assets/icon/Icon';
+import {useCountry} from '../../../../../../hooks/useCountry';
 
 export default function Facilities({data}) {
   const {t} = useLanguage();
-
+  const {currency} = useCountry();
   return (
     <View style={styles.boxTourTime}>
       <View
@@ -36,8 +37,8 @@ export default function Facilities({data}) {
             <CustomText
               textType="bold"
               style={{...styles.name, color: COLORS.primary}}>
-              {formatPrice(data?.price, {
-                locales: 'vi',
+              {formatPrice(data?.price * currency?.exchange_rate, {
+                currency: currency?.currency_code,
               })}
             </CustomText>
           </CustomText>

@@ -7,9 +7,11 @@ import {getListRent} from '../../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../../utils/format';
 import {useQuery} from '@tanstack/react-query';
 import {scale} from '../../../../../assets/constants';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function SimilarApartmentsNearby() {
   const {t} = useLanguage();
+  const {currency} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',
@@ -17,6 +19,7 @@ export default function SimilarApartmentsNearby() {
       {
         accommodation_type_id: 1,
         country_id: 241,
+        currency_id: currency?.id,
         // province_id: 1,
       },
     ],
@@ -25,6 +28,7 @@ export default function SimilarApartmentsNearby() {
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
         country_id: 241,
+        currency_id: currency?.id,
         // province_id: 1,
       }),
   });

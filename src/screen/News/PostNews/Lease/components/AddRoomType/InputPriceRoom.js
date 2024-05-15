@@ -26,7 +26,6 @@ export default memo(function InputPriceRoom({
   });
 
   const [typeCurrency, setTypeCurrency] = useState(currencyValue);
-
   return (
     <View
       style={{

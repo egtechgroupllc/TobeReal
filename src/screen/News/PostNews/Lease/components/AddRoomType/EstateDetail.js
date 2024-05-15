@@ -64,6 +64,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             data={data?.data}
             watch={watch}
             setValue
+            valueFind="id"
           />
           <RealEstateType
             label={'Bed Type'}
@@ -71,6 +72,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             control={control}
             data={listBedType.data?.data}
             watch={watch}
+            valueFind="id"
           />
 
           <View style={styles.line} />

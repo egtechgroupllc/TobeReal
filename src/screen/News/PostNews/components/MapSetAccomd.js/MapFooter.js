@@ -8,12 +8,12 @@ import CustomText from '../../../../../components/CustomText';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {showMess} from '../../../../../assets/constants/Helper';
 
-export default function MapFooter({moveLocation, router}) {
+export default function MapFooter({moveLocation, router, distance}) {
   const insets = useSafeAreaInsets();
   const {goBack} = useNavigation();
   const {t} = useLanguage();
-
   return (
     <View
       style={[
@@ -22,6 +22,29 @@ export default function MapFooter({moveLocation, router}) {
           paddingBottom: insets.bottom + scale(10),
         },
       ]}>
+      <View
+        style={{
+          flexDirection: 'row',
+          position: 'absolute',
+          top: scale(-40),
+          left: scale(10),
+          backgroundColor: COLORS.primary,
+          padding: scale(8),
+          minWidth: '20%',
+          borderRadius: scale(10),
+        }}>
+        <CustomText style={{color: COLORS.white}}>
+          Distance: {distance} {distance >= 1 ? 'meters' : 'meter'}
+        </CustomText>
+      </View>
+
+      <View>
+        <CustomText>
+          Note: Please come to the exact location of your property within 5
+          meters and choose the exact location to post (this will help identify
+          your property on the system better)
+        </CustomText>
+      </View>
       <View style={styles.content}>
         <View style={styles.icon}>
           <IconMapView fill={COLORS.primary} />
@@ -50,8 +73,15 @@ export default function MapFooter({moveLocation, router}) {
       <CustomButton
         text={t('confirm')}
         onPress={() => {
-          router?.onGoBack(moveLocation);
-          goBack();
+          if (distance <= 5) {
+            router?.onGoBack(moveLocation);
+            goBack();
+          } else {
+            showMess(
+              'Please choose an exact location within 5 meters to post',
+              'error',
+            );
+          }
         }}
       />
     </View>
