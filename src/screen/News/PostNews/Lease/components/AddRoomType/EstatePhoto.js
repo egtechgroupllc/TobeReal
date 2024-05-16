@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, scale} from '../../../../../../assets/constants';
@@ -10,10 +10,38 @@ import ButtonTabValidate from '../ButtonTabValidate';
 import InViewPort from '../../../../../../components/InViewport';
 import RulesPostImg from '../../../components/RulesPostImg';
 
-export default function EstatePhoto({control, errors, watch}) {
+export default function EstatePhoto({control, errors, watch, setValue}) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
+
+  const formatImgEdit = images => {
+    const result = images.map((item, index) => {
+      var filename = item.file_name;
+
+      var parts = filename.split('.');
+
+      var extension = parts[parts.length - 1];
+
+      return {
+        name: filename,
+        type: `image/${extension}`,
+        id: item.id,
+        description: item?.description,
+        uri: item.url,
+      };
+    });
+
+    return result;
+  };
+  const imgDes = useMemo(() => {
+    if (watch('images')) {
+      const description_img = watch('images');
+      const image_descriptionFormat = formatImgEdit(description_img);
+
+      return image_descriptionFormat;
+    }
+  }, [watch('images')]);
 
   return (
     <View>
@@ -31,9 +59,28 @@ export default function EstatePhoto({control, errors, watch}) {
             title={t('real_estate_images')}
             subHeading={t('update_image_to_maximum')}
             control={control}
-            rules={[validateMinLength(t('this_field_required'), 1)]}
             name={'files'}
+            rules={
+              !imgDes && [
+                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+              ]
+            }
           />
+          {imgDes && (
+            <ChooseImgPicker
+              defaultValue={imgDes}
+              isAddWhenEmpty={true}
+              isAddMore={false}
+              name={'image_update_description'}
+              control={control}
+              onDelete={id => {
+                setValue(
+                  'image_delete',
+                  watch('image_delete') ? [id, ...watch('image_delete')] : [id],
+                );
+              }}
+            />
+          )}
         </Collapsible>
       </InViewPort>
     </View>

@@ -1,34 +1,81 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
 import {CustomButton} from '../../../../components';
+import {QueryClient, useMutation} from '@tanstack/react-query';
+import {deleteAccom} from '../../../../Model/api/apiAccom';
+import {showMess} from '../../../../assets/constants/Helper';
+import HeaderRight from '../../../../navigation/components/HeaderRight';
+import {IconHome} from '../../../../assets/icon/Icon';
 
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
   const {setOptions} = useNavigation();
-  const {navigate} = useNavigation();
+  const {navigate, goBack} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: 'Quản lý chỗ ở',
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   useEffect(() => {
     setAdminScreen(true);
   }, [adminScreen]);
+  const deleteAccomMu = useMutation({
+    mutationFn: deleteAccom,
+  });
+
+  const Delete = value => {
+    deleteAccomMu.mutate(
+      {
+        id_accom: params?.id,
+      },
+      {
+        onSuccess: dataInside => {
+          showMess(
+            dataInside.message,
+            dataInside?.status ? 'success' : 'error',
+          );
+
+          if (dataInside?.status) {
+            goBack();
+            QueryClient.invalidateQueries(['accommodation', 'my-list']);
+          }
+        },
+
+        onError: err => {
+          console.log({err});
+        },
+      },
+    );
+  };
+  const handleDelete = () =>
+    Alert.alert(
+      'Bạn có chắc xoá chỗ ở này?',
+      'Chỗ ở đã xoá không thể khôi phục!',
+      [
+        {
+          text: 'Cancel',
+          // onPress: () => Alert.alert('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => Delete()},
+      ],
+    );
   return (
-    <MainWrapper
-      scrollEnabled={false}
-      refreshControl
-      styleContent={{
-        marginVertical: scale(10),
-      }}>
-      <View style={{alignItems: 'center', rowGap: scale(10)}}>
+    <MainWrapper scrollEnabled={false} refreshControl>
+      <View
+        style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
         <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
           {params?.name}
         </CustomText>
@@ -70,6 +117,7 @@ export default function AdminManageLeaseScreen() {
               {params?.status}
             </CustomText>
           </View>
+
           <View style={{...styles.content}}>
             <CustomText
               textType="bold"
@@ -114,6 +162,15 @@ export default function AdminManageLeaseScreen() {
           onPress={() =>
             navigate('PolicyManageScreen', {...params, admin: adminScreen})
           }
+        />
+        <CustomButton
+          text="Remove Accommodation"
+          style={{
+            width: '85%',
+            height: scale(45),
+            backgroundColor: '#f04f5c',
+          }}
+          onPress={handleDelete}
         />
       </View>
     </MainWrapper>

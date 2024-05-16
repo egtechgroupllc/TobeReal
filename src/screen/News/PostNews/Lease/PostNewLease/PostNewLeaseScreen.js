@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -38,7 +38,12 @@ export default function PostNewLeaseScreen() {
     reset,
     formState: {errors},
   } = useForm();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: 'Create new accommodation',
+    });
+  }, []);
   const queryClient = useQueryClient();
 
   const createAccommodationMu = useMutation({
@@ -111,7 +116,10 @@ export default function PostNewLeaseScreen() {
         if (dataInside?.status) {
           reset();
           queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
-          navigate('AddPolicyScreen', dataInside?.data);
+          navigate('NoBottomTab', {
+            screen: 'AddPolicyScreen',
+            params: dataInside?.data,
+          });
         }
       },
       onError: err => {

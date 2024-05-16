@@ -40,10 +40,10 @@ export default function AddPolicyScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log('====================================');
-  console.log(dataParams);
-  console.log('====================================');
   const handleCreatePolicy = value => {
+    console.log('====================================');
+    console.log(value, 222222);
+    console.log('====================================');
     const price_percent = value?.isDiscount
       ? value?.price_percent / 100
       : value?.price_percent / 100 + 1;
@@ -70,11 +70,16 @@ export default function AddPolicyScreen({route}) {
               'list-policy',
               dataParams?.id,
             ]);
-            {
-              !dataParams?.policyScreen
-                ? navigate('AddRoomTypeScreen', {accomId: dataParams?.id})
-                : navigate('PolicyManageScreen', {id: dataParams?.id});
-            }
+
+            !dataParams?.policyScreen
+              ? navigate('NoBottomTab', {
+                  screen: 'AddRoomTypeScreen',
+                  params: {id: dataParams?.id},
+                })
+              : navigate('NoBottomTab', {
+                  screen: 'PolicyManageScreen',
+                  params: {id: dataParams?.id},
+                });
           }
         },
 

@@ -36,6 +36,8 @@ export default function FindBest({country, currency}) {
       getListRent({
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
+        // date_end: formatDate(new Date(), {addDays: 14}),
+        // date_start: formatDate(new Date(), {addDays: 2}),
         country_id: country?.id,
         province_id: filter?.id,
         currency_id: currency?.id,

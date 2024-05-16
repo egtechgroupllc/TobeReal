@@ -1,21 +1,14 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet} from 'react-native';
-import {getMyListCreateAccom} from '../../../../../../../Model/api/apiAccom';
-import {getMyListCreateTour} from '../../../../../../../Model/api/apiTour';
+import React, {useLayoutEffect, useRef, useState} from 'react';
+import {FlatList, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {scale} from '../../../../../../../assets/constants';
-import EmptyData from '../../../../../../../components/EmptyData';
-import MainWrapper from '../../../../../../../components/MainWrapper';
-import Pagination from '../../../../../../../components/Pagination';
-import usePagination from '../../../../../../../hooks/usePagination';
-import CreateAccomItem from '../../HomeLease/CreateAccomItem';
-import ListCreateAccomLoading from '../../HomeLease/ListCreateAccomLoading';
-import RoomItem from './RoomItem';
 import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
-import DeleteEstate from '../../../../Sell/components/PostNewSell/DeleteEstate';
-import DeleteAccom from './DeleteAccom';
-import {QueryClient} from '@tanstack/react-query';
+import EmptyData from '../../../../../../../components/EmptyData';
+import MainWrapper from '../../../../../../../components/MainWrapper';
+import DeleteRoom from './DeleteRoom';
+import RoomItem from './RoomItem';
+import {IconHome} from '../../../../../../../assets/icon/Icon';
 
 export default function RoomManageScreen() {
   const params = useRoute().params;
@@ -25,6 +18,11 @@ export default function RoomManageScreen() {
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: 'Quản lý phòng',
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
@@ -77,7 +75,10 @@ export default function RoomManageScreen() {
                       bottomSheetRef.current.open();
                     }}
                     onEdit={() => {
-                      navigate('AddRoomTypeScreen', item);
+                      navigate('AddRoomTypeScreen', {
+                        ...item,
+                        update: true,
+                      });
                     }}
                   />
                 )}
@@ -98,7 +99,7 @@ export default function RoomManageScreen() {
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>
-          <DeleteAccom
+          <DeleteRoom
             data={dataItemAccom}
             onSuccess={() => {
               bottomSheetRef.current.close();

@@ -84,7 +84,17 @@ export const postCreateAccommoRoomLease = async ({id_accomo, formData}) => {
 
   return responsive.data;
 };
+export const postUpdateAccom = async ({id_room, formData}) => {
+  const responsive = await instanceAccom.post(
+    `/room/${id_room}/update`,
+    formData,
+    {
+      headers: {'Content-Type': 'multipart/form-data'},
+    },
+  );
 
+  return responsive.data;
+};
 export const getListRoomDetailAccmo = async ({
   id_accomo,
   date_start,
@@ -190,11 +200,15 @@ export const postPolicyToRoom = async data => {
 
   return responsive.data;
 };
-export const deleteAccom = async ({id_room}) => {
+export const deleteRoom = async ({id_room}) => {
   const responsive = await instanceAccom.delete(`/room/${id_room}`);
   return responsive.data;
 };
 export const deletePolicy = async ({id_policy}) => {
   const responsive = await instanceAccom.delete(`/policy/${id_policy}`);
+  return responsive.data;
+};
+export const deleteAccom = async ({id_accom}) => {
+  const responsive = await instanceAccom.delete(`/${id_accom}`);
   return responsive.data;
 };

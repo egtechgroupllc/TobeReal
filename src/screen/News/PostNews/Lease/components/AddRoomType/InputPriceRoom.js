@@ -11,21 +11,25 @@ import {formatPrice} from '../../../../../../utils/format';
 import {requireField} from '../../../../../../utils/validate';
 import ItemUtil from '../../../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import InputPrice from '../../../../../components/InputPrice';
+import {useCountry} from '../../../../../../hooks/useCountry';
+import {useForm} from 'react-hook-form';
 
 export default memo(function InputPriceRoom({
   control,
   priceValue = 0,
-  currencyValue = 'USD',
+  // currencyValue,
   setValue,
 }) {
   const {t} = useLanguage();
-
+  const {watch} = useForm();
   const {data, isLoading} = useQuery({
     queryKey: ['common', 'list-constant'],
     queryFn: getListConstant,
   });
 
-  const [typeCurrency, setTypeCurrency] = useState(currencyValue);
+  const [typeCurrency, setTypeCurrency] = useState();
+  const {currency} = useCountry();
+
   return (
     <View
       style={{
@@ -39,7 +43,7 @@ export default memo(function InputPriceRoom({
         rules={requireField(t('this_field_required'))}
         placeholder={t('enter_price')}
         style={styles.textInput}
-        onChangeCurrency={value => setTypeCurrency(value?.currency_code)}
+        // onChangeCurrency={value => setTypeCurrency(currency?.currency_code)}
       />
 
       <View

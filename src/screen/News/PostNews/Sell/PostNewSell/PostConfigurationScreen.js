@@ -125,7 +125,6 @@ export default function PostConfigurationScreen() {
     delete params?.date_start;
 
     const formData = getFormData({...filterEmptyValues(params), ...value});
-
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');

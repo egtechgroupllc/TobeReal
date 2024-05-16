@@ -24,7 +24,7 @@ export default function CreateAccomItem({data, isTour}) {
     //   ? handleContinue()
     //   : navigateDetail();
     // handleContinue();
-    navigate('AdminManageLeaseScreen', data);
+    navigate('NoBottomTab', {screen: 'AdminManageLeaseScreen', params: data});
   };
   return (
     <TouchableOpacity
@@ -142,7 +142,7 @@ export default function CreateAccomItem({data, isTour}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text="Management"
+              text="Manage"
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,

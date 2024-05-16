@@ -85,7 +85,7 @@ export default function RoomUntil({data, price, isFilterChildren}) {
 
           <View>
             <CustomText textType="bold" style={styles.price}>
-              {formatPrice(price * currency?.exchange_rate, {
+              {formatPrice(price, {
                 currency: currency?.currency_code,
               })}
             </CustomText>

@@ -1,24 +1,24 @@
+import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {deleteAccom} from '../../../../../../../Model/api/apiAccom';
+import {deleteRoom} from '../../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {showMess} from '../../../../../../../assets/constants/Helper';
 import {IconError, IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import CustomText from '../../../../../../../components/CustomText';
-import {useNavigation} from '@react-navigation/native';
 
-export default function DeleteAccom({data, onSuccess, onCancel}) {
+export default function DeleteRoom({data, onSuccess, onCancel}) {
   const [confirm, setConfirm] = useState(true);
   const {navigate} = useNavigation();
   const queryClient = useQueryClient();
-  const deleteAccomMu = useMutation({
-    mutationFn: deleteAccom,
+  const deleteRoomMu = useMutation({
+    mutationFn: deleteRoom,
   });
 
   const handDelete = value => {
-    deleteAccomMu.mutate(
+    deleteRoomMu.mutate(
       {
         id_room: data?.id,
       },
@@ -123,7 +123,7 @@ export default function DeleteAccom({data, onSuccess, onCancel}) {
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
               Lưu ý:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Tin đăng sau khi xoá không thể khôi phục
+                Phòng đã xoá không thể khôi phục
               </CustomText>
             </CustomText>
           </View>
@@ -144,7 +144,7 @@ export default function DeleteAccom({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Xoá tin"
+              text="Xoá phòng"
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

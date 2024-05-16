@@ -33,6 +33,8 @@ export default function AccommodationPremium({currency}) {
       getListRent({
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
+        // date_end: formatDate(new Date(), {addDays: 14}),
+        // date_start: formatDate(new Date(), {addDays: 2}),
         country_id: country?.id,
         currency_id: currency?.id,
       }),
@@ -43,15 +45,15 @@ export default function AccommodationPremium({currency}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
       {isRender && (
         <WrapperContent
-          isSeeAll
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // isSeeAll
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllRentScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           heading={title}
           subHeading={t('Find popular accomodation in your area')}
           styleWrapper={{backgroundColor: '#f8eede'}}>

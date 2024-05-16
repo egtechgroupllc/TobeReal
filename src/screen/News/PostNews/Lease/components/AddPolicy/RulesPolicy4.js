@@ -53,13 +53,13 @@ export default function RulesPolicy4({control, unregister}) {
       <Collapsible collapsed={isSelect === 0}>
         <View style={styles.boxCheckMeal}>
           <CustomInput
-            defaultValue="2"
+            defaultValue={isSelect === 1 && '2'}
             style={styles.textInput}
             maxLength={2}
             styleText={{
               fontSize: SIZES.xMedium,
             }}
-            control={control}
+            control={isSelect === 1 && control}
             name="min_number_day"
             rules={[
               requireField(t('this_field_required')),

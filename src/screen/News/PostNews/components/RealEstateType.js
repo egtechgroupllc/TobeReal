@@ -44,7 +44,7 @@ export default memo(function RealEstateType({
       }),
     [valueFind, watch(name), data],
   );
-  console.log(watch(name), dataFind, valueFind, 1232123213);
+  console.log(watch(name), dataFind?.name, valueFind, 1232123213);
   return (
     <View
       style={{
@@ -73,7 +73,7 @@ export default memo(function RealEstateType({
               style={{
                 fontSize: scale(13),
               }}>
-              {valueFind ? dataFind?.name : valueConvert?.name || 'Select'}
+              {dataFind?.name ? valueConvert?.name : 'Select'}
             </CustomText>
           );
         }}

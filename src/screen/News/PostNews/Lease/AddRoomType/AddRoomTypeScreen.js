@@ -1,12 +1,13 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import React, {useEffect, useLayoutEffect} from 'react';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useForm} from 'react-hook-form';
 import {
   postCreateAccommoRoomLease,
   postPolicyToRoom,
+  postUpdateAccom,
 } from '../../../../../Model/api/apiAccom';
 import {images} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
@@ -24,11 +25,23 @@ import EstateDetail from '../components/AddRoomType/EstateDetail';
 import EstateFacilities from '../components/AddRoomType/EstateFacilities';
 import EstatePhoto from '../components/AddRoomType/EstatePhoto';
 import GeneralInformation from '../components/AddRoomType/GeneralInformation';
+import {IconHome} from '../../../../../assets/icon/Icon';
 
 export default function AddRoomTypeScreen() {
   const {t} = useLanguage();
-  const {navigate} = useNavigation();
+  const {navigate, goBack, setOptions} = useNavigation();
   const params = useRoute().params;
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: !params?.update ? 'Tạo phòng' : 'Sửa thông tin phòng',
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   const {
     handleSubmit,
     control,
@@ -41,30 +54,64 @@ export default function AddRoomTypeScreen() {
   const createAccommodationRoomMu = useMutation({
     mutationFn: postCreateAccommoRoomLease,
   });
+  const updateAccommodationRoomMu = useMutation({
+    mutationFn: postUpdateAccom,
+  });
   const createAddPolicyToRoom = useMutation({
     mutationFn: postPolicyToRoom,
   });
   const getFormData = (object = {}) => {
     const formData = new FormData();
+    const arrKeyno = [
+      'files',
+      'policy',
+      'image_update_description',
+      // params?.update && 'features',
+    ];
 
     Object.keys(object).reduce((item, key) => {
-      if (key !== 'files' && key !== 'policy') {
+      if (!arrKeyno.includes(key)) {
         item.append(key, object[key]);
       }
 
       return item;
     }, formData);
 
-    const arrImage_description = object?.files?.map(image => {
-      formData.append('files', image);
+    // if (params?.update) {
+    //   formData.append('features', JSON.stringify(object?.features));
+    // }
 
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+    if (object?.files) {
+      const arrImage_description = object?.files?.map(image => {
+        formData.append('files', image);
 
-    formData.append('image_description', JSON.stringify(arrImage_description));
+        return {
+          name: image?.name,
+          description: image?.description,
+        };
+      });
+
+      formData.append(
+        'image_description',
+        JSON.stringify(arrImage_description),
+      );
+    }
+
+    if (object?.image_update_description) {
+      const arrImage_descriptionUp = object?.image_update_description?.map(
+        image => {
+          return {
+            id: image?.id,
+            description: image?.description,
+          };
+        },
+      );
+
+      formData.append(
+        'image_update_description',
+        JSON.stringify(arrImage_descriptionUp),
+      );
+    }
 
     return formData;
   };
@@ -85,17 +132,26 @@ export default function AddRoomTypeScreen() {
       },
     );
   };
-
   const handlePostRoom = value => {
     // navigate('AddPolicyScreen', {id: params?.id});
+    delete value?.number_user;
+    delete value?.images;
 
-    if (!value?.policy || JSON.parse(value?.policy).length <= 0) {
+    params?.update && delete value?.number_room;
+    params?.update && delete value?.price;
+
+    const policy = params?.update ? value?.policy : JSON.parse(value?.policy);
+
+    if (!value?.policy || policy.length <= 0) {
       showMess('Ban chua chon chinh sach cho phong', 'error');
       return;
     }
-    delete value?.number_user;
 
-    if (!value?.features || JSON.parse(value?.features).length <= 0) {
+    const features = params?.update
+      ? value?.features
+      : JSON.parse(value?.features);
+
+    if (!value?.features || features.length <= 0) {
       showMess('Ban chua chon tien ich cho phong', 'error');
       return;
     }
@@ -104,37 +160,46 @@ export default function AddRoomTypeScreen() {
     // });
     const formData = getFormData(value);
 
+    const mutationConfig = {
+      onSuccess: dataInside => {
+        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+
+        if (dataInside?.status) {
+          // reset();
+          queryClient.invalidateQueries(['accommodation', 'my-list']);
+          // navigate('NoBottomTab', {
+          //   screen: 'AccommoManagementScreen',
+          // });
+          linkPolicy({
+            id: dataInside?.data?.id,
+            policy: value?.policy,
+          });
+          if (params?.update) {
+            goBack();
+            return;
+          }
+          params?.admin
+            ? navigate('RoomManageScreen', params)
+            : navigate('NoBottomTab', {
+                screen: 'AccommoManagementScreen',
+                params: params?.id,
+              });
+        }
+      },
+      onError: err => {
+        console.log({err});
+      },
+    };
+    if (params?.update) {
+      updateAccommodationRoomMu.mutate(
+        {formData, id_room: params?.id},
+        mutationConfig,
+      );
+      return;
+    }
     createAccommodationRoomMu.mutate(
       {formData, id_accomo: params?.id || params?.accomId},
-      {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message,
-            dataInside?.status ? 'success' : 'error',
-          );
-
-          if (dataInside?.status) {
-            // reset();
-            queryClient.invalidateQueries(['accommodation', 'my-list']);
-            // navigate('NoBottomTab', {
-            //   screen: 'AccommoManagementScreen',
-            // });
-            linkPolicy({
-              id: dataInside?.data?.id,
-              policy: value?.policy,
-            });
-            !params?.admin
-              ? navigate('AdminManageLeaseScreen', params)
-              : navigate('NoBottomTab', {
-                  screen: 'AccommoManagementScreen',
-                  params: params?.id,
-                });
-          }
-        },
-        onError: err => {
-          console.log({err});
-        },
-      },
+      mutationConfig,
     );
   };
   useEffect(() => {
@@ -144,19 +209,19 @@ export default function AddRoomTypeScreen() {
       const entries = Object.entries(params);
       const arrKeyno = [
         'status',
-        'user_id',
+        'id',
         'createdAt',
         'updatedAt',
         'note',
-        'wallet_address',
-        'images',
         'active',
+        'accommodation_id',
+        'wallet_address',
+        'update',
       ];
 
       entries.map(item => {
         if (!arrKeyno.includes(item[0])) {
           const checkNum = typeof item[1] === 'number';
-
           setValue(item[0], checkNum ? String(item[1]) : item[1]);
         }
       });
@@ -164,7 +229,6 @@ export default function AddRoomTypeScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
   return (
     <MainWrapper styleContent={styles.wrapper}>
       <View style={styles.button}>
@@ -175,7 +239,7 @@ export default function AddRoomTypeScreen() {
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-          {t('add_room')}
+          {!params?.update ? t('add_room') : t('Edit room')}
         </CustomText>
       </View>
 
@@ -184,7 +248,7 @@ export default function AddRoomTypeScreen() {
         setValue={setValue}
         watch={watch}
         errors={errors}
-        accomId={params?.accomId || params?.id}
+        accomId={params?.accommodation_id || params?.id}
       />
       <EstateDetail
         control={control}
@@ -198,6 +262,7 @@ export default function AddRoomTypeScreen() {
         setValue={setValue}
         watch={watch}
         errors={errors}
+        update={params?.update}
       />
 
       <EstatePhoto
@@ -210,7 +275,7 @@ export default function AddRoomTypeScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={t('post')}
+        text={params?.update ? t('Update') : t('post')}
         disabled={createAccommodationRoomMu.isPending}
         onPress={handleSubmit(handlePostRoom)}
         // onPress={handlePostRoom}

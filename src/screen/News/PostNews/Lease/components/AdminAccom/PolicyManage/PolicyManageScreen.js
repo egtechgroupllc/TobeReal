@@ -1,22 +1,20 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {useQuery} from '@tanstack/react-query';
+import React, {useLayoutEffect, useRef, useState} from 'react';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getListPolicy} from '../../../../../../../Model/api/apiAccom';
-import CustomText from '../../../../../../../components/CustomText';
+import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {IconTrash} from '../../../../../../../assets/icon/Icon';
-import BottomSheet from '../../../../../../../components/BottomSheet';
-import DeleteAccom from '../RoomManage/DeleteAccom';
-import DeletePolicy from './DeletePolicy';
 import {CustomButton} from '../../../../../../../components';
+import BottomSheet from '../../../../../../../components/BottomSheet';
+import CustomText from '../../../../../../../components/CustomText';
+import DeletePolicy from './DeletePolicy';
 
 export default function PolicyManageScreen() {
   const params = useRoute().params;
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
-  const [policyScreen, setPolicyScreen] = useState(false);
 
   useLayoutEffect(() => {
     return setOptions({
@@ -32,9 +30,6 @@ export default function PolicyManageScreen() {
       }),
   });
 
-  useEffect(() => {
-    setPolicyScreen(true);
-  }, []);
   return (
     <View style={{marginTop: scale(30)}}>
       <CustomText
@@ -91,7 +86,7 @@ export default function PolicyManageScreen() {
           onPress={() =>
             navigate('AddPolicyScreen', {
               id: params?.id,
-              policyScreen: policyScreen,
+              policyScreen: true,
             })
           }
         />

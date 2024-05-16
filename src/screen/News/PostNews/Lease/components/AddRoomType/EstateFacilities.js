@@ -12,7 +12,13 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {dataRoomFacilities} from '../../../../../../utils/dataRoomFacilities';
 import ButtonTabValidate from '../ButtonTabValidate';
 
-export default function EstateFacilities({control, setValue, errors, watch}) {
+export default function EstateFacilities({
+  control,
+  setValue,
+  errors,
+  watch,
+  update,
+}) {
   const {t} = useLanguage();
 
   const [viewFacilities, setViewFacilities] = useState(false);
@@ -35,13 +41,14 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
     if (!watch('features')) {
       setArrFacilities([]);
       setShowFacilitiesItem(-1);
-    } else {
-      setArrFacilities(watch('features'));
     }
+    // else {
+    //   setArrFacilities(watch('features'));
+    // }
   }, [watch('features')]);
 
   useEffect(() => {
-    !watch('features') && setValue('features', JSON.stringify(arrFacilities));
+    setValue('features', JSON.stringify(arrFacilities));
   }, [arrFacilities]);
 
   const arrKeywords = useRef(['features']).current;

@@ -15,7 +15,15 @@ import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTou
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
-import {AccommoManagementScreen} from '../screen/News/PostNews/Lease';
+import {
+  AccommoManagementScreen,
+  AddPolicyScreen,
+} from '../screen/News/PostNews/Lease';
+import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
+import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
+import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/PolicyManage/PolicyManageScreen';
+import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
+import RoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomManageScreen';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
 import {
@@ -187,5 +195,29 @@ export default routerNoBottomTab = [
   {
     name: 'NotifyScreen',
     component: NotifyScreen,
+  },
+  {
+    name: 'AdminManageLeaseScreen',
+    component: AdminManageLeaseScreen,
+  },
+  {
+    name: 'RoomManageScreen',
+    component: RoomManageScreen,
+  },
+  {
+    name: 'DetailRoomManageScreen',
+    component: DetailRoomManageScreen,
+  },
+  {
+    name: 'PolicyManageScreen',
+    component: PolicyManageScreen,
+  },
+  {
+    name: 'AddRoomTypeScreen',
+    component: AddRoomTypeScreen,
+  },
+  {
+    name: 'AddPolicyScreen',
+    component: AddPolicyScreen,
   },
 ];

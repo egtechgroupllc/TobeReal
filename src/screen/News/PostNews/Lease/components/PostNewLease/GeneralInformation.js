@@ -64,6 +64,8 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
               control={control}
               data={data?.data}
               watch={watch}
+              valueFind="id"
+              value={watch('accommodation_type_id')}
             />
             <View style={styles.line} />
 

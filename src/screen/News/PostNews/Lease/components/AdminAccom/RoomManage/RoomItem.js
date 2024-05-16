@@ -2,13 +2,10 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import CustomImage from '../../../../../../../components/CustomImage';
 import CustomText from '../../../../../../../components/CustomText';
-import {
-  IconEditProfile,
-  IconTrash,
-} from '../../../../../../../assets/icon/Icon';
 
 export default function RoomItem({data, isTour, onPressMore, onEdit}) {
   const {navigate} = useNavigation();

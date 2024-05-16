@@ -1,16 +1,13 @@
+import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {
-  deleteAccom,
-  deletePolicy,
-} from '../../../../../../../Model/api/apiAccom';
+import {deletePolicy} from '../../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {showMess} from '../../../../../../../assets/constants/Helper';
 import {IconError, IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import CustomText from '../../../../../../../components/CustomText';
-import {useNavigation} from '@react-navigation/native';
 
 export default function DeletePolicy({data, onSuccess, onCancel}) {
   const [confirm, setConfirm] = useState(true);

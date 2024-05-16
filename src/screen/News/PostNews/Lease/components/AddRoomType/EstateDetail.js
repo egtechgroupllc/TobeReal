@@ -44,7 +44,6 @@ export default function EstateDetail({control, errors, watch, setValue}) {
     'size',
     'price',
   ]).current;
-
   return (
     <View>
       <ButtonTabValidate
@@ -63,7 +62,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             control={control}
             data={data?.data}
             watch={watch}
-            setValue
+            value={watch('room_type_id')}
             valueFind="id"
           />
           <RealEstateType
@@ -72,6 +71,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             control={control}
             data={listBedType.data?.data}
             watch={watch}
+            value={watch('room_bed_type_id')}
             valueFind="id"
           />
 

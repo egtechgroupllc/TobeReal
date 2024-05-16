@@ -23,28 +23,27 @@ export default function InputPrice({
 }) {
   const {currency} = useCountry();
   const {navigate} = useNavigation();
-  const [dataFromScreen, setDataFromScreen] = useState({
-    currency_code: 'USD',
-    id: 1,
-  });
+  // const [dataFromScreen, setDataFromScreen] = useState({
+  //   currency_code: 'USD',
+  //   id: 1,
+  // });
 
-  const onGoBack = (value, onChange) => {
-    if (value) {
-      setDataFromScreen(value);
-      setValue && setValue(nameCurrency, value?.id);
-    }
-  };
+  // const onGoBack = (value, onChange) => {
+  //   if (value) {
+  //     setDataFromScreen(value);
+  //     setValue && setValue(nameCurrency, value?.id);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (onChangeCurrency) {
+  //     onChangeCurrency(dataFromScreen);
+  //   }
+  // }, [dataFromScreen?.currency_code]);
 
   useEffect(() => {
-    if (onChangeCurrency) {
-      onChangeCurrency(dataFromScreen);
-    }
-  }, [dataFromScreen?.currency_code]);
-
-  useEffect(() => {
-    setValue(nameCurrency, 1);
+    setValue && setValue('currency_id', currency?.id);
   }, []);
-
   return (
     <CustomInput
       label={label}
@@ -61,18 +60,18 @@ export default function InputPrice({
       componentLeft={
         <View
           activeOpacity={0.7}
-          onPress={() => {
-            navigate('NoBottomTab', {
-              screen: 'CurrencyScreen',
-              params: {
-                onGoBack: data => {
-                  onGoBack(data);
-                },
+          // onPress={() => {
+          //   navigate('NoBottomTab', {
+          //     screen: 'CurrencyScreen',
+          //     params: {
+          //       onGoBack: data => {
+          //         onGoBack(data);
+          //       },
 
-                currency: dataFromScreen,
-              },
-            });
-          }}
+          //       currency: dataFromScreen,
+          //     },
+          //   });
+          // }}
           style={styles.boxCurrency}>
           <CustomText
             textType="medium"

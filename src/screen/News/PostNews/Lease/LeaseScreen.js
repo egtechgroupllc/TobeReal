@@ -46,8 +46,8 @@ export default function LeaseScreen() {
         callFunc={getMyListCreateAccom}
         keyQuery={{hasRoom: 0}}
         // navigateAdd="AddRoomTypeScreen"
-        navigateAdd="AddPolicyScreen"
-        navigateDetail="DetailAccommodationScreen"
+        // navigateAdd="AddPolicyScreen"
+        // navigateDetail="DetailAccommodationScreen"
       />
 
       <View style={styles.content}>

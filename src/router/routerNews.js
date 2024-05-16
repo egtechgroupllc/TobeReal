@@ -49,10 +49,7 @@ export default routerNews = [
     name: 'TourScreen',
     component: TourScreen,
   },
-  {
-    name: 'AddRoomTypeScreen',
-    component: AddRoomTypeScreen,
-  },
+
   {
     name: 'ContractScreen',
     component: ContractScreen,
@@ -73,28 +70,9 @@ export default routerNews = [
     name: 'PostNewSellScreen',
     component: PostNewSellScreen,
   },
-  {
-    name: 'AddPolicyScreen',
-    component: AddPolicyScreen,
-  },
+
   {
     name: 'FeaturesPolicyScreen',
     component: FeaturesPolicyScreen,
-  },
-  {
-    name: 'AdminManageLeaseScreen',
-    component: AdminManageLeaseScreen,
-  },
-  {
-    name: 'RoomManageScreen',
-    component: RoomManageScreen,
-  },
-  {
-    name: 'DetailRoomManageScreen',
-    component: DetailRoomManageScreen,
-  },
-  {
-    name: 'PolicyManageScreen',
-    component: PolicyManageScreen,
   },
 ];
