@@ -4,7 +4,7 @@ import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import CustomImage from '../../../../components/CustomImage';
 
-export default function Contact() {
+export default function Contact({data}) {
   return (
     <View style={styles.boxContact}>
       <CustomText textType="bold" size={SIZES.medium}>
@@ -17,13 +17,13 @@ export default function Contact() {
             rowGap: scale(2),
           }}>
           <CustomText textType="medium" size={SIZES.xMedium}>
-            kuqhqyeiuqyuewq
+            {data?.contact_name}
           </CustomText>
           <CustomText textType="medium" color={COLORS.text}>
-            01923182938021
+            {data?.contact_phone}
           </CustomText>
           <CustomText textType="medium" color={COLORS.text}>
-            jweks@gmail.com
+            {data?.contact_email}
           </CustomText>
         </View>
       </View>

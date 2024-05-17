@@ -5,7 +5,8 @@ import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import Star from '../../../components/StarRating';
 
-export default function TopReview() {
+export default function TopReview({data}) {
+  console.log();
   return (
     <View
       style={{
@@ -13,7 +14,7 @@ export default function TopReview() {
         columnGap: scale(10),
       }}>
       <CustomImage
-        source={images.a3}
+        source={data?.accommodation?.images[0]?.url}
         style={{
           width: scale(80),
           height: scale(80),
@@ -30,10 +31,11 @@ export default function TopReview() {
           textType="semiBold"
           size={SIZES.xMedium}
           color={COLORS.text}>
-          danh gia san pham tiktokdanh gia san pham tiktokdanh gia san pham
-          tiktok
+          Vui lòng đánh giá trải nghiệm của bạn tại {data?.accommodation?.name}
         </CustomText>
-        <CustomText color={COLORS.textSub}>danh gia san pham tiktok</CustomText>
+        <CustomText color={COLORS.textSub}>
+          Đánh giá để chủ sở hữu cải thiện dịch vụ tốt hơn!
+        </CustomText>
       </View>
     </View>
   );

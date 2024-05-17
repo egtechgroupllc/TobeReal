@@ -80,7 +80,7 @@ export default React.memo(
     const onShare = async () => {
       Share.share({
         message: `Temukan kenyamanan dan kemudahan di jantung kawasan Mangga Besar Jakarta yang ramai di Belvena Hotel, di mana studio yang nyaman dan dirancang secara efisien ini menjanjikan masa menginap yang nyaman bagi penjelajah perkotaan dan pelancong bisnis.`,
-        url: 'https://www.agoda.com/?cid=1891474&tag=c0ba56c3-f836-b8c6-7f0e-8ab5ff0441fe&gclid=Cj0KCQiAwbitBhDIARIsABfFYIL1meATggkwP30pbwJEWDr94Q57mesRYq9RE14HRI-FIxhht18AEu4aAvGlEALw_wcB&ds=gL2Af8%2BwwrSh7B8d',
+        url: 'https://saveloka.com/en',
       })
         .then(res => {
           console.log(res);

@@ -3,6 +3,7 @@ import React, {useLayoutEffect} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {images, scale} from '../../assets/constants';
 import PaymentMethodsItem from './components/BookingRoom/ContentStep2/PaymentMethodsItem';
+import {showMess} from '../../assets/constants/Helper';
 const listMethods = [
   {
     header: 'Savaloka Wallet',
@@ -46,7 +47,6 @@ export default function ListPaymentMethodsScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <View>
       <FlatList
@@ -69,8 +69,14 @@ export default function ListPaymentMethodsScreen({route}) {
             tag={item?.tag}
             backgroundColor="#fff"
             onPress={() => {
-              dataParams?.onGoBack(item);
-              goBack();
+              if (item?.type === 'LOKAPAY') {
+                dataParams?.onGoBack(item);
+                goBack();
+              } else {
+                showMess('Comming soon!', 'error', {
+                  duration: 500,
+                });
+              }
             }}
           />
         )}

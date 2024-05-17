@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AlphabetList} from 'react-native-section-alphabet-list';
 import {getListCountry} from '../../Model/api/common';
@@ -96,7 +96,7 @@ export default function CountryScreen() {
       };
     });
 
-    return countryGroups;
+    return dataFilter;
   }, [data?.data, deferredValue]);
 
   return (
@@ -111,7 +111,7 @@ export default function CountryScreen() {
           }}
           onChangeText={setSearch}
         />
-        <AlphabetList
+        <FlatList
           data={dataNew || []}
           indexLetterStyle={styles.indexLetterStyle}
           listHeaderHeight={-80 + insets.top}
@@ -124,7 +124,7 @@ export default function CountryScreen() {
           }
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => <EmptyData />}
-          renderCustomItem={item => (
+          renderItem={({item}) => (
             <CheckBox
               key={`key_${item?.id}`}
               text={`${item?.flag ? item?.flag : ''} ${item?.name}${

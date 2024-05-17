@@ -208,13 +208,13 @@ export default function Content() {
           title={t('Select country')}
           onPress={selectCountry}
           large={true}
-          nameCountry={`${country?.flag}  ${country?.name}`}
+          nameCountry={country?.name && `${country?.flag}  ${country?.name}`}
         />
         <CategoriesButton
           title={t('Main currency')}
           onPress={selectCurrency}
           large={true}
-          nameCountry={`${country?.currency_code}`}
+          nameCountry={country?.name && `${country?.currency_code}`}
         />
         <CategoriesButton
           title={t('select_language')}

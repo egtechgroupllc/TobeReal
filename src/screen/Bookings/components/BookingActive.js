@@ -31,6 +31,12 @@ export default function BookingActive() {
             key={index}
             data={item}
             onPress={() => navigate('DetailBookingScreen', item)}
+            onReView={() =>
+              navigate('NoBottomTab', {
+                screen: 'PostReviewScreen',
+                params: item,
+              })
+            }
           />
         ) : (
           <BookingItemLoading />

@@ -170,7 +170,7 @@ export default function BoxFeatureItem({
                         <CustomText
                           textType="regular"
                           style={{...styles.textDiscount, color: COLORS.white}}>
-                          {formatPrice(data?.price * currency?.exchange_rate, {
+                          {formatPrice(data?.price, {
                             currency: currency?.currency_code,
                           })}{' '}
                         </CustomText>
@@ -196,7 +196,7 @@ export default function BoxFeatureItem({
                           marginTop: scale(25),
                         }}>
                         <CustomText style={styles.topName} numberOfLines={1}>
-                          {formatPrice(data?.price * currency?.exchange_rate, {
+                          {formatPrice(data?.price, {
                             currency: currency?.currency_code,
                           })}{' '}
                         </CustomText>

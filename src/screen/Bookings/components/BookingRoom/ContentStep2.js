@@ -57,47 +57,49 @@ export default function ContentStep2({onPress, data}) {
     );
   };
   const handleBookingRoom = value => {
-    bookingRoomMu.mutate(
-      {
-        check_in_date: data?.date?.selectedStartDate,
-        check_out_date: data?.date?.selectedEndDate,
-        number_room: data?.numRoomSelect,
-        accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
-        room_id: data?.id, //id của phòng
-        contact_name: contact?.name,
-        contact_email: contact?.email,
-        contact_phone: contact?.phone,
-        payment: typePayment,
-      },
-      {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message,
-            dataInside?.status ? 'success' : 'error',
-          );
+    typePayment
+      ? bookingRoomMu.mutate(
+          {
+            check_in_date: data?.date?.selectedStartDate,
+            check_out_date: data?.date?.selectedEndDate,
+            number_room: data?.numRoomSelect,
+            accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
+            room_id: data?.id, //id của phòng
+            contact_name: contact?.name,
+            contact_email: contact?.email,
+            contact_phone: contact?.phone,
+            // payment: typePayment,
+          },
+          {
+            onSuccess: dataInside => {
+              showMess(
+                dataInside?.message,
+                dataInside?.status ? 'success' : 'error',
+              );
 
-          if (dataInside?.status) {
-            queryClient.invalidateQueries([
-              'accommodation',
-              'detail',
-              'list-room',
-              data?.idAccom,
-            ]);
-            queryClient.invalidateQueries(['user', 'profile']);
-            if (dataInside?.data?.payment === 'PAYPAL') {
-              handlePaypal(dataInside?.data?.id);
-              return;
-            }
-            navigate('Booking', {
-              screen: 'HomeBookingsScreen',
-            });
-          }
-        },
-        onError: err => {
-          console.log({err});
-        },
-      },
-    );
+              if (dataInside?.status) {
+                queryClient.invalidateQueries([
+                  'accommodation',
+                  'detail',
+                  'list-room',
+                  data?.idAccom,
+                ]);
+                queryClient.invalidateQueries(['user', 'profile']);
+                // if (dataInside?.data?.payment === 'PAYPAL') {
+                //   handlePaypal(dataInside?.data?.id);
+                //   return;
+                // }
+                navigate('Booking', {
+                  screen: 'HomeBookingsScreen',
+                });
+              }
+            },
+            onError: err => {
+              console.log({err});
+            },
+          },
+        )
+      : showMess('Vui lòng chọn phương thức thanh toán', 'error');
   };
 
   return (

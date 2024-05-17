@@ -25,8 +25,8 @@ export default function SimilarApartmentsNearby() {
     ],
     queryFn: () =>
       getListRent({
-        date_end: formatDate(new Date(), {addDays: 14}),
-        date_start: formatDate(new Date(), {addDays: 2}),
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
         country_id: 241,
         currency_id: currency?.id,
         // province_id: 1,

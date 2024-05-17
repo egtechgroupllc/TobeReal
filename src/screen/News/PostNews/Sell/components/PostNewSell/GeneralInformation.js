@@ -69,7 +69,8 @@ export default function GeneralInformation({
               name={'estate_type_id'}
               control={control}
               watch={watch}
-              value={watch('estate_type')}
+              value={watch('estate_type_id')}
+              valueFind="id"
             />
             <View style={styles.line} />
 

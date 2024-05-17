@@ -17,7 +17,7 @@ export default function Ribbon({
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
-      {freeCancel === 0 ? (
+      {freeCancel !== 1 ? (
         <View style={styles.left}>
           {iconLeft && <IconLeft style={styles.icon} />}
           <CustomText
@@ -25,7 +25,7 @@ export default function Ribbon({
             style={{
               fontSize: SIZES.xSmall,
             }}>
-            {t('Free cancellation') + ' 30% 🏨'}
+            {t('Free cancellation')}
           </CustomText>
           {iconRight && <IconRight style={styles.icon} />}
         </View>

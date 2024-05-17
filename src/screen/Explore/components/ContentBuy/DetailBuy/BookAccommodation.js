@@ -86,7 +86,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
               fontSize: SIZES.medium,
             }}
             textType="bold">
-            {formatPrice(price * currency?.exchange_rate, {
+            {formatPrice(price, {
               currency: currency?.currency_code,
             })}{' '}
           </CustomText>

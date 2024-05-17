@@ -17,7 +17,7 @@ export default memo(function RealEstateType({
   watch = () => {},
   value,
   isDefaultValue,
-  valueFind = 'id',
+  valueFind = '',
 }) {
   // const [dataFind, setDataFind] = useState([]);
   // const Finding = () => {
@@ -44,7 +44,7 @@ export default memo(function RealEstateType({
       }),
     [valueFind, watch(name), data],
   );
-  console.log(watch(name), dataFind?.name, valueFind, 1232123213);
+  // console.log(watch(name), dataFind?.name, valueFind, 1232123213);
   return (
     <View
       style={{
@@ -67,13 +67,12 @@ export default memo(function RealEstateType({
           const valueConvert = !control
             ? item
             : (!watch(name) ? {} : item) || value;
-
           return (
             <CustomText
               style={{
                 fontSize: scale(13),
               }}>
-              {dataFind?.name ? valueConvert?.name : 'Select'}
+              {dataFind?.name || valueConvert?.name || 'Select'}
             </CustomText>
           );
         }}

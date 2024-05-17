@@ -49,7 +49,7 @@ export default function TopImg({
               width: scale(100),
             }}>
             <CustomText style={styles.topName} numberOfLines={1}>
-              {formatPrice(data?.price * currency?.exchange_rate, {
+              {formatPrice(data?.price, {
                 currency: currency?.currency_code,
               })}{' '}
             </CustomText>

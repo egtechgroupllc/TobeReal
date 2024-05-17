@@ -43,7 +43,7 @@ export default function PolicyManageScreen() {
         // numColumns={numColumns}
         alwaysBounceVertical={false}
         directionalLockEnabled={true}
-        keyExtractor={(item, index) => `$key_${item.id}-${index}`}
+        keyExtractor={(item, index) => `$key_${item.id}-policy-${index}`}
         // columnWrapperStyle={
         //   numColumns >= 2 && {
         //     columnGap: scale(10),
@@ -54,10 +54,11 @@ export default function PolicyManageScreen() {
           rowGap: scale(10),
           marginTop: scale(10),
         }}
-        renderItem={({item, index}) => (
-          <>
+        renderItem={({item, index}) => {
+          return (
             <TouchableOpacity
               //   onPress={() => navigate('AddPolicyScreen')}
+              key={`$key_${item.id}-policy-${index}`}
               style={{
                 backgroundColor: COLORS.primary,
                 borderRadius: scale(10),
@@ -76,8 +77,8 @@ export default function PolicyManageScreen() {
                 <IconTrash />
               </TouchableOpacity>
             </TouchableOpacity>
-          </>
-        )}
+          );
+        }}
       />
       <View style={{alignItems: 'center', marginTop: scale(30)}}>
         <CustomButton

@@ -24,14 +24,17 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
-  const {control, setValue, unregister, handleSubmit} = useForm();
-
+  const {control, setValue, unregister, handleSubmit, watch} = useForm({
+    defaultValues: {
+      near_me: true,
+    },
+  });
   useEffect(() => {
     params?.id && setValue('province_id', params?.id);
     params?.name && setValue('name', params?.name);
     params?.id && unregister('name');
 
-    if (params === 'Around me') {
+    if (params === 'Around me' || !params) {
       unregister(['name', 'province_id']);
       setValue('near_me', true);
     } else {

@@ -51,17 +51,14 @@ export default function BoxPlaceItem({
     );
   };
   const priceFinal = useMemo(() => {
-    if (data?.rooms) {
-      let min = 0;
-      data?.rooms?.map(element => {
-        const result = element?.room_dates.map(room => {
-          return room?.price_final;
-        });
-        min = Math.min(...result);
+    return data?.rooms?.map(element => {
+      const result = element?.room_dates.map(room => {
+        return room?.price_final;
       });
-      return min;
-    }
+      return Math.min(...result);
+    });
   }, [data?.rooms]);
+
   const freeCancel = useMemo(() => {
     if (data?.rooms) {
       let num = 0;
@@ -74,7 +71,8 @@ export default function BoxPlaceItem({
       return num;
     }
   }, [data?.rooms]);
-  // console.log(priceFinal);
+  // console.log(freeCancel);
+
   const {country} = useCountry();
 
   return (

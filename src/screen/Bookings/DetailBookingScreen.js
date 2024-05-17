@@ -116,14 +116,14 @@ export default function DetailBookingScreen() {
               textType="medium"
               size={SIZES.xMedium}
               color={COLORS.textSub}>
-              Kietdep zai
+              {data?.contact_name}
             </CustomText>
           </View>
 
           <View>
             <ItemUtil
               Icon={IconBan}
-              value={'Không hoàn lịch'}
+              value={'Không hoàn tiền'}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -137,8 +137,8 @@ export default function DetailBookingScreen() {
               styleIcon={styles.iconPolicy}
             />
           </View>
-          <TotalPriceBooking />
-          <Contact />
+          <TotalPriceBooking data={data} />
+          <Contact data={data} />
         </View>
 
         <View style={styles.footer}>

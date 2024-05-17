@@ -173,7 +173,7 @@ export const getListReviewAccmo = async ({
 // ==> API LIST BOOKING  <==
 export const getListBookingAccomo = async ({pageParam = 1, limit = 10}) => {
   const responsive = await instanceAccom.get(
-    `/room/my-booking?limit=${limit}&page=${pageParam}`,
+    `/room/booking/my-booking?limit=${limit}&page=${pageParam}`,
   );
 
   return responsive.data;

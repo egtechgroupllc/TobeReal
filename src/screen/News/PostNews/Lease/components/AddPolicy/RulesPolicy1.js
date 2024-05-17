@@ -28,12 +28,11 @@ const list = [
 
 export default function RulesPolicy1({setValue, control, unregister}) {
   const {t} = useLanguage();
-  const [isSelect, setIsSelect] = useState(list.length - 1);
+  const [isSelect, setIsSelect] = useState(1);
   const [openCheckStart, setOpenCheckStart] = useState(false);
   const [timeCheckStart, setTimeCheckStart] = useState(
     new Date('2024-01-01T6:00:00'),
   );
-
   useEffect(() => {
     if (isSelect === 1) {
       unregister('refund_time');
@@ -49,7 +48,6 @@ export default function RulesPolicy1({setValue, control, unregister}) {
       setValue('refund_time', formatTime(timeCheckStart));
     }
   }, [isSelect, timeCheckStart]);
-
   return (
     <View
       style={{
@@ -93,7 +91,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
       <Collapsible collapsed={isSelect === list.length - 1}>
         <View style={styles.boxCheckMeal}>
           <CustomInput
-            control={control}
+            control={isSelect !== list.length - 1 && control}
             name="refund_fee"
             defaultValue="10"
             placeholder="%"

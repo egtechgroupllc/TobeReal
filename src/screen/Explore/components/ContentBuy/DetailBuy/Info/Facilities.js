@@ -37,7 +37,7 @@ export default function Facilities({data}) {
             <CustomText
               textType="bold"
               style={{...styles.name, color: COLORS.primary}}>
-              {formatPrice(data?.price * currency?.exchange_rate, {
+              {formatPrice(data?.price, {
                 currency: currency?.currency_code,
               })}
             </CustomText>

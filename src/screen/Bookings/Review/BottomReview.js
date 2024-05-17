@@ -42,23 +42,26 @@ export default function BottomReview({handleSubmit, roomID}) {
       showMess('Please select a rating', 'error');
     }
     const formData = getFormData(value);
-
-    postReviewAccmoMu.mutate(formData, {
-      onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-        if (dataInside?.status) {
-          queryClient.invalidateQueries([
-            'accommodation',
-            'room',
-            'my-booking',
-          ]);
-          goBack();
-        }
-      },
-      onError: err => {
-        console.log({err});
-      },
-    });
+    value?.rating &&
+      postReviewAccmoMu.mutate(formData, {
+        onSuccess: dataInside => {
+          showMess(
+            dataInside?.message ? dataInside?.message : 'Success!',
+            dataInside?.status ? 'success' : 'error',
+          );
+          if (dataInside?.status) {
+            queryClient.invalidateQueries([
+              'accommodation',
+              'room',
+              'my-booking',
+            ]);
+            goBack();
+          }
+        },
+        onError: err => {
+          console.log({err});
+        },
+      });
   };
 
   return (

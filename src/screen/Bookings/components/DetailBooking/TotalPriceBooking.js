@@ -5,8 +5,10 @@ import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/comp
 import {IconInvoice} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import {formatPrice} from '../../../../utils/format';
+import {useCountry} from '../../../../hooks/useCountry';
 
-export default function TotalPriceBooking() {
+export default function TotalPriceBooking({data}) {
+  const {currency} = useCountry();
   return (
     <View style={styles.wrapper}>
       <ItemUtil
@@ -26,10 +28,10 @@ export default function TotalPriceBooking() {
           style={{
             textDecorationLine: 'line-through',
           }}>
-          19.023.808 VND
+          {formatPrice(data?.price, {currency: currency?.currency_code})}
         </CustomText>
         <CustomText textType="bold" size={SIZES.medium} color="#ff5e1f">
-          {formatPrice(123131132)}
+          {formatPrice(data?.price, {currency: currency?.currency_code})}
         </CustomText>
         <CustomText color={'#42b00b'}>Giá tốt nhất</CustomText>
       </View>

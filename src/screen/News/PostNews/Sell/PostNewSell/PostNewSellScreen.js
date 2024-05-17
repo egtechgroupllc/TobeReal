@@ -39,6 +39,7 @@ export default function PostNewSellScreen() {
   } = useForm();
 
   const handlePostLease = value => {
+    console.log(value, 11312321);
     delete value?.check;
     delete value?.direction_main;
     delete value?.estate_type;

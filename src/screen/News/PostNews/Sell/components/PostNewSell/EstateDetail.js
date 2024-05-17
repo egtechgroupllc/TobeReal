@@ -99,7 +99,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               control={control}
               styleWrapper={styles.buttonStyle}
               watch={watch}
-              value={watch('direction_main')}
+              value={watch('direction_main_id')}
+              valueFind="id"
             />
             {/* <RealEstateType
               label={'Hướng ban công'}
@@ -229,6 +230,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               placeholder="Price for locking informationn"
               name="price_lock"
               control={control}
+              editable={false}
+              defaultValue="1"
               rules={requireField(t('this_field_required'))}
               styleTextLabel={styles.label}
               styleWrapper={{

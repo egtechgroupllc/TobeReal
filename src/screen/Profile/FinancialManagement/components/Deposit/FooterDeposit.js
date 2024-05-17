@@ -18,11 +18,12 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
     mutationFn: postInitOrderDeposit,
   });
   const {currency} = useCountry();
+
   const handleInitOrder = value => {
     initOrderDepositMu.mutate(
       {
         ...value,
-        currency_id: 1,
+        currency_id: currency?.id,
       },
       {
         onSuccess: dataInside => {

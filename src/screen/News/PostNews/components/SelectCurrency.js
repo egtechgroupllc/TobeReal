@@ -15,6 +15,7 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
 import {Controller, useController, useForm} from 'react-hook-form';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function SelectCurrency({
   control,
@@ -26,28 +27,28 @@ export default function SelectCurrency({
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const {currency} = useCountry();
+  // const [dataFromScreen, setDataFromScreen] = useState(null);
+  // const form = useForm();
+  // const onGoBack = (value, onChange) => {
+  //   if (value) {
+  //     onChange(value?.id);
+  //     onSelect && onSelect(value);
+  //     setDataFromScreen(value);
+  //   }
+  // };
 
-  const [dataFromScreen, setDataFromScreen] = useState(null);
-  const form = useForm();
-  const onGoBack = (value, onChange) => {
-    if (value) {
-      onChange(value?.id);
-      onSelect && onSelect(value);
-      setDataFromScreen(value);
-    }
-  };
-
-  useEffect(() => {
-    if (watch('currency')) {
-      setDataFromScreen(watch('currency'));
-    }
-  }, [watch('currency')]);
+  // useEffect(() => {
+  //   if (watch('currency')) {
+  //     setDataFromScreen(watch('currency'));
+  //   }
+  // }, [watch('currency')]);
 
   return (
     <Controller
-      defaultValue={defaultValue}
-      control={control || form.control}
-      rules={rules || requireField(t('this_field_required'))}
+      defaultValue={currency?.id}
+      control={control}
+      // rules={rules || requireField(t('this_field_required'))}
       name={name || 'currency_id'}
       render={({
         field: {onChange, value},
@@ -65,20 +66,20 @@ export default function SelectCurrency({
                 width: '50%',
                 rowGap: scale(6),
               }}>
-              <TouchableOpacity
+              <View
                 activeOpacity={0.7}
-                onPress={() => {
-                  navigate('NoBottomTab', {
-                    screen: 'CurrencyScreen',
-                    params: {
-                      onGoBack: data => {
-                        onGoBack(data, onChange);
-                      },
+                // onPress={() => {
+                //   navigate('NoBottomTab', {
+                //     screen: 'CurrencyScreen',
+                //     params: {
+                //       onGoBack: data => {
+                //         onGoBack(data, onChange);
+                //       },
 
-                      currency: dataFromScreen,
-                    },
-                  });
-                }}
+                //       currency: dataFromScreen,
+                //     },
+                //   });
+                // }}
                 style={[
                   error && {
                     borderColor: '#f0334b',
@@ -86,16 +87,25 @@ export default function SelectCurrency({
                   },
                   styles.content,
                 ]}>
-                <CustomText
+                {/* <CustomText
                   style={
                     !dataFromScreen && {
                       color: '#aaa',
                     }
                   }>
                   {dataFromScreen?.currency_code || t('Main Currency')}
+                </CustomText> */}
+                <CustomText
+                // style={
+                //   !dataFromScreen && {
+                //     color: '#aaa',
+                //   }
+                // }
+                >
+                  {currency?.currency_code || t('Main Currency')}
                 </CustomText>
                 <IconRight />
-              </TouchableOpacity>
+              </View>
 
               {error && (
                 <View style={styles.errorBox}>

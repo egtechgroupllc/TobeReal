@@ -33,8 +33,7 @@ export default function AccommodationPremium({currency}) {
       getListRent({
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
-        // date_end: formatDate(new Date(), {addDays: 14}),
-        // date_start: formatDate(new Date(), {addDays: 2}),
+
         country_id: country?.id,
         currency_id: currency?.id,
       }),
@@ -62,8 +61,9 @@ export default function AccommodationPremium({currency}) {
             showsHorizontalScrollIndicator={false}
             data={data?.data?.rows?.slice(0, 9)}
             contentContainerStyle={styles.content}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <BoxPlaceItem
+                key={index}
                 isHeart
                 isDiscount
                 isStar

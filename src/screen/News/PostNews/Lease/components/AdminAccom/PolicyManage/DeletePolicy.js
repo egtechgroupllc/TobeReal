@@ -31,7 +31,11 @@ export default function DeletePolicy({data, onSuccess, onCancel}) {
 
           if (dataInside?.status) {
             onSuccess();
-            queryClient.invalidateQueries(['accommodation', 'list-policy']);
+            queryClient.invalidateQueries([
+              'accommodation',
+              'list-policy',
+              data?.id,
+            ]);
           }
         },
 

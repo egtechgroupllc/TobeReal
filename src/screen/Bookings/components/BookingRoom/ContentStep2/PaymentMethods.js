@@ -21,7 +21,6 @@ export default function PaymentMethods({data, onChange}) {
   }, [onChange, methodsPay]);
 
   const {currency} = useCountry();
-
   return (
     <View
       style={{
@@ -41,7 +40,6 @@ export default function PaymentMethods({data, onChange}) {
             navigate('ListPaymentMethodsScreen', {
               onGoBack: dataBack => {
                 setMethodsPay(dataBack);
-                console.log('ListPaymentMethodsScreen', dataBack);
               },
             })
           }>

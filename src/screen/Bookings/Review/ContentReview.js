@@ -4,8 +4,11 @@ import {COLORS, scale} from '../../../assets/constants';
 import {CustomInput, StarRating} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import ChooseImgPicker from '../../components/ChooseImgPicker';
+import {requireField} from '../../../utils/validate';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ContentReview({control, setValue}) {
+  const {t} = useLanguage();
   const [lengthContent, setLengthContent] = useState(0);
   return (
     <View style={{width: '100%', alignItems: 'center'}}>
@@ -31,6 +34,7 @@ export default function ContentReview({control, setValue}) {
         styleTextLabel={{
           textType: 'bold',
         }}
+        rules={[requireField(t('this_field_required'))]}
         style={{
           minHeight: scale(120),
           maxHeight: scale(200),

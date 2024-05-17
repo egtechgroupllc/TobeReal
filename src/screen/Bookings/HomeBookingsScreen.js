@@ -61,7 +61,6 @@ export default function HomeBookingsScreen() {
     queryKey: ['accommodation', 'room', 'my-booking'],
     queryFn: getListBookingAccomo,
   });
-
   return (
     <MainWrapper styleContent={styles.wrapper} scrollEnabled={false}>
       <View>

@@ -10,12 +10,11 @@ import {useForm} from 'react-hook-form';
 
 export default function PostReviewScreen({route}) {
   const paramData = route.params;
-  console.log(paramData?.room_id);
   const {control, watch, setValue, handleSubmit} = useForm();
   return (
     <>
       <MainWrapper noImgColor styleContent={styles.content}>
-        <TopReview />
+        <TopReview data={paramData} />
         <ContentReview control={control} setValue={setValue} />
       </MainWrapper>
       <BottomReview handleSubmit={handleSubmit} roomID={paramData?.id} />
