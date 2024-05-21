@@ -6,7 +6,7 @@ export default ToastMessage = props => {
   const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.sequence([
+    const animationSequence = Animated.sequence([
       Animated.timing(opacity, {
         toValue: 1,
         duration: 500,
@@ -18,11 +18,17 @@ export default ToastMessage = props => {
         duration: 500,
         useNativeDriver: true,
       }),
-    ]).start(() => {
+    ]);
+
+    animationSequence.start(() => {
       props.onHide();
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    // Cleanup function to stop animation when component unmounts
+    return () => {
+      opacity.stopAnimation();
+    };
+  }, [opacity, props]);
 
   return (
     <Animated.View

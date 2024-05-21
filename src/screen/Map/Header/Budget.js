@@ -12,7 +12,7 @@ const min = 0;
 const max = 2000;
 export default function Budget({onBudget, value}) {
   const {currency} = useCountry();
-
+  console.log(currency?.exchange_rate);
   const {t} = useLanguage();
   const [multiSliderValue, setMultiSliderValue] = useState(value || [min, max]);
   return (

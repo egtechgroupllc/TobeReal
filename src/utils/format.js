@@ -33,7 +33,6 @@ export const formatPrice = (
   // Thêm đơn vị tự chọn
   return formattedPrice + (unit ? ` ${unit}` : '');
 };
-
 export function formatNumber(num) {
   if (num > 1e11) return '100B+';
 

@@ -43,11 +43,11 @@ export default function Content() {
           onSaveToken(dataInside?.data?.token);
 
           showMess(dataInside?.message, 'success');
-          navigate('HomeExploreScreen');
+          // navigate('HomeExploreScreen');
 
           setTimeout(() => {
             RNRestart.restart();
-          }, 1000);
+          }, 500);
         } else {
           showMess(dataInside?.message, 'error');
         }

@@ -25,7 +25,6 @@ export default function ProfileScreen() {
   const {token} = useAuthentication();
   const {currency} = useCountry();
   const queryClient = useQueryClient();
-
   const {isLoading, data} = useQuery({
     queryKey: ['user', 'profile'],
     queryFn: () => getProfile(token),

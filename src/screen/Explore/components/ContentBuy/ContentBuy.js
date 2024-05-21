@@ -334,10 +334,10 @@ export default function ContentBuy() {
 
   const dataNew = useMemo(
     () =>
-      listSavedName.filter(item => {
+      listSavedName?.filter(item => {
         return item?.country_id === country?.id;
       }),
-    [listSavedName[0]?.id, country?.id],
+    [listSavedName?.[0]?.id, country?.id],
   );
   return (
     <View style={styles.wrapper}>

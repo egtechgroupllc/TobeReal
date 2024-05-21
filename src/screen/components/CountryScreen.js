@@ -7,9 +7,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import RNRestart from 'react-native-restart';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AlphabetList} from 'react-native-section-alphabet-list';
 import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
@@ -17,10 +17,9 @@ import {CustomInput} from '../../components';
 import CheckBox from '../../components/CheckBox';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
-import {useLanguage} from '../../hooks/useLanguage';
-import RNRestart from 'react-native-restart';
-import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../hooks/useCountry';
+import {useLanguage} from '../../hooks/useLanguage';
+import {FlatList} from 'react-native-gesture-handler';
 
 export default function CountryScreen() {
   const {t} = useLanguage();
@@ -55,7 +54,7 @@ export default function CountryScreen() {
   };
 
   useEffect(() => {
-    countryStore && setCountry(countryStore);
+    countryStore?.id && setCountry(countryStore);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryStore?.id]);
 
@@ -88,14 +87,6 @@ export default function CountryScreen() {
       return item?.name?.toLowerCase().includes(deferredValue?.toLowerCase());
     });
 
-    const countryGroups = dataFilter?.map((item, index) => {
-      return {
-        ...item,
-        value: item?.name,
-        key: `key_${item?.id}`,
-      };
-    });
-
     return dataFilter;
   }, [data?.data, deferredValue]);
 
@@ -113,11 +104,8 @@ export default function CountryScreen() {
         />
         <FlatList
           data={dataNew || []}
-          indexLetterStyle={styles.indexLetterStyle}
-          listHeaderHeight={-80 + insets.top}
-          indexContainerStyle={styles.indexContainerStyle}
           contentContainerStyle={{
-            paddingBottom: insets.bottom + scale(100),
+            paddingBottom: insets.bottom + scale(20),
           }}
           keyExtractor={(item, index) =>
             `key_${item?.id}-${item?.name}-${index}`
@@ -136,17 +124,6 @@ export default function CountryScreen() {
               isChecked={country?.id === item?.id}
               style={styles.checkBox}
             />
-          )}
-          renderCustomSectionHeader={section => (
-            <View
-              style={{
-                backgroundColor: COLORS.white,
-                paddingVertical: scale(4),
-              }}>
-              <CustomText style={{fontSize: SIZES.medium}} textType="semiBold">
-                {section?.title}
-              </CustomText>
-            </View>
           )}
         />
       </View>

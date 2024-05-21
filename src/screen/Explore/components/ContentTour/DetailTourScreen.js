@@ -1,27 +1,21 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useCallback, useMemo, useRef, useState} from 'react';
-import {Animated, StyleSheet, View} from 'react-native';
+import React, {useMemo, useRef} from 'react';
+import {StyleSheet, View} from 'react-native';
 
-import InfoDetail from './DetailTour/InfoDetail';
-import Map from './DetailTour/Map';
-import Review from './DetailTour/Review';
-import DetailAccommodationLoading from './DetailTour/DetailAccommodationLoading';
-import MainWrapper from '../../../../components/MainWrapper';
-import BookAccommodation from './DetailTour/BookAccommodation';
-import DynamicHeader from './DetailTour/DynamicHeader';
-import {scale, WIDTH} from '../../../../assets/constants';
-import TourSchedule from './DetailTour/TourSchedule';
 import {useRoute} from '@react-navigation/native';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
-import ContactInfo from '../ContentBuy/DetailBuy/ContactInfo';
-import ConfigDetail from '../ContentBuy/ConfigDetail';
 import {useQuery} from '@tanstack/react-query';
-import {getDetailEstate} from '../../../../Model/api/apiEstate';
-import AnimateScrollWrapper from '../AnimateScrollWrapper';
+import {scale, WIDTH} from '../../../../assets/constants';
+import MainWrapper from '../../../../components/MainWrapper';
+import {useLanguage} from '../../../../hooks/useLanguage';
 import {getDetailTour} from '../../../../Model/api/apiTour';
+import AnimateScrollWrapper from '../AnimateScrollWrapper';
+import ContactInfo from '../ContentBuy/DetailBuy/ContactInfo';
+import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
+import InfoDetail from './DetailTour/InfoDetail';
+import Review from './DetailTour/Review';
+import TourSchedule from './DetailTour/TourSchedule';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen() {

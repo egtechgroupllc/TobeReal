@@ -58,7 +58,7 @@ export default function CurrencyScreen() {
     });
 
     return dataFilter;
-  }, [data?.data, deferredValue, country]);
+  }, [data?.data, deferredValue, country?.currency_code]);
 
   useLayoutEffect(() => {
     return setOptions({

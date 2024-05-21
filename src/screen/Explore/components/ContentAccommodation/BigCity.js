@@ -93,9 +93,6 @@ export default function BigCity({
                 styesWrapper={styleItem}
                 styesTextTitle={styesTextTitle}
                 onPress={() => onPress && onPress({item, index})}
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
               />
             )}
           />

@@ -24,7 +24,7 @@ export default function Content() {
   const [viewpersonal, setViewpersonal] = useState(false);
   const [client, setClient] = useState(false);
   const {token} = useAuthentication();
-  const {country} = useCountry();
+  const {country, onSaveCountry} = useCountry();
   const [selectedLanguage, setSelectedLanguage] = useState([]);
   useEffect(() => {
     const loadSavedLanguage = async () => {
@@ -102,6 +102,7 @@ export default function Content() {
   const gotoHome = () => {
     navigation.navigate('BottomTab');
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.box}>

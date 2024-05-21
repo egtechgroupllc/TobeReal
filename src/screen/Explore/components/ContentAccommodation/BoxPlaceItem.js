@@ -146,7 +146,7 @@ export default function BoxPlaceItem({
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                columnGap: scale(20),
+                columnGap: scale(25),
                 // height: scale(25),
               }}>
               {isStar && <StarRating rating={rating} />}
@@ -178,7 +178,7 @@ export default function BoxPlaceItem({
                         textType="regular"
                         style={styles.textDiscount}>
                         {formatPrice(data?.discount, {
-                          locales: 'en',
+                          currency: country?.currency_code,
                         })}{' '}
                       </CustomText>
 

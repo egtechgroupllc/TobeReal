@@ -1,5 +1,6 @@
 import {Platform} from 'react-native';
-import {PERMISSIONS, check, request} from 'react-native-permissions';
+import {PERMISSIONS, check, request, RESULTS} from 'react-native-permissions';
+
 export const requestLocationPermission = async () => {
   try {
     const permission =
@@ -7,15 +8,21 @@ export const requestLocationPermission = async () => {
         ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
         : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
-    const granted = await request(permission);
     const status = await check(permission);
-    console.log(status, granted, 2321);
-    if (granted === 'granted') {
+
+    if (status === RESULTS.GRANTED) {
+      return true;
+    }
+
+    const result = await request(permission);
+    if (result === RESULTS.GRANTED) {
       return true;
     } else {
       console.log('Location permission denied');
+      return false;
     }
   } catch (error) {
     console.log('Error requesting location permission:', error);
+    return false;
   }
 };

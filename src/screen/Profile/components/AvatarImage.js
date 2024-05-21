@@ -79,22 +79,22 @@ export default function AvatarImage({
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingHorizontal: scale(20),
+            // paddingHorizontal: scale(10),
           }}>
-          <View style={{justifyContent: 'center', rowGap: scale(10)}}>
+          <View style={{justifyContent: 'center', rowGap: scale(10), flex: 1}}>
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.black}}>
               {t('My identification address')}
             </CustomText>
             <CustomInput
+              numberOfLines={1}
               editable={false}
-              placeholder={t('54rteyueytd645ew67fegd')}
+              placeholder={t('54rteyueytd645ew67fedsddsd')}
               placeholderTextColor={COLORS.black}
               style={{
                 borderRadius: scale(5),
                 borderWidth: scale(0),
-                height: scale(30),
               }}
               password
               iconLeft={IconCopy}

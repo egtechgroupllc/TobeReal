@@ -1,4 +1,4 @@
-import {Dimensions, TextStyle} from 'react-native';
+import {Dimensions, Platform, TextStyle} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 export const scale = (value = 0) => {
@@ -41,7 +41,7 @@ export const FONTS = {
 };
 
 export const SHADOW = {
-  shadowColor: '#333',
+  shadowColor: Platform?.OS === 'ios' ? '#333' : '#DCDCDC',
   shadowOffset: {
     width: 0,
     height: 1,

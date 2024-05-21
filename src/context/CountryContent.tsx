@@ -20,9 +20,19 @@ export const COUNTRY_KEY = '@country';
 export const CURRENCY_KEY = '@currency';
 
 export const CountryContext = createContext<CountryProps>({});
+const dataFake = {
+  currency_code: 'VND',
+  flag: '🇻🇳',
+  geoname_id: 1562822,
+  id: 241,
+  iso2: 'VN',
+  iso3: 'VNM',
+  name: 'Vietnam',
+  phone_code: '+84',
+};
 
 export const CountryProvider = ({children}: {children: ReactNode}) => {
-  const [country, setCountry] = useState<any>({}); // Current language
+  const [country, setCountry] = useState<any>(dataFake); // Current language
   const [currency, setCurrency] = useState<any>({}); // Current language
 
   const {data, isLoading, isError} = useQuery({

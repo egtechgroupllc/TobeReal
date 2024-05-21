@@ -32,10 +32,9 @@ export default function HomeMapScreen({showListLocation, style}) {
   const scrollOffsetX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(0);
   const [focusedItem, setFocusedItem] = useState(0);
-  const [current, setCurrent] = useState({});
+  const [current, setCurrent] = useState(null);
   const {country, currency} = useCountry();
   const mapRef = useRef(null);
-  console.log(currency);
   const objRent = {
     date_end: formatDate(new Date(), {addDays: 1}),
     date_start: formatDate(),
@@ -205,8 +204,8 @@ export default function HomeMapScreen({showListLocation, style}) {
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={[styles.map, style]}
         region={{
-          latitude: state.markers?.[0]?.latitude,
-          longitude: state.markers?.[0]?.longitude,
+          latitude: current?.latitude || state.markers?.[0]?.latitude || 0,
+          longitude: current?.longitude || state.markers?.[0]?.longitude || 0,
           latitudeDelta: 0.04864195044303443,
           longitudeDelta: 0.040142817690068,
         }}

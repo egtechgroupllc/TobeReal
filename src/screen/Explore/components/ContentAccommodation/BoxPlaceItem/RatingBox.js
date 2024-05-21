@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     overflow: 'hidden',
     ...SHADOW,
+    backgroundColor: '#f5f5f5',
   },
   boxIcon: {
-    backgroundColor: '#f5f5f5',
+    // backgroundColor: '#f5f5f5',
     padding: scale(4),
     paddingHorizontal: scale(6),
     borderRadius: 6,
