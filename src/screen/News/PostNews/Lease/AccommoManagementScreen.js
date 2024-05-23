@@ -10,11 +10,12 @@ import Pagination from '../../../../components/Pagination';
 import usePagination from '../../../../hooks/usePagination';
 import CreateAccomItem from './components/HomeLease/CreateAccomItem';
 import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
-import {IconHome} from '../../../../assets/icon/Icon';
+import {IconGoBack, IconHome} from '../../../../assets/icon/Icon';
+import HeaderLeft from '../../../../navigation/components/HeaderLeft';
 
 export default function AccommoManagementScreen() {
   const params = useRoute().params;
-  const {setOptions, navigate} = useNavigation();
+  const {setOptions, navigate, goBack} = useNavigation();
   const {data, page, isLoading, isError, setPage} = usePagination(
     params?.isTour ? ['accommodation', 'my-list', 1] : ['tour', 'my-list', 1],
     params?.isTour ? getMyListCreateTour : getMyListCreateAccom,
@@ -35,6 +36,12 @@ export default function AccommoManagementScreen() {
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
+      headerLeftNavigate: 'LeaseScreen',
+      // headerLeft: () => (
+      //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
+      //     <IconGoBack style={{width: scale(20)}} />
+      //   </TouchableOpacity>
+      // ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);

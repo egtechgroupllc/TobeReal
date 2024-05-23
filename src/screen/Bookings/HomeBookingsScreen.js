@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getListBookingAccomo} from '../../Model/api/apiAccom';
@@ -61,6 +61,31 @@ export default function HomeBookingsScreen() {
     queryKey: ['accommodation', 'room', 'my-booking'],
     queryFn: getListBookingAccomo,
   });
+  // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
+  //   useInfiniteQuery({
+  //     queryKey: ['accommodation', 'room', 'my-booking'],
+  //     queryFn: getListBookingAccomo,
+  //     getNextPageParam: (lastPage, allPages) => {
+  //       // console.log('====================================');
+  //       // console.log(lastPage?.data?.rows, 12321);
+  //       // console.log('====================================');
+  //       if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
+
+  //       return undefined;
+  //     },
+  //     // enabled: !!token,
+  //   });
+
+  // const dataArr = useMemo(
+  //   () =>
+  //     data?.pages
+  //       .map(page => {
+  //         if (!page) return undefined;
+  //         return page?.data?.rows;
+  //       })
+  //       .flat(),
+  //   [data?.pages],
+  // );
   return (
     <MainWrapper styleContent={styles.wrapper} scrollEnabled={false}>
       <View>

@@ -3,6 +3,7 @@ import {
   ListPaymentMethodsScreen,
   PostReviewScreen,
 } from '../screen/Bookings';
+import {SelectDefaultCountryScreen} from '../screen/DefaultCountry';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
@@ -219,5 +220,9 @@ export default routerNoBottomTab = [
   {
     name: 'AddPolicyScreen',
     component: AddPolicyScreen,
+  },
+  {
+    name: 'SelectDefaultCountryScreen',
+    component: SelectDefaultCountryScreen,
   },
 ];

@@ -61,9 +61,10 @@ export default function BottomSheetListSelect({
           buttonType="normal"
           key={index}
           style={[
-            index !== 0 && {
-              borderTopWidth: 1,
-            },
+            index !== 0 &&
+              {
+                // borderTopWidth: 1,
+              },
             styles.item,
           ]}
           text={item?.text || item}
@@ -87,7 +88,7 @@ export default function BottomSheetListSelect({
 
 const styles = StyleSheet.create({
   item: {
-    borderTopColor: '#eee',
+    // borderTopColor: '#eee',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

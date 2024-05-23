@@ -1,11 +1,11 @@
 import React, {memo, useMemo} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
-import {IconMarker} from '../../assets/icon/Icon';
+import {IconMarker, IconMarkerRent} from '../../assets/icon/Icon';
 import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
 import CustomText from '../../components/CustomText';
 import {formatPrice} from '../../utils/format';
 
-const CustomMarker = ({scaleValue, data}) => {
+const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
   const scaleStyle = {
     transform: [
       {
@@ -34,34 +34,48 @@ const CustomMarker = ({scaleValue, data}) => {
           minWidth: scale(150),
           height: scale(150),
           alignItems: 'center',
+          // backgroundColor: '#000',
         },
         scaleValue && scaleStyle,
       ]}>
       <View
         style={{
           flexDirection: 'row',
-          columnGap: scale(5),
+          // columnGap: scale(5),
           width: '100%',
           justifyContent: 'center',
         }}>
+        {checkFilter && (
+          <View
+            style={{
+              borderWidth: 10,
+              borderColor: '#00000000',
+              position: 'absolute',
+              bottom: -32,
+              zIndex: 99,
+              borderTopColor: markerFocus ? COLORS.primary : COLORS.white,
+            }}
+          />
+        )}
         <Animated.View
           style={{
-            backgroundColor: scaleValue?.backgroundColor,
+            backgroundColor: markerFocus ? COLORS.primary : COLORS.white,
             paddingHorizontal: scale(6),
             paddingVertical: scale(4),
-            borderRadius: 10,
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
             marginBottom: scale(-12),
             maxWidth: scale(140),
             borderWidth: 1,
-            borderColor: COLORS.primary,
+            borderColor: markerFocus ? COLORS.white : COLORS.primary,
             justifyContent: 'center',
           }}>
           <Animated.Text
             numberOfLines={1}
             textType="bold"
             style={{
-              fontSize: SIZES.xMedium,
-              color: scaleValue?.color,
+              fontSize: SIZES.large,
+              color: markerFocus ? COLORS.white : COLORS.primary,
               fontFamily: FONTS.semiBold,
             }}>
             {data?.accommodation_type?.name || data?.estate_type?.name}
@@ -69,39 +83,41 @@ const CustomMarker = ({scaleValue, data}) => {
         </Animated.View>
         <Animated.View
           style={{
-            backgroundColor: scaleValue?.backgroundColor,
+            backgroundColor: markerFocus ? COLORS.primary : COLORS.white,
             paddingHorizontal: scale(6),
             paddingVertical: scale(4),
-            borderRadius: 10,
+            borderTopRightRadius: 10,
+            borderBottomRightRadius: 10,
             marginBottom: scale(-12),
             maxWidth: scale(140),
             borderWidth: 1,
-            borderColor: scaleValue?.color,
+            borderColor: markerFocus ? COLORS.white : COLORS.primary,
           }}>
           <Animated.Text
             numberOfLines={1}
             textType="bold"
             style={{
-              fontSize: SIZES.medium,
-              color: scaleValue?.color,
+              fontSize: SIZES.large,
+              color: markerFocus ? COLORS.white : COLORS.primary,
               fontFamily: FONTS.semiBold,
             }}>
             {formatPrice(priceFinal || data?.price)}
           </Animated.Text>
         </Animated.View>
       </View>
-
-      <IconMarker
-        style={{
-          width: '100%',
-          height: '90%',
-          transform: [
-            {
-              scale: 0.7,
-            },
-          ],
-        }}
-      />
+      {!checkFilter && (
+        <IconMarkerRent
+          style={{
+            width: '100%',
+            height: '85%',
+            transform: [
+              {
+                scale: 0.7,
+              },
+            ],
+          }}
+        />
+      )}
     </Animated.View>
   );
 };

@@ -28,7 +28,7 @@ export default function CategoriesButton({
 }) {
   const {t} = useLanguage();
   return (
-    <View>
+    <View style={style}>
       {large && (
         <TouchableOpacity onPress={onPress}>
           <View

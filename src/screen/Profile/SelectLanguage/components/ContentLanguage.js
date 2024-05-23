@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
@@ -9,6 +9,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import ItemLanguage from './ItemLanguage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNRestart from 'react-native-restart';
+import {useCountry} from '../../../../hooks/useCountry';
 const listLanguage = [
   {
     id: '1',
@@ -65,7 +66,7 @@ const listLanguage = [
 export default function ContentLanguage() {
   const {t, changeLocale, locale} = useLanguage();
   const {goBack, setOptions} = useNavigation();
-
+  const router = useRoute().params;
   const [language, setLanguage] = useState(locale);
   const onSaveLanguage = async () => {
     await EncryptedStorage.setItem(
@@ -83,13 +84,18 @@ export default function ContentLanguage() {
   }, []);
 
   const changeLanguage = () => {
-    onSaveLanguage();
-    changeLocale(language?.languageCode);
-    showMess(t('change_language_success'), 'success');
-
-    setTimeout(() => {
-      RNRestart.restart();
-    }, 500);
+    if (!router) {
+      onSaveLanguage();
+      changeLocale(language?.languageCode);
+      showMess(t('change_language_success'), 'success');
+      setTimeout(() => {
+        RNRestart.restart();
+      }, 1000);
+    } else {
+      router?.onGoBack(language);
+      changeLocale(language?.languageCode);
+      goBack();
+    }
   };
 
   useLayoutEffect(() => {

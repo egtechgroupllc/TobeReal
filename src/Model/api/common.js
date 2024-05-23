@@ -5,6 +5,20 @@ export const instanceCommon = axios.create({
   baseURL: baseUrl + '/api/v1',
 });
 // ============================ Common =====================================
+export const getUserInfoLocation = async ({lat, lon}) => {
+  // Encode the latitude and longitude to ensure they are correctly formatted
+  const encodedLat = encodeURIComponent(lat);
+  const encodedLon = encodeURIComponent(lon);
+
+  // Construct the request URL
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${encodedLat}&lon=${encodedLon}&format=json`;
+
+  // Make the GET request to the Nominatim API
+  const response = await axios.get(url);
+
+  // Return the response data
+  return response.data;
+};
 
 export const getProfile = async token => {
   const responsive = await instanceCommon.get('/user/profile', {

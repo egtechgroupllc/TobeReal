@@ -205,8 +205,8 @@ const BoxText = ({
   return (
     <View
       style={{
-        borderRadius: (isDateStart || isDateEnd) && 99,
-        borderWidth: (isDateStart || isDateEnd) && 2,
+        borderRadius: isDateStart || isDateEnd ? 99 : 0,
+        borderWidth: isDateStart || isDateEnd ? 2 : 0,
         backgroundColor: (isDateStart || isDateEnd) && '#fff',
         borderColor: COLORS.primary,
         width: '100%',

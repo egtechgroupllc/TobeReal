@@ -1,6 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {
+  useCallback,
   useDeferredValue,
   useEffect,
   useLayoutEffect,
@@ -10,7 +11,11 @@ import React, {
 import {StyleSheet, View} from 'react-native';
 import RNRestart from 'react-native-restart';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {getListCountry} from '../../Model/api/common';
+import {
+  getListCountry,
+  getUserInfoLocation,
+  getUserLocation,
+} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
@@ -20,6 +25,7 @@ import EmptyData from '../../components/EmptyData';
 import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
 import {FlatList} from 'react-native-gesture-handler';
+import {getCurrentLocation} from '../../utils/getCurrentLocation';
 
 export default function CountryScreen() {
   const {t} = useLanguage();
@@ -40,7 +46,7 @@ export default function CountryScreen() {
   });
   const {onSaveCountry, country: countryStore} = useCountry();
 
-  const handleDone = async () => {
+  const handleDone = () => {
     if (!router) {
       onSaveCountry(country);
 
@@ -48,7 +54,7 @@ export default function CountryScreen() {
         RNRestart.restart();
       }, 1000);
     } else {
-      router.onGoBack(country);
+      router?.onGoBack(country);
       goBack();
     }
   };

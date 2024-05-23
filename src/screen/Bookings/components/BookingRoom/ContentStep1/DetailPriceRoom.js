@@ -5,11 +5,12 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconDown} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {formatPrice} from '../../../../../utils/format';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function DetailPriceRoom({data}) {
   const numRoom = data?.numRoomSelect;
   const [isMorePrice, setIsMorePrice] = useState(false);
-
+  const {currency} = useCountry();
   const priceAverage = useMemo(
     () => numRoom * data?.priceAverage * data?.date?.numNight,
     [numRoom, data?.date?.numNight, data?.priceAverage],
@@ -35,7 +36,9 @@ export default function DetailPriceRoom({data}) {
           styleValue={{
             fontSize: SIZES.medium,
           }}
-          value={formatPrice(priceAverage + feePrice)}
+          value={formatPrice(priceAverage + feePrice, {
+            currency: currency?.currency_code,
+          })}
           colorValue={COLORS.primary}
           textType="bold"
           Icon={
@@ -65,17 +68,23 @@ export default function DetailPriceRoom({data}) {
 
         <Row
           title={'Price per night'}
-          value={formatPrice(data?.priceAverage * numRoom)}
+          value={formatPrice(data?.priceAverage * numRoom, {
+            currency: currency?.currency_code,
+          })}
           colorValue={COLORS.primary}
           textType="semiBold"
         />
         <Row
           title={`Total price for ${data?.date?.numNight} night`}
-          value={formatPrice(priceAverage)}
+          value={formatPrice(priceAverage, {
+            currency: currency?.currency_code,
+          })}
         />
         <Row
           title={'Taxes and fees'}
-          value={formatPrice(feePrice)}
+          value={formatPrice(feePrice, {
+            currency: currency?.currency_code,
+          })}
           textType="regular"
           colorValue={COLORS.text}
         />

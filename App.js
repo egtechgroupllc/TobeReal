@@ -28,6 +28,8 @@ import NavigationAuth from './src/navigation/NavigationAuth';
 import NavigationProfile from './src/navigation/NavigationProfile';
 import {AddPolicyScreen} from './src/screen/News/PostNews/Lease';
 import {CountryProvider} from './src/context/CountryContent';
+import {useCountry} from './src/hooks/useCountry';
+import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -54,7 +56,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setSplashScreenVisible(false);
-    }, 2000); // Adjust the duration as needed
+    }, 1500); // Adjust the duration as needed
 
     return () => clearTimeout(timer);
   }, []);
@@ -77,13 +79,12 @@ export default function App() {
       <CustomImage
         source={images.logoSplash}
         style={{height: '70%', width: '70%', alignSelf: 'center'}}
-        resizeMode="contain"></CustomImage>
+        resizeMode="contain"
+      />
     </View>
   );
 
-  return splashScreenVisible ? (
-    <SplashScreen />
-  ) : (
+  return (
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider
         style={{
@@ -91,30 +92,34 @@ export default function App() {
         }}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
-            <Loading />
-            <KeyboardProvider>
-              <CountryProvider>
-                <LanguageProvider>
-                  <AuthProvider>
-                    <FlashMessage
-                      position={
-                        Platform.OS === 'ios'
-                          ? 'top'
-                          : {top: StatusBar.currentHeight, left: 0, right: 0}
-                      }
-                      floating={Platform.OS !== 'ios'}
-                    />
-                    <BottomSheetModalProvider>
-                      <StatusBar
-                        barStyle="dark-content"
-                        backgroundColor={COLORS.primary}
+            <CountryProvider>
+              {splashScreenVisible ? (
+                <SplashScreen />
+              ) : (
+                <KeyboardProvider>
+                  <Loading />
+                  <LanguageProvider>
+                    <AuthProvider>
+                      <FlashMessage
+                        position={
+                          Platform.OS === 'ios'
+                            ? 'top'
+                            : {top: StatusBar.currentHeight, left: 0, right: 0}
+                        }
+                        floating={Platform.OS !== 'ios'}
                       />
-                      <Layout />
-                    </BottomSheetModalProvider>
-                  </AuthProvider>
-                </LanguageProvider>
-              </CountryProvider>
-            </KeyboardProvider>
+                      <BottomSheetModalProvider>
+                        <StatusBar
+                          barStyle="dark-content"
+                          backgroundColor={COLORS.primary}
+                        />
+                        <Layout />
+                      </BottomSheetModalProvider>
+                    </AuthProvider>
+                  </LanguageProvider>
+                </KeyboardProvider>
+              )}
+            </CountryProvider>
           </QueryClientProvider>
         </NavigationContainer>
       </SafeAreaProvider>
@@ -123,6 +128,8 @@ export default function App() {
 }
 
 const Layout = () => {
+  const {country} = useCountry();
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -132,7 +139,15 @@ const Layout = () => {
         },
       }}
       initialRouteName="BottomTab">
-      <Stack.Screen name="BottomTab" component={BottomTab} />
+      {country?.id ? (
+        <Stack.Screen name="BottomTab" component={BottomTab} />
+      ) : (
+        <Stack.Screen
+          name={'SelectDefaultCountryScreen'}
+          component={SelectDefaultCountryScreen}
+        />
+      )}
+
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
 

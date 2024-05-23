@@ -23,7 +23,7 @@ export default function Review({dataP}) {
 
   useEffect(() => {
     if (isOpen) {
-      bottomSheetRef.current.open();
+      bottomSheetRef.current?.open();
     }
   }, [isOpen]);
 

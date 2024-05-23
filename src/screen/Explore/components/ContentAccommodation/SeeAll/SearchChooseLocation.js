@@ -112,10 +112,10 @@ export default function SearchChooseLocation({onPress, control}) {
 
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => onPress('Around me')}
+          onPress={() => onPress('Near me')}
           style={[styles.searchItem, {borderBottomWidth: 1}]}>
           <IconMyLocation fill={COLORS.primary} />
-          <CustomText style={{fontSize: SIZES.xMedium}}>Around me</CustomText>
+          <CustomText style={{fontSize: SIZES.xMedium}}>Near me</CustomText>
         </TouchableOpacity>
 
         {/* <TouchableOpacity activeOpacity={0.7} style={styles.searchItem}>

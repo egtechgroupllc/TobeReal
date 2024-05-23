@@ -1,10 +1,10 @@
-import React, {useMemo, useRef} from 'react';
-import {View} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getDetailAccmo} from '../../Model/api/apiAccom';
-import {WIDTH, scale} from '../../assets/constants';
+import {COLORS, SHADOW, WIDTH, images, scale} from '../../assets/constants';
 import MainWrapper from '../../components/MainWrapper';
 import {useLanguage} from '../../hooks/useLanguage';
 import AnimateScrollWrapper from './components/AnimateScrollWrapper';
@@ -16,6 +16,17 @@ import InfoUnitFacilities from './components/DetailAccommodation/Detail/InfoUnit
 import Review from './components/DetailAccommodation/Detail/Review';
 import SimilarApartmentsNearby from './components/DetailAccommodation/Detail/SimilarApartmentsNearby';
 import TimeCheckInOut from './components/DetailAccommodation/Detail/TimeCheckInOut';
+import YoutubePlayer, {YoutubeIframeRef} from 'react-native-youtube-iframe';
+import {CustomButton} from '../../components';
+import {
+  IconShare,
+  IconX,
+  IconZoomIn,
+  IconZoomOut,
+} from '../../assets/icon/Icon';
+import WebView from 'react-native-webview';
+import CustomImage from '../../components/CustomImage';
+import VideoYoutubeBox from './components/VideoYoutubeBox';
 
 export default function DetailAccommodationScreen() {
   const params = useRoute().params;
@@ -79,6 +90,7 @@ export default function DetailAccommodationScreen() {
           />
         }
       />
+      <VideoYoutubeBox />
     </MainWrapper>
   );
 }

@@ -7,13 +7,13 @@ import {IconCopy} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import {formatPrice} from '../../../../../utils/format';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function InfoBank({data}) {
   const nameBank = useMemo(
     () => data?.typeAccountBank?.bank_name.split(' - ')[0],
     [data],
   );
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -69,6 +69,7 @@ const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
     Clipboard.setString(value);
     showMess('Sao chép thành công');
   };
+  const {currency} = useCountry();
 
   return (
     <View style={styles.boxInfo}>
@@ -84,7 +85,9 @@ const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
             flex: 1,
             fontSize: SIZES.xMedium,
           }}>
-          {isPrice ? formatPrice(value) : value}
+          {isPrice
+            ? formatPrice(value, {currency: currency?.currency_code})
+            : value}
         </CustomText>
         {isCopy && <IconCopy width={scale(16)} height={scale(16)} />}
       </TouchableOpacity>

@@ -5,10 +5,11 @@ import {IconMarker} from '../../../assets/icon/Icon';
 import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {formatDateTime, formatPrice} from '../../../utils/format';
+import {useCountry} from '../../../hooks/useCountry';
 
 export default function BookingItem({data, onPress, onReView}) {
   const objAccom = data?.accommodation;
-
+  const {currency} = useCountry();
   return (
     <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
       <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
@@ -26,7 +27,9 @@ export default function BookingItem({data, onPress, onReView}) {
         <CustomText>
           Price:{' '}
           <CustomText textType="semiBold">
-            {formatPrice(data?.price)}
+            {formatPrice(data?.price * currency?.exchange_rate, {
+              currency: currency?.currency_code,
+            })}
           </CustomText>
         </CustomText>
       </View>

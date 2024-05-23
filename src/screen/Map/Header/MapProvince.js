@@ -1,30 +1,34 @@
-import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {StyleSheet, TouchableOpacity, TextStyle, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 import WrapperContent from '../../Explore/components/WrapperContent';
+import {useQuery} from '@tanstack/react-query';
+import {useCountry} from '../../../hooks/useCountry';
+import {getListCountry} from '../../../Model/api/common';
+import {CustomButton, CustomInput} from '../../../components';
+import BottomSheet from '../../../components/BottomSheet';
+import BottomSheetListSelect from '../../../components/BottomSheetListSelect';
+import ReviewAll from '../../Explore/components/DetailAccommodation/Review/ReviewAll';
 
-export default function Menubar({onType, value}) {
+export default function MapProvince({
+  onProvince,
+  value,
+  control,
+  onSearch,
+  data,
+  nameProvince,
+}) {
   const {t} = useLanguage();
   const [checked, setChecked] = useState(value || undefined);
-
-  const data = [
-    {
-      id: 1,
-      name: 'RENT',
-    },
-    {
-      id: 2,
-      name: 'BUY',
-    },
-    {
-      id: 3,
-      name: 'TOUR',
-    },
-  ];
   return (
     <WrapperContent
+      heading={t('Province')}
+      styleWrapper={{marginBottom: scale(-10)}}
+      styleHeading={{
+        paddingHorizontal: 0,
+      }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
       }}
@@ -36,7 +40,18 @@ export default function Menubar({onType, value}) {
         flexWrap: 'wrap',
         justifyContent: 'space-between',
       }}>
-      {data?.map((item, index) => (
+      <CustomInput
+        styleText={{color: COLORS.black, alignSelf: 'flex-start'}}
+        placeholder={nameProvince || 'Search more'}
+        style={{
+          backgroundColor: '#f5f5f5',
+          borderWidth: 1,
+          borderColor: COLORS.grey,
+          height: scale(30),
+        }}
+        onPress={onSearch}
+      />
+      {data?.data?.data?.slice(0, 6)?.map((item, index) => (
         // <CheckBox
         //   key={index}
         //   textLeft
@@ -50,14 +65,14 @@ export default function Menubar({onType, value}) {
         // />
         <TouchableOpacity
           onPress={e => {
-            item && onType && onType(item);
+            item && onProvince && onProvince(item);
             setChecked(item?.id);
           }}
           activeOpacity={0.7}
           key={index}
           style={{
             borderWidth: 1,
-            minWidth: '30%',
+            minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
             borderColor: checked === item?.id ? COLORS.primary : '#ccc',

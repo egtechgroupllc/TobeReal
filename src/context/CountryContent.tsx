@@ -7,7 +7,12 @@ import React, {
   useMemo,
 } from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {getListCurrency} from '../Model/api/common';
+import {
+  getListCountry,
+  getListCurrency,
+  getUserInfoLocation,
+} from '../Model/api/common';
+import {getCurrentLocation} from '../utils/getCurrentLocation';
 
 interface CountryProps {
   onSaveCountry?: (data: string) => Promise<any>;
@@ -32,22 +37,76 @@ const dataFake = {
 };
 
 export const CountryProvider = ({children}: {children: ReactNode}) => {
-  const [country, setCountry] = useState<any>(dataFake); // Current language
+  const [country, setCountry] = useState<any>({}); // Current language
   const [currency, setCurrency] = useState<any>({}); // Current language
+  // const [coordinates, setCoordinates] = useState<any>({});
 
   const {data, isLoading, isError} = useQuery({
     queryKey: ['common', 'list-currency'],
     queryFn: getListCurrency,
   });
 
+  // const {data: dataCountry} = useQuery({
+  //   queryKey: ['common', 'list-country'],
+  //   queryFn: () => getListCountry(),
+  // });
+
+  // useEffect(() => {
+  //   const currentPosition = async () => {
+  //     const {coords} = await getCurrentLocation();
+
+  //     if (coords) {
+  //       const currenCoords = {
+  //         latitude: coords?.latitude,
+  //         longitude: coords?.longitude,
+  //       };
+
+  //       setCoordinates(currenCoords);
+  //     }
+  //   };
+  //   currentPosition();
+  // }, []);
+
+  // const {
+  //   data: dataUserInfoLocation,
+  //   isSuccess,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ['common', 'user-info-location'],
+  //   queryFn: () =>
+  //     getUserInfoLocation({
+  //       lat: +coordinates?.latitude,
+  //       lon: +coordinates?.longitude,
+  //     }),
+  //   enabled: !!coordinates,
+  // });
+
+  // useEffect(() => {
+  //   const dataUserCountry =
+  //     dataUserInfoLocation?.address?.country_code.toUpperCase();
+  //   // console.log({dataUserInfoLocation, dataUserCountry}, '12312aaaa3123312aaa');
+
+  //   dataCountry?.data?.find((item: any) => {
+  //     if (item?.iso2 === dataUserCountry) {
+  //       onSaveCountry(item);
+  //       return;
+  //     }
+  //   });
+  // }, [dataCountry?.data, dataUserInfoLocation, coordinates]);
+
   useEffect(() => {
     const loadCountry = async () => {
       const result = (await EncryptedStorage.getItem(COUNTRY_KEY)) || '';
       const resultCurrency =
         (await EncryptedStorage.getItem(CURRENCY_KEY)) || '';
+      console.log(typeof result, 23312333, result);
 
-      setCountry(JSON.parse(result));
-      setCurrency(JSON.parse(resultCurrency));
+      if (result) {
+        setCountry(JSON.parse(result));
+      }
+      if (resultCurrency) {
+        setCurrency(JSON.parse(resultCurrency));
+      }
 
       return result;
     };
@@ -70,6 +129,7 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
       console.log(error);
     }
   };
+
   const onSaveCurrency = async (value: any) => {
     try {
       await EncryptedStorage.setItem(CURRENCY_KEY, JSON.stringify(value));

@@ -88,7 +88,8 @@ export default function TourSchedule({
 
   useEffect(() => {
     setValue('total_hours', numDays.days * 24 + numDays.hours);
-    setValue('time_options', JSON.stringify(['23:59']));
+    setValue('total_hours', 1);
+    setValue('refund_fee', 1);
   }, []);
   const handleConfirm = value => {
     if (numDays.days > value) {

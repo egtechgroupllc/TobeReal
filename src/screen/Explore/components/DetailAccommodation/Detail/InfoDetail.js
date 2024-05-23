@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {Alert, Button, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {IconLocation} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
@@ -8,7 +8,8 @@ import StarRating from '../../../../../components/StarRating';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatNumber} from '../../../../../utils/format';
 import Introduction from './Introduction';
-
+import YoutubePlayer from 'react-native-youtube-iframe';
+import YoutubeIframe from 'react-native-youtube-iframe';
 export default function InfoDetail({data}) {
   const {t} = useLanguage();
 

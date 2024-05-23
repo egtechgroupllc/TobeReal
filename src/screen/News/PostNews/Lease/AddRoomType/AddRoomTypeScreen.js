@@ -133,7 +133,6 @@ export default function AddRoomTypeScreen() {
     );
   };
   const handlePostRoom = value => {
-    console.log(value, 31232321);
     // navigate('AddPolicyScreen', {id: params?.id});
     delete value?.number_user;
     delete value?.images;

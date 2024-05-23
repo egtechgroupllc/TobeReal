@@ -8,7 +8,7 @@ import {getListRent} from '../../Model/api/apiAccom';
 import {getListSell} from '../../Model/api/apiEstate';
 import {getListTour} from '../../Model/api/apiTour';
 import {KEY_MAP} from '../../Model/url';
-import {COLORS, scale} from '../../assets/constants';
+import {COLORS, SIZES, scale} from '../../assets/constants';
 import {IconMyLocation} from '../../assets/icon/Icon';
 import {CustomButton} from '../../components';
 import MainWrapper from '../../components/MainWrapper';
@@ -21,10 +21,10 @@ import {useCountry} from '../../hooks/useCountry';
 
 const initialMapState = {
   markers: [],
-  region: {
-    latitudeDelta: 0.04864195044303443,
-    longitudeDelta: 0.040142817690068,
-  },
+  // region: {
+  //   latitudeDelta: 0.02605427198568755,
+  //   longitudeDelta: 0.014597922563552856,
+  // },
 };
 const CARD_WIDTH = scale(400 / 1.4);
 export default function HomeMapScreen({showListLocation, style}) {
@@ -80,7 +80,7 @@ export default function HomeMapScreen({showListLocation, style}) {
   useEffect(() => {
     setState({
       ...initialMapState,
-      markers: data?.data?.rows || [],
+      markers: data?.data?.rows?.slice(0, 9) || [],
     });
   }, [data?.data]);
 
@@ -107,13 +107,16 @@ export default function HomeMapScreen({showListLocation, style}) {
             latitude,
             longitude,
           };
-          mapRef.current.animateToRegion(
+          mapRef.current.animateCamera(
             {
-              ...coordinate,
-              latitudeDelta: state.region.latitudeDelta,
-              longitudeDelta: state.region.longitudeDelta,
+              center: {
+                ...coordinate,
+                latitudeDelta: 0.002305,
+                longitudeDelta: 0.0010525,
+              },
+              // heading: 0,
             },
-            500,
+            1000,
           );
         }
       }, 10);
@@ -146,8 +149,7 @@ export default function HomeMapScreen({showListLocation, style}) {
           outputRange: [COLORS.primary, '#fff', COLORS.primary],
           extrapolate: 'clamp',
         });
-
-        return {scale, backgroundColor, color};
+        return {scale};
       }),
     [state.markers],
   );
@@ -204,11 +206,12 @@ export default function HomeMapScreen({showListLocation, style}) {
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={[styles.map, style]}
         region={{
-          latitude: current?.latitude || state.markers?.[0]?.latitude || 0,
-          longitude: current?.longitude || state.markers?.[0]?.longitude || 0,
-          latitudeDelta: 0.04864195044303443,
-          longitudeDelta: 0.040142817690068,
+          latitude: current?.latitude || state.markers?.[0]?.latitude,
+          longitude: current?.longitude || state.markers?.[0]?.longitude,
+          latitudeDelta: 0.002305,
+          longitudeDelta: 0.0010525,
         }}
+        // onRegionChangeComplete={value => console.log(value)}
         zoomControlEnabled
         showsUserLocation>
         {state.markers.map((marker, index) => {
@@ -223,13 +226,19 @@ export default function HomeMapScreen({showListLocation, style}) {
               coordinate={coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>
-              <CustomMarker scaleValue={interpolations[index]} data={marker} />
+              <CustomMarker
+                scaleValue={interpolations[index]}
+                data={marker}
+                markerFocus={index === focusedItem}
+                checkFilter={filter}
+              />
             </Marker>
           );
         })}
         {/* {children} */}
       </MapView>
       <MapHeader
+        mapProvince
         menu
         onFilter={value => {
           !value?.name && delete value?.name;

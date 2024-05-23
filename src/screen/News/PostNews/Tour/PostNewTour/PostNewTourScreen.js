@@ -26,6 +26,7 @@ import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import GeneralInformation from '../components/PostNewTour/GeneralInformation';
 import TourSchedule from '../components/PostNewTour/TourSchedule';
 import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
+import TourPhoto from '../components/PostNewTour/TourPhoto';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
@@ -135,7 +136,7 @@ export default function PostNewTourScreen() {
           setValue={setValue}
         />
 
-        <EstatePhoto
+        <TourPhoto
           control={control}
           setValue={setValue}
           watch={watch}
