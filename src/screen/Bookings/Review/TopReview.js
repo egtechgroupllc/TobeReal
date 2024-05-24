@@ -6,7 +6,6 @@ import CustomText from '../../../components/CustomText';
 import Star from '../../../components/StarRating';
 
 export default function TopReview({data}) {
-  console.log();
   return (
     <View
       style={{

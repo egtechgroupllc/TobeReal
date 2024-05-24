@@ -71,7 +71,6 @@ export default function BoxPlaceItem({
       return num;
     }
   }, [data?.rooms]);
-  // console.log(freeCancel);
 
   const {country} = useCountry();
 

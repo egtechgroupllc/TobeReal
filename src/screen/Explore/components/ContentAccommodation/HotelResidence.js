@@ -16,7 +16,6 @@ export default function HotelResidence({data}) {
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
 
-  // console.log(listSavedName);
   // const {data, isLoading, isError, error} = useQuery({
   //   queryKey: [
   //     'accommodation',

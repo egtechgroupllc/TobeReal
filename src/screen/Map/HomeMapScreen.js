@@ -40,6 +40,7 @@ export default function HomeMapScreen({showListLocation, style}) {
     date_start: formatDate(),
     accommodation_type_id: filter?.type,
     country_id: country?.id,
+    province_id: filter?.province?.id,
     name: filter?.name,
     max_price: filter?.budget ? filter?.budget[1] : '',
     min_price: filter?.budget ? filter?.budget[0] : '',
@@ -47,10 +48,10 @@ export default function HomeMapScreen({showListLocation, style}) {
     distance: current?.longitude && 5000,
     currency_id: currency?.id,
   };
-
   const objBuy = {
     estate_type_id: filter?.type,
     country_id: country?.id,
+    province_id: filter?.province?.id,
     title: filter?.name,
     max_price: filter?.budget ? filter?.budget[1] : '',
     min_price: filter?.budget ? filter?.budget[0] : '',
@@ -111,8 +112,8 @@ export default function HomeMapScreen({showListLocation, style}) {
             {
               center: {
                 ...coordinate,
-                latitudeDelta: 0.002305,
-                longitudeDelta: 0.0010525,
+                latitudeDelta: 0.06851501762865553,
+                longitudeDelta: 0.05517102777957916,
               },
               // heading: 0,
             },
@@ -136,7 +137,7 @@ export default function HomeMapScreen({showListLocation, style}) {
 
         const scale = scrollOffsetX.interpolate({
           inputRange,
-          outputRange: [0.5, 0.7, 0.5],
+          outputRange: [0.7, 1, 0.7],
           extrapolate: 'clamp',
         });
         const backgroundColor = scrollOffsetX.interpolate({
@@ -206,12 +207,12 @@ export default function HomeMapScreen({showListLocation, style}) {
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={[styles.map, style]}
         region={{
-          latitude: current?.latitude || state.markers?.[0]?.latitude,
-          longitude: current?.longitude || state.markers?.[0]?.longitude,
-          latitudeDelta: 0.002305,
-          longitudeDelta: 0.0010525,
+          latitude: current?.latitude || state.markers?.[0]?.latitude || 0,
+          longitude: current?.longitude || state.markers?.[0]?.longitude || 0,
+          latitudeDelta: 0.06851501762865553,
+          longitudeDelta: 0.05517102777957916,
         }}
-        // onRegionChangeComplete={value => console.log(value)}
+        onRegionChangeComplete={value => console.log(value)}
         zoomControlEnabled
         showsUserLocation>
         {state.markers.map((marker, index) => {
@@ -230,7 +231,7 @@ export default function HomeMapScreen({showListLocation, style}) {
                 scaleValue={interpolations[index]}
                 data={marker}
                 markerFocus={index === focusedItem}
-                checkFilter={filter}
+                checkFilter={!!filter}
               />
             </Marker>
           );

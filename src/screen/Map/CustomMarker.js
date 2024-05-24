@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import {IconMarker, IconMarkerRent} from '../../assets/icon/Icon';
 import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
@@ -27,12 +27,13 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
       return min;
     }
   }, [data?.rooms]);
+
   return (
     <Animated.View
       style={[
         {
           minWidth: scale(150),
-          height: scale(150),
+          height: !checkFilter ? scale(150) : '',
           alignItems: 'center',
           // backgroundColor: '#000',
         },
@@ -42,6 +43,7 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
         style={{
           flexDirection: 'row',
           // columnGap: scale(5),
+          paddingBottom: checkFilter && scale(40),
           width: '100%',
           justifyContent: 'center',
         }}>
@@ -51,36 +53,39 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
               borderWidth: 10,
               borderColor: '#00000000',
               position: 'absolute',
-              bottom: -32,
+              bottom: 8,
               zIndex: 99,
               borderTopColor: markerFocus ? COLORS.primary : COLORS.white,
             }}
           />
         )}
-        <Animated.View
-          style={{
-            backgroundColor: markerFocus ? COLORS.primary : COLORS.white,
-            paddingHorizontal: scale(6),
-            paddingVertical: scale(4),
-            borderTopLeftRadius: 10,
-            borderBottomLeftRadius: 10,
-            marginBottom: scale(-12),
-            maxWidth: scale(140),
-            borderWidth: 1,
-            borderColor: markerFocus ? COLORS.white : COLORS.primary,
-            justifyContent: 'center',
-          }}>
-          <Animated.Text
-            numberOfLines={1}
-            textType="bold"
+        {!checkFilter && (
+          <Animated.View
             style={{
-              fontSize: SIZES.large,
-              color: markerFocus ? COLORS.white : COLORS.primary,
-              fontFamily: FONTS.semiBold,
+              backgroundColor: markerFocus ? COLORS.primary : COLORS.white,
+              paddingHorizontal: scale(6),
+              paddingVertical: scale(4),
+              borderTopLeftRadius: 10,
+              borderBottomLeftRadius: 10,
+              marginBottom: scale(-12),
+              maxWidth: scale(140),
+              borderWidth: 1,
+              borderColor: markerFocus ? COLORS.white : COLORS.primary,
+              justifyContent: 'center',
             }}>
-            {data?.accommodation_type?.name || data?.estate_type?.name}
-          </Animated.Text>
-        </Animated.View>
+            <Animated.Text
+              numberOfLines={1}
+              textType="bold"
+              style={{
+                fontSize: SIZES.large,
+                color: markerFocus ? COLORS.white : COLORS.primary,
+                fontFamily: FONTS.semiBold,
+              }}>
+              {data?.accommodation_type?.name || data?.estate_type?.name}
+            </Animated.Text>
+          </Animated.View>
+        )}
+
         <Animated.View
           style={{
             backgroundColor: markerFocus ? COLORS.primary : COLORS.white,
@@ -88,6 +93,8 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
             paddingVertical: scale(4),
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
+            borderTopLeftRadius: checkFilter ? 10 : 0,
+            borderBottomLeftRadius: checkFilter ? 10 : 0,
             marginBottom: scale(-12),
             maxWidth: scale(140),
             borderWidth: 1,
@@ -109,7 +116,7 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
         <IconMarkerRent
           style={{
             width: '100%',
-            height: '85%',
+            height: '82%',
             transform: [
               {
                 scale: 0.7,

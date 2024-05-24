@@ -25,7 +25,7 @@ export default function BottomSheetChild({
 }) {
   const {t} = useLanguage();
 
-  const [select, setSelect] = useState(data[0]);
+  const [select, setSelect] = useState();
   const insets = useSafeAreaInsets();
   const flatListRef = useRef(null);
   const [search, setSearch] = useState('');
@@ -61,13 +61,10 @@ export default function BottomSheetChild({
 
     return dataFilter;
   }, [data?.data?.data, deferredValue]);
-
   return (
     <>
       <CustomInput
         placeholder={t('Search province')}
-        // name="province_name"
-        // control={control}
         onChangeText={setSearch}
         styleWrapper={{width: '95%', alignSelf: 'center'}}
       />
@@ -93,12 +90,12 @@ export default function BottomSheetChild({
               ]}
               text={item?.name}
               onPress={() => {
-                handlePress(item?.name, index);
+                handlePress(item, index);
               }}
-              iconRight={select === item?.name && IconCheckBox}
+              iconRight={select === item && IconCheckBox}
               styleText={{
                 textType: 'medium',
-                color: select === item?.name ? COLORS.primary : COLORS.text,
+                color: select === item ? COLORS.primary : COLORS.text,
                 fontSize: SIZES.xMedium,
               }}
             />

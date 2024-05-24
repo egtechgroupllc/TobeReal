@@ -44,14 +44,16 @@ export default function MapHeader({
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
-
-  const {control, handleSubmit, watch, setValue, reset, unregister} = useForm();
   const {country} = useCountry();
-  const [select, setSelect] = useState();
 
   const listProvince = useQuery({
     queryKey: ['common', 'list-country', country?.geoname_id],
     queryFn: () => getListCountry(country?.geoname_id),
+  });
+  const {control, handleSubmit, watch, setValue, reset, unregister} = useForm({
+    defaultValues: {
+      menu: {id: 1, name: 'RENT'},
+    },
   });
   const handelFiter = value => {
     onFilter && onFilter(value);
@@ -73,7 +75,10 @@ export default function MapHeader({
           text={t('filter')}
           listFill={listFill}
           noSelectDefault
-          onSort={() => bottomSheetRef.current.open()}
+          onSort={() => {
+            bottomSheetRef.current.open();
+            setValue('province', listProvince.data?.data?.[0]);
+          }}
         />
 
         <BottomSheet
@@ -85,9 +90,8 @@ export default function MapHeader({
             <BottomSheetChild
               data={listProvince}
               onChange={value => {
+                value && setValue('province', value);
                 bottomSheetChildRef.current.closeChild();
-                setSelect(value);
-                console.log(value);
               }}
             />
           )}
@@ -115,7 +119,9 @@ export default function MapHeader({
                   const keyReset = Object.keys(watch());
 
                   reset();
-                  unregister(keyReset);
+                  if (keyReset.includes('province')) {
+                    unregister(keyReset);
+                  }
                   bottomSheetRef.current.close();
                 }}
               />
@@ -159,7 +165,7 @@ export default function MapHeader({
                     onProvince={value => {
                       setValue('province', value);
                     }}
-                    nameProvince={select}
+                    nameProvince={watch('province')}
                     data={listProvince}
                     onSearch={() => bottomSheetChildRef.current.openChild()}
                   />

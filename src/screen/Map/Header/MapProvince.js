@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, TextStyle, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
@@ -11,6 +12,7 @@ import {CustomButton, CustomInput} from '../../../components';
 import BottomSheet from '../../../components/BottomSheet';
 import BottomSheetListSelect from '../../../components/BottomSheetListSelect';
 import ReviewAll from '../../Explore/components/DetailAccommodation/Review/ReviewAll';
+import {IconSearch} from '../../../assets/icon/Icon';
 
 export default function MapProvince({
   onProvince,
@@ -22,6 +24,11 @@ export default function MapProvince({
 }) {
   const {t} = useLanguage();
   const [checked, setChecked] = useState(value || undefined);
+
+  useEffect(() => {
+    nameProvince?.name && setChecked(nameProvince);
+  }, [nameProvince?.name]);
+
   return (
     <WrapperContent
       heading={t('Province')}
@@ -42,7 +49,8 @@ export default function MapProvince({
       }}>
       <CustomInput
         styleText={{color: COLORS.black, alignSelf: 'flex-start'}}
-        placeholder={nameProvince || 'Search more'}
+        value={checked?.name}
+        placeholder="Select province"
         style={{
           backgroundColor: '#f5f5f5',
           borderWidth: 1,
@@ -52,21 +60,10 @@ export default function MapProvince({
         onPress={onSearch}
       />
       {data?.data?.data?.slice(0, 6)?.map((item, index) => (
-        // <CheckBox
-        //   key={index}
-        //   textLeft
-        //   defaultValue={checked === index}
-        //   text={<CustomText>{item?.name}</CustomText>}
-        //   style={{
-        //     justifyContent: 'space-between',
-        //     paddingVertical: scale(5),
-        //   }}
-        //   onPress={e => onType && onType(index)}
-        // />
         <TouchableOpacity
           onPress={e => {
             item && onProvince && onProvince(item);
-            setChecked(item?.id);
+            setChecked(item);
           }}
           activeOpacity={0.7}
           key={index}
@@ -75,14 +72,14 @@ export default function MapProvince({
             minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked?.id === item?.id ? COLORS.primary : '#ccc',
+            backgroundColor: checked?.id === item?.id ? COLORS.primary : '#fff',
           }}>
           <CustomText
             style={{
               padding: scale(6),
               textAlign: 'center',
-              color: checked === item?.id ? COLORS.white : COLORS.black,
+              color: checked?.id === item?.id ? COLORS.white : COLORS.black,
             }}>
             {item?.name}
           </CustomText>
