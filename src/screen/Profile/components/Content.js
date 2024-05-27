@@ -18,7 +18,7 @@ import BoxItemProfile from './BoxItemProfile';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useCountry} from '../../../hooks/useCountry';
 import EncryptedStorage from 'react-native-encrypted-storage';
-export default function Content() {
+export default function Content({data}) {
   const {t} = useLanguage();
   const navigation = useNavigation();
   const [viewpersonal, setViewpersonal] = useState(false);
@@ -56,6 +56,7 @@ export default function Content() {
         })
       : navigation.navigate('NoBottomTab', {
           screen: 'FinancialScreen',
+          params: data,
         });
   };
   const wishlist = () => {
@@ -166,14 +167,14 @@ export default function Content() {
         </View>
       </View>
       <View style={{alignItems: 'center', width: '90%'}}>
-        {/* <CategoriesButton
+        <CategoriesButton
           title={t('view_personal')}
           onPress={viewPersonal}
           viewpersonal={viewpersonal}
           changePW={changePW}
           large={true}
           personalInformation={personalInformation}
-        /> */}
+        />
 
         {/* <View
           style={{

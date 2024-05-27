@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Animated, StyleSheet} from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {Animated, StyleSheet, View} from 'react-native';
+import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 import {getListRent} from '../../Model/api/apiAccom';
 import {getListSell} from '../../Model/api/apiEstate';
 import {getListTour} from '../../Model/api/apiTour';
 import {KEY_MAP} from '../../Model/url';
-import {COLORS, SIZES, scale} from '../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../assets/constants';
 import {IconMyLocation} from '../../assets/icon/Icon';
 import {CustomButton} from '../../components';
 import MainWrapper from '../../components/MainWrapper';
@@ -18,6 +18,8 @@ import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
 import {useCountry} from '../../hooks/useCountry';
+import CustomText from '../../components/CustomText';
+import {Platform} from 'react-native';
 
 const initialMapState = {
   markers: [],
@@ -117,7 +119,7 @@ export default function HomeMapScreen({showListLocation, style}) {
               },
               // heading: 0,
             },
-            1000,
+            10,
           );
         }
       }, 10);
@@ -212,7 +214,7 @@ export default function HomeMapScreen({showListLocation, style}) {
           latitudeDelta: 0.06851501762865553,
           longitudeDelta: 0.05517102777957916,
         }}
-        onRegionChangeComplete={value => console.log(value)}
+        // onRegionChangeComplete={value => console.log(value)}
         zoomControlEnabled
         showsUserLocation>
         {state.markers.map((marker, index) => {
@@ -220,19 +222,22 @@ export default function HomeMapScreen({showListLocation, style}) {
             latitude: marker?.latitude,
             longitude: marker?.longitude,
           };
+
           return (
             <Marker
               key={index}
-              tracksViewChanges={index === focusedItem}
+              tracksViewChanges={Platform.OS === 'ios' ? true : false}
               coordinate={coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>
+              {/* <Callout tooltip> */}
               <CustomMarker
                 scaleValue={interpolations[index]}
                 data={marker}
                 markerFocus={index === focusedItem}
                 checkFilter={!!filter}
               />
+              {/* </Callout> */}
             </Marker>
           );
         })}

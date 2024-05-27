@@ -33,6 +33,7 @@ import {
   DetailHistoryDeposit,
   FinancialScreen,
 } from '../screen/Profile/FinancialManagement';
+import ListBankScreen from '../screen/Profile/FinancialManagement/Withdraw/ListBankScreen';
 import {
   HomeSearchAccommodScreen,
   ListAccommodationSearchScreen,
@@ -224,5 +225,9 @@ export default routerNoBottomTab = [
   {
     name: 'SelectDefaultCountryScreen',
     component: SelectDefaultCountryScreen,
+  },
+  {
+    name: 'ListBankScreen',
+    component: ListBankScreen,
   },
 ];

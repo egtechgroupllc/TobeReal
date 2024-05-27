@@ -5,8 +5,14 @@ import {StyleSheet} from 'react-native';
 
 import {HistoryTransactionScreen, ListMethodBankScreen} from '.';
 import {COLORS, scale} from '../../../assets/constants';
-import {IconBookings, IconHistory} from '../../../assets/icon/Icon';
+import {
+  IconBookings,
+  IconDeposit,
+  IconHistory,
+  IconWithdraw,
+} from '../../../assets/icon/Icon';
 import HeaderBar from '../../../components/HeaderBar';
+import WithdrawScreen from './WithdrawScreen';
 const Tab = createBottomTabNavigator();
 
 export default function FinancialScreen() {
@@ -34,7 +40,17 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: 'Depossit',
           tabBarIcon: ({focused}) => (
-            <IconBookings fill={focused && '#F0B90B'} />
+            <IconDeposit fill={focused && '#F0B90B'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={'WithdrawScreen'}
+        component={WithdrawScreen}
+        options={{
+          tabBarLabel: 'Withdraw',
+          tabBarIcon: ({focused}) => (
+            <IconWithdraw fill={focused && '#F0B90B'} />
           ),
         }}
       />

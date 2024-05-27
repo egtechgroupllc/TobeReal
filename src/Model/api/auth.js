@@ -68,3 +68,20 @@ export const getHistoryDeposit = async ({pageParam = 1}) => {
 
   return responsive.data;
 };
+export const getHistoryWithdraw = async ({pageParam = 1}) => {
+  const responsive = await instance.get(
+    `/withdraw/my-order?page=${pageParam}&limit=10`,
+  );
+
+  return responsive.data;
+};
+export const postConfirmWithdraw = async data => {
+  const responsive = await instance.post('/withdraw/create-order', data);
+
+  return responsive.data;
+};
+export const postCancelWithdraw = async data => {
+  const responsive = await instance.post('/withdraw/cancel-order', data);
+
+  return responsive.data;
+};

@@ -14,12 +14,14 @@ import CustomText from '../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
 import {IconAdd, IconEditProfile} from '../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {useCountry} from '../../../../hooks/useCountry';
 export default function BotContent({data}) {
   const {t} = useLanguage();
   const [openView, setOpenView] = useState(false);
   const OpenView = () => {
     setOpenView(prevOpenView => !prevOpenView);
   };
+  const {country} = useCountry();
   return (
     <View style={styles.container}>
       <View style={{...styles.box}}>
@@ -64,7 +66,7 @@ export default function BotContent({data}) {
               marginLeft: scale(10),
               marginTop: scale(10),
             }}>
-            0824232339
+            {data?.phone}
           </CustomText>
         </View>
         <View style={{flexDirection: 'row'}}>
@@ -75,7 +77,7 @@ export default function BotContent({data}) {
               color: COLORS.black,
               marginTop: scale(10),
             }}>
-            {t('gender')}:
+            {t('country')}:
           </CustomText>
           <CustomText
             textType="regular"
@@ -85,10 +87,10 @@ export default function BotContent({data}) {
               marginLeft: scale(10),
               marginTop: scale(10),
             }}>
-            Male
+            {country?.name}
           </CustomText>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{flexDirection: 'row'}}>
           <CustomText
             textType="medium"
             style={{
@@ -108,9 +110,9 @@ export default function BotContent({data}) {
             }}>
             USA
           </CustomText>
-        </View>
+        </View> */}
       </View>
-      <View style={{...styles.box1}}>
+      {/* <View style={{...styles.box1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomText
             textType="medium"
@@ -154,7 +156,7 @@ export default function BotContent({data}) {
             </TouchableOpacity>
           </View>
         </View>
-      )}
+      )} */}
     </View>
   );
 }
@@ -175,11 +177,12 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: '#EEEEEE',
-    height: scale(174),
+    minHeight: scale(120),
     width: '90%',
     borderRadius: scale(8),
     paddingHorizontal: scale(20),
     paddingTop: scale(10),
+    paddingBottom: scale(10),
   },
   box1: {
     backgroundColor: '#EEEEEE',

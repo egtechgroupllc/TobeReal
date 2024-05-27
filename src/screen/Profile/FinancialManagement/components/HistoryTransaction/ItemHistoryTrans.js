@@ -16,8 +16,15 @@ import {
   formatPrice,
   formatTime,
 } from '../../../../../utils/format';
+import {CustomButton} from '../../../../../components';
 
-export default function ItemHistory({data, isBackground, onPress}) {
+export default function ItemHistory({
+  data,
+  isBackground,
+  onPress,
+  tab,
+  onPressCancel,
+}) {
   const nameBank = useMemo(
     () =>
       data?.method_deposit_item?.bank_name?.split('-')[0] ||
@@ -59,9 +66,9 @@ export default function ItemHistory({data, isBackground, onPress}) {
                 borderRadius: scale(3),
                 padding: scale(3),
                 backgroundColor:
-                  data.status === 'SUCCESS'
+                  data?.status === 'SUCCESS'
                     ? '#42b00b'
-                    : data.status === 'PENDING'
+                    : data?.status === 'PENDING'
                     ? COLORS.primary
                     : '#e03c31',
               }}>
@@ -81,7 +88,8 @@ export default function ItemHistory({data, isBackground, onPress}) {
                 fontSize: scale(12),
                 flex: 1,
               }}>
-              {nameBank} - {data?.method_deposit_item?.owner}
+              {nameBank || data?.bank_owner} -{' '}
+              {data?.method_deposit_item?.owner || data?.bank_name}
             </CustomText>
           </View>
 
@@ -111,10 +119,20 @@ export default function ItemHistory({data, isBackground, onPress}) {
                 fontSize: scale(13),
                 color: COLORS.text,
               }}>
-              +{formatPrice(data?.amount)}
+              {tab === 'Deposit' ? '+' : '-'}
+              {formatPrice(data?.amount)}
             </CustomText>
           </View>
         </View>
+        {data?.status === 'PENDING' && tab === 'Withdraw' && (
+          <CustomButton
+            onPress={onPressCancel}
+            text="Cancel"
+            buttonType="small"
+            style={{width: '20%'}}
+            styleWrapper={{alignSelf: 'flex-end'}}
+          />
+        )}
       </>
     </TouchableHighlight>
   );

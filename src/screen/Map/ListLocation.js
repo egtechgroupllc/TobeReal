@@ -68,7 +68,7 @@ export default memo(
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollOffsetX}}}],
             {
-              useNativeDriver: Platform.OS === 'android' ? true : false,
+              useNativeDriver: false,
             },
           )}
           renderItem={({item, index}) => (
