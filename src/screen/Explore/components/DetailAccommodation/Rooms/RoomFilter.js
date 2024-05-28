@@ -1,6 +1,6 @@
 import React, {forwardRef, memo, useImperativeHandle, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../assets/constants';
 import ChooseCalendarRoom from './ChooseCalendarRoom';
 import SelectNumGuestRoom from './SelectNumGuestRoom';
 
@@ -9,7 +9,7 @@ export default memo(function RoomFilter({onSelectDate, data, onChangeNum}) {
     <View
       style={{
         ...styles.row,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.trans,
         paddingHorizontal: scale(8),
         paddingVertical: scale(10),
       }}>

@@ -49,14 +49,14 @@ export default function WeeklyHotDeal() {
           isSeeAll
           isCategory
           dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllRentScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => setFilter(item)}
           heading={title}
           subHeading={t('ends_in')}

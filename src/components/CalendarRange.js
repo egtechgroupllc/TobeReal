@@ -208,7 +208,7 @@ const BoxText = ({
         borderRadius: isDateStart || isDateEnd ? 99 : 0,
         borderWidth: isDateStart || isDateEnd ? 2 : 0,
         backgroundColor: (isDateStart || isDateEnd) && '#fff',
-        borderColor: COLORS.primary,
+        borderColor: COLORS.green,
         width: '100%',
       }}>
       <CustomText

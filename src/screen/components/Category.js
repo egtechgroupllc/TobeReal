@@ -13,7 +13,7 @@ export default memo(function Category({
   styleContent,
   isShadow = true,
   indexDefault = 0,
-  backgroundColorSelect = COLORS.primary,
+  backgroundColorSelect = COLORS.green,
   isObject = false,
 }) {
   const [select, setSelect] = useState(!noSelect && 0);

@@ -11,6 +11,7 @@ export default function ItemOverviewRating({rating, textType}) {
       <CustomText
         style={{
           flex: 1,
+          color: COLORS.black,
         }}>
         {textType}
       </CustomText>

@@ -65,7 +65,7 @@ export default function ContentStep2({onPress, data}) {
             number_room: data?.numRoomSelect,
             accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
             room_id: data?.id, //id của phòng
-            contact_name: contact?.name,
+            contact_name: contact?.username,
             contact_email: contact?.email,
             contact_phone: contact?.phone,
             // payment: typePayment,
@@ -109,10 +109,14 @@ export default function ContentStep2({onPress, data}) {
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
           <DetailPriceRoom data={data} />
-          <CustomText textType="semiBold">
+          <CustomText textType="semiBold" styleText={{color: COLORS.white}}>
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
-          <CustomButton text="Thanh Toán" onPress={handleBookingRoom} />
+          <CustomButton
+            text="Thanh Toán"
+            onPress={handleBookingRoom}
+            styleText={{color: COLORS.black}}
+          />
         </View>
 
         <View style={styles.boxEarnPoint}>
@@ -139,7 +143,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
   },
   boxDetailPrice: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primary,
     borderRadius: scale(6),
     rowGap: scale(16),
     padding: scale(20),
@@ -149,5 +153,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: scale(6),
     alignItems: 'center',
+    backgroundColor: COLORS.trans,
   },
 });

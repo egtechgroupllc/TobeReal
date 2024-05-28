@@ -56,18 +56,18 @@ export default function FindBest({country, currency}) {
           isSeeAll
           isCategory
           dataCategory={listProvince?.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllRentScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => setFilter(item)}
           heading={title}
           subHeading={t('disc_upto') + ` 30%!`}
-          styleWrapper={{backgroundColor: '#91F2FF'}}>
+          styleWrapper={{backgroundColor: 'transparent'}}>
           {data?.data?.count !== 0 ? (
             <FlatList
               horizontal

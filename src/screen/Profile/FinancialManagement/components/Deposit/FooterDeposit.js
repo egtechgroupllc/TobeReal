@@ -56,6 +56,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
           textType="bold"
           style={{
             fontSize: SIZES.large,
+            color: COLORS.black,
           }}>
           {formatPrice(watch('amount') || 0, {
             currency: currency?.currency_code,

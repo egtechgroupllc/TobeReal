@@ -48,14 +48,14 @@ export default function ExploreNearbyEstate({country}) {
           // worldTour
           isCategory
           dataCategory={listProvince.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllBuyScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => setFilter(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}

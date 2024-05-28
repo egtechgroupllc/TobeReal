@@ -104,7 +104,7 @@ export default memo(function ChooseImgPicker({
                     <CustomText
                       textType="medium"
                       style={{
-                        ...styles.text,
+                        ...styles.white,
                         marginTop: scale(20),
                       }}>
                       {title}
@@ -121,7 +121,7 @@ export default memo(function ChooseImgPicker({
                   <TouchableOpacity
                     onPress={() => pickImage(onChange, valueImg)}
                     style={styles.icon}>
-                    <IconCamera />
+                    <IconCamera fill={COLORS.white} />
                   </TouchableOpacity>
                 )}
               </View>

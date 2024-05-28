@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import TabContent from './components/TabContent';
 import MainWrapper from '../../../components/MainWrapper';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View, ImageBackground} from 'react-native';
 import CustomText from '../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
@@ -27,7 +27,7 @@ export default function PostNewsScreen() {
   };
 
   return (
-    <MainWrapper>
+    <MainWrapper imgBackground>
       <TabContent />
 
       {(profile?.role_id === 2 || profile?.role_id === undefined) &&
@@ -56,7 +56,7 @@ export default function PostNewsScreen() {
                 textType="regular"
                 style={{
                   fontSize: SIZES.medium,
-                  color: COLORS.primary,
+                  color: COLORS.green,
                 }}>
                 Become Saveloka partner
               </CustomText>

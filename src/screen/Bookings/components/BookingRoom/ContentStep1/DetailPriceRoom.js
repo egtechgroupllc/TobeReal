@@ -35,6 +35,7 @@ export default function DetailPriceRoom({data}) {
           }}
           styleValue={{
             fontSize: SIZES.medium,
+            color: COLORS.white,
           }}
           value={formatPrice(priceAverage + feePrice, {
             currency: currency?.currency_code,
@@ -43,6 +44,7 @@ export default function DetailPriceRoom({data}) {
           textType="bold"
           Icon={
             <IconDown
+              fill={COLORS.white}
               style={
                 isMorePrice && {
                   transform: [
@@ -64,17 +66,18 @@ export default function DetailPriceRoom({data}) {
         }}>
         <View style={styles.line} />
 
-        <Row title={`Room number`} value={numRoom} />
+        <Row title={`Room number`} value={numRoom} colorValue={COLORS.white} />
 
         <Row
           title={'Price per night'}
           value={formatPrice(data?.priceAverage * numRoom, {
             currency: currency?.currency_code,
           })}
-          colorValue={COLORS.primary}
+          colorValue={COLORS.white}
           textType="semiBold"
         />
         <Row
+          colorValue={COLORS.white}
           title={`Total price for ${data?.date?.numNight} night`}
           value={formatPrice(priceAverage, {
             currency: currency?.currency_code,
@@ -86,7 +89,7 @@ export default function DetailPriceRoom({data}) {
             currency: currency?.currency_code,
           })}
           textType="regular"
-          colorValue={COLORS.text}
+          colorValue={COLORS.green}
         />
       </Collapsible>
     </View>

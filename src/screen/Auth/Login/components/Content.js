@@ -6,7 +6,7 @@ import {useMutation} from '@tanstack/react-query';
 import RNRestart from 'react-native-restart';
 
 import {postLogin} from '../../../../Model/api/auth';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
@@ -68,6 +68,7 @@ export default function Content() {
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           label={t('email')}
           name="email"
@@ -80,6 +81,7 @@ export default function Content() {
         />
 
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           label={t('password')}
           name="password"
@@ -95,7 +97,7 @@ export default function Content() {
         <CustomText
           onPress={gotoForgotPassword}
           textType="semiBold"
-          style={{...styles.text1, marginLeft: 'auto'}}>
+          style={{...styles.text1, marginLeft: 'auto', color: COLORS.white}}>
           {t('forgot_password')}
         </CustomText>
 
@@ -103,6 +105,7 @@ export default function Content() {
           onPress={handleSubmit(handleLogin)}
           buttonType="large"
           text={t('login')}
+          styleText={{color: COLORS.black}}
           linearGradientProps
         />
       </View>
@@ -115,7 +118,7 @@ export default function Content() {
         <CustomText
           onPress={gotoRegister}
           textType="semiBold"
-          style={{...styles.text1, marginLeft: scale(10)}}>
+          style={{...styles.text1, marginLeft: scale(10), color: COLORS.green}}>
           {t('signup')}
         </CustomText>
       </View>

@@ -137,6 +137,7 @@ export default function EstateFacilities({
                         style={styles.checkBox}
                         textStyle={{
                           flex: 1,
+                          color: COLORS.black,
                         }}
                       />
                     )
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
   },
   select: {

@@ -41,7 +41,9 @@ export default function SearchChooseLocation({onPress}) {
           onPress={() => onPress('Near me')}
           style={[styles.searchItem, {borderBottomWidth: 1}]}>
           <IconMyLocation fill={COLORS.primary} />
-          <CustomText style={{fontSize: SIZES.xMedium}}>Near me</CustomText>
+          <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
+            Near me
+          </CustomText>
         </TouchableOpacity>
 
         {/* <TouchableOpacity activeOpacity={0.7} style={styles.searchItem}>
@@ -61,6 +63,7 @@ export default function SearchChooseLocation({onPress}) {
             textType="semiBold"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             Recent searches
           </CustomText>
@@ -78,7 +81,7 @@ export default function SearchChooseLocation({onPress}) {
               onPress={() => onPress(item)}
               style={[styles.searchItem]}>
               <IconHistory
-                fill={COLORS.textSub}
+                fill={COLORS.black}
                 style={{
                   height: scale(16),
                   width: scale(16),
@@ -88,6 +91,7 @@ export default function SearchChooseLocation({onPress}) {
                 numberOfLines={1}
                 style={{
                   flex: 1,
+                  color: COLORS.black,
                 }}>
                 {item?.name}
               </CustomText>

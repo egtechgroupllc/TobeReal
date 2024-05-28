@@ -71,7 +71,7 @@ export default function ContactInfo({data}) {
             }}>
             <View style={styles.boxInfoItem}>
               <IconProfile
-                fill={COLORS.primary}
+                fill={COLORS.white}
                 style={{
                   width: scale(20),
                   height: scale(20),
@@ -135,17 +135,17 @@ export default function ContactInfo({data}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     paddingVertical: scale(16),
     paddingHorizontal: scale(20),
   },
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.trans,
     borderRadius: scale(10),
     ...SHADOW,
   },
   header: {
-    backgroundColor: '#FFCE00',
+    backgroundColor: COLORS.green,
     padding: scale(10),
     borderRadius: scale(10),
     alignItems: 'center',
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   boxIcon: {
     padding: scale(4),
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
   },
 });

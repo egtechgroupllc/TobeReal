@@ -84,6 +84,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             }}>
             <CustomInput
               label={'Chiều rộng (m)'}
+              styleTextLabel={{color: COLORS.black}}
               placeholder="Chiều rộng"
               name="size_width"
               rules={requireField(t('this_field_required'))}
@@ -97,6 +98,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
+              styleTextLabel={{color: COLORS.black}}
               label={'Length (m)'}
               placeholder="Length"
               name="size_length"
@@ -111,6 +113,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
           </View>
           <CustomInput
+            styleTextLabel={{color: COLORS.black}}
             label={'Number of rooms'}
             placeholder="Number of rooms"
             name="number_room"
@@ -148,7 +151,9 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(20),
               justifyContent: 'space-between',
             }}>
-            <CustomText size={SIZES.xMedium} style={{flex: 1}}>
+            <CustomText
+              size={SIZES.xMedium}
+              style={{flex: 1, color: COLORS.black}}>
               Maximum age of children
             </CustomText>
 
@@ -192,7 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

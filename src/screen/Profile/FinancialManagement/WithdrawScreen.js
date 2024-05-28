@@ -48,8 +48,6 @@ export default function WithdrawScreen() {
   };
   return (
     <MainWrapper
-      noImgColor
-      backgroundColor="#eee"
       styleContent={{
         paddingHorizontal: scale(10),
         paddingVertical: scale(20),

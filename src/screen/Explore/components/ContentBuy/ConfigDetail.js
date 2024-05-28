@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     columnGap: scale(10),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.trans,
     padding: scale(20),
   },
   center: {
-    color: COLORS.text,
+    color: COLORS.white,
     marginBottom: scale(4),
   },
 });

@@ -18,12 +18,13 @@ export default function TypeAccommoda({onType, value}) {
   return (
     <WrapperContent
       heading={t('Type accommodation')}
-      styleWrapper={{marginBottom: scale(-10)}}
+      styleWrapper={{marginBottom: scale(-10), backgroundColor: 'transparent'}}
       styleHeading={{
         paddingHorizontal: 0,
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         gap: scale(8),

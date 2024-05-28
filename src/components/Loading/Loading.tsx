@@ -68,11 +68,18 @@ const Loading = ({
 
   const _renderDefaultContent = () => {
     return (
-      <CustomImage
-        source={images.logoLoading}
-        style={{height: scale(120), width: scale(120), alignSelf: 'center'}}
-        resizeMode="cover"
-      />
+      <>
+        <CustomImage
+          source={images.logoOnly}
+          style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
+          resizeMode="contain"
+        />
+        <CustomImage
+          source={images.loading}
+          style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
+          resizeMode="contain"
+        />
+      </>
     );
 
     return (
@@ -80,7 +87,7 @@ const Loading = ({
         {/* {customIndicator || <ActivityIndicator color={color} size={size} />}
          */}
         <CustomImage
-          source={images.logoLoading}
+          source={images.loading}
           style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
           resizeMode="cover"
         />

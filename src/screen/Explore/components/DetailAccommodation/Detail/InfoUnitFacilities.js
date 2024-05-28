@@ -68,6 +68,7 @@ export default function InfoUnitFacilities({data}) {
                   textType="regular"
                   style={{
                     fontSize: SIZES.xMedium,
+                    color: COLORS.black,
                   }}>
                   {t(item)}
                 </CustomText>

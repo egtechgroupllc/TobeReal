@@ -42,7 +42,7 @@ export default function AvatarImage({
         {upgrade && (
           <TouchableOpacity onPress={onPressUpgrade}>
             <LinearGradient
-              colors={['#F7E75A', '#FFC702']}
+              colors={COLORS.linearButton}
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               style={styles.button}>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.medium,
-    color: COLORS.black,
+    color: COLORS.white,
   },
   textHeading: {
     fontSize: SIZES.xxLarge,

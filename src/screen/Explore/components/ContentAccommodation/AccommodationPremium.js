@@ -55,7 +55,7 @@ export default function AccommodationPremium({currency}) {
           // }
           heading={title}
           subHeading={t('Find popular accomodation in your area')}
-          styleWrapper={{backgroundColor: '#f8eede'}}>
+          styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

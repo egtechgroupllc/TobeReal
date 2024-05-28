@@ -25,6 +25,7 @@ export default function ContentReview({control, setValue}) {
       />
 
       <CustomInput
+        styleText={{color: COLORS.white}}
         control={control}
         name="content"
         placeholder="Bạn thích hoặc không thích điều gì về chỗ ở này?"

@@ -54,7 +54,7 @@ export default memo(function CustomText({
 const styles = StyleSheet.create({
   text: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
   },
   shaDow: {
     textShadowOffset: {width: 0, height: 1.5},

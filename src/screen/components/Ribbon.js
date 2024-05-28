@@ -39,6 +39,7 @@ export default function Ribbon({
           textType="medium"
           style={{
             fontSize: SIZES.xSmall,
+            color: COLORS.black,
           }}>
           🛌 {numberRoom}
         </CustomText>

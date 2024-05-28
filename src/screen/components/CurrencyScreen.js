@@ -14,7 +14,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {getListCurrency} from '../../Model/api/common';
-import {SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
+import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CheckBox from '../../components/CheckBox';
@@ -145,6 +145,7 @@ export default function CurrencyScreen() {
           renderItem={({item}) => {
             return (
               <CheckBox
+                textStyle={{color: COLORS.black}}
                 key={`key_${item?.id}`}
                 text={item?.currency_code}
                 textLeft

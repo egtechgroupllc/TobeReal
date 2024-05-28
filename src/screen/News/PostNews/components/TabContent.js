@@ -62,7 +62,7 @@ export default function TabContent() {
       }}>
       <CustomText
         textType="bold"
-        style={{...styles.text2, color: COLORS.black}}>
+        style={{...styles.text2, color: COLORS.white}}>
         {t('post')}
       </CustomText>
       <ButtonPost

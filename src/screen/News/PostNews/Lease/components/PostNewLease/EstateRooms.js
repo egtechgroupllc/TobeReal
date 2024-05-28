@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   buttonCategories: {
     backgroundColor: 'white',
     borderRadius: scale(6),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     height: scale(50),
     justifyContent: 'space-between',
     marginTop: scale(20),
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

@@ -124,6 +124,7 @@ export default function CountryScreen() {
               text={`${item?.flag ? item?.flag : ''} ${item?.name}${
                 router?.isPhone ? ` (${item?.phone_code})` : ''
               }`}
+              textStyle={{color: COLORS.black}}
               textLeft
               isRadio
               onPress={() => setCountry(item)}

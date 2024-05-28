@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {images, scale} from '../../assets/constants';
+import {COLORS, images, scale} from '../../assets/constants';
 import PaymentMethodsItem from './components/BookingRoom/ContentStep2/PaymentMethodsItem';
 import {showMess} from '../../assets/constants/Helper';
 const listMethods = [
@@ -48,7 +48,7 @@ export default function ListPaymentMethodsScreen({route}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <View>
+    <View style={{backgroundColor: COLORS.grey}}>
       <FlatList
         data={listMethods}
         style={{
@@ -67,7 +67,7 @@ export default function ListPaymentMethodsScreen({route}) {
             title={item?.title}
             desc={item?.desc}
             tag={item?.tag}
-            backgroundColor="#fff"
+            backgroundColor={COLORS.primary}
             onPress={() => {
               if (item?.type === 'LOKAPAY') {
                 dataParams?.onGoBack(item);

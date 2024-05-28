@@ -7,7 +7,10 @@ import CustomImage from '../../../../components/CustomImage';
 export default function Contact({data}) {
   return (
     <View style={styles.boxContact}>
-      <CustomText textType="bold" size={SIZES.medium}>
+      <CustomText
+        textType="bold"
+        size={SIZES.medium}
+        style={{color: COLORS.black}}>
         Chi tiết liên lạc
       </CustomText>
       <View style={styles.infoContact}>
@@ -16,7 +19,10 @@ export default function Contact({data}) {
           style={{
             rowGap: scale(2),
           }}>
-          <CustomText textType="medium" size={SIZES.xMedium}>
+          <CustomText
+            textType="medium"
+            size={SIZES.xMedium}
+            style={{color: COLORS.black}}>
             {data?.contact_name}
           </CustomText>
           <CustomText textType="medium" color={COLORS.text}>

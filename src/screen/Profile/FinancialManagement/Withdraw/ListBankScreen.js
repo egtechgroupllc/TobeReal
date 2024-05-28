@@ -94,7 +94,9 @@ export default function ListBankScreen() {
                     columnGap: scale(10),
                   }}>
                   {item?.icon}
-                  <CustomText>{item?.name}</CustomText>
+                  <CustomText style={{color: COLORS.black}}>
+                    {item?.name}
+                  </CustomText>
                 </View>
               }
               style={styles.boxItem}

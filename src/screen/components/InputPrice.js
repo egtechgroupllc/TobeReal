@@ -78,6 +78,7 @@ export default function InputPrice({
             style={{
               minWidth: scale(26),
               textAlign: 'center',
+              color: COLORS.black,
             }}>
             {/* {dataFromScreen?.currency_code} */}
             {currency?.currency_code}

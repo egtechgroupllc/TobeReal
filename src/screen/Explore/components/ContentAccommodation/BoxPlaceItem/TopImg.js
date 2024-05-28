@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
   },
   topName: {
     fontSize: SIZES.xSmall,
+    color: COLORS.black,
   },
 });

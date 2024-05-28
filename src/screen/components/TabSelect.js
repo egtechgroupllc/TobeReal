@@ -71,7 +71,7 @@ export default function TabSelect({
               styleText={{
                 color:
                   tab === index
-                    ? styleTabActive?.color || '#F0B90B'
+                    ? styleTabActive?.color || COLORS.green
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
                 fontSize: SIZES.xMedium,

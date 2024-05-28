@@ -28,13 +28,14 @@ export default function BottomTab() {
       initialRouteName="Explore"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.green,
+        tabBarInactiveTintColor: '#fff',
         tabBarItemStyle: {
           columnGap: scale(4),
         },
         // tabBarHideOnKeyboard: true,
         tabBarStyle: {
+          backgroundColor: COLORS.primary,
           zIndex: -1,
         },
       }}>
@@ -50,7 +51,7 @@ export default function BottomTab() {
               style={{width: scale(25), height: scale(25)}}
               resizeMode="cover"
             />
-            // <IconExplore fill={focused && '#F0B90B'} />
+            // <IconExplore fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -60,7 +61,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('booking'),
           tabBarIcon: ({focused}) => (
-            <IconBookings fill={focused && '#F0B90B'} />
+            <IconBookings fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -71,7 +72,7 @@ export default function BottomTab() {
           tabBarLabel: t('promotion'),
 
           tabBarIcon: ({focused}) => (
-            <IconPromotion fill={focused && '#F0B90B'} />
+            <IconPromotion fill={focused && COLORS.green} />
           ),
         }}
       /> */}
@@ -82,7 +83,7 @@ export default function BottomTab() {
           tabBarLabel: t('Reviews'),
 
           tabBarIcon: ({focused}) => (
-            <IconVideo fill={focused && COLORS.primary} />
+            <IconVideo fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -91,7 +92,7 @@ export default function BottomTab() {
         component={NavigationWishList}
         options={{
           tabBarIcon: ({focused}) => (
-            <IconMapView fill={focused && '#F0B90B'} />
+            <IconMapView fill={focused && COLORS.green} />
           ),
         }}
       /> */}
@@ -101,7 +102,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('map'),
           tabBarIcon: ({focused}) => (
-            <IconMapView fill={focused && '#F0B90B'} />
+            <IconMapView fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -110,7 +111,9 @@ export default function BottomTab() {
         component={NavigationNews}
         options={{
           tabBarLabel: t('post_new'),
-          tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
+          tabBarIcon: ({focused}) => (
+            <IconNews fill={focused && COLORS.green} />
+          ),
         }}
       />
 
@@ -120,7 +123,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
-            <IconProfile fill={focused && '#F0B90B'} />
+            <IconProfile fill={focused && COLORS.green} />
           ),
         }}
       />

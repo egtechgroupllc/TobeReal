@@ -98,6 +98,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                     <CustomText
                       style={{
                         padding: scale(12),
+                        color: COLORS.black,
                       }}>
                       Khách có thể sử dụng gì tại nơi lưu trú của bạn?
                     </CustomText>
@@ -128,6 +129,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                           style={styles.checkBox}
                           textStyle={{
                             flex: 1,
+                            color: COLORS.black,
                           }}
                         />
                       )
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
   },
   select: {

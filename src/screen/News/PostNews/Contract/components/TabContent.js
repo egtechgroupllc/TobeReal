@@ -177,10 +177,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
     shadowOffset: {
       width: 0,
       height: 5,

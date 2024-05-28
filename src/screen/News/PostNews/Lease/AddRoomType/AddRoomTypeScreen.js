@@ -12,6 +12,7 @@ import {
 import {images} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {
+  COLORS,
   SHADOW,
   SIZES,
   WIDTH,
@@ -238,7 +239,7 @@ export default function AddRoomTypeScreen() {
         />
         <CustomText
           textType="medium"
-          style={{...styles.text2, marginLeft: scale(20)}}>
+          style={{...styles.text2, marginLeft: scale(20), color: COLORS.black}}>
           {!params?.update ? t('add_room') : t('Edit room')}
         </CustomText>
       </View>
@@ -300,7 +301,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     ...SHADOW,
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
   },
 
   text2: {

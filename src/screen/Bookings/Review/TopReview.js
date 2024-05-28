@@ -29,11 +29,11 @@ export default function TopReview({data}) {
           numberOfLines={2}
           textType="semiBold"
           size={SIZES.xMedium}
-          color={COLORS.text}>
-          Vui lòng đánh giá trải nghiệm của bạn tại {data?.accommodation?.name}
+          color={COLORS.white}>
+          Please review your experience at {data?.accommodation?.name}
         </CustomText>
-        <CustomText color={COLORS.textSub}>
-          Đánh giá để chủ sở hữu cải thiện dịch vụ tốt hơn!
+        <CustomText color={COLORS.white}>
+          Rate to get better service improvement!
         </CustomText>
       </View>
     </View>

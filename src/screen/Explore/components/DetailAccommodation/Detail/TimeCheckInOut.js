@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {IconArrowRight} from '../../../../../assets/icon/Icon';
@@ -20,7 +20,7 @@ export default function TimeCheckInOut({data}) {
           </CustomText>
         </View>
 
-        <IconArrowRight />
+        <IconArrowRight fill={COLORS.white} />
 
         <View style={{flex: 1, alignItems: 'center'}}>
           <CustomText style={{fontSize: SIZES.xMedium}}>
@@ -37,11 +37,11 @@ export default function TimeCheckInOut({data}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(10),
   },
   content: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.trans,
     padding: scale(10),
     borderRadius: scale(8),
     flexDirection: 'row',

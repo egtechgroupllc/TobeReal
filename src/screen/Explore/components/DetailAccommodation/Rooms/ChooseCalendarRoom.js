@@ -2,7 +2,7 @@
 import {differenceInDays} from 'date-fns';
 import React, {memo, useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {scale} from '../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../assets/constants';
 import {IconCalendar} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 import BottomSheet from '../../../../../components/BottomSheet';
@@ -95,7 +95,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
           ...styles.textDate,
         }}
         onPress={() => bottomSheetRef.current.open()}>
-        <IconCalendar style={styles.icon} />
+        <IconCalendar style={styles.icon} fill={COLORS.white} />
         <CustomText textType="medium">
           {selectedStartDate} - {selectedEndDate ? selectedEndDate : '_'},{' '}
           {selected?.text}

@@ -147,17 +147,14 @@ export default function HistoryTransactionScreen() {
     ]);
   };
   return (
-    <MainWrapper
-      noImgColor
-      scrollEnabled={false}
-      backgroundColor={'#fff'}
-      refreshControl>
+    <MainWrapper scrollEnabled={false} refreshControl>
       <>
         <OptionAccommodation
           isShaDow
           data={listInfo}
           styleWrapper={{
             flex: 0,
+            backgroundColor: 'transparent',
           }}
         />
         <FlatList

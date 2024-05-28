@@ -19,6 +19,7 @@ export default (function InputPhone({
   style,
   onChangeCountry,
   onChange,
+  styleText,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -55,6 +56,7 @@ export default (function InputPhone({
 
   return (
     <CustomInput
+      styleText={{color: styleText || COLORS.white}}
       label={label}
       styleTextLabel={styles.label}
       name={name}
@@ -92,6 +94,7 @@ export default (function InputPhone({
             style={{
               minWidth: scale(26),
               textAlign: 'center',
+              color: COLORS.black,
             }}>
             {dataFromScreen?.phone_code}
           </CustomText>

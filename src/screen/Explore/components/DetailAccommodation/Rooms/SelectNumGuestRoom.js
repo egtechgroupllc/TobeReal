@@ -45,11 +45,11 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
       style={{...styles.row, flex: 0.5, columnGap: scale(10)}}
       onPress={() => bottomSheetRef.current.open()}>
       <View style={{...styles.row}}>
-        <IconPeople style={styles.icon} />
+        <IconPeople style={styles.icon} fill={COLORS.white} />
         <CustomText>{numAdult}</CustomText>
       </View>
       <View style={{...styles.row}}>
-        <IconChild style={styles.icon} />
+        <IconChild style={styles.icon} fill={COLORS.white} />
         <CustomText>{numChild?.length}</CustomText>
       </View>
       <View style={{...styles.row}}>

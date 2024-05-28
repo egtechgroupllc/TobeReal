@@ -58,6 +58,7 @@ export default function Content() {
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           maxLength={30}
           sizeInput="medium"
@@ -70,6 +71,7 @@ export default function Content() {
         />
 
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           sizeInput="medium"
           rules={[
@@ -87,6 +89,7 @@ export default function Content() {
           style={{height: scale(45)}}
         />
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           sizeInput="medium"
           rules={validateMinLengthText(t('use_6_characters'), 6)}
@@ -96,6 +99,7 @@ export default function Content() {
         />
 
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           sizeInput="medium"
           rules={[
@@ -108,6 +112,7 @@ export default function Content() {
         />
 
         <CustomInput
+          styleText={{color: COLORS.white}}
           control={control}
           sizeInput="medium"
           // name="refid"
@@ -115,6 +120,7 @@ export default function Content() {
         />
 
         <CustomButton
+          styleText={{color: COLORS.black}}
           onPress={handleSubmit(handleSignup)}
           buttonType="large"
           text={t('signup')}
@@ -154,7 +160,7 @@ export default function Content() {
           <CustomText
             onPress={() => navigate('RegisterPartnerScreen')}
             textType="semiBold"
-            style={{...styles.text2, color: COLORS.primary}}>
+            style={{...styles.text2, color: COLORS.green}}>
             {t('Become a partner of saveloka')}
           </CustomText>
         </TouchableOpacity>
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: SIZES.small,
-    color: '#F0B90B',
+    color: COLORS.green,
   },
   text2: {
     fontSize: SIZES.medium,

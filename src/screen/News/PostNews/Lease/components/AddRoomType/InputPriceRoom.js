@@ -66,7 +66,10 @@ export default memo(function InputPriceRoom({
             textType="semiBold"
             size={SIZES.xMedium}>
             {data?.data?.fee_commission_percent * 100}%{' '}
-            <CustomText textType="medium" size={SIZES.xMedium}>
+            <CustomText
+              textType="medium"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
               Hoa hồng cho Saveloka
             </CustomText>
           </CustomText>
@@ -96,7 +99,10 @@ export default memo(function InputPriceRoom({
             {formatPrice(priceValue * data?.data?.fee_commission_percent, {
               currency: typeCurrency,
             })}{' '}
-            <CustomText textType="medium" size={SIZES.xMedium}>
+            <CustomText
+              textType="medium"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
               Doanh thu của bạn (bao gồm thuế)
             </CustomText>
           </CustomText>

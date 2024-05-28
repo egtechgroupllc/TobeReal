@@ -2,7 +2,7 @@ import {useHeaderHeight} from '@react-navigation/elements';
 import {useQueryClient} from '@tanstack/react-query';
 import React, {useRef, useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {COLORS, images, scale} from '../assets/constants';
 import CustomImage from './CustomImage';
@@ -14,8 +14,9 @@ export default function MainWrapper({
   styleWrapper,
   noSafeArea,
   refreshControl = false,
+
   scrollEnabled = true,
-  noImgColor,
+  imgBackground,
   onScroll = () => {},
 }) {
   const headerHeight = useHeaderHeight();
@@ -27,18 +28,19 @@ export default function MainWrapper({
     queryClient.invalidateQueries();
     refresh.current = false;
   }
-  const Component = noImgColor ? View : CustomImage;
-
+  const Component = !imgBackground ? View : CustomImage;
+  const {top} = useSafeAreaInsets();
   return (
-    <SafeAreaView
-      style={{flex: 1, backgroundColor: COLORS.primary}}
-      edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
+    <SafeAreaView style={{flex: 1}} edges={['right', 'left']}>
       <Component
         source={images.background}
         resizeMode="stretch"
         style={[
           styles.wrapper,
-          {backgroundColor: '#f7f9fa'},
+          {
+            backgroundColor: COLORS.primary,
+            paddingTop: noSafeArea || !!headerHeight ? 0 : top,
+          },
           backgroundColor && {backgroundColor},
           styleWrapper,
         ]}>

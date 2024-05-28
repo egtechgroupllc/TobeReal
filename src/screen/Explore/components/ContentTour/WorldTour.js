@@ -43,14 +43,14 @@ export default function WorldTour() {
           isSeeAll
           isCategory
           dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllTourScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllTourScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => console.log(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}

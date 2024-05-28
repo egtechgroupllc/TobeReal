@@ -19,11 +19,13 @@ export default function SortBy({onSort, value}) {
     <WrapperContent
       onPressSeeAll={() => console.log(1)}
       heading={t('sort_result')}
+      styleWrapper={{backgroundColor: 'transparent'}}
       styleHeading={{
         paddingHorizontal: 0,
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(4),
@@ -38,8 +40,7 @@ export default function SortBy({onSort, value}) {
             setChecked(item);
             item && onSort && onSort(item);
           }}>
-          <CustomText>{item}</CustomText>
-
+          <CustomText style={{color: COLORS.black}}>{item}</CustomText>
           <View style={styles.radio}>
             {checked === item ? <View style={styles.dot} /> : null}
           </View>

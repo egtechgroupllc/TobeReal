@@ -66,6 +66,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
             numberOfLines={5}
             style={{
               flex: 1,
+              color: COLORS.black,
             }}>
             <View
               style={{
@@ -96,17 +97,22 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
       <View style={{flexDirection: 'row', columnGap: scale(10)}}>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Mã tin</CustomText>
-          <CustomText textType="medium" numberOfLines={1}>
+          <CustomText
+            textType="medium"
+            numberOfLines={1}
+            style={{color: COLORS.black}}>
             {data?.id}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày đăng</CustomText>
-          <CustomText textType="medium">{data?.date_start}</CustomText>
+          <CustomText textType="medium" style={{color: COLORS.black}}>
+            {data?.date_start}
+          </CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Ngày hết hạn</CustomText>
-          <CustomText textType="medium">
+          <CustomText textType="medium" style={{color: COLORS.black}}>
             {formatDate(data?.date_start, {
               addDays: data?.package_post_item?.number_day,
               dateStyle: 'yyyy-MM-dd',

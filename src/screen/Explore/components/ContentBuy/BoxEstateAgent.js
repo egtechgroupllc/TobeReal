@@ -315,7 +315,7 @@ export default function BoxEstateAgent({
           style={[
             isStar && {
               fontSize: SIZES.xSmall,
-              color: '#252B5C',
+              color: COLORS.white,
               alignSelf: 'center',
             },
           ]}

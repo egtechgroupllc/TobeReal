@@ -67,7 +67,9 @@ export default function Counter({
         <View style={styles.boxHeading}>
           {Icon}
           <View style={{rowGap: scale(2), styleBoxHeading}}>
-            <CustomText style={{fontSize: SIZES.xMedium}}>{heading}</CustomText>
+            <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
+              {heading}
+            </CustomText>
             {subHeading && (
               <CustomText textType="regular">{subHeading}</CustomText>
             )}

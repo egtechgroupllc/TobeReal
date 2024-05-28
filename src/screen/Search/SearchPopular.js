@@ -12,6 +12,7 @@ export default function SearchPopular({onPress, data}) {
           textType="semiBold"
           style={{
             fontSize: SIZES.xMedium,
+            color: COLORS.black,
           }}>
           Popular destination
         </CustomText>
@@ -45,6 +46,7 @@ export default function SearchPopular({onPress, data}) {
               numberOfLines={1}
               style={{
                 flex: 1,
+                color: COLORS.black,
               }}>
               {item?.name}
             </CustomText>

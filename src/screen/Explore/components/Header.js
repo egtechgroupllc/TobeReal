@@ -52,7 +52,7 @@ export default function Header() {
       <View style={styles.header}>
         <View style={styles.boxHeight}>
           <CustomImage
-            source={images.logoSaveloka}
+            source={images.logoHorizon}
             resizeMode="contain"
             style={styles.img}
           />
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     rowGap: scale(20),
-    backgroundColor: COLORS.primary,
+    // backgroundColor: COLORS.primary,
     paddingHorizontal: scale(16),
   },
   header: {

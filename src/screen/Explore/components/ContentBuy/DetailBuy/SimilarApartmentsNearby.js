@@ -50,14 +50,14 @@ export default function SimilarApartmentsNearby() {
     <WrapperContent
       // background={images.bgPackageTour}
       isSeeAll
-      onPressSeeAll={() =>
-        navigate('NoBottomTab', {
-          screen: 'SeeAllBuyScreen',
-          params: {
-            title: title || '',
-          },
-        })
-      }
+      // onPressSeeAll={() =>
+      //   navigate('NoBottomTab', {
+      //     screen: 'SeeAllBuyScreen',
+      //     params: {
+      //       title: title || '',
+      //     },
+      //   })
+      // }
       onPressCategory={item => console.log(item)}
       heading={t('Explore Nearby Estates')}
       // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}

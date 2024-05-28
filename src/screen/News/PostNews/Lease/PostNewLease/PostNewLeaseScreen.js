@@ -210,6 +210,7 @@ export default function PostNewLeaseScreen() {
         disabled={createAccommodationMu.isPending}
         // onPress={handleSubmit(handlePostLease)}
         onPress={checkIsValid}
+        styleText={{color: COLORS.black}}
         style={{
           marginTop: scale(20),
           width: '80%',
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     ...SHADOW,
@@ -242,10 +243,11 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
   },
 
   text2: {
     fontSize: SIZES.medium,
+    color: COLORS.black,
   },
 });

@@ -4,7 +4,7 @@ import React from 'react';
 import MainWrapper from '../../components/MainWrapper';
 import TopReview from './Review/TopReview';
 import ContentReview from './Review/ContentReview';
-import {scale} from '../../assets/constants';
+import {COLORS, scale} from '../../assets/constants';
 import BottomReview from './Review/BottomReview';
 import {useForm} from 'react-hook-form';
 
@@ -13,7 +13,7 @@ export default function PostReviewScreen({route}) {
   const {control, watch, setValue, handleSubmit} = useForm();
   return (
     <>
-      <MainWrapper noImgColor styleContent={styles.content}>
+      <MainWrapper styleContent={styles.content}>
         <TopReview data={paramData} />
         <ContentReview control={control} setValue={setValue} />
       </MainWrapper>
@@ -25,7 +25,7 @@ export default function PostReviewScreen({route}) {
 const styles = StyleSheet.create({
   content: {
     padding: scale(10),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.trans,
     alginItem: 'center',
     rowGap: scale(20),
   },

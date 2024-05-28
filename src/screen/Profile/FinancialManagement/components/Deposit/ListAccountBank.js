@@ -24,7 +24,7 @@ export default memo(function ListAccountBank({
 
   return (
     <View style={styles.box}>
-      <CustomText textType="medium">
+      <CustomText textType="medium" style={{color: COLORS.black}}>
         Bạn hãy chọn một trong các hình thức thanh toán dưới đây
       </CustomText>
 

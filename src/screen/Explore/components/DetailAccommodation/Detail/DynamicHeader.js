@@ -158,6 +158,7 @@ export default React.memo(
             styleWrapper={{
               flex: 0,
               height: scale(46),
+              backgroundColor: COLORS.primary,
             }}
             data={listInfo}
             onSelect={onSelect}

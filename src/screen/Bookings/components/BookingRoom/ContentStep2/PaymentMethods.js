@@ -59,6 +59,8 @@ export default function PaymentMethods({data, onChange}) {
               },
             )}`
           }
+          titleColor={{color: COLORS.black}}
+          descColor={{color: COLORS.black}}
           isDot
           image={methodsPay?.image}
         />

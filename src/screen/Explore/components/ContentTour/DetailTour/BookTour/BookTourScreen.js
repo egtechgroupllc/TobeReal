@@ -71,7 +71,7 @@ export default function BookTourScreen({route}) {
             style={{
               ...styles.line,
               marginTop: scale(10),
-              backgroundColor: '#F0B90B80',
+              backgroundColor: COLORS.green,
             }}></View>
           <CustomText
             textType="medium"
@@ -475,9 +475,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     backgroundColor: '#FFFFFF',
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
     shadowOffset: {
       width: 0,
       height: 5,
@@ -547,7 +547,7 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: scale(5),
     borderBottomEndRadius: scale(5),
     paddingHorizontal: scale(20),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     width: '90%',
     paddingBottom: scale(20),
@@ -589,7 +589,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: scale(4),
     borderWidth: scale(1),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     height: scale(50),
     width: '90%',
     justifyContent: 'space-between',

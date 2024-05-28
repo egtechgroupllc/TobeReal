@@ -24,6 +24,8 @@ export default function Introduction({data}) {
       onPressSeeAll={() => {
         setIsOpen(true);
       }}
+      styleWrapper={{backgroundColor: 'transparent'}}
+      styleTextHeading={{color: COLORS.white}}
       heading={t('introduction')}
       styleContent={{
         paddingHorizontal: scale(16),
@@ -33,6 +35,7 @@ export default function Introduction({data}) {
         numberOfLines={5}
         style={{
           lineHeight: 18,
+          color: COLORS.white,
         }}>
         {data?.description}
       </CustomText>
@@ -50,6 +53,7 @@ export default function Introduction({data}) {
             textType="regular"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             {data?.description}
           </CustomText>

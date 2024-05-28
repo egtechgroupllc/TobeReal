@@ -72,13 +72,13 @@ export default function App() {
   const SplashScreen = () => (
     <View
       style={{
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.primary,
         height: '100%',
         justifyContent: 'center',
       }}>
       <CustomImage
-        source={images.logoSplash}
-        style={{height: '70%', width: '70%', alignSelf: 'center'}}
+        source={images.logoVerti}
+        style={{height: '60%', width: '60%', alignSelf: 'center'}}
         resizeMode="contain"
       />
     </View>
@@ -110,7 +110,7 @@ export default function App() {
                       />
                       <BottomSheetModalProvider>
                         <StatusBar
-                          barStyle="dark-content"
+                          barStyle="white-content"
                           backgroundColor={COLORS.primary}
                         />
                         <Layout />

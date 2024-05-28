@@ -79,6 +79,7 @@ export default function RoomItem({
               textType="bold"
               style={{
                 fontSize: SIZES.xMedium,
+                color: COLORS.black,
               }}>
               {dataP?.room_type?.name}
             </CustomText>
@@ -93,7 +94,7 @@ export default function RoomItem({
                   height: scale(20),
                 }}
               />
-              <CustomText>
+              <CustomText style={{color: COLORS.black}}>
                 {formatPrice(dataP.size_width * dataP.size_length, {
                   unit: 'm²',
                 })}

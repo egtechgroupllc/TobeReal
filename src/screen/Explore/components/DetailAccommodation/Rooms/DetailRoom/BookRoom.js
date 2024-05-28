@@ -76,8 +76,12 @@ export default function BookRoom({data}) {
           />
           <CustomText style={{color: COLORS.text}}>
             Total price for the room{' '}
-            <CustomText textType="medium"> {selectRoom} room</CustomText>,
-            <CustomText textType="medium">
+            <CustomText textType="medium" style={{color: COLORS.black}}>
+              {' '}
+              {selectRoom} room
+            </CustomText>
+            ,
+            <CustomText textType="medium" style={{color: COLORS.black}}>
               {data?.date?.numNight} night
             </CustomText>
           </CustomText>
@@ -123,7 +127,7 @@ export default function BookRoom({data}) {
                   ...styles.point,
                 }}>
                 <IconCoinPoint />
-                <CustomText>
+                <CustomText style={{color: COLORS.black}}>
                   Receive{' '}
                   <CustomText textType="medium" style={{color: '#ff5e1f'}}>
                     {formatPrice(selectRoom * 12312231)} points
@@ -151,6 +155,7 @@ export default function BookRoom({data}) {
 
           <CustomButton
             buttonType="normal"
+            styleText={{color: COLORS.black}}
             text={t('booking')}
             linearGradientProps
             style={{minWidth: scale(100)}}

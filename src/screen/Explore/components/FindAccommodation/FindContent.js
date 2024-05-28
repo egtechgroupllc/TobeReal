@@ -140,9 +140,10 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
           {isBuy && (
             <View style={styles.optionBox}>
               <View style={styles.boxIcon}>
-                <IconRoom />
+                <IconRoom fill={COLORS.primary} />
               </View>
               <OptionAccommodation
+                unselectedColor={COLORS.black}
                 outline
                 isSelectAll
                 styleContent={{
@@ -174,6 +175,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
                 <IconFurniture />
               </View>
               <OptionAccommodation
+                unselectedColor={COLORS.black}
                 outline
                 scrollEnabled
                 isSelectAll
@@ -202,6 +204,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
                 <IconTag />
               </View>
               <OptionAccommodation
+                unselectedColor={COLORS.black}
                 outline
                 // multiSelect
                 isSelectAll
@@ -243,11 +246,12 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
           </View> */}
 
           <CustomButton
+            linearGradientProps
             onPress={handleSubmit(handleSearch)}
             buttonType="medium"
             text={!isBuy ? t('Find_Accommodation') : t('Find real estate')}
             styleText={{
-              color: COLORS.white,
+              color: COLORS.primary,
               textType: 'bold',
               textTransform: 'uppercase',
             }}

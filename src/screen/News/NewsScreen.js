@@ -20,7 +20,7 @@ export default function NewsScreen() {
   // }, [isFocused]);
 
   return (
-    <MainWrapper>
+    <MainWrapper imgBackground>
       <Header />
       <TabContent />
     </MainWrapper>

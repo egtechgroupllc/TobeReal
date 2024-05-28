@@ -6,7 +6,7 @@ import BottomSheetMain, {
 import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SHADOW, SIZES, scale} from '../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../assets/constants';
 import {IconX} from '../assets/icon/Icon';
 import CustomText from './CustomText';
 
@@ -167,6 +167,7 @@ const HandleIndicator = ({
         style={[
           {
             fontSize: style?.fontSize || SIZES.xMedium,
+            color: COLORS.black,
           },
           style?.color && {color: style?.color},
         ]}>

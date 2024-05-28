@@ -3,7 +3,7 @@ import {useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {IconBan, IconBookings} from '../../../../assets/icon/Icon';
 import {CustomButton, StarRating} from '../../../../components';
 import CustomImage from '../../../../components/CustomImage';
@@ -50,21 +50,30 @@ export default function ContentStep1({onPress, data}) {
             }}
           />
           <View style={{flex: 1, rowGap: scale(5)}}>
-            <CustomText textType="semiBold" size={SIZES.xMedium}>
+            <CustomText
+              textType="semiBold"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
               {data?.nameAccom}
             </CustomText>
             <CustomText
               textType="semiBold"
               numberOfLines={2}
               size={SIZES.medium}>
-              <CustomText textType="semiBold" size={SIZES.xMedium}>
+              <CustomText
+                textType="semiBold"
+                size={SIZES.xMedium}
+                style={{color: COLORS.black}}>
                 ({data?.numRoomSelect} phòng){'  '}
               </CustomText>
 
               {data?.name}
             </CustomText>
 
-            <CustomText textType="semiBold" size={SIZES.xMedium}>
+            <CustomText
+              textType="semiBold"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
               {data?.room_type?.name}
             </CustomText>
             <StarRating rating={2} />
@@ -155,6 +164,7 @@ const Box = ({children, title, styleContent}) => {
         textType="semiBold"
         style={{
           fontSize: SIZES.xMedium,
+          color: COLORS.black,
         }}>
         {title}:
       </CustomText>
@@ -182,10 +192,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     backgroundColor: '#FFFFFF',
     ...SHADOW,
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
     rowGap: scale(15),
   },
 
@@ -194,7 +204,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     padding: scale(10),
     gap: scale(10),

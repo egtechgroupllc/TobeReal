@@ -20,6 +20,8 @@ export default function PaymentMethodsItem({
   isShadow,
   onPress,
   image,
+  descColor,
+  titleColor,
 }) {
   return (
     <View
@@ -29,7 +31,10 @@ export default function PaymentMethodsItem({
         }
       }>
       {header && (
-        <CustomText textType="bold" size={SIZES.xMedium}>
+        <CustomText
+          textType="bold"
+          size={SIZES.xMedium}
+          style={{color: COLORS.black}}>
           {header}
         </CustomText>
       )}
@@ -59,11 +64,17 @@ export default function PaymentMethodsItem({
               resizeMode="contain"
             />
             <View style={{rowGap: scale(4)}}>
-              <CustomText textType="semiBold" size={scale(13)}>
+              <CustomText
+                textType="semiBold"
+                size={scale(13)}
+                style={{color: titleColor || COLORS.white}}>
                 {title}
               </CustomText>
               {desc && (
-                <CustomText color={COLORS.text} textType="medium">
+                <CustomText
+                  color={COLORS.text}
+                  textType="medium"
+                  style={{color: descColor || COLORS.white}}>
                   {desc}
                 </CustomText>
               )}
@@ -98,7 +109,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: scale(5),
     borderTopLeftRadius: scale(5),
     padding: scale(3),
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.green,
   },
   img: {
     width: scale(35),

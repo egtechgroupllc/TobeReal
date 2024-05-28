@@ -17,11 +17,13 @@ export default function Budget({onBudget, value}) {
   return (
     <WrapperContent
       heading={t('budget')}
+      styleWrapper={{backgroundColor: 'transparent'}}
       styleHeading={{
         paddingHorizontal: 0,
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(10),
@@ -32,12 +34,12 @@ export default function Budget({onBudget, value}) {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {formatPrice(multiSliderValue[0] * currency?.exchange_rate, {
             currency: currency?.currency_code,
           })}
         </CustomText>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {formatPrice(multiSliderValue[1] * currency?.exchange_rate, {
             currency: currency?.currency_code,
           })}

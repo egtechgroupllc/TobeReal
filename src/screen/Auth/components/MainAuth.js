@@ -6,7 +6,7 @@ import Wrapper from './Wrapper';
 
 export default function MainAuth({children, heading, subHeading, style}) {
   return (
-    <MainWrapper>
+    <MainWrapper imgBackground>
       <View style={styles.container}>
         <View style={[styles.config, style]}>
           <Wrapper Heading1={heading} subHeading={subHeading} />

@@ -49,14 +49,14 @@ export default function FeatureEstate() {
           // worldTour
           // isCategory
           // dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllBuyScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => setFilter(item)}
           heading={title}
           subHeading={t('Explore popular real estate')}

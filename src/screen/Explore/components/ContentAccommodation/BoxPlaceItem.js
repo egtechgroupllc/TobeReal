@@ -136,7 +136,10 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.black},
+              ]}
               numberOfLines={1}>
               {data?.name || data?.title}
             </CustomText>
@@ -221,8 +224,10 @@ export default function BoxPlaceItem({
                         flexDirection: 'row',
                         columnGap: scale(5),
                       }}>
-                      <IconMapView />
-                      <CustomText numberOfLines={2} style={{flex: 1}}>
+                      <IconMapView fill={COLORS.grey} />
+                      <CustomText
+                        numberOfLines={2}
+                        style={{flex: 1, color: COLORS.black}}>
                         {' '}
                         {data?.country?.name}, {data?.province?.name}
                       </CustomText>
@@ -289,6 +294,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+    color: COLORS.black,
   },
   boxIcon: {
     backgroundColor: '#f5f5f5',

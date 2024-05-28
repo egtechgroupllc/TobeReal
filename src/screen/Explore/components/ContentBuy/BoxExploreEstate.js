@@ -107,11 +107,11 @@ export default function BoxExploreEstate({
               data={data}
             />
             <LinearGradient
-              colors={['#F0B90B', '#D88A00']}
+              colors={COLORS.linearButton}
               start={{x: 0, y: 0}}
               end={{x: 0, y: 1}}
               style={styles.topBox}>
-              <CustomText style={styles.topName}>
+              <CustomText style={{...styles.topName, color: COLORS.black}}>
                 {data?.estate_type?.name}
               </CustomText>
             </LinearGradient>
@@ -132,7 +132,9 @@ export default function BoxExploreEstate({
                 <IconMarker width={scale(9)} height={scale(9)} />
                 <CustomText
                   textType="regular"
-                  style={[isStar && {fontSize: SIZES.xSmall}]}
+                  style={[
+                    isStar && {fontSize: SIZES.xSmall, color: COLORS.black},
+                  ]}
                   numberOfLines={2}>
                   {data?.country?.name}, {data?.province?.name}
                 </CustomText>
@@ -148,6 +150,7 @@ export default function BoxExploreEstate({
                   textType="medium"
                   style={{
                     fontSize: SIZES.xSmall,
+                    color: COLORS.black,
                     // minWidth: scale(35),
                   }}>
                   {formatPrice(data?.size_width * data?.size_length, {
@@ -171,6 +174,7 @@ export default function BoxExploreEstate({
                         style={{
                           fontSize: SIZES.xSmall,
                           minWidth: scale(35),
+                          color: COLORS.black,
                         }}>
                         {data?.contact_name}
                       </CustomText>

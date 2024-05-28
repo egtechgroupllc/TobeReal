@@ -53,8 +53,12 @@ export default function LeaseScreen() {
       <View style={styles.content}>
         {list.map((item, index) => (
           <View style={styles.box} key={index}>
-            <CustomText textType="bold">{item?.title}</CustomText>
-            <CustomText textType="regular">{item?.desc}</CustomText>
+            <CustomText textType="bold" style={{color: COLORS.black}}>
+              {item?.title}
+            </CustomText>
+            <CustomText textType="regular" style={{color: COLORS.black}}>
+              {item?.desc}
+            </CustomText>
 
             <CustomButton
               text={item?.textBtn}

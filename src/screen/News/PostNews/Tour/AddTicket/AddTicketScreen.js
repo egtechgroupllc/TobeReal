@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     ...SHADOW,
@@ -219,6 +219,6 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
   },
 });

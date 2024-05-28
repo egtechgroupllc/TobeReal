@@ -1,6 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {SHADOW, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import {IconHeart} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
@@ -30,7 +36,7 @@ export default function ItemBox({style, isShadow = true, data}) {
       style={[
         styles.content,
         isShadow && {
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.trans,
           ...SHADOW,
         },
         style,
@@ -47,6 +53,7 @@ export default function ItemBox({style, isShadow = true, data}) {
             style={{
               fontSize: SIZES.xMedium,
               flex: 1,
+              color: COLORS.black,
             }}
             numberOfLines={1}>
             {data?.user?.username}
@@ -58,6 +65,7 @@ export default function ItemBox({style, isShadow = true, data}) {
 
       <View>
         <CustomText
+          style={{color: COLORS.black}}
           textType="regular"
           numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
           onTextLayout={onTextLayoutUser}>
@@ -71,7 +79,7 @@ export default function ItemBox({style, isShadow = true, data}) {
             style={styles.moreUser}>
             <CustomText
               style={{
-                color: '#687176',
+                color: COLORS.black,
               }}>
               ...
             </CustomText>
@@ -88,7 +96,9 @@ export default function ItemBox({style, isShadow = true, data}) {
           style={{
             color: '#687176',
           }}>
-          <CustomText textType="semiBold">From the Hotel owner: </CustomText>
+          <CustomText textType="semiBold" style={{color: COLORS.black}}>
+            From the Hotel owner:{' '}
+          </CustomText>
           Thank you very much for reviewing our hotel. {'\n'}We will try to
           improve and develop further to bring the best experience to you.
         </CustomText>
@@ -112,7 +122,7 @@ export default function ItemBox({style, isShadow = true, data}) {
       <View style={styles.footer}>
         <CustomText
           textType="regular"
-          style={{marginTop: 'auto', color: '#687176'}}>
+          style={{marginTop: 'auto', color: COLORS.grey}}>
           {formatDateTime(data?.updatedAt, {
             dateStyle: 'dd-MM-yyyy, HH:mm',
           })}
@@ -127,7 +137,7 @@ export default function ItemBox({style, isShadow = true, data}) {
               width: scale(13),
               height: scale(13),
             }}
-            fill={'#687176'}
+            fill={COLORS.grey}
           />
         </TouchableOpacity>
       </View>
@@ -169,6 +179,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: scale(12),
     backgroundColor: '#f5f5f5',
+    color: COLORS.black,
     paddingHorizontal: scale(12),
   },
   footer: {

@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CheckBox from '../../../../../components/CheckBox';
 import FormChangeContact from './FormChangeContact';
 
@@ -15,7 +15,7 @@ export default function InfoContact({data}) {
   return (
     <View
       style={{
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.primary,
         ...SHADOW,
         borderRadius: scale(10),
       }}>
@@ -36,6 +36,7 @@ export default function InfoContact({data}) {
               onPress={() => setUserBooking(item)}
               textStyle={{
                 fontSize: SIZES.xMedium,
+                color: COLORS.black,
               }}
             />
           );

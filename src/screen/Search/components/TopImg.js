@@ -15,11 +15,13 @@ export default function TopImg({isHeart, feature, showPrice, data, type}) {
         )} */}
         {feature && (
           <LinearGradient
-            colors={['#F0B90B', '#D88A00']}
+            colors={COLORS.linearButton}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 1}}
             style={styles.topBox}>
-            <CustomText style={styles.topName}>{type}</CustomText>
+            <CustomText style={{...styles.topName, color: COLORS.black}}>
+              {type}
+            </CustomText>
           </LinearGradient>
         )}
         {showPrice && (
@@ -31,7 +33,9 @@ export default function TopImg({isHeart, feature, showPrice, data, type}) {
               marginTop: scale(105),
               width: scale(100),
             }}>
-            <CustomText style={styles.topName} numberOfLines={1}>
+            <CustomText
+              style={{...styles.topName, color: COLORS.black}}
+              numberOfLines={1}>
               {formatPrice(data?.price, {
                 locales: 'vi',
               })}{' '}

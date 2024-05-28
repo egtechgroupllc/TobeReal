@@ -166,8 +166,8 @@ export default function ItemAccommdSearch({
               )}{' '}
             </CustomText>
             <View style={{flexDirection: 'row'}}>
-              <IconMapView />
-              <CustomText>
+              <IconMapView fill={COLORS.grey} />
+              <CustomText style={{color: COLORS.black}}>
                 {data?.country?.name}, {data?.province?.name}
               </CustomText>
             </View>
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: SIZES.medium,
     flex: 1,
+    color: COLORS.black,
   },
   address: {
     fontSize: SIZES.small,
@@ -218,5 +219,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+    color: COLORS.black,
   },
 });

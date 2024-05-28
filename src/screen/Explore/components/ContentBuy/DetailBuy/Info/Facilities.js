@@ -23,7 +23,7 @@ export default function Facilities({data}) {
       <View
         style={{
           backgroundColor: '#F5F5F5',
-          height: scale(6),
+          height: scale(2),
         }}
       />
 
@@ -32,7 +32,7 @@ export default function Facilities({data}) {
           paddingHorizontal: scale(20),
         }}>
         <View style={styles.listInfo}>
-          <CustomText textType="semiBold" style={{color: COLORS.black}}>
+          <CustomText textType="semiBold" style={{color: COLORS.white}}>
             {t('Price')}:{' '}
             <CustomText
               textType="bold"
@@ -109,7 +109,7 @@ export default function Facilities({data}) {
 
 const styles = StyleSheet.create({
   boxTourTime: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(10),
   },

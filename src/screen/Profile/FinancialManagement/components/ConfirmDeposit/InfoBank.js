@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import CustomText from '../../../../../components/CustomText';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconCopy} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import {formatPrice} from '../../../../../utils/format';
@@ -22,6 +22,7 @@ export default function InfoBank({data}) {
           style={{
             flex: 1,
             fontSize: SIZES.medium,
+            color: COLORS.black,
           }}>
           Chuyển tiền qua - {nameBank}
         </CustomText>
@@ -73,7 +74,9 @@ const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
 
   return (
     <View style={styles.boxInfo}>
-      <CustomText textType="medium">{name}:</CustomText>
+      <CustomText textType="medium" style={{color: COLORS.black}}>
+        {name}:
+      </CustomText>
       <TouchableOpacity
         onPress={handleCopy}
         activeOpacity={isCopy ? 0.7 : 1}
@@ -84,6 +87,7 @@ const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
           style={{
             flex: 1,
             fontSize: SIZES.xMedium,
+            color: COLORS.black,
           }}>
           {isPrice
             ? formatPrice(value, {currency: currency?.currency_code})

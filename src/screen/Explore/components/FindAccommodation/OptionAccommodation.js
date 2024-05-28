@@ -30,6 +30,8 @@ export default function OptionAccommodation({
   selectIndex,
   onSelect,
   onChange,
+  selectedColor,
+  unselectedColor,
 }) {
   const _keyTextView = keyTextView || 'text';
   const _keyTextSub = keyTextSub || 'subText';
@@ -199,8 +201,8 @@ export default function OptionAccommodation({
                   textType={isTextSub && 'semiBold'}
                   style={{
                     color: checkSelect(item, index)
-                      ? COLORS.primary
-                      : COLORS.text,
+                      ? selectedColor || COLORS.green
+                      : unselectedColor || COLORS.white,
                   }}>
                   {item?.[_keyTextView]}
                 </CustomText>
@@ -209,8 +211,8 @@ export default function OptionAccommodation({
                 <CustomText
                   style={{
                     color: checkSelect(item, index)
-                      ? COLORS.primary
-                      : COLORS.text,
+                      ? selectedColor || COLORS.primary
+                      : unselectedColor || COLORS.text,
                   }}>
                   {item?.[_keyTextSub]}
                 </CustomText>

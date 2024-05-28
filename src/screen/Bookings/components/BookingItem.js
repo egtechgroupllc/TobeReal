@@ -12,21 +12,31 @@ export default function BookingItem({data, onPress, onReView}) {
   const {currency} = useCountry();
   return (
     <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
-      <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
+      <CustomText
+        textType="bold"
+        numberOfLines={2}
+        size={SIZES.xMedium}
+        style={{color: COLORS.black}}>
         {objAccom?.name}
       </CustomText>
 
       <View style={styles.code}>
-        <CustomText style={{flex: 1}} numberOfLines={1} ellipsizeMode="middle">
+        <CustomText
+          style={{color: COLORS.black, flex: 1}}
+          numberOfLines={1}
+          ellipsizeMode="middle">
           Booking code:{' '}
-          <CustomText textType="semiBold" numberOfLines={1}>
+          <CustomText
+            textType="semiBold"
+            numberOfLines={1}
+            style={{color: COLORS.black}}>
             {data?.id}
           </CustomText>
         </CustomText>
 
         <CustomText>
           Price:{' '}
-          <CustomText textType="semiBold">
+          <CustomText textType="semiBold" style={{color: COLORS.black}}>
             {formatPrice(data?.price * currency?.exchange_rate, {
               currency: currency?.currency_code,
             })}
@@ -40,9 +50,7 @@ export default function BookingItem({data, onPress, onReView}) {
           <CustomText
             numberOfLines={2}
             textType="medium"
-            style={{
-              flex: 1,
-            }}>
+            style={{color: COLORS.black, flex: 1}}>
             {objAccom?.country?.name}, {objAccom?.province?.name}
           </CustomText>
         </View>
@@ -67,6 +75,7 @@ export default function BookingItem({data, onPress, onReView}) {
           </View>
         ) : (
           <CustomButton
+            styleText={{color: COLORS.white}}
             styleWrapper={{flex: 0.4}}
             text="Review"
             style={{height: scale(25)}}

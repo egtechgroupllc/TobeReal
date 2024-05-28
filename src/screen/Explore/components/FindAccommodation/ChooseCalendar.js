@@ -100,7 +100,12 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
   return (
     <View style={style}>
       {Checkin && (
-        <CustomText style={{fontSize: SIZES.xMedium, paddingBottom: scale(5)}}>
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            paddingBottom: scale(5),
+            color: COLORS.black,
+          }}>
           Check in - Check out
         </CustomText>
       )}
@@ -159,6 +164,7 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
         </View>
 
         <CustomButton
+          linearGradientProps
           buttonType="large"
           text="Select Date"
           style={{
@@ -166,6 +172,7 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
           }}
           styleText={{
             textType: 'semiBold',
+            color: COLORS.black,
           }}
           onPress={handleSelectDate}
         />

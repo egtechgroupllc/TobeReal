@@ -21,8 +21,11 @@ export default function FinancialScreen() {
       initialRouteName="ListMethodBankScreen"
       screenOptions={{
         headerShown: true,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.green,
+        tabBarStyle: {
+          backgroundColor: COLORS.primary,
+        },
+        tabBarInactiveTintColor: COLORS.white,
         header: props => (
           <HeaderBar
             {...props}
@@ -40,7 +43,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: 'Depossit',
           tabBarIcon: ({focused}) => (
-            <IconDeposit fill={focused && '#F0B90B'} />
+            <IconDeposit fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -50,7 +53,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: 'Withdraw',
           tabBarIcon: ({focused}) => (
-            <IconWithdraw fill={focused && '#F0B90B'} />
+            <IconWithdraw fill={focused && COLORS.green} />
           ),
         }}
       />
@@ -60,7 +63,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: 'Transaction history',
           tabBarIcon: ({focused}) => (
-            <IconHistory fill={focused && '#F0B90B'} />
+            <IconHistory fill={focused && COLORS.green} />
           ),
         }}
       />

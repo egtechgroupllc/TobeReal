@@ -91,11 +91,9 @@ export default function SelectProvince({
                   styles.content,
                 ]}>
                 <CustomText
-                  style={
-                    !dataFromScreen && {
-                      color: '#aaa',
-                    }
-                  }>
+                  style={{
+                    color: !dataFromScreen ? '#aaa' : COLORS.black,
+                  }}>
                   {dataFromScreen?.name || t('province_city')}
                 </CustomText>
                 <IconRight />

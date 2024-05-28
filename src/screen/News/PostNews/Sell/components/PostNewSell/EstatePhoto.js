@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
 
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

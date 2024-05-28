@@ -60,7 +60,7 @@ export default function DetailTourScreen() {
   }, [data?.data]);
 
   return (
-    <MainWrapper scrollEnabled={false} noImgColor>
+    <MainWrapper scrollEnabled={false} imgBackground>
       <AnimateScrollWrapper
         lisViewComponent={listView}
         listNav={listNavBar}

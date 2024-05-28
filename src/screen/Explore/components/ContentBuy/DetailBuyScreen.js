@@ -56,7 +56,7 @@ export default function DetailBuyScreen() {
   }, [data?.data]);
 
   return (
-    <MainWrapper scrollEnabled={false} noImgColor>
+    <MainWrapper scrollEnabled={false}>
       <AnimateScrollWrapper
         lisViewComponent={listView}
         listNav={listNavBar}

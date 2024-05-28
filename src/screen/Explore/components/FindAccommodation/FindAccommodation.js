@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {WIDTH, images, scale} from '../../../../assets/constants';
+import {COLORS, WIDTH, images, scale} from '../../../../assets/constants';
 import {
   IconApartment,
   IconEmigrate,
@@ -135,7 +135,7 @@ export default function FindAccommodation() {
     },
   ]).current;
   return (
-    <MainWrapper refreshControl noSafeArea>
+    <MainWrapper refreshControl noSafeArea backgroundColor={'transparent'}>
       <InViewPort
         onChange={render => {
           render && setIsRender(render);
@@ -166,6 +166,8 @@ export default function FindAccommodation() {
                         />
                       )}
                       <OptionAccommodation
+                        selectedColor={COLORS.green}
+                        unselectedColor={COLORS.black}
                         styleIcon={{color: '#BCBCBC'}}
                         // multiSelect
                         // isSelectAll

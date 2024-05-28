@@ -25,7 +25,7 @@ export default function InfoDetail({data}) {
             <CustomText
               textType="semiBold"
               style={{
-                color: '#7906f6',
+                color: COLORS.white,
               }}>
               {data.accommodation_type.name}
             </CustomText>
@@ -33,7 +33,11 @@ export default function InfoDetail({data}) {
           {data.review_average ? (
             <StarRating rating={data.review_average} />
           ) : (
-            <CustomText textType="regular">
+            <CustomText
+              textType="regular"
+              style={{
+                color: COLORS.white,
+              }}>
               (There are no reviews yet)
             </CustomText>
           )}
@@ -45,13 +49,18 @@ export default function InfoDetail({data}) {
             flexDirection: 'row',
           }}>
           <IconLocation
-            fill={COLORS.text}
+            fill={COLORS.white}
             style={{
               width: scale(15),
               height: scale(15),
             }}
           />
-          <CustomText textType="regular" numberOfLines={2}>
+          <CustomText
+            textType="regular"
+            numberOfLines={2}
+            style={{
+              color: COLORS.white,
+            }}>
             {' '}
             {data.address}
           </CustomText>
@@ -66,7 +75,11 @@ export default function InfoDetail({data}) {
             </CustomText>
           </View>
           <View style={styles.boxMore}>
-            <CustomText textType="bold">
+            <CustomText
+              textType="bold"
+              style={{
+                color: COLORS.white,
+              }}>
               {t('discussion')} ({formatNumber(data?.review_count)})
             </CustomText>
           </View>
@@ -94,12 +107,12 @@ const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
 
-  name: {flex: 1, fontSize: SIZES.xMedium},
+  name: {flex: 1, fontSize: SIZES.xMedium, color: COLORS.white},
 
   room: {
     flexDirection: 'row',

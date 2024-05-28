@@ -44,8 +44,6 @@ export default function DepositScreen({route}) {
     <>
       <MainWrapper
         scrollEnabled={false}
-        noImgColor
-        backgroundColor="#eee"
         styleContent={{
           paddingHorizontal: scale(10),
           paddingVertical: scale(20),
@@ -70,6 +68,7 @@ export default function DepositScreen({route}) {
               styleTextLabel={{
                 position: 'absolute',
                 top: scale(-10),
+                color: COLORS.black,
               }}
               enableFormatNum
               placeholder={`Nhập tối thiểu ${formatPrice(minPrice, {

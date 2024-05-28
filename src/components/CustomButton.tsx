@@ -62,12 +62,12 @@ export default memo(function CustomButton({
   const propStyle = useMemo(() => arrayToObject(props.style), [props.style]);
 
   const _backgroundColor: (string | number)[] = useMemo(() => {
-    const backgroundColor = propStyle?.backgroundColor || COLORS.primary;
+    const backgroundColor = propStyle?.backgroundColor || COLORS.subPrimary;
 
     return outline
       ? ['transparent', 'transparent']
       : linearGradientProps
-      ? ['#F7E75A', '#FFC702']
+      ? COLORS.linearButton
       : [backgroundColor, backgroundColor];
   }, [propStyle?.backgroundColor, outline, linearGradientProps]);
   const ComponentWrapper: any = !linearGradientProps ? View : LinearGradient;
@@ -143,7 +143,7 @@ export default memo(function CustomButton({
               styles.text,
               {fontSize: scale(fontSize)},
               !linearGradientProps && {color: COLORS.white},
-              outline && {color: COLORS.primary},
+              outline && {color: COLORS.subPrimary},
               styleText,
             ]}>
             {text.trim()}
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   outline: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.subPrimary,
   },
   button: {
     alignItems: 'center',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
     paddingHorizontal: scale(10),
     borderRadius: scale(10),
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.subPrimary,
   },
   text: {
     textAlign: 'center',

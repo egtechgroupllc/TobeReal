@@ -27,6 +27,7 @@ export default function DetailRoomScreen({route}) {
           style={{
             ...styles.textLarge,
             marginTop: scale(20),
+            color: COLORS.white,
           }}>
           {data.name}
         </CustomText>
@@ -43,7 +44,10 @@ export default function DetailRoomScreen({route}) {
                 alignSelf: 'flex-start',
                 rowGap: scale(10),
               }}>
-              <CustomText textType="semiBold" size={SIZES.medium}>
+              <CustomText
+                textType="semiBold"
+                size={SIZES.medium}
+                style={{color: COLORS.black}}>
                 {data?.room_type?.name}
               </CustomText>
 
@@ -82,13 +86,17 @@ export default function DetailRoomScreen({route}) {
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Room amenities:</CustomText>
+                <CustomText textType="semiBold" style={{color: COLORS.black}}>
+                  Room amenities:
+                </CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (
                     <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
-                      <CustomText>{item}</CustomText>
+                      <CustomText style={{color: COLORS.black}}>
+                        {item}
+                      </CustomText>
                     </View>
                   ))}
                 </View>
@@ -99,13 +107,17 @@ export default function DetailRoomScreen({route}) {
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Bathroom:</CustomText>
+                <CustomText textType="semiBold" style={{color: COLORS.black}}>
+                  Bathroom:
+                </CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (
                     <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
-                      <CustomText>{item}</CustomText>
+                      <CustomText style={{color: COLORS.black}}>
+                        {item}
+                      </CustomText>
                     </View>
                   ))}
                 </View>
@@ -129,6 +141,7 @@ const Box = ({children, title, styleContent}) => {
         textType="semiBold"
         style={{
           fontSize: SIZES.xMedium,
+          color: COLORS.black,
         }}>
         {title}:
       </CustomText>
@@ -149,7 +162,7 @@ const styles = StyleSheet.create({
     minHeight: scale(63),
     borderRadius: scale(20),
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     backgroundColor: '#FFFFFF',
     ...SHADOW,
     width: '100%',
@@ -215,7 +228,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(5),
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     padding: scale(10),
     gap: scale(10),

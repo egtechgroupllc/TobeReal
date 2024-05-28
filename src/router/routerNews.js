@@ -32,6 +32,9 @@ export default routerNews = [
   {
     name: 'PostNewsScreen',
     component: PostNewsScreen,
+    options: {
+      headerShown: false,
+    },
   },
   {
     name: 'SellScreen',

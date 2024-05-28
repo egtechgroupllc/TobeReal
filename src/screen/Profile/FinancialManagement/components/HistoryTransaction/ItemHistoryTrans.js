@@ -41,7 +41,6 @@ export default function ItemHistory({
       onPress={() => onPress({nameBank, ...data})}
       style={{
         ...styles.wrapper,
-        backgroundColor: isBackground ? '#fff' : '#f6fdff',
       }}>
       <>
         <View style={styles.boxImg}>
@@ -87,6 +86,7 @@ export default function ItemHistory({
               style={{
                 fontSize: scale(12),
                 flex: 1,
+                color: COLORS.white,
               }}>
               {nameBank || data?.bank_owner} -{' '}
               {data?.method_deposit_item?.owner || data?.bank_name}
@@ -117,7 +117,7 @@ export default function ItemHistory({
               textType="bold"
               style={{
                 fontSize: scale(13),
-                color: COLORS.text,
+                color: COLORS.white,
               }}>
               {tab === 'Deposit' ? '+' : '-'}
               {formatPrice(data?.amount)}
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   textSmall: {
     fontSize: SIZES.xSmall,
-    color: COLORS.text,
+    color: COLORS.white,
   },
   footer: {
     rowGap: scale(4),

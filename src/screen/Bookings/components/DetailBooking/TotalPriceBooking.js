@@ -27,6 +27,7 @@ export default function TotalPriceBooking({data}) {
           textType="medium"
           style={{
             textDecorationLine: 'line-through',
+            color: COLORS.black,
           }}>
           {formatPrice(data?.price, {currency: currency?.currency_code})}
         </CustomText>

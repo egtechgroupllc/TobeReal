@@ -48,7 +48,7 @@ export default function WrapperContent({
               <CustomText
                 textType="semiBold"
                 style={{
-                  color: COLORS.primary,
+                  color: COLORS.green,
                   minWidth: scale(42),
                   lineHeight: scale(20),
                 }}
@@ -125,7 +125,7 @@ export default function WrapperContent({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.primary,
     paddingVertical: scale(16),
     rowGap: scale(10),
   },

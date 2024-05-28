@@ -29,7 +29,9 @@ export default function BotContent({control, setValue}) {
           })
         }>
         {bank?.icon}
-        <CustomText textType="medium" style={{fontSize: SIZES.xMedium}}>
+        <CustomText
+          textType="medium"
+          style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
           {bank?.name || 'Select bank'}
         </CustomText>
         <IconNext

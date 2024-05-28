@@ -11,71 +11,70 @@ import {
 import {IconDown, IconHistory} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 
-
 export default function SearchRecent({onPress}) {
   const [isRender, setIsRender] = useState(false);
   return (
-      <View style={styles.search}>
-        <TouchableOpacity
-          style={styles.title}
-          onPress={() => setIsRender(prev => !prev)}>
-          <CustomText
-            textType="semiBold"
-            style={{
-              fontSize: SIZES.xMedium,
-            }}>
-            Recent searches
-          </CustomText>
-          <IconDown />
-        </TouchableOpacity>
-        {isRender && (
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={[
-              'Jakarta',
-              'Bandung',
-              'Tangerang',
-              'Bekasi',
-              'Depok',
-              'Surabaya',
-              'Medan',
-              'Bogor',
-              'Makassar (Ujung Pandang)',
-              'Sumedang',
-              'Sidoarjo',
-              'Yogyakarta (Jogja)',
-              'Semarang',
-            ]}
-            contentContainerStyle={{
-              paddingHorizontal: scale(16),
-            }}
-            renderItem={({item, index}) => (
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => onPress(item)}
-                style={[
-                  styles.searchItem,
-                  {borderTopWidth: index === 0 ? 0 : 1},
-                ]}>
-                <IconHistory
-                  fill={COLORS.textSub}
-                  style={{
-                    height: scale(16),
-                    width: scale(16),
-                  }}
-                />
-                <CustomText
-                  numberOfLines={1}
-                  style={{
-                    flex: 1,
-                  }}>
-                  {item}
-                </CustomText>
-              </TouchableOpacity>
-            )}
-          />
-        )}
-      </View>
+    <View style={styles.search}>
+      <TouchableOpacity
+        style={styles.title}
+        onPress={() => setIsRender(prev => !prev)}>
+        <CustomText
+          textType="semiBold"
+          style={{
+            fontSize: SIZES.xMedium,
+          }}>
+          Recent searches
+        </CustomText>
+        <IconDown />
+      </TouchableOpacity>
+      {isRender && (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={[
+            'Jakarta',
+            'Bandung',
+            'Tangerang',
+            'Bekasi',
+            'Depok',
+            'Surabaya',
+            'Medan',
+            'Bogor',
+            'Makassar (Ujung Pandang)',
+            'Sumedang',
+            'Sidoarjo',
+            'Yogyakarta (Jogja)',
+            'Semarang',
+          ]}
+          contentContainerStyle={{
+            paddingHorizontal: scale(16),
+          }}
+          renderItem={({item, index}) => (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => onPress(item)}
+              style={[
+                styles.searchItem,
+                {borderTopWidth: index === 0 ? 0 : 1},
+              ]}>
+              <IconHistory
+                fill={COLORS.textSub}
+                style={{
+                  height: scale(16),
+                  width: scale(16),
+                }}
+              />
+              <CustomText
+                numberOfLines={1}
+                style={{
+                  flex: 1,
+                }}>
+                {item}
+              </CustomText>
+            </TouchableOpacity>
+          )}
+        />
+      )}
+    </View>
   );
 }
 

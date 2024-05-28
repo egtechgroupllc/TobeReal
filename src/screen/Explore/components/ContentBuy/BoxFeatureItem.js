@@ -133,7 +133,9 @@ export default function BoxFeatureItem({
                 <IconMarker width={scale(9)} height={scale(9)} />
                 <CustomText
                   textType="medium"
-                  style={[isStar && {fontSize: SIZES.xSmall}]}
+                  style={[
+                    isStar && {fontSize: SIZES.xSmall, color: COLORS.black},
+                  ]}
                   numberOfLines={2}>
                   {data?.country?.name}, {data?.province?.name}
                 </CustomText>
@@ -150,6 +152,7 @@ export default function BoxFeatureItem({
                   textType="medium"
                   style={{
                     fontSize: SIZES.xSmall,
+                    color: COLORS.black,
                     // minWidth: scale(35),
                   }}>
                   {formatPrice(data?.size_width * data?.size_length, {
@@ -241,6 +244,7 @@ export default function BoxFeatureItem({
                         style={{
                           fontSize: SIZES.xSmall,
                           minWidth: scale(35),
+                          color: COLORS.black,
                         }}>
                         {data?.contact_name}
                       </CustomText>

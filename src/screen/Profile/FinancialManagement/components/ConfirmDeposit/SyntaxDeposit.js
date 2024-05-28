@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../components/CustomText';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconCopy} from '../../../../../assets/icon/Icon';
 import {useQueryClient} from '@tanstack/react-query';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -36,11 +36,13 @@ export default function SyntaxDeposit({data}) {
           style={{
             flex: 1,
             fontSize: SIZES.xMedium,
+            color: COLORS.black,
           }}>
           <CustomText
             textType="semiBold"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             {data?.code}{' '}
           </CustomText>
@@ -49,6 +51,7 @@ export default function SyntaxDeposit({data}) {
             textType="semiBold"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             {' '}
             {dataUser?.username}

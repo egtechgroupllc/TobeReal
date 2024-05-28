@@ -21,7 +21,9 @@ export default function ItemMethodDeposit({data, onPress}) {
             style={{width: scale(26), height: scale(26)}}
             resizeMode="contain"
           />
-          <CustomText textType="medium" style={{fontSize: SIZES.xMedium}}>
+          <CustomText
+            textType="medium"
+            style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
             {data?.name}
           </CustomText>
           <IconNext

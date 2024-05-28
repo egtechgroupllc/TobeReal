@@ -92,7 +92,7 @@ export default function InfoDetail({data, price}) {
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },

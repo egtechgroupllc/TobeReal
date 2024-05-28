@@ -4,7 +4,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {postReviewAccmo} from '../../../Model/api/apiAccom';
-import {SHADOW, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
 
@@ -67,7 +67,7 @@ export default function BottomReview({handleSubmit, roomID}) {
   return (
     <View style={{...styles.wrapper, paddingBottom: insets.bottom}}>
       {/* <CheckBox text="Đánh giá ẩn danh" /> */}
-      <CustomButton text="Gửi" onPress={handleSubmit(hanPostReview)} />
+      <CustomButton text="Submit" onPress={handleSubmit(hanPostReview)} />
     </View>
   );
 }
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     padding: scale(10),
     paddingHorizontal: scale(20),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primary,
     ...SHADOW,
     shadowOffset: {
       width: 0,

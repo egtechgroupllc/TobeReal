@@ -96,12 +96,9 @@ export default function SelectCurrency({
                   {dataFromScreen?.currency_code || t('Main Currency')}
                 </CustomText> */}
                 <CustomText
-                // style={
-                //   !dataFromScreen && {
-                //     color: '#aaa',
-                //   }
-                // }
-                >
+                  style={{
+                    color: COLORS.black,
+                  }}>
                   {currency?.currency_code || t('Main Currency')}
                 </CustomText>
                 <IconRight />

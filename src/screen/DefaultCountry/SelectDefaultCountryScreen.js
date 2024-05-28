@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import MainWrapper from '../../components/MainWrapper';
-import {SIZES, images, scale} from '../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../assets/constants';
 import CustomImage from '../../components/CustomImage';
 import {CustomButton} from '../../components';
 import CategoriesButton from '../Profile/components/CategoriesButton';
@@ -58,7 +58,7 @@ export default function SelectDefaultCountryScreen() {
     }
   };
   return (
-    <MainWrapper>
+    <MainWrapper scrollEnabled={false} imgBackground>
       <View style={styles.contain}>
         <CustomImage
           source={images.logo1}
@@ -70,10 +70,14 @@ export default function SelectDefaultCountryScreen() {
         />
         <CustomText
           textType="medium"
-          style={{fontSize: SIZES.large, marginTop: scale(20)}}>
+          style={{
+            fontSize: SIZES.large,
+            marginTop: scale(20),
+            color: COLORS.white,
+          }}>
           Welcome to Saveloka!
         </CustomText>
-        <CustomText textType="regular">
+        <CustomText textType="regular" style={{color: COLORS.white}}>
           Please select country and language to continue
         </CustomText>
         <CategoriesButton

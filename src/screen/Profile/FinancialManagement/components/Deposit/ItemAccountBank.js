@@ -42,7 +42,9 @@ export default function ItemAccountBank({data, onPress, isSelect}) {
           flex: 1,
           alignItems: 'flex-start',
         }}>
-        <CustomText textType="medium" style={{fontSize: SIZES.xMedium}}>
+        <CustomText
+          textType="medium"
+          style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
           {data?.bank_name?.split('-')?.[0]}
           {data?.bank_name && '-'} {data?.owner}
         </CustomText>
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     padding: scale(3),
   },
   code: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: COLORS.grey,
     padding: scale(6),
     borderRadius: scale(6),
     flexDirection: 'row',

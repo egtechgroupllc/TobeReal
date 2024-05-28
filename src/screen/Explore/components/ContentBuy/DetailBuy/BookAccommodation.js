@@ -172,7 +172,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
         }}>
         <View style={styles.contact}>
           <LinearGradient
-            colors={['#FFE55A', '#F0B90B']}
+            colors={COLORS.linearButton}
             start={{x: 1.2, y: 0}}
             end={{x: 0, y: 0}}
             style={styles.contactHeader}>
@@ -191,7 +191,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
             activeOpacity={0.7}
             style={styles.btnClose}
             onPress={() => setOpenContact(false)}>
-            <IconX fill={'white'} width={scale(20)} height={scale(20)} />
+            <IconX fill={COLORS.black} width={scale(20)} height={scale(20)} />
           </TouchableOpacity>
 
           <View style={styles.listContact}>

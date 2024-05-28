@@ -104,7 +104,7 @@ export default function PostNewTourScreen() {
         />
         <CustomText
           textType="medium"
-          style={{...styles.text2, marginLeft: scale(20)}}>
+          style={{...styles.text2, marginLeft: scale(20), color: COLORS.black}}>
           {t('TOUR')}
         </CustomText>
       </View>
@@ -150,7 +150,7 @@ export default function PostNewTourScreen() {
         rules={requireField(t('this_field_required'))}
         text={t('do_you_agree')}
         textStyle={{
-          color: COLORS.black,
+          color: COLORS.white,
           fontSize: SIZES.xSmall,
           flex: 0,
         }}
@@ -163,6 +163,7 @@ export default function PostNewTourScreen() {
         linearGradientProps
         buttonType="medium"
         text={t('Next')}
+        styleText={{color: COLORS.black}}
         onPress={handleSubmit(handlePostTour)}
         style={{
           marginTop: scale(20),
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
-    borderColor: '#F0B90B40',
+    borderColor: COLORS.green,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     ...SHADOW,
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowColor: '#F0B90B40',
+    shadowColor: COLORS.green,
   },
 
   text2: {

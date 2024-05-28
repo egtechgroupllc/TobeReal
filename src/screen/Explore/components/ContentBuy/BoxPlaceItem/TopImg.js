@@ -30,11 +30,11 @@ export default function TopImg({
         )} */}
         {feature && (
           <LinearGradient
-            colors={['#F0B90B', '#D88A00']}
+            colors={COLORS.linearButton}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 1}}
             style={styles.topBox}>
-            <CustomText style={styles.topName}>
+            <CustomText style={{...styles.topName, color: COLORS.black}}>
               {data?.estate_type?.name}
             </CustomText>
           </LinearGradient>

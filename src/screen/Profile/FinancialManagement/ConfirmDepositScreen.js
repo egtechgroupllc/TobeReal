@@ -53,7 +53,7 @@ export default function ConfirmDepositScreen({route}) {
 
   return (
     <>
-      <MainWrapper noImgColor styleContent={styles.content}>
+      <MainWrapper styleContent={styles.content}>
         <InfoBank data={data} />
         <SyntaxDeposit data={data} />
         <ImgConfirmDeposit control={control} />
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: scale(10),
     paddingVertical: scale(20),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     rowGap: scale(20),
   },
   footer: {

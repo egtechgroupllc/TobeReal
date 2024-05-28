@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
-import {SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import RulesPolicy1 from './components/AddPolicy/RulesPolicy1';
 import RulesPolicy2 from './components/AddPolicy/RulesPolicy2';
@@ -41,14 +41,11 @@ export default function AddPolicyScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(watch('refund_fee'), 321);
   const handleCreatePolicy = value => {
     const price_percent = value?.isDiscount
       ? value?.price_percent / 100
       : value?.price_percent / 100 + 1;
-    console.log('====================================');
-    console.log(value, 23111312312, value?.refund_fee);
-    console.log('====================================');
+
     delete value?.isDiscount;
     createPolicy.mutate(
       {
@@ -93,7 +90,7 @@ export default function AddPolicyScreen({route}) {
 
   return (
     <MainWrapper
-      noImgColor
+      imgBackground
       styleContent={{
         paddingHorizontal: scale(10),
       }}>
@@ -173,10 +170,15 @@ const Box = ({title, num, children}) => {
             backgroundColor: '#ddd',
             borderRadius: scale(6),
           }}>
-          <CustomText textType="bold">{num}</CustomText>
+          <CustomText textType="bold" style={{color: COLORS.black}}>
+            {num}
+          </CustomText>
         </View>
 
-        <CustomText textType="bold" size={SIZES.xMedium} style={{flex: 1}}>
+        <CustomText
+          textType="bold"
+          size={SIZES.xMedium}
+          style={{flex: 1, color: COLORS.black}}>
           {title}
         </CustomText>
       </View>

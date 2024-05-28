@@ -21,13 +21,13 @@ export default function DetailBookingScreen() {
       <MainWrapper styleContent={styles.wrapper}>
         <View
           style={{
-            backgroundColor: '#b5e5fe',
+            backgroundColor: COLORS.blue,
             padding: scale(10),
           }}>
           <CustomText textType="bold" size={SIZES.large}>
             Chi tiết chỗ đặt
           </CustomText>
-          <CustomText size={SIZES.xMedium} color={COLORS.textSub}>
+          <CustomText size={SIZES.xMedium} color={COLORS.white}>
             Booking code: {data?.id}
           </CustomText>
           {data.status && (
@@ -53,10 +53,15 @@ export default function DetailBookingScreen() {
 
         <View style={styles.content}>
           <View>
-            <CustomText textType="bold" size={SIZES.medium}>
+            <CustomText
+              textType="bold"
+              size={SIZES.medium}
+              style={{color: COLORS.black}}>
               {objAccmo?.name}
             </CustomText>
-            <CustomText>{objAccmo?.address}</CustomText>
+            <CustomText style={{color: COLORS.black}}>
+              {objAccmo?.address}
+            </CustomText>
           </View>
 
           <TimeBookingCheckInOut data={data} />
@@ -68,7 +73,7 @@ export default function DetailBookingScreen() {
             <CustomText
               textType="bold"
               size={SIZES.xMedium}
-              style={{marginBottom: scale(5)}}>
+              style={{marginBottom: scale(5), color: COLORS.black}}>
               ({data?.number_room} phòng - {data?.room?.room_type?.name}){'  '}{' '}
               {data?.room?.name}
             </CustomText>
@@ -97,7 +102,10 @@ export default function DetailBookingScreen() {
           </View>
 
           <View>
-            <CustomText textType="bold" size={SIZES.xMedium}>
+            <CustomText
+              textType="bold"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
               Yêu cầu đặc biệt (nếu có)
             </CustomText>
             <CustomText
@@ -109,8 +117,11 @@ export default function DetailBookingScreen() {
           </View>
 
           <View style={{rowGap: scale(5)}}>
-            <CustomText textType="bold" size={SIZES.xMedium}>
-              Tên khách
+            <CustomText
+              textType="bold"
+              size={SIZES.xMedium}
+              style={{color: COLORS.black}}>
+              Customer's name
             </CustomText>
             <CustomText
               textType="medium"

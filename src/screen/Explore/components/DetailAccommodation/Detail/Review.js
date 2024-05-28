@@ -51,7 +51,7 @@ export default function Review({dataP}) {
               }}>
               <CustomText
                 textType="bold"
-                style={{fontSize: SIZES.xMedium, color: COLORS.primary}}>
+                style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
                 {t('overview')}
               </CustomText>
               <CustomText style={{fontSize: SIZES.xMedium}}>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(16),
   },
   overviewNumberRating: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.green,
     borderRadius: scale(6),
   },
   numberRating: {

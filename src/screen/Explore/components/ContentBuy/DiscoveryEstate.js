@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, } from 'react-native';
+import {StyleSheet, Text, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import {formatPrice} from '../../../../utils/format';
@@ -8,34 +8,37 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import BoxDiscoveryItem from './BoxDiscoveryItem';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const funcFallBack = () => {};
-export default function DiscoveryEstate({data, onPressCategory = funcFallBack}) {
+export default function DiscoveryEstate({
+  data,
+  onPressCategory = funcFallBack,
+}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Discover other real estate')]
+  const title = [t('Discover other real estate')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
           isSeeAll
           discoveryTour
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllBuyScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={onPressCategory}
           heading={title}
           subHeading={t('the_place_discovery')}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
-            numColumns={2} 
+            numColumns={2}
             showsHorizontalScrollIndicator={false}
             data={data}
             contentContainerStyle={styles.content}
@@ -60,8 +63,8 @@ export default function DiscoveryEstate({data, onPressCategory = funcFallBack}) 
 const styles = StyleSheet.create({
   content: {
     // columnGap: scale(14),
-    rowGap:scale(14),
+    rowGap: scale(14),
     paddingVertical: scale(6),
-    alignItems:'center'
+    alignItems: 'center',
   },
 });

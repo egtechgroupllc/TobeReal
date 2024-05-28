@@ -40,7 +40,7 @@ export default memo(function BookAccommodation({data}) {
           textType="bold"
           style={{
             fontSize: SIZES.xMedium,
-            color: COLORS.primary,
+            color: COLORS.white,
           }}>
           {formatPrice(params?.priceFinal || priceFinal, {
             currency: currency?.currency_code,

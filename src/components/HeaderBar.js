@@ -5,6 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, SIZES, scale} from '../assets/constants';
 import {IconGoBack} from '../assets/icon/Icon';
 import CustomText from './CustomText';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default memo(function HeaderBar({back, navigation, options, route}) {
   const {goBack, navigate} = useNavigation();
@@ -12,7 +13,10 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
 
   if (!options?.headerShown) return null;
   return (
-    <View
+    <LinearGradient
+      colors={['#24EBA9', '#08021C00']}
+      start={{x: 0, y: 0}}
+      end={{x: 0, y: 1}}
       style={[styles.wrapper, {paddingTop: insets.top}, options?.headerStyle]}>
       <View
         style={{
@@ -60,7 +64,7 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
         }}>
         {options?.headerRight && options?.headerRight()}
       </View>
-    </View>
+    </LinearGradient>
   );
 });
 

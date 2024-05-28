@@ -55,7 +55,9 @@ export default function CategoriesButton({
                       {width: scale(15), height: scale(15), borderRadius: 999},
                     ]}
                   />
-                  <CustomText textType="semiBold">{nameCountry}</CustomText>
+                  <CustomText textType="semiBold" style={{color: COLORS.black}}>
+                    {nameCountry}
+                  </CustomText>
                 </>
               )}
             </View>

@@ -248,7 +248,7 @@ export default function CategoriesButton({
                   colors={['#F0B90B', '#FFFFFF']}
                   start={{x: 0, y: 0}}
                   end={{x: 0, y: 1}}
-                  style={{...styles.item, height:scale(330)}}>
+                  style={{...styles.item, height: scale(330)}}>
                   <CustomText
                     textType="bold"
                     style={{...styles.text, color: COLORS.white}}>
@@ -265,7 +265,7 @@ export default function CategoriesButton({
                       borderTopRightRadius: scale(10),
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginTop:scale(10)
+                      marginTop: scale(10),
                     }}>
                     <CustomText
                       textType="bold"
@@ -354,7 +354,7 @@ export default function CategoriesButton({
                     <CustomText
                       textType="bold"
                       style={{...styles.text3, color: COLORS.white}}>
-                       Post super vip news for free
+                      Post super vip news for free
                     </CustomText>
                     <CustomText
                       textType="semiBold"
@@ -847,7 +847,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: scale(4),
     borderWidth: scale(1),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     height: scale(50),
     width: '100%',
     justifyContent: 'space-between',
@@ -896,7 +896,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     paddingTop: scale(10),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
   },
   item: {
@@ -904,7 +904,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     // flexDirection: 'row',
     paddingTop: scale(10),
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     borderRadius: scale(16),
     width: scale(266),

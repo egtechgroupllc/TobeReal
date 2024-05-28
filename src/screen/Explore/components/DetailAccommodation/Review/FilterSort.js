@@ -17,6 +17,7 @@ export default function FilterSort({
     <View style={styles.wrapper}>
       {!!listFill[0] && (
         <OptionAccommodation
+          unselectedColor={COLORS.black}
           outline
           noSelectDefault={noSelectDefault}
           isSelectAll={isSelectAll}
@@ -47,7 +48,9 @@ export default function FilterSort({
               height: scale(14),
             }}
           />
-          <CustomText>{text || 'Filter'}</CustomText>
+          <CustomText style={{color: COLORS.black}}>
+            {text || 'Filter'}
+          </CustomText>
         </View>
         {sort && (
           <CustomText

@@ -28,6 +28,7 @@ export default function Menubar({onType, value}) {
       styleTextHeading={{
         fontSize: SIZES.xMedium,
       }}
+      styleWrapper={{backgroundColor: 'transparent'}}
       styleContent={{
         gap: scale(8),
         alignItem: 'center',

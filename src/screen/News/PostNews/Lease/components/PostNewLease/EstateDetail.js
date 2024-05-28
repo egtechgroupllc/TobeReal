@@ -111,7 +111,10 @@ const Box = ({title, children}) => {
         width: '100%',
         rowGap: scale(10),
       }}>
-      <CustomText textType="semiBold" size={SIZES.xMedium}>
+      <CustomText
+        textType="semiBold"
+        size={SIZES.xMedium}
+        style={{color: COLORS.black}}>
         {title}
       </CustomText>
       {children}
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.green,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

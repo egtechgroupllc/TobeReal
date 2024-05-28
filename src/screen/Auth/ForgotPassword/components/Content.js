@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {CustomButton, CustomInput} from '../../../../components';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
@@ -82,9 +82,10 @@ export default function Content() {
           <CustomImage
             source={images.logo1}
             style={{
-              width: '35%',
+              width: '30%',
               height: scale(109),
             }}
+            resizeMode="contain"
           />
           <Wrapper
             Heading1={t('forgot_password')}
@@ -95,6 +96,7 @@ export default function Content() {
         {phase === 1 && (
           <>
             <CustomInput
+              styleText={{color: COLORS.white}}
               sizeInput="medium"
               placeholder={t('email')}
               control={control}
@@ -106,6 +108,7 @@ export default function Content() {
             />
 
             <CustomButton
+              styleText={{color: COLORS.black}}
               onPress={handleSubmit(submitForgotPassword)}
               linearGradientProps
               buttonType="large"
@@ -129,7 +132,11 @@ export default function Content() {
         <TouchableOpacity onPress={gotoLogin}>
           <CustomText
             textType="semiBold"
-            style={{...styles.text1, marginLeft: scale(5)}}>
+            style={{
+              ...styles.text1,
+              marginLeft: scale(5),
+              color: COLORS.green,
+            }}>
             {t('login')}
           </CustomText>
         </TouchableOpacity>

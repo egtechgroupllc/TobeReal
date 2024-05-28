@@ -34,14 +34,14 @@ export default function BuySell({data}) {
       {isRender && (
         <WrapperContent
           isSeeAll
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
+          // onPressSeeAll={() =>
+          //   navigate('NoBottomTab', {
+          //     screen: 'SeeAllBuyScreen',
+          //     params: {
+          //       title: title || '',
+          //     },
+          //   })
+          // }
           onPressCategory={item => console.log(item)}
           heading={title}
           subHeading={t('There are 1,000,000 Real Estate')}
