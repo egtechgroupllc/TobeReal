@@ -93,9 +93,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.saveloka.shome"
+    namespace "com.tobechain.tobehouse"
     defaultConfig {
-        applicationId "com.saveloka.shome"
+        applicationId "com.tobechain.tobehouse"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
