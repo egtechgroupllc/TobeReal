@@ -126,7 +126,7 @@ export default function ContentStep1({onPress, data}) {
           <ItemUtil
             Icon={IconBookings}
             title={
-              "Taxes and fees are amounts remitted by Traveloka to the hotel. For questions about taxes and invoices, please refer to Saveloka's Terms and Conditions for answers"
+              "Taxes and fees are amounts remitted by Traveloka to the hotel. For questions about taxes and invoices, please refer to Tobe House's Terms and Conditions for answers"
             }
             styleTextTitle={{
               fontSize: SIZES.small,

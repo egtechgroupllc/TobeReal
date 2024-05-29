@@ -70,7 +70,7 @@ export default memo(function InputPriceRoom({
               textType="medium"
               size={SIZES.xMedium}
               style={{color: COLORS.black}}>
-              Hoa hồng cho Saveloka
+              Hoa hồng cho Tobe House
             </CustomText>
           </CustomText>
 

@@ -46,7 +46,7 @@ export default function Info({data}) {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          7 years participating in Saveloka.vn
+          7 years participating in Tobe House
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>

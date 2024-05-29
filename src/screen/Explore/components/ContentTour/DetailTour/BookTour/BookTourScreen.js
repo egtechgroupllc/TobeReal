@@ -449,7 +449,7 @@ export default function BookTourScreen({route}) {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text2, color: COLORS.black}}>
-                    {t('wallet')} Saveloka
+                    {t('wallet')} Tobe House
                   </CustomText>
                 </View>
               </View>

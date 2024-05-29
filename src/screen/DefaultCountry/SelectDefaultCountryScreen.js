@@ -75,7 +75,7 @@ export default function SelectDefaultCountryScreen() {
             marginTop: scale(20),
             color: COLORS.white,
           }}>
-          Welcome to Saveloka!
+          Welcome to Tobe House!
         </CustomText>
         <CustomText textType="regular" style={{color: COLORS.white}}>
           Please select country and language to continue

@@ -94,7 +94,7 @@ const listVideo = [
     location: 'Italia',
     rental: 'night',
     description:
-      'The majority of reviews on Saveloka say that for a quick stay, this is the go-to hotel which provides a comfortable stay/service/access to get around town. ',
+      'The majority of reviews on Tobe House say that for a quick stay, this is the go-to hotel which provides a comfortable stay/service/access to get around town. ',
   },
 ];
 

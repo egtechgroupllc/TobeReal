@@ -17,7 +17,7 @@ const dataWaiting = [
   },
   {
     id: 2,
-    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
+    desc: 'Congratulations, you have successfully deposited $100 into your Tobe House wallet.',
     type: 'Deposit',
   },
   {
@@ -27,7 +27,7 @@ const dataWaiting = [
   },
   {
     id: 4,
-    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
+    desc: 'Congratulations, you have successfully deposited $100 into your Tobe House wallet.',
     type: 'Deposit',
   },
   {

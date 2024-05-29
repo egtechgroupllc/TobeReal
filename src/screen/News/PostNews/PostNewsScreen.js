@@ -49,7 +49,7 @@ export default function PostNewsScreen() {
               style={{
                 fontSize: SIZES.medium,
               }}>
-              Please become Saveloka partner to post news
+              Please become Tobe House partner to post news
             </CustomText>
             <TouchableOpacity onPress={handleRegisterPartner}>
               <CustomText
@@ -58,7 +58,7 @@ export default function PostNewsScreen() {
                   fontSize: SIZES.medium,
                   color: COLORS.green,
                 }}>
-                Become Saveloka partner
+                Become Tobe House partner
               </CustomText>
             </TouchableOpacity>
           </View>

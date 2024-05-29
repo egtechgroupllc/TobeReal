@@ -9,9 +9,9 @@ import CustomText from '../../../../../components/CustomText';
 import {CustomInput} from '../../../../../components';
 import {IconAdd} from '../../../../../assets/icon/Icon';
 import Button from '../../../components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const data = [
     {
       id: 1,
@@ -73,7 +73,7 @@ export default function Content() {
             <CustomText
               textType="medium"
               style={{...styles.text1, color: COLORS.black}}>
-             {t('wallet')} Saveloka
+              {t('wallet')} Tobe House
             </CustomText>
             <CustomText
               textType="bold"
@@ -102,7 +102,7 @@ export default function Content() {
         <CustomText
           textType="medium"
           style={{...styles.text, color: COLORS.black}}>
-         {t('from_money_source')}
+          {t('from_money_source')}
         </CustomText>
       </View>
 

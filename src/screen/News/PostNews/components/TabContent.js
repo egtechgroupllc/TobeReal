@@ -18,7 +18,7 @@ export default function TabContent() {
       showMess(
         profile?.status === 'VERIFYING_BUSINESS'
           ? 'Your account is waiting for approval'
-          : 'Please become Saveloka partner to post news',
+          : 'Please become Tobe House partner to post news',
         'error',
       );
       return false;

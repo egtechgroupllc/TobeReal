@@ -6,9 +6,9 @@ import PaymentMethodsItem from './components/BookingRoom/ContentStep2/PaymentMet
 import {showMess} from '../../assets/constants/Helper';
 const listMethods = [
   {
-    header: 'Savaloka Wallet',
-    title: 'Saveloka Transfer',
-    desc: 'Thanh toán bằng ví Saveloka',
+    header: 'Tobe House Wallet',
+    title: 'Tobe House Transfer',
+    desc: 'Thanh toán bằng ví Tobe House',
     tag: 'Recommened',
     type: 'LOKAPAY',
     image: images.logo1,
