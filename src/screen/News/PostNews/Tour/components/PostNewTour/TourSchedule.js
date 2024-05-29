@@ -66,7 +66,6 @@ export default function TourSchedule({
     'estate_type_id',
     'schedule',
     'total_hours',
-    'time_options',
   ]).current;
 
   const [openCheckStart, setOpenCheckStart] = useState(false);
@@ -88,7 +87,6 @@ export default function TourSchedule({
 
   useEffect(() => {
     setValue('total_hours', numDays.days * 24 + numDays.hours);
-    setValue('total_hours', 1);
     setValue('refund_fee', 1);
   }, []);
   const handleConfirm = value => {

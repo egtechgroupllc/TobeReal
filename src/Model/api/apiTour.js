@@ -54,7 +54,11 @@ export const postAddTicket = async ({data, tour_id}) => {
 
   return responsive.data;
 };
+export const postAddTypeTicket = async ({data}) => {
+  const responsive = await instance.post('/ticket/item/create', data);
 
+  return responsive.data;
+};
 export const getListTour = async ({
   pageParam = 1,
   country_id,
@@ -74,7 +78,7 @@ export const getDetailTour = async id_tour => {
 
   return responsive.data;
 };
-export const getListTicket = async id_tour => {
+export const getListTicket = async ({id_tour}) => {
   const responsive = await instance.get(`/detail/${id_tour}/list-ticket`);
 
   return responsive.data;
@@ -82,5 +86,13 @@ export const getListTicket = async id_tour => {
 export const getDetailTicket = async id_ticket => {
   const responsive = await instance.get(`/ticket/${id_ticket}`);
 
+  return responsive.data;
+};
+export const deleteTour = async ({id_tour}) => {
+  const responsive = await instance.delete(`/${id_tour}`);
+  return responsive.data;
+};
+export const deleteTicket = async ({id_ticket}) => {
+  const responsive = await instance.delete(`/ticket/${id_ticket}`);
   return responsive.data;
 };

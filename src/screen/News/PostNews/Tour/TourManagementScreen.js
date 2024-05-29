@@ -1,39 +1,37 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
 import {FlatList, ScrollView, TouchableOpacity} from 'react-native';
-import {getMyListCreateAccom} from '../../../../Model/api/apiAccom';
 import {getMyListCreateTour} from '../../../../Model/api/apiTour';
 import {scale} from '../../../../assets/constants';
+import {IconHome} from '../../../../assets/icon/Icon';
 import EmptyData from '../../../../components/EmptyData';
 import MainWrapper from '../../../../components/MainWrapper';
 import Pagination from '../../../../components/Pagination';
 import usePagination from '../../../../hooks/usePagination';
-import CreateAccomItem from './components/HomeLease/CreateAccomItem';
-import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
-import {IconGoBack, IconHome} from '../../../../assets/icon/Icon';
-import HeaderLeft from '../../../../navigation/components/HeaderLeft';
+import ListCreateAccomLoading from '../Lease/components/HomeLease/ListCreateAccomLoading';
+import CreateTourItem from './components/CreateTourItem';
 
-export default function AccommoManagementScreen() {
+export default function TourManagementScreen() {
   const params = useRoute().params;
   const {setOptions, navigate, goBack} = useNavigation();
   const {data, page, isLoading, isError, setPage} = usePagination(
-    ['accommodation', 'my-list', 1],
-    getMyListCreateAccom,
+    ['tour', 'my-list', 1],
+    getMyListCreateTour,
     {
-      hasRoom: 1,
+      hasTicket: 1,
       limit: 12,
     },
   );
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Danh Sách Chỗ Ở Đã Tạo',
+      headerTitle: 'Danh Sách Tour Đã Tạo',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
-      headerLeftNavigate: 'LeaseScreen',
+      headerLeftNavigate: 'TourScreen',
       // headerLeft: () => (
       //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
       //     <IconGoBack style={{width: scale(20)}} />
@@ -64,7 +62,7 @@ export default function AccommoManagementScreen() {
                 gap: scale(10),
               }}>
               <FlatList
-                key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
+                key={`tour/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
                 data={dataNew}
                 numColumns={numColumns}
                 alwaysBounceVertical={false}
@@ -81,10 +79,9 @@ export default function AccommoManagementScreen() {
                 }}
                 renderItem={({item, index}) =>
                   item?.id ? (
-                    <CreateAccomItem
+                    <CreateTourItem
                       key={`key_${item?.id}-${index}`}
                       data={item}
-                      isTour={params?.isTour}
                     />
                   ) : (
                     <ListCreateAccomLoading key={`key_${index}`} />

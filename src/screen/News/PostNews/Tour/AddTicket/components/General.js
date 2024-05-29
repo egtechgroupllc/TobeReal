@@ -16,6 +16,7 @@ import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
 import SelectCountry from '../../../components/SelectCountry';
 import SelectCurrency from '../../../components/SelectCurrency';
+import TimeOption from './TimeOption';
 
 export default function General({
   maxCharacters,
@@ -38,7 +39,6 @@ export default function General({
     'quantity',
     'price',
   ]).current;
-
   return (
     <View>
       <ButtonTabValidate
@@ -106,7 +106,7 @@ export default function General({
 
             <View style={styles.line} />
 
-            <CustomInput
+            {/* <CustomInput
               label={t('Số lượng vé')}
               control={control}
               name="quantity"
@@ -114,9 +114,14 @@ export default function General({
               rules={[requireField(t('this_field_required'))]}
               style={[styles.textInput]}
               keyboardType="number-pad"
-            />
+            /> */}
 
             <SelectCurrency control={control} />
+            <TimeOption
+              onChange={value => {
+                setValue('time_options', value);
+              }}
+            />
             <CustomInput
               label={t('price')}
               control={control}

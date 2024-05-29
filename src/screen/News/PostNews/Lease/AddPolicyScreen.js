@@ -41,14 +41,11 @@ export default function AddPolicyScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(watch('refund_fee'), 321);
   const handleCreatePolicy = value => {
     const price_percent = value?.isDiscount
       ? value?.price_percent / 100
       : value?.price_percent / 100 + 1;
-    console.log('====================================');
-    console.log(value, 23111312312, value?.refund_fee);
-    console.log('====================================');
+
     delete value?.isDiscount;
     createPolicy.mutate(
       {

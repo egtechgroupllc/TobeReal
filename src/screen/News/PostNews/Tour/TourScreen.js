@@ -9,13 +9,14 @@ import {CustomButton} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
 import ListCreateAccom from '../Lease/components/HomeLease/ListCreateAccom';
+import ListCreateTour from './ListCreateTour';
 const list = [
   {
-    title: 'I already have a property registered',
-    desc: 'View and manage your registered properties',
+    title: 'I already have a tour registered',
+    desc: 'View and manage your registered touries',
     textBtn: 'Continue',
     navigate: 'NoBottomTab',
-    screen: 'AccommoManagementScreen',
+    screen: 'TourManagementScreen',
   },
   {
     title: 'Tôi muốn đăng ký tour mới',
@@ -29,7 +30,7 @@ export default function TourScreen() {
 
   return (
     <MainWrapper>
-      <ListCreateAccom
+      <ListCreateTour
         keyArr={['tour', 'my-list', 0]}
         callFunc={getMyListCreateTour}
         keyQuery={{hasTicket: 0}}
