@@ -29,7 +29,7 @@ export default function BoxPlaceItem({
   time,
 }) {
   const {t} = useLanguage();
-  const price = data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price;
+  const price = data?.tour_tickets?.[0]?.tour_ticket_dates?.[0]?.price_final;
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>

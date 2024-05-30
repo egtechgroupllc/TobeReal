@@ -1,18 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useRef, useState} from 'react';
-import {StyleSheet, TouchableOpacity, TextStyle, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {CustomInput} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 import WrapperContent from '../../Explore/components/WrapperContent';
-import {useQuery} from '@tanstack/react-query';
-import {useCountry} from '../../../hooks/useCountry';
-import {getListCountry} from '../../../Model/api/common';
-import {CustomButton, CustomInput} from '../../../components';
-import BottomSheet from '../../../components/BottomSheet';
-import BottomSheetListSelect from '../../../components/BottomSheetListSelect';
-import ReviewAll from '../../Explore/components/DetailAccommodation/Review/ReviewAll';
-import {IconSearch} from '../../../assets/icon/Icon';
 
 export default function MapProvince({
   onProvince,
@@ -26,8 +19,8 @@ export default function MapProvince({
   const [checked, setChecked] = useState(value || undefined);
 
   useEffect(() => {
-    nameProvince?.name && setChecked(nameProvince);
-  }, [nameProvince?.name]);
+    value && setChecked(value);
+  }, [value]);
 
   return (
     <WrapperContent

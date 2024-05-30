@@ -65,7 +65,7 @@ export default function ContentStep2({onPress, data}) {
             number_room: data?.numRoomSelect,
             accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
             room_id: data?.id, //id của phòng
-            contact_name: contact?.name,
+            contact_name: contact?.username,
             contact_email: contact?.email,
             contact_phone: contact?.phone,
             // payment: typePayment,

@@ -37,10 +37,9 @@ const data = [
 ];
 export default function TicketOption() {
   const params = useRoute().params;
-
   const {data, isLoading} = useQuery({
-    queryKey: ['tour', 'detail', 'list-ticket', params?.id],
-    queryFn: () => getListTicket(params?.id),
+    queryKey: ['tour', 'detail', 'list-ticket', {id_tour: params?.id}],
+    queryFn: () => getListTicket({id_tour: params?.id}),
   });
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
@@ -138,7 +137,10 @@ export default function TicketOption() {
                       paddingHorizontal: scale(10),
                       color: COLORS.primary,
                     }}>
-                    $ {item.price}
+                    ${' '}
+                    {item?.tour_ticket_items?.map(item => {
+                      return item?.price_percent;
+                    })}
                   </CustomText>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: '25%'}}>

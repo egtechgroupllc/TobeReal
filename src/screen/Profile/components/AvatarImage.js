@@ -73,7 +73,7 @@ export default function AvatarImage({
           ...styles.box,
           height: scale(100),
           marginTop: scale(20),
-          marginBottom: scale(-15),
+          marginBottom: scale(-25),
         }}>
         <View
           style={{

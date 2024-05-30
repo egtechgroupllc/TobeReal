@@ -25,11 +25,11 @@ import CheckBox from '../../../../../../components/CheckBox';
 import CustomText from '../../../../../../components/CustomText';
 const listSort = [
   {
-    id: 'AUDnt',
+    id: 'ADULT',
     name: 'Adult',
   },
   {
-    id: 'CHikd',
+    id: 'CHILDREN',
     name: 'Children',
   },
 ];
@@ -65,11 +65,16 @@ export default function TypeTicket({
   };
 
   const arrKeywords = useRef([
-    'name',
+    'type',
     'description',
     'quantity',
     'price',
   ]).current;
+
+  useEffect(() => {
+    setValue('type', arraySelect[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(arraySelect), setValue]);
 
   return (
     <View style={{marginTop: scale(-10)}}>
@@ -141,7 +146,7 @@ export default function TypeTicket({
                         styleTextLabel={styles.label}
                         label={t('description_content')}
                         control={control}
-                        name="description"
+                        name="description_item"
                         placeholder={t('enter_a_description')}
                         rules={[requireField(t('this_field_required'))]}
                         style={[

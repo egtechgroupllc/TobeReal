@@ -11,26 +11,30 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListTour} from '../../../../Model/api/apiTour';
 import {getListCountry} from '../../../../Model/api/common';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function WorldTour() {
   const [filter, setFilter] = useState();
+  const {currency} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'tour',
       'list-tour',
       {
         country_id: filter?.id,
+        currency_id: currency?.id,
       },
     ],
     queryFn: () => getListTour({country_id: filter?.id}),
   });
-  const listCountry = useQuery({
+
+  const listProvince = useQuery({
     queryKey: ['common', 'list-country'],
     queryFn: () => getListCountry(),
   });
   useEffect(() => {
-    setFilter(listCountry.data?.data?.[0]);
-  }, [listCountry.data?.data]);
+    setFilter(listProvince.data?.data?.[0]);
+  }, [listProvince?.data?.data]);
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
@@ -40,9 +44,9 @@ export default function WorldTour() {
       {isRender && (
         <WrapperContent
           background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           isCategory
-          dataCategory={listCountry.data?.data?.slice(0, 9)}
+          dataCategory={listProvince.data?.data?.slice(0, 9)}
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
               screen: 'SeeAllTourScreen',
@@ -51,7 +55,7 @@ export default function WorldTour() {
               },
             })
           }
-          onPressCategory={item => console.log(item)}
+          onPressCategory={item => setFilter(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
           styleWrapper={{backgroundColor: 'transparent'}}>

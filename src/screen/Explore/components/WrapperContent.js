@@ -33,7 +33,7 @@ export default function WrapperContent({
 }) {
   const {t} = useLanguage();
   return (
-    <ImageBackground source={background}>
+    <ImageBackground source={background || images.white}>
       <View {...props} style={[styles.wrapper, styleWrapper]}>
         <View style={[styles.heading, styleHeading]}>
           <View style={styles.boxHeading}>

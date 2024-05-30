@@ -18,13 +18,14 @@ import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
 
-export default function ContactInfo({data}) {
+export default function ContactInfo({data, onPress}) {
   const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity
         style={styles.content}
         onPress={() =>
+          onPress ||
           navigate('NoBottomTab', {
             screen: 'DetailBrokerScreen',
             params: data,

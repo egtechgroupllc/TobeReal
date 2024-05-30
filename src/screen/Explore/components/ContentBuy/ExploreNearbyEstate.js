@@ -44,7 +44,7 @@ export default function ExploreNearbyEstate({country}) {
       {isRender && (
         <WrapperContent
           // background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           // worldTour
           isCategory
           dataCategory={listProvince.data?.data?.slice(0, 9)}

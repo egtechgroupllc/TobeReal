@@ -16,6 +16,8 @@ import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
 import InfoDetail from './DetailTour/InfoDetail';
 import Review from './DetailTour/Review';
 import TourSchedule from './DetailTour/TourSchedule';
+import BookAccommodation from '../BookAccommodation';
+import BookTour from './DetailTour/BookTour';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen() {
@@ -49,11 +51,11 @@ export default function DetailTourScreen() {
 
       <InfoDetail data={dataDetail} />,
       <DetailAccommoMap data={dataDetail} />,
-      <Review />,
+      <Review dataP={dataDetail} />,
       <View>
-        <ContactInfo data={dataDetail} />
+        <ContactInfo data={dataDetail} onPress={() => console.log(1)} />
       </View>,
-      <TourSchedule />,
+      <TourSchedule data={dataDetail} />,
 
       // <SimilarApartmentsNearby />,
     ];
@@ -66,13 +68,12 @@ export default function DetailTourScreen() {
         listNav={listNavBar}
         dataDetail={data?.data}
         isLoading={isLoading}
-        // ContentBookComponent={
-        //   <BookAccommodation
-        //     price={123213}
-        //     isLoading={false}
-        //     onPress={() => {}}
-        //   />
-        // }
+        ContentBookComponent={
+          <BookTour
+            isLoading={false}
+            data={{...data?.data, dataFilter: params?.dataFilter}}
+          />
+        }
       />
     </MainWrapper>
   );

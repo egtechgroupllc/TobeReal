@@ -40,20 +40,20 @@ export default function BoxDiscoveryItem({
       {!isLoading ? (
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => {
-            if (isFocused()) {
-              dispatch(
-                StackActions.push('NoBottomTab', {
-                  screen: 'SeeAllBuyScreen',
-                  params: {
-                    jsondata: jsonImage || [],
-                    title: name || '',
-                    paramPrice: price || '',
-                  },
-                }),
-              );
-            }
-          }}
+          // onPress={() => {
+          //   if (isFocused()) {
+          //     dispatch(
+          //       StackActions.push('NoBottomTab', {
+          //         screen: 'SeeAllBuyScreen',
+          //         params: {
+          //           jsondata: jsonImage || [],
+          //           title: name || '',
+          //           paramPrice: price || '',
+          //         },
+          //       }),
+          //     );
+          //   }
+          // }}
           style={[
             styles.wrapper,
             {

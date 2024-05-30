@@ -53,7 +53,7 @@ export default function FindBest({country, currency}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={130}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           isCategory
           dataCategory={listProvince?.data?.data?.slice(0, 9)}
           onPressSeeAll={() =>

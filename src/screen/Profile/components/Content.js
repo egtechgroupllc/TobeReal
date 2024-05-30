@@ -106,7 +106,7 @@ export default function Content({data}) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.box}>
+      {/* <View style={styles.box}>
         <View
           style={{
             flexDirection: 'row',
@@ -165,7 +165,7 @@ export default function Content({data}) {
             </CustomText>
           </View>
         </View>
-      </View>
+      </View> */}
       <View style={{alignItems: 'center', width: '90%'}}>
         <CategoriesButton
           title={t('view_personal')}

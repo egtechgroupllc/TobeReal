@@ -6,15 +6,20 @@ import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
-import {TabSelect} from '../../../../../components';
+import {CustomButton, TabSelect} from '../../../../../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 const listTab = ['Trip highlights'];
-export default function TourSchedule() {
+export default function TourSchedule({data}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-
   const [tabSelect, setTabSelect] = useState(listTab[0]);
+  const [selectedDay, setSelectedDay] = useState(
+    JSON.parse(data?.schedule)[0]?.title,
+  );
+  const handleDayClick = value => {
+    setSelectedDay(value);
+  };
 
   return (
     <WrapperContent
@@ -67,22 +72,28 @@ export default function TourSchedule() {
           paddingHorizontal: scale(16),
         }}>
         <View style={styles.content}>
-          {[1, 2].map((item, index) => (
-            <View key={`key-${item}-${index}`} style={styles.itemFac}>
-              <View style={styles.dot} />
-              <CustomText
-                textType="regular"
-                style={{
-                  fontSize: SIZES.xMedium,
-                }}>
-                Enjoy a unique stay experience at the building Cochin Sang
-                Hotel's rich historical imprint, which is difficult for you can
-                be found anywhere. {'\n'}If planning to have a vacation long,
-                then Cochin Sang Hotel is the choice for you. With full
-                amenities and excellent service quality, Cochin Sang Hotel will
-                make you feel comfortable like you are at home.
-              </CustomText>
-            </View>
+          {JSON.parse(data?.schedule)?.map((item, index) => (
+            <>
+              <CustomButton
+                key={item?.title}
+                text={item?.title}
+                style={{width: '20%', height: scale(30)}}
+                onPress={() => handleDayClick(item?.title)}
+              />
+
+              <View key={`key-${item}-${index}`} style={styles.itemFac}>
+                <View style={styles.dot} />
+                {item?.title === selectedDay && (
+                  <CustomText
+                    textType="regular"
+                    style={{
+                      fontSize: SIZES.xMedium,
+                    }}>
+                    {item?.description}
+                  </CustomText>
+                )}
+              </View>
+            </>
           ))}
         </View>
       </BottomSheet>
@@ -101,5 +112,22 @@ const styles = StyleSheet.create({
   },
   textSubIntroduction: {
     fontSize: SIZES.xMedium,
+  },
+  content: {
+    rowGap: scale(10),
+    width: WIDTH.widthContain,
+    maxHeight: scale(130),
+  },
+  dot: {
+    backgroundColor: COLORS.black,
+    width: scale(5),
+    height: scale(5),
+    borderRadius: 99,
+    top: scale(5),
+  },
+  itemFac: {
+    flexDirection: 'row',
+    // alignItems: 'center',
+    columnGap: scale(8),
   },
 });

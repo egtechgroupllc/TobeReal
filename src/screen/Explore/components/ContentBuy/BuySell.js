@@ -33,7 +33,7 @@ export default function BuySell({data}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           onPressSeeAll={() =>
             navigate('NoBottomTab', {
               screen: 'SeeAllBuyScreen',

@@ -49,7 +49,15 @@ export default function RoomScreen() {
         child_age: JSON.stringify(numRoomGuest?.numChild),
       }),
   });
-
+  console.log({
+    id_accomo: params?.id,
+    date_start: date?.selectedStartDate,
+    date_end: date?.selectedEndDate,
+    number_room: numRoomGuest?.numRooms,
+    number_occupancy: numRoomGuest?.numAdult,
+    number_child_occupancy: numRoomGuest?.numChild.length,
+    child_age: JSON.stringify(numRoomGuest?.numChild),
+  });
   const handleBookingRoom = value => {
     navigate('BookingRoomScreen', {...params, ...value});
   };

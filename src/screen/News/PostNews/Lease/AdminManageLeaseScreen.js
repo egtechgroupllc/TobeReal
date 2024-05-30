@@ -34,7 +34,7 @@ export default function AdminManageLeaseScreen() {
   const deleteAccomMu = useMutation({
     mutationFn: deleteAccom,
   });
-
+  console.log(params, 32131231212);
   const Delete = value => {
     deleteAccomMu.mutate(
       {

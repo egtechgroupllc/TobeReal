@@ -45,7 +45,7 @@ export default function FeatureEstate() {
       {isRender && (
         <WrapperContent
           // background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           // worldTour
           // isCategory
           // dataCategory={listCountry.data?.data?.slice(0, 9)}

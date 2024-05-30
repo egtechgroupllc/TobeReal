@@ -18,8 +18,23 @@ export default function FormChangeContact({data, isOpen}) {
   const bottomSheetRef = useRef();
 
   useEffect(() => {
+    const dataStart = async () => {
+      await EncryptedStorage.setItem(
+        '@infoBooking',
+        JSON.stringify({
+          username: data?.username,
+          phone: data?.phone,
+          email: data?.email,
+        }),
+      );
+    };
+    dataStart();
+  }, [JSON.stringify(data)]);
+
+  useEffect(() => {
     const loadInfoBooking = async () => {
       const result = await EncryptedStorage.getItem('@infoBooking');
+
       if (result) {
         setApply(JSON.parse(result));
       }
@@ -44,7 +59,6 @@ export default function FormChangeContact({data, isOpen}) {
       email: apply?.email || data?.email,
     };
   }, [JSON.stringify(data), JSON.stringify(apply)]);
-
   return (
     <>
       <TouchableOpacity

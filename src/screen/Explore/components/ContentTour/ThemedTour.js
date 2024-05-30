@@ -7,19 +7,18 @@ import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function ThemedTour({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  const title = [t('themed_tour')]
+  const title = [t('themed_tour')];
   const {navigate} = useNavigation();
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           themedTour
           onPressSeeAll={() =>
             navigate('NoBottomTab', {

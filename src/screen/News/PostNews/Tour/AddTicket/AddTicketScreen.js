@@ -56,6 +56,7 @@ export default function AddTicketScreen() {
     setValue,
     watch,
     reset,
+    getValues,
     formState: {errors},
   } = useForm();
 
@@ -67,16 +68,25 @@ export default function AddTicketScreen() {
     mutationFn: postAddTypeTicket,
   });
   const AddTypeTicket = value => {
+    const {price_percent, description_item, quantity, type} = getValues();
+
     addTypeTicketMu.mutate(
       {
-        type: value?.policy,
-        description: value?.id,
-        quantity: 1,
-        price_percent: 1,
+        tour_ticket_id: value,
+        type,
+        description: description_item,
+        quantity,
+        price_percent,
       },
       {
         onSuccess: dataInside => {
           console.log({dataInside}, 132);
+          reset();
+
+          queryClient.invalidateQueries(['tour', 'my-list']);
+          navigate('NoBottomTab', {
+            screen: 'TourManagementScreen',
+          });
         },
         onError: err => {
           console.log({err});
@@ -85,6 +95,10 @@ export default function AddTicketScreen() {
     );
   };
   const handlePostAddTicket = data => {
+    delete data?.price_percent;
+    delete data?.description_item;
+    delete data?.quantity;
+    delete data?.type;
     addTicketMu.mutate(
       {data, tour_id: params?.id},
       {
@@ -95,11 +109,7 @@ export default function AddTicketScreen() {
           );
 
           if (dataInside?.status) {
-            reset();
-            queryClient.invalidateQueries(['tour', 'my-list']);
-            navigate('NoBottomTab', {
-              screen: 'TourManagementScreen',
-            });
+            AddTypeTicket(dataInside?.data?.id);
           }
         },
         onError: err => {

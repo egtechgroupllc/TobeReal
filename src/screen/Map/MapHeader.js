@@ -20,6 +20,7 @@ import BottomSheetListSelect from '../../components/BottomSheetListSelect';
 import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../Model/api/common';
 import BottomSheetChild from './Header/BottomSheetChild';
+import InViewport from '../../components/InViewport';
 const listFill = [
   {
     text: 'On Promotion',
@@ -55,6 +56,7 @@ export default function MapHeader({
       menu: {id: 1, name: 'RENT'},
     },
   });
+  const [isRender, setIsRender] = useState(false);
   const handelFiter = value => {
     onFilter && onFilter(value);
 
@@ -77,7 +79,8 @@ export default function MapHeader({
           noSelectDefault
           onSort={() => {
             bottomSheetRef.current.open();
-            setValue('province', listProvince.data?.data?.[0]);
+            !watch('province')?.id &&
+              setValue('province', listProvince.data?.data?.[0]);
           }}
         />
 
@@ -158,19 +161,7 @@ export default function MapHeader({
                   setValue('menu', value);
                 }}
               />
-              {mapProvince && (
-                <>
-                  <MapProvince
-                    value={watch('province')?.id}
-                    onProvince={value => {
-                      setValue('province', value);
-                    }}
-                    nameProvince={watch('province')}
-                    data={listProvince}
-                    onSearch={() => bottomSheetChildRef.current.openChild()}
-                  />
-                </>
-              )}
+
               {watch('menu')?.name === 'RENT' || !watch('menu') ? (
                 <TypeAccommoda
                   value={watch('type')}
@@ -191,35 +182,60 @@ export default function MapHeader({
             </>
           )}
 
-          {/* <RatingReview /> */}
-          <SortBy
-            value={watch('sortPrice')}
-            onSort={value => {
-              setValue('sortPrice', value);
-            }}
-          />
-          <Budget
-            value={watch('budget')}
-            onBudget={value => {
-              setValue('budget', value);
-            }}
-          />
-          {accom && (
-            <TypeAccommoda
-              value={watch('type')}
-              onType={value => {
-                setValue('type', value?.id);
-              }}
-            />
-          )}
-          {estate && (
-            <TypeEstate
-              value={watch('type')}
-              onType={value => {
-                setValue('type', value?.id);
-              }}
-            />
-          )}
+          <InViewport
+            delay={100}
+            onChange={setIsRender}
+            styleLoading={{
+              marginTop: '40%',
+              height: scale(120),
+              width: scale(120),
+            }}>
+            {isRender && (
+              <>
+                {mapProvince && (
+                  <MapProvince
+                    value={watch('province')}
+                    onProvince={value => {
+                      setValue('province', value);
+                    }}
+                    // nameProvince={watch('province')}
+                    data={listProvince}
+                    onSearch={() => bottomSheetChildRef.current.openChild()}
+                  />
+                )}
+                {/* <RatingReview /> */}
+                {accom && (
+                  <TypeAccommoda
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                )}
+                {estate && (
+                  <TypeEstate
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                )}
+                <Budget
+                  value={watch('budget')}
+                  onBudget={value => {
+                    setValue('budget', value);
+                  }}
+                />
+                <SortBy
+                  value={watch('sortPrice')}
+                  onSort={value => {
+                    setValue('sortPrice', value);
+                  }}
+                />
+              </>
+            )}
+          </InViewport>
+
           {/* <BedRoom /> */}
         </BottomSheet>
       </View>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
@@ -15,6 +15,10 @@ export default function TypeAccommoda({onType, value}) {
     queryKey: ['common', 'accommodation', 'list-type'],
     queryFn: () => getListTypeRent(),
   });
+  useEffect(() => {
+    !value && data?.data?.[0]?.id && setChecked(data?.data?.[0]?.id);
+  }, [data?.data?.[0]?.id, value]);
+
   return (
     <WrapperContent
       heading={t('Type accommodation')}

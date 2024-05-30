@@ -49,7 +49,7 @@ export default function SimilarApartmentsNearby() {
   return (
     <WrapperContent
       // background={images.bgPackageTour}
-      isSeeAll
+      // isSeeAll
       onPressSeeAll={() =>
         navigate('NoBottomTab', {
           screen: 'SeeAllBuyScreen',
