@@ -1,13 +1,30 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
 import CustomText from '../../../../components/CustomText';
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
 import FeaturesPolicy1 from './components/FeaturesPolicy.js/FeaturesPolicy1';
 import CheckBox from '../../../../components/CheckBox';
 import FeaturesPolicy2 from './components/FeaturesPolicy.js/FeaturesPolicy2';
 import FeaturesPolicy3 from './components/FeaturesPolicy.js/FeaturesPolicy3';
+import {useNavigation} from '@react-navigation/native';
+import {IconHome} from '../../../../assets/icon/Icon';
 
 export default function FeaturesPolicyScreen() {
+  const {setOptions, navigate} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: 'Services',
+      headerTitleStyle: {
+        textAlign: 'center',
+      },
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <View>
       <View
@@ -19,13 +36,13 @@ export default function FeaturesPolicyScreen() {
           rowGap: scale(20),
           ...SHADOW,
         }}>
-        <Box title={'Vật nuôi'}>
+        <Box title={'Pet'}>
           <FeaturesPolicy1 />
         </Box>
-        <Box title={'Hút Thuốc'}>
+        <Box title={'Smoking'}>
           <FeaturesPolicy2 />
         </Box>
-        <Box title={'Bữa sáng bỗ sung'}>
+        <Box title={'Additional breakfast'}>
           <FeaturesPolicy3 />
         </Box>
       </View>

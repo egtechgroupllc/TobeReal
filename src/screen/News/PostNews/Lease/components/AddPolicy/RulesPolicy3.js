@@ -13,14 +13,14 @@ export default function RulesPolicy3({setValue, unregister}) {
         rowGap: scale(10),
       }}>
       <CustomText>
-        Mỗi loại giá có thể có tôi đa 5 dịch vụ giá trị gia tăng, chảng hạn như
-        chỗ đô xe, mát-xa và tin dụng.
+        Each price type can have up to 5 value-added services, for example
+        Parking, massage and credit facilities.
       </CustomText>
       <CustomText
         color={COLORS.blue}
         textType="medium"
         onPress={() => navigate('FeaturesPolicyScreen')}>
-        Thêm dịch vụ giá trị gia tăng mới
+        Add new value-added services
       </CustomText>
     </View>
   );

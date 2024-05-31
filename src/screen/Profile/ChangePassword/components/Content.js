@@ -43,6 +43,7 @@ export default function Content() {
         label={t('old_password')}
         control={control}
         name="from"
+        password
         placeholder={t('enter_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
@@ -52,6 +53,7 @@ export default function Content() {
         label={t('new_password')}
         control={control}
         name="to"
+        password
         placeholder={t('enter_new_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
@@ -60,6 +62,7 @@ export default function Content() {
       <CustomInput
         label={t('confirm_password')}
         control={control}
+        password
         name="passwordConfirm"
         placeholder={t('confirm_password')}
         rules={[

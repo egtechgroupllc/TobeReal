@@ -99,7 +99,7 @@ export default function ContentStep2({onPress, data}) {
             },
           },
         )
-      : showMess('Vui lòng chọn phương thức thanh toán', 'error');
+      : showMess('Please select payment method', 'error');
   };
 
   return (
@@ -112,7 +112,7 @@ export default function ContentStep2({onPress, data}) {
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
-          <CustomButton text="Thanh Toán" onPress={handleBookingRoom} />
+          <CustomButton text="Pay" onPress={handleBookingRoom} />
         </View>
 
         <View style={styles.boxEarnPoint}>

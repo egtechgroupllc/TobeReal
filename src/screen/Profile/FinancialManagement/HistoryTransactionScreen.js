@@ -37,7 +37,7 @@ import {CustomButton} from '../../../components';
 import {showMess} from '../../../assets/constants/Helper';
 const listInfo = [
   {
-    text: 'Tất cả',
+    text: 'All',
   },
   {
     text: 'Bank',
@@ -137,7 +137,7 @@ export default function HistoryTransactionScreen() {
     );
   };
   const handleCancel = value => {
-    Alert.alert('Bạn có chắc huỷ giao dịch này?', '', [
+    Alert.alert('Are you sure to cancel this transaction?', '', [
       {
         text: 'Cancel',
         // onPress: () => Alert.alert('Cancel Pressed'),

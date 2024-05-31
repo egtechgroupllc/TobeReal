@@ -51,7 +51,7 @@ export default memo(function InputPriceRoom({
           rowGap: scale(10),
         }}>
         <CustomText color={COLORS.text}>
-          Bao gồm các loại thuế, phí và hoa hồng
+          Includes taxes, fees and commissions
         </CustomText>
 
         <Collapsible
@@ -67,7 +67,7 @@ export default memo(function InputPriceRoom({
             size={SIZES.xMedium}>
             {data?.data?.fee_commission_percent * 100}%{' '}
             <CustomText textType="medium" size={SIZES.xMedium}>
-              Hoa hồng cho Saveloka
+              Commission for Saveloka
             </CustomText>
           </CustomText>
 
@@ -77,15 +77,15 @@ export default memo(function InputPriceRoom({
             }}>
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Trợ giúp 24/7 bằng ngôn ngữ của bạn'}
+              value={'24/7 help in your language'}
             />
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Tiết kiệm thời gian với đặt phòng được xác nhận tự động'}
+              value={'Save time with automatically confirmed bookings'}
             />
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Chúng tôi sẽ quảng bá chỗ ở của bạn trên Google'}
+              value={'We will promote your property on Google'}
             />
           </View>
 
@@ -97,7 +97,7 @@ export default memo(function InputPriceRoom({
               currency: typeCurrency,
             })}{' '}
             <CustomText textType="medium" size={SIZES.xMedium}>
-              Doanh thu của bạn (bao gồm thuế)
+              Your revenue (including taxes)
             </CustomText>
           </CustomText>
         </Collapsible>

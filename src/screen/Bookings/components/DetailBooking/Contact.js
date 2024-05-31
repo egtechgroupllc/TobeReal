@@ -8,7 +8,7 @@ export default function Contact({data}) {
   return (
     <View style={styles.boxContact}>
       <CustomText textType="bold" size={SIZES.medium}>
-        Chi tiết liên lạc
+        Contact detail
       </CustomText>
       <View style={styles.infoContact}>
         <CustomImage source={images.avatar} style={styles.avatar} />

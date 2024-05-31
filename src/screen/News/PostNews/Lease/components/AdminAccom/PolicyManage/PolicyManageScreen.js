@@ -4,7 +4,7 @@ import React, {useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getListPolicy} from '../../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {IconTrash} from '../../../../../../../assets/icon/Icon';
+import {IconHome, IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../../components/CustomText';
@@ -18,8 +18,14 @@ export default function PolicyManageScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý chính sách',
+      headerTitle: 'Policy management',
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const {data, isLoading, error} = useQuery({
@@ -35,7 +41,7 @@ export default function PolicyManageScreen() {
       <CustomText
         textType="semiBold"
         style={{alignSelf: 'center', fontSize: SIZES.large}}>
-        Danh sách các chính sách
+        List of policies
       </CustomText>
       <FlatList
         // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
@@ -95,7 +101,7 @@ export default function PolicyManageScreen() {
 
       <BottomSheet
         ref={bottomSheetRef}
-        titleIndicator={'Thao Tác'}
+        titleIndicator={'Operation'}
         snapPoints={['30%']}
         disableScroll
         styleContent={styles.bottomSheet}>

@@ -11,15 +11,15 @@ import CustomText from '../../../../../../components/CustomText';
 const list = [
   {
     id: 1,
-    title: 'Không được mang theo thú cưng.',
+    title: 'Pets are not allowed.',
   },
   {
     id: 2,
-    title: 'Được mang theo thú cưng.',
+    title: 'Pets are allowed.',
   },
   {
     id: 3,
-    title: 'Khác',
+    title: 'Other',
   },
 ];
 
@@ -47,7 +47,7 @@ export default function FeaturesPolicy1({control}) {
       <Collapsible collapsed={isSelect !== 2}>
         <View style={styles.boxCheckMeal}>
           <CustomInput
-            placeholder="Mô tả yêu cầu khác "
+            placeholder="Describe other requirements "
             style={styles.textInput}
             maxLength={2}
             styleText={{
@@ -57,7 +57,7 @@ export default function FeaturesPolicy1({control}) {
             name="min_number_day"
             rules={[requireField(t('this_field_required'))]}
           />
-          <CustomText>Mô tả yêu cầu khác</CustomText>
+          <CustomText>Describe other requirements</CustomText>
         </View>
       </Collapsible>
     </View>

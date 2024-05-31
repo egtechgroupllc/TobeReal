@@ -19,7 +19,7 @@ const list = [
     screen: 'TourManagementScreen',
   },
   {
-    title: 'Tôi muốn đăng ký tour mới',
+    title: 'I want to register for a new tour',
     desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
     textBtn: 'List New Tour',
     navigate: 'PostNewTourScreen',

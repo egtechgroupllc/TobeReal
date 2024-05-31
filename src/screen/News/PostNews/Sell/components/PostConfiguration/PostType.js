@@ -10,16 +10,16 @@ import ChoosePostTime from './ChoosePostTime';
 
 const postType = [
   {
-    searchRating: 'Đứng cuối kết quả tìm kiếm',
+    searchRating: 'Standing at the bottom of search results',
   },
   {
-    searchRating: 'Hiển thị dưới VIP Vàng',
+    searchRating: 'Shown under VIP Gold',
   },
   {
-    searchRating: 'Hiển thị dưới VIP Kim Cương',
+    searchRating: 'Shown under VIP Diamond',
   },
   {
-    searchRating: 'Đứng đầu kết quả tìm kiếm',
+    searchRating: 'Top search results',
   },
 ];
 
@@ -60,7 +60,7 @@ export default memo(function PostType({
             paddingHorizontal: scale(10),
             alignSelf: 'flex-start',
           }}>
-          Chọn loại tin đăng:
+          Select post type:
         </CustomText>
 
         <FlatList

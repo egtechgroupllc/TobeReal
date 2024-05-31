@@ -83,8 +83,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(30),
             }}>
             <CustomInput
-              label={'Chiều rộng (m)'}
-              placeholder="Chiều rộng"
+              label={'Width (m)'}
+              placeholder="Width"
               name="size_width"
               rules={requireField(t('this_field_required'))}
               styleWrapper={{

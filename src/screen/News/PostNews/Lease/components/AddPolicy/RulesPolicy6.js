@@ -16,11 +16,11 @@ import {IconAdd} from '../../../../../../assets/icon/Icon';
 const list = [
   {
     id: 1,
-    title: 'Rẻ hơn Loại giá cho khách đặt sớm (15+ ngày)',
+    title: 'Cheaper Price type for early booking (15+ days)',
   },
   {
     id: 2,
-    title: 'Đắt hơn Loại giá cho khách đặt sớm (15+ ngày)',
+    title: 'More expensive Price type for early booking (15+ days)',
   },
 ];
 

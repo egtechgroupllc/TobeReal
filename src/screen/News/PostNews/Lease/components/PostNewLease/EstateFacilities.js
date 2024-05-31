@@ -99,7 +99,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       style={{
                         padding: scale(12),
                       }}>
-                      Khách có thể sử dụng gì tại nơi lưu trú của bạn?
+                      What can guests use at your property?
                     </CustomText>
                   )
                 );

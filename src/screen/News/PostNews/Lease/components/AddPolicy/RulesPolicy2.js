@@ -8,29 +8,29 @@ import Collapsible from 'react-native-collapsible';
 const list = [
   {
     id: 1,
-    title: 'Không',
+    title: 'No',
   },
   {
     id: 2,
-    title: 'Có, thêm lựa chọn bữa ăn',
+    title: 'Yes, more meal options',
   },
 ];
 const listHasMeal = [
   {
     id: 1,
-    title: 'Bữa sáng',
+    title: 'Breakfast',
   },
   {
     id: 2,
-    title: 'Bữa trưa',
+    title: 'Lunch',
   },
   {
     id: 3,
-    title: 'Bữa tối',
+    title: 'Dinner',
   },
   {
     id: 4,
-    title: 'Bao gồm tất cả',
+    title: 'Include all',
   },
 ];
 export default function RulesPolicy2({setValue, unregister}) {

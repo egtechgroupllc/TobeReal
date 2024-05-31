@@ -23,13 +23,13 @@ export default function DetailTicketScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Tổng quan',
+      text: 'Overview',
     },
     {
-      text: t('Hiệu lực voucher'),
+      text: t('Voucher validity'),
     },
     {
-      text: t('Chính sách'),
+      text: t('Policy'),
     },
   ]).current;
   const {data, isLoading} = useQuery({

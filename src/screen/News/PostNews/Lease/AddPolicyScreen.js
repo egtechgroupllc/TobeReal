@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
@@ -15,6 +15,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postCreatePolicyToAccom} from '../../../../Model/api/apiAccom';
 import {CustomButton} from '../../../../components';
 import {useNavigation} from '@react-navigation/native';
+import {IconHome} from '../../../../assets/icon/Icon';
 
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
@@ -38,6 +39,11 @@ export default function AddPolicyScreen({route}) {
       headerTitleStyle: {
         textAlign: 'center',
       },
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('POST')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -96,7 +102,7 @@ export default function AddPolicyScreen({route}) {
       }}>
       <View style={styles.content}>
         <Box
-          title="Quý vị muốn sử dụng chính sách hủy phòng nào cho loại giá này?"
+          title="Which cancellation policy would you like to use for this rate?"
           num="1">
           <RulesPolicy1
             setValue={setValue}
@@ -105,19 +111,19 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="2" title="Quý vị có muốn bao gồm bữa ăn trong loại giá này?">
+        <Box num="2" title="Do you want meals included in this rate?">
           <RulesPolicy2 setValue={setValue} unregister={unregister} />
         </Box>
 
         <Box
           num="3"
-          title="Quý vị muốn thêm dịch vụ giá trị gia tăng vào loại giá này?">
+          title="Do you want to add value-added services to this rate?">
           <RulesPolicy3 setValue={setValue} unregister={unregister} />
         </Box>
 
         <Box
           num="4"
-          title="Quý vị có muốn thiết lập thời gian lưu trú tối thiểu cho loại giá này không?">
+          title="Do you want to set a minimum length of stay for this rate?">
           <RulesPolicy4
             setValue={setValue}
             control={control}
@@ -127,13 +133,13 @@ export default function AddPolicyScreen({route}) {
 
         <Box
           num="5"
-          title="Khách có thể đặt với loại giá này bao nhiêu ngày trước khi nhận phòng?">
+          title="How many days before check-in can guests book this rate?">
           <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
         <Box
           num="6"
-          title="Quý vị muốn loại giá mới này rẻ hơn hay đắt hơn so với giá trên lịch?">
+          title="Do you want this new price to be cheaper or more expensive than the price on the calendar?">
           <RulesPolicy6
             control={control}
             unregister={unregister}
@@ -141,7 +147,7 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="7" title="Quý vị  đặt tên cho loại chính sách này là gì?">
+        <Box num="7" title="What do you name this type of policy?">
           <SetNamePolicy control={control} />
         </Box>
         <CustomButton

@@ -27,7 +27,7 @@ export default function AccommoManagementScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Danh Sách Chỗ Ở Đã Tạo',
+      headerTitle: 'Accommodation List Created',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />

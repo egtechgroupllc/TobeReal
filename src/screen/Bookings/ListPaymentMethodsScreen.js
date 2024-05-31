@@ -8,7 +8,7 @@ const listMethods = [
   {
     header: 'Savaloka Wallet',
     title: 'Saveloka Transfer',
-    desc: 'Thanh toán bằng ví Saveloka',
+    desc: 'Pay with Saveloka wallet',
     tag: 'Recommened',
     type: 'LOKAPAY',
     image: images.logo1,
@@ -16,7 +16,7 @@ const listMethods = [
   {
     header: 'Payment card',
     title: 'Payment card',
-    desc: 'Chấp nhận thanh toán từ tất cả ngân hàng',
+    desc: 'Accept payments from all banks',
     type: 'CARD',
     image: images.iconBank,
   },
@@ -40,7 +40,7 @@ export default function ListPaymentMethodsScreen({route}) {
   const dataParams = route?.params;
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Chọn phương thức thanh toán',
+      headerTitle: 'Select a payment method',
       headerTitleStyle: {
         textAlign: 'left',
       },

@@ -17,7 +17,7 @@ const list = [
     screen: 'SellManagementScreen',
   },
   {
-    title: 'Tôi muốn bán bất động sản',
+    title: 'I want to sell real estate',
     desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
     textBtn: 'List New Sell',
     navigate: 'PostNewSellScreen',

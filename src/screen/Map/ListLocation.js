@@ -87,7 +87,7 @@ export default memo(
               rating={3}
               data={item}
               seeViewNumber={1.4}
-              // isViewMap
+              isViewMap
             />
           )}
         />

@@ -93,7 +93,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Hướng cửa chính'}
+              label={'Main door direction'}
               data={data?.data}
               name={'direction_main_id'}
               control={control}
@@ -114,7 +114,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Giấy tờ pháp lý'}
+              label={'Legal documents'}
               name={'legal_documents'}
               control={control}
               data={listLegalDoc}
@@ -125,7 +125,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <RealEstateType
-              label={'Nội thất'}
+              label={'Interior'}
               name={'furnish'}
               control={control}
               data={listInterior}

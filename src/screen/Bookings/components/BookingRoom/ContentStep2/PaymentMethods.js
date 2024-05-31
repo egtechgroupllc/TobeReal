@@ -31,7 +31,7 @@ export default function PaymentMethods({data, onChange}) {
           textType="semiBold"
           color={COLORS.text}
           size={SIZES.xMedium}>
-          Phuơng thức thanh toán
+          Payment method
         </CustomText>
         <CustomText
           textType="bold"
@@ -43,7 +43,7 @@ export default function PaymentMethods({data, onChange}) {
               },
             })
           }>
-          {methodsPay ? 'Xem tất cả' : 'Chọn'}
+          {methodsPay ? 'See all' : 'Select'}
         </CustomText>
       </View>
 

@@ -15,11 +15,11 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 const list = [
   {
     id: 1,
-    title: 'Bất cứ lúc nào (loại giá này luôn hoạt động)',
+    title: 'Anytime (this price type is always active)',
   },
   {
     id: 2,
-    title: 'Cài đặt số ngày trước khi nhận phòng',
+    title: 'Set the number of days before check-in',
   },
 ];
 
@@ -65,12 +65,12 @@ export default function RulesPolicy5({control, unregister}) {
             rules={[
               requireField(t('this_field_required')),
               validateMinMaxAmount(
-                'Số ngày đặt trước phải hợp lệ (1 -> 28)',
+                'The number of days in advance must be valid (1 -> 28)',
                 28,
               ),
             ]}
           />
-          <CustomText>Ngày hoặc hơn trước khi nhận phòng</CustomText>
+          <CustomText>Days or more before check-in</CustomText>
         </View>
       </Collapsible>
     </View>

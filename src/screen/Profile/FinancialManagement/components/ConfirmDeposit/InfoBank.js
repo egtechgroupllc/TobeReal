@@ -23,7 +23,7 @@ export default function InfoBank({data}) {
             flex: 1,
             fontSize: SIZES.medium,
           }}>
-          Chuyển tiền qua - {nameBank}
+          Transfer money - {nameBank}
         </CustomText>
         <CustomImage
           source={data?.typeAccountBank?.logo_url}
@@ -45,16 +45,19 @@ export default function InfoBank({data}) {
             paddingHorizontal: scale(10),
             rowGap: scale(20),
           }}>
-          <ItemInfo name="Số tài khoản" value={data?.typeAccountBank?.code} />
           <ItemInfo
-            name="Chủ tài khoản"
+            name="Bank account number"
+            value={data?.typeAccountBank?.code}
+          />
+          <ItemInfo
+            name="Bank account holders"
             value={data?.typeAccountBank?.owner}
             isCopy={false}
           />
         </View>
         <View style={styles.border}>
           <ItemInfo
-            name="Số tiền chuyển khoản"
+            name="Transfer amount"
             value={String(data?.amount)}
             isPrice
           />
@@ -67,7 +70,7 @@ export default function InfoBank({data}) {
 const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
   const handleCopy = () => {
     Clipboard.setString(value);
-    showMess('Sao chép thành công');
+    showMess('Copy successfully');
   };
   const {currency} = useCountry();
 

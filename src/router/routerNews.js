@@ -56,9 +56,4 @@ export default routerNews = [
     name: 'PostNewSellScreen',
     component: PostNewSellScreen,
   },
-
-  {
-    name: 'FeaturesPolicyScreen',
-    component: FeaturesPolicyScreen,
-  },
 ];

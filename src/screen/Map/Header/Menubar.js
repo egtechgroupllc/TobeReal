@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
@@ -23,6 +23,9 @@ export default function Menubar({onType, value}) {
       name: 'TOUR',
     },
   ];
+  useEffect(() => {
+    !value && data[0]?.id && setChecked(data[0]?.id);
+  }, [data[0]?.id, value]);
   return (
     <WrapperContent
       styleTextHeading={{

@@ -25,7 +25,7 @@ export default function TourManagementScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Danh Sách Tour Đã Tạo',
+      headerTitle: 'Tour List Created',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />

@@ -67,7 +67,7 @@ export default function BottomReview({handleSubmit, roomID}) {
   return (
     <View style={{...styles.wrapper, paddingBottom: insets.bottom}}>
       {/* <CheckBox text="Đánh giá ẩn danh" /> */}
-      <CustomButton text="Gửi" onPress={handleSubmit(hanPostReview)} />
+      <CustomButton text="Submit" onPress={handleSubmit(hanPostReview)} />
     </View>
   );
 }

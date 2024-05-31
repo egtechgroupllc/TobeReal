@@ -22,8 +22,8 @@ export default function SetNamePolicy({control}) {
       <View style={styles.note}>
         <View style={styles.arrowTop} />
         <CustomText>
-          Điều này sẽ không ảnh hưởng đến bất kỳ giới hạn thời gian lưu trú nào
-          đã cài trong lịch của Quý vị.
+          This will not affect any length of stay restrictions installed in your
+          calendar.
         </CustomText>
       </View>
     </View>

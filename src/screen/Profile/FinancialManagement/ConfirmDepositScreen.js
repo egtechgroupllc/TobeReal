@@ -22,7 +22,7 @@ export default function ConfirmDepositScreen({route}) {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Xác minh thanh toán',
+      headerTitle: 'Payment verification',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,7 +65,7 @@ export default function ConfirmDepositScreen({route}) {
         }}>
         <CustomButton
           onPress={handleSubmit(handleConfirmOrder)}
-          text="Vâng, tôi đã thanh toán "
+          text="Yes, I confirm paid "
           style={{
             width: '70%',
           }}

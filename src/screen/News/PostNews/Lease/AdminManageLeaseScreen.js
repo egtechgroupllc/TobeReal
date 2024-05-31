@@ -19,7 +19,7 @@ export default function AdminManageLeaseScreen() {
   const [adminScreen, setAdminScreen] = useState(false);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý chỗ ở',
+      headerTitle: 'Accommodation management',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
@@ -61,8 +61,8 @@ export default function AdminManageLeaseScreen() {
   };
   const handleDelete = () =>
     Alert.alert(
-      'Bạn có chắc xoá chỗ ở này?',
-      'Chỗ ở đã xoá không thể khôi phục!',
+      'Are you sure to delete this property?',
+      'Deleted properties cannot be restored!',
       [
         {
           text: 'Cancel',

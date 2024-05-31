@@ -27,10 +27,10 @@ export default function ContentReview({control, setValue}) {
       <CustomInput
         control={control}
         name="content"
-        placeholder="Bạn thích hoặc không thích điều gì về chỗ ở này?"
+        placeholder="What do you like or dislike about this place?"
         multiline
         maxLength={300}
-        label={'Viết 1 đánh giá'}
+        label={'Write review'}
         styleTextLabel={{
           textType: 'bold',
         }}

@@ -14,15 +14,15 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 const list = [
   {
     id: 1,
-    title: 'Linh động - huỷ phòng trước giờ nhận phòng',
+    title: 'Flexible - cancel before check-in time',
   },
   {
     id: 2,
-    title: 'Linh động - trước 1 ngày',
+    title: 'Flexible - 1 day in advance',
   },
   {
     id: 3,
-    title: 'Không hoàn tiền',
+    title: 'No refunds',
   },
 ];
 
@@ -63,9 +63,9 @@ export default function RulesPolicy1({setValue, control, unregister}) {
             key={index}
             title={
               index === 0 && isSelect === 0
-                ? `Linh động - huỷ phòng trước ${formatTime(
+                ? `Flexibility - cancel in advance ${formatTime(
                     timeCheckStart,
-                  )} vào ngày nhận phòng`
+                  )} on check-in day`
                 : item?.title
             }
             isCheck={isSelect === index}
@@ -75,7 +75,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
 
       <DatePicker
         mode="time"
-        title={'Chọn giờ'}
+        title={'Select hours'}
         modal
         open={openCheckStart}
         date={timeCheckStart}
@@ -109,13 +109,15 @@ export default function RulesPolicy1({setValue, control, unregister}) {
               </View>
             }
           />
-          <CustomText>Phí huỷ sau thời gian khách đã đặt phòng</CustomText>
+          <CustomText>
+            Cancellation fee after the time the guest has booked the room
+          </CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
             <CustomText>
-              Phí huỷ sau thời gian khách đã đặt phòng. Khách hàng phải trả phí
-              huỷ phòng sau thời gian đã đặt phòng
+              Cancellation fee after the time the guest has booked the room.
+              Customers must pay a fee Cancel the room after the booked time
             </CustomText>
           </View>
         </View>

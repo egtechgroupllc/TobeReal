@@ -25,7 +25,7 @@ export default memo(function ListAccountBank({
   return (
     <View style={styles.box}>
       <CustomText textType="medium">
-        Bạn hãy chọn một trong các hình thức thanh toán dưới đây
+        Please choose one of the payment methods below
       </CustomText>
 
       <ScrollView

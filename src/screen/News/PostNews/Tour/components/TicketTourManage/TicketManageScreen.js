@@ -24,7 +24,7 @@ export default function TicketManageScreen() {
   const [dataItemAccom, setDataItemAccom] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý vé Tour',
+      headerTitle: 'Tour ticket management',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
@@ -110,7 +110,7 @@ export default function TicketManageScreen() {
         )}
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Thao Tác'}
+          titleIndicator={'Operation'}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

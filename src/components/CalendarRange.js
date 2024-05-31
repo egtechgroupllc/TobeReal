@@ -7,7 +7,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {getListPriceRoomDate} from '../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../assets/constants';
-import {formatPrice} from '../utils/format';
+import {formatNumber, formatPrice} from '../utils/format';
 import CustomText from './CustomText';
 import {Calendar} from 'react-native-calendars';
 
@@ -57,7 +57,6 @@ export default function CalendarRange({
       }),
     enabled: !!id,
   });
-
   const handlePress = useCallback(value => {
     if (clicked.current) {
       setDateSelect(prev => ({
@@ -228,7 +227,7 @@ const BoxText = ({
               : '#000'),
           fontSize: SIZES.medium,
         }}>
-        {date.date.day}
+        {date?.date.day}
       </CustomText>
     </View>
   );
@@ -250,7 +249,7 @@ const TextPrice = ({isLoading, date, isWeekend, data}) => {
           style={{
             color: '#000',
           }}>
-          {formatPrice(dataDateDetail?.price)}
+          {formatNumber(dataDateDetail?.price)}
         </CustomText>
       );
 };

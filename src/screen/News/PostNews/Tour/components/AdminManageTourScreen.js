@@ -21,7 +21,7 @@ export default function AdminManageTourScreen() {
   const queryClient = useQueryClient();
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý tour',
+      headerTitle: 'Tour management',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />

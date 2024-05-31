@@ -27,7 +27,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
           ref={bottomSheetRef}
           onDismiss={() => onClose()}
           snapPoints={['40%']}
-          titleIndicator="Chi tiết giá"
+          titleIndicator="Price detail"
           styleContent={{
             paddingHorizontal: scale(20),
             rowGap: scale(10),

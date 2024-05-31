@@ -14,15 +14,15 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 const list = [
   {
     id: 1,
-    title: 'Linh động - huỷ tour trước giờ diễn ra tour',
+    title: 'Flexibility - cancel tour before tour time',
   },
   {
     id: 2,
-    title: 'Linh động - trước 1 ngày',
+    title: 'Flexible - 1 day in advance',
   },
   {
     id: 3,
-    title: 'Không hoàn tiền',
+    title: 'No refunds',
   },
 ];
 
@@ -63,9 +63,9 @@ export default function RulesPolicyTour({setValue, control, unregister}) {
             key={index}
             title={
               index === 0 && isSelect === 0
-                ? `Linh động - huỷ tour trước ${formatTime(
+                ? `Flexibility - cancel tour in advance ${formatTime(
                     timeCheckStart,
-                  )} vào ngày bắt đầu tour`
+                  )} on the tour start date`
                 : item?.title
             }
             isCheck={isSelect === index}
@@ -75,7 +75,7 @@ export default function RulesPolicyTour({setValue, control, unregister}) {
 
       <DatePicker
         mode="time"
-        title={'Chọn giờ'}
+        title={'Select hours'}
         modal
         open={openCheckStart}
         date={timeCheckStart}
@@ -109,13 +109,16 @@ export default function RulesPolicyTour({setValue, control, unregister}) {
               </View>
             }
           />
-          <CustomText>Phí huỷ sau thời gian khách đã đặt tour</CustomText>
+          <CustomText>
+            Cancellation fee after the time the customer has booked the tour
+          </CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
             <CustomText>
-              Phí huỷ sau thời gian khách đã đặt tour. Khách hàng phải trả phí
-              huỷ tour sau thời gian đã đặt tour
+              Cancellation fee after the time the customer has booked the tour.
+              Customers must pay a fee Cancel the tour after the tour booking
+              time
             </CustomText>
           </View>
         </View>

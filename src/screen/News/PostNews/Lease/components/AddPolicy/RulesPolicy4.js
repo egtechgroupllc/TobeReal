@@ -15,11 +15,11 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 const list = [
   {
     id: 1,
-    title: 'Không (loại giá này dùng được cho tất cả các độ dài lưu trú)',
+    title: 'No (this rate is available for all stay lengths)',
   },
   {
     id: 2,
-    title: 'Có',
+    title: 'Yes',
   },
 ];
 
@@ -63,19 +63,16 @@ export default function RulesPolicy4({control, unregister}) {
             name="min_number_day"
             rules={[
               requireField(t('this_field_required')),
-              validateMinMaxAmount(
-                'Đêm lưu trú tối thiểu không hợp lệ (1 -> 28)',
-                28,
-              ),
+              validateMinMaxAmount('Invalid minimum night stay (1 -> 28)', 28),
             ]}
           />
-          <CustomText>Đêm lưu trú tối thiểu</CustomText>
+          <CustomText>Minimum night stay</CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
             <CustomText>
-              Điều này sẽ không ảnh hưởng đến bất kỳ giới hạn thời gian lưu trú
-              nào đã cài trong lịch của Quý vị.
+              This will not affect any length of stay limits which is set in
+              your calendar.
             </CustomText>
           </View>
         </View>

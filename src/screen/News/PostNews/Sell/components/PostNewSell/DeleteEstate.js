@@ -84,7 +84,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Mã tin{' '}
+                News id{' '}
               </CustomText>
               <CustomText textType="medium" style={styles.textRight}>
                 {data?.id}
@@ -120,16 +120,16 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Lưu ý:{' '}
+              Note:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Tin đăng sau khi xoá không thể khôi phục
+                Once deleted, postings cannot be restored
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Huỷ"
+              text="Cancel"
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -143,7 +143,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Xoá tin"
+              text="Delete"
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

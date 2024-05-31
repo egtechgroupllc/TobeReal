@@ -18,7 +18,7 @@ export default function ListMethodBankScreen() {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Nạp tiền vào tài khoản',
+      headerTitle: 'Deposit',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -26,7 +26,7 @@ export default function ListMethodBankScreen() {
   return (
     <View style={styles.box}>
       <CustomText textType="medium">
-        Bạn hãy chọn một trong các hình thức thanh toán dưới đây
+        Please choose one of the payment methods below
       </CustomText>
 
       <FlatList

@@ -144,7 +144,8 @@ export default function BookTourScreen({route}) {
                   width: '10%',
                   left: '40%',
                   top: '50%',
-                }}></View>
+                }}
+              />
               <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity style={styles.boxSum}>
                   <CustomText

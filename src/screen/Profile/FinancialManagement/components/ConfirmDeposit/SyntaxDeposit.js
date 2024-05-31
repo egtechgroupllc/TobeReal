@@ -13,9 +13,9 @@ export default function SyntaxDeposit({data}) {
 
   const handleCopy = () => {
     Clipboard.setString(
-      `${data?.code}  nap tien dang tin cho tai khoan ${dataUser?.username}`,
+      `${data?.code}  deposit money to post news to your account ${dataUser?.username}`,
     );
-    showMess('Sao chép thành công');
+    showMess('Copy successful');
   };
 
   return (
@@ -25,7 +25,7 @@ export default function SyntaxDeposit({data}) {
         style={{
           fontSize: SIZES.medium,
         }}>
-        Cú pháp nội dung chuyển khoản
+        Syntax of transfer content
       </CustomText>
       <TouchableOpacity
         activeOpacity={0.7}
@@ -44,7 +44,7 @@ export default function SyntaxDeposit({data}) {
             }}>
             {data?.code}{' '}
           </CustomText>
-          nap tien dang tin cho tai khoan
+          deposit money to post news to your account
           <CustomText
             textType="semiBold"
             style={{
@@ -63,7 +63,7 @@ export default function SyntaxDeposit({data}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Lưu ý:{' '}
+          Note:{' '}
         </CustomText>
         <CustomText
           textType="semiBold"
@@ -72,9 +72,9 @@ export default function SyntaxDeposit({data}) {
           }}>
           {data?.code}
         </CustomText>{' '}
-        là mã chuyển khoản của riêng bạn. Bạn vui lòng nhập đúng mã ở đầu nội
-        dung chuyển khoản để việc xác nhận giao dịch được nhanh chóng và chính
-        xác.
+        is your own transfer code. Please enter the correct code at the top of
+        the content Use wire transfer to confirm transactions quickly and
+        accurately body.
       </CustomText>
     </View>
   );

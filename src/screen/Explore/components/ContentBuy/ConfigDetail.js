@@ -9,12 +9,12 @@ export default function ConfigDetail({data}) {
     <View style={styles.wrapper}>
       <View style={{flex: 1, rowGap: scale(20)}}>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày đăng</CustomText>
+          <CustomText style={styles.center}>Date posted</CustomText>
           <CustomText textType="medium">{data?.date_start}</CustomText>
         </View>
 
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày hết hạn</CustomText>
+          <CustomText style={styles.center}>Expiration date</CustomText>
           <CustomText textType="medium">
             {formatDate(data?.date_start, {
               addDays: data?.package_post_item?.number_day,
@@ -26,13 +26,13 @@ export default function ConfigDetail({data}) {
 
       <View style={{flex: 1, rowGap: scale(20)}}>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Loại tin</CustomText>
+          <CustomText style={styles.center}>Type</CustomText>
           <CustomText textType="medium" numberOfLines={1}>
             {data?.package_post_item?.package_post?.name}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Mã tin</CustomText>
+          <CustomText style={styles.center}>News id</CustomText>
           <CustomText textType="medium" numberOfLines={1}>
             {data?.id}
           </CustomText>

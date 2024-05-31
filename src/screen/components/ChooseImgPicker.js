@@ -157,7 +157,7 @@ export default memo(function ChooseImgPicker({
                           height: scale(50),
                         }}
                       />
-                      <CustomText>Thêm ảnh</CustomText>
+                      <CustomText>Add images</CustomText>
                     </TouchableOpacity>
                   )}
 
@@ -196,7 +196,7 @@ export default memo(function ChooseImgPicker({
                         }}
                       />
                       <CustomText>
-                        {descContent || 'Bấm để chọn ảnh cần tải lên'}
+                        {descContent || 'Click to select the photo to upload'}
                       </CustomText>
                     </View>
                   )}

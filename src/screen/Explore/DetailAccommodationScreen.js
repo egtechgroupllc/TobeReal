@@ -24,7 +24,7 @@ export default function DetailAccommodationScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Tổng quan',
+      text: 'Overview',
     },
     {
       text: t('facilities'),

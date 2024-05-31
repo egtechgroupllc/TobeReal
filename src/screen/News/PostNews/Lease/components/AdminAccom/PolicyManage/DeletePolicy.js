@@ -123,16 +123,16 @@ export default function DeletePolicy({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Lưu ý:{' '}
+              Note:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Chính sách đã xoá không thể khôi phục
+                Deleted policies cannot be restored
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Huỷ"
+              text="Cancel"
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -146,7 +146,7 @@ export default function DeletePolicy({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Xoá chính sách"
+              text="Delete policy"
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

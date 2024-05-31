@@ -73,7 +73,7 @@ export default memo(function ChoosePostTime({
           paddingHorizontal: scale(10),
           alignSelf: 'flex-start',
         }}>
-        Chọn thời gian đăng tin
+        Choose posting time
       </CustomText>
       <View>
         <CustomText
@@ -82,7 +82,7 @@ export default memo(function ChoosePostTime({
             paddingHorizontal: scale(10),
             alignSelf: 'flex-start',
           }}>
-          Số ngày đăng
+          Number of days posted
         </CustomText>
         <FlatList
           contentContainerStyle={{
@@ -111,7 +111,7 @@ export default memo(function ChoosePostTime({
           rowGap: scale(6),
         }}>
         <CustomInput
-          label={'Ngày bắt đầu'}
+          label={'Start day'}
           styleTextLabel={{
             textType: 'semiBold',
           }}
@@ -127,7 +127,7 @@ export default memo(function ChoosePostTime({
 
         <DatePicker
           mode="date"
-          title={'Ngày bắt đầu'}
+          title={'Start day'}
           modal
           open={openDate}
           date={date}
@@ -145,7 +145,7 @@ export default memo(function ChoosePostTime({
           style={{
             color: COLORS.text,
           }}>
-          Kết thúc ngày {dateEnd}
+          End of day {dateEnd}
         </CustomText>
       </View>
     </View>

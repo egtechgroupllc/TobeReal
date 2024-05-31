@@ -48,7 +48,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
           <CustomText textType="semiBold">
             {formatPrice(data?.price)}
           </CustomText>
-          /ngày
+          /day
         </CustomText>
 
         {!!data?.numView && (
@@ -127,7 +127,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
       <CustomButton
         onPress={onPress}
         buttonType="normal"
-        text={isSelect ? 'Đã chọn' : 'Chọn'}
+        text={isSelect ? 'Selected' : 'Select'}
         outline={isSelect}
         styleWrapper={{
           marginTop: 'auto',

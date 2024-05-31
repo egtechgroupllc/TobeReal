@@ -50,7 +50,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
             fontSize: SIZES.xSmall,
             color: COLORS.text,
           }}>
-          Tổng tiền:
+          Total amount:
         </CustomText>
         <CustomText
           textType="bold"
@@ -64,7 +64,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
       </View>
       <CustomButton
         buttonType="normal"
-        text="Nạp Ngay"
+        text="Deposit"
         iconLeft={IconPromotion}
         styleIcon={{
           color: COLORS.white,

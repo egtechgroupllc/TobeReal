@@ -64,7 +64,7 @@ export default function DepositScreen({route}) {
               />
             </View>
             <CustomInput
-              label="Nhập số tiền bạn muốn nạp"
+              label="Enter the amount you want to deposit"
               control={control}
               name="amount"
               styleTextLabel={{
@@ -72,19 +72,19 @@ export default function DepositScreen({route}) {
                 top: scale(-10),
               }}
               enableFormatNum
-              placeholder={`Nhập tối thiểu ${formatPrice(minPrice, {
+              placeholder={`Enter min ${formatPrice(minPrice, {
                 currency: currency?.currency_code,
               })} `}
               rules={[
                 requireField(t('this_field_required')),
                 validateMaxAmount(
-                  `Số tiền tối đa là ${formatPrice(maxPrice, {
+                  `The maximum amount is ${formatPrice(maxPrice, {
                     currency: currency?.currency_code,
                   })}`,
                   maxPrice,
                 ),
                 validateMinAmount(
-                  `Số tiền tối thiểu là ${formatPrice(minPrice, {
+                  `The minimum amount is ${formatPrice(minPrice, {
                     currency: currency?.currency_code,
                   })}`,
                   minPrice,

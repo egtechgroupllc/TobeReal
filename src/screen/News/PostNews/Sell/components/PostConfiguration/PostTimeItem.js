@@ -30,13 +30,13 @@ export default function PostTimeItem({onPress, data, cost, isSelect}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          {data.number_day} ngày
+          {data.number_day} day
         </CustomText>
         <CustomText
           style={{
             color: COLORS.text,
           }}>
-          {formatPrice(price)}/ngày
+          {formatPrice(price)}/day
         </CustomText>
       </View>
       {!!data.discount && (

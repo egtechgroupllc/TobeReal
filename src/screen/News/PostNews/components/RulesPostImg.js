@@ -10,13 +10,13 @@ export default function RulesPostImg() {
         width: '100%',
       }}>
       <CustomText textType="semiBold" style={{marginBottom: scale(6)}}>
-        - Quy định đăng hình:
+        - Rules for posting pictures:
       </CustomText>
-      <CustomText>• Đăng tối thiểu 4 ảnh</CustomText>
-      <CustomText>• Đăng tối đa 24 ảnh với tất cả các loại tin</CustomText>
-      <CustomText>• Hãy dùng ảnh thật, không trùng</CustomText>
-      <CustomText>• Mỗi ảnh kích thước tối thiểu 100x100 px</CustomText>
-      <CustomText>• Mô tả ảnh tối đa 45 kí tự.</CustomText>
+      <CustomText>• Post a minimum of 4 photos</CustomText>
+      <CustomText>• Post up to 24 photos with all types of stories</CustomText>
+      <CustomText>• Please use real photos, not duplicates</CustomText>
+      <CustomText>• Each photo has a minimum size of 100x100 px</CustomText>
+      <CustomText>• Describe photo in maximum 45 characters.</CustomText>
     </View>
   );
 }

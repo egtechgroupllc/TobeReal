@@ -13,8 +13,8 @@ export default function TotalPriceBooking({data}) {
     <View style={styles.wrapper}>
       <ItemUtil
         Icon={IconInvoice}
-        title={'Tổng giá phòng'}
-        value={'2 phòng, 1 đêm'}
+        title={'Total room price'}
+        value={'2 rooms, 1 night'}
         styleTextValue={styles.textValueUntil}
         styleIcon={styles.iconUntil}
       />
@@ -33,7 +33,7 @@ export default function TotalPriceBooking({data}) {
         <CustomText textType="bold" size={SIZES.medium} color="#ff5e1f">
           {formatPrice(data?.price, {currency: currency?.currency_code})}
         </CustomText>
-        <CustomText color={'#42b00b'}>Giá tốt nhất</CustomText>
+        <CustomText color={'#42b00b'}>Best price</CustomText>
       </View>
     </View>
   );

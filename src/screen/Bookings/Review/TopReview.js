@@ -30,10 +30,10 @@ export default function TopReview({data}) {
           textType="semiBold"
           size={SIZES.xMedium}
           color={COLORS.text}>
-          Vui lòng đánh giá trải nghiệm của bạn tại {data?.accommodation?.name}
+          Please review your experience at {data?.accommodation?.name}
         </CustomText>
         <CustomText color={COLORS.textSub}>
-          Đánh giá để chủ sở hữu cải thiện dịch vụ tốt hơn!
+          Review for the owner to improve the service better!
         </CustomText>
       </View>
     </View>

@@ -20,7 +20,7 @@ import {useCountry} from '../../../hooks/useCountry';
 
 export default function WithdrawScreen() {
   const {control, handleSubmit, setValue, watch} = useForm();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
   const withdrawMutation = useMutation({
     mutationFn: postConfirmWithdraw,
   });
@@ -28,7 +28,12 @@ export default function WithdrawScreen() {
   useEffect(() => {
     setValue('currency_id', currency?.id);
   }, []);
-
+  useLayoutEffect(() => {
+    setOptions({
+      headerTitle: 'Withdraw',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleWidraw = value => {
     if (!value?.bank_name) {
       showMess('Please choose bank!', 'error');

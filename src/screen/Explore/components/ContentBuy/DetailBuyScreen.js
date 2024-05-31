@@ -22,7 +22,7 @@ export default function DetailBuyScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Tổng quan',
+      text: 'Overview',
     },
     {
       text: t('description_content'),

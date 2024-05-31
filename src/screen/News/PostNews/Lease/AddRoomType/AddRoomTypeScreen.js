@@ -33,7 +33,7 @@ export default function AddRoomTypeScreen() {
   const params = useRoute().params;
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: !params?.update ? 'Tạo phòng' : 'Sửa thông tin phòng',
+      headerTitle: !params?.update ? 'Create room' : 'Edit room information',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />

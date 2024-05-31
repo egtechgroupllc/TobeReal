@@ -17,7 +17,7 @@ export default function RoomManageScreen() {
   const [dataItemAccom, setDataItemAccom] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý phòng',
+      headerTitle: 'Room management',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
@@ -95,7 +95,7 @@ export default function RoomManageScreen() {
         )}
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Thao Tác'}
+          titleIndicator={'Operation'}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

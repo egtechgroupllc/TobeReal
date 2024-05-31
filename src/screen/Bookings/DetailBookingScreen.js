@@ -25,7 +25,7 @@ export default function DetailBookingScreen() {
             padding: scale(10),
           }}>
           <CustomText textType="bold" size={SIZES.large}>
-            Chi tiết chỗ đặt
+            Booking detail
           </CustomText>
           <CustomText size={SIZES.xMedium} color={COLORS.textSub}>
             Booking code: {data?.id}
@@ -69,13 +69,13 @@ export default function DetailBookingScreen() {
               textType="bold"
               size={SIZES.xMedium}
               style={{marginBottom: scale(5)}}>
-              ({data?.number_room} phòng - {data?.room?.room_type?.name}){'  '}{' '}
+              ({data?.number_room} room - {data?.room?.room_type?.name}){'  '}{' '}
               {data?.room?.name}
             </CustomText>
 
             <ItemUtil
               Icon={IconPeople}
-              value={`${data?.room?.max_occupancy} khách`}
+              value={`${data?.room?.max_occupancy} guest`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -89,7 +89,7 @@ export default function DetailBookingScreen() {
             />
             <ItemUtil
               Icon={IconWifi}
-              value={`Wifi miễn phí`}
+              value={`Free wifi`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -98,7 +98,7 @@ export default function DetailBookingScreen() {
 
           <View>
             <CustomText textType="bold" size={SIZES.xMedium}>
-              Yêu cầu đặc biệt (nếu có)
+              Special requests (if any)
             </CustomText>
             <CustomText
               textType="medium"
@@ -110,7 +110,7 @@ export default function DetailBookingScreen() {
 
           <View style={{rowGap: scale(5)}}>
             <CustomText textType="bold" size={SIZES.xMedium}>
-              Tên khách
+              Guest name
             </CustomText>
             <CustomText
               textType="medium"
@@ -123,7 +123,7 @@ export default function DetailBookingScreen() {
           <View>
             <ItemUtil
               Icon={IconBan}
-              value={'Không hoàn tiền'}
+              value={'No refunds'}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -131,7 +131,7 @@ export default function DetailBookingScreen() {
 
             <ItemUtil
               Icon={IconBan}
-              value={'Không đổi lịch'}
+              value={'No rescheduling'}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -151,7 +151,7 @@ export default function DetailBookingScreen() {
               paddingTop: scale(12),
               padding: scale(10),
             }}>
-            Sự lựa chọn tuyệt vời cho kỳ nghỉ của bạn!
+            Great choice for your vacation!
           </CustomText>
         </View>
       </MainWrapper>

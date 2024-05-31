@@ -95,17 +95,17 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
 
       <View style={{flexDirection: 'row', columnGap: scale(10)}}>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Mã tin</CustomText>
+          <CustomText style={styles.center}>News id</CustomText>
           <CustomText textType="medium" numberOfLines={1}>
             {data?.id}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày đăng</CustomText>
+          <CustomText style={styles.center}>Date posted</CustomText>
           <CustomText textType="medium">{data?.date_start}</CustomText>
         </View>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày hết hạn</CustomText>
+          <CustomText style={styles.center}>Expiration date</CustomText>
           <CustomText textType="medium">
             {formatDate(data?.date_start, {
               addDays: data?.package_post_item?.number_day,
@@ -132,7 +132,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
           outline
           buttonType="normal"
           iconLeft={IconEditProfile}
-          text="Sửa tin"
+          text="Edit"
           style={{
             flex: 1,
           }}

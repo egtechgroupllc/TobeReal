@@ -35,7 +35,7 @@ export default function AddTicketScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Tạo vé tour',
+      headerTitle: 'Create tour tickets',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
@@ -235,7 +235,7 @@ export default function AddTicketScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={'Xác nhận'}
+        text={'Submit'}
         onPress={handleSubmit(handlePostAddTicket)}
         style={{
           width: '100%',

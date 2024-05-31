@@ -12,13 +12,14 @@ import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/Detail
 import {SeeAllBuyScreen} from '../screen/Explore/components/ContentBuy/SeeAll';
 import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
-import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
+import BookTourScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookTourScreen';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
 import {
   AccommoManagementScreen,
   AddPolicyScreen,
+  FeaturesPolicyScreen,
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
@@ -125,9 +126,6 @@ export default routerNoBottomTab = [
   {
     name: 'BookTourScreen',
     component: BookTourScreen,
-    options: {
-      headerShown: false,
-    },
   },
   {
     name: 'ListVideoInfluencerScreen',
@@ -249,5 +247,10 @@ export default routerNoBottomTab = [
   {
     name: 'AddTicketScreen',
     component: AddTicketScreen,
+  },
+
+  {
+    name: 'FeaturesPolicyScreen',
+    component: FeaturesPolicyScreen,
   },
 ];

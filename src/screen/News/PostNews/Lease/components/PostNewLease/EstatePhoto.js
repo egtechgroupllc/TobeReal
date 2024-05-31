@@ -80,7 +80,7 @@ export default function EstatePhoto({
   return (
     <View>
       <ButtonTabValidate
-        title={t('Thêm Ảnh')}
+        title={t('Add images')}
         onPress={() => setView(prev => !prev)}
         errors={errors}
         watch={watch}

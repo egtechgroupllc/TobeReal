@@ -85,7 +85,7 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Mã phòng{' '}
+                Room id{' '}
               </CustomText>
               <CustomText textType="medium" style={styles.textRight}>
                 {data?.id}
@@ -121,16 +121,16 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Lưu ý:{' '}
+              Note:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Phòng đã xoá không thể khôi phục
+                Deleted rooms cannot be restored
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Huỷ"
+              text="Cancel"
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -144,7 +144,7 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Xoá phòng"
+              text="Delete room"
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

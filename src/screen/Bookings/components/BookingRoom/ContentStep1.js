@@ -58,7 +58,7 @@ export default function ContentStep1({onPress, data}) {
               numberOfLines={2}
               size={SIZES.medium}>
               <CustomText textType="semiBold" size={SIZES.xMedium}>
-                ({data?.numRoomSelect} phòng){'  '}
+                ({data?.numRoomSelect} room){'  '}
               </CustomText>
 
               {data?.name}
