@@ -7,9 +7,11 @@ import {COLORS, scale} from '../../../assets/constants';
 import ItemMethodDeposit from './components/ItemMethodDeposit';
 import CustomText from '../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ListMethodBankScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const {data, isLoading} = useQuery({
     queryKey: ['user', 'deposit', 'list-method'],
@@ -18,16 +20,14 @@ export default function ListMethodBankScreen() {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Deposit',
+      headerTitle: t('deposit'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={styles.box}>
-      <CustomText textType="medium">
-        Please choose one of the payment methods below
-      </CustomText>
+      <CustomText textType="medium">{t('please_choose_one')}</CustomText>
 
       <FlatList
         data={data?.data || (isLoading && [1, 2, 3])}

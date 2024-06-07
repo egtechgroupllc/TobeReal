@@ -8,9 +8,11 @@ import {deleteEstate} from '../../../../../../Model/api/apiEstate';
 import {showMess} from '../../../../../../assets/constants/Helper';
 import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function DeleteEstate({data, onSuccess, onCancel}) {
   const [confirm, setConfirm] = useState(true);
+  const {t} = useLanguage();
 
   const queryClient = useQueryClient();
   const deleteEstateMu = useMutation({
@@ -51,7 +53,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
       }}>
       {!confirm ? (
         <CustomButton
-          text="Xoá tin"
+          text={t('delete_estate')}
           onPress={() => {
             setConfirm(true);
           }}
@@ -84,7 +86,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                News id{' '}
+                {t('estate')} id{' '}
               </CustomText>
               <CustomText textType="medium" style={styles.textRight}>
                 {data?.id}
@@ -120,16 +122,16 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Note:{' '}
+              {t('note')}:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Once deleted, postings cannot be restored
+                {t('estate_not_restore')}
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Cancel"
+              text={t('cancel')}
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -143,7 +145,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Delete"
+              text={t('delete_estate')}
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

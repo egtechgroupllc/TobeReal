@@ -19,8 +19,8 @@ export default function ReviewOverview() {
           4.5
           <CustomText>/5</CustomText>
         </CustomText>
-        <CustomText textType="semiBold">Rat tot</CustomText>
-        <CustomText>{formatNumber(9999)} danh gia</CustomText>
+        <CustomText textType="semiBold">Very good</CustomText>
+        <CustomText>{formatNumber(9999)} reviews</CustomText>
       </View>
 
       <View style={styles.overviewRight}>

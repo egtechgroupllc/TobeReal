@@ -4,8 +4,11 @@ import {IconMarker, IconMarkerRent} from '../../assets/icon/Icon';
 import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
 import CustomText from '../../components/CustomText';
 import {formatPrice} from '../../utils/format';
+import {useCountry} from '../../hooks/useCountry';
 
 const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
+  const {currency} = useCountry();
+  console.log(currency);
   const scaleStyle = {
     transform: [
       {
@@ -108,7 +111,9 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
               color: markerFocus ? COLORS.white : COLORS.primary,
               fontFamily: FONTS.semiBold,
             }}>
-            {formatPrice(priceFinal || data?.price)}
+            {formatPrice(priceFinal || data?.price, {
+              currency: currency?.currency_code,
+            })}
           </Animated.Text>
         </Animated.View>
       </View>

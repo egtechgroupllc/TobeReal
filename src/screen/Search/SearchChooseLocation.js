@@ -7,11 +7,13 @@ import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconHistory, IconMyLocation, IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CustomText from '../../components/CustomText';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function SearchChooseLocation({onPress}) {
   const {navigate} = useNavigation();
   const {control, setValue, watch, handleSubmit} = useForm();
   const [listSearchHistory, setListSearchHistory] = useState([]);
+  const {t} = useLanguage();
 
   useEffect(() => {
     const loadSearchRecent = async () => {
@@ -30,7 +32,7 @@ export default function SearchChooseLocation({onPress}) {
           autoFocus
           control={control}
           iconLeft={IconSearch}
-          placeholder="Where would you like to go?"
+          placeholder={t('where_you_like_go')}
           returnKeyType="search"
           onSubmitEditing={handleSubmit(goHome)}
           name="name"
@@ -41,7 +43,9 @@ export default function SearchChooseLocation({onPress}) {
           onPress={() => onPress('Near me')}
           style={[styles.searchItem, {borderBottomWidth: 1}]}>
           <IconMyLocation fill={COLORS.primary} />
-          <CustomText style={{fontSize: SIZES.xMedium}}>Near me</CustomText>
+          <CustomText style={{fontSize: SIZES.xMedium}}>
+            {t('near_me')}
+          </CustomText>
         </TouchableOpacity>
 
         {/* <TouchableOpacity activeOpacity={0.7} style={styles.searchItem}>
@@ -62,7 +66,7 @@ export default function SearchChooseLocation({onPress}) {
             style={{
               fontSize: SIZES.xMedium,
             }}>
-            Recent searches
+            {t('recent_searches')}
           </CustomText>
         </View>
         <FlatList

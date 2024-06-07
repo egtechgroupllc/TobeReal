@@ -8,9 +8,11 @@ import {formatPrice} from '../../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
 import PaymentMethodsItem from './PaymentMethodsItem';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function PaymentMethods({data, onChange}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
@@ -31,7 +33,7 @@ export default function PaymentMethods({data, onChange}) {
           textType="semiBold"
           color={COLORS.text}
           size={SIZES.xMedium}>
-          Payment method
+          {t('payment_method')}
         </CustomText>
         <CustomText
           textType="bold"
@@ -43,7 +45,7 @@ export default function PaymentMethods({data, onChange}) {
               },
             })
           }>
-          {methodsPay ? 'See all' : 'Select'}
+          {methodsPay ? t('see_all') : t('select')}
         </CustomText>
       </View>
 
@@ -52,7 +54,7 @@ export default function PaymentMethods({data, onChange}) {
           title={methodsPay?.title}
           desc={
             methodsPay?.type === 'LOKAPAY' &&
-            ` Balance: ${formatPrice(
+            `${t('balance')}: ${formatPrice(
               profile?.balance * currency?.exchange_rate,
               {
                 currency: currency?.currency_code,

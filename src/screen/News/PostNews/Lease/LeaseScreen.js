@@ -12,29 +12,27 @@ import ListCreateAccom from './components/HomeLease/ListCreateAccom';
 import {useQuery} from '@tanstack/react-query';
 import {getMyListCreateAccom} from '../../../../Model/api/apiAccom';
 
-const list = [
-  {
-    title: 'I already have a property registered',
-    desc: 'View and manage your registered properties',
-    textBtn: 'Continue',
-    navigate: 'NoBottomTab',
-    screen: 'AccommoManagementScreen',
-  },
-  {
-    title: 'I want to list a new accommodation',
-    desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
-    textBtn: 'List New Accommodation',
-    navigate: 'PostNewLeaseScreen',
-  },
-];
-
 export default function LeaseScreen() {
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
-
+  const list = [
+    {
+      title: t('already_have_property'),
+      desc: t('view_registed_properties'),
+      textBtn: t('continue'),
+      navigate: 'NoBottomTab',
+      screen: 'AccommoManagementScreen',
+    },
+    {
+      title: t('new_accommodation'),
+      desc: t('click_button_below'),
+      textBtn: t('list_new'),
+      navigate: 'PostNewLeaseScreen',
+    },
+  ];
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: t('Post news'),
+      headerTitle: t('post_new'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -59,7 +57,7 @@ export default function LeaseScreen() {
             <CustomButton
               text={item?.textBtn}
               iconRight={
-                item?.textBtn === 'Continue' ? IconArrowRight : IconAdd
+                item?.textBtn === t('continue') ? IconArrowRight : IconAdd
               }
               buttonType="normal"
               styleWrapper={{

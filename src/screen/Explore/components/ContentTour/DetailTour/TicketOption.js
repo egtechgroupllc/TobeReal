@@ -121,7 +121,7 @@ export default function TicketOption() {
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    {t('easy_reschdule')}
+                    {t('easy_reschedule')}
                   </CustomText>
                 </View>
               </View>

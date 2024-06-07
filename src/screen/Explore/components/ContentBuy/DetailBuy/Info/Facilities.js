@@ -33,7 +33,7 @@ export default function Facilities({data}) {
         }}>
         <View style={styles.listInfo}>
           <CustomText textType="semiBold" style={{color: COLORS.black}}>
-            {t('Price')}:{' '}
+            {t('price')}:{' '}
             <CustomText
               textType="bold"
               style={{...styles.name, color: COLORS.primary}}>
@@ -64,7 +64,7 @@ export default function Facilities({data}) {
           }}>
           <InfoItem
             Icon={IconRoom}
-            name={t('Bedroom')}
+            name={t('bedroom')}
             value={3}
             styleIcon={{
               height: scale(16),
@@ -72,15 +72,15 @@ export default function Facilities({data}) {
           />
           <InfoItem
             Icon={IconFurniture}
-            name={t('Interior')}
+            name={t('interior')}
             value={data?.furnish}
           />
 
-          <InfoItem Icon={IconBed} name={t('Toilet')} value={3} />
+          <InfoItem Icon={IconBed} name={t('toilet')} value={3} />
 
           <InfoItem
             Icon={IconDirection}
-            name={t('House direction')}
+            name={t('house_direction')}
             value={data?.direction_main.name}
             styleIcon={{
               height: scale(16),
@@ -98,7 +98,7 @@ export default function Facilities({data}) {
 
           <InfoItem
             Icon={IconBookings}
-            name={t('Juridical')}
+            name={t('juridical')}
             value={data?.legal_documents}
           />
         </View>

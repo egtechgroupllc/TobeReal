@@ -12,7 +12,7 @@ export default function SetNamePolicy({control}) {
   return (
     <View style={styles.boxCheckMeal}>
       <CustomInput
-        placeholder="Name"
+        placeholder={t('name')}
         control={control}
         name="name"
         style={styles.textInput}
@@ -21,10 +21,7 @@ export default function SetNamePolicy({control}) {
       />
       <View style={styles.note}>
         <View style={styles.arrowTop} />
-        <CustomText>
-          This will not affect any length of stay restrictions installed in your
-          calendar.
-        </CustomText>
+        <CustomText>{t('this_not_affect')}</CustomText>
       </View>
     </View>
   );

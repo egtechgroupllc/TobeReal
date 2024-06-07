@@ -99,7 +99,7 @@ export default function ContentStep2({onPress, data}) {
             },
           },
         )
-      : showMess('Please select payment method', 'error');
+      : showMess(t('please_select_payment'), 'error');
   };
 
   return (
@@ -112,13 +112,13 @@ export default function ContentStep2({onPress, data}) {
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
-          <CustomButton text="Pay" onPress={handleBookingRoom} />
+          <CustomButton text={t('pay')} onPress={handleBookingRoom} />
         </View>
 
         <View style={styles.boxEarnPoint}>
           <IconCoinPoint />
           <CustomText color={COLORS.blue} textType="semiBold">
-            {formatPrice(12312, {showCurrency: false})} Point
+            {formatPrice(12312, {showCurrency: false})} {t('point')}
           </CustomText>
         </View>
       </View>

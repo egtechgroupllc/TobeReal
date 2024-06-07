@@ -96,7 +96,7 @@ export default function Review({dataP}) {
                   }}
                 />
               )}
-              titleIndicator="Đánh giá">
+              titleIndicator="Review">
               <ReviewAll
                 onSort={() => bottomSheetChildRef.current.openChild()}
                 valueSort={select}

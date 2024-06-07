@@ -23,16 +23,7 @@ import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '../../../../../../components/CheckBox';
 import CustomText from '../../../../../../components/CustomText';
-const listSort = [
-  {
-    id: 'ADULT',
-    name: 'Adult',
-  },
-  {
-    id: 'CHILDREN',
-    name: 'Children',
-  },
-];
+
 export default function TypeTicket({
   maxCharacters,
   control,
@@ -42,7 +33,16 @@ export default function TypeTicket({
 }) {
   const richTextRef = useRef(null);
   const {t} = useLanguage();
-
+  const listSort = [
+    {
+      id: 'ADULT',
+      name: t('adult'),
+    },
+    {
+      id: 'CHILDREN',
+      name: t('children'),
+    },
+  ];
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
@@ -79,7 +79,7 @@ export default function TypeTicket({
   return (
     <View style={{marginTop: scale(-10)}}>
       <ButtonTabValidate
-        title={t('Type ticket')}
+        title={t('type_ticket')}
         onPress={viewGeneral}
         errors={errors}
         watch={watch}

@@ -8,24 +8,23 @@ import {requireField} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../components/CustomText';
 
-const list = [
-  {
-    id: 1,
-    title: 'Pets are not allowed.',
-  },
-  {
-    id: 2,
-    title: 'Pets are allowed.',
-  },
-  {
-    id: 3,
-    title: 'Other',
-  },
-];
-
 export default function FeaturesPolicy1({control}) {
   const [isSelect, setIsSelect] = useState();
   const {t} = useLanguage();
+  const list = [
+    {
+      id: 1,
+      title: t('pet_not_allow'),
+    },
+    {
+      id: 2,
+      title: t('pet_allow'),
+    },
+    {
+      id: 3,
+      title: t('other'),
+    },
+  ];
   return (
     <View
       style={{

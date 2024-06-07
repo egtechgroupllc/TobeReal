@@ -33,7 +33,7 @@ export default function PolicyTour({
   ]).current;
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Policy screen',
+      headerTitle: t('tour_policies'),
       headerTitleStyle: {
         textAlign: 'center',
       },
@@ -43,7 +43,7 @@ export default function PolicyTour({
   return (
     <View>
       <ButtonTabValidate
-        title={t('Tour policies')}
+        title={t('tour_policies')}
         onPress={viewGeneral}
         errors={errors}
         watch={watch}
@@ -53,10 +53,10 @@ export default function PolicyTour({
         noLoading={true}
         onChange={render => render && setIsRender(render)}>
         {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <Box
-              title="Quý vị muốn sử dụng chính sách hủy tour nào cho tour này?"
-              num="1">
+          <Collapsible
+            collapsed={!isView}
+            style={{...styles.box, alignItems: 'flex-start'}}>
+            <Box title={t('which_policy_tour')} num="1">
               <RulesPolicyTour
                 setValue={setValue}
                 control={control}

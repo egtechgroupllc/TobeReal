@@ -88,6 +88,7 @@ export default function HomeMapScreen({showListLocation, style}) {
   }, [data?.data]);
 
   let mapIndex = 0;
+
   useMemo(() => {
     const handleScroll = ({value}) => {
       let index = Math.floor(value / CARD_WIDTH + 0.3);
@@ -159,7 +160,7 @@ export default function HomeMapScreen({showListLocation, style}) {
 
   const onMarkerPress = index => {
     const x = index * CARD_WIDTH;
-    flatListRef.current.scrollToOffset(x);
+    flatListRef.current.scrollToOffset(x, true);
   };
   const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
@@ -226,7 +227,9 @@ export default function HomeMapScreen({showListLocation, style}) {
           return (
             <Marker
               key={index}
-              tracksViewChanges={Platform.OS === 'ios' ? true : false}
+              tracksViewChanges={
+                Platform.OS === 'ios' ? index === focusedItem : false
+              }
               coordinate={coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>

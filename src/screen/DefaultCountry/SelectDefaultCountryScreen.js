@@ -73,12 +73,10 @@ export default function SelectDefaultCountryScreen() {
           style={{fontSize: SIZES.large, marginTop: scale(20)}}>
           Welcome to Saveloka!
         </CustomText>
-        <CustomText textType="regular">
-          Please select country and language to continue
-        </CustomText>
+        <CustomText textType="regular">{t('please_select_country')}</CustomText>
         <CategoriesButton
           style={{width: '90%', marginTop: scale(30)}}
-          title={t('Select country')}
+          title={t('select_country')}
           onPress={selectCountry}
           large={true}
           nameCountry={country?.name && `${country?.flag}  ${country?.name}`}

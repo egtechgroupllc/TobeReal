@@ -209,7 +209,8 @@ export default function TourSchedule({
               </>
             </View>
             <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
-              Tour Duration: {numDays.days} days {numDays.hours} hours
+              {t('tour_duration')}: {numDays.days} {t('days')} {numDays.hours}{' '}
+              {t('hours')}
             </CustomText>
             <ScrollView
               horizontal
@@ -236,7 +237,7 @@ export default function TourSchedule({
                         key={dayNumber}
                         onPress={() => handleDayClick(dayNumber)}>
                         <CustomText style={{...styles.label}}>
-                          Day: {dayNumber + 1}
+                          {t('day')}: {dayNumber + 1}
                         </CustomText>
                       </TouchableOpacity>
                     </LinearGradient>
@@ -253,7 +254,7 @@ export default function TourSchedule({
                       }}
                       onPress={() => handleDayClick(dayNumber)}>
                       <CustomText style={{...styles.label}}>
-                        Day: {dayNumber + 1}
+                        {t('day')}: {dayNumber + 1}
                       </CustomText>
                     </TouchableOpacity>
                   ),
@@ -296,7 +297,7 @@ export default function TourSchedule({
                     <CustomButton
                       styleWrapper={{width: '20%', alignSelf: 'flex-end'}}
                       buttonType="small"
-                      text="Ok"
+                      text={t('ok')}
                       onPress={() => handleConfirm(dayNumber + 1)}
                     />
                   </>

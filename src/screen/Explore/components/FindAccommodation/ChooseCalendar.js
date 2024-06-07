@@ -117,7 +117,7 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
       <BottomSheet
         ref={bottomSheetRef}
         refChild={bottomSheetChild}
-        titleIndicator={'Calendar'}
+        titleIndicator={t('calendar')}
         snapPoints={['75%']}
         snapPointsChild={['60%']}
         onDismiss={handleSelectDate}
@@ -160,7 +160,7 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
 
         <CustomButton
           buttonType="large"
-          text="Select Date"
+          text={t('select_date')}
           style={{
             marginTop: scale(10),
           }}

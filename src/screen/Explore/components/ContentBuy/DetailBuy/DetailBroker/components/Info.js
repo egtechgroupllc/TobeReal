@@ -8,8 +8,11 @@ import {
 } from '../../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function Info({data}) {
+  const {t} = useLanguage();
+
   return (
     <View style={{paddingVertical: scale(20), paddingHorizontal: scale(50)}}>
       <View style={styles.boxInfoItem}>
@@ -27,7 +30,7 @@ export default function Info({data}) {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          Have a broker certificate
+          {t('broker_certificate')}
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>
@@ -46,7 +49,7 @@ export default function Info({data}) {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          7 years participating in Saveloka.vn
+          7 {t('year_paricipant')}
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>
@@ -64,7 +67,7 @@ export default function Info({data}) {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          Phone: {data?.contact_phone}
+          {t('phone')}: {data?.contact_phone}
         </CustomText>
       </View>
       <View style={styles.boxInfoItem}>
@@ -82,7 +85,7 @@ export default function Info({data}) {
             fontSize: SIZES.xMedium,
             // flex: 1,
           }}>
-          Email: {data?.contact_email}
+          {t('email')}: {data?.contact_email}
         </CustomText>
       </View>
     </View>

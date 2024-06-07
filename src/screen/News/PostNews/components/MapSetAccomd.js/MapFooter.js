@@ -73,17 +73,17 @@ export default function MapFooter({moveLocation, router, distance}) {
       <CustomButton
         text={t('confirm')}
         onPress={() => {
-          if (distance <= 5) {
-            router?.onGoBack(moveLocation);
-            goBack();
-          } else {
-            showMess(
-              'Please choose an exact location within 5 meters to post',
-              'error',
-            );
-          }
-          // router?.onGoBack(moveLocation);
-          // goBack();
+          // if (distance <= 5) {
+          //   router?.onGoBack(moveLocation);
+          //   goBack();
+          // } else {
+          //   showMess(
+          //     'Please choose an exact location within 5 meters to post',
+          //     'error',
+          //   );
+          // }
+          router?.onGoBack(moveLocation);
+          goBack();
         }}
       />
     </View>

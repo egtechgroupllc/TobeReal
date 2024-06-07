@@ -49,7 +49,7 @@ export default function DetailRoomScreen({route}) {
 
               <View style={styles.boxFreeUnRoom}>
                 <CustomText size={SIZES.xMedium} color="#00875a">
-                  Free cancellation
+                  {t('free_cancel')}
                 </CustomText>
               </View>
             </View>
@@ -68,7 +68,7 @@ export default function DetailRoomScreen({route}) {
             </Box>
             {/* t('little_convenient') */}
             <Box
-              title={'Basic amenities'}
+              title={t('basic_amenities')}
               styleContent={{
                 flexDirection: 'row',
                 flexWrap: 'wrap',
@@ -76,13 +76,15 @@ export default function DetailRoomScreen({route}) {
               <BasicFacilities data={data} />
             </Box>
 
-            <Box title={'Other amenities'}>
+            <Box title={t('other_amenities')}>
               <View
                 style={{
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Room amenities:</CustomText>
+                <CustomText textType="semiBold">
+                  {t('room_amenities')}:
+                </CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (
@@ -99,7 +101,7 @@ export default function DetailRoomScreen({route}) {
                   width: '100%',
                   rowGap: scale(10),
                 }}>
-                <CustomText textType="semiBold">Bathroom:</CustomText>
+                <CustomText textType="semiBold">{t('bathroom')}:</CustomText>
 
                 <View style={styles.contentFeat}>
                   {data?.features?.map((item, index) => (

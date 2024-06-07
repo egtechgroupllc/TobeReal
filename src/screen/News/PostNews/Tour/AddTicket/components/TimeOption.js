@@ -49,7 +49,7 @@ export default function TimeOption({onChange, title}) {
         <>
           <DatePicker
             mode="time"
-            title={t('Time options')}
+            title={t('time_option')}
             modal
             open={openCheckStart}
             date={timeCheckStart}

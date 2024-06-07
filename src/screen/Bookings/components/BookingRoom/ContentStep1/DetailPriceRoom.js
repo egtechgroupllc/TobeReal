@@ -6,6 +6,7 @@ import {IconDown} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function DetailPriceRoom({data}) {
   const numRoom = data?.numRoomSelect;
@@ -16,6 +17,7 @@ export default function DetailPriceRoom({data}) {
     [numRoom, data?.date?.numNight, data?.priceAverage],
   );
   const feePrice = priceAverage * (11.8165 / 100);
+  const {t} = useLanguage();
 
   return (
     <View style={{rowGap: scale(5)}}>
@@ -29,7 +31,7 @@ export default function DetailPriceRoom({data}) {
         }}>
         <Row
           textTypeTitle={'bold'}
-          title={'Total price'}
+          title={t('total_price')}
           styleTitle={{
             fontSize: SIZES.medium,
           }}
@@ -64,10 +66,10 @@ export default function DetailPriceRoom({data}) {
         }}>
         <View style={styles.line} />
 
-        <Row title={`Room number`} value={numRoom} />
+        <Row title={t('room_number')} value={numRoom} />
 
         <Row
-          title={'Price per night'}
+          title={t('price_per_day')}
           value={formatPrice(data?.priceAverage * numRoom, {
             currency: currency?.currency_code,
           })}
@@ -75,13 +77,13 @@ export default function DetailPriceRoom({data}) {
           textType="semiBold"
         />
         <Row
-          title={`Total price for ${data?.date?.numNight} night`}
+          title={`${t('total_price_for')} ${data?.date?.numNight} ${t('day')}`}
           value={formatPrice(priceAverage, {
             currency: currency?.currency_code,
           })}
         />
         <Row
-          title={'Taxes and fees'}
+          title={t('taxes_and_fees')}
           value={formatPrice(feePrice, {
             currency: currency?.currency_code,
           })}

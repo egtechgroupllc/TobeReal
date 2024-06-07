@@ -85,7 +85,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <CheckBox
-            text="Free cancellation"
+            text={t('free_cancel')}
             styleWrapper={{
               width: '100%',
             }}

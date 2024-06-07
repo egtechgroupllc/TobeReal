@@ -55,12 +55,12 @@ export default function General({
         {isRender && (
           <Collapsible collapsed={!isView} style={styles.box}>
             <CustomInput
-              label={t('Tour ticket name')}
+              label={t('tour_ticket_name')}
               control={control}
               name="name"
               multiline
               maxLength={100}
-              placeholder={t('Tour ticket name')}
+              placeholder={t('tour_ticket_name')}
               rules={[
                 requireField(t('this_field_required')),
                 validateMaxLengthText(`${100} characters limit`, 100),

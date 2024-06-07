@@ -4,9 +4,11 @@ import {SIZES, scale} from '../../../../../../assets/constants';
 import Counter from '../../../../../../components/Counter';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function AutoPostTop({date, setValue, onCount, countNum}) {
   const [count, setCount] = useState(1);
+  const {t} = useLanguage();
 
   const dateEnd = useMemo(
     () =>
@@ -29,16 +31,19 @@ export default function AutoPostTop({date, setValue, onCount, countNum}) {
             fontSize: SIZES.xMedium,
             marginBottom: scale(5),
           }}>
-          Automatically repost
+          {t('auto_repost')}
         </CustomText>
 
         <CustomText>
-          Number of times remaining
-          <CustomText textType="semiBold"> {count} time</CustomText>
+          {t('number_time_remaining')}
+          <CustomText textType="semiBold">
+            {' '}
+            {count} {t('time')}
+          </CustomText>
         </CustomText>
 
         <CustomText>
-          Last repost expected
+          {t('last_repost_expected')}
           <CustomText textType="semiBold"> {dateEnd}</CustomText>
         </CustomText>
       </View>

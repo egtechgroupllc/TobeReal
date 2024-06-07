@@ -7,8 +7,11 @@ import CustomText from '../../../../../components/CustomText';
 import {formatDate} from '../../../../../utils/format';
 import ItemUtil from '../../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import PaymentMethods from './PaymentMethods';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function TopStep2({data, onChange}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.top}>
       <View style={styles.topContent}>
@@ -34,7 +37,7 @@ export default function TopStep2({data, onChange}) {
               {formatDate(data?.date?.selectedStartDate, {
                 dateStyle: 'dd-MM-yyyy',
               })}
-              , {data?.date?.numNight} night{' '}
+              , {data?.date?.numNight} {t('day')}{' '}
             </CustomText>
           </View>
           <IconDown fill={COLORS.white} />
@@ -46,7 +49,7 @@ export default function TopStep2({data, onChange}) {
             width: scale(16),
             height: scale(16),
           }}
-          value={`Room code: ${data?.id}`}
+          value={`${t('room')} id: ${data?.id}`}
           color={COLORS.blue}
           valueBold
           styleWrapper={styles.roomCode}

@@ -27,10 +27,10 @@ export default function ContentReview({control, setValue}) {
       <CustomInput
         control={control}
         name="content"
-        placeholder="What do you like or dislike about this place?"
+        placeholder={`${t('like_or_dislike')}?`}
         multiline
         maxLength={300}
-        label={'Write review'}
+        label={t('write_review')}
         styleTextLabel={{
           textType: 'bold',
         }}

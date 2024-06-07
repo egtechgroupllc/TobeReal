@@ -6,8 +6,11 @@ import {CustomButton} from '../../../../../components';
 import {IconArrowRight, IconGoBack} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function CreateTourItem({data}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
+
   // const handleContinue = () => {
   //   navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   // };
@@ -106,7 +109,7 @@ export default function CreateTourItem({data}) {
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
               }}>
-              Tour id: {data?.id}
+              Id: {data?.id}
             </CustomText>
           </View>
 
@@ -143,7 +146,7 @@ export default function CreateTourItem({data}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text="Manage"
+              text={t('manage')}
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,

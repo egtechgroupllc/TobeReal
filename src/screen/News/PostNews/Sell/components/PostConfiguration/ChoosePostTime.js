@@ -8,6 +8,7 @@ import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
 import PostTimeItem from './PostTimeItem';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default memo(function ChoosePostTime({
   setValue,
@@ -15,6 +16,8 @@ export default memo(function ChoosePostTime({
   params,
   onChangeDateEnd,
 }) {
+  const {t} = useLanguage();
+
   const [select, setSelect] = useState(data?.package_post_items?.[0]);
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState(
@@ -73,7 +76,7 @@ export default memo(function ChoosePostTime({
           paddingHorizontal: scale(10),
           alignSelf: 'flex-start',
         }}>
-        Choose posting time
+        {t('choose_posting_time')}
       </CustomText>
       <View>
         <CustomText
@@ -82,7 +85,7 @@ export default memo(function ChoosePostTime({
             paddingHorizontal: scale(10),
             alignSelf: 'flex-start',
           }}>
-          Number of days posted
+          {t('number_day_post')}
         </CustomText>
         <FlatList
           contentContainerStyle={{
@@ -111,7 +114,7 @@ export default memo(function ChoosePostTime({
           rowGap: scale(6),
         }}>
         <CustomInput
-          label={'Start day'}
+          label={t('start_day')}
           styleTextLabel={{
             textType: 'semiBold',
           }}
@@ -127,7 +130,7 @@ export default memo(function ChoosePostTime({
 
         <DatePicker
           mode="date"
-          title={'Start day'}
+          title={t('start_day')}
           modal
           open={openDate}
           date={date}
@@ -145,7 +148,7 @@ export default memo(function ChoosePostTime({
           style={{
             color: COLORS.text,
           }}>
-          End of day {dateEnd}
+          {t('end_of_day')} {dateEnd}
         </CustomText>
       </View>
     </View>

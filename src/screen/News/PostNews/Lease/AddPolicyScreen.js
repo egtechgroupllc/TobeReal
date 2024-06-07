@@ -16,9 +16,13 @@ import {postCreatePolicyToAccom} from '../../../../Model/api/apiAccom';
 import {CustomButton} from '../../../../components';
 import {useNavigation} from '@react-navigation/native';
 import {IconHome} from '../../../../assets/icon/Icon';
+import {showMess} from '../../../../assets/constants/Helper';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
+  const {t} = useLanguage();
+
   const {navigate, setOptions} = useNavigation();
   const {
     handleSubmit,
@@ -35,12 +39,12 @@ export default function AddPolicyScreen({route}) {
   });
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Policy screen',
+      headerTitle: t('policy_screen'),
       headerTitleStyle: {
         textAlign: 'center',
       },
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -62,8 +66,6 @@ export default function AddPolicyScreen({route}) {
       },
       {
         onSuccess: dataInside => {
-          console.log(dataInside);
-
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
@@ -74,7 +76,10 @@ export default function AddPolicyScreen({route}) {
               'list-policy',
               dataParams?.id,
             ]);
-
+            showMess(
+              dataInside?.message,
+              dataInside?.status ? 'success' : 'error',
+            );
             !dataParams?.policyScreen
               ? navigate('NoBottomTab', {
                   screen: 'AddRoomTypeScreen',
@@ -101,9 +106,7 @@ export default function AddPolicyScreen({route}) {
         paddingHorizontal: scale(10),
       }}>
       <View style={styles.content}>
-        <Box
-          title="Which cancellation policy would you like to use for this rate?"
-          num="1">
+        <Box title={t('which_cancel_policy')} num="1">
           <RulesPolicy1
             setValue={setValue}
             control={control}
@@ -111,19 +114,15 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="2" title="Do you want meals included in this rate?">
+        <Box num="2" title={t('do_you_want_meal')}>
           <RulesPolicy2 setValue={setValue} unregister={unregister} />
         </Box>
 
-        <Box
-          num="3"
-          title="Do you want to add value-added services to this rate?">
+        <Box num="3" title={t('do_you_want_service')}>
           <RulesPolicy3 setValue={setValue} unregister={unregister} />
         </Box>
 
-        <Box
-          num="4"
-          title="Do you want to set a minimum length of stay for this rate?">
+        <Box num="4" title={t('do_you_want_minimum_lenghth')}>
           <RulesPolicy4
             setValue={setValue}
             control={control}
@@ -131,15 +130,11 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box
-          num="5"
-          title="How many days before check-in can guests book this rate?">
+        <Box num="5" title={t('how_many_days')}>
           <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
-        <Box
-          num="6"
-          title="Do you want this new price to be cheaper or more expensive than the price on the calendar?">
+        <Box num="6" title={t('do_you_want_new_price')}>
           <RulesPolicy6
             control={control}
             unregister={unregister}
@@ -147,11 +142,11 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="7" title="What do you name this type of policy?">
+        <Box num="7" title={t('name_of_policy')}>
           <SetNamePolicy control={control} />
         </Box>
         <CustomButton
-          text="Submit"
+          text={t('submit')}
           onPress={handleSubmit(handleCreatePolicy)}
         />
       </View>

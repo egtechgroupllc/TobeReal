@@ -15,7 +15,7 @@ import {useCountry} from '../../../../hooks/useCountry';
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
-  const title = [t('Popular in the area')];
+  const title = [t('popular_area')];
   const {navigate} = useNavigation();
   const {country} = useCountry();
 
@@ -54,7 +54,7 @@ export default function AccommodationPremium({currency}) {
           //   })
           // }
           heading={title}
-          subHeading={t('Find popular accomodation in your area')}
+          subHeading={t('find_popular')}
           styleWrapper={{backgroundColor: '#f8eede'}}>
           <FlatList
             horizontal
@@ -68,7 +68,6 @@ export default function AccommodationPremium({currency}) {
                 isDiscount
                 isStar
                 isRating
-                rating={3}
                 data={item}
                 seeViewNumber={1.6}
                 isViewMap

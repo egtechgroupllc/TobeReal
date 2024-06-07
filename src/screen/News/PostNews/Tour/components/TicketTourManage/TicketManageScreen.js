@@ -16,17 +16,20 @@ import {
   getMyListTicket,
 } from '../../../../../../Model/api/apiTour';
 import {useQuery} from '@tanstack/react-query';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function TicketManageScreen() {
+  const {t} = useLanguage();
+
   const params = useRoute().params;
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Tour ticket management',
+      headerTitle: t('tour_ticket_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -51,7 +54,7 @@ export default function TicketManageScreen() {
       }}>
       <>
         <CustomButton
-          text="Add more ticket"
+          text={t('add_more_ticket')}
           style={{width: '50%', marginLeft: scale(20), marginBottom: scale(10)}}
           onPress={() => navigate('AddTicketScreen', {...params})}
         />

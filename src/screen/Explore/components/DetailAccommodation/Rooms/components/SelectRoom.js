@@ -4,9 +4,11 @@ import {COLORS, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
 import {CustomButton} from '../../../../../../components';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default memo(function SelectRoom({onPress, data, onSelect}) {
   const [selectRoom, setSelectRoom] = useState(1);
+  const {t} = useLanguage();
 
   const roomsAverage = useMemo(() => {
     const result = data?.room_dates?.map(item => {
@@ -26,7 +28,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
         style={{
           color: COLORS.error,
         }}>
-        {roomsAverage} room left
+        {roomsAverage} {t('room_left')}
       </CustomText>
 
       <View
@@ -39,7 +41,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
           isDefaultValue
           styleWrapper={{width: '40%'}}
           data={[...Array(roomsAverage)].map((_, index) => ({
-            name: `${index + 1} room`,
+            name: `${index + 1} ${t('room')}`,
             value: index + 1,
           }))}
           buttonEstateTypes={{
@@ -54,7 +56,7 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
         <CustomButton
           onPress={() => onPress(selectRoom)}
           buttonType="normal"
-          text="Book room"
+          text={t('book_room')}
           styleWrapper={{
             flex: 1,
           }}

@@ -7,9 +7,11 @@ import BottomSheet from '../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate, formatPrice} from '../../../../../../utils/format';
 import {getDate} from 'date-fns';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
   const bottomSheetRef = useRef();
+  const {t} = useLanguage();
 
   useEffect(() => {
     isOpen && bottomSheetRef.current.open();
@@ -26,14 +28,14 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
         <BottomSheet
           ref={bottomSheetRef}
           onDismiss={() => onClose()}
-          snapPoints={['40%']}
-          titleIndicator="Price detail"
+          snapPoints={['35%']}
+          titleIndicator={t('price_detail')}
           styleContent={{
             paddingHorizontal: scale(20),
             rowGap: scale(10),
           }}>
           <Row
-            title={'Date'}
+            title={t('date')}
             value={`${getDate(data?.date?.selectedStartDate)} - ${formatDate(
               data?.date?.selectedEndDate,
               {
@@ -41,25 +43,21 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               },
             )}`}
           />
-          <Row title={'Room number'} value={`${numRoom} room`} />
+          <Row title={t('room_number')} value={`${numRoom} ${t('room')}`} />
           <View
             style={{
               rowGap: scale(10),
               marginTop: scale(10),
             }}>
             <Row
-              title={'Price per night'}
+              title={t('price_per_day')}
               value={formatPrice(data?.priceAverage * numRoom)}
               colorValue={COLORS.primary}
               textType="semiBold"
             />
+
             <Row
-              title={`
-              Total price for ${data?.date?.numNight} night`}
-              value={formatPrice(priceAverage)}
-            />
-            <Row
-              title={'Taxes and fees'}
+              title={t('taxes_and_fees')}
               value={formatPrice(feePrice)}
               textType="regular"
               colorValue={COLORS.text}
@@ -70,7 +68,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               ...styles.point,
             }}>
             <Row
-              title={'Total price'}
+              title={t('total_price')}
               value={formatPrice(priceAverage + feePrice)}
               colorValue={COLORS.primary}
               textType="bold"
@@ -81,12 +79,12 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               }}>
               <IconCoinPoint />
               <CustomText>
-                Book and receive now{' '}
+                {t('book_and_receive')}{' '}
                 <CustomText textType="medium" style={{color: '#ff5e1f'}}>
                   {formatPrice(numRoom * 3111, {
                     showCurrency: false,
                   })}{' '}
-                  point
+                  {t('point')}
                 </CustomText>
               </CustomText>
             </View>

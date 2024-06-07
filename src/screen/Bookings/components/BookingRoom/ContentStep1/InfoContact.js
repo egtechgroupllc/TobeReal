@@ -3,11 +3,14 @@ import {StyleSheet, View} from 'react-native';
 import {SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CheckBox from '../../../../../components/CheckBox';
 import FormChangeContact from './FormChangeContact';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function InfoContact({data}) {
+  const {t} = useLanguage();
+
   const typePeopleBooking = useRef([
-    'Individual',
-    'I booked for someone else',
+    t('individual'),
+    t('book_for_someone'),
   ]).current;
 
   const [userBooking, setUserBooking] = useState(typePeopleBooking[0]);

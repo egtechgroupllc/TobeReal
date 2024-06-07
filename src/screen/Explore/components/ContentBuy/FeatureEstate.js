@@ -17,7 +17,7 @@ export default function FeatureEstate() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Feature Estates')];
+  const title = [t('feature_estate')];
   const [filter, setFilter] = useState();
   const {country} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
@@ -59,7 +59,7 @@ export default function FeatureEstate() {
           }
           onPressCategory={item => setFilter(item)}
           heading={title}
-          subHeading={t('Explore popular real estate')}
+          subHeading={t('explore_popular_estate')}
           styleWrapper={{backgroundColor: 'transparent'}}>
           <FlatList
             horizontal

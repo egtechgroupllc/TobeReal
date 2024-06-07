@@ -13,16 +13,19 @@ import usePagination from '../../../../hooks/usePagination';
 import CreateSellItem from './components/CreateSellItem';
 import CreateSellItemLoading from './components/CreateSellItemLoading';
 import DeleteEstate from './components/PostNewSell/DeleteEstate';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function SellManagementScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {setOptions, navigate, addListener} = useNavigation();
   const bottomSheetRef = useRef();
 
   const [dataItemEstate, setDataItemEstate] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Real Estate Listing Created',
+      headerTitle: t('real_estate_listing'),
     });
   }, [params]);
 

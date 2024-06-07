@@ -12,20 +12,18 @@ import {
 } from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Anytime (this price type is always active)',
-  },
-  {
-    id: 2,
-    title: 'Set the number of days before check-in',
-  },
-];
-
 export default function RulesPolicy5({control, unregister}) {
   const {t} = useLanguage();
-
+  const list = [
+    {
+      id: 1,
+      title: t('anytime_price_active'),
+    },
+    {
+      id: 2,
+      title: t('set_number_before'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(0);
 
   useEffect(() => {

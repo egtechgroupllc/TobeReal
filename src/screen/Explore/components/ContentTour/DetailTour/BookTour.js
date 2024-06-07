@@ -25,6 +25,8 @@ import {
 import {useCountry} from '../../../../../hooks/useCountry';
 
 export default memo(function BookTour({data}) {
+  const {t} = useLanguage();
+
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
   const params = useRoute().params;
@@ -49,7 +51,7 @@ export default memo(function BookTour({data}) {
         style={{
           rowGap: scale(2),
         }}>
-        <CustomText>Starting point:</CustomText>
+        <CustomText>{t('price_only_from')}:</CustomText>
         <CustomText
           textType="bold"
           style={{
@@ -68,7 +70,7 @@ export default memo(function BookTour({data}) {
         }}
         buttonType="medium"
         style={{flex: 0.7}}
-        text={'View ticket tour'}
+        text={t('view_ticket')}
         styleText={{
           fontSize: SIZES.xMedium,
         }}

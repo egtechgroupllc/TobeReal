@@ -5,6 +5,7 @@ import {SIZES, images, scale} from '../../../../../../../assets/constants';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../../../../Model/api/apiEstate';
 import BoxPlaceItem from '../../../BoxPlaceItem';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 // const data = [
 //   {
@@ -83,6 +84,8 @@ import BoxPlaceItem from '../../../BoxPlaceItem';
 //   },
 // ];
 export default function Posted({dataPost}) {
+  const {t} = useLanguage();
+
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'estate',
@@ -106,7 +109,7 @@ export default function Posted({dataPost}) {
         style={{
           fontSize: SIZES.medium,
         }}>
-        Posted for sale
+        {t('post_for_sale')}
       </CustomText>
       <FlatList
         scrollEnabled={false}

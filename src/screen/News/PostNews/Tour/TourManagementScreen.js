@@ -10,9 +10,12 @@ import Pagination from '../../../../components/Pagination';
 import usePagination from '../../../../hooks/usePagination';
 import ListCreateAccomLoading from '../Lease/components/HomeLease/ListCreateAccomLoading';
 import CreateTourItem from './components/CreateTourItem';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function TourManagementScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {setOptions, navigate, goBack} = useNavigation();
   const {data, page, isLoading, isError, setPage} = usePagination(
     ['tour', 'my-list', 1],
@@ -25,9 +28,9 @@ export default function TourManagementScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Tour List Created',
+      headerTitle: t('tour_list_create'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

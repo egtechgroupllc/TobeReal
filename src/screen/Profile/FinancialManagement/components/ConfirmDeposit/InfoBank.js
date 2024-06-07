@@ -8,8 +8,11 @@ import CustomImage from '../../../../../components/CustomImage';
 import {formatPrice} from '../../../../../utils/format';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function InfoBank({data}) {
+  const {t} = useLanguage();
+
   const nameBank = useMemo(
     () => data?.typeAccountBank?.bank_name.split(' - ')[0],
     [data],
@@ -23,7 +26,7 @@ export default function InfoBank({data}) {
             flex: 1,
             fontSize: SIZES.medium,
           }}>
-          Transfer money - {nameBank}
+          {t('transfer_money')} - {nameBank}
         </CustomText>
         <CustomImage
           source={data?.typeAccountBank?.logo_url}
@@ -46,18 +49,18 @@ export default function InfoBank({data}) {
             rowGap: scale(20),
           }}>
           <ItemInfo
-            name="Bank account number"
+            name={t('bank_number')}
             value={data?.typeAccountBank?.code}
           />
           <ItemInfo
-            name="Bank account holders"
+            name={t('bank_holder')}
             value={data?.typeAccountBank?.owner}
             isCopy={false}
           />
         </View>
         <View style={styles.border}>
           <ItemInfo
-            name="Transfer amount"
+            name={t('transfer_amount')}
             value={String(data?.amount)}
             isPrice
           />

@@ -16,7 +16,7 @@ export default function BuySell({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Recently viewed')];
+  const title = [t('recent_view')];
 
   // const {data, isLoading, isError, error} = useQuery({
   //   queryKey: [

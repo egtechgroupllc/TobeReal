@@ -150,7 +150,7 @@ export default function PostNewSellScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={t('Next')}
+        text={t('continue')}
         onPress={handleSubmit(handlePostLease)}
         // onPress={handlePostLease}
         style={{

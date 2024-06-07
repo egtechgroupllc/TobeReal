@@ -35,9 +35,9 @@ export default function AddTicketScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Create tour tickets',
+      headerTitle: t('create_tour_ticket'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

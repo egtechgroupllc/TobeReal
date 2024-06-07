@@ -25,10 +25,10 @@ export default function DetailBookingScreen() {
             padding: scale(10),
           }}>
           <CustomText textType="bold" size={SIZES.large}>
-            Booking detail
+            {t('booking_detail')}
           </CustomText>
           <CustomText size={SIZES.xMedium} color={COLORS.textSub}>
-            Booking code: {data?.id}
+            {t('booking_code')}: {data?.id}
           </CustomText>
           {data.status && (
             <View
@@ -69,13 +69,13 @@ export default function DetailBookingScreen() {
               textType="bold"
               size={SIZES.xMedium}
               style={{marginBottom: scale(5)}}>
-              ({data?.number_room} room - {data?.room?.room_type?.name}){'  '}{' '}
-              {data?.room?.name}
+              ({data?.number_room} {t('room')} - {data?.room?.room_type?.name})
+              {'  '} {data?.room?.name}
             </CustomText>
 
             <ItemUtil
               Icon={IconPeople}
-              value={`${data?.room?.max_occupancy} guest`}
+              value={`${data?.room?.max_occupancy} ${t('guest')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -89,7 +89,7 @@ export default function DetailBookingScreen() {
             />
             <ItemUtil
               Icon={IconWifi}
-              value={`Free wifi`}
+              value={`${t('free_wifi')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -98,7 +98,7 @@ export default function DetailBookingScreen() {
 
           <View>
             <CustomText textType="bold" size={SIZES.xMedium}>
-              Special requests (if any)
+              {t('special_request')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -110,7 +110,7 @@ export default function DetailBookingScreen() {
 
           <View style={{rowGap: scale(5)}}>
             <CustomText textType="bold" size={SIZES.xMedium}>
-              Guest name
+              {t('guest_name')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -123,7 +123,7 @@ export default function DetailBookingScreen() {
           <View>
             <ItemUtil
               Icon={IconBan}
-              value={'No refunds'}
+              value={`${t('no_refund')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -131,7 +131,7 @@ export default function DetailBookingScreen() {
 
             <ItemUtil
               Icon={IconBan}
-              value={'No rescheduling'}
+              value={`${t('no_reschedulung')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -151,7 +151,7 @@ export default function DetailBookingScreen() {
               paddingTop: scale(12),
               padding: scale(10),
             }}>
-            Great choice for your vacation!
+            {t('great_choice')}
           </CustomText>
         </View>
       </MainWrapper>

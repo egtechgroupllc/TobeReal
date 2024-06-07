@@ -12,21 +12,19 @@ import {
 } from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'No (this rate is available for all stay lengths)',
-  },
-  {
-    id: 2,
-    title: 'Yes',
-  },
-];
-
 export default function RulesPolicy4({control, unregister}) {
   const {t} = useLanguage();
   const [isSelect, setIsSelect] = useState(0);
-
+  const list = [
+    {
+      id: 1,
+      title: t('no_all_stay'),
+    },
+    {
+      id: 2,
+      title: t('yes'),
+    },
+  ];
   useEffect(() => {
     if (isSelect === 0) {
       unregister('min_number_day');

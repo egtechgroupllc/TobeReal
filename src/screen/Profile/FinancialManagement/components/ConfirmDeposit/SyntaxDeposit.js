@@ -6,14 +6,17 @@ import {IconCopy} from '../../../../../assets/icon/Icon';
 import {useQueryClient} from '@tanstack/react-query';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function SyntaxDeposit({data}) {
   const queryClient = useQueryClient();
+  const {t} = useLanguage();
+
   const dataUser = queryClient.getQueryData(['user', 'profile'])?.data;
 
   const handleCopy = () => {
     Clipboard.setString(
-      `${data?.code}  deposit money to post news to your account ${dataUser?.username}`,
+      `${data?.code}  ${t('deposit_to_post')} ${dataUser?.username}`,
     );
     showMess('Copy successful');
   };
@@ -25,7 +28,7 @@ export default function SyntaxDeposit({data}) {
         style={{
           fontSize: SIZES.medium,
         }}>
-        Syntax of transfer content
+        {t('syntax_transfer')}
       </CustomText>
       <TouchableOpacity
         activeOpacity={0.7}
@@ -44,7 +47,7 @@ export default function SyntaxDeposit({data}) {
             }}>
             {data?.code}{' '}
           </CustomText>
-          deposit money to post news to your account
+          {t('deposit_to_post')}
           <CustomText
             textType="semiBold"
             style={{
@@ -63,7 +66,7 @@ export default function SyntaxDeposit({data}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Note:{' '}
+          {t('note')}:{' '}
         </CustomText>
         <CustomText
           textType="semiBold"
@@ -72,9 +75,7 @@ export default function SyntaxDeposit({data}) {
           }}>
           {data?.code}
         </CustomText>{' '}
-        is your own transfer code. Please enter the correct code at the top of
-        the content Use wire transfer to confirm transactions quickly and
-        accurately body.
+        {t('own_transfer_code')}
       </CustomText>
     </View>
   );

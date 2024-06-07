@@ -4,6 +4,7 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import Counter from '../../../../../components/Counter';
 import CustomSelectDropdown from '../../../../../components/CustomSelectDropdown';
 import CustomText from '../../../../../components/CustomText';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 const list = [...Array(18)].map((_, index) => (index === 0 ? '< 1' : index));
 
@@ -12,6 +13,7 @@ export default function ListChildren({onChange, quantity}) {
   const handleAdd = () => {
     setListChild(prev => [...prev, 8]);
   };
+  const {t} = useLanguage();
 
   const handleDown = () => {
     const newArr = [...listChild];
@@ -39,8 +41,8 @@ export default function ListChildren({onChange, quantity}) {
         rowGap: SIZES.xSmall,
       }}>
       <Counter
-        heading="Children"
-        subHeading={'Age (0 - 17)'}
+        heading={t('children')}
+        subHeading={`${t('age')} (0 - 17)`}
         min={0}
         max={6}
         onAdd={handleAdd}

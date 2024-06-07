@@ -57,7 +57,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
       <InViewPort noLoading={true}>
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <RealEstateType
-            label={'Room Type'}
+            label={t('room_type')}
             name={'room_type_id'}
             control={control}
             data={data?.data}
@@ -66,7 +66,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             valueFind="id"
           />
           <RealEstateType
-            label={'Bed Type'}
+            label={t('bed_type')}
             name={'room_bed_type_id'}
             control={control}
             data={listBedType.data?.data}
@@ -83,7 +83,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(30),
             }}>
             <CustomInput
-              label={'Width (m)'}
+              label={`${t('width')} (m)`}
               placeholder="Width"
               name="size_width"
               rules={requireField(t('this_field_required'))}
@@ -97,7 +97,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Length (m)'}
+              label={`${t('length')} (m)`}
               placeholder="Length"
               name="size_length"
               control={control}
@@ -111,8 +111,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
           </View>
           <CustomInput
-            label={'Number of rooms'}
-            placeholder="Number of rooms"
+            label={t('number_room')}
+            placeholder={t('number_room')}
             name="number_room"
             control={control}
             rules={requireField(t('this_field_required'))}
@@ -122,7 +122,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <Counter
-            heading={'Maximum number of adults'}
+            heading={t('maximum_adult')}
             min={1}
             max={20}
             value={watch('max_occupancy')}
@@ -131,7 +131,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             }}
           />
           <Counter
-            heading={'Maximum number of children'}
+            heading={t('maximum_children')}
             min={0}
             max={20}
             value={watch('max_child_occupancy')}
@@ -149,7 +149,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               justifyContent: 'space-between',
             }}>
             <CustomText size={SIZES.xMedium} style={{flex: 1}}>
-              Maximum age of children
+              {t('maximum_age_children')}
             </CustomText>
 
             <CustomSelectDropdown

@@ -23,28 +23,7 @@ import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '../../../../../../components/CheckBox';
 import CustomText from '../../../../../../components/CustomText';
-const listSort = [
-  {
-    id: 1,
-    name: 'Tour guide',
-  },
-  {
-    id: 2,
-    name: 'Meals',
-  },
-  {
-    id: 3,
-    name: 'Transport',
-  },
-  {
-    id: 4,
-    name: 'Other services',
-  },
-  {
-    id: 5,
-    name: 'Price not included',
-  },
-];
+
 export default function TicketDetail({
   maxCharacters,
   control,
@@ -54,7 +33,28 @@ export default function TicketDetail({
 }) {
   const richTextRef = useRef(null);
   const {t} = useLanguage();
-
+  const listSort = [
+    {
+      id: 1,
+      name: t('tour_guide'),
+    },
+    {
+      id: 2,
+      name: t('meal'),
+    },
+    {
+      id: 3,
+      name: t('transport'),
+    },
+    {
+      id: 4,
+      name: t('other_service'),
+    },
+    {
+      id: 5,
+      name: t('price_not_included'),
+    },
+  ];
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
@@ -86,7 +86,7 @@ export default function TicketDetail({
   return (
     <View style={{marginTop: scale(-10)}}>
       <ButtonTabValidate
-        title={t('Ticket detail')}
+        title={t('ticket_detail')}
         onPress={viewGeneral}
         errors={errors}
         watch={watch}
@@ -99,7 +99,7 @@ export default function TicketDetail({
         {isRender && (
           <Collapsible collapsed={!isView} style={styles.box}>
             <CustomText textType="medium" style={{...styles.text2}}>
-              {t('Price (included):')}
+              {t('price_included')}:
             </CustomText>
             {listSort.map((item, index) => (
               <View key={index}>
@@ -107,7 +107,7 @@ export default function TicketDetail({
                   <CustomText
                     textType="medium"
                     style={{...styles.text2, paddingBottom: scale(10)}}>
-                    {t('Price (not included):')}
+                    {t('price_not_included')}:
                   </CustomText>
                 )}
                 <CheckBox

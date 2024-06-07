@@ -8,24 +8,23 @@ import {requireField} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../components/CustomText';
 
-const list = [
-  {
-    id: 1,
-    title: 'Smoking is only allowed in designated areas.',
-  },
-  {
-    id: 2,
-    title: 'Non-smoking accommodation facilities.',
-  },
-  {
-    id: 3,
-    title: 'Other',
-  },
-];
-
 export default function FeaturesPolicy2({control}) {
   const [isSelect, setIsSelect] = useState();
   const {t} = useLanguage();
+  const list = [
+    {
+      id: 1,
+      title: t('smoking_area'),
+    },
+    {
+      id: 2,
+      title: t('non_smoking'),
+    },
+    {
+      id: 3,
+      title: t('other'),
+    },
+  ];
   return (
     <View
       style={{

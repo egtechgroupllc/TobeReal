@@ -21,20 +21,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../Model/api/common';
 import BottomSheetChild from './Header/BottomSheetChild';
 import InViewport from '../../components/InViewport';
-const listFill = [
-  {
-    text: 'On Promotion',
-  },
-  {
-    text: 'No Minimum Stay',
-  },
-  {
-    text: 'Full Furnished',
-  },
-  {
-    text: 'Unfurnished',
-  },
-];
+
 export default function MapHeader({
   onFilter = () => {},
   accom,
@@ -43,6 +30,20 @@ export default function MapHeader({
   mapProvince,
 }) {
   const {t} = useLanguage();
+  const listFill = [
+    {
+      text: t('on_promotion'),
+    },
+    {
+      text: t('no_minimum'),
+    },
+    {
+      text: t('full_furnished'),
+    },
+    {
+      text: t('unfurnished'),
+    },
+  ];
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const {country} = useCountry();
@@ -135,7 +136,7 @@ export default function MapHeader({
                 // onPress={onPress}
                 buttonType="normal"
                 style={{flex: 0.5}}
-                text={t('Apply')}
+                text={t('apply')}
                 onPress={handleSubmit(handelFiter)}
                 styleText={{
                   fontSize: SIZES.xMedium,
@@ -162,14 +163,14 @@ export default function MapHeader({
                 }}
               />
 
-              {watch('menu')?.name === 'RENT' || !watch('menu') ? (
+              {watch('menu')?.name === t('rent') || !watch('menu') ? (
                 <TypeAccommoda
                   value={watch('type')}
                   onType={value => {
                     setValue('type', value?.id);
                   }}
                 />
-              ) : watch('menu')?.name === 'BUY' ? (
+              ) : watch('menu')?.name === t('buy') ? (
                 <TypeEstate
                   value={watch('type')}
                   onType={value => {

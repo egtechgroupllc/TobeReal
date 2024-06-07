@@ -15,7 +15,9 @@ export default function TimeBookingCheckInOut({data}) {
         timeDate={formatDate(data?.check_in_date, {
           dateStyle: 'EEE, dd-MM-yyyy',
         })}
-        timeCheck={`From ${data?.accommodation?.check_in_time_start} - ${data?.accommodation?.check_in_time_end} `}
+        timeCheck={`${t('from')} ${
+          data?.accommodation?.check_in_time_start
+        } - ${data?.accommodation?.check_in_time_end} `}
       />
 
       <View style={styles.numDays}>
@@ -23,7 +25,8 @@ export default function TimeBookingCheckInOut({data}) {
           textType="medium"
           color={COLORS.text}
           style={{textAlign: 'center'}}>
-          {differenceInDays(data?.check_out_date, data?.check_in_date)} night
+          {differenceInDays(data?.check_out_date, data?.check_in_date)}{' '}
+          {t('day')}
         </CustomText>
       </View>
 
@@ -32,7 +35,9 @@ export default function TimeBookingCheckInOut({data}) {
         timeDate={formatDate(data?.check_out_date, {
           dateStyle: 'EEE, dd-MM-yyyy',
         })}
-        timeCheck={`To ${data?.accommodation?.check_out_time_start} - ${data?.accommodation?.check_out_time_end} `}
+        timeCheck={`${t('to')} ${data?.accommodation?.check_out_time_start} - ${
+          data?.accommodation?.check_out_time_end
+        } `}
       />
     </View>
   );

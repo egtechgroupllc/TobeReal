@@ -1,49 +1,31 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import Header from '../../../../../Profile/components/Header';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useLayoutEffect} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS, SHADOW, scale} from '../../../../../../assets/constants';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import MainWrapper from '../../../../../../components/MainWrapper';
-import {
-  Avatar,
-  IconBrokerCertificate,
-  IconCalendar,
-  IconCertificate,
-  IconEmail,
-  IconPhone,
-  IconViewablePassword,
-} from '../../../../../../assets/icon/Icon';
-import CustomText from '../../../../../../components/CustomText';
-import Info from './components/Info';
-import HeadContent from './components/HeadContent';
+import Header from '../../../../../Profile/components/Header';
 import Contact from './components/Contact';
+import HeadContent from './components/HeadContent';
+import Info from './components/Info';
 import Posted from './components/Posted';
+import MainWrapper from '../../../../../../components/MainWrapper';
+import {IconHome} from '../../../../../../assets/icon/Icon';
 
 export default function DetailBrokerScreen() {
   const params = useRoute().params;
-  const navigation = useNavigation();
   const {t} = useLanguage();
-  const goBack = () => {
-    navigation.goBack();
-  };
-  const notify = () => {};
+  const {setOptions} = useNavigation();
+
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('detail_broker'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <MainWrapper>
       <View style={styles.container}>
-        <Header
-          goback={true}
-          subHeading={t('Detail Broker')}
-          noti={true}
-          onPress={goBack}
-          notify={notify}
-          styleWrapper={{
-            marginTop: scale(-20),
-            backgroundColor: COLORS.primary,
-            paddingHorizontal: scale(30),
-            paddingBottom: scale(10),
-          }}
-        />
         <HeadContent data={params} />
         <Info data={params} />
         <Contact />

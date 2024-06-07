@@ -4,36 +4,39 @@ import RadioButton from '../../../../../components/RadioButton';
 import {scale} from '../../../../../../assets/constants';
 import CheckBox from '../../../../../../components/CheckBox';
 import Collapsible from 'react-native-collapsible';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'No',
-  },
-  {
-    id: 2,
-    title: 'Yes, more meal options',
-  },
-];
-const listHasMeal = [
-  {
-    id: 1,
-    title: 'Breakfast',
-  },
-  {
-    id: 2,
-    title: 'Lunch',
-  },
-  {
-    id: 3,
-    title: 'Dinner',
-  },
-  {
-    id: 4,
-    title: 'Include all',
-  },
-];
 export default function RulesPolicy2({setValue, unregister}) {
+  const {t} = useLanguage();
+
+  const list = [
+    {
+      id: 1,
+      title: t('no'),
+    },
+    {
+      id: 2,
+      title: t('more_meal'),
+    },
+  ];
+  const listHasMeal = [
+    {
+      id: 1,
+      title: t('BREAKFAST'),
+    },
+    {
+      id: 2,
+      title: t('lunch'),
+    },
+    {
+      id: 3,
+      title: t('dinner'),
+    },
+    {
+      id: 4,
+      title: t('include_all'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(0);
   const [arrFacilities, setArrFacilities] = useState([listHasMeal[0].title]);
 

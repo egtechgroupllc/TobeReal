@@ -12,15 +12,15 @@ export default function Menubar({onType, value}) {
   const data = [
     {
       id: 1,
-      name: 'RENT',
+      name: t('rent'),
     },
     {
       id: 2,
-      name: 'BUY',
+      name: t('buy'),
     },
     {
       id: 3,
-      name: 'TOUR',
+      name: t('tour'),
     },
   ];
   useEffect(() => {

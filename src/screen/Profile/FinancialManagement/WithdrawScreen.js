@@ -17,8 +17,11 @@ import BotContent from './Withdraw/BotContent';
 import {showMess} from '../../../assets/constants/Helper';
 import MainWrapper from '../../../components/MainWrapper';
 import {useCountry} from '../../../hooks/useCountry';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function WithdrawScreen() {
+  const {t} = useLanguage();
+
   const {control, handleSubmit, setValue, watch} = useForm();
   const {navigate, setOptions} = useNavigation();
   const withdrawMutation = useMutation({
@@ -30,7 +33,7 @@ export default function WithdrawScreen() {
   }, []);
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Withdraw',
+      headerTitle: t('withdraw'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -64,7 +67,7 @@ export default function WithdrawScreen() {
         <TopContent control={control} />
         <BotContent control={control} setValue={setValue} />
         <CustomButton
-          text="Confirm"
+          text={t('confirm')}
           style={{marginTop: scale(20)}}
           onPress={handleSubmit(handleWidraw)}
         />

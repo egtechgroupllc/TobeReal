@@ -7,8 +7,11 @@ import {
 } from '../../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function HeadContent({data}) {
+  const {t} = useLanguage();
+
   return (
     <View
       style={{
@@ -32,7 +35,7 @@ export default function HeadContent({data}) {
               color: '#00A3FF',
               fontSize: SIZES.xSmall,
             }}>
-            Professional broker
+            {t('professional_broker')}
           </CustomText>
         </View>
 
@@ -60,7 +63,7 @@ export default function HeadContent({data}) {
                 fontSize: SIZES.xSmall,
                 minWidth: scale(35),
               }}>
-              6.100+  news views
+              6.100+ {t('news_views')}
             </CustomText>
           </View>
         </View>

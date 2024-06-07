@@ -7,16 +7,15 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import WrapperContent from '../../WrapperContent';
 import BottomSheet from '../../../../../components/BottomSheet';
 
-const listPolicy = [
-  {
-    icon: IconClock,
-    name: 'Required documents',
-    value:
-      'When checking in, you need to provide ID card/CCCD. Please bring necessary documents in hard copy.',
-  },
-];
 export default function AccommoPolicy({data}) {
   const {t} = useLanguage();
+  const listPolicy = [
+    {
+      icon: IconClock,
+      name: t('require_document'),
+      value: t('checking_require'),
+    },
+  ];
   const bottomSheetRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -26,7 +25,7 @@ export default function AccommoPolicy({data}) {
   }, [isOpen]);
   return (
     <WrapperContent
-      heading={'Accommodation policy'}
+      heading={t('accom_policy')}
       isSeeAll
       onPressSeeAll={() => {
         setIsOpen(true);

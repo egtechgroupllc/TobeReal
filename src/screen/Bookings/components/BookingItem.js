@@ -6,10 +6,13 @@ import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {formatDateTime, formatPrice} from '../../../utils/format';
 import {useCountry} from '../../../hooks/useCountry';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function BookingItem({data, onPress, onReView}) {
   const objAccom = data?.accommodation;
   const {currency} = useCountry();
+  const {t} = useLanguage();
+
   return (
     <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
       <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
@@ -18,14 +21,14 @@ export default function BookingItem({data, onPress, onReView}) {
 
       <View style={styles.code}>
         <CustomText style={{flex: 1}} numberOfLines={1} ellipsizeMode="middle">
-          Booking code:{' '}
+          {t('booking_code')}:{' '}
           <CustomText textType="semiBold" numberOfLines={1}>
             {data?.id}
           </CustomText>
         </CustomText>
 
         <CustomText>
-          Price:{' '}
+          {t('price')}:{' '}
           <CustomText textType="semiBold">
             {formatPrice(data?.price * currency?.exchange_rate, {
               currency: currency?.currency_code,
@@ -51,11 +54,11 @@ export default function BookingItem({data, onPress, onReView}) {
           <View style={styles.address}>
             <CustomButton
               styleWrapper={{flex: 1}}
-              text="PAY"
+              text={t('pay')}
               style={{height: scale(25)}}
             />
             <CustomButton
-              text="CANCEL"
+              text={t('cancel')}
               styleWrapper={{flex: 1}}
               outline
               style={{
@@ -68,7 +71,7 @@ export default function BookingItem({data, onPress, onReView}) {
         ) : (
           <CustomButton
             styleWrapper={{flex: 0.4}}
-            text="Review"
+            text={t('review')}
             style={{height: scale(25)}}
             onPress={onReView}
           />
@@ -83,8 +86,8 @@ export default function BookingItem({data, onPress, onReView}) {
           }}>
           <CustomText size={SIZES.xSmall} textType="bold" color={COLORS.white}>
             {data.status === 'SUCCESS'
-              ? 'Successful transaction'
-              : 'Exceeded specified time limit'}
+              ? t('success_transaction')
+              : t('exceed_limit')}
           </CustomText>
         </View>
         <CustomText

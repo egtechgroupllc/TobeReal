@@ -17,8 +17,8 @@ export default function TabContent() {
     if (profile?.role_id === 2 || profile?.role_id === undefined) {
       showMess(
         profile?.status === 'VERIFYING_BUSINESS'
-          ? 'Your account is waiting for approval'
-          : 'Please become Saveloka partner to post news',
+          ? t('account_approval')
+          : t('please_become_partner'),
         'error',
       );
       return false;

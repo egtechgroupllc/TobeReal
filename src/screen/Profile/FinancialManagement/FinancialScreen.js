@@ -13,9 +13,13 @@ import {
 } from '../../../assets/icon/Icon';
 import HeaderBar from '../../../components/HeaderBar';
 import WithdrawScreen from './WithdrawScreen';
+import {useLanguage} from '../../../hooks/useLanguage';
 const Tab = createBottomTabNavigator();
 
 export default function FinancialScreen() {
+  const {t} = useLanguage();
+  const {navigate} = useNavigation();
+
   return (
     <Tab.Navigator
       initialRouteName="ListMethodBankScreen"
@@ -38,7 +42,7 @@ export default function FinancialScreen() {
         name={'ListMethodBankScreen'}
         component={ListMethodBankScreen}
         options={{
-          tabBarLabel: 'Depossit',
+          tabBarLabel: t('deposit'),
           tabBarIcon: ({focused}) => (
             <IconDeposit fill={focused && '#F0B90B'} />
           ),
@@ -48,7 +52,7 @@ export default function FinancialScreen() {
         name={'WithdrawScreen'}
         component={WithdrawScreen}
         options={{
-          tabBarLabel: 'Withdraw',
+          tabBarLabel: t('withdraw'),
           tabBarIcon: ({focused}) => (
             <IconWithdraw fill={focused && '#F0B90B'} />
           ),
@@ -58,7 +62,7 @@ export default function FinancialScreen() {
         name={'HistoryTransaction'}
         component={HistoryTransactionScreen}
         options={{
-          tabBarLabel: 'Transaction history',
+          tabBarLabel: t('transaction_history'),
           tabBarIcon: ({focused}) => (
             <IconHistory fill={focused && '#F0B90B'} />
           ),

@@ -11,23 +11,23 @@ import CustomText from '../../../../../../components/CustomText';
 import {requireField} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Flexible - cancel before check-in time',
-  },
-  {
-    id: 2,
-    title: 'Flexible - 1 day in advance',
-  },
-  {
-    id: 3,
-    title: 'No refunds',
-  },
-];
-
 export default function RulesPolicy1({setValue, control, unregister}) {
   const {t} = useLanguage();
+
+  const list = [
+    {
+      id: 1,
+      title: t('cancel_before'),
+    },
+    {
+      id: 2,
+      title: t('flexible_advance'),
+    },
+    {
+      id: 3,
+      title: t('no_refund'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(1);
   const [openCheckStart, setOpenCheckStart] = useState(false);
   const [timeCheckStart, setTimeCheckStart] = useState(
@@ -63,9 +63,9 @@ export default function RulesPolicy1({setValue, control, unregister}) {
             key={index}
             title={
               index === 0 && isSelect === 0
-                ? `Flexibility - cancel in advance ${formatTime(
+                ? `${t('flexible_cancel_advance')} ${formatTime(
                     timeCheckStart,
-                  )} on check-in day`
+                  )} ${t('on_check')}`
                 : item?.title
             }
             isCheck={isSelect === index}
@@ -75,7 +75,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
 
       <DatePicker
         mode="time"
-        title={'Select hours'}
+        title={t('select_hour')}
         modal
         open={openCheckStart}
         date={timeCheckStart}
@@ -109,16 +109,11 @@ export default function RulesPolicy1({setValue, control, unregister}) {
               </View>
             }
           />
-          <CustomText>
-            Cancellation fee after the time the guest has booked the room
-          </CustomText>
+          <CustomText>{t('cancellation_fee_after')}</CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
-            <CustomText>
-              Cancellation fee after the time the guest has booked the room.
-              Customers must pay a fee Cancel the room after the booked time
-            </CustomText>
+            <CustomText>{t('cancellation_fee_customer_pay')}</CustomText>
           </View>
         </View>
       </Collapsible>

@@ -75,10 +75,14 @@ export default function BookRoom({data}) {
             }}
           />
           <CustomText style={{color: COLORS.text}}>
-            Total price for the room{' '}
-            <CustomText textType="medium"> {selectRoom} room</CustomText>,
+            {t('total_price_room')}{' '}
             <CustomText textType="medium">
-              {data?.date?.numNight} night
+              {' '}
+              {selectRoom} {t('room')}
+            </CustomText>
+            ,
+            <CustomText textType="medium">
+              {data?.date?.numNight} {t('day')}
             </CustomText>
           </CustomText>
         </View>
@@ -115,7 +119,7 @@ export default function BookRoom({data}) {
                   fontSize: SIZES.xSmall,
                   color: COLORS.text,
                 }}>
-                Last price
+                {t('last_price')}
               </CustomText>
               <View
                 style={{
@@ -124,9 +128,9 @@ export default function BookRoom({data}) {
                 }}>
                 <IconCoinPoint />
                 <CustomText>
-                  Receive{' '}
+                  {t('receive')}{' '}
                   <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                    {formatPrice(selectRoom * 12312231)} points
+                    {formatPrice(selectRoom * 12312231)} {t('points')}
                   </CustomText>
                 </CustomText>
               </View>
@@ -140,7 +144,7 @@ export default function BookRoom({data}) {
             isDefaultValue
             styleWrapper={{width: '100%'}}
             data={[...Array(roomsAverage)].map((_, index) => ({
-              name: `${index + 1} room`,
+              name: `${index + 1} ${t('room')}`,
               value: index + 1,
             }))}
             buttonEstateTypes={{

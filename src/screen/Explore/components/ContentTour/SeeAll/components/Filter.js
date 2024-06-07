@@ -11,40 +11,41 @@ import {
 import {IconDown, IconHistory} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
-
-
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function Filter() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const {t} = useLanguage();
 
-  const renderItem = ({ item, index }) => {
-    return (
-      activeIndex === index ? (
-        <LinearGradient
+  const renderItem = ({item, index}) => {
+    return activeIndex === index ? (
+      <LinearGradient
         colors={['#F0B90B', '#FFE55A']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={{
-                ...styles.searchItem
-              }}
-        >
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setActiveIndex(index)}>
-            <CustomText textType='bold' numberOfLines={1}>{item}</CustomText>
-          </TouchableOpacity>
-        </LinearGradient>
-      ) : (
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        style={{
+          ...styles.searchItem,
+        }}>
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => setActiveIndex(index)}
-          style={{
-            ...styles.searchItem,
-            backgroundColor: '#F8F8F8'
-          }}>
-          <CustomText textType='bold' numberOfLines={1}>{item}</CustomText>
+          onPress={() => setActiveIndex(index)}>
+          <CustomText textType="bold" numberOfLines={1}>
+            {item}
+          </CustomText>
         </TouchableOpacity>
-      )
+      </LinearGradient>
+    ) : (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => setActiveIndex(index)}
+        style={{
+          ...styles.searchItem,
+          backgroundColor: '#F8F8F8',
+        }}>
+        <CustomText textType="bold" numberOfLines={1}>
+          {item}
+        </CustomText>
+      </TouchableOpacity>
     );
   };
 
@@ -54,12 +55,12 @@ export default function Filter() {
         horizontal
         showsHorizontalScrollIndicator={false}
         data={[
-          'Our topics',
-          'Lowest price first',
-          'Best reviewed',
-          'Recently',
-          'On promotion',
-          'Good review',
+          t('our_topics'),
+          t('lowest_price_first'),
+          t('best_review'),
+          t('recent'),
+          t('on_promotion'),
+          t('good_review'),
         ]}
         contentContainerStyle={{
           paddingHorizontal: scale(10),
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(10),
     // backgroundColor: COLORS.white,
     // borderWidth:scale(1),
-    width:'80%',
+    width: '80%',
     maxHeight: WIDTH.heightScreen / 1.9,
   },
   title: {
@@ -90,13 +91,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   searchItem: {
-    minWidth:scale(120),
-    borderWidth:scale(1),
+    minWidth: scale(120),
+    borderWidth: scale(1),
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
-    borderRadius:scale(5),
-    borderColor:'#E3E3E3',
+    justifyContent: 'center',
+    borderRadius: scale(5),
+    borderColor: '#E3E3E3',
     // borderTopColor: '#f1f1f1',
   },
 });

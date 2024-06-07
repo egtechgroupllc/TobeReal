@@ -16,10 +16,10 @@ export default function ImgConfirmDeposit({control}) {
           fontSize: SIZES.medium,
           marginBottom: scale(-10),
         }}>
-        Photo proof
+        {t('photo_proof')}
       </CustomText>
       <ChooseImgPicker
-        title={'Photo proof of transfer'}
+        title={t('photo_proof_transfer')}
         name={'files'}
         isDescriptionImg={false}
         maxFiles={2}

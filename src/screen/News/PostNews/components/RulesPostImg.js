@@ -2,21 +2,24 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../components/CustomText';
 import {scale} from '../../../../assets/constants';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function RulesPostImg() {
+  const {t} = useLanguage();
+
   return (
     <View
       style={{
         width: '100%',
       }}>
       <CustomText textType="semiBold" style={{marginBottom: scale(6)}}>
-        - Rules for posting pictures:
+        - {t('rules_posting_pictures')}:
       </CustomText>
-      <CustomText>• Post a minimum of 4 photos</CustomText>
-      <CustomText>• Post up to 24 photos with all types of stories</CustomText>
-      <CustomText>• Please use real photos, not duplicates</CustomText>
-      <CustomText>• Each photo has a minimum size of 100x100 px</CustomText>
-      <CustomText>• Describe photo in maximum 45 characters.</CustomText>
+      <CustomText>• {t('post_minimum_photo')}</CustomText>
+      <CustomText>• {t('post_upto_photo')}</CustomText>
+      <CustomText>• {t('please_use_real_photo')}</CustomText>
+      <CustomText>• {t('each_photo')}</CustomText>
+      <CustomText>• {t('describe_photo')}</CustomText>
     </View>
   );
 }

@@ -1,7 +1,7 @@
 export const dataPropertyFacilities = [
   {
     id: 1,
-    name: 'Common',
+    name: 'common',
     include: {
       PARKING_AREA: 'Parking Area',
       ROOM_SERVICE: 'Room Service',
@@ -20,7 +20,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 2,
-    name: 'Accessibility',
+    name: 'accessibility',
     include: {
       ACCESSIBLE_BATHROOM: 'Accessible Bathroom',
       ACCESSIBLE_PARKING: 'Accessible Parking',
@@ -35,7 +35,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 3,
-    name: 'Business',
+    name: 'business',
     include: {
       BUSINESS_CENTER: 'Business Center',
       MEETING_FACILITIES: 'Meeting Facilities',
@@ -52,7 +52,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 4,
-    name: 'Connectivity',
+    name: 'connectivity',
     include: {
       WIFI_SURCHARGE: 'Wifi Surcharge',
       WIFI_FREE: 'Wifi Free',
@@ -65,7 +65,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: '5',
-    name: 'Facilities',
+    name: 'facilities',
     include: {
       FAMILY_ROOM: 'Family Room',
       SMOKING_AREA: 'Smoking Area',
@@ -87,7 +87,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 6,
-    name: 'Food & Drinks',
+    name: 'food_drinks',
     include: {
       WINERY: 'Winery',
       BEACH_BAR: 'Beach Bar',
@@ -136,7 +136,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 7,
-    name: 'Inside Room',
+    name: 'inside_room',
     include: {
       BATHROBE: 'Bathrobe',
       BATHTUB: 'Bathtub',
@@ -156,7 +156,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 8,
-    name: 'Nearby Amenities',
+    name: 'nearby_amenities',
     include: {
       GIFT_SHOP: 'Gift Shop',
       SHOPS: 'Shops',
@@ -170,7 +170,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 9,
-    name: 'Service',
+    name: 'service',
     include: {
       FRONT_DESK: 'Front Desk',
       CONCIERGE: 'Concierge',
@@ -200,7 +200,7 @@ export const dataPropertyFacilities = [
 
   {
     id: 10,
-    name: 'Sports & Recreation',
+    name: 'sports_recreation',
     include: {
       SKI: 'Ski',
       SKI_STORAGE: 'Ski Storage',
@@ -253,7 +253,7 @@ export const dataPropertyFacilities = [
 
   {
     id: 11,
-    name: 'Things To Do',
+    name: 'things_to_do',
     include: {
       CHILDREN_CLUB_SURCHARGE: 'Children Club Surcharge',
       WATER_PARK_ACCESS_SURCHARGE: 'Water Park Access Surcharge',
@@ -308,7 +308,7 @@ export const dataPropertyFacilities = [
   },
   {
     id: 12,
-    name: 'Transportation',
+    name: 'transportation',
     include: {
       SKI_SHUTTLE: 'Ski Shuttle',
       SKI_SHUTTLE_SURCHARGE: 'Ski Shuttle Surcharge',
@@ -345,7 +345,7 @@ export const dataPropertyFacilities = [
 
   {
     id: 13,
-    name: 'Traveling With Others',
+    name: 'traveling_with_others',
     include: {
       BABYSITTING: 'Babysitting',
       SUPERVISED_CHILDCARE: 'Supervised Childcare',

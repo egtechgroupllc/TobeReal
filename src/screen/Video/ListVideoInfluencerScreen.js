@@ -130,7 +130,6 @@ export default function ListVideoInfluencerScreen() {
   const flatListRef = useRef(null);
 
   const [videoPlay, setVideoPlay] = useState(true);
-  const [releaseHeart, setReleaseHeart] = useState({x: 0, y: 0});
 
   const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
     if (viewableItems.length > 0 && viewableItems[0].isViewable) {
@@ -186,15 +185,6 @@ export default function ListVideoInfluencerScreen() {
   //   });
   // }, []);
 
-  const onHeartVideo = useCallback(event => {
-    const {x, y} = event;
-    setReleaseHeart({x, y});
-    const timeOutID = setTimeout(() => {
-      setReleaseHeart({x: 0, y: 0});
-    }, 1000);
-    return clearTimeout(timeOutID);
-  }, []);
-
   return (
     <View>
       <TouchableOpacity
@@ -236,38 +226,14 @@ export default function ListVideoInfluencerScreen() {
             data={item}
             paused={item?.id !== videoPlay}
             play={item?.id === videoPlay}
-            isFavourite={releaseHeart.x}
             // onProgress={value => {
             //   handleProgress(value);
             // }}
-            onHeartVideo={onHeartVideo}
             onComment={() => commentRef.current?.open()}
           />
         )}
       />
 
-      {!!releaseHeart.y && (
-        <View
-          style={[
-            {
-              position: 'absolute',
-            },
-            releaseHeart.x && {
-              left: releaseHeart.x - 50,
-              top: releaseHeart.y - 40,
-            },
-          ]}>
-          <LottieView
-            loop={false}
-            autoPlay={true}
-            duration={1200}
-            source={animations.releaseHeart}
-            onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
-            resizeMode="cover"
-            style={styles.favouriteHeart}
-          />
-        </View>
-      )}
       <View
         style={{
           width: '100%',

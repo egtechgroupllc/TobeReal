@@ -17,8 +17,10 @@ import {
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function ContactInfo({data, onPress}) {
+  const {t} = useLanguage();
   const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -37,7 +39,7 @@ export default function ContactInfo({data, onPress}) {
             style={{
               fontSize: SIZES.medium,
             }}>
-            Information
+            {t('information')}
           </CustomText>
           <IconRight />
         </View>
@@ -62,7 +64,7 @@ export default function ContactInfo({data, onPress}) {
                 style={{
                   color: '#009BA1',
                 }}>
-                Môi giới chuyên nghiệp
+                {t('professional_broker')}
               </CustomText>
             )}
           </View>

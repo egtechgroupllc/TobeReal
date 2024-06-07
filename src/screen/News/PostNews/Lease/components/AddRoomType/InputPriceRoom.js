@@ -39,7 +39,7 @@ export default memo(function InputPriceRoom({
         name="price"
         control={control}
         setValue={setValue}
-        label={t('Amount per night?')}
+        label={t('amount_per_night')}
         rules={requireField(t('this_field_required'))}
         placeholder={t('enter_price')}
         style={styles.textInput}
@@ -50,9 +50,7 @@ export default memo(function InputPriceRoom({
         style={{
           rowGap: scale(10),
         }}>
-        <CustomText color={COLORS.text}>
-          Includes taxes, fees and commissions
-        </CustomText>
+        <CustomText color={COLORS.text}>{t('include_taxes')}</CustomText>
 
         <Collapsible
           collapsed={!priceValue}

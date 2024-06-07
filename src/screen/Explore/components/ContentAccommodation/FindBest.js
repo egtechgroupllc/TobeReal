@@ -92,7 +92,7 @@ export default function FindBest({country, currency}) {
             <View style={{alignItems: 'center', rowGap: scale(10)}}>
               <IconBookings width={scale(50)} height={scale(50)} />
               <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                No data
+                {t('no_data')}
               </CustomText>
             </View>
           )}

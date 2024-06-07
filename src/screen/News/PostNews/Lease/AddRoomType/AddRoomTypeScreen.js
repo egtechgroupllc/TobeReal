@@ -33,9 +33,9 @@ export default function AddRoomTypeScreen() {
   const params = useRoute().params;
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: !params?.update ? 'Create room' : 'Edit room information',
+      headerTitle: !params?.update ? t('create_room') : t('edit_room'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -239,7 +239,7 @@ export default function AddRoomTypeScreen() {
         <CustomText
           textType="medium"
           style={{...styles.text2, marginLeft: scale(20)}}>
-          {!params?.update ? t('add_room') : t('Edit room')}
+          {!params?.update ? t('add_room') : t('edit_room')}
         </CustomText>
       </View>
 
@@ -275,7 +275,7 @@ export default function AddRoomTypeScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={params?.update ? t('Update') : t('post')}
+        text={params?.update ? t('update') : t('post')}
         disabled={createAccommodationRoomMu.isPending}
         onPress={handleSubmit(handlePostRoom)}
         // onPress={handlePostRoom}

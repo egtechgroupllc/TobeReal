@@ -52,7 +52,7 @@ export default function ProvinceScreen() {
               color: '#fff',
               fontSize: SIZES.xMedium,
             }}>
-            Done
+            {t('done')}
           </CustomText>
         ),
     });

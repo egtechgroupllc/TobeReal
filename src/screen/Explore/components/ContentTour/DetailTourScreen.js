@@ -26,7 +26,7 @@ export default function DetailTourScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Overview',
+      text: t('overview'),
     },
     {
       text: t('location'),

@@ -24,7 +24,7 @@ export default function DetailAccommodationScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Overview',
+      text: t('overview'),
     },
     {
       text: t('facilities'),
@@ -34,7 +34,7 @@ export default function DetailAccommodationScreen() {
     },
 
     {
-      text: t('Review'),
+      text: t('review'),
     },
     {
       text: 'Chính sách',

@@ -24,7 +24,7 @@ export default function MapProvince({
 
   return (
     <WrapperContent
-      heading={t('Province')}
+      heading={t('province')}
       styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,

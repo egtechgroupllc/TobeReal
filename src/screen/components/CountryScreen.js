@@ -81,7 +81,7 @@ export default function CountryScreen() {
               color: '#fff',
               fontSize: SIZES.xMedium,
             }}>
-            Done
+            {t('done')}
           </CustomText>
         ),
     });

@@ -11,9 +11,11 @@ import {deleteAccom} from '../../../../../Model/api/apiAccom';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {IconHome} from '../../../../../assets/icon/Icon';
 import {deleteTour} from '../../../../../Model/api/apiTour';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function AdminManageTourScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
 
   const {setOptions} = useNavigation();
   const {navigate, goBack} = useNavigation();
@@ -21,9 +23,9 @@ export default function AdminManageTourScreen() {
   const queryClient = useQueryClient();
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Tour management',
+      headerTitle: t('tour_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -129,20 +131,20 @@ export default function AdminManageTourScreen() {
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
               }}>
-              Tour id: {params?.id}
+              Id: {params?.id}
             </CustomText>
           </View>
         </CustomImage>
         <CustomButton
-          text="Booking Count"
+          text={t('booking_count')}
           style={{width: '85%', height: scale(45)}}
         />
         <CustomButton
-          text="Reviews"
+          text={t('reviews')}
           style={{width: '85%', height: scale(45)}}
         />
         <CustomButton
-          text="Tour ticket management"
+          text={t('tour_ticket_management')}
           style={{width: '85%', height: scale(45)}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
@@ -159,7 +161,7 @@ export default function AdminManageTourScreen() {
           }
         /> */}
         <CustomButton
-          text="Remove Tour"
+          text={t('remove_tour')}
           style={{
             width: '85%',
             height: scale(45),

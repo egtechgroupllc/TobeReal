@@ -13,7 +13,6 @@ import {useLanguage} from '../../hooks/useLanguage';
 import BookingHistory from './components/BookingHistory';
 import BookingActive from './components/BookingActive';
 
-const listTab = ['Active Booking', 'Booking History'];
 const dataWaiting = [
   {
     id: 1,
@@ -55,6 +54,8 @@ const dataWaiting = [
 export default function HomeBookingsScreen() {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
+  const listTab = [t('active_booking'), t('booking_history')];
+
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
   const {data, isLoading} = useQuery({

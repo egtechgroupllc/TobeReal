@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {COLORS, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import ItemAccountBank from './ItemAccountBank';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default memo(function ListAccountBank({
   setValue,
@@ -10,6 +11,7 @@ export default memo(function ListAccountBank({
   data,
 }) {
   const [selectMethod, setSelectMethod] = useState();
+  const {t} = useLanguage();
 
   useEffect(() => {
     setSelectMethod(data?.method_deposit_items[0]);
@@ -24,9 +26,7 @@ export default memo(function ListAccountBank({
 
   return (
     <View style={styles.box}>
-      <CustomText textType="medium">
-        Please choose one of the payment methods below
-      </CustomText>
+      <CustomText textType="medium">{t('please_choose_one')}</CustomText>
 
       <ScrollView
         style={{

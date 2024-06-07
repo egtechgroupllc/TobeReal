@@ -207,13 +207,13 @@ export default function Content({data}) {
           Icon={IconAdd}
         /> */}
         <CategoriesButton
-          title={t('Select country')}
+          title={t('select_country')}
           onPress={selectCountry}
           large={true}
           nameCountry={country?.name && `${country?.flag}  ${country?.name}`}
         />
         <CategoriesButton
-          title={t('Main currency')}
+          title={t('main_currency')}
           onPress={selectCurrency}
           large={true}
           nameCountry={country?.name && `${country?.currency_code}`}

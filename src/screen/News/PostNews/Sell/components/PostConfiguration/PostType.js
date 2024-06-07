@@ -7,21 +7,7 @@ import PostTypeItem from './PostTypeItem';
 import {useQuery} from '@tanstack/react-query';
 import {getListPackagePost} from '../../../../../../Model/api/common';
 import ChoosePostTime from './ChoosePostTime';
-
-const postType = [
-  {
-    searchRating: 'Standing at the bottom of search results',
-  },
-  {
-    searchRating: 'Shown under VIP Gold',
-  },
-  {
-    searchRating: 'Shown under VIP Diamond',
-  },
-  {
-    searchRating: 'Top search results',
-  },
-];
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default memo(function PostType({
   control,
@@ -29,6 +15,23 @@ export default memo(function PostType({
   onChangeDateEnd,
   params,
 }) {
+  const {t} = useLanguage();
+
+  const postType = [
+    {
+      searchRating: t('standing_bottom_results'),
+    },
+    {
+      searchRating: t('show_vip_gold'),
+    },
+    {
+      searchRating: t('show_vip_diamond'),
+    },
+    {
+      searchRating: t('top_search_results'),
+    },
+  ];
+
   const [select, setSelect] = useState(null);
   const [seeMore, setIsSeeMore] = useState(false);
 
@@ -60,7 +63,7 @@ export default memo(function PostType({
             paddingHorizontal: scale(10),
             alignSelf: 'flex-start',
           }}>
-          Select post type:
+          {t('select_post_type')}:
         </CustomText>
 
         <FlatList

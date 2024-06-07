@@ -58,7 +58,7 @@ export default function ContentStep1({onPress, data}) {
               numberOfLines={2}
               size={SIZES.medium}>
               <CustomText textType="semiBold" size={SIZES.xMedium}>
-                ({data?.numRoomSelect} room){'  '}
+                ({data?.numRoomSelect} {t('room')}){'  '}
               </CustomText>
 
               {data?.name}
@@ -94,12 +94,12 @@ export default function ContentStep1({onPress, data}) {
             }}>
             <ItemUtil
               Icon={IconBan}
-              value={'This booking is non-refundable.'}
+              value={t('booking_non_refund')}
               valueBold={'regular'}
             />
             <ItemUtil
               Icon={IconBan}
-              value={'Rescheduling is not applicable'}
+              value={t('rescheduling_not_apply')}
               valueBold={'regular'}
             />
           </View>
@@ -116,9 +116,7 @@ export default function ContentStep1({onPress, data}) {
           }}>
           <ItemUtil
             Icon={IconBookings}
-            title={
-              "Taxes and fees are amounts remitted by Traveloka to the hotel. For questions about taxes and invoices, please refer to Saveloka's Terms and Conditions for answers"
-            }
+            title={t('tax_and_fee')}
             styleTextTitle={{
               fontSize: SIZES.small,
             }}

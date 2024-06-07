@@ -70,7 +70,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       ...styles.select,
                       borderTopWidth: scale(index === 0 ? 0 : 1),
                     }}
-                    text={item?.name}
+                    text={t(item?.name)}
                     iconRight={() => (
                       <IconDown
                         style={
@@ -99,7 +99,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       style={{
                         padding: scale(12),
                       }}>
-                      What can guests use at your property?
+                      {t('guest_use_at')}
                     </CustomText>
                   )
                 );

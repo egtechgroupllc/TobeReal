@@ -41,7 +41,7 @@ export default function PostNewLeaseScreen() {
   const {navigate, setOptions} = useNavigation();
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Create new accommodation',
+      headerTitle: t('create_new_accom'),
     });
   }, []);
   const queryClient = useQueryClient();
@@ -96,7 +96,9 @@ export default function PostNewLeaseScreen() {
 
   const handlePostLease = value => {
     delete value?.check;
-
+    if (value?.rating === 0) {
+      delete value?.rating;
+    }
     if (!value?.latitude) {
       showMess('Please choose coordinates of your estate in Map', 'error');
       return;

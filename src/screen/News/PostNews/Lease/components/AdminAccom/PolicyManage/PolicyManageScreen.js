@@ -9,18 +9,21 @@ import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../../components/CustomText';
 import DeletePolicy from './DeletePolicy';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function PolicyManageScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Policy management',
+      headerTitle: t('policy_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -41,7 +44,7 @@ export default function PolicyManageScreen() {
       <CustomText
         textType="semiBold"
         style={{alignSelf: 'center', fontSize: SIZES.large}}>
-        List of policies
+        {t('list_policies')}
       </CustomText>
       <FlatList
         // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
@@ -88,7 +91,7 @@ export default function PolicyManageScreen() {
       />
       <View style={{alignItems: 'center', marginTop: scale(30)}}>
         <CustomButton
-          text="Add more policy"
+          text={t('add_more_policy')}
           style={{width: '50%'}}
           onPress={() =>
             navigate('AddPolicyScreen', {

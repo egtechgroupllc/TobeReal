@@ -16,7 +16,7 @@ export default function BotContent({control, setValue}) {
   return (
     <View>
       <CustomText style={{fontSize: SIZES.medium}}>
-        Choose your bank:
+        {t('choose_bank')}:
       </CustomText>
       <TouchableOpacity
         style={{...styles.boxItem, marginTop: scale(10)}}
@@ -30,7 +30,7 @@ export default function BotContent({control, setValue}) {
         }>
         {bank?.icon}
         <CustomText textType="medium" style={{fontSize: SIZES.xMedium}}>
-          {bank?.name || 'Select bank'}
+          {bank?.name || t('select_bank')}
         </CustomText>
         <IconNext
           width={scale(12)}
@@ -43,23 +43,23 @@ export default function BotContent({control, setValue}) {
       </TouchableOpacity>
 
       <CustomInput
-        label="Bank account number"
+        label={t('bank_number')}
         styleTextLabel={{fontSize: SIZES.medium}}
         style={{...styles.boxItem, borderWidth: 0}}
         styleWrapper={{paddingVertical: scale(10)}}
         control={control}
         rules={[requireField(t('this_field_required'))]}
         name="bank_number"
-        placeholder={'Enter bank account number'}
+        placeholder={t('enter_bank_number')}
       />
       <CustomInput
-        label="Bank account holders"
+        label={t('bank_holder')}
         styleTextLabel={{fontSize: SIZES.medium}}
         style={{...styles.boxItem, borderWidth: 0}}
         styleWrapper={{paddingVertical: scale(5)}}
         control={control}
         name="bank_owner"
-        placeholder={'Enter bank account holders'}
+        placeholder={t('enter_bank_holder')}
         rules={[requireField(t('this_field_required'))]}
       />
     </View>

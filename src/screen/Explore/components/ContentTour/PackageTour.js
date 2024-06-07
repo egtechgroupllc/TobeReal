@@ -19,7 +19,7 @@ export default function PackageTour() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Domestic tour')];
+  const title = [t('domestic_tour')];
   const [filter, setFilter] = useState();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -74,7 +74,7 @@ export default function PackageTour() {
             <View style={{alignItems: 'center', rowGap: scale(10)}}>
               <IconBookings width={scale(50)} height={scale(50)} />
               <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                No data
+                {t('no_data')}
               </CustomText>
             </View>
           )}

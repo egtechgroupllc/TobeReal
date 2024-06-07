@@ -109,7 +109,7 @@ const ComponentContain = ({children, noContain}) => {
   ) : (
     <WrapperContent
       heading={t('looking_for_a_place')}
-      subHeading={t('Find "By Saveloka" units in big cities')}>
+      subHeading={t('find_by_saveloka')}>
       {children}
     </WrapperContent>
   );

@@ -7,6 +7,7 @@ import {SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import ContentStep1 from './ContentStep1';
 import ContentStep2 from './ContentStep2';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 const stepCount = 2;
 const firstIndicatorStyles = {
@@ -20,6 +21,7 @@ const firstIndicatorStyles = {
 
 export default function HorizontalStepIndicator({data}) {
   const {setOptions} = useNavigation();
+  const {t} = useLanguage();
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const renderLabel = ({position, label, currentPosition}) => {
@@ -68,7 +70,7 @@ export default function HorizontalStepIndicator({data}) {
           <StepIndicator
             customStyles={firstIndicatorStyles}
             currentPosition={currentPage}
-            labels={['Reservations', 'Pay']}
+            labels={[t('reservation'), t('pay')]}
             stepCount={stepCount}
             renderLabel={renderLabel}
             onPress={position =>

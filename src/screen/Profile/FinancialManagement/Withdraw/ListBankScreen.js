@@ -22,6 +22,7 @@ import {
 } from '../../../../assets/icon/Icon';
 import CheckBox from '../../../../components/CheckBox';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {useLanguage} from '../../../../hooks/useLanguage';
 const data = [
   {id: 1, name: 'VIETCOMBANK', icon: <IconVietcombank />},
   {id: 2, name: 'TECHCOMBANK', icon: <IconTechcombank />},
@@ -41,6 +42,7 @@ const data = [
 export default function ListBankScreen() {
   const [bank, setBank] = useState();
   const router = useRoute().params;
+  const {t} = useLanguage();
 
   const {setOptions, goBack} = useNavigation();
   const handleDone = () => {
@@ -50,7 +52,7 @@ export default function ListBankScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Select BANK',
+      headerTitle: t('select_bank'),
 
       headerRight: () => (
         <CustomText
@@ -60,7 +62,7 @@ export default function ListBankScreen() {
             color: '#fff',
             fontSize: SIZES.xMedium,
           }}>
-          Done
+          {t('done')}
         </CustomText>
       ),
     });

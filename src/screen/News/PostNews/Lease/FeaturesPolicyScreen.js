@@ -8,17 +8,20 @@ import FeaturesPolicy2 from './components/FeaturesPolicy.js/FeaturesPolicy2';
 import FeaturesPolicy3 from './components/FeaturesPolicy.js/FeaturesPolicy3';
 import {useNavigation} from '@react-navigation/native';
 import {IconHome} from '../../../../assets/icon/Icon';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function FeaturesPolicyScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
+
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Services',
+      headerTitle: t('services'),
       headerTitleStyle: {
         textAlign: 'center',
       },
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -36,13 +39,13 @@ export default function FeaturesPolicyScreen() {
           rowGap: scale(20),
           ...SHADOW,
         }}>
-        <Box title={'Pet'}>
+        <Box title={t('pet')}>
           <FeaturesPolicy1 />
         </Box>
-        <Box title={'Smoking'}>
+        <Box title={t('smoking')}>
           <FeaturesPolicy2 />
         </Box>
-        <Box title={'Additional breakfast'}>
+        <Box title={t('additional_breakfast')}>
           <FeaturesPolicy3 />
         </Box>
       </View>

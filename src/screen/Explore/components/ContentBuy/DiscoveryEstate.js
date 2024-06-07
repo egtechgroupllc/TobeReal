@@ -18,7 +18,7 @@ export default function DiscoveryEstate({
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Discover other real estate')];
+  const title = [t('discover_other_estate')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (

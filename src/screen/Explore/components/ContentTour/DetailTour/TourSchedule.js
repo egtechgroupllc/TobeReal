@@ -24,29 +24,31 @@ export default function TourSchedule({data}) {
   return (
     <WrapperContent
       heading={t('tour_schedule')}
-      styleWrapper={{marginBottom: scale(100)}}
+      styleWrapper={
+        {
+          // marginBottom: scale(20),
+        }
+      }
       styleContent={{
         paddingHorizontal: scale(16),
+        minHeight: scale(50),
       }}>
       <CustomText
         style={{
           lineHeight: 18,
         }}>
-        Staying at Cochin Sang Hotel is a right choice when you visit visitors
-        to Ben Thanh Ward. The hotel possesses a prime location 6.64 km from Tan
-        Son Nhat Airport. Stay at Cochin Sang Hotel is a good choice when you
-        visit Ben Ward Wall. The hotel possesses a prime location away from Tan
-        Airport Son Nhat 6.64 km.
+        {JSON.parse(data?.schedule)?.[0]?.description}
       </CustomText>
       <LinearGradient
-        colors={['#FADD50', '#D88A00']}
+        colors={['#F8E85A', '#FFC803']}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
         style={{
           position: 'absolute',
-          top: scale(100),
+          bottom: scale(-10),
           height: scale(35),
           width: '110%',
+          opacity: 0.8,
           alignItems: 'center',
           justifyContent: 'center',
         }}>

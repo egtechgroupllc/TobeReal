@@ -19,8 +19,8 @@ export default function ReviewOverview({dataP}) {
           {dataP?.review_average || 0}
           <CustomText>/5</CustomText>
         </CustomText>
-        <CustomText textType="semiBold">Rat tot</CustomText>
-        <CustomText>{formatNumber(dataP?.review_count)} danh gia</CustomText>
+        <CustomText textType="semiBold">Very good</CustomText>
+        <CustomText>{formatNumber(dataP?.review_count)} reviews</CustomText>
       </View>
 
       <View style={styles.overviewRight}>

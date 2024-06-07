@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {
   postCreateEstatSell,
@@ -11,22 +11,33 @@ import {
 } from '../../../../../Model/api/apiEstate';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
-import {IconGoBack} from '../../../../../assets/icon/Icon';
+import {IconGoBack, IconHome} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 import CustomText from '../../../../../components/CustomText';
 import MainWrapper from '../../../../../components/MainWrapper';
 import AutoPost from '../components/PostConfiguration/AutoPost';
 import PostType from '../components/PostConfiguration/PostType';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function PostConfigurationScreen() {
   const params = useRoute().params;
   const queryClient = useQueryClient();
-
-  const {goBack, navigate} = useNavigation();
+  const {t} = useLanguage();
+  const {goBack, navigate, setOptions} = useNavigation();
   const {handleSubmit, control, setValue, unregister} = useForm();
 
   const [dateEnd, setDateEnd] = useState(new Date());
-
+  useEffect(() => {
+    return setOptions({
+      headerTitle: !params?.update ? t('create_room') : t('edit_room'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   const createEstateSellMu = useMutation({
     mutationFn: postCreateEstatSell,
   });
@@ -165,7 +176,7 @@ export default function PostConfigurationScreen() {
               fontSize: SIZES.large,
               paddingHorizontal: scale(10),
             }}>
-            Post configuration
+            {t('post_configuration')}
           </CustomText>
 
           <PostType
@@ -193,7 +204,7 @@ export default function PostConfigurationScreen() {
             width: '35%',
             alignSelf: 'center',
           }}
-          text="Back"
+          text={t('back')}
           outline
           iconLeft={IconGoBack}
           styleIcon={{
@@ -211,7 +222,7 @@ export default function PostConfigurationScreen() {
             width: '80%',
             alignSelf: 'center',
           }}
-          text="Submit"
+          text={t('submit')}
           onPress={handleSubmit(handlePostLease)}
           disabled={createEstateSellMu.isPending}
         />

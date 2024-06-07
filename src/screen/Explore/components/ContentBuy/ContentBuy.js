@@ -344,10 +344,11 @@ export default function ContentBuy() {
       {dataNew?.length > 0 ? <BuySell data={dataNew} /> : <View />}
       {/* <Discount /> */}
       <FeatureEstate />
-      <TopLocation data={dataLocation} />
       <TopEstateAgent data={dataAgent} />
       <ExploreNearbyEstate country={country} />
-      <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} />
+      <TopLocation data={dataLocation} />
+
+      {/* <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} /> */}
     </View>
   );
 }

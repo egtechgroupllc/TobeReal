@@ -1,7 +1,7 @@
 export const dataRoomFacilities = [
   {
     id: 1,
-    name: 'Room & Laundry',
+    name: 'room_laundry',
     include: {
       INTERNET_ACCESS_WIFI_CHARGES_APPLY: 'Internet Access Wifi Charges Apply',
       HAIR_DRYER: 'Hair Dryer',
@@ -23,7 +23,7 @@ export const dataRoomFacilities = [
   },
   {
     id: 2,
-    name: 'Food & Drinks',
+    name: 'food_drinks',
     include: {
       COMPLIMENTARY_BOTTLED_WATER: 'Complimentary Bottled Water',
       MINI_BAR: 'Mini Bar',
@@ -36,7 +36,7 @@ export const dataRoomFacilities = [
   },
   {
     id: 3,
-    name: 'Entertainment',
+    name: 'entertainment',
     include: {
       DAILY_NEWSPAPER: 'Daily Newspaper',
       INHOUSE_MOVIES: 'Inhouse Movies',
@@ -47,7 +47,7 @@ export const dataRoomFacilities = [
   },
   {
     id: 4,
-    name: 'Room Configuration & Access',
+    name: 'room_configuration_access',
     include: {
       SHARED_BATHROOM: 'Shared Bathroom',
       BALCONY_TERRACE: 'Balcony Terrace',
@@ -61,7 +61,7 @@ export const dataRoomFacilities = [
   },
   {
     id: 5,
-    name: 'Bathroom & Pool',
+    name: 'bathroom_pool',
     include: {
       DAILY_NEWSPAPER: 'Daily Newspaper',
       INHOUSE_MOVIES: 'Inhouse Movies',

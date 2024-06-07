@@ -27,9 +27,9 @@ export default function InfoDetail({data, name}) {
         </View>
 
         <View style={styles.room}>
-          <StarRating />
+          <StarRating rating={2} />
           <CustomText textType="medium" style={styles.text}>
-            (10 Evaluate)
+            0 {t('review')}
           </CustomText>
           <TouchableOpacity>
             <CustomImage

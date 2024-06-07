@@ -10,24 +10,27 @@ import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
 import ListCreateAccom from '../Lease/components/HomeLease/ListCreateAccom';
 import ListCreateTour from './ListCreateTour';
-const list = [
-  {
-    title: 'I already have a tour registered',
-    desc: 'View and manage your registered touries',
-    textBtn: 'Continue',
-    navigate: 'NoBottomTab',
-    screen: 'TourManagementScreen',
-  },
-  {
-    title: 'I want to register for a new tour',
-    desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
-    textBtn: 'List New Tour',
-    navigate: 'PostNewTourScreen',
-  },
-];
+import {useLanguage} from '../../../../hooks/useLanguage';
+
 export default function TourScreen() {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
+  const list = [
+    {
+      title: t('already_have_tour'),
+      desc: t('view_tour'),
+      textBtn: t('continue'),
+      navigate: 'NoBottomTab',
+      screen: 'TourManagementScreen',
+    },
+    {
+      title: t('register_new_tour'),
+      desc: t('list_new_tour_registration'),
+      textBtn: 'List New Tour',
+      navigate: 'PostNewTourScreen',
+    },
+  ];
   return (
     <MainWrapper>
       <ListCreateTour
@@ -45,7 +48,9 @@ export default function TourScreen() {
 
             <CustomButton
               text={item.textBtn}
-              iconRight={item.textBtn === 'Continue' ? IconArrowRight : IconAdd}
+              iconRight={
+                item.textBtn === t('continue') ? IconArrowRight : IconAdd
+              }
               buttonType="normal"
               styleWrapper={{
                 alignSelf: 'flex-end',

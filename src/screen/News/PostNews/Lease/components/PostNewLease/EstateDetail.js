@@ -24,6 +24,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
     'km_to_center',
     'size_width',
     'size_length',
+    'rating',
   ]).current;
 
   return (
@@ -40,8 +41,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!viewDetail} style={styles.box}>
-            <Box title={'How many stars does your accommodation meet?'}>
-              <SetStartAccomo onChange={value => console.log({value})} />
+            <Box title={t('how_many_star_accom')}>
+              <SetStartAccomo onChange={value => setValue('rating', value)} />
             </Box>
 
             <Box title={"What are the property's check-in/check-out times?"}>

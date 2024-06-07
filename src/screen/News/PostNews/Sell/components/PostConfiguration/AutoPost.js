@@ -9,11 +9,13 @@ import BottomSheet from '../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
 import AutoPostTop from './AutoPostTop';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function AutoPost({setValue, date, params, unregister}) {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
   const [count, setCount] = useState(0);
+  const {t} = useLanguage();
 
   const bottomSheetRef = useRef();
   const dateEnd = useMemo(
@@ -50,7 +52,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
         style={{
           fontSize: SIZES.medium,
         }}>
-        Utilities
+        {t('utilities')}
       </CustomText>
 
       <View style={styles.content}>
@@ -72,18 +74,19 @@ export default function AutoPost({setValue, date, params, unregister}) {
             style={{
               fontSize: SIZES.xMedium,
             }}>
-            Automatically repost
+            {t('auto_repost')}
           </CustomText>
           {isConfirm ? (
             <View>
-              <CustomText>- Automatically repost {count.count} time</CustomText>
-              <CustomText>- Last posted on date {dateEnd}</CustomText>
+              <CustomText>
+                - {t('auto_repost')} {count.count} {t('time')}
+              </CustomText>
+              <CustomText>
+                - {t('last_post_on_date')} {dateEnd}
+              </CustomText>
             </View>
           ) : (
-            <CustomText>
-              News will be reposted as soon as it expires. Every time I repost,
-              The system only deducts money for that repost.
-            </CustomText>
+            <CustomText>{t('news_will_be_repost')}</CustomText>
           )}
         </View>
         {isConfirm && (
@@ -120,7 +123,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
         />
 
         <BottomSheet
-          titleIndicator={'Automatically repost'}
+          titleIndicator={t('auto_repost')}
           snapPoints={['40%']}
           ref={bottomSheetRef}
           onDismiss={() => !isConfirm && setIsEnabled(false)}
@@ -136,24 +139,13 @@ export default function AutoPost({setValue, date, params, unregister}) {
           />
 
           <View>
-            <CustomText>
-              - News will be reposted as soon as it expires..
-            </CustomText>
-            <CustomText>
-              - At the time of re-posting, the system will deduct money.
-            </CustomText>
-            <CustomText>
-              - Each time a post is reposted, the system only deducts the post
-              fee there again.
-            </CustomText>
-            <CustomText>
-              - Each time a post is reposted, the system only deducts the post
-              fee there again.
-            </CustomText>
+            <CustomText>- {t('news_will_repost')}.</CustomText>
+            <CustomText>- {t('time_reposting')}.</CustomText>
+            <CustomText>- {t('each_time_post')}.</CustomText>
           </View>
 
           <CustomButton
-            text="Submit"
+            text={t('submit')}
             onPress={() => {
               setIsConfirm(true);
               bottomSheetRef.current.close();

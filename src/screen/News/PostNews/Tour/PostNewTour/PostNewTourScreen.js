@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {
   COLORS,
@@ -22,17 +22,29 @@ import MainWrapper from '../../../../../components/MainWrapper';
 
 import {postCreateTour} from '../../../../../Model/api/apiTour';
 
-import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
-import GeneralInformation from '../components/PostNewTour/GeneralInformation';
-import TourSchedule from '../components/PostNewTour/TourSchedule';
-import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
-import TourPhoto from '../components/PostNewTour/TourPhoto';
-import PolicyTour from '../components/PostNewTour/PolicyTour';
 import {useNavigation} from '@react-navigation/native';
+import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
+import GeneralInformation from '../components/PostNewTour/GeneralInformation';
+import PolicyTour from '../components/PostNewTour/PolicyTour';
+import TourPhoto from '../components/PostNewTour/TourPhoto';
+import TourSchedule from '../components/PostNewTour/TourSchedule';
+import {IconHome} from '../../../../../assets/icon/Icon';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
+  useEffect(() => {
+    return setOptions({
+      headerTitle: t('post_new_tour'),
+      headerLeftNavigate: 'TourScreen',
+      // headerLeft: () => (
+      //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
+      //     <IconGoBack style={{width: scale(20)}} />
+      //   </TouchableOpacity>
+      // ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {
     handleSubmit,
     control,

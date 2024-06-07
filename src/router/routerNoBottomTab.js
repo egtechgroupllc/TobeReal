@@ -72,9 +72,6 @@ export default routerNoBottomTab = [
   {
     name: 'DetailBrokerScreen',
     component: DetailBrokerScreen,
-    options: {
-      headerShown: false,
-    },
   },
   {
     name: 'DetailTicketScreen',

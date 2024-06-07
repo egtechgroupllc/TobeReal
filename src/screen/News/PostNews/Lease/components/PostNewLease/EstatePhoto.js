@@ -80,7 +80,7 @@ export default function EstatePhoto({
   return (
     <View>
       <ButtonTabValidate
-        title={t('Add images')}
+        title={t('add_images')}
         onPress={() => setView(prev => !prev)}
         errors={errors}
         watch={watch}
@@ -129,9 +129,7 @@ export default function EstatePhoto({
             {isKyc && (
               <>
                 <ChooseImgPicker
-                  title={t(
-                    'Add images to prove ownership of your Real Estate assets',
-                  )}
+                  title={t('add_image_to_prove')}
                   control={control}
                   rules={
                     !imgKyc && [validateMinLength(t('this_field_required'), 1)]

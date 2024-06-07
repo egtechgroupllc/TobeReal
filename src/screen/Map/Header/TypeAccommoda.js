@@ -21,7 +21,7 @@ export default function TypeAccommoda({onType, value}) {
 
   return (
     <WrapperContent
-      heading={t('Type accommodation')}
+      heading={t('type_accom')}
       styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,

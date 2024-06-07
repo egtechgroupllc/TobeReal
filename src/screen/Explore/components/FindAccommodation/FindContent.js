@@ -74,7 +74,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
         <View style={styles.findContent}>
           <CustomInput
             // control={control}
-            rules={requireField('Vui long them')}
+            rules={requireField(t('please_add'))}
             // name="location"
             value={params?.name || t('around_me')}
             iconLeft={IconMarker}
@@ -146,6 +146,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
                 outline
                 isSelectAll
                 styleContent={{
+                  flex: 1,
                   columnGap: scale(8),
                 }}
                 data={[
@@ -245,7 +246,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
           <CustomButton
             onPress={handleSubmit(handleSearch)}
             buttonType="medium"
-            text={!isBuy ? t('Find_Accommodation') : t('Find real estate')}
+            text={!isBuy ? t('Find_Accommodation') : t('find_real_estate')}
             styleText={{
               color: COLORS.white,
               textType: 'bold',

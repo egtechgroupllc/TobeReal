@@ -8,10 +8,13 @@ import {showMess} from '../../../../../../../assets/constants/Helper';
 import {IconError, IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import CustomText from '../../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function DeleteRoom({data, onSuccess, onCancel}) {
   const [confirm, setConfirm] = useState(true);
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
+
   const queryClient = useQueryClient();
   const deleteRoomMu = useMutation({
     mutationFn: deleteRoom,
@@ -52,7 +55,7 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
       }}>
       {!confirm ? (
         <CustomButton
-          text="Xoá tin"
+          text={t('delete_room')}
           onPress={() => {
             setConfirm(true);
           }}
@@ -85,7 +88,7 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Room id{' '}
+                {t('room')} id{' '}
               </CustomText>
               <CustomText textType="medium" style={styles.textRight}>
                 {data?.id}
@@ -121,16 +124,16 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Note:{' '}
+              {t('note')}:{' '}
               <CustomText style={{fontSize: SIZES.xMedium}}>
-                Deleted rooms cannot be restored
+                {t('delete_room_not_restore')}
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Cancel"
+              text={t('cancel')}
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -144,7 +147,7 @@ export default function DeleteRoom({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Delete room"
+              text={t('delete_room')}
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

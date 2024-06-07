@@ -16,7 +16,10 @@ import {WIDTH, scale} from '../../../assets/constants';
 import {IconPlayVideo} from '../../../assets/icon/Icon';
 import SideBar from './SideBar';
 import VideoCaption from './VideoCaption';
-
+import AnimatedHeartClick from './AnimatedHeartClick';
+function getUniqueID() {
+  return Math.floor(Math.random() * Date.now()).toString();
+}
 export default forwardRef(function VideoPlay(
   {
     fullScreen,
@@ -29,7 +32,6 @@ export default forwardRef(function VideoPlay(
     muted,
     onProgress,
     isFavourite,
-    onHeartVideo,
     onComment,
     ...props
   },
@@ -42,7 +44,13 @@ export default forwardRef(function VideoPlay(
   const [pausedVideo, setPausedVideo] = useState(true);
   const [progress, setProgress] = useState(0);
   const [resizeMode, setResizeMode] = useState('contain');
+  const [hearts, setHearts] = useState([]);
 
+  const handleCompleteAnimation = useCallback(id => {
+    setHearts(oldHearts => {
+      return oldHearts.filter(heart => heart.id !== id);
+    });
+  }, []);
   useEffect(() => {
     if (play) {
       videoRef.current.seek(0);
@@ -51,7 +59,10 @@ export default forwardRef(function VideoPlay(
       setPausedVideo(true);
     }
   }, [play]);
-
+  const onHeartVideo = useCallback(event => {
+    const {x, y} = event;
+    setHearts(oldHearts => [...oldHearts, {id: getUniqueID(), x, y}]);
+  }, []);
   const handleValueChange = useCallback(value => {
     videoRef.current.seek(value);
   }, []);
@@ -78,12 +89,12 @@ export default forwardRef(function VideoPlay(
     () =>
       Gesture.Tap()
         .maxDuration(300)
-        .numberOfTaps(2)
+        .numberOfTaps(hearts?.length >= 2 ? 1 : 2)
         .runOnJS(true)
         .onStart(event => {
           onHeartVideo(event);
         }),
-    [],
+    [hearts?.length],
   );
 
   return (
@@ -95,36 +106,50 @@ export default forwardRef(function VideoPlay(
       <GestureDetector
         gesture={Gesture.Exclusive(doubleTap, singleTap)}
         hitSlop>
-        <Video
-          ref={videoRef}
-          {...props}
-          source={isImgAsset ? data?.src : {uri: data?.src}}
-          style={[styles.video, style]}
-          paused={pausedVideo}
-          onProgress={value => {
-            onProgress && onProgress(value);
-          }}
-          onSeek={value => {
-            setProgress(value);
-          }}
-          repeat
-          muted={muted}
-          resizeMode={resizeMode}
-          onLoad={response => {
-            const {width, height} = response.naturalSize;
-            const heightScaled = height / width;
-            console.log(heightScaled);
-            setResizeMode(height > width ? 'cover' : 'contain');
-          }}
-        />
+        <View style={styles.video}>
+          <Video
+            ref={videoRef}
+            {...props}
+            source={isImgAsset ? data?.src : {uri: data?.src}}
+            style={[styles.video, style]}
+            paused={pausedVideo}
+            onProgress={value => {
+              onProgress && onProgress(value);
+            }}
+            onSeek={value => {
+              setProgress(value);
+            }}
+            repeat
+            muted={muted}
+            resizeMode={resizeMode}
+            onLoad={response => {
+              const {width, height} = response.naturalSize;
+              const heightScaled = height / width;
+              console.log(heightScaled);
+              setResizeMode(height > width ? 'cover' : 'contain');
+            }}
+          />
+          {hearts.map(({id, x, y}) => (
+            <AnimatedHeartClick
+              key={id}
+              id={id}
+              position={{
+                x,
+                y,
+              }}
+              onHeartVideo={onHeartVideo}
+              onCompleteAnimation={handleCompleteAnimation}
+            />
+          ))}
+        </View>
       </GestureDetector>
 
-      {play && (
+      {true && (
         <>
           <VideoCaption data={data} />
           <SideBar
             data={data}
-            isFavourite={isFavourite}
+            isFavourite={!!hearts.length}
             onComment={onComment}
           />
 

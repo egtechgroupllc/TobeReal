@@ -4,8 +4,11 @@ import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import Star from '../../../components/StarRating';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function TopReview({data}) {
+  const {t} = useLanguage();
+
   return (
     <View
       style={{
@@ -30,10 +33,10 @@ export default function TopReview({data}) {
           textType="semiBold"
           size={SIZES.xMedium}
           color={COLORS.text}>
-          Please review your experience at {data?.accommodation?.name}
+          {t('please_review')} {data?.accommodation?.name}
         </CustomText>
         <CustomText color={COLORS.textSub}>
-          Review for the owner to improve the service better!
+          {t('review_for_improve')}!
         </CustomText>
       </View>
     </View>

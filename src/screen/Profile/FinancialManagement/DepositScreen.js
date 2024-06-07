@@ -64,7 +64,7 @@ export default function DepositScreen({route}) {
               />
             </View>
             <CustomInput
-              label="Enter the amount you want to deposit"
+              label={t('enter_amount')}
               control={control}
               name="amount"
               styleTextLabel={{
@@ -78,13 +78,13 @@ export default function DepositScreen({route}) {
               rules={[
                 requireField(t('this_field_required')),
                 validateMaxAmount(
-                  `The maximum amount is ${formatPrice(maxPrice, {
+                  `${t('maximum_amount')} ${formatPrice(maxPrice, {
                     currency: currency?.currency_code,
                   })}`,
                   maxPrice,
                 ),
                 validateMinAmount(
-                  `The minimum amount is ${formatPrice(minPrice, {
+                  `${t('minimum_amount')} ${formatPrice(minPrice, {
                     currency: currency?.currency_code,
                   })}`,
                   minPrice,

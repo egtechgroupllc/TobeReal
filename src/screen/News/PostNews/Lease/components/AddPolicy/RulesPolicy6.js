@@ -13,20 +13,18 @@ import {
 } from '../../../../../../utils/validate';
 import {IconAdd} from '../../../../../../assets/icon/Icon';
 
-const list = [
-  {
-    id: 1,
-    title: 'Cheaper Price type for early booking (15+ days)',
-  },
-  {
-    id: 2,
-    title: 'More expensive Price type for early booking (15+ days)',
-  },
-];
-
 export default function RulesPolicy6({control, unregister, setValue}) {
   const {t} = useLanguage();
-
+  const list = [
+    {
+      id: 1,
+      title: t('cheaper_price_type'),
+    },
+    {
+      id: 2,
+      title: t('more_expensive_price'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(list[0]);
 
   useEffect(() => {
@@ -89,10 +87,7 @@ export default function RulesPolicy6({control, unregister, setValue}) {
             name="price_percent"
             rules={[
               requireField(t('this_field_required')),
-              validateMinMaxAmount(
-                'Tỉ lệ chênh lệch không hợp lệ (1% -> 100%)',
-                100,
-              ),
+              validateMinMaxAmount(t('invalid_ratio'), 100),
             ]}
             componentRight={
               <View style={styles.componentRight}>

@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {SIZES, scale} from '../../../../assets/constants';
 import CustomSelectDropdown from '../../../../components/CustomSelectDropdown';
 import CustomText from '../../../../components/CustomText';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default memo(function RealEstateType({
   onSelect,
@@ -35,6 +36,7 @@ export default memo(function RealEstateType({
   // useEffect(() => {
   //   Finding();
   // }, []);
+  const {t} = useLanguage();
 
   const dataFind = useMemo(
     () =>
@@ -72,7 +74,7 @@ export default memo(function RealEstateType({
               style={{
                 fontSize: scale(13),
               }}>
-              {dataFind?.name || valueConvert?.name || 'Select'}
+              {dataFind?.name || valueConvert?.name || t('select')}
             </CustomText>
           );
         }}
