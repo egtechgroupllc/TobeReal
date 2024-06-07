@@ -10,6 +10,7 @@ import {COLORS, SIZES, scale} from '../assets/constants';
 import {formatNumber, formatPrice} from '../utils/format';
 import CustomText from './CustomText';
 import {Calendar} from 'react-native-calendars';
+import InViewport from './InViewport';
 
 var hd = new Holidays('VN');
 
@@ -24,6 +25,8 @@ export default function CalendarRange({
     date_start: startDate || null,
     date_end: endDate || null,
   });
+  const [isRender, setIsRender] = useState(false);
+
   const clicked = useRef(false);
 
   const [dayMonth, setDayMonth] = useState(() => {
@@ -176,20 +179,27 @@ export default function CalendarRange({
   };
 
   return (
-    <Calendar
-      minDate={(!dateSelect.date_end && dateSelect.date_start) || minDate}
-      startDate={minDate}
-      hideExtraDays
-      enableSwipeMonths
-      onMonthChange={onMonthChange}
-      theme={{
-        arrowColor: COLORS.primary,
-        weekVerticalMargin: id ? scale(6) : scale(2),
-      }}
-      dayComponent={dayComponent}
-      markedDates={markedDates}
-      markingType={'period'}
-    />
+    <InViewport
+      onChange={render => render && setIsRender(render)}
+      delay={30}
+      styleLoading={{width: scale(120), height: scale(120)}}>
+      {isRender && (
+        <Calendar
+          minDate={(!dateSelect.date_end && dateSelect.date_start) || minDate}
+          startDate={minDate}
+          hideExtraDays
+          enableSwipeMonths
+          onMonthChange={onMonthChange}
+          theme={{
+            arrowColor: COLORS.primary,
+            weekVerticalMargin: id ? scale(6) : scale(2),
+          }}
+          dayComponent={dayComponent}
+          markedDates={markedDates}
+          markingType={'period'}
+        />
+      )}
+    </InViewport>
   );
 }
 

@@ -183,7 +183,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
                 color: COLORS.black,
               }}
               textType="bold">
-              We are always here to support you
+              {t('we_are_always_here')}
             </CustomText>
           </LinearGradient>
 
@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(20),
     paddingVertical: scale(12),
     flexDirection: 'row',
+    alignItems: 'center',
     columnGap: scale(20),
   },
 

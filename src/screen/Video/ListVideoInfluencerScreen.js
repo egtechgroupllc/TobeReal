@@ -1,8 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import React, {useCallback, useLayoutEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import {
+  Animated,
+  AppState,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {animations, scale} from '../../assets/constants';
 import video from '../../assets/constants/video';
@@ -129,6 +142,7 @@ export default function ListVideoInfluencerScreen() {
   const commentRef = useRef();
   const flatListRef = useRef(null);
 
+  const isFocused = useIsFocused();
   const [videoPlay, setVideoPlay] = useState(true);
 
   const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
@@ -207,7 +221,7 @@ export default function ListVideoInfluencerScreen() {
           });
         }}
         style={{
-          backgroundColor: '#ccc',
+          backgroundColor: '#000',
           height: '100%',
         }}
         contentContainerStyle={{
@@ -225,7 +239,7 @@ export default function ListVideoInfluencerScreen() {
             ref={videoRef}
             data={item}
             paused={item?.id !== videoPlay}
-            play={item?.id === videoPlay}
+            play={item?.id === videoPlay && isFocused}
             // onProgress={value => {
             //   handleProgress(value);
             // }}

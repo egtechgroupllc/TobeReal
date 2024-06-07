@@ -1,4 +1,11 @@
-import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform,
+  Pressable,
+} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {COLORS, SHADOW, WIDTH, scale} from '../../../assets/constants';
 import {IconX, IconZoomIn, IconZoomOut} from '../../../assets/icon/Icon';
@@ -88,7 +95,7 @@ export default function VideoYoutubeBox() {
                 padding: scale(2),
 
                 position: 'absolute',
-                zIndex: 1,
+                zIndex: 2,
               }}>
               <IconX fill={COLORS.white} width={scale(20)} height={scale(20)} />
             </TouchableOpacity>
@@ -125,6 +132,17 @@ export default function VideoYoutubeBox() {
                 },
               }}
             />
+            {!zoom && (
+              <Pressable
+                onPress={handleZoom}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  zIndex: 1,
+                  position: 'absolute',
+                }}
+              />
+            )}
             <TouchableOpacity
               style={{
                 alignSelf: 'center',

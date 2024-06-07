@@ -44,15 +44,15 @@ export default function FindAccommodation() {
     () => [
       {
         id: 'RENT',
-        name: t('rent'),
+        name: t('RENT'),
       },
       {
         id: 'BUY',
-        name: t('buy'),
+        name: t('BUY'),
       },
       {
         id: 'TOUR',
-        name: t('tour'),
+        name: t('TOUR'),
       },
     ],
     [locale],

@@ -1035,5 +1035,6 @@
   "request_to_book_tour": "Request to book tour",
   "detail_tour_ticket": "Detail tour ticket",
   "voucher_valid": "Voucher validity",
-  "policy": "policy"
+  "policy": "policy",
+  "payment_method": "Payment methods"
 }

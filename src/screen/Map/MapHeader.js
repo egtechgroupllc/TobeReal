@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {CustomButton, CustomInput} from '../../components';
@@ -28,6 +28,7 @@ export default function MapHeader({
   estate,
   menu,
   mapProvince,
+  dataReturn,
 }) {
   const {t} = useLanguage();
   const listFill = [
@@ -47,6 +48,7 @@ export default function MapHeader({
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const {country} = useCountry();
+  const [openBottom, setOpenBottom] = useState(false);
 
   const listProvince = useQuery({
     queryKey: ['common', 'list-country', country?.geoname_id],
@@ -54,15 +56,31 @@ export default function MapHeader({
   });
   const {control, handleSubmit, watch, setValue, reset, unregister} = useForm({
     defaultValues: {
-      menu: {id: 1, name: 'RENT'},
+      menu: {id: 'RENT', name: t('RENT')},
+      province: listProvince.data?.data?.[0],
     },
   });
   const [isRender, setIsRender] = useState(false);
   const handelFiter = value => {
     onFilter && onFilter(value);
-
+    setOpenBottom(true);
     bottomSheetRef.current.close();
   };
+
+  useEffect(() => {
+    if (dataReturn?.count === 0 && openBottom) {
+      Alert.alert(t('delete_property'), t('delete_property_not_restore'), [
+        {
+          text: t('ok'),
+          onPress: () => {
+            setOpenBottom(false);
+
+            bottomSheetRef.current.open();
+          },
+        },
+      ]);
+    }
+  }, [dataReturn?.count, openBottom]);
 
   return (
     <View
@@ -80,8 +98,6 @@ export default function MapHeader({
           noSelectDefault
           onSort={() => {
             bottomSheetRef.current.open();
-            !watch('province')?.id &&
-              setValue('province', listProvince.data?.data?.[0]);
           }}
         />
 
@@ -90,6 +106,11 @@ export default function MapHeader({
           titleIndicator={t('filter&sort')}
           ref={bottomSheetRef}
           refChild={bottomSheetChildRef}
+          onChange={value => {
+            if (value > 0) {
+              openBottom && setOpenBottom(false);
+            }
+          }}
           handleChildBottom={() => (
             <BottomSheetChild
               data={listProvince}
@@ -122,11 +143,11 @@ export default function MapHeader({
                 onPress={() => {
                   const keyReset = Object.keys(watch());
 
-                  reset();
                   if (keyReset.includes('province')) {
-                    unregister(keyReset);
+                    reset();
+                    // unregister(keyReset);
                   }
-                  bottomSheetRef.current.close();
+                  setIsRender(false);
                 }}
               />
               <CustomButton
@@ -135,7 +156,9 @@ export default function MapHeader({
                 // }}
                 // onPress={onPress}
                 buttonType="normal"
-                style={{flex: 0.5}}
+                style={{
+                  flex: 0.5,
+                }}
                 text={t('apply')}
                 onPress={handleSubmit(handelFiter)}
                 styleText={{
@@ -154,35 +177,6 @@ export default function MapHeader({
             control={control}
           />
 
-          {menu && (
-            <>
-              <Menubar
-                value={watch('menu')?.id}
-                onType={value => {
-                  setValue('menu', value);
-                }}
-              />
-
-              {watch('menu')?.name === t('rent') || !watch('menu') ? (
-                <TypeAccommoda
-                  value={watch('type')}
-                  onType={value => {
-                    setValue('type', value?.id);
-                  }}
-                />
-              ) : watch('menu')?.name === t('buy') ? (
-                <TypeEstate
-                  value={watch('type')}
-                  onType={value => {
-                    setValue('type', value?.id);
-                  }}
-                />
-              ) : (
-                <View></View>
-              )}
-            </>
-          )}
-
           <InViewport
             delay={100}
             onChange={setIsRender}
@@ -193,6 +187,35 @@ export default function MapHeader({
             }}>
             {isRender && (
               <>
+                {menu && (
+                  <>
+                    <Menubar
+                      value={watch('menu')?.id}
+                      onType={value => {
+                        setValue('menu', value);
+                        setIsRender(false);
+                      }}
+                    />
+
+                    {watch('menu')?.id === 'RENT' || !watch('menu') ? (
+                      <TypeAccommoda
+                        value={watch('type')}
+                        onType={value => {
+                          setValue('type', value?.id);
+                        }}
+                      />
+                    ) : watch('menu')?.id === 'BUY' ? (
+                      <TypeEstate
+                        value={watch('type')}
+                        onType={value => {
+                          setValue('type', value?.id);
+                        }}
+                      />
+                    ) : (
+                      <View></View>
+                    )}
+                  </>
+                )}
                 {mapProvince && (
                   <MapProvince
                     value={watch('province')}

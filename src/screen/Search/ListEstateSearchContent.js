@@ -36,7 +36,7 @@ export default function ListEstateSearchContent({
         longitude: params?.near_me ? location?.longitude : '',
         distance: params?.near_me ? 5000 : '',
         currency_id: currency?.id,
-        province_id: filter?.province?.id,
+        province_id: filter?.province?.id || filter?.province_id,
       },
     ],
     queryFn: () =>
@@ -49,7 +49,7 @@ export default function ListEstateSearchContent({
         longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
         distance: !paramsFilter && params?.near_me ? 5000 : '',
         currency_id: currency?.id,
-        province_id: filter?.province?.id,
+        province_id: filter?.province?.id || filter?.province_id,
       }),
   });
 

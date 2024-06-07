@@ -11,21 +11,22 @@ export default function Menubar({onType, value}) {
 
   const data = [
     {
-      id: 1,
-      name: t('rent'),
+      id: 'RENT',
+      name: t('RENT'),
     },
     {
-      id: 2,
-      name: t('buy'),
+      id: 'BUY',
+      name: t('BUY'),
     },
     {
-      id: 3,
-      name: t('tour'),
+      id: 'TOUR',
+      name: t('TOUR'),
     },
   ];
   useEffect(() => {
     !value && data[0]?.id && setChecked(data[0]?.id);
   }, [data[0]?.id, value]);
+
   return (
     <WrapperContent
       styleTextHeading={{
@@ -71,6 +72,7 @@ export default function Menubar({onType, value}) {
               padding: scale(6),
               textAlign: 'center',
               color: checked === item?.id ? COLORS.white : COLORS.black,
+              textTransform: 'uppercase',
             }}>
             {item?.name}
           </CustomText>

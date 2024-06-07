@@ -36,7 +36,7 @@ export default function ListAccomSearchContent({
         longitude: params?.near_me ? location?.longitude : '',
         distance: params?.near_me ? 5000 : '',
         currency_id: currency?.id,
-        province_id: filter?.province?.id,
+        province_id: filter?.province?.id || filter?.province_id,
       },
     ],
     queryFn: () =>
@@ -52,7 +52,7 @@ export default function ListAccomSearchContent({
         latitude: !paramsFilter && params?.near_me ? location?.latitude : '',
         longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
         distance: !paramsFilter && params?.near_me ? 5000 : '',
-        province_id: filter?.province?.id,
+        province_id: filter?.province?.id || filter?.province_id,
         currency_id: currency?.id,
         // province_id: 1,
       }),

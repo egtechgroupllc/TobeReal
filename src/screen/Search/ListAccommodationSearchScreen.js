@@ -33,6 +33,7 @@ export default function ListAccommodationSearchScreen() {
     currentPosition();
   }, []);
   // console.log(filter);
+  console.log(params, 312321312);
   return (
     <MainWrapper
       scrollEnabled={false}

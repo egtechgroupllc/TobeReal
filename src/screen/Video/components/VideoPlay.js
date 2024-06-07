@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {StyleSheet, View} from 'react-native';
+import {AppState, StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import {WIDTH, scale} from '../../../assets/constants';
@@ -59,6 +59,21 @@ export default forwardRef(function VideoPlay(
       setPausedVideo(true);
     }
   }, [play]);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (nextAppState === 'active' && play) {
+        setPausedVideo(false);
+      } else if (nextAppState === 'inactive') {
+        setPausedVideo(true);
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, [play]);
+
   const onHeartVideo = useCallback(event => {
     const {x, y} = event;
     setHearts(oldHearts => [...oldHearts, {id: getUniqueID(), x, y}]);
