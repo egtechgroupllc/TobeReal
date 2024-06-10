@@ -37,7 +37,7 @@ export default function InfoDetail({data, price}) {
             <CustomText
               textType="semiBold"
               style={{
-                color: '#7906f6',
+                color: COLORS.white,
               }}>
               {data?.estate_type?.name}
             </CustomText>
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  name: {fontSize: SIZES.medium},
-  text1: {fontSize: SIZES.xxSmall, width: '30%'},
+  name: {fontSize: SIZES.medium, color: COLORS.white},
+  text1: {fontSize: SIZES.xxSmall, color: COLORS.white, width: '30%'},
 
   room: {
     flexDirection: 'row',

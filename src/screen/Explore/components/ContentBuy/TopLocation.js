@@ -14,13 +14,13 @@ export default function TopLocation({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Top Locations')];
+  const title = [t('top_location')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
           // background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           // worldTour
           // onPressSeeAll={() =>
           //   navigate('NoBottomTab', {
@@ -33,7 +33,7 @@ export default function TopLocation({data}) {
           onPressCategory={item => console.log(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+        >
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

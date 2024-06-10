@@ -27,9 +27,9 @@ export default function InfoDetail({data, name}) {
         </View>
 
         <View style={styles.room}>
-          <StarRating />
+          <StarRating rating={2} />
           <CustomText textType="medium" style={styles.text}>
-            (10 Evaluate)
+            0 {t('review')}
           </CustomText>
           <TouchableOpacity>
             <CustomImage
@@ -59,16 +59,16 @@ export default function InfoDetail({data, name}) {
           <IconMapView
             width={scale(12)}
             height={scale(12)}
-            fill={COLORS.primary}
+            fill={COLORS.white}
           />
           <CustomText
             textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.primary}}>
+            style={{...styles.text, marginLeft: '2%', color: COLORS.white}}>
             {t('location')} |
           </CustomText>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.primary, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             {data?.address || ''}
           </CustomText>
         </View>
@@ -79,15 +79,19 @@ export default function InfoDetail({data, name}) {
             alignItems: 'center',
             marginTop: scale(5),
           }}>
-          <IconCalendar width={scale(12)} height={scale(12)} />
+          <IconCalendar
+            width={scale(12)}
+            height={scale(12)}
+            fill={COLORS.white}
+          />
           <CustomText
             textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            style={{...styles.text, marginLeft: '2%', color: COLORS.white}}>
             {t('lastest_tour')} |
           </CustomText>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             {formatDateTime(data?.tour_tickets?.[0]?.createdAt)}
           </CustomText>
         </View>
@@ -98,15 +102,15 @@ export default function InfoDetail({data, name}) {
             alignItems: 'center',
             marginTop: scale(5),
           }}>
-          <IconClock width={scale(12)} height={scale(12)} />
+          <IconClock width={scale(12)} height={scale(12)} fill={COLORS.white} />
           <CustomText
             textType="semiBold"
-            style={{...styles.text, marginLeft: '2%', color: COLORS.black}}>
+            style={{...styles.text, marginLeft: '2%', color: COLORS.white}}>
             {t('tour_time')} |
           </CustomText>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             {data?.total_hours} {t('hour')}
           </CustomText>
         </View>
@@ -122,8 +126,9 @@ export default function InfoDetail({data, name}) {
 const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
+    borderTopWidth: scale(1),
+    borderTopColor: '#FFFFFF30',
     rowGap: scale(8),
-    backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -132,16 +137,15 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-start',
   },
-  name: {flex: 1, fontSize: SIZES.xMedium},
-  text: {fontSize: SIZES.small, color: COLORS.grey},
-  text1: {fontSize: SIZES.xxSmall, width: '30%'},
+  name: {flex: 1, fontSize: SIZES.xMedium, color: COLORS.white},
+  text: {fontSize: SIZES.small, color: COLORS.white},
+  text1: {fontSize: SIZES.xxSmall, color: COLORS.white, width: '30%'},
   line: {
     width: '100%',
     height: scale(1),
     backgroundColor: COLORS.grey,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },

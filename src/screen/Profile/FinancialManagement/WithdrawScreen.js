@@ -17,10 +17,13 @@ import BotContent from './Withdraw/BotContent';
 import {showMess} from '../../../assets/constants/Helper';
 import MainWrapper from '../../../components/MainWrapper';
 import {useCountry} from '../../../hooks/useCountry';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function WithdrawScreen() {
+  const {t} = useLanguage();
+
   const {control, handleSubmit, setValue, watch} = useForm();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
   const withdrawMutation = useMutation({
     mutationFn: postConfirmWithdraw,
   });
@@ -28,7 +31,12 @@ export default function WithdrawScreen() {
   useEffect(() => {
     setValue('currency_id', currency?.id);
   }, []);
-
+  useLayoutEffect(() => {
+    setOptions({
+      headerTitle: t('withdraw'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleWidraw = value => {
     if (!value?.bank_name) {
       showMess('Please choose bank!', 'error');
@@ -57,7 +65,8 @@ export default function WithdrawScreen() {
         <TopContent control={control} />
         <BotContent control={control} setValue={setValue} />
         <CustomButton
-          text="Confirm"
+          text={t('confirm')}
+          styleText={{color: COLORS.black}}
           style={{marginTop: scale(20)}}
           onPress={handleSubmit(handleWidraw)}
         />

@@ -37,20 +37,20 @@ export default function RecommendedUnitItem({
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => {
-        if (isFocused()) {
-          dispatch(
-            StackActions.push('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                jsondata: jsonImage || [],
-                title: name || '',
-                paramPrice: price || '',
-              },
-            }),
-          );
-        }
-      }}
+      // onPress={() => {
+      //   if (isFocused()) {
+      //     dispatch(
+      //       StackActions.push('NoBottomTab', {
+      //         screen: 'SeeAllRentScreen',
+      //         params: {
+      //           jsondata: jsonImage || [],
+      //           title: name || '',
+      //           paramPrice: price || '',
+      //         },
+      //       }),
+      //     );
+      //   }
+      // }}
       activeOpacity={0.7}
       style={[
         styles.wrapper,

@@ -33,12 +33,8 @@ export default function InfoDetail({data}) {
           {data.review_average ? (
             <StarRating rating={data.review_average} />
           ) : (
-            <CustomText
-              textType="regular"
-              style={{
-                color: COLORS.white,
-              }}>
-              (There are no reviews yet)
+            <CustomText textType="regular" style={{color: COLORS.white}}>
+              ({t('no_review_yet')})
             </CustomText>
           )}
         </View>

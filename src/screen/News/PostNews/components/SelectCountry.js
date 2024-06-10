@@ -16,6 +16,7 @@ export default function SelectCountry({
   name,
   rules,
   defaultValue,
+  colorText,
   setValue = () => {},
   onSelect = () => {},
   watch = () => {},
@@ -55,7 +56,7 @@ export default function SelectCountry({
               rowGap: scale(10),
             }}>
             <View style={styles.wrapper}>
-              <CustomText style={{color: COLORS.black}}>
+              <CustomText style={{color: colorText || COLORS.black}}>
                 {t('country')}
               </CustomText>
 
@@ -110,6 +111,7 @@ export default function SelectCountry({
 
             {dataFromScreen && (
               <SelectProvince
+                colorText={colorText}
                 control={control}
                 setValue={setValue}
                 watch={watch}

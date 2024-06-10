@@ -13,7 +13,7 @@ import CustomText from '../../../../../components/CustomText';
 import {StarRating} from '../../../../../components';
 import {formatDateTime} from '../../../../../utils/format';
 
-export default function ItemBox({style, isShadow = true, data}) {
+export default function ItemBox({style, isShadow = true, data, colorText}) {
   const [seeMoreOwn, setSeeMoreOwn] = useState(false);
   const [isBtnSeeMoreOwn, setIsBtnSeeMoreOwn] = useState(false);
 
@@ -50,11 +50,7 @@ export default function ItemBox({style, isShadow = true, data}) {
         <View>
           <CustomText
             textType="semiBold"
-            style={{
-              fontSize: SIZES.xMedium,
-              flex: 1,
-              color: COLORS.black,
-            }}
+            style={[styles.text, {color: colorText || COLORS.black}]}
             numberOfLines={1}>
             {data?.user?.username}
           </CustomText>
@@ -65,7 +61,7 @@ export default function ItemBox({style, isShadow = true, data}) {
 
       <View>
         <CustomText
-          style={{color: COLORS.black}}
+          style={[styles.text, {color: colorText || COLORS.black}]}
           textType="regular"
           numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
           onTextLayout={onTextLayoutUser}>
@@ -152,6 +148,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(12),
     rowGap: scale(10),
     marginBottom: scale(2),
+  },
+  text: {
+    fontSize: SIZES.xMedium,
+    flex: 1,
   },
   infoCustomer: {
     flexDirection: 'row',

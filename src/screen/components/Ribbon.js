@@ -23,9 +23,10 @@ export default function Ribbon({
           <CustomText
             textType="medium"
             style={{
+              color: COLORS.white,
               fontSize: SIZES.xSmall,
             }}>
-            {t('Free cancellation')}
+            {t('free_cancel')}
           </CustomText>
           {iconRight && <IconRight style={styles.icon} />}
         </View>

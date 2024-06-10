@@ -17,6 +17,7 @@ import {
   formatTime,
 } from '../../../../../utils/format';
 import {CustomButton} from '../../../../../components';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function ItemHistory({
   data,
@@ -25,6 +26,8 @@ export default function ItemHistory({
   tab,
   onPressCancel,
 }) {
+  const {t} = useLanguage();
+
   const nameBank = useMemo(
     () =>
       data?.method_deposit_item?.bank_name?.split('-')[0] ||
@@ -124,12 +127,12 @@ export default function ItemHistory({
             </CustomText>
           </View>
         </View>
-        {data?.status === 'PENDING' && tab === 'Withdraw' && (
+        {data?.status === 'PENDING' && tab === t('withdraw') && (
           <CustomButton
             onPress={onPressCancel}
-            text="Cancel"
+            text={t('cancel')}
             buttonType="small"
-            style={{width: '20%'}}
+            style={{width: '20%', height: scale(25)}}
             styleWrapper={{alignSelf: 'flex-end'}}
           />
         )}

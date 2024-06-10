@@ -7,11 +7,12 @@ import {COLORS, images, scale} from '../../../assets/constants';
 import ItemMethodDeposit from './components/ItemMethodDeposit';
 import CustomText from '../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../hooks/useLanguage';
 import MainWrapper from '../../../components/MainWrapper';
-import CustomImage from '../../../components/CustomImage';
 
 export default function ListMethodBankScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const {data, isLoading} = useQuery({
     queryKey: ['user', 'deposit', 'list-method'],
@@ -20,7 +21,7 @@ export default function ListMethodBankScreen() {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Nạp tiền vào tài khoản',
+      headerTitle: t('deposit'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -33,13 +34,8 @@ export default function ListMethodBankScreen() {
         rowGap: scale(20),
       }}>
       <View style={styles.box}>
-        <CustomImage
-          source={images.logo1}
-          style={{height: scale(120), marginBottom: scale(30)}}
-          resizeMode="contain"
-        />
         <CustomText textType="medium" style={{color: COLORS.white}}>
-          Bạn hãy chọn một trong các hình thức thanh toán dưới đây
+          {t('please_choose_one')}
         </CustomText>
 
         <FlatList

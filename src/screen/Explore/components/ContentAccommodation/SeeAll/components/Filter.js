@@ -11,9 +11,11 @@ import {
 import {IconDown, IconHistory} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function Filter() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const {t} = useLanguage();
 
   const renderItem = ({item, index}) => {
     return activeIndex === index ? (
@@ -53,12 +55,12 @@ export default function Filter() {
         horizontal
         showsHorizontalScrollIndicator={false}
         data={[
-          'Our topics',
-          'Lowest price first',
-          'Best reviewed',
-          'Recently',
-          'On promotion',
-          'Good review',
+          t('our_topics'),
+          t('lowest_price_first'),
+          t('best_review'),
+          t('recent'),
+          t('on_promotion'),
+          t('good_review'),
         ]}
         contentContainerStyle={{
           paddingHorizontal: scale(10),

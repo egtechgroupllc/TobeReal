@@ -5,7 +5,7 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
 import {useNavigation} from '@react-navigation/native';
 import {getListCountry} from '../../../../Model/api/common';
@@ -18,7 +18,7 @@ export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Explore Nearby Estates')];
+  const title = [t('explore_nearby_estate')];
   const [filter, setFilter] = useState();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -44,7 +44,7 @@ export default function ExploreNearbyEstate({country}) {
       {isRender && (
         <WrapperContent
           // background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           // worldTour
           isCategory
           dataCategory={listProvince.data?.data?.slice(0, 9)}
@@ -59,7 +59,7 @@ export default function ExploreNearbyEstate({country}) {
           onPressCategory={item => setFilter(item)}
           heading={title}
           // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+        >
           {data?.data?.count !== 0 ? (
             <FlatList
               horizontal
@@ -73,8 +73,10 @@ export default function ExploreNearbyEstate({country}) {
           ) : (
             <View style={{alignItems: 'center', rowGap: scale(10)}}>
               <IconBookings width={scale(50)} height={scale(50)} />
-              <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                No data
+              <CustomText
+                textType="medium"
+                style={{fontSize: SIZES.medium, color: COLORS.white}}>
+                {t('no_data')}
               </CustomText>
             </View>
           )}

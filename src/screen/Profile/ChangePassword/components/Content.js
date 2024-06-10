@@ -4,7 +4,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {postChangePassword} from '../../../../Model/api/auth';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -43,6 +43,8 @@ export default function Content() {
         label={t('old_password')}
         control={control}
         name="from"
+        styleTextLabel={{color: COLORS.white}}
+        password
         placeholder={t('enter_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
@@ -52,6 +54,8 @@ export default function Content() {
         label={t('new_password')}
         control={control}
         name="to"
+        styleTextLabel={{color: COLORS.white}}
+        password
         placeholder={t('enter_new_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
@@ -60,7 +64,9 @@ export default function Content() {
       <CustomInput
         label={t('confirm_password')}
         control={control}
+        password
         name="passwordConfirm"
+        styleTextLabel={{color: COLORS.white}}
         placeholder={t('confirm_password')}
         rules={[
           requireField(t('this_field_required')),

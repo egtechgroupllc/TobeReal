@@ -59,7 +59,6 @@ export default function FormChangeContact({data, isOpen}) {
       email: apply?.email || data?.email,
     };
   }, [JSON.stringify(data), JSON.stringify(apply)]);
-
   return (
     <>
       <TouchableOpacity
@@ -69,22 +68,29 @@ export default function FormChangeContact({data, isOpen}) {
           paddingHorizontal: scale(12),
           paddingVertical: scale(10),
         }}>
-        <CustomText textType="medium" size={SIZES.xMedium}>
+        <CustomText
+          textType="medium"
+          size={SIZES.xMedium}
+          style={{color: COLORS.white}}>
           {dataView?.username}
         </CustomText>
         <View
           style={{
             flexDirection: 'row',
           }}>
-          <CustomText>{dataView?.email} - </CustomText>
-          <CustomText>{dataView?.phone}</CustomText>
+          <CustomText style={{color: COLORS.white}}>
+            {dataView?.email} -{' '}
+          </CustomText>
+          <CustomText style={{color: COLORS.white}}>
+            {dataView?.phone}
+          </CustomText>
         </View>
       </TouchableOpacity>
       <BottomSheet
         ref={bottomSheetRef}
         index={1}
         snapPoints={['50%', '80%']}
-        titleIndicator={'Thông tin liên hệ'}
+        titleIndicator={t('contact_info')}
         // onDismiss={!apply && reset}
         styleContent={{
           paddingHorizontal: scale(16),
@@ -92,34 +98,34 @@ export default function FormChangeContact({data, isOpen}) {
         }}>
         <CustomInput
           styleTextLabel={styles.label}
-          label={t('Tên người liên hệ')}
+          label={t('contact_name')}
           control={control}
           defaultValue={dataView?.username}
-          name="name"
+          name="username"
           maxLength={100}
-          placeholder={t('Tên người liên hệ')}
+          placeholder={t('contact_name')}
           rules={[requireField(t('this_field_required'))]}
           style={styles.textInput}
         />
         <CustomInput
           styleTextLabel={styles.label}
           defaultValue={dataView?.phone}
-          label={t('Số điện thoại')}
+          label={t('phone')}
           control={control}
           name="phone"
           maxLength={30}
-          placeholder={t('Số điện thoại')}
+          placeholder={t('phone')}
           rules={[requireField(t('this_field_required'))]}
           style={styles.textInput}
         />
         <CustomInput
           styleTextLabel={styles.label}
-          label={t('Địa chỉ email')}
+          label={t('email')}
           control={control}
           defaultValue={dataView?.email}
           name="email"
           maxLength={50}
-          placeholder={'email@gmail.com'}
+          placeholder={'example@gmail.com'}
           rules={[
             requireField(t('this_field_required')),
             validateEmail(t('invalid_email')),
@@ -127,7 +133,7 @@ export default function FormChangeContact({data, isOpen}) {
           style={styles.textInput}
         />
 
-        <CustomButton text="Apply" onPress={handleSubmit(handleApply)} />
+        <CustomButton text={t('apply')} onPress={handleSubmit(handleApply)} />
       </BottomSheet>
     </>
   );

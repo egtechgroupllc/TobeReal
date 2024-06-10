@@ -58,7 +58,7 @@ export default function SelectCurrency({
         return (
           <View style={styles.wrapper}>
             <CustomText style={{color: COLORS.black}}>
-              {t('Main Currency')}
+              {t('main_currency')}
             </CustomText>
 
             <View
@@ -93,13 +93,13 @@ export default function SelectCurrency({
                       color: '#aaa',
                     }
                   }>
-                  {dataFromScreen?.currency_code || t('Main Currency')}
+                  {dataFromScreen?.currency_code || t('main_currency')}
                 </CustomText> */}
                 <CustomText
                   style={{
                     color: COLORS.black,
                   }}>
-                  {currency?.currency_code || t('Main Currency')}
+                  {currency?.currency_code || t('main_currency')}
                 </CustomText>
                 <IconRight />
               </View>

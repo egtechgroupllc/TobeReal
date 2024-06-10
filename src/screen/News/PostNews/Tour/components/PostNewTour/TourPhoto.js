@@ -80,7 +80,7 @@ export default function TourPhoto({
   return (
     <View>
       <ButtonTabValidate
-        title={t('Thêm Ảnh')}
+        title={t('add_images')}
         onPress={() => setView(prev => !prev)}
         errors={errors}
         watch={watch}
@@ -94,7 +94,7 @@ export default function TourPhoto({
           <Collapsible collapsed={!isView} style={styles.box}>
             <RulesPostImg />
             <ChooseImgPicker
-              title={t('real_estate_images')}
+              title={t('tour_image')}
               subHeading={t('update_image_to_maximum')}
               control={control}
               rules={
@@ -126,7 +126,7 @@ export default function TourPhoto({
               />
             )}
 
-            {isKyc && (
+            {/* {isKyc && (
               <>
                 <ChooseImgPicker
                   title={t(
@@ -157,7 +157,7 @@ export default function TourPhoto({
                   />
                 )}
               </>
-            )}
+            )} */}
             {/* <CustomInput
               label={t('Link youtube')}
               placeholder={t('Link youtube')}

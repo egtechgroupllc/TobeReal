@@ -33,7 +33,7 @@ export default function Facilities({data}) {
         }}>
         <View style={styles.listInfo}>
           <CustomText textType="semiBold" style={{color: COLORS.white}}>
-            {t('Price')}:{' '}
+            {t('price')}:{' '}
             <CustomText
               textType="bold"
               style={{...styles.name, color: COLORS.primary}}>
@@ -43,7 +43,7 @@ export default function Facilities({data}) {
             </CustomText>
           </CustomText>
 
-          <CustomText textType="regular" style={styles.text}>
+          <CustomText textType="regular" style={{color: COLORS.white}}>
             {t('acreage')}:{' '}
             <CustomText textType="semiBold" style={styles.name}>
               {formatPrice(data?.size_width * data?.size_length, {
@@ -64,7 +64,7 @@ export default function Facilities({data}) {
           }}>
           <InfoItem
             Icon={IconRoom}
-            name={t('Bedroom')}
+            name={t('bedroom')}
             value={3}
             styleIcon={{
               height: scale(16),
@@ -72,15 +72,15 @@ export default function Facilities({data}) {
           />
           <InfoItem
             Icon={IconFurniture}
-            name={t('Interior')}
+            name={t('interior')}
             value={data?.furnish}
           />
 
-          <InfoItem Icon={IconBed} name={t('Toilet')} value={3} />
+          <InfoItem Icon={IconBed} name={t('toilet')} value={3} />
 
           <InfoItem
             Icon={IconDirection}
-            name={t('House direction')}
+            name={t('house_direction')}
             value={data?.direction_main.name}
             styleIcon={{
               height: scale(16),
@@ -98,7 +98,7 @@ export default function Facilities({data}) {
 
           <InfoItem
             Icon={IconBookings}
-            name={t('Juridical')}
+            name={t('juridical')}
             value={data?.legal_documents}
           />
         </View>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     minHeight: scale(50),
     paddingVertical: scale(10),
   },
-  name: {fontSize: SIZES.medium},
+  name: {fontSize: SIZES.medium, color: COLORS.white},
   listInfo: {
     flexDirection: 'row',
     paddingBottom: scale(6),

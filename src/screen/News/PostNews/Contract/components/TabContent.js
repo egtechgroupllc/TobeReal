@@ -120,7 +120,7 @@ export default function TabContent() {
         />
 
         <ChooseImgPicker
-          title={t('Add images to prove ownership of your Real Estate assets')}
+          title={t('add_image_to_prove')}
           control={control}
           rules={[requireField(t('this_field_required'))]}
           name={'descriptionImg3'}

@@ -16,47 +16,45 @@ import RealEstateType from '../../../components/RealEstateType';
 import SelectCurrency from '../../../components/SelectCurrency';
 import Counter from '../../../../../../components/Counter';
 
-const listLegalDoc = [
-  {
-    id: 1,
-    name: 'Red Book / Pink Book',
-  },
-  {
-    id: 2,
-    name: 'Sales Contract',
-  },
-  {
-    id: 3,
-    name: 'Deposit Agreement',
-  },
-  {
-    id: 4,
-    name: 'Awaiting Title Deed',
-  },
-];
-
-const listInterior = [
-  {
-    id: 1,
-    name: 'Fully Furnished',
-  },
-  {
-    id: 2,
-    name: 'High-end Furnishings',
-  },
-  {
-    id: 3,
-    name: 'Basic Finishes',
-  },
-  {
-    id: 4,
-    name: 'Unfurnished',
-  },
-];
-
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
+  const listLegalDoc = [
+    {
+      id: 1,
+      name: t('red_book'),
+    },
+    {
+      id: 2,
+      name: t('sale_contract'),
+    },
+    {
+      id: 3,
+      name: t('deposit_agreement'),
+    },
+    {
+      id: 4,
+      name: t('waiting_title'),
+    },
+  ];
 
+  const listInterior = [
+    {
+      id: 1,
+      name: t('full_furnished'),
+    },
+    {
+      id: 2,
+      name: t('high_end'),
+    },
+    {
+      id: 3,
+      name: t('basic_furnish'),
+    },
+    {
+      id: 4,
+      name: t('unfurnished'),
+    },
+  ];
   const [viewDetail, setViewDetail] = useState(false);
 
   const arrKeywords = useRef([
@@ -93,7 +91,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Hướng cửa chính'}
+              label={t('main_door')}
               data={data?.data}
               name={'direction_main_id'}
               control={control}
@@ -114,7 +112,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
-              label={'Giấy tờ pháp lý'}
+              label={t('legal_documents')}
               name={'legal_documents'}
               control={control}
               data={listLegalDoc}
@@ -125,7 +123,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <RealEstateType
-              label={'Nội thất'}
+              label={t('interior')}
               name={'furnish'}
               control={control}
               data={listInterior}
@@ -155,7 +153,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               columnGap: scale(30),
             }}>
             <CustomInput
-              label={'Width'}
+              label={t('width')}
               placeholder="Width"
               name="size_width"
               control={control}
@@ -168,7 +166,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Length'}
+              label={t('length')}
               placeholder="Length"
               name="size_length"
               control={control}
@@ -182,7 +180,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           </View>
 
           <Counter
-            heading={'Room number'}
+            heading={t('room_number')}
             min={0}
             max={255}
             value={watch('number_bedroom')}
@@ -192,7 +190,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <Counter
-            heading={'Number of bathrooms and toilets'}
+            heading={t('number_bathroom')}
             min={0}
             max={255}
             value={watch('number_bathroom')}
@@ -226,8 +224,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             />
 
             <CustomInput
-              label={'Price for locking information'}
-              placeholder="Price for locking informationn"
+              label={t('price_locking_information')}
+              placeholder={t('price_locking_information')}
               name="price_lock"
               control={control}
               editable={false}
@@ -244,7 +242,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           </View>
 
           <CheckBox
-            text="Price can be negotiated"
+            text={t('price_negotiated')}
             textStyle={{color: COLORS.black}}
             styleWrapper={{
               width: '100%',

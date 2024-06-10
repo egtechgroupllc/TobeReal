@@ -54,7 +54,8 @@ export default function Review({dataP}) {
                 style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
                 {t('overview')}
               </CustomText>
-              <CustomText style={{fontSize: SIZES.xMedium}}>
+              <CustomText
+                style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
                 {formatNumber(dataP?.review_count)}{' '}
                 {dataP?.review_count > 1 ? t('reviews') : t('review')}
               </CustomText>
@@ -72,7 +73,11 @@ export default function Review({dataP}) {
             }}
             renderItem={({item, index}) =>
               item?.id ? (
-                <ItemBoxReview key={`key-${item}-${index}`} data={item} />
+                <ItemBoxReview
+                  key={`key-${item}-${index}`}
+                  data={item}
+                  colorText={COLORS.white}
+                />
               ) : (
                 <ItemBoxReviewLoading />
               )
@@ -96,7 +101,7 @@ export default function Review({dataP}) {
                   }}
                 />
               )}
-              titleIndicator="Đánh giá">
+              titleIndicator="Review">
               <ReviewAll
                 onSort={() => bottomSheetChildRef.current.openChild()}
                 valueSort={select}

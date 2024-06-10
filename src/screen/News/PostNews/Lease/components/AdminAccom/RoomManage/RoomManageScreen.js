@@ -9,15 +9,17 @@ import MainWrapper from '../../../../../../../components/MainWrapper';
 import DeleteRoom from './DeleteRoom';
 import RoomItem from './RoomItem';
 import {IconHome} from '../../../../../../../assets/icon/Icon';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function RoomManageScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý phòng',
+      headerTitle: t('room_manage'),
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
@@ -36,7 +38,7 @@ export default function RoomManageScreen() {
       }}>
       <>
         <CustomButton
-          text="Add more room"
+          text={t('add_more_room')}
           style={{width: '50%', marginLeft: scale(20), marginBottom: scale(10)}}
           onPress={() => navigate('AddRoomTypeScreen', {...params})}
         />
@@ -95,7 +97,7 @@ export default function RoomManageScreen() {
         )}
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Thao Tác'}
+          titleIndicator={'Operation'}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

@@ -4,9 +4,11 @@ import {SIZES, scale} from '../../../../../../assets/constants';
 import Counter from '../../../../../../components/Counter';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function AutoPostTop({date, setValue, onCount, countNum}) {
   const [count, setCount] = useState(1);
+  const {t} = useLanguage();
 
   const dateEnd = useMemo(
     () =>
@@ -29,16 +31,19 @@ export default function AutoPostTop({date, setValue, onCount, countNum}) {
             fontSize: SIZES.xMedium,
             marginBottom: scale(5),
           }}>
-          Tự động đăng lại
+          {t('auto_repost')}
         </CustomText>
 
         <CustomText>
-          Số lần còn lại
-          <CustomText textType="semiBold"> {count} lần</CustomText>
+          {t('number_time_remaining')}
+          <CustomText textType="semiBold">
+            {' '}
+            {count} {t('time')}
+          </CustomText>
         </CustomText>
 
         <CustomText>
-          Lần đăng lại cuối dự kiến
+          {t('last_repost_expected')}
           <CustomText textType="semiBold"> {dateEnd}</CustomText>
         </CustomText>
       </View>

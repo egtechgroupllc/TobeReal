@@ -28,12 +28,13 @@ export default function ContentReview({control, setValue}) {
         styleText={{color: COLORS.white}}
         control={control}
         name="content"
-        placeholder="Bạn thích hoặc không thích điều gì về chỗ ở này?"
+        placeholder={`${t('like_or_dislike')}?`}
         multiline
         maxLength={300}
-        label={'Viết 1 đánh giá'}
+        label={t('write_review')}
         styleTextLabel={{
           textType: 'bold',
+          color: COLORS.white,
         }}
         rules={[requireField(t('this_field_required'))]}
         style={{

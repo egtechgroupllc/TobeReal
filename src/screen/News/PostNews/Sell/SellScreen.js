@@ -7,25 +7,27 @@ import {CustomButton} from '../../../../components';
 import {IconAdd, IconArrowRight} from '../../../../assets/icon/Icon';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
-
-const list = [
-  {
-    title: 'I already have a property registered',
-    desc: 'View and manage your registered properties',
-    textBtn: 'Continue',
-    navigate: 'NoBottomTab',
-    screen: 'SellManagementScreen',
-  },
-  {
-    title: 'Tôi muốn bán bất động sản',
-    desc: "We're happy to hear that! Click the button below to begin listing your new accommodation. The registration process may take up to 15 minutes.",
-    textBtn: 'List New Sell',
-    navigate: 'PostNewSellScreen',
-  },
-];
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function SellScreen() {
+  const {t} = useLanguage();
+
   const {navigate} = useNavigation();
+  const list = [
+    {
+      title: t('already_have_property'),
+      desc: t('view_registed_properties'),
+      textBtn: t('continue'),
+      navigate: 'NoBottomTab',
+      screen: 'SellManagementScreen',
+    },
+    {
+      title: t('want_sell_estate'),
+      desc: t('click_button_below'),
+      textBtn: t('list_new_sell'),
+      navigate: 'PostNewSellScreen',
+    },
+  ];
 
   return (
     <MainWrapper>
@@ -41,7 +43,9 @@ export default function SellScreen() {
 
             <CustomButton
               text={item.textBtn}
-              iconRight={item.textBtn === 'Continue' ? IconArrowRight : IconAdd}
+              iconRight={
+                item.textBtn === t('continue') ? IconArrowRight : IconAdd
+              }
               buttonType="normal"
               styleWrapper={{
                 alignSelf: 'flex-end',

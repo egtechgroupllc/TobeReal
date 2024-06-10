@@ -6,9 +6,11 @@ import {IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import CustomImage from '../../../../../../../components/CustomImage';
 import CustomText from '../../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function RoomItem({data, isTour, onPressMore, onEdit}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
@@ -59,7 +61,7 @@ export default function RoomItem({data, isTour, onPressMore, onEdit}) {
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
               }}>
-              Room id: {data?.id}
+              {t('room')} id: {data?.id}
             </CustomText>
           </View>
 
@@ -96,7 +98,7 @@ export default function RoomItem({data, isTour, onPressMore, onEdit}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text="Edit"
+              text={t('edit')}
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,

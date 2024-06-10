@@ -24,6 +24,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
     'km_to_center',
     'size_width',
     'size_length',
+    'rating',
   ]).current;
 
   return (
@@ -40,11 +41,11 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         onChange={render => render && setIsRender(render)}>
         {isRender && (
           <Collapsible collapsed={!viewDetail} style={styles.box}>
-            <Box title={'Nơi lưu trú của bạn đạt tiêu chuẩn mấy sao?'}>
-              <SetStartAccomo onChange={value => console.log({value})} />
+            <Box title={t('how_many_star_accom')}>
+              <SetStartAccomo onChange={value => setValue('rating', value)} />
             </Box>
 
-            <Box title={'Giờ nhận/trả phòng của nơi lưu trú là khi nào?'}>
+            <Box title={"What are the property's check-in/check-out times?"}>
               <>
                 <TimeCheckIn
                   onChange={value => {
@@ -63,15 +64,15 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
             {/* <View style={styles.line} /> */}
 
-            <Box title={'Diện tích của nơi lưu trú của bạn?'}>
+            <Box title={'The area of ​​your property?'}>
               <View
                 style={{
                   flexDirection: 'row',
                   columnGap: scale(30),
                 }}>
                 <CustomInput
-                  label={'Chiều rộng'}
-                  placeholder="Chiều rộng"
+                  label={'Width'}
+                  placeholder="Width"
                   name="size_width"
                   rules={requireField(t('this_field_required'))}
                   styleWrapper={{
@@ -83,8 +84,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
                 />
 
                 <CustomInput
-                  label={'Chiều dài'}
-                  placeholder="Chiều dài"
+                  label={'Length'}
+                  placeholder="Length"
                   name="size_length"
                   control={control}
                   rules={requireField(t('this_field_required'))}

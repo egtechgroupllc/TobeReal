@@ -14,7 +14,11 @@ export default function ButtonPost({onPress, title, styleImage, image, style}) {
         <View style={{width: '80%'}}>
           <CustomText
             textType="semiBold"
-            style={{...styles.text2, marginLeft: scale(10)}}>
+            style={{
+              ...styles.text2,
+              marginLeft: scale(10),
+              color: COLORS.white,
+            }}>
             {title}
           </CustomText>
         </View>

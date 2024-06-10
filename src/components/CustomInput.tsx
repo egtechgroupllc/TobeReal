@@ -117,7 +117,7 @@ export default forwardRef(function CustomInput(
             {label && (
               <CustomText
                 textType={styleTextLabel?.textType}
-                style={[{color: COLORS.white}, styleTextLabel]}>
+                style={[{color: COLORS.black}, styleTextLabel]}>
                 {label}
               </CustomText>
             )}

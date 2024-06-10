@@ -4,6 +4,7 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconSort} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import OptionAccommodation from '../../FindAccommodation/OptionAccommodation';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function FilterSort({
   isSelectAll,
@@ -13,6 +14,8 @@ export default function FilterSort({
   sort,
   text,
 }) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.wrapper}>
       {!!listFill[0] && (
@@ -49,7 +52,7 @@ export default function FilterSort({
             }}
           />
           <CustomText style={{color: COLORS.black}}>
-            {text || 'Filter'}
+            {text || t('filter')}
           </CustomText>
         </View>
         {sort && (

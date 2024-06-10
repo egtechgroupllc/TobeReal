@@ -11,9 +11,11 @@ import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {formatDate} from '../../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function CreateSellItem({data, onPressMore, onEdit}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const dataPackagePost = useMemo(
     () => data.package_post_item?.package_post,
@@ -96,23 +98,18 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
 
       <View style={{flexDirection: 'row', columnGap: scale(10)}}>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Mã tin</CustomText>
-          <CustomText
-            textType="medium"
-            numberOfLines={1}
-            style={{color: COLORS.black}}>
+          <CustomText style={styles.center}>Id</CustomText>
+          <CustomText textType="medium" numberOfLines={1}>
             {data?.id}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày đăng</CustomText>
-          <CustomText textType="medium" style={{color: COLORS.black}}>
-            {data?.date_start}
-          </CustomText>
+          <CustomText style={styles.center}>{t('date_posted')}</CustomText>
+          <CustomText textType="medium">{data?.date_start}</CustomText>
         </View>
         <View style={{flex: 1}}>
-          <CustomText style={styles.center}>Ngày hết hạn</CustomText>
-          <CustomText textType="medium" style={{color: COLORS.black}}>
+          <CustomText style={styles.center}>{t('expiration_date')}</CustomText>
+          <CustomText textType="medium">
             {formatDate(data?.date_start, {
               addDays: data?.package_post_item?.number_day,
               dateStyle: 'yyyy-MM-dd',
@@ -138,7 +135,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
           outline
           buttonType="normal"
           iconLeft={IconEditProfile}
-          text="Sửa tin"
+          text={t('edit')}
           style={{
             flex: 1,
           }}

@@ -1,8 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import React, {useCallback, useLayoutEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import {
+  Animated,
+  AppState,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {animations, scale} from '../../assets/constants';
 import video from '../../assets/constants/video';
@@ -129,8 +142,8 @@ export default function ListVideoInfluencerScreen() {
   const commentRef = useRef();
   const flatListRef = useRef(null);
 
+  const isFocused = useIsFocused();
   const [videoPlay, setVideoPlay] = useState(true);
-  const [releaseHeart, setReleaseHeart] = useState({x: 0, y: 0});
 
   const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
     if (viewableItems.length > 0 && viewableItems[0].isViewable) {
@@ -186,15 +199,6 @@ export default function ListVideoInfluencerScreen() {
   //   });
   // }, []);
 
-  const onHeartVideo = useCallback(event => {
-    const {x, y} = event;
-    setReleaseHeart({x, y});
-    const timeOutID = setTimeout(() => {
-      setReleaseHeart({x: 0, y: 0});
-    }, 1000);
-    return clearTimeout(timeOutID);
-  }, []);
-
   return (
     <View>
       <TouchableOpacity
@@ -217,7 +221,7 @@ export default function ListVideoInfluencerScreen() {
           });
         }}
         style={{
-          backgroundColor: '#ccc',
+          backgroundColor: '#000',
           height: '100%',
         }}
         contentContainerStyle={{
@@ -235,39 +239,15 @@ export default function ListVideoInfluencerScreen() {
             ref={videoRef}
             data={item}
             paused={item?.id !== videoPlay}
-            play={item?.id === videoPlay}
-            isFavourite={releaseHeart.x}
+            play={item?.id === videoPlay && isFocused}
             // onProgress={value => {
             //   handleProgress(value);
             // }}
-            onHeartVideo={onHeartVideo}
             onComment={() => commentRef.current?.open()}
           />
         )}
       />
 
-      {!!releaseHeart.y && (
-        <View
-          style={[
-            {
-              position: 'absolute',
-            },
-            releaseHeart.x && {
-              left: releaseHeart.x - 50,
-              top: releaseHeart.y - 40,
-            },
-          ]}>
-          <LottieView
-            loop={false}
-            autoPlay={true}
-            duration={1200}
-            source={animations.releaseHeart}
-            onAnimationFinish={() => setReleaseHeart({x: 0, y: 0})}
-            resizeMode="cover"
-            style={styles.favouriteHeart}
-          />
-        </View>
-      )}
       <View
         style={{
           width: '100%',

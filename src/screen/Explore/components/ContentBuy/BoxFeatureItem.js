@@ -133,9 +133,7 @@ export default function BoxFeatureItem({
                 <IconMarker width={scale(9)} height={scale(9)} />
                 <CustomText
                   textType="medium"
-                  style={[
-                    isStar && {fontSize: SIZES.xSmall, color: COLORS.black},
-                  ]}
+                  style={[isStar && {fontSize: SIZES.xSmall, flex: 1}]}
                   numberOfLines={2}>
                   {data?.country?.name}, {data?.province?.name}
                 </CustomText>

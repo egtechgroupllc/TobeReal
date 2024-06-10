@@ -14,7 +14,7 @@ export default function NotifyItems({
   header,
   title,
   desc,
-  backgroundColor = '#f2f3f3',
+  backgroundColor = '#ffffff30',
   tag,
   isDot,
   isShadow,
@@ -50,13 +50,17 @@ export default function NotifyItems({
           activeOpacity={0.7}
           onPress={onPress}>
           <View style={styles.left}>
-            <CustomImage source={images.logo1} style={styles.img} />
+            <CustomImage
+              source={images.logo1}
+              style={styles.img}
+              resizeMode="contain"
+            />
             <View style={{rowGap: scale(4), flex: 1}}>
               {/* <CustomText textType="semiBold" size={scale(13)}>
                 {data?.title}
               </CustomText> */}
               <CustomText
-                color={COLORS.text}
+                color={COLORS.white}
                 textType="medium"
                 // style={{flex: 1}}
                 numberOfLines={3}>

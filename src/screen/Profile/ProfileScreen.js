@@ -18,6 +18,7 @@ import {IconWallet} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 import {formatPrice} from '../../utils/format';
 import {useCountry} from '../../hooks/useCountry';
+import {CustomButton} from '../../components';
 
 export default function ProfileScreen() {
   const upgrade = () => {};

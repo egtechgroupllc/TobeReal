@@ -20,6 +20,7 @@ export default (function InputPhone({
   onChangeCountry,
   onChange,
   styleText,
+  colorText,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -94,7 +95,7 @@ export default (function InputPhone({
             style={{
               minWidth: scale(26),
               textAlign: 'center',
-              color: COLORS.black,
+              color: colorText || COLORS.black,
             }}>
             {dataFromScreen?.phone_code}
           </CustomText>

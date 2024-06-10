@@ -74,6 +74,7 @@ export default function TabSelect({
                     ? styleTabActive?.color || COLORS.green
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
+                textTransform: 'uppercase',
                 fontSize: SIZES.xMedium,
               }}
               onPress={() => {

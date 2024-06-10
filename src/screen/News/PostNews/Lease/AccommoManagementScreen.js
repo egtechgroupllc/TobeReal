@@ -12,27 +12,29 @@ import CreateAccomItem from './components/HomeLease/CreateAccomItem';
 import ListCreateAccomLoading from './components/HomeLease/ListCreateAccomLoading';
 import {IconGoBack, IconHome} from '../../../../assets/icon/Icon';
 import HeaderLeft from '../../../../navigation/components/HeaderLeft';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function AccommoManagementScreen() {
   const params = useRoute().params;
   const {setOptions, navigate, goBack} = useNavigation();
+  const {t} = useLanguage();
+
   const {data, page, isLoading, isError, setPage} = usePagination(
-    params?.isTour ? ['accommodation', 'my-list', 1] : ['tour', 'my-list', 1],
-    params?.isTour ? getMyListCreateTour : getMyListCreateAccom,
+    ['accommodation', 'my-list', 1],
+    getMyListCreateAccom,
     {
-      keyQuery: params?.isTour
-        ? {hasTicket: 1, limit: 12}
-        : {hasRoom: 1, limit: 12},
+      keyQuery: {
+        hasRoom: 1,
+        limit: 12,
+      },
     },
   );
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: params?.isTour
-        ? 'Danh Sách Tour Đã Tạo'
-        : 'Danh Sách Chỗ Ở Đã Tạo',
+      headerTitle: t('accom_list_create'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -45,7 +47,6 @@ export default function AccommoManagementScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
   const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4, 4]);
   const numColumns = Math.ceil(dataNew?.length / 4);
   return (

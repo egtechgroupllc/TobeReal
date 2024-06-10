@@ -4,8 +4,11 @@ import React, {useMemo} from 'react';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function PostTimeItem({onPress, data, cost, isSelect}) {
+  const {t} = useLanguage();
+
   const price = useMemo(
     () => cost - data?.discount * cost,
     [cost, data?.discount],
@@ -30,13 +33,13 @@ export default function PostTimeItem({onPress, data, cost, isSelect}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          {data.number_day} ngày
+          {data.number_day} {t('day')}
         </CustomText>
         <CustomText
           style={{
             color: COLORS.text,
           }}>
-          {formatPrice(price)}/ngày
+          {formatPrice(price)}/{t('day')}
         </CustomText>
       </View>
       {!!data.discount && (

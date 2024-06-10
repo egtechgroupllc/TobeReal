@@ -3,15 +3,15 @@ import React from 'react';
 import CustomText from '../../../../components/CustomText';
 import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import CustomImage from '../../../../components/CustomImage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function Contact({data}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.boxContact}>
-      <CustomText
-        textType="bold"
-        size={SIZES.medium}
-        style={{color: COLORS.black}}>
-        Chi tiết liên lạc
+      <CustomText textType="bold" size={SIZES.medium}>
+        {t('contact_detail')}
       </CustomText>
       <View style={styles.infoContact}>
         <CustomImage source={images.avatar} style={styles.avatar} />

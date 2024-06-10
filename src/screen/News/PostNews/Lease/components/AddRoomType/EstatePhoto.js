@@ -60,11 +60,7 @@ export default function EstatePhoto({control, errors, watch, setValue}) {
             subHeading={t('update_image_to_maximum')}
             control={control}
             name={'files'}
-            rules={
-              !imgDes && [
-                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
-              ]
-            }
+            rules={!imgDes && [validateMinLength(t('minimum_photos'), 4)]}
           />
           {imgDes && (
             <ChooseImgPicker

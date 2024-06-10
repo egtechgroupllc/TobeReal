@@ -5,19 +5,21 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../../../Model/api/common';
 import {getListTour} from '../../../../Model/api/apiTour';
+import {IconBookings} from '../../../../assets/icon/Icon';
+import CustomText from '../../../../components/CustomText';
 
 export default function PackageTour() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Domestic tour')];
+  const title = [t('domestic_tour')];
   const [filter, setFilter] = useState();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -43,7 +45,7 @@ export default function PackageTour() {
       {isRender && (
         <WrapperContent
           background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           isCategory
           dataCategory={listCountry.data?.data?.slice(0, 9)}
           // onPressSeeAll={() =>
@@ -56,17 +58,29 @@ export default function PackageTour() {
           // }
           onPressCategory={item => setFilter(item)}
           heading={title}
-          subHeading={t('discover_package_family') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxPlaceItem isHeart isStar data={item} rental="night" />
-            )}
-          />
+          subHeading={
+            t('discover_package_family') + ` ${formatPrice(1000000)}`
+          }>
+          {data?.data?.count !== 0 ? (
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={data?.data?.rows}
+              contentContainerStyle={styles.content}
+              renderItem={({item}) => (
+                <BoxPlaceItem isHeart isStar data={item} rental="night" />
+              )}
+            />
+          ) : (
+            <View style={{alignItems: 'center', rowGap: scale(10)}}>
+              <IconBookings width={scale(50)} height={scale(50)} />
+              <CustomText
+                textType="medium"
+                style={{fontSize: SIZES.medium, color: COLORS.white}}>
+                {t('no_data')}
+              </CustomText>
+            </View>
+          )}
         </WrapperContent>
       )}
     </InViewPort>

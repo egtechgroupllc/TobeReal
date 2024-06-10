@@ -25,6 +25,8 @@ export default memo(function BookAccommodation({
 
 const styles = StyleSheet.create({
   wrapper: {
+    borderTopWidth: scale(1),
+    borderColor: '#ffffff30',
     width: '100%',
     minHeight: scale(90),
     rowGap: scale(8),

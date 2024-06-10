@@ -11,10 +11,12 @@ export default function TimeCheckInOut({data}) {
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <View style={{flex: 1, alignItems: 'center'}}>
-          <CustomText style={{fontSize: SIZES.xMedium}}>
+          <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
             {t('check_in')}
             {'\n'}
-            <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+            <CustomText
+              textType="bold"
+              style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
               {data?.check_in_time_start} - {data?.check_in_time_end}{' '}
             </CustomText>
           </CustomText>
@@ -23,9 +25,11 @@ export default function TimeCheckInOut({data}) {
         <IconArrowRight fill={COLORS.white} />
 
         <View style={{flex: 1, alignItems: 'center'}}>
-          <CustomText style={{fontSize: SIZES.xMedium}}>
+          <CustomText style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
             {t('check_out')} {'\n'}
-            <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+            <CustomText
+              textType="bold"
+              style={{fontSize: SIZES.xMedium, color: COLORS.white}}>
               {data?.check_out_time_start} - {data?.check_out_time_end}
             </CustomText>
           </CustomText>

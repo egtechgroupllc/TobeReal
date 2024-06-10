@@ -12,16 +12,18 @@ import CustomText from '../../../../../../components/CustomText';
 import {formatPrice, formatDate} from '../../../../../../utils/format';
 import ItemUtil from './ItemUtil';
 import {useCountry} from '../../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function RoomUntil({data, price, isFilterChildren}) {
   const dataPolicies = data?.accommodation_policies;
   const RefundCondition = dataPolicies[0]?.refund_fee;
+  const {t} = useLanguage();
   const {currency} = useCountry();
   const feeCancel = useMemo(() => {
     if (RefundCondition === 1) {
-      return 'Cancellation without refund';
+      return t('cancel_without_refund');
     } else {
-      return `Free cancelation before ${formatDate(new Date(), {
+      return `${t('free_cancel_before')} ${formatDate(new Date(), {
         addDays: -dataPolicies[0]?.refund_number_day,
       })}`;
     }
@@ -44,8 +46,10 @@ export default function RoomUntil({data, price, isFilterChildren}) {
           Icon={IconPeople}
           value={
             !isFilterChildren
-              ? `Max ${data?.max_occupancy} adult(s)`
-              : `Max ${data?.max_occupancy} adult(s), ${data?.max_child_occupancy} children`
+              ? `${t('max')} ${data?.max_occupancy} ${t('adult').toLowerCase()}`
+              : `${t('max')} ${data?.max_occupancy} ${t(
+                  'children',
+                ).toLowerCase()}, ${data?.max_child_occupancy} children`
           }
         />
         <ItemUtil Icon={IconRoom} value={data.room_bed_type.name} />
@@ -56,9 +60,12 @@ export default function RoomUntil({data, price, isFilterChildren}) {
           justifyContent: 'space-between',
         }}>
         <View>
-          <ItemUtil Icon={IconPeople} value={`Breakfast not included`} />
-          <ItemUtil Icon={IconRoom} value={'No refunds'} />
-          <ItemUtil Icon={IconWifi} value={'Wifi free'} color={'#00875a'} />
+          <ItemUtil
+            Icon={IconPeople}
+            value={`${t('breakfast_not_included')}`}
+          />
+          <ItemUtil Icon={IconRoom} value={t('no_refund')} />
+          <ItemUtil Icon={IconWifi} value={t('WIFI_FREE')} color={'#00875a'} />
         </View>
 
         <View
@@ -89,7 +96,9 @@ export default function RoomUntil({data, price, isFilterChildren}) {
                 currency: currency?.currency_code,
               })}
             </CustomText>
-            <CustomText style={styles.night}>/Room/night</CustomText>
+            <CustomText style={styles.night}>
+              /{t('room')}/{t('night')}
+            </CustomText>
           </View>
         </View>
       </View>

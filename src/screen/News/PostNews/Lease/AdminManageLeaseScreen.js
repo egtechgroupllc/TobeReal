@@ -11,17 +11,20 @@ import {deleteAccom} from '../../../../Model/api/apiAccom';
 import {showMess} from '../../../../assets/constants/Helper';
 import HeaderRight from '../../../../navigation/components/HeaderRight';
 import {IconHome} from '../../../../assets/icon/Icon';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {setOptions} = useNavigation();
   const {navigate, goBack} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý chỗ ở',
+      headerTitle: t('accom_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -34,7 +37,6 @@ export default function AdminManageLeaseScreen() {
   const deleteAccomMu = useMutation({
     mutationFn: deleteAccom,
   });
-
   const Delete = value => {
     deleteAccomMu.mutate(
       {
@@ -60,23 +62,21 @@ export default function AdminManageLeaseScreen() {
     );
   };
   const handleDelete = () =>
-    Alert.alert(
-      'Bạn có chắc xoá chỗ ở này?',
-      'Chỗ ở đã xoá không thể khôi phục!',
-      [
-        {
-          text: 'Cancel',
-          // onPress: () => Alert.alert('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'OK', onPress: () => Delete()},
-      ],
-    );
+    Alert.alert(t('delete_property'), t('delete_property_not_restore'), [
+      {
+        text: t('cancel'),
+        // onPress: () => Alert.alert('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: t('ok'), onPress: () => Delete()},
+    ]);
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
         style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
-        <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
+        <CustomText
+          textType="semiBold"
+          style={{fontSize: SIZES.large, color: COLORS.white}}>
           {params?.name}
         </CustomText>
         <CustomImage
@@ -139,15 +139,15 @@ export default function AdminManageLeaseScreen() {
           </View>
         </CustomImage>
         <CustomButton
-          text="Booking Count"
+          text={t('booking_count')}
           style={{width: '85%', height: scale(45)}}
         />
         <CustomButton
-          text="Reviews"
+          text={t('review')}
           style={{width: '85%', height: scale(45)}}
         />
         <CustomButton
-          text="Room management"
+          text={t('room_manage')}
           style={{width: '85%', height: scale(45)}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
@@ -157,14 +157,14 @@ export default function AdminManageLeaseScreen() {
           }
         />
         <CustomButton
-          text="Policy management"
+          text={t('policy_manage')}
           style={{width: '85%', height: scale(45)}}
           onPress={() =>
             navigate('PolicyManageScreen', {...params, admin: adminScreen})
           }
         />
         <CustomButton
-          text="Remove Accommodation"
+          text={t('remove_accom')}
           style={{
             width: '85%',
             height: scale(45),

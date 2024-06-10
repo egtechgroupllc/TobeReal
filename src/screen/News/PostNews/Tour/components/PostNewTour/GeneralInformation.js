@@ -42,11 +42,6 @@ export default function GeneralInformation({
     'estate_type_id',
   ]).current;
 
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['common', 'estate', 'list-type'],
-    queryFn: getListTypeEstateSell,
-  });
-
   return (
     <View>
       <ButtonTabValidate

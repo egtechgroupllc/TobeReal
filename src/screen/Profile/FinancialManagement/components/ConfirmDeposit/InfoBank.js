@@ -8,8 +8,11 @@ import CustomImage from '../../../../../components/CustomImage';
 import {formatPrice} from '../../../../../utils/format';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function InfoBank({data}) {
+  const {t} = useLanguage();
+
   const nameBank = useMemo(
     () => data?.typeAccountBank?.bank_name.split(' - ')[0],
     [data],
@@ -24,7 +27,7 @@ export default function InfoBank({data}) {
             fontSize: SIZES.medium,
             color: COLORS.black,
           }}>
-          Chuyển tiền qua - {nameBank}
+          {t('transfer_money')} - {nameBank}
         </CustomText>
         <CustomImage
           source={data?.typeAccountBank?.logo_url}
@@ -46,16 +49,19 @@ export default function InfoBank({data}) {
             paddingHorizontal: scale(10),
             rowGap: scale(20),
           }}>
-          <ItemInfo name="Số tài khoản" value={data?.typeAccountBank?.code} />
           <ItemInfo
-            name="Chủ tài khoản"
+            name={t('bank_number')}
+            value={data?.typeAccountBank?.code}
+          />
+          <ItemInfo
+            name={t('bank_holder')}
             value={data?.typeAccountBank?.owner}
             isCopy={false}
           />
         </View>
         <View style={styles.border}>
           <ItemInfo
-            name="Số tiền chuyển khoản"
+            name={t('transfer_amount')}
             value={String(data?.amount)}
             isPrice
           />
@@ -68,7 +74,7 @@ export default function InfoBank({data}) {
 const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
   const handleCopy = () => {
     Clipboard.setString(value);
-    showMess('Sao chép thành công');
+    showMess('Copy successfully');
   };
   const {currency} = useCountry();
 

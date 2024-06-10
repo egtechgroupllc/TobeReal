@@ -5,8 +5,11 @@ import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {CustomInput} from '../../../../../components';
 import {IconCalendar, IconDown} from '../../../../../assets/icon/Icon';
 import {formatDate} from '../../../../../utils/format';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.top}>
       <View style={styles.boxDate}>
@@ -15,14 +18,14 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
             rowGap: scale(4),
             flex: 1,
           }}>
-          <CustomText>Check-In</CustomText>
+          <CustomText>{t('check_in')}</CustomText>
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
               color: checkIn ? COLORS.text : COLORS.textSub,
             }}
             textType="semiBold">
-            {checkIn ? formatDate(checkIn) : 'Check-in'}
+            {checkIn ? formatDate(checkIn) : t('check_in')}
           </CustomText>
         </View>
 
@@ -31,14 +34,14 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
             rowGap: scale(4),
             flex: 1,
           }}>
-          <CustomText>Check-Out</CustomText>
+          <CustomText>{t('check_out')}</CustomText>
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
               color: checkOut ? COLORS.text : COLORS.textSub,
             }}
             textType="semiBold">
-            {checkOut ? formatDate(checkOut) : 'Check-out'}
+            {checkOut ? formatDate(checkOut) : t('check_out')}
           </CustomText>
         </View>
       </View>

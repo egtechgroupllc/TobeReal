@@ -2,18 +2,20 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, Switch, TouchableOpacity, View} from 'react-native';
 
-import {SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {IconEditProfile, IconReset} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import BottomSheet from '../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
 import AutoPostTop from './AutoPostTop';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function AutoPost({setValue, date, params, unregister}) {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
   const [count, setCount] = useState(0);
+  const {t} = useLanguage();
 
   const bottomSheetRef = useRef();
   const dateEnd = useMemo(
@@ -49,8 +51,9 @@ export default function AutoPost({setValue, date, params, unregister}) {
         textType="semiBold"
         style={{
           fontSize: SIZES.medium,
+          color: COLORS.white,
         }}>
-        Tiện ích
+        {t('utilities')}
       </CustomText>
 
       <View style={styles.content}>
@@ -71,18 +74,22 @@ export default function AutoPost({setValue, date, params, unregister}) {
             textType="semiBold"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.white,
             }}>
-            Tự động đăng lại
+            {t('auto_repost')}
           </CustomText>
           {isConfirm ? (
             <View>
-              <CustomText>- Tự động đăng lại {count.count} lần</CustomText>
-              <CustomText>- Lần đăng cuối vào ngày {dateEnd}</CustomText>
+              <CustomText>
+                - {t('auto_repost')} {count.count} {t('time')}
+              </CustomText>
+              <CustomText>
+                - {t('last_post_on_date')} {dateEnd}
+              </CustomText>
             </View>
           ) : (
-            <CustomText>
-              Tin sẽ được đăng lại ngay khi tin vừa hết hạn. Mỗi lần đăng lại,
-              hệ thống chỉ trừ tiền của lần đăng lại đó.
+            <CustomText style={{color: COLORS.white}}>
+              {t('news_will_be_repost')}
             </CustomText>
           )}
         </View>
@@ -120,7 +127,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
         />
 
         <BottomSheet
-          titleIndicator={'Tự động đăng lại'}
+          titleIndicator={t('auto_repost')}
           snapPoints={['40%']}
           ref={bottomSheetRef}
           onDismiss={() => !isConfirm && setIsEnabled(false)}
@@ -136,24 +143,13 @@ export default function AutoPost({setValue, date, params, unregister}) {
           />
 
           <View>
-            <CustomText>
-              - Tin sẽ được đăng lại ngay khi tin vừa hết hạn.
-            </CustomText>
-            <CustomText>
-              - Đến thời điểm đăng lại, hệ thống mới thực hiện trừ tiền.
-            </CustomText>
-            <CustomText>
-              - Mỗi lần tin được đăng lại, hệ thống chỉ trừ tiền của lần đăng
-              lại đó.
-            </CustomText>
-            <CustomText>
-              - Mỗi lần tin được đăng lại, hệ thống chỉ trừ tiền của lần đăng
-              lại đó.
-            </CustomText>
+            <CustomText>- {t('news_will_repost')}.</CustomText>
+            <CustomText>- {t('time_reposting')}.</CustomText>
+            <CustomText>- {t('each_time_post')}.</CustomText>
           </View>
 
           <CustomButton
-            text="Xác nhận"
+            text={t('submit')}
             onPress={() => {
               setIsConfirm(true);
               bottomSheetRef.current.close();
@@ -168,7 +164,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(12),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(10),
     ...SHADOW,
   },

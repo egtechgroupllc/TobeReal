@@ -56,7 +56,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.text}>
             {t('how_to_change')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {changeVote && (
           <View>
@@ -105,7 +105,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.text}>
             {t('conversion')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {conversion && (
           <View>
@@ -130,7 +130,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.text}>
             {t('refund_and_change')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {refundcalendar && (
           <View>
@@ -176,7 +176,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.text}>
             {t('calendar_change')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {changeCalendar && (
           <View>
@@ -251,7 +251,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.text}>
             {t('refund_policy')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {refundpolicy && (
           <View>
@@ -315,7 +315,7 @@ export default function TermContent() {
           <CustomText textType="bold" style={styles.name1}>
             {t('term_condition')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </TouchableOpacity>
         {termcondition && (
           <View>
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -485,10 +485,10 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-start',
   },
-  name: {fontSize: SIZES.xMedium},
-  name1: {fontSize: SIZES.xLarge},
-  name2: {fontSize: SIZES.xxLarge},
-  text: {fontSize: SIZES.small, color: COLORS.black},
+  name: {fontSize: SIZES.xMedium, color: COLORS.white},
+  name1: {fontSize: SIZES.xLarge, color: COLORS.white},
+  name2: {fontSize: SIZES.xxLarge, color: COLORS.white},
+  text: {fontSize: SIZES.small, color: COLORS.white},
   text1: {fontSize: SIZES.xxSmall, width: '30%'},
   line: {
     width: '100%',
@@ -545,7 +545,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     height: scale(4),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     borderRadius: scale(99),
     width: '1.5%',
     marginTop: scale(5),

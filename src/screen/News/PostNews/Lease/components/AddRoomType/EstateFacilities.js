@@ -56,7 +56,7 @@ export default function EstateFacilities({
   return (
     <View>
       <ButtonTabValidate
-        title={t('Room Facilities')}
+        title={t('room_facilities')}
         onPress={() => setViewFacilities(prev => !prev)}
         errors={errors}
         watch={watch}
@@ -76,7 +76,7 @@ export default function EstateFacilities({
                     ...styles.select,
                     borderTopWidth: scale(index === 0 ? 0 : 1),
                   }}
-                  text={item?.name}
+                  text={t(item?.name)}
                   iconRight={() => (
                     <IconDown
                       style={
@@ -102,7 +102,7 @@ export default function EstateFacilities({
               return (
                 index === 0 && (
                   <CustomInput
-                    value={t('Room Facilities')}
+                    value={t('room_facilities')}
                     style={{
                       borderWidth: 0,
                     }}
@@ -128,7 +128,7 @@ export default function EstateFacilities({
                     isActive && (
                       <CheckBox
                         key={index}
-                        text={item}
+                        text={t(item)}
                         textLeft
                         isChecked={arrFacilities?.includes(item)}
                         onPress={evt => {

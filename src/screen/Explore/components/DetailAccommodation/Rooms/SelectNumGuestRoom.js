@@ -13,9 +13,12 @@ import Counter from '../../../../../components/Counter';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import ListChildren from '../../FindAccommodation/Occupancy/ListChildren';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
   const bottomSheetRef = useRef();
+  const {t} = useLanguage();
+
   const [numRooms, setNumRooms] = useState(data?.dataFilter?.numRooms || 1);
   const [numAdult, setNumAdult] = useState(data?.dataFilter?.numAdult || 1);
   const [numChild, setNumChild] = useState(data?.dataFilter?.numChild || []);
@@ -46,21 +49,23 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
       onPress={() => bottomSheetRef.current.open()}>
       <View style={{...styles.row}}>
         <IconPeople style={styles.icon} fill={COLORS.white} />
-        <CustomText>{numAdult}</CustomText>
+        <CustomText style={{color: COLORS.white}}>{numAdult}</CustomText>
       </View>
       <View style={{...styles.row}}>
         <IconChild style={styles.icon} fill={COLORS.white} />
-        <CustomText>{numChild?.length}</CustomText>
+        <CustomText style={{color: COLORS.white}}>
+          {numChild?.length}
+        </CustomText>
       </View>
       <View style={{...styles.row}}>
         <CustomImage source={images.lease} style={styles.icon} />
-        <CustomText>{numRooms}</CustomText>
+        <CustomText style={{color: COLORS.white}}>{numRooms}</CustomText>
       </View>
 
       <BottomSheet
         ref={bottomSheetRef}
         onDismiss={handleApply}
-        titleIndicator={'Add Guest(s) & Room(s)'}
+        titleIndicator={t('add_guest_room')}
         snapPoints={['50%']}
         styleContent={{
           rowGap: scale(14),
@@ -72,7 +77,7 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
           }}>
           <Counter
             editable={false}
-            heading={'Room(s)'}
+            heading={t('room')}
             max={numAdult}
             Icon={<CustomImage source={images.lease} style={styles.iconShe} />}
             // value={numRooms > numAdult ? numAdult : numRooms}
@@ -80,7 +85,7 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
           />
           <Counter
             editable={false}
-            heading={'Total Adult'}
+            heading={t('total_adult')}
             max={30}
             Icon={<IconPeople style={styles.iconShe} />}
             // value={data?.dataFilter?.numAdult}
@@ -91,7 +96,7 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
         </View>
         <CustomButton
           onPress={handleApply}
-          text="Apply"
+          text={t('apply')}
           styleWrapper={{
             paddingTop: scale(10),
             borderTopWidth: 3,

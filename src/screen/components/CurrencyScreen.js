@@ -73,7 +73,7 @@ export default function CurrencyScreen() {
               color: '#fff',
               fontSize: SIZES.xMedium,
             }}>
-            Done
+            {t('done')}
           </CustomText>
         ),
     });

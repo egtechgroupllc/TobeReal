@@ -18,6 +18,7 @@ import NavigationExplore from './NavigationExplore';
 import NavigationNews from './NavigationNews';
 import NavigationProfile from './NavigationProfile';
 import NavigationVideo from './NavigationVideo';
+import {WIDTH} from '../assets/constants/theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,10 +35,15 @@ export default function BottomTab() {
           columnGap: scale(4),
         },
         // tabBarHideOnKeyboard: true,
-        tabBarStyle: {
-          backgroundColor: COLORS.primary,
-          zIndex: -1,
-        },
+        tabBarStyle: [
+          WIDTH.widthScreen > 700 && {
+            height: scale(50),
+          },
+          {
+            backgroundColor: COLORS.primary,
+            zIndex: -1,
+          },
+        ],
       }}>
       <Tab.Screen
         name={'Explore'}
@@ -47,9 +53,9 @@ export default function BottomTab() {
 
           tabBarIcon: ({focused}) => (
             <CustomImage
-              source={images.iconSaveloka}
-              style={{width: scale(25), height: scale(25)}}
-              resizeMode="cover"
+              source={images.logoOnly}
+              style={{width: scale(17), height: scale(17)}}
+              resizeMode="contain"
             />
             // <IconExplore fill={focused && COLORS.green} />
           ),
@@ -80,7 +86,7 @@ export default function BottomTab() {
         name={'Video'}
         component={NavigationVideo}
         options={{
-          tabBarLabel: t('Reviews'),
+          tabBarLabel: t('reviews'),
 
           tabBarIcon: ({focused}) => (
             <IconVideo fill={focused && COLORS.green} />

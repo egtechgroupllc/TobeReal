@@ -7,9 +7,11 @@ import ContentReview from './Review/ContentReview';
 import {COLORS, scale} from '../../assets/constants';
 import BottomReview from './Review/BottomReview';
 import {useForm} from 'react-hook-form';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function PostReviewScreen({route}) {
   const paramData = route.params;
+
   const {control, watch, setValue, handleSubmit} = useForm();
   return (
     <>

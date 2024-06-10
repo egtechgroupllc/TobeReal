@@ -1,5 +1,11 @@
 import React, {Component, memo} from 'react';
-import {Dimensions, View, ViewProps} from 'react-native';
+import {
+  Dimensions,
+  View,
+  ViewProps,
+  ImageStyle,
+  StyleSheet,
+} from 'react-native';
 import {images, scale} from '../assets/constants';
 import CustomImage from './CustomImage';
 
@@ -10,6 +16,7 @@ export interface Iprops {
   delay: number;
   noLoading: boolean;
   ComponentLoading: any;
+  styleLoading?: ImageStyle;
 }
 
 const InViewPort = class extends Component<Iprops | ViewProps> {
@@ -102,11 +109,7 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
                   />
                   <CustomImage
                     source={images.loading}
-                    style={{
-                      height: scale(50),
-                      width: scale(50),
-                      alignSelf: 'center',
-                    }}
+                    style={[styles.imageStyle, this.props.styleLoading]}
                     resizeMode="contain"
                   />
                 </>
@@ -121,5 +124,12 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
     );
   }
 };
+const styles = StyleSheet.create({
+  imageStyle: {
+    height: scale(50),
+    width: scale(50),
+    alignSelf: 'center',
+  },
+});
 
 export default memo(InViewPort);

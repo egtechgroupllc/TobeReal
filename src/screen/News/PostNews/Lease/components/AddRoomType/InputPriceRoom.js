@@ -39,7 +39,7 @@ export default memo(function InputPriceRoom({
         name="price"
         control={control}
         setValue={setValue}
-        label={t('Amount per night?')}
+        label={t('amount_per_night')}
         rules={requireField(t('this_field_required'))}
         placeholder={t('enter_price')}
         style={styles.textInput}
@@ -50,9 +50,7 @@ export default memo(function InputPriceRoom({
         style={{
           rowGap: scale(10),
         }}>
-        <CustomText color={COLORS.text}>
-          Bao gồm các loại thuế, phí và hoa hồng
-        </CustomText>
+        <CustomText color={COLORS.text}>{t('include_taxes')}</CustomText>
 
         <Collapsible
           collapsed={!priceValue}
@@ -66,11 +64,8 @@ export default memo(function InputPriceRoom({
             textType="semiBold"
             size={SIZES.xMedium}>
             {data?.data?.fee_commission_percent * 100}%{' '}
-            <CustomText
-              textType="medium"
-              size={SIZES.xMedium}
-              style={{color: COLORS.black}}>
-              Hoa hồng cho Tobe House
+            <CustomText textType="medium" size={SIZES.xMedium}>
+              Commission for Tobe House
             </CustomText>
           </CustomText>
 
@@ -80,15 +75,15 @@ export default memo(function InputPriceRoom({
             }}>
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Trợ giúp 24/7 bằng ngôn ngữ của bạn'}
+              value={'24/7 help in your language'}
             />
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Tiết kiệm thời gian với đặt phòng được xác nhận tự động'}
+              value={'Save time with automatically confirmed bookings'}
             />
             <ItemUtil
               Icon={IconCheckBox}
-              value={'Chúng tôi sẽ quảng bá chỗ ở của bạn trên Google'}
+              value={'We will promote your property on Google'}
             />
           </View>
 
@@ -99,11 +94,8 @@ export default memo(function InputPriceRoom({
             {formatPrice(priceValue * data?.data?.fee_commission_percent, {
               currency: typeCurrency,
             })}{' '}
-            <CustomText
-              textType="medium"
-              size={SIZES.xMedium}
-              style={{color: COLORS.black}}>
-              Doanh thu của bạn (bao gồm thuế)
+            <CustomText textType="medium" size={SIZES.xMedium}>
+              Your revenue (including taxes)
             </CustomText>
           </CustomText>
         </Collapsible>

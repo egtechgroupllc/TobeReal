@@ -4,23 +4,32 @@ import React, {useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getListPolicy} from '../../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {IconTrash} from '../../../../../../../assets/icon/Icon';
+import {IconHome, IconTrash} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../../components/CustomText';
 import DeletePolicy from './DeletePolicy';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import MainWrapper from '../../../../../../../components/MainWrapper';
 
 export default function PolicyManageScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Quản lý chính sách',
+      headerTitle: t('policy_manage'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const {data, isLoading, error} = useQuery({
@@ -36,8 +45,12 @@ export default function PolicyManageScreen() {
       <View style={{marginTop: scale(30)}}>
         <CustomText
           textType="semiBold"
-          style={{alignSelf: 'center', fontSize: SIZES.large}}>
-          Danh sách các chính sách
+          style={{
+            alignSelf: 'center',
+            fontSize: SIZES.large,
+            color: COLORS.white,
+          }}>
+          {t('list_policies')}
         </CustomText>
         <FlatList
           // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
@@ -86,7 +99,7 @@ export default function PolicyManageScreen() {
         />
         <View style={{alignItems: 'center', marginTop: scale(30)}}>
           <CustomButton
-            text="Add more policy"
+            text={t('add_more_policy')}
             style={{width: '50%'}}
             onPress={() =>
               navigate('AddPolicyScreen', {
@@ -95,26 +108,26 @@ export default function PolicyManageScreen() {
               })
             }
           />
-        </View>
 
-        <BottomSheet
-          ref={bottomSheetRef}
-          titleIndicator={'Thao Tác'}
-          snapPoints={['30%']}
-          disableScroll
-          styleContent={styles.bottomSheet}>
-          <DeletePolicy
-            data={dataItemAccom}
-            onSuccess={() => {
-              bottomSheetRef.current.close();
-              setDataItemAccom(null);
-            }}
-            onCancel={() => {
-              bottomSheetRef.current.close();
-              setDataItemAccom(null);
-            }}
-          />
-        </BottomSheet>
+          <BottomSheet
+            ref={bottomSheetRef}
+            titleIndicator={'Operation'}
+            snapPoints={['30%']}
+            disableScroll
+            styleContent={styles.bottomSheet}>
+            <DeletePolicy
+              data={dataItemAccom}
+              onSuccess={() => {
+                bottomSheetRef.current.close();
+                setDataItemAccom(null);
+              }}
+              onCancel={() => {
+                bottomSheetRef.current.close();
+                setDataItemAccom(null);
+              }}
+            />
+          </BottomSheet>
+        </View>
       </View>
     </MainWrapper>
   );

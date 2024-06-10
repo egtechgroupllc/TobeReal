@@ -24,11 +24,14 @@ export default function DetailBookingScreen() {
             backgroundColor: COLORS.blue,
             padding: scale(10),
           }}>
-          <CustomText textType="bold" size={SIZES.large}>
-            Chi tiết chỗ đặt
+          <CustomText
+            textType="bold"
+            size={SIZES.large}
+            style={{color: COLORS.white}}>
+            {t('booking_detail')}
           </CustomText>
           <CustomText size={SIZES.xMedium} color={COLORS.white}>
-            Booking code: {data?.id}
+            {t('booking_code')}: {data?.id}
           </CustomText>
           {data.status && (
             <View
@@ -73,14 +76,14 @@ export default function DetailBookingScreen() {
             <CustomText
               textType="bold"
               size={SIZES.xMedium}
-              style={{marginBottom: scale(5), color: COLORS.black}}>
-              ({data?.number_room} phòng - {data?.room?.room_type?.name}){'  '}{' '}
-              {data?.room?.name}
+              style={{marginBottom: scale(5)}}>
+              ({data?.number_room} {t('room')} - {data?.room?.room_type?.name})
+              {'  '} {data?.room?.name}
             </CustomText>
 
             <ItemUtil
               Icon={IconPeople}
-              value={`${data?.room?.max_occupancy} khách`}
+              value={`${data?.room?.max_occupancy} ${t('guest')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -94,7 +97,7 @@ export default function DetailBookingScreen() {
             />
             <ItemUtil
               Icon={IconWifi}
-              value={`Wifi miễn phí`}
+              value={`${t('free_wifi')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconUntil}
@@ -102,11 +105,8 @@ export default function DetailBookingScreen() {
           </View>
 
           <View>
-            <CustomText
-              textType="bold"
-              size={SIZES.xMedium}
-              style={{color: COLORS.black}}>
-              Yêu cầu đặc biệt (nếu có)
+            <CustomText textType="bold" size={SIZES.xMedium}>
+              {t('special_request')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -117,11 +117,8 @@ export default function DetailBookingScreen() {
           </View>
 
           <View style={{rowGap: scale(5)}}>
-            <CustomText
-              textType="bold"
-              size={SIZES.xMedium}
-              style={{color: COLORS.black}}>
-              Customer's name
+            <CustomText textType="bold" size={SIZES.xMedium}>
+              {t('guest_name')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -134,7 +131,7 @@ export default function DetailBookingScreen() {
           <View>
             <ItemUtil
               Icon={IconBan}
-              value={'Không hoàn tiền'}
+              value={`${t('no_refund')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -142,7 +139,7 @@ export default function DetailBookingScreen() {
 
             <ItemUtil
               Icon={IconBan}
-              value={'Không đổi lịch'}
+              value={`${t('no_reschedulung')}`}
               valueBold
               styleTextValue={styles.textValueUntil}
               styleIcon={styles.iconPolicy}
@@ -162,7 +159,7 @@ export default function DetailBookingScreen() {
               paddingTop: scale(12),
               padding: scale(10),
             }}>
-            Sự lựa chọn tuyệt vời cho kỳ nghỉ của bạn!
+            {t('great_choice')}
           </CustomText>
         </View>
       </MainWrapper>

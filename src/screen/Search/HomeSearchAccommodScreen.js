@@ -21,7 +21,7 @@ export default function HomeSearchAccommodScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Search',
+      headerTitle: t('search'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

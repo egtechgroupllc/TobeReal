@@ -8,6 +8,7 @@ import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
 import PostTimeItem from './PostTimeItem';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default memo(function ChoosePostTime({
   setValue,
@@ -15,6 +16,8 @@ export default memo(function ChoosePostTime({
   params,
   onChangeDateEnd,
 }) {
+  const {t} = useLanguage();
+
   const [select, setSelect] = useState(data?.package_post_items?.[0]);
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState(
@@ -72,8 +75,9 @@ export default memo(function ChoosePostTime({
         style={{
           paddingHorizontal: scale(10),
           alignSelf: 'flex-start',
+          color: COLORS.white,
         }}>
-        Chọn thời gian đăng tin
+        {t('choose_posting_time')}
       </CustomText>
       <View>
         <CustomText
@@ -81,8 +85,9 @@ export default memo(function ChoosePostTime({
           style={{
             paddingHorizontal: scale(10),
             alignSelf: 'flex-start',
+            color: COLORS.white,
           }}>
-          Số ngày đăng
+          {t('number_day_post')}
         </CustomText>
         <FlatList
           contentContainerStyle={{
@@ -111,12 +116,13 @@ export default memo(function ChoosePostTime({
           rowGap: scale(6),
         }}>
         <CustomInput
-          label={'Ngày bắt đầu'}
+          label={t('start_day')}
           styleTextLabel={{
             textType: 'semiBold',
+            color: COLORS.white,
           }}
           styleText={{
-            color: '#000',
+            color: '#fff',
             fontSize: SIZES.xMedium,
             fontFamily: FONTS.medium,
           }}
@@ -127,7 +133,7 @@ export default memo(function ChoosePostTime({
 
         <DatePicker
           mode="date"
-          title={'Ngày bắt đầu'}
+          title={t('start_day')}
           modal
           open={openDate}
           date={date}
@@ -143,9 +149,9 @@ export default memo(function ChoosePostTime({
 
         <CustomText
           style={{
-            color: COLORS.text,
+            color: COLORS.white,
           }}>
-          Kết thúc ngày {dateEnd}
+          {t('end_of_day')} {dateEnd}
         </CustomText>
       </View>
     </View>

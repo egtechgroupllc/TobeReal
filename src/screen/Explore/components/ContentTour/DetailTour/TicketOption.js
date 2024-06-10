@@ -37,10 +37,9 @@ const data = [
 ];
 export default function TicketOption() {
   const params = useRoute().params;
-
   const {data, isLoading} = useQuery({
-    queryKey: ['tour', 'detail', 'list-ticket', params?.id],
-    queryFn: () => getListTicket(params?.id),
+    queryKey: ['tour', 'detail', 'list-ticket', {id_tour: params?.id}],
+    queryFn: () => getListTicket({id_tour: params?.id}),
   });
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
@@ -65,7 +64,7 @@ export default function TicketOption() {
           {t('ticket_option')}
         </CustomText>
         <View style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
-          <ChooseCalendar />
+          <ChooseCalendar fillColor={COLORS.white} />
         </View>
         <FlatList
           showsHorizontalScrollIndicator={false}
@@ -97,7 +96,7 @@ export default function TicketOption() {
                     ...styles.text,
                     paddingHorizontal: scale(10),
                     marginTop: scale(5),
-                    color: COLORS.primary,
+                    color: COLORS.white,
                   }}>
                   {t('see_detail')}
                 </CustomText>
@@ -110,7 +109,11 @@ export default function TicketOption() {
                   paddingVertical: scale(10),
                 }}>
                 <View style={{flexDirection: 'row'}}>
-                  <IconRefund width={scale(15)} height={scale(15)} />
+                  <IconRefund
+                    width={scale(15)}
+                    height={scale(15)}
+                    fill={COLORS.white}
+                  />
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
@@ -118,11 +121,15 @@ export default function TicketOption() {
                   </CustomText>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: '10%'}}>
-                  <IconCalendar width={scale(15)} height={scale(15)} />
+                  <IconCalendar
+                    width={scale(15)}
+                    height={scale(15)}
+                    fill={COLORS.white}
+                  />
                   <CustomText
                     textType="semiBold"
                     style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    {t('easy_reschdule')}
+                    {t('easy_reschedule')}
                   </CustomText>
                 </View>
               </View>
@@ -136,16 +143,19 @@ export default function TicketOption() {
                     style={{
                       ...styles.text,
                       paddingHorizontal: scale(10),
-                      color: COLORS.primary,
+                      color: COLORS.white,
                     }}>
-                    $ {item.price}
+                    ${' '}
+                    {item?.tour_ticket_items?.map(item => {
+                      return item?.price_percent;
+                    })}
                   </CustomText>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: '25%'}}>
                   <View style={styles.discount}>
                     <CustomText
                       textType="semiBold"
-                      style={{...styles.text1, color: COLORS.primary}}>
+                      style={{...styles.text1, color: COLORS.white}}>
                       -25%
                     </CustomText>
                   </View>
@@ -176,19 +186,18 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },
-  name: {flex: 1, fontSize: SIZES.xMedium},
-  text: {fontSize: SIZES.small},
-  text1: {fontSize: SIZES.xSmall},
+  name: {flex: 1, fontSize: SIZES.xMedium, color: COLORS.white},
+  text: {fontSize: SIZES.small, color: COLORS.white},
+  text1: {fontSize: SIZES.xSmall, color: COLORS.white},
   content: {
     width: '90%',
     alignSelf: 'center',
   },
   discount: {
-    backgroundColor: '#FF00001A',
+    backgroundColor: COLORS.error,
     height: scale(15),
     width: '35%',
     borderRadius: scale(20),

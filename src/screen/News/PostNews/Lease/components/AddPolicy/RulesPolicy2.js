@@ -1,39 +1,42 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import RadioButton from '../../../../../components/RadioButton';
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import CheckBox from '../../../../../../components/CheckBox';
 import Collapsible from 'react-native-collapsible';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Không',
-  },
-  {
-    id: 2,
-    title: 'Có, thêm lựa chọn bữa ăn',
-  },
-];
-const listHasMeal = [
-  {
-    id: 1,
-    title: 'Bữa sáng',
-  },
-  {
-    id: 2,
-    title: 'Bữa trưa',
-  },
-  {
-    id: 3,
-    title: 'Bữa tối',
-  },
-  {
-    id: 4,
-    title: 'Bao gồm tất cả',
-  },
-];
 export default function RulesPolicy2({setValue, unregister}) {
+  const {t} = useLanguage();
+
+  const list = [
+    {
+      id: 1,
+      title: t('no'),
+    },
+    {
+      id: 2,
+      title: t('more_meal'),
+    },
+  ];
+  const listHasMeal = [
+    {
+      id: 1,
+      title: t('BREAKFAST'),
+    },
+    {
+      id: 2,
+      title: t('lunch'),
+    },
+    {
+      id: 3,
+      title: t('dinner'),
+    },
+    {
+      id: 4,
+      title: t('include_all'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(0);
   const [arrFacilities, setArrFacilities] = useState([listHasMeal[0].title]);
 
@@ -95,6 +98,7 @@ export default function RulesPolicy2({setValue, unregister}) {
           {listHasMeal.map((item, index) => {
             return (
               <CheckBox
+                textStyle={{color: COLORS.black}}
                 key={index}
                 text={item?.title}
                 isChecked={arrFacilities?.includes(item?.title)}

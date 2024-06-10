@@ -8,24 +8,23 @@ import {requireField} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import CustomText from '../../../../../../components/CustomText';
 
-const list = [
-  {
-    id: 1,
-    title: 'Chỉ được phép hút thuốc trong khu vực chỉ định.',
-  },
-  {
-    id: 2,
-    title: 'Cơ sở lưu trú cấm hút thuốc.',
-  },
-  {
-    id: 3,
-    title: 'Khác',
-  },
-];
-
 export default function FeaturesPolicy2({control}) {
   const [isSelect, setIsSelect] = useState();
   const {t} = useLanguage();
+  const list = [
+    {
+      id: 1,
+      title: t('smoking_area'),
+    },
+    {
+      id: 2,
+      title: t('non_smoking'),
+    },
+    {
+      id: 3,
+      title: t('other'),
+    },
+  ];
   return (
     <View
       style={{
@@ -47,7 +46,7 @@ export default function FeaturesPolicy2({control}) {
       <Collapsible collapsed={isSelect !== 2}>
         <View style={styles.boxCheckMeal}>
           <CustomInput
-            placeholder="Mô tả yêu cầu khác "
+            placeholder="Describe other requirements "
             style={styles.textInput}
             maxLength={2}
             styleText={{
@@ -57,7 +56,7 @@ export default function FeaturesPolicy2({control}) {
             name="min_number_day"
             rules={[requireField(t('this_field_required'))]}
           />
-          <CustomText>Mô tả yêu cầu khác</CustomText>
+          <CustomText>Describe other requirements</CustomText>
         </View>
       </Collapsible>
     </View>

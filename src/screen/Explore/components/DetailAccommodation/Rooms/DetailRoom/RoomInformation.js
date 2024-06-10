@@ -8,20 +8,23 @@ import {
 import ItemUtil from '../components/ItemUtil';
 import {formatPrice} from '../../../../../../utils/format';
 import {scale} from '../../../../../../assets/constants';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function RoomInformation({data, isFilterChildren}) {
+  const {t} = useLanguage();
+
   return (
     <>
       <ItemUtil
         Icon={IconRoom}
         value={data?.room_bed_type?.name}
-        title={'Bed type'}
+        title={t('bed_type')}
         styleWrapper={{
           width: '45%',
         }}
       />
       <ItemUtil
-        title={'Room size'}
+        title={t('room_size')}
         Icon={IconAcreage}
         value={formatPrice(data.size_width * data.size_length, {
           unit: 'm²',
@@ -39,10 +42,12 @@ export default function RoomInformation({data, isFilterChildren}) {
         Icon={IconPeople}
         value={
           !isFilterChildren
-            ? `Max ${data?.max_occupancy} adult(s)`
-            : `Max ${data?.max_occupancy} adult(s), ${data?.max_child_occupancy} children`
+            ? `${t('max')} ${data?.max_occupancy} ${t('adult').toLowerCase()}`
+            : `${t('max')} ${data?.max_occupancy} ${t(
+                'children',
+              ).toLowerCase()}, ${data?.max_child_occupancy} children`
         }
-        title={'Guest'}
+        title={t('guest')}
         styleWrapper={{
           width: '60%',
         }}

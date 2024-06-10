@@ -99,7 +99,7 @@ export default function ContentStep2({onPress, data}) {
             },
           },
         )
-      : showMess('Vui lòng chọn phương thức thanh toán', 'error');
+      : showMess(t('please_select_payment'), 'error');
   };
 
   return (
@@ -109,20 +109,16 @@ export default function ContentStep2({onPress, data}) {
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
           <DetailPriceRoom data={data} />
-          <CustomText textType="semiBold" styleText={{color: COLORS.white}}>
+          <CustomText textType="semiBold" style={{color: COLORS.white}}>
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
-          <CustomButton
-            text="Thanh Toán"
-            onPress={handleBookingRoom}
-            styleText={{color: COLORS.black}}
-          />
+          <CustomButton text={t('pay')} onPress={handleBookingRoom} />
         </View>
 
         <View style={styles.boxEarnPoint}>
           <IconCoinPoint />
           <CustomText color={COLORS.blue} textType="semiBold">
-            {formatPrice(12312, {showCurrency: false})} Point
+            {formatPrice(12312, {showCurrency: false})} {t('point')}
           </CustomText>
         </View>
       </View>

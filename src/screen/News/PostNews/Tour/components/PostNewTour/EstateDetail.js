@@ -40,7 +40,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
   return (
     <View>
       <ButtonTabValidate
-        title={t('Chi tiết Tour')}
+        title={t('Tour detail')}
         onPress={() => setViewDetail(prev => !prev)}
         errors={errors}
         watch={watch}
@@ -60,7 +60,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
           <CustomInput
             styleTextLabel={styles.label}
-            label={t('Lịch trình tour')}
+            label={t('Tour schedule')}
             control={control}
             name="description"
             maxLength={5000}
@@ -85,7 +85,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           />
 
           <CheckBox
-            text="Free cancellation"
+            text={t('free_cancel')}
             styleWrapper={{
               width: '100%',
             }}

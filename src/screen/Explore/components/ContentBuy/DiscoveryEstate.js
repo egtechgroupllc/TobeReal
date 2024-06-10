@@ -18,12 +18,12 @@ export default function DiscoveryEstate({
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Discover other real estate')];
+  const title = [t('discover_other_estate')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           discoveryTour
           // onPressSeeAll={() =>
           //   navigate('NoBottomTab', {
@@ -35,8 +35,7 @@ export default function DiscoveryEstate({
           // }
           onPressCategory={onPressCategory}
           heading={title}
-          subHeading={t('the_place_discovery')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('the_place_discovery')}>
           <FlatList
             numColumns={2}
             showsHorizontalScrollIndicator={false}

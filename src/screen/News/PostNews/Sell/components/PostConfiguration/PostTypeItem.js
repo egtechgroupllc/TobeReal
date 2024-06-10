@@ -7,8 +7,11 @@ import {CustomButton} from '../../../../../../components';
 import CustomImage from '../../../../../../components/CustomImage';
 import CustomText from '../../../../../../components/CustomText';
 import {formatPrice} from '../../../../../../utils/format';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
+  const {t} = useLanguage();
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -44,11 +47,11 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
           style={{
             color: COLORS.text,
           }}>
-          From{' '}
+          {t('from')}{' '}
           <CustomText textType="semiBold">
             {formatPrice(data?.price)}
           </CustomText>
-          /ngày
+          /{t('day')}
         </CustomText>
 
         {!!data?.numView && (
@@ -83,7 +86,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
               style={{
                 fontSize: SIZES.xSmall,
               }}>
-              Lượt xem tin
+              {t('news_views')}
             </CustomText>
           </View>
         )}
@@ -127,7 +130,7 @@ export default function PostTypeItem({data, list, onPress, isSelect, seeMore}) {
       <CustomButton
         onPress={onPress}
         buttonType="normal"
-        text={isSelect ? 'Đã chọn' : 'Chọn'}
+        text={isSelect ? t('selected') : t('select')}
         outline={isSelect}
         styleWrapper={{
           marginTop: 'auto',

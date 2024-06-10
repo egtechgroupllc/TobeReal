@@ -34,7 +34,7 @@ const dataPackage = [
 export default function SimilarApartmentsNearby() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const title = [t('Explore Nearby Estates')];
+  const title = [t('explore_nearby_estate')];
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'estate',
@@ -49,19 +49,19 @@ export default function SimilarApartmentsNearby() {
   return (
     <WrapperContent
       // background={images.bgPackageTour}
-      isSeeAll
-      // onPressSeeAll={() =>
-      //   navigate('NoBottomTab', {
-      //     screen: 'SeeAllBuyScreen',
-      //     params: {
-      //       title: title || '',
-      //     },
-      //   })
-      // }
+      // isSeeAll
+      onPressSeeAll={() =>
+        navigate('NoBottomTab', {
+          screen: 'SeeAllBuyScreen',
+          params: {
+            title: title || '',
+          },
+        })
+      }
       onPressCategory={item => console.log(item)}
-      heading={t('Explore Nearby Estates')}
+      heading={t('explore_nearby_estate')}
       // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-      styleWrapper={{backgroundColor: 'transparent'}}>
+    >
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

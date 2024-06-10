@@ -8,9 +8,11 @@ import BottomSheet from '../../../../components/BottomSheet';
 import Counter from '../../../../components/Counter';
 import ListChildren from './Occupancy/ListChildren';
 import CustomImage from '../../../../components/CustomImage';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function ChooseOccupancy({setValue}) {
   const bottomSheetRef = useRef();
+  const {t} = useLanguage();
 
   const [numAdult, setNumAdult] = useState(1);
   const [numChild, setNumChild] = useState([]);
@@ -23,7 +25,9 @@ export default function ChooseOccupancy({setValue}) {
   return (
     <View>
       <CustomInput
-        defaultValue={`${numRooms} Room, ${numAdult} Adult, ${numChild.length} Children`}
+        defaultValue={`${numRooms} ${t('room')}, ${numAdult} ${t('adult')}, ${
+          numChild.length
+        } ${t('children')}`}
         iconLeft={IconRoom}
         styleIcon={{
           ...styles.icon,
@@ -34,7 +38,7 @@ export default function ChooseOccupancy({setValue}) {
 
       <BottomSheet
         ref={bottomSheetRef}
-        titleIndicator={'Occupancy'}
+        titleIndicator={t('occupancy')}
         snapPoints={['70%']}
         styleContent={{
           rowGap: scale(10),
@@ -43,14 +47,14 @@ export default function ChooseOccupancy({setValue}) {
         <View style={{flex: 1, rowGap: scale(15)}}>
           <Counter
             editable={false}
-            heading={'Room(s)'}
+            heading={t('room')}
             max={numAdult}
             // Icon={<CustomImage source={images.lease} style={styles.iconShe} />}
             // value={numRoom > numAdult ? numAdult : numRoom}
             onChange={setNumRooms}
           />
           <Counter
-            heading="Adult"
+            heading={t('adult')}
             onChange={setNumAdult}
             value={numAdult}
             min={numRooms}
@@ -60,7 +64,7 @@ export default function ChooseOccupancy({setValue}) {
 
         <CustomButton
           buttonType="large"
-          text="Confirm"
+          text={t('confirm')}
           style={{
             marginTop: scale(10),
           }}

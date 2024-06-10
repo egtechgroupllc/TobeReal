@@ -33,8 +33,11 @@ export default memo(
     useImperativeHandle(
       ref,
       () => ({
-        scrollToOffset: (offset = 0) => {
-          flatListRef.current?.scrollToOffset({offset: offset, animated: true});
+        scrollToOffset: (offset = 0, isClick = false) => {
+          flatListRef.current?.scrollToOffset({
+            offset: offset,
+            animated: !isClick,
+          });
         },
       }),
       [],
@@ -87,7 +90,7 @@ export default memo(
               rating={3}
               data={item}
               seeViewNumber={1.4}
-              // isViewMap
+              isViewMap
             />
           )}
         />

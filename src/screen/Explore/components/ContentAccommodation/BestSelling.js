@@ -47,7 +47,7 @@ export default function BestSelling() {
     <InViewPort onChange={render => render && setIsRender(render)} delay={270}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           isCategory
           dataCategory={listCountry.data?.data?.slice(0, 9)}
           // onPressSeeAll={() =>

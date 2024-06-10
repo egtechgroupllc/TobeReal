@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import RadioButton from '../../../../../components/RadioButton';
@@ -12,21 +12,19 @@ import {
 } from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Không (loại giá này dùng được cho tất cả các độ dài lưu trú)',
-  },
-  {
-    id: 2,
-    title: 'Có',
-  },
-];
-
 export default function RulesPolicy4({control, unregister}) {
   const {t} = useLanguage();
   const [isSelect, setIsSelect] = useState(0);
-
+  const list = [
+    {
+      id: 1,
+      title: t('no_all_stay'),
+    },
+    {
+      id: 2,
+      title: t('yes'),
+    },
+  ];
   useEffect(() => {
     if (isSelect === 0) {
       unregister('min_number_day');
@@ -63,19 +61,18 @@ export default function RulesPolicy4({control, unregister}) {
             name="min_number_day"
             rules={[
               requireField(t('this_field_required')),
-              validateMinMaxAmount(
-                'Đêm lưu trú tối thiểu không hợp lệ (1 -> 28)',
-                28,
-              ),
+              validateMinMaxAmount('Invalid minimum night stay (1 -> 28)', 28),
             ]}
           />
-          <CustomText>Đêm lưu trú tối thiểu</CustomText>
+          <CustomText style={{color: COLORS.black}}>
+            Minimum night stay
+          </CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
-            <CustomText>
-              Điều này sẽ không ảnh hưởng đến bất kỳ giới hạn thời gian lưu trú
-              nào đã cài trong lịch của Quý vị.
+            <CustomText style={{color: COLORS.black}}>
+              This will not affect any length of stay limits which is set in
+              your calendar.
             </CustomText>
           </View>
         </View>

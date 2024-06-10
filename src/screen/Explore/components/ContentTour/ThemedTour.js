@@ -18,7 +18,7 @@ export default function ThemedTour({data}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           themedTour
           // onPressSeeAll={() =>
           //   navigate('NoBottomTab', {
@@ -30,8 +30,7 @@ export default function ThemedTour({data}) {
           // }
           onPressCategory={item => console.log(item)}
           heading={title}
-          subHeading={t('discover_tour_youlove') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('discover_tour_youlove') + ` ${formatPrice(1000000)}`}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

@@ -1,20 +1,28 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import {IconInvoice} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
-import {formatPrice} from '../../../../utils/format';
+import {formatPrice, formatDate} from '../../../../utils/format';
 import {useCountry} from '../../../../hooks/useCountry';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import {differenceInDays} from 'date-fns';
 
 export default function TotalPriceBooking({data}) {
   const {currency} = useCountry();
+  const {t} = useLanguage();
+
+  const difference = useMemo(
+    () => differenceInDays(data?.check_out_date, data?.check_in_date),
+    [data],
+  );
   return (
     <View style={styles.wrapper}>
       <ItemUtil
         Icon={IconInvoice}
-        title={'Tổng giá phòng'}
-        value={'2 phòng, 1 đêm'}
+        title={`${t('total_room')}`}
+        value={`${data?.number_room} ${t('room')}, ${difference} ${t('day')}`}
         styleTextValue={styles.textValueUntil}
         styleIcon={styles.iconUntil}
       />
@@ -34,7 +42,7 @@ export default function TotalPriceBooking({data}) {
         <CustomText textType="bold" size={SIZES.medium} color="#ff5e1f">
           {formatPrice(data?.price, {currency: currency?.currency_code})}
         </CustomText>
-        <CustomText color={'#42b00b'}>Giá tốt nhất</CustomText>
+        <CustomText color={'#42b00b'}>{t('best_price')}</CustomText>
       </View>
     </View>
   );

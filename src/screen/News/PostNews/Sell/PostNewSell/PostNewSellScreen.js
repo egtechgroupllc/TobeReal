@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -28,7 +28,16 @@ export default function PostNewSellScreen() {
   const params = useRoute().params;
 
   const {t} = useLanguage();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('list_new_sell'),
+      headerTitleStyle: {
+        textAlign: 'center',
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {
     handleSubmit,
     control,
@@ -149,7 +158,8 @@ export default function PostNewSellScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={t('Next')}
+        text={t('continue')}
+        styleText={{color: COLORS.black}}
         onPress={handleSubmit(handlePostLease)}
         // onPress={handlePostLease}
         style={{

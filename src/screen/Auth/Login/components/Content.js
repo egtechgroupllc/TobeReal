@@ -69,6 +69,7 @@ export default function Content() {
       <View style={styles.content}>
         <CustomInput
           styleText={{color: COLORS.white}}
+          styleTextLabel={{color: COLORS.white}}
           control={control}
           label={t('email')}
           name="email"
@@ -82,6 +83,7 @@ export default function Content() {
 
         <CustomInput
           styleText={{color: COLORS.white}}
+          styleTextLabel={{color: COLORS.white}}
           control={control}
           label={t('password')}
           name="password"
@@ -111,7 +113,9 @@ export default function Content() {
       </View>
 
       <View style={styles.footer}>
-        <CustomText textType="semiBold" style={{...styles.text}}>
+        <CustomText
+          textType="semiBold"
+          style={{...styles.text, color: COLORS.white}}>
           {t('dont_have_account')}
         </CustomText>
 

@@ -2,8 +2,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../components/CustomText';
 import {COLORS, scale} from '../../../../assets/constants';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function RulesPostImg() {
+  const {t} = useLanguage();
+
   return (
     <View
       style={{
@@ -12,22 +15,20 @@ export default function RulesPostImg() {
       <CustomText
         textType="semiBold"
         style={{marginBottom: scale(6), color: COLORS.black}}>
-        - Quy định đăng hình:
+        - {t('rules_posting_pictures')}:
       </CustomText>
       <CustomText style={{color: COLORS.black}}>
-        • Đăng tối thiểu 4 ảnh
+        • {t('post_minimum_photo')}
       </CustomText>
       <CustomText style={{color: COLORS.black}}>
-        • Đăng tối đa 24 ảnh với tất cả các loại tin
+        • {t('post_upto_photo')}
       </CustomText>
       <CustomText style={{color: COLORS.black}}>
-        • Hãy dùng ảnh thật, không trùng
+        • {t('please_use_real_photo')}
       </CustomText>
+      <CustomText style={{color: COLORS.black}}>• {t('each_photo')}</CustomText>
       <CustomText style={{color: COLORS.black}}>
-        • Mỗi ảnh kích thước tối thiểu 100x100 px
-      </CustomText>
-      <CustomText style={{color: COLORS.black}}>
-        • Mô tả ảnh tối đa 45 kí tự.
+        • {t('describe_photo')}
       </CustomText>
     </View>
   );

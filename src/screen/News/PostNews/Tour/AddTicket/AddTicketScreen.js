@@ -1,10 +1,13 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
 import MainWrapper from '../../../../../components/MainWrapper';
 import {useForm} from 'react-hook-form';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {postAddTicket} from '../../../../../Model/api/apiTour';
+import {
+  postAddTicket,
+  postAddTypeTicket,
+} from '../../../../../Model/api/apiTour';
 import {CustomButton, CustomInput} from '../../../../../components';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {
@@ -20,18 +23,40 @@ import {
 } from '../../../../../assets/constants';
 import SelectCurrency from '../../components/SelectCurrency';
 import CustomText from '../../../../../components/CustomText';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import General from './components/General';
 import TicketDetail from './components/TicketDetail';
+import {IconHome} from '../../../../../assets/icon/Icon';
+import TypeTicket from './components/TypeTicket';
 
 export default function AddTicketScreen() {
   const params = useRoute().params;
+  const {setOptions, navigate} = useNavigation();
+
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('create_tour_ticket'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
+      headerLeftNavigate: 'TourScreen',
+      // headerLeft: () => (
+      //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
+      //     <IconGoBack style={{width: scale(20)}} />
+      //   </TouchableOpacity>
+      // ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   const {
     handleSubmit,
     control,
     setValue,
     watch,
     reset,
+    getValues,
     formState: {errors},
   } = useForm();
 
@@ -39,8 +64,41 @@ export default function AddTicketScreen() {
   const addTicketMu = useMutation({
     mutationFn: postAddTicket,
   });
+  const addTypeTicketMu = useMutation({
+    mutationFn: postAddTypeTicket,
+  });
+  const AddTypeTicket = value => {
+    const {price_percent, description_item, quantity, type} = getValues();
 
+    addTypeTicketMu.mutate(
+      {
+        tour_ticket_id: value,
+        type,
+        description: description_item,
+        quantity,
+        price_percent,
+      },
+      {
+        onSuccess: dataInside => {
+          console.log({dataInside}, 132);
+          reset();
+
+          queryClient.invalidateQueries(['tour', 'my-list']);
+          navigate('NoBottomTab', {
+            screen: 'TourManagementScreen',
+          });
+        },
+        onError: err => {
+          console.log({err});
+        },
+      },
+    );
+  };
   const handlePostAddTicket = data => {
+    delete data?.price_percent;
+    delete data?.description_item;
+    delete data?.quantity;
+    delete data?.type;
     addTicketMu.mutate(
       {data, tour_id: params?.id},
       {
@@ -51,8 +109,7 @@ export default function AddTicketScreen() {
           );
 
           if (dataInside?.status) {
-            reset();
-            queryClient.invalidateQueries(['tour', 'my-list']);
+            AddTypeTicket(dataInside?.data?.id);
           }
         },
         onError: err => {
@@ -72,7 +129,7 @@ export default function AddTicketScreen() {
         rowGap: scale(20),
         alignItems: 'center',
       }}>
-      <View style={styles.button}>
+      {/* <View style={styles.button}>
         <Image
           source={images.rentbuy}
           style={{width: scale(38), height: scale(38)}}
@@ -155,14 +212,19 @@ export default function AddTicketScreen() {
           keyboardType="number-pad"
           enableFormatNum
         />
-      </View>
+      </View> */}
       <General
         control={control}
         setValue={setValue}
         watch={watch}
         errors={errors}
       />
-
+      <TypeTicket
+        control={control}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+      />
       <TicketDetail
         control={control}
         setValue={setValue}
@@ -173,7 +235,7 @@ export default function AddTicketScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={'Xác nhận'}
+        text={'Submit'}
         onPress={handleSubmit(handlePostAddTicket)}
         style={{
           width: '100%',

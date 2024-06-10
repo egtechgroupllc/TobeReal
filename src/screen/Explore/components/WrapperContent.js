@@ -33,7 +33,7 @@ export default function WrapperContent({
 }) {
   const {t} = useLanguage();
   return (
-    <ImageBackground source={background}>
+    <ImageBackground source={background || images.white}>
       <View {...props} style={[styles.wrapper, styleWrapper]}>
         <View style={[styles.heading, styleHeading]}>
           <View style={styles.boxHeading}>
@@ -142,9 +142,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: SIZES.xMedium,
     flex: 1,
+    color: COLORS.white,
   },
   textSub: {
     fontSize: SIZES.xSmall,
+    color: COLORS.white,
   },
   content: {
     borderRadius: scale(12),

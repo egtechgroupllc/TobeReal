@@ -35,7 +35,13 @@ const listSelectTimeYear = [
   {text: '3 Yearly', value: 3},
 ];
 
-export default function ChooseCalendar({rental, style, Checkin, onDate}) {
+export default function ChooseCalendar({
+  rental,
+  style,
+  Checkin,
+  onDate,
+  fillColor,
+}) {
   const {t} = useLanguage();
   // Khai báo State
   const [selectedStartDate, setSelectedStartDate] = useState(minDate);
@@ -111,18 +117,19 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
       )}
       <CustomInput
         // name="calendar"
+        styleText={{color: fillColor || COLORS.primary}}
         defaultValue={`${formatDate(selectedStartDate)} - ${formatDate(
           selectedEndDate || dateEnd,
         )}`}
         iconLeft={IconCalendar}
-        styleIcon={styles.icon}
+        styleIcon={{...styles.icon, color: fillColor || COLORS.primary}}
         onPress={() => bottomSheetRef.current.open()}
       />
 
       <BottomSheet
         ref={bottomSheetRef}
         refChild={bottomSheetChild}
-        titleIndicator={'Calendar'}
+        titleIndicator={t('calendar')}
         snapPoints={['75%']}
         snapPointsChild={['60%']}
         onDismiss={handleSelectDate}
@@ -166,7 +173,7 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
         <CustomButton
           linearGradientProps
           buttonType="large"
-          text="Select Date"
+          text={t('select_date')}
           style={{
             marginTop: scale(10),
           }}

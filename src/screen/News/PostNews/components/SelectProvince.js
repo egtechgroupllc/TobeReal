@@ -18,6 +18,7 @@ export default function SelectProvince({
   rules,
   country,
   setValue,
+  colorText,
   watch = () => {},
 }) {
   const {t} = useLanguage();
@@ -58,7 +59,7 @@ export default function SelectProvince({
       render={({field: {onChange}, fieldState: {error}}) => {
         return (
           <View style={styles.wrapper}>
-            <CustomText style={{color: COLORS.black}}>
+            <CustomText style={{color: colorText || COLORS.black}}>
               {t('province_city')}
             </CustomText>
 

@@ -9,6 +9,7 @@ import {IconCamera, IconError} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
 import ImgItem from './ChooseImg/ImgItem';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default memo(function ChooseImgPicker({
   title,
@@ -31,6 +32,7 @@ export default memo(function ChooseImgPicker({
 }) {
   const form = useForm();
   const [viewImg, setViewImg] = useState(false);
+  const {t} = useLanguage();
 
   const pickImage = async (onChange, value) => {
     await launchImageLibrary(
@@ -106,6 +108,7 @@ export default memo(function ChooseImgPicker({
                       style={{
                         ...styles.white,
                         marginTop: scale(20),
+                        color: COLORS.black,
                       }}>
                       {title}
                     </CustomText>
@@ -157,7 +160,7 @@ export default memo(function ChooseImgPicker({
                           height: scale(50),
                         }}
                       />
-                      <CustomText>Thêm ảnh</CustomText>
+                      <CustomText>{t('add_images')}</CustomText>
                     </TouchableOpacity>
                   )}
 
@@ -196,7 +199,7 @@ export default memo(function ChooseImgPicker({
                         }}
                       />
                       <CustomText>
-                        {descContent || 'Bấm để chọn ảnh cần tải lên'}
+                        {descContent || t('click_to_select')}
                       </CustomText>
                     </View>
                   )}

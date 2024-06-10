@@ -53,7 +53,7 @@ export default function Content() {
           marginTop: scale(40),
           color: COLORS.black,
         }}>
-        {t('Select country')}
+        {t('select_country')}
       </CustomText>
       <ButtonAccount title={'United States'} />
       <CustomText

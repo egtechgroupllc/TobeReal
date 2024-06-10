@@ -19,7 +19,7 @@ export default function DetailHistoryDeposit({route}) {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Chi tiết giao dịch',
+      headerTitle: 'Transaction detail',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,7 +70,7 @@ export default function DetailHistoryDeposit({route}) {
             </View>
 
             <Item
-              name={'Trạng thái'}
+              name={'Status'}
               value={data?.status}
               backgroundColor={
                 data.status === 'SUCCESS'
@@ -83,7 +83,7 @@ export default function DetailHistoryDeposit({route}) {
             />
 
             <Item
-              name={'Thời gian'}
+              name={'Time'}
               value={formatDateTime(data?.createdAt, {
                 dateStyle: 'HH:mm - dd/MM/yyyy',
               })}
@@ -92,12 +92,12 @@ export default function DetailHistoryDeposit({route}) {
               <View style={styles.line} />
             </View>
 
-            <Item name={'Mã giao dịch'} value={data?.code} isCopy />
+            <Item name={'Transfer id'} value={data?.code} isCopy />
             <Item
-              name={'Tài khoản/thẻ'}
+              name={'Card account'}
               value={data?.method_deposit_item?.method_deposit?.name}
             />
-            <Item name={'Tổng phí'} value="Miễn phí" />
+            <Item name={'Overheads'} value="Free" />
           </View>
 
           <View style={styles.boxSupport}>
@@ -106,7 +106,7 @@ export default function DetailHistoryDeposit({route}) {
               size={SIZES.xMedium}
               color={'#0194f3'}
               textType="medium">
-              Liên hệ hỗ trợ
+              Contact support
             </CustomText>
           </View>
         </View>
@@ -118,24 +118,21 @@ export default function DetailHistoryDeposit({route}) {
               padding: scale(10),
             }}>
             <Item
-              name={'Số thẻ /TK'}
+              name={'Card number/account'}
               value={data?.method_deposit_item?.code}
               isCopy
             />
 
             <Item
-              name={'Ngân hàng'}
+              name={'Bank'}
               value={
                 data?.method_deposit_item?.bank_name?.split('-')?.[1] ||
                 data?.method_deposit_item?.method_deposit?.name
               }
             />
+            <Item name={'Receiver'} value={data?.method_deposit_item?.owner} />
             <Item
-              name={'Người nhận'}
-              value={data?.method_deposit_item?.owner}
-            />
-            <Item
-              name={'Số tiền'}
+              name={'Amount of money'}
               value={`+${formatPrice(data?.amount, {
                 currency: data?.currency_code,
               })}`}
@@ -151,7 +148,7 @@ export default function DetailHistoryDeposit({route}) {
         }}>
         <CustomButton
           onPress={() => navigate('ListMethodBankScreen')}
-          text="Nạp thêm"
+          text="Top up"
           style={{
             width: '70%',
           }}
@@ -163,7 +160,7 @@ export default function DetailHistoryDeposit({route}) {
 const Item = ({name, value, color, backgroundColor, isCopy}) => {
   const handleCopy = () => {
     Clipboard.setString(value);
-    showMess('Sao chép thành công');
+    showMess('Copy successfully');
   };
 
   return (

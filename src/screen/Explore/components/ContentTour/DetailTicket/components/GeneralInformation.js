@@ -315,7 +315,6 @@ const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -324,10 +323,10 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-start',
   },
-  name: {fontSize: SIZES.xMedium},
-  name1: {fontSize: SIZES.xLarge},
-  name2: {fontSize: SIZES.xxLarge},
-  text: {fontSize: SIZES.small, color: COLORS.black},
+  name: {fontSize: SIZES.xMedium, color: COLORS.white},
+  name1: {fontSize: SIZES.xLarge, color: COLORS.white},
+  name2: {fontSize: SIZES.xxLarge, color: COLORS.white},
+  text: {fontSize: SIZES.small, color: COLORS.white},
   text1: {fontSize: SIZES.xxSmall, width: '30%'},
   line: {
     width: '100%',
@@ -384,7 +383,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     height: scale(4),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     borderRadius: scale(99),
     width: '1.5%',
   },

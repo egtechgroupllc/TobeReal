@@ -14,7 +14,7 @@ export default function DetailRoomManageScreen() {
   const [adminScreen, setAdminScreen] = useState(false);
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Chi tiết quản lý phòng',
+      headerTitle: 'Room management details',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);

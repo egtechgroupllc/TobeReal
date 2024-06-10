@@ -11,6 +11,7 @@ import CalendarRange from '../../../../../components/CalendarRange';
 import CustomText from '../../../../../components/CustomText';
 import {formatDate} from '../../../../../utils/format';
 import TopCalendar from '../../FindAccommodation/Calendar/TopCalendar';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 const formatDateStyle = (date, add = 0) => {
   const newDate = formatDate(
@@ -30,6 +31,7 @@ const dateEnd = formatDateStyle(minDate, 1);
 export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
+  const {t} = useLanguage();
 
   const [selectedStartDate, setSelectedStartDate] = useState(
     data?.dataFilter?.date?.date_start || minDate,
@@ -40,7 +42,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
 
   const listSelectTime = useMemo(() => {
     return [...Array(30)].map((_, index) => {
-      return {text: `${index + 1} night`, value: index + 1};
+      return {text: `${index + 1} ${t('day')}`, value: index + 1};
     });
   }, []);
 
@@ -96,7 +98,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
         }}
         onPress={() => bottomSheetRef.current.open()}>
         <IconCalendar style={styles.icon} fill={COLORS.white} />
-        <CustomText textType="medium">
+        <CustomText textType="medium" style={{color: COLORS.white}}>
           {selectedStartDate} - {selectedEndDate ? selectedEndDate : '_'},{' '}
           {selected?.text}
         </CustomText>
@@ -105,7 +107,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
       <BottomSheet
         ref={bottomSheetRef}
         refChild={bottomSheetChild}
-        titleIndicator={'Calendar'}
+        titleIndicator={t('calendar')}
         snapPoints={['75%']}
         snapPointsChild={['60%']}
         onDismiss={handleSelectDate}
@@ -146,7 +148,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
 
         <CustomButton
           buttonType="large"
-          text="Select Date"
+          text={t('select_date')}
           style={{
             marginTop: scale(10),
           }}

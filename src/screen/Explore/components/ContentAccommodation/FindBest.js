@@ -4,7 +4,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import InViewPort from '../../../../components/InViewport';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../utils/format';
@@ -53,7 +53,7 @@ export default function FindBest({country, currency}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={130}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           isCategory
           dataCategory={listProvince?.data?.data?.slice(0, 9)}
           // onPressSeeAll={() =>
@@ -66,8 +66,7 @@ export default function FindBest({country, currency}) {
           // }
           onPressCategory={item => setFilter(item)}
           heading={title}
-          subHeading={t('disc_upto') + ` 30%!`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('disc_upto') + ` 30%!`}>
           {data?.data?.count !== 0 ? (
             <FlatList
               horizontal
@@ -91,8 +90,10 @@ export default function FindBest({country, currency}) {
           ) : (
             <View style={{alignItems: 'center', rowGap: scale(10)}}>
               <IconBookings width={scale(50)} height={scale(50)} />
-              <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                No data
+              <CustomText
+                textType="medium"
+                style={{fontSize: SIZES.medium, color: COLORS.white}}>
+                {t('no_data')}
               </CustomText>
             </View>
           )}

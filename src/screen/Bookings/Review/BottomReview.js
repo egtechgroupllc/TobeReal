@@ -7,9 +7,12 @@ import {postReviewAccmo} from '../../../Model/api/apiAccom';
 import {COLORS, SHADOW, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function BottomReview({handleSubmit, roomID}) {
   const insets = useSafeAreaInsets();
+  const {t} = useLanguage();
+
   const {goBack} = useNavigation();
   const queryClient = useQueryClient();
 
@@ -67,7 +70,7 @@ export default function BottomReview({handleSubmit, roomID}) {
   return (
     <View style={{...styles.wrapper, paddingBottom: insets.bottom}}>
       {/* <CheckBox text="Đánh giá ẩn danh" /> */}
-      <CustomButton text="Submit" onPress={handleSubmit(hanPostReview)} />
+      <CustomButton text={t('submit')} onPress={handleSubmit(hanPostReview)} />
     </View>
   );
 }

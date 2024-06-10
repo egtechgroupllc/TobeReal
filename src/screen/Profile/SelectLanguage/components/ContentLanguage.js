@@ -110,7 +110,7 @@ export default function ContentLanguage() {
             fontSize: SIZES.xMedium,
           }}
           onPress={changeLanguage}>
-          Done
+          {t('done')}
         </CustomText>
       ),
     });

@@ -56,26 +56,26 @@ export default function TopContent({control}) {
       />
 
       <CustomInput
-        label="Enter the amount you want to withdraw"
-        styleTextLabel={{fontSize: SIZES.medium}}
+        label={t('enter_amount')}
+        styleTextLabel={{fontSize: SIZES.medium, color: COLORS.white}}
         style={{...styles.boxItem, borderWidth: 0}}
         styleWrapper={{paddingVertical: scale(10)}}
         control={control}
         name="amount"
         enableFormatNum
-        placeholder={`Nhập tối thiểu ${formatPrice(minPrice, {
+        placeholder={`${t('minimum_entry')} ${formatPrice(minPrice, {
           currency: currency?.currency_code,
         })} `}
         rules={[
           requireField(t('this_field_required')),
           validateMaxAmount(
-            `Số tiền tối đa là ${formatPrice(maxPrice, {
+            `${t('maximum_amount')} ${formatPrice(maxPrice, {
               currency: currency?.currency_code,
             })}`,
             maxPrice,
           ),
           validateMinAmount(
-            `Số tiền tối thiểu là ${formatPrice(minPrice, {
+            `${t('minimum_amount')} ${formatPrice(minPrice, {
               currency: currency?.currency_code,
             })}`,
             minPrice,

@@ -65,7 +65,7 @@ export default function NotifyScreen() {
   const {setOptions} = useNavigation();
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Notification',
+      headerTitle: t('notification'),
       headerTitleStyle: {
         textAlign: 'center',
       },

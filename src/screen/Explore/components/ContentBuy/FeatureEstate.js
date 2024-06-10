@@ -17,7 +17,7 @@ export default function FeatureEstate() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Feature Estates')];
+  const title = [t('feature_estate')];
   const [filter, setFilter] = useState();
   const {country} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
@@ -45,7 +45,7 @@ export default function FeatureEstate() {
       {isRender && (
         <WrapperContent
           // background={images.bgPackageTour}
-          isSeeAll
+          // isSeeAll
           // worldTour
           // isCategory
           // dataCategory={listCountry.data?.data?.slice(0, 9)}
@@ -59,8 +59,7 @@ export default function FeatureEstate() {
           // }
           onPressCategory={item => setFilter(item)}
           heading={title}
-          subHeading={t('Explore popular real estate')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('explore_popular_estate')}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

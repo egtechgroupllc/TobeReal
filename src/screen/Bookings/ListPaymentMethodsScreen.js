@@ -4,43 +4,45 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS, images, scale} from '../../assets/constants';
 import PaymentMethodsItem from './components/BookingRoom/ContentStep2/PaymentMethodsItem';
 import {showMess} from '../../assets/constants/Helper';
-const listMethods = [
-  {
-    header: 'Tobe House Wallet',
-    title: 'Tobe House Transfer',
-    desc: 'Thanh toán bằng ví Tobe House',
-    tag: 'Recommened',
-    type: 'LOKAPAY',
-    image: images.logo1,
-  },
-  {
-    header: 'Payment card',
-    title: 'Payment card',
-    desc: 'Chấp nhận thanh toán từ tất cả ngân hàng',
-    type: 'CARD',
-    image: images.iconBank,
-  },
-  {
-    header: 'PAYPAL',
-    title: 'PAYPAL Transfer',
-    type: 'PAYPAL',
-    image: images.iconPaypal,
-  },
-  // {
-  //   header: 'Direct payment',
-  //   title: 'Pay directly at the location',
-  //   tag: 'Ưu đãi giảm gía',
-  //   type: 'CASH',
-  //   image: images.iconDirect,
-  // },
-];
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function ListPaymentMethodsScreen({route}) {
+  const {t} = useLanguage();
+  const listMethods = [
+    {
+      header: t('saveloka_wallet'),
+      title: t('saveloka_transfer'),
+      desc: t('pay_with_wallet'),
+      tag: t('recommended'),
+      type: 'LOKAPAY',
+      image: images.logo1,
+    },
+    {
+      header: t('payment_card'),
+      title: t('payment_card'),
+      desc: t('accept_all_bank'),
+      type: 'CARD',
+      image: images.iconBank,
+    },
+    {
+      header: 'PAYPAL',
+      title: t('paypal_transfer'),
+      type: 'PAYPAL',
+      image: images.iconPaypal,
+    },
+    // {
+    //   header: 'Direct payment',
+    //   title: 'Pay directly at the location',
+    //   tag: 'Ưu đãi giảm gía',
+    //   type: 'CASH',
+    //   image: images.iconDirect,
+    // },
+  ];
   const {setOptions, goBack} = useNavigation();
   const dataParams = route?.params;
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Chọn phương thức thanh toán',
+      headerTitle: t('select_payment_method'),
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -48,7 +50,7 @@ export default function ListPaymentMethodsScreen({route}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <View style={{backgroundColor: COLORS.grey}}>
+    <View style={{backgroundColor: COLORS.white}}>
       <FlatList
         data={listMethods}
         style={{
@@ -73,7 +75,7 @@ export default function ListPaymentMethodsScreen({route}) {
                 dataParams?.onGoBack(item);
                 goBack();
               } else {
-                showMess('Comming soon!', 'error', {
+                showMess(t('comming_soon'), 'error', {
                   duration: 500,
                 });
               }

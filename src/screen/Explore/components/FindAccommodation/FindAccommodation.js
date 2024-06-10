@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, WIDTH, images, scale} from '../../../../assets/constants';
 import {
@@ -38,22 +38,25 @@ export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
   //   import('../ContentAccommodation/ContentAccommodation'),
   // );
-  const {t} = useLanguage();
+  const {t, locale} = useLanguage();
 
-  const listMenu = useRef([
-    {
-      id: 'RENT',
-      name: t('RENT'),
-    },
-    {
-      id: 'BUY',
-      name: t('BUY'),
-    },
-    {
-      id: 'TOUR',
-      name: t('TOUR'),
-    },
-  ]).current;
+  const listMenu = useMemo(
+    () => [
+      {
+        id: 'RENT',
+        name: t('RENT'),
+      },
+      {
+        id: 'BUY',
+        name: t('BUY'),
+      },
+      {
+        id: 'TOUR',
+        name: t('TOUR'),
+      },
+    ],
+    [locale],
+  );
 
   const typeRent = useQuery({
     queryKey: ['common', 'accommodation', 'list-type'],
@@ -64,20 +67,23 @@ export default function FindAccommodation() {
     queryFn: () => getListTypeEstateSell(),
   });
 
-  const listTour = useRef([
-    {
-      name: t('tour_by_topic'),
-      icon: IconTourTopic,
-    },
-    {
-      name: t('emigrate'),
-      icon: IconEmigrate,
-    },
-    {
-      name: t('world'),
-      icon: IconWorld,
-    },
-  ]).current;
+  const listTour = useMemo(
+    () => [
+      {
+        name: t('tour_by_topic'),
+        icon: IconTourTopic,
+      },
+      {
+        name: t('emigrate'),
+        icon: IconEmigrate,
+      },
+      {
+        name: t('world'),
+        icon: IconWorld,
+      },
+    ],
+    [locale],
+  );
 
   const [tabSelect, setTabSelect] = useState(listMenu[0]?.id);
   const [category, setCategory] = useState();
@@ -90,50 +96,57 @@ export default function FindAccommodation() {
         : typeBuy?.data?.data?.[0]?.id;
     setSelectedId(typeId);
   }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
-  const listRent = useRef([
-    {
-      id: 1,
-      name: t('Hotel'),
-      icon: IconHotel,
-    },
-    {
-      id: 2,
-      name: t('Apartment'),
-      icon: IconApartment,
-    },
-    {
-      id: 3,
-      name: t('House'),
-      icon: IconHome,
-    },
-    {
-      id: 4,
-      name: t('Villa'),
-      icon: IconVilla,
-    },
-  ]).current;
-  const listBuy = useRef([
-    {
-      id: 1,
-      name: t('Apartment'),
-      icon: IconApartment,
-    },
-    {
-      id: 2,
-      name: t('House'),
-      icon: IconHome,
-    },
-    {
-      id: 3,
-      name: t('Villa'),
-      icon: IconVilla,
-    },
-    {
-      id: 4,
-      name: t('Land'),
-      icon: IconLand,
-    },
-  ]).current;
+  const listRent = useMemo(
+    () => [
+      {
+        id: 1,
+        name: t('hotel'),
+        icon: IconHotel,
+      },
+      {
+        id: 2,
+        name: t('apartment'),
+        icon: IconApartment,
+      },
+      {
+        id: 3,
+        name: t('house'),
+        icon: IconHome,
+      },
+      {
+        id: 4,
+        name: t('villa'),
+        icon: IconVilla,
+      },
+    ],
+    [locale],
+  );
+
+  const listBuy = useMemo(
+    () => [
+      {
+        id: 1,
+        name: t('apartment'),
+        icon: IconApartment,
+      },
+      {
+        id: 2,
+        name: t('house'),
+        icon: IconHome,
+      },
+      {
+        id: 3,
+        name: t('villa'),
+        icon: IconVilla,
+      },
+      {
+        id: 4,
+        name: t('land'),
+        icon: IconLand,
+      },
+    ],
+    [locale],
+  );
   return (
     <MainWrapper refreshControl noSafeArea backgroundColor={'transparent'}>
       <InViewPort

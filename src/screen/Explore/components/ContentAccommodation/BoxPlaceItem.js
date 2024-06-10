@@ -17,6 +17,7 @@ import TopImg from './BoxPlaceItem/TopImg';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
+import StarAccomo from '../../../News/PostNews/Lease/components/PostNewLease/EstateDetail/StarAccomo';
 
 export default function BoxPlaceItem({
   data,
@@ -27,7 +28,6 @@ export default function BoxPlaceItem({
   isStar,
   textRating,
   isDiscount,
-  rating = 0,
   rental = 'month',
   multiPrice,
   isUnitAvailable,
@@ -73,7 +73,6 @@ export default function BoxPlaceItem({
   }, [data?.rooms]);
 
   const {country} = useCountry();
-
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -151,7 +150,7 @@ export default function BoxPlaceItem({
                 columnGap: scale(25),
                 // height: scale(25),
               }}>
-              {isStar && <StarRating rating={rating} />}
+              {isStar && data?.rating && <StarAccomo rating={data?.rating} />}
               {isRating && data?.review_count > 0 ? (
                 <RatingBox
                   rating={data?.review_average}
@@ -160,7 +159,7 @@ export default function BoxPlaceItem({
               ) : (
                 <View style={styles.boxIcon}>
                   <CustomText style={{color: COLORS.grey}} textType="semiBold">
-                    No review
+                    {t('no_review')}
                   </CustomText>
                 </View>
               )}
@@ -199,6 +198,7 @@ export default function BoxPlaceItem({
                   <View style={styles.price}>
                     <CustomText
                       textType="semiBold"
+                      numberOfLines={1}
                       style={[
                         styles.buildingName,
                         isStar && {fontSize: SIZES.xMedium},
@@ -280,9 +280,10 @@ const styles = StyleSheet.create({
     marginVertical: scale(3),
   },
 
-  // buildingName: {
-  //   flex: 1,
-  // },
+  buildingName: {
+    color: COLORS.black,
+    flex: 1,
+  },
   price: {
     flexDirection: 'row',
     // justifyContent: 'space-between',

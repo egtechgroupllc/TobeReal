@@ -29,7 +29,7 @@ export default function BoxPlaceItem({
   time,
 }) {
   const {t} = useLanguage();
-  const price = data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price;
+  const price = data?.tour_tickets?.[0]?.tour_ticket_dates?.[0]?.price_final;
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -81,7 +81,10 @@ export default function BoxPlaceItem({
             }}>
             <CustomText
               textType="semiBold"
-              style={[styles.buildingName, isStar && {fontSize: SIZES.xMedium}]}
+              style={[
+                styles.buildingName,
+                isStar && {fontSize: SIZES.xMedium, color: COLORS.white},
+              ]}
               numberOfLines={1}>
               {data?.name}
             </CustomText>
@@ -123,8 +126,11 @@ export default function BoxPlaceItem({
                       textType="semiBold"
                       style={[
                         styles.buildingName,
-                        isStar && {fontSize: SIZES.xMedium},
-                        isDiscount && {color: COLORS.black},
+                        isStar && {
+                          fontSize: SIZES.xMedium,
+                          color: COLORS.white,
+                        },
+                        isDiscount && {color: COLORS.white},
                       ]}>
                       {formatPrice(price, {
                         locales: 'vi',

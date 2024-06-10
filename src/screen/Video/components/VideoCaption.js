@@ -7,9 +7,11 @@ import {SIZES, scale} from '../../../assets/constants';
 import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {formatPrice} from '../../../utils/format';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default memo(function VideoCaption({data}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const [isMoreText, setIsMoreText] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(false);
@@ -83,24 +85,24 @@ export default memo(function VideoCaption({data}) {
               padding: scale(6),
               marginBottom: scale(4),
             }}>
-            {isMoreText ? 'Read less' : 'Read more'}
+            {isMoreText ? t('read_less') : t('read_more')}
           </CustomText>
         )}
 
         <CustomButton
-          text="Check it Out!"
+          text={t('check_it_out')}
           outline
           buttonType="medium"
           style={{borderColor: '#fff'}}
           styleText={{
             color: '#fff',
           }}
-          onPress={() => {
-            navigate('NoBottomTab', {
-              screen: 'DetailAccommodationScreen',
-              params: {jsondata: [] || [], title: '3123' || ''},
-            });
-          }}
+          // onPress={() => {
+          //   navigate('NoBottomTab', {
+          //     screen: 'DetailAccommodationScreen',
+          //     params: {jsondata: [] || [], title: '3123' || ''},
+          //   });
+          // }}
         />
       </View>
     </LinearGradient>

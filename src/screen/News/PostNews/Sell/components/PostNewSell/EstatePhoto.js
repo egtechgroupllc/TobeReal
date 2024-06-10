@@ -42,9 +42,7 @@ export default function EstatePhoto({control, errors, watch}) {
             />
 
             <ChooseImgPicker
-              title={t(
-                'Add images to prove ownership of your Real Estate assets',
-              )}
+              title={t('add_image_to_prove')}
               control={control}
               rules={[validateMinLength(t('this_field_required'), 1)]}
               name={'kyc'}

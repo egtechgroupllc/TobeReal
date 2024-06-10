@@ -81,13 +81,13 @@ export default function GeneralInformation({
         <Collapsible collapsed={!isView} style={styles.box}>
           <InputLeaseMulti
             control={control}
-            label={t('Room name')}
+            label={t('room_name')}
             maxLength={maxCharacters}
-            placeholder={t('Room name')}
+            placeholder={t('room_name')}
             name="name"
           />
           <ButtonTabValidate
-            title={t('List policy')}
+            title={t('list_policy')}
             onPress={viewListPolicy}
             errors={errors}
             watch={watch}
@@ -131,11 +131,9 @@ export default function GeneralInformation({
                   height: scale(20),
                   alignItems: 'center',
                 }}>
-                <CustomText>
-                  No policy exists, please add more policy!
-                </CustomText>
+                <CustomText>{t('no_policy_exist')}</CustomText>
                 <CustomButton
-                  text="Add policy"
+                  text={t('add_policy')}
                   styleWrapper={{
                     width: '50%',
                     marginTop: scale(10),

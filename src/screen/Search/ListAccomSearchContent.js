@@ -27,13 +27,16 @@ export default function ListAccomSearchContent({
       'search',
       {
         ...filter,
-        accommodation_type_id: filter?.type,
+        accommodation_type_id: !paramsFilter?.type
+          ? filter?.type
+          : paramsFilter?.type,
         country_id: country?.id,
         name: filter?.name,
         latitude: params?.near_me ? location?.latitude : '',
         longitude: params?.near_me ? location?.longitude : '',
         distance: params?.near_me ? 5000 : '',
         currency_id: currency?.id,
+        province_id: filter?.province?.id || filter?.province_id,
       },
     ],
     queryFn: () =>
@@ -42,11 +45,14 @@ export default function ListAccomSearchContent({
         date_end: filter?.date?.date_end,
         date_start: filter?.date?.date_start,
         country_id: country?.id,
-        accommodation_type_id: filter?.type,
+        accommodation_type_id: !paramsFilter?.type
+          ? filter?.type
+          : paramsFilter?.type,
         name: filter?.name,
-        latitude: params?.near_me ? location?.latitude : '',
-        longitude: params?.near_me ? location?.longitude : '',
-        distance: params?.near_me ? 5000 : '',
+        latitude: !paramsFilter && params?.near_me ? location?.latitude : '',
+        longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
+        distance: !paramsFilter && params?.near_me ? 5000 : '',
+        province_id: filter?.province?.id || filter?.province_id,
         currency_id: currency?.id,
         // province_id: 1,
       }),

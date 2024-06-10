@@ -6,9 +6,11 @@ import {CustomButton} from '../../../../../../components';
 import {IconArrowRight, IconGoBack} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function CreateAccomItem({data, isTour}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
@@ -51,31 +53,30 @@ export default function CreateAccomItem({data, isTour}) {
           </View>
         )}
 
-        {data?.status &&
-          (!data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0) && (
-            <View
+        {data?.status && (
+          <View
+            style={{
+              ...styles.type,
+              left: scale(8),
+              right: 'auto',
+              borderRadius: scale(5),
+              paddingVertical: scale(2),
+              backgroundColor:
+                data?.status === 'VERIFIED'
+                  ? '#42b00b'
+                  : data?.status === 'VERIFYING'
+                  ? COLORS.primary
+                  : '#e03c31',
+            }}>
+            <CustomText
+              textType="semiBold"
               style={{
-                ...styles.type,
-                left: scale(8),
-                right: 'auto',
-                borderRadius: scale(5),
-                paddingVertical: scale(2),
-                backgroundColor:
-                  data?.status === 'VERIFIED'
-                    ? '#42b00b'
-                    : data?.status === 'VERIFYING'
-                    ? COLORS.primary
-                    : '#e03c31',
+                color: COLORS.white,
               }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  color: COLORS.white,
-                }}>
-                {data?.status}
-              </CustomText>
-            </View>
-          )}
+              {data?.status}
+            </CustomText>
+          </View>
+        )}
 
         <View
           style={{
@@ -105,7 +106,7 @@ export default function CreateAccomItem({data, isTour}) {
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
               }}>
-              RegID: {data?.id}
+              Id: {data?.id}
             </CustomText>
           </View>
 
@@ -142,7 +143,7 @@ export default function CreateAccomItem({data, isTour}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text="Manage"
+              text={t('manage')}
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,

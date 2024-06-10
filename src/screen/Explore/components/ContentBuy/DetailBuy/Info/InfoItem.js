@@ -10,8 +10,14 @@ export default function InfoItem({Icon, name, value, styleIcon}) {
       {Icon && (
         <IconComponent style={{...styles.image, ...styleIcon}} fill={'#aaa'} />
       )}
-      {name && <CustomText textType="semiBold">{name}:</CustomText>}
-      <CustomText textType="regular">{value}</CustomText>
+      {name && (
+        <CustomText textType="semiBold" style={{color: COLORS.white}}>
+          {name}:
+        </CustomText>
+      )}
+      <CustomText textType="regular" style={{color: COLORS.white}}>
+        {value}
+      </CustomText>
     </View>
   );
 }

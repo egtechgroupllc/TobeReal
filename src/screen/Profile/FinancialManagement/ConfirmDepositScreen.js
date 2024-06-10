@@ -13,16 +13,19 @@ import MainWrapper from '../../../components/MainWrapper';
 import ImgConfirmDeposit from './components/ConfirmDeposit/ImgConfirmDeposit';
 import InfoBank from './components/ConfirmDeposit/InfoBank';
 import SyntaxDeposit from './components/ConfirmDeposit/SyntaxDeposit';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ConfirmDepositScreen({route}) {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
+
   const data = route.params;
   const {control, handleSubmit} = useForm();
   const {bottom} = useSafeAreaInsets();
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Xác minh thanh toán',
+      headerTitle: t('payment_verification'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,7 +68,7 @@ export default function ConfirmDepositScreen({route}) {
         }}>
         <CustomButton
           onPress={handleSubmit(handleConfirmOrder)}
-          text="Vâng, tôi đã thanh toán "
+          text={t('confirm_paid')}
           style={{
             width: '70%',
           }}

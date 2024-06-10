@@ -3,8 +3,11 @@ import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconHistory} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function SearchPopular({onPress, data}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.search}>
       <View style={styles.title}>
@@ -14,7 +17,7 @@ export default function SearchPopular({onPress, data}) {
             fontSize: SIZES.xMedium,
             color: COLORS.black,
           }}>
-          Popular destination
+          {t('popular_destination')}
         </CustomText>
       </View>
 

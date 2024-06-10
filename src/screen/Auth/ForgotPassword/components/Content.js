@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: SIZES.small,
     textDecorationLine: 'underline',
+    color: COLORS.white,
   },
   text1: {
     fontSize: SIZES.small,

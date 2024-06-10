@@ -16,7 +16,7 @@ export default function BuySell({data}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('Recently viewed')];
+  const title = [t('recent_view')];
 
   // const {data, isLoading, isError, error} = useQuery({
   //   queryKey: [
@@ -33,19 +33,18 @@ export default function BuySell({data}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
-          // onPressSeeAll={() =>
-          //   navigate('NoBottomTab', {
-          //     screen: 'SeeAllBuyScreen',
-          //     params: {
-          //       title: title || '',
-          //     },
-          //   })
-          // }
+          // isSeeAll
+          onPressSeeAll={() =>
+            navigate('NoBottomTab', {
+              screen: 'SeeAllBuyScreen',
+              params: {
+                title: title || '',
+              },
+            })
+          }
           onPressCategory={item => console.log(item)}
           heading={title}
-          subHeading={t('There are 1,000,000 Real Estate')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('There are 1,000,000 Real Estate')}>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}

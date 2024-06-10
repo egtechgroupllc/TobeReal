@@ -14,6 +14,7 @@ import {getDetailTicket} from '../../../../../Model/api/apiTour';
 import AnimateScrollWrapper from '../../AnimateScrollWrapper';
 import GeneralInformation from './components/GeneralInformation';
 import InfoDetail from './components/InfoDetail';
+import BookTour from '../DetailTour/BookTour';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTicketScreen() {
@@ -23,13 +24,13 @@ export default function DetailTicketScreen() {
 
   const listNavBar = useRef([
     {
-      text: 'Tổng quan',
+      text: t('overview'),
     },
     {
-      text: t('Hiệu lực voucher'),
+      text: t('voucher_valid'),
     },
     {
-      text: t('Chính sách'),
+      text: t('policy'),
     },
   ]).current;
   const {data, isLoading} = useQuery({
@@ -68,13 +69,12 @@ export default function DetailTicketScreen() {
         listNav={listNavBar}
         dataDetail={{...data?.data, images: params?.images}}
         isLoading={isLoading}
-        // ContentBookComponent={
-        //   <BookAccommodation
-        //     price={123213}
-        //     isLoading={false}
-        //     onPress={() => {}}
-        //   />
-        // }
+        ContentBookComponent={
+          <BookTour
+            isLoading={false}
+            data={{...data?.data, dataFilter: params?.dataFilter}}
+          />
+        }
       />
     </MainWrapper>
   );

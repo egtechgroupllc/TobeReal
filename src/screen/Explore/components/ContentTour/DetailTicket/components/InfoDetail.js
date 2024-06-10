@@ -32,7 +32,7 @@ export default function InfoDetail({data}) {
         <View style={styles.room}>
           <CustomText
             textType="medium"
-            style={{...styles.text, color: COLORS.black}}>
+            style={{...styles.text, color: COLORS.white}}>
             {data?.description}
           </CustomText>
         </View>
@@ -45,21 +45,27 @@ export default function InfoDetail({data}) {
             paddingHorizontal: scale(20),
             alignItems: 'center',
           }}>
-          <IconRefund width={scale(12)} height={scale(12)}></IconRefund>
+          <IconRefund
+            width={scale(12)}
+            height={scale(12)}
+            fill={COLORS.white}></IconRefund>
           <CustomText
             textType="regular"
             style={{
               ...styles.text,
               marginLeft: '2%',
-              color: COLORS.black,
+              color: COLORS.white,
               marginRight: '10%',
             }}>
             {t('easy_refund')}
           </CustomText>
-          <IconCalendar width={scale(12)} height={scale(12)}></IconCalendar>
+          <IconCalendar
+            width={scale(12)}
+            height={scale(12)}
+            fill={COLORS.white}></IconCalendar>
           <CustomText
             textType="regular"
-            style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
+            style={{...styles.text, color: COLORS.white, marginLeft: '1%'}}>
             {t('easy_reschedule')}
           </CustomText>
         </View>
@@ -75,7 +81,7 @@ export default function InfoDetail({data}) {
               style={{
                 ...styles.name2,
                 paddingHorizontal: scale(20),
-                color: COLORS.primary,
+                color: COLORS.white,
               }}>
               $ 56
             </CustomText>
@@ -84,7 +90,7 @@ export default function InfoDetail({data}) {
               style={{
                 ...styles.name,
                 paddingHorizontal: scale(20),
-                color: COLORS.grey,
+                color: COLORS.white,
               }}>
               $ 56
             </CustomText>
@@ -100,7 +106,7 @@ export default function InfoDetail({data}) {
             <View style={styles.discount}>
               <CustomText
                 textType="semiBold"
-                style={{...styles.name, color: COLORS.primary}}>
+                style={{...styles.name, color: COLORS.white}}>
                 -25%
               </CustomText>
             </View>
@@ -117,8 +123,9 @@ export default function InfoDetail({data}) {
 const styles = StyleSheet.create({
   wrapper: {
     // width: WIDTH.widthContain,
+    borderTopWidth: scale(1),
+    borderTopColor: '#FFFFFF30',
     rowGap: scale(8),
-    backgroundColor: '#fff',
     padding: scale(16),
     paddingBottom: scale(4),
   },
@@ -127,18 +134,17 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-start',
   },
-  name: {fontSize: SIZES.xMedium},
-  name1: {fontSize: SIZES.xLarge},
-  name2: {fontSize: SIZES.xxLarge},
+  name: {fontSize: SIZES.xMedium, color: COLORS.white},
+  name1: {fontSize: SIZES.xLarge, color: COLORS.white},
+  name2: {fontSize: SIZES.xxLarge, color: COLORS.white},
   text: {fontSize: SIZES.small, color: COLORS.grey},
-  text1: {fontSize: SIZES.xxSmall, width: '30%'},
+  text1: {fontSize: SIZES.xxSmall, width: '30%', color: COLORS.white},
   line: {
     width: '100%',
     height: scale(1),
     backgroundColor: COLORS.grey,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
     maxWidth: scale(110),
   },
   discount: {
-    backgroundColor: '#FF00001A',
+    backgroundColor: COLORS.error,
     height: scale(20),
     width: '35%',
     borderRadius: scale(20),

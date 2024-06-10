@@ -35,7 +35,7 @@ export default function HotelResidence({data}) {
   //       // province_id: 1,
   //     }),
   // });
-  const title = [t('Recently viewed')];
+  const title = [t('recent_view')];
   return (
     <InViewPort onChange={render => render && setIsRender(render)} delay={30}>
       {isRender && (

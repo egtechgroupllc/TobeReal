@@ -1,8 +1,8 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ImageBackground} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {KEY_MAP} from '../../../../../Model/url';
-import {COLORS, SHADOW, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, images, scale} from '../../../../../assets/constants';
 import {IconMapView, IconMarker} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -13,6 +13,7 @@ import Nearby from '../Rooms/components/Nearby';
 export default function DetailAccommoMap({
   region,
   data,
+  post,
   address,
   styleWrapper,
   isShowNearby = true,
@@ -67,6 +68,8 @@ export default function DetailAccommoMap({
   return (
     <WrapperContent
       heading={t('map_view')}
+      styleTextHeading={{color: post ? COLORS.black : COLORS.white}}
+      styleWrapper={{backgroundColor: post ? 'transparent' : COLORS.primary}}
       styleContent={[styles.wrapper, styleWrapper]}>
       <View
         style={{

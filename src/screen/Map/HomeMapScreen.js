@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Animated, StyleSheet, View} from 'react-native';
+import {Alert, Animated, StyleSheet, View} from 'react-native';
 import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 import {getListRent} from '../../Model/api/apiAccom';
@@ -20,6 +20,7 @@ import MapHeader from './MapHeader';
 import {useCountry} from '../../hooks/useCountry';
 import CustomText from '../../components/CustomText';
 import {Platform} from 'react-native';
+import {useLanguage} from '../../hooks/useLanguage';
 
 const initialMapState = {
   markers: [],
@@ -30,6 +31,8 @@ const initialMapState = {
 };
 const CARD_WIDTH = scale(400 / 1.4);
 export default function HomeMapScreen({showListLocation, style}) {
+  const {t} = useLanguage();
+
   const [filter, setFilter] = useState();
   const scrollOffsetX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(0);
@@ -37,6 +40,7 @@ export default function HomeMapScreen({showListLocation, style}) {
   const [current, setCurrent] = useState(null);
   const {country, currency} = useCountry();
   const mapRef = useRef(null);
+
   const objRent = {
     date_end: formatDate(new Date(), {addDays: 1}),
     date_start: formatDate(),
@@ -66,15 +70,15 @@ export default function HomeMapScreen({showListLocation, style}) {
   };
   const {data, isLoading, isError, error} = useQuery({
     queryKey:
-      filter?.menu?.name === 'RENT' || !filter?.menu?.name
+      filter?.menu?.id === 'RENT' || !filter?.menu?.id
         ? ['accommodation', 'list-rent', objRent]
-        : filter?.menu?.name === 'TOUR'
+        : filter?.menu?.id === 'TOUR'
         ? ['tour', 'list-tour', objTour]
         : ['estate', 'list-post', objBuy],
     queryFn:
-      filter?.menu?.name === 'RENT' || !filter?.menu?.name
+      filter?.menu?.id === 'RENT' || !filter?.menu?.id
         ? () => getListRent(objRent)
-        : filter?.menu?.name === 'BUY'
+        : filter?.menu?.id === 'BUY'
         ? () => getListSell(objBuy)
         : () => getListTour(objTour),
   });
@@ -88,6 +92,7 @@ export default function HomeMapScreen({showListLocation, style}) {
   }, [data?.data]);
 
   let mapIndex = 0;
+
   useMemo(() => {
     const handleScroll = ({value}) => {
       let index = Math.floor(value / CARD_WIDTH + 0.3);
@@ -159,7 +164,7 @@ export default function HomeMapScreen({showListLocation, style}) {
 
   const onMarkerPress = index => {
     const x = index * CARD_WIDTH;
-    flatListRef.current.scrollToOffset(x);
+    flatListRef.current.scrollToOffset(x, true);
   };
   const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
@@ -226,7 +231,9 @@ export default function HomeMapScreen({showListLocation, style}) {
           return (
             <Marker
               key={index}
-              tracksViewChanges={Platform.OS === 'ios' ? true : false}
+              tracksViewChanges={
+                Platform.OS === 'ios' ? index === focusedItem : false
+              }
               coordinate={coordinate}
               zIndex={index === focusedItem ? 1 : 0}
               onPress={e => onMarkerPress(index)}>
@@ -246,6 +253,7 @@ export default function HomeMapScreen({showListLocation, style}) {
       <MapHeader
         mapProvince
         menu
+        dataReturn={data?.data}
         onFilter={value => {
           !value?.name && delete value?.name;
           const arrKeys = Object.keys(value);
@@ -254,7 +262,6 @@ export default function HomeMapScreen({showListLocation, style}) {
           (JSON.stringify(value) === '{}' ||
             (arrKeys?.length === 1 && value?.menu)) &&
             moveCurrentPosition();
-
           setFilter(value);
         }}
       />

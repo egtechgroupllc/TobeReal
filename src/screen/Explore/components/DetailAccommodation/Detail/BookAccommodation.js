@@ -9,8 +9,11 @@ import CustomText from '../../../../../components/CustomText';
 import {useAuthentication} from '../../../../../hooks/useAuthentication';
 import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default memo(function BookAccommodation({data}) {
+  const {t} = useLanguage();
+
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
   const params = useRoute().params;
@@ -35,7 +38,9 @@ export default memo(function BookAccommodation({data}) {
         style={{
           rowGap: scale(2),
         }}>
-        <CustomText>Starting point:</CustomText>
+        <CustomText style={{color: COLORS.white}}>
+          {t('price_only_from')}:
+        </CustomText>
         <CustomText
           textType="bold"
           style={{
@@ -53,7 +58,7 @@ export default memo(function BookAccommodation({data}) {
         }}
         buttonType="medium"
         style={{flex: 0.7}}
-        text={'View Room'}
+        text={t('view_room')}
         styleText={{
           fontSize: SIZES.xMedium,
         }}

@@ -12,13 +12,14 @@ import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/Detail
 import {SeeAllBuyScreen} from '../screen/Explore/components/ContentBuy/SeeAll';
 import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
-import {BookTourScreen} from '../screen/Explore/components/ContentTour/DetailTour/BookTour';
+import BookTourScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookTourScreen';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
 import {
   AccommoManagementScreen,
   AddPolicyScreen,
+  FeaturesPolicyScreen,
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
@@ -26,6 +27,10 @@ import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAc
 import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
 import RoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomManageScreen';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
+import {AddTicketScreen} from '../screen/News/PostNews/Tour';
+import TourManagementScreen from '../screen/News/PostNews/Tour/TourManagementScreen';
+import AdminManageTourScreen from '../screen/News/PostNews/Tour/components/AdminManageTourScreen';
+import TicketManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketManageScreen';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
 import {
   ConfirmDepositScreen,
@@ -67,9 +72,6 @@ export default routerNoBottomTab = [
   {
     name: 'DetailBrokerScreen',
     component: DetailBrokerScreen,
-    options: {
-      headerShown: false,
-    },
   },
   {
     name: 'DetailTicketScreen',
@@ -121,9 +123,6 @@ export default routerNoBottomTab = [
   {
     name: 'BookTourScreen',
     component: BookTourScreen,
-    options: {
-      headerShown: false,
-    },
   },
   {
     name: 'ListVideoInfluencerScreen',
@@ -149,6 +148,10 @@ export default routerNoBottomTab = [
   {
     name: 'AccommoManagementScreen',
     component: AccommoManagementScreen,
+  },
+  {
+    name: 'TourManagementScreen',
+    component: TourManagementScreen,
   },
   {
     name: 'RoomScreen',
@@ -203,8 +206,16 @@ export default routerNoBottomTab = [
     component: AdminManageLeaseScreen,
   },
   {
+    name: 'AdminManageTourScreen',
+    component: AdminManageTourScreen,
+  },
+  {
     name: 'RoomManageScreen',
     component: RoomManageScreen,
+  },
+  {
+    name: 'TicketManageScreen',
+    component: TicketManageScreen,
   },
   {
     name: 'DetailRoomManageScreen',
@@ -229,5 +240,14 @@ export default routerNoBottomTab = [
   {
     name: 'ListBankScreen',
     component: ListBankScreen,
+  },
+  {
+    name: 'AddTicketScreen',
+    component: AddTicketScreen,
+  },
+
+  {
+    name: 'FeaturesPolicyScreen',
+    component: FeaturesPolicyScreen,
   },
 ];

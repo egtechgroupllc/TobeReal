@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
@@ -15,9 +15,14 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postCreatePolicyToAccom} from '../../../../Model/api/apiAccom';
 import {CustomButton} from '../../../../components';
 import {useNavigation} from '@react-navigation/native';
+import {IconHome} from '../../../../assets/icon/Icon';
+import {showMess} from '../../../../assets/constants/Helper';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
+  const {t} = useLanguage();
+
   const {navigate, setOptions} = useNavigation();
   const {
     handleSubmit,
@@ -34,10 +39,15 @@ export default function AddPolicyScreen({route}) {
   });
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Policy screen',
+      headerTitle: t('policy_screen'),
       headerTitleStyle: {
         textAlign: 'center',
       },
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -56,8 +66,6 @@ export default function AddPolicyScreen({route}) {
       },
       {
         onSuccess: dataInside => {
-          console.log(dataInside);
-
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
@@ -68,7 +76,10 @@ export default function AddPolicyScreen({route}) {
               'list-policy',
               dataParams?.id,
             ]);
-
+            showMess(
+              dataInside?.message,
+              dataInside?.status ? 'success' : 'error',
+            );
             !dataParams?.policyScreen
               ? navigate('NoBottomTab', {
                   screen: 'AddRoomTypeScreen',
@@ -95,9 +106,7 @@ export default function AddPolicyScreen({route}) {
         paddingHorizontal: scale(10),
       }}>
       <View style={styles.content}>
-        <Box
-          title="Quý vị muốn sử dụng chính sách hủy phòng nào cho loại giá này?"
-          num="1">
+        <Box title={t('which_cancel_policy')} num="1">
           <RulesPolicy1
             setValue={setValue}
             control={control}
@@ -105,19 +114,15 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="2" title="Quý vị có muốn bao gồm bữa ăn trong loại giá này?">
+        <Box num="2" title={t('do_you_want_meal')}>
           <RulesPolicy2 setValue={setValue} unregister={unregister} />
         </Box>
 
-        <Box
-          num="3"
-          title="Quý vị muốn thêm dịch vụ giá trị gia tăng vào loại giá này?">
+        <Box num="3" title={t('do_you_want_service')}>
           <RulesPolicy3 setValue={setValue} unregister={unregister} />
         </Box>
 
-        <Box
-          num="4"
-          title="Quý vị có muốn thiết lập thời gian lưu trú tối thiểu cho loại giá này không?">
+        <Box num="4" title={t('do_you_want_minimum_lenghth')}>
           <RulesPolicy4
             setValue={setValue}
             control={control}
@@ -125,15 +130,11 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box
-          num="5"
-          title="Khách có thể đặt với loại giá này bao nhiêu ngày trước khi nhận phòng?">
+        <Box num="5" title={t('how_many_days')}>
           <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
-        <Box
-          num="6"
-          title="Quý vị muốn loại giá mới này rẻ hơn hay đắt hơn so với giá trên lịch?">
+        <Box num="6" title={t('do_you_want_new_price')}>
           <RulesPolicy6
             control={control}
             unregister={unregister}
@@ -141,11 +142,11 @@ export default function AddPolicyScreen({route}) {
           />
         </Box>
 
-        <Box num="7" title="Quý vị  đặt tên cho loại chính sách này là gì?">
+        <Box num="7" title={t('name_of_policy')}>
           <SetNamePolicy control={control} />
         </Box>
         <CustomButton
-          text="Submit"
+          text={t('submit')}
           onPress={handleSubmit(handleCreatePolicy)}
         />
       </View>

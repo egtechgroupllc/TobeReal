@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import {requireField} from '../../../../../../utils/validate';
@@ -12,7 +12,7 @@ export default function SetNamePolicy({control}) {
   return (
     <View style={styles.boxCheckMeal}>
       <CustomInput
-        placeholder="Name"
+        placeholder={t('name')}
         control={control}
         name="name"
         style={styles.textInput}
@@ -21,9 +21,8 @@ export default function SetNamePolicy({control}) {
       />
       <View style={styles.note}>
         <View style={styles.arrowTop} />
-        <CustomText>
-          Điều này sẽ không ảnh hưởng đến bất kỳ giới hạn thời gian lưu trú nào
-          đã cài trong lịch của Quý vị.
+        <CustomText style={{color: COLORS.black}}>
+          {t('this_not_affect')}
         </CustomText>
       </View>
     </View>

@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {
   COLORS,
@@ -22,15 +22,29 @@ import MainWrapper from '../../../../../components/MainWrapper';
 
 import {postCreateTour} from '../../../../../Model/api/apiTour';
 
-import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
-import GeneralInformation from '../components/PostNewTour/GeneralInformation';
-import TourSchedule from '../components/PostNewTour/TourSchedule';
+import {useNavigation} from '@react-navigation/native';
 import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
+import GeneralInformation from '../components/PostNewTour/GeneralInformation';
+import PolicyTour from '../components/PostNewTour/PolicyTour';
 import TourPhoto from '../components/PostNewTour/TourPhoto';
+import TourSchedule from '../components/PostNewTour/TourSchedule';
+import {IconHome} from '../../../../../assets/icon/Icon';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
-
+  const {navigate, setOptions} = useNavigation();
+  useEffect(() => {
+    return setOptions({
+      headerTitle: t('post_new_tour'),
+      headerLeftNavigate: 'TourScreen',
+      // headerLeft: () => (
+      //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
+      //     <IconGoBack style={{width: scale(20)}} />
+      //   </TouchableOpacity>
+      // ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {
     handleSubmit,
     control,
@@ -51,7 +65,7 @@ export default function PostNewTourScreen() {
 
     Object.keys(object).reduce((item, key) => {
       if (
-        !['description_img', 'schedule'].includes(key) &&
+        !['description_img', 'schedule', 'refund_fee'].includes(key) &&
         !key.includes('description_day')
       ) {
         item.append(key, object[key]);
@@ -70,7 +84,10 @@ export default function PostNewTourScreen() {
     });
 
     formData.append('schedule', JSON.stringify(object?.schedule));
-
+    formData.append(
+      'refund_fee',
+      object?.refund_fee ? object?.refund_fee / 100 : 1,
+    );
     formData.append('image_description', JSON.stringify(arrImage_description));
 
     return formData;
@@ -80,6 +97,7 @@ export default function PostNewTourScreen() {
     delete value?.check;
     // delete value?.description_0;
     const formData = getFormData(value);
+
     createTourMu.mutate(formData, {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
@@ -87,6 +105,10 @@ export default function PostNewTourScreen() {
         if (dataInside?.status) {
           reset();
           queryClient.invalidateQueries(['tour', 'create']);
+          navigate('NoBottomTab', {
+            screen: 'AddTicketScreen',
+            params: {id: dataInside?.data?.id},
+          });
         }
       },
       onError: err => {
@@ -123,6 +145,13 @@ export default function PostNewTourScreen() {
           errors={errors}
         /> */}
         <TourSchedule
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
+          unregister={unregister}
+        />
+        <PolicyTour
           control={control}
           setValue={setValue}
           watch={watch}

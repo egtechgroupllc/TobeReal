@@ -87,7 +87,11 @@ export default function ContentPartner() {
           rules={[requireField(t('this_field_required'))]}
           style={{height: scale(45)}}
         />
-        <SelectCountry setValue={setValue} control={control} />
+        <SelectCountry
+          setValue={setValue}
+          control={control}
+          colorText={COLORS.white}
+        />
         <CustomInput
           control={control}
           sizeInput="medium"

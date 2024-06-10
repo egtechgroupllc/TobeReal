@@ -71,7 +71,9 @@ export default function Counter({
               {heading}
             </CustomText>
             {subHeading && (
-              <CustomText textType="regular">{subHeading}</CustomText>
+              <CustomText textType="regular" style={{color: COLORS.black}}>
+                {subHeading}
+              </CustomText>
             )}
           </View>
         </View>

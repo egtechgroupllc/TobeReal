@@ -12,20 +12,18 @@ import {
 } from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Bất cứ lúc nào (loại giá này luôn hoạt động)',
-  },
-  {
-    id: 2,
-    title: 'Cài đặt số ngày trước khi nhận phòng',
-  },
-];
-
 export default function RulesPolicy5({control, unregister}) {
   const {t} = useLanguage();
-
+  const list = [
+    {
+      id: 1,
+      title: t('anytime_price_active'),
+    },
+    {
+      id: 2,
+      title: t('set_number_before'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(0);
 
   useEffect(() => {
@@ -65,12 +63,14 @@ export default function RulesPolicy5({control, unregister}) {
             rules={[
               requireField(t('this_field_required')),
               validateMinMaxAmount(
-                'Số ngày đặt trước phải hợp lệ (1 -> 28)',
+                'The number of days in advance must be valid (1 -> 28)',
                 28,
               ),
             ]}
           />
-          <CustomText>Ngày hoặc hơn trước khi nhận phòng</CustomText>
+          <CustomText style={{color: COLORS.black}}>
+            Days or more before check-in
+          </CustomText>
         </View>
       </Collapsible>
     </View>

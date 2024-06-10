@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import MainAuth from '../../../../../../components/MainAuth';
 import {useNavigation} from '@react-navigation/native';
@@ -28,22 +28,21 @@ export default function BookTourScreen({route}) {
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
+
   const {t} = useLanguage();
-  const navigation = useNavigation();
-  const goBack = () => {
-    navigation.goBack();
-  };
+  const {setOptions} = useNavigation();
+  useEffect(() => {
+    return setOptions({
+      headerTitle: t('detail_tour_ticket'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const notify = () => {};
   const Ok = () => {};
   return (
     <MainAuth>
       <View style={styles.container}>
-        <Header
-          goback={true}
-          subHeading={t('Book Tour')}
-          noti={true}
-          onPress={goBack}
-          notify={notify}></Header>
         <View style={styles.view}>
           <View
             style={{
@@ -144,7 +143,8 @@ export default function BookTourScreen({route}) {
                   width: '10%',
                   left: '40%',
                   top: '50%',
-                }}></View>
+                }}
+              />
               <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity style={styles.boxSum}>
                   <CustomText
@@ -456,20 +456,19 @@ export default function BookTourScreen({route}) {
             </LinearGradient>
           </TouchableOpacity>
         </View>
-        <Button title={t('request_to_book')} onPress={Ok} />
+        <Button title={t('request_to_book_tour')} onPress={Ok} />
       </View>
     </MainAuth>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(30),
+    marginTop: scale(10),
     paddingBottom: scale(50),
     width: '90%',
     alignSelf: 'center',
   },
   view: {
-    marginTop: scale(10),
     minHeight: scale(63),
     borderRadius: scale(20),
     alignItems: 'center',

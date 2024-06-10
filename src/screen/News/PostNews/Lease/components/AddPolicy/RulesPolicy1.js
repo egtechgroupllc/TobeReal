@@ -11,23 +11,23 @@ import CustomText from '../../../../../../components/CustomText';
 import {requireField} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-const list = [
-  {
-    id: 1,
-    title: 'Linh động - huỷ phòng trước giờ nhận phòng',
-  },
-  {
-    id: 2,
-    title: 'Linh động - trước 1 ngày',
-  },
-  {
-    id: 3,
-    title: 'Không hoàn tiền',
-  },
-];
-
 export default function RulesPolicy1({setValue, control, unregister}) {
   const {t} = useLanguage();
+
+  const list = [
+    {
+      id: 1,
+      title: t('cancel_before'),
+    },
+    {
+      id: 2,
+      title: t('flexible_advance'),
+    },
+    {
+      id: 3,
+      title: t('no_refund'),
+    },
+  ];
   const [isSelect, setIsSelect] = useState(1);
   const [openCheckStart, setOpenCheckStart] = useState(false);
   const [timeCheckStart, setTimeCheckStart] = useState(
@@ -63,9 +63,9 @@ export default function RulesPolicy1({setValue, control, unregister}) {
             key={index}
             title={
               index === 0 && isSelect === 0
-                ? `Linh động - huỷ phòng trước ${formatTime(
+                ? `${t('flexible_cancel_advance')} ${formatTime(
                     timeCheckStart,
-                  )} vào ngày nhận phòng`
+                  )} ${t('on_check')}`
                 : item?.title
             }
             isCheck={isSelect === index}
@@ -75,7 +75,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
 
       <DatePicker
         mode="time"
-        title={'Chọn giờ'}
+        title={t('select_hour')}
         modal
         open={openCheckStart}
         date={timeCheckStart}
@@ -109,13 +109,14 @@ export default function RulesPolicy1({setValue, control, unregister}) {
               </View>
             }
           />
-          <CustomText>Phí huỷ sau thời gian khách đã đặt phòng</CustomText>
+          <CustomText style={{color: COLORS.black}}>
+            {t('cancellation_fee_after')}
+          </CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
-            <CustomText>
-              Phí huỷ sau thời gian khách đã đặt phòng. Khách hàng phải trả phí
-              huỷ phòng sau thời gian đã đặt phòng
+            <CustomText style={{color: COLORS.black}}>
+              {t('cancellation_fee_customer_pay')}
             </CustomText>
           </View>
         </View>

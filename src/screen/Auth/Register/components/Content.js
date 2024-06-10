@@ -82,6 +82,7 @@ export default function Content() {
           placeholder={t('enter_email')}
         />
         <InputPhone
+          colorText={COLORS.white}
           name={'phone'}
           placeholder={t('phone')}
           control={control}
@@ -180,6 +181,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.small,
+    color: COLORS.white,
   },
   text1: {
     fontSize: SIZES.small,

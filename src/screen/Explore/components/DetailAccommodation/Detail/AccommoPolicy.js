@@ -1,22 +1,21 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconClock} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import WrapperContent from '../../WrapperContent';
 import BottomSheet from '../../../../../components/BottomSheet';
 
-const listPolicy = [
-  {
-    icon: IconClock,
-    name: 'Required documents',
-    value:
-      'When checking in, you need to provide ID card/CCCD. Please bring necessary documents in hard copy.',
-  },
-];
 export default function AccommoPolicy({data}) {
   const {t} = useLanguage();
+  const listPolicy = [
+    {
+      icon: IconClock,
+      name: t('require_document'),
+      value: t('checking_require'),
+    },
+  ];
   const bottomSheetRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -26,7 +25,7 @@ export default function AccommoPolicy({data}) {
   }, [isOpen]);
   return (
     <WrapperContent
-      heading={'Accommodation policy'}
+      heading={t('accom_policy')}
       isSeeAll
       onPressSeeAll={() => {
         setIsOpen(true);
@@ -39,7 +38,7 @@ export default function AccommoPolicy({data}) {
           rowGap: scale(16),
         }}>
         {listPolicy?.slice(0, 2).map((item, index) => (
-          <Item data={item} key={index} />
+          <Item data={item} key={index} fill={COLORS.white} />
         ))}
       </View>
 
@@ -55,7 +54,12 @@ export default function AccommoPolicy({data}) {
             rowGap: scale(16),
           }}>
           {listPolicy?.map((item, index) => (
-            <Item data={item} key={index} />
+            <Item
+              data={item}
+              key={index}
+              fill={COLORS.primary}
+              colorText={COLORS.black}
+            />
           ))}
         </BottomSheet>
       )}
@@ -63,7 +67,7 @@ export default function AccommoPolicy({data}) {
   );
 }
 
-const Item = ({data}) => {
+const Item = ({data, fill, colorText}) => {
   return (
     <View style={styles.item}>
       {data.icon && (
@@ -72,6 +76,7 @@ const Item = ({data}) => {
             width: scale(20),
             height: scale(20),
           }}
+          fill={fill}
         />
       )}
 
@@ -84,10 +89,17 @@ const Item = ({data}) => {
           textType="semiBold"
           style={{
             fontSize: SIZES.xMedium,
+            color: colorText || COLORS.white,
           }}>
           {data?.name}
         </CustomText>
-        <CustomText>{data?.value}</CustomText>
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            color: colorText || COLORS.white,
+          }}>
+          {data?.value}
+        </CustomText>
       </View>
     </View>
   );

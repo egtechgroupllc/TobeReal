@@ -35,9 +35,10 @@ import ItemHistoryTransLoading from './components/HistoryTransaction/ItemHistory
 import CustomText from '../../../components/CustomText';
 import {CustomButton} from '../../../components';
 import {showMess} from '../../../assets/constants/Helper';
+import {useLanguage} from '../../../hooks/useLanguage';
 const listInfo = [
   {
-    text: 'Tất cả',
+    text: 'All',
   },
   {
     text: 'Bank',
@@ -46,14 +47,16 @@ const listInfo = [
     text: 'MoMo',
   },
 ];
-const transferType = [{name: 'Deposit'}, {name: 'Withdraw'}];
 export default function HistoryTransactionScreen() {
+  const {t} = useLanguage();
+
   const {setOptions} = useNavigation();
-  const [tab, setTab] = useState('Deposit');
+  const [tab, setTab] = useState(t('deposit'));
   const params = useRoute().params;
   useEffect(() => {
-    params?.withdraw && setTab('Withdraw');
+    params?.withdraw && setTab(t('withdraw'));
   }, [params?.withdraw]);
+  const transferType = [{name: t('deposit')}, {name: t('withdraw')}];
 
   useEffect(() => {
     return setOptions({
@@ -61,7 +64,7 @@ export default function HistoryTransactionScreen() {
         <>
           {transferType.map((item, index) => {
             return (
-              <View>
+              <View key={index}>
                 <CustomButton
                   buttonType="normal"
                   style={{
@@ -90,8 +93,10 @@ export default function HistoryTransactionScreen() {
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
     useInfiniteQuery({
       queryKey:
-        tab === 'Deposit' ? ['deposit', 'my-order'] : ['withdraw', 'my-order'],
-      queryFn: tab === 'Deposit' ? getHistoryDeposit : getHistoryWithdraw,
+        tab === t('deposit')
+          ? ['deposit', 'my-order']
+          : ['withdraw', 'my-order'],
+      queryFn: tab === t('deposit') ? getHistoryDeposit : getHistoryWithdraw,
       getNextPageParam: (lastPage, allPages) => {
         if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
 
@@ -137,7 +142,7 @@ export default function HistoryTransactionScreen() {
     );
   };
   const handleCancel = value => {
-    Alert.alert('Bạn có chắc huỷ giao dịch này?', '', [
+    Alert.alert('Are you sure to cancel this transaction?', '', [
       {
         text: 'Cancel',
         // onPress: () => Alert.alert('Cancel Pressed'),
@@ -200,13 +205,16 @@ export default function HistoryTransactionScreen() {
               <ItemHistoryTrans
                 tab={tab}
                 onPress={value => navigate('DetailHistoryDeposit', value)}
-                key={index}
+                key={item?.id}
                 data={item}
                 isBackground={index % 2 === 0}
                 onPressCancel={() => handleCancel(item?.id)}
               />
             ) : (
-              <ItemHistoryTransLoading isBackground={index % 2 === 0} />
+              <ItemHistoryTransLoading
+                isBackground={index % 2 === 0}
+                key={index}
+              />
             )
           }
         />

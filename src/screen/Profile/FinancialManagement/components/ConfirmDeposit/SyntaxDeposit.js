@@ -6,16 +6,19 @@ import {IconCopy} from '../../../../../assets/icon/Icon';
 import {useQueryClient} from '@tanstack/react-query';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function SyntaxDeposit({data}) {
   const queryClient = useQueryClient();
+  const {t} = useLanguage();
+
   const dataUser = queryClient.getQueryData(['user', 'profile'])?.data;
 
   const handleCopy = () => {
     Clipboard.setString(
-      `${data?.code}  nap tien dang tin cho tai khoan ${dataUser?.username}`,
+      `${data?.code}  ${t('deposit_to_post')} ${dataUser?.username}`,
     );
-    showMess('Sao chép thành công');
+    showMess('Copy successful');
   };
 
   return (
@@ -25,7 +28,7 @@ export default function SyntaxDeposit({data}) {
         style={{
           fontSize: SIZES.medium,
         }}>
-        Cú pháp nội dung chuyển khoản
+        {t('syntax_transfer')}
       </CustomText>
       <TouchableOpacity
         activeOpacity={0.7}
@@ -46,7 +49,7 @@ export default function SyntaxDeposit({data}) {
             }}>
             {data?.code}{' '}
           </CustomText>
-          nap tien dang tin cho tai khoan
+          {t('deposit_to_post')}
           <CustomText
             textType="semiBold"
             style={{
@@ -66,7 +69,7 @@ export default function SyntaxDeposit({data}) {
           style={{
             fontSize: SIZES.xMedium,
           }}>
-          Lưu ý:{' '}
+          {t('note')}:{' '}
         </CustomText>
         <CustomText
           textType="semiBold"
@@ -75,9 +78,7 @@ export default function SyntaxDeposit({data}) {
           }}>
           {data?.code}
         </CustomText>{' '}
-        là mã chuyển khoản của riêng bạn. Bạn vui lòng nhập đúng mã ở đầu nội
-        dung chuyển khoản để việc xác nhận giao dịch được nhanh chóng và chính
-        xác.
+        {t('own_transfer_code')}
       </CustomText>
     </View>
   );

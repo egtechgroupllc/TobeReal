@@ -54,17 +54,25 @@ export const postAddTicket = async ({data, tour_id}) => {
 
   return responsive.data;
 };
+export const postAddTypeTicket = async data => {
+  const responsive = await instance.post('/ticket/item/create', data);
 
+  return responsive.data;
+};
 export const getListTour = async ({
-  pageParam = 1,
+  page = 1,
   country_id,
   province_id,
   name = '',
+  min_price = 0,
+  max_price,
+  currency_id = 151,
 }) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
+  const maxPrice = max_price ? `max_price=${max_price}` : '';
   const responsive = await instance.get(
-    `/list-sell?page=${pageParam}&limit=10&${country}&${province}&name=${name}`,
+    `/list-sell?page=${page}&limit=10&${country}&${province}&name=${name}&min_price=${min_price}&${maxPrice}&currency_id=${currency_id}`,
   );
 
   return responsive.data;
@@ -74,13 +82,32 @@ export const getDetailTour = async id_tour => {
 
   return responsive.data;
 };
-export const getListTicket = async id_tour => {
+export const getListTicket = async ({id_tour}) => {
   const responsive = await instance.get(`/detail/${id_tour}/list-ticket`);
 
   return responsive.data;
 };
 export const getDetailTicket = async id_ticket => {
   const responsive = await instance.get(`/ticket/${id_ticket}`);
+
+  return responsive.data;
+};
+export const deleteTour = async ({id_tour}) => {
+  const responsive = await instance.delete(`/${id_tour}`);
+  return responsive.data;
+};
+export const deleteTicket = async ({id_ticket}) => {
+  const responsive = await instance.delete(`/ticket/${id_ticket}`);
+  return responsive.data;
+};
+export const getListReviewTour = async ({
+  id_tour,
+  pageParam = 1,
+  limit = 10,
+}) => {
+  const responsive = await instance.get(
+    `/${id_tour}/list-review?limit=${limit}&page=${pageParam}`,
+  );
 
   return responsive.data;
 };

@@ -32,6 +32,7 @@ export default function ListAccommodationSearchScreen() {
   useEffect(() => {
     currentPosition();
   }, []);
+  // console.log(filter);
   return (
     <MainWrapper
       scrollEnabled={false}
@@ -42,11 +43,17 @@ export default function ListAccommodationSearchScreen() {
           width: '100%',
         }}>
         {params?.menu === 'TOUR' ? (
-          <MapHeader onFilter={value => setFilter(value)} accom />
+          <MapHeader onFilter={value => setFilter(value)} accom mapProvince />
         ) : params?.menu === 'RENT' ? (
-          <MapHeader onFilter={value => setFilter(value)} accom />
+          <MapHeader onFilter={value => setFilter(value)} accom mapProvince />
         ) : (
-          <MapHeader onFilter={value => setFilter(value)} estate />
+          <MapHeader
+            onFilter={value => {
+              setFilter(value);
+            }}
+            estate
+            mapProvince
+          />
         )}
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />

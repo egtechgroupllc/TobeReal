@@ -16,10 +16,10 @@ export default function ImgConfirmDeposit({control}) {
           fontSize: SIZES.medium,
           marginBottom: scale(-10),
         }}>
-        Ảnh chứng minh
+        {t('photo_proof')}
       </CustomText>
       <ChooseImgPicker
-        title={'Ảnh chứng minh chuyển khoản'}
+        title={t('photo_proof_transfer')}
         name={'files'}
         isDescriptionImg={false}
         maxFiles={2}

@@ -47,9 +47,10 @@ export default function AvatarImage({
               end={{x: 1, y: 0}}
               style={styles.button}>
               <CustomText
+                numberOfLines={1}
                 textType="bold"
                 style={{...styles.text2, color: COLORS.black}}>
-                Upgrade account
+                {t('upgrade_account')}
               </CustomText>
             </LinearGradient>
           </TouchableOpacity>
@@ -64,7 +65,7 @@ export default function AvatarImage({
           <TouchableOpacity
             onPress={onPressChangeName}
             style={{marginLeft: scale(10)}}>
-            <IconEditProfile />
+            <IconEditProfile fill={COLORS.white} />
           </TouchableOpacity>
         )}
       </View>
@@ -73,7 +74,7 @@ export default function AvatarImage({
           ...styles.box,
           height: scale(100),
           marginTop: scale(20),
-          marginBottom: scale(-15),
+          marginBottom: scale(-25),
         }}>
         <View
           style={{
@@ -85,7 +86,7 @@ export default function AvatarImage({
             <CustomText
               textType="bold"
               style={{...styles.text, color: COLORS.black}}>
-              {t('My identification address')}
+              {t('my_identify_address')}
             </CustomText>
             <CustomInput
               numberOfLines={1}
@@ -152,7 +153,8 @@ const styles = StyleSheet.create({
     height: scale(25),
     justifyContent: 'center',
     marginTop: scale(120),
-    paddingHorizontal: scale(10),
+    paddingHorizontal: scale(5),
     position: 'absolute',
+    width: scale(130),
   },
 });

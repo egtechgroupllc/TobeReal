@@ -11,6 +11,7 @@ import {showMess} from '../../../../../assets/constants/Helper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
   const {navigate} = useNavigation();
@@ -18,6 +19,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
     mutationFn: postInitOrderDeposit,
   });
   const {currency} = useCountry();
+  const {t} = useLanguage();
 
   const handleInitOrder = value => {
     initOrderDepositMu.mutate(
@@ -39,6 +41,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
   };
 
   const {bottom} = useSafeAreaInsets();
+
   return (
     <View style={[styles.box, {paddingBottom: bottom + scale(10)}]}>
       <View
@@ -50,7 +53,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
             fontSize: SIZES.xSmall,
             color: COLORS.text,
           }}>
-          Tổng tiền:
+          {t('total_amount')}:
         </CustomText>
         <CustomText
           textType="bold"
@@ -65,7 +68,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
       </View>
       <CustomButton
         buttonType="normal"
-        text="Nạp Ngay"
+        text={t('deposit')}
         iconLeft={IconPromotion}
         styleIcon={{
           color: COLORS.white,

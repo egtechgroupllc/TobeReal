@@ -20,7 +20,7 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
     <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
       {isRender && (
         <WrapperContent
-          isSeeAll
+          // isSeeAll
           discoveryTour
           // onPressSeeAll={() =>
           //   navigate('NoBottomTab', {
@@ -32,8 +32,7 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
           // }
           onPressCategory={onPressCategory}
           heading={title}
-          subHeading={t('the_place_discovery')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+          subHeading={t('the_place_discovery')}>
           <FlatList
             numColumns={2}
             showsHorizontalScrollIndicator={false}

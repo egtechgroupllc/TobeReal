@@ -25,6 +25,8 @@ export default function ReviewOverview({dataP}) {
         <CustomText style={{color: COLORS.black}}>
           {formatNumber(dataP?.review_count)} reviews
         </CustomText>
+        <CustomText textType="semiBold">Very good</CustomText>
+        <CustomText>{formatNumber(dataP?.review_count)} reviews</CustomText>
       </View>
 
       <View style={styles.overviewRight}>

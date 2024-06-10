@@ -1181,7 +1181,7 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SocketRocket (0.6.1)
-  - TOCropViewController (2.6.1)
+  - TOCropViewController (2.7.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1512,7 +1512,7 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
+  TOCropViewController: b9b2905938c0424f289ea2d9964993044913fac6
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: be79ba0f12c0c6d8f87538440b4073f90d0d69b3

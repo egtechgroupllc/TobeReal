@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import CheckBox from '../../../../components/CheckBox';
 import CustomImage from '../../../../components/CustomImage';
 
@@ -13,6 +13,7 @@ export default function ItemLanguage({item, onPress, check}) {
         textLeft
         isChecked={check}
         onPress={onPress}
+        textStyle={{color: COLORS.white}}
         isRadio
         style={{
           justifyContent: 'space-between',

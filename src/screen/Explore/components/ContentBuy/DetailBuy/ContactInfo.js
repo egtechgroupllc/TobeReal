@@ -17,14 +17,17 @@ import {
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function ContactInfo({data}) {
+export default function ContactInfo({data, onPress}) {
+  const {t} = useLanguage();
   const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity
         style={styles.content}
         onPress={() =>
+          onPress ||
           navigate('NoBottomTab', {
             screen: 'DetailBrokerScreen',
             params: data,
@@ -35,8 +38,9 @@ export default function ContactInfo({data}) {
             textType="bold"
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.white,
             }}>
-            Information
+            {t('information')}
           </CustomText>
           <IconRight />
         </View>
@@ -61,7 +65,7 @@ export default function ContactInfo({data}) {
                 style={{
                   color: '#009BA1',
                 }}>
-                Môi giới chuyên nghiệp
+                {t('professional_broker')}
               </CustomText>
             )}
           </View>
@@ -82,6 +86,7 @@ export default function ContactInfo({data}) {
                 style={{
                   fontSize: SIZES.xMedium,
                   flex: 1,
+                  color: COLORS.white,
                 }}>
                 {data?.contact_name}
               </CustomText>
@@ -102,6 +107,7 @@ export default function ContactInfo({data}) {
                   style={{
                     fontSize: SIZES.xMedium,
                     flex: 1,
+                    color: COLORS.white,
                   }}>
                   {data?.contact_phone}
                 </CustomText>
@@ -121,6 +127,7 @@ export default function ContactInfo({data}) {
                   style={{
                     fontSize: SIZES.xMedium,
                     flex: 1,
+                    color: COLORS.white,
                   }}>
                   {data?.contact_email}
                 </CustomText>

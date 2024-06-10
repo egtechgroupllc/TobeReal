@@ -24,7 +24,6 @@ export default function Introduction({data}) {
       onPressSeeAll={() => {
         setIsOpen(true);
       }}
-      styleWrapper={{backgroundColor: 'transparent'}}
       styleTextHeading={{color: COLORS.white}}
       heading={t('introduction')}
       styleContent={{

@@ -70,7 +70,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                       ...styles.select,
                       borderTopWidth: scale(index === 0 ? 0 : 1),
                     }}
-                    text={item?.name}
+                    text={t(item?.name)}
                     iconRight={() => (
                       <IconDown
                         style={
@@ -100,7 +100,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                         padding: scale(12),
                         color: COLORS.black,
                       }}>
-                      Khách có thể sử dụng gì tại nơi lưu trú của bạn?
+                      {t('guest_use_at')}
                     </CustomText>
                   )
                 );

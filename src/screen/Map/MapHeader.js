@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {CustomButton, CustomInput} from '../../components';
@@ -20,31 +20,35 @@ import BottomSheetListSelect from '../../components/BottomSheetListSelect';
 import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../Model/api/common';
 import BottomSheetChild from './Header/BottomSheetChild';
-const listFill = [
-  {
-    text: 'On Promotion',
-  },
-  {
-    text: 'No Minimum Stay',
-  },
-  {
-    text: 'Full Furnished',
-  },
-  {
-    text: 'Unfurnished',
-  },
-];
+import InViewport from '../../components/InViewport';
+
 export default function MapHeader({
   onFilter = () => {},
   accom,
   estate,
   menu,
   mapProvince,
+  dataReturn,
 }) {
   const {t} = useLanguage();
+  const listFill = [
+    {
+      text: t('on_promotion'),
+    },
+    {
+      text: t('no_minimum'),
+    },
+    {
+      text: t('full_furnished'),
+    },
+    {
+      text: t('unfurnished'),
+    },
+  ];
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const {country} = useCountry();
+  const [openBottom, setOpenBottom] = useState(false);
 
   const listProvince = useQuery({
     queryKey: ['common', 'list-country', country?.geoname_id],
@@ -52,14 +56,31 @@ export default function MapHeader({
   });
   const {control, handleSubmit, watch, setValue, reset, unregister} = useForm({
     defaultValues: {
-      menu: {id: 1, name: 'RENT'},
+      menu: {id: 'RENT', name: t('RENT')},
+      province: listProvince.data?.data?.[0],
     },
   });
+  const [isRender, setIsRender] = useState(false);
   const handelFiter = value => {
     onFilter && onFilter(value);
-
+    setOpenBottom(true);
     bottomSheetRef.current.close();
   };
+
+  useEffect(() => {
+    if (dataReturn?.count === 0 && openBottom) {
+      Alert.alert(t('no_properties_found'), t('please_filter_again'), [
+        {
+          text: t('ok'),
+          onPress: () => {
+            setOpenBottom(false);
+
+            bottomSheetRef.current.open();
+          },
+        },
+      ]);
+    }
+  }, [dataReturn?.count, openBottom]);
 
   return (
     <View
@@ -77,7 +98,6 @@ export default function MapHeader({
           noSelectDefault
           onSort={() => {
             bottomSheetRef.current.open();
-            setValue('province', listProvince.data?.data?.[0]);
           }}
         />
 
@@ -86,6 +106,11 @@ export default function MapHeader({
           titleIndicator={t('filter&sort')}
           ref={bottomSheetRef}
           refChild={bottomSheetChildRef}
+          onChange={value => {
+            if (value > 0) {
+              openBottom && setOpenBottom(false);
+            }
+          }}
           handleChildBottom={() => (
             <BottomSheetChild
               data={listProvince}
@@ -118,11 +143,11 @@ export default function MapHeader({
                 onPress={() => {
                   const keyReset = Object.keys(watch());
 
-                  reset();
                   if (keyReset.includes('province')) {
-                    unregister(keyReset);
+                    reset();
+                    // unregister(keyReset);
                   }
-                  bottomSheetRef.current.close();
+                  setIsRender(false);
                 }}
               />
               <CustomButton
@@ -131,8 +156,10 @@ export default function MapHeader({
                 // }}
                 // onPress={onPress}
                 buttonType="normal"
-                style={{flex: 0.5}}
-                text={t('Apply')}
+                style={{
+                  flex: 0.5,
+                }}
+                text={t('apply')}
                 onPress={handleSubmit(handelFiter)}
                 styleText={{
                   fontSize: SIZES.xMedium,
@@ -150,76 +177,89 @@ export default function MapHeader({
             control={control}
           />
 
-          {menu && (
-            <>
-              <Menubar
-                value={watch('menu')?.id}
-                onType={value => {
-                  setValue('menu', value);
-                }}
-              />
-              {mapProvince && (
-                <>
+          <InViewport
+            delay={100}
+            onChange={setIsRender}
+            styleLoading={{
+              marginTop: '40%',
+              height: scale(120),
+              width: scale(120),
+            }}>
+            {isRender && (
+              <>
+                {menu && (
+                  <>
+                    <Menubar
+                      value={watch('menu')?.id}
+                      onType={value => {
+                        setValue('menu', value);
+                        setIsRender(false);
+                      }}
+                    />
+
+                    {watch('menu')?.id === 'RENT' || !watch('menu') ? (
+                      <TypeAccommoda
+                        value={watch('type')}
+                        onType={value => {
+                          setValue('type', value?.id);
+                        }}
+                      />
+                    ) : watch('menu')?.id === 'BUY' ? (
+                      <TypeEstate
+                        value={watch('type')}
+                        onType={value => {
+                          setValue('type', value?.id);
+                        }}
+                      />
+                    ) : (
+                      <View></View>
+                    )}
+                  </>
+                )}
+                {mapProvince && (
                   <MapProvince
-                    value={watch('province')?.id}
+                    value={watch('province')}
                     onProvince={value => {
                       setValue('province', value);
                     }}
-                    nameProvince={watch('province')}
+                    // nameProvince={watch('province')}
                     data={listProvince}
                     onSearch={() => bottomSheetChildRef.current.openChild()}
                   />
-                </>
-              )}
-              {watch('menu')?.name === 'RENT' || !watch('menu') ? (
-                <TypeAccommoda
-                  value={watch('type')}
-                  onType={value => {
-                    setValue('type', value?.id);
+                )}
+                {/* <RatingReview /> */}
+                {accom && (
+                  <TypeAccommoda
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                )}
+                {estate && (
+                  <TypeEstate
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                )}
+                <Budget
+                  value={watch('budget')}
+                  onBudget={value => {
+                    setValue('budget', value);
                   }}
                 />
-              ) : watch('menu')?.name === 'BUY' ? (
-                <TypeEstate
-                  value={watch('type')}
-                  onType={value => {
-                    setValue('type', value?.id);
+                <SortBy
+                  value={watch('sortPrice')}
+                  onSort={value => {
+                    setValue('sortPrice', value);
                   }}
                 />
-              ) : (
-                <View></View>
-              )}
-            </>
-          )}
+              </>
+            )}
+          </InViewport>
 
-          {/* <RatingReview /> */}
-          <SortBy
-            value={watch('sortPrice')}
-            onSort={value => {
-              setValue('sortPrice', value);
-            }}
-          />
-          <Budget
-            value={watch('budget')}
-            onBudget={value => {
-              setValue('budget', value);
-            }}
-          />
-          {accom && (
-            <TypeAccommoda
-              value={watch('type')}
-              onType={value => {
-                setValue('type', value?.id);
-              }}
-            />
-          )}
-          {estate && (
-            <TypeEstate
-              value={watch('type')}
-              onType={value => {
-                setValue('type', value?.id);
-              }}
-            />
-          )}
           {/* <BedRoom /> */}
         </BottomSheet>
       </View>
