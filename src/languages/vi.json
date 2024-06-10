@@ -1024,5 +1024,15 @@
   "each_time_post": "Mỗi lần bài viết được đăng lại, hệ thống chỉ trừ phí đăng lại đó",
   "start_day": "Ngày bắt đầu",
   "end_of_day": "Kết thúc ngày",
-  "view_ticket": "Xem vé du lịch"
+  "view_ticket": "Xem vé du lịch",
+  "there_are_real_estate": "Đây là những bất động sản bạn đã xem gần đây",
+  "feature_estate": "Bất động sản nổi bật",
+  "explore_popular_estate": "Khám phá bất động sản phổ biến",
+  "request_to_book_tour": "Yêu cầu đặt tour",
+  "detail_tour_ticket": "Chi tiết vé tour",
+  "voucher_valid": "Hiệu lực của phiếu giảm giá",
+  "policy": "chính sách",
+  "payment_method": "Phương thức thanh toán",
+  "no_properties_found": "Không tìm thấy bất động sản nào",
+  "please_filter_again": "Vui lòng lọc lại"
 }

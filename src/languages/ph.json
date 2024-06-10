@@ -1017,5 +1017,15 @@
   "each_time_post": "Sa bawat pag-post muli, ang sistema ay magbabawas lamang ng bayad sa post doon muli",
   "start_day": "Araw ng pagsisimula",
   "end_of_day": "Katapusan ng araw",
-  "view_ticket": "Tingnan ang ticket tour"
+  "view_ticket": "Tingnan ang ticket tour",
+  "there_are_real_estate": "Ito ang mga property na kamakailan mo lang tiningnan",
+  "feature_estate": "Mga Tampok na Ari-arian",
+  "explore_popular_estate": "Galugarin ang mga sikat na real estate",
+  "request_to_book_tour": "Humiling na mag-book ng tour",
+  "detail_tour_ticket": "Detalye ng tiket ng tour",
+  "voucher_valid": "Bisa ng voucher",
+  "policy": "patakaran",
+  "payment_method": "Mga paraan ng pagbabayad",
+  "no_properties_found": "Walang nahanap na mga property",
+  "please_filter_again": "Paki-filter ulit"
 }

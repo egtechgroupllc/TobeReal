@@ -1036,5 +1036,7 @@
   "detail_tour_ticket": "Detail tour ticket",
   "voucher_valid": "Voucher validity",
   "policy": "policy",
-  "payment_method": "Payment methods"
+  "payment_method": "Payment methods",
+  "no_properties_found": "No properties found",
+  "please_filter_again": "Please filter again"
 }

@@ -1020,5 +1020,15 @@
   "each_time_post": "每次帖子被重发，系统只扣除该重发的费用",
   "start_day": "开始日期",
   "end_of_day": "结束日期",
-  "view_ticket": "查看旅游票"
+  "view_ticket": "查看旅游票",
+  "there_are_real_estate": "这是您最近查看的房产",
+  "feature_estate": "特色房产",
+  "explore_popular_estate": "探索热门房产",
+  "request_to_book_tour": "请求预订旅游",
+  "detail_tour_ticket": "详细旅游票",
+  "voucher_valid": "优惠券有效期",
+  "policy": "政策",
+  "payment_method": "付款方式",
+  "no_properties_found": "未找到房产",
+  "please_filter_again": "请再次筛选"
 }

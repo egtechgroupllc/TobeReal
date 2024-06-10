@@ -995,5 +995,15 @@
   "read_less": "Baca lebih sedikit",
   "read_more": "Baca lebih lanjut",
   "check_it_out": "Cek ini!",
-  "view_ticket": "Lihat tiket tur"
+  "view_ticket": "Lihat tiket tur",
+  "there_are_real_estate": "Ini adalah properti yang baru saja Anda lihat",
+  "feature_estate": "Properti Unggulan",
+  "explore_popular_estate": "Jelajahi real estat populer",
+  "request_to_book_tour": "Minta untuk memesan tur",
+  "detail_tour_ticket": "Detail tiket tur",
+  "voucher_valid": "Masa berlaku voucher",
+  "policy": "kebijakan",
+  "payment_method": "Metode pembayaran",
+  "no_properties_found": "Tidak ada properti yang ditemukan",
+  "please_filter_again": "Silakan filter lagi"
 }

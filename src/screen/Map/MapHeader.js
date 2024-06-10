@@ -69,7 +69,7 @@ export default function MapHeader({
 
   useEffect(() => {
     if (dataReturn?.count === 0 && openBottom) {
-      Alert.alert(t('delete_property'), t('delete_property_not_restore'), [
+      Alert.alert(t('no_properties_found'), t('please_filter_again'), [
         {
           text: t('ok'),
           onPress: () => {
