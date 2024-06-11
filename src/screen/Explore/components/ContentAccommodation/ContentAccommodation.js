@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {scale} from '../../../../assets/constants';
@@ -10,7 +10,7 @@ import HotelResidence from './HotelResidence';
 import ThematicInstagram from './ThematicInstagram';
 import {useCountry} from '../../../../hooks/useCountry';
 
-export default function ContentAccommodation() {
+export default memo(function ContentAccommodation({}) {
   const {t} = useLanguage();
 
   const [listSavedName, setListSavedName] = useState([]);
@@ -53,7 +53,7 @@ export default function ContentAccommodation() {
       <BigCity />
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -310,7 +310,7 @@ const dataAgent = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default function ContentBuy() {
+export default memo(function ContentBuy() {
   const {t} = useLanguage();
   const [tourData, setTourData] = useState(dataDomestic);
   const {country} = useCountry();
@@ -351,7 +351,7 @@ export default function ContentBuy() {
       {/* <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} /> */}
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -3,7 +3,13 @@ import BottomSheetMain, {
   BottomSheetModal,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import React, {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
+import React, {
+  forwardRef,
+  memo,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {SHADOW, SIZES, scale} from '../assets/constants';
@@ -148,34 +154,36 @@ const HandleIndicator = ({
   headerComponent,
   styleHeaderWrapper,
   style,
-}) => (
-  <View style={[styles.wrapperHeader, styleHeaderWrapper]}>
-    <View style={[styles.headerHandle, style]}>
-      <TouchableOpacity
-        style={styles.icon}
-        onPress={onClose}
-        activeOpacity={0.6}>
-        <IconX
-          style={{
-            width: scale(20),
-            height: scale(20),
-          }}
-        />
-      </TouchableOpacity>
-      <CustomText
-        textType="semiBold"
-        style={[
-          {
-            fontSize: style?.fontSize || SIZES.xMedium,
-          },
-          style?.color && {color: style?.color},
-        ]}>
-        {title || 'Title'}
-      </CustomText>
+}) => {
+  return (
+    <View style={[styles.wrapperHeader, styleHeaderWrapper]}>
+      <View style={[styles.headerHandle, style]}>
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={onClose}
+          activeOpacity={0.6}>
+          <IconX
+            style={{
+              width: scale(20),
+              height: scale(20),
+            }}
+          />
+        </TouchableOpacity>
+        <CustomText
+          textType="semiBold"
+          style={[
+            {
+              fontSize: style?.fontSize || SIZES.xMedium,
+            },
+            style?.color && {color: style?.color},
+          ]}>
+          {title || 'Title'}
+        </CustomText>
+      </View>
+      {headerComponent}
     </View>
-    {headerComponent}
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -202,4 +210,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default forwardRef(BottomSheet);
+export default memo(forwardRef(BottomSheet));

@@ -1,101 +1,60 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../../assets/constants';
+import {SIZES, scale} from '../../../../assets/constants';
 import {IconCalendar} from '../../../../assets/icon/Icon';
-import {CustomButton, CustomInput} from '../../../../components';
-import BottomSheet from '../../../../components/BottomSheet';
-import CalendarRange from '../../../../components/CalendarRange';
-import ListSelect from '../../../../components/BottomSheetListSelect';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import {formatDate} from '../../../../utils/format';
-import TopCalendar from './Calendar/TopCalendar';
+import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
+import {formatDate} from '../../../../utils/format';
+import ChooseCalendarSheet from './ChooseCalendarSheet';
+import {useLanguage} from '../../../../hooks/useLanguage';
 
 const minDate = formatDate(new Date()); // Today
-let dateEnd = formatDate(minDate, {addDays: 1});
-
-const listSelectTimeMonth = [
-  {text: '1 Month', value: 1},
-  {text: '2 Month', value: 2},
-  {text: '3 Month', value: 3},
-  {text: '4 Month', value: 4},
-  {text: '5 Month', value: 5},
-  {text: '6 Month', value: 6},
-  {text: '7 Month', value: 7},
-  {text: '8 Month', value: 8},
-  {text: '9 Month', value: 9},
-  {text: '10 Month', value: 10},
-  {text: '11 Month', value: 11},
-  {text: '12 Month', value: 12},
-];
-const listSelectTimeYear = [
-  {text: '1 Yearly', value: 1},
-  {text: '2 Yearly', value: 2},
-  {text: '3 Yearly', value: 3},
-];
+const dateEnd = formatDate(minDate, {addDays: 1});
 
 export default function ChooseCalendar({rental, style, Checkin, onDate}) {
   const {t} = useLanguage();
+
   // Khai báo State
-  const [selectedStartDate, setSelectedStartDate] = useState(minDate);
-  const [selectedEndDate, setSelectedEndDate] = useState(dateEnd);
-  const [selected, setSelected] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({
+    date_start: minDate,
+    date_end: dateEnd,
+  });
+  const [isOpen, setIsOpen] = useState(false);
+
   // Refs
   const bottomSheetRef = useRef();
-  const bottomSheetChild = useRef();
 
-  // List được Memoized
-  const listSelectTime = useMemo(
-    () => (rental === t('yearly') ? listSelectTimeYear : listSelectTimeMonth),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rental],
-  );
   useEffect(() => {
+    const newDate =
+      rental === 'yearly'
+        ? formatDate(minDate, {
+            yearsToAdd: 1,
+          })
+        : rental !== 'daily'
+        ? formatDate(minDate, {
+            monthsToAdd: 1,
+          })
+        : formatDate(minDate, {
+            addDays: 1,
+          });
+
+    setSelectedDate({
+      date_start: minDate,
+      date_end: newDate,
+    });
     onDate &&
       onDate({
-        date_start: selectedStartDate,
-        date_end: selectedEndDate,
+        date_start: minDate,
+        date_end: newDate,
       });
+  }, [rental]);
+
+  const handleSelectDate = useCallback(date => {
+    setSelectedDate(date);
+
+    onDate && onDate(date);
   }, []);
-  const onDateChange = (date, type) => {
-    setSelectedEndDate(date?.date_end);
-    setSelectedStartDate(date?.date_start);
-  };
-
-  const handleSelectDate = () => {
-    bottomSheetRef.current.close();
-
-    const dateEndFallback = formatDate(selectedStartDate, {addDays: 1});
-
-    if (!selectedEndDate || `${selectedStartDate}` === `${selectedEndDate}`) {
-      setSelectedEndDate(dateEndFallback);
-    }
-
-    onDate &&
-      onDate({
-        date_start: selectedStartDate,
-        date_end: selectedEndDate,
-      });
-  };
-
-  // Hiệu ứng cho Sự thay đổi Ngày
-  useEffect(() => {
-    if (rental !== t('daily')) {
-      const newDate =
-        rental === t('yearly')
-          ? formatDate(selectedStartDate || minDate, {
-              yearsToAdd: selected?.value || 1,
-            })
-          : formatDate(selectedStartDate || minDate, {
-              monthsToAdd: selected?.value || 1,
-            });
-
-      setSelectedEndDate(newDate);
-    } else {
-      setSelectedEndDate(dateEnd);
-    }
-  }, [selected, rental]);
 
   return (
     <View style={style}>
@@ -106,70 +65,28 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
       )}
       <CustomInput
         // name="calendar"
-        defaultValue={`${formatDate(selectedStartDate)} - ${formatDate(
-          selectedEndDate || dateEnd,
+        defaultValue={`${formatDate(selectedDate?.date_start)} - ${formatDate(
+          selectedDate?.date_end || dateEnd,
         )}`}
         iconLeft={IconCalendar}
         styleIcon={styles.icon}
-        onPress={() => bottomSheetRef.current.open()}
+        onPress={() => {
+          setIsOpen(true);
+          // bottomSheetRef.current.open();
+        }}
       />
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        refChild={bottomSheetChild}
-        titleIndicator={t('calendar')}
-        snapPoints={['75%']}
-        snapPointsChild={['60%']}
-        onDismiss={handleSelectDate}
-        handleChildBottom={
-          rental !== 'Daily' &&
-          (() => (
-            <ListSelect
-              data={listSelectTime}
-              onSelect={value => {
-                bottomSheetChild.current.closeChild();
-                setSelected(value);
-              }}
-            />
-          ))
-        }
-        styleContent={{
-          rowGap: scale(10),
-          paddingHorizontal: scale(20),
-        }}>
-        <TopCalendar
-          value={selected?.text}
-          checkIn={selectedStartDate}
-          checkOut={selectedEndDate}
-          onPressTime={
-            rental !== 'Daily' &&
-            (() => {
-              bottomSheetChild.current.openChild();
-            })
-          }
+      {isOpen && (
+        <ChooseCalendarSheet
+          ref={bottomSheetRef}
+          onDate={handleSelectDate}
+          rental={rental}
+          style={style}
+          value={selectedDate}
+          isOpen={isOpen}
+          onDismissSheet={() => setIsOpen(false)}
         />
-
-        <View style={{flex: 1}}>
-          <CalendarRange
-            minDate={minDate}
-            startDate={selectedStartDate}
-            endDate={selectedEndDate}
-            onDateChange={onDateChange}
-          />
-        </View>
-
-        <CustomButton
-          buttonType="large"
-          text={t('select_date')}
-          style={{
-            marginTop: scale(10),
-          }}
-          styleText={{
-            textType: 'semiBold',
-          }}
-          onPress={handleSelectDate}
-        />
-      </BottomSheet>
+      )}
     </View>
   );
 }

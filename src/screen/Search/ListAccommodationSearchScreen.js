@@ -1,15 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import MainWrapper from '../../components/MainWrapper';
-import FilterSort from '../Explore/components/DetailAccommodation/Review/FilterSort';
+import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
+import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import MapHeader from '../Map/MapHeader';
 import ListAccomSearchContent from './ListAccomSearchContent';
-import {useRoute} from '@react-navigation/native';
 import ListEstateSearchContent from './ListEstateSearchContent';
 import ListTourSearchContent from './ListTourSearchContent';
-import {getCurrentLocation} from '../../utils/getCurrentLocation';
-import {useCountry} from '../../hooks/useCountry';
+import CustomText from '../../components/CustomText';
+import {SIZES} from '../../assets/constants';
+import {formatDate} from '../../utils/format';
+import {differenceInDays} from 'date-fns';
 
 export default function ListAccommodationSearchScreen() {
   const {t} = useLanguage();
@@ -17,6 +20,8 @@ export default function ListAccommodationSearchScreen() {
   const {country, currency} = useCountry();
   const [filter, setFilter] = useState();
   const [current, setCurrent] = useState({});
+  const {setOptions} = useNavigation();
+
   const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
 
@@ -29,11 +34,46 @@ export default function ListAccommodationSearchScreen() {
       return coordinates;
     }
   }, []);
+
   useEffect(() => {
     currentPosition();
   }, []);
-  // console.log(filter);
-  console.log(params, 312321312);
+
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitleComponent: () => (
+        <View
+          style={{
+            width: '70%',
+          }}>
+          <CustomText
+            textType="bold"
+            numberOfLines={1}
+            style={{
+              color: '#fff',
+              fontSize: SIZES.xMedium,
+            }}>
+            {params.near_me ? 'Near me' : params?.province?.name}
+          </CustomText>
+          <CustomText
+            style={{
+              color: '#fff',
+            }}>
+            {`${formatDate(params?.date?.date_end)}, ${differenceInDays(
+              params?.date?.date_end,
+              params?.date?.date_start,
+            )} ${t('night')}, ${params?.numAdult} ${t('guest')}, ${
+              params?.numRoom
+            } ${t('room')}`}
+          </CustomText>
+        </View>
+      ),
+      headerTitleStyle: {
+        textAlign: 'left',
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <MainWrapper
       scrollEnabled={false}
@@ -56,6 +96,7 @@ export default function ListAccommodationSearchScreen() {
             mapProvince
           />
         )}
+
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />
         ) : params?.menu === 'RENT' ? (

@@ -29,13 +29,14 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
       near_me: true,
     },
   });
+
   useEffect(() => {
-    params?.id && setValue('province_id', params?.id);
-    params?.name && setValue('name', params?.name);
-    params?.id && unregister('name');
+    params?.id && setValue('province', params);
+    // params?.name && setValue('name', params?.name);
+    // params?.id && unregister('name');
 
     if (params === 'Near me' || !params) {
-      unregister(['name', 'province_id']);
+      unregister(['name', 'province']);
       setValue('near_me', true);
     } else {
       unregister(['near_me']);
@@ -130,6 +131,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
               <ChooseCalendar
                 rental={rental}
                 onDate={value => {
+                  console.log(value, 81273);
                   setValue('date', value);
                 }}
               />

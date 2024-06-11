@@ -1,13 +1,19 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import CustomText from '../../../../../components/CustomText';
+import React, {memo} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {CustomInput} from '../../../../../components';
 import {IconCalendar, IconDown} from '../../../../../assets/icon/Icon';
-import {formatDate} from '../../../../../utils/format';
+import {CustomInput} from '../../../../../components';
+import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {formatDate} from '../../../../../utils/format';
+import {differenceInDays} from 'date-fns';
 
-export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
+export default memo(function TopCalendar({
+  checkIn,
+  checkOut,
+  value,
+  onPressTime,
+}) {
   const {t} = useLanguage();
 
   return (
@@ -29,10 +35,18 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
           </CustomText>
         </View>
 
+        <View style={styles.centerNight}>
+          <CustomText>
+            {checkOut ? differenceInDays(checkOut, checkIn) : '...'}{' '}
+            {t('night')}
+          </CustomText>
+        </View>
+
         <View
           style={{
             rowGap: scale(4),
             flex: 1,
+            alignItems: 'flex-end',
           }}>
           <CustomText>{t('check_out')}</CustomText>
           <CustomText
@@ -41,10 +55,11 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
               color: checkOut ? COLORS.text : COLORS.textSub,
             }}
             textType="semiBold">
-            {checkOut ? formatDate(checkOut) : t('check_out')}
+            {checkOut ? formatDate(checkOut) : '...'}
           </CustomText>
         </View>
       </View>
+
       {onPressTime && (
         <CustomInput
           iconLeft={IconCalendar}
@@ -55,7 +70,7 @@ export default function TopCalendar({checkIn, checkOut, value, onPressTime}) {
       )}
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   top: {
@@ -70,5 +85,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingHorizontal: scale(30),
     columnGap: scale(10),
+  },
+  centerNight: {
+    rowGap: scale(4),
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+    paddingBottom: scale(5),
+    minWidth: scale(70),
+    alignItems: 'center',
   },
 });

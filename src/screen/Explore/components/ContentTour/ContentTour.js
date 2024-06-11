@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -191,7 +191,7 @@ const dataInternational = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default function ContentTour() {
+export default memo(function ContentTour() {
   const [tourData, setTourData] = useState(dataDomestic);
 
   const handleCategoryChange = categoryData => {
@@ -211,7 +211,7 @@ export default function ContentTour() {
       <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange} />
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   wrapper: {

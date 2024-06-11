@@ -1,14 +1,15 @@
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {getListRent} from '../../Model/api/apiAccom';
-import {scale} from '../../assets/constants';
+import {SIZES, scale} from '../../assets/constants';
 import EmptyData from '../../components/EmptyData';
 import {useCountry} from '../../hooks/useCountry';
 import ItemAccommdSearch from './components/ItemAccommdSearch';
 import ItemAccommdSearchLoading from './components/ItemAccommdSearchLoading';
+import CustomText from '../../components/CustomText';
 
 export default function ListAccomSearchContent({
   paramsFilter,
@@ -18,8 +19,8 @@ export default function ListAccomSearchContent({
 }) {
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
-
   const filter = {...params, ...paramsFilter};
+
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'accommodation',
@@ -49,9 +50,9 @@ export default function ListAccomSearchContent({
           ? filter?.type
           : paramsFilter?.type,
         name: filter?.name,
-        latitude: !paramsFilter && params?.near_me ? location?.latitude : '',
-        longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
-        distance: !paramsFilter && params?.near_me ? 5000 : '',
+        latitude: params?.near_me ? location?.latitude : '',
+        longitude: params?.near_me ? location?.longitude : '',
+        distance: params?.near_me ? 5000 : '',
         province_id: filter?.province?.id || filter?.province_id,
         currency_id: currency?.id,
         // province_id: 1,

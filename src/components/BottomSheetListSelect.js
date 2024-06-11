@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import React, {
+  memo,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -13,7 +14,7 @@ import {CustomButton} from '.';
 import {COLORS, SIZES, scale} from '../assets/constants';
 import {IconCheckBox} from '../assets/icon/Icon';
 
-export default function BottomSheetListSelect({
+export default memo(function BottomSheetListSelect({
   data = [],
   onChange,
   onSelect,
@@ -73,6 +74,7 @@ export default function BottomSheetListSelect({
           }}
           iconRight={(select === item?.text || select === item) && IconCheckBox}
           styleText={{
+            textTransform: 'lowercase',
             textType: 'medium',
             color:
               select === item?.text || select === item
@@ -84,7 +86,7 @@ export default function BottomSheetListSelect({
       )}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   item: {

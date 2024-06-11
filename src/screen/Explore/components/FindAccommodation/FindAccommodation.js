@@ -1,7 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {WIDTH, images, scale} from '../../../../assets/constants';
+import {
+  getListTypeEstateSell,
+  getListTypeRent,
+} from '../../../../Model/api/common';
+import {WIDTH, scale} from '../../../../assets/constants';
 import {
   IconApartment,
   IconEmigrate,
@@ -14,6 +19,7 @@ import {
 } from '../../../../assets/icon/Icon';
 import {Category, TabSelect} from '../../../../components';
 import InViewPort from '../../../../components/InViewport';
+import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import ContentAccommodation from '../ContentAccommodation/ContentAccommodation';
 import ContentBuy from '../ContentBuy/ContentBuy';
@@ -21,18 +27,6 @@ import ContentTour from '../ContentTour/ContentTour';
 import FindAccommodationStart from './FindAccommodationStart';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
-import {useQuery} from '@tanstack/react-query';
-import {
-  getListTypeRoom,
-  getMyListCreateAccom,
-} from '../../../../Model/api/apiAccom';
-import {useAuthentication} from '../../../../hooks/useAuthentication';
-import {
-  getListTypeEstateSell,
-  getListTypeRent,
-} from '../../../../Model/api/common';
-import {ScrollView} from 'react-native-gesture-handler';
-import MainWrapper from '../../../../components/MainWrapper';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -57,15 +51,23 @@ export default function FindAccommodation() {
     ],
     [locale],
   );
-
-  const typeRent = useQuery({
-    queryKey: ['common', 'accommodation', 'list-type'],
-    queryFn: () => getListTypeRent(),
-  });
-  const typeBuy = useQuery({
-    queryKey: ['common', 'estate', 'list-type'],
-    queryFn: () => getListTypeEstateSell(),
-  });
+  const listRental = useMemo(
+    () => [
+      {
+        id: 'daily',
+        name: t('daily'),
+      },
+      {
+        id: 'monthly',
+        name: t('monthly'),
+      },
+      {
+        id: 'yearly',
+        name: t('yearly'),
+      },
+    ],
+    [locale],
+  );
 
   const listTour = useMemo(
     () => [
@@ -84,18 +86,6 @@ export default function FindAccommodation() {
     ],
     [locale],
   );
-
-  const [tabSelect, setTabSelect] = useState(listMenu[0]?.id);
-  const [category, setCategory] = useState();
-  const [isRender, setIsRender] = useState();
-  const [selectedId, setSelectedId] = useState(null);
-  useEffect(() => {
-    const typeId =
-      tabSelect === 'RENT'
-        ? typeRent?.data?.data?.[0]?.id
-        : typeBuy?.data?.data?.[0]?.id;
-    setSelectedId(typeId);
-  }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
   const listRent = useMemo(
     () => [
       {
@@ -147,6 +137,29 @@ export default function FindAccommodation() {
     ],
     [locale],
   );
+
+  const typeRent = useQuery({
+    queryKey: ['common', 'accommodation', 'list-type'],
+    queryFn: () => getListTypeRent(),
+  });
+  const typeBuy = useQuery({
+    queryKey: ['common', 'estate', 'list-type'],
+    queryFn: () => getListTypeEstateSell(),
+  });
+
+  const [tabSelect, setTabSelect] = useState(listMenu[0]?.id);
+  const [category, setCategory] = useState(listRental[0]);
+  const [isRender, setIsRender] = useState();
+  const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+    const typeId =
+      tabSelect === 'RENT'
+        ? typeRent?.data?.data?.[0]?.id
+        : typeBuy?.data?.data?.[0]?.id;
+    setSelectedId(typeId);
+  }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
+
   return (
     <MainWrapper refreshControl noSafeArea>
       <InViewPort
@@ -165,6 +178,7 @@ export default function FindAccommodation() {
             data={listMenu}
             onChange={value => {
               setTabSelect(value?.id);
+              tabSelect !== 'RENT' && setCategory(listRental[0]);
             }}
             renderView={() => (
               <>
@@ -173,8 +187,9 @@ export default function FindAccommodation() {
                     <View style={styles.category}>
                       {tabSelect === 'RENT' && (
                         <Category
+                          isObject
                           indexDefault={1}
-                          data={[t('daily'), t('monthly'), t('yearly')]}
+                          data={listRental}
                           onPress={value => setCategory(value)}
                         />
                       )}
@@ -198,7 +213,7 @@ export default function FindAccommodation() {
                     {tabSelect !== 'TOUR' ? (
                       <FindContent
                         isBuy={tabSelect === 'BUY'}
-                        rental={category}
+                        rental={category?.id}
                         dataFind={{type: selectedId, menu: tabSelect}}
                       />
                     ) : (
@@ -216,6 +231,7 @@ export default function FindAccommodation() {
           />
         </View>
       </InViewPort>
+
       {tabSelect === 'TOUR' ? (
         <ContentTour />
       ) : tabSelect === 'RENT' ? (

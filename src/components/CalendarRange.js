@@ -2,7 +2,14 @@
 import {useQuery} from '@tanstack/react-query';
 import {eachDayOfInterval, format, getMonth, getYear} from 'date-fns';
 import Holidays from 'date-holidays';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {getListPriceRoomDate} from '../Model/api/apiAccom';
@@ -14,7 +21,7 @@ import InViewport from './InViewport';
 
 var hd = new Holidays('VN');
 
-export default function CalendarRange({
+export default memo(function CalendarRange({
   minDate = new Date(),
   startDate,
   endDate,
@@ -60,6 +67,7 @@ export default function CalendarRange({
       }),
     enabled: !!id,
   });
+
   const handlePress = useCallback(value => {
     if (clicked.current) {
       setDateSelect(prev => ({
@@ -123,7 +131,7 @@ export default function CalendarRange({
         return acc;
       }, {});
     }
-  }, [dateSelect]);
+  }, [JSON.stringify(dateSelect)]);
 
   const dayComponent = date => {
     if (!date) return null;
@@ -201,7 +209,7 @@ export default function CalendarRange({
       )}
     </InViewport>
   );
-}
+});
 
 const BoxText = ({
   isDateStart,
