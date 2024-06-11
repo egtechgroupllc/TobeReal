@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -10,11 +10,21 @@ import ImageDetail from '../../../../components/ImageDetail';
 import BasicFacilities from './DetailRoom/BasicFacilities';
 import BookRoom from './DetailRoom/BookRoom';
 import RoomInformation from './DetailRoom/RoomInformation';
+import {useNavigation} from '@react-navigation/native';
 
 export default function DetailRoomScreen({route}) {
   const data = route.params;
   const {t} = useLanguage();
-
+  const {setOptions} = useNavigation();
+  useEffect(() => {
+    return setOptions({
+      headerTitle: t('detail_room'),
+      headerTitleStyle: {
+        textAlign: 'center',
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <MainWrapper

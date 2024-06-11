@@ -82,7 +82,7 @@ export default function BookRoom({data}) {
             </CustomText>
             ,
             <CustomText textType="medium">
-              {data?.date?.numNight} {t('day')}
+              {data?.date?.numNight} {t('night')}
             </CustomText>
           </CustomText>
         </View>

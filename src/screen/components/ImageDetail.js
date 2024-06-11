@@ -15,7 +15,6 @@ export default memo(function ImageDetail({onLayout, arrImg, styleWrapper}) {
     index,
     uri: img?.url,
   }));
-
   return (
     <View
       style={[

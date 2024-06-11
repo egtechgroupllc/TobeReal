@@ -8,7 +8,6 @@ import {useCountry} from '../../hooks/useCountry';
 
 const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
   const {currency} = useCountry();
-  console.log(currency);
   const scaleStyle = {
     transform: [
       {

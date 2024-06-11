@@ -37,7 +37,7 @@ export default function TopStep2({data, onChange}) {
               {formatDate(data?.date?.selectedStartDate, {
                 dateStyle: 'dd-MM-yyyy',
               })}
-              , {data?.date?.numNight} {t('day')}{' '}
+              , {data?.date?.numNight} {t('night')}{' '}
             </CustomText>
           </View>
           <IconDown fill={COLORS.white} />

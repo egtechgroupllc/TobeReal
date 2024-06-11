@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {getMyListCreateTour} from '../../../../Model/api/apiTour';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
@@ -13,9 +13,15 @@ import ListCreateTour from './ListCreateTour';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function TourScreen() {
-  const {navigate} = useNavigation();
-  const {t} = useLanguage();
+  const {navigate, setOptions} = useNavigation();
 
+  const {t} = useLanguage();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('post_new'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const list = [
     {
       title: t('already_have_tour'),

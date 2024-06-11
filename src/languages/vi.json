@@ -408,7 +408,7 @@
   "Reset": "Đặt lại",
   "Apply": "Áp dụng",
   "free_cancel": "Hủy miễn phí",
-  "price_only": "Giá thấp nhất từ",
+  "price_only_from": "Giá thấp nhất từ",
   "no_review_yet": "Chưa có đánh giá nào",
   "accom_policy": "Chính sách chỗ ở",
   "require_document": "Yêu cầu tài liệu",
@@ -1034,5 +1034,14 @@
   "policy": "chính sách",
   "payment_method": "Phương thức thanh toán",
   "no_properties_found": "Không tìm thấy bất động sản nào",
-  "please_filter_again": "Vui lòng lọc lại"
+  "please_filter_again": "Vui lòng lọc lại!",
+  "commission_for_saveloka": "Hoa hồng cho Saveloka",
+  "help_in_language": "Hỗ trợ 24/7 bằng ngôn ngữ của bạn",
+  "save_time_automatic": "Tiết kiệm thời gian với các đặt chỗ được xác nhận tự động",
+  "we_will_promote": "Chúng tôi sẽ quảng bá tài sản của bạn trên Google",
+  "your_revenue": "Doanh thu của bạn (bao gồm thuế)",
+  "please_choose_coordinates": "Vui lòng chọn tọa độ của bất động sản của bạn trên bản đồ!",
+  "what_are_property": "Thời gian nhận phòng/trả phòng của bất động sản là gì?",
+  "the_area_of_property": "Diện tích của bất động sản của bạn?",
+  "please_enter_correct": "Vui lòng nhập thông tin chính xác"
 }

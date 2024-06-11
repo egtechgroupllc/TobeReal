@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -28,7 +28,13 @@ export default function PostNewSellScreen() {
   const params = useRoute().params;
 
   const {t} = useLanguage();
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('post_for_sale'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {
     handleSubmit,
     control,
@@ -39,7 +45,6 @@ export default function PostNewSellScreen() {
   } = useForm();
 
   const handlePostLease = value => {
-    console.log(value, 11312321);
     delete value?.check;
     delete value?.direction_main;
     delete value?.estate_type;

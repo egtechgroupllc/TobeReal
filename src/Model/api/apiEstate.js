@@ -29,6 +29,8 @@ export const getListSell = async ({
   latitude,
   longitude,
   distance,
+  min_size,
+  max_size,
 }) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
@@ -38,8 +40,10 @@ export const getListSell = async ({
   const lat = latitude ? `latitude=${latitude}` : '';
   const long = longitude ? `longitude=${longitude}` : '';
   const dist = distance ? `distance=${distance}` : '';
+  const minsize = min_size ? `min_size=${min_size}` : '';
+  const maxsize = max_size ? `max_size=${max_size}` : '';
   const responsive = await instance.get(
-    `/list-post?page=${pageParam}&limit=10&${country}&${province}&${estate_type}&title=${title}&${minprice}&${maxprice}&${lat}&${long}&${dist}`,
+    `/list-post?page=${pageParam}&limit=10&${country}&${province}&${estate_type}&title=${title}&${minprice}&${maxprice}&${lat}&${long}&${dist}&${minsize}&${maxsize}`,
   );
 
   return responsive.data;

@@ -40,13 +40,12 @@ export default function HomeMapScreen({showListLocation, style}) {
   const [current, setCurrent] = useState(null);
   const {country, currency} = useCountry();
   const mapRef = useRef(null);
-
   const objRent = {
     date_end: formatDate(new Date(), {addDays: 1}),
     date_start: formatDate(),
     accommodation_type_id: filter?.type,
-    country_id: country?.id,
-    province_id: filter?.province?.id,
+    country_id: !current?.longitude && country?.id,
+    province_id: !current?.longitude && filter?.province?.id,
     name: filter?.name,
     max_price: filter?.budget ? filter?.budget[1] : '',
     min_price: filter?.budget ? filter?.budget[0] : '',
@@ -64,6 +63,8 @@ export default function HomeMapScreen({showListLocation, style}) {
     ...current,
     distance: current?.longitude && 5000,
     currency_id: currency?.id,
+    min_size: filter?.acreage?.[0],
+    max_size: filter?.acreage?.[1],
   };
   const objTour = {
     country_id: country?.id,
@@ -82,6 +83,7 @@ export default function HomeMapScreen({showListLocation, style}) {
         ? () => getListSell(objBuy)
         : () => getListTour(objTour),
   });
+
   const [state, setState] = useState(initialMapState);
 
   useEffect(() => {
@@ -206,7 +208,6 @@ export default function HomeMapScreen({showListLocation, style}) {
   useEffect(() => {
     fetchPlaces();
   }, []);
-
   return (
     <MainWrapper style={{flex: 1}} scrollEnabled={false}>
       <MapView

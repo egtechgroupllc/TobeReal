@@ -8,7 +8,7 @@ import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
-import SelectProvince from './SelectProvince';
+import SelectProvince from '../../../News/PostNews/components/SelectProvince';
 import {Controller, useForm} from 'react-hook-form';
 import {useCountry} from '../../../../hooks/useCountry';
 
@@ -27,22 +27,19 @@ export default function SelectCountry({
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
   const form = useForm();
-  const {country} = useCountry();
   useEffect(() => {
     if (watch('country')) {
       setDataFromScreen(watch('country'));
-    } else {
-      setDataFromScreen(country);
     }
-  }, [watch('country'), country]);
+  }, [watch('country')]);
 
-  // const onGoBack = (value, onChange) => {
-  //   if (value) {
-  //     onChange(value?.id);
-  //     onSelect && onSelect(value);
-  //     setDataFromScreen(value);
-  //   }
-  // };
+  const onGoBack = (value, onChange) => {
+    if (value) {
+      onChange(value?.id);
+      onSelect && onSelect(value);
+      setDataFromScreen(value);
+    }
+  };
 
   return (
     <Controller
@@ -67,20 +64,20 @@ export default function SelectCountry({
                   width: '50%',
                   rowGap: scale(6),
                 }}>
-                <View
+                <TouchableOpacity
                   activeOpacity={0.7}
-                  // onPress={() => {
-                  //   navigate('NoBottomTab', {
-                  //     screen: 'CountryScreen',
-                  //     params: {
-                  //       onGoBack: data => {
-                  //         onGoBack(data, onChange);
-                  //       },
+                  onPress={() => {
+                    navigate('NoBottomTab', {
+                      screen: 'CountryScreen',
+                      params: {
+                        onGoBack: data => {
+                          onGoBack(data, onChange);
+                        },
 
-                  //       country: dataFromScreen,
-                  //     },
-                  //   });
-                  // }}
+                        country: dataFromScreen,
+                      },
+                    });
+                  }}
                   style={[
                     error && {
                       borderColor: '#f0334b',
@@ -96,8 +93,8 @@ export default function SelectCountry({
                     }>
                     {dataFromScreen?.name || t('country')}
                   </CustomText>
-                  {/* <IconRight /> */}
-                </View>
+                  <IconRight />
+                </TouchableOpacity>
 
                 {error && (
                   <View style={styles.errorBox}>

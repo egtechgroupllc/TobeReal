@@ -1032,5 +1032,14 @@
   "policy": "นโยบาย",
   "payment_method": "วิธีการชำระเงิน",
   "no_properties_found": "ไม่พบอสังหาริมทรัพย์",
-  "please_filter_again": "กรุณากรองอีกครั้ง"
+  "please_filter_again": "กรุณากรองอีกครั้ง!",
+  "commission_for_saveloka": "ค่าคอมมิชชั่นสำหรับ Saveloka",
+  "help_in_language": "ความช่วยเหลือตลอด 24/7 ในภาษาของคุณ",
+  "save_time_automatic": "ประหยัดเวลาด้วยการจองที่ยืนยันโดยอัตโนมัติ",
+  "we_will_promote": "เราจะโปรโมททรัพย์สินของคุณบน Google",
+  "your_revenue": "รายได้ของคุณ (รวมภาษี)",
+  "please_choose_coordinates": "กรุณาเลือกพิกัดที่ดินของคุณในแผนที่!",
+  "what_are_property": "เวลาเช็คอิน/เช็คเอาท์ของที่พักคืออะไร?",
+  "the_area_of_property": "พื้นที่ของทรัพย์สินของคุณ?",
+  "please_enter_correct": "กรุณากรอกข้อมูลที่ถูกต้อง"
 }

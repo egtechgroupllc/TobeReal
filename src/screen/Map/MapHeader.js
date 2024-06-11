@@ -21,6 +21,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../Model/api/common';
 import BottomSheetChild from './Header/BottomSheetChild';
 import InViewport from '../../components/InViewport';
+import Acreage from './Header/Acreage';
 
 export default function MapHeader({
   onFilter = () => {},
@@ -49,7 +50,6 @@ export default function MapHeader({
   const bottomSheetChildRef = useRef();
   const {country} = useCountry();
   const [openBottom, setOpenBottom] = useState(false);
-
   const listProvince = useQuery({
     queryKey: ['common', 'list-country', country?.geoname_id],
     queryFn: () => getListCountry(country?.geoname_id),
@@ -66,10 +66,9 @@ export default function MapHeader({
     setOpenBottom(true);
     bottomSheetRef.current.close();
   };
-
   useEffect(() => {
     if (dataReturn?.count === 0 && openBottom) {
-      Alert.alert(t('no_properties_found'), t('please_filter_again'), [
+      Alert.alert(t('please_filter_again'), t('no_properties_found'), [
         {
           text: t('ok'),
           onPress: () => {
@@ -205,12 +204,20 @@ export default function MapHeader({
                         }}
                       />
                     ) : watch('menu')?.id === 'BUY' ? (
-                      <TypeEstate
-                        value={watch('type')}
-                        onType={value => {
-                          setValue('type', value?.id);
-                        }}
-                      />
+                      <>
+                        <TypeEstate
+                          value={watch('type')}
+                          onType={value => {
+                            setValue('type', value?.id);
+                          }}
+                        />
+                        <Acreage
+                          value={watch('acreage')}
+                          onAcreage={value => {
+                            setValue('acreage', value);
+                          }}
+                        />
+                      </>
                     ) : (
                       <View></View>
                     )}
@@ -237,12 +244,20 @@ export default function MapHeader({
                   />
                 )}
                 {estate && (
-                  <TypeEstate
-                    value={watch('type')}
-                    onType={value => {
-                      setValue('type', value?.id);
-                    }}
-                  />
+                  <>
+                    <TypeEstate
+                      value={watch('type')}
+                      onType={value => {
+                        setValue('type', value?.id);
+                      }}
+                    />
+                    <Acreage
+                      value={watch('acreage')}
+                      onAcreage={value => {
+                        setValue('acreage', value);
+                      }}
+                    />
+                  </>
                 )}
                 <Budget
                   value={watch('budget')}

@@ -1027,5 +1027,14 @@
   "policy": "patakaran",
   "payment_method": "Mga paraan ng pagbabayad",
   "no_properties_found": "Walang nahanap na mga property",
-  "please_filter_again": "Paki-filter ulit"
+  "please_filter_again": "Paki-filter ulit!",
+  "commission_for_saveloka": "Komisyon para sa Saveloka",
+  "help_in_language": "24/7 na tulong sa iyong wika",
+  "save_time_automatic": "Magtipid ng oras sa mga awtomatikong kinumpirmang booking",
+  "we_will_promote": "Ipopromote namin ang iyong property sa Google",
+  "your_revenue": "Ang iyong kita (kabilang ang buwis)",
+  "please_choose_coordinates": "Paki-pili ang coordinates ng iyong estate sa Mapa!",
+  "what_are_property": "Ano ang oras ng check-in/check-out ng property?",
+  "the_area_of_property": "Ang lugar ng iyong property?",
+  "please_enter_correct": "Paki-pasok ang tamang impormasyon"
 }

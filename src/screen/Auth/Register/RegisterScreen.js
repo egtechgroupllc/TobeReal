@@ -2,13 +2,16 @@ import React from 'react';
 import Content from './components/Content';
 import MainAuth from '../components/MainAuth';
 import {scale} from '../../../assets/constants';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function RegisterScreen() {
+  const {t} = useLanguage();
+
   return (
     <MainAuth
-      heading={'Create an account'}
+      heading={t('create_an_account')}
       style={{marginTop: scale(40)}}
-      subHeading={'Connect with your friends today!'}>
+      subHeading={t('connect_with_your_friend')}>
       <Content />
     </MainAuth>
   );

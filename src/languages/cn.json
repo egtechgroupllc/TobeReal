@@ -13,7 +13,6 @@
   "enter_lastname": "输入您的姓氏",
   "enter_phone": "输入您的电话",
   "enter_email": "输入您的邮箱",
-  "enter_referral": "输入您的推荐码",
   "enter_new_password": "输入新密码",
   "enter_password_confirm": "确认密码",
   "already_have_account": "已有账号？",
@@ -1030,5 +1029,14 @@
   "policy": "政策",
   "payment_method": "付款方式",
   "no_properties_found": "未找到房产",
-  "please_filter_again": "请再次筛选"
+  "please_filter_again": "请再次筛选!",
+  "commission_for_saveloka": "Saveloka 的佣金",
+  "help_in_language": "全天候 24/7 用您的语言提供帮助",
+  "save_time_automatic": "通过自动确认的预订节省时间",
+  "we_will_promote": "我们将在 Google 上推广您的房产",
+  "your_revenue": "您的收入（包括税收）",
+  "please_choose_coordinates": "请选择您的房产在地图上的坐标！",
+  "what_are_property": "房产的入住/退房时间是什么时候？",
+  "the_area_of_property": "您的房产面积是多少？",
+  "please_enter_correct": "请输入正确的信息"
 }

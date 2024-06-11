@@ -13,7 +13,6 @@
   "enter_lastname": "Enter your last name",
   "enter_phone": "Enter your phone",
   "enter_email": "Enter your email",
-  "enter_referral": "Enter your Referral Code",
   "enter_new_password": "Enter new password",
   "enter_password_confirm": "Enter your password confirm",
   "already_have_account": "Already have an account?",
@@ -1038,5 +1037,23 @@
   "policy": "policy",
   "payment_method": "Payment methods",
   "no_properties_found": "No properties found",
-  "please_filter_again": "Please filter again"
+  "please_filter_again": "Please filter again!",
+
+  "commission_for_saveloka": "Commission for Saveloka",
+  "help_in_language": "24/7 help in your language",
+  "save_time_automatic": "Save time with automatically confirmed bookings",
+  "we_will_promote": "We will promote your property on Google",
+  "your_revenue": "Your revenue (including taxes)",
+  "please_choose_coordinates": "Please choose coordinates of your estate in Map!",
+  "what_are_property": "What are the property's check-in/check-out times?",
+  "the_area_of_property": "The area of ​​your property?",
+  "please_enter_correct": "Please enter correct information",
+
+  "over": "Over",
+  "enter_referral": "Enter your Referral Code",
+  "create_an_account": "Create an account",
+  "connect_with_your_friend": "Connect with your friends today!",
+  "enter_business_name": "Enter business name",
+  "enter_business_category": "Enter business category",
+  "detail_room": "Detail room"
 }

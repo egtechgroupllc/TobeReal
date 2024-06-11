@@ -26,7 +26,7 @@ export default function TimeBookingCheckInOut({data}) {
           color={COLORS.text}
           style={{textAlign: 'center'}}>
           {differenceInDays(data?.check_out_date, data?.check_in_date)}{' '}
-          {t('day')}
+          {t('night')}
         </CustomText>
       </View>
 

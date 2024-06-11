@@ -1005,5 +1005,14 @@
   "policy": "kebijakan",
   "payment_method": "Metode pembayaran",
   "no_properties_found": "Tidak ada properti yang ditemukan",
-  "please_filter_again": "Silakan filter lagi"
+  "please_filter_again": "Silakan filter lagi!",
+  "commission_for_saveloka": "Komisi untuk Saveloka",
+  "help_in_language": "Bantuan 24/7 dalam bahasa Anda",
+  "save_time_automatic": "Hemat waktu dengan pemesanan yang dikonfirmasi secara otomatis",
+  "we_will_promote": "Kami akan mempromosikan properti Anda di Google",
+  "your_revenue": "Pendapatan Anda (termasuk pajak)",
+  "please_choose_coordinates": "Silakan pilih koordinat properti Anda di peta!",
+  "what_are_property": "Jam check-in/check-out properti Anda?",
+  "the_area_of_property": "Luas properti Anda?",
+  "please_enter_correct": "Silakan masukkan informasi yang benar"
 }

@@ -1009,5 +1009,14 @@
   "policy": "dasar",
   "payment_method": "Kaedah pembayaran",
   "no_properties_found": "Tiada hartanah dijumpai",
-  "please_filter_again": "Sila tapis semula"
+  "please_filter_again": "Sila tapis semula!",
+  "commission_for_saveloka": "Komisen untuk Saveloka",
+  "help_in_language": "Bantuan 24/7 dalam bahasa anda",
+  "save_time_automatic": "Jimat masa dengan tempahan yang disahkan secara automatik",
+  "we_will_promote": "Kami akan mempromosikan hartanah anda di Google",
+  "your_revenue": "Pendapatan anda (termasuk cukai)",
+  "please_choose_coordinates": "Sila pilih koordinat harta anda di Peta!",
+  "what_are_property": "Apakah waktu daftar masuk/daftar keluar hartanah?",
+  "the_area_of_property": "Keluasan hartanah anda?",
+  "please_enter_correct": "Sila masukkan maklumat yang betul"
 }

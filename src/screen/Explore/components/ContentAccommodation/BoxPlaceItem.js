@@ -51,12 +51,14 @@ export default function BoxPlaceItem({
     );
   };
   const priceFinal = useMemo(() => {
-    return data?.rooms?.map(element => {
+    const resultPri = data?.rooms?.map(element => {
       const result = element?.room_dates.map(room => {
         return room?.price_final;
       });
+
       return Math.min(...result);
     });
+    return Math.min(...resultPri);
   }, [data?.rooms]);
 
   const freeCancel = useMemo(() => {

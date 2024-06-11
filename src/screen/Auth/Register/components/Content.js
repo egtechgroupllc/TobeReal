@@ -155,7 +155,7 @@ export default function Content() {
             onPress={() => navigate('RegisterPartnerScreen')}
             textType="semiBold"
             style={{...styles.text2, color: COLORS.primary}}>
-            {t('Become a partner of saveloka')}
+            {t('become_shome_partner')}
           </CustomText>
         </TouchableOpacity>
       </View>

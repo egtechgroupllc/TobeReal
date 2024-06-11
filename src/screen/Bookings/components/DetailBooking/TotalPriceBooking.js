@@ -22,7 +22,7 @@ export default function TotalPriceBooking({data}) {
       <ItemUtil
         Icon={IconInvoice}
         title={`${t('total_room')}`}
-        value={`${data?.number_room} ${t('room')}, ${difference} ${t('day')}`}
+        value={`${data?.number_room} ${t('room')}, ${difference} ${t('night')}`}
         styleTextValue={styles.textValueUntil}
         styleIcon={styles.iconUntil}
       />
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   textValueUntil: {
     fontSize: SIZES.xMedium,
     color: COLORS.text,
+    textTransform: 'lowercase',
   },
   iconUntil: {
     width: scale(18),

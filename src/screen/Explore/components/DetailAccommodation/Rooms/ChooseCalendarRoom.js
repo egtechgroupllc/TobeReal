@@ -42,7 +42,7 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
 
   const listSelectTime = useMemo(() => {
     return [...Array(30)].map((_, index) => {
-      return {text: `${index + 1} ${t('day')}`, value: index + 1};
+      return {text: `${index + 1} ${t('night')}`, value: index + 1};
     });
   }, []);
 

@@ -45,7 +45,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               <SetStartAccomo onChange={value => setValue('rating', value)} />
             </Box>
 
-            <Box title={"What are the property's check-in/check-out times?"}>
+            <Box title={t('what_are_property')}>
               <>
                 <TimeCheckIn
                   onChange={value => {
@@ -64,15 +64,15 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
             {/* <View style={styles.line} /> */}
 
-            <Box title={'The area of ​​your property?'}>
+            <Box title={t('the_area_of_property')}>
               <View
                 style={{
                   flexDirection: 'row',
                   columnGap: scale(30),
                 }}>
                 <CustomInput
-                  label={'Width'}
-                  placeholder="Width"
+                  label={t('width')}
+                  placeholder={t('length')}
                   name="size_width"
                   rules={requireField(t('this_field_required'))}
                   styleWrapper={{
@@ -84,8 +84,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
                 />
 
                 <CustomInput
-                  label={'Length'}
-                  placeholder="Length"
+                  label={t('length')}
+                  placeholder={t('length')}
                   name="size_length"
                   control={control}
                   rules={requireField(t('this_field_required'))}

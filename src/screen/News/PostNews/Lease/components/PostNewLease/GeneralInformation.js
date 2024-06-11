@@ -102,7 +102,7 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
             />
             {!watch('latitude') && (
               <CustomText style={{color: COLORS.error}}>
-                Please choose coordinates of your estate in Map!
+                {t('please_choose_coordinates')}
               </CustomText>
             )}
             <View style={styles.line} />

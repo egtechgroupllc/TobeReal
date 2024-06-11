@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import PostNewSellScreen from './PostNewSell/PostNewSellScreen';
 import MainWrapper from '../../../../components/MainWrapper';
 import {StyleSheet, View} from 'react-native';
@@ -12,7 +12,13 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 export default function SellScreen() {
   const {t} = useLanguage();
 
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('post_new'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const list = [
     {
       title: t('already_have_property'),
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     rowGap: scale(10),
-    marginTop: '30%',
+    marginTop: '10%',
   },
   box: {
     backgroundColor: COLORS.white,

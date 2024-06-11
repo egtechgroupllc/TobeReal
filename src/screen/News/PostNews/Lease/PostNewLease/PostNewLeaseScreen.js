@@ -87,7 +87,7 @@ export default function PostNewLeaseScreen() {
   };
   const checkIsValid = () => {
     if (`${errors}` !== '{}') {
-      showMess('Vui lòng nhập chính xác thông tin', 'error');
+      showMess(t('please_enter_correct'), 'error');
       // return;
     }
 
@@ -100,7 +100,7 @@ export default function PostNewLeaseScreen() {
       delete value?.rating;
     }
     if (!value?.latitude) {
-      showMess('Please choose coordinates of your estate in Map', 'error');
+      showMess(t('please_choose_coordinates'), 'error');
       return;
     }
 

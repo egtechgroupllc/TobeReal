@@ -65,7 +65,7 @@ export default memo(function InputPriceRoom({
             size={SIZES.xMedium}>
             {data?.data?.fee_commission_percent * 100}%{' '}
             <CustomText textType="medium" size={SIZES.xMedium}>
-              Commission for Saveloka
+              {t('commission_for_saveloka')}
             </CustomText>
           </CustomText>
 
@@ -73,18 +73,9 @@ export default memo(function InputPriceRoom({
             style={{
               marginLeft: scale(10),
             }}>
-            <ItemUtil
-              Icon={IconCheckBox}
-              value={'24/7 help in your language'}
-            />
-            <ItemUtil
-              Icon={IconCheckBox}
-              value={'Save time with automatically confirmed bookings'}
-            />
-            <ItemUtil
-              Icon={IconCheckBox}
-              value={'We will promote your property on Google'}
-            />
+            <ItemUtil Icon={IconCheckBox} value={t('help_in_language')} />
+            <ItemUtil Icon={IconCheckBox} value={t('save_time_automatic')} />
+            <ItemUtil Icon={IconCheckBox} value={t('we_will_promote')} />
           </View>
 
           <CustomText
@@ -95,7 +86,7 @@ export default memo(function InputPriceRoom({
               currency: typeCurrency,
             })}{' '}
             <CustomText textType="medium" size={SIZES.xMedium}>
-              Your revenue (including taxes)
+              {t('your_revenue')}
             </CustomText>
           </CustomText>
         </Collapsible>

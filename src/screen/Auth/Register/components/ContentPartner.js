@@ -21,8 +21,8 @@ import {
   validateMinLengthText,
   validateUserName,
 } from '../../../../utils/validate';
-import SelectCountry from '../../../News/PostNews/components/SelectCountry';
 import InputPhone from '../../../components/InputPhone';
+import SelectCountry from './SelectCountry';
 
 export default function ContentPartner() {
   const {t} = useLanguage();
@@ -114,7 +114,7 @@ export default function ContentPartner() {
           sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
           name="business_name"
-          placeholder={t('Enter business name')}
+          placeholder={t('enter_business_name')}
         />
         <CustomInput
           control={control}
@@ -122,7 +122,7 @@ export default function ContentPartner() {
           sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
           name="business_category"
-          placeholder={t('Enter business category')}
+          placeholder={t('enter_business_category')}
         />
 
         <CustomInput
