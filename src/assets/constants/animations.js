@@ -5,5 +5,5 @@ export default {
   loading: require('../animations/loading.json'),
   pending: require('../animations/pending.json'),
   failed: require('../animations/failed.json'),
-  success: require('../animations/success.json'),
+  success: require('../animations/success.gif'),
 };

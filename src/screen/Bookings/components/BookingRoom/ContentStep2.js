@@ -30,7 +30,9 @@ import LottieView from 'lottie-react-native';
 import ModalBookingSuccess from './ContentStep2/ModalBookingSuccess';
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
-export default function ContentStep2({onPress, data}) {
+import {check} from 'react-native-permissions';
+import {useCountdown} from '../../../../hooks/useCountdown';
+export default function ContentStep2({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const [contact, setContact] = useState([]);
@@ -44,6 +46,7 @@ export default function ContentStep2({onPress, data}) {
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
+  const {start, countdown} = useCountdown(10);
 
   useEffect(() => {
     const loadInfoBooking = async () => {
@@ -98,33 +101,39 @@ export default function ContentStep2({onPress, data}) {
         {
           onSuccess: dataInside => {
             isPending.current = true;
-            setCheck(dataInside?.status);
-
+            setCheck({
+              status: dataInside?.status,
+              mess: dataInside?.message,
+            });
+            start();
             // showMess(
             //   dataInside?.message,
             //   dataInside?.status ? 'success' : 'error',
             // );
 
-            setTimeout(() => {
-              setOpenContact(false);
+            setTimeout(
+              () => {
+                setOpenContact(false);
 
-              if (dataInside?.status) {
-                queryClient.invalidateQueries([
-                  'accommodation',
-                  'detail',
-                  'list-room',
-                  data?.idAccom,
-                ]);
-                queryClient.invalidateQueries(['user', 'profile']);
-                if (dataInside?.data?.payment === 'PAYPAL') {
-                  handlePaypal(dataInside?.data?.id);
-                  return;
+                if (dataInside?.status) {
+                  queryClient.invalidateQueries([
+                    'accommodation',
+                    'detail',
+                    'list-room',
+                    data?.idAccom,
+                  ]);
+                  queryClient.invalidateQueries(['user', 'profile']);
+                  if (dataInside?.data?.payment === 'PAYPAL') {
+                    handlePaypal(dataInside?.data?.id);
+                    return;
+                  }
+                  navigate('Booking', {
+                    screen: 'HomeBookingsScreen',
+                  });
                 }
-                navigate('Booking', {
-                  screen: 'HomeBookingsScreen',
-                });
-              }
-            }, 1000000);
+              },
+              dataInside?.status === false ? 3000 : 10000,
+            );
           },
           onError: err => {
             console.log({err});
@@ -133,7 +142,6 @@ export default function ContentStep2({onPress, data}) {
       );
     }, 2000);
   };
-
   return (
     <View style={styles.container}>
       <TopStep2 data={data} onChange={value => setTypePayment(value?.type)} />
@@ -154,41 +162,83 @@ export default function ContentStep2({onPress, data}) {
                 color: COLORS.black,
               }}
               textType="bold">
-              {t('we_are_always_here')}
+              {t('notification')}
             </CustomText>
           </LinearGradient>
           <View style={styles.listContact}>
-            {/* {!isPending.current ? (
+            {!isPending.current ? (
               <LottieView
                 autoPlay={true}
                 source={animations.pending}
                 style={{
-                  height: scale(200),
-                  width: scale(200),
+                  height: scale(150),
+                  width: scale(150),
                 }}
                 resizeMode="contain"
               />
             ) : (
-              <LottieView
-                autoPlay={true}
-                source={check ? animations.success : animations.failed}
-                style={{
-                  height: scale(300),
-                  width: scale(200),
-                }}
-                resizeMode="contain"
-              />
-            )} */}
-
-            <LottieView
-              autoPlay={true}
-              source={animations.success}
-              style={{
-                height: scale(200),
-                width: scale(200),
-              }}
-              resizeMode="contain"
-            />
+              <>
+                {!check?.status ? (
+                  <LottieView
+                    autoPlay={true}
+                    source={animations.failed}
+                    style={{
+                      height: scale(70),
+                      width: scale(70),
+                    }}
+                    resizeMode="contain"
+                  />
+                ) : (
+                  <CustomImage
+                    source={animations.success}
+                    style={{
+                      height: scale(70),
+                      width: scale(70),
+                    }}
+                    resizeMode="contain"
+                  />
+                )}
+                <CustomText
+                  style={{
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    paddingHorizontal: scale(20),
+                  }}
+                  textType="bold">
+                  {check?.mess}!
+                </CustomText>
+                {check?.status && (
+                  <>
+                    <CustomText
+                      textType="bold"
+                      style={{
+                        alignSelf: 'center',
+                        marginTop: scale(5),
+                      }}>
+                      0.5 TBC
+                    </CustomText>
+                    <CustomText
+                      style={{
+                        alignSelf: 'center',
+                        marginTop: scale(5),
+                      }}>
+                      Congratulations on receiving TBC coin!
+                    </CustomText>
+                    <CustomText
+                      style={{
+                        alignSelf: 'center',
+                        marginTop: scale(5),
+                        paddingBottom: scale(20),
+                        textAlign: 'center',
+                        color: COLORS.textSub,
+                      }}>
+                      You will automatic transfer {'\n'} into booking history
+                      screen in {'\n'} ... {countdown}s
+                    </CustomText>
+                  </>
+                )}
+              </>
+            )}
           </View>
         </View>
       </Modal>
@@ -243,6 +293,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contactHeader: {
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
     paddingHorizontal: scale(20),
     paddingVertical: scale(12),
     flexDirection: 'row',
@@ -251,9 +303,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listContact: {
+    borderBottomLeftRadius: scale(20),
+    borderBottomRightRadius: scale(20),
     alignItems: 'center',
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.white,
     width: '100%',
-    minHeight: scale(200),
+    minHeight: scale(120),
   },
 });
