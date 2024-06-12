@@ -1,20 +1,35 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useState} from 'react';
-import {Linking, StyleSheet, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {postBookingRoom, postPaypal} from '../../../../Model/api/apiAccom';
-import {COLORS, scale} from '../../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  animations,
+  images,
+  scale,
+} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
-import {IconCoinPoint} from '../../../../assets/icon/Icon';
+import {
+  IconCoinPoint,
+  IconSupporterYellow,
+  IconX,
+} from '../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../utils/format';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import TopStep2 from './ContentStep2/TopStep2';
+import CustomImage from '../../../../components/CustomImage';
+import LottieView from 'lottie-react-native';
+import ModalBookingSuccess from './ContentStep2/ModalBookingSuccess';
+import LinearGradient from 'react-native-linear-gradient';
+import Modal from 'react-native-modal';
 export default function ContentStep2({onPress, data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -23,6 +38,9 @@ export default function ContentStep2({onPress, data}) {
   const insets = useSafeAreaInsets();
   const policyId = data?.accommodation_policies[0]?.id;
   const queryClient = useQueryClient();
+  const [openContact, setOpenContact] = useState(false);
+  const [check, setCheck] = useState(false);
+
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
@@ -56,26 +74,39 @@ export default function ContentStep2({onPress, data}) {
       },
     );
   };
+  const isPending = useRef(false);
   const handleBookingRoom = value => {
-    typePayment
-      ? bookingRoomMu.mutate(
-          {
-            check_in_date: data?.date?.selectedStartDate,
-            check_out_date: data?.date?.selectedEndDate,
-            number_room: data?.numRoomSelect,
-            accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
-            room_id: data?.id, //id của phòng
-            contact_name: contact?.username,
-            contact_email: contact?.email,
-            contact_phone: contact?.phone,
-            // payment: typePayment,
-          },
-          {
-            onSuccess: dataInside => {
-              showMess(
-                dataInside?.message,
-                dataInside?.status ? 'success' : 'error',
-              );
+    if (!typePayment) {
+      showMess(t('please_select_payment'), 'error');
+      return;
+    }
+    setOpenContact(true);
+    setTimeout(() => {
+      // setOpenContact(false);
+      bookingRoomMu.mutate(
+        {
+          check_in_date: data?.date?.selectedStartDate,
+          check_out_date: data?.date?.selectedEndDate,
+          number_room: data?.numRoomSelect,
+          accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
+          room_id: data?.id, //id của phòng
+          contact_name: contact?.username,
+          contact_email: contact?.email,
+          contact_phone: contact?.phone,
+          // payment: typePayment,
+        },
+        {
+          onSuccess: dataInside => {
+            isPending.current = true;
+            setCheck(dataInside?.status);
+
+            // showMess(
+            //   dataInside?.message,
+            //   dataInside?.status ? 'success' : 'error',
+            // );
+
+            setTimeout(() => {
+              setOpenContact(false);
 
               if (dataInside?.status) {
                 queryClient.invalidateQueries([
@@ -85,27 +116,82 @@ export default function ContentStep2({onPress, data}) {
                   data?.idAccom,
                 ]);
                 queryClient.invalidateQueries(['user', 'profile']);
-                // if (dataInside?.data?.payment === 'PAYPAL') {
-                //   handlePaypal(dataInside?.data?.id);
-                //   return;
-                // }
+                if (dataInside?.data?.payment === 'PAYPAL') {
+                  handlePaypal(dataInside?.data?.id);
+                  return;
+                }
                 navigate('Booking', {
                   screen: 'HomeBookingsScreen',
                 });
               }
-            },
-            onError: err => {
-              console.log({err});
-            },
+            }, 1000000);
           },
-        )
-      : showMess(t('please_select_payment'), 'error');
+          onError: err => {
+            console.log({err});
+          },
+        },
+      );
+    }, 2000);
   };
 
   return (
     <View style={styles.container}>
       <TopStep2 data={data} onChange={value => setTypePayment(value?.type)} />
+      <Modal
+        isVisible={openContact}
+        animationIn={'fadeIn'}
+        animationOut={'fadeOut'}>
+        <View style={styles.contact}>
+          <LinearGradient
+            colors={['#FFE55A', '#F0B90B']}
+            start={{x: 1.2, y: 0}}
+            end={{x: 0, y: 0}}
+            style={styles.contactHeader}>
+            <IconSupporterYellow height={scale(20)} width={scale(20)} />
+            <CustomText
+              style={{
+                fontSize: SIZES.small,
+                color: COLORS.black,
+              }}
+              textType="bold">
+              {t('we_are_always_here')}
+            </CustomText>
+          </LinearGradient>
+          <View style={styles.listContact}>
+            {/* {!isPending.current ? (
+              <LottieView
+                autoPlay={true}
+                source={animations.pending}
+                style={{
+                  height: scale(200),
+                  width: scale(200),
+                }}
+                resizeMode="contain"
+              />
+            ) : (
+              <LottieView
+                autoPlay={true}
+                source={check ? animations.success : animations.failed}
+                style={{
+                  height: scale(300),
+                  width: scale(200),
+                }}
+                resizeMode="contain"
+              />
+            )} */}
 
+            <LottieView
+              autoPlay={true}
+              source={animations.success}
+              style={{
+                height: scale(200),
+                width: scale(200),
+              }}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
+      </Modal>
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
           <DetailPriceRoom data={data} />
@@ -117,7 +203,7 @@ export default function ContentStep2({onPress, data}) {
 
         <View style={styles.boxEarnPoint}>
           <IconCoinPoint />
-          <CustomText color={COLORS.blue} textType="semiBold">
+          <CustomText color={COLORS.black} textType="semiBold">
             {formatPrice(12312, {showCurrency: false})} {t('point')}
           </CustomText>
         </View>
@@ -133,7 +219,7 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    backgroundColor: '#edf8ff',
+    backgroundColor: COLORS.subPrimary,
     marginTop: 'auto',
     marginHorizontal: scale(10),
     borderRadius: scale(6),
@@ -149,5 +235,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: scale(6),
     alignItems: 'center',
+  },
+  contact: {
+    borderRadius: scale(20),
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  contactHeader: {
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(12),
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(20),
+    width: '100%',
+  },
+  listContact: {
+    alignItems: 'center',
+    backgroundColor: COLORS.grey,
+    width: '100%',
+    minHeight: scale(200),
   },
 });

@@ -25,7 +25,6 @@ export default function SelectCountry({
   const {navigate} = useNavigation();
 
   const [dataFromScreen, setDataFromScreen] = useState(null);
-
   const form = useForm();
   const {country} = useCountry();
   useEffect(() => {
@@ -43,10 +42,9 @@ export default function SelectCountry({
   //     setDataFromScreen(value);
   //   }
   // };
-
   return (
     <Controller
-      // defaultValue={defaultValue}
+      defaultValue={defaultValue || country?.id}
       control={control || form.control}
       rules={rules || requireField(t('this_field_required'))}
       name={name || 'country_id'}

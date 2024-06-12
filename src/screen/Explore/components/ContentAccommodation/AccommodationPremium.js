@@ -33,6 +33,7 @@ export default function AccommodationPremium({currency}) {
       getListRent({
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
+        accommodation_type_id: 1,
 
         country_id: country?.id,
         currency_id: currency?.id,

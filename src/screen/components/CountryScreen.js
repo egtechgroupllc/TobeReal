@@ -44,6 +44,7 @@ export default function CountryScreen() {
     queryFn: () =>
       getListCountry(router?.isProvince ? router?.country?.geoname_id : ''),
   });
+  console.log(router);
   const {onSaveCountry, country: countryStore} = useCountry();
 
   const handleDone = () => {
@@ -60,9 +61,9 @@ export default function CountryScreen() {
   };
 
   useEffect(() => {
-    countryStore?.id && setCountry(countryStore);
+    !router?.isProvince && countryStore?.id && setCountry(countryStore);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countryStore?.id]);
+  }, [countryStore?.id, router?.isProvince]);
 
   useLayoutEffect(() => {
     return setOptions({

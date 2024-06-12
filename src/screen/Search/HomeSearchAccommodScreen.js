@@ -8,10 +8,11 @@ import MainWrapper from '../../components/MainWrapper';
 import {useLanguage} from '../../hooks/useLanguage';
 import SearchChooseLocation from './SearchChooseLocation';
 import SearchPopular from './SearchPopular';
+import {useCountry} from '../../hooks/useCountry';
 export default function HomeSearchAccommodScreen() {
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
-
+  const {country} = useCountry();
   const handleSelectSearch = value => {
     navigate('Explore', {
       screen: 'HomeExploreScreen',
@@ -25,14 +26,14 @@ export default function HomeSearchAccommodScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const listCountry = useQuery({
-    queryKey: ['common', 'list-country', 1562822],
-    queryFn: () => getListCountry(1562822),
+  const listProvince = useQuery({
+    queryKey: ['common', 'list-country', country?.geoname_id],
+    queryFn: () => getListCountry(country?.geoname_id),
   });
   // useEffect(() => {
   //   setFilter(listCountry.data?.data?.[0]);
   // }, [listCountry.data?.data]);
-  const data = listCountry.data?.data?.slice(0, 9);
+  const data = listProvince.data?.data?.slice(0, 9);
   return (
     <MainWrapper>
       <View style={styles.content}>

@@ -113,7 +113,7 @@ export default function RoomItem({
                 }}>
                 <CustomText
                   textType="bold"
-                  style={{color: '#0194f3', flex: 1}}
+                  style={{color: COLORS.black, flex: 1}}
                   numberOfLines={1}>
                   {dataP?.name}
                 </CustomText>
@@ -122,7 +122,7 @@ export default function RoomItem({
                     width: scale(14),
                     height: scale(14),
                   }}
-                  fill={'#0194f3'}
+                  fill={COLORS.black}
                 />
               </View>
 
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
     padding: scale(6),
     paddingVertical: scale(10),
-    backgroundColor: '#d4edfc',
+    backgroundColor: COLORS.subPrimary,
     justifyContent: 'space-between',
     borderTopRightRadius: scale(6),
     borderTopLeftRadius: scale(6),

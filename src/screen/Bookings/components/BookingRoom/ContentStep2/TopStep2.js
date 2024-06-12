@@ -26,21 +26,21 @@ export default function TopStep2({data, onChange}) {
               rowGap: scale(4),
             }}>
             <CustomText
-              color={COLORS.white}
+              color={COLORS.black}
               textType="semiBold"
               style={{
                 textAlign: 'center',
               }}>
               {data?.nameAccom}
             </CustomText>
-            <CustomText color={COLORS.white}>
+            <CustomText color={COLORS.black}>
               {formatDate(data?.date?.selectedStartDate, {
                 dateStyle: 'dd-MM-yyyy',
               })}
               , {data?.date?.numNight} {t('night')}{' '}
             </CustomText>
           </View>
-          <IconDown fill={COLORS.white} />
+          <IconDown fill={COLORS.black} />
         </View>
 
         <ItemUtil
@@ -50,7 +50,7 @@ export default function TopStep2({data, onChange}) {
             height: scale(16),
           }}
           value={`${t('room')} id: ${data?.id}`}
-          color={COLORS.blue}
+          color={COLORS.black}
           valueBold
           styleWrapper={styles.roomCode}
         />
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     columnGap: scale(10),
     width: '100%',
-    backgroundColor: '#255c9f',
+    backgroundColor: COLORS.subPrimary,
     padding: scale(7),
     paddingHorizontal: scale(12),
   },
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
     padding: scale(10),
     justifyContent: 'center',
     width: '100%',
-    backgroundColor: '#edf8ff',
+    backgroundColor: '#f5f5f590',
   },
 });

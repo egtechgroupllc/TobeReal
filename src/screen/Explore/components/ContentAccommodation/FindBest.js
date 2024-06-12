@@ -4,7 +4,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import InViewPort from '../../../../components/InViewport';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../utils/format';
@@ -67,7 +67,7 @@ export default function FindBest({country, currency}) {
           onPressCategory={item => setFilter(item)}
           heading={title}
           subHeading={t('disc_upto') + ` 30%!`}
-          styleWrapper={{backgroundColor: '#91F2FF'}}>
+          styleWrapper={{backgroundColor: COLORS.subPrimary}}>
           {data?.data?.count !== 0 ? (
             <FlatList
               horizontal

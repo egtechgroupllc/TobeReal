@@ -37,7 +37,7 @@ export default function PaymentMethods({data, onChange}) {
         </CustomText>
         <CustomText
           textType="bold"
-          color={COLORS.blue}
+          color={COLORS.primary}
           onPress={() =>
             navigate('ListPaymentMethodsScreen', {
               onGoBack: dataBack => {

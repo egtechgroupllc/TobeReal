@@ -9,6 +9,7 @@ export const scale = (value = 0) => {
 export const COLORS = {
   blue: '#0194f3',
   primary: '#F0B90B',
+  subPrimary: '#fcf6bd',
   text: '#3b3a3a',
   textSub: '#7d7d7d',
   white: '#fff',

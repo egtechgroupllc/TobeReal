@@ -24,7 +24,6 @@ export default function SelectProvince({
   const {navigate} = useNavigation();
 
   const [dataFromScreen, setDataFromScreen] = useState(country || null);
-
   const form = useForm();
 
   const onGoBack = (value, onChange) => {
@@ -41,7 +40,6 @@ export default function SelectProvince({
       setValue(name, null);
     }
   }, [dataFromScreen, country]);
-
   useEffect(() => {
     if (watch('province')) {
       setDataFromScreen(watch('province'));
