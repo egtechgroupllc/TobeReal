@@ -13,6 +13,8 @@ export const COLORS = {
   text: '#3b3a3a',
   textSub: '#7d7d7d',
   white: '#fff',
+  white70: '#f1f1f170',
+  grey90: '#cccccc90',
   grey: '#ccc',
   black: '#000000',
   overlay: '#00000060',

@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {useLayoutEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -10,10 +10,17 @@ import SearchChooseLocation from './SearchChooseLocation';
 import SearchPopular from './SearchPopular';
 import {useCountry} from '../../hooks/useCountry';
 export default function HomeSearchAccommodScreen() {
-  const {navigate, setOptions} = useNavigation();
+  const {navigate, goBack, setOptions} = useNavigation();
   const {t} = useLanguage();
   const {country} = useCountry();
+  const dataParams = useRoute().params;
+
   const handleSelectSearch = value => {
+    dataParams?.onGoBack(value);
+    if (dataParams?.onGoBack) {
+      goBack();
+      return;
+    }
     navigate('Explore', {
       screen: 'HomeExploreScreen',
       params: value,

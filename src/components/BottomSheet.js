@@ -12,6 +12,7 @@ import React, {
 } from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
 import {SHADOW, SIZES, scale} from '../assets/constants';
 import {IconX} from '../assets/icon/Icon';
 import CustomText from './CustomText';
@@ -32,7 +33,9 @@ const BottomSheet = (
     refChild,
     disableScroll,
     onDismiss,
+    onDismissChild,
     onChange,
+    onChangeChild,
     ComponentFooter,
     index,
   },
@@ -138,10 +141,19 @@ const BottomSheet = (
       {bottomSheetChildRef && (
         <BottomSheetMain
           ref={bottomSheetChildRef}
+          onClose={onDismissChild}
+          onChange={onChangeChild}
           snapPoints={_snapPointsChild}
           enablePanDownToClose
           backdropComponent={BottomSheetBackdrop}>
-          {handleChildBottom && handleChildBottom()}
+          <View
+            style={{
+              paddingTop: scale(16),
+              paddingBottom: insets.bottom + scale(10),
+              flex: 1,
+            }}>
+            {handleChildBottom && handleChildBottom()}
+          </View>
         </BottomSheetMain>
       )}
     </BottomSheetModal>
@@ -156,7 +168,12 @@ const HandleIndicator = ({
   style,
 }) => {
   return (
-    <View style={[styles.wrapperHeader, styleHeaderWrapper]}>
+    <View
+      style={[
+        styles.wrapperHeader,
+        !title && {borderBottomWidth: 0},
+        styleHeaderWrapper,
+      ]}>
       <View style={[styles.headerHandle, style]}>
         <TouchableOpacity
           style={styles.icon}
@@ -169,16 +186,18 @@ const HandleIndicator = ({
             }}
           />
         </TouchableOpacity>
-        <CustomText
-          textType="semiBold"
-          style={[
-            {
-              fontSize: style?.fontSize || SIZES.xMedium,
-            },
-            style?.color && {color: style?.color},
-          ]}>
-          {title || 'Title'}
-        </CustomText>
+        {title && (
+          <CustomText
+            textType="semiBold"
+            style={[
+              {
+                fontSize: style?.fontSize || SIZES.xMedium,
+              },
+              style?.color && {color: style?.color},
+            ]}>
+            {title || 'Title'}
+          </CustomText>
+        )}
       </View>
       {headerComponent}
     </View>
@@ -196,6 +215,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
     paddingVertical: scale(12),
+    // height: scale(40),
   },
   headerHandle: {
     alignItems: 'center',
@@ -206,6 +226,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: scale(8),
     padding: scale(6),
+    top: scale(-10),
     // height: '100%',
   },
 });

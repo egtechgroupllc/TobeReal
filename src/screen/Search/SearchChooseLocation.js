@@ -40,7 +40,7 @@ export default function SearchChooseLocation({onPress}) {
 
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => onPress('Near me')}
+          onPress={() => onPress('near_me')}
           style={[styles.searchItem, {borderBottomWidth: 1}]}>
           <IconMyLocation fill={COLORS.primary} />
           <CustomText style={{fontSize: SIZES.xMedium}}>

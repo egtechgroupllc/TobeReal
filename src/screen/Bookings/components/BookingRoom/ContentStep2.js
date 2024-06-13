@@ -1,37 +1,25 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import React, {useEffect, useRef, useState} from 'react';
-import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Linking, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import LinearGradient from 'react-native-linear-gradient';
+import Modal from 'react-native-modal';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {postBookingRoom, postPaypal} from '../../../../Model/api/apiAccom';
-import {
-  COLORS,
-  SIZES,
-  animations,
-  images,
-  scale,
-} from '../../../../assets/constants';
+import {COLORS, SIZES, animations, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
-import {
-  IconCoinPoint,
-  IconSupporterYellow,
-  IconX,
-} from '../../../../assets/icon/Icon';
+import {IconCoinPoint, IconSupporterYellow} from '../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../components';
+import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
+import {useCountdown} from '../../../../hooks/useCountdown';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../utils/format';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import TopStep2 from './ContentStep2/TopStep2';
-import CustomImage from '../../../../components/CustomImage';
-import LottieView from 'lottie-react-native';
-import ModalBookingSuccess from './ContentStep2/ModalBookingSuccess';
-import LinearGradient from 'react-native-linear-gradient';
-import Modal from 'react-native-modal';
-import {check} from 'react-native-permissions';
-import {useCountdown} from '../../../../hooks/useCountdown';
 export default function ContentStep2({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();

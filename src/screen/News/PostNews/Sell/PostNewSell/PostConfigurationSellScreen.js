@@ -19,7 +19,7 @@ import AutoPost from '../components/PostConfiguration/AutoPost';
 import PostType from '../components/PostConfiguration/PostType';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function PostConfigurationScreen() {
+export default function PostConfigurationSellScreen() {
   const params = useRoute().params;
   const queryClient = useQueryClient();
   const {t} = useLanguage();
@@ -38,6 +38,7 @@ export default function PostConfigurationScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
+
   const createEstateSellMu = useMutation({
     mutationFn: postCreateEstatSell,
   });

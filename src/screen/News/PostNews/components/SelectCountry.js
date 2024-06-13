@@ -28,11 +28,7 @@ export default function SelectCountry({
   const form = useForm();
   const {country} = useCountry();
   useEffect(() => {
-    if (watch('country')) {
-      setDataFromScreen(watch('country'));
-    } else {
-      setDataFromScreen(country);
-    }
+    setDataFromScreen(watch('country') || country);
   }, [watch('country'), country]);
 
   // const onGoBack = (value, onChange) => {

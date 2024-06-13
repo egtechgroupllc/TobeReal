@@ -99,7 +99,6 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
       const result = (await EncryptedStorage.getItem(COUNTRY_KEY)) || '';
       const resultCurrency =
         (await EncryptedStorage.getItem(CURRENCY_KEY)) || '';
-      console.log(typeof result, 23312333, result);
 
       if (result) {
         setCountry(JSON.parse(result));

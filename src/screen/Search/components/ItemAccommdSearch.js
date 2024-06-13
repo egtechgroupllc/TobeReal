@@ -1,20 +1,17 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useMemo} from 'react';
+import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
+import {IconMapView} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import {formatPrice} from '../../../utils/format';
 import RatingBox from '../../Explore/components/ContentAccommodation/BoxPlaceItem/RatingBox';
-import ListFacilities from './ListFacilities';
-import Bottom from './Bottom';
-import ImageDetail from '../../components/ImageDetail';
 import TopImg from './TopImg';
-import {IconMapView} from '../../../assets/icon/Icon';
 
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {useCountry} from '../../../hooks/useCountry';
 import {StarRating} from '../../../components';
+import {useCountry} from '../../../hooks/useCountry';
 
 export default function ItemAccommdSearch({
   data,
@@ -22,18 +19,23 @@ export default function ItemAccommdSearch({
   rating,
   isRating,
   isDiscount,
+  objFilter,
 }) {
   const {navigate} = useNavigation();
   const params = useRoute().params;
-  const detail = () => {
+
+  const onDetail = () => {
     if (params?.menu === 'RENT') {
       onSavedName();
-      navigate('DetailAccommodationScreen', {...data, dataFilter: params});
+      navigate('DetailAccommodationScreen', {
+        ...data,
+        dataFilter: objFilter,
+      });
     } else if (params?.menu === 'BUY') {
       onSavedNameEstate();
-      navigate('DetailBuyScreen', {...data, dataFilter: params});
+      navigate('DetailBuyScreen', {...data, dataFilter: objFilter});
     } else if (params?.menu === 'TOUR') {
-      navigate('DetailTourScreen', {...data, dataFilter: params});
+      navigate('DetailTourScreen', {...data, dataFilter: objFilter});
     }
   };
   const onSavedName = async () => {
@@ -64,7 +66,7 @@ export default function ItemAccommdSearch({
       activeOpacity={0.7}
       style={styles.wrapper}
       onPress={() => {
-        detail();
+        onDetail();
       }}>
       <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
       <TopImg

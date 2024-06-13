@@ -1,4 +1,7 @@
 import {addDays, addMonths, addYears, format} from 'date-fns';
+import {vi} from 'date-fns/locale';
+import {COUNTRY_KEY} from '../context/CountryContent';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export const formatPrice = (
   price = 0,
@@ -56,6 +59,15 @@ function formatWithComma(value, suffix) {
   return formattedValue.replace('.', ',') + suffix;
 }
 
+const getCountry = async () => {
+  const countryStorage = await EncryptedStorage.getItem(COUNTRY_KEY);
+  return JSON.parse(countryStorage)?.iso2;
+};
+
+let countrya = '';
+getCountry().then(item => (countrya = item));
+console.log(countrya, 1312312313);
+
 export const formatDate = (
   date = new Date(),
   {dateStyle, addDays: daysToAdd, monthsToAdd, yearsToAdd} = {},
@@ -76,9 +88,8 @@ export const formatDate = (
 
   const dateFormat = dateStyle || 'yyyy-MM-dd';
 
-  return format(formattedDateTime, dateFormat);
+  return format(formattedDateTime, dateFormat, {locale: vi});
 };
-
 export const formatDateTime = (
   date = new Date(),
   {noDate, noHour, isHour24, addDays: daysToAdd, dateStyle} = {},
@@ -94,7 +105,7 @@ export const formatDateTime = (
   const timeFormat = noHour ? '' : !isHour24 ? 'HH:mm ' : 'hh:mm a';
   const formatString = dateStyle || `${dateFormat} ${timeFormat}`.trim();
 
-  return format(formattedDateTime, formatString);
+  return format(formattedDateTime, formatString, {locale: vi});
 };
 
 export const formatTime = (date = new Date(), {isHour24} = {}) => {

@@ -1,29 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import CustomText from '../../../components/CustomText';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
 import {useLanguage} from '../../../hooks/useLanguage';
-
-const listSort = [
-  {
-    rating: '2',
-    textRating: 'Pleasant',
-  },
-  {
-    rating: '3',
-    textRating: 'Good',
-  },
-  {
-    rating: '4',
-    textRating: 'Very good',
-  },
-  {
-    rating: '5',
-    textRating: 'Exceptional',
-  },
-];
+import {IconStar} from '../../../assets/icon/Icon';
+import {CustomButton} from '../../../components';
 
 export default function RatingReview({onSort}) {
   const [checked, setChecked] = useState(undefined);
@@ -35,45 +18,36 @@ export default function RatingReview({onSort}) {
         rowGap: scale(10),
       }}>
       <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
-        {t('review_score')}
+        Hang sao
       </CustomText>
+
       <View
         style={{
           columnGap: scale(10),
           alignItem: 'center',
           flexDirection: 'row',
         }}>
-        {listSort.map((item, index) => (
-          <TouchableOpacity
-            key={index}
+        {[...Array(5)].map((item, index) => (
+          <CustomButton
+            text={`${index + 1}`}
+            iconRight={IconStar}
+            outline
+            onPress={() => setChecked(index)}
             style={{
               ...styles.item,
-              borderWidth: checked?.rating === item.rating ? 1.3 : 1,
-              borderColor:
-                checked?.rating === item.rating ? COLORS.primary : '#f1f1f1',
+              borderWidth: checked === index ? 1.3 : 1,
+              borderColor: checked === index ? COLORS.primary : '#f1f1f1',
             }}
-            activeOpacity={0.7}
-            onPress={() => setChecked(item)}>
-            <CustomText
-              textType="semiBold"
-              style={
-                checked?.rating === item.rating && {
-                  color: COLORS.primary,
-                }
-              }>
-              {item.rating}+
-            </CustomText>
-
-            <CustomText
-              numberOfLines={1}
-              style={
-                checked?.rating === item.rating && {
-                  color: COLORS.primary,
-                }
-              }>
-              {item.textRating}
-            </CustomText>
-          </TouchableOpacity>
+            styleText={{
+              fontSize: SIZES.small,
+              color: checked === index ? COLORS.primary : '#000',
+            }}
+            styleIcon={{
+              color: COLORS.primary,
+              width: SIZES.small,
+              height: SIZES.small,
+            }}
+          />
         ))}
       </View>
     </View>
@@ -90,6 +64,7 @@ const styles = StyleSheet.create({
     borderColor: '#f1f1f1',
     rowGap: scale(4),
     flex: 1,
+    height: scale(30),
   },
   boxLine: {
     height: scale(20),

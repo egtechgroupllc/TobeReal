@@ -35,7 +35,7 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
     // params?.name && setValue('name', params?.name);
     // params?.id && unregister('name');
 
-    if (params === 'Near me' || !params) {
+    if (params === 'near_me' || !params) {
       unregister(['name', 'province']);
       setValue('near_me', true);
     } else {

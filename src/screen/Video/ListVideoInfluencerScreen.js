@@ -22,6 +22,7 @@ import video from '../../assets/constants/video';
 import {IconGoBack} from '../../assets/icon/Icon';
 import RangeSlider from './components/RangeSlider';
 import VideoPlay from './components/VideoPlay';
+import Comment from './Comment';
 
 const listVideo = [
   {
@@ -269,7 +270,7 @@ export default function ListVideoInfluencerScreen() {
           // maximumValue={value?.seekableDuration}
           />
         </View>
-        {/* <Comment ref={commentRef} /> */}
+        <Comment ref={commentRef} />
       </View>
     </View>
   );

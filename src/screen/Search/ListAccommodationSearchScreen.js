@@ -1,25 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+
 import MainWrapper from '../../components/MainWrapper';
 import {useCountry} from '../../hooks/useCountry';
-import {useLanguage} from '../../hooks/useLanguage';
 import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import MapHeader from '../Map/MapHeader';
 import ListAccomSearchContent from './ListAccomSearchContent';
 import ListEstateSearchContent from './ListEstateSearchContent';
 import ListTourSearchContent from './ListTourSearchContent';
-import CustomText from '../../components/CustomText';
-import {SIZES} from '../../assets/constants';
-import {formatDate} from '../../utils/format';
-import {differenceInDays} from 'date-fns';
+import SearchNavBar from './components/SearchNavBar';
 
 export default function ListAccommodationSearchScreen() {
-  const {t} = useLanguage();
   const params = useRoute().params;
   const {country, currency} = useCountry();
   const [filter, setFilter] = useState();
   const [current, setCurrent] = useState({});
+  const [empale, setEmpale] = useState();
+  const isFilter = useRef();
   const {setOptions} = useNavigation();
 
   const currentPosition = useCallback(async () => {
@@ -39,41 +38,50 @@ export default function ListAccommodationSearchScreen() {
     currentPosition();
   }, []);
 
-  useLayoutEffect(() => {
+  const objFilter = useMemo(() => {
+    return {
+      ...params,
+      ...filter,
+      ...empale?.occupancy,
+      near_me: empale?.destination === 'near_me',
+      province:
+        (isFilter.current ? filter?.province : empale?.destination) ||
+        params?.province,
+      date: !empale
+        ? params?.date
+        : {
+            date_end: empale?.date_end,
+            date_start: empale?.date_start,
+          },
+    };
+  }, [JSON.stringify([params, filter, empale]), isFilter.current]);
+
+  useEffect(() => {
     return setOptions({
       headerTitleComponent: () => (
-        <View
-          style={{
-            width: '70%',
-          }}>
-          <CustomText
-            textType="bold"
-            numberOfLines={1}
-            style={{
-              color: '#fff',
-              fontSize: SIZES.xMedium,
-            }}>
-            {params.near_me ? 'Near me' : params?.province?.name}
-          </CustomText>
-          <CustomText
-            style={{
-              color: '#fff',
-            }}>
-            {`${formatDate(params?.date?.date_end)}, ${differenceInDays(
-              params?.date?.date_end,
-              params?.date?.date_start,
-            )} ${t('night')}, ${params?.numAdult} ${t('guest')}, ${
-              params?.numRoom
-            } ${t('room')}`}
-          </CustomText>
-        </View>
+        <SearchNavBar
+          data={objFilter}
+          onEmpale={value => {
+            isFilter.current = false;
+            setEmpale(value);
+          }}
+        />
       ),
       headerTitleStyle: {
         textAlign: 'left',
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+  }, [JSON.stringify(objFilter)]);
+
+  const onFilter = useCallback(
+    value => {
+      isFilter.current = true;
+      setFilter(value);
+    },
+    [isFilter.current],
+  );
+
   return (
     <MainWrapper
       scrollEnabled={false}
@@ -84,24 +92,18 @@ export default function ListAccommodationSearchScreen() {
           width: '100%',
         }}>
         {params?.menu === 'TOUR' ? (
-          <MapHeader onFilter={value => setFilter(value)} accom mapProvince />
+          <MapHeader onFilter={onFilter} accom mapProvince />
         ) : params?.menu === 'RENT' ? (
-          <MapHeader onFilter={value => setFilter(value)} accom mapProvince />
+          <MapHeader onFilter={onFilter} accom mapProvince />
         ) : (
-          <MapHeader
-            onFilter={value => {
-              setFilter(value);
-            }}
-            estate
-            mapProvince
-          />
+          <MapHeader onFilter={onFilter} estate mapProvince />
         )}
 
         {params?.menu === 'TOUR' ? (
           <ListTourSearchContent paramsFilter={filter} />
         ) : params?.menu === 'RENT' ? (
           <ListAccomSearchContent
-            paramsFilter={filter}
+            paramsFilter={objFilter}
             location={current}
             country={country}
             currency={currency}

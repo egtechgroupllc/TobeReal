@@ -7,7 +7,7 @@ import {
   PostNewLeaseScreen,
 } from '../screen/News/PostNews/Lease';
 import {
-  PostConfigurationScreen,
+  PostConfigurationSellScreen,
   PostNewSellScreen,
   SellScreen,
 } from '../screen/News/PostNews/Sell';
@@ -48,8 +48,8 @@ export default routerNews = [
     component: PostNewTourScreen,
   },
   {
-    name: 'PostConfigurationScreen',
-    component: PostConfigurationScreen,
+    name: 'PostConfigurationSellScreen',
+    component: PostConfigurationSellScreen,
   },
 
   {

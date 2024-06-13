@@ -65,7 +65,7 @@ export default function DetailAccommodationScreen() {
           <SimilarApartmentsNearby />,
         ];
   }, [data?.data]);
-
+  // console.log(params, '2131232adad13');
   return (
     <MainWrapper scrollEnabled={false} noImgColor>
       <AnimateScrollWrapper

@@ -15,8 +15,8 @@ import {type} from '../../components/Marquee';
 
 export default function ListTourSearchContent({paramsFilter}) {
   const insets = useSafeAreaInsets();
-  const params = useRoute().params;
-  const filter = {...params, ...paramsFilter};
+
+  const filter = paramsFilter;
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'tour',

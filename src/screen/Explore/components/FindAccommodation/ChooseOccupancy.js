@@ -39,7 +39,7 @@ export default function ChooseOccupancy({setValue}) {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={t('occupancy')}
-        snapPoints={['70%']}
+        snapPoints={['60%']}
         styleContent={{
           rowGap: scale(10),
           padding: scale(20),

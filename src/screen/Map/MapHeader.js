@@ -1,29 +1,30 @@
-import React, {useEffect, useRef, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 
+import {useQuery} from '@tanstack/react-query';
+import {useForm} from 'react-hook-form';
+import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {CustomButton, CustomInput} from '../../components';
 import BottomSheet from '../../components/BottomSheet';
+import InViewport from '../../components/InViewport';
+import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
 import FilterSort from '../Explore/components/DetailAccommodation/Review/FilterSort';
-import BedRoom from './Header/BedRoom';
+import Acreage from './Header/Acreage';
+import BottomSheetChild from './Header/BottomSheetChild';
 import Budget from './Header/Budget';
-import RatingReview from './Header/RatingReview';
+import MapProvince from './Header/MapProvince';
+import Menubar from './Header/Menubar';
 import SortBy from './Header/SortBy';
 import TypeAccommoda from './Header/TypeAccommoda';
-import {useForm} from 'react-hook-form';
 import TypeEstate from './Header/TypeEstate';
-import Menubar from './Header/Menubar';
-import {useCountry} from '../../hooks/useCountry';
-import MapProvince from './Header/MapProvince';
-import BottomSheetListSelect from '../../components/BottomSheetListSelect';
-import {useQuery} from '@tanstack/react-query';
-import {getListCountry} from '../../Model/api/common';
-import BottomSheetChild from './Header/BottomSheetChild';
-import InViewport from '../../components/InViewport';
-import Acreage from './Header/Acreage';
+import BedRoom from './Header/BedRoom';
+import RatingReview from './Header/RatingReview';
+import StartAccom from './Header/StartAccom';
 
-export default function MapHeader({
+export default memo(function MapHeader({
   onFilter = () => {},
   accom,
   estate,
@@ -66,6 +67,7 @@ export default function MapHeader({
     setOpenBottom(true);
     bottomSheetRef.current.close();
   };
+
   useEffect(() => {
     if (dataReturn?.count === 0 && openBottom) {
       Alert.alert(t('please_filter_again'), t('no_properties_found'), [
@@ -80,6 +82,19 @@ export default function MapHeader({
       ]);
     }
   }, [dataReturn?.count, openBottom]);
+
+  const handleSelectProvince = useCallback(value => {
+    value && setValue('province', value);
+    bottomSheetChildRef.current.closeChild();
+  }, []);
+
+  const handleReset = useCallback(value => {
+    const keyReset = Object.keys(watch());
+    if (keyReset.includes('province')) {
+      reset();
+    }
+    setIsRender(false);
+  }, []);
 
   return (
     <View
@@ -113,10 +128,7 @@ export default function MapHeader({
           handleChildBottom={() => (
             <BottomSheetChild
               data={listProvince}
-              onChange={value => {
-                value && setValue('province', value);
-                bottomSheetChildRef.current.closeChild();
-              }}
+              onChange={handleSelectProvince}
             />
           )}
           ComponentFooter={
@@ -139,15 +151,7 @@ export default function MapHeader({
                 styleText={{
                   fontSize: SIZES.xMedium,
                 }}
-                onPress={() => {
-                  const keyReset = Object.keys(watch());
-
-                  if (keyReset.includes('province')) {
-                    reset();
-                    // unregister(keyReset);
-                  }
-                  setIsRender(false);
-                }}
+                onPress={handleReset}
               />
               <CustomButton
                 // onPress={() => {
@@ -236,12 +240,20 @@ export default function MapHeader({
                 )}
                 {/* <RatingReview /> */}
                 {accom && (
-                  <TypeAccommoda
-                    value={watch('type')}
-                    onType={value => {
-                      setValue('type', value?.id);
-                    }}
-                  />
+                  <View
+                    style={{
+                      rowGap: scale(20),
+                    }}>
+                    <TypeAccommoda
+                      value={watch('type')}
+                      onType={value => {
+                        setValue('type', value?.id);
+                      }}
+                    />
+                    <StartAccom />
+
+                    <RatingReview />
+                  </View>
                 )}
                 {estate && (
                   <>
@@ -280,6 +292,6 @@ export default function MapHeader({
       </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({});

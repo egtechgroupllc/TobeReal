@@ -52,7 +52,7 @@ export default function PostNewSellScreen() {
     delete value?.currency;
     delete value?.province;
 
-    navigate('PostConfigurationScreen', value);
+    navigate('PostConfigurationSellScreen', value);
   };
 
   useEffect(() => {

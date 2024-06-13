@@ -75,6 +75,7 @@ export default memo(function CustomButton({
   const timer = useRef<any>(null);
   const TIMEOUT = 400;
 
+
   const debounce = (onSingle: () => void, onDouble: () => void) => {
     clearTimeout(timer.current);
 
