@@ -9,7 +9,6 @@ export default function usePagination(
   const queryClient = useQueryClient();
 
   const [page, setPage] = useState(1);
-  console.log({page, ...keyQuery});
   const {data, isFetching, ...props} = useQuery({
     queryKey: [...keyArr, page],
     queryFn: () => callFunc({page, ...keyQuery}),

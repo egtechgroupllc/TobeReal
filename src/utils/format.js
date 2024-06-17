@@ -66,7 +66,6 @@ const getCountry = async () => {
 
 let countrya = '';
 getCountry().then(item => (countrya = item));
-console.log(countrya, 1312312313);
 
 export const formatDate = (
   date = new Date(),

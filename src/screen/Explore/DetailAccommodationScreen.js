@@ -51,6 +51,7 @@ export default function DetailAccommodationScreen() {
 
   const listView = useMemo(() => {
     const dataDetail = data?.data;
+
     return !dataDetail
       ? []
       : [
@@ -65,6 +66,7 @@ export default function DetailAccommodationScreen() {
           <SimilarApartmentsNearby />,
         ];
   }, [data?.data]);
+
   // console.log(params, '2131232adad13');
   return (
     <MainWrapper scrollEnabled={false} noImgColor>

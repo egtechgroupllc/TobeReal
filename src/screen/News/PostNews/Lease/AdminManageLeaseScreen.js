@@ -6,7 +6,7 @@ import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
 import {CustomButton} from '../../../../components';
-import {QueryClient, useMutation} from '@tanstack/react-query';
+import {QueryClient, useMutation, useQueryClient} from '@tanstack/react-query';
 import {deleteAccom} from '../../../../Model/api/apiAccom';
 import {showMess} from '../../../../assets/constants/Helper';
 import HeaderRight from '../../../../navigation/components/HeaderRight';
@@ -16,6 +16,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
+  const queryClient = useQueryClient();
 
   const {setOptions} = useNavigation();
   const {navigate, goBack} = useNavigation();
@@ -51,7 +52,8 @@ export default function AdminManageLeaseScreen() {
 
           if (dataInside?.status) {
             goBack();
-            QueryClient.invalidateQueries(['accommodation', 'my-list']);
+            queryClient.invalidateQueries(['accommodation', 'my-list']);
+            queryClient.invalidateQueries(['accommodation', 'list-rent']);
           }
         },
 

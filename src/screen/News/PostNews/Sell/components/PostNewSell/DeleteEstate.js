@@ -34,6 +34,7 @@ export default function DeleteEstate({data, onSuccess, onCancel}) {
           if (dataInside?.status) {
             onSuccess();
             queryClient.invalidateQueries(['estate', 'my-list']);
+            queryClient.invalidateQueries(['estate', 'list-post']);
           }
         },
 

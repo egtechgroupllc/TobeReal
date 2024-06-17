@@ -1041,5 +1041,12 @@
   "please_choose_coordinates": "กรุณาเลือกพิกัดที่ดินของคุณในแผนที่!",
   "what_are_property": "เวลาเช็คอิน/เช็คเอาท์ของที่พักคืออะไร?",
   "the_area_of_property": "พื้นที่ของทรัพย์สินของคุณ?",
-  "please_enter_correct": "กรุณากรอกข้อมูลที่ถูกต้อง"
+  "please_enter_correct": "กรุณากรอกข้อมูลที่ถูกต้อง",
+  "over": "จบ",
+  "enter_referral": "กรอกรหัสอ้างอิงของคุณ",
+  "create_an_account": "สร้างบัญชี",
+  "connect_with_your_friend": "เชื่อมต่อกับเพื่อนของคุณวันนี้!",
+  "enter_business_name": "กรอกชื่อธุรกิจ",
+  "enter_business_category": "กรอกประเภทธุรกิจ",
+  "detail_room": "รายละเอียดห้อง"
 }

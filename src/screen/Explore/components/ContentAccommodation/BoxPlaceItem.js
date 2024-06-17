@@ -47,7 +47,7 @@ export default function BoxPlaceItem({
       : [];
     await EncryptedStorage.setItem(
       'save_name',
-      JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
+      JSON.stringify(result ? [data, ...arrsdf.slice(0, 5)] : [data]),
     );
   };
   const priceFinal = useMemo(() => {
@@ -75,6 +75,7 @@ export default function BoxPlaceItem({
   }, [data?.rooms]);
 
   const {country} = useCountry();
+
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (

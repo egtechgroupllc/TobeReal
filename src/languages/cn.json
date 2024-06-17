@@ -1038,5 +1038,12 @@
   "please_choose_coordinates": "请选择您的房产在地图上的坐标！",
   "what_are_property": "房产的入住/退房时间是什么时候？",
   "the_area_of_property": "您的房产面积是多少？",
-  "please_enter_correct": "请输入正确的信息"
+  "please_enter_correct": "请输入正确的信息",
+  "over": "结束",
+  "enter_referral": "输入推荐码",
+  "create_an_account": "创建账户",
+  "connect_with_your_friend": "今天就和你的朋友们联系吧！",
+  "enter_business_name": "输入企业名称",
+  "enter_business_category": "输入企业类别",
+  "detail_room": "房间详情"
 }

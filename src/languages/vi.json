@@ -1043,5 +1043,12 @@
   "please_choose_coordinates": "Vui lòng chọn tọa độ của bất động sản của bạn trên bản đồ!",
   "what_are_property": "Thời gian nhận phòng/trả phòng của bất động sản là gì?",
   "the_area_of_property": "Diện tích của bất động sản của bạn?",
-  "please_enter_correct": "Vui lòng nhập thông tin chính xác"
+  "please_enter_correct": "Vui lòng nhập thông tin chính xác",
+  "over": "Kết thúc",
+  "enter_referral": "Nhập mã giới thiệu của bạn",
+  "create_an_account": "Tạo tài khoản",
+  "connect_with_your_friend": "Kết nối với bạn bè của bạn ngay hôm nay!",
+  "enter_business_name": "Nhập tên doanh nghiệp",
+  "enter_business_category": "Nhập loại hình doanh nghiệp",
+  "detail_room": "Chi tiết phòng"
 }

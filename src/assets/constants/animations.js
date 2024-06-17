@@ -6,4 +6,6 @@ export default {
   pending: require('../animations/pending.json'),
   failed: require('../animations/failed.json'),
   success: require('../animations/success.gif'),
+  location: require('../animations/location.gif'),
+  locationJson: require('../animations/location.json'),
 };

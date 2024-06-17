@@ -31,7 +31,7 @@ export default function ProfileScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
-
+  console.log(token);
   return (
     <MainWrapper refreshControl>
       {token ? (

@@ -38,7 +38,7 @@ export default function Nearby({data, coordinate}) {
               rowGap: scale(10),
               justifyContent: 'space-between',
             }}>
-            {data.slice(0, 4).map((item, index) => {
+            {data.slice(0, 10).map((item, index) => {
               return (
                 <View
                   key={index}

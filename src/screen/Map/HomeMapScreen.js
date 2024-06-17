@@ -21,6 +21,7 @@ import {useCountry} from '../../hooks/useCountry';
 import CustomText from '../../components/CustomText';
 import {Platform} from 'react-native';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useRoute} from '@react-navigation/native';
 
 const initialMapState = {
   markers: [],

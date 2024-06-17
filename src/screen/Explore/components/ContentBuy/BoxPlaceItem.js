@@ -237,7 +237,7 @@ export default function BoxPlaceItem({
                       </CustomText>
                     </View>
 
-                    <View
+                    {/* <View
                       style={{
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -256,7 +256,7 @@ export default function BoxPlaceItem({
                         height={scale(10)}
                         fill={'#4e4c4c'}
                       />
-                    </View>
+                    </View> */}
 
                     {isViewMap && (
                       <TouchableOpacity

@@ -69,7 +69,6 @@ export default function AddPolicyScreen({route}) {
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
-
           if (dataInside?.status) {
             queryClient.invalidateQueries([
               'accommodation',

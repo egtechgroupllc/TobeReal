@@ -52,7 +52,7 @@ export default function ItemBox({style, isShadow = true, data}) {
             {data?.user?.username}
           </CustomText>
 
-          <StarRating rating={4.5} />
+          <StarRating rating={data?.rating} />
         </View>
       </View>
 

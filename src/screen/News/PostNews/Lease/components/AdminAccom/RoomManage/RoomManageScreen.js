@@ -28,7 +28,7 @@ export default function RoomManageScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-  const numColumns = Math.ceil(params?.rooms?.length / 4);
+  const numColumns = Math.ceil(params?.rooms?.length / 3);
 
   return (
     <MainWrapper

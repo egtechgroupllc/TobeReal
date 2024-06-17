@@ -11,61 +11,156 @@ import CustomText from '../../../../../components/CustomText';
 import LottieView from 'lottie-react-native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import ReactNativeModal from 'react-native-modal';
+import Modal from 'react-native-modal';
+import {IconSupporterYellow} from '../../../../../assets/icon/Icon';
+import CustomImage from '../../../../../components/CustomImage';
 
-export default function ModalBookingSuccess({open}) {
+export default function ModalBookingSuccess({
+  openContact,
+  isPending,
+  check,
+  countdown,
+}) {
   const {t} = useLanguage();
 
   return (
-    <View style={{position: 'absolute', height: scale(100)}}>
-      <ReactNativeModal
-        isVisible={open}
-        onSwipeComplete={() => {
-          setOpenContact(false);
-        }}
-        swipeDirection={['up', 'left', 'right', 'down']}
-        onBackdropPress={() => {
-          setOpenContact(false);
-        }}>
-        <View style={styles.contact}>
-          <LinearGradient
-            colors={['#FFE55A', '#F0B90B']}
-            start={{x: 1.2, y: 0}}
-            end={{x: 0, y: 0}}
-            style={styles.contactHeader}>
-            <CustomText
+    <Modal
+      isVisible={openContact}
+      animationIn={'fadeIn'}
+      animationOut={'fadeOut'}>
+      <View style={styles.contact}>
+        <LinearGradient
+          colors={['#FFE55A', '#F0B90B']}
+          start={{x: 1.2, y: 0}}
+          end={{x: 0, y: 0}}
+          style={styles.contactHeader}>
+          <IconSupporterYellow height={scale(20)} width={scale(20)} />
+          <CustomText
+            style={{
+              fontSize: SIZES.small,
+              color: COLORS.black,
+            }}
+            textType="bold">
+            {t('notification')}
+          </CustomText>
+        </LinearGradient>
+        <View style={styles.listContact}>
+          {!isPending.current ? (
+            <LottieView
+              autoPlay={true}
+              source={animations.pending}
               style={{
-                fontSize: SIZES.small,
-                color: COLORS.black,
+                height: scale(150),
+                width: scale(150),
               }}
-              textType="bold">
-              {t('we_are_always_here')}
-            </CustomText>
-          </LinearGradient>
-
-          <View style={styles.listContact}>
-            <LottieView autoPlay={true} source={animations.pending} />
-          </View>
+              resizeMode="contain"
+            />
+          ) : (
+            <>
+              {!check?.status ? (
+                <LottieView
+                  autoPlay={true}
+                  source={animations.failed}
+                  style={{
+                    height: scale(70),
+                    width: scale(70),
+                  }}
+                  resizeMode="contain"
+                />
+              ) : (
+                <CustomImage
+                  source={animations.success}
+                  style={{
+                    height: scale(70),
+                    width: scale(70),
+                  }}
+                  resizeMode="contain"
+                />
+              )}
+              <CustomText
+                style={{
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  paddingHorizontal: scale(20),
+                }}
+                textType="bold">
+                {check?.mess}!
+              </CustomText>
+              {check?.status ? (
+                <>
+                  <CustomText
+                    textType="bold"
+                    style={{
+                      alignSelf: 'center',
+                      marginTop: scale(5),
+                    }}>
+                    +0.5 TBC
+                  </CustomText>
+                  <CustomText
+                    style={{
+                      alignSelf: 'center',
+                      marginTop: scale(5),
+                    }}>
+                    Congratulations on receiving TBC coin!
+                  </CustomText>
+                  <CustomText
+                    style={{
+                      alignSelf: 'center',
+                      marginTop: scale(5),
+                      paddingBottom: scale(20),
+                      textAlign: 'center',
+                      color: COLORS.textSub,
+                    }}>
+                    You will automatic transfer {'\n'} into booking history
+                    screen in {'\n'} ... {countdown}s
+                  </CustomText>
+                </>
+              ) : (
+                <>
+                  <CustomText
+                    style={{
+                      alignSelf: 'center',
+                      marginTop: scale(5),
+                      paddingBottom: scale(20),
+                      textAlign: 'center',
+                      color: COLORS.textSub,
+                    }}>
+                    Your transaction has been canceled due to {'\n'} an error
+                    during the booking process.{'\n'}Please try again!
+                  </CustomText>
+                </>
+              )}
+            </>
+          )}
         </View>
-      </ReactNativeModal>
-    </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   contact: {
-    backgroundColor: COLORS.error,
     borderRadius: scale(20),
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   contactHeader: {
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
     paddingHorizontal: scale(20),
     paddingVertical: scale(12),
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(20),
+    width: '100%',
   },
   listContact: {
+    borderBottomLeftRadius: scale(20),
+    borderBottomRightRadius: scale(20),
     alignItems: 'center',
-    paddingVertical: scale(15),
-    rowGap: scale(10),
+    backgroundColor: COLORS.white,
+    width: '100%',
+    minHeight: scale(120),
   },
 });

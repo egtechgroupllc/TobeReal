@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {KEY_MAP} from '../../../../../Model/url';
 import {COLORS, SHADOW, scale} from '../../../../../assets/constants';
@@ -9,15 +9,17 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import {getCurrentLocation} from '../../../../../utils/getCurrentLocation';
 import WrapperContent from '../../WrapperContent';
 import Nearby from '../Rooms/components/Nearby';
+import {useNavigation} from '@react-navigation/native';
+import {dataMapNearby} from '../../../../../assets/dataFake/MapNearby';
 
 export default function DetailAccommoMap({
   region,
   data,
   address,
   styleWrapper,
-  isShowNearby = true,
 }) {
   const {t} = useLanguage();
+  const {navigate} = useNavigation();
   const [coordinate, setCoordinate] = useState(
     data?.latitude
       ? {
@@ -30,7 +32,6 @@ export default function DetailAccommoMap({
         },
   );
 
-  const [listLocationNearby, setListLocationNearby] = useState([]);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -39,26 +40,6 @@ export default function DetailAccommoMap({
       animated: true,
     });
   }, [coordinate]);
-
-  const radius = 9 * 1000;
-
-  const fetchPlaces = async () => {
-    const {coords} = await getCurrentLocation();
-    if (coords) {
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${data.latitude},${data.longitude}&radius=${radius}&key=${KEY_MAP}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(dataRes => {
-          setListLocationNearby(dataRes.results);
-        });
-    }
-  };
-
-  useEffect(() => {
-    isShowNearby && fetchPlaces();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, isShowNearby]);
 
   useEffect(() => {
     region && setCoordinate(region);
@@ -73,7 +54,12 @@ export default function DetailAccommoMap({
           rowGap: scale(10),
           width: '100%',
         }}>
-        <View style={styles.boxMap}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.boxMap}
+          onPress={() =>
+            navigate('NoBottomTab', {screen: 'MapLocateEstate', params: data})
+          }>
           <MapView
             scrollEnabled={false}
             ref={mapRef}
@@ -104,10 +90,7 @@ export default function DetailAccommoMap({
               {address || data?.address}
             </CustomText>
           </View>
-        </View>
-        {isShowNearby && (
-          <Nearby data={listLocationNearby} coordinate={coordinate} />
-        )}
+        </TouchableOpacity>
       </View>
     </WrapperContent>
   );

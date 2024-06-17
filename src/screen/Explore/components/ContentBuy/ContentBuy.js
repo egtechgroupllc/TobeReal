@@ -11,6 +11,8 @@ import ExploreNearbyEstate from './ExploreNearbyEstate';
 import DiscoveryEstate from './DiscoveryEstate';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
+import {useQuery} from '@tanstack/react-query';
+import {getListSell} from '../../../../Model/api/apiEstate';
 
 const dataWorld = [
   {
@@ -322,7 +324,18 @@ export default memo(function ContentBuy() {
       setTourData(dataInternational);
     }
   };
-
+  const {data, isLoading, isError, error} = useQuery({
+    queryKey: [
+      'estate',
+      'list-post',
+      {
+        estate_type_id: 1,
+        country_id: country?.id,
+        // province_id: filter?.id,
+      },
+    ],
+    queryFn: () => getListSell({country_id: country?.id}),
+  });
   useEffect(() => {
     const loadSavedName = async () => {
       const result = await EncryptedStorage.getItem('@save_name_estate');
@@ -332,13 +345,18 @@ export default memo(function ContentBuy() {
     loadSavedName();
   }, []);
 
-  const dataNew = useMemo(
-    () =>
-      listSavedName?.filter(item => {
-        return item?.country_id === country?.id;
-      }),
-    [listSavedName?.[0]?.id, country?.id],
-  );
+  const dataNew = useMemo(() => {
+    const filterSaved = listSavedName?.filter(item => {
+      return item?.country_id === country?.id;
+    });
+
+    const dataIds = data?.data?.rows?.map(element => element?.id) || [];
+    const result = filterSaved?.filter(item => {
+      return dataIds.includes(item?.id);
+    });
+
+    return result;
+  }, [listSavedName, country?.id, data?.data?.count]);
   return (
     <View style={styles.wrapper}>
       {dataNew?.length > 0 ? <BuySell data={dataNew} /> : <View />}

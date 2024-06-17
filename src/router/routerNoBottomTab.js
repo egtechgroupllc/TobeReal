@@ -16,6 +16,7 @@ import BookTourScreen from '../screen/Explore/components/ContentTour/DetailTour/
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
+import MapLocateEstate from '../screen/Map/MapLocateEstate';
 import {
   AccommoManagementScreen,
   AddPolicyScreen,
@@ -200,6 +201,10 @@ export default routerNoBottomTab = [
   {
     name: 'NotifyScreen',
     component: NotifyScreen,
+  },
+  {
+    name: 'MapLocateEstate',
+    component: MapLocateEstate,
   },
   {
     name: 'AdminManageLeaseScreen',

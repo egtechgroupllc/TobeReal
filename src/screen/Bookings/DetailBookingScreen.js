@@ -21,7 +21,7 @@ export default function DetailBookingScreen() {
       <MainWrapper styleContent={styles.wrapper}>
         <View
           style={{
-            backgroundColor: '#b5e5fe',
+            backgroundColor: COLORS.subPrimary,
             padding: scale(10),
           }}>
           <CustomText textType="bold" size={SIZES.large}>
@@ -145,7 +145,7 @@ export default function DetailBookingScreen() {
           <CustomText
             textType="medium"
             size={SIZES.xMedium}
-            color="#0071ce"
+            color={COLORS.black}
             style={{
               textAlign: 'center',
               paddingTop: scale(12),
@@ -161,7 +161,7 @@ export default function DetailBookingScreen() {
 }
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#baf076',
+    backgroundColor: COLORS.subPrimary,
     marginHorizontal: scale(12),
     borderRadius: scale(12),
     overflow: 'hidden',

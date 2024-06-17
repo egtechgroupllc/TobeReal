@@ -1036,5 +1036,12 @@
   "please_choose_coordinates": "Paki-pili ang coordinates ng iyong estate sa Mapa!",
   "what_are_property": "Ano ang oras ng check-in/check-out ng property?",
   "the_area_of_property": "Ang lugar ng iyong property?",
-  "please_enter_correct": "Paki-pasok ang tamang impormasyon"
+  "please_enter_correct": "Paki-pasok ang tamang impormasyon",
+  "over": "Tapos na",
+  "enter_referral": "Ilagay ang Referral Code mo",
+  "create_an_account": "Gumawa ng account",
+  "connect_with_your_friend": "Makipag-ugnayan sa iyong mga kaibigan ngayon!",
+  "enter_business_name": "Ilagay ang pangalan ng negosyo",
+  "enter_business_category": "Ilagay ang kategorya ng negosyo",
+  "detail_room": "Detalye ng kwarto"
 }

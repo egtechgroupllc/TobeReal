@@ -75,6 +75,8 @@ export default {
   iconBank: require('../images/iconBank.png'),
   iconDirect: require('../images/iconDirect.png'),
   pending: require('../images/pending.gif'),
+  hotel: require('../images/hotel.png'),
+
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),
   // c15_2: require('../images/c15_2.jpg'),

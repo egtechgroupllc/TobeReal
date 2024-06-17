@@ -1014,5 +1014,12 @@
   "please_choose_coordinates": "Silakan pilih koordinat properti Anda di peta!",
   "what_are_property": "Jam check-in/check-out properti Anda?",
   "the_area_of_property": "Luas properti Anda?",
-  "please_enter_correct": "Silakan masukkan informasi yang benar"
+  "please_enter_correct": "Silakan masukkan informasi yang benar",
+  "over": "Berakhir",
+  "enter_referral": "Masukkan Kode Referal Anda",
+  "create_an_account": "Buat akun",
+  "connect_with_your_friend": "Hubungkan dengan teman-teman Anda hari ini!",
+  "enter_business_name": "Masukkan nama bisnis",
+  "enter_business_category": "Masukkan kategori bisnis",
+  "detail_room": "Detail ruangan"
 }
