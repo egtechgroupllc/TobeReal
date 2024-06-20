@@ -1,24 +1,19 @@
-import {useNavigation} from '@react-navigation/native';
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {getProfile} from '../../Model/api/common';
-import MainAuth from '../../components/MainAuth';
-import {useAuthentication} from '../../hooks/useAuthentication';
-import AvatarImage from './components/AvatarImage';
-import Bottom from './components/Bottom';
-import Content from './components/Content';
-import HeaderAvatar from './components/HeaderAvatar';
-import HeaderNoToken from './components/HeaderNoToken';
-import {Alert, StyleSheet, View} from 'react-native';
-import axios, {AxiosError} from 'axios';
-import {showMess} from '../../assets/constants/Helper';
-import MainWrapper from '../../components/MainWrapper';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
-import {formatPrice} from '../../utils/format';
+import MainWrapper from '../../components/MainWrapper';
+import {useAuthentication} from '../../hooks/useAuthentication';
 import {useCountry} from '../../hooks/useCountry';
-import {CustomButton} from '../../components';
+import {formatPrice} from '../../utils/format';
+import AvatarImage from './components/AvatarImage';
+import Bottom from './components/Bottom';
+import Content from './components/Content';
+import HeaderNoToken from './components/HeaderNoToken';
+import Content1 from './components/Content1';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -36,7 +31,6 @@ export default function ProfileScreen() {
     <MainWrapper refreshControl>
       {token ? (
         <>
-          {/* <HeaderAvatar noti={false} notify={goBack} heading={'Profile'} /> */}
           <View style={styles.wallet}>
             <IconWallet />
             <CustomText
@@ -57,7 +51,8 @@ export default function ProfileScreen() {
       ) : (
         <HeaderNoToken />
       )}
-      <Content />
+      <Content1 />
+
       <Bottom />
     </MainWrapper>
   );

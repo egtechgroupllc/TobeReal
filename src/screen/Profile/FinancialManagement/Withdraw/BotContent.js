@@ -1,12 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
-import CustomText from '../../../../components/CustomText';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
-import {CustomInput} from '../../../../components';
-import {IconNext} from '../../../../assets/icon/Icon';
 import {useNavigation} from '@react-navigation/native';
-import {requireField} from '../../../../utils/validate';
+import React, {useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {IconNext} from '../../../../assets/icon/Icon';
+import {CustomInput} from '../../../../components';
+import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {requireField} from '../../../../utils/validate';
 
 export default function BotContent({control, setValue}) {
   const [bank, setBank] = useState(null);

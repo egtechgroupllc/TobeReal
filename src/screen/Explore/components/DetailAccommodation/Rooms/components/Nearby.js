@@ -14,7 +14,7 @@ export default function Nearby({data, coordinate}) {
       ? `${metters} m`
       : `${(metters / 1000).toFixed(2).replace('.', ',')} km`;
   };
-
+  console.log(data);
   return (
     <View>
       {data.length > 0 && (

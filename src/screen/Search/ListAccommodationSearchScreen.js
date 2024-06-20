@@ -43,7 +43,9 @@ export default function ListAccommodationSearchScreen() {
       ...params,
       ...filter,
       ...empale?.occupancy,
-      near_me: empale?.destination === 'near_me',
+      near_me:
+        (!filter?.province && empale?.destination !== 'near_me') ||
+        empale?.destination === 'near_me',
       province:
         (isFilter.current ? filter?.province : empale?.destination) ||
         params?.province,

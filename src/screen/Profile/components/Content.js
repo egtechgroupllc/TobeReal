@@ -1,23 +1,15 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
-import CustomText from '../../../components/CustomText';
-import CategoriesButton from './CategoriesButton';
-import {useLanguage} from '../../../hooks/useLanguage';
-import {IconAdd} from '../../../assets/icon/Icon';
-import BoxItemProfile from './BoxItemProfile';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useCountry} from '../../../hooks/useCountry';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import {useLanguage} from '../../../hooks/useLanguage';
+import CategoriesButton from './CategoriesButton';
+import BoxItemProfile from './BoxItemProfile';
+import {IconAdd} from '../../../assets/icon/Icon';
 export default function Content({data}) {
   const {t} = useLanguage();
   const navigation = useNavigation();

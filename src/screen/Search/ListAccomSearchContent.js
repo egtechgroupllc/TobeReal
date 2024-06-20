@@ -29,15 +29,15 @@ export default function ListAccomSearchContent({
       country_id: country?.id,
       accommodation_type_id: paramsFilter?.type,
       name: paramsFilter?.name,
-      latitude: !paramsFilter && params?.near_me ? location?.latitude : '',
-      longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
-      distance: !paramsFilter && params?.near_me ? 5000 : '',
+      latitude: paramsFilter?.near_me ? location?.latitude : '',
+      longitude: paramsFilter?.near_me ? location?.longitude : '',
+      distance: paramsFilter?.near_me ? 5000 : '',
       province_id: paramsFilter?.province?.id || paramsFilter?.province_id,
       currency_id: currency?.id,
     }),
     [JSON.stringify([paramsFilter, location]), country?.id, currency?.id],
   );
-
+  console.log(objFilter);
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
     useInfiniteQuery({
       queryKey: [

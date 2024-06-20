@@ -29,6 +29,7 @@ export default function RatingReview({onSort}) {
         }}>
         {[...Array(5)].map((item, index) => (
           <CustomButton
+            key={index}
             text={`${index + 1}`}
             iconRight={IconStar}
             outline

@@ -1,42 +1,43 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {QueryClient, useMutation, useQuery} from '@tanstack/react-query';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {
-  getListMethod,
-  postConfirmWithdraw,
-  postLogin,
-} from '../../../Model/api/auth';
-import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
-import {IconNext} from '../../../assets/icon/Icon';
-import CustomText from '../../../components/CustomText';
-import TopContent from './Withdraw/TopContent';
-import {CustomButton, CustomInput} from '../../../components';
-import BotContent from './Withdraw/BotContent';
+import {StyleSheet, View} from 'react-native';
+
+import {postConfirmWithdraw} from '../../../Model/api/auth';
+import {scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
+import {CustomButton} from '../../../components';
 import MainWrapper from '../../../components/MainWrapper';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
+import BotContent from './Withdraw/BotContent';
+import TopContent from './Withdraw/TopContent';
 
 export default function WithdrawScreen() {
   const {t} = useLanguage();
+  const {currency} = useCountry();
 
-  const {control, handleSubmit, setValue, watch} = useForm();
+  const {control, handleSubmit, setValue, watch} = useForm({
+    defaultValues: {
+      currency_id: currency?.id,
+    },
+  });
+
+  const queryClient = useQueryClient();
+
   const {navigate, setOptions} = useNavigation();
   const withdrawMutation = useMutation({
     mutationFn: postConfirmWithdraw,
   });
-  const {currency} = useCountry();
-  useEffect(() => {
-    setValue('currency_id', currency?.id);
-  }, []);
+
   useLayoutEffect(() => {
     setOptions({
       headerTitle: t('withdraw'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleWidraw = value => {
     if (!value?.bank_name) {
       showMess('Please choose bank!', 'error');
@@ -45,7 +46,7 @@ export default function WithdrawScreen() {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
-          //   QueryClient.invalidateQueries(['withdraw', 'my-order']);
+          queryClient.invalidateQueries(['withdraw', 'my-order']);
           navigate('FinancialScreen', {
             screen: 'HistoryTransaction',
             params: {withdraw: true},

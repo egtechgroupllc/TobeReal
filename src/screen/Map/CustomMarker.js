@@ -16,18 +16,15 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
     ],
   };
 
-  const price = data?.rooms?.[0]?.room_dates?.[0]?.price;
   const priceFinal = useMemo(() => {
-    if (data?.rooms) {
-      let min = 0;
-      data?.rooms?.map(element => {
-        const result = element?.room_dates.map(room => {
-          return room?.price_final;
-        });
-        min = Math.min(...result);
+    const resultPri = data?.rooms?.map(element => {
+      const result = element?.room_dates.map(room => {
+        return room?.price_final;
       });
-      return min;
-    }
+
+      return Math.min(...result);
+    });
+    return Math.min(...resultPri);
   }, [data?.rooms]);
 
   return (

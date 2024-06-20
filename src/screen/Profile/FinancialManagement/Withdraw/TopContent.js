@@ -56,6 +56,7 @@ export default function TopContent({control}) {
       />
 
       <CustomInput
+        maxLength={10}
         label={t('enter_amount')}
         styleTextLabel={{fontSize: SIZES.medium}}
         style={{...styles.boxItem, borderWidth: 0}}

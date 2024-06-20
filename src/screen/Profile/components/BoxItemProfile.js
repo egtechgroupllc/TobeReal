@@ -11,32 +11,23 @@ export default function BoxItemProfile({title, Icon, subTitle, onPress}) {
       onPress={onPress}
       style={{
         backgroundColor: COLORS.white,
-        width: '100%',
-        minHeight: scale(50),
         flexDirection: 'row',
         alignItems: 'center',
         padding: scale(10),
-        // ...SHADOW,
-        borderRadius: scale(6),
         columnGap: scale(14),
       }}>
       {Icon && <Icon width={scale(16)} height={scale(16)} />}
-      <View
-        style={{
-          rowGap: scale(5),
-        }}>
-        <CustomText textType="semiBold">{title}</CustomText>
-        {subTitle && (
-          <CustomText style={{color: COLORS.text}}>{subTitle}</CustomText>
-        )}
-      </View>
+
+      <CustomText textType="semiBold" size={scale(13)}>
+        {title}
+      </CustomText>
       <IconNext
-        width={scale(14)}
-        height={scale(14)}
-        fill={COLORS.primary}
+        width={scale(12)}
+        height={scale(12)}
         style={{
           marginLeft: 'auto',
         }}
+        fill={COLORS.textSub}
       />
     </TouchableOpacity>
   );

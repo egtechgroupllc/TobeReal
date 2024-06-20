@@ -1,21 +1,15 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-  Pressable,
-} from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {COLORS, SHADOW, WIDTH, scale} from '../../../assets/constants';
-import {IconX, IconZoomIn, IconZoomOut} from '../../../assets/icon/Icon';
-import YoutubePlayer, {YoutubeIframeRef} from 'react-native-youtube-iframe';
+import React, {useEffect, useRef, useState} from 'react';
+import {Platform, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDecay,
 } from 'react-native-reanimated';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import YoutubePlayer from 'react-native-youtube-iframe';
+
+import {COLORS, SHADOW, WIDTH, scale} from '../../../assets/constants';
+import {IconX, IconZoomIn, IconZoomOut} from '../../../assets/icon/Icon';
 
 export default function VideoYoutubeBox() {
   const [playing, setPlaying] = useState(false);
@@ -23,9 +17,7 @@ export default function VideoYoutubeBox() {
   const youtubePlayerRef = useRef(null);
 
   const [zoom, setZoom] = useState(false);
-  useEffect(() => {
-    setPlaying(true);
-  }, []);
+
   const handleZoom = () => {
     setZoom(prev => !prev);
   };
@@ -33,6 +25,7 @@ export default function VideoYoutubeBox() {
     setPlaying(false);
     setCancel(true);
   };
+
   const extractVideoId = url => {
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:shorts\/|v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -101,6 +94,7 @@ export default function VideoYoutubeBox() {
             </TouchableOpacity>
             <YoutubePlayer
               ref={youtubePlayerRef}
+              onReady={() => setPlaying(true)}
               width={
                 zoom
                   ? Platform.OS === 'android'
@@ -143,23 +137,25 @@ export default function VideoYoutubeBox() {
                 }}
               />
             )}
-            <TouchableOpacity
-              style={{
-                alignSelf: 'center',
-                flexDirection: 'row',
-                marginTop: scale(10),
-                backgroundColor: COLORS.grey,
-                borderRadius: scale(99),
-                padding: scale(5),
-                ...SHADOW,
-              }}
-              onPress={handleZoom}>
-              {!zoom ? (
-                <IconZoomIn width={scale(18)} height={scale(18)} />
-              ) : (
-                <IconZoomOut width={scale(18)} height={scale(18)} />
-              )}
-            </TouchableOpacity>
+            {playing && (
+              <TouchableOpacity
+                style={{
+                  alignSelf: 'center',
+                  flexDirection: 'row',
+                  marginTop: scale(10),
+                  backgroundColor: COLORS.grey,
+                  borderRadius: scale(99),
+                  padding: scale(5),
+                  ...SHADOW,
+                }}
+                onPress={handleZoom}>
+                {!zoom ? (
+                  <IconZoomIn width={scale(18)} height={scale(18)} />
+                ) : (
+                  <IconZoomOut width={scale(18)} height={scale(18)} />
+                )}
+              </TouchableOpacity>
+            )}
           </Animated.View>
         </GestureDetector>
       )}
