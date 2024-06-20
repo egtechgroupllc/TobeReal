@@ -56,10 +56,6 @@ export default routerProfile = [
     component: PriceListScreen,
   },
   {
-    name: 'FinancialScreen',
-    component: FinancialScreen,
-  },
-  {
     name: 'ListOfCustomersScreen',
     component: ListOfCustomersScreen,
   },

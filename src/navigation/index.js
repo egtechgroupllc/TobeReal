@@ -3,3 +3,8 @@ export {default as NoBottomTab} from './NoBottomTab';
 export {default as NavigationAuth} from './NavigationAuth';
 export {default as NavigationExplore} from './NavigationExplore';
 export {default as NavigationProfile} from './NavigationProfile';
+export {default as NavigateWalletToken} from './NavigateWalletToken';
+export {default as NavigationBookings} from './NavigationBookings';
+export {default as NavigationNews} from './NavigationNews';
+export {default as NavigationWishList} from './NavigationWishList';
+export {default as NavigationVideo} from './NavigationVideo';

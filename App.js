@@ -23,10 +23,9 @@ import CustomImage from './src/components/CustomImage';
 import Loading from './src/components/Loading/Loading';
 import {AuthProvider} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
-import {BottomTab, NoBottomTab} from './src/navigation';
+import {BottomTab, NavigateWalletToken, NoBottomTab} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
-import NavigationProfile from './src/navigation/NavigationProfile';
-import {AddPolicyScreen} from './src/screen/News/PostNews/Lease';
+
 import {CountryProvider} from './src/context/CountryContent';
 import {useCountry} from './src/hooks/useCountry';
 import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
@@ -147,11 +146,13 @@ const Layout = () => {
           component={SelectDefaultCountryScreen}
         />
       )}
-
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
-      <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
-
+      <Stack.Screen
+        name="NavigateWalletToken"
+        component={NavigateWalletToken}
+      />
       <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
+
       {/* <NoBottomTab /> */}
     </Stack.Navigator>
   );

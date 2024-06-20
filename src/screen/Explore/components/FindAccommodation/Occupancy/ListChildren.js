@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import Counter from '../../../../../components/Counter';
-import CustomSelectDropdown from '../../../../../components/CustomSelectDropdown';
-import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {
+  Counter,
+  CustomSelectDropdown,
+  CustomText,
+} from '../../../../../components';
 
 const list = [...Array(18)].map((_, index) => (index === 0 ? '< 1' : index));
 

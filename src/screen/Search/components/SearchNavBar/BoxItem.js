@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
     borderBottomWidth: 1,
     paddingBottom: scale(6),
-    borderBottomColor: COLORS.grey90,
+    borderBottomColor: COLORS.grey50,
   },
   icon: {
     width: scale(20),

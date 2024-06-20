@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import MainAuth from '../../../components/MainAuth';
-import AvatarImage from '../components/AvatarImage';
+import TopProfile from '../components/TopProfile';
 import {useNavigation} from '@react-navigation/native';
 import MidContent from './components/MidContent';
 import BotContent from './components/BotContent';
@@ -39,7 +39,7 @@ export default function InformationScreen() {
         onPress={goBack}
         subHeading={t('personal_information')}
       /> */}
-      <AvatarImage
+      <TopProfile
         name={data?.data?.username}
         changeName={true}
         onPressChangeName={changeName}

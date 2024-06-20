@@ -1,17 +1,8 @@
-import React, {useState} from 'react';
-import {
-  FlatList,
-  ScrollView,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import CustomText from '../../../../../../components/CustomText';
-import {IconAdd} from '../../../../../../assets/icon/Icon';
-import Counter from '../../../../../../components/Counter';
+import {Counter, CustomText} from '../../../../../../components';
 
 export default function Box({title, onChange}) {
   return (

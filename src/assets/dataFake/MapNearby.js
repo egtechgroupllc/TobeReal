@@ -239,7 +239,7 @@ export const dataMapNearby = {
       rating: 3.1,
       reference: 'ChIJV3OVQB8sdTERNX-XmLw19a4',
       scope: 'GOOGLE',
-      types: ['shopping_mall', 'point_of_interest', 'establishment'],
+      types: ['shopping_mall', 'parking', 'point_of_interest', 'establishment'],
       user_ratings_total: 38,
       vicinity: '294 Hòa Bình, Phú Thạnh',
     },

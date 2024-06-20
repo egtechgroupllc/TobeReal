@@ -14,7 +14,7 @@ export const COLORS = {
   textSub: '#7d7d7d',
   white: '#fff',
   white70: '#f1f1f170',
-  grey90: '#cccccc90',
+  grey50: '#cccccc50',
   grey: '#ccc',
   black: '#000000',
   overlay: '#00000060',
@@ -26,8 +26,8 @@ export const WIDTH = {
   heightScreen: height,
 };
 export const SIZES = {
-  xSmall: scale(10),
   xxSmall: scale(6),
+  xSmall: scale(10),
   small: scale(12),
   xMedium: scale(14),
   medium: scale(16),

@@ -21,11 +21,16 @@ export const getUserInfoLocation = async ({lat, lon}) => {
 };
 
 export const getProfile = async token => {
-  const responsive = await instanceCommon.get('/user/profile', {
-    headers: {
-      Authorization: token,
-    },
-  });
+  const responsive = await instanceCommon.get(
+    '/user/profile',
+    token
+      ? {
+          headers: {
+            Authorization: token,
+          },
+        }
+      : {},
+  );
 
   return responsive.data;
 };

@@ -9,11 +9,10 @@ import MainWrapper from '../../components/MainWrapper';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useCountry} from '../../hooks/useCountry';
 import {formatPrice} from '../../utils/format';
-import AvatarImage from './components/AvatarImage';
+import TopProfile from './components/TopProfile';
 import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderNoToken from './components/HeaderNoToken';
-import Content1 from './components/Content1';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -26,9 +25,13 @@ export default function ProfileScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
-  console.log(token);
+
   return (
-    <MainWrapper refreshControl>
+    <MainWrapper
+      refreshControl
+      styleContent={{
+        paddingHorizontal: scale(12),
+      }}>
       {token ? (
         <>
           <View style={styles.wallet}>
@@ -42,8 +45,9 @@ export default function ProfileScreen() {
               })}
             </CustomText>
           </View>
-          <AvatarImage
+          <TopProfile
             upgrade={true}
+            data={data?.data}
             name={data?.data?.username || 'name'}
             onPressUpgrade={upgrade}
           />
@@ -51,7 +55,7 @@ export default function ProfileScreen() {
       ) : (
         <HeaderNoToken />
       )}
-      <Content1 />
+      <Content />
 
       <Bottom />
     </MainWrapper>

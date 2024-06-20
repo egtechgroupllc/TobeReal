@@ -1,10 +1,9 @@
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SIZES, scale} from '../../../../../../assets/constants';
-import Counter from '../../../../../../components/Counter';
-import CustomText from '../../../../../../components/CustomText';
 import {formatDate} from '../../../../../../utils/format';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {Counter, CustomText} from '../../../../../../components';
 
 export default function AutoPostTop({date, setValue, onCount, countNum}) {
   const [count, setCount] = useState(1);

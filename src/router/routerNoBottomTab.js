@@ -16,7 +16,7 @@ import BookTourScreen from '../screen/Explore/components/ContentTour/DetailTour/
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
-import MapLocateEstate from '../screen/Map/MapLocateEstate';
+import MapLocateEstate from '../screen/Explore/components/DetailAccommodation/Map/MapLocateEstate';
 import {
   AccommoManagementScreen,
   AddPolicyScreen,
@@ -46,6 +46,7 @@ import {
 } from '../screen/Search';
 import {ListVideoInfluencerScreen} from '../screen/Video';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
+import {AddressWalletScreen, SelectLanguageScreen} from '../screen/Profile';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -254,5 +255,9 @@ export default routerNoBottomTab = [
   {
     name: 'FeaturesPolicyScreen',
     component: FeaturesPolicyScreen,
+  },
+  {
+    name: 'SelectLanguageScreen',
+    component: SelectLanguageScreen,
   },
 ];

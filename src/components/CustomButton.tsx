@@ -11,13 +11,15 @@ import LinearGradient, {
   LinearGradientProps,
 } from 'react-native-linear-gradient';
 import {COLORS, scale} from '../assets/constants';
-import {SHADOW} from '../assets/constants/theme';
+import {SHADOW, SIZES} from '../assets/constants/theme';
 import {arrayToObject} from '../utils/arrayToObject';
 import CustomText, {CustomTextProps} from './CustomText';
+import {is} from 'date-fns/locale';
 
 type CustomButtonProps = {
   buttonType?: 'normal' | 'medium' | 'large';
   text: string;
+  desc: string;
   isShadow?: boolean;
   outline?: boolean;
   linearGradientProps?: LinearGradientProps;
@@ -26,7 +28,9 @@ type CustomButtonProps = {
   isDelay?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
+  isIconComponent?: boolean;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
+  textDesc: Pick<CustomTextProps, 'textType'> & TextStyle;
   onPress: () => void;
   onDoublePress: () => void;
 } & TouchableOpacityProps;
@@ -35,14 +39,17 @@ const funcFallBlack = () => {};
 export default memo(function CustomButton({
   buttonType = 'medium',
   text,
+  desc,
   isShadow,
   iconLeft,
   iconRight,
   outline,
   styleText,
+  textDesc,
   styleIcon,
   styleWrapper,
   linearGradientProps,
+  isIconComponent,
   isDelay,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
@@ -74,7 +81,6 @@ export default memo(function CustomButton({
 
   const timer = useRef<any>(null);
   const TIMEOUT = 400;
-
 
   const debounce = (onSingle: () => void, onDouble: () => void) => {
     clearTimeout(timer.current);
@@ -108,7 +114,7 @@ export default memo(function CustomButton({
           ? {flex: propStyle?.flex}
           : propStyle.minWidth
           ? {minWidth: propStyle.minWidth}
-          : {width: propStyle?.width || '100%'},
+          : {width: propStyle?.width || 'auto'},
         styleWrapper,
       ]}
       onPress={_onPress}>
@@ -128,34 +134,55 @@ export default memo(function CustomButton({
           propStyle,
           propStyle.minWidth ? {minWidth: propStyle.minWidth} : {width: '100%'},
         ]}>
-        {iconLeft && (
-          <View>
+        {iconLeft &&
+          (isIconComponent ? (
+            iconLeft
+          ) : (
             <IconLeft
               style={{...styles.icon, ...styleIcon}}
               fill={styleIcon?.color}
             />
-          </View>
-        )}
-        {text && (
-          <CustomText
-            textType={styleText?.textType || (buttonType && 'semiBold')}
-            numberOfLines={6}
-            style={[
-              styles.text,
-              {fontSize: scale(fontSize)},
-              !linearGradientProps && {color: COLORS.white},
-              outline && {color: COLORS.primary},
-              styleText,
-            ]}>
-            {text.trim()}
-          </CustomText>
-        )}
-        {iconRight && (
-          <IconRight
-            style={{...styles.icon, ...styleIcon}}
-            fill={styleIcon?.color}
-          />
-        )}
+          ))}
+
+        <View style={desc && {flex: 1, justifyContent: 'center'}}>
+          {text && (
+            <CustomText
+              textType={styleText?.textType || (buttonType && 'semiBold')}
+              numberOfLines={2}
+              style={[
+                !desc && styles.text,
+                {fontSize: scale(fontSize)},
+                !linearGradientProps && {color: COLORS.white},
+                outline && {color: COLORS.primary},
+                styleText,
+              ]}>
+              {text.trim()}
+            </CustomText>
+          )}
+          {desc && (
+            <CustomText
+              textType={styleText?.textType || (buttonType && 'medium')}
+              numberOfLines={6}
+              style={[
+                !desc && styles.text,
+                {fontSize: scale(fontSize - 3)},
+                !linearGradientProps && {color: COLORS.white},
+                outline && {color: COLORS.primary},
+                textDesc,
+              ]}>
+              {desc.trim()}
+            </CustomText>
+          )}
+        </View>
+        {iconRight &&
+          (isIconComponent ? (
+            iconRight
+          ) : (
+            <IconRight
+              style={{...styles.icon, ...styleIcon}}
+              fill={styleIcon?.color}
+            />
+          ))}
       </ComponentWrapper>
     </TouchableOpacity>
   );

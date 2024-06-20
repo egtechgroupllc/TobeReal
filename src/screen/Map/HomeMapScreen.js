@@ -1,27 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Alert, Animated, StyleSheet, View} from 'react-native';
-import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {Animated, StyleSheet} from 'react-native';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
+import {Platform} from 'react-native';
 import {getListRent} from '../../Model/api/apiAccom';
 import {getListSell} from '../../Model/api/apiEstate';
 import {getListTour} from '../../Model/api/apiTour';
-import {KEY_MAP} from '../../Model/url';
-import {COLORS, SIZES, images, scale} from '../../assets/constants';
+import {COLORS, scale} from '../../assets/constants';
 import {IconMyLocation} from '../../assets/icon/Icon';
-import {CustomButton} from '../../components';
-import MainWrapper from '../../components/MainWrapper';
+import {CustomButton, MainWrapper} from '../../components';
+import {useCountry} from '../../hooks/useCountry';
+import {useLanguage} from '../../hooks/useLanguage';
 import {formatDate} from '../../utils/format';
 import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
 import MapHeader from './MapHeader';
-import {useCountry} from '../../hooks/useCountry';
-import CustomText from '../../components/CustomText';
-import {Platform} from 'react-native';
-import {useLanguage} from '../../hooks/useLanguage';
-import {useRoute} from '@react-navigation/native';
 
 const initialMapState = {
   markers: [],
@@ -192,23 +188,6 @@ export default function HomeMapScreen({showListLocation, style}) {
     }
   }, []);
 
-  const radius = 4 * 1000;
-
-  const fetchPlaces = async () => {
-    const location = await currentPosition();
-
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=${radius}&key=${KEY_MAP}`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(dataPlaces => {
-        console.log('data', dataPlaces.results);
-      });
-  };
-
-  useEffect(() => {
-    fetchPlaces();
-  }, []);
   return (
     <MainWrapper style={{flex: 1}} scrollEnabled={false}>
       <MapView

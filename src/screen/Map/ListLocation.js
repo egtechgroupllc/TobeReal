@@ -1,33 +1,14 @@
-import {
-  Animated,
-  FlatList,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React, {
-  forwardRef,
-  memo,
-  useCallback,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import BoxPlaceItem from '../Explore/components/ContentAccommodation/BoxPlaceItem';
-import {WIDTH, images, scale} from '../../assets/constants';
+import React, {forwardRef, memo, useImperativeHandle, useRef} from 'react';
+import {Animated, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useQuery} from '@tanstack/react-query';
-import {getListRent} from '../../Model/api/apiAccom';
-import {formatDate} from '../../utils/format';
+import {scale} from '../../assets/constants';
+import BoxPlaceItem from '../Explore/components/ContentAccommodation/BoxPlaceItem';
 
 export default memo(
   forwardRef(function ListLocation(
     {data = [], CARD_WIDTH, scrollOffsetX},
     ref,
   ) {
-    const insets = useSafeAreaInsets();
     const flatListRef = useRef();
 
     useImperativeHandle(

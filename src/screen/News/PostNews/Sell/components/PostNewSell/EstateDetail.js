@@ -6,15 +6,17 @@ import Collapsible from 'react-native-collapsible';
 
 import {getListDirection} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
-import CheckBox from '../../../../../../components/CheckBox';
-import InViewPort from '../../../../../../components/InViewport';
+import {
+  CheckBox,
+  Counter,
+  CustomInput,
+  InViewport,
+} from '../../../../../../components';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {requireField} from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import RealEstateType from '../../../components/RealEstateType';
 import SelectCurrency from '../../../components/SelectCurrency';
-import Counter from '../../../../../../components/Counter';
 
 export default function EstateDetail({control, errors, watch, setValue}) {
   const {t} = useLanguage();
@@ -87,7 +89,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         watch={watch}
         arrKeywords={arrKeywords}
       />
-      <InViewPort noLoading={true}>
+      <InViewport noLoading={true}>
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
@@ -254,7 +256,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             defaultValue={0}
           />
         </Collapsible>
-      </InViewPort>
+      </InViewport>
     </View>
   );
 }

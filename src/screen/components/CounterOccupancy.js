@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {memo, useEffect, useState} from 'react';
-import Counter from '../../components/Counter';
 import {scale} from '../../assets/constants';
 import {useLanguage} from '../../hooks/useLanguage';
+import {Counter} from '../../components';
 
 export default memo(function CounterOccupancy({value, onChange}) {
   const {t} = useLanguage();

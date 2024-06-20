@@ -1306,35 +1306,7 @@ export function IconUnViewablePassword({fill, ...props}) {
     </Svg>
   );
 }
-export function IconQrcode({fill, ...props}) {
-  return (
-    <Svg
-      width={props?.style?.width || scale(75)}
-      height={props?.style?.height || scale(75)}
-      viewBox="0 0 75 75"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <Path d="M9.375 9.375h9.375v9.375H9.375V9.375z" fill={fill || '#fff'} />
-      <Path
-        d="M28.125 0v28.125H0V0h28.125zm-4.688 4.688H4.688v18.75h18.75V4.688zM18.75 56.25H9.375v9.375h9.375V56.25z"
-        fill={fill || '#fff'}
-      />
-      <Path
-        d="M28.125 46.875V75H0V46.875h28.125zM4.687 51.563v18.75h18.75v-18.75H4.688zM56.25 9.374h9.375v9.375H56.25V9.375z"
-        fill={fill || '#fff'}
-      />
-      <Path
-        d="M46.875 0v28.125H75V0H46.875zm23.437 4.688v18.75h-18.75V4.688h18.75zm-32.812 0V0h4.688v9.375H37.5v9.375h-4.688V4.687H37.5zm0 23.437V18.75h4.688v9.375H37.5zM28.125 37.5v-4.688h4.688v-4.687H37.5V37.5h4.688v-4.688h23.437V37.5h-18.75v4.688H32.812V37.5h-4.687zm0 0v4.688H9.375V37.5H4.687v4.688H0v-9.376h14.063V37.5h14.062zM75 42.188h-4.688v-9.376H75v9.376zm-4.688 0h-4.687v9.374H75v-4.687h-4.688v-4.688zm-18.75 0h9.376v4.687H56.25v4.688h-4.688v-9.376zm9.376 14.062v-4.688H56.25v4.688h-4.688v4.688h-9.374v4.687H56.25V56.25h4.688zm0 0H75v4.688h-9.375v4.687h-4.688V56.25zm-18.75-4.688v4.688h4.687v-9.375H32.812v4.688h9.376z"
-        fill={fill || '#fff'}
-      />
-      <Path
-        d="M32.813 56.25H37.5v14.063h18.75V75H32.812V56.25zM75 65.625V75H60.937v-4.688h9.376v-4.687H75z"
-        fill={fill || '#fff'}
-      />
-    </Svg>
-  );
-}
+
 export function IconUnCheckBox({fill, ...props}) {
   return (
     <Svg
@@ -1392,12 +1364,29 @@ export function IconCheckBox({fill, ...props}) {
       <Rect x={0.5} y={0.5} width={19} height={19} rx={4.5} stroke="#CDD1E0" />
       <Path
         d="M4 8l3.281 4.922a1 1 0 001.58.11L16 5"
-        stroke="#0C9648"
+        stroke="#4CAF50"
         strokeWidth={2}
       />
     </Svg>
   );
 }
+export function IconCheck({fill, size, ...props}) {
+  return (
+    <Svg
+      width={size || scale(18)}
+      height={size || scale(18)}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M10 20a10 10 0 100-20 10 10 0 000 20zm-5.19-9.736a.91.91 0 011.28 0l2.092 2.09 5.263-5.263a.909.909 0 011.282 1.282l-5.909 5.909a.91.91 0 01-1.282 0L4.81 11.555a.909.909 0 010-1.291z"
+        fill="#4CAF50"
+      />
+    </Svg>
+  );
+}
+
 export function IconArrowRight({fill, ...props}) {
   return (
     <Svg
@@ -1431,9 +1420,28 @@ export function IconArrowLeft({fill, ...props}) {
     </Svg>
   );
 }
+
+export function IconArrowBottom({fill, size, ...props}) {
+  return (
+    <Svg
+      width={size || scale(13)}
+      height={size || scale(15)}
+      viewBox="0 0 13 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M.296 9.673l5.043 5.043a.98.98 0 00.695.284.98.98 0 00.695-.284l5.043-5.043a.992.992 0 000-1.39.992.992 0 00-1.391 0l-3.335 3.335V.98a.985.985 0 00-.98-.98.985.985 0 00-.98.98v10.716L1.687 8.299a.992.992 0 00-1.39 0c-.396.38-.396.964 0 1.375z"
+        fill="#000"
+      />
+    </Svg>
+  );
+}
+
 export function IconGoBack({fill, ...props}) {
   return <IconArrowLeft fill={fill} {...props} />;
 }
+
 export function IconHotel({fill, ...props}) {
   return (
     <Svg
@@ -2810,11 +2818,11 @@ export function IconHeart({fill, ...props}) {
     </Svg>
   );
 }
-export function IconNext({fill, ...props}) {
+export function IconNext({fill, size, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(12)}
-      height={props?.style?.height || scale(22)}
+      width={size || props?.style?.width || scale(12)}
+      height={size || props?.style?.height || scale(22)}
       viewBox="0 0 12 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -3543,6 +3551,23 @@ export function IconKeyBroad({fill, ...props}) {
       <Path
         d="M2.222 1.667a.557.557 0 00-.555.555v8.89c0 .305.25.555.555.555h15.556c.305 0 .555-.25.555-.556V2.222a.557.557 0 00-.555-.555H2.222zM0 2.222C0 .997.997 0 2.222 0h15.556C19.004 0 20 .997 20 2.222v8.89a2.224 2.224 0 01-2.222 2.221H2.222A2.224 2.224 0 010 11.111V2.222zM6.111 8.89h7.778c.305 0 .555.25.555.555V10c0 .306-.25.556-.555.556H6.11A.557.557 0 015.556 10v-.556c0-.305.25-.555.555-.555zm-2.5-2.5c0-.306.25-.556.556-.556h.555c.306 0 .556.25.556.556v.555c0 .306-.25.556-.556.556h-.555a.557.557 0 01-.556-.556V6.39zm.556-3.333h.555c.306 0 .556.25.556.555v.556c0 .305-.25.555-.556.555h-.555a.557.557 0 01-.556-.555V3.61c0-.305.25-.555.556-.555zm2.222 3.333c0-.306.25-.556.555-.556H7.5c.306 0 .556.25.556.556v.555c0 .306-.25.556-.556.556h-.556a.557.557 0 01-.555-.556V6.39zm.555-3.333H7.5c.306 0 .556.25.556.555v.556c0 .305-.25.555-.556.555h-.556a.557.557 0 01-.555-.555V3.61c0-.305.25-.555.555-.555zm2.223 3.333c0-.306.25-.556.555-.556h.556c.305 0 .555.25.555.556v.555c0 .306-.25.556-.555.556h-.556a.557.557 0 01-.555-.556V6.39zm.555-3.333h.556c.305 0 .555.25.555.555v.556c0 .305-.25.555-.555.555h-.556a.557.557 0 01-.555-.555V3.61c0-.305.25-.555.555-.555zm2.222 3.333c0-.306.25-.556.556-.556h.556c.305 0 .555.25.555.556v.555c0 .306-.25.556-.555.556H12.5a.557.557 0 01-.556-.556V6.39zm.556-3.333h.556c.305 0 .555.25.555.555v.556c0 .305-.25.555-.555.555H12.5a.557.557 0 01-.556-.555V3.61c0-.305.25-.555.556-.555zm2.222 3.333c0-.306.25-.556.556-.556h.555c.306 0 .556.25.556.556v.555c0 .306-.25.556-.556.556h-.555a.557.557 0 01-.556-.556V6.39zm.556-3.333h.555c.306 0 .556.25.556.555v.556c0 .305-.25.555-.556.555h-.555a.557.557 0 01-.556-.555V3.61c0-.305.25-.555.556-.555z"
         fill={fill || '#000'}
+      />
+    </Svg>
+  );
+}
+
+export function IconKey({fill, size, ...props}) {
+  return (
+    <Svg
+      width={size || props?.style?.width || scale(11)}
+      height={size || props?.style?.height || scale(17)}
+      viewBox="0 0 11 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M3.372 14.62v.875c0 .077.03.152.085.208l1.055 1.046a.892.892 0 001.24 0l1.053-1.046a.303.303 0 00.085-.208V9.95a5.13 5.13 0 10-3.518 0v.886c0 .067.023.132.064.184l.393.487-.408.622a.284.284 0 00-.05.161v.877c0 .067.024.132.065.184l.393.487-.408.622a.284.284 0 00-.05.16zm2.052 1.628a.346.346 0 01-.586 0V12.02a.293.293 0 11.586 0v4.228zM5.13 11.14a.293.293 0 110-.587.293.293 0 010 .587zm.293-1.466a.293.293 0 01-.586 0v-.598c.195.015.39.016.586.003v.595zM1.768 5.277h.745a.303.303 0 00.208-.085l.873-.877a.847.847 0 00.364.083.88.88 0 10-.88-.88c0 .136.034.27.097.39l-.783.783h-.6a3.364 3.364 0 013.632-2.92v2.8L4.336 5.657a.886.886 0 10.414.414l1.175-1.173a.303.303 0 00.085-.208V1.876a3.369 3.369 0 010 6.506V7.45l.795-.795a.886.886 0 10-.414-.413l-.882.88a.303.303 0 00-.085.207V8.49a3.372 3.372 0 01-3.656-3.213zm1.897-1.759a.293.293 0 11.586 0 .293.293 0 01-.586 0zM4.25 6.45a.293.293 0 11-.586 0 .293.293 0 01.586 0zm2.639-.587a.293.293 0 11.293.294.298.298 0 01-.293-.294z"
+        fill="#000"
       />
     </Svg>
   );
@@ -5680,11 +5705,11 @@ export function IconCoinPoint({fill, ...props}) {
     </Svg>
   );
 }
-export function IconCopy({fill, ...props}) {
+export function IconCopy({fill, size, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(17)}
-      height={props?.style?.height || scale(20)}
+      width={size || props?.style?.width || scale(17)}
+      height={size || props?.style?.height || scale(20)}
       viewBox="0 0 17 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -5755,6 +5780,37 @@ export function IconInvoice({fill, ...props}) {
         strokeWidth="2px"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+export function IconExportFile({fill, size, ...props}) {
+  return (
+    <Svg
+      width={size || scale(20)}
+      height={size || scale(20)}
+      viewBox="0 0 21 21"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9.73 13.452h9.231a.77.77 0 100-1.538h-9.23a.769.769 0 100 1.538z"
+        fill={fill || '#000'}
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16.11 10.15l2.532 2.533-2.532 2.532a.77.77 0 001.087 1.088l3.077-3.077c.3-.3.3-.788 0-1.088l-3.077-3.076a.77.77 0 00-1.087 1.087v.001zM8.192 1.913V4.99A2.307 2.307 0 0010.5 7.298h3.077a.769.769 0 100-1.538H10.5a.769.769 0 01-.77-.77V1.913a.769.769 0 10-1.538 0z"
+        fill={fill || '#000'}
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15.115 9.606V6.529a.77.77 0 00-.225-.544L9.506.6a.77.77 0 00-.544-.225H2.808A2.307 2.307 0 00.5 2.683v15.384a2.307 2.307 0 002.308 2.308h10a2.307 2.307 0 002.307-2.308V15.76a.769.769 0 10-1.538 0v2.307a.77.77 0 01-.77.77h-10a.77.77 0 01-.769-.77V2.683a.77.77 0 01.77-.77h5.835l4.934 4.934v2.759a.769.769 0 101.538 0z"
+        fill={fill || '#000'}
       />
     </Svg>
   );

@@ -1,41 +1,26 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
-  QueryClient,
   useInfiniteQuery,
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
 import LottieView from 'lottie-react-native';
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import {
-  Alert,
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {Alert, FlatList, RefreshControl, StyleSheet, View} from 'react-native';
 import {
   getHistoryDeposit,
   getHistoryWithdraw,
   postCancelWithdraw,
 } from '../../../Model/api/auth';
-import {COLORS, SIZES, animations, scale} from '../../../assets/constants';
+import {COLORS, animations, scale} from '../../../assets/constants';
+import {showMess} from '../../../assets/constants/Helper';
+import {CustomButton} from '../../../components';
 import EmptyData from '../../../components/EmptyData';
 import MainWrapper from '../../../components/MainWrapper';
+import {useLanguage} from '../../../hooks/useLanguage';
 import OptionAccommodation from '../../Explore/components/FindAccommodation/OptionAccommodation';
 import ItemHistoryTrans from './components/HistoryTransaction/ItemHistoryTrans';
 import ItemHistoryTransLoading from './components/HistoryTransaction/ItemHistoryTransLoading';
-import CustomText from '../../../components/CustomText';
-import {CustomButton} from '../../../components';
-import {showMess} from '../../../assets/constants/Helper';
-import {useLanguage} from '../../../hooks/useLanguage';
 const listInfo = [
   {
     text: 'All',

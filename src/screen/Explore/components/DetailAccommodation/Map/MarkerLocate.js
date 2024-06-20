@@ -1,11 +1,8 @@
-import React, {memo, useEffect, useMemo, useState} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
-import {IconMarker, IconMarkerRent} from '../../assets/icon/Icon';
-import {COLORS, FONTS, SIZES, scale} from '../../assets/constants';
-import CustomText from '../../components/CustomText';
-import {formatPrice} from '../../utils/format';
-import {useCountry} from '../../hooks/useCountry';
-import CustomImage from '../../components/CustomImage';
+import React, {memo} from 'react';
+import {Animated} from 'react-native';
+import {scale} from '../../../../../assets/constants';
+import CustomImage from '../../../../../components/CustomImage';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 const MarkerLocate = ({scaleValue, data, markerFocus, checkFilter}) => {
   const {currency} = useCountry();

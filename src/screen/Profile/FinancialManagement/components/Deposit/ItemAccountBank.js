@@ -1,11 +1,12 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
+
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
+import {showMess} from '../../../../../assets/constants/Helper';
 import {IconCopy} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
-import Clipboard from '@react-native-clipboard/clipboard';
-import {showMess} from '../../../../../assets/constants/Helper';
 
 export default function ItemAccountBank({data, onPress, isSelect}) {
   const handleCopy = () => {

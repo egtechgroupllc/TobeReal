@@ -3,11 +3,13 @@ import {StyleSheet, View} from 'react-native';
 
 import {COLORS, images, scale} from '../../../../assets/constants';
 import {IconProfile, IconRoom} from '../../../../assets/icon/Icon';
-import {CustomButton, CustomInput} from '../../../../components';
-import BottomSheet from '../../../../components/BottomSheet';
-import Counter from '../../../../components/Counter';
+import {
+  BottomSheet,
+  Counter,
+  CustomButton,
+  CustomInput,
+} from '../../../../components';
 import ListChildren from './Occupancy/ListChildren';
-import CustomImage from '../../../../components/CustomImage';
 import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function ChooseOccupancy({setValue}) {

@@ -56,53 +56,66 @@ export default function Bottom() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.box}>
-        <IconSupporter />
-        <View style={{marginLeft: scale(30), marginRight: scale(50)}}>
-          <CustomText
-            textType="bold"
-            style={{...styles.text1, color: COLORS.white}}>
-            {t('support')}
-          </CustomText>
-          <View style={{marginTop: scale(10)}}>
+      {/* <View style={styles.box}>
+          <IconSupporter />
+          <View style={{marginLeft: scale(30), marginRight: scale(50)}}>
             <CustomText
-              textType="medium"
-              style={{...styles.text, color: COLORS.white}}>
-              {t('hotline')}: ....
+              textType="bold"
+              style={{...styles.text1, color: COLORS.white}}>
+              {t('support')}
             </CustomText>
-            <CustomText
-              textType="medium"
-              style={{...styles.text, color: COLORS.white}}>
-              {t('email')}: ....
-            </CustomText>
-            <CustomText
-              textType="medium"
-              style={{...styles.text, color: COLORS.white}}>
-              {t('website')}: ....
-            </CustomText>
+            <View style={{marginTop: scale(10)}}>
+              <CustomText
+                textType="medium"
+                style={{...styles.text, color: COLORS.white}}>
+                {t('hotline')}: ....
+              </CustomText>
+              <CustomText
+                textType="medium"
+                style={{...styles.text, color: COLORS.white}}>
+                {t('email')}: ....
+              </CustomText>
+              <CustomText
+                textType="medium"
+                style={{...styles.text, color: COLORS.white}}>
+                {t('website')}: ....
+              </CustomText>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={{flexDirection: 'row', marginTop: scale(10)}}>
-        {listSocial?.map((Icon, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.7}
-            style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
-            <Icon />
-          </TouchableOpacity>
-        ))}
-      </View>
+        <View style={{flexDirection: 'row', marginTop: scale(10)}}>
+          {listSocial?.map((Icon, index) => (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={0.7}
+              style={{width: scale(50), height: scale(23), alignItems: 'center'}}>
+              <Icon />
+            </TouchableOpacity>
+          ))}
+        </View> */}
 
       {token && (
         <CustomButton
           text={t('log_out')}
           onPress={handleLogOut}
-          buttonType="large"
+          buttonType="medium"
           linearGradientProps
           style={{
-            width: '85%',
+            flex: 1,
+            backgroundColor: '#000',
+            marginTop: scale(12),
+          }}
+        />
+      )}
+      {token && (
+        <CustomButton
+          text={'Đổi tài khoản'}
+          onPress={handleLogOut}
+          buttonType="medium"
+          linearGradientProps
+          style={{
+            flex: 1,
             backgroundColor: '#000',
             marginTop: scale(12),
           }}
@@ -116,8 +129,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: scale(10),
     alignItems: 'center',
-    rowGap: scale(10),
+    columnGap: scale(10),
     paddingBottom: scale(20),
+    flexDirection: 'row',
   },
   box: {
     backgroundColor: '#0000004D',

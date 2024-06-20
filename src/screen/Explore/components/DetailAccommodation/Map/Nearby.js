@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import CustomText from '../../../../../../components/CustomText';
-import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import CustomImage from '../../../../../../components/CustomImage';
+import CustomText from '../../../../../components/CustomText';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import CustomImage from '../../../../../components/CustomImage';
 import getDistance from 'geolib/es/getDistance';
-import {IconMapView} from '../../../../../../assets/icon/Icon';
+import {IconMapView} from '../../../../../assets/icon/Icon';
 
-export default function Nearby({data, coordinate}) {
+export default function Nearby({data, coordinate, onPressLocationNear}) {
   const calculatorMeters = position => {
     const metters = getDistance(coordinate, position);
 
@@ -14,7 +14,7 @@ export default function Nearby({data, coordinate}) {
       ? `${metters} m`
       : `${(metters / 1000).toFixed(2).replace('.', ',')} km`;
   };
-  console.log(data);
+
   return (
     <View>
       {data.length > 0 && (
@@ -76,6 +76,7 @@ export default function Nearby({data, coordinate}) {
           </View>
 
           <TouchableOpacity
+            onPress={onPressLocationNear}
             activeOpacity={0.7}
             style={{
               flexDirection: 'row',

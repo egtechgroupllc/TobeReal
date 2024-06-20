@@ -33,6 +33,7 @@ export default memo(function Category({
         contentContainerStyle={{
           columnGap: scale(10),
           paddingHorizontal: scale(16),
+          alignItems: 'center',
           ...styleContent,
         }}
         horizontal

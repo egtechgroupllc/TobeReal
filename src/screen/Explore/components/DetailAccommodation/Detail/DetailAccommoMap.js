@@ -8,15 +8,16 @@ import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {getCurrentLocation} from '../../../../../utils/getCurrentLocation';
 import WrapperContent from '../../WrapperContent';
-import Nearby from '../Rooms/components/Nearby';
-import {useNavigation} from '@react-navigation/native';
+import Nearby from '../Map/Nearby';
 import {dataMapNearby} from '../../../../../assets/dataFake/MapNearby';
+import {useNavigation} from '@react-navigation/native';
 
 export default function DetailAccommoMap({
   region,
   data,
   address,
   styleWrapper,
+  isShowNearby = true,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -32,14 +33,29 @@ export default function DetailAccommoMap({
         },
   );
 
-  const mapRef = useRef(null);
+  const [listLocationNearby, setListLocationNearby] = useState([]);
+
+  const radius = 9 * 1000;
+
+  const fetchPlaces = async () => {
+    // const {coords} = await getCurrentLocation();
+    // if (coords) {
+    //   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${data.latitude},${data.longitude}&radius=${radius}&key=${KEY_MAP}`;
+
+    //   fetch(url)
+    //     .then(response => response.json())
+    //     .then(dataRes => {
+    //       setListLocationNearby(dataMapNearby?.results || dataRes.results);
+    //     });
+    // }
+    setListLocationNearby(dataMapNearby?.results);
+  };
 
   useEffect(() => {
-    mapRef.current.fitToCoordinates([coordinate], {
-      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
-      animated: true,
-    });
-  }, [coordinate]);
+    isShowNearby && fetchPlaces();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isShowNearby]);
 
   useEffect(() => {
     region && setCoordinate(region);
@@ -58,11 +74,13 @@ export default function DetailAccommoMap({
           activeOpacity={0.7}
           style={styles.boxMap}
           onPress={() =>
-            navigate('NoBottomTab', {screen: 'MapLocateEstate', params: data})
+            navigate('NoBottomTab', {
+              screen: 'MapLocateEstate',
+              params: {...data, listLocationNearby},
+            })
           }>
           <MapView
             scrollEnabled={false}
-            ref={mapRef}
             provider={PROVIDER_GOOGLE}
             style={{
               flex: 1,
@@ -91,6 +109,18 @@ export default function DetailAccommoMap({
             </CustomText>
           </View>
         </TouchableOpacity>
+        {isShowNearby && (
+          <Nearby
+            data={listLocationNearby?.slice(0, 4)}
+            coordinate={coordinate}
+            onPressLocationNear={() => {
+              navigate('NoBottomTab', {
+                screen: 'MapLocateEstate',
+                params: {...data, listLocationNearby},
+              });
+            }}
+          />
+        )}
       </View>
     </WrapperContent>
   );

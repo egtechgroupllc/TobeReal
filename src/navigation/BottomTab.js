@@ -121,7 +121,7 @@ export default function BottomTab() {
       />
 
       <Tab.Screen
-        name={'Profile'}
+        name={'NavigationProfile'}
         component={NavigationProfile}
         options={{
           tabBarLabel: t('profile'),

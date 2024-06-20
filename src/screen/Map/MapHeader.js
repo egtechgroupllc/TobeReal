@@ -17,12 +17,11 @@ import BottomSheetChild from './Header/BottomSheetChild';
 import Budget from './Header/Budget';
 import MapProvince from './Header/MapProvince';
 import Menubar from './Header/Menubar';
+import RatingReview from './Header/RatingReview';
 import SortBy from './Header/SortBy';
+import StartAccom from './Header/StartAccom';
 import TypeAccommoda from './Header/TypeAccommoda';
 import TypeEstate from './Header/TypeEstate';
-import BedRoom from './Header/BedRoom';
-import RatingReview from './Header/RatingReview';
-import StartAccom from './Header/StartAccom';
 
 export default memo(function MapHeader({
   onFilter = () => {},

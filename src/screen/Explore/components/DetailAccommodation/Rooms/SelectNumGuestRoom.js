@@ -7,11 +7,14 @@ import {
   IconPeople,
   IconProfile,
 } from '../../../../../assets/icon/Icon';
-import {CustomButton} from '../../../../../components';
-import BottomSheet from '../../../../../components/BottomSheet';
-import Counter from '../../../../../components/Counter';
-import CustomImage from '../../../../../components/CustomImage';
-import CustomText from '../../../../../components/CustomText';
+import {
+  BottomSheet,
+  Counter,
+  CustomButton,
+  CustomImage,
+  CustomText,
+} from '../../../../../components';
+
 import ListChildren from '../../FindAccommodation/Occupancy/ListChildren';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 

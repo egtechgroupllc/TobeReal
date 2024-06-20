@@ -111,6 +111,9 @@ export default forwardRef(function CustomInput(
             propStyle?.flex
               ? {flex: propStyle?.flex}
               : propStyle?.width && {width: propStyle?.width},
+            props?.multiline && {
+              minHeight: scale(140),
+            },
             styleWrapper,
           ]}>
           <>
@@ -125,6 +128,9 @@ export default forwardRef(function CustomInput(
               style={[
                 styles.content,
                 !propStyle?.minHeight && {height: scale(heightSize)},
+                props?.multiline && {
+                  minHeight: scale(140),
+                },
                 propStyle,
                 error && {borderColor: '#f6465d'},
                 {width: '100%'},
@@ -233,7 +239,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 12,
+    borderRadius: scale(8),
     columnGap: scale(8),
     justifyContent: 'center',
     width: '100%',

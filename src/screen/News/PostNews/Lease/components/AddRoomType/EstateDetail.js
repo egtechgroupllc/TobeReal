@@ -9,16 +9,17 @@ import {
   getListTypeRoom,
 } from '../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
-import CustomSelectDropdown from '../../../../../../components/CustomSelectDropdown';
-import CustomText from '../../../../../../components/CustomText';
-import InViewPort from '../../../../../../components/InViewport';
+import {
+  Counter,
+  CustomInput,
+  CustomSelectDropdown,
+  CustomText,
+  InViewport,
+} from '../../../../../../components';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {requireField} from '../../../../../../utils/validate';
-import SelectCurrency from '../../../components/SelectCurrency';
 import ButtonTabValidate from '../ButtonTabValidate';
 import RealEstateType from '../../../components/RealEstateType';
-import Counter from '../../../../../../components/Counter';
 import InputPriceRoom from './InputPriceRoom';
 const list = [...Array(17)].map((_, index) => (index === 0 ? '< 1' : index));
 
@@ -54,7 +55,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort noLoading={true}>
+      <InViewport noLoading={true}>
         <Collapsible collapsed={!viewDetail} style={styles.box}>
           <RealEstateType
             label={t('room_type')}
@@ -174,7 +175,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             setValue={setValue}
           />
         </Collapsible>
-      </InViewPort>
+      </InViewport>
     </View>
   );
 }

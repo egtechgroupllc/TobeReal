@@ -5,11 +5,13 @@ import {StyleSheet, View} from 'react-native';
 
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {IconLocation, IconPeople} from '../../../assets/icon/Icon';
-import {CustomButton} from '../../../components';
-import BottomSheet from '../../../components/BottomSheet';
-import BottomSheetListSelect from '../../../components/BottomSheetListSelect';
-import CustomImage from '../../../components/CustomImage';
-import CustomText from '../../../components/CustomText';
+import {
+  BottomSheet,
+  BottomSheetListSelect,
+  CustomButton,
+  CustomImage,
+  CustomText,
+} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatDate} from '../../../utils/format';
 import CounterOccupancy from '../../components/CounterOccupancy';
