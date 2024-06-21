@@ -16,6 +16,7 @@ export default function DetailAccommoMap({
   region,
   data,
   address,
+  disable,
   styleWrapper,
   isShowNearby = true,
 }) {
@@ -71,6 +72,7 @@ export default function DetailAccommoMap({
           width: '100%',
         }}>
         <TouchableOpacity
+          disabled={disable}
           activeOpacity={0.7}
           style={styles.boxMap}
           onPress={() =>

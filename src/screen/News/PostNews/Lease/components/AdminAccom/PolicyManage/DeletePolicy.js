@@ -19,7 +19,6 @@ export default function DeletePolicy({data, onSuccess, onCancel}) {
   const deletePolicyMu = useMutation({
     mutationFn: deletePolicy,
   });
-
   const handDelete = value => {
     deletePolicyMu.mutate(
       {

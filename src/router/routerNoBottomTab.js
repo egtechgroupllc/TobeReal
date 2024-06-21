@@ -26,6 +26,7 @@ import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
 import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/PolicyManage/PolicyManageScreen';
 import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
+import PolicyToRoomScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/PolicyToRoomScreen';
 import RoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomManageScreen';
 import {SellManagementScreen} from '../screen/News/PostNews/Sell';
 import {AddTicketScreen} from '../screen/News/PostNews/Tour';
@@ -259,5 +260,9 @@ export default routerNoBottomTab = [
   {
     name: 'SelectLanguageScreen',
     component: SelectLanguageScreen,
+  },
+  {
+    name: 'PolicyToRoomScreen',
+    component: PolicyToRoomScreen,
   },
 ];

@@ -131,6 +131,7 @@ export default function ContentStep2({data}) {
       );
     }, 2000);
   };
+
   return (
     <View style={styles.container}>
       <TopStep2 data={data} onChange={value => setTypePayment(value?.type)} />

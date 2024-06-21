@@ -10,15 +10,22 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function DetailPriceRoom({data}) {
   const numRoom = data?.numRoomSelect;
+  const numNight = data?.date?.numNight;
   const [isMorePrice, setIsMorePrice] = useState(false);
   const {currency} = useCountry();
   const priceAverage = useMemo(
-    () => numRoom * data?.priceAverage * data?.date?.numNight,
-    [numRoom, data?.date?.numNight, data?.priceAverage],
+    () => numRoom * data?.priceAverage * numNight,
+    [numRoom, numNight, data?.priceAverage],
   );
+  const calculatePrice = () => {
+    if (data?.percentDiscount && data?.percentDiscount === 1) {
+      return priceAverage;
+    } else {
+      return priceAverage - priceAverage * data?.percentDiscount;
+    }
+  };
   const feePrice = priceAverage * (11.8165 / 100);
   const {t} = useLanguage();
-
   return (
     <View style={{rowGap: scale(5)}}>
       <TouchableOpacity
@@ -38,7 +45,7 @@ export default function DetailPriceRoom({data}) {
           styleValue={{
             fontSize: SIZES.medium,
           }}
-          value={formatPrice(priceAverage + feePrice, {
+          value={formatPrice(calculatePrice() * numRoom * numNight + feePrice, {
             currency: currency?.currency_code,
           })}
           colorValue={COLORS.primary}
@@ -70,15 +77,15 @@ export default function DetailPriceRoom({data}) {
 
         <Row
           title={t('price_per_day')}
-          value={formatPrice(data?.priceAverage * numRoom, {
+          value={formatPrice(calculatePrice() * numRoom, {
             currency: currency?.currency_code,
           })}
           colorValue={COLORS.primary}
           textType="semiBold"
         />
         <Row
-          title={`${t('total_price_for')} ${data?.date?.numNight} ${t('day')}`}
-          value={formatPrice(priceAverage, {
+          title={`${t('total_price_for')} ${numNight} ${t('day')}`}
+          value={formatPrice(calculatePrice() * numRoom * numNight, {
             currency: currency?.currency_code,
           })}
         />

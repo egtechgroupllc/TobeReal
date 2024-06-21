@@ -7,9 +7,12 @@ import {CustomButton} from '../../../../../../../components';
 import CustomImage from '../../../../../../../components/CustomImage';
 import CustomText from '../../../../../../../components/CustomText';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {getListPriceRoomDate} from '../../../../../../../Model/api/apiAccom';
+import {useQuery} from '@tanstack/react-query';
 
 export default function RoomItem({data, isTour, onPressMore, onEdit}) {
   const {navigate} = useNavigation();
+
   const {t} = useLanguage();
 
   const handleContinue = () => {
@@ -26,10 +29,10 @@ export default function RoomItem({data, isTour, onPressMore, onEdit}) {
     //   ? handleContinue()
     //   : navigateDetail();
     // handleContinue();
-    navigate('DetailRoomManageScreen', {...data});
+    navigate('NoBottomTab', {screen: 'DetailRoomManageScreen', params: data});
   };
   return (
-    <View
+    <TouchableOpacity
       activeOpacity={0.7}
       onPress={() => {
         handleTouch();
@@ -98,7 +101,7 @@ export default function RoomItem({data, isTour, onPressMore, onEdit}) {
           <View style={styles.bottom}>
             <CustomButton
               buttonType="normal"
-              text={t('edit')}
+              text={t('manage')}
               style={styles.btnInfo}
               styleText={{
                 fontSize: SIZES.xSmall,
@@ -119,7 +122,7 @@ export default function RoomItem({data, isTour, onPressMore, onEdit}) {
           </View>
         </View>
       </CustomImage>
-    </View>
+    </TouchableOpacity>
   );
 }
 

@@ -39,7 +39,6 @@ export default function CountryScreen() {
     queryFn: () =>
       getListCountry(router?.isProvince ? router?.country?.geoname_id : ''),
   });
-  console.log(router);
   const {onSaveCountry, country: countryStore} = useCountry();
 
   const handleDone = () => {

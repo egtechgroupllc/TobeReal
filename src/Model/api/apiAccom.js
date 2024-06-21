@@ -21,7 +21,6 @@ export const getListRent = async ({
   date_start,
   date_end,
   number_room = 1,
-  accommodation_type_id = 1,
   province_id,
   country_id,
   number_occupancy = 1,
@@ -32,6 +31,7 @@ export const getListRent = async ({
   latitude,
   longitude,
   distance,
+  accommodation_type_id,
 }) => {
   const province = province_id ? `province_id=${province_id}` : '';
   const country = country_id ? `country_id=${country_id}` : '';
@@ -40,10 +40,12 @@ export const getListRent = async ({
   const lat = latitude ? `latitude=${latitude}` : '';
   const long = longitude ? `longitude=${longitude}` : '';
   const dist = distance ? `distance=${distance}` : '';
+  const accommodation_type = accommodation_type_id
+    ? `accommodation_type_id=${accommodation_type_id}`
+    : '';
   const responsive = await instanceAccom.get(
-    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&accommodation_type_id=${accommodation_type_id}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}&${minprice}&${maxprice}&currency_id=${currency_id}&${lat}&${long}&${dist}`,
+    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&${accommodation_type}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}&${minprice}&${maxprice}&currency_id=${currency_id}&${lat}&${long}&${dist}`,
   );
-
   return responsive.data;
 };
 
@@ -188,11 +190,19 @@ export const postCreatePolicyToAccom = async data => {
   return responsive.data;
 };
 
-export const getListPolicy = async ({accommodation_id}) => {
+export const getListPolicy = async ({accommodation_id, room_id}) => {
   const accomId = accommodation_id
     ? `accommodation_id=${accommodation_id}`
     : '';
-  const responsive = await instanceAccom.get(`/policy/list?${accomId}`);
+  const roomId = room_id ? `room_id=${room_id}` : '';
+  const responsive = await instanceAccom.get(
+    `/policy/list?${accomId}&${roomId}`,
+  );
+
+  return responsive.data;
+};
+export const getDetailRoom = async ({room_id}) => {
+  const responsive = await instanceAccom.get(`/room/${room_id}`);
 
   return responsive.data;
 };

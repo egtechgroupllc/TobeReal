@@ -22,8 +22,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
   const {t} = useLanguage();
-
-  const {navigate, setOptions} = useNavigation();
+  const {navigate, setOptions, goBack} = useNavigation();
   const {
     handleSubmit,
     control,
@@ -32,7 +31,11 @@ export default function AddPolicyScreen({route}) {
     watch,
     unregister,
     formState: {errors},
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      price_percent: 10,
+    },
+  });
   const queryClient = useQueryClient();
   const createPolicy = useMutation({
     mutationFn: postCreatePolicyToAccom,
@@ -51,15 +54,14 @@ export default function AddPolicyScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleCreatePolicy = value => {
-    const price_percent = value?.isDiscount
-      ? value?.price_percent / 100
-      : value?.price_percent / 100 + 1;
+    const price_percent = !value?.isDiscount ? value?.price_percent / 100 : 1;
 
     delete value?.isDiscount;
     createPolicy.mutate(
       {
-        accommodation_id: dataParams?.id,
+        accommodation_id: dataParams?.accommodation_id,
         ...value,
         refund_fee: value?.refund_fee ? value?.refund_fee / 100 : 1,
         price_percent,
@@ -69,25 +71,24 @@ export default function AddPolicyScreen({route}) {
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
+
           if (dataInside?.status) {
+            reset();
             queryClient.invalidateQueries([
               'accommodation',
               'list-policy',
-              dataParams?.id,
+              dataParams?.accommodation_id,
             ]);
             showMess(
               dataInside?.message,
               dataInside?.status ? 'success' : 'error',
             );
-            !dataParams?.policyScreen
+            !dataParams?.admin
               ? navigate('NoBottomTab', {
-                  screen: 'AddRoomTypeScreen',
-                  params: {id: dataParams?.id},
+                  screen: 'PolicyToRoomScreen',
+                  params: dataParams,
                 })
-              : navigate('NoBottomTab', {
-                  screen: 'PolicyManageScreen',
-                  params: {id: dataParams?.id},
-                });
+              : goBack(dataParams?.data?.accommodationId);
           }
         },
 
@@ -133,11 +134,15 @@ export default function AddPolicyScreen({route}) {
           <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
-        <Box num="6" title={t('do_you_want_new_price')}>
+        <Box
+          num="6"
+          title={t('Bạn có muốn giảm giá niêm yết của phòng này không?')}>
           <RulesPolicy6
+            data={dataParams}
             control={control}
             unregister={unregister}
             setValue={setValue}
+            watch={watch}
           />
         </Box>
 

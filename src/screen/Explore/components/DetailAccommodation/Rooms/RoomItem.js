@@ -1,6 +1,11 @@
 import {useQuery} from '@tanstack/react-query';
-import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  StyleSheet,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import {getListPriceRoomDate} from '../../../../../Model/api/apiAccom';
@@ -11,7 +16,7 @@ import {
   WIDTH,
   scale,
 } from '../../../../../assets/constants';
-import {IconAcreage, IconNext} from '../../../../../assets/icon/Icon';
+import {IconAcreage, IconDown, IconNext} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import InViewport from '../../../../../components/InViewport';
@@ -20,14 +25,19 @@ import ItemAccommdSearchLoading from '../../../../Search/components/ItemAccommdS
 import RoomUntil from './components/RoomUntil';
 import SelectRoom from './components/SelectRoom';
 import {useCountry} from '../../../../../hooks/useCountry';
+import Collapsible from 'react-native-collapsible';
+import {CustomButton} from '../../../../../components';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function RoomItem({
+export default function wwRoomItem({
   dataP,
   onBooking,
   date,
   onDetail,
   isFilterChildren,
 }) {
+  const {t} = useLanguage();
+
   const [isRender, setIsRender] = useState(false);
   const [numRoom, setNumRoom] = useState(1);
   const {data, isLoading} = useQuery({
@@ -39,13 +49,14 @@ export default function RoomItem({
         date_end: date?.selectedEndDate,
       }),
   });
-
   const priceAverage = useMemo(() => {
     const result = data?.data?.data?.rows?.reduce((acc, item) => {
       return acc + item?.price;
     }, 0);
     return result / data?.data?.data?.count;
   }, [data?.data?.data]);
+  const [viewMore, setViewMore] = useState(false);
+
   return (
     <InViewport
       onChange={render => render && setIsRender(render)}
@@ -100,56 +111,108 @@ export default function RoomItem({
               </CustomText>
             </View>
           </View>
-
-          <TouchableNativeFeedback
-            onPress={() => {
-              onDetail({priceAverage});
+          <View
+            style={{
+              width: '100%',
             }}>
-            <View style={styles.content}>
-              <View
+            {dataP.accommodation_policies
+              .slice(0, viewMore ? Infinity : 2)
+              .map((item, index) => {
+                return (
+                  <TouchableNativeFeedback
+                    key={index}
+                    onPress={() => {
+                      onDetail({
+                        priceAverage,
+                        percentDiscount: item?.price_percent,
+                      });
+                    }}>
+                    <View style={styles.content}>
+                      <View
+                        style={{
+                          ...styles.row,
+                          ...styles.header,
+                        }}>
+                        <CustomText
+                          textType="bold"
+                          style={{color: COLORS.black, flex: 1}}
+                          numberOfLines={1}>
+                          {dataP?.name}
+                        </CustomText>
+                        <IconNext
+                          style={{
+                            width: scale(14),
+                            height: scale(14),
+                          }}
+                          fill={COLORS.black}
+                        />
+                      </View>
+
+                      <View
+                        style={{
+                          padding: scale(8),
+                          rowGap: scale(7),
+                        }}>
+                        <RoomUntil
+                          data={{...dataP, item}}
+                          price={priceAverage * numRoom}
+                          isFilterChildren={isFilterChildren}
+                        />
+                        <SelectRoom
+                          onPress={value =>
+                            onBooking({
+                              numRoomSelect: value,
+                              id: dataP?.id,
+                              priceAverage,
+                              percentDiscount: item?.price_percent,
+                            })
+                          }
+                          data={dataP}
+                          onSelect={setNumRoom}
+                        />
+                      </View>
+                    </View>
+                  </TouchableNativeFeedback>
+                );
+              })}
+            {dataP?.accommodation_policies?.length > 2 && (
+              <TouchableOpacity
+                onPress={() => setViewMore(prev => !prev)}
+                activeOpacity={0.7}
                 style={{
-                  ...styles.row,
-                  ...styles.header,
+                  marginTop: scale(10),
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  columnGap: scale(10),
                 }}>
                 <CustomText
-                  textType="bold"
-                  style={{color: COLORS.black, flex: 1}}
-                  numberOfLines={1}>
-                  {dataP?.name}
-                </CustomText>
-                <IconNext
+                  textType="semiBold"
                   style={{
-                    width: scale(14),
-                    height: scale(14),
-                  }}
-                  fill={COLORS.black}
-                />
-              </View>
-
-              <View
-                style={{
-                  padding: scale(8),
-                  rowGap: scale(7),
-                }}>
-                <RoomUntil
-                  data={dataP}
-                  price={priceAverage * numRoom}
-                  isFilterChildren={isFilterChildren}
-                />
-                <SelectRoom
-                  onPress={value =>
-                    onBooking({
-                      numRoomSelect: value,
-                      id: dataP?.id,
-                      priceAverage,
-                    })
+                    color: COLORS.primary,
+                    fontSize: SIZES.medium,
+                  }}>
+                  {!viewMore
+                    ? `${t('show_more')} ${
+                        dataP?.accommodation_policies?.length - 2
+                      } ${t('room')}`
+                    : t('show_less')}
+                </CustomText>
+                <IconDown
+                  fill={COLORS.primary}
+                  style={
+                    viewMore && {
+                      transform: [
+                        {
+                          rotate: '180deg',
+                        },
+                      ],
+                    }
                   }
-                  data={dataP}
-                  onSelect={setNumRoom}
                 />
-              </View>
-            </View>
-          </TouchableNativeFeedback>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       )}
     </InViewport>
@@ -179,6 +242,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     width: '100%',
     borderRadius: scale(6),
+    marginTop: scale(15),
   },
   header: {
     columnGap: scale(10),

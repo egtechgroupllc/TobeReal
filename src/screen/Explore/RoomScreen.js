@@ -15,6 +15,8 @@ import ItemAccommdSearchLoading from '../Search/components/ItemAccommdSearchLoad
 import RoomFilter from './components/DetailAccommodation/Rooms/RoomFilter';
 import RoomFilterType from './components/DetailAccommodation/Rooms/RoomFilterType';
 import RoomItem from './components/DetailAccommodation/Rooms/RoomItem';
+import InViewport from '../../components/InViewport';
+import Collapsible from 'react-native-collapsible';
 
 export default function RoomScreen() {
   const {setOptions, navigate} = useNavigation();

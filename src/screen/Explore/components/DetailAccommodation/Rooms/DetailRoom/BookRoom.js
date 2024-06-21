@@ -37,7 +37,6 @@ export default function BookRoom({data}) {
     [selectRoom, data?.date?.numNight, data?.priceAverage],
   );
   const feePrice = priceAverage * (11.8165 / 100);
-
   const handleBookingRoom = value => {
     !token
       ? navigate('NavigationAuth')
@@ -45,9 +44,16 @@ export default function BookRoom({data}) {
           ...data,
           numRoomSelect: selectRoom,
           total: priceAverage,
+          percentDiscount: data?.percentDiscount,
         });
   };
-
+  const calculatePrice = () => {
+    if (data?.percentDiscount && data?.percentDiscount === 1) {
+      return priceAverage;
+    } else {
+      return priceAverage - priceAverage * data?.percentDiscount;
+    }
+  };
   return (
     <View
       style={[styles.wrapper, {paddingBottom: insets.bottom + scale(6)}]}
@@ -101,17 +107,22 @@ export default function BookRoom({data}) {
             style={{
               rowGap: scale(2),
             }}>
-            <CustomText
-              style={{color: COLORS.text, textDecorationLine: 'line-through'}}>
-              {formatPrice(data?.priceAverage)}
-            </CustomText>
+            {data?.percentDiscount != 1 && (
+              <CustomText
+                style={{
+                  color: COLORS.text,
+                  textDecorationLine: 'line-through',
+                }}>
+                {formatPrice(priceAverage)}
+              </CustomText>
+            )}
             <CustomText
               textType="semiBold"
               style={{
                 color: COLORS.primary,
                 fontSize: SIZES.xMedium,
               }}>
-              {formatPrice(priceAverage + feePrice)}
+              {formatPrice(calculatePrice())}
             </CustomText>
             <View>
               <CustomText

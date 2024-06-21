@@ -1,17 +1,24 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
 import {CustomButton} from '../../../../components';
-import {QueryClient, useMutation, useQueryClient} from '@tanstack/react-query';
-import {deleteAccom} from '../../../../Model/api/apiAccom';
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import {deleteAccom, getListRent} from '../../../../Model/api/apiAccom';
 import {showMess} from '../../../../assets/constants/Helper';
 import HeaderRight from '../../../../navigation/components/HeaderRight';
 import {IconHome} from '../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {formatDate} from '../../../../utils/format';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
@@ -21,6 +28,7 @@ export default function AdminManageLeaseScreen() {
   const {setOptions} = useNavigation();
   const {navigate, goBack} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('accom_management'),
@@ -138,10 +146,13 @@ export default function AdminManageLeaseScreen() {
             </CustomText>
           </View>
         </CustomImage>
-        <CustomButton
-          text={t('booking_count')}
-          style={{width: '85%', height: scale(45)}}
-        />
+        <View style={styles.button}>
+          <CustomText
+            style={{color: COLORS.white, fontSize: SIZES.xMedium}}
+            textType="semiBold">
+            {t('booking_count')}:
+          </CustomText>
+        </View>
         <CustomButton
           text={t('review')}
           style={{width: '85%', height: scale(45)}}
@@ -156,13 +167,13 @@ export default function AdminManageLeaseScreen() {
             navigate('RoomManageScreen', {...params, admin: adminScreen})
           }
         />
-        <CustomButton
+        {/* <CustomButton
           text={t('policy_manage')}
           style={{width: '85%', height: scale(45)}}
           onPress={() =>
             navigate('PolicyManageScreen', {...params, admin: adminScreen})
           }
-        />
+        /> */}
         <CustomButton
           text={t('remove_accom')}
           style={{
@@ -221,5 +232,15 @@ const styles = StyleSheet.create({
     width: scale(8),
     height: scale(8),
     marginTop: scale(1),
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    columnGap: scale(10),
+    paddingHorizontal: scale(10),
+    borderRadius: scale(10),
+    backgroundColor: COLORS.primary,
+    width: '85%',
+    height: scale(45),
   },
 });

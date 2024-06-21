@@ -48,7 +48,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
   return (
     <View>
       <ButtonTabValidate
-        title={t('estate_detail')}
+        title={t('room_detail')}
         onPress={() => setViewDetail(prev => !prev)}
         errors={errors}
         watch={watch}

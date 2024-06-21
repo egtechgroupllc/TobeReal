@@ -7,5 +7,6 @@ import {scale} from '../../../assets/constants';
 
 export default function BookingRoomScreen() {
   const params = useRoute().params;
+
   return <HorizontalStepIndicator data={params} />;
 }

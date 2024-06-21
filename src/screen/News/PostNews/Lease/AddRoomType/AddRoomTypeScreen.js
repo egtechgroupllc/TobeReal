@@ -57,9 +57,9 @@ export default function AddRoomTypeScreen() {
   const updateAccommodationRoomMu = useMutation({
     mutationFn: postUpdateAccom,
   });
-  const createAddPolicyToRoom = useMutation({
-    mutationFn: postPolicyToRoom,
-  });
+  // const createAddPolicyToRoom = useMutation({
+  //   mutationFn: postPolicyToRoom,
+  // });
   const getFormData = (object = {}) => {
     const formData = new FormData();
     const arrKeyno = [
@@ -115,23 +115,24 @@ export default function AddRoomTypeScreen() {
 
     return formData;
   };
-  const linkPolicy = value => {
-    createAddPolicyToRoom.mutate(
-      {
-        array_policy_id: value?.policy,
-        room_id: value?.id,
-        is_add: 1,
-      },
-      {
-        onSuccess: dataInside => {
-          console.log({dataInside}, 132);
-        },
-        onError: err => {
-          console.log({err});
-        },
-      },
-    );
-  };
+  // const linkPolicy = value => {
+  //   createAddPolicyToRoom.mutate(
+  //     {
+  //       array_policy_id: value?.policy,
+  //       room_id: value?.id,
+  //       is_add: 1,
+  //     },
+  //     {
+  //       onSuccess: dataInside => {
+  //         console.log({dataInside}, 132);
+  //       },
+  //       onError: err => {
+  //         console.log({err});
+  //       },
+  //     },
+  //   );
+  // };
+
   const handlePostRoom = value => {
     // navigate('AddPolicyScreen', {id: params?.id});
     delete value?.number_user;
@@ -140,12 +141,12 @@ export default function AddRoomTypeScreen() {
     params?.update && delete value?.number_room;
     params?.update && delete value?.price;
 
-    const policy = params?.update ? value?.policy : JSON.parse(value?.policy);
+    // const policy = value?.policy;
 
-    if (!value?.policy || policy.length <= 0) {
-      showMess('Ban chua chon chinh sach cho phong', 'error');
-      return;
-    }
+    // if (!value?.policy || policy.length <= 0) {
+    //   showMess('Ban chua chon chinh sach cho phong', 'error');
+    //   return;
+    // }
 
     const features = params?.update
       ? value?.features
@@ -163,26 +164,32 @@ export default function AddRoomTypeScreen() {
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-
         if (dataInside?.status) {
           // reset();
           queryClient.invalidateQueries(['accommodation', 'my-list']);
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
-          linkPolicy({
-            id: dataInside?.data?.id,
-            policy: value?.policy,
-          });
+          // linkPolicy({
+          //   id: dataInside?.data?.id,
+          //   policy: value?.policy,
+          // });
           if (params?.update) {
             goBack();
             return;
           }
           params?.admin
             ? navigate('RoomManageScreen', params)
-            : navigate('NoBottomTab', {
-                screen: 'AccommoManagementScreen',
-                params: params?.id,
+            : // navigate('NoBottomTab', {
+              //     screen: 'AccommoManagementScreen',
+              //     params: params?.id,
+              //   });
+              navigate('NoBottomTab', {
+                screen: 'AddPolicyScreen',
+                params: {
+                  accommodation_id: params?.id,
+                  dataRoom: dataInside?.data,
+                },
               });
         }
       },

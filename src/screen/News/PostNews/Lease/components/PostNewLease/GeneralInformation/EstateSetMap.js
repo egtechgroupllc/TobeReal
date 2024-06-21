@@ -36,6 +36,7 @@ export default function EstateSetMap({onChange, watch = () => {}, address}) {
         });
       }}>
       <DetailAccommoMap
+        disable
         address={address ? address : 'Address'}
         region={dataFromScreen}
         styleWrapper={{

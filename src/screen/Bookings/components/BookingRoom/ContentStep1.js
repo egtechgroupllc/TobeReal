@@ -31,7 +31,6 @@ export default function ContentStep1({onPress, data}) {
       check_out_time_end: data?.check_out_time_end,
     },
   };
-
   return (
     <MainWrapper styleContent={styles.container}>
       <View style={styles.view}>

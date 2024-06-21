@@ -248,45 +248,6 @@ export const dataMapNearby = {
       business_status: 'OPERATIONAL',
       geometry: {
         location: {
-          lat: 10.779912,
-          lng: 106.6374873,
-        },
-        viewport: {
-          northeast: {
-            lat: 10.7812565302915,
-            lng: 106.6388525802915,
-          },
-          southwest: {
-            lat: 10.7785585697085,
-            lng: 106.6361546197085,
-          },
-        },
-      },
-      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png',
-      icon_background_color: '#7B9EB0',
-      icon_mask_base_uri:
-        'https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet',
-      name: 'Chăm Sóc Da Chuyên Nghiệp Tre Xanh Spa',
-      opening_hours: {
-        open_now: true,
-      },
-      place_id: 'ChIJVbV0pKUudTERaPd27g8xmIk',
-      plus_code: {
-        compound_code: 'QJHP+XX Phú Nhuận, Thành phố Hồ Chí Minh, Việt Nam',
-        global_code: '7P28QJHP+XX',
-      },
-      rating: 4.5,
-      reference: 'ChIJVbV0pKUudTERaPd27g8xmIk',
-      scope: 'GOOGLE',
-      types: ['spa', 'point_of_interest', 'store', 'health', 'establishment'],
-      user_ratings_total: 2,
-      vicinity: '25 Hồ Văn Huê',
-    },
-
-    {
-      business_status: 'OPERATIONAL',
-      geometry: {
-        location: {
           lat: 10.7749752,
           lng: 106.6325489,
         },
@@ -332,56 +293,7 @@ export const dataMapNearby = {
       user_ratings_total: 2,
       vicinity: '2 Dương Khuê, Hoà Thanh',
     },
-    {
-      business_status: 'OPERATIONAL',
-      geometry: {
-        location: {
-          lat: 10.7791332,
-          lng: 106.6351271,
-        },
-        viewport: {
-          northeast: {
-            lat: 10.7804481302915,
-            lng: 106.6365673802915,
-          },
-          southwest: {
-            lat: 10.7777501697085,
-            lng: 106.6338694197085,
-          },
-        },
-      },
-      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png',
-      icon_background_color: '#7B9EB0',
-      icon_mask_base_uri:
-        'https://maps.gstatic.com/mapfiles/place_api/icons/v2/school_pinlet',
-      name: 'TRƯỜNG MẦM NON NGÔI NHÀ HẠNH PHÚC - HAPPY HOUSE',
-      opening_hours: {
-        open_now: true,
-      },
-      photos: [
-        {
-          height: 2625,
-          html_attributions: [
-            '<a href="https://maps.google.com/maps/contrib/114207621762851770148">TRƯỜNG MẦM NON NGÔI NHÀ HẠNH PHÚC - HAPPY HOUSE</a>',
-          ],
-          photo_reference:
-            'AUc7tXUQzFZj3jsH0lYAobDJPR2AqMaorHPAnKRJY6Jw6GNWoH6_wMOUdgYxVmGSHXD2KH2whUjTGZWgFKH8mUAaQUnb0mpUVn4Mv-c7UJR1jh9SL00BR3GrSMgrJpzIyzIIHdygecQ9lmWWHpe914jysxbwTklba4WDT_xyRjn2ISo9fqHN',
-          width: 2090,
-        },
-      ],
-      place_id: 'ChIJ475gGaoudTERDha8MOYVExE',
-      plus_code: {
-        compound_code: 'QJHP+M3 Tân Phú, Thành phố Hồ Chí Minh, Việt Nam',
-        global_code: '7P28QJHP+M3',
-      },
-      rating: 4.4,
-      reference: 'ChIJ475gGaoudTERDha8MOYVExE',
-      scope: 'GOOGLE',
-      types: ['point_of_interest', 'school', 'establishment'],
-      user_ratings_total: 35,
-      vicinity:
-        '215-217 Vườn Lài, phường Phú Thọ Hoà, quận Tân Phú 611A Luỹ Bán Bích, Phường Phú Thạnh, Quận Tân Phú 300 Hoà Bình, Phường Hiệp Tân, Quận Tân Phú 123 Lê Quang Đông, Phường 5, Quận 8, 560 Lê Văn Khương, Phường Thái An',
-    },
+
     {
       business_status: 'OPERATIONAL',
       geometry: {
@@ -980,56 +892,7 @@ export const dataMapNearby = {
       user_ratings_total: 11,
       vicinity: '60B Nguyễn Sơn, Phú Thọ Hoà',
     },
-    {
-      business_status: 'OPERATIONAL',
-      geometry: {
-        location: {
-          lat: 10.7791332,
-          lng: 106.6351271,
-        },
-        viewport: {
-          northeast: {
-            lat: 10.7804481302915,
-            lng: 106.6365673802915,
-          },
-          southwest: {
-            lat: 10.7777501697085,
-            lng: 106.6338694197085,
-          },
-        },
-      },
-      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png',
-      icon_background_color: '#7B9EB0',
-      icon_mask_base_uri:
-        'https://maps.gstatic.com/mapfiles/place_api/icons/v2/school_pinlet',
-      name: 'TRƯỜNG MẦM NON NGÔI NHÀ HẠNH PHÚC - HAPPY HOUSE',
-      opening_hours: {
-        open_now: true,
-      },
-      photos: [
-        {
-          height: 2625,
-          html_attributions: [
-            '<a href="https://maps.google.com/maps/contrib/114207621762851770148">TRƯỜNG MẦM NON NGÔI NHÀ HẠNH PHÚC - HAPPY HOUSE</a>',
-          ],
-          photo_reference:
-            'AUc7tXVBNRdzVyFJY0p0ojJ6c_YCjHJeTV-ouG7AMXk058Sz6V-IWI8t3V1Tjr8OedpHgZqIUeCcAxuFnHKaMne9ANizekAJFYKvpWNyEOB2hezqn6GeXZTU7CPdsEOhZagr0sg0gI1-lfUVYdMMfJH_spHvJwNW6koR_5EwPrEQtaVHkN-u',
-          width: 2090,
-        },
-      ],
-      place_id: 'ChIJ475gGaoudTERDha8MOYVExE',
-      plus_code: {
-        compound_code: 'QJHP+M3 Tân Phú, Thành phố Hồ Chí Minh, Việt Nam',
-        global_code: '7P28QJHP+M3',
-      },
-      rating: 4.4,
-      reference: 'ChIJ475gGaoudTERDha8MOYVExE',
-      scope: 'GOOGLE',
-      types: ['point_of_interest', 'school', 'establishment'],
-      user_ratings_total: 35,
-      vicinity:
-        '215-217 Vườn Lài, phường Phú Thọ Hoà, quận Tân Phú 611A Luỹ Bán Bích, Phường Phú Thạnh, Quận Tân Phú 300 Hoà Bình, Phường Hiệp Tân, Quận Tân Phú 123 Lê Quang Đông, Phường 5, Quận 8, 560 Lê Văn Khương, Phường Thái An',
-    },
+
     {
       business_status: 'OPERATIONAL',
       geometry: {

@@ -1055,5 +1055,8 @@
   "connect_with_your_friend": "Connect with your friends today!",
   "enter_business_name": "Enter business name",
   "enter_business_category": "Enter business category",
-  "detail_room": "Detail room"
+  "detail_room": "Detail room",
+
+  "show_more": "Show more",
+  "show_less": "Show less"
 }

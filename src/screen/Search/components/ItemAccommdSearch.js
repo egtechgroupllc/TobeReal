@@ -61,6 +61,7 @@ export default function ItemAccommdSearch({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}

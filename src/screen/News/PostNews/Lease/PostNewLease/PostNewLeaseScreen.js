@@ -119,7 +119,7 @@ export default function PostNewLeaseScreen() {
           reset();
           queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
           navigate('NoBottomTab', {
-            screen: 'AddPolicyScreen',
+            screen: 'AddRoomTypeScreen',
             params: dataInside?.data,
           });
         }

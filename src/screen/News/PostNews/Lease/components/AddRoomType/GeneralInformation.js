@@ -86,7 +86,7 @@ export default function GeneralInformation({
             placeholder={t('room_name')}
             name="name"
           />
-          <ButtonTabValidate
+          {/* <ButtonTabValidate
             title={t('list_policy')}
             onPress={viewListPolicy}
             errors={errors}
@@ -98,27 +98,23 @@ export default function GeneralInformation({
               paddingHorizontal: scale(20),
               marginBottom: scale(-17),
             }}
-          />
-          {data?.data?.count !== 0 && data?.data?.count ? (
+          /> */}
+          {/* {data?.data?.count !== 0 && data?.data?.count ? (
             <Collapsible collapsed={!isViewPolicy} style={{...styles.box}}>
               {data?.data?.rows?.map((item, index) => {
                 return (
-                  <>
-                    <View>
-                      <CheckBox
-                        key={index}
-                        textBold
-                        isRadio
-                        style={{width: scale(322), height: scale(20)}}
-                        text={item?.name}
-                        isChecked={policy?.includes(item?.id)}
-                        onPress={() => policiesCheckBox(item)}
-                        textStyle={{
-                          fontSize: SIZES.xMedium,
-                        }}
-                      />
-                    </View>
-                  </>
+                  <CheckBox
+                    key={index}
+                    textBold
+                    isRadio
+                    style={{width: scale(322), height: scale(20)}}
+                    text={item?.name}
+                    isChecked={policy?.includes(item?.id)}
+                    onPress={() => policiesCheckBox(item)}
+                    textStyle={{
+                      fontSize: SIZES.xMedium,
+                    }}
+                  />
                 );
               })}
             </Collapsible>
@@ -141,7 +137,7 @@ export default function GeneralInformation({
                 />
               </View>
             </Collapsible>
-          )}
+          )} */}
         </Collapsible>
       </InViewPort>
     </View>

@@ -15,8 +15,8 @@ import {useCountry} from '../../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function RoomUntil({data, price, isFilterChildren}) {
-  const dataPolicies = data?.accommodation_policies;
-  const RefundCondition = dataPolicies[0]?.refund_fee;
+  const dataPolicies = data?.item;
+  const RefundCondition = dataPolicies?.refund_fee;
   const {t} = useLanguage();
   const {currency} = useCountry();
   const feeCancel = useMemo(() => {
@@ -30,6 +30,13 @@ export default function RoomUntil({data, price, isFilterChildren}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [RefundCondition]);
 
+  const calculatePrice = () => {
+    if (dataPolicies?.price_percent && dataPolicies?.price_percent === 1) {
+      return price;
+    } else {
+      return price - price * dataPolicies?.price_percent;
+    }
+  };
   return (
     <>
       <ItemUtil
@@ -74,25 +81,31 @@ export default function RoomUntil({data, price, isFilterChildren}) {
             alignItems: 'flex-end',
           }}>
           <View>
-            <View style={styles.boxDiscount}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  color: '#FF0000',
-                  fontSize: SIZES.xSmall,
-                }}>
-                {' '}
-                -20%
-              </CustomText>
-            </View>
-            <CustomText style={styles.priceDiscount}>
-              {formatPrice(23)}
-            </CustomText>
+            {dataPolicies?.price_percent !== 1 && (
+              <>
+                <View style={styles.boxDiscount}>
+                  <CustomText
+                    textType="semiBold"
+                    style={{
+                      color: '#FF0000',
+                      fontSize: SIZES.xSmall,
+                    }}>
+                    {' '}
+                    -{dataPolicies?.price_percent * 100}%
+                  </CustomText>
+                </View>
+                <CustomText style={styles.priceDiscount}>
+                  {formatPrice(price, {
+                    currency: currency?.currency_code,
+                  })}
+                </CustomText>
+              </>
+            )}
           </View>
 
           <View>
             <CustomText textType="bold" style={styles.price}>
-              {formatPrice(price, {
+              {formatPrice(calculatePrice(), {
                 currency: currency?.currency_code,
               })}
             </CustomText>

@@ -77,9 +77,8 @@ export default function RoomManageScreen() {
                       bottomSheetRef.current.open();
                     }}
                     onEdit={() => {
-                      navigate('AddRoomTypeScreen', {
+                      navigate('DetailRoomManageScreen', {
                         ...item,
-                        update: true,
                       });
                     }}
                   />
