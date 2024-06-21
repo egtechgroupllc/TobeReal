@@ -5815,3 +5815,19 @@ export function IconExportFile({fill, size, ...props}) {
     </Svg>
   );
 }
+export function IconImportFile({fill, size, ...props}) {
+  return (
+    <Svg
+      width={size || scale(15)}
+      height={size || scale(20)}
+      viewBox="0 0 15 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <Path
+        d="M2.5 0A2.502 2.502 0 000 2.5v15C0 18.879 1.121 20 2.5 20h10c1.379 0 2.5-1.121 2.5-2.5V6.25h-5c-.691 0-1.25-.559-1.25-1.25V0H2.5zM10 0v5h5l-5-5zM8.437 9.063v3.988l1.211-1.211a.937.937 0 011.324 1.324L8.16 15.977a.934.934 0 01-1.324 0l-2.813-2.813a.937.937 0 011.324-1.324l1.212 1.21V9.063c0-.519.418-.937.937-.937.52 0 .938.418.938.938h.004z"
+        fill={fill || '#000'}
+      />
+    </Svg>
+  );
+}

@@ -5,7 +5,7 @@ import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {IconCheck} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
-import BoxWalletBlockChain from '../AddressWallet/BoxWalletBlockChain';
+import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
 
 export default function TopProfile({name, data}) {
   console.log(data);

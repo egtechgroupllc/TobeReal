@@ -13,6 +13,7 @@
     "apk": "cd android && ./gradlew clean && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "@dr.pogodin/react-native-fs": "^2.27.1",
     "@gorhom/bottom-sheet": "^4.6.0",
     "@miblanchard/react-native-slider": "^2.3.1",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
@@ -45,6 +46,7 @@
     "react-native-calendars": "^1.1304.1",
     "react-native-collapsible": "^1.6.1",
     "react-native-date-picker": "^4.3.5",
+    "react-native-document-picker": "^9.3.0",
     "react-native-encrypted-storage": "^4.0.3",
     "react-native-fast-image": "^8.6.3",
     "react-native-flash-message": "^0.4.2",
@@ -73,6 +75,7 @@
     "react-native-video": "^5.2.1",
     "react-native-webview": "^13.8.1",
     "react-native-youtube-iframe": "^2.3.0",
+    "rn-fetch-blob": "^0.12.0",
     "yarn": "^1.22.21"
   },
   "devDependencies": {

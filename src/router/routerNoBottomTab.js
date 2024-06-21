@@ -14,9 +14,9 @@ import {DetailTourScreen} from '../screen/Explore/components/ContentTour';
 import {DetailTicketScreen} from '../screen/Explore/components/ContentTour/DetailTicket';
 import BookTourScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookTourScreen';
 import {SeeAllTourScreen} from '../screen/Explore/components/ContentTour/SeeAll';
+import MapLocateEstate from '../screen/Explore/components/DetailAccommodation/Map/MapLocateEstate';
 import {DetailRoomScreen} from '../screen/Explore/components/DetailAccommodation/Rooms';
 import {NotifyScreen} from '../screen/Explore/components/Notify';
-import MapLocateEstate from '../screen/Explore/components/DetailAccommodation/Map/MapLocateEstate';
 import {
   AccommoManagementScreen,
   AddPolicyScreen,
@@ -34,6 +34,7 @@ import TourManagementScreen from '../screen/News/PostNews/Tour/TourManagementScr
 import AdminManageTourScreen from '../screen/News/PostNews/Tour/components/AdminManageTourScreen';
 import TicketManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketManageScreen';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
+import {SelectLanguageScreen} from '../screen/Profile';
 import {
   ConfirmDepositScreen,
   DepositScreen,
@@ -47,7 +48,6 @@ import {
 } from '../screen/Search';
 import {ListVideoInfluencerScreen} from '../screen/Video';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
-import {AddressWalletScreen, SelectLanguageScreen} from '../screen/Profile';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [

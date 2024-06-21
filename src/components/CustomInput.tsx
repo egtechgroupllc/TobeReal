@@ -111,9 +111,6 @@ export default forwardRef(function CustomInput(
             propStyle?.flex
               ? {flex: propStyle?.flex}
               : propStyle?.width && {width: propStyle?.width},
-            props?.multiline && {
-              minHeight: scale(140),
-            },
             styleWrapper,
           ]}>
           <>
@@ -128,9 +125,7 @@ export default forwardRef(function CustomInput(
               style={[
                 styles.content,
                 !propStyle?.minHeight && {height: scale(heightSize)},
-                props?.multiline && {
-                  minHeight: scale(140),
-                },
+                props?.multiline && {height: scale(140)},
                 propStyle,
                 error && {borderColor: '#f6465d'},
                 {width: '100%'},
@@ -159,6 +154,7 @@ export default forwardRef(function CustomInput(
                 secureTextEntry={viewPassword}
                 editable={!onPress}
                 autoCapitalize="none"
+                
                 {...props}
                 onChangeText={text => {
                   const valueText = enableFormatNum ? text.trim() : text;
@@ -239,7 +235,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: scale(8),
+    borderRadius: 12,
     columnGap: scale(8),
     justifyContent: 'center',
     width: '100%',

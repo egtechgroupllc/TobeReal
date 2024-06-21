@@ -2,6 +2,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <RNFSBackgroundDownloads.h>
 
 @implementation AppDelegate
 
@@ -20,6 +21,15 @@
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
   return [self getBundleURL];
+}
+
+- (void)application:(UIApplication *)application
+  handleEventsForBackgroundURLSession:(NSString *)identifier
+  completionHandler:(void (^)())completionHandler
+{
+  [RNFSBackgroundDownloads
+    setCompletionHandlerForIdentifier:identifier
+    completionHandler:completionHandler];
 }
 
 - (NSURL *)getBundleURL

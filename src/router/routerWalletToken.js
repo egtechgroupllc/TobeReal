@@ -1,5 +1,5 @@
-import {AddressWalletScreen} from '../screen/Profile';
 import {
+  AddressWalletScreen,
   ImportAddressWalletScreen,
   WalletTokenScreen,
 } from '../screen/WalletToken';

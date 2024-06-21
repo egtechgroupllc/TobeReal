@@ -89,9 +89,6 @@ export default function ImportAddressWalletScreen({route}) {
           paddingHorizontal: scale(10),
           paddingVertical: scale(5),
         }}
-        styleWrapper={{
-          marginBottom: scale(20),
-        }}
         autoFocus
         control={control}
         name="value"
@@ -116,7 +113,7 @@ export default function ImportAddressWalletScreen({route}) {
 
       <CustomText style={styles.desc}>
         {dataP.type === 'PASSPHRASE'
-          ? `Thường là 12 từ (đôi khi là 18 hay 24 từ) được phân tách bằng dấu cách `
+          ? `Thường là 12 từ (đôi khi là 18 hay 24 từ) được phân tách bằng dấu cách`
           : `Private key là một chuỗi ký tự bao gồm cả chữ và số, hoạt động như một mã bảo mật để truy cập vào tài khoản.`}
       </CustomText>
 
@@ -138,7 +135,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: SIZES.xMedium,
     color: COLORS.text,
-    marginTop: scale(10),
     lineHeight: scale(20),
   },
 });

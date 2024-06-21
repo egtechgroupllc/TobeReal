@@ -36,7 +36,7 @@ export default function SelectDefaultCountryScreen() {
   };
 
   const selectLanguage = () => {
-    navigation.navigate('NavigationProfile', {
+    navigation.navigate('NoBottomTab', {
       screen: 'SelectLanguageScreen',
       params: {
         onGoBack: data => {
