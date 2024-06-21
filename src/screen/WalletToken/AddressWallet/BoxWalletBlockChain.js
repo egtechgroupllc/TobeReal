@@ -10,9 +10,9 @@ import {CustomText} from '../../../components';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
-import QRWalletBlockChain from '../components/QRWalletBlockChain';
+import QRWalletBlockChain from '../../Profile/components/QRWalletBlockChain';
 import {useQuery} from '@tanstack/react-query';
-import {getBalance} from '../../../Model/api/wallet';
+import {getBalanceWallet} from '../../../Model/api/wallet';
 import MenuAddressWallet from './MenuAddressWallet';
 
 export default function BoxWalletBlockChain({data}) {
@@ -36,7 +36,7 @@ export default function BoxWalletBlockChain({data}) {
 
   const {data: dataQ, error} = useQuery({
     queryKey: ['user', 'wallet', 'balance'],
-    queryFn: getBalance,
+    queryFn: getBalanceWallet,
   });
 
   if (!data?.wallet_address) return null;
@@ -76,12 +76,24 @@ export default function BoxWalletBlockChain({data}) {
                 textType="semiBold"
                 color={COLORS.primary}
                 numberOfLines={1}>
+                {formatPrice(dataQ?.data?.TBC, {
+                  currency: 'TBC',
+                  locales: 'vi',
+                })}
+              </CustomText>
+              {`\n`}
+              Số dư phí gas:{' '}
+              <CustomText
+                textType="semiBold"
+                color={COLORS.primary}
+                numberOfLines={1}>
                 {formatPrice(dataQ?.data?.TBH, {
-                  showCurrency: false,
+                  currency: 'TBH',
+                  locales: 'vi',
                 })}
               </CustomText>
             </CustomText>
-            <MenuAddressWallet />
+            <MenuAddressWallet data={data} />
           </View>
         </View>
 

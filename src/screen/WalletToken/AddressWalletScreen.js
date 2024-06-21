@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../assets/constants';
-import WalletItem from './AddressWallet/WalletItem';
+import WalletItem from '../WalletToken/AddressWallet/WalletItem';
 
 export default function AddressWalletScreen() {
   const {setOptions, navigate} = useNavigation();

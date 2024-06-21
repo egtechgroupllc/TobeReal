@@ -9,8 +9,9 @@ import {showMess} from '../../assets/constants/Helper';
 import {IconAdd} from '../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../components';
 import {useAuthentication} from '../../hooks/useAuthentication';
-import BoxWalletBlockChain from '../Profile/AddressWallet/BoxWalletBlockChain';
-import ImportAddressWalletBtn from './components/ImportAddressWalletBtn';
+import BoxWalletBlockChain from './AddressWallet/BoxWalletBlockChain';
+import ListToken from './components/ListToken';
+import MenuImportAddressWallet from './components/MenuImportAddressWallet';
 
 export default function WalletTokenScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -91,10 +92,15 @@ export default function WalletTokenScreen() {
               </View>
             }
           />
-          <ImportAddressWalletBtn />
+
+          {/* MARK: MenuImportAddressWallet */}
+          <MenuImportAddressWallet />
         </View>
       ) : (
-        <BoxWalletBlockChain data={data?.data} />
+        <>
+          <BoxWalletBlockChain data={data?.data} />
+          <ListToken />
+        </>
       )}
     </View>
   );
