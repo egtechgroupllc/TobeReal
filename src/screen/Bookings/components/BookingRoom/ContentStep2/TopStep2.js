@@ -1,17 +1,29 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {COLORS, scale} from '../../../../../assets/constants';
-import {IconClock, IconDown} from '../../../../../assets/icon/Icon';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {
+  IconClock,
+  IconDown,
+  IconVoucher,
+} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {formatDate} from '../../../../../utils/format';
 import ItemUtil from '../../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import PaymentMethods from './PaymentMethods';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
+import ApplyVoucher from './Voucher/components/ApplyVoucher';
 
-export default function TopStep2({data, onChange}) {
+export default function TopStep2({
+  data,
+  onChange,
+  typePayment,
+  onCheckVoucher,
+  dataVoucher,
+}) {
   const {t} = useLanguage();
-
+  const {navigate} = useNavigation();
   return (
     <View style={styles.top}>
       <View style={styles.topContent}>
@@ -55,8 +67,15 @@ export default function TopStep2({data, onChange}) {
           styleWrapper={styles.roomCode}
         />
 
-        <PaymentMethods data={data} onChange={onChange} />
+        <PaymentMethods onChange={onChange} />
       </View>
+      {typePayment === 'VOUCHER' && (
+        <ApplyVoucher
+          data={data}
+          onCheckVoucher={onCheckVoucher}
+          dataVoucher={dataVoucher}
+        />
+      )}
     </View>
   );
 }
@@ -76,6 +95,7 @@ const styles = StyleSheet.create({
     zIndex: 99,
     alignItems: 'center',
   },
+
   heading: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -15,10 +15,10 @@ export default function HeaderNoToken() {
       <CustomButton
         text={t('login')}
         buttonType="large"
+        styleText={{color: COLORS.white}}
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.primary,
           flex: 0.5,
-          borderColor: '#fff',
         }}
         outline
         onPress={() => {
@@ -28,11 +28,9 @@ export default function HeaderNoToken() {
       <CustomButton
         text={t('signup')}
         buttonType="large"
-        styleText={{
-          color: '#fff',
-        }}
         style={{
           flex: 0.5,
+          backgroundColor: COLORS.white,
           borderColor: '#fff',
         }}
         outline
@@ -46,7 +44,6 @@ export default function HeaderNoToken() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.primary,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingVertical: scale(10),

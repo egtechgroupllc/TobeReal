@@ -38,7 +38,6 @@ export default function AccommoManagementScreen() {
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
-      headerLeftNavigate: 'LeaseScreen',
       // headerLeft: () => (
       //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
       //     <IconGoBack style={{width: scale(20)}} />

@@ -31,15 +31,19 @@ export default function TotalPriceBooking({data}) {
           alignItems: 'flex-end',
           rowGap: scale(3),
         }}>
-        <CustomText
+        {/* <CustomText
           textType="medium"
           style={{
             textDecorationLine: 'line-through',
           }}>
-          {formatPrice(data?.price, {currency: currency?.currency_code})}
-        </CustomText>
+          {formatPrice(data?.price * currency?.exchange_rate, {
+            currency: currency?.currency_code,
+          })}
+        </CustomText> */}
         <CustomText textType="bold" size={SIZES.medium} color="#ff5e1f">
-          {formatPrice(data?.price, {currency: currency?.currency_code})}
+          {formatPrice(data?.price * currency?.exchange_rate, {
+            currency: currency?.currency_code,
+          })}
         </CustomText>
         <CustomText color={'#42b00b'}>{t('best_price')}</CustomText>
       </View>

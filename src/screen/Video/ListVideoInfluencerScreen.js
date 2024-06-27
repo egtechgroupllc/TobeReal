@@ -26,43 +26,6 @@ import Comment from './Comment';
 
 const listVideo = [
   {
-    id: 3,
-    src: video.video1,
-    username: 'John',
-    price: 2000,
-    location: 'United States',
-    rental: 'night',
-    quantityHeart: 516,
-    quantityComment: 10,
-    description:
-      "Getting around Los Angeles (CA) can be a challenge, but with a little planning, it's easy to navigate the city. The most common form of transportation in Los Angeles (CA) is by car, so consider renting a car or using a ride-sharing service like Uber or Lyft. Los Angeles (CA) also has a public transportation system, which includes buses and trains. If you're planning to use public transportation, be sure to check schedules and plan your route in advance. And for those who prefer to walk or bike, Los Angeles (CA) has plenty of pedestrian-friendly areas and bike lanes.",
-  },
-  {
-    id: 2,
-    src: video.video3,
-    username: 'David',
-    quantityHeart: 1982,
-    quantityComment: 67,
-    description:
-      'This is a wonderful apartment to stay at for a honeymoon, featuring some of the best service I have ever experienced. The staff are incredibly friendly and helpful. The room, while not large, was well lit, well furnished, with a very comfortable bed and a modern bathroom. ',
-    price: 2000,
-    location: 'France',
-    rental: 'night',
-  },
-  {
-    id: 1,
-    src: video.video3,
-    username: 'Jack',
-    quantityHeart: 100,
-    quantityComment: 11,
-    description:
-      'Overall very good with only a small complaint with the common area: The atmosphere feels more like a hotel. Nobody socializes in the common area. ',
-    price: 1000,
-    location: 'Germany',
-    rental: 'night',
-  },
-
-  {
     id: 4,
     src: video.video4,
     username: 'Jimmy',
@@ -73,42 +36,6 @@ const listVideo = [
     price: 500,
     location: 'United Kingdom',
     rental: 'night',
-  },
-  {
-    id: 5,
-    src: video.video5,
-    username: 'Michael',
-    quantityHeart: 112,
-    quantityComment: 15,
-    description:
-      'Everything was great until I was stopped by police( ФМС) to check my doc. hotel stay address, they call it “registration” Even I was given the document that says I’m registered, It wasn’t in the the system of the ФМС. ',
-    price: 3000,
-    location: 'Russia',
-    rental: 'night',
-  },
-  {
-    id: 6,
-    src: video.video4,
-    username: 'Tyler',
-    quantityHeart: 213,
-    quantityComment: 21,
-    description:
-      'This was an awesome spot to stay in Dublin. You can take the airlink bus from the airport here, or a taxi. They allowed us early check in as our room was ready.',
-    price: 4000,
-    location: 'Ireland',
-    rental: 'night',
-  },
-  {
-    id: 31,
-    src: video.video1,
-    username: 'Bob',
-    quantityHeart: 132,
-    quantityComment: 5,
-    price: 5000,
-    location: 'Italia',
-    rental: 'night',
-    description:
-      'The majority of reviews on Saveloka say that for a quick stay, this is the go-to hotel which provides a comfortable stay/service/access to get around town. ',
   },
 ];
 

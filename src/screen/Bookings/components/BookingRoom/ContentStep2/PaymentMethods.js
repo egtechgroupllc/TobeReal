@@ -10,7 +10,7 @@ import PaymentMethodsItem from './PaymentMethodsItem';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function PaymentMethods({data, onChange}) {
+export default function PaymentMethods({onChange}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
 
@@ -53,7 +53,7 @@ export default function PaymentMethods({data, onChange}) {
         <PaymentMethodsItem
           title={methodsPay?.title}
           desc={
-            methodsPay?.type === 'LOKAPAY' &&
+            methodsPay?.type === 'FIAT' &&
             `${t('balance')}: ${formatPrice(
               profile?.balance * currency?.exchange_rate,
               {

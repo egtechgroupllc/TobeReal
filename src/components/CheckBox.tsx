@@ -52,13 +52,16 @@ export default function CheckBox({
         <View style={[styleWrapper]}>
           <BouncyCheckbox
             textComponent={
-              <CustomText textType={textBold && 'medium'} style={props.textStyle}>{props.text}</CustomText>
+              <CustomText
+                textType={textBold && 'medium'}
+                style={props.textStyle}>
+                {props.text}
+              </CustomText>
             }
             onPress={valueCheck => {
               onChange(checkedNumber ? (valueCheck ? 1 : 0) : valueCheck);
             }}
             size={scale(16)}
-            
             isChecked={value}
             fillColor={COLORS.primary}
             disableBuiltInState={isRadio}

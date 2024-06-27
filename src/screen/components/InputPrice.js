@@ -20,6 +20,7 @@ export default function InputPrice({
   placeholder,
   style,
   onChangeCurrency,
+  namePrice,
 }) {
   const {currency} = useCountry();
   const {navigate} = useNavigation();
@@ -80,7 +81,7 @@ export default function InputPrice({
               textAlign: 'center',
             }}>
             {/* {dataFromScreen?.currency_code} */}
-            {currency?.currency_code}
+            {namePrice || currency?.currency_code}
           </CustomText>
           <View style={styles.border} />
         </View>

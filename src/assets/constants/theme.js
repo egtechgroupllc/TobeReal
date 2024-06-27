@@ -27,6 +27,7 @@ export const WIDTH = {
 };
 export const SIZES = {
   xxSmall: scale(6),
+  xlSmall: scale(8),
   xSmall: scale(10),
   small: scale(12),
   xMedium: scale(14),

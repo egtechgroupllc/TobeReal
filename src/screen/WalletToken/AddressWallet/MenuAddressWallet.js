@@ -51,7 +51,7 @@ export default function MenuAddressWallet({data}) {
     const content = `${JSON.stringify(dataSave, null, 2)}
    Note*: 
   - Hãy lưu trữ file này cận thận và để ở 1 nơi an toàn.
-  - Saveloka không giữa bản sao thông tín ví của bạn.      
+  - Saveloka không giữa bản sao thông tin ví của bạn.      
   `;
 
     const content2 = JSON.stringify(dataSave);

@@ -47,13 +47,13 @@ export default function BookRoom({data}) {
           percentDiscount: data?.percentDiscount,
         });
   };
-  const calculatePrice = () => {
-    if (data?.percentDiscount && data?.percentDiscount === 1) {
-      return priceAverage;
-    } else {
-      return priceAverage - priceAverage * data?.percentDiscount;
-    }
-  };
+  // const calculatePrice = () => {
+  //   if (data?.percentDiscount && data?.percentDiscount === 1) {
+  //     return priceAverage;
+  //   } else {
+  //     return priceAverage - priceAverage * data?.percentDiscount;
+  //   }
+  // };
   return (
     <View
       style={[styles.wrapper, {paddingBottom: insets.bottom + scale(6)}]}
@@ -122,7 +122,7 @@ export default function BookRoom({data}) {
                 color: COLORS.primary,
                 fontSize: SIZES.xMedium,
               }}>
-              {formatPrice(calculatePrice())}
+              {formatPrice(priceAverage * data?.percentDiscount)}
             </CustomText>
             <View>
               <CustomText
@@ -141,7 +141,7 @@ export default function BookRoom({data}) {
                 <CustomText>
                   {t('receive')}{' '}
                   <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                    {formatPrice(selectRoom * 12312231)} {t('points')}
+                    {formatPrice(selectRoom * 10)} {t('points')}
                   </CustomText>
                 </CustomText>
               </View>

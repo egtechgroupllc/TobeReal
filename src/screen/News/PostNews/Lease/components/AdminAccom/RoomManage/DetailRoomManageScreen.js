@@ -207,7 +207,11 @@ export default function DetailRoomManageScreen() {
           text={t('policy_manage')}
           style={{width: '85%', height: scale(45)}}
           onPress={() =>
-            navigate('PolicyManageScreen', {...params, admin: adminScreen})
+            navigate('PolicyManageScreen', {
+              ...params,
+              admin: adminScreen,
+              price: price,
+            })
           }
         />
 

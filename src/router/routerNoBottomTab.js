@@ -3,6 +3,7 @@ import {
   ListPaymentMethodsScreen,
   PostReviewScreen,
 } from '../screen/Bookings';
+import HomeListVoucherScreen from '../screen/Bookings/components/BookingRoom/ContentStep2/Voucher/HomeListVoucherScreen';
 import {SelectDefaultCountryScreen} from '../screen/DefaultCountry';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
@@ -24,6 +25,8 @@ import {
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
+import AddVoucherScreen from '../screen/News/PostNews/Lease/VoucherManage/AddVoucherScreen';
+import VoucherManageScreen from '../screen/News/PostNews/Lease/VoucherManage/VoucherManageScreen';
 import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/PolicyManage/PolicyManageScreen';
 import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
 import PolicyToRoomScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/PolicyToRoomScreen';
@@ -264,5 +267,17 @@ export default routerNoBottomTab = [
   {
     name: 'PolicyToRoomScreen',
     component: PolicyToRoomScreen,
+  },
+  {
+    name: 'VoucherManageScreen',
+    component: VoucherManageScreen,
+  },
+  {
+    name: 'AddVoucherScreen',
+    component: AddVoucherScreen,
+  },
+  {
+    name: 'HomeListVoucherScreen',
+    component: HomeListVoucherScreen,
   },
 ];

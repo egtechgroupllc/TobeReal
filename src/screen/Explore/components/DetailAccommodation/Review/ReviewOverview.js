@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {formatNumber} from '../../../../../utils/format';
+import {formatNumber, formatPrice} from '../../../../../utils/format';
 import ItemOverviewRating from './ItemOverviewRating';
 import RangeSlider from '../../../../Video/components/RangeSlider';
 
@@ -16,7 +16,10 @@ export default function ReviewOverview({dataP}) {
             fontSize: SIZES.xxLarge,
             color: COLORS.primary,
           }}>
-          {dataP?.review_average || 0}
+          {formatPrice(dataP?.review_average, {
+            showCurrency: false,
+            decimalPlaces: 2,
+          }) || 0}
           <CustomText>/5</CustomText>
         </CustomText>
         <CustomText textType="semiBold">Very good</CustomText>

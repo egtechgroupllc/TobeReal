@@ -12,24 +12,27 @@ export default function EmptyData({
   desc,
   textBtn,
   image,
+  iconEmpty,
   styleWrapper,
 }) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
   return (
     <View style={[styles.wrapper, styleWrapper]}>
-      <CustomImage
-        source={image || images.emptyData}
-        resizeMode="contain"
-        style={styles.img}
-      />
+      {iconEmpty || (
+        <CustomImage
+          source={image || images.emptyData}
+          resizeMode="contain"
+          style={styles.img}
+        />
+      )}
       <CustomText
         textType="bold"
         style={{
           color: COLORS.primary,
           fontSize: SIZES.medium,
         }}>
-        {desc || 'Empty Data'}
+        {desc || t('Empty Data')}
       </CustomText>
 
       {textBtn && (

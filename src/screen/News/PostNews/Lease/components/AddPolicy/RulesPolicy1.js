@@ -8,10 +8,13 @@ import RadioButton from '../../../../../components/RadioButton';
 import Collapsible from 'react-native-collapsible';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
-import {requireField} from '../../../../../../utils/validate';
+import {
+  requireField,
+  validateMinMaxAmount,
+} from '../../../../../../utils/validate';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-export default function RulesPolicy1({setValue, control, unregister}) {
+export default function RulesPolicy1({setValue, control, unregister, watch}) {
   const {t} = useLanguage();
 
   const list = [
@@ -36,7 +39,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
   useEffect(() => {
     if (isSelect === 1) {
       unregister('refund_time');
-      setValue('refund_number_day', 1);
+      setValue('refund_number_day', watch('refund_number_day'));
     } else if (isSelect === list.length - 1) {
       unregister(['refund_number_day', 'refund_time', 'refund_fee']);
     }
@@ -48,6 +51,7 @@ export default function RulesPolicy1({setValue, control, unregister}) {
       setValue('refund_time', formatTime(timeCheckStart));
     }
   }, [isSelect, timeCheckStart]);
+
   return (
     <View
       style={{
@@ -66,6 +70,10 @@ export default function RulesPolicy1({setValue, control, unregister}) {
                 ? `${t('flexible_cancel_advance')} ${formatTime(
                     timeCheckStart,
                   )} ${t('on_check')}`
+                : index === 1 && isSelect === 1
+                ? `${t('flexible_cancel_advance')} ${
+                    +watch('refund_number_day') || 1
+                  } ${t('day').toLowerCase()}`
                 : item?.title
             }
             isCheck={isSelect === index}
@@ -90,6 +98,36 @@ export default function RulesPolicy1({setValue, control, unregister}) {
 
       <Collapsible collapsed={isSelect === list.length - 1}>
         <View style={styles.boxCheckMeal}>
+          {isSelect === 1 && (
+            <CustomInput
+              control={control}
+              name="refund_number_day"
+              defaultValue="1"
+              placeholder={t('day').toLowerCase()}
+              style={styles.textInput}
+              styleText={{
+                fontSize: SIZES.xMedium,
+              }}
+              maxLength={2}
+              keyboardType="numeric"
+              rules={[
+                requireField(t('this_field_required')),
+                validateMinMaxAmount(
+                  t('invalid date (from 1 to 30 days)'),
+                  100,
+                ),
+              ]}
+              componentRight={
+                <View style={styles.componentRight}>
+                  <CustomText textType="regular" size={SIZES.xMedium}>
+                    {t('day').toLowerCase()}
+                  </CustomText>
+                </View>
+              }
+            />
+          )}
+          <CustomText>{t('cancellation_fee_after')}</CustomText>
+
           <CustomInput
             control={isSelect !== list.length - 1 && control}
             name="refund_fee"
@@ -109,7 +147,6 @@ export default function RulesPolicy1({setValue, control, unregister}) {
               </View>
             }
           />
-          <CustomText>{t('cancellation_fee_after')}</CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />

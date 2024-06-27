@@ -71,13 +71,13 @@ export default function BoxWalletBlockChain({data}) {
               style={{
                 flex: 1,
               }}>
-              Số dư:{' '}
+              Số dư :{' '}
               <CustomText
                 textType="semiBold"
                 color={COLORS.primary}
                 numberOfLines={1}>
-                {formatPrice(dataQ?.data?.TBC, {
-                  currency: 'TBC',
+                {formatPrice(dataQ?.data?.TBH, {
+                  currency: 'TBH',
                   locales: 'vi',
                 })}
               </CustomText>
@@ -87,8 +87,8 @@ export default function BoxWalletBlockChain({data}) {
                 textType="semiBold"
                 color={COLORS.primary}
                 numberOfLines={1}>
-                {formatPrice(dataQ?.data?.TBH, {
-                  currency: 'TBH',
+                {formatPrice(dataQ?.data?.TBC, {
+                  currency: 'TBC',
                   locales: 'vi',
                 })}
               </CustomText>

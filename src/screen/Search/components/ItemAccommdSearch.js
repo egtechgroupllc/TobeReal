@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconMapView} from '../../../assets/icon/Icon';
@@ -61,7 +61,28 @@ export default function ItemAccommdSearch({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
+  const priceFinal = useMemo(() => {
+    const resultPri = data?.rooms?.map(element => {
+      const result = element?.room_dates
+        .slice(0, element?.room_dates.length - 1)
+        .map(room => {
+          console.log(room.date, data.name);
 
+          const resultPolicy = element?.accommodation_policies.reduce(
+            (acc, policy) => {
+              return policy?.price_percent * room?.price_final;
+            },
+            0,
+          );
+
+          return resultPolicy;
+        });
+
+      return Math.min(...result);
+    });
+    return Math.min(...resultPri);
+  }, [data?.rooms]);
+  console.log(priceFinal);
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -162,7 +183,7 @@ export default function ItemAccommdSearch({
               numberOfLines={1}
               style={{color: COLORS.primary}}>
               {formatPrice(
-                data?.price ||
+                priceFinal ||
                   data?.rooms?.[0]?.room_dates?.[0]?.price_final ||
                   data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
                 {currency: currency?.currency_code},

@@ -72,7 +72,8 @@ export default function DetailAccommoMap({
           width: '100%',
         }}>
         <TouchableOpacity
-          disabled={disable}
+          // disabled={disable}
+          disabled={true}
           activeOpacity={0.7}
           style={styles.boxMap}
           onPress={() =>
@@ -111,7 +112,7 @@ export default function DetailAccommoMap({
             </CustomText>
           </View>
         </TouchableOpacity>
-        {isShowNearby && (
+        {/* {isShowNearby && (
           <Nearby
             data={listLocationNearby?.slice(0, 4)}
             coordinate={coordinate}
@@ -122,7 +123,7 @@ export default function DetailAccommoMap({
               });
             }}
           />
-        )}
+        )} */}
       </View>
     </WrapperContent>
   );

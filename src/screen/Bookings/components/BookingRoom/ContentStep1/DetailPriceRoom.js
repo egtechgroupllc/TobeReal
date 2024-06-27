@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
@@ -8,24 +8,38 @@ import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function DetailPriceRoom({data}) {
+export default function DetailPriceRoom({data, priceVoucher}) {
+  const {t} = useLanguage();
   const numRoom = data?.numRoomSelect;
   const numNight = data?.date?.numNight;
   const [isMorePrice, setIsMorePrice] = useState(false);
+  const [checkPrice, setCheckPrice] = useState(false);
   const {currency} = useCountry();
   const priceAverage = useMemo(
     () => numRoom * data?.priceAverage * numNight,
     [numRoom, numNight, data?.priceAverage],
   );
   const calculatePrice = () => {
-    if (data?.percentDiscount && data?.percentDiscount === 1) {
-      return priceAverage;
-    } else {
-      return priceAverage - priceAverage * data?.percentDiscount;
-    }
+    // if (data?.percentDiscount && data?.percentDiscount === 1) {
+    //   return priceAverage;
+    // } else {
+    //   return priceAverage - priceAverage * data?.percentDiscount;
+    // }
+    return priceAverage * data?.percentDiscount;
   };
-  const feePrice = priceAverage * (11.8165 / 100);
-  const {t} = useLanguage();
+  const feePrice = priceAverage * 0;
+  const price_per_day = calculatePrice() * numRoom;
+  const total_price_per_day = calculatePrice() * numRoom * numNight;
+  const voucher_discount = priceVoucher;
+  const totalPrice = calculatePrice() * numRoom * numNight + feePrice;
+  useEffect(() => {
+    if (voucher_discount > totalPrice) {
+      setCheckPrice(true);
+    } else {
+      setCheckPrice(false);
+    }
+  }, [voucher_discount, totalPrice, checkPrice]);
+
   return (
     <View style={{rowGap: scale(5)}}>
       <TouchableOpacity
@@ -45,22 +59,32 @@ export default function DetailPriceRoom({data}) {
           styleValue={{
             fontSize: SIZES.medium,
           }}
-          value={formatPrice(calculatePrice() * numRoom * numNight + feePrice, {
+          priceVoucher={priceVoucher}
+          valueSub={formatPrice(totalPrice, {
             currency: currency?.currency_code,
           })}
+          textDesc={`${t('So du con lai se duoc cong vao vi tien le la: ')} `}
+          valueDesc={`+${formatPrice(voucher_discount - totalPrice, {
+            currency: currency?.currency_code,
+          })}`}
+          value={formatPrice(
+            !checkPrice ? totalPrice - voucher_discount || totalPrice : 0,
+            {
+              currency: currency?.currency_code,
+            },
+          )}
+          checkPrice={checkPrice}
           colorValue={COLORS.primary}
           textType="bold"
           Icon={
             <IconDown
-              style={
-                isMorePrice && {
-                  transform: [
-                    {
-                      rotate: '180deg',
-                    },
-                  ],
-                }
-              }
+              style={{
+                transform: [
+                  {
+                    rotate: isMorePrice ? '0deg' : '180deg',
+                  },
+                ],
+              }}
             />
           }
         />
@@ -77,7 +101,7 @@ export default function DetailPriceRoom({data}) {
 
         <Row
           title={t('price_per_day')}
-          value={formatPrice(calculatePrice() * numRoom, {
+          value={formatPrice(price_per_day, {
             currency: currency?.currency_code,
           })}
           colorValue={COLORS.primary}
@@ -85,10 +109,20 @@ export default function DetailPriceRoom({data}) {
         />
         <Row
           title={`${t('total_price_for')} ${numNight} ${t('day')}`}
-          value={formatPrice(calculatePrice() * numRoom * numNight, {
+          value={formatPrice(total_price_per_day, {
             currency: currency?.currency_code,
           })}
         />
+        {!!priceVoucher && (
+          <Row
+            title={t('voucher discount')}
+            value={`-${formatPrice(voucher_discount, {
+              currency: currency?.currency_code,
+            })}`}
+            textType="regular"
+            colorValue={COLORS.text}
+          />
+        )}
         <Row
           title={t('taxes_and_fees')}
           value={formatPrice(feePrice, {
@@ -110,31 +144,77 @@ const Row = ({
   textType,
   textTypeTitle,
   Icon,
+  priceVoucher,
+  valueSub,
+  valueDesc,
+  checkPrice,
+  textDesc,
 }) => {
   return (
-    <View
-      style={{
-        ...styles.row,
-        justifyContent: 'space-between',
-      }}>
-      <CustomText
-        textType={textTypeTitle}
-        style={{fontSize: SIZES.xMedium, ...styleTitle}}>
-        {title}
-      </CustomText>
+    <View>
       <View
         style={{
           ...styles.row,
-          flex: 1,
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
         }}>
         <CustomText
-          textType={textType || 'medium'}
-          style={{fontSize: SIZES.xMedium, color: colorValue, ...styleValue}}>
-          {value}
+          textType={textTypeTitle}
+          style={{fontSize: SIZES.xMedium, ...styleTitle}}>
+          {title}
         </CustomText>
-        {Icon}
+        <View
+          style={{
+            ...styles.row,
+            flex: 1,
+            justifyContent: 'flex-end',
+          }}>
+          <View
+            style={{
+              alignItems: 'flex-end',
+            }}>
+            {!!priceVoucher && (
+              <CustomText
+                textType={'medium'}
+                style={{
+                  fontSize: SIZES.xMedium,
+                  color: COLORS.textSub,
+                  textDecorationLine: 'line-through',
+                }}>
+                {valueSub}
+              </CustomText>
+            )}
+            <CustomText
+              textType={textType || 'medium'}
+              style={{
+                fontSize: SIZES.xMedium,
+                color: colorValue,
+                ...styleValue,
+              }}>
+              {value}
+            </CustomText>
+          </View>
+
+          {Icon}
+        </View>
       </View>
+      {!!priceVoucher && checkPrice && (
+        <CustomText
+          textType={'medium'}
+          style={{
+            fontSize: SIZES.xSmall,
+            color: COLORS.black,
+          }}>
+          {textDesc}
+          <CustomText
+            textType={'medium'}
+            style={{
+              fontSize: SIZES.xSmall,
+              color: 'green',
+            }}>
+            {valueDesc}
+          </CustomText>
+        </CustomText>
+      )}
     </View>
   );
 };

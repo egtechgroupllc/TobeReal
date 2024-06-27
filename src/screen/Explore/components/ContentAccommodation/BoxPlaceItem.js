@@ -52,9 +52,18 @@ export default function BoxPlaceItem({
   };
   const priceFinal = useMemo(() => {
     const resultPri = data?.rooms?.map(element => {
-      const result = element?.room_dates.map(room => {
-        return room?.price_final;
-      });
+      const result = element?.room_dates
+        .slice(0, element?.room_dates.length - 1)
+        .map(room => {
+          const resultPolicy = element?.accommodation_policies.reduce(
+            (acc, policy) => {
+              return policy?.price_percent * room?.price_final;
+            },
+            0,
+          );
+
+          return resultPolicy;
+        });
 
       return Math.min(...result);
     });

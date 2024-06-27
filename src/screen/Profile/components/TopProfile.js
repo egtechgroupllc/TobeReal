@@ -8,7 +8,6 @@ import CustomText from '../../../components/CustomText';
 import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
 
 export default function TopProfile({name, data}) {
-  console.log(data);
   return (
     <View style={styles.wrapper}>
       <View

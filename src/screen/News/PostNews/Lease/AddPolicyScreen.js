@@ -34,6 +34,7 @@ export default function AddPolicyScreen({route}) {
   } = useForm({
     defaultValues: {
       price_percent: 10,
+      refund_number_day: 1,
     },
   });
   const queryClient = useQueryClient();
@@ -56,7 +57,11 @@ export default function AddPolicyScreen({route}) {
   }, []);
 
   const handleCreatePolicy = value => {
-    const price_percent = !value?.isDiscount ? value?.price_percent / 100 : 1;
+    // const price_percent = !value?.isDiscount ? value?.price_percent / 100 : 1;
+
+    const price_percent = value?.isDiscount
+      ? (100 - value?.price_percent) / 100
+      : value?.price_percent / 100 + 1;
 
     delete value?.isDiscount;
     createPolicy.mutate(
@@ -111,6 +116,7 @@ export default function AddPolicyScreen({route}) {
             setValue={setValue}
             control={control}
             unregister={unregister}
+            watch={watch}
           />
         </Box>
 
@@ -134,9 +140,7 @@ export default function AddPolicyScreen({route}) {
           <RulesPolicy5 control={control} unregister={unregister} />
         </Box>
 
-        <Box
-          num="6"
-          title={t('Bạn có muốn giảm giá niêm yết của phòng này không?')}>
+        <Box num="6" title={t('do_you_want_new_price')}>
           <RulesPolicy6
             data={dataParams}
             control={control}

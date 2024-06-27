@@ -37,7 +37,6 @@ export default function ListAccomSearchContent({
     }),
     [JSON.stringify([paramsFilter, location]), country?.id, currency?.id],
   );
-  console.log(objFilter);
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
     useInfiniteQuery({
       queryKey: [

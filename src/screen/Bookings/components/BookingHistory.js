@@ -19,7 +19,6 @@ export default function BookingHistory() {
     queryFn: getListBookingAccomo,
     enabled: !!token,
   });
-
   return (
     <FlatList
       data={data?.data?.rows || (isLoading && [...Array(3)])}

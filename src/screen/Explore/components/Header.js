@@ -43,9 +43,9 @@ export default function Header() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const goNotify = () => {
-    navigate('NoBottomTab', {
-      screen: 'NotifyScreen',
-    });
+    // navigate('NoBottomTab', {
+    //   screen: 'NotifyScreen',
+    // });
   };
   return (
     <View style={styles.wrapper}>

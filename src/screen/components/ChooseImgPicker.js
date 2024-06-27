@@ -148,20 +148,22 @@ export default memo(function ChooseImgPicker({
                     styleContentImg,
                   ]}
                   disabled={valueImg.length > 0}>
-                  {valueImg.length > 0 && isAddMore && (
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      onPress={() => pickImage(onChange, valueImg)}
-                      style={[styles.img, styles.border, styles.addImg]}>
-                      <IconCamera
-                        style={{
-                          width: scale(50),
-                          height: scale(50),
-                        }}
-                      />
-                      <CustomText>{t('add_images')}</CustomText>
-                    </TouchableOpacity>
-                  )}
+                  {valueImg.length > 0 &&
+                    isAddMore &&
+                    maxFiles > valueImg.length && (
+                      <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => pickImage(onChange, valueImg)}
+                        style={[styles.img, styles.border, styles.addImg]}>
+                        <IconCamera
+                          style={{
+                            width: scale(50),
+                            height: scale(50),
+                          }}
+                        />
+                        <CustomText>{t('add_images')}</CustomText>
+                      </TouchableOpacity>
+                    )}
 
                   {valueImg.length > 0 ? (
                     valueImg.map((img, index) => {

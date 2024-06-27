@@ -1,16 +1,18 @@
 import React, {useMemo} from 'react';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
-import {scale} from '../assets/constants';
+import {COLORS, scale} from '../assets/constants';
 
 type CustomImgProps = {
   source: string;
   isAvatar: boolean;
+  isLoading: boolean;
   size: number;
 } & FastImageProps;
 
 export default function CustomImage({
   source,
   isAvatar,
+  isLoading,
   size,
   ...props
 }: CustomImgProps) {
@@ -26,6 +28,7 @@ export default function CustomImage({
           borderRadius: 99,
           ...props.style,
         },
+        isLoading && {backgroundColor: COLORS.white70},
         !isAvatar && props.style,
       ]}
       source={

@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {Linking, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -31,6 +31,7 @@ export default function ContentStep2({data}) {
   const queryClient = useQueryClient();
   const [openContact, setOpenContact] = useState(false);
   const [check, setCheck] = useState(false);
+  const [dataVoucher, setDataVoucher] = useState();
 
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
@@ -68,6 +69,18 @@ export default function ContentStep2({data}) {
   };
   const isPending = useRef(false);
   const handleBookingRoom = value => {
+    console.log({
+      check_in_date: data?.date?.selectedStartDate,
+      check_out_date: data?.date?.selectedEndDate,
+      number_room: data?.numRoomSelect,
+      accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
+      room_id: data?.id, //id của phòng
+      contact_name: contact?.username,
+      contact_email: contact?.email,
+      contact_phone: contact?.phone,
+      type_payment: typePayment,
+      array_voucher_id: dataVoucher?.map(item => item?.id),
+    });
     if (!typePayment) {
       showMess(t('please_select_payment'), 'error');
       return;
@@ -85,10 +98,12 @@ export default function ContentStep2({data}) {
           contact_name: contact?.username,
           contact_email: contact?.email,
           contact_phone: contact?.phone,
-          // payment: typePayment,
+          type_payment: typePayment,
+          array_voucher_id: dataVoucher?.map(item => item?.id),
         },
         {
           onSuccess: dataInside => {
+            console.log(dataInside);
             isPending.current = true;
             setCheck({
               status: dataInside?.status,
@@ -132,9 +147,29 @@ export default function ContentStep2({data}) {
     }, 2000);
   };
 
+  const priceVoucher = useMemo(() => {
+    if (dataVoucher && typePayment === 'VOUCHER') {
+      const countDis = dataVoucher.reduce((acc, item) => {
+        return acc + item?.price_discount;
+      }, 0);
+
+      return countDis;
+    } else {
+      return 0;
+    }
+  }, [dataVoucher, typePayment]);
+
   return (
     <View style={styles.container}>
-      <TopStep2 data={data} onChange={value => setTypePayment(value?.type)} />
+      <TopStep2
+        data={data}
+        onChange={value => setTypePayment(value?.type)}
+        typePayment={typePayment}
+        onCheckVoucher={value => {
+          setDataVoucher(value);
+        }}
+        dataVoucher={dataVoucher}
+      />
       <ModalBookingSuccess
         openContact={openContact}
         isPending={isPending}
@@ -143,7 +178,7 @@ export default function ContentStep2({data}) {
       />
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
-          <DetailPriceRoom data={data} />
+          <DetailPriceRoom data={data} priceVoucher={priceVoucher} />
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
@@ -153,7 +188,7 @@ export default function ContentStep2({data}) {
         <View style={styles.boxEarnPoint}>
           <IconCoinPoint />
           <CustomText color={COLORS.black} textType="semiBold">
-            {formatPrice(12312, {showCurrency: false})} {t('point')}
+            {formatPrice(0, {showCurrency: false})} {t('point')}
           </CustomText>
         </View>
       </View>

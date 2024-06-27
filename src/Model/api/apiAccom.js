@@ -223,3 +223,34 @@ export const deleteAccom = async ({id_accom}) => {
   const responsive = await instanceAccom.delete(`/${id_accom}`);
   return responsive.data;
 };
+
+//-----Voucher-----//
+export const getListVoucher = async () => {
+  const responsive = await instanceAccom.get('/voucher/my-list');
+
+  return responsive.data;
+};
+export const getListVoucherSelling = async accom_id => {
+  const responsive = await instanceAccom.get(
+    `/detail/${accom_id}/list-voucher-selling`,
+  );
+
+  return responsive.data;
+};
+export const getListVoucherCanUse = async accom_id => {
+  const responsive = await instanceAccom.get(
+    `/${accom_id}/list-voucher-can-use`,
+  );
+
+  return responsive.data;
+};
+export const postCreateVoucher = async data => {
+  const responsive = await instanceAccom.post('/voucher/create', data);
+
+  return responsive.data;
+};
+export const postBuyVoucher = async data => {
+  const responsive = await instanceAccom.post('/voucher/buy', data);
+
+  return responsive.data;
+};

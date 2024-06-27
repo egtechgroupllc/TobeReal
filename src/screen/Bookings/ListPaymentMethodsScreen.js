@@ -14,8 +14,16 @@ export default function ListPaymentMethodsScreen({route}) {
       title: t('saveloka_transfer'),
       desc: t('pay_with_wallet'),
       tag: t('recommended'),
-      type: 'LOKAPAY',
+      type: 'FIAT',
       image: images.logo1,
+    },
+    {
+      header: t('voucher'),
+      title: t('voucher'),
+      desc: t('pay_with_voucher'),
+      tag: t('recommended'),
+      type: 'VOUCHER',
+      image: images.voucher_saveloka,
     },
     {
       header: t('payment_card'),
@@ -71,7 +79,7 @@ export default function ListPaymentMethodsScreen({route}) {
             tag={item?.tag}
             backgroundColor="#fff"
             onPress={() => {
-              if (item?.type === 'LOKAPAY') {
+              if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
                 dataParams?.onGoBack(item);
                 goBack();
               } else {

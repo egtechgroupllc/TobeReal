@@ -24,14 +24,15 @@ export default function RulesPolicy6({
 }) {
   const {t} = useLanguage();
   const {currency} = useCountry();
+
   const list = [
     {
       id: 1,
-      title: t('Không giảm giá niêm yết'),
+      title: t('Loại giá này rẻ hơn so với giá niêm yết'),
     },
     {
       id: 2,
-      title: t('Giảm giá niêm yết'),
+      title: t('Loại giá này mắc hơn so với giá niêm yết'),
     },
   ];
   const [isSelect, setIsSelect] = useState(list[0]);
@@ -39,7 +40,7 @@ export default function RulesPolicy6({
   useEffect(() => {
     setValue('isDiscount', isSelect.id === 1);
   }, [isSelect.id]);
-  console.log(watch('price_percent'));
+
   return (
     <View>
       <View
@@ -57,72 +58,86 @@ export default function RulesPolicy6({
           );
         })}
       </View>
-
-      {isSelect.id === 2 && (
-        <Collapsible collapsed={false}>
-          <View style={styles.boxCheckMeal}>
-            <View
-              style={{
-                flexDirection: 'row',
-                columnGap: scale(10),
-              }}>
+      <View style={styles.boxCheckMeal}>
+        <View
+          style={{
+            flexDirection: 'row',
+            columnGap: scale(10),
+          }}>
+          <View
+            style={{
+              height: scale(38),
+              justifyContent: 'center',
+            }}>
+            {isSelect.id !== 1 ? (
+              <IconAdd />
+            ) : (
               <View
                 style={{
-                  justifyContent: 'center',
-                }}>
-                <CustomInput
-                  control={control}
-                  defaultValue="10"
-                  placeholder="%"
-                  style={styles.textInput}
-                  maxLength={2}
-                  styleWrapper={{
-                    flex: 0.7,
-                  }}
-                  styleText={{
-                    fontSize: SIZES.xMedium,
-                  }}
-                  name="price_percent"
-                  rules={[
-                    requireField(t('this_field_required')),
-                    validateMinMaxAmount(t('invalid_ratio'), 100),
-                  ]}
-                  componentRight={
-                    <View style={styles.componentRight}>
-                      <CustomText textType="semiBold" size={SIZES.xMedium}>
-                        %
-                      </CustomText>
-                    </View>
-                  }
-                />
-              </View>
-            </View>
+                  width: scale(14),
+                  backgroundColor: '#000',
+                  height: scale(1.4),
+                }}
+              />
+            )}
           </View>
-        </Collapsible>
-      )}
-      <CustomText
-        textType="regular"
-        size={SIZES.small}
-        style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
-        Giá niêm yết của phòng này:{' '}
-        {formatPrice(data?.price, {
-          currency: currency?.currency_code,
-        })}
-      </CustomText>
-      {isSelect.id === 2 && (
+
+          <CustomInput
+            control={control}
+            defaultValue="10"
+            placeholder="%"
+            style={styles.textInput}
+            maxLength={2}
+            styleWrapper={{
+              flex: 0.7,
+            }}
+            styleText={{
+              fontSize: SIZES.xMedium,
+            }}
+            name="price_percent"
+            rules={[
+              requireField(t('this_field_required')),
+              validateMinMaxAmount(t('invalid_ratio'), 100),
+            ]}
+            componentRight={
+              <View style={styles.componentRight}>
+                <CustomText textType="semiBold" size={SIZES.xMedium}>
+                  %
+                </CustomText>
+              </View>
+            }
+          />
+        </View>
+        <CustomText
+          textType="medium"
+          style={{
+            marginLeft: '7%',
+          }}>
+          {isSelect.title}
+        </CustomText>
+        <CustomText
+          textType="regular"
+          size={SIZES.small}
+          style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
+          Giá niêm yết của phòng này:{' '}
+          {formatPrice(data?.price, {
+            currency: currency?.currency_code,
+          })}
+        </CustomText>
         <CustomText
           textType="semiBold"
           size={SIZES.small}
           style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
-          Giá sau khi áp dụng chính sách giảm:{' '}
-          {formatPrice(
-            data?.price - data?.price * (watch('price_percent') / 100),
-            {
-              currency: currency?.currency_code,
-            },
-          )}
+          Giá sau khi áp dụng chính sách:{' '}
+          {isSelect.id === 1
+            ? formatPrice(data?.price * (1 - watch('price_percent') / 100), {
+                currency: currency?.currency_code,
+              })
+            : formatPrice(data?.price * (1 + watch('price_percent') / 100), {
+                currency: currency?.currency_code,
+              })}
         </CustomText>
-      )}
+      </View>
     </View>
   );
 }

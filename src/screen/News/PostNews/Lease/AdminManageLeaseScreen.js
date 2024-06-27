@@ -158,6 +158,14 @@ export default function AdminManageLeaseScreen() {
           style={{width: '85%', height: scale(45)}}
         />
         <CustomButton
+          text={t('voucher_manage')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() => navigate('VoucherManageScreen', {...params})}
+        />
+        <CustomButton
           text={t('room_manage')}
           style={{width: '85%', height: scale(45)}}
           // onPress={() =>

@@ -288,6 +288,7 @@ export default function AddRoomTypeScreen() {
         // onPress={handlePostRoom}
         style={{
           marginTop: scale(20),
+          width: '80%',
         }}
       />
     </MainWrapper>

@@ -42,7 +42,10 @@ export default function Review({dataP}) {
           <View style={styles.overview}>
             <View style={styles.overviewNumberRating}>
               <CustomText textType="bold" style={styles.numberRating}>
-                {dataP?.review_average || 0}
+                {formatPrice(dataP?.review_average, {
+                  showCurrency: false,
+                  decimalPlaces: 2,
+                }) || 0}
               </CustomText>
             </View>
 

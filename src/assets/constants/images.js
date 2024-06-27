@@ -77,6 +77,9 @@ export default {
   iconDirect: require('../images/iconDirect.png'),
   pending: require('../images/pending.gif'),
   hotel: require('../images/hotel.png'),
+  voucher: require('../images/voucher.png'),
+  voucher_saveloka: require('../images/voucher_saveloka.png'),
+  backgroundVoucher: require('../images/backgroundVoucher.png'),
 
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),

@@ -131,7 +131,6 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
               <ChooseCalendar
                 rental={rental}
                 onDate={value => {
-                  console.log(value, 81273);
                   setValue('date', value);
                 }}
               />

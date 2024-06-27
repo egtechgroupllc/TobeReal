@@ -22,6 +22,13 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
     [numRoom, data?.date?.numNight, data?.priceAverage],
   );
   const feePrice = priceAverage * (11.8165 / 100);
+  // const calculatePrice = () => {
+  //   if (data?.percentDiscount && data?.percentDiscount === 1) {
+  //     return priceAverage;
+  //   } else {
+  //     return priceAverage - priceAverage * data?.percentDiscount;
+  //   }
+  // };
   return (
     <>
       {isOpen && (
@@ -51,7 +58,9 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
             }}>
             <Row
               title={t('price_per_day')}
-              value={formatPrice(data?.priceAverage * numRoom)}
+              value={formatPrice(
+                priceAverage * data?.percentDiscount * numRoom,
+              )}
               colorValue={COLORS.primary}
               textType="semiBold"
             />
@@ -69,7 +78,9 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
             }}>
             <Row
               title={t('total_price')}
-              value={formatPrice(priceAverage + feePrice)}
+              value={formatPrice(
+                priceAverage * data?.percentDiscount + feePrice,
+              )}
               colorValue={COLORS.primary}
               textType="bold"
             />
@@ -81,7 +92,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
               <CustomText>
                 {t('book_and_receive')}{' '}
                 <CustomText textType="medium" style={{color: '#ff5e1f'}}>
-                  {formatPrice(numRoom * 3111, {
+                  {formatPrice(numRoom * 10, {
                     showCurrency: false,
                   })}{' '}
                   {t('point')}
