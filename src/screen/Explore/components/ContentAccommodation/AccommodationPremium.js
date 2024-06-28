@@ -38,6 +38,8 @@ export default function AccommodationPremium({currency}) {
   });
 
   if (!(data?.data?.count !== 0) && !isLoading) return null;
+  if (!data?.data?.count && !isLoading) return null;
+
   return (
     // <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
     //   {isRender && (
@@ -58,7 +60,7 @@ export default function AccommodationPremium({currency}) {
         horizontal
         scrollEnabled={!isLoading}
         showsHorizontalScrollIndicator={false}
-        data={data?.data?.rows?.slice(0, 9) || [...Array(4)]}
+        data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
         contentContainerStyle={styles.content}
         renderItem={({item, index}) => (
           <BoxPlaceItem

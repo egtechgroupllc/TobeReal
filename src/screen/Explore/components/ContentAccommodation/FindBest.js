@@ -53,7 +53,11 @@ export default function FindBest({country, currency}) {
     <WrapperContent
       // isSeeAll
       isCategory
-      dataCategory={listProvince?.data?.data?.slice(0, 9) || [...Array(4)]}
+      dataCategory={
+        !listProvince.isLoading
+          ? listProvince?.data?.data?.slice(0, 9)
+          : [...Array(4)]
+      }
       onPressSeeAll={() =>
         navigate('NoBottomTab', {
           screen: 'SeeAllRentScreen',
@@ -75,7 +79,7 @@ export default function FindBest({country, currency}) {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={data?.data?.rows || [...Array(4)]}
+        data={!isLoading ? data?.data?.rows : [...Array(4)]}
         contentContainerStyle={styles.content}
         ListEmptyComponent={<EmptyData />}
         renderItem={({item, index}) => (

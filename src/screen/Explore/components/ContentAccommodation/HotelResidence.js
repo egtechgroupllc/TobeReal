@@ -37,8 +37,8 @@ export default memo(function HotelResidence({data, isLoading, country}) {
     return result;
   }, [listSavedName, country?.id, data]);
 
-  if (!(data?.count !== 0) && !isLoading) return null;
-
+  if (!(dataNew?.length !== 0) && !isLoading) return null;
+  if (!dataNew?.length && !isLoading) return null;
   return (
     <WrapperContent heading={title}>
       <FlatList
