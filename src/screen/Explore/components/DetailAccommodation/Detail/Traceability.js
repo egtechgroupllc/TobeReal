@@ -17,11 +17,13 @@ export default function Traceability({data}) {
       bottomSheetRef.current.open();
     }
   }, [isOpen]);
+
   const handleOpenLink = async () => {
     await Linking.openURL(
-      `https://tobescan.com/address/0x7333714803a16eDcBff11C46F4C9E7e1424A273f`,
+      `https://tobescan.com/address/${data.user.wallet_address}`,
     );
   };
+
   return (
     <WrapperContent
       heading={t('Traceability')}
@@ -29,12 +31,13 @@ export default function Traceability({data}) {
         paddingHorizontal: scale(16),
         height: scale(100),
       }}>
-      <TouchableOpacity onPress={handleOpenLink}>
+      <TouchableOpacity onPress={handleOpenLink} activeOpacity={0.7}>
         <CustomText
           numberOfLines={2}
           style={{
             lineHeight: 18,
             color: COLORS.blue,
+            textDecorationLine: 'underline',
           }}>
           {/* https://tobescan.com/address/{data?.wallet_address} */}
           Truy xuất nguồn gốc bất động sản

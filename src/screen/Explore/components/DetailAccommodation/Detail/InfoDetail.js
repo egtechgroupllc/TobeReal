@@ -1,18 +1,17 @@
-import React, {useCallback, useState} from 'react';
-import {Alert, Button, StyleSheet, TouchableOpacity, View} from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
+import React, {useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
+import {showMess} from '../../../../../assets/constants/Helper';
 import {IconLocation} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import StarRating from '../../../../../components/StarRating';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatNumber} from '../../../../../utils/format';
-import Introduction from './Introduction';
-import YoutubePlayer from 'react-native-youtube-iframe';
-import YoutubeIframe from 'react-native-youtube-iframe';
-import QRCode from 'react-native-qrcode-svg';
-import Clipboard from '@react-native-clipboard/clipboard';
 import QRWalletBlockChain from '../../../../Profile/components/QRWalletBlockChain';
+import Introduction from './Introduction';
 import Traceability from './Traceability';
 export default function InfoDetail({data}) {
   const {t} = useLanguage();

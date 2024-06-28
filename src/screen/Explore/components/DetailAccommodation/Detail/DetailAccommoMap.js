@@ -1,16 +1,13 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {KEY_MAP} from '../../../../../Model/url';
 import {COLORS, SHADOW, scale} from '../../../../../assets/constants';
+import {dataMapNearby} from '../../../../../assets/dataFake/MapNearby';
 import {IconMapView, IconMarker} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import {getCurrentLocation} from '../../../../../utils/getCurrentLocation';
 import WrapperContent from '../../WrapperContent';
-import Nearby from '../Map/Nearby';
-import {dataMapNearby} from '../../../../../assets/dataFake/MapNearby';
-import {useNavigation} from '@react-navigation/native';
 
 export default function DetailAccommoMap({
   region,

@@ -66,6 +66,7 @@ export default function VoucherItem({
           borderRadius: scale(7),
           height: scale(90),
           width: scale(120 / 1.4),
+          backgroundColor: COLORS.grey50,
         }}
       />
       <View
