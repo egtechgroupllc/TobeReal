@@ -1,11 +1,12 @@
 import {useHeaderHeight} from '@react-navigation/elements';
 import {useQueryClient} from '@tanstack/react-query';
-import React, {useRef, useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {COLORS, images, scale} from '../assets/constants';
 import CustomImage from './CustomImage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function MainWrapper({
   children,
@@ -17,9 +18,14 @@ export default function MainWrapper({
   scrollEnabled = true,
   noImgColor,
   onScroll = () => {},
+  headerTitle,
+  headerRight,
+  headerTitleComponent,
+  headerStyle,
 }) {
   const headerHeight = useHeaderHeight();
   const queryClient = useQueryClient();
+  const {setOptions} = useNavigation();
 
   const refresh = useRef(false);
   function pullToRefresh(value) {
@@ -28,6 +34,18 @@ export default function MainWrapper({
     refresh.current = false;
   }
   const Component = noImgColor ? View : CustomImage;
+
+  useLayoutEffect(() => {
+    if (headerTitle || headerRight || headerTitleComponent) {
+      setOptions({
+        headerShown: true,
+        headerTitle: headerTitle || '',
+        headerRight: () => headerRight,
+        headerTitleComponent: () => headerTitleComponent,
+        headerStyle: headerStyle,
+      });
+    }
+  }, [headerTitle, headerRight, headerTitleComponent, setOptions, headerStyle]);
 
   return (
     <SafeAreaView

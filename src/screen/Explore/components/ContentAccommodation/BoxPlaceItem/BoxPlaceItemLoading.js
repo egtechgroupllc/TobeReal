@@ -23,7 +23,7 @@ export default function BoxPlaceItemLoading({
         />
         <View
           style={{
-            marginTop: scale(14),
+            marginTop: scale(16),
             flexDirection: !multiPrice ? 'column' : 'row',
           }}>
           <View
@@ -32,8 +32,14 @@ export default function BoxPlaceItemLoading({
             }}>
             <Skeleton
               shimmerStyle={{
-                height: scale(12),
+                height: scale(16),
                 width: multiPrice ? '60%' : '100%',
+              }}
+            />
+            <Skeleton
+              shimmerStyle={{
+                height: scale(12),
+                width: '60%',
               }}
             />
             <Skeleton
@@ -71,13 +77,13 @@ export default function BoxPlaceItemLoading({
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
-    height: scale(236),
+    height: scale(270),
     backgroundColor: '#fff',
     borderRadius: 12,
     ...SHADOW,
   },
   img: {
-    height: '60%',
+    height: '50%',
     borderRadius: 0,
     borderTopLeftRadius: scale(12),
     borderTopRightRadius: scale(12),

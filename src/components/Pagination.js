@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {memo, useEffect, useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {COLORS, SIZES, scale} from '../assets/constants';
@@ -11,15 +11,15 @@ import {
 import CustomText from './CustomText';
 
 const Pagination = ({
-  totalPages = 0,
+  totalData = 0,
   pageSize = 10,
   onChange = () => {},
   currentPage = 1,
   styleWrapper,
 }) => {
   const countPage = useMemo(
-    () => Math.ceil(totalPages / pageSize),
-    [pageSize, totalPages],
+    () => Math.ceil(totalData / pageSize),
+    [pageSize, totalData],
   );
 
   let arrOfCurrButtons = useMemo(() => {
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   //   alignSelf: 'center',
   // },
 });
-export default Pagination;
+export default memo(Pagination);

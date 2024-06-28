@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {COLORS, WIDTH, scale} from '../../assets/constants';
-import {CustomButton} from '../../components';
+import {CustomButton, Skeleton} from '../../components';
 
 const funcFallBack = () => {};
 export default memo(function Category({
@@ -39,31 +39,35 @@ export default memo(function Category({
         horizontal
         showsHorizontalScrollIndicator={false}
         scrollEnabled={data.length > 3}
-        renderItem={({item, index}) => (
-          <CustomButton
-            buttonType="normal"
-            key={`key-${item}-${index}`}
-            text={isObject ? item?.name : item}
-            isShadow={isShadow}
-            style={[
-              {
-                width: 'auto',
-                minWidth: widthSize,
-                backgroundColor:
-                  select === index ? backgroundColorSelect : '#f1f1f1',
-              },
-            ]}
-            styleText={[
-              select !== index && {
-                color: COLORS.text,
-              },
-            ]}
-            onPress={() => {
-              setSelect(index);
-              onPress(item);
-            }}
-          />
-        )}
+        renderItem={({item, index}) =>
+          (isObject ? !!item?.name : !!item) ? (
+            <CustomButton
+              buttonType="normal"
+              key={`key-${item}-${index}`}
+              text={isObject ? item?.name : item}
+              isShadow={isShadow}
+              style={[
+                {
+                  width: 'auto',
+                  minWidth: widthSize,
+                  backgroundColor:
+                    select === index ? backgroundColorSelect : '#f1f1f1',
+                },
+              ]}
+              styleText={[
+                select !== index && {
+                  color: COLORS.text,
+                },
+              ]}
+              onPress={() => {
+                setSelect(index);
+                onPress(item);
+              }}
+            />
+          ) : (
+            <Skeleton width={widthSize} key={index} />
+          )
+        }
       />
     </View>
   );

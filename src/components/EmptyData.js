@@ -32,7 +32,7 @@ export default function EmptyData({
           color: COLORS.primary,
           fontSize: SIZES.medium,
         }}>
-        {desc || t('Empty Data')}
+        {desc || t('no_data')}
       </CustomText>
 
       {textBtn && (

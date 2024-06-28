@@ -18,6 +18,9 @@ export const getMyListCreateSell = async ({page = 1, limit = 10}) => {
 
   return responsive.data;
 };
+
+getMyListCreateSell.queyKey = ['estate', 'my-list'];
+
 export const getListSell = async ({
   pageParam = 1,
   country_id,

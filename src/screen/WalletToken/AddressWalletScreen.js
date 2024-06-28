@@ -1,12 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
 import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {getProfile} from '../../Model/api/common';
+import {getBalanceWallet} from '../../Model/api/wallet';
 import {images, scale} from '../../assets/constants';
-import WalletItem from '../WalletToken/AddressWallet/WalletItem';
+import {showMess} from '../../assets/constants/Helper';
+import {useAuthentication} from '../../hooks/useAuthentication';
+import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
+import WalletItem from '../WalletToken/AddressWallet/WalletItem';
 
 export default function AddressWalletScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {currency} = useCountry();
   const {t} = useLanguage();
 
   useLayoutEffect(() => {
@@ -15,34 +22,58 @@ export default function AddressWalletScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const {token} = useAuthentication();
+  const {isLoading, data} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(token),
+    enabled: !!token,
+  });
+  const {data: dataQ, error} = useQuery({
+    queryKey: ['user', 'wallet', 'balance'],
+    queryFn: getBalanceWallet,
+  });
 
   const listWallet = useMemo(
     () => [
       {
         name: `${t('wallet')} Saveloka`,
-        balance: 1000000,
+        balance: data?.data.balance * currency?.exchange_rate,
         backgroundColor: '#FFA800',
         logo: images.logo1,
         isOpen: true,
+        currency: currency?.currency_code,
       },
       {
         name: `${t('wallet')} TobeChain`,
-        balance: null,
+        balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
-        des: t('active_to_use_TBH'),
+        des: 'Kích hoạt để sử dụng ví Wallet ToBeChain',
         logo: images.logoTBH,
-        isOpen: false,
+        isOpen: !!dataQ?.data?.TBH || false,
+        currency: 'TBH',
+        isNext: true,
+        isToken: true,
       },
       {
         name: 'Paypal',
         des: t('direct_payment'),
         backgroundColor: '#012169',
         logo: images.iconPaypal,
-        online: true,
+        isNext: true,
         isOpen: true,
+        isBeta: true,
+      },
+      {
+        last: true,
       },
     ],
-    [],
+    [
+      currency?.currency_code,
+      currency?.exchange_rate,
+      data?.data.balance,
+      dataQ?.data?.TBH,
+      t,
+    ],
   );
 
   return (
@@ -56,7 +87,14 @@ export default function AddressWalletScreen() {
           <WalletItem
             item={item}
             key={index}
-            onPress={() => navigate('WalletTokenScreen')}
+            onPress={() => {
+              if (item?.isBeta) {
+                showMess('Coming soon', 'error');
+
+                return;
+              }
+              navigate('WalletTokenScreen');
+            }}
           />
         );
       })}

@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
   shimmerStyle: {
     width: '100%',
     height: '100%',
-    borderRadius: scale(6),
+    borderRadius: scale(5),
   },
 });

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(16),
     paddingVertical: scale(4),
     columnGap: scale(10),
-    overflow: 'hidden',
+    // overflow: 'hidden',
   },
   active: {
     minWidth: scale(30),

@@ -1,5 +1,5 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 
@@ -9,15 +9,14 @@ import CustomText from '../../../../components/CustomText';
 import {formatPrice} from '../../../../utils/format';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 
-import StarRating from '../../../../components/StarRating';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import Ribbon from '../../../components/Ribbon';
-import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
-import TopImg from './BoxPlaceItem/TopImg';
-import RatingBox from './BoxPlaceItem/RatingBox';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
+import {useLanguage} from '../../../../hooks/useLanguage';
 import StarAccomo from '../../../News/PostNews/Lease/components/PostNewLease/EstateDetail/StarAccomo';
+import Ribbon from '../../../components/Ribbon';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import RatingBox from './BoxPlaceItem/RatingBox';
+import TopImg from './BoxPlaceItem/TopImg';
 
 export default function BoxPlaceItem({
   data,
@@ -38,7 +37,7 @@ export default function BoxPlaceItem({
 }) {
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
-  const price = data?.rooms?.[0]?.room_dates?.[0]?.price_final;
+
   const onSavedName = async () => {
     const result = await EncryptedStorage.getItem('save_name');
 
@@ -51,23 +50,25 @@ export default function BoxPlaceItem({
     );
   };
   const priceFinal = useMemo(() => {
-    const resultPri = data?.rooms?.map(element => {
-      const result = element?.room_dates
-        .slice(0, element?.room_dates.length - 1)
-        .map(room => {
-          const resultPolicy = element?.accommodation_policies.reduce(
-            (acc, policy) => {
-              return policy?.price_percent * room?.price_final;
-            },
-            0,
-          );
+    if (data?.rooms) {
+      const resultPri = data?.rooms?.map(element => {
+        const result = element?.room_dates
+          .slice(0, element?.room_dates.length - 1)
+          .map(room => {
+            const resultPolicy = element?.accommodation_policies.reduce(
+              (acc, policy) => {
+                return policy?.price_percent * room?.price_final;
+              },
+              0,
+            );
 
-          return resultPolicy;
-        });
+            return resultPolicy;
+          });
 
-      return Math.min(...result);
-    });
-    return Math.min(...resultPri);
+        return Math.min(...result);
+      });
+      return Math.min(...resultPri);
+    }
   }, [data?.rooms]);
 
   const freeCancel = useMemo(() => {

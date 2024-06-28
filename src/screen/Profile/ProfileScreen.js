@@ -9,10 +9,10 @@ import MainWrapper from '../../components/MainWrapper';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useCountry} from '../../hooks/useCountry';
 import {formatPrice} from '../../utils/format';
-import TopProfile from './components/TopProfile';
 import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderNoToken from './components/HeaderNoToken';
+import TopProfile from './components/TopProfile';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -29,10 +29,15 @@ export default function ProfileScreen() {
   return (
     <MainWrapper
       refreshControl
+      headerStyle={{
+        minHeight: scale(120),
+        paddingTop: scale(10),
+      }}
+      headerTitleComponent={!token && <HeaderNoToken />}
       styleContent={{
         paddingHorizontal: scale(12),
       }}>
-      {token ? (
+      {token && (
         <>
           <View style={styles.wallet}>
             <IconWallet />
@@ -52,8 +57,6 @@ export default function ProfileScreen() {
             onPressUpgrade={upgrade}
           />
         </>
-      ) : (
-        <HeaderNoToken />
       )}
       <Content />
 

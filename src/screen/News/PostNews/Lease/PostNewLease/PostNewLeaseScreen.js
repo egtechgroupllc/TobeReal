@@ -85,6 +85,12 @@ export default function PostNewLeaseScreen() {
     return formData;
   };
   const checkIsValid = () => {
+    // dispatch(
+    //   StackActions.replace('NoBottomTab', {
+    //     screen: 'AddRoomTypeScreen',
+    //     params: {},
+    //   }),
+    // );
     if (`${errors}` !== '{}') {
       showMess(t('please_enter_correct'), 'error');
       // return;

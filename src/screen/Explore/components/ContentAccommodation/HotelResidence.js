@@ -1,80 +1,69 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import BoxPlaceItem from './BoxPlaceItem';
-import WrapperContent from '../WrapperContent';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
-import InViewPort from '../../../../components/InViewport';
-import {useQuery} from '@tanstack/react-query';
-import {getListRent} from '../../../../Model/api/apiAccom';
-import {formatDate} from '../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
+import React, {memo, useEffect, useMemo, useState} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {scale} from '../../../../assets/constants';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import WrapperContent from '../WrapperContent';
+import BoxPlaceItem from './BoxPlaceItem';
 
-export default function HotelResidence({data}) {
+export default memo(function HotelResidence({data, isLoading, country}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
 
-  // const {data, isLoading, isError, error} = useQuery({
-  //   queryKey: [
-  //     'accommodation',
-  //     'list-rent',
-  //     {
-  //       accommodation_type_id: 1,
-  //       country_id: 241,
-  //       // province_id: 1,
-  //     },
-  //   ],
-  //   queryFn: () =>
-  //     getListRent({
-  //       date_end: formatDate(new Date(), {addDays: 1}),
-  //       date_start: formatDate(),
-  //       country_id: 241,
-
-  //       // province_id: 1,
-  //     }),
-  // });
   const title = [t('recent_view')];
+
+  const [listSavedName, setListSavedName] = useState([]);
+  useEffect(() => {
+    const loadSavedName = async () => {
+      const result = await EncryptedStorage.getItem('save_name');
+      // const result = await EncryptedStorage.removeItem('save_name');
+      setListSavedName(JSON.parse(result));
+    };
+    loadSavedName();
+  }, []);
+
+  const dataNew = useMemo(() => {
+    const filterSaved = listSavedName?.filter(item => {
+      return item?.country_id === country?.id;
+    });
+
+    const dataIds = data?.map(element => element?.id) || [];
+    const result = filterSaved?.filter(item => {
+      return dataIds.includes(item?.id);
+    });
+
+    return result;
+  }, [listSavedName, country?.id, data]);
+
+  if (!(data?.count !== 0) && !isLoading) return null;
+
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={30}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          // onPressSeeAll={() =>
-          //   navigate('NoBottomTab', {
-          //     screen: 'SeeAllRentScreen',
-          //     params: {
-          //       title: title || '',
-          //     },
-          //   })
-          // }
-          heading={title}
-          subHeading={t('seamless_living')}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item, index}) => (
-              <BoxPlaceItem
-                key={index}
-                seeViewNumber={1.6}
-                isViewMap
-                isStar
-                isRating
-                isDiscount
-                // rating={2}
-                isHeart
-                data={item}
-              />
-            )}
+    <WrapperContent heading={title}>
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={!isLoading ? dataNew : [...Array(4)]}
+        contentContainerStyle={styles.content}
+        renderItem={({item, index}) => (
+          <BoxPlaceItem
+            key={index}
+            seeViewNumber={1.6}
+            isViewMap
+            isStar
+            isRating
+            isDiscount
+            // rating={2}
+            isHeart
+            data={item}
+            isLoading={!item}
           />
-        </WrapperContent>
-      )}
-    </InViewPort>
+        )}
+      />
+    </WrapperContent>
   );
-}
+});
 
 const styles = StyleSheet.create({
   content: {

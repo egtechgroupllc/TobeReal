@@ -77,7 +77,7 @@ export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
       </ScrollView>
       <Pagination
         currentPage={page}
-        totalPages={data?.data?.count}
+        totalData={data?.data?.count}
         onChange={num => setPage(num)}
         styleWrapper={{
           marginVertical: 0,

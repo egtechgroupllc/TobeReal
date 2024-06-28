@@ -48,6 +48,8 @@ export const getListRent = async ({
   );
   return responsive.data;
 };
+// MARK: Key getListRent
+getListRent.queryKey = ['accommodation', 'list-rent'];
 
 export const postCreateAccommoLease = async data => {
   const responsive = await instanceAccom.post('/create', data, {

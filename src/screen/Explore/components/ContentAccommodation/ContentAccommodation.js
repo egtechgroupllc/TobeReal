@@ -16,7 +16,6 @@ import {formatDate} from '../../../../utils/format';
 export default memo(function ContentAccommodation({}) {
   const {t} = useLanguage();
 
-  const [listSavedName, setListSavedName] = useState([]);
   const {country, currency} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -36,34 +35,17 @@ export default memo(function ContentAccommodation({}) {
         currency_id: currency?.id,
       }),
   });
-  useEffect(() => {
-    const loadSavedName = async () => {
-      const result = await EncryptedStorage.getItem('save_name');
-      // const result = await EncryptedStorage.removeItem('save_name');
-      setListSavedName(JSON.parse(result));
-    };
-    loadSavedName();
-  }, []);
-
-  const dataNew = useMemo(() => {
-    const filterSaved = listSavedName?.filter(item => {
-      return item?.country_id === country?.id;
-    });
-
-    const dataIds = data?.data?.rows?.map(element => element?.id) || [];
-    const result = filterSaved?.filter(item => {
-      return dataIds.includes(item?.id);
-    });
-
-    return result;
-  }, [listSavedName, country?.id, data?.data?.count]);
 
   return (
     <View style={styles.wrapper}>
-      {dataNew?.length > 0 ? <HotelResidence data={dataNew} /> : <View />}
+      <HotelResidence
+        data={data?.data?.rows}
+        isLoading={isLoading}
+        country={country}
+      />
       <AccommodationPremium currency={currency} />
       <FindBest country={country} currency={currency} />
-      <ThematicInstagram />
+      {/* <ThematicInstagram /> */}
       {/* <RecommendedUnit data={data} /> */}
       {/* <StayMonthly /> */}
 

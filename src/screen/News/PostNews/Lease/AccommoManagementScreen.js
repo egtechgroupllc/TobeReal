@@ -99,7 +99,7 @@ export default function AccommoManagementScreen() {
             <Pagination
               pageSize={12}
               currentPage={page}
-              totalPages={data?.data?.count}
+              totalData={data?.data?.count}
               onChange={num => setPage(num)}
             />
           </>

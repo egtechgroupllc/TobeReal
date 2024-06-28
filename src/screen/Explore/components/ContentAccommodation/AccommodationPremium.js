@@ -1,16 +1,14 @@
-import {StyleSheet, Text, FlatList, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import React, {useState} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
+import {getListRent} from '../../../../Model/api/apiAccom';
+import {scale} from '../../../../assets/constants';
+import {useCountry} from '../../../../hooks/useCountry';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import {formatDate} from '../../../../utils/format';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
-import {useLanguage} from '../../../../hooks/useLanguage';
-import {scale} from '../../../../assets/constants';
-import InViewPort from '../../../../components/InViewport';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {getListRent} from '../../../../Model/api/apiAccom';
-import {formatDate} from '../../../../utils/format';
-import {useQuery} from '@tanstack/react-query';
-import EncryptedStorage from 'react-native-encrypted-storage';
-import {useCountry} from '../../../../hooks/useCountry';
 
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
@@ -21,8 +19,7 @@ export default function AccommodationPremium({currency}) {
 
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
-      'accommodation',
-      'list-rent',
+      ...getListRent.queryKey,
       {
         accommodation_type_id: 1,
         country_id: country?.id,
@@ -40,44 +37,46 @@ export default function AccommodationPremium({currency}) {
       }),
   });
 
-  if (!(data?.data?.count !== 0)) return null;
+  if (!(data?.data?.count !== 0) && !isLoading) return null;
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          // onPressSeeAll={() =>
-          //   navigate('NoBottomTab', {
-          //     screen: 'SeeAllRentScreen',
-          //     params: {
-          //       title: title || '',
-          //     },
-          //   })
-          // }
-          heading={title}
-          subHeading={t('find_popular')}
-          styleWrapper={{backgroundColor: '#f8eede'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows?.slice(0, 9)}
-            contentContainerStyle={styles.content}
-            renderItem={({item, index}) => (
-              <BoxPlaceItem
-                key={index}
-                isHeart
-                isDiscount
-                isStar
-                isRating
-                data={item}
-                seeViewNumber={1.6}
-                isViewMap
-              />
-            )}
+    // <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
+    //   {isRender && (
+    <WrapperContent
+      // isSeeAll
+      // onPressSeeAll={() =>
+      //   navigate('NoBottomTab', {
+      //     screen: 'SeeAllRentScreen',
+      //     params: {
+      //       title: title || '',
+      //     },
+      //   })
+      // }
+      heading={title}
+      subHeading={t('find_popular')}
+      styleWrapper={{backgroundColor: '#f8eede'}}>
+      <FlatList
+        horizontal
+        scrollEnabled={!isLoading}
+        showsHorizontalScrollIndicator={false}
+        data={data?.data?.rows?.slice(0, 9) || [...Array(4)]}
+        contentContainerStyle={styles.content}
+        renderItem={({item, index}) => (
+          <BoxPlaceItem
+            key={index}
+            isHeart
+            isDiscount
+            isStar
+            isRating
+            data={item}
+            seeViewNumber={1.6}
+            isViewMap
+            isLoading={isLoading}
           />
-        </WrapperContent>
-      )}
-    </InViewPort>
+        )}
+      />
+    </WrapperContent>
+    //   )}
+    // </InViewPort>
   );
 }
 

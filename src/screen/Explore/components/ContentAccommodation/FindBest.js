@@ -1,18 +1,17 @@
+import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
+import {getListRent} from '../../../../Model/api/apiAccom';
+import {getListCountry} from '../../../../Model/api/common';
+import {COLORS, SHADOW, scale} from '../../../../assets/constants';
+import EmptyData from '../../../../components/EmptyData';
+import InViewport from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {formatDate} from '../../../../utils/format';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
-import InViewPort from '../../../../components/InViewport';
-import {COLORS, SIZES, scale} from '../../../../assets/constants';
-import {useNavigation} from '@react-navigation/native';
-import {getListRent} from '../../../../Model/api/apiAccom';
-import {formatDate} from '../../../../utils/format';
-import {useQuery} from '@tanstack/react-query';
-import {getListCountry} from '../../../../Model/api/common';
-import EmptyData from '../../../../components/EmptyData';
-import CustomText from '../../../../components/CustomText';
-import {IconBookings} from '../../../../assets/icon/Icon';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function FindBest({country, currency}) {
   const {t} = useLanguage();
@@ -49,56 +48,52 @@ export default function FindBest({country, currency}) {
   useEffect(() => {
     setFilter(listProvince.data?.data?.[0]);
   }, [listProvince?.data?.data]);
+
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={130}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          isCategory
-          dataCategory={listProvince?.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}
-          subHeading={t('disc_upto') + ` 30%!`}
-          styleWrapper={{backgroundColor: COLORS.subPrimary}}>
-          {data?.data?.count !== 0 ? (
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={data?.data?.rows}
-              contentContainerStyle={styles.content}
-              renderItem={({item, index}) => (
-                <BoxPlaceItem
-                  key={index}
-                  seeViewNumber={1.6}
-                  isViewMap
-                  isStar
-                  isRating
-                  isDiscount
-                  rating={2}
-                  isHeart
-                  data={item}
-                />
-              )}
-            />
-          ) : (
-            <View style={{alignItems: 'center', rowGap: scale(10)}}>
-              <IconBookings width={scale(50)} height={scale(50)} />
-              <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                {t('no_data')}
-              </CustomText>
-            </View>
-          )}
-        </WrapperContent>
-      )}
-    </InViewPort>
+    <WrapperContent
+      // isSeeAll
+      isCategory
+      dataCategory={listProvince?.data?.data?.slice(0, 9) || [...Array(4)]}
+      onPressSeeAll={() =>
+        navigate('NoBottomTab', {
+          screen: 'SeeAllRentScreen',
+          params: {
+            title: title || '',
+          },
+        })
+      }
+      onPressCategory={item => setFilter(item)}
+      heading={title}
+      subHeading={t('disc_upto') + ` 30%!`}
+      styleWrapper={{
+        backgroundColor: COLORS.subPrimary,
+      }}
+      styleContent={{
+        justifyContent: 'center',
+        minHeight: scale(230),
+      }}>
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={data?.data?.rows || [...Array(4)]}
+        contentContainerStyle={styles.content}
+        ListEmptyComponent={<EmptyData />}
+        renderItem={({item, index}) => (
+          <BoxPlaceItem
+            key={index}
+            seeViewNumber={1.6}
+            isViewMap
+            isStar
+            isRating
+            isDiscount
+            rating={2}
+            isHeart
+            data={item}
+            isLoading={isLoading}
+          />
+        )}
+      />
+    </WrapperContent>
   );
 }
 
@@ -107,5 +102,7 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
+    minHeight: scale(230),
+    minWidth: '100%',
   },
 });

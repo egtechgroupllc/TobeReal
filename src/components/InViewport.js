@@ -5,6 +5,8 @@ import {
   ViewProps,
   ImageStyle,
   StyleSheet,
+  FlatList,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {images, scale} from '../assets/constants';
 import CustomImage from './CustomImage';
@@ -14,7 +16,9 @@ export interface Iprops {
   onChange: (event: Event) => void;
   topHeight: number;
   delay: number;
+  numLoading: number;
   noLoading: boolean;
+  loadingMap: boolean;
   ComponentLoading: any;
   styleLoading?: ImageStyle;
 }
@@ -95,14 +99,23 @@ const InViewPort = class extends Component<Iprops | ViewProps> {
         {
           this.props.children ||
             (!this.props.noLoading &&
-              // <></>
-              (this.props.ComponentLoading || (
+            // <></>
+            this.props.loadingMap ? (
+              this.props.ComponentLoading || (
                 <CustomImage
                   source={images.logoLoading}
                   style={[styles.imageStyle, this.props.styleLoading]}
                   resizeMode="cover"
                 />
-              )))
+              )
+            ) : (
+              <FlatList
+                data={[...Array(this.props.numLoading)]}
+                renderItem={({item, index}) => (
+                  <View key={index}>{this.props.ComponentLoading}</View>
+                )}
+              />
+            ))
           // <ActivityIndicator
           //   size={'large'}
           //   color={COLORS.primary}

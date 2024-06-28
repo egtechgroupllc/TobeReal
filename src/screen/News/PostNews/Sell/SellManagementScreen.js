@@ -29,8 +29,8 @@ export default function SellManagementScreen() {
     });
   }, [params]);
 
-  const {data, isLoading, page, setPage} = usePagination(
-    ['estate', 'my-list'],
+  const {data, isLoading, page, setPage, isPending} = usePagination(
+    getMyListCreateSell.queyKey,
     getMyListCreateSell,
   );
 
@@ -50,7 +50,7 @@ export default function SellManagementScreen() {
       styleContent={{
         marginBottom: scale(20),
       }}>
-      {!dataNew?.length > 0 ? (
+      {!dataNew?.length > 0 && isPending ? (
         <EmptyData />
       ) : (
         <>
@@ -97,7 +97,7 @@ export default function SellManagementScreen() {
           <Pagination
             pageSize={10}
             currentPage={page}
-            totalPages={data?.data?.count}
+            totalData={data?.data?.count}
             onChange={num => setPage(num)}
           />
 
