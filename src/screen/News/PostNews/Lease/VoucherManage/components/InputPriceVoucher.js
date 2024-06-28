@@ -23,6 +23,7 @@ export default memo(function InputPriceVoucher({
   value,
   priceDiscount,
   namePrice,
+  enableFormatNum,
 }) {
   const {t} = useLanguage();
   const {watch} = useForm();
@@ -48,6 +49,7 @@ export default memo(function InputPriceVoucher({
         placeholder={t('enter_price')}
         style={styles.textInput}
         namePrice={namePrice}
+        enableFormatNum={enableFormatNum}
         // onChangeCurrency={value => setTypeCurrency(currency?.currency_code)}
       />
       {priceDiscount && (

@@ -10,91 +10,125 @@ import {formatNumber} from '../../../../../utils/format';
 import Introduction from './Introduction';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import YoutubeIframe from 'react-native-youtube-iframe';
+import QRCode from 'react-native-qrcode-svg';
+import Clipboard from '@react-native-clipboard/clipboard';
+import QRWalletBlockChain from '../../../../Profile/components/QRWalletBlockChain';
+import Traceability from './Traceability';
 export default function InfoDetail({data}) {
   const {t} = useLanguage();
+  const handleCopy = () => {
+    Clipboard.setString(data?.wallet_address);
+    showMess('Sao chép thành công');
+  };
+  const [isOpen, setIsOpen] = useState(false);
 
+  if (!data?.wallet_address) return null;
   return (
     <View>
-      <View style={styles.wrapper}>
-        <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
-          {data.name}
-        </CustomText>
-
-        <View style={styles.room}>
-          <View style={styles.boxRoom}>
-            <CustomText
-              textType="semiBold"
-              style={{
-                color: '#7906f6',
-              }}>
-              {data.accommodation_type.name}
-            </CustomText>
-          </View>
-          {data.review_average ? (
-            <StarRating rating={data.review_average} />
-          ) : (
-            <CustomText textType="regular">({t('no_review_yet')})</CustomText>
-          )}
-        </View>
-
-        <View
-          style={{
-            alignItems: 'flex-start',
-            flexDirection: 'row',
-          }}>
-          <IconLocation
-            fill={COLORS.text}
-            style={{
-              width: scale(15),
-              height: scale(15),
-            }}
-          />
-          <CustomText textType="regular" numberOfLines={2}>
-            {' '}
-            {data.address}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          backgroundColor: '#fff',
+          justifyContent: 'space-between',
+          padding: scale(16),
+        }}>
+        <View style={styles.wrapper}>
+          <CustomText textType="semiBold" style={styles.name} numberOfLines={2}>
+            {data.name}
           </CustomText>
-        </View>
 
-        <View style={styles.room}>
-          <View style={[styles.boxMore, styles.rating]}>
-            <CustomText
-              style={{color: COLORS.white, lineHeight: 18}}
-              textType="bold">
-              {t('new')}
+          <View style={styles.room}>
+            <View style={styles.boxRoom}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  color: '#7906f6',
+                }}>
+                {data.accommodation_type.name}
+              </CustomText>
+            </View>
+            {data.review_average ? (
+              <StarRating rating={data.review_average} />
+            ) : (
+              <CustomText textType="regular">({t('no_review_yet')})</CustomText>
+            )}
+          </View>
+
+          <View
+            style={{
+              alignItems: 'flex-start',
+              flexDirection: 'row',
+            }}>
+            <IconLocation
+              fill={COLORS.text}
+              style={{
+                width: scale(15),
+                height: scale(15),
+              }}
+            />
+            <CustomText textType="regular" numberOfLines={2}>
+              {' '}
+              {data.address}
             </CustomText>
           </View>
-          <View style={styles.boxMore}>
-            <CustomText textType="bold">
-              {t('discussion')} ({formatNumber(data?.review_count)})
-            </CustomText>
+
+          <View style={styles.room}>
+            <View style={[styles.boxMore, styles.rating]}>
+              <CustomText
+                style={{color: COLORS.white, lineHeight: 18}}
+                textType="bold">
+                {t('new')}
+              </CustomText>
+            </View>
+            <View style={styles.boxMore}>
+              <CustomText textType="bold">
+                {t('discussion')} ({formatNumber(data?.review_count)})
+              </CustomText>
+            </View>
+            <TouchableOpacity>
+              <CustomImage
+                source={images.iconTiktok}
+                style={{width: scale(20), height: scale(20)}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomImage
+                source={images.iconYoutube}
+                style={{width: scale(20), height: scale(20)}}
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <CustomImage
-              source={images.iconTiktok}
-              style={{width: scale(20), height: scale(20)}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <CustomImage
-              source={images.iconYoutube}
-              style={{width: scale(20), height: scale(20)}}
-            />
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setIsOpen(true)}
+          style={{
+            backgroundColor: COLORS.white70,
+            padding: scale(8),
+            borderRadius: scale(9),
+          }}>
+          <QRCode value={data?.wallet_address} size={scale(80)} />
+        </TouchableOpacity>
       </View>
-
+      {isOpen && (
+        <QRWalletBlockChain
+          data={data}
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
       <Introduction data={data} />
+      <Traceability data={data} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
-    padding: scale(16),
     paddingBottom: scale(4),
+    width: '70%',
   },
 
   name: {flex: 1, fontSize: SIZES.xMedium},

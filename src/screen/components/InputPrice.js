@@ -21,6 +21,7 @@ export default function InputPrice({
   style,
   onChangeCurrency,
   namePrice,
+  enableFormatNum = true,
 }) {
   const {currency} = useCountry();
   const {navigate} = useNavigation();
@@ -55,7 +56,7 @@ export default function InputPrice({
       placeholder={placeholder}
       style={style}
       keyboardType="number-pad"
-      enableFormatNum
+      enableFormatNum={enableFormatNum}
       maxLength={14}
       inputMode="numeric"
       componentLeft={

@@ -2,9 +2,10 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect} from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useForm} from 'react-hook-form';
 import {
+  getListPriceRoomDate,
   postCreateAccommoRoomLease,
   postPolicyToRoom,
   postUpdateAccom,
@@ -57,6 +58,7 @@ export default function AddRoomTypeScreen() {
   const updateAccommodationRoomMu = useMutation({
     mutationFn: postUpdateAccom,
   });
+
   // const createAddPolicyToRoom = useMutation({
   //   mutationFn: postPolicyToRoom,
   // });
@@ -189,6 +191,7 @@ export default function AddRoomTypeScreen() {
                 params: {
                   accommodation_id: params?.id,
                   dataRoom: dataInside?.data,
+                  price: watch('price'),
                 },
               });
         }

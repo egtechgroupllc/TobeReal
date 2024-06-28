@@ -44,7 +44,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
             borderRadius: scale(10),
             flexDirection: 'row',
             columnGap: scale(10),
-            width: scale(300),
+            width: scale(280),
             alignItems: 'center',
           }}>
           <CustomImage
@@ -61,13 +61,14 @@ export default function QRWalletBlockChain({open, data, onClose}) {
             }}>
             <CustomText
               style={styles.textReceive}
-              size={SIZES.medium}
+              size={SIZES.xMedium}
+              numberOfLines={1}
               textType="medium">
-              {data?.username}
+              {data?.username || data?.name}
             </CustomText>
 
             <CustomText
-              size={SIZES.xMedium}
+              size={SIZES.xSmall}
               textType="medium"
               color={COLORS.text}>
               {data?.wallet_address}
@@ -101,7 +102,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
               <View style={{...styles.box, opacity: secondEnd ? 0.3 : 1}}>
                 {true ? (
                   <QRCode
-                    size={scale(260)}
+                    size={scale(220)}
                     value={JSON.stringify(21321)}
                     color="#000"
                   />
@@ -112,7 +113,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
             </View>
           </View>
 
-          <View style={styles.row}>
+          {/* <View style={styles.row}>
             <View
               style={{
                 flex: 1,
@@ -133,7 +134,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
                 Chia se
               </CustomText>
             </View>
-          </View>
+          </View> */}
         </View>
 
         <CustomButton

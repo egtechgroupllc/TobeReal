@@ -45,7 +45,6 @@ export default function PostNewLeaseScreen() {
     });
   }, []);
   const queryClient = useQueryClient();
-
   const createAccommodationMu = useMutation({
     mutationFn: postCreateAccommoLease,
   });

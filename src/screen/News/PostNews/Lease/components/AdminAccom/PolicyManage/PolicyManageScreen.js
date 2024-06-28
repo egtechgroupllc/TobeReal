@@ -19,6 +19,7 @@ import {showMess} from '../../../../../../../assets/constants/Helper';
 
 export default function PolicyManageScreen() {
   const params = useRoute().params;
+
   const {setOptions, navigate, goBack} = useNavigation();
 
   const {t} = useLanguage();
@@ -67,7 +68,7 @@ export default function PolicyManageScreen() {
   });
   const LinkPolicy = value => {
     if (value?.length === 0) {
-      showMess('Chọn ít nhất một chính sách để tiếp tục', 'error');
+      showMess(t('select_at_least_one_policy'), 'error');
       return;
     }
 

@@ -112,10 +112,7 @@ export default function RulesPolicy1({setValue, control, unregister, watch}) {
               keyboardType="numeric"
               rules={[
                 requireField(t('this_field_required')),
-                validateMinMaxAmount(
-                  t('invalid date (from 1 to 30 days)'),
-                  100,
-                ),
+                validateMinMaxAmount(t('invalid_date'), 100),
               ]}
               componentRight={
                 <View style={styles.componentRight}>

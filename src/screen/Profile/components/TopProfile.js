@@ -6,8 +6,11 @@ import {IconCheck} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function TopProfile({name, data}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.wrapper}>
       <View
@@ -22,14 +25,14 @@ export default function TopProfile({name, data}) {
       </CustomText>
 
       <View style={styles.info}>
-        <CustomText color={COLORS.text}>09123618236</CustomText>
+        <CustomText color={COLORS.text}>{data?.phone}</CustomText>
 
         <View style={styles.boxVerify}>
           <CustomText
             color={COLORS.white}
             size={SIZES.xSmall}
             textType="medium">
-            Đã xac thuc
+            {t('verified')}
           </CustomText>
         </View>
       </View>
@@ -42,7 +45,7 @@ export default function TopProfile({name, data}) {
             borderTopRightRadius: scale(12),
             borderBottomLeftRadius: scale(8),
           }}>
-          <CustomText textType="semiBold">trang ca nhan</CustomText>
+          <CustomText textType="semiBold">{t('personal_profile')}</CustomText>
         </TouchableOpacity>
 
         <View style={styles.line} />
@@ -53,7 +56,7 @@ export default function TopProfile({name, data}) {
             borderTopLeftRadius: scale(2),
             borderBottomRightRadius: scale(8),
           }}>
-          <CustomText textType="semiBold">Giới thieu</CustomText>
+          <CustomText textType="semiBold">{t('introduction')}</CustomText>
         </TouchableOpacity>
       </View>
 

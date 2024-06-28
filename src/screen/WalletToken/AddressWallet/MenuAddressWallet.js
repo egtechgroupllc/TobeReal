@@ -9,10 +9,12 @@ import {COLORS, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
 import {IconExportFile, IconTrash} from '../../../assets/icon/Icon';
 import {BottomSheet, CustomButton, CustomText} from '../../../components';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function MenuAddressWallet({data}) {
   const bottomSheetRef = useRef();
   const queryClient = useQueryClient();
+  const {t} = useLanguage();
 
   const deleteWalletMu = useMutation({
     mutationFn: deleteWallet,
@@ -133,7 +135,7 @@ export default function MenuAddressWallet({data}) {
 
       <BottomSheet
         ref={bottomSheetRef}
-        titleIndicator={'Ví'}
+        titleIndicator={t('wallet')}
         snapPoints={['30%']}
         styleContent={{
           paddingHorizontal: scale(16),
@@ -141,7 +143,7 @@ export default function MenuAddressWallet({data}) {
         }}>
         <CustomButton
           iconLeft={IconExportFile}
-          text="Export wallet"
+          text={t('export_wallet')}
           styleText={{textAlign: 'left'}}
           styleIcon={{
             color: '#fff',
@@ -152,7 +154,7 @@ export default function MenuAddressWallet({data}) {
           onPress={handleDeleteWallet}
           outline
           iconLeft={IconTrash}
-          text="Delete wallet"
+          text={t('delete_wallet')}
           styleText={{textAlign: 'left', color: COLORS.error}}
           style={{
             borderColor: COLORS.error,

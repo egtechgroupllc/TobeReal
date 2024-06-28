@@ -79,8 +79,7 @@ export default {
   hotel: require('../images/hotel.png'),
   voucher: require('../images/voucher.png'),
   voucher_saveloka: require('../images/voucher_saveloka.png'),
-  backgroundVoucher: require('../images/backgroundVoucher.png'),
-
+  banner: require('../images/banner.png'),
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),
   // c15_2: require('../images/c15_2.jpg'),

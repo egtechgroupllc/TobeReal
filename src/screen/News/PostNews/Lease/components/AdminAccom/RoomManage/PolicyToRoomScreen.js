@@ -101,6 +101,7 @@ export default function PolicyToRoomScreen() {
       }),
   });
 
+  const policyIdArray = dataPolicy?.data?.data?.rows?.map(item => item?.id);
   const dataDetailRoom = useQuery({
     queryKey: ['room', 'detail', params?.id],
     queryFn: () =>
@@ -113,7 +114,7 @@ export default function PolicyToRoomScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Link policy to room',
+      headerTitle: t('link_policy_to_room'),
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
@@ -139,12 +140,41 @@ export default function PolicyToRoomScreen() {
     createAddPolicyToRoom.mutate(
       {
         array_policy_id: [value?.id],
-        room_id: params?.id,
+        room_id: params?.id || params?.dataRoom?.id,
         is_add: 0,
       },
       {
         onSuccess: dataInside => {
           if (dataInside?.status) {
+            queryClient.invalidateQueries([
+              'accommodation',
+              'list-policy',
+              params?.accommodation_id,
+              params?.id,
+            ]);
+          }
+        },
+        onError: err => {
+          console.log({err});
+        },
+      },
+    );
+  };
+  const handleLinkPolicy = value => {
+    createAddPolicyToRoom.mutate(
+      {
+        array_policy_id: policyIdArray,
+        room_id: params?.id || params?.dataRoom?.id,
+        is_add: 1,
+      },
+      {
+        onSuccess: dataInside => {
+          if (dataInside?.status) {
+            if (params?.admin) {
+              goBack(params);
+            } else {
+              navigate('AccommoManagementScreen', params);
+            }
             queryClient.invalidateQueries([
               'accommodation',
               'list-policy',
@@ -411,13 +441,7 @@ export default function PolicyToRoomScreen() {
         </View>
       </View>
       <CustomButton
-        onPress={() => {
-          if (params?.admin) {
-            goBack(params);
-          } else {
-            navigate('AccommoManagementScreen', params);
-          }
-        }}
+        onPress={() => handleLinkPolicy()}
         text={t('confirm')}
         buttonType="medium"
         style={{maxWidth: '50%', alignSelf: 'center'}}

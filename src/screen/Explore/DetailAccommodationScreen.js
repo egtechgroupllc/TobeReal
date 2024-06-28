@@ -51,7 +51,6 @@ export default function DetailAccommodationScreen() {
 
   const listView = useMemo(() => {
     const dataDetail = data?.data;
-
     return !dataDetail
       ? []
       : [
@@ -82,7 +81,7 @@ export default function DetailAccommodationScreen() {
           />
         }
       />
-      <VideoYoutubeBox />
+      {data?.data?.video_link && <VideoYoutubeBox data={data?.data} />}
     </MainWrapper>
   );
 }

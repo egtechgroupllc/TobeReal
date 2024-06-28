@@ -31,7 +31,6 @@ export default function VoucherItem({
   buyVoucher,
   onPressVoucher,
 }) {
-  const {navigate} = useNavigation();
   const {currency} = useCountry();
   const {t} = useLanguage();
 
@@ -84,20 +83,23 @@ export default function VoucherItem({
               numberOfLines={2}>
               {data?.name}
             </CustomText>
-            <CustomText
-              textType="medium"
-              style={{
-                color: COLORS.black,
-                fontSize: SIZES.xSmall,
-              }}>
-              {t('quantity')}:{data?.quantity_real}
-            </CustomText>
+            {buyVoucher && (
+              <CustomText
+                textType="medium"
+                style={{
+                  color: COLORS.black,
+                  fontSize: SIZES.xSmall,
+                }}>
+                {t('quantity')}:{data?.quantity_real}
+              </CustomText>
+            )}
 
             <CustomText
               textType="semiBold"
               style={{
                 color: COLORS.black,
                 fontSize: SIZES.xSmall,
+                marginTop: !buyVoucher && scale(10),
               }}>
               {t('Giá trị sử dụng: ')}
               {t('giảm ')}
@@ -153,7 +155,11 @@ export default function VoucherItem({
                 color: COLORS.primary,
                 fontSize: SIZES.small,
               }}>
-              {formatPrice(data?.price, {currency: 'TBH', locales: 'vi'})}
+              {formatPrice(data?.price, {
+                currency: 'TBH',
+                locales: 'vi',
+                decimalPlaces: 12,
+              })}
             </CustomText>
             <View
               style={{

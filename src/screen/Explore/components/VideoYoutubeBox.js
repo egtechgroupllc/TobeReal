@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
@@ -11,7 +11,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import {COLORS, SHADOW, WIDTH, scale} from '../../../assets/constants';
 import {IconX, IconZoomIn, IconZoomOut} from '../../../assets/icon/Icon';
 
-export default function VideoYoutubeBox() {
+export default function VideoYoutubeBox({data}) {
   const [playing, setPlaying] = useState(false);
   const [cancel, setCancel] = useState(false);
   const youtubePlayerRef = useRef(null);
@@ -25,13 +25,13 @@ export default function VideoYoutubeBox() {
     setPlaying(false);
     setCancel(true);
   };
-
-  const extractVideoId = url => {
+  const extractVideoId = useMemo(() => {
     const regex =
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:shorts\/|v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-    const match = url.match(regex);
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?v=|[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = data?.video_link.match(regex);
+
     return match ? match[1] : null;
-  };
+  }, [data?.video_link]);
 
   const onStateChange = state => {
     if (state === 'ended') {
@@ -104,7 +104,7 @@ export default function VideoYoutubeBox() {
               }
               height={zoom ? scale(300) : scale(250)}
               play={playing}
-              videoId={'AfH3pTMFiww'}
+              videoId={extractVideoId}
               onChangeState={onStateChange}
               // allowWebViewZoom={true}ßß
               // onChangeState={event => {

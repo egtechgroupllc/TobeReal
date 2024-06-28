@@ -9,6 +9,7 @@ import {validateMinLength} from '../../../../../../utils/validate';
 import ChooseImgPicker from '../../../../../components/ChooseImgPicker';
 import RulesPostImg from '../../../components/RulesPostImg';
 import ButtonTabValidate from '../ButtonTabValidate';
+import {CustomInput} from '../../../../../../components';
 
 export default function EstatePhoto({
   control,
@@ -93,6 +94,7 @@ export default function EstatePhoto({
         {isRender && (
           <Collapsible collapsed={!isView} style={styles.box}>
             <RulesPostImg />
+
             <ChooseImgPicker
               title={t('real_estate_images')}
               subHeading={t('update_image_to_maximum')}
@@ -167,6 +169,15 @@ export default function EstatePhoto({
               placeholder={t('Link tiktok')}
               style={{...styles.textInput}}
             /> */}
+
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('Add your real estate YouTube link video(if any)')}
+              control={control}
+              name="video_link"
+              placeholder={t('link_youtube')}
+              style={styles.textInput}
+            />
           </Collapsible>
         )}
       </InViewPort>

@@ -4,6 +4,7 @@ import {
   PostReviewScreen,
 } from '../screen/Bookings';
 import HomeListVoucherScreen from '../screen/Bookings/components/BookingRoom/ContentStep2/Voucher/HomeListVoucherScreen';
+import BuyVoucherScreen from '../screen/Bookings/components/BookingRoom/ContentStep2/Voucher/components/BuyVoucherScreen';
 import {SelectDefaultCountryScreen} from '../screen/DefaultCountry';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
@@ -279,5 +280,9 @@ export default routerNoBottomTab = [
   {
     name: 'HomeListVoucherScreen',
     component: HomeListVoucherScreen,
+  },
+  {
+    name: 'BuyVoucherScreen',
+    component: BuyVoucherScreen,
   },
 ];

@@ -28,11 +28,11 @@ export default function RulesPolicy6({
   const list = [
     {
       id: 1,
-      title: t('Loại giá này rẻ hơn so với giá niêm yết'),
+      title: t('this_rate_is_cheaper'),
     },
     {
       id: 2,
-      title: t('Loại giá này mắc hơn so với giá niêm yết'),
+      title: t('this_rate_is_expensive'),
     },
   ];
   const [isSelect, setIsSelect] = useState(list[0]);
@@ -119,7 +119,7 @@ export default function RulesPolicy6({
           textType="regular"
           size={SIZES.small}
           style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
-          Giá niêm yết của phòng này:{' '}
+          {t('listed_price_room')} :{' '}
           {formatPrice(data?.price, {
             currency: currency?.currency_code,
           })}
@@ -128,7 +128,7 @@ export default function RulesPolicy6({
           textType="semiBold"
           size={SIZES.small}
           style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
-          Giá sau khi áp dụng chính sách:{' '}
+          {t('listed_price_room')}:{' '}
           {isSelect.id === 1
             ? formatPrice(data?.price * (1 - watch('price_percent') / 100), {
                 currency: currency?.currency_code,

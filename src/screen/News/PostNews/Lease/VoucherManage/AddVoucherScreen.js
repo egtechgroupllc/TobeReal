@@ -162,22 +162,24 @@ export default function AddVoucherScreen() {
           control={control}
           priceValue={watch('price')}
           setValue={setValue}
-          priceType={t('Listed price')}
+          priceType={t('list_price')}
           value={'price'}
           namePrice={'TBH'}
+          enableFormatNum={false}
         />
         <InputPriceVoucher
           control={control}
           priceValue={watch('price_discount')}
           setValue={setValue}
-          priceType={t('Discount price')}
+          priceType={t('discount_price')}
           value={'price_discount'}
           priceDiscount
+          enableFormatNum
         />
 
         <ChooseImgPicker
           title={t('voucher_images')}
-          subHeading={t('update_image_to_maximum')}
+          subHeading={t('minimum_one_photos')}
           isDescriptionImg={false}
           maxFiles={1}
           name="file"

@@ -3,13 +3,15 @@ import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {images, scale} from '../../assets/constants';
 import WalletItem from '../WalletToken/AddressWallet/WalletItem';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function AddressWalletScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Quan ly tai khoan/the',
+      headerTitle: t('account_card_management'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -17,23 +19,23 @@ export default function AddressWalletScreen() {
   const listWallet = useMemo(
     () => [
       {
-        name: 'Ví Saveloka',
+        name: `${t('wallet')} Saveloka`,
         balance: 1000000,
         backgroundColor: '#FFA800',
         logo: images.logo1,
         isOpen: true,
       },
       {
-        name: 'Ví TBH',
+        name: `${t('wallet')} TobeChain`,
         balance: null,
         backgroundColor: '#012133',
-        des: 'Kích hoạt để sử dụng TBH',
+        des: t('active_to_use_TBH'),
         logo: images.logoTBH,
         isOpen: false,
       },
       {
         name: 'Paypal',
-        des: 'Thanh toán trực tiếp',
+        des: t('direct_payment'),
         backgroundColor: '#012169',
         logo: images.iconPaypal,
         online: true,

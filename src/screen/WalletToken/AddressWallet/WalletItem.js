@@ -4,8 +4,11 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {formatPrice} from '../../../utils/format';
 import {IconNext} from '../../../assets/icon/Icon';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function WalletItem({item, onPress}) {
+  const {t} = useLanguage();
+
   return (
     <View
       style={{
@@ -36,7 +39,9 @@ export default function WalletItem({item, onPress}) {
             </CustomText>
 
             <CustomText textType="medium" color={COLORS.white}>
-              {item.balance ? `Số dư: ${formatPrice(item.balance)}` : item.des}
+              {item.balance
+                ? `${t('balance')}: ${formatPrice(item.balance)}`
+                : item.des}
             </CustomText>
           </View>
           {item.isOpen ? (
@@ -45,7 +50,7 @@ export default function WalletItem({item, onPress}) {
             <CustomButton
               onPress={onPress}
               buttonType="normal"
-              text={item.online ? 'Kích hoạt ngay' : 'Mở ngay'}
+              text={item.online ? t('active_now') : t('open_now')}
               style={{
                 backgroundColor: COLORS.white,
                 height: scale(28),

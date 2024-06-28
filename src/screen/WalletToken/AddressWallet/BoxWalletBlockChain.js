@@ -31,7 +31,7 @@ export default function BoxWalletBlockChain({data}) {
 
   const handleCopy = () => {
     Clipboard.setString(data?.wallet_address);
-    showMess('Sao chép thành công');
+    showMess(t('copy_success'));
   };
 
   const {data: dataQ, error} = useQuery({
@@ -71,7 +71,7 @@ export default function BoxWalletBlockChain({data}) {
               style={{
                 flex: 1,
               }}>
-              Số dư :{' '}
+              {t('balance')} :{' '}
               <CustomText
                 textType="semiBold"
                 color={COLORS.primary}
@@ -82,7 +82,7 @@ export default function BoxWalletBlockChain({data}) {
                 })}
               </CustomText>
               {`\n`}
-              Số dư phí gas:{' '}
+              {t('balance_fee_gas')}:{' '}
               <CustomText
                 textType="semiBold"
                 color={COLORS.primary}

@@ -25,13 +25,17 @@ import SelectVoucherFooter from './components/SelectVoucherFooter';
 
 export default function HomeListVoucherScreen() {
   const params = useRoute().params;
-
-  const {setOptions, goBack} = useNavigation();
+  const {setOptions, goBack, navigate} = useNavigation();
   const {t} = useLanguage();
   const transferType = [
     {id: 1, name: t('your_voucher')},
     {id: 2, name: t('hotel_voucher')},
   ];
+  useEffect(() => {
+    if (params?.isSuccess) {
+      setTab(1);
+    }
+  }, [params?.isSuccess]);
 
   const [tab, setTab] = useState(1);
   useEffect(() => {
@@ -76,8 +80,12 @@ export default function HomeListVoucherScreen() {
         : ['voucher', 'list-voucher-can-use'],
     queryFn: () =>
       tab === 2
-        ? getListVoucherSelling(params?.accomId)
-        : getListVoucherCanUse(params?.accomId),
+        ? getListVoucherSelling(
+            params?.accomId || params?.params?.item?.accommodation_id,
+          )
+        : getListVoucherCanUse(
+            params?.accomId || params?.params?.item?.accommodation_id,
+          ),
   });
   const [voucher, setVoucher] = useState([]);
 
@@ -98,52 +106,13 @@ export default function HomeListVoucherScreen() {
     });
   };
 
-  const buyVoucherMutation = useMutation({
-    mutationFn: postBuyVoucher,
-  });
-  const handleAlert = value => {
-    Alert.alert(
-      t('Are you sure you want to buy this voucher?'),
-      t('Transactions made cannot be refunded!'),
-      [
-        {
-          text: t('cancel'),
-          // onPress: () => Alert.alert('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: t('ok'), onPress: () => BuyVoucher(value)},
-      ],
-    );
-  };
-  const BuyVoucher = value => {
-    buyVoucherMutation.mutate(
-      {id: value, quantity: 1},
-      {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message,
-            dataInside?.status ? 'success' : 'error',
-          );
-          if (dataInside?.status) {
-            setTab(1);
-          }
-        },
-
-        onError: error => {
-          if (error.response) {
-            showMess(error?.response?.data?.message, 'error');
-          }
-        },
-      },
-    );
-  };
-
   return (
     <>
       <MainWrapper
         scrollEnabled={false}
         styleContent={{
           paddingHorizontal: scale(10),
+          paddingBottom: scale(70),
         }}>
         <FlatList
           // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
@@ -179,7 +148,9 @@ export default function HomeListVoucherScreen() {
                 chooseVoucher={tab === 1 && true}
                 buyVoucher={tab === 2 && true}
                 onPressVoucher={() => {
-                  tab === 2 ? handleAlert(item?.id) : voucherCheckBox(item);
+                  tab === 2
+                    ? navigate('BuyVoucherScreen', {params, item})
+                    : voucherCheckBox(item);
                 }}
                 // onPressMore={() => {
                 //   setDataItemAccom(item);
@@ -195,11 +166,13 @@ export default function HomeListVoucherScreen() {
           }}
         />
       </MainWrapper>
-      <SelectVoucherFooter
-        count={voucher?.length}
-        data={voucher}
-        onGoBack={params?.onGoBack}
-      />
+      {tab === 1 && (
+        <SelectVoucherFooter
+          count={voucher?.length}
+          data={voucher}
+          onGoBack={params?.onGoBack}
+        />
+      )}
     </>
   );
 }

@@ -12,15 +12,17 @@ import {useAuthentication} from '../../hooks/useAuthentication';
 import BoxWalletBlockChain from './AddressWallet/BoxWalletBlockChain';
 import ListToken from './components/ListToken';
 import MenuImportAddressWallet from './components/MenuImportAddressWallet';
+import {useLanguage} from '../../hooks/useLanguage';
 
 export default function WalletTokenScreen() {
   const {setOptions, navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const queryClient = useQueryClient();
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Quan ly ví TBH',
+      headerTitle: t('tbh_wallet_management'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -71,8 +73,7 @@ export default function WalletTokenScreen() {
         style={{
           textAlign: 'center',
         }}>
-        Tham gia ngay để tích điểm và nhận voucher giảm giá cho giao dịch tiếp
-        theo của bạn!
+        {t('join_not_to_receive_voucher')}
       </CustomText>
       {!data?.data?.wallet_address ? (
         <View
@@ -82,7 +83,7 @@ export default function WalletTokenScreen() {
           }}>
           <CustomButton
             onPress={createWallet}
-            text="Tạo ví mới"
+            text={t('create_new_wallet')}
             buttonType="large"
             desc="New wallet and recovery passphrase"
             isIconComponent

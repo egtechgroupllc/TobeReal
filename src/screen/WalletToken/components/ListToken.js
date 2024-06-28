@@ -5,8 +5,11 @@ import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {useQuery} from '@tanstack/react-query';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 import {formatPrice} from '../../../utils/format';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ListToken() {
+  const {t} = useLanguage();
+
   const {data, error} = useQuery({
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
@@ -33,7 +36,7 @@ export default function ListToken() {
         width: '100%',
       }}>
       <CustomText size={SIZES.medium} textType="medium">
-        Điểm thưởng
+        {t('point')}
       </CustomText>
       <View
         style={{
