@@ -85,3 +85,15 @@ export const postCancelWithdraw = async data => {
 
   return responsive.data;
 };
+export const postWithdrawToken = async data => {
+  const responsive = await instance.post('/token-data/withdraw', data);
+
+  return responsive.data;
+};
+export const getHistoryToken = async ({pageParam = 1}) => {
+  const responsive = await instance.get(
+    `/token-data/history?page=${pageParam}&limit=10`,
+  );
+
+  return responsive.data;
+};

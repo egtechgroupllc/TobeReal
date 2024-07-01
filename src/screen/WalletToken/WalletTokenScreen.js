@@ -102,10 +102,16 @@ export default function WalletTokenScreen() {
         <>
           <BoxWalletBlockChain data={data?.data} />
           <ListToken />
-          {/* <WalletManage data={data?.data} /> */}
+          <WalletManage data={data?.data} />
         </>
       )}
-      {/* <CustomButton text="Tra cuu lich su giao dich" /> */}
+      <CustomButton
+        onPress={() => navigate('NoBottomTab', {screen: 'HistoryTokenData'})}
+        text={t('look_up_transaction')}
+        iconRight={IconSearch}
+        styleIcon={{color: COLORS.white}}
+        styleWrapper={{maxWidth: '70%'}}
+      />
     </View>
   );
 }

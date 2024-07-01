@@ -47,7 +47,7 @@ export default function AddressWalletScreen() {
         name: `${t('wallet')} TobeChain`,
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
-        des: 'Kích hoạt để sử dụng ví Wallet ToBeChain',
+        des: t('active_to_use_wallet'),
         logo: images.logoTBH,
         isOpen: !!dataQ?.data?.TBH || false,
         currency: 'TBH',
@@ -89,7 +89,7 @@ export default function AddressWalletScreen() {
             key={index}
             onPress={() => {
               if (item?.isBeta) {
-                showMess('Coming soon', 'error');
+                showMess(t('comming_soon'), 'error');
 
                 return;
               }

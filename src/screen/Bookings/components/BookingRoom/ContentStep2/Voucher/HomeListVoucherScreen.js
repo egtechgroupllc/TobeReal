@@ -87,6 +87,7 @@ export default function HomeListVoucherScreen() {
             params?.accomId || params?.params?.item?.accommodation_id,
           ),
   });
+
   const [voucher, setVoucher] = useState([]);
 
   const arrIds = useMemo(
@@ -105,7 +106,6 @@ export default function HomeListVoucherScreen() {
       return [...prev, item];
     });
   };
-
   return (
     <>
       <MainWrapper
@@ -168,6 +168,7 @@ export default function HomeListVoucherScreen() {
       </MainWrapper>
       {tab === 1 && (
         <SelectVoucherFooter
+          countVoucherAvailable={data?.data?.count}
           count={voucher?.length}
           data={voucher}
           onGoBack={params?.onGoBack}

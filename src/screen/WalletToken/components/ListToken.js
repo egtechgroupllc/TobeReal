@@ -56,7 +56,7 @@ export default function ListToken() {
               borderRadius: scale(10),
               padding: scale(8),
             }}>
-            <CustomImage isAvatar source={images.logo1} size={scale(35)} />
+            <CustomImage isAvatar source={images.logoTBH} size={scale(30)} />
             <View
               style={{
                 rowGap: scale(3),
@@ -67,6 +67,7 @@ export default function ListToken() {
               <CustomText textType="medium">
                 {formatPrice(item?.value, {
                   showCurrency: false,
+                  decimalPlaces: 6,
                 })}
               </CustomText>
             </View>

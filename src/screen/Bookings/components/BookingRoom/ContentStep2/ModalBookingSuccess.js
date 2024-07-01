@@ -101,7 +101,7 @@ export default function ModalBookingSuccess({
                       alignSelf: 'center',
                       marginTop: scale(5),
                     }}>
-                    Congratulations on receiving TBC coin!
+                    {t('congratulate_on_receiving_coin')}
                   </CustomText>
                   <CustomText
                     style={{
@@ -111,8 +111,7 @@ export default function ModalBookingSuccess({
                       textAlign: 'center',
                       color: COLORS.textSub,
                     }}>
-                    You will automatic transfer {'\n'} into booking history
-                    screen in {'\n'} ... {countdown}s
+                    {t('you_will_automatic_transfer')} ... {countdown}s
                   </CustomText>
                 </>
               ) : (
@@ -125,8 +124,7 @@ export default function ModalBookingSuccess({
                       textAlign: 'center',
                       color: COLORS.textSub,
                     }}>
-                    Your transaction has been canceled due to {'\n'} an error
-                    during the booking process.{'\n'}Please try again!
+                    {t('your_transaction_has_been_canceled')}
                   </CustomText>
                 </>
               )}

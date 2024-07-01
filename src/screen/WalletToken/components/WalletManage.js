@@ -6,9 +6,12 @@ import {useQuery} from '@tanstack/react-query';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 import {formatPrice} from '../../../utils/format';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function WalletManage({data}) {
   const {t} = useLanguage();
+  const {navigate} = useNavigation();
+
   return (
     <View
       style={{
@@ -26,6 +29,12 @@ export default function WalletManage({data}) {
         }}>
         <TouchableOpacity
           activeOpacity={0.7}
+          onPress={() =>
+            navigate('NoBottomTab', {
+              screen: 'WithdrawTokenScreen',
+              params: data,
+            })
+          }
           style={{
             flexDirection: 'row',
             columnGap: scale(12),
@@ -35,13 +44,13 @@ export default function WalletManage({data}) {
             borderRadius: scale(10),
             padding: scale(8),
           }}>
-          <CustomImage isAvatar source={images.logo1} size={scale(35)} />
+          <CustomImage isAvatar source={images.logoTBH} size={scale(30)} />
           <View
             style={{
               rowGap: scale(3),
             }}>
             <CustomText size={SIZES.xMedium} textType="medium">
-              Số dư TBH (khả dụng có thể rút về ví):
+              {t('token_balance_available')}:
             </CustomText>
             <View
               style={{
@@ -51,10 +60,10 @@ export default function WalletManage({data}) {
               }}>
               <CustomText textType="medium">
                 {formatPrice(data?.balance_token_data, {
-                  currency: 'TBH',
-                  locales: 'vi',
-                  decimalPlaces: 20,
-                })}
+                  showCurrency: false,
+                  decimalPlaces: 6,
+                })}{' '}
+                TBH
               </CustomText>
               <CustomText>
                 <View
@@ -62,7 +71,7 @@ export default function WalletManage({data}) {
                     backgroundColor: COLORS.primary,
                     borderRadius: scale(10),
                     padding: scale(3),
-                    paddingHorizontal: scale(10),
+                    paddingHorizontal: scale(15),
                   }}>
                   <CustomText textType="medium" style={{color: COLORS.white}}>
                     {t('withdraw')}

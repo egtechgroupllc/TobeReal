@@ -25,7 +25,7 @@ export default function Traceability({data}) {
   };
   return (
     <WrapperContent
-      heading={t('Traceability')}
+      heading={t('traceability')}
       styleContent={{
         paddingHorizontal: scale(16),
         height: scale(100),
@@ -39,7 +39,7 @@ export default function Traceability({data}) {
             textDecorationLine: 'underline',
           }}>
           {/* https://tobescan.com/address/{data?.wallet_address} */}
-          Truy xuất nguồn gốc bất động sản
+          {t('property_traceability')}
         </CustomText>
       </TouchableOpacity>
     </WrapperContent>

@@ -63,7 +63,9 @@ export default function DetailPriceRoom({data, priceVoucher}) {
           valueSub={formatPrice(totalPrice, {
             currency: currency?.currency_code,
           })}
-          textDesc={`${t('So du con lai se duoc cong vao vi tien le la: ')} `}
+          textDesc={`${t(
+            'The remaining balance will be added to the e-wallet:',
+          )} `}
           valueDesc={`+${formatPrice(voucher_discount - totalPrice, {
             currency: currency?.currency_code,
           })}`}

@@ -1087,5 +1087,21 @@
   "this_rate_is_expensive": "This rate is more expensive than the listed price",
   "listed_price_room": "Listed price of this room",
   "price_after_policy": "Price after applying the policy",
-  "cancel_link_policy": "Cancel link policy"
+  "cancel_link_policy": "Cancel link policy",
+  "enter_amount_token": "Enter amount token",
+  "enter_amount_you_want_withdraw": "Enter amount you want to withdraw",
+  "look_up_transaction": "Look up transaction history",
+  "token_balance_available": "TBH balance (available to withdraw to wallet)",
+  "active_to_use_wallet": "Activate to use ToBeChain Wallet",
+  "active_3_types_wallet": "Activate 3 types of wallets: Saveloka, TobeChain and enjoy fast, secure payments",
+  "congratulate_on_receiving_coin": "Congratulations on receiving TBC coin!",
+  "you_will_automatic_transfer": "You will automatic transfer {'\n'} into booking history screen in {'\n'}",
+  "your_transaction_has_been_canceled": "Your transaction has been canceled due to {'\n'} an error during the booking process.{'\n'}Please try again!",
+  "traceability": "Traceability",
+  "property_traceability": "Property traceability",
+  "voucher": "Voucher",
+  "pay_with_voucher": "Pay with voucher",
+  "voucher_applied": "Voucher applied",
+  "you_have": "You have",
+  "available_voucher_left": "Available voucher left"
 }

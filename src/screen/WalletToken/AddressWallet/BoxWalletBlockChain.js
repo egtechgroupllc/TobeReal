@@ -77,9 +77,10 @@ export default function BoxWalletBlockChain({data}) {
                 color={COLORS.primary}
                 numberOfLines={1}>
                 {formatPrice(dataQ?.data?.TBH, {
-                  currency: 'TBH',
-                  locales: 'vi',
-                })}
+                  showCurrency: false,
+                  decimalPlaces: 6,
+                })}{' '}
+                TBH
               </CustomText>
               {`\n`}
               {t('balance_fee_gas')}:{' '}
@@ -88,9 +89,10 @@ export default function BoxWalletBlockChain({data}) {
                 color={COLORS.primary}
                 numberOfLines={1}>
                 {formatPrice(dataQ?.data?.TBC, {
-                  currency: 'TBC',
-                  locales: 'vi',
-                })}
+                  showCurrency: false,
+                  decimalPlaces: 6,
+                })}{' '}
+                TBC
               </CustomText>
             </CustomText>
             <MenuAddressWallet data={data} />

@@ -63,7 +63,7 @@ export default function WalletItem({item, onPress}) {
               <CustomButton
                 onPress={onPress}
                 buttonType="normal"
-                text={item.online ? 'Kích hoạt ngay' : 'Mở ngay'}
+                text={item.online ? t('active_now') : t('open_now')}
                 style={{
                   backgroundColor: COLORS.white,
                   height: scale(28),
@@ -81,19 +81,13 @@ export default function WalletItem({item, onPress}) {
             ...styles.box,
             ...styles.last,
           }}>
-          <CustomImage
-            source={images.logoSaveloka}
-            resizeMode="contain"
-            style={styles.img}
-          />
           <CustomText
             style={{
               color: COLORS.text,
               textAlign: 'center',
               width: '70%',
             }}>
-            Kích hoạt 3 loại ví Saveloka,TobeChain và để tẩn hưởng thanh toán an
-            toàn nhanh chóng
+            {t('active_3_types_wallet')}
           </CustomText>
         </View>
       )}

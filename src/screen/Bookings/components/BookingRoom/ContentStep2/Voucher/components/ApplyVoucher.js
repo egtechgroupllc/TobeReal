@@ -9,7 +9,6 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
-
   return (
     <View style={styles.voucherView}>
       <CustomText

@@ -51,6 +51,8 @@ import {
   ListAccommodationSearchScreen,
 } from '../screen/Search';
 import {ListVideoInfluencerScreen} from '../screen/Video';
+import WithdrawTokenScreen from '../screen/WalletToken/WithdrawTokenScreen';
+import HistoryTokenData from '../screen/WalletToken/components/HistoryTokenData';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
 
 // eslint-disable-next-line no-undef
@@ -284,5 +286,13 @@ export default routerNoBottomTab = [
   {
     name: 'BuyVoucherScreen',
     component: BuyVoucherScreen,
+  },
+  {
+    name: 'WithdrawTokenScreen',
+    component: WithdrawTokenScreen,
+  },
+  {
+    name: 'HistoryTokenData',
+    component: HistoryTokenData,
   },
 ];
