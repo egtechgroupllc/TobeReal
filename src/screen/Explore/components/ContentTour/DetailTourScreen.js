@@ -18,6 +18,7 @@ import Review from './DetailTour/Review';
 import TourSchedule from './DetailTour/TourSchedule';
 import BookAccommodation from '../BookAccommodation';
 import BookTour from './DetailTour/BookTour';
+import {showMess} from '../../../../assets/constants/Helper';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen() {
@@ -52,9 +53,14 @@ export default function DetailTourScreen() {
       <InfoDetail data={dataDetail} />,
       <DetailAccommoMap data={dataDetail} />,
       <Review dataP={dataDetail} />,
-      <View>
-        <ContactInfo data={dataDetail} onPress={() => console.log(1)} />
-      </View>,
+      // <View>
+      //   <ContactInfo
+      //     data={dataDetail}
+      //     onPress={() => {
+      //       showMess(t('comming_soon'), 'error');
+      //     }}
+      //   />
+      // </View>,
       <TourSchedule data={dataDetail} />,
 
       // <SimilarApartmentsNearby />,

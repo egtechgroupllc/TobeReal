@@ -89,7 +89,7 @@ export default memo(function VideoCaption({data}) {
           </CustomText>
         )}
 
-        <CustomButton
+        {/* <CustomButton
           text={t('check_it_out')}
           outline
           buttonType="medium"
@@ -103,7 +103,7 @@ export default memo(function VideoCaption({data}) {
           //     params: {jsondata: [] || [], title: '3123' || ''},
           //   });
           // }}
-        />
+        /> */}
       </View>
     </LinearGradient>
   );

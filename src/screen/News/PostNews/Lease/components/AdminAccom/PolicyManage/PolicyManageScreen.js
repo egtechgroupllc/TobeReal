@@ -7,7 +7,11 @@ import {
   postPolicyToRoom,
 } from '../../../../../../../Model/api/apiAccom';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
-import {IconHome, IconTrash} from '../../../../../../../assets/icon/Icon';
+import {
+  IconBookings,
+  IconHome,
+  IconTrash,
+} from '../../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
 import CustomText from '../../../../../../../components/CustomText';
@@ -137,6 +141,19 @@ export default function PolicyManageScreen() {
             //     columnGap: scale(10),
             //   }
             // }
+            ListEmptyComponent={
+              <View
+                style={{
+                  alignItems: 'center',
+                  rowGap: scale(10),
+                  padding: scale(10),
+                }}>
+                <IconBookings width={scale(50)} height={scale(50)} />
+                <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
+                  {t('no_data')}
+                </CustomText>
+              </View>
+            }
             contentContainerStyle={{
               marginTop: scale(10),
               borderRadius: 10,

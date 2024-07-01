@@ -35,7 +35,7 @@ export default function Content() {
           nameScreen="AddressWalletScreen"
           nameNavigate="NavigateWalletToken"
         />
-        <BoxItemProfile title={'Tài khoản và bảo mật'} />
+        {/* <BoxItemProfile title={'Tài khoản và bảo mật'} /> */}
       </Box>
 
       <Box title={'Tiện ích'}>
@@ -64,10 +64,10 @@ export default function Content() {
         />
       </Box>
 
-      <Box title={'Trợ giúp'}>
+      {/* <Box title={'Trợ giúp'}>
         <BoxItemProfile title={'Trung tâm trợ giúp'} />
         <BoxItemProfile title={'Thông tin chung'} />
-      </Box>
+      </Box> */}
     </View>
   );
 }

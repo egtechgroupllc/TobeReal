@@ -27,6 +27,7 @@ import Skeleton from '../../../../../components/Skeleton';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {showMess} from '../../../../../assets/constants/Helper';
 
 const listContact = [
   {
@@ -127,8 +128,9 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
 
           <CustomButton
             onPress={() => {
-              makeCallPhone('0824232339');
-              setOpenContact(true);
+              // makeCallPhone('0824232339');
+              // setOpenContact(true);
+              showMess(t('comming_soon'), 'error');
             }}
             buttonType="medium"
             style={{flex: 0.7}}
@@ -161,7 +163,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
           /> */}
         </View>
       </Skeleton>
-      <Modal
+      {/* <Modal
         isVisible={openContact}
         onSwipeComplete={() => {
           setOpenContact(false);
@@ -200,7 +202,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
             })}
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 });

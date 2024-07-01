@@ -14,7 +14,6 @@ export default function BookingActive() {
     queryKey: ['accommodation', 'room', 'my-booking'],
     queryFn: getListBookingAccomo,
   });
-
   return (
     <FlatList
       data={data?.data?.rows || (isLoading && [...Array(3)])}

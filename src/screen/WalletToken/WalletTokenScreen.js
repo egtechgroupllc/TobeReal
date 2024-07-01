@@ -6,13 +6,14 @@ import {getProfile} from '../../Model/api/common';
 import {postCreateWallet} from '../../Model/api/wallet';
 import {COLORS, images, scale} from '../../assets/constants';
 import {showMess} from '../../assets/constants/Helper';
-import {IconAdd} from '../../assets/icon/Icon';
+import {IconAdd, IconSearch} from '../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../components';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import BoxWalletBlockChain from './AddressWallet/BoxWalletBlockChain';
 import ListToken from './components/ListToken';
 import MenuImportAddressWallet from './components/MenuImportAddressWallet';
 import {useLanguage} from '../../hooks/useLanguage';
+import WalletManage from './components/WalletManage';
 
 export default function WalletTokenScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -101,8 +102,10 @@ export default function WalletTokenScreen() {
         <>
           <BoxWalletBlockChain data={data?.data} />
           <ListToken />
+          {/* <WalletManage data={data?.data} /> */}
         </>
       )}
+      {/* <CustomButton text="Tra cuu lich su giao dich" /> */}
     </View>
   );
 }
@@ -110,7 +113,7 @@ export default function WalletTokenScreen() {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    rowGap: scale(20),
+    rowGap: scale(10),
     padding: scale(20),
     paddingTop: scale(30),
   },

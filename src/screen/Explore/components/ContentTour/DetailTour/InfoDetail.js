@@ -31,7 +31,7 @@ export default function InfoDetail({data, name}) {
           <CustomText textType="medium" style={styles.text}>
             0 {t('review')}
           </CustomText>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <CustomImage
               source={images.iconTiktok}
               style={{width: scale(20), height: scale(20)}}
@@ -45,7 +45,7 @@ export default function InfoDetail({data, name}) {
           </TouchableOpacity>
           <CustomText textType="medium" style={styles.text1}>
             {t('watch_the_most')}
-          </CustomText>
+          </CustomText> */}
         </View>
       </View>
       <View style={styles.line} />

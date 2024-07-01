@@ -23,6 +23,8 @@ import {IconGoBack} from '../../assets/icon/Icon';
 import RangeSlider from './components/RangeSlider';
 import VideoPlay from './components/VideoPlay';
 import Comment from './Comment';
+import {showMess} from '../../assets/constants/Helper';
+import {useLanguage} from '../../hooks/useLanguage';
 
 const listVideo = [
   {
@@ -62,6 +64,8 @@ const listVideo = [
 // }
 
 export default function ListVideoInfluencerScreen() {
+  const {t} = useLanguage();
+
   const {goBack, setOptions} = useNavigation();
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
@@ -171,7 +175,8 @@ export default function ListVideoInfluencerScreen() {
             // onProgress={value => {
             //   handleProgress(value);
             // }}
-            onComment={() => commentRef.current?.open()}
+            // onComment={() => commentRef.current?.open()}
+            onComment={() => showMess(t('comming_soon'), 'error')}
           />
         )}
       />

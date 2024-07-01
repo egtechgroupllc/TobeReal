@@ -153,10 +153,10 @@ export default function AdminManageLeaseScreen() {
             {t('booking_count')}:
           </CustomText>
         </View>
-        <CustomButton
+        {/* <CustomButton
           text={t('review')}
           style={{width: '85%', height: scale(45)}}
-        />
+        /> */}
         <CustomButton
           text={t('voucher_manage')}
           style={{width: '85%', height: scale(45)}}

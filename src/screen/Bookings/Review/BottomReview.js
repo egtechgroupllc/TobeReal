@@ -48,6 +48,7 @@ export default function BottomReview({handleSubmit, roomID}) {
     value?.rating &&
       postReviewAccmoMu.mutate(formData, {
         onSuccess: dataInside => {
+          console.log(dataInside);
           showMess(
             dataInside?.message ? dataInside?.message : 'Success!',
             dataInside?.status ? 'success' : 'error',

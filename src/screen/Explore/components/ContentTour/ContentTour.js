@@ -208,7 +208,7 @@ export default memo(function ContentTour() {
       <PackageTour />
       {/* <ThemedTour data={dataThemed} /> */}
       <WorldTour data={dataWorld} />
-      <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange} />
+      {/* <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange} /> */}
     </View>
   );
 });

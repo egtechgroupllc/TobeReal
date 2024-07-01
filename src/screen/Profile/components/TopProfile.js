@@ -37,7 +37,7 @@ export default function TopProfile({name, data}) {
         </View>
       </View>
 
-      <View style={styles.bottom}>
+      {/* <View style={styles.bottom}>
         <TouchableOpacity
           activeOpacity={0.7}
           style={{
@@ -58,7 +58,7 @@ export default function TopProfile({name, data}) {
           }}>
           <CustomText textType="semiBold">{t('introduction')}</CustomText>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <BoxWalletBlockChain data={data} />
 

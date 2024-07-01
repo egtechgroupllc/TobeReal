@@ -85,7 +85,7 @@ export default function InfoDetail({data}) {
                 {t('discussion')} ({formatNumber(data?.review_count)})
               </CustomText>
             </View>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <CustomImage
                 source={images.iconTiktok}
                 style={{width: scale(20), height: scale(20)}}
@@ -96,7 +96,7 @@ export default function InfoDetail({data}) {
                 source={images.iconYoutube}
                 style={{width: scale(20), height: scale(20)}}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
         <TouchableOpacity
@@ -118,7 +118,6 @@ export default function InfoDetail({data}) {
         />
       )}
       <Introduction data={data} />
-      <Traceability data={data} />
     </View>
   );
 }

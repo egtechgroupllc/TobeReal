@@ -17,6 +17,7 @@ import Review from './components/DetailAccommodation/Detail/Review';
 import SimilarApartmentsNearby from './components/DetailAccommodation/Detail/SimilarApartmentsNearby';
 import TimeCheckInOut from './components/DetailAccommodation/Detail/TimeCheckInOut';
 import VideoYoutubeBox from './components/VideoYoutubeBox';
+import Traceability from './components/DetailAccommodation/Detail/Traceability';
 
 export default function DetailAccommodationScreen() {
   const params = useRoute().params;
@@ -25,6 +26,9 @@ export default function DetailAccommodationScreen() {
   const listNavBar = useRef([
     {
       text: t('overview'),
+    },
+    {
+      text: t('traceability'),
     },
     {
       text: t('facilities'),
@@ -55,6 +59,7 @@ export default function DetailAccommodationScreen() {
       ? []
       : [
           <InfoDetail data={dataDetail} />,
+          <Traceability data={dataDetail} />,
           <InfoUnitFacilities data={dataDetail} />,
           <View style={{rowGap: scale(8)}}>
             <DetailAccommoMap data={dataDetail} />

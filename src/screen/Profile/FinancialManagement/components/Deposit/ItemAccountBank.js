@@ -16,7 +16,7 @@ export default function ItemAccountBank({data, onPress, isSelect}) {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={1}
       onPress={onPress}
       style={[
         styles.box,

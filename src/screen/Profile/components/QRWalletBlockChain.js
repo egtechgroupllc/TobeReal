@@ -15,9 +15,7 @@ import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function QRWalletBlockChain({open, data, onClose}) {
   const {t} = useLanguage();
-  console.log('====================================');
-  console.log(data, 312321321);
-  console.log('====================================');
+
   const [secondEnd, setSecondEnd] = useState(false);
 
   if (!open) return null;
@@ -64,7 +62,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
               size={SIZES.xMedium}
               numberOfLines={1}
               textType="medium">
-              {data?.username || data?.name}
+              {data?.username || data?.name || data?.title}
             </CustomText>
 
             <CustomText

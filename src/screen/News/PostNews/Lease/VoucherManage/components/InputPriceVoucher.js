@@ -95,7 +95,8 @@ export default memo(function InputPriceVoucher({
               textType="semiBold"
               size={SIZES.xMedium}>
               {formatPrice(
-                priceValue * data?.data?.fee_commission_percent_voucher,
+                priceValue -
+                  priceValue * data?.data?.fee_commission_percent_voucher,
                 {
                   currency: 'TBH',
                   locales: 'vi',

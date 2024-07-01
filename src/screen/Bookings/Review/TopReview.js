@@ -8,7 +8,6 @@ import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function TopReview({data}) {
   const {t} = useLanguage();
-
   return (
     <View
       style={{

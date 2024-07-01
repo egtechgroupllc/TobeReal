@@ -100,195 +100,195 @@ export default memo(function MapHeader({
       style={{
         position: 'absolute',
         top: 0,
+        width: '100%',
         zIndex: 10,
+
         ...SHADOW,
       }}>
       {/* <HeaderBar /> */}
-      <View>
-        <FilterSort
-          text={t('filter')}
-          listFill={listFill}
-          noSelectDefault
-          onSort={() => {
-            bottomSheetRef.current.open();
-          }}
+      <FilterSort
+        text={t('filter')}
+        listFill={listFill}
+        noSelectDefault
+        onSort={() => {
+          bottomSheetRef.current.open();
+        }}
+      />
+
+      <BottomSheet
+        snapPoints={['50%', '80%']}
+        titleIndicator={t('filter&sort')}
+        ref={bottomSheetRef}
+        refChild={bottomSheetChildRef}
+        onChange={value => {
+          if (value > 0) {
+            openBottom && setOpenBottom(false);
+          }
+        }}
+        handleChildBottom={() => (
+          <BottomSheetChild
+            data={listProvince}
+            onChange={handleSelectProvince}
+          />
+        )}
+        ComponentFooter={
+          <View
+            style={{
+              borderTopWidth: scale(1),
+              borderColor: COLORS.grey,
+              backgroundColor: 'white',
+              height: scale(100),
+              flexDirection: 'row',
+              columnGap: scale(20),
+              paddingVertical: scale(20),
+              paddingHorizontal: scale(40),
+            }}>
+            <CustomButton
+              outline
+              buttonType="normal"
+              style={{flex: 0.5}}
+              text={t('Reset')}
+              styleText={{
+                fontSize: SIZES.xMedium,
+              }}
+              onPress={handleReset}
+            />
+            <CustomButton
+              // onPress={() => {
+              //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
+              // }}
+              // onPress={onPress}
+              buttonType="normal"
+              style={{
+                flex: 0.5,
+              }}
+              text={t('apply')}
+              onPress={handleSubmit(handelFiter)}
+              styleText={{
+                fontSize: SIZES.xMedium,
+              }}
+            />
+          </View>
+        }
+        styleContent={{
+          paddingHorizontal: scale(16),
+          rowGap: scale(5),
+        }}>
+        <CustomInput
+          placeholder={t('accommodation_name')}
+          name="name"
+          control={control}
         />
 
-        <BottomSheet
-          snapPoints={['50%', '80%']}
-          titleIndicator={t('filter&sort')}
-          ref={bottomSheetRef}
-          refChild={bottomSheetChildRef}
-          onChange={value => {
-            if (value > 0) {
-              openBottom && setOpenBottom(false);
-            }
-          }}
-          handleChildBottom={() => (
-            <BottomSheetChild
-              data={listProvince}
-              onChange={handleSelectProvince}
-            />
-          )}
-          ComponentFooter={
-            <View
-              style={{
-                borderTopWidth: scale(1),
-                borderColor: COLORS.grey,
-                backgroundColor: 'white',
-                height: scale(100),
-                flexDirection: 'row',
-                columnGap: scale(20),
-                paddingVertical: scale(20),
-                paddingHorizontal: scale(40),
-              }}>
-              <CustomButton
-                outline
-                buttonType="normal"
-                style={{flex: 0.5}}
-                text={t('Reset')}
-                styleText={{
-                  fontSize: SIZES.xMedium,
-                }}
-                onPress={handleReset}
-              />
-              <CustomButton
-                // onPress={() => {
-                //   token ? navigate('NavigationAuth') : navigate('BookingRoomScreen');
-                // }}
-                // onPress={onPress}
-                buttonType="normal"
-                style={{
-                  flex: 0.5,
-                }}
-                text={t('apply')}
-                onPress={handleSubmit(handelFiter)}
-                styleText={{
-                  fontSize: SIZES.xMedium,
-                }}
-              />
-            </View>
-          }
-          styleContent={{
-            paddingHorizontal: scale(16),
-            rowGap: scale(5),
+        <InViewport
+          delay={100}
+          onChange={setIsRender}
+          styleLoading={{
+            marginTop: '40%',
+            height: scale(120),
+            width: scale(120),
           }}>
-          <CustomInput
-            placeholder={t('accommodation_name')}
-            name="name"
-            control={control}
-          />
-
-          <InViewport
-            delay={100}
-            onChange={setIsRender}
-            styleLoading={{
-              marginTop: '40%',
-              height: scale(120),
-              width: scale(120),
-            }}>
-            {isRender && (
-              <>
-                {menu && (
-                  <>
-                    <Menubar
-                      value={watch('menu')?.id}
-                      onType={value => {
-                        setValue('menu', value);
-                        setIsRender(false);
-                      }}
-                    />
-
-                    {watch('menu')?.id === 'RENT' || !watch('menu') ? (
-                      <TypeAccommoda
-                        value={watch('type')}
-                        onType={value => {
-                          setValue('type', value?.id);
-                        }}
-                      />
-                    ) : watch('menu')?.id === 'BUY' ? (
-                      <>
-                        <TypeEstate
-                          value={watch('type')}
-                          onType={value => {
-                            setValue('type', value?.id);
-                          }}
-                        />
-                        <Acreage
-                          value={watch('acreage')}
-                          onAcreage={value => {
-                            setValue('acreage', value);
-                          }}
-                        />
-                      </>
-                    ) : (
-                      <View></View>
-                    )}
-                  </>
-                )}
-                {mapProvince && (
-                  <MapProvince
-                    value={watch('province')}
-                    onProvince={value => {
-                      setValue('province', value);
+          {isRender && (
+            <>
+              {menu && (
+                <>
+                  <Menubar
+                    value={watch('menu')?.id}
+                    onType={value => {
+                      setValue('menu', value);
+                      setIsRender(false);
                     }}
-                    // nameProvince={watch('province')}
-                    data={listProvince}
-                    onSearch={() => bottomSheetChildRef.current.openChild()}
                   />
-                )}
-                {/* <RatingReview /> */}
-                {accom && (
-                  <View
-                    style={{
-                      rowGap: scale(20),
-                    }}>
+
+                  {watch('menu')?.id === 'RENT' || !watch('menu') ? (
                     <TypeAccommoda
                       value={watch('type')}
                       onType={value => {
                         setValue('type', value?.id);
                       }}
                     />
-                    <StartAccom />
-
-                    <RatingReview />
-                  </View>
-                )}
-                {estate && (
-                  <>
-                    <TypeEstate
-                      value={watch('type')}
-                      onType={value => {
-                        setValue('type', value?.id);
-                      }}
-                    />
-                    <Acreage
-                      value={watch('acreage')}
-                      onAcreage={value => {
-                        setValue('acreage', value);
-                      }}
-                    />
-                  </>
-                )}
-                <Budget
-                  value={watch('budget')}
-                  onBudget={value => {
-                    setValue('budget', value);
+                  ) : watch('menu')?.id === 'BUY' ? (
+                    <>
+                      <TypeEstate
+                        value={watch('type')}
+                        onType={value => {
+                          setValue('type', value?.id);
+                        }}
+                      />
+                      <Acreage
+                        value={watch('acreage')}
+                        onAcreage={value => {
+                          setValue('acreage', value);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <View></View>
+                  )}
+                </>
+              )}
+              {mapProvince && (
+                <MapProvince
+                  value={watch('province')}
+                  onProvince={value => {
+                    setValue('province', value);
                   }}
+                  // nameProvince={watch('province')}
+                  data={listProvince}
+                  onSearch={() => bottomSheetChildRef.current.openChild()}
                 />
-                <SortBy
-                  value={watch('sortPrice')}
-                  onSort={value => {
-                    setValue('sortPrice', value);
-                  }}
-                />
-              </>
-            )}
-          </InViewport>
+              )}
+              {/* <RatingReview /> */}
+              {accom && (
+                <View
+                  style={{
+                    rowGap: scale(20),
+                  }}>
+                  <TypeAccommoda
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                  <StartAccom />
 
-          {/* <BedRoom /> */}
-        </BottomSheet>
-      </View>
+                  <RatingReview />
+                </View>
+              )}
+              {estate && (
+                <>
+                  <TypeEstate
+                    value={watch('type')}
+                    onType={value => {
+                      setValue('type', value?.id);
+                    }}
+                  />
+                  <Acreage
+                    value={watch('acreage')}
+                    onAcreage={value => {
+                      setValue('acreage', value);
+                    }}
+                  />
+                </>
+              )}
+              <Budget
+                value={watch('budget')}
+                onBudget={value => {
+                  setValue('budget', value);
+                }}
+              />
+              <SortBy
+                value={watch('sortPrice')}
+                onSort={value => {
+                  setValue('sortPrice', value);
+                }}
+              />
+            </>
+          )}
+        </InViewport>
+
+        {/* <BedRoom /> */}
+      </BottomSheet>
     </View>
   );
 });

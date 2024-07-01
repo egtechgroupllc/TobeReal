@@ -28,7 +28,7 @@ export default function DetailBrokerScreen() {
       <View style={styles.container}>
         <HeadContent data={params} />
         <Info data={params} />
-        <Contact />
+        {/* <Contact /> */}
       </View>
       <View style={styles.line} />
       <Posted dataPost={params} />

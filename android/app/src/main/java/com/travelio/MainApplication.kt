@@ -1,4 +1,4 @@
-package com.saveloka.shome
+package com.tobechain.saveloka
 
 import android.app.Application
 import com.facebook.react.PackageList

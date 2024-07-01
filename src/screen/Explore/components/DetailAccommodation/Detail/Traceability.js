@@ -23,7 +23,6 @@ export default function Traceability({data}) {
       `https://tobescan.com/address/${data.user.wallet_address}`,
     );
   };
-
   return (
     <WrapperContent
       heading={t('Traceability')}

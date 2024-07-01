@@ -76,9 +76,9 @@ export default function Header() {
             style={{borderRadius: scale(20), borderColor: COLORS.white}}
           />
         </View>
-        <TouchableOpacity onPress={goNotify}>
+        {/* <TouchableOpacity onPress={goNotify}>
           <IconNotification fill={COLORS.white} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       {/* 
       <View style={styles.content}>

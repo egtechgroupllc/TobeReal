@@ -58,7 +58,7 @@ export default memo(function ContentAccommodation({}) {
 
       {/* <RecommendedApartments /> */}
 
-      <BigCity />
+      {/* <BigCity /> */}
     </View>
   );
 });

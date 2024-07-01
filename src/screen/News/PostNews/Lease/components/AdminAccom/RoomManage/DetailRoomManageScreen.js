@@ -167,10 +167,10 @@ export default function DetailRoomManageScreen() {
             </View>
           </View>
         </CustomImage>
-        <CustomButton
+        {/* <CustomButton
           text={t('booking_count')}
           style={{width: '85%', height: scale(45)}}
-        />
+        /> */}
 
         <CustomButton
           text={t('edit')}

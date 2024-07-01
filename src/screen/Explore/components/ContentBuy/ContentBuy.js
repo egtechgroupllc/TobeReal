@@ -362,9 +362,9 @@ export default memo(function ContentBuy() {
       {dataNew?.length > 0 ? <BuySell data={dataNew} /> : <View />}
       {/* <Discount /> */}
       <FeatureEstate />
-      <TopEstateAgent data={dataAgent} />
+      {/* <TopEstateAgent data={dataAgent} /> */}
       <ExploreNearbyEstate country={country} />
-      <TopLocation data={dataLocation} />
+      {/* <TopLocation data={dataLocation} /> */}
 
       {/* <DiscoveryEstate data={tourData} onPressCategory={handleCategoryChange} /> */}
     </View>

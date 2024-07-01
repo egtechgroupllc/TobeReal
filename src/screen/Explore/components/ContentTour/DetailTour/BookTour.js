@@ -23,6 +23,7 @@ import {
   LogoZalo,
 } from '../../../../../assets/icon/Icon';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {showMess} from '../../../../../assets/constants/Helper';
 
 export default memo(function BookTour({data}) {
   const {t} = useLanguage();
@@ -66,7 +67,9 @@ export default memo(function BookTour({data}) {
       <CustomButton
         onPress={() => {
           // !token ? navigate('NavigationAuth') : navigate('RoomScreen', data);
-          !token ? navigate('NavigationAuth') : '';
+          !token
+            ? navigate('NavigationAuth')
+            : showMess(t('comming_soon'), 'error');
         }}
         buttonType="medium"
         style={{flex: 0.7}}

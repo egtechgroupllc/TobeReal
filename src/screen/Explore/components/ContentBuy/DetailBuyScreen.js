@@ -15,6 +15,8 @@ import ContactInfo from './DetailBuy/ContactInfo';
 import InfoDetail from './DetailBuy/InfoDetail';
 import DetailAccommoMap from '../DetailAccommodation/Detail/DetailAccommoMap';
 import SimilarApartmentsNearby from './DetailBuy/SimilarApartmentsNearby';
+import VideoYoutubeBox from '../VideoYoutubeBox';
+import Traceability from '../DetailAccommodation/Detail/Traceability';
 
 export default function DetailBuyScreen() {
   const params = useRoute().params;
@@ -23,6 +25,9 @@ export default function DetailBuyScreen() {
   const listNavBar = useRef([
     {
       text: t('overview'),
+    },
+    {
+      text: t('traceability'),
     },
     {
       text: t('description_content'),
@@ -45,6 +50,8 @@ export default function DetailBuyScreen() {
     const dataDetail = data?.data;
     return [
       <InfoDetail data={dataDetail} />,
+      <Traceability data={dataDetail} />,
+
       <Introduction data={dataDetail} />,
       <DetailAccommoMap data={dataDetail} />,
       <View>
@@ -70,6 +77,7 @@ export default function DetailBuyScreen() {
           />
         }
       />
+      {data?.data?.video_link && <VideoYoutubeBox data={data?.data} />}
     </MainWrapper>
   );
 }

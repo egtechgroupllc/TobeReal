@@ -19,6 +19,7 @@ import Button from '../../../../Profile/components/Button';
 import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListTicket} from '../../../../../Model/api/apiTour';
+import {showMess} from '../../../../../assets/constants/Helper';
 
 const data = [
   {
@@ -155,7 +156,8 @@ export default function TicketOption() {
               </View>
               <Button
                 title={t('select_ticket')}
-                onPress={() => booktour(item)}
+                // onPress={() => booktour(item)}
+                onPress={() => showMess(t('comming_soon'), 'error')}
               />
             </View>
           )}

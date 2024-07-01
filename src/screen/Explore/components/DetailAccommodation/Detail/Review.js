@@ -31,7 +31,6 @@ export default function Review({dataP}) {
     queryKey: ['accommodation', 'list-review', dataP.id],
     queryFn: () => getListReviewAccmo({id_accomo: dataP.id, limit: 6}),
   });
-
   return (
     <WrapperContent
       isSeeAll
