@@ -5,13 +5,16 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
+import {SIZES, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListTour} from '../../../../Model/api/apiTour';
 import {getListCountry} from '../../../../Model/api/common';
 import {useCountry} from '../../../../hooks/useCountry';
+import EmptyData from '../../../../components/EmptyData';
+import {IconBookings} from '../../../../assets/icon/Icon';
+import {CustomText} from '../../../../components';
 
 export default function WorldTour() {
   const [filter, setFilter] = useState();
@@ -40,36 +43,43 @@ export default function WorldTour() {
   const {navigate} = useNavigation();
   const title = [t('travel_around_world')];
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          background={images.bgPackageTour}
-          // isSeeAll
-          isCategory
-          dataCategory={listProvince.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllTourScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}
-          // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
+    <InViewPort>
+      <WrapperContent
+        // isSeeAll
+        isCategory
+        dataCategory={listProvince.data?.data?.slice(0, 9)}
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllTourScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => setFilter(item)}
+        heading={title}
+        // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        {data?.data?.count !== 0 ? (
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
+            ListEmptyComponent={<EmptyData />}
             data={data?.data?.rows}
             contentContainerStyle={styles.content}
             renderItem={({item}) => (
               <BoxPlaceItem isHeart isStar data={item} rental="night" />
             )}
           />
-        </WrapperContent>
-      )}
+        ) : (
+          <View style={{alignItems: 'center', rowGap: scale(10)}}>
+            <IconBookings width={scale(50)} height={scale(50)} />
+            <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
+              {t('no_data')}
+            </CustomText>
+          </View>
+        )}
+      </WrapperContent>
     </InViewPort>
   );
 }
@@ -79,5 +89,6 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
+    minWidth: '100%',
   },
 });

@@ -58,7 +58,7 @@ export default function ProfileScreen() {
           />
         </>
       )}
-      <Content />
+      <Content token={token} />
 
       <Bottom />
     </MainWrapper>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     alignItems: 'center',
     flexDirection: 'row',
-    top: scale(30),
+    top: scale(40),
     right: scale(10),
     backgroundColor: COLORS.white,
     minHeight: scale(40),

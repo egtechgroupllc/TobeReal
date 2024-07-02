@@ -16,7 +16,6 @@ export default function DetailHistoryDeposit({route}) {
   const {setOptions, navigate} = useNavigation();
   const {bottom} = useSafeAreaInsets();
   const data = route.params;
-
   useLayoutEffect(() => {
     setOptions({
       headerTitle: 'Transaction detail',

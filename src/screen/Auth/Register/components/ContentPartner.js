@@ -62,10 +62,7 @@ export default function ContentPartner() {
           control={control}
           maxLength={30}
           sizeInput="medium"
-          rules={[
-            validateUserName(t('12312')),
-            requireField(t('this_field_required')),
-          ]}
+          rules={[requireField(t('this_field_required'))]}
           name="username"
           placeholder={t('enter_username')}
         />

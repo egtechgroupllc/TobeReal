@@ -126,18 +126,18 @@ export default function QRWalletBlockChain({open, data, onClose}) {
           </View> */}
           <CustomText
             style={{
-              width: scale(260),
+              width: scale(280),
             }}>
-            <IconError size={scale(12)} fill={COLORS.primary} /> This deposit
-            address only accepts
+            <IconError size={scale(12)} fill={COLORS.primary} />{' '}
+            {t('this_deposit_address')}
             <CustomText textType="semiBold"> TBH.TBRC20 </CustomText>
-            don't deposit other coins into it.
+            {t('dont_deposit_other')}.
           </CustomText>
         </View>
 
         <CustomButton
           buttonType="normal"
-          text={'Đóng'}
+          text={t('close')}
           onPress={onClose}
           style={{minWidth: scale(100), marginTop: scale(10)}}
         />

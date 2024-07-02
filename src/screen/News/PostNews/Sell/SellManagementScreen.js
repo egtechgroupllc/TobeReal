@@ -33,7 +33,6 @@ export default function SellManagementScreen() {
     getMyListCreateSell.queyKey,
     getMyListCreateSell,
   );
-
   useEffect(
     () =>
       addListener('beforeRemove', e => {
@@ -43,7 +42,6 @@ export default function SellManagementScreen() {
     [],
   );
   const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4]);
-
   return (
     <MainWrapper
       scrollEnabled={false}

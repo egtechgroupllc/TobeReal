@@ -53,91 +53,86 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
         watch={watch}
         arrKeywords={arrKeywords}
       />
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}
-        delay={50}>
-        {isRender && (
-          <Collapsible collapsed={!viewFacilities} style={styles.box}>
-            <Accordion
-              containerStyle={styles.content}
-              activeSections={[showFacilitiesItem]}
-              sections={dataPropertyFacilities}
-              renderHeader={(item, index, isActive) => {
-                return (
-                  <CustomButton
-                    style={{
-                      ...styles.select,
-                      borderTopWidth: scale(index === 0 ? 0 : 1),
-                    }}
-                    text={t(item?.name)}
-                    iconRight={() => (
-                      <IconDown
-                        style={
-                          isActive && {
-                            transform: [
-                              {
-                                rotate: '180deg',
-                              },
-                            ],
-                          }
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!viewFacilities} style={styles.box}>
+          <Accordion
+            containerStyle={styles.content}
+            activeSections={[showFacilitiesItem]}
+            sections={dataPropertyFacilities}
+            renderHeader={(item, index, isActive) => {
+              return (
+                <CustomButton
+                  style={{
+                    ...styles.select,
+                    borderTopWidth: scale(index === 0 ? 0 : 1),
+                  }}
+                  text={t(item?.name)}
+                  iconRight={() => (
+                    <IconDown
+                      style={
+                        isActive && {
+                          transform: [
+                            {
+                              rotate: '180deg',
+                            },
+                          ],
                         }
-                      />
-                    )}
-                    onPress={() => setShowFacilitiesItem(isActive ? -1 : index)}
-                    styleText={{
-                      color: COLORS.text,
-                      textType: 'medium',
-                    }}
-                  />
-                );
-              }}
-              renderSectionTitle={(item, index) => {
-                return (
-                  index === 0 && (
-                    <CustomText
-                      style={{
-                        padding: scale(12),
-                      }}>
-                      {t('guest_use_at')}
-                    </CustomText>
-                  )
-                );
-              }}
-              renderContent={(itemCont, indexCont, isActive) => {
-                return (
-                  <FlatList
-                    key={indexCont}
-                    data={Object.keys(itemCont?.include)}
+                      }
+                    />
+                  )}
+                  onPress={() => setShowFacilitiesItem(isActive ? -1 : index)}
+                  styleText={{
+                    color: COLORS.text,
+                    textType: 'medium',
+                  }}
+                />
+              );
+            }}
+            renderSectionTitle={(item, index) => {
+              return (
+                index === 0 && (
+                  <CustomText
                     style={{
-                      maxHeight: scale(450),
-                    }}
-                    contentContainerStyle={{
-                      paddingVertical: scale(10),
-                    }}
-                    renderItem={({item, index}) =>
-                      isActive && (
-                        <CheckBox
-                          key={index}
-                          text={t(item)}
-                          textLeft
-                          isChecked={arrFacilities.includes(item)}
-                          onPress={evt => {
-                            facilitiesCheckBox(item);
-                          }}
-                          style={styles.checkBox}
-                          textStyle={{
-                            flex: 1,
-                          }}
-                        />
-                      )
-                    }
-                  />
-                );
-              }}
-            />
-          </Collapsible>
-        )}
+                      padding: scale(12),
+                    }}>
+                    {t('guest_use_at')}
+                  </CustomText>
+                )
+              );
+            }}
+            renderContent={(itemCont, indexCont, isActive) => {
+              return (
+                <FlatList
+                  key={indexCont}
+                  data={Object.keys(itemCont?.include)}
+                  style={{
+                    maxHeight: scale(450),
+                  }}
+                  contentContainerStyle={{
+                    paddingVertical: scale(10),
+                  }}
+                  renderItem={({item, index}) =>
+                    isActive && (
+                      <CheckBox
+                        key={index}
+                        text={t(item)}
+                        textLeft
+                        isChecked={arrFacilities.includes(item)}
+                        onPress={evt => {
+                          facilitiesCheckBox(item);
+                        }}
+                        style={styles.checkBox}
+                        textStyle={{
+                          flex: 1,
+                        }}
+                      />
+                    )
+                  }
+                />
+              );
+            }}
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

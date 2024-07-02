@@ -46,7 +46,7 @@ export default function AddVoucherScreen() {
     return setOptions({
       headerTitle: t('add_voucher'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -82,7 +82,6 @@ export default function AddVoucherScreen() {
   };
 
   const handlePostVoucher = value => {
-    console.log(value, 312312312);
     // const policy = value?.policy;
 
     // if (!value?.policy || policy.length <= 0) {

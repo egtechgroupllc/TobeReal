@@ -32,28 +32,26 @@ export default function VideoInfluencerApproved() {
   const [isRender, setIsRender] = useState(false);
 
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={190}>
-      {isRender && (
-        <WrapperContent heading="Influencer Approved Units ✨">
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item, index}) => (
-              <VideoCompact
-                onPlay={() =>
-                  navigate('NoBottomTab', {
-                    screen: 'ListVideoInfluencerScreen',
-                    params: {index},
-                  })
-                }
-                source={item?.src}
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent heading="Influencer Approved Units ✨">
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.content}
+          renderItem={({item, index}) => (
+            <VideoCompact
+              onPlay={() =>
+                navigate('NoBottomTab', {
+                  screen: 'ListVideoInfluencerScreen',
+                  params: {index},
+                })
+              }
+              source={item?.src}
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

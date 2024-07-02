@@ -19,6 +19,7 @@ import {
 } from '@tanstack/react-query';
 import LottieView from 'lottie-react-native';
 import {formatDateTime, formatPrice} from '../../../utils/format';
+import EmptyData from '../../../components/EmptyData';
 
 export default function HistoryTokenData() {
   const {setOptions} = useNavigation();
@@ -77,6 +78,11 @@ export default function HistoryTokenData() {
             onRefresh={pullToRefresh}
             tintColor={COLORS.primary}
           />
+        }
+        ListEmptyComponent={
+          <View style={{marginTop: scale(100)}}>
+            <EmptyData />
+          </View>
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

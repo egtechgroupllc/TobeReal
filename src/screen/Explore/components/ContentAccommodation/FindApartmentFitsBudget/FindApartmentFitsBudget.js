@@ -60,7 +60,7 @@ export default function FindApartmentFitsBudget() {
   const [isRender, setIsRender] = useState(false);
 
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={210}>
+    <InViewPort>
       {isRender && (
         <WrapperContent
           heading={t('find_appartment')}

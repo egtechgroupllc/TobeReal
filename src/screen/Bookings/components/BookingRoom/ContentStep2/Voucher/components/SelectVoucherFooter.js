@@ -46,7 +46,7 @@ export default function SelectVoucherFooter({
               fontSize: SIZES.xMedium,
               color: COLORS.primary,
             }}>
-            {count} {t('voucher')}
+            {count} {t('voucher').toLowerCase()}
           </CustomText>
         </View>
       )}

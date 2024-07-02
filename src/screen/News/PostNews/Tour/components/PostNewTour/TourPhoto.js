@@ -87,46 +87,38 @@ export default function TourPhoto({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <RulesPostImg />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <RulesPostImg />
+          <ChooseImgPicker
+            title={t('tour_image')}
+            subHeading={t('update_image_to_maximum')}
+            control={control}
+            rules={
+              !imgDes && [
+                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+              ]
+            }
+            name={'description_img'}
+          />
+
+          {imgDes && (
             <ChooseImgPicker
-              title={t('tour_image')}
-              subHeading={t('update_image_to_maximum')}
+              defaultValue={imgDes}
+              isAddWhenEmpty={true}
+              isAddMore={false}
+              name={'image_update_description'}
               control={control}
-              rules={
-                !imgDes && [
-                  validateMinLength(
-                    t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'),
-                    4,
-                  ),
-                ]
-              }
-              name={'description_img'}
+              onDelete={id => {
+                setValue(
+                  'image_delete',
+                  watch('image_delete') ? [id, ...watch('image_delete')] : [id],
+                );
+              }}
             />
+          )}
 
-            {imgDes && (
-              <ChooseImgPicker
-                defaultValue={imgDes}
-                isAddWhenEmpty={true}
-                isAddMore={false}
-                name={'image_update_description'}
-                control={control}
-                onDelete={id => {
-                  setValue(
-                    'image_delete',
-                    watch('image_delete')
-                      ? [id, ...watch('image_delete')]
-                      : [id],
-                  );
-                }}
-              />
-            )}
-
-            {/* {isKyc && (
+          {/* {isKyc && (
               <>
                 <ChooseImgPicker
                   title={t(
@@ -158,7 +150,7 @@ export default function TourPhoto({
                 )}
               </>
             )} */}
-            {/* <CustomInput
+          {/* <CustomInput
               label={t('Link youtube')}
               placeholder={t('Link youtube')}
               style={{...styles.textInput}}
@@ -169,8 +161,7 @@ export default function TourPhoto({
               placeholder={t('Link tiktok')}
               style={{...styles.textInput}}
             /> */}
-          </Collapsible>
-        )}
+        </Collapsible>
       </InViewPort>
     </View>
   );

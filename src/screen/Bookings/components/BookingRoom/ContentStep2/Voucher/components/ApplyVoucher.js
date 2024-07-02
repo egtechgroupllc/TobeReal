@@ -18,7 +18,7 @@ export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
           textAlign: 'left',
           fontSize: SIZES.xMedium,
         }}>
-        {t('apply_gift_voucher')}
+        {t('apply_voucher')}
       </CustomText>
       <View
         style={{
@@ -86,7 +86,7 @@ export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
             style={{
               textAlign: 'left',
             }}>
-            {t('you_have')} 0 {t('available_voucher_left')}
+            {t('you_have')} 0 {t('available_voucher_left').toLowerCase()}
           </CustomText>
         </View>
       </View>

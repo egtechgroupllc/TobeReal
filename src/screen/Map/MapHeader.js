@@ -181,110 +181,106 @@ export default memo(function MapHeader({
         />
 
         <InViewport
-          delay={100}
-          onChange={setIsRender}
           styleLoading={{
             marginTop: '40%',
             height: scale(120),
             width: scale(120),
           }}>
-          {isRender && (
-            <>
-              {menu && (
-                <>
-                  <Menubar
-                    value={watch('menu')?.id}
-                    onType={value => {
-                      setValue('menu', value);
-                      setIsRender(false);
-                    }}
-                  />
-
-                  {watch('menu')?.id === 'RENT' || !watch('menu') ? (
-                    <TypeAccommoda
-                      value={watch('type')}
-                      onType={value => {
-                        setValue('type', value?.id);
-                      }}
-                    />
-                  ) : watch('menu')?.id === 'BUY' ? (
-                    <>
-                      <TypeEstate
-                        value={watch('type')}
-                        onType={value => {
-                          setValue('type', value?.id);
-                        }}
-                      />
-                      <Acreage
-                        value={watch('acreage')}
-                        onAcreage={value => {
-                          setValue('acreage', value);
-                        }}
-                      />
-                    </>
-                  ) : (
-                    <View></View>
-                  )}
-                </>
-              )}
-              {mapProvince && (
-                <MapProvince
-                  value={watch('province')}
-                  onProvince={value => {
-                    setValue('province', value);
+          <>
+            {menu && (
+              <>
+                <Menubar
+                  value={watch('menu')?.id}
+                  onType={value => {
+                    setValue('menu', value);
+                    setIsRender(false);
                   }}
-                  // nameProvince={watch('province')}
-                  data={listProvince}
-                  onSearch={() => bottomSheetChildRef.current.openChild()}
                 />
-              )}
-              {/* <RatingReview /> */}
-              {accom && (
-                <View
-                  style={{
-                    rowGap: scale(20),
-                  }}>
+
+                {watch('menu')?.id === 'RENT' || !watch('menu') ? (
                   <TypeAccommoda
                     value={watch('type')}
                     onType={value => {
                       setValue('type', value?.id);
                     }}
                   />
-                  <StartAccom />
+                ) : watch('menu')?.id === 'BUY' ? (
+                  <>
+                    <TypeEstate
+                      value={watch('type')}
+                      onType={value => {
+                        setValue('type', value?.id);
+                      }}
+                    />
+                    <Acreage
+                      value={watch('acreage')}
+                      onAcreage={value => {
+                        setValue('acreage', value);
+                      }}
+                    />
+                  </>
+                ) : (
+                  <View></View>
+                )}
+              </>
+            )}
+            {mapProvince && (
+              <MapProvince
+                value={watch('province')}
+                onProvince={value => {
+                  setValue('province', value);
+                }}
+                // nameProvince={watch('province')}
+                data={listProvince}
+                onSearch={() => bottomSheetChildRef.current.openChild()}
+              />
+            )}
+            {/* <RatingReview /> */}
+            {accom && (
+              <View
+                style={{
+                  rowGap: scale(20),
+                }}>
+                <TypeAccommoda
+                  value={watch('type')}
+                  onType={value => {
+                    setValue('type', value?.id);
+                  }}
+                />
+                <StartAccom />
 
-                  <RatingReview />
-                </View>
-              )}
-              {estate && (
-                <>
-                  <TypeEstate
-                    value={watch('type')}
-                    onType={value => {
-                      setValue('type', value?.id);
-                    }}
-                  />
-                  <Acreage
-                    value={watch('acreage')}
-                    onAcreage={value => {
-                      setValue('acreage', value);
-                    }}
-                  />
-                </>
-              )}
-              <Budget
-                value={watch('budget')}
-                onBudget={value => {
-                  setValue('budget', value);
-                }}
-              />
-              <SortBy
-                value={watch('sortPrice')}
-                onSort={value => {
-                  setValue('sortPrice', value);
-                }}
-              />
-            </>
-          )}
+                <RatingReview />
+              </View>
+            )}
+            {estate && (
+              <>
+                <TypeEstate
+                  value={watch('type')}
+                  onType={value => {
+                    setValue('type', value?.id);
+                  }}
+                />
+                <Acreage
+                  value={watch('acreage')}
+                  onAcreage={value => {
+                    setValue('acreage', value);
+                  }}
+                />
+              </>
+            )}
+            <Budget
+              value={watch('budget')}
+              onBudget={value => {
+                setValue('budget', value);
+              }}
+            />
+            <SortBy
+              value={watch('sortPrice')}
+              onSort={value => {
+                setValue('sortPrice', value);
+              }}
+            />
+          </>
         </InViewport>
 
         {/* <BedRoom /> */}

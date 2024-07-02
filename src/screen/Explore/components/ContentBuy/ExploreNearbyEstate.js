@@ -13,6 +13,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
 import {IconBookings} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
@@ -26,11 +27,12 @@ export default function ExploreNearbyEstate({country}) {
       'list-post',
       {
         estate_type_id: 1,
-        country_id: 241,
+        country_id: country?.id,
         province_id: filter?.id,
       },
     ],
-    queryFn: () => getListSell({country_id: 241, province_id: filter?.id}),
+    queryFn: () =>
+      getListSell({country_id: country?.id, province_id: filter?.id}),
   });
   const listProvince = useQuery({
     queryKey: ['common', 'list-country', country?.geoname_id],
@@ -39,6 +41,7 @@ export default function ExploreNearbyEstate({country}) {
   useEffect(() => {
     setFilter(listProvince.data?.data?.[0]);
   }, [listProvince?.data?.data]);
+  console.log(data, 3123123);
   return (
     <InViewPort>
       <WrapperContent

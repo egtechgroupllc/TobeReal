@@ -14,9 +14,11 @@ import DocumentPicker from 'react-native-document-picker';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postImportWallet} from '../../../Model/api/wallet';
 import {showMess} from '../../../assets/constants/Helper';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ImportAddressWalletBtn() {
   const bottomSheetRef = useRef();
+  const {t} = useLanguage();
 
   const {navigate} = useNavigation();
   const queryClient = useQueryClient();
@@ -88,8 +90,8 @@ export default function ImportAddressWalletBtn() {
       }}>
       <CustomButton
         onPress={() => bottomSheetRef.current.open()}
-        text="Thêm ví hiện có"
-        desc="Import an existing wallet"
+        text={t('add_existing_wallet')}
+        desc={t('import_existing_wallet')}
         buttonType="large"
         isIconComponent
         iconLeft={
@@ -101,7 +103,7 @@ export default function ImportAddressWalletBtn() {
 
       <BottomSheet
         ref={bottomSheetRef}
-        titleIndicator={'Import an existing wallet'}
+        titleIndicator={t('import_existing_wallet')}
         snapPoints={['30%']}
         styleContent={{
           paddingHorizontal: scale(16),
@@ -109,8 +111,8 @@ export default function ImportAddressWalletBtn() {
         }}>
         <CustomButton
           onPress={() => handleImport('PASSPHRASE')}
-          text="Cụm từ bí mật"
-          desc="Sử dụng cụm từ ghi nhớ 12 từ"
+          text={t('pass_phrase')}
+          desc={t('use_word_mnemonic')}
           buttonType="large"
           isIconComponent
           iconLeft={
@@ -123,7 +125,7 @@ export default function ImportAddressWalletBtn() {
         <CustomButton
           onPress={() => handleImport('PRIVATE_KEY')}
           text="Private key"
-          desc="Sử dụng cụm từ Private key đã lưu"
+          desc={t('use_saved_private_key')}
           buttonType="large"
           isIconComponent
           iconLeft={
@@ -136,8 +138,8 @@ export default function ImportAddressWalletBtn() {
         {!!checkImportFile && (
           <CustomButton
             onPress={handleImportWallet}
-            text="File đã sao lưu"
-            desc="Sử dụng File đã sao lưu"
+            text={t('backup_file')}
+            desc={t('use_backup_file')}
             buttonType="large"
             isIconComponent
             iconLeft={

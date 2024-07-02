@@ -70,7 +70,6 @@ export default function DetailAccommodationScreen() {
           <SimilarApartmentsNearby />,
         ];
   }, [data?.data]);
-
   // console.log(params, '2131232adad13');
   return (
     <MainWrapper scrollEnabled={false} noImgColor>
@@ -86,7 +85,7 @@ export default function DetailAccommodationScreen() {
           />
         }
       />
-      {data?.data?.video_link && <VideoYoutubeBox data={data?.data} />}
+      {!!data?.data?.video_link && <VideoYoutubeBox data={data?.data} />}
     </MainWrapper>
   );
 }

@@ -58,163 +58,159 @@ export default function wwRoomItem({
   const [viewMore, setViewMore] = useState(false);
 
   return (
-    <InViewport
-      onChange={render => render && setIsRender(render)}
-      ComponentLoading={<ItemAccommdSearchLoading />}>
-      {isRender && (
-        <View style={styles.wrapper}>
-          <Carousel
-            loop
-            autoplay
-            autoplayInterval={3000}
-            layout={'tinder'}
-            layoutCardOffset={9}
-            data={dataP.images}
-            sliderWidth={WIDTH.widthScreen - scale(30)}
-            itemWidth={WIDTH.widthScreen - scale(30)}
-            containerCustomStyle={{
-              paddingBottom: scale(5),
-              height: scale(155),
-            }}
-            renderItem={({item}) => {
-              return <CustomImage source={item.url} style={styles.img} />;
-            }}
-          />
+    <InViewport ComponentLoading={<ItemAccommdSearchLoading />}>
+      <View style={styles.wrapper}>
+        <Carousel
+          loop
+          autoplay
+          autoplayInterval={3000}
+          layout={'tinder'}
+          layoutCardOffset={9}
+          data={dataP.images}
+          sliderWidth={WIDTH.widthScreen - scale(30)}
+          itemWidth={WIDTH.widthScreen - scale(30)}
+          containerCustomStyle={{
+            paddingBottom: scale(5),
+            height: scale(155),
+          }}
+          renderItem={({item}) => {
+            return <CustomImage source={item.url} style={styles.img} />;
+          }}
+        />
 
+        <View
+          style={{
+            alignSelf: 'flex-start',
+            rowGap: scale(4),
+          }}>
+          <CustomText
+            textType="bold"
+            style={{
+              fontSize: SIZES.xMedium,
+            }}>
+            {dataP?.room_type?.name}
+          </CustomText>
           <View
             style={{
-              alignSelf: 'flex-start',
-              rowGap: scale(4),
+              ...styles.row,
+              columnGap: scale(5),
             }}>
-            <CustomText
-              textType="bold"
+            <IconAcreage
               style={{
-                fontSize: SIZES.xMedium,
-              }}>
-              {dataP?.room_type?.name}
-            </CustomText>
-            <View
-              style={{
-                ...styles.row,
-                columnGap: scale(5),
-              }}>
-              <IconAcreage
-                style={{
-                  width: scale(20),
-                  height: scale(20),
-                }}
-              />
-              <CustomText>
-                {formatPrice(dataP.size_width * dataP.size_length, {
-                  unit: 'm²',
-                })}
-              </CustomText>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-            }}>
-            {dataP.accommodation_policies
-              .slice(0, viewMore ? Infinity : 2)
-              .map((item, index) => {
-                return (
-                  <TouchableNativeFeedback
-                    key={index}
-                    onPress={() => {
-                      onDetail({
-                        priceAverage,
-                        percentDiscount: item?.price_percent,
-                      });
-                    }}>
-                    <View style={styles.content}>
-                      <View
-                        style={{
-                          ...styles.row,
-                          ...styles.header,
-                        }}>
-                        <CustomText
-                          textType="bold"
-                          style={{color: COLORS.black, flex: 1}}
-                          numberOfLines={1}>
-                          {dataP?.name}
-                        </CustomText>
-                        <IconNext
-                          style={{
-                            width: scale(14),
-                            height: scale(14),
-                          }}
-                          fill={COLORS.black}
-                        />
-                      </View>
-
-                      <View
-                        style={{
-                          padding: scale(8),
-                          rowGap: scale(7),
-                        }}>
-                        <RoomUntil
-                          data={{...dataP, item}}
-                          price={priceAverage * numRoom}
-                          isFilterChildren={isFilterChildren}
-                        />
-                        <SelectRoom
-                          onPress={value =>
-                            onBooking({
-                              numRoomSelect: value,
-                              id: dataP?.id,
-                              priceAverage,
-                              percentDiscount: item?.price_percent,
-                            })
-                          }
-                          data={dataP}
-                          onSelect={setNumRoom}
-                        />
-                      </View>
-                    </View>
-                  </TouchableNativeFeedback>
-                );
+                width: scale(20),
+                height: scale(20),
+              }}
+            />
+            <CustomText>
+              {formatPrice(dataP.size_width * dataP.size_length, {
+                unit: 'm²',
               })}
-            {dataP?.accommodation_policies?.length > 2 && (
-              <TouchableOpacity
-                onPress={() => setViewMore(prev => !prev)}
-                activeOpacity={0.7}
-                style={{
-                  marginTop: scale(10),
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  columnGap: scale(10),
-                }}>
-                <CustomText
-                  textType="semiBold"
-                  style={{
-                    color: COLORS.primary,
-                    fontSize: SIZES.medium,
-                  }}>
-                  {!viewMore
-                    ? `${t('show_more')} ${
-                        dataP?.accommodation_policies?.length - 2
-                      } ${t('room')}`
-                    : t('show_less')}
-                </CustomText>
-                <IconDown
-                  fill={COLORS.primary}
-                  style={
-                    viewMore && {
-                      transform: [
-                        {
-                          rotate: '180deg',
-                        },
-                      ],
-                    }
-                  }
-                />
-              </TouchableOpacity>
-            )}
+            </CustomText>
           </View>
         </View>
-      )}
+        <View
+          style={{
+            width: '100%',
+          }}>
+          {dataP.accommodation_policies
+            .slice(0, viewMore ? Infinity : 2)
+            .map((item, index) => {
+              return (
+                <TouchableNativeFeedback
+                  key={index}
+                  onPress={() => {
+                    onDetail({
+                      priceAverage,
+                      percentDiscount: item?.price_percent,
+                    });
+                  }}>
+                  <View style={styles.content}>
+                    <View
+                      style={{
+                        ...styles.row,
+                        ...styles.header,
+                      }}>
+                      <CustomText
+                        textType="bold"
+                        style={{color: COLORS.black, flex: 1}}
+                        numberOfLines={1}>
+                        {dataP?.name}
+                      </CustomText>
+                      <IconNext
+                        style={{
+                          width: scale(14),
+                          height: scale(14),
+                        }}
+                        fill={COLORS.black}
+                      />
+                    </View>
+
+                    <View
+                      style={{
+                        padding: scale(8),
+                        rowGap: scale(7),
+                      }}>
+                      <RoomUntil
+                        data={{...dataP, item}}
+                        price={priceAverage * numRoom}
+                        isFilterChildren={isFilterChildren}
+                      />
+                      <SelectRoom
+                        onPress={value =>
+                          onBooking({
+                            numRoomSelect: value,
+                            id: dataP?.id,
+                            priceAverage,
+                            percentDiscount: item?.price_percent,
+                          })
+                        }
+                        data={dataP}
+                        onSelect={setNumRoom}
+                      />
+                    </View>
+                  </View>
+                </TouchableNativeFeedback>
+              );
+            })}
+          {dataP?.accommodation_policies?.length > 2 && (
+            <TouchableOpacity
+              onPress={() => setViewMore(prev => !prev)}
+              activeOpacity={0.7}
+              style={{
+                marginTop: scale(10),
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                columnGap: scale(10),
+              }}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  color: COLORS.primary,
+                  fontSize: SIZES.medium,
+                }}>
+                {!viewMore
+                  ? `${t('show_more')} ${
+                      dataP?.accommodation_policies?.length - 2
+                    } ${t('room')}`
+                  : t('show_less')}
+              </CustomText>
+              <IconDown
+                fill={COLORS.primary}
+                style={
+                  viewMore && {
+                    transform: [
+                      {
+                        rotate: '180deg',
+                      },
+                    ],
+                  }
+                }
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
     </InViewport>
   );
 }

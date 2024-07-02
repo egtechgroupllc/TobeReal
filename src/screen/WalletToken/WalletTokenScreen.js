@@ -87,7 +87,7 @@ export default function WalletTokenScreen() {
             onPress={createWallet}
             text={t('create_new_wallet')}
             buttonType="large"
-            desc="New wallet and recovery passphrase"
+            desc={t('new_wallet_recovery_phrase')}
             isIconComponent
             iconLeft={
               <View style={styles.boxIcon}>
@@ -104,15 +104,17 @@ export default function WalletTokenScreen() {
           <BoxWalletBlockChain data={data?.data} />
           <ListToken />
           <WalletManage data={data?.data} />
+          <CustomButton
+            onPress={() =>
+              navigate('NoBottomTab', {screen: 'HistoryTokenData'})
+            }
+            text={t('look_up_transaction')}
+            iconRight={IconSearch}
+            styleIcon={{color: COLORS.white}}
+            styleWrapper={{maxWidth: '70%'}}
+          />
         </>
       )}
-      <CustomButton
-        onPress={() => navigate('NoBottomTab', {screen: 'HistoryTokenData'})}
-        text={t('look_up_transaction')}
-        iconRight={IconSearch}
-        styleIcon={{color: COLORS.white}}
-        styleWrapper={{maxWidth: '70%'}}
-      />
     </View>
   );
 }

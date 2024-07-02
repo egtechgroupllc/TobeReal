@@ -88,77 +88,69 @@ export default function EstatePhoto({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <RulesPostImg />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <RulesPostImg />
 
+          <ChooseImgPicker
+            title={t('real_estate_images')}
+            subHeading={t('update_image_to_maximum')}
+            control={control}
+            rules={
+              !imgDes && [
+                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+              ]
+            }
+            name={'description_img'}
+          />
+
+          {imgDes && (
             <ChooseImgPicker
-              title={t('real_estate_images')}
-              subHeading={t('update_image_to_maximum')}
+              defaultValue={imgDes}
+              isAddWhenEmpty={true}
+              isAddMore={false}
+              name={'image_update_description'}
               control={control}
-              rules={
-                !imgDes && [
-                  validateMinLength(
-                    t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'),
-                    4,
-                  ),
-                ]
-              }
-              name={'description_img'}
+              onDelete={id => {
+                setValue(
+                  'image_delete',
+                  watch('image_delete') ? [id, ...watch('image_delete')] : [id],
+                );
+              }}
             />
+          )}
 
-            {imgDes && (
+          {isKyc && (
+            <>
               <ChooseImgPicker
-                defaultValue={imgDes}
-                isAddWhenEmpty={true}
-                isAddMore={false}
-                name={'image_update_description'}
+                title={t('add_image_to_prove')}
                 control={control}
-                onDelete={id => {
-                  setValue(
-                    'image_delete',
-                    watch('image_delete')
-                      ? [id, ...watch('image_delete')]
-                      : [id],
-                  );
-                }}
+                rules={
+                  !imgKyc && [validateMinLength(t('this_field_required'), 1)]
+                }
+                name={'kyc'}
               />
-            )}
 
-            {isKyc && (
-              <>
+              {imgKyc && (
                 <ChooseImgPicker
-                  title={t('add_image_to_prove')}
+                  defaultValue={imgKyc}
+                  isAddWhenEmpty={true}
+                  isAddMore={false}
+                  name={'image_update_description_kyc'}
                   control={control}
-                  rules={
-                    !imgKyc && [validateMinLength(t('this_field_required'), 1)]
-                  }
-                  name={'kyc'}
+                  onDelete={id => {
+                    setValue(
+                      'image_delete',
+                      watch('image_delete')
+                        ? [id, ...watch('image_delete')]
+                        : [id],
+                    );
+                  }}
                 />
-
-                {imgKyc && (
-                  <ChooseImgPicker
-                    defaultValue={imgKyc}
-                    isAddWhenEmpty={true}
-                    isAddMore={false}
-                    name={'image_update_description_kyc'}
-                    control={control}
-                    onDelete={id => {
-                      setValue(
-                        'image_delete',
-                        watch('image_delete')
-                          ? [id, ...watch('image_delete')]
-                          : [id],
-                      );
-                    }}
-                  />
-                )}
-              </>
-            )}
-            {/* <CustomInput
+              )}
+            </>
+          )}
+          {/* <CustomInput
               label={t('Link youtube')}
               placeholder={t('Link youtube')}
               style={{...styles.textInput}}
@@ -170,16 +162,15 @@ export default function EstatePhoto({
               style={{...styles.textInput}}
             /> */}
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('Add your real estate YouTube link video(if any)')}
-              control={control}
-              name="video_link"
-              placeholder={t('link_youtube')}
-              style={styles.textInput}
-            />
-          </Collapsible>
-        )}
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('Add your real estate YouTube link video(if any)')}
+            control={control}
+            name="video_link"
+            placeholder={t('link_youtube')}
+            style={styles.textInput}
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

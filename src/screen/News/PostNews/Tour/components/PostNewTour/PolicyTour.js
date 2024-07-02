@@ -49,22 +49,18 @@ export default function PolicyTour({
         watch={watch}
         arrKeywords={arrKeywords}
       />
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible
-            collapsed={!isView}
-            style={{...styles.box, alignItems: 'flex-start'}}>
-            <Box title={t('which_policy_tour')} num="1">
-              <RulesPolicyTour
-                setValue={setValue}
-                control={control}
-                unregister={unregister}
-              />
-            </Box>
-          </Collapsible>
-        )}
+      <InViewPort noLoading={true}>
+        <Collapsible
+          collapsed={!isView}
+          style={{...styles.box, alignItems: 'flex-start'}}>
+          <Box title={t('which_policy_tour')} num="1">
+            <RulesPolicyTour
+              setValue={setValue}
+              control={control}
+              unregister={unregister}
+            />
+          </Box>
+        </Collapsible>
       </InViewPort>
     </View>
   );

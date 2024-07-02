@@ -44,39 +44,37 @@ export default function BestSelling() {
     setFilter(listCountry.data?.data?.[0]);
   }, [listCountry.data?.data]);
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={270}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          isCategory
-          dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxPlaceItem
-                seeViewNumber={1.5}
-                multiPrice
-                isUnitAvailable
-                isHeart
-                data={item}
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // isSeeAll
+        isCategory
+        dataCategory={listCountry.data?.data?.slice(0, 9)}
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllRentScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => setFilter(item)}
+        heading={title}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxPlaceItem
+              seeViewNumber={1.5}
+              multiPrice
+              isUnitAvailable
+              isHeart
+              data={item}
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

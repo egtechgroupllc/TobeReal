@@ -107,7 +107,7 @@ const InViewPort1 = class extends Component<Iprops | ViewProps> {
         {this.lastValue ? (
           this.props.children
         ) : !this.props.loadingMap ? (
-          this.props.ComponentLoading || (
+          (this.props.noLoading ? <></> : this.props.ComponentLoading) || (
             <CustomImage
               source={images.logoLoading}
               style={[styles.imageStyle, this.props.styleLoading]}

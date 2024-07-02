@@ -9,7 +9,7 @@ import {useLanguage} from '../../../hooks/useLanguage';
 import BoxItemProfile from './BoxItemProfile';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Content() {
+export default function Content({token}) {
   const {t} = useLanguage();
   const {country} = useCountry();
   const [selectedLanguage, setSelectedLanguage] = useState();
@@ -32,20 +32,21 @@ export default function Content() {
         <BoxItemProfile
           Icon={IconDeposit}
           title={t('financial_management')}
-          nameScreen="AddressWalletScreen"
-          nameNavigate="NavigateWalletToken"
+          nameScreen={token ? 'AddressWalletScreen' : 'LoginScreen'}
+          nameNavigate={token ? 'NavigateWalletToken' : 'NavigationAuth'}
         />
-        <BoxItemProfile
+        {/* <BoxItemProfile
           title={'Tài khoản & Bảo mật'}
           nameScreen={'AccountAndSecurityScreen'}
-        />
+        /> */}
       </Box>
 
       <Box title={'Tiện ích'}>
         <BoxItemProfile
           Icon={IconDeposit}
           title={'Nạp & Rút Tiền'}
-          nameScreen="FinancialScreen"
+          nameScreen={token ? 'FinancialScreen' : 'LoginScreen'}
+          nameNavigate={token ? 'NavigationProfile' : 'NavigationAuth'}
         />
       </Box>
 
@@ -53,16 +54,19 @@ export default function Content() {
         <BoxItemProfile
           title={t('select_country')}
           nameScreen="CountryScreen"
+          nameNavigate={'NoBottomTab'}
           titleRight={country?.name && `${country?.flag} ${country?.name}`}
         />
         <BoxItemProfile
           title={t('main_currency')}
           nameScreen="CurrencyScreen"
+          nameNavigate={'NoBottomTab'}
           titleRight={country?.name && `${country?.currency_code}`}
         />
         <BoxItemProfile
           title={t('select_language')}
           nameScreen="SelectLanguageScreen"
+          nameNavigate={'NoBottomTab'}
           titleRight={selectedLanguage?.name}
         />
       </Box>

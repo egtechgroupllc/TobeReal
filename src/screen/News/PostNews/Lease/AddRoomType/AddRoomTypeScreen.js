@@ -36,7 +36,7 @@ export default function AddRoomTypeScreen() {
     return setOptions({
       headerTitle: !params?.update ? t('create_room') : t('edit_room'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

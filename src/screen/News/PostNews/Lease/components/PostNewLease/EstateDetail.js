@@ -36,69 +36,65 @@ export default function EstateDetail({control, errors, watch, setValue}) {
         watch={watch}
         arrKeywords={arrKeywords}
       />
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!viewDetail} style={styles.box}>
-            <Box title={t('how_many_star_accom')}>
-              <SetStartAccomo onChange={value => setValue('rating', value)} />
-            </Box>
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!viewDetail} style={styles.box}>
+          <Box title={t('how_many_star_accom')}>
+            <SetStartAccomo onChange={value => setValue('rating', value)} />
+          </Box>
 
-            <Box title={t('what_are_property')}>
-              <>
-                <TimeCheckIn
-                  onChange={value => {
-                    setValue('check_in_time_start', value?.timeCheckStart);
-                    setValue('check_in_time_end', value?.timeCheckEnd);
-                  }}
-                />
-                <TimeCheckOut
-                  onChange={value => {
-                    setValue('check_out_time_start', value?.timeCheckStart);
-                    setValue('check_out_time_end', value?.timeCheckEnd);
-                  }}
-                />
-              </>
-            </Box>
+          <Box title={t('what_are_property')}>
+            <>
+              <TimeCheckIn
+                onChange={value => {
+                  setValue('check_in_time_start', value?.timeCheckStart);
+                  setValue('check_in_time_end', value?.timeCheckEnd);
+                }}
+              />
+              <TimeCheckOut
+                onChange={value => {
+                  setValue('check_out_time_start', value?.timeCheckStart);
+                  setValue('check_out_time_end', value?.timeCheckEnd);
+                }}
+              />
+            </>
+          </Box>
 
-            {/* <View style={styles.line} /> */}
+          {/* <View style={styles.line} /> */}
 
-            <Box title={t('the_area_of_property')}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  columnGap: scale(30),
-                }}>
-                <CustomInput
-                  label={t('width')}
-                  placeholder={t('length')}
-                  name="size_width"
-                  rules={requireField(t('this_field_required'))}
-                  styleWrapper={{
-                    flex: 1,
-                  }}
-                  control={control}
-                  styleTextLabel={styles.label}
-                  style={styles.textInput}
-                />
+          <Box title={t('the_area_of_property')}>
+            <View
+              style={{
+                flexDirection: 'row',
+                columnGap: scale(30),
+              }}>
+              <CustomInput
+                label={t('width')}
+                placeholder={t('length')}
+                name="size_width"
+                rules={requireField(t('this_field_required'))}
+                styleWrapper={{
+                  flex: 1,
+                }}
+                control={control}
+                styleTextLabel={styles.label}
+                style={styles.textInput}
+              />
 
-                <CustomInput
-                  label={t('length')}
-                  placeholder={t('length')}
-                  name="size_length"
-                  control={control}
-                  rules={requireField(t('this_field_required'))}
-                  styleTextLabel={styles.label}
-                  styleWrapper={{
-                    flex: 1,
-                  }}
-                  style={styles.textInput}
-                />
-              </View>
-            </Box>
-          </Collapsible>
-        )}
+              <CustomInput
+                label={t('length')}
+                placeholder={t('length')}
+                name="size_length"
+                control={control}
+                rules={requireField(t('this_field_required'))}
+                styleTextLabel={styles.label}
+                styleWrapper={{
+                  flex: 1,
+                }}
+                style={styles.textInput}
+              />
+            </View>
+          </Box>
+        </Collapsible>
       </InViewPort>
     </View>
   );

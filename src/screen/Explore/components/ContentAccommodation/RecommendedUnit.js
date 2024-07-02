@@ -11,20 +11,18 @@ export default function RecommendedUnit({data}) {
   const [isRender, setIsRender] = useState(false);
 
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={50}>
-      {isRender && (
-        <WrapperContent
-          onPressSeeAll={() => console.log(1)}
-          heading={t('saveloka_recommended')}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => <RecommendedUnitItem isButtonBottom />}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        onPressSeeAll={() => console.log(1)}
+        heading={t('saveloka_recommended')}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => <RecommendedUnitItem isButtonBottom />}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

@@ -67,12 +67,12 @@ export default function FilterSort({
 const styles = StyleSheet.create({
   wrapper: {
     height: scale(50),
-    width: '100%',
+    width: '25%',
     flexDirection: 'row-reverse',
     alignItems: 'center',
     paddingHorizontal: scale(10),
     paddingVertical: scale(4),
-    // backgroundColor: '#fff',
+    // backgroundColor: '#000',
     columnGap: scale(10),
   },
   sort: {

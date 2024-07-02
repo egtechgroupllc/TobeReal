@@ -93,96 +93,92 @@ export default function TicketDetail({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <CustomText textType="medium" style={{...styles.text2}}>
-              {t('price_included')}:
-            </CustomText>
-            {listSort.map((item, index) => (
-              <View key={index}>
-                {listSort.length - 1 === index && (
-                  <CustomText
-                    textType="medium"
-                    style={{...styles.text2, paddingBottom: scale(10)}}>
-                    {t('price_not_included')}:
-                  </CustomText>
-                )}
-                <CheckBox
-                  textLeft
-                  style={{
-                    height: scale(40),
-                    justifyContent: 'space-between',
-                    borderWidth: scale(1),
-                    borderColor: '#EEEEEE',
-                    paddingHorizontal: scale(10),
-                    backgroundColor: COLORS.white,
-                    borderTopLeftRadius: arraySelect.includes(index)
-                      ? scale(10)
-                      : scale(0),
-                    borderTopRightRadius: arraySelect.includes(index)
-                      ? scale(10)
-                      : scale(0),
-                    paddingVertical: scale(5),
-                  }}
-                  defaultValue={arraySelect === index}
-                  text={<CustomText>{item.name}</CustomText>}
-                  checked={arraySelect === index}
-                  onPress={() => handleSelectOption(index)}
-                />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <CustomText textType="medium" style={{...styles.text2}}>
+            {t('price_included')}:
+          </CustomText>
+          {listSort.map((item, index) => (
+            <View key={index}>
+              {listSort.length - 1 === index && (
+                <CustomText
+                  textType="medium"
+                  style={{...styles.text2, paddingBottom: scale(10)}}>
+                  {t('price_not_included')}:
+                </CustomText>
+              )}
+              <CheckBox
+                textLeft
+                style={{
+                  height: scale(40),
+                  justifyContent: 'space-between',
+                  borderWidth: scale(1),
+                  borderColor: '#EEEEEE',
+                  paddingHorizontal: scale(10),
+                  backgroundColor: COLORS.white,
+                  borderTopLeftRadius: arraySelect.includes(index)
+                    ? scale(10)
+                    : scale(0),
+                  borderTopRightRadius: arraySelect.includes(index)
+                    ? scale(10)
+                    : scale(0),
+                  paddingVertical: scale(5),
+                }}
+                defaultValue={arraySelect === index}
+                text={<CustomText>{item.name}</CustomText>}
+                checked={arraySelect === index}
+                onPress={() => handleSelectOption(index)}
+              />
 
-                {arraySelect.includes(index) && (
-                  <>
-                    <View
-                      style={{
-                        backgroundColor: '#EEEEEE',
-                        borderWidth: scale(1),
-                        borderColor: '#EEEEEE',
-                        marginBottom: scale(10),
-                        minHeight: scale(150),
-                      }}>
-                      <RichEditor
-                        initialFocus
-                        editorStyle={{backgroundColor: '#EEEEEE'}}
-                        initialContentHTML={'<ul><li></li><ul/>'}
-                        ref={richTextRef}
-                        onChange={descriptionText => {
-                          console.log(
-                            `descriptionText:_${index}`,
-                            descriptionText,
-                          );
-                        }}
-                      />
-                    </View>
-                    <RichToolbar
-                      selectedIconTint={COLORS.primary}
-                      style={{
-                        marginTop: scale(-10),
-                        borderTopWidth: scale(1),
-                        borderColor: COLORS.grey,
-                        borderBottomLeftRadius: scale(10),
-                        borderBottomRightRadius: scale(10),
+              {arraySelect.includes(index) && (
+                <>
+                  <View
+                    style={{
+                      backgroundColor: '#EEEEEE',
+                      borderWidth: scale(1),
+                      borderColor: '#EEEEEE',
+                      marginBottom: scale(10),
+                      minHeight: scale(150),
+                    }}>
+                    <RichEditor
+                      initialFocus
+                      editorStyle={{backgroundColor: '#EEEEEE'}}
+                      initialContentHTML={'<ul><li></li><ul/>'}
+                      ref={richTextRef}
+                      onChange={descriptionText => {
+                        console.log(
+                          `descriptionText:_${index}`,
+                          descriptionText,
+                        );
                       }}
-                      editor={richTextRef}
-                      actions={[
-                        actions.setBold,
-                        actions.setItalic,
-                        actions.setUnderline,
-                        actions.removeFormat,
-                        actions.insertBulletsList,
-                        actions.insertOrderedList,
-                        actions.insertLink,
-                        'customAction',
-                      ]}
                     />
-                  </>
-                )}
-              </View>
-            ))}
-          </Collapsible>
-        )}
+                  </View>
+                  <RichToolbar
+                    selectedIconTint={COLORS.primary}
+                    style={{
+                      marginTop: scale(-10),
+                      borderTopWidth: scale(1),
+                      borderColor: COLORS.grey,
+                      borderBottomLeftRadius: scale(10),
+                      borderBottomRightRadius: scale(10),
+                    }}
+                    editor={richTextRef}
+                    actions={[
+                      actions.setBold,
+                      actions.setItalic,
+                      actions.setUnderline,
+                      actions.removeFormat,
+                      actions.insertBulletsList,
+                      actions.insertOrderedList,
+                      actions.insertLink,
+                      'customAction',
+                    ]}
+                  />
+                </>
+              )}
+            </View>
+          ))}
+        </Collapsible>
       </InViewPort>
     </View>
   );

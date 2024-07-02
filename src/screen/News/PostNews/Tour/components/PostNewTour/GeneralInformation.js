@@ -52,94 +52,90 @@ export default function GeneralInformation({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('title')}
-              control={control}
-              name="name"
-              multiline
-              maxLength={100}
-              placeholder={t('title')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${100} characters limit`, 100),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  height: scale(60),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('name')?.length || 0}/{100}
-                </Text>
-              }
-            />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('title')}
+            control={control}
+            name="name"
+            multiline
+            maxLength={100}
+            placeholder={t('title')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${100} characters limit`, 100),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                height: scale(60),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('name')?.length || 0}/{100}
+              </Text>
+            }
+          />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('description_content')}
-              control={control}
-              name="description"
-              maxLength={5000}
-              multiline
-              placeholder={t('enter_a_description')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${5000} characters limit`, 5000),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  minHeight: scale(130),
-                  maxHeight: scale(500),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('description')?.length || 0}/{5000}
-                </Text>
-              }
-            />
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('description_content')}
+            control={control}
+            name="description"
+            maxLength={5000}
+            multiline
+            placeholder={t('enter_a_description')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${5000} characters limit`, 5000),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                minHeight: scale(130),
+                maxHeight: scale(500),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('description')?.length || 0}/{5000}
+              </Text>
+            }
+          />
 
-            <View style={styles.line} />
+          <View style={styles.line} />
 
-            <EstateSetMap
-              control={control}
-              onChange={value => {
-                setValue('latitude', value?.latitude);
-                setValue('longitude', value?.longitude);
-              }}
-            />
+          <EstateSetMap
+            control={control}
+            onChange={value => {
+              setValue('latitude', value?.latitude);
+              setValue('longitude', value?.longitude);
+            }}
+          />
 
-            <View style={styles.line} />
+          <View style={styles.line} />
 
-            <SelectCountry
-              setValue={setValue}
-              control={control}
-              // onChange={value => {
-              //   setValue('country_id', value?.id);
-              //   setValue('province_id', value?.province?.id);
-              // }}
-            />
+          <SelectCountry
+            setValue={setValue}
+            control={control}
+            // onChange={value => {
+            //   setValue('country_id', value?.id);
+            //   setValue('province_id', value?.province?.id);
+            // }}
+          />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('address')}
-              control={control}
-              name="address"
-              placeholder={t('address')}
-              rules={requireField(t('this_field_required'))}
-              style={styles.textInput}
-            />
-          </Collapsible>
-        )}
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('address')}
+            control={control}
+            name="address"
+            placeholder={t('address')}
+            rules={requireField(t('this_field_required'))}
+            style={styles.textInput}
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

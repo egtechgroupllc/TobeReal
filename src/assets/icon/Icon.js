@@ -1526,25 +1526,20 @@ export function IconRoom({fill, ...props}) {
 export function IconHome({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(60)}
-      height={props?.style?.height || scale(60)}
-      viewBox="0 0 60 60"
-      fill={fill || '#E3E3E3'}
+      width={props?.style?.width || scale(34)}
+      height={props?.style?.height || scale(30)}
+      viewBox="0 0 34 30"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}>
-      <G clipPath="url(#clip0_1735_1827)">
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M11.37 0h15.99l-.72.85-14.91 16.46-.83-.25V0h.47zm15.32 48.29h2.36c.12 0 .2.08.2.2 0 .11-.08.21-.2.21h-2.36c-.08.29-.36.52-.7.52-.41 0-.74-.33-.74-.74s.33-.74.74-.74c.34 0 .62.23.7.54v.01zM.18 50.86h7.28V32.27H0L29.83 1.1l29.85 31.18h-7.46v18.59h5.79v8.8H.18v-8.81zM23.47 38.5h12.75v20.14H23.47V38.5z"
-          fill={fill || '#E3E3E3'}
-        />
-      </G>
-      <Defs>
-        <ClipPath id="clip0_1735_1827">
-          <Path fill={fill || '#E3E3E3'} d="M0 0H59.68V59.67H0z" />
-        </ClipPath>
-      </Defs>
+      <Path
+        d="M29.76 29.354V13.98L16.635 5.041 3.51 13.98v15.375c0 .357.293.646.656.646h7.219v-9.442c0-.714.588-1.292 1.313-1.292h7.875c.724 0 1.312.578 1.312 1.292V30h7.22c.362 0 .656-.29.656-.646z"
+        fill={fill || '#fff'}
+      />
+      <Path
+        d="M16.245 3.743a.693.693 0 01.779 0l13.994 9.531c.686.467 1.63.262 2.053-.445l.004-.006c.377-.633.2-1.446-.411-1.869L17.02.118a.693.693 0 00-.772 0L.608 10.964A1.396 1.396 0 00.2 12.835a1.448 1.448 0 002.05.441l13.996-9.533zM13.267 24.462a3.426 3.426 0 116.851 0v5.383h-6.851v-5.383z"
+        fill={fill || '#fff'}
+      />
     </Svg>
   );
 }
@@ -1984,8 +1979,8 @@ export function IconAccommodationOther({fill, ...props}) {
 export function IconMarkerRent({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(20)}
-      height={props?.style?.height || scale(29)}
+      width={props?.style?.width || scale(79)}
+      height={props?.style?.height || scale(106)}
       viewBox="0 0 79 106"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

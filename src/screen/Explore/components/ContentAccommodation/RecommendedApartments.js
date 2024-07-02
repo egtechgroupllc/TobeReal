@@ -46,42 +46,40 @@ export default function RecommendedApartments({
     setFilter(listCountry.data?.data?.[0]);
   }, [listCountry.data?.data]);
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={300}>
-      {isRender && (
-        <WrapperContent
-          isSeeAll={isSeeAll}
-          isCategory={isCategory}
-          dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllRentScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item, index}) => (
-              <BoxPlaceItem
-                key={`key-${item}-${index}`}
-                seeViewNumber={1.5}
-                data={item}
-                isUnitAvailable
-                isStar
-                rating={4}
-                textRating={index % 2 !== 0 && 'New'}
-                isHeart
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        isSeeAll={isSeeAll}
+        isCategory={isCategory}
+        dataCategory={listCountry.data?.data?.slice(0, 9)}
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllRentScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => setFilter(item)}
+        heading={title}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows}
+          contentContainerStyle={styles.content}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              key={`key-${item}-${index}`}
+              seeViewNumber={1.5}
+              data={item}
+              isUnitAvailable
+              isStar
+              rating={4}
+              textRating={index % 2 !== 0 && 'New'}
+              isHeart
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

@@ -15,42 +15,40 @@ export default function ThemedTour({data}) {
   const title = [t('themed_tour')];
   const {navigate} = useNavigation();
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          themedTour
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllTourScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => console.log(item)}
-          heading={title}
-          subHeading={t('discover_tour_youlove') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxPlaceItem
-                isHeart
-                isStar
-                data={item}
-                rental="night"
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // isSeeAll
+        themedTour
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllTourScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => console.log(item)}
+        heading={title}
+        subHeading={t('discover_tour_youlove') + ` ${formatPrice(1000000)}`}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxPlaceItem
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              jsonImage={item?.imgdetail}
+              name={item?.name}
+              price={item?.price}
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

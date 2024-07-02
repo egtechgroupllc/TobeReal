@@ -133,7 +133,7 @@ export default function HomeListVoucherScreen() {
                 marginTop: '40%',
                 justifyContent: 'center',
               }}
-              desc={'There are no vouchers available!'}
+              desc={t('')}
             />
           }
           renderItem={({item, index}) => {

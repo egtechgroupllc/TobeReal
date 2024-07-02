@@ -22,7 +22,6 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data.package_post_item?.package_post?.level],
   );
-
   return (
     <TouchableOpacity
       style={styles.wrapper}

@@ -53,9 +53,7 @@ export default memo(function InputPriceVoucher({
         // onChangeCurrency={value => setTypeCurrency(currency?.currency_code)}
       />
       {priceDiscount && (
-        <CustomText color={COLORS.text}>
-          {t('Giá trị sử dụng của voucher dùng để áp dụng giảm giá')}
-        </CustomText>
+        <CustomText color={COLORS.text}>{t('value_of_the_voucher')}</CustomText>
       )}
       {!priceDiscount && (
         <View
@@ -100,6 +98,7 @@ export default memo(function InputPriceVoucher({
                 {
                   currency: 'TBH',
                   locales: 'vi',
+                  decimalPlaces: 12,
                 },
               )}{' '}
               <CustomText textType="medium" size={SIZES.xMedium}>

@@ -192,7 +192,12 @@ export default function HistoryTransactionScreen() {
             item?.id ? (
               <ItemHistoryTrans
                 tab={tab}
-                onPress={value => navigate('DetailHistoryDeposit', value)}
+                onPress={value =>
+                  navigate('NoBottomTab', {
+                    screen: 'DetailHistoryDeposit',
+                    params: value,
+                  })
+                }
                 key={item?.id}
                 data={item}
                 isBackground={index % 2 === 0}

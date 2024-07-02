@@ -27,40 +27,36 @@ export default function EstatePhoto({control, errors, watch}) {
         watch={watch}
         arrKeywords={arrKeywords}
       />
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <RulesPostImg />
-            <ChooseImgPicker
-              title={t('real_estate_images')}
-              subHeading={t('update_image_to_maximum')}
-              control={control}
-              rules={[validateMinLength(t('this_field_required'), 4)]}
-              name={'description_img'}
-            />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <RulesPostImg />
+          <ChooseImgPicker
+            title={t('real_estate_images')}
+            subHeading={t('update_image_to_maximum')}
+            control={control}
+            rules={[validateMinLength(t('this_field_required'), 4)]}
+            name={'description_img'}
+          />
 
-            <ChooseImgPicker
-              title={t('add_image_to_prove')}
-              control={control}
-              rules={[validateMinLength(t('this_field_required'), 1)]}
-              name={'kyc'}
-            />
+          <ChooseImgPicker
+            title={t('add_image_to_prove')}
+            control={control}
+            rules={[validateMinLength(t('this_field_required'), 1)]}
+            name={'kyc'}
+          />
 
-            <CustomInput
-              label={t('Link youtube')}
-              placeholder={t('Link youtube')}
-              style={{...styles.textInput}}
-            />
+          <CustomInput
+            label={t('Link youtube')}
+            placeholder={t('Link youtube')}
+            style={{...styles.textInput}}
+          />
 
-            <CustomInput
-              label={t('Link tiktok')}
-              placeholder={t('Link tiktok')}
-              style={{...styles.textInput}}
-            />
-          </Collapsible>
-        )}
+          <CustomInput
+            label={t('Link tiktok')}
+            placeholder={t('Link tiktok')}
+            style={{...styles.textInput}}
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

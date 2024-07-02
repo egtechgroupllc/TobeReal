@@ -24,7 +24,7 @@ export default function ImportAddressWalletScreen({route}) {
   useLayoutEffect(() => {
     setOptions({
       headerTitle:
-        dataP.type === 'PASSPHRASE' ? 'Cụm từ bí mật' : 'Private key',
+        dataP.type === 'PASSPHRASE' ? t('secret_phrase') : 'Private key',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataP.type]);
@@ -80,7 +80,7 @@ export default function ImportAddressWalletScreen({route}) {
       />
 
       <CustomInput
-        label={dataP.type === 'PASSPHRASE' ? 'Cụm từ bí mật' : 'Private key'}
+        label={dataP.type === 'PASSPHRASE' ? t('secret_phrase') : 'Private key'}
         styleTextLabel={styles.label}
         styleText={{
           fontSize: SIZES.xMedium,
@@ -97,7 +97,7 @@ export default function ImportAddressWalletScreen({route}) {
         componentRight={
           <CustomButton
             onPress={handlePast}
-            text="Dán"
+            text={t('paste')}
             buttonType="normal"
             styleWrapper={{
               marginTop: 'auto',
@@ -114,12 +114,12 @@ export default function ImportAddressWalletScreen({route}) {
 
       <CustomText style={styles.desc}>
         {dataP.type === 'PASSPHRASE'
-          ? `Thường là 12 từ (đôi khi là 18 hay 24 từ) được phân tách bằng dấu cách`
-          : `Private key là một chuỗi ký tự bao gồm cả chữ và số, hoạt động như một mã bảo mật để truy cập vào tài khoản.`}
+          ? `${t('usually_12_words')}`
+          : `Private key ${t('is_a_string_of_letter')}`}
       </CustomText>
 
       <CustomButton
-        text="Khôi phục ví"
+        text={t('restore_wallet')}
         onPress={handleSubmit(handleImportWallet)}
       />
     </View>

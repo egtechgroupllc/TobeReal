@@ -196,11 +196,11 @@ export default function ListVideoInfluencerScreen() {
               top: scale(-30),
             },
           ]}>
-          <RangeSlider
+          {/* <RangeSlider
           // progressValue={value?.currentTime}
           // onValueChange={videoRef.current?.handleValueChange}
           // maximumValue={value?.seekableDuration}
-          />
+          /> */}
         </View>
         <Comment ref={commentRef} />
       </View>

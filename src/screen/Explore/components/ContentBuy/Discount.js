@@ -15,25 +15,23 @@ export default function Discount() {
   const [isRender, setIsRender] = useState(false);
 
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <View style={{flexDirection: 'row', marginLeft: scale(20)}}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity>
-              <CustomImage
-                source={images.halloween}
-                style={{width: scale(270), height: scale(181)}}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <CustomImage
-                source={images.summer}
-                style={{width: scale(270), height: scale(181)}}
-              />
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-      )}
+    <InViewPort>
+      <View style={{flexDirection: 'row', marginLeft: scale(20)}}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity>
+            <CustomImage
+              source={images.halloween}
+              style={{width: scale(270), height: scale(181)}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <CustomImage
+              source={images.summer}
+              style={{width: scale(270), height: scale(181)}}
+            />
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
     </InViewPort>
   );
 }

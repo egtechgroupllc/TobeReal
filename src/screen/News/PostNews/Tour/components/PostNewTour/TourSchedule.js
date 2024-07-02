@@ -128,183 +128,179 @@ export default function TourSchedule({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <View
-              style={{
-                flexDirection: 'row',
-                columnGap: scale(10),
-              }}>
-              <CustomInput
-                label={t('Ngày bắt đầu')}
-                styleWrapper={{
-                  flex: 1,
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(10),
+            }}>
+            <CustomInput
+              label={t('Ngày bắt đầu')}
+              styleWrapper={{
+                flex: 1,
+              }}
+              styleTextLabel={styles.label}
+              style={styles.input}
+              styleText={styles.textInput}
+              value={formatDateTime(timeCheckStart)}
+              onPress={() => setOpenCheckStart(true)}
+            />
+
+            <CustomInput
+              label={t('Ngày kết thúc')}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              style={styles.input}
+              styleText={styles.textInput}
+              value={formatDateTime(timeCheckEnd)}
+              onPress={() => setOpenCheckEnd(true)}
+            />
+
+            <>
+              <DatePicker
+                mode="datetime"
+                title={t('check_in')}
+                modal
+                minimumDate={new Date()}
+                open={openCheckStart}
+                date={timeCheckStart}
+                onConfirm={time => {
+                  setOpenCheckStart(false);
+                  setTimeCheckStart(time);
+                  setTimeCheckEnd(
+                    new Date(time.getTime() + 24 * 60 * 60 * 1000),
+                  );
                 }}
-                styleTextLabel={styles.label}
-                style={styles.input}
-                styleText={styles.textInput}
-                value={formatDateTime(timeCheckStart)}
-                onPress={() => setOpenCheckStart(true)}
+                onCancel={() => {
+                  setOpenCheckStart(false);
+                }}
               />
 
-              <CustomInput
-                label={t('Ngày kết thúc')}
-                styleTextLabel={styles.label}
-                styleWrapper={{
-                  flex: 1,
+              <DatePicker
+                title={t('check_out')}
+                mode="datetime"
+                modal
+                // locale="en-FR"
+                // is24Hour={true}
+                open={openCheckEnd}
+                date={timeCheckEnd}
+                minimumDate={
+                  new Date(
+                    new Date(timeCheckStart).getTime() + 1 * 60 * 60 * 1000,
+                  )
+                }
+                maximumDate={
+                  new Date(timeCheckStart.getTime() + 7 * 24 * 60 * 60 * 1000)
+                }
+                onConfirm={time => {
+                  setOpenCheckEnd(false);
+                  setTimeCheckEnd(time);
                 }}
-                style={styles.input}
-                styleText={styles.textInput}
-                value={formatDateTime(timeCheckEnd)}
-                onPress={() => setOpenCheckEnd(true)}
+                onCancel={() => {
+                  setOpenCheckEnd(false);
+                }}
               />
-
-              <>
-                <DatePicker
-                  mode="datetime"
-                  title={t('check_in')}
-                  modal
-                  minimumDate={new Date()}
-                  open={openCheckStart}
-                  date={timeCheckStart}
-                  onConfirm={time => {
-                    setOpenCheckStart(false);
-                    setTimeCheckStart(time);
-                    setTimeCheckEnd(
-                      new Date(time.getTime() + 24 * 60 * 60 * 1000),
-                    );
-                  }}
-                  onCancel={() => {
-                    setOpenCheckStart(false);
-                  }}
-                />
-
-                <DatePicker
-                  title={t('check_out')}
-                  mode="datetime"
-                  modal
-                  // locale="en-FR"
-                  // is24Hour={true}
-                  open={openCheckEnd}
-                  date={timeCheckEnd}
-                  minimumDate={
-                    new Date(
-                      new Date(timeCheckStart).getTime() + 1 * 60 * 60 * 1000,
-                    )
-                  }
-                  maximumDate={
-                    new Date(timeCheckStart.getTime() + 7 * 24 * 60 * 60 * 1000)
-                  }
-                  onConfirm={time => {
-                    setOpenCheckEnd(false);
-                    setTimeCheckEnd(time);
-                  }}
-                  onCancel={() => {
-                    setOpenCheckEnd(false);
-                  }}
-                />
-              </>
-            </View>
-            <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
-              {t('tour_duration')}: {numDays.days} {t('days')} {numDays.hours}{' '}
-              {t('hours')}
-            </CustomText>
-            <ScrollView
-              horizontal
-              style={{alignSelf: 'flex-start'}}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                columnGap: scale(10),
-              }}>
-              {Array.from(
-                {length: numDays.days || (numDays.hours ? 1 : 0)},
-                (_, dayNumber) =>
-                  selectedDay === dayNumber ? (
-                    <LinearGradient
-                      colors={['#F0B90B', '#FFE55A']}
-                      start={{x: 0, y: 0}}
-                      end={{x: 0, y: 1}}
-                      style={{
-                        padding: scale(5),
-                        paddingHorizontal: scale(20),
-                        borderRadius: scale(5),
-                        borderColor: COLORS.grey,
-                      }}>
-                      <TouchableOpacity
-                        key={dayNumber}
-                        onPress={() => handleDayClick(dayNumber)}>
-                        <CustomText style={{...styles.label}}>
-                          {t('day')}: {dayNumber + 1}
-                        </CustomText>
-                      </TouchableOpacity>
-                    </LinearGradient>
-                  ) : (
+            </>
+          </View>
+          <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
+            {t('tour_duration')}: {numDays.days} {t('days')} {numDays.hours}{' '}
+            {t('hours')}
+          </CustomText>
+          <ScrollView
+            horizontal
+            style={{alignSelf: 'flex-start'}}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              columnGap: scale(10),
+            }}>
+            {Array.from(
+              {length: numDays.days || (numDays.hours ? 1 : 0)},
+              (_, dayNumber) =>
+                selectedDay === dayNumber ? (
+                  <LinearGradient
+                    colors={['#F0B90B', '#FFE55A']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 0, y: 1}}
+                    style={{
+                      padding: scale(5),
+                      paddingHorizontal: scale(20),
+                      borderRadius: scale(5),
+                      borderColor: COLORS.grey,
+                    }}>
                     <TouchableOpacity
                       key={dayNumber}
-                      style={{
-                        alignSelf: 'flex-start',
-                        borderWidth: scale(1),
-                        padding: scale(5),
-                        borderRadius: scale(5),
-                        borderColor: COLORS.grey,
-                        backgroundColor: 'white',
-                      }}
                       onPress={() => handleDayClick(dayNumber)}>
                       <CustomText style={{...styles.label}}>
                         {t('day')}: {dayNumber + 1}
                       </CustomText>
                     </TouchableOpacity>
-                  ),
-              )}
-            </ScrollView>
-            {Array.from(
-              {length: numDays.days || (numDays.hours ? 1 : 0)},
-              (_, dayNumber) =>
-                dayNumber === selectedDay && (
-                  <>
-                    <CustomInput
-                      ref={inputRef}
-                      styleTextLabel={styles.label}
-                      label={t('description_content')}
-                      control={control}
-                      name={`description_day${selectedDay}`}
-                      maxLength={5000}
-                      multiline
-                      value={watch(`description_day${selectedDay}`)}
-                      placeholder={t('enter_a_description')}
-                      rules={[
-                        requireField(t('this_field_required')),
-                        validateMaxLengthText(`${5000} characters limit`, 5000),
-                      ]}
-                      style={[
-                        styles.textDesc,
-                        {
-                          minHeight: scale(130),
-                          maxHeight: scale(300),
-                        },
-                      ]}
-                      componentRight={
-                        <Text style={styles.numText}>
-                          {watch(`description_${selectedDay}`)?.length || 0}/
-                          {5000}
-                        </Text>
-                      }
-                    />
-
-                    <CustomButton
-                      styleWrapper={{width: '20%', alignSelf: 'flex-end'}}
-                      buttonType="small"
-                      text={t('ok')}
-                      onPress={() => handleConfirm(dayNumber + 1)}
-                    />
-                  </>
+                  </LinearGradient>
+                ) : (
+                  <TouchableOpacity
+                    key={dayNumber}
+                    style={{
+                      alignSelf: 'flex-start',
+                      borderWidth: scale(1),
+                      padding: scale(5),
+                      borderRadius: scale(5),
+                      borderColor: COLORS.grey,
+                      backgroundColor: 'white',
+                    }}
+                    onPress={() => handleDayClick(dayNumber)}>
+                    <CustomText style={{...styles.label}}>
+                      {t('day')}: {dayNumber + 1}
+                    </CustomText>
+                  </TouchableOpacity>
                 ),
             )}
-          </Collapsible>
-        )}
+          </ScrollView>
+          {Array.from(
+            {length: numDays.days || (numDays.hours ? 1 : 0)},
+            (_, dayNumber) =>
+              dayNumber === selectedDay && (
+                <>
+                  <CustomInput
+                    ref={inputRef}
+                    styleTextLabel={styles.label}
+                    label={t('description_content')}
+                    control={control}
+                    name={`description_day${selectedDay}`}
+                    maxLength={5000}
+                    multiline
+                    value={watch(`description_day${selectedDay}`)}
+                    placeholder={t('enter_a_description')}
+                    rules={[
+                      requireField(t('this_field_required')),
+                      validateMaxLengthText(`${5000} characters limit`, 5000),
+                    ]}
+                    style={[
+                      styles.textDesc,
+                      {
+                        minHeight: scale(130),
+                        maxHeight: scale(300),
+                      },
+                    ]}
+                    componentRight={
+                      <Text style={styles.numText}>
+                        {watch(`description_${selectedDay}`)?.length || 0}/
+                        {5000}
+                      </Text>
+                    }
+                  />
+
+                  <CustomButton
+                    styleWrapper={{width: '20%', alignSelf: 'flex-end'}}
+                    buttonType="small"
+                    text={t('ok')}
+                    onPress={() => handleConfirm(dayNumber + 1)}
+                  />
+                </>
+              ),
+          )}
+        </Collapsible>
       </InViewPort>
     </View>
   );

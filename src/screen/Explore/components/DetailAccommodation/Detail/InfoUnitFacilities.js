@@ -59,7 +59,7 @@ export default function InfoUnitFacilities({data}) {
           ref={bottomSheetRef}
           index={1}
           snapPoints={['50%', '86%']}
-          titleIndicator="Unit Facilities">
+          titleIndicator={t('room_facilities')}>
           <View style={styles.content}>
             {data?.features.map((item, index) => (
               <View key={`key-${item}-${index}`} style={styles.itemFac}>

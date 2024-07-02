@@ -49,64 +49,61 @@ export default function General({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <CustomInput
-              label={t('tour_ticket_name')}
-              control={control}
-              name="name"
-              multiline
-              maxLength={100}
-              placeholder={t('tour_ticket_name')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${100} characters limit`, 100),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  height: scale(50),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('name')?.length || 0}/{100}
-                </Text>
-              }
-            />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <CustomInput
+            label={t('tour_ticket_name')}
+            control={control}
+            name="name"
+            multiline
+            maxLength={100}
+            placeholder={t('tour_ticket_name')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${100} characters limit`, 100),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                height: scale(50),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('name')?.length || 0}/{100}
+              </Text>
+            }
+          />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('description_content')}
-              control={control}
-              name="description"
-              maxLength={5000}
-              multiline
-              placeholder={t('enter_a_description')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${5000} characters limit`, 5000),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  minHeight: scale(130),
-                  maxHeight: scale(300),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('description')?.length || 0}/{5000}
-                </Text>
-              }
-            />
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('description_content')}
+            control={control}
+            name="description"
+            maxLength={5000}
+            multiline
+            placeholder={t('enter_a_description')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${5000} characters limit`, 5000),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                minHeight: scale(130),
+                maxHeight: scale(300),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('description')?.length || 0}/{5000}
+              </Text>
+            }
+          />
 
-            <View style={styles.line} />
+          <View style={styles.line} />
 
-            {/* <CustomInput
+          {/* <CustomInput
               label={t('Số lượng vé')}
               control={control}
               name="quantity"
@@ -116,24 +113,23 @@ export default function General({
               keyboardType="number-pad"
             /> */}
 
-            <SelectCurrency control={control} />
-            <TimeOption
-              onChange={value => {
-                setValue('time_options', value);
-              }}
-            />
-            <CustomInput
-              label={t('price')}
-              control={control}
-              name="price"
-              placeholder={t('enter_price')}
-              rules={requireField(t('this_field_required'))}
-              style={{...styles.textInput}}
-              keyboardType="number-pad"
-              enableFormatNum
-            />
-          </Collapsible>
-        )}
+          <SelectCurrency control={control} />
+          <TimeOption
+            onChange={value => {
+              setValue('time_options', value);
+            }}
+          />
+          <CustomInput
+            label={t('price')}
+            control={control}
+            name="price"
+            placeholder={t('enter_price')}
+            rules={requireField(t('this_field_required'))}
+            style={{...styles.textInput}}
+            keyboardType="number-pad"
+            enableFormatNum
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

@@ -43,7 +43,7 @@ export default function WeeklyHotDeal() {
     setFilter(listCountry.data?.data?.[0]);
   }, [listCountry.data?.data]);
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={240}>
+    <InViewPort>
       {isRender && (
         <WrapperContent
           // isSeeAll

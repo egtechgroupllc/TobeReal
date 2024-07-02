@@ -31,7 +31,7 @@ export default function BuyVoucherScreen() {
 
   useEffect(() => {
     return setOptions({
-      headerTitle: t('Buy voucher'),
+      headerTitle: t('buy_voucher'),
     });
   }, []);
   const [quantity, setQuantity] = useState(1);
@@ -40,8 +40,8 @@ export default function BuyVoucherScreen() {
   });
   const handleAlert = () => {
     Alert.alert(
-      t('Are you sure you want to buy this voucher?'),
-      t('Transactions made cannot be refunded!'),
+      t('are_you_sure_want_buy_voucher'),
+      t('transaction_cant_refund'),
       [
         {
           text: t('cancel'),
@@ -140,7 +140,7 @@ export default function BuyVoucherScreen() {
             <CustomText
               textType="medium"
               style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-              Point:
+              {t('point')}
             </CustomText>
             <CustomText
               textType="medium"
@@ -170,7 +170,7 @@ export default function BuyVoucherScreen() {
               <CustomText
                 textType="medium"
                 style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-                Quantity:
+                {t('quantity')}:
               </CustomText>
               <CustomText
                 textType="medium"
@@ -193,29 +193,26 @@ export default function BuyVoucherScreen() {
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('Voucher uu dai giam ')}{' '}
+            - {t('discount_voucher')}{' '}
             {formatPrice(params?.item?.price_discount, {
               currency: currency?.currency_code,
             })}{' '}
-            {t('khi thanh toan tai khach san')}{' '}
-            {params?.item?.accommodation?.name}.
+            {t('when_paying_hotel')} {params?.item?.accommodation?.name}.
           </CustomText>
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('Ap dung tren tat ca he thong thuoc khach san')}{' '}
-            {params?.item?.accommodation?.name}.
+            - {t('apply_all_hotel_system')} {params?.item?.accommodation?.name}.
           </CustomText>
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('Voucher nay co thoi han su dung den')}{' '}
-            {params?.item?.date_end}
+            - {t('this_voucher_is_valid')} {params?.item?.date_end}
           </CustomText>
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('Voucher khong ap dung cho cac khach san khac.')}
+            - {t('this_voucher_not_apply_other_hotel')}
           </CustomText>
         </View>
       </View>

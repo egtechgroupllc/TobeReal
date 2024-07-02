@@ -160,7 +160,6 @@ export default function HomeMapScreen({showListLocation, style}) {
       }),
     [state.markers],
   );
-
   const onMarkerPress = index => {
     const x = index * CARD_WIDTH;
     flatListRef.current.scrollToOffset(x, true);
@@ -176,6 +175,9 @@ export default function HomeMapScreen({showListLocation, style}) {
       setCurrent(coordinates);
       return coordinates;
     }
+  }, []);
+  useEffect(() => {
+    currentPosition();
   }, []);
   const moveCurrentPosition = useCallback(async () => {
     const coordinates = await currentPosition();

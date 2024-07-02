@@ -17,42 +17,40 @@ export default function DiscoveryTour({data, onPressCategory = funcFallBack}) {
   const {navigate} = useNavigation();
   const title = [t('discover_more_tour')];
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          discoveryTour
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllTourScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={onPressCategory}
-          heading={title}
-          subHeading={t('the_place_discovery')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            numColumns={2}
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxDiscoveryItem
-                isHeart
-                isStar
-                data={item}
-                rental="night"
-                jsonImage={item?.imgdetail}
-                name={item?.name}
-                price={item?.price}
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // isSeeAll
+        discoveryTour
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllTourScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={onPressCategory}
+        heading={title}
+        subHeading={t('the_place_discovery')}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        <FlatList
+          numColumns={2}
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxDiscoveryItem
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              jsonImage={item?.imgdetail}
+              name={item?.name}
+              price={item?.price}
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

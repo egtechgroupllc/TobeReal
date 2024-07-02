@@ -58,107 +58,103 @@ export default function GeneralInformation({
         arrKeywords={arrKeywords}
       />
 
-      <InViewPort
-        noLoading={true}
-        onChange={render => render && setIsRender(render)}>
-        {isRender && (
-          <Collapsible collapsed={!isView} style={styles.box}>
-            <RealEstateType
-              label={t('real_estate_type')}
-              data={data?.data}
-              name={'estate_type_id'}
-              control={control}
-              watch={watch}
-              value={watch('estate_type_id')}
-              valueFind="id"
-            />
-            <View style={styles.line} />
+      <InViewPort noLoading={true}>
+        <Collapsible collapsed={!isView} style={styles.box}>
+          <RealEstateType
+            label={t('real_estate_type')}
+            data={data?.data}
+            name={'estate_type_id'}
+            control={control}
+            watch={watch}
+            value={watch('estate_type_id')}
+            valueFind="id"
+          />
+          <View style={styles.line} />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('real_estate_title')}
-              control={control}
-              name="title"
-              multiline
-              maxLength={100}
-              placeholder={t('enter_real_estate_title')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${100} characters limit`, 100),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  height: scale(60),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('title')?.length || 0}/{100}
-                </Text>
-              }
-            />
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('real_estate_title')}
+            control={control}
+            name="title"
+            multiline
+            maxLength={100}
+            placeholder={t('enter_real_estate_title')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${100} characters limit`, 100),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                height: scale(60),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('title')?.length || 0}/{100}
+              </Text>
+            }
+          />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('description_content')}
-              control={control}
-              name="description"
-              maxLength={5000}
-              multiline
-              placeholder={t('enter_a_description')}
-              rules={[
-                requireField(t('this_field_required')),
-                validateMaxLengthText(`${5000} characters limit`, 5000),
-              ]}
-              style={[
-                styles.textInput,
-                {
-                  minHeight: scale(130),
-                  maxHeight: scale(500),
-                },
-              ]}
-              componentRight={
-                <Text style={styles.numText}>
-                  {watch('description')?.length || 0}/{5000}
-                </Text>
-              }
-            />
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('description_content')}
+            control={control}
+            name="description"
+            maxLength={5000}
+            multiline
+            placeholder={t('enter_a_description')}
+            rules={[
+              requireField(t('this_field_required')),
+              validateMaxLengthText(`${5000} characters limit`, 5000),
+            ]}
+            style={[
+              styles.textInput,
+              {
+                minHeight: scale(130),
+                maxHeight: scale(500),
+              },
+            ]}
+            componentRight={
+              <Text style={styles.numText}>
+                {watch('description')?.length || 0}/{5000}
+              </Text>
+            }
+          />
 
-            <View style={styles.line} />
+          <View style={styles.line} />
 
-            <EstateSetMap
-              control={control}
-              watch={watch}
-              onChange={value => {
-                setValue('latitude', value?.latitude);
-                setValue('longitude', value?.longitude);
-              }}
-            />
+          <EstateSetMap
+            control={control}
+            watch={watch}
+            onChange={value => {
+              setValue('latitude', value?.latitude);
+              setValue('longitude', value?.longitude);
+            }}
+          />
 
-            <View style={styles.line} />
+          <View style={styles.line} />
 
-            <SelectCountry
-              control={control}
-              setValue={setValue}
-              watch={watch}
-              // onChange={value => {
-              //   setValue('country_id', value?.id);
-              //   setValue('province_id', value?.province?.id);
-              // }}
-            />
+          <SelectCountry
+            control={control}
+            setValue={setValue}
+            watch={watch}
+            // onChange={value => {
+            //   setValue('country_id', value?.id);
+            //   setValue('province_id', value?.province?.id);
+            // }}
+          />
 
-            <CustomInput
-              styleTextLabel={styles.label}
-              label={t('address')}
-              control={control}
-              name="address"
-              placeholder={t('address')}
-              rules={requireField(t('this_field_required'))}
-              style={styles.textInput}
-            />
-          </Collapsible>
-        )}
+          <CustomInput
+            styleTextLabel={styles.label}
+            label={t('address')}
+            control={control}
+            name="address"
+            placeholder={t('address')}
+            rules={requireField(t('this_field_required'))}
+            style={styles.textInput}
+          />
+        </Collapsible>
       </InViewPort>
     </View>
   );

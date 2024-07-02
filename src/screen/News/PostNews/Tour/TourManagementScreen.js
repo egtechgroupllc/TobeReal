@@ -30,7 +30,7 @@ export default function TourManagementScreen() {
     return setOptions({
       headerTitle: t('tour_list_create'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

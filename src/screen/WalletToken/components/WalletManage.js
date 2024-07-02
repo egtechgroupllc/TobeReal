@@ -19,7 +19,7 @@ export default function WalletManage({data}) {
         width: '100%',
       }}>
       <CustomText size={SIZES.medium} textType="medium">
-        {t('wallet manage')}
+        {t('wallet_manage')}
       </CustomText>
       <View
         style={{
