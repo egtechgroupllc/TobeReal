@@ -9,9 +9,6 @@ export default function NavigateWalletToken() {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        contentStyle: {
-          backgroundColor: '#f7f9fa',
-        },
         header: props => <HeaderBar {...props} />,
       }}>
       {routerWalletToken.map(router => (

@@ -22,7 +22,9 @@ export default function AddressWalletScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const {token} = useAuthentication();
+
   const {isLoading, data} = useQuery({
     queryKey: ['user', 'profile'],
     queryFn: () => getProfile(token),
@@ -49,7 +51,7 @@ export default function AddressWalletScreen() {
         backgroundColor: '#012133',
         des: t('active_to_use_wallet'),
         logo: images.logoTBH,
-        isOpen: !!dataQ?.data?.TBH || false,
+        isOpen: data?.data?.private_key || data?.data?.passphrase,
         currency: 'TBH',
         isNext: true,
         isToken: true,
@@ -70,7 +72,7 @@ export default function AddressWalletScreen() {
     [
       currency?.currency_code,
       currency?.exchange_rate,
-      data?.data.balance,
+      data,
       dataQ?.data?.TBH,
       t,
     ],
@@ -80,7 +82,9 @@ export default function AddressWalletScreen() {
     <View
       style={{
         paddingHorizontal: 10,
-        marginTop: scale(30),
+        paddingTop: scale(30),
+        backgroundColor: '#f7f9fa',
+        flex: 1,
       }}>
       {listWallet.map((item, index) => {
         return (

@@ -29,7 +29,7 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
             }}
             style={{padding: scale(6), paddingHorizontal: scale(8)}}>
             <IconGoBack
-              fill={'#fff'}
+              fill={options?.headerTitleStyle?.color || '#fff'}
               style={{
                 width: scale(16),
                 height: scale(16),
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: scale(16),
-    paddingVertical: scale(4),
+    paddingVertical: scale(2),
     columnGap: scale(10),
     // overflow: 'hidden',
   },

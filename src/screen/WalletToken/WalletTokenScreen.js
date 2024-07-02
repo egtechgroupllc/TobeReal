@@ -52,6 +52,7 @@ export default function WalletTokenScreen() {
 
           if (dataInside?.status) {
             queryClient.invalidateQueries(['user', 'profile']);
+            navigate('ShowPrivateKeyAndSecretPhrase');
           }
         },
       },

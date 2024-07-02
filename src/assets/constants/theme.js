@@ -19,6 +19,7 @@ export const COLORS = {
   black: '#000000',
   overlay: '#00000060',
   error: '#FF0000',
+  background: '#f7f9fa',
 };
 export const WIDTH = {
   widthScreen: width,

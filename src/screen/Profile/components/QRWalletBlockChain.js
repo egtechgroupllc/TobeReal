@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
+import Clipboard from '@react-native-clipboard/clipboard';
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
-import {IconDown, IconGoBack, IconShare} from '../../../assets/icon/Icon';
+import {showMess} from '../../../assets/constants/Helper';
+import {IconError} from '../../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 
@@ -17,6 +19,10 @@ export default function QRWalletBlockChain({open, data, onClose}) {
   const {t} = useLanguage();
 
   const [secondEnd, setSecondEnd] = useState(false);
+  const handleCopy = () => {
+    Clipboard.setString(data?.wallet_address);
+    showMess(t('copy_success'));
+  };
 
   if (!open) return null;
   return (
@@ -35,22 +41,17 @@ export default function QRWalletBlockChain({open, data, onClose}) {
           onPress={onClose}
         />
 
-        <View
-          style={{
-            padding: scale(10),
-            backgroundColor: '#fff',
-            borderRadius: scale(10),
-            flexDirection: 'row',
-            columnGap: scale(10),
-            width: scale(280),
-            alignItems: 'center',
-          }}>
+        <TouchableOpacity
+          activeOpacity={0.9}
+          style={styles.header}
+          onPress={handleCopy}>
           <CustomImage
-            source={images.logo1}
+            source={images.logoTBH}
             style={{
-              width: scale(40),
+              width: scale(30),
               aspectRatio: 1,
             }}
+            resizeMode="contain"
           />
           <View
             style={{
@@ -72,7 +73,7 @@ export default function QRWalletBlockChain({open, data, onClose}) {
               {data?.wallet_address}
             </CustomText>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View
           style={{
@@ -81,16 +82,6 @@ export default function QRWalletBlockChain({open, data, onClose}) {
             borderRadius: scale(10),
             rowGap: scale(10),
           }}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={onClose}
-            style={{
-              position: 'absolute',
-              padding: scale(10),
-            }}>
-            <IconGoBack />
-          </TouchableOpacity>
-
           <View style={styles.content}>
             <View
               style={{
@@ -133,6 +124,15 @@ export default function QRWalletBlockChain({open, data, onClose}) {
               </CustomText>
             </View>
           </View> */}
+          <CustomText
+            style={{
+              width: scale(260),
+            }}>
+            <IconError size={scale(12)} fill={COLORS.primary} /> This deposit
+            address only accepts
+            <CustomText textType="semiBold"> TBH.TBRC20 </CustomText>
+            don't deposit other coins into it.
+          </CustomText>
         </View>
 
         <CustomButton
@@ -158,5 +158,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(10),
+  },
+  header: {
+    padding: scale(6),
+    backgroundColor: '#fff',
+    borderRadius: scale(10),
+    flexDirection: 'row',
+    columnGap: scale(10),
+    width: scale(280),
+    alignItems: 'center',
   },
 });

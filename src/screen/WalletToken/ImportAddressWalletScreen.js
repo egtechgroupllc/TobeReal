@@ -48,6 +48,7 @@ export default function ImportAddressWalletScreen({route}) {
 
           if (dataInside?.status) {
             queryClient.invalidateQueries(['user', 'profile']);
+            queryClient.invalidateQueries(['user', 'wallet', 'balance']);
             navigate('ProfileScreen');
           }
         },
@@ -68,7 +69,7 @@ export default function ImportAddressWalletScreen({route}) {
         marginTop: '10%',
       }}>
       <CustomInput
-        value="Ví TBH"
+        value="Ví TobeChain"
         label="Tên của ví"
         editable={false}
         styleTextLabel={styles.label}

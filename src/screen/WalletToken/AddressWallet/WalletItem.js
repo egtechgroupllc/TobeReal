@@ -48,7 +48,8 @@ export default function WalletItem({item, onPress}) {
                 textType="semiBold"
                 color={COLORS.white}
                 numberOfLines={2}>
-                {item.balance
+                {(item.isOpen && item.balance) ||
+                (item.isOpen && item.balance === 0)
                   ? `Số dư: ${formatPrice(item.balance, {
                       currency: item?.currency,
                       locales: item?.isToken && 'vi',

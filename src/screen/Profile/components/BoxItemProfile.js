@@ -9,7 +9,7 @@ export default memo(function BoxItemProfile({
   title,
   Icon,
   nameScreen,
-  nameNavigate = 'NoBottomTab',
+  nameNavigate = 'NavigationProfile',
   subTitle,
   onPress,
   titleRight,

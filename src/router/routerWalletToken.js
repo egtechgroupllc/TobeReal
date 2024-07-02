@@ -1,6 +1,7 @@
 import {
   AddressWalletScreen,
   ImportAddressWalletScreen,
+  ShowPrivateKeyAndSecretPhrase,
   WalletTokenScreen,
 } from '../screen/WalletToken';
 
@@ -16,5 +17,9 @@ export default routerWalletToken = [
   {
     name: 'ImportAddressWalletScreen',
     component: ImportAddressWalletScreen,
+  },
+  {
+    name: 'ShowPrivateKeyAndSecretPhrase',
+    component: ShowPrivateKeyAndSecretPhrase,
   },
 ];

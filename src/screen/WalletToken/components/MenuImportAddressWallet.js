@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {COLORS, scale} from '../../../assets/constants';
 import {
@@ -21,6 +21,8 @@ export default function ImportAddressWalletBtn() {
   const {navigate} = useNavigation();
   const queryClient = useQueryClient();
 
+  const [checkImportFile, setCheckImportFile] = useState(false);
+
   const handleImport = type => {
     bottomSheetRef.current.close();
     navigate('ImportAddressWalletScreen', {type});
@@ -42,22 +44,26 @@ export default function ImportAddressWalletBtn() {
       const content = await RNFS.readFile(filePath2, 'utf8');
 
       if (content) {
-        handleImportWallet(JSON.parse(content));
+        setCheckImportFile(JSON.parse(content));
       }
     } catch (error) {
       console.error('Lỗi khi đọc tệp:', error);
     }
   };
 
+  useEffect(() => {
+    handleReadFile();
+  }, []);
+
   const postImportWalletMu = useMutation({
     mutationFn: postImportWallet,
   });
 
-  const handleImportWallet = value => {
+  const handleImportWallet = () => {
     postImportWalletMu.mutate(
       {
-        type: value.secret_phrase ? 'PASSPHRASE' : 'PRIVATE_KEY', // "PRIVATE_KEY" | "PASSPHRASE"
-        value: value.secret_phrase || value.private_key,
+        type: checkImportFile.secret_phrase ? 'PASSPHRASE' : 'PRIVATE_KEY', // "PRIVATE_KEY" | "PASSPHRASE"
+        value: checkImportFile.secret_phrase || checkImportFile.private_key,
       },
       {
         onSuccess: dataInside => {
@@ -127,18 +133,20 @@ export default function ImportAddressWalletBtn() {
           }
         />
 
-        <CustomButton
-          onPress={handleReadFile}
-          text="File đã sao lưu"
-          desc="Sử dụng File đã sao lưu"
-          buttonType="large"
-          isIconComponent
-          iconLeft={
-            <View style={styles.boxIcon}>
-              <IconImportFile />
-            </View>
-          }
-        />
+        {!!checkImportFile && (
+          <CustomButton
+            onPress={handleImportWallet}
+            text="File đã sao lưu"
+            desc="Sử dụng File đã sao lưu"
+            buttonType="large"
+            isIconComponent
+            iconLeft={
+              <View style={styles.boxIcon}>
+                <IconImportFile />
+              </View>
+            }
+          />
+        )}
       </BottomSheet>
     </View>
   );
