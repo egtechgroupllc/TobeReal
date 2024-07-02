@@ -10,7 +10,7 @@ import {
   IconProfile,
   IconVideo,
 } from '../assets/icon/Icon';
-import {HomeMapScreen} from '../components';
+import {HeaderBar, HomeMapScreen} from '../components';
 import CustomImage from '../components/CustomImage';
 import {useLanguage} from '../hooks/useLanguage';
 import NavigationBookings from './NavigationBookings';
@@ -19,6 +19,7 @@ import NavigationNews from './NavigationNews';
 import NavigationProfile from './NavigationProfile';
 import NavigationVideo from './NavigationVideo';
 import {WIDTH} from '../assets/constants/theme';
+import {ProfileScreen} from '../screen/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -121,13 +122,14 @@ export default function BottomTab() {
       />
 
       <Tab.Screen
-        name={'NavigationProfile'}
-        component={NavigationProfile}
+        name={'ProfileScreen'}
+        component={ProfileScreen}
         options={{
           tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
             <IconProfile fill={focused && '#F0B90B'} />
           ),
+          header: props => <HeaderBar {...props} />,
         }}
       />
     </Tab.Navigator>

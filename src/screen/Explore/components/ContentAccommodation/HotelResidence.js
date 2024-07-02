@@ -2,14 +2,15 @@ import {useNavigation} from '@react-navigation/native';
 import React, {memo, useEffect, useMemo, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {scale} from '../../../../assets/constants';
+import {SHADOW, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
+import {InViewport} from '../../../../components';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default memo(function HotelResidence({data, isLoading, country}) {
   const {t} = useLanguage();
-  const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
 
   const title = [t('recent_view')];
@@ -40,28 +41,43 @@ export default memo(function HotelResidence({data, isLoading, country}) {
   if (!(dataNew?.length !== 0) && !isLoading) return null;
   if (!dataNew?.length && !isLoading) return null;
   return (
-    <WrapperContent heading={title}>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={!isLoading ? dataNew : [...Array(4)]}
-        contentContainerStyle={styles.content}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            key={index}
-            seeViewNumber={1.6}
-            isViewMap
-            isStar
-            isRating
-            isDiscount
-            // rating={2}
-            isHeart
-            data={item}
-            isLoading={!item}
-          />
-        )}
-      />
-    </WrapperContent>
+    <InViewport
+      delay={40}
+      loadingMap
+      ComponentLoading={
+        <BoxPlaceItemLoading
+          style={[
+            styles.wrapper,
+            {
+              width: scale(400 / 1.6),
+            },
+            SHADOW,
+          ]}
+        />
+      }>
+      <WrapperContent heading={title}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={!isLoading ? dataNew : [...Array(4)]}
+          contentContainerStyle={styles.content}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              key={index}
+              seeViewNumber={1.6}
+              isViewMap
+              isStar
+              isRating
+              isDiscount
+              // rating={2}
+              isHeart
+              data={item}
+              isLoading={!item}
+            />
+          )}
+        />
+      </WrapperContent>
+    </InViewport>
   );
 });
 

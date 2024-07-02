@@ -30,39 +30,37 @@ export default function BuySell({data}) {
   //   queryFn: () => getListSell({country_id: 241}),
   // });
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          // isSeeAll
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => console.log(item)}
-          heading={title}
-          subHeading={t('There are 1,000,000 Real Estate')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxPlaceItem
-                isHeart
-                isStar
-                textRating={2}
-                data={item}
-                rental="night"
-              />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // isSeeAll
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllBuyScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => console.log(item)}
+        heading={title}
+        subHeading={t('There are 1,000,000 Real Estate')}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxPlaceItem
+              isHeart
+              isStar
+              textRating={2}
+              data={item}
+              rental="night"
+            />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

@@ -41,37 +41,35 @@ export default function FeatureEstate() {
   // }, [listCountry.data?.data]);
   if (!(data?.data?.count !== 0)) return null;
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          // background={images.bgPackageTour}
-          // isSeeAll
-          // worldTour
-          // isCategory
-          // dataCategory={listCountry.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}
-          subHeading={t('explore_popular_estate')}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxFeatureItem isHeart isStar data={item} rental="night" />
-            )}
-          />
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // background={images.bgPackageTour}
+        // isSeeAll
+        // worldTour
+        // isCategory
+        // dataCategory={listCountry.data?.data?.slice(0, 9)}
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllBuyScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => setFilter(item)}
+        heading={title}
+        subHeading={t('explore_popular_estate')}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows}
+          contentContainerStyle={styles.content}
+          renderItem={({item}) => (
+            <BoxFeatureItem isHeart isStar data={item} rental="night" />
+          )}
+        />
+      </WrapperContent>
     </InViewPort>
   );
 }

@@ -3,12 +3,14 @@ import {useQuery} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {getListRent} from '../../../../Model/api/apiAccom';
-import {scale} from '../../../../assets/constants';
+import {SHADOW, scale} from '../../../../assets/constants';
+import {InViewport} from '../../../../components';
 import {useCountry} from '../../../../hooks/useCountry';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatDate} from '../../../../utils/format';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
@@ -41,8 +43,6 @@ export default function AccommodationPremium({currency}) {
   if (!data?.data?.count && !isLoading) return null;
 
   return (
-    // <InViewPort onChange={render => render && setIsRender(render)} delay={160}>
-    //   {isRender && (
     <WrapperContent
       // isSeeAll
       // onPressSeeAll={() =>
@@ -56,29 +56,41 @@ export default function AccommodationPremium({currency}) {
       heading={title}
       subHeading={t('find_popular')}
       styleWrapper={{backgroundColor: '#f8eede'}}>
-      <FlatList
-        horizontal
-        scrollEnabled={!isLoading}
-        showsHorizontalScrollIndicator={false}
-        data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
-        contentContainerStyle={styles.content}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            key={index}
-            isHeart
-            isDiscount
-            isStar
-            isRating
-            data={item}
-            seeViewNumber={1.6}
-            isViewMap
-            isLoading={isLoading}
+      <InViewport
+        loadingMap
+        ComponentLoading={
+          <BoxPlaceItemLoading
+            style={[
+              styles.wrapper,
+              {
+                width: scale(400 / 1.6),
+              },
+              SHADOW,
+            ]}
           />
-        )}
-      />
+        }>
+        <FlatList
+          horizontal
+          scrollEnabled={!isLoading}
+          showsHorizontalScrollIndicator={false}
+          data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
+          contentContainerStyle={styles.content}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              key={index}
+              isHeart
+              isDiscount
+              isStar
+              isRating
+              data={item}
+              seeViewNumber={1.6}
+              isViewMap
+              isLoading={isLoading}
+            />
+          )}
+        />
+      </InViewport>
     </WrapperContent>
-    //   )}
-    // </InViewPort>
   );
 }
 

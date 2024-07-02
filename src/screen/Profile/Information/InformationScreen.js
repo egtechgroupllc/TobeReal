@@ -1,53 +1,105 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-import MainAuth from '../../../components/MainAuth';
-import TopProfile from '../components/TopProfile';
 import {useNavigation} from '@react-navigation/native';
-import MidContent from './components/MidContent';
-import BotContent from './components/BotContent';
-import HeaderAvatar from '../components/HeaderAvatar';
-import {useLanguage} from '../../../hooks/useLanguage';
-import {useAuthentication} from '../../../hooks/useAuthentication';
-import {useQuery} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getProfile} from '../../../Model/api/common';
+import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {IconNext} from '../../../assets/icon/Icon';
+import {CustomText, MainWrapper} from '../../../components';
+import {useAuthentication} from '../../../hooks/useAuthentication';
+import {useCountry} from '../../../hooks/useCountry';
+import {useLanguage} from '../../../hooks/useLanguage';
+import {formatDate} from '../../../utils/format';
 
 export default function InformationScreen() {
   const {t} = useLanguage();
-  const {token} = useAuthentication();
 
-  const navigation = useNavigation();
-  const goBack = () => {
-    navigation.goBack();
-  };
-  const changeName = () => {};
-  const notify = () => {};
-  const onPressCamera = () => {};
+  const queryClient = useQueryClient();
+  const datePro = queryClient.getQueryData(['user', 'profile'])?.data;
 
-  const {isLoading, isError, data, isPending, error} = useQuery({
-    queryKey: ['user', 'profile'],
-    queryFn: getProfile,
-    enabled: !!token,
-  });
+  const {country} = useCountry();
 
   return (
-    <MainAuth>
-      {/* <HeaderAvatar
-        noti={true}
-        notify={notify}
-        goback={true}
-        onPress={goBack}
-        subHeading={t('personal_information')}
-      /> */}
-      <TopProfile
-        name={data?.data?.username}
-        changeName={true}
-        onPressChangeName={changeName}
-        camera={true}
-        onPressCamera={onPressCamera}
-      />
-      {/* <MidContent data={data?.data} /> */}
-      <BotContent data={data?.data} />
-    </MainAuth>
+    <MainWrapper
+      headerTitle={t('personal_information')}
+      noImgColor
+      styleContent={{
+        paddingHorizontal: scale(12),
+      }}>
+      <View style={styles.wrapper}>
+        <Row title={t('phone')} value={datePro?.phone} />
+        <Row title={'Email'} value={datePro?.email} />
+        <Row
+          title={t('date')}
+          value={formatDate(datePro?.createdAt)}
+          disabled
+        />
+        <Row
+          title={t('country')}
+          value={country?.name && `${country?.flag} ${country?.name}`}
+          desc={
+            'Ban đầu, hệ thống thiết lập khu vực tài khoản của bạn dựa tren thời gian và địa điểm đăng ký'
+          }
+        />
+      </View>
+    </MainWrapper>
   );
 }
+
+const Row = ({title, value, desc, disabled, onPress}) => {
+  return (
+    <TouchableOpacity disabled={disabled} activeOpacity={0.7} onPress={onPress}>
+      <View style={styles.row}>
+        <CustomText textType="medium" size={SIZES.xMedium}>
+          {title}
+        </CustomText>
+        <View style={styles.right}>
+          {value && (
+            <CustomText
+              color={COLORS.textSub}
+              ellipsizeMode="middle"
+              size={scale(13)}
+              numberOfLines={1}
+              style={{flex: 1, textAlign: 'right'}}>
+              {value}
+            </CustomText>
+          )}
+          {!disabled && <IconNext size={scale(10)} fill={COLORS.textSub} />}
+        </View>
+      </View>
+      {desc && (
+        <CustomText
+          color={COLORS.textSub}
+          size={scale(13)}
+          style={{width: '96%'}}>
+          {desc}
+        </CustomText>
+      )}
+    </TouchableOpacity>
+  );
+};
+const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: COLORS.white,
+    width: '100%',
+    borderRadius: scale(10),
+    padding: scale(12),
+    rowGap: scale(6),
+    marginTop: scale(14),
+  },
+  row: {
+    flexDirection: 'row',
+    columnGap: scale(30),
+    alignItems: 'center',
+    paddingVertical: scale(10),
+    justifyContent: 'space-between',
+  },
+  right: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(8),
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+});

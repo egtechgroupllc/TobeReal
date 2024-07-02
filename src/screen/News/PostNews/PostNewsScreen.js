@@ -1,17 +1,13 @@
-import React from 'react';
-import MainAuth from '../../../components/MainAuth';
-import Header from '../components/Header';
-import TabContent from './components/TabContent';
-import MainWrapper from '../../../components/MainWrapper';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {TouchableOpacity, View} from 'react-native';
-import CustomText from '../../../components/CustomText';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
-import {showMess} from '../../../assets/constants/Helper';
-import {postLogout} from '../../../Model/api/auth';
-import {useAuthentication} from '../../../hooks/useAuthentication';
+import {useQueryClient} from '@tanstack/react-query';
+import React from 'react';
+import {TouchableOpacity, View} from 'react-native';
+
+import {COLORS, SIZES, scale} from '../../../assets/constants';
+import CustomText from '../../../components/CustomText';
+import MainWrapper from '../../../components/MainWrapper';
 import {useLanguage} from '../../../hooks/useLanguage';
+import TabContent from './components/TabContent';
 
 export default function PostNewsScreen() {
   const queryClient = useQueryClient();
@@ -20,8 +16,7 @@ export default function PostNewsScreen() {
   const {t} = useLanguage();
 
   const {navigate} = useNavigation();
-  const goBack = () => {};
-  const upgrade = () => {};
+
   const handleRegisterPartner = () => {
     navigate('NavigationAuth', {
       screen: 'RegisterPartnerScreen',

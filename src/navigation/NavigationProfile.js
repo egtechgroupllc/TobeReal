@@ -2,10 +2,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import HeaderBar from '../components/HeaderBar';
 import routerProfile from '../router/routerProfile';
-
 const Stack = createNativeStackNavigator();
 
-export default function NavigationProfile() {
+export default function NavigateWalletToken() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -17,7 +16,7 @@ export default function NavigationProfile() {
           key={router.name}
           name={router.name}
           component={router.component}
-          options={router.options}
+          options={router?.options}
         />
       ))}
     </Stack.Navigator>

@@ -4,9 +4,9 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {postChangePassword} from '../../../../Model/api/auth';
-import {scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
-import {CustomButton, CustomInput} from '../../../../components';
+import {CustomButton, CustomInput, CustomText} from '../../../../components';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {
   confirmField,
@@ -34,11 +34,15 @@ export default function Content() {
           reset();
         }
       },
+      onError: err => console.log(err),
     });
   };
 
   return (
     <View style={styles.container}>
+      <CustomText textType="bold" size={SIZES.large}>
+        {t('change_password')}
+      </CustomText>
       <CustomInput
         label={t('old_password')}
         control={control}
@@ -47,6 +51,11 @@ export default function Content() {
         placeholder={t('enter_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
+        sizeInput="medium"
+        styleTextLabel={styles.styleLabel}
+        styleText={{
+          fontSize: SIZES.xMedium,
+        }}
       />
 
       <CustomInput
@@ -57,6 +66,11 @@ export default function Content() {
         placeholder={t('enter_new_password')}
         rules={validateMinLengthText(t('use_6_characters'), 6)}
         style={styles.textInput}
+        sizeInput="medium"
+        styleTextLabel={styles.styleLabel}
+        styleText={{
+          fontSize: SIZES.xMedium,
+        }}
       />
 
       <CustomInput
@@ -70,6 +84,11 @@ export default function Content() {
           confirmField(t('password_not_match'), watch('to')),
         ]}
         style={styles.textInput}
+        styleTextLabel={styles.styleLabel}
+        sizeInput="medium"
+        styleText={{
+          fontSize: SIZES.xMedium,
+        }}
       />
 
       <CustomButton
@@ -85,20 +104,21 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '90%',
+    alignItems: 'flex-start',
     rowGap: scale(14),
     marginTop: '20%',
+    paddingHorizontal: scale(12),
   },
   button: {
-    width: '80%',
+    width: '100%',
     marginTop: scale(50),
   },
 
   textInput: {
-    backgroundColor: '#f1f1f2',
-    borderRadius: scale(8),
-    borderColor: '#1618230f',
+    backgroundColor: COLORS.grey50,
+    borderWidth: 0,
+  },
+  styleLabel: {
+    textType: 'medium',
   },
 });

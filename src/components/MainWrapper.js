@@ -20,8 +20,9 @@ export default function MainWrapper({
   onScroll = () => {},
   headerTitle,
   headerRight,
+  headerShown = true,
   headerTitleComponent,
-  headerStyle,
+  optionsHeader,
 }) {
   const headerHeight = useHeaderHeight();
   const queryClient = useQueryClient();
@@ -36,16 +37,34 @@ export default function MainWrapper({
   const Component = noImgColor ? View : CustomImage;
 
   useLayoutEffect(() => {
-    if (headerTitle || headerRight || headerTitleComponent) {
+    if (headerTitle || headerRight || headerTitleComponent || optionsHeader) {
+      const _headerTitleComponent = headerTitleComponent
+        ? {
+            headerTitleComponent: () => headerTitleComponent,
+          }
+        : {};
+      const _headerRight = headerRight
+        ? {
+            headerRight: () => headerRight,
+          }
+        : {};
+
       setOptions({
-        headerShown: true,
+        headerShown: headerShown,
         headerTitle: headerTitle || '',
-        headerRight: () => headerRight,
-        headerTitleComponent: () => headerTitleComponent,
-        headerStyle: headerStyle,
+        ..._headerRight,
+        ..._headerTitleComponent,
+        ...optionsHeader,
       });
     }
-  }, [headerTitle, headerRight, headerTitleComponent, setOptions, headerStyle]);
+  }, [
+    headerTitle,
+    headerRight,
+    headerTitleComponent,
+    setOptions,
+    optionsHeader,
+    headerShown,
+  ]);
 
   return (
     <SafeAreaView

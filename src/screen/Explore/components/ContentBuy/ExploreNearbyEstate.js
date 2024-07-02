@@ -40,46 +40,44 @@ export default function ExploreNearbyEstate({country}) {
     setFilter(listProvince.data?.data?.[0]);
   }, [listProvince?.data?.data]);
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={70}>
-      {isRender && (
-        <WrapperContent
-          // background={images.bgPackageTour}
-          // isSeeAll
-          // worldTour
-          isCategory
-          dataCategory={listProvince.data?.data?.slice(0, 9)}
-          onPressSeeAll={() =>
-            navigate('NoBottomTab', {
-              screen: 'SeeAllBuyScreen',
-              params: {
-                title: title || '',
-              },
-            })
-          }
-          onPressCategory={item => setFilter(item)}
-          heading={title}
-          // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-          styleWrapper={{backgroundColor: 'transparent'}}>
-          {data?.data?.count !== 0 ? (
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={data?.data?.rows}
-              contentContainerStyle={styles.content}
-              renderItem={({item}) => (
-                <BoxExploreEstate isHeart isStar data={item} rental="night" />
-              )}
-            />
-          ) : (
-            <View style={{alignItems: 'center', rowGap: scale(10)}}>
-              <IconBookings width={scale(50)} height={scale(50)} />
-              <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-                {t('no_data')}
-              </CustomText>
-            </View>
-          )}
-        </WrapperContent>
-      )}
+    <InViewPort>
+      <WrapperContent
+        // background={images.bgPackageTour}
+        // isSeeAll
+        // worldTour
+        isCategory
+        dataCategory={listProvince.data?.data?.slice(0, 9)}
+        onPressSeeAll={() =>
+          navigate('NoBottomTab', {
+            screen: 'SeeAllBuyScreen',
+            params: {
+              title: title || '',
+            },
+          })
+        }
+        onPressCategory={item => setFilter(item)}
+        heading={title}
+        // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
+        styleWrapper={{backgroundColor: 'transparent'}}>
+        {data?.data?.count !== 0 ? (
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={data?.data?.rows}
+            contentContainerStyle={styles.content}
+            renderItem={({item}) => (
+              <BoxExploreEstate isHeart isStar data={item} rental="night" />
+            )}
+          />
+        ) : (
+          <View style={{alignItems: 'center', rowGap: scale(10)}}>
+            <IconBookings width={scale(50)} height={scale(50)} />
+            <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
+              {t('no_data')}
+            </CustomText>
+          </View>
+        )}
+      </WrapperContent>
     </InViewPort>
   );
 }

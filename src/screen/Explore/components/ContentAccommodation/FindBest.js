@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
+
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {getListCountry} from '../../../../Model/api/common';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
@@ -76,27 +77,40 @@ export default function FindBest({country, currency}) {
         justifyContent: 'center',
         minHeight: scale(230),
       }}>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={!isLoading ? data?.data?.rows : [...Array(4)]}
-        contentContainerStyle={styles.content}
-        ListEmptyComponent={<EmptyData />}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            key={index}
-            seeViewNumber={1.6}
-            isViewMap
-            isStar
-            isRating
-            isDiscount
-            rating={2}
-            isHeart
-            data={item}
-            isLoading={isLoading}
+      <InViewport
+        loadingMap
+        ComponentLoading={
+          <BoxPlaceItemLoading
+            style={[
+              {
+                width: scale(400 / 1.6),
+              },
+              SHADOW,
+            ]}
           />
-        )}
-      />
+        }>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={!isLoading ? data?.data?.rows : [...Array(4)]}
+          contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              key={index}
+              seeViewNumber={1.6}
+              isViewMap
+              isStar
+              isRating
+              isDiscount
+              rating={2}
+              isHeart
+              data={item}
+              isLoading={isLoading}
+            />
+          )}
+        />
+      </InViewport>
     </WrapperContent>
   );
 }
@@ -106,7 +120,7 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
-    minHeight: scale(230),
+    minHeight: scale(250),
     minWidth: '100%',
   },
 });

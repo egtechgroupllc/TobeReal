@@ -7,8 +7,11 @@ export default function FindAccommodationStart() {
   return (
     <View
       style={{
-        paddingHorizontal: scale(16),
+        paddingHorizontal: scale(12),
         rowGap: scale(12),
+        backgroundColor: '#fff',
+        paddingVertical: scale(12),
+        borderRadius: scale(6),
       }}>
       <View
         style={{

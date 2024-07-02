@@ -9,9 +9,7 @@ export default function NoBottomTab() {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        contentStyle: {
-          backgroundColor: '#f7f9fa',
-        },
+
         header: props => <HeaderBar {...props} />,
       }}>
       {routerNoBottomTab.map(router => (

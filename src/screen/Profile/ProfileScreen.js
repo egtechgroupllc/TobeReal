@@ -29,11 +29,11 @@ export default function ProfileScreen() {
   return (
     <MainWrapper
       refreshControl
-      headerStyle={{
-        minHeight: scale(120),
-        paddingTop: scale(10),
+      optionsHeader={{
+        headerStyle: {minHeight: scale(120), paddingTop: scale(10)},
       }}
-      headerTitleComponent={!token && <HeaderNoToken />}
+      headerTitleComponent={<HeaderNoToken />}
+      headerShown={!token}
       styleContent={{
         paddingHorizontal: scale(12),
       }}>

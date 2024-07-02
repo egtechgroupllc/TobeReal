@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   getListTypeEstateSell,
@@ -17,7 +17,7 @@ import {
   IconVilla,
   IconWorld,
 } from '../../../../assets/icon/Icon';
-import {Category, TabSelect} from '../../../../components';
+import {Category, InViewport, TabSelect} from '../../../../components';
 import InViewPort from '../../../../components/InViewport';
 import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -160,77 +160,70 @@ export default function FindAccommodation() {
     setSelectedId(typeId);
   }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
 
+  const handleChangeTab = useCallback(value => {
+    setTabSelect(value?.id);
+    tabSelect !== 'RENT' && setCategory(listRental[0]);
+  }, []);
+
   return (
     <MainWrapper refreshControl noSafeArea>
-      <InViewPort
-        onChange={render => {
-          render && setIsRender(render);
-        }}
-        delay={20}>
-        <View
-          style={{
-            width: WIDTH.widthContain,
-            alignSelf: 'center',
-            marginTop: scale(20),
-          }}>
+      <View
+        style={{
+          width: WIDTH.widthContain,
+          alignSelf: 'center',
+          marginTop: scale(20),
+        }}>
+        <InViewPort ComponentLoading={<FindAccommodationStart />}>
           <TabSelect
             isObj
             data={listMenu}
-            onChange={value => {
-              setTabSelect(value?.id);
-              tabSelect !== 'RENT' && setCategory(listRental[0]);
-            }}
+            onChange={handleChangeTab}
             renderView={() => (
               <>
-                {isRender ? (
-                  <>
-                    <View style={styles.category}>
-                      {tabSelect === 'RENT' && (
-                        <Category
-                          isObject
-                          indexDefault={1}
-                          data={listRental}
-                          onPress={value => setCategory(value)}
-                        />
-                      )}
-                      <OptionAccommodation
-                        styleIcon={{color: '#BCBCBC'}}
-                        // multiSelect
-                        // isSelectAll
-                        onSelect={value => setSelectedId(value.id)}
-                        keyTextView={'name'}
-                        data={
-                          tabSelect === 'RENT'
-                            ? listRent || typeRent?.data?.data
-                            : tabSelect === 'BUY'
-                            ? listBuy || typeBuy?.data?.data
-                            : // : tabSelect === 'TOUR'
-                              // ? listTour
-                              []
-                        }
-                      />
-                    </View>
-                    {tabSelect !== 'TOUR' ? (
-                      <FindContent
-                        isBuy={tabSelect === 'BUY'}
-                        rental={category?.id}
-                        dataFind={{type: selectedId, menu: tabSelect}}
-                      />
-                    ) : (
-                      <FindContent
-                        tour
-                        dataFind={{type: selectedId, menu: tabSelect}}
-                      />
-                    )}
-                  </>
+                <View style={styles.category}>
+                  {tabSelect === 'RENT' && (
+                    <Category
+                      isObject
+                      indexDefault={1}
+                      data={listRental}
+                      onPress={value => setCategory(value)}
+                    />
+                  )}
+                  <OptionAccommodation
+                    styleIcon={{color: '#BCBCBC'}}
+                    // multiSelect
+                    // isSelectAll
+                    onSelect={value => setSelectedId(value.id)}
+                    keyTextView={'name'}
+                    data={
+                      tabSelect === 'RENT'
+                        ? listRent || typeRent?.data?.data
+                        : tabSelect === 'BUY'
+                        ? listBuy || typeBuy?.data?.data
+                        : []
+                      // : tabSelect === 'TOUR'
+                      // ? listTour
+                      // : []
+                    }
+                  />
+                </View>
+                {tabSelect !== 'TOUR' ? (
+                  <FindContent
+                    isBuy={tabSelect === 'BUY'}
+                    rental={category?.id}
+                    dataFind={{type: selectedId, menu: tabSelect}}
+                  />
                 ) : (
-                  <FindAccommodationStart />
+                  <FindContent
+                    tour
+                    dataFind={{type: selectedId, menu: tabSelect}}
+                  />
                 )}
               </>
             )}
           />
-        </View>
-      </InViewPort>
+        </InViewPort>
+      </View>
 
       {tabSelect === 'TOUR' ? (
         <ContentTour />

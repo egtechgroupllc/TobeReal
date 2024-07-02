@@ -1,10 +1,11 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {Fragment, useState} from 'react';
-import RecommendedUnitItem from './RecommendedUnitItem';
+import React from 'react';
+import {FlatList, StyleSheet} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
-import WrapperContent from '../WrapperContent';
-import {useLanguage} from '../../../../hooks/useLanguage';
+import {Skeleton} from '../../../../components';
 import InViewPort from '../../../../components/InViewport';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import WrapperContent from '../WrapperContent';
+import RecommendedUnitItem from './RecommendedUnitItem';
 const dataInternational = [
   {
     id: 1,
@@ -72,32 +73,37 @@ export default function BigCity({
   renderReply = true,
   noContain,
 }) {
-  const [isRender, setIsRender] = useState(!renderReply);
-
   return (
-    <InViewPort onChange={render => render && setIsRender(render)} delay={300}>
-      {isRender && (
-        <ComponentContain noContain={noContain}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={dataInternational}
-            contentContainerStyle={[styles.content, styleWrapper]}
-            renderItem={({item, index}) => (
-              <RecommendedUnitItem
-                viewShow={2.5}
-                isCenter
-                title={item?.name}
-                data={item}
-                img={item?.src}
-                styesWrapper={styleItem}
-                styesTextTitle={styesTextTitle}
-                onPress={() => onPress && onPress({item, index})}
-              />
-            )}
-          />
-        </ComponentContain>
-      )}
+    <InViewPort
+      loadingMap
+      ComponentLoading={
+        <Skeleton
+          style={{
+            width: scale(400 / 2.5),
+            height: scale(400 / 2.5),
+          }}
+        />
+      }>
+      <ComponentContain noContain={noContain}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={dataInternational}
+          contentContainerStyle={[styles.content, styleWrapper]}
+          renderItem={({item, index}) => (
+            <RecommendedUnitItem
+              viewShow={2.5}
+              isCenter
+              title={item?.name}
+              data={item}
+              img={item?.src}
+              styesWrapper={styleItem}
+              styesTextTitle={styesTextTitle}
+              onPress={() => onPress && onPress({item, index})}
+            />
+          )}
+        />
+      </ComponentContain>
     </InViewPort>
   );
 }

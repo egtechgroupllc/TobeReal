@@ -17,6 +17,7 @@ import TopContent from './Withdraw/TopContent';
 export default function WithdrawScreen() {
   const {t} = useLanguage();
   const {currency} = useCountry();
+  const {navigate, setOptions} = useNavigation();
 
   const {control, handleSubmit, setValue, watch} = useForm({
     defaultValues: {
@@ -26,7 +27,6 @@ export default function WithdrawScreen() {
 
   const queryClient = useQueryClient();
 
-  const {navigate, setOptions} = useNavigation();
   const withdrawMutation = useMutation({
     mutationFn: postConfirmWithdraw,
   });

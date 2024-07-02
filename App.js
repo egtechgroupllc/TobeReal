@@ -23,7 +23,12 @@ import CustomImage from './src/components/CustomImage';
 import Loading from './src/components/Loading/Loading';
 import {AuthProvider} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
-import {BottomTab, NavigateWalletToken, NoBottomTab} from './src/navigation';
+import {
+  BottomTab,
+  NavigateWalletToken,
+  NavigationProfile,
+  NoBottomTab,
+} from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 
 import {CountryProvider} from './src/context/CountryContent';
@@ -147,6 +152,7 @@ const Layout = () => {
         />
       )}
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
+      <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
       <Stack.Screen
         name="NavigateWalletToken"
         component={NavigateWalletToken}

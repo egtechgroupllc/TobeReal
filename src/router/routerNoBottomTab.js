@@ -43,7 +43,6 @@ import {
   ConfirmDepositScreen,
   DepositScreen,
   DetailHistoryDeposit,
-  FinancialScreen,
 } from '../screen/Profile/FinancialManagement';
 import ListBankScreen from '../screen/Profile/FinancialManagement/Withdraw/ListBankScreen';
 import {
@@ -191,13 +190,7 @@ export default routerNoBottomTab = [
       },
     },
   },
-  {
-    name: 'FinancialScreen',
-    component: FinancialScreen,
-    options: {
-      headerShown: false,
-    },
-  },
+
   {
     name: 'PostReviewScreen',
     component: PostReviewScreen,

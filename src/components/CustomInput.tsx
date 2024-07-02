@@ -154,7 +154,6 @@ export default forwardRef(function CustomInput(
                 secureTextEntry={viewPassword}
                 editable={!onPress}
                 autoCapitalize="none"
-                
                 {...props}
                 onChangeText={text => {
                   const valueText = enableFormatNum ? text.trim() : text;
