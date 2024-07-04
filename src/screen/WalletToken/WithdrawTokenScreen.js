@@ -25,7 +25,7 @@ export default function WithdrawTokenScreen() {
   const {control, handleSubmit} = useForm({});
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: t('withdraw_token'),
+      headerTitle: t('withdraw_point_voucher'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,7 +37,6 @@ export default function WithdrawTokenScreen() {
   const handleWidraw = value => {
     withdrawMutation.mutate(value, {
       onSuccess: dataInside => {
-        console.log(dataInside);
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
           queryClient.invalidateQueries(['user', 'profile']);
@@ -67,15 +66,21 @@ export default function WithdrawTokenScreen() {
             TBH
           </CustomText>
         </View>
-        <CustomImage
-          source={images.logo1}
-          style={{height: scale(120)}}
-          resizeMode="contain"
-        />
+        <View style={styles.icon}>
+          <CustomImage
+            isAvatar
+            source={images.logoTBH}
+            style={{
+              height: scale(120),
+              aspectRatio: 1,
+            }}
+            resizeMode="contain"
+          />
+        </View>
         <CustomInput
           maxLength={15}
           label={t('enter_amount_token')}
-          styleTextLabel={{fontSize: SIZES.medium}}
+          styleTextLabel={{fontSize: SIZES.xMedium}}
           style={{...styles.boxItem, borderWidth: 0}}
           styleWrapper={{paddingVertical: scale(10)}}
           control={control}
@@ -85,7 +90,7 @@ export default function WithdrawTokenScreen() {
         />
         <CustomButton
           onPress={handleSubmit(handleWidraw)}
-          text={t('withdraw')}
+          text={t('confirm')}
           styleWrapper={{alignSelf: 'center'}}
           style={{width: '50%'}}
         />
@@ -129,5 +134,14 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
     columnGap: scale(14),
     backgroundColor: COLORS.grey50,
+  },
+  icon: {
+    height: scale(140),
+    width: scale(140),
+    backgroundColor: COLORS.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: scale(99),
+    alignSelf: 'center',
   },
 });

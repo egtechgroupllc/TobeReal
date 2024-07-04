@@ -412,7 +412,7 @@
   "view_room": "Tingnan ang Silid",
   "review": "Review",
   "domestic_tour": "Lokal na tour",
-  "my_identify_address": "Aking pagkakakilanlan address",
+  "my_wallet_address": "Ang address ng aking pitaka",
   "select_country": "Piliin ang bansa",
   "please_select_country": "Mangyaring piliin ang bansa at wika upang magpatuloy",
   "please_choose_one": "Mangyaring pumili ng isa sa mga paraan ng pagbabayad sa ibaba",
@@ -1076,12 +1076,12 @@
   "listed_price_room": "Nakatalang presyo ng kwartong ito",
   "price_after_policy": "Presyo pagkatapos ng paglalapat ng patakaran",
   "cancel_link_policy": "Kanselahin ang pag-link ng patakaran",
-  "enter_amount_token": "Ilagay ang halaga ng token",
-  "enter_amount_you_want_withdraw": "Ilagay ang halaga na nais mong i-withdraw",
+  "enter_amount_token": "Ilagay ang halaga",
+  "enter_amount_you_want_withdraw": "Ilagay ang halagang nais mong i-withdraw",
   "look_up_transaction": "Hanapin ang kasaysayan ng transaksyon",
   "token_balance_available": "Balanse ng TBH (magagamit upang i-withdraw sa pitaka)",
   "active_to_use_wallet": "I-activate upang magamit ang ToBeChain Wallet",
-  "active_3_types_wallet": "I-activate ang 3 uri ng mga pitaka: Saveloka, ToBeChain at tamasahin ang mabilis, ligtas na mga pagbabayad",
+  "active_2_types_wallet": "Aktibo ang 2 uri ng wallet: SavePay, cryptocurrency wallet at mag-enjoy ng mabilis at ligtas na pagbabayad",
   "congratulate_on_receiving_coin": "Binabati kita sa pagtanggap ng TBC coin!",
   "you_will_automatic_transfer": "Ikaw ay awtomatikong ililipat {'\n'} sa screen ng kasaysayan ng booking sa {'\n'}",
   "your_transaction_has_been_canceled": "Ang iyong transaksyon ay nakansela dahil sa {'\n'} isang error sa panahon ng proseso ng pag-book. {'\n'}Mangyaring subukan muli!",
@@ -1094,8 +1094,7 @@
   "available_voucher_left": "Natitirang magagamit na voucher",
 
   "withdraw_token": "I-withdraw ang token",
-  "wallet_manage": "Pamamahala ng wallet",
-  "history_token_data": "Kasaysayan ng datos ng token",
+  "manage_point_voucher": "Pamamahala ng point voucher",
   "your_voucher": "Ang iyong voucher",
   "hotel_voucher": "Mga voucher ng hotel",
   "there_are_no_voucher": "Walang magagamit na voucher!",
@@ -1119,7 +1118,7 @@
   "paste": "I-paste",
 
   "this_deposit_address": "Ang address na ito para sa deposito ay tumatanggap lamang ng",
-  "dont_deposit_other": "huwag magdeposito ng ibang mga coin dito",
+  "dont_deposit_other": "huwag magdeposito ng ibang uri dito",
   "add_existing_wallet": "Magdagdag ng umiiral na wallet",
   "import_existing_wallet": "I-import ang umiiral na wallet",
   "pass_phrase": "Pass phrase",
@@ -1128,5 +1127,20 @@
   "backup_file": "Backup file",
   "use_backup_file": "Gamitin ang backup file",
   "new_wallet_recovery_phrase": "Bagong wallet at recovery passphrase",
-  "close": "Isara"
+  "close": "Isara",
+
+  "cryptocurrency_wallet": "Cryptocurrency wallet",
+  "cryptocurrency_wallet_manage": "Pamamahala ng cryptocurrency wallet",
+  "withdraw_point_voucher": "Tarik voucher poin",
+  "history_transaction_appear_here": "Ang kasaysayan ng transaksyon ay lilitaw dito",
+
+  "copy": "Kopya",
+  "deposit_fee": "Bayad sa deposito",
+  "send": "Ipadala",
+
+  "this_your_wallet_address": "Ito ang iyong wallet address",
+  "this_is_type_point": "Ito ang mga uri ng puntos na ginagamit sa app",
+  "this_is_wallet_manage": "Ito ang pamamahala ng wallet ng voucher point",
+  "help_center": "Sentro ng tulong",
+  "how_to_add_tobechain": "Paano idagdag ang TobeChain sa MetaMask?"
 }

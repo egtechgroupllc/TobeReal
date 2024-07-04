@@ -22,7 +22,6 @@ import SortBy from './Header/SortBy';
 import StartAccom from './Header/StartAccom';
 import TypeAccommoda from './Header/TypeAccommoda';
 import TypeEstate from './Header/TypeEstate';
-
 export default memo(function MapHeader({
   onFilter = () => {},
   accom,

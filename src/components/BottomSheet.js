@@ -10,7 +10,12 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {SHADOW, SIZES, scale} from '../assets/constants';

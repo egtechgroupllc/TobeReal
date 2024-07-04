@@ -112,6 +112,7 @@ export default function InfoDetail({data}) {
       </View>
       {isOpen && (
         <QRWalletBlockChain
+          hotelAddress
           data={data}
           open={isOpen}
           onClose={() => setIsOpen(false)}

@@ -49,7 +49,7 @@ export default function ImportAddressWalletScreen({route}) {
           if (dataInside?.status) {
             queryClient.invalidateQueries(['user', 'profile']);
             queryClient.invalidateQueries(['user', 'wallet', 'balance']);
-            navigate('ProfileScreen');
+            navigate('WalletTokenScreen');
           }
         },
       },

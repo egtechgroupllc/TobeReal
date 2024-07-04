@@ -50,9 +50,13 @@ import {
   ListAccommodationSearchScreen,
 } from '../screen/Search';
 import {ListVideoInfluencerScreen} from '../screen/Video';
+import DepositTokenScreen from '../screen/WalletToken/DepositTokenScreen';
+import DetailTokenScreen from '../screen/WalletToken/DetailTokenScreen';
 import WithdrawTokenScreen from '../screen/WalletToken/WithdrawTokenScreen';
-import HistoryTokenData from '../screen/WalletToken/components/HistoryTokenData';
+import HistoryTokenDataScreen from '../screen/WalletToken/HistoryTokenDataScreen';
+import HistoryTokenData from '../screen/WalletToken/HistoryTokenDataScreen';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
+import HelpCenterTokenScreen from '../screen/WalletToken/HelpCenterTokenScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -285,7 +289,19 @@ export default routerNoBottomTab = [
     component: WithdrawTokenScreen,
   },
   {
-    name: 'HistoryTokenData',
-    component: HistoryTokenData,
+    name: 'HistoryTokenDataScreen',
+    component: HistoryTokenDataScreen,
+  },
+  {
+    name: 'DepositTokenScreen',
+    component: DepositTokenScreen,
+  },
+  {
+    name: 'DetailTokenScreen',
+    component: DetailTokenScreen,
+  },
+  {
+    name: 'HelpCenterTokenScreen',
+    component: HelpCenterTokenScreen,
   },
 ];

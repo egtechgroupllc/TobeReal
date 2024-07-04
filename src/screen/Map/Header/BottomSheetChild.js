@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import {BottomSheetFlatList, BottomSheetTextInput} from '@gorhom/bottom-sheet';
 import React, {
   useCallback,
   useDeferredValue,
@@ -63,10 +63,10 @@ export default function BottomSheetChild({
   }, [data?.data?.data, deferredValue]);
   return (
     <>
-      <CustomInput
+      <BottomSheetTextInput
         placeholder={t('Search province')}
         onChangeText={setSearch}
-        styleWrapper={{width: '95%', alignSelf: 'center'}}
+        style={styles.input}
       />
       <BottomSheetFlatList
         ref={flatListRef}
@@ -116,5 +116,19 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
     backgroundColor: 'transparent',
     paddingHorizontal: SIZES.large,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    borderStyle: 'solid',
+    paddingHorizontal: scale(8),
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 12,
+    columnGap: scale(8),
+    justifyContent: 'center',
+    width: '95%',
+    height: scale(38),
+    alignSelf: 'center',
   },
 });

@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Alert, Share, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {getProfile} from '../../Model/api/common';
@@ -10,16 +10,23 @@ import {
   IconUnViewablePassword,
   IconViewablePassword,
 } from '../../assets/icon/Icon';
-import {CustomText, MainWrapper} from '../../components';
+import {CustomButton, CustomText, MainWrapper} from '../../components';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ShowPrivateKeyAndSecretPhrase() {
   const {t} = useLanguage();
+  const {setOptions, goBack} = useNavigation();
 
   const {token} = useAuthentication();
   const [secure, setSecure] = useState(true);
-
+  useLayoutEffect(() => {
+    setOptions({
+      headerTitle: t('secret_phrase'),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {isLoading, data} = useQuery({
     queryKey: ['user', 'profile'],
     queryFn: () => getProfile(token),
@@ -118,6 +125,12 @@ export default function ShowPrivateKeyAndSecretPhrase() {
           </CustomText>
         </View>
       </View>
+      <CustomButton
+        onPress={goBack}
+        text={t('confirm')}
+        style={{width: '50%'}}
+        styleWrapper={{alignSelf: 'center', marginTop: scale(30)}}
+      />
     </MainWrapper>
   );
 }

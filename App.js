@@ -34,6 +34,12 @@ import NavigationAuth from './src/navigation/NavigationAuth';
 import {CountryProvider} from './src/context/CountryContent';
 import {useCountry} from './src/hooks/useCountry';
 import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
+import {
+  CopilotProvider,
+  CopilotStep,
+  useCopilot,
+  walkthroughable,
+} from 'react-native-copilot';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -89,45 +95,51 @@ export default function App() {
   );
 
   return (
-    <GestureHandlerRootView style={styles.wrapper}>
-      <SafeAreaProvider
-        style={{
-          backgroundColor: COLORS.white,
-        }}>
-        <NavigationContainer>
-          <QueryClientProvider client={queryClient}>
-            <CountryProvider>
-              {splashScreenVisible ? (
-                <SplashScreen />
-              ) : (
-                <KeyboardProvider>
-                  <Loading />
-                  <LanguageProvider>
-                    <AuthProvider>
-                      <FlashMessage
-                        position={
-                          Platform.OS === 'ios'
-                            ? 'top'
-                            : {top: StatusBar.currentHeight, left: 0, right: 0}
-                        }
-                        floating={Platform.OS !== 'ios'}
-                      />
-                      <BottomSheetModalProvider>
-                        <StatusBar
-                          barStyle="dark-content"
-                          backgroundColor={COLORS.primary}
+    <CopilotProvider>
+      <GestureHandlerRootView style={styles.wrapper}>
+        <SafeAreaProvider
+          style={{
+            backgroundColor: COLORS.white,
+          }}>
+          <NavigationContainer>
+            <QueryClientProvider client={queryClient}>
+              <CountryProvider>
+                {splashScreenVisible ? (
+                  <SplashScreen />
+                ) : (
+                  <KeyboardProvider>
+                    <Loading />
+                    <LanguageProvider>
+                      <AuthProvider>
+                        <FlashMessage
+                          position={
+                            Platform.OS === 'ios'
+                              ? 'top'
+                              : {
+                                  top: StatusBar.currentHeight,
+                                  left: 0,
+                                  right: 0,
+                                }
+                          }
+                          floating={Platform.OS !== 'ios'}
                         />
-                        <Layout />
-                      </BottomSheetModalProvider>
-                    </AuthProvider>
-                  </LanguageProvider>
-                </KeyboardProvider>
-              )}
-            </CountryProvider>
-          </QueryClientProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+                        <BottomSheetModalProvider>
+                          <StatusBar
+                            barStyle="dark-content"
+                            backgroundColor={COLORS.primary}
+                          />
+                          <Layout />
+                        </BottomSheetModalProvider>
+                      </AuthProvider>
+                    </LanguageProvider>
+                  </KeyboardProvider>
+                )}
+              </CountryProvider>
+            </QueryClientProvider>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </CopilotProvider>
   );
 }
 

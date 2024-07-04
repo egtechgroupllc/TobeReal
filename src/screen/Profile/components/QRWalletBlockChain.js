@@ -11,11 +11,16 @@ import QRCode from 'react-native-qrcode-svg';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
-import {IconError} from '../../../assets/icon/Icon';
+import {IconCopy, IconError} from '../../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 
-export default function QRWalletBlockChain({open, data, onClose}) {
+export default function QRWalletBlockChain({
+  open,
+  data,
+  onClose,
+  hotelAddress,
+}) {
   const {t} = useLanguage();
 
   const [secondEnd, setSecondEnd] = useState(false);
@@ -41,40 +46,6 @@ export default function QRWalletBlockChain({open, data, onClose}) {
           onPress={onClose}
         />
 
-        <TouchableOpacity
-          activeOpacity={0.9}
-          style={styles.header}
-          onPress={handleCopy}>
-          <CustomImage
-            source={images.logoTBH}
-            style={{
-              width: scale(30),
-              aspectRatio: 1,
-            }}
-            resizeMode="contain"
-          />
-          <View
-            style={{
-              rowGap: scale(5),
-              flex: 1,
-            }}>
-            <CustomText
-              style={styles.textReceive}
-              size={SIZES.xMedium}
-              numberOfLines={1}
-              textType="medium">
-              {data?.username || data?.name || data?.title}
-            </CustomText>
-
-            <CustomText
-              size={SIZES.xSmall}
-              textType="medium"
-              color={COLORS.text}>
-              {data?.wallet_address}
-            </CustomText>
-          </View>
-        </TouchableOpacity>
-
         <View
           style={{
             padding: scale(10),
@@ -82,6 +53,43 @@ export default function QRWalletBlockChain({open, data, onClose}) {
             borderRadius: scale(10),
             rowGap: scale(10),
           }}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            style={styles.header}
+            onPress={handleCopy}>
+            <View style={styles.icon}>
+              <CustomImage
+                source={images.logoTBH}
+                style={{
+                  width: scale(30),
+                  aspectRatio: 1,
+                }}
+                resizeMode="contain"
+              />
+            </View>
+            <View
+              style={{
+                rowGap: scale(5),
+                flex: 1,
+              }}>
+              <CustomText
+                style={styles.textReceive}
+                size={SIZES.xMedium}
+                numberOfLines={1}
+                textType="medium">
+                {data?.username || data?.name || data?.title}
+              </CustomText>
+              <CustomText
+                size={SIZES.xSmall}
+                textType="medium"
+                numberOfLines={2}
+                color={COLORS.text}>
+                {data?.wallet_address}
+                {'  '}
+                <IconCopy size={scale(12)} />
+              </CustomText>
+            </View>
+          </TouchableOpacity>
           <View style={styles.content}>
             <View
               style={{
@@ -89,10 +97,10 @@ export default function QRWalletBlockChain({open, data, onClose}) {
                 justifyContent: 'center',
               }}>
               <View style={{...styles.box, opacity: secondEnd ? 0.3 : 1}}>
-                {true ? (
+                {data?.wallet_address ? (
                   <QRCode
                     size={scale(220)}
-                    value={JSON.stringify(21321)}
+                    value={JSON.stringify(data?.wallet_address)}
                     color="#000"
                   />
                 ) : (
@@ -124,15 +132,17 @@ export default function QRWalletBlockChain({open, data, onClose}) {
               </CustomText>
             </View>
           </View> */}
-          <CustomText
-            style={{
-              width: scale(280),
-            }}>
-            <IconError size={scale(12)} fill={COLORS.primary} />{' '}
-            {t('this_deposit_address')}
-            <CustomText textType="semiBold"> TBH.TBRC20 </CustomText>
-            {t('dont_deposit_other')}.
-          </CustomText>
+          {!hotelAddress && (
+            <CustomText
+              style={{
+                width: scale(280),
+              }}>
+              <IconError size={scale(12)} fill={COLORS.primary} />{' '}
+              {t('this_deposit_address')}
+              <CustomText textType="semiBold"> TBH.TBRC20, </CustomText>
+              {t('dont_deposit_other')}.
+            </CustomText>
+          )}
         </View>
 
         <CustomButton
@@ -154,6 +164,16 @@ const styles = StyleSheet.create({
     flex: 1,
     rowGap: scale(10),
   },
+  icon: {
+    height: scale(35),
+    width: scale(35),
+    backgroundColor: '#52b788',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: scale(99),
+    borderWidth: scale(2),
+    borderColor: COLORS.white,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -161,7 +181,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: scale(6),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.grey50,
     borderRadius: scale(10),
     flexDirection: 'row',
     columnGap: scale(10),

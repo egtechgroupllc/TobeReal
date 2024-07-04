@@ -11,8 +11,8 @@ export default function WalletItem({item, onPress}) {
 
   return (
     <TouchableOpacity
-      disabled={!item.isNext}
-      onPress={item.isNext && onPress}
+      disabled={item?.last}
+      onPress={onPress}
       activeOpacity={0.8}
       style={
         {
@@ -29,7 +29,10 @@ export default function WalletItem({item, onPress}) {
             <CustomImage
               source={item.logo || ''}
               isAvatar
-              style={styles.logo}
+              style={{
+                ...styles.logo,
+                backgroundColor: item?.isToken ? 'green' : '#fff',
+              }}
               size={scale(35)}
             />
             <View
@@ -50,7 +53,7 @@ export default function WalletItem({item, onPress}) {
                 numberOfLines={2}>
                 {(item.isOpen && item.balance) ||
                 (item.isOpen && item.balance === 0)
-                  ? `Số dư: ${formatPrice(item.balance, {
+                  ? `${t('balance')}: ${formatPrice(item.balance, {
                       currency: item?.currency,
                       locales: item?.isToken && 'vi',
                       decimalPlaces: item?.isToken && 10,
@@ -88,7 +91,7 @@ export default function WalletItem({item, onPress}) {
               textAlign: 'center',
               width: '70%',
             }}>
-            {t('active_3_types_wallet')}
+            {t('active_2_types_wallet')}
           </CustomText>
         </View>
       )}
@@ -149,7 +152,6 @@ const styles = StyleSheet.create({
   logo: {
     borderWidth: scale(5),
     borderColor: '#fff',
-    backgroundColor: '#fff',
   },
   img: {
     height: '40%',
@@ -163,5 +165,6 @@ const styles = StyleSheet.create({
     height: scale(150),
     alignItems: 'center',
     rowGap: scale(4),
+    paddingTop: '8%',
   },
 });

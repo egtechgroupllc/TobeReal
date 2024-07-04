@@ -34,36 +34,38 @@ export default function AddressWalletScreen() {
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
   });
-
   const listWallet = useMemo(
     () => [
       {
-        name: `${t('wallet')} Saveloka`,
+        name: `${t('wallet')} SavePay`,
         balance: data?.data.balance * currency?.exchange_rate,
         backgroundColor: '#FFA800',
         logo: images.logo1,
         isOpen: true,
         currency: currency?.currency_code,
+        isNext: true,
+        title: t('this_is_wallet_using_fiat_currency_to_pay'),
       },
       {
-        name: `${t('wallet')} TobeChain`,
+        name: `${t('cryptocurrency_wallet')} `,
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
         des: t('active_to_use_wallet'),
         logo: images.logoTBH,
         isOpen: data?.data?.private_key || data?.data?.passphrase,
         currency: 'TBH',
-        isNext: true,
         isToken: true,
+        isNext: true,
+        title: t('this_is_wallet_using_crypto_currency_to_pay'),
       },
       {
         name: 'Paypal',
         des: t('direct_payment'),
         backgroundColor: '#012169',
         logo: images.iconPaypal,
-        isNext: true,
         isOpen: true,
         isBeta: true,
+        title: t('this_is_method_pay_direct'),
       },
       {
         last: true,
@@ -86,18 +88,23 @@ export default function AddressWalletScreen() {
         backgroundColor: '#f7f9fa',
         flex: 1,
       }}>
+      {/* <Button title="Start tutorial" onPress={() => start()} /> */}
+
       {listWallet.map((item, index) => {
         return (
           <WalletItem
             item={item}
-            key={index}
             onPress={() => {
               if (item?.isBeta) {
                 showMess(t('comming_soon'), 'error');
-
                 return;
+              } else if (item?.isToken) {
+                navigate('WalletTokenScreen');
+              } else {
+                navigate('NavigationProfile', {
+                  screen: 'FinancialScreen',
+                });
               }
-              navigate('WalletTokenScreen');
             }}
           />
         );

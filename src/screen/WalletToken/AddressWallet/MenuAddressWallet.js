@@ -7,7 +7,7 @@ import DocumentPicker from 'react-native-document-picker';
 import {deleteWallet} from '../../../Model/api/wallet';
 import {COLORS, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
-import {IconExportFile, IconTrash} from '../../../assets/icon/Icon';
+import {IconExportFile, IconMenu, IconTrash} from '../../../assets/icon/Icon';
 import {BottomSheet, CustomButton, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 
@@ -122,15 +122,7 @@ export default function MenuAddressWallet({data}) {
         onPress={() => {
           bottomSheetRef.current.open();
         }}>
-        <CustomText
-          style={{
-            borderWidth: 1,
-            borderColor: COLORS.grey,
-            padding: 2,
-            borderRadius: scale(3),
-          }}>
-          ---
-        </CustomText>
+        <IconMenu fill={COLORS.white} />
       </TouchableOpacity>
 
       <BottomSheet

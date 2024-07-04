@@ -31,7 +31,7 @@ export default function FinancialScreen() {
           <HeaderBar
             {...props}
             options={{
-              headerLeftNavigate: 'ProfileScreen',
+              headerLeftNavigate: 'AddressWalletScreen',
               ...props.options,
             }}
             back

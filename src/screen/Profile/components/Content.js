@@ -41,14 +41,14 @@ export default function Content({token}) {
         /> */}
       </Box>
 
-      <Box title={'Tiện ích'}>
+      {/* <Box title={'Tiện ích'}>
         <BoxItemProfile
           Icon={IconDeposit}
           title={'Nạp & Rút Tiền'}
           nameScreen={token ? 'FinancialScreen' : 'LoginScreen'}
           nameNavigate={token ? 'NavigationProfile' : 'NavigationAuth'}
         />
-      </Box>
+      </Box> */}
 
       <Box title={'Nội dung & Hiển thị'}>
         <BoxItemProfile

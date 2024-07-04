@@ -1,8 +1,14 @@
 import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
 import React, {useLayoutEffect, useMemo, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {useLanguage} from '../../../hooks/useLanguage';
-import {CustomImage, CustomText, MainWrapper} from '../../../components';
+import {useLanguage} from '../../hooks/useLanguage';
+import {
+  CustomImage,
+  CustomText,
+  InViewport,
+  MainWrapper,
+  Skeleton,
+} from '../../components';
 import {
   COLORS,
   SHADOW,
@@ -10,25 +16,25 @@ import {
   animations,
   images,
   scale,
-} from '../../../assets/constants';
-import {getHistoryToken} from '../../../Model/api/auth';
+} from '../../assets/constants';
+import {getHistoryToken} from '../../Model/api/auth';
 import {
   useInfiniteQuery,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 import LottieView from 'lottie-react-native';
-import {formatDateTime, formatPrice} from '../../../utils/format';
-import EmptyData from '../../../components/EmptyData';
+import {formatDateTime, formatPrice} from '../../utils/format';
+import EmptyData from '../../components/EmptyData';
 
-export default function HistoryTokenData() {
+export default function HistoryTokenDataScreen() {
   const {setOptions} = useNavigation();
   const {t} = useLanguage();
   const queryClient = useQueryClient();
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: t('history_token_data'),
+      headerTitle: t('transaction_history'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -107,59 +113,63 @@ export default function HistoryTokenData() {
         }
         onEndReached={hasNextPage && fetchNextPage}
         onEndReachedThreshold={0.5}
-        renderItem={({item, index}) => (
-          <View
-            key={index}
-            style={{
-              backgroundColor: COLORS.grey + '40',
-              minHeight: scale(50),
-              borderRadius: scale(5),
-              padding: scale(10),
-              flexDirection: 'row',
-              columnGap: scale(10),
-              alignItems: 'center',
-            }}>
-            <CustomImage
-              source={images.logoTBH}
-              style={{width: scale(33), height: scale(33)}}
-              resizeMode="contain"
-            />
+        renderItem={({item, index}) =>
+          item?.id ? (
             <View
+              key={index}
               style={{
-                flex: 1,
-                rowGap: scale(6),
+                backgroundColor: COLORS.grey + '40',
+                minHeight: scale(50),
+                borderRadius: scale(5),
+                padding: scale(10),
+                flexDirection: 'row',
+                columnGap: scale(10),
+                alignItems: 'center',
               }}>
-              <CustomText
-                numberOfLines={2}
-                style={{fontSize: SIZES.xMedium, flex: 1}}
-                textType="semiBold">
-                {item?.content}
-              </CustomText>
+              <CustomImage
+                source={images.logoTBH}
+                style={{width: scale(33), height: scale(33)}}
+                resizeMode="contain"
+              />
               <View
                 style={{
-                  flexDirection: 'row',
+                  flex: 1,
+                  rowGap: scale(6),
                 }}>
-                <CustomText>
-                  {formatDateTime(item?.createdAt, {
-                    dateStyle: 'HH:mm - dd/MM/yyyy',
-                  })}
-                </CustomText>
                 <CustomText
-                  style={{
-                    color: item?.amount > 0 ? 'green' : COLORS.error,
-                    marginLeft: 'auto',
-                  }}>
-                  {item?.amount > 0 ? '+' : ''}{' '}
-                  {formatPrice(item?.amount, {
-                    decimalPlaces: 6,
-                    showCurrency: false,
-                  })}{' '}
-                  TBH
+                  numberOfLines={2}
+                  style={{fontSize: SIZES.xMedium, flex: 1}}
+                  textType="semiBold">
+                  {item?.content}
                 </CustomText>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <CustomText>
+                    {formatDateTime(item?.createdAt, {
+                      dateStyle: 'HH:mm - dd/MM/yyyy',
+                    })}
+                  </CustomText>
+                  <CustomText
+                    style={{
+                      color: item?.amount > 0 ? 'green' : COLORS.error,
+                      marginLeft: 'auto',
+                    }}>
+                    {item?.amount > 0 ? '+' : ''}{' '}
+                    {formatPrice(item?.amount, {
+                      decimalPlaces: 6,
+                      showCurrency: false,
+                    })}{' '}
+                    TBH
+                  </CustomText>
+                </View>
               </View>
             </View>
-          </View>
-        )}
+          ) : (
+            <Skeleton height={scale(50)} />
+          )
+        }
       />
     </MainWrapper>
   );

@@ -3,6 +3,8 @@ import React, {useMemo, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
+import {useQuery} from '@tanstack/react-query';
+import {getBalanceWallet} from '../../../Model/api/wallet';
 import {COLORS, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
 import {IconCopy} from '../../../assets/icon/Icon';
@@ -11,9 +13,6 @@ import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
 import QRWalletBlockChain from '../../Profile/components/QRWalletBlockChain';
-import {useQuery} from '@tanstack/react-query';
-import {getBalanceWallet} from '../../../Model/api/wallet';
-import MenuAddressWallet from './MenuAddressWallet';
 
 export default function BoxWalletBlockChain({data}) {
   const {t} = useLanguage();
@@ -44,9 +43,7 @@ export default function BoxWalletBlockChain({data}) {
     <View style={styles.box}>
       <View style={styles.content}>
         <View style={styles.left}>
-          <CustomText textType="semiBold">
-            {t('my_identify_address')}:
-          </CustomText>
+          <CustomText textType="semiBold">{t('my_wallet_address')}:</CustomText>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.walletAddress}
@@ -67,7 +64,7 @@ export default function BoxWalletBlockChain({data}) {
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <CustomText
+            {/* <CustomText
               style={{
                 flex: 1,
               }}>
@@ -94,8 +91,7 @@ export default function BoxWalletBlockChain({data}) {
                 })}{' '}
                 TBC
               </CustomText>
-            </CustomText>
-            <MenuAddressWallet data={data} />
+            </CustomText> */}
           </View>
         </View>
 
@@ -141,7 +137,7 @@ const styles = StyleSheet.create({
   },
   left: {
     justifyContent: 'center',
-    rowGap: scale(6),
+    rowGap: scale(2),
     flex: 1,
   },
   walletAddress: {
