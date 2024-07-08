@@ -32,7 +32,8 @@ export default function ContentStep2({data}) {
   const [openContact, setOpenContact] = useState(false);
   const [check, setCheck] = useState(false);
   const [dataVoucher, setDataVoucher] = useState();
-
+  const [balance, setBalance] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(null);
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
@@ -69,18 +70,6 @@ export default function ContentStep2({data}) {
   };
   const isPending = useRef(false);
   const handleBookingRoom = value => {
-    console.log({
-      check_in_date: data?.date?.selectedStartDate,
-      check_out_date: data?.date?.selectedEndDate,
-      number_room: data?.numRoomSelect,
-      accommodation_policy_id: policyId, //id của chính sách liên kết với phòng đó
-      room_id: data?.id, //id của phòng
-      contact_name: contact?.username,
-      contact_email: contact?.email,
-      contact_phone: contact?.phone,
-      type_payment: typePayment,
-      array_voucher_id: dataVoucher?.map(item => item?.id),
-    });
     if (!typePayment) {
       showMess(t('please_select_payment'), 'error');
       return;
@@ -103,7 +92,6 @@ export default function ContentStep2({data}) {
         },
         {
           onSuccess: dataInside => {
-            console.log(dataInside);
             isPending.current = true;
             setCheck({
               status: dataInside?.status,
@@ -158,7 +146,14 @@ export default function ContentStep2({data}) {
       return 0;
     }
   }, [dataVoucher, typePayment]);
-
+  const checkBalance = useMemo(() => {
+    if (typePayment === 'FIAT') {
+      return balance < totalPrice;
+    } else if (typePayment === 'VOUCHER') {
+      return priceVoucher < totalPrice;
+    }
+    return false; // Default return value
+  }, [priceVoucher, totalPrice, balance, typePayment]);
   return (
     <View style={styles.container}>
       <TopStep2
@@ -169,6 +164,7 @@ export default function ContentStep2({data}) {
           setDataVoucher(value);
         }}
         dataVoucher={dataVoucher}
+        onChangeBalance={value => setBalance(value)}
       />
       <ModalBookingSuccess
         openContact={openContact}
@@ -178,11 +174,22 @@ export default function ContentStep2({data}) {
       />
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
-          <DetailPriceRoom data={data} priceVoucher={priceVoucher} />
+          <DetailPriceRoom
+            data={data}
+            priceVoucher={priceVoucher}
+            onChangeTotalPrice={value => setTotalPrice(value)}
+          />
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x
           </CustomText>
-          <CustomButton text={t('pay')} onPress={handleBookingRoom} />
+          <CustomButton
+            text={t('pay')}
+            onPress={handleBookingRoom}
+            disabled={checkBalance}
+            style={{
+              backgroundColor: !checkBalance ? COLORS.primary : COLORS.grey,
+            }}
+          />
         </View>
 
         <View style={styles.boxEarnPoint}>

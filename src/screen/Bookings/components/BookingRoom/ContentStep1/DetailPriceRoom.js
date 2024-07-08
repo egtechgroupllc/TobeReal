@@ -8,7 +8,11 @@ import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function DetailPriceRoom({data, priceVoucher}) {
+export default function DetailPriceRoom({
+  data,
+  priceVoucher,
+  onChangeTotalPrice,
+}) {
   const {t} = useLanguage();
   const numRoom = data?.numRoomSelect;
   const numNight = data?.date?.numNight;
@@ -32,6 +36,7 @@ export default function DetailPriceRoom({data, priceVoucher}) {
   const total_price_per_day = calculatePrice() * numRoom * numNight;
   const voucher_discount = priceVoucher;
   const totalPrice = calculatePrice() * numRoom * numNight + feePrice;
+
   useEffect(() => {
     if (voucher_discount > totalPrice) {
       setCheckPrice(true);
@@ -39,7 +44,9 @@ export default function DetailPriceRoom({data, priceVoucher}) {
       setCheckPrice(false);
     }
   }, [voucher_discount, totalPrice, checkPrice]);
-
+  useEffect(() => {
+    totalPrice && onChangeTotalPrice && onChangeTotalPrice(totalPrice);
+  }, [onChangeTotalPrice, totalPrice]);
   return (
     <View style={{rowGap: scale(5)}}>
       <TouchableOpacity

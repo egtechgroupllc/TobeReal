@@ -14,6 +14,7 @@ import {getListSell} from '../../../../Model/api/apiEstate';
 import {IconBookings} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import {useCountry} from '../../../../hooks/useCountry';
+import {getListPopularProvince} from '../../../../Model/api/apiAccom';
 
 export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
@@ -35,13 +36,12 @@ export default function ExploreNearbyEstate({country}) {
       getListSell({country_id: country?.id, province_id: filter?.id}),
   });
   const listProvince = useQuery({
-    queryKey: ['common', 'list-country', country?.geoname_id],
-    queryFn: () => getListCountry(country?.geoname_id),
+    queryKey: ['accommodation', 'list-popular-province', country?.geoname_id],
+    queryFn: () => getListPopularProvince(country?.geoname_id),
   });
   useEffect(() => {
-    setFilter(listProvince.data?.data?.[0]);
-  }, [listProvince?.data?.data]);
-  console.log(data, 3123123);
+    setFilter(listProvince.data?.data?.rows?.[0]);
+  }, [listProvince?.data?.data?.rows]);
   return (
     <InViewPort>
       <WrapperContent
@@ -49,7 +49,7 @@ export default function ExploreNearbyEstate({country}) {
         // isSeeAll
         // worldTour
         isCategory
-        dataCategory={listProvince.data?.data?.slice(0, 9)}
+        dataCategory={listProvince.data?.data?.rows?.slice(0, 9)}
         onPressSeeAll={() =>
           navigate('NoBottomTab', {
             screen: 'SeeAllBuyScreen',

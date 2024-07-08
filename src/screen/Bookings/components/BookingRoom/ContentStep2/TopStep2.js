@@ -21,6 +21,7 @@ export default function TopStep2({
   typePayment,
   onCheckVoucher,
   dataVoucher,
+  onChangeBalance,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -67,7 +68,7 @@ export default function TopStep2({
           styleWrapper={styles.roomCode}
         />
 
-        <PaymentMethods onChange={onChange} />
+        <PaymentMethods onChange={onChange} onChangeBalance={onChangeBalance} />
       </View>
       {typePayment === 'VOUCHER' && (
         <ApplyVoucher

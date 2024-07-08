@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
@@ -9,6 +9,7 @@ import BookingItem from './BookingItem';
 import BookingItemLoading from './BookingItemLoading';
 
 export default function BookingActive() {
+  const params = useRoute().params;
   const {navigate} = useNavigation();
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'room', 'my-booking'],

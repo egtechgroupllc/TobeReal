@@ -167,12 +167,10 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: '#52b788',
+    backgroundColor: COLORS.black,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),
-    borderWidth: scale(2),
-    borderColor: COLORS.white,
   },
   row: {
     flexDirection: 'row',

@@ -29,7 +29,7 @@ import {useLanguage} from '../../hooks/useLanguage';
 const listVideo = [
   {
     id: 4,
-    src: video.video4,
+    src: 'http://192.168.0.197:3000/videos/users/video_short/be92d9a9-1eb9-4ce0-979f-cb4004b62ee4.MP4',
     username: 'Jimmy',
     quantityHeart: 276,
     quantityComment: 11,

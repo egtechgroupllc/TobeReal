@@ -77,3 +77,8 @@ export const getListConstant = async () => {
 
   return responsive.data;
 };
+export const getListVideoRandom = async () => {
+  const responsive = await instanceCommon.get('/video-short/list-random');
+
+  return responsive.data;
+};

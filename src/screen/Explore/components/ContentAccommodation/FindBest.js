@@ -3,7 +3,10 @@ import {useQuery} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 
-import {getListRent} from '../../../../Model/api/apiAccom';
+import {
+  getListPopularProvince,
+  getListRent,
+} from '../../../../Model/api/apiAccom';
 import {getListCountry} from '../../../../Model/api/common';
 import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import EmptyData from '../../../../components/EmptyData';
@@ -43,20 +46,19 @@ export default function FindBest({country, currency}) {
       }),
   });
   const listProvince = useQuery({
-    queryKey: ['common', 'list-country', country?.geoname_id],
-    queryFn: () => getListCountry(country?.geoname_id),
+    queryKey: ['accommodation', 'list-popular-province', country?.geoname_id],
+    queryFn: () => getListPopularProvince(country?.geoname_id),
   });
   useEffect(() => {
-    setFilter(listProvince.data?.data?.[0]);
-  }, [listProvince?.data?.data]);
-
+    setFilter(listProvince.data?.data?.rows?.[0]);
+  }, [listProvince?.data?.data?.rows]);
   return (
     <WrapperContent
       // isSeeAll
       isCategory
       dataCategory={
         !listProvince.isLoading
-          ? listProvince?.data?.data?.slice(0, 9)
+          ? listProvince?.data?.data?.rows.slice(0, 9)
           : [...Array(4)]
       }
       onPressSeeAll={() =>

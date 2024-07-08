@@ -140,6 +140,14 @@ export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
   return responsive.data;
 };
 
+export const getListPopularProvince = async (parent = '') => {
+  const responsive = await instanceAccom.get(
+    `/statistic/popular-province?parent=${parent}`,
+  );
+
+  return responsive.data;
+};
+
 // export const getDetailRoom = async ({id_room, date_start, date_end}) => {
 //   const responsive = await instanceAccom.get(
 //     `room/${id_room}/list-room-date?date_start=${date_start}&date_end=${date_end}`,
@@ -253,6 +261,13 @@ export const postCreateVoucher = async data => {
 };
 export const postBuyVoucher = async data => {
   const responsive = await instanceAccom.post('/voucher/buy', data);
+
+  return responsive.data;
+};
+
+//-----Check-in-----//
+export const postCreateQR = async data => {
+  const responsive = await instanceAccom.post('/room/booking/create-qr', data);
 
   return responsive.data;
 };

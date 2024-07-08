@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import CustomImage from '../../../../../components/CustomImage';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
@@ -10,19 +10,24 @@ import PaymentMethodsItem from './PaymentMethodsItem';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function PaymentMethods({onChange}) {
+export default function PaymentMethods({onChange, onChangeBalance}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
+  const {currency} = useCountry();
 
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
   const [methodsPay, setMethodsPay] = useState(null);
-
+  const balanceFiat = useMemo(
+    () => profile?.balance * currency?.exchange_rate,
+    [profile?.balance, currency?.exchange_rate],
+  );
   useEffect(() => {
     methodsPay && onChange && onChange(methodsPay);
   }, [onChange, methodsPay]);
-
-  const {currency} = useCountry();
+  useEffect(() => {
+    balanceFiat && onChangeBalance && onChangeBalance(balanceFiat);
+  }, [onChangeBalance, balanceFiat]);
   return (
     <View
       style={{
@@ -54,12 +59,9 @@ export default function PaymentMethods({onChange}) {
           title={methodsPay?.title}
           desc={
             methodsPay?.type === 'FIAT' &&
-            `${t('balance')}: ${formatPrice(
-              profile?.balance * currency?.exchange_rate,
-              {
-                currency: currency?.currency_code,
-              },
-            )}`
+            `${t('balance')}: ${formatPrice(balanceFiat, {
+              currency: currency?.currency_code,
+            })}`
           }
           isDot
           image={methodsPay?.image}

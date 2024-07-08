@@ -26,15 +26,30 @@ export default function WalletItem({item, onPress}) {
             ...styles.box,
           }}>
           <View style={styles.content}>
-            <CustomImage
-              source={item.logo || ''}
-              isAvatar
-              style={{
-                ...styles.logo,
-                backgroundColor: item?.isToken ? 'green' : '#fff',
-              }}
-              size={scale(35)}
-            />
+            {!item.isToken ? (
+              <CustomImage
+                source={item.logo || ''}
+                isAvatar
+                style={{
+                  ...styles.logo,
+                  backgroundColor: item?.isToken ? 'green' : '#fff',
+                }}
+                size={scale(35)}
+              />
+            ) : (
+              <View style={styles.icon}>
+                <CustomImage
+                  isAvatar
+                  source={item?.logo}
+                  style={{
+                    width: scale(30),
+                    aspectRatio: 1,
+                  }}
+                  resizeMode="contain"
+                />
+              </View>
+            )}
+
             <View
               style={{
                 rowGap: scale(3),
@@ -132,6 +147,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(14),
     justifyContent: 'flex-start',
     paddingHorizontal: scale(10),
+  },
+  icon: {
+    height: scale(35),
+    width: scale(35),
+    backgroundColor: COLORS.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: scale(99),
   },
   content: {
     height: '89%',

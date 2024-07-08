@@ -7,6 +7,7 @@ import CustomText from '../../../components/CustomText';
 import {formatDateTime, formatPrice} from '../../../utils/format';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
+import QRCode from 'react-native-qrcode-svg';
 
 export default function BookingItem({data, onPress, onReView}) {
   const objAccom = data?.accommodation;
@@ -20,20 +21,29 @@ export default function BookingItem({data, onPress, onReView}) {
       </CustomText>
 
       <View style={styles.code}>
-        <CustomText style={{flex: 1}} numberOfLines={1} ellipsizeMode="middle">
-          {t('booking_code')}:{' '}
-          <CustomText textType="semiBold" numberOfLines={1}>
-            {data?.id}
+        <View style={{flexDirection: 'row'}}>
+          <CustomText
+            style={{flex: 1}}
+            numberOfLines={1}
+            ellipsizeMode="middle">
+            {t('booking_code')}:{' '}
+            <CustomText textType="semiBold" numberOfLines={1}>
+              {data?.id}
+            </CustomText>
           </CustomText>
-        </CustomText>
 
-        <CustomText>
-          {t('price')}:{' '}
-          <CustomText textType="semiBold">
-            {formatPrice(data?.price * currency?.exchange_rate, {
-              currency: currency?.currency_code,
-            })}
+          <CustomText>
+            {t('price')}:{' '}
+            <CustomText textType="semiBold">
+              {formatPrice(data?.price * currency?.exchange_rate, {
+                currency: currency?.currency_code,
+              })}
+            </CustomText>
           </CustomText>
+        </View>
+        <CustomText>
+          {t('type_payment')}:{' '}
+          <CustomText textType="semiBold">{data?.type_payment} </CustomText>
         </CustomText>
       </View>
 
@@ -129,11 +139,11 @@ const styles = StyleSheet.create({
     borderWidth: scale(1),
     borderRadius: scale(6),
     borderColor: '#0000001A',
-    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: scale(10),
     paddingVertical: scale(6),
     columnGap: scale(10),
+    rowGap: scale(10),
   },
   line: {
     backgroundColor: COLORS.grey,

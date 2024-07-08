@@ -1,6 +1,12 @@
 import {useRoute} from '@react-navigation/native';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconBan, IconPeople, IconRoom, IconWifi} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
@@ -11,11 +17,39 @@ import Contact from './components/DetailBooking/Contact';
 import FooterButton from './components/DetailBooking/FooterButton';
 import TimeBookingCheckInOut from './components/DetailBooking/TimeBookingCheckInOut';
 import TotalPriceBooking from './components/DetailBooking/TotalPriceBooking';
+import QRCode from 'react-native-qrcode-svg';
+import {CustomButton} from '../../components';
+import {postCreateQR} from '../../Model/api/apiAccom';
+import {useMutation} from '@tanstack/react-query';
 
 export default function DetailBookingScreen() {
   const {t} = useLanguage();
   const data = useRoute().params;
   const objAccmo = data?.accommodation;
+  const [isOpen, setIsOpen] = useState(false);
+  const [qrCode, setQrCode] = useState('');
+  const createQRMutation = useMutation({
+    mutationFn: postCreateQR,
+  });
+  const handleCreateQR = value => {
+    createQRMutation.mutate(
+      {bookingId: data?.id},
+      {
+        onSuccess: dataInside => {
+          console.log(dataInside);
+          if (dataInside?.status) {
+            setQrCode(dataInside?.data?.qr_code);
+          }
+        },
+        onError: err => {
+          console.log(err);
+        },
+      },
+    );
+  };
+  useEffect(() => {
+    handleCreateQR();
+  }, []);
   return (
     <>
       <MainWrapper styleContent={styles.wrapper}>
@@ -63,37 +97,52 @@ export default function DetailBookingScreen() {
 
           <View
             style={{
-              rowGap: scale(3),
+              flexDirection: 'row',
+              columnGap: scale(50),
             }}>
-            <CustomText
-              textType="bold"
-              size={SIZES.xMedium}
-              style={{marginBottom: scale(5)}}>
-              ({data?.number_room} {t('room')} - {data?.room?.room_type?.name})
-              {'  '} {data?.room?.name}
-            </CustomText>
+            <View style={{rowGap: scale(3)}}>
+              <CustomText
+                textType="bold"
+                size={SIZES.xMedium}
+                style={{marginBottom: scale(5)}}>
+                ({data?.number_room} {t('room')} - {data?.room?.room_type?.name}
+                ){'  '} {data?.room?.name}
+              </CustomText>
 
-            <ItemUtil
-              Icon={IconPeople}
-              value={`${data?.room?.max_occupancy} ${t('guest')}`}
-              valueBold
-              styleTextValue={styles.textValueUntil}
-              styleIcon={styles.iconUntil}
-            />
-            <ItemUtil
-              Icon={IconRoom}
-              value={`${data?.room?.room_bed_type?.name}`}
-              valueBold
-              styleTextValue={styles.textValueUntil}
-              styleIcon={styles.iconUntil}
-            />
-            <ItemUtil
-              Icon={IconWifi}
-              value={`${t('free_wifi')}`}
-              valueBold
-              styleTextValue={styles.textValueUntil}
-              styleIcon={styles.iconUntil}
-            />
+              <ItemUtil
+                Icon={IconPeople}
+                value={`${data?.room?.max_occupancy} ${t('guest')}`}
+                valueBold
+                styleTextValue={styles.textValueUntil}
+                styleIcon={styles.iconUntil}
+              />
+              <ItemUtil
+                Icon={IconRoom}
+                value={`${data?.room?.room_bed_type?.name}`}
+                valueBold
+                styleTextValue={styles.textValueUntil}
+                styleIcon={styles.iconUntil}
+              />
+              <ItemUtil
+                Icon={IconWifi}
+                value={`${t('free_wifi')}`}
+                valueBold
+                styleTextValue={styles.textValueUntil}
+                styleIcon={styles.iconUntil}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => setIsOpen(true)}
+              style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
+              {qrCode ? (
+                <QRCode value={qrCode} color="#000" />
+              ) : (
+                <ActivityIndicator color={COLORS.primary} size="large" />
+              )}
+              <CustomText style={{width: scale(150), textAlign: 'center'}}>
+                Please give this qrcode to hotel owner to check-in
+              </CustomText>
+            </TouchableOpacity>
           </View>
 
           <View>
@@ -156,6 +205,54 @@ export default function DetailBookingScreen() {
         </View>
       </MainWrapper>
       {data.status !== 'SUCCESS' && <FooterButton />}
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={!!isOpen}
+        onRequestClose={() => setIsOpen(false)}>
+        <View style={styles.wrappers}>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={{
+              backgroundColor: '#00000070',
+              ...StyleSheet.absoluteFill,
+            }}
+            onPress={() => setIsOpen(false)}
+          />
+
+          <View
+            style={{
+              padding: scale(10),
+              backgroundColor: '#fff',
+              borderRadius: scale(10),
+              rowGap: scale(10),
+            }}>
+            <View style={styles.content}>
+              <View
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View>
+                  {qrCode ? (
+                    <QRCode size={scale(220)} value={qrCode} color="#000" />
+                  ) : (
+                    <ActivityIndicator color={COLORS.primary} size="large" />
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <CustomButton
+            buttonType="normal"
+            text={t('close')}
+            onPress={() => setIsOpen(false)}
+            style={{minWidth: scale(100), marginTop: scale(10)}}
+          />
+        </View>
+      </Modal>
     </>
   );
 }
@@ -167,6 +264,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingBottom: scale(0),
     marginVertical: scale(20),
+  },
+  wrappers: {
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    flex: 1,
+    rowGap: scale(10),
   },
   content: {
     padding: scale(10),
