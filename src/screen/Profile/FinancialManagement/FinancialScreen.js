@@ -27,6 +27,8 @@ export default function FinancialScreen() {
         headerShown: true,
         tabBarActiveTintColor: '#F0B90B',
         tabBarInactiveTintColor: '#000000',
+        tabBarHideOnKeyboard: true,
+
         header: props => (
           <HeaderBar
             {...props}

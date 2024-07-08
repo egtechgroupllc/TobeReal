@@ -68,7 +68,9 @@ export default function VideoYoutubeBox({data}) {
         clamp: [height.value / 1.6, -WIDTH.heightScreen / 2.7],
       });
     });
-  if (!data) return null;
+
+  if (!data?.video_link) return null;
+
   return (
     <>
       {!cancel && (

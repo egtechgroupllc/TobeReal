@@ -1,19 +1,25 @@
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {COLORS, SIZES, WIDTH, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../../assets/constants';
 import CustomText from '../../../components/CustomText';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import {useCountry} from '../../../hooks/useCountry';
-const min = 0;
-const max = 2000;
-export default function Budget({onBudget, value}) {
+import {IconLogoSaveloka} from '../../../assets/icon/Icon';
+
+export default function Budget({onBudget, value, estateT}) {
+  const min = 0;
+  const max = estateT ? 500000 : 2000;
+
   const {currency} = useCountry();
   const {t} = useLanguage();
   const [multiSliderValue, setMultiSliderValue] = useState(value || [min, max]);
+  useEffect(() => {
+    setMultiSliderValue([min, max]);
+  }, [estateT, max]);
   return (
     <WrapperContent
       heading={t('budget')}
@@ -71,6 +77,23 @@ export default function Budget({onBudget, value}) {
         markerStyle={{
           borderWidth: 1.2,
           borderColor: COLORS.primary,
+        }}
+        customMarker={() => {
+          return (
+            <View
+              style={{
+                backgroundColor: COLORS.white,
+                borderRadius: scale(99),
+                width: scale(30),
+                height: scale(30),
+                alignItems: 'center',
+                justifyContent: 'center',
+                ...SHADOW,
+                borderWidth: 1,
+                borderColor: COLORS.grey,
+              }}
+            />
+          );
         }}
         onValuesChange={values => setMultiSliderValue(values)}
         onValuesChangeFinish={value => {

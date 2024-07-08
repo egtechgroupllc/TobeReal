@@ -35,7 +35,7 @@ export default function BottomTab() {
         tabBarItemStyle: {
           columnGap: scale(4),
         },
-        // tabBarHideOnKeyboard: true,
+        tabBarHideOnKeyboard: true,
         tabBarStyle: [
           WIDTH.widthScreen > 700 && {
             height: scale(50),

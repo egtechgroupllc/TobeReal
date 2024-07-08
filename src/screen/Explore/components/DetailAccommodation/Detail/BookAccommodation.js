@@ -15,22 +15,29 @@ export default memo(function BookAccommodation({data}) {
   const {t} = useLanguage();
 
   const {navigate} = useNavigation();
-  const {token} = useAuthentication();
   const params = useRoute().params;
   const {currency} = useCountry();
   const priceFinal = useMemo(() => {
-    if (params?.rooms) {
-      let min = 0;
-      params?.rooms?.map(element => {
-        const result = element?.room_dates?.map(room => {
-          return room?.price_final;
-        });
-        console.log(result);
-        min = Math.min(...result);
+    if (data?.rooms) {
+      const resultPri = data?.rooms?.map(element => {
+        const result = element?.room_dates
+          .slice(0, element?.room_dates.length - 1)
+          .map(room => {
+            const resultPolicy = element?.accommodation_policies.reduce(
+              (acc, policy) => {
+                return policy?.price_percent * room?.price_final;
+              },
+              0,
+            );
+
+            return resultPolicy;
+          });
+
+        return Math.min(...result);
       });
-      return min;
+      return Math.min(...resultPri);
     }
-  }, [params?.rooms]);
+  }, [data?.rooms]);
 
   return (
     <View style={styles.wrapper}>
@@ -52,7 +59,7 @@ export default memo(function BookAccommodation({data}) {
       </View>
       <CustomButton
         onPress={() => {
-          !token ? navigate('NavigationAuth') : navigate('RoomScreen', data);
+          navigate('RoomScreen', data);
         }}
         buttonType="medium"
         style={{flex: 0.7}}

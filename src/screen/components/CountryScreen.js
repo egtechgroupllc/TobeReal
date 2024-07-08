@@ -64,7 +64,7 @@ export default function CountryScreen() {
       headerTitle: router?.isProvince
         ? t('province_city')
         : router?.isPhone
-        ? t('Phone area code')
+        ? t('phone_area_code')
         : t('country'),
 
       headerRight: () =>

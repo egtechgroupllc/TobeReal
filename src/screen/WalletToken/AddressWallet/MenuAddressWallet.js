@@ -119,6 +119,7 @@ export default function MenuAddressWallet({data}) {
     <>
       <TouchableOpacity
         activeOpacity={0.7}
+        style={{padding: scale(5)}}
         onPress={() => {
           bottomSheetRef.current.open();
         }}>

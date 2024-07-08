@@ -1148,5 +1148,12 @@
   "this_is_type_point": "Đây là các loại điểm sử dụng trong ứng dụng",
   "this_is_wallet_manage": "Đây là quản lý ví điểm voucher",
   "help_center": "Trung tâm trợ giúp",
-  "how_to_add_tobechain": "Làm thế nào để thêm TobeChain vào MetaMask?"
+  "how_to_add_tobechain": "Làm thế nào để thêm TobeChain vào MetaMask?",
+
+  "create_new_policy": "Tạo chính sách mới",
+  "you_have_not_select_facility": "Bạn chưa chọn cơ sở nào",
+  "note_map_distance": "Chú ý: Vui lòng đến đúng vị trí của tài sản của bạn trong vòng 5 mét và chọn đúng vị trí để đăng (điều này sẽ giúp nhận diện tài sản của bạn trên hệ thống tốt hơn)",
+  "distance": "Khoảng cách",
+  "phone_area_code": "Mã vùng điện thoại",
+  "invalid_phone": "Số điện thoại không hợp lệ"
 }

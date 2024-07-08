@@ -59,7 +59,7 @@ export default (function InputPhone({
       styleTextLabel={styles.label}
       name={name}
       control={control}
-      rules={[rules, validatePhone(t('invalidPhone'), dataFromScreen?.iso2)]}
+      rules={[rules, validatePhone(t('invalid_phone'), dataFromScreen?.iso2)]}
       placeholder={placeholder}
       style={style}
       keyboardType="number-pad"

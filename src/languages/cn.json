@@ -1144,5 +1144,12 @@
   "this_is_type_point": "这是应用中使用的积分类型",
   "this_is_wallet_manage": "这是钱包管理代金券积分",
   "help_center": "帮助中心",
-  "how_to_add_tobechain": "如何将TobeChain添加到MetaMask?"
+  "how_to_add_tobechain": "如何将TobeChain添加到MetaMask?",
+
+  "create_new_policy": "创建新政策",
+  "you_have_not_select_facility": "您尚未选择设施",
+  "note_map_distance": "注意：请确保到达您物业的确切位置，距离不超过5米，并选择正确的位置进行发布（这将有助于更好地在系统中识别您的物业）",
+  "distance": "距离",
+  "phone_area_code": "电话区号",
+  "invalid_phone": "无效电话号码"
 }

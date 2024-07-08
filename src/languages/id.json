@@ -1119,5 +1119,12 @@
   "this_is_type_point": "Ini adalah jenis poin yang digunakan dalam aplikasi",
   "this_is_wallet_manage": "Ini adalah manajemen dompet voucher poin",
   "help_center": "Pusat bantuan",
-  "how_to_add_tobechain": "Bagaimana cara menambahkan TobeChain ke MetaMask?"
+  "how_to_add_tobechain": "Bagaimana cara menambahkan TobeChain ke MetaMask?",
+
+  "create_new_policy": "Buat kebijakan baru",
+  "you_have_not_select_facility": "Anda belum memilih fasilitas",
+  "note_map_distance": "Catatan: Harap datang ke lokasi persis properti Anda dalam jarak 5 meter dan pilih lokasi yang tepat untuk diposting (ini akan membantu mengidentifikasi properti Anda di sistem dengan lebih baik)",
+  "distance": "Jarak",
+  "phone_area_code": "Kode area telepon",
+  "invalid_phone": "Nomor telepon tidak valid"
 }

@@ -56,7 +56,6 @@ export default function wwRoomItem({
     return result / data?.data?.data?.count;
   }, [data?.data?.data]);
   const [viewMore, setViewMore] = useState(false);
-
   return (
     <InViewport ComponentLoading={<ItemAccommdSearchLoading />}>
       <View style={styles.wrapper}>

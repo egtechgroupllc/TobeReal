@@ -74,6 +74,7 @@
     "react-native-video": "^5.2.1",
     "react-native-webview": "^13.8.1",
     "react-native-youtube-iframe": "^2.3.0",
+    "rn-tourguide": "^3.3.0",
     "yarn": "^1.22.21"
   },
   "devDependencies": {

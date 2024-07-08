@@ -1124,5 +1124,12 @@
   "this_is_type_point": "Ini adalah jenis mata yang digunakan dalam aplikasi",
   "this_is_wallet_manage": "Ini adalah pengurusan dompet mata baucar",
   "help_center": "Pusat bantuan",
-  "how_to_add_tobechain": "Bagaimana cara menambah TobeChain ke MetaMask?"
+  "how_to_add_tobechain": "Bagaimana cara menambah TobeChain ke MetaMask?",
+
+  "create_new_policy": "Buat dasar baru",
+  "you_have_not_select_facility": "Anda belum memilih kemudahan",
+  "note_map_distance": "Nota: Sila datang ke lokasi tepat hartanah anda dalam lingkungan 5 meter dan pilih lokasi yang tepat untuk diposkan (ini akan membantu mengenal pasti hartanah anda dalam sistem dengan lebih baik)",
+  "distance": "Jarak",
+  "phone_area_code": "Kod kawasan telefon",
+  "invalid_phone": "Nombor telefon tidak sah"
 }

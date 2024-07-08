@@ -10,14 +10,18 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {KeyboardProvider} from 'react-native-keyboard-controller';
+import {
+  KeyboardProvider,
+  KeyboardAvoidingView,
+} from 'react-native-keyboard-controller';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {COLORS, images} from './src/assets/constants';
+import {COLORS, SIZES, images, scale} from './src/assets/constants';
 import {showMess} from './src/assets/constants/Helper';
 import CustomImage from './src/components/CustomImage';
 import Loading from './src/components/Loading/Loading';
@@ -34,12 +38,14 @@ import NavigationAuth from './src/navigation/NavigationAuth';
 import {CountryProvider} from './src/context/CountryContent';
 import {useCountry} from './src/hooks/useCountry';
 import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
-import {
-  CopilotProvider,
-  CopilotStep,
-  useCopilot,
-  walkthroughable,
-} from 'react-native-copilot';
+// import {
+//   CopilotProvider,
+//   CopilotStep,
+//   useCopilot,
+//   walkthroughable,
+// } from 'react-native-copilot';
+import {TourGuideProvider} from 'rn-tourguide';
+import {CustomText} from './src/components';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -94,52 +100,163 @@ export default function App() {
     </View>
   );
 
-  return (
-    <CopilotProvider>
-      <GestureHandlerRootView style={styles.wrapper}>
-        <SafeAreaProvider
+  // const TooltipComponent = () => {
+  //   const {
+  //     isFirstStep,
+  //     isLastStep,
+  //     goToPrev,
+  //     goToNext,
+  //     goToNth,
+  //     currentStep,
+  //     stop,
+  //   } = useCopilot();
+  //   return (
+  //     <View
+  //       style={{
+  //         backgroundColor: '#fff',
+  //         width: '100%',
+  //         borderRadius: scale(10),
+  //         minHeight: scale(100),
+  //         padding: scale(10),
+  //       }}>
+  //       <CustomText style={{textAlign: 'center', flex: 1}}>
+  //         {currentStep.text}
+  //       </CustomText>
+
+  //       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+  //         {currentStep.order > 1 ? (
+  //           <TouchableOpacity onPress={goToPrev}>
+  //             <CustomText style={{color: 'green'}}>Previous</CustomText>
+  //           </TouchableOpacity>
+  //         ) : (
+  //           <View></View>
+  //         )}
+
+  //         <TouchableOpacity onPress={goToNext}>
+  //           <CustomText style={{color: 'green'}}>Next</CustomText>
+  //         </TouchableOpacity>
+
+  //         <TouchableOpacity onPress={stop}>
+  //           <CustomText style={{color: 'green'}}>Finish</CustomText>
+  //         </TouchableOpacity>
+  //       </View>
+  //     </View>
+  //   );
+  // };
+  const TooltipComponent = tooltip => {
+    return (
+      <View
+        style={{
+          backgroundColor: '#fff',
+          width: '100%',
+          borderRadius: scale(10),
+          minHeight: scale(100),
+          padding: scale(10),
+        }}>
+        <View
           style={{
-            backgroundColor: COLORS.white,
+            height: scale(30),
+            width: scale(30),
+            backgroundColor: 'green',
+            position: 'absolute',
+            alignItems: 'center',
+            alignSelf: 'flex-end',
+            justifyContent: 'center',
+            borderRadius: scale(99),
+            top: scale(-12),
           }}>
-          <NavigationContainer>
-            <QueryClientProvider client={queryClient}>
-              <CountryProvider>
-                {splashScreenVisible ? (
-                  <SplashScreen />
-                ) : (
-                  <KeyboardProvider>
-                    <Loading />
-                    <LanguageProvider>
-                      <AuthProvider>
-                        <FlashMessage
-                          position={
-                            Platform.OS === 'ios'
-                              ? 'top'
-                              : {
-                                  top: StatusBar.currentHeight,
-                                  left: 0,
-                                  right: 0,
-                                }
-                          }
-                          floating={Platform.OS !== 'ios'}
-                        />
+          <CustomText style={{color: COLORS.white}}>
+            {tooltip.currentStep.order}
+          </CustomText>
+        </View>
+        <CustomText
+          style={{textAlign: 'center', flex: 1, fontSize: SIZES.xMedium}}>
+          {tooltip.currentStep.text}
+        </CustomText>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          {tooltip.currentStep.order > 1 ? (
+            <TouchableOpacity
+              onPress={tooltip.handlePrev}
+              style={{padding: scale(5)}}>
+              <CustomText style={{color: 'green'}}>Previous</CustomText>
+            </TouchableOpacity>
+          ) : (
+            <View></View>
+          )}
+
+          {!tooltip.isLastStep ? (
+            <TouchableOpacity
+              onPress={tooltip.handleNext}
+              style={{padding: scale(5)}}>
+              <CustomText style={{color: 'green'}}>Next</CustomText>
+            </TouchableOpacity>
+          ) : (
+            <View></View>
+          )}
+          <TouchableOpacity
+            onPress={tooltip.handleStop}
+            style={{padding: scale(5)}}>
+            <CustomText style={{color: 'green'}}>Finish</CustomText>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+  return (
+    <GestureHandlerRootView style={styles.wrapper}>
+      <SafeAreaProvider
+        style={{
+          backgroundColor: COLORS.white,
+        }}>
+        <NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <CountryProvider>
+              {splashScreenVisible ? (
+                <SplashScreen />
+              ) : (
+                <KeyboardProvider>
+                  <Loading />
+                  <LanguageProvider>
+                    <AuthProvider>
+                      <FlashMessage
+                        position={
+                          Platform.OS === 'ios'
+                            ? 'top'
+                            : {
+                                top: StatusBar.currentHeight,
+                                left: 0,
+                                right: 0,
+                              }
+                        }
+                        floating={Platform.OS !== 'ios'}
+                      />
+                      <TourGuideProvider
+                        tooltipComponent={TooltipComponent}
+                        preventOutsideInteraction>
                         <BottomSheetModalProvider>
                           <StatusBar
                             barStyle="dark-content"
                             backgroundColor={COLORS.primary}
                           />
-                          <Layout />
+                          <KeyboardAvoidingView
+                            style={{flex: 1}}
+                            behavior={
+                              Platform.OS === 'ios' ? 'padding' : 'height'
+                            }>
+                            <Layout />
+                          </KeyboardAvoidingView>
                         </BottomSheetModalProvider>
-                      </AuthProvider>
-                    </LanguageProvider>
-                  </KeyboardProvider>
-                )}
-              </CountryProvider>
-            </QueryClientProvider>
-          </NavigationContainer>
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
-    </CopilotProvider>
+                      </TourGuideProvider>
+                    </AuthProvider>
+                  </LanguageProvider>
+                </KeyboardProvider>
+              )}
+            </CountryProvider>
+          </QueryClientProvider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 

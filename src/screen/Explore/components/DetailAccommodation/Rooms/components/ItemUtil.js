@@ -7,7 +7,7 @@ export default function ItemUtil({
   value,
   title,
   Icon,
-  color,
+  color = '#000',
   backgroundColor,
   styleWrapper,
   styleIcon,

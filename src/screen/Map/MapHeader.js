@@ -99,9 +99,7 @@ export default memo(function MapHeader({
       style={{
         position: 'absolute',
         top: 0,
-        width: '100%',
-        zIndex: 10,
-
+        paddingHorizontal: scale(80),
         ...SHADOW,
       }}>
       {/* <HeaderBar /> */}
@@ -192,17 +190,26 @@ export default memo(function MapHeader({
                   value={watch('menu')?.id}
                   onType={value => {
                     setValue('menu', value);
-                    setIsRender(false);
+                    unregister('budget');
                   }}
                 />
 
                 {watch('menu')?.id === 'RENT' || !watch('menu') ? (
-                  <TypeAccommoda
-                    value={watch('type')}
-                    onType={value => {
-                      setValue('type', value?.id);
-                    }}
-                  />
+                  <>
+                    <TypeAccommoda
+                      value={watch('type')}
+                      onType={value => {
+                        setValue('type', value?.id);
+                      }}
+                    />
+                    <Budget
+                      estateT={false}
+                      value={watch('budget')}
+                      onBudget={value => {
+                        setValue('budget', value);
+                      }}
+                    />
+                  </>
                 ) : watch('menu')?.id === 'BUY' ? (
                   <>
                     <TypeEstate
@@ -215,6 +222,13 @@ export default memo(function MapHeader({
                       value={watch('acreage')}
                       onAcreage={value => {
                         setValue('acreage', value);
+                      }}
+                    />
+                    <Budget
+                      estateT
+                      value={watch('budget')}
+                      onBudget={value => {
+                        setValue('budget', value);
                       }}
                     />
                   </>
@@ -249,6 +263,12 @@ export default memo(function MapHeader({
                 <StartAccom />
 
                 <RatingReview />
+                <Budget
+                  value={watch('budget')}
+                  onBudget={value => {
+                    setValue('budget', value);
+                  }}
+                />
               </View>
             )}
             {estate && (
@@ -265,14 +285,16 @@ export default memo(function MapHeader({
                     setValue('acreage', value);
                   }}
                 />
+                <Budget
+                  estateT={true}
+                  value={watch('budget')}
+                  onBudget={value => {
+                    setValue('budget', value);
+                  }}
+                />
               </>
             )}
-            <Budget
-              value={watch('budget')}
-              onBudget={value => {
-                setValue('budget', value);
-              }}
-            />
+
             <SortBy
               value={watch('sortPrice')}
               onSort={value => {

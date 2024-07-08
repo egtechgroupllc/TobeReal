@@ -21,7 +21,6 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
-  console.log(dataParams, 31231312);
   const {t} = useLanguage();
   const {navigate, setOptions, goBack} = useNavigation();
   const {

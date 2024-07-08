@@ -34,16 +34,12 @@ export default function MapFooter({moveLocation, router, distance}) {
           borderRadius: scale(10),
         }}>
         <CustomText style={{color: COLORS.white}}>
-          Distance: {distance} {distance >= 1 ? 'meters' : 'meter'}
+          {t('distance')}: {distance} {distance >= 1 ? 'meters' : 'meter'}
         </CustomText>
       </View>
 
       <View>
-        <CustomText>
-          Note: Please come to the exact location of your property within 5
-          meters and choose the exact location to post (this will help identify
-          your property on the system better)
-        </CustomText>
+        <CustomText>{t('note_map_distance')}</CustomText>
       </View>
       <View style={styles.content}>
         <View style={styles.icon}>

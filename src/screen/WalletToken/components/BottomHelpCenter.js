@@ -14,6 +14,7 @@ export default function BottomHelpCenter() {
   const listQuestion = [
     {
       title: t('how_to_add_tobechain'),
+      uri: 'https://docs.tobescan.com/docs/getting-started/add-tobechain',
     },
     // {
     //   title: t('How to deposit to TobeChain?'),
@@ -23,6 +24,7 @@ export default function BottomHelpCenter() {
     <>
       <TouchableOpacity
         activeOpacity={0.7}
+        style={{padding: scale(5)}}
         onPress={() => {
           bottomSheetRef.current.open();
         }}>
@@ -40,12 +42,13 @@ export default function BottomHelpCenter() {
         {listQuestion.map(item => (
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() =>
+            onPress={() => {
+              bottomSheetRef.current.close();
               navigate('NoBottomTab', {
                 screen: 'HelpCenterTokenScreen',
                 params: item,
-              })
-            }>
+              });
+            }}>
             <View
               style={{
                 flexDirection: 'row',

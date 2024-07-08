@@ -67,11 +67,11 @@ export default function RoomUntil({data, price, isFilterChildren}) {
           justifyContent: 'space-between',
         }}>
         <View>
-          <ItemUtil
+          {/* <ItemUtil
             Icon={IconPeople}
             value={`${t('breakfast_not_included')}`}
           />
-          <ItemUtil Icon={IconRoom} value={t('no_refund')} />
+          <ItemUtil Icon={IconRoom} value={t('no_refund')} /> */}
           <ItemUtil Icon={IconWifi} value={t('WIFI_FREE')} color={'#00875a'} />
         </View>
 

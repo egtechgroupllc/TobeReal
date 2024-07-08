@@ -30,18 +30,20 @@ import HelpCenterTokenScreen from './HelpCenterTokenScreen';
 import BottomHelpCenter from './components/BottomHelpCenter';
 import {CopilotStep, useCopilot, walkthroughable} from 'react-native-copilot';
 import EncryptedStorage from 'react-native-encrypted-storage';
-
+import {
+  TourGuideZone, // Main wrapper of highlight component
+  TourGuideZoneByPosition, // Component to use mask on overlay (ie, position absolute)
+  useTourGuideController, // hook to start, etc.
+} from 'rn-tourguide';
 export default function WalletTokenScreen() {
   const {setOptions, navigate} = useNavigation();
   const {
-    isFirstStep,
-    goToNext,
-    stop,
-    currentStep,
-    start,
-    isLastStep,
-    copilotEvents,
-  } = useCopilot();
+    canStart, // a boolean indicate if you can start tour guide
+    start, // a function to start the tourguide
+    stop, // a function  to stopping it
+    eventEmitter,
+  } = useTourGuideController();
+  const [stopGuide, setStopGuide] = useState(false);
   const CopilotText = walkthroughable(Text);
   const CopilotView = walkthroughable(View);
 
@@ -80,6 +82,35 @@ export default function WalletTokenScreen() {
       },
     );
   };
+
+  // useEffect(() => {
+  //   if (!currentStep && check) {
+  //     start();
+  //   }
+  //   const listener = () => {
+  //     stop();
+  //   };
+  //   copilotEvents.on('stop', listener);
+
+  //   return () => {
+  //     copilotEvents.off('stop', listener);
+  //   };
+  // }, [isFirstStep]);
+  const handleOnStart = () => console.log('start');
+  const handleOnStop = () => setStopGuide(true);
+  const handleOnStepChange = () => console.log(`stepChange`);
+
+  React.useEffect(() => {
+    eventEmitter.on('start', handleOnStart);
+    eventEmitter.on('stop', handleOnStop);
+    eventEmitter.on('stepChange', handleOnStepChange);
+
+    return () => {
+      eventEmitter.off('start', handleOnStart);
+      eventEmitter.off('stop', handleOnStop);
+      eventEmitter.off('stepChange', handleOnStepChange);
+    };
+  }, []);
   const onVerifyFinancial = async () => {
     try {
       EncryptedStorage.setItem(
@@ -93,33 +124,32 @@ export default function WalletTokenScreen() {
     }
   };
   useEffect(() => {
-    isLastStep && onVerifyFinancial();
-  }, [isLastStep]);
-
+    stopGuide && onVerifyFinancial();
+  }, [stopGuide]);
   useEffect(() => {
     const loadVerifyFinancial = async () => {
+      // await EncryptedStorage.removeItem('@verify_financial');
       const result =
-        (await EncryptedStorage.getItem('@verify_financial')) || '';
+        (await EncryptedStorage.getItem('@verify_financial')) || '{}';
+
       const jsonParseResult = JSON.parse(result);
       if (jsonParseResult?.step1) {
         setCheck(jsonParseResult?.step1);
       }
+      if (canStart && !jsonParseResult?.step1) {
+        start();
+      }
     };
-    loadVerifyFinancial();
-  }, []);
-  useEffect(() => {
-    if (!currentStep && check) {
-      start();
-    }
-    const listener = () => {
-      stop();
-    };
-    copilotEvents.on('stop', listener);
 
-    return () => {
-      copilotEvents.off('stop', listener);
-    };
-  }, [isFirstStep]);
+    loadVerifyFinancial();
+  }, [canStart]);
+
+  // React.useEffect(() => {
+  //   if (canStart && !check) {
+  //     start();
+  //   }
+  // }, [canStart, check]);
+
   useLayoutEffect(() => {
     setOptions({
       headerTitle: t('cryptocurrency_wallet_manage'),
@@ -128,7 +158,7 @@ export default function WalletTokenScreen() {
           <View
             style={{
               flexDirection: 'row',
-              columnGap: scale(5),
+              columnGap: scale(7),
               alignItems: 'center',
             }}>
             <BottomHelpCenter />
@@ -182,45 +212,34 @@ export default function WalletTokenScreen() {
           </View>
         ) : (
           <>
-            <CopilotStep
+            <TourGuideZone
+              zone={1}
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
               text={t('this_your_wallet_address')}
-              order={1}
-              name={'text1'}
-              active={true}>
-              <CopilotView
-                style={{
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingBottom: scale(10),
-                }}>
-                <BoxWalletBlockChain data={data?.data} />
-              </CopilotView>
-            </CopilotStep>
-            <CopilotStep
-              text={t('this_is_type_point')}
-              order={2}
-              name={'text2'}
-              active={true}>
-              <CopilotView
-                style={{
-                  paddingBottom: scale(10),
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <ListToken dataP={data?.data} />
-              </CopilotView>
-            </CopilotStep>
-            <CopilotStep
-              text={t('this_is_wallet_manage')}
-              order={3}
-              name={'text3'}
-              active={true}>
-              <CopilotView>
-                <WalletManage data={data?.data} />
-              </CopilotView>
-            </CopilotStep>
+              borderRadius={16}>
+              <BoxWalletBlockChain data={data?.data} />
+            </TourGuideZone>
+
+            <TourGuideZone
+              zone={2}
+              style={{
+                paddingBottom: scale(10),
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              shape={'rectangle_and_keep'}
+              text={t('this_is_type_point')}>
+              <ListToken dataP={data?.data} />
+            </TourGuideZone>
+            <TourGuideZone zone={3} text={t('this_is_wallet_manage')}>
+              <WalletManage data={data?.data} />
+            </TourGuideZone>
           </>
         )}
       </View>

@@ -1142,5 +1142,12 @@
   "this_is_type_point": "Ito ang mga uri ng puntos na ginagamit sa app",
   "this_is_wallet_manage": "Ito ang pamamahala ng wallet ng voucher point",
   "help_center": "Sentro ng tulong",
-  "how_to_add_tobechain": "Paano idagdag ang TobeChain sa MetaMask?"
+  "how_to_add_tobechain": "Paano idagdag ang TobeChain sa MetaMask?",
+
+  "create_new_policy": "Gumawa ng bagong patakaran",
+  "you_have_not_select_facility": "Hindi mo pa napili ang pasilidad",
+  "note_map_distance": "Tandaan: Mangyaring pumunta sa eksaktong lokasyon ng iyong property sa loob ng 5 metro at piliin ang eksaktong lokasyon na ipo-post (ito ay makakatulong sa pag-identify ng iyong property sa sistema nang mas maayos)",
+  "distance": "Distansya",
+  "phone_area_code": "Kodigo ng area ng telepono",
+  "invalid_phone": "Hindi wastong numero ng telepono"
 }

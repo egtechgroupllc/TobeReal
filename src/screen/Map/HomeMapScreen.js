@@ -44,8 +44,12 @@ export default function HomeMapScreen({showListLocation, style}) {
     country_id: !current?.longitude && country?.id,
     province_id: !current?.longitude && filter?.province?.id,
     name: filter?.name,
-    max_price: filter?.budget ? filter?.budget[1] : '',
-    min_price: filter?.budget ? filter?.budget[0] : '',
+    max_price: filter?.budget
+      ? filter?.budget[1] * currency?.exchange_rate
+      : '',
+    min_price: filter?.budget
+      ? filter?.budget[0] * currency?.exchange_rate
+      : '',
     ...current,
     distance: current?.longitude && 5000,
     currency_id: currency?.id,
@@ -55,8 +59,12 @@ export default function HomeMapScreen({showListLocation, style}) {
     country_id: country?.id,
     province_id: filter?.province?.id,
     title: filter?.name,
-    max_price: filter?.budget ? filter?.budget[1] : '',
-    min_price: filter?.budget ? filter?.budget[0] : '',
+    max_price: filter?.budget
+      ? filter?.budget[1] * currency?.exchange_rate
+      : '',
+    min_price: filter?.budget
+      ? filter?.budget[0] * currency?.exchange_rate
+      : '',
     ...current,
     distance: current?.longitude && 5000,
     currency_id: currency?.id,
@@ -166,7 +174,6 @@ export default function HomeMapScreen({showListLocation, style}) {
   };
   const currentPosition = useCallback(async () => {
     const {coords} = await getCurrentLocation();
-
     if (coords) {
       const coordinates = {
         latitude: coords?.latitude,
@@ -261,8 +268,8 @@ export default function HomeMapScreen({showListLocation, style}) {
         isShadow
         styleWrapper={{
           position: 'absolute',
-          top: '15%',
-          right: scale(10),
+          top: '2%',
+          right: scale(15),
         }}
         onPress={moveCurrentPosition}
         iconRight={IconMyLocation}

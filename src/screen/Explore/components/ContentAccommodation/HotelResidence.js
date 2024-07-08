@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {memo, useEffect, useMemo, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {SHADOW, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
@@ -55,7 +55,9 @@ export default memo(function HotelResidence({data, isLoading, country}) {
           ]}
         />
       }>
-      <WrapperContent heading={title}>
+      <WrapperContent
+        heading={title}
+        styleWrapper={{backgroundColor: COLORS.grey50}}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

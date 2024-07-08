@@ -5,9 +5,12 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {scale} from '../../../../../../../assets/constants';
 import DetailAccommoMap from '../../../../../../Explore/components/DetailAccommodation/Detail/DetailAccommoMap';
 import CustomText from '../../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function EstateSetMap({onChange, watch = () => {}, address}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
+
   const [dataFromScreen, setDataFromScreen] = useState(null);
 
   useEffect(() => {
@@ -37,7 +40,7 @@ export default function EstateSetMap({onChange, watch = () => {}, address}) {
       }}>
       <DetailAccommoMap
         disable
-        address={address ? address : 'Address'}
+        address={address ? address : t('address')}
         region={dataFromScreen}
         styleWrapper={{
           marginHorizontal: scale(0),

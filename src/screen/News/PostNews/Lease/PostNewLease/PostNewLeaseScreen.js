@@ -100,7 +100,11 @@ export default function PostNewLeaseScreen() {
   };
 
   const handlePostLease = value => {
+    if (!value?.video_link) {
+      delete value?.video_link;
+    }
     delete value?.check;
+
     if (value?.rating === 0) {
       delete value?.rating;
     }
@@ -110,7 +114,7 @@ export default function PostNewLeaseScreen() {
     }
 
     if (!value?.features || JSON.parse(value?.features).length <= 0) {
-      showMess('You have not selected a facility yet', 'error');
+      showMess(t('you_have_not_select_facility'), 'error');
       return;
     }
 
@@ -118,6 +122,7 @@ export default function PostNewLeaseScreen() {
 
     createAccommodationMu.mutate(formData, {
       onSuccess: dataInside => {
+       
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {

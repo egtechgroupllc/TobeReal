@@ -70,6 +70,14 @@ export default function DetailAccommodationScreen() {
           <SimilarApartmentsNearby />,
         ];
   }, [data?.data]);
+
+  const renderVideo = () => {
+    if (!data?.data?.video_link || data?.data?.video_link === 'undefined') {
+      return null;
+    }
+    return <VideoYoutubeBox data={data?.data} />;
+  };
+
   return (
     <MainWrapper scrollEnabled={false} noImgColor>
       <AnimateScrollWrapper
@@ -84,7 +92,7 @@ export default function DetailAccommodationScreen() {
           />
         }
       />
-      {!!data?.data?.video_link && <VideoYoutubeBox data={data?.data} />}
+      {renderVideo()}
     </MainWrapper>
   );
 }

@@ -32,19 +32,19 @@ export default memo(function BookTour({data}) {
   const {token} = useAuthentication();
   const params = useRoute().params;
   const {currency} = useCountry();
-  const priceFinal = useMemo(() => {
-    if (params?.tour_tickets) {
-      let min = 0;
-      params?.rooms?.map(element => {
-        const result = element?.tour_tickets?.map(ticket => {
-          return ticket?.price_final;
-        });
-        console.log(result);
-        min = Math.min(...result);
-      });
-      return min;
-    }
-  }, [params?.tour_tickets]);
+  // const priceFinal = useMemo(() => {
+  //   if (params?.tour_tickets) {
+  //     let min = 0;
+  //     params?.rooms?.map(element => {
+  //       const result = element?.tour_tickets?.map(ticket => {
+  //         return ticket?.price_final;
+  //       });
+  //       console.log(result);
+  //       min = Math.min(...result);
+  //     });
+  //     return min;
+  //   }
+  // }, [params?.tour_tickets]);
 
   return (
     <View style={styles.wrapper}>

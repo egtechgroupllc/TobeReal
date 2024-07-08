@@ -1154,5 +1154,12 @@
   "this_is_type_point": "This is types of point using in app",
   "this_is_wallet_manage": "This is wallet manage voucher point",
   "help_center": "Help center",
-  "how_to_add_tobechain": "How to add TobeChain to MetaMask?"
+  "how_to_add_tobechain": "How to add TobeChain to MetaMask?",
+
+  "create_new_policy": "Create new policy",
+  "you_have_not_select_facility": "You have not selected a facility yet",
+  "note_map_distance": "Note: Please come to the exact location of your property within 5 meters and choose the exact location to post (this will help identify your property on the system better)",
+  "distance": "Distance",
+  "phone_area_code": "Phone area code",
+  "invalid_phone": "Invalid phone"
 }

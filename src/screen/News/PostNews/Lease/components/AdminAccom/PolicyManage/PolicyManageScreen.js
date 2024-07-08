@@ -171,7 +171,7 @@ export default function PolicyManageScreen() {
                     height: scale(35),
                     backgroundColor: index % 2 ? COLORS.subPrimary : '#fefae0',
                     borderColor: COLORS.primary,
-                    borderTopWidth: !index === 0 && 1,
+                    borderTopWidth: index === 0 ? 0 : 1,
 
                     alignItems: 'center',
                     justifyContent: 'space-between',

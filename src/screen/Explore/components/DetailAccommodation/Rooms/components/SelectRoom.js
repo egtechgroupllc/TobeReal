@@ -5,10 +5,14 @@ import CustomText from '../../../../../../components/CustomText';
 import RealEstateType from '../../../../../News/PostNews/components/RealEstateType';
 import {CustomButton} from '../../../../../../components';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {useAuthentication} from '../../../../../../hooks/useAuthentication';
+import {useNavigation} from '@react-navigation/native';
 
 export default memo(function SelectRoom({onPress, data, onSelect}) {
   const [selectRoom, setSelectRoom] = useState(1);
   const {t} = useLanguage();
+  const {token} = useAuthentication();
+  const {navigate} = useNavigation();
 
   const roomsAverage = useMemo(() => {
     const result = data?.room_dates?.map(item => {
@@ -54,7 +58,9 @@ export default memo(function SelectRoom({onPress, data, onSelect}) {
         />
 
         <CustomButton
-          onPress={() => onPress(selectRoom)}
+          onPress={() =>
+            !token ? navigate('NavigationAuth') : onPress(selectRoom)
+          }
           buttonType="normal"
           text={t('book_room')}
           styleWrapper={{
