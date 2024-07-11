@@ -12,6 +12,7 @@ import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
@@ -22,15 +23,16 @@ export default function AccommodationPremium({currency}) {
   const [current, setCurrent] = useState(null);
 
   const currentPosition = useCallback(async () => {
-    const {coords} = await getCurrentLocation();
-    if (coords) {
-      const coordinates = {
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-      };
-      setCurrent(coordinates);
-      return coordinates;
-    }
+    await getCurrentLocation(({coords}) => {
+      if (coords) {
+        const coordinates = {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
+        setCurrent(coordinates);
+        return coordinates;
+      }
+    });
   }, []);
   useEffect(() => {
     currentPosition();
@@ -43,9 +45,9 @@ export default function AccommodationPremium({currency}) {
         accommodation_type_id: 1,
         country_id: country?.id,
         currency_id: currency?.id,
+        distance: 10000,
         latitude: current?.latitude,
         longitude: current?.longitude,
-        distance: 10000,
       },
     ],
     queryFn: () =>
@@ -53,17 +55,16 @@ export default function AccommodationPremium({currency}) {
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
         accommodation_type_id: 1,
+        distance: 10000,
         latitude: current?.latitude,
         longitude: current?.longitude,
-        distance: 10000,
         country_id: country?.id,
         currency_id: currency?.id,
       }),
   });
-
   if (!(data?.data?.count !== 0) && !isLoading) return null;
   if (!data?.data?.count && !isLoading) return null;
-
+  console.log(current, 32131232112);
   return (
     <WrapperContent
       // isSeeAll

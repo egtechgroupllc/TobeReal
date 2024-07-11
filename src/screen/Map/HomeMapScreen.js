@@ -173,28 +173,37 @@ export default function HomeMapScreen({showListLocation, style}) {
     flatListRef.current.scrollToOffset(x, true);
   };
   const currentPosition = useCallback(async () => {
-    const {coords} = await getCurrentLocation();
-    if (coords) {
-      const coordinates = {
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-      };
-      setCurrent(coordinates);
-      return coordinates;
-    }
+    await getCurrentLocation(({coords}) => {
+      if (coords) {
+        const coordinates = {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
+        setCurrent(coordinates);
+        return coordinates;
+      }
+    });
   }, []);
   useEffect(() => {
     currentPosition();
   }, []);
+
   const moveCurrentPosition = useCallback(async () => {
-    const coordinates = await currentPosition();
-    if (coordinates) {
-      setCurrent(coordinates);
-      mapRef.current.fitToCoordinates([coordinates], {
-        edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
-        animated: true,
-      });
-    }
+    await getCurrentLocation(({coords}) => {
+      if (coords) {
+        const coordinates = {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
+        if (coordinates) {
+          // setCurrent(coordinates);
+          mapRef.current.fitToCoordinates([coordinates], {
+            edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+            animated: true,
+          });
+        }
+      }
+    });
   }, []);
 
   return (
@@ -264,6 +273,7 @@ export default function HomeMapScreen({showListLocation, style}) {
         />
       )}
 
+      {/* {Platform.OS === 'ios' && ( */}
       <CustomButton
         isShadow
         styleWrapper={{
@@ -278,6 +288,7 @@ export default function HomeMapScreen({showListLocation, style}) {
           color: '#3b57f8',
         }}
       />
+      {/* )} */}
     </MainWrapper>
   );
 }

@@ -5,7 +5,7 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
+import {SHADOW, images, scale} from '../../../../assets/constants';
 import BoxFeatureItem from './BoxFeatureItem';
 import {useNavigation} from '@react-navigation/native';
 import {getListSell} from '../../../../Model/api/apiEstate';
@@ -13,6 +13,8 @@ import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../../../Model/api/common';
 import {useCountry} from '../../../../hooks/useCountry';
 import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
+import InViewport from '../../../../components/InViewport';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function FeatureEstate() {
   const {t} = useLanguage();
@@ -24,15 +26,16 @@ export default function FeatureEstate() {
   const [current, setCurrent] = useState(null);
 
   const currentPosition = useCallback(async () => {
-    const {coords} = await getCurrentLocation();
-    if (coords) {
-      const coordinates = {
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-      };
-      setCurrent(coordinates);
-      return coordinates;
-    }
+    await getCurrentLocation(({coords}) => {
+      if (coords) {
+        const coordinates = {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
+        setCurrent(coordinates);
+        return coordinates;
+      }
+    });
   }, []);
   useEffect(() => {
     currentPosition();
@@ -68,25 +71,37 @@ export default function FeatureEstate() {
   if (!(data?.data?.count !== 0) && !isLoading) return null;
   if (!data?.data?.count && !isLoading) return null;
   return (
-    <InViewPort>
-      <WrapperContent
-        // background={images.bgPackageTour}
-        // isSeeAll
-        // worldTour
-        // isCategory
-        // dataCategory={listCountry.data?.data?.slice(0, 9)}
-        // onPressSeeAll={() =>
-        //   navigate('NoBottomTab', {
-        //     screen: 'SeeAllBuyScreen',
-        //     params: {
-        //       title: title || '',
-        //     },
-        //   })
-        // }
-        // onPressCategory={item => setFilter(item)}
-        heading={title}
-        subHeading={t('explore_popular_estate')}
-        styleWrapper={{backgroundColor: 'transparent'}}>
+    <WrapperContent
+      // background={images.bgPackageTour}
+      // isSeeAll
+      // worldTour
+      // isCategory
+      // dataCategory={listCountry.data?.data?.slice(0, 9)}
+      // onPressSeeAll={() =>
+      //   navigate('NoBottomTab', {
+      //     screen: 'SeeAllBuyScreen',
+      //     params: {
+      //       title: title || '',
+      //     },
+      //   })
+      // }
+      // onPressCategory={item => setFilter(item)}
+      heading={title}
+      subHeading={t('explore_popular_estate')}
+      styleWrapper={{backgroundColor: 'transparent'}}>
+      <InViewport
+        loadingMap
+        ComponentLoading={
+          <BoxPlaceItemLoading
+            style={[
+              styles.wrapper,
+              {
+                width: scale(400 / 1.6),
+              },
+              SHADOW,
+            ]}
+          />
+        }>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -96,8 +111,8 @@ export default function FeatureEstate() {
             <BoxFeatureItem isHeart isStar data={item} rental="night" />
           )}
         />
-      </WrapperContent>
-    </InViewPort>
+      </InViewport>
+    </WrapperContent>
   );
 }
 

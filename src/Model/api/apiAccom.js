@@ -37,14 +37,14 @@ export const getListRent = async ({
   const country = country_id ? `country_id=${country_id}` : '';
   const minprice = min_price ? `min_price=${min_price}` : '';
   const maxprice = max_price ? `max_price=${max_price}` : '';
+  const dist = distance ? `distance=${distance}` : '';
   const lat = latitude ? `latitude=${latitude}` : '';
   const long = longitude ? `longitude=${longitude}` : '';
-  const dist = distance ? `distance=${distance}` : '';
   const accommodation_type = accommodation_type_id
     ? `accommodation_type_id=${accommodation_type_id}`
     : '';
   const responsive = await instanceAccom.get(
-    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&${accommodation_type}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}&${minprice}&${maxprice}&currency_id=${currency_id}&${lat}&${long}&${dist}`,
+    `/list-rent?page=${pageParam}&limit=10&date_start=${date_start}&date_end=${date_end}&number_room=${number_room}&${accommodation_type}&${province}&${country}&number_occupancy=${number_occupancy}&name=${name}&${minprice}&${maxprice}&currency_id=${currency_id}&${dist}&${lat}&${long}`,
   );
   return responsive.data;
 };

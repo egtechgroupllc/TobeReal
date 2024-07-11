@@ -36,19 +36,19 @@ export default function MapSetAccomdScreen() {
     });
   };
   const currentPosition = useCallback(async region => {
-    const {coords} = await getCurrentLocation();
+    await getCurrentLocation(({coords}) => {
+      if (coords || region?.latitude) {
+        const coordinates = (region?.latitude && region) || {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
 
-    if (coords || region?.latitude) {
-      const coordinates = (region?.latitude && region) || {
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-      };
-
-      setMoveLocation(coordinates);
-      animatedMoveCenterMap([coordinates]);
-      setMyLocation(coordinates);
-      return coordinates;
-    }
+        setMoveLocation(coordinates);
+        animatedMoveCenterMap([coordinates]);
+        setMyLocation(coordinates);
+        return coordinates;
+      }
+    });
   }, []);
 
   useEffect(() => {

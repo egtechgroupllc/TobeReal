@@ -22,18 +22,17 @@ export default function ListAccommodationSearchScreen() {
   const {setOptions} = useNavigation();
 
   const currentPosition = useCallback(async () => {
-    const {coords} = await getCurrentLocation();
-
-    if (coords) {
-      const coordinates = {
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-      };
-      setCurrent(coordinates);
-      return coordinates;
-    }
+    await getCurrentLocation(({coords}) => {
+      if (coords) {
+        const coordinates = {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+        };
+        setCurrent(coordinates);
+        return coordinates;
+      }
+    });
   }, []);
-
   useEffect(() => {
     currentPosition();
   }, []);
