@@ -21,7 +21,9 @@ export default memo(function ChoosePostTime({
   const [select, setSelect] = useState(data?.package_post_items?.[0]);
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState(
-    params?.date_start ? new Date(params?.date_start) : new Date(),
+    params?.date_start && !params?.value?.isRestore
+      ? new Date(params?.date_start)
+      : new Date(),
   );
 
   const dateStart = useMemo(

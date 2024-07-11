@@ -88,9 +88,8 @@ export default function HomeBookingsScreen() {
   //   [data?.pages],
   // );
   return (
-    <MainWrapper styleContent={styles.wrapper} scrollEnabled={false}>
-      <View>
-        <TabSelect
+    <MainWrapper scrollEnabled={false}>
+      {/* <TabSelect
           data={listTab}
           styleWrapper={{
             alignItems: 'center',
@@ -104,7 +103,14 @@ export default function HomeBookingsScreen() {
           }}
           onChange={e => setTabSelect(e)}
         />
-        {tabSelect === listTab[0] ? <BookingActive /> : <BookingHistory />}
+        {tabSelect === listTab[0] ? <BookingActive /> : <BookingHistory />} */}
+      <View
+        style={{
+          alignItems: 'center',
+          borderRadius: 5,
+          width: '100%',
+        }}>
+        <BookingActive />
       </View>
     </MainWrapper>
   );

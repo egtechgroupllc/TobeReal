@@ -28,6 +28,7 @@ type CustomButtonProps = {
   isDelay?: boolean;
   styleIcon?: TextStyle;
   styleWrapper?: ViewStyle;
+  styleOutline?: ViewStyle;
   isIconComponent?: boolean;
   styleText: Pick<CustomTextProps, 'textType'> & TextStyle;
   textDesc: Pick<CustomTextProps, 'textType'> & TextStyle;
@@ -51,6 +52,7 @@ export default memo(function CustomButton({
   linearGradientProps,
   isIconComponent,
   isDelay,
+  styleOutline,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
   ...props
@@ -128,7 +130,7 @@ export default memo(function CustomButton({
           !propStyle?.height && {
             minHeight: scale(heightSize),
           },
-          outline && styles.outline,
+          outline && (styleOutline || styles.outline),
           (iconLeft || iconRight) && text && {flexDirection: 'row'},
 
           propStyle,

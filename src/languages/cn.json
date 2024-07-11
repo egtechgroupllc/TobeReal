@@ -1151,5 +1151,25 @@
   "note_map_distance": "注意：请确保到达您物业的确切位置，距离不超过5米，并选择正确的位置进行发布（这将有助于更好地在系统中识别您的物业）",
   "distance": "距离",
   "phone_area_code": "电话区号",
-  "invalid_phone": "无效电话号码"
+  "invalid_phone": "无效电话号码",
+
+  "type_payment": "支付方式",
+  "view_review": "查看评论",
+  "would_you_like_share_short_video": "您是否愿意通过短视频分享您在这家酒店的经历？这些视频将出现在趋势中！",
+  "video_caption": "视频标题",
+  "edit_accommodation": "编辑住宿",
+  "post_video_short": "发布短视频",
+  "check_in_qrscan": "扫描二维码以登记入住",
+  "share_detail_hotel_short_video": "通过短视频分享您的酒店详细信息，这些视频将出现在趋势中！",
+  "share_detail_estate_short_video": "通过短视频分享您的房产详细信息，这些视频将出现在趋势中！",
+  "description_video_short": "视频描述",
+  "click_to_select_video": "点击选择要上传的视频",
+  "video_short_review": "短视频评论",
+  "please_give_qrcode_to": "请将此二维码交给酒店老板以办理入住",
+  "no_more_room_today": "今天没有空房了",
+  "please_repost": "此帖子已过期，请重新发布",
+  "repost": "重新发布",
+  "video_short": "短视频",
+  "wallet_ready_to_use": "您的加密货币钱包已准备好使用",
+  "the_remaining_balance_add": "剩余余额将添加到余额管理钱包中："
 }

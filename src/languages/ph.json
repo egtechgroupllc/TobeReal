@@ -1149,5 +1149,25 @@
   "note_map_distance": "Tandaan: Mangyaring pumunta sa eksaktong lokasyon ng iyong property sa loob ng 5 metro at piliin ang eksaktong lokasyon na ipo-post (ito ay makakatulong sa pag-identify ng iyong property sa sistema nang mas maayos)",
   "distance": "Distansya",
   "phone_area_code": "Kodigo ng area ng telepono",
-  "invalid_phone": "Hindi wastong numero ng telepono"
+  "invalid_phone": "Hindi wastong numero ng telepono",
+
+  "type_payment": "Uri ng pagbabayad",
+  "view_review": "Tingnan ang pagsusuri",
+  "would_you_like_share_short_video": "Nais mo bang ibahagi ang iyong mga karanasan sa hotel na ito sa pamamagitan ng mga maikling video? Ang mga video na ito ay lilitaw sa mga uso!",
+  "video_caption": "Caption ng video",
+  "edit_accommodation": "I-edit ang Akomodasyon",
+  "post_video_short": "I-post ang maikling video",
+  "check_in_qrscan": "Mag-scan ng QR para mag-check-in",
+  "share_detail_hotel_short_video": "Ibahagi ang mga detalye ng iyong hotel sa pamamagitan ng mga maikling video, ang mga video na ito ay lilitaw sa mga uso!",
+  "share_detail_estate_short_video": "Ibahagi ang mga detalye ng iyong estate sa pamamagitan ng mga maikling video, ang mga video na ito ay lilitaw sa mga uso!",
+  "description_video_short": "Paglalarawan ng maikling video",
+  "click_to_select_video": "I-click upang pumili ng video na ia-upload",
+  "video_short_review": "Pagsusuri ng maikling video",
+  "please_give_qrcode_to": "Pakiusap ibigay ang QR code na ito sa may-ari ng hotel upang mag-check-in",
+  "no_more_room_today": "Wala nang kuwarto ngayon",
+  "please_repost": "Ang post na ito ay nag-expire na, paki repost",
+  "repost": "Repost",
+  "video_short": "maikling video",
+  "wallet_ready_to_use": "Ang iyong cryptocurrency wallet ay handa nang gamitin",
+  "the_remaining_balance_add": "Ang natitirang balanse ay idaragdag sa pamamahala ng balanse wallet:"
 }

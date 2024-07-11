@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: scale(10),
     paddingVertical: scale(4),
-    // backgroundColor: '#000',
     columnGap: scale(10),
   },
   sort: {

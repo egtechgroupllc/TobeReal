@@ -57,6 +57,12 @@ import HistoryTokenDataScreen from '../screen/WalletToken/HistoryTokenDataScreen
 import HistoryTokenData from '../screen/WalletToken/HistoryTokenDataScreen';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
 import HelpCenterTokenScreen from '../screen/WalletToken/HelpCenterTokenScreen';
+import QRScanDetailScreen from '../screen/News/PostNews/Lease/QRScanDetailScreen';
+import CheckInSuccessScreen from '../screen/News/PostNews/Lease/CheckInSuccessScreen';
+import PostVideoShortReview from '../screen/Bookings/PostVideoShortReviewScreen';
+import PostVideoShortReviewScreen from '../screen/Bookings/PostVideoShortReviewScreen';
+import PostVideoShortScreen from '../screen/News/PostVideoShortScreen';
+import DetailReviewScreen from '../screen/Bookings/DetailReviewScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -303,5 +309,25 @@ export default routerNoBottomTab = [
   {
     name: 'HelpCenterTokenScreen',
     component: HelpCenterTokenScreen,
+  },
+  {
+    name: 'QRScanDetailScreen',
+    component: QRScanDetailScreen,
+  },
+  {
+    name: 'CheckInSuccessScreen',
+    component: CheckInSuccessScreen,
+  },
+  {
+    name: 'PostVideoShortReviewScreen',
+    component: PostVideoShortReviewScreen,
+  },
+  {
+    name: 'PostVideoShortScreen',
+    component: PostVideoShortScreen,
+  },
+  {
+    name: 'DetailReviewScreen',
+    component: DetailReviewScreen,
   },
 ];

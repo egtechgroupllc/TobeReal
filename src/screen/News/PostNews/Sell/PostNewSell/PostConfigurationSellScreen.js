@@ -21,6 +21,7 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function PostConfigurationSellScreen() {
   const params = useRoute().params;
+
   const queryClient = useQueryClient();
   const {t} = useLanguage();
   const {goBack, navigate, setOptions} = useNavigation();
@@ -135,8 +136,9 @@ export default function PostConfigurationSellScreen() {
     delete params?.package_post_item_id_repost;
     delete params?.package_post_item;
     delete params?.date_start;
-
+    delete params?.value;
     const formData = getFormData({...filterEmptyValues(params), ...value});
+
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');

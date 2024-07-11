@@ -19,7 +19,13 @@ import {getListTypeRent} from '../../../../../../Model/api/common';
 import InputLeaseMulti from './GeneralInformation/InputLeaseMulti';
 import CustomText from '../../../../../../components/CustomText';
 
-export default function GeneralInformation({control, setValue, watch, errors}) {
+export default function GeneralInformation({
+  control,
+  setValue,
+  watch,
+  errors,
+  params,
+}) {
   const {t} = useLanguage();
 
   const [isView, setView] = useState(false);
@@ -70,6 +76,7 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
             label={t('real_estate_title')}
             name="name"
             control={control}
+            editable={params?.name ? false : true}
             maxLength={100}
             placeholder={t('enter_real_estate_title')}
           />
@@ -87,34 +94,40 @@ export default function GeneralInformation({control, setValue, watch, errors}) {
             }}
           />
 
-          <View style={styles.line} />
+          {!params?.address && (
+            <>
+              <View style={styles.line} />
+              <EstateSetMap
+                control={control}
+                onChange={value => {
+                  setValue('latitude', value?.latitude);
+                  setValue('longitude', value?.longitude);
+                }}
+                address={watch('address')}
+              />
 
-          <EstateSetMap
-            control={control}
-            onChange={value => {
-              setValue('latitude', value?.latitude);
-              setValue('longitude', value?.longitude);
-            }}
-            address={watch('address')}
-          />
-          {!watch('latitude') && (
-            <CustomText style={{color: COLORS.error}}>
-              {t('please_choose_coordinates')}
-            </CustomText>
+              {!watch('latitude') && (
+                <CustomText style={{color: COLORS.error}}>
+                  {t('please_choose_coordinates')}
+                </CustomText>
+              )}
+            </>
           )}
           <View style={styles.line} />
 
-          <SelectCountry setValue={setValue} control={control} />
+          <SelectCountry setValue={setValue} control={control} watch={watch} />
 
-          <CustomInput
-            styleTextLabel={styles.label}
-            label={t('address')}
-            control={control}
-            name="address"
-            placeholder={t('address')}
-            rules={requireField(t('this_field_required'))}
-            style={styles.textInput}
-          />
+          {!params?.address && (
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('address')}
+              control={control}
+              name="address"
+              placeholder={t('address')}
+              rules={requireField(t('this_field_required'))}
+              style={styles.textInput}
+            />
+          )}
         </Collapsible>
       </InViewPort>
     </View>

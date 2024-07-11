@@ -49,8 +49,8 @@ export default function DetailAccommodationScreen() {
   ]).current;
 
   const {data, isLoading} = useQuery({
-    queryKey: ['accommodation', 'detail', params?.id],
-    queryFn: () => getDetailAccmo(params?.id),
+    queryKey: ['accommodation', 'detail', params?.data?.table_id || params?.id],
+    queryFn: () => getDetailAccmo(params?.data?.table_id || params?.id),
   });
 
   const listView = useMemo(() => {
@@ -88,7 +88,11 @@ export default function DetailAccommodationScreen() {
         ContentBookComponent={
           <BookAccommodation
             isLoading={false}
-            data={{...data?.data, dataFilter: params?.dataFilter}}
+            data={{
+              ...data?.data,
+              dataFilter: params?.dataFilter,
+              isVideo: params?.data?.isVideo,
+            }}
           />
         }
       />

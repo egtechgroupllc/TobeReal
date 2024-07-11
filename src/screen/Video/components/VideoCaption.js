@@ -1,13 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {memo, useCallback, useState} from 'react';
+import React, {memo, useCallback, useMemo, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import LinearGradient from 'react-native-linear-gradient';
 import {SIZES, scale} from '../../../assets/constants';
 import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
-import {formatPrice} from '../../../utils/format';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useQuery} from '@tanstack/react-query';
+import {getListRoomDetailAccmo} from '../../../Model/api/apiAccom';
+import {formatDate} from '../../../utils/format';
 
 export default memo(function VideoCaption({data}) {
   const {navigate} = useNavigation();
@@ -35,7 +37,7 @@ export default memo(function VideoCaption({data}) {
           flex: 1,
         }}>
         <CustomText textType="bold" style={styles.name}>
-          {data?.username}
+          {data?.user?.username}
         </CustomText>
 
         <TouchableOpacity
@@ -52,12 +54,12 @@ export default memo(function VideoCaption({data}) {
               textType="medium"
               numberOfLines={isMoreText ? 0 : 4}
               style={styles.textDesc}>
-              {data?.description}
+              {data?.caption}
             </CustomText>
           </Collapsible>
         </TouchableOpacity>
 
-        <CustomText textType="bold" style={styles.textDesc}>
+        {/* <CustomText textType="bold" style={styles.textDesc}>
           {formatPrice(data?.price)}
           <CustomText textType="medium" style={styles.textDesc}>
             <CustomText
@@ -67,10 +69,10 @@ export default memo(function VideoCaption({data}) {
             </CustomText>{' '}
             {data?.rental}
           </CustomText>
-        </CustomText>
+        </CustomText> */}
 
         <CustomText textType="medium" style={styles.textDesc}>
-          {data?.location}
+          {data?.accommodation?.address || data?.estate?.address}
         </CustomText>
       </View>
       <View>
@@ -89,21 +91,23 @@ export default memo(function VideoCaption({data}) {
           </CustomText>
         )}
 
-        {/* <CustomButton
-          text={t('check_it_out')}
+        <CustomButton
+          text={t('see_detail')}
           outline
           buttonType="medium"
           style={{borderColor: '#fff'}}
           styleText={{
             color: '#fff',
           }}
-          // onPress={() => {
-          //   navigate('NoBottomTab', {
-          //     screen: 'DetailAccommodationScreen',
-          //     params: {jsondata: [] || [], title: '3123' || ''},
-          //   });
-          // }}
-        /> */}
+          onPress={() => {
+            navigate('NoBottomTab', {
+              screen: data?.accommodation
+                ? 'DetailAccommodationScreen'
+                : 'DetailBuyScreen',
+              params: {data, isVideo: true},
+            });
+          }}
+        />
       </View>
     </LinearGradient>
   );

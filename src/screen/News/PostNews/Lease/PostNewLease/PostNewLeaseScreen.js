@@ -1,10 +1,13 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
-import {postCreateAccommoLease} from '../../../../../Model/api/apiAccom';
+import {
+  postCreateAccommoLease,
+  postUpdateAccom,
+} from '../../../../../Model/api/apiAccom';
 import {
   COLORS,
   SHADOW,
@@ -29,6 +32,7 @@ import MainWrapper from '../../../../../components/MainWrapper';
 
 export default function PostNewLeaseScreen() {
   const {t} = useLanguage();
+  const params = useRoute().params;
 
   const {
     handleSubmit,
@@ -38,15 +42,19 @@ export default function PostNewLeaseScreen() {
     reset,
     formState: {errors},
   } = useForm();
+
   const {navigate, setOptions} = useNavigation();
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: t('create_new_accom'),
+      headerTitle: !params?.name ? t('create_new_accom') : t('edit'),
     });
   }, []);
   const queryClient = useQueryClient();
   const createAccommodationMu = useMutation({
     mutationFn: postCreateAccommoLease,
+  });
+  const updateAccommodationMu = useMutation({
+    mutationFn: postUpdateAccom,
   });
 
   const getFormData = (object = {}) => {
@@ -76,14 +84,16 @@ export default function PostNewLeaseScreen() {
         description: image?.description,
       };
     });
-
-    formData.append(
-      'image_description',
-      JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
-    );
+    if (object?.kyc || object?.description_img) {
+      formData.append(
+        'image_description',
+        JSON.stringify([...arrImage_description, ...arrImage_Kyc]),
+      );
+    }
 
     return formData;
   };
+
   const checkIsValid = () => {
     // dispatch(
     //   StackActions.replace('NoBottomTab', {
@@ -108,7 +118,7 @@ export default function PostNewLeaseScreen() {
     if (value?.rating === 0) {
       delete value?.rating;
     }
-    if (!value?.latitude) {
+    if (!params?.name && !value?.latitude) {
       showMess(t('please_choose_coordinates'), 'error');
       return;
     }
@@ -119,27 +129,56 @@ export default function PostNewLeaseScreen() {
     }
 
     const formData = getFormData(value);
-
-    createAccommodationMu.mutate(formData, {
+    const mutationConfig = {
       onSuccess: dataInside => {
-       
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
-          reset();
-          queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
+          if (!params?.address) {
+            reset();
+            queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
+            navigate('NoBottomTab', {
+              screen: 'AddRoomTypeScreen',
+              params: dataInside?.data,
+            });
+            return;
+          }
           navigate('NoBottomTab', {
-            screen: 'AddRoomTypeScreen',
-            params: dataInside?.data,
+            screen: 'AccommoManagementScreen',
           });
+          queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
         }
       },
       onError: err => {
         console.log({err});
       },
-    });
+    };
+    if (params?.address) {
+      updateAccommodationMu.mutate(
+        {data: formData, id_accom: params?.id},
+        mutationConfig,
+      );
+      return;
+    }
+    createAccommodationMu.mutate(formData, mutationConfig);
   };
+  useEffect(() => {
+    if (params?.address) {
+      reset();
 
+      const entries = Object.entries(params);
+      const arrKeyno = ['address', 'latitude', 'longitude'];
+
+      entries.map(item => {
+        if (!arrKeyno.includes(item[0])) {
+          const checkNum = typeof item[1] === 'number';
+          setValue(item[0], checkNum ? String(item[1]) : item[1]);
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <MainWrapper styleContent={styles.wrapper}>
       <View style={styles.button}>
@@ -160,6 +199,7 @@ export default function PostNewLeaseScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          params={params}
         />
 
         <EstateDetail
@@ -174,6 +214,7 @@ export default function PostNewLeaseScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          params={params}
         />
 
         <EstateContact
@@ -190,6 +231,7 @@ export default function PostNewLeaseScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          arrImg={params?.images}
         />
 
         {/* <PaymentInfo
@@ -218,7 +260,7 @@ export default function PostNewLeaseScreen() {
       <CustomButton
         linearGradientProps
         buttonType="medium"
-        text={t('post')}
+        text={!params?.name ? t('post') : t('update')}
         disabled={createAccommodationMu.isPending}
         // onPress={handleSubmit(handlePostLease)}
         onPress={checkIsValid}

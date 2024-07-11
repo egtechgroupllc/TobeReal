@@ -34,6 +34,7 @@ export default function AddressWalletScreen() {
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
   });
+
   const listWallet = useMemo(
     () => [
       {
@@ -50,7 +51,9 @@ export default function AddressWalletScreen() {
         name: `${t('cryptocurrency_wallet')} `,
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
-        des: t('active_to_use_wallet'),
+        des: !data?.data?.wallet_address
+          ? t('active_to_use_wallet')
+          : t('wallet_ready_to_use'),
         logo: images.logoTBH,
         isOpen: data?.data?.private_key || data?.data?.passphrase,
         currency: 'TBH',

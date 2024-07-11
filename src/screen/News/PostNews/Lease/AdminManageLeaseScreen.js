@@ -12,22 +12,28 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import {deleteAccom, getListRent} from '../../../../Model/api/apiAccom';
+import {
+  deleteAccom,
+  getListRent,
+  postScanQR,
+} from '../../../../Model/api/apiAccom';
 import {showMess} from '../../../../assets/constants/Helper';
 import HeaderRight from '../../../../navigation/components/HeaderRight';
 import {IconHome} from '../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {formatDate} from '../../../../utils/format';
 import {useCountry} from '../../../../hooks/useCountry';
+import ModalQrCodeScanner from '../../../Bookings/components/ModalQRCodeScanner';
+import {requestCameraPermission} from '../../../../utils/permission/permissionCamera';
 
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
   const queryClient = useQueryClient();
 
-  const {setOptions} = useNavigation();
-  const {navigate, goBack} = useNavigation();
+  const {navigate, goBack, setOptions} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useLayoutEffect(() => {
     return setOptions({
@@ -80,6 +86,32 @@ export default function AdminManageLeaseScreen() {
       },
       {text: t('ok'), onPress: () => Delete()},
     ]);
+
+  const scanQRMutation = useMutation({
+    mutationFn: postScanQR,
+  });
+  const handleScanQR = value => {
+    scanQRMutation.mutate(
+      {id: value?.id, qr_code: value?.qr_code},
+      {
+        onSuccess: dataInside => {
+          if (dataInside?.status) {
+            navigate('NoBottomTab', {
+              screen: 'QRScanDetailScreen',
+              params: dataInside?.data,
+            });
+            setOpen(false);
+            return;
+          }
+          showMess(dataInside?.message, 'error');
+        },
+        onError: err => {
+          console.log(err);
+        },
+      },
+    );
+  };
+
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
@@ -146,17 +178,25 @@ export default function AdminManageLeaseScreen() {
             </CustomText>
           </View>
         </CustomImage>
-        <View style={styles.button}>
+        {/* <View style={styles.button}>
           <CustomText
             style={{color: COLORS.white, fontSize: SIZES.xMedium}}
             textType="semiBold">
             {t('booking_count')}:
           </CustomText>
-        </View>
+        </View> */}
         {/* <CustomButton
           text={t('review')}
           style={{width: '85%', height: scale(45)}}
         /> */}
+        <CustomButton
+          text={t('edit_accommodation')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() => navigate('PostNewLeaseScreen', {...params})}
+        />
         <CustomButton
           text={t('voucher_manage')}
           style={{width: '85%', height: scale(45)}}
@@ -174,6 +214,31 @@ export default function AdminManageLeaseScreen() {
           onPress={() =>
             navigate('RoomManageScreen', {...params, admin: adminScreen})
           }
+        />
+        <CustomButton
+          text={t('post_video_short')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() =>
+            navigate('PostVideoShortScreen', {Accom: true, accomId: params?.id})
+          }
+        />
+        <CustomButton
+          text={t('check_in_qrscan')}
+          style={{width: '85%', height: scale(45)}}
+          onPress={() => {
+            setOpen(true);
+          }}
+          // onPress={() => {
+          //   navigate('NoBottomTab', {screen: 'CheckInSuccessScreen'});
+          // }}
+        />
+        <ModalQrCodeScanner
+          open={!!open}
+          onScanner={value => handleScanQR(value)}
+          onClose={() => setOpen(false)}
         />
         {/* <CustomButton
           text={t('policy_manage')}

@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {SHADOW, scale} from '../../../../assets/constants';
@@ -11,6 +11,7 @@ import {formatDate} from '../../../../utils/format';
 import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
@@ -18,6 +19,22 @@ export default function AccommodationPremium({currency}) {
   const title = [t('popular_area')];
   const {navigate} = useNavigation();
   const {country} = useCountry();
+  const [current, setCurrent] = useState(null);
+
+  const currentPosition = useCallback(async () => {
+    const {coords} = await getCurrentLocation();
+    if (coords) {
+      const coordinates = {
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+      };
+      setCurrent(coordinates);
+      return coordinates;
+    }
+  }, []);
+  useEffect(() => {
+    currentPosition();
+  }, []);
 
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -26,6 +43,9 @@ export default function AccommodationPremium({currency}) {
         accommodation_type_id: 1,
         country_id: country?.id,
         currency_id: currency?.id,
+        latitude: current?.latitude,
+        longitude: current?.longitude,
+        distance: 10000,
       },
     ],
     queryFn: () =>
@@ -33,7 +53,9 @@ export default function AccommodationPremium({currency}) {
         date_end: formatDate(new Date(), {addDays: 1}),
         date_start: formatDate(),
         accommodation_type_id: 1,
-
+        latitude: current?.latitude,
+        longitude: current?.longitude,
+        distance: 10000,
         country_id: country?.id,
         currency_id: currency?.id,
       }),

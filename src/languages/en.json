@@ -1161,5 +1161,25 @@
   "note_map_distance": "Note: Please come to the exact location of your property within 5 meters and choose the exact location to post (this will help identify your property on the system better)",
   "distance": "Distance",
   "phone_area_code": "Phone area code",
-  "invalid_phone": "Invalid phone"
+  "invalid_phone": "Invalid phone",
+
+  "type_payment": "Type payment",
+  "view_review": "View review",
+  "would_you_like_share_short_video": "Would you like to share your experiences at this hotel through short videos? These videos will appear on trends!",
+  "video_caption": "Video caption",
+  "edit_accommodation": "Edit Accommodation",
+  "post_video_short": "Post video short",
+  "check_in_qrscan": "Check in QR scan",
+  "share_detail_hotel_short_video": "Share the details of your hotel through short videos, these videos will appear on trends!",
+  "share_detail_estate_short_video": "Share the details of your estate through short videos, these videos will appear on trends!",
+  "description_video_short": "Description video short",
+  "click_to_select_video": "Click to select the video to upload",
+  "video_short_review": "Video short review",
+  "please_give_qrcode_to": "Please give this qrcode to hotel owner to check-in",
+  "no_more_room_today": "No more room today",
+  "please_repost": "This post have been expired, please repost it",
+  "repost": "Repost",
+  "video_short": "video_short",
+  "wallet_ready_to_use": "Your cryptocurrency wallet is ready to use",
+  "the_remaining_balance_add": "The remaining balance will be added to the balance management wallet:"
 }

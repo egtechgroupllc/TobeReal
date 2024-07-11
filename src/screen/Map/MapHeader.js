@@ -101,6 +101,7 @@ export default memo(function MapHeader({
         top: 0,
         paddingHorizontal: scale(80),
         ...SHADOW,
+        zIndex: 99,
       }}>
       {/* <HeaderBar /> */}
       <FilterSort

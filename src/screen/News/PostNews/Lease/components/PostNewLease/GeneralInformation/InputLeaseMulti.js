@@ -15,6 +15,7 @@ export default function InputLeaseMulti({
   placeholder,
   maxLength,
   styleInput,
+  editable,
 }) {
   const {t} = useLanguage();
   const [lengthText, setLengthText] = useState('');
@@ -33,6 +34,7 @@ export default function InputLeaseMulti({
     <CustomInput
       styleTextLabel={styles.label}
       label={label}
+      editable={editable}
       control={control}
       name={name}
       multiline

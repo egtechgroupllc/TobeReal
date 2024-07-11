@@ -1155,5 +1155,25 @@
   "note_map_distance": "Chú ý: Vui lòng đến đúng vị trí của tài sản của bạn trong vòng 5 mét và chọn đúng vị trí để đăng (điều này sẽ giúp nhận diện tài sản của bạn trên hệ thống tốt hơn)",
   "distance": "Khoảng cách",
   "phone_area_code": "Mã vùng điện thoại",
-  "invalid_phone": "Số điện thoại không hợp lệ"
+  "invalid_phone": "Số điện thoại không hợp lệ",
+
+  "type_payment": "Loại thanh toán",
+  "view_review": "Xem đánh giá",
+  "would_you_like_share_short_video": "Quý khách có muốn chia sẻ những trải nghiệm tại khách sạn này bằng video ngắn? Những video này sẽ xuất hiện trên xu hướng!",
+  "video_caption": "Chú thích video",
+  "edit_accommodation": "Chỉnh sửa chỗ ở",
+  "post_video_short": "Đăng video ngắn",
+  "check_in_qrscan": "Quét mã QR để check-in",
+  "share_detail_hotel_short_video": "Chia sẻ chi tiết khách sạn của bạn bằng video ngắn, những video này sẽ xuất hiện trên xu hướng!",
+  "share_detail_estate_short_video": "Chia sẻ chi tiết bất động sản của bạn bằng video ngắn, những video này sẽ xuất hiện trên xu hướng!",
+  "description_video_short": "Mô tả video ngắn",
+  "click_to_select_video": "Nhấp để chọn video để tải lên",
+  "video_short_review": "Đánh giá video ngắn",
+  "please_give_qrcode_to": "Vui lòng đưa mã QR này cho chủ khách sạn để check-in",
+  "no_more_room_today": "Hôm nay không còn phòng trống",
+  "please_repost": "Bài đăng này đã hết hạn, vui lòng đăng lại",
+  "repost": "Đăng lại",
+  "video_short": "video ngắn",
+  "wallet_ready_to_use": "Ví tiền mã hoá của bạn đã sẵn sàng để sử dụng",
+  "the_remaining_balance_add": "Số dư còn lại sẽ được thêm vào ví quản lý số dư:"
 }

@@ -1131,5 +1131,25 @@
   "note_map_distance": "Nota: Sila datang ke lokasi tepat hartanah anda dalam lingkungan 5 meter dan pilih lokasi yang tepat untuk diposkan (ini akan membantu mengenal pasti hartanah anda dalam sistem dengan lebih baik)",
   "distance": "Jarak",
   "phone_area_code": "Kod kawasan telefon",
-  "invalid_phone": "Nombor telefon tidak sah"
+  "invalid_phone": "Nombor telefon tidak sah",
+
+  "type_payment": "Jenis pembayaran",
+  "view_review": "Lihat ulasan",
+  "would_you_like_share_short_video": "Adakah anda ingin berkongsi pengalaman anda di hotel ini melalui video pendek? Video-video ini akan muncul dalam tren!",
+  "video_caption": "Kapsyen video",
+  "edit_accommodation": "Sunting Penginapan",
+  "post_video_short": "Hantar video pendek",
+  "check_in_qrscan": "Imbas QR untuk daftar masuk",
+  "share_detail_hotel_short_video": "Kongsi butiran hotel anda melalui video pendek, video-video ini akan muncul dalam tren!",
+  "share_detail_estate_short_video": "Kongsi butiran hartanah anda melalui video pendek, video-video ini akan muncul dalam tren!",
+  "description_video_short": "Penerangan video pendek",
+  "click_to_select_video": "Klik untuk memilih video untuk dimuat naik",
+  "video_short_review": "Ulasan video pendek",
+  "please_give_qrcode_to": "Sila berikan kod QR ini kepada pemilik hotel untuk daftar masuk",
+  "no_more_room_today": "Tiada bilik lagi hari ini",
+  "please_repost": "Catatan ini telah tamat tempoh, sila pos semula",
+  "repost": "Pos semula",
+  "video_short": "video pendek",
+  "wallet_ready_to_use": "Dompet kripto anda sedia untuk digunakan",
+  "the_remaining_balance_add": "Baki yang tinggal akan ditambah ke dalam dompet pengurusan baki:"
 }

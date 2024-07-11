@@ -70,9 +70,7 @@ export default function DetailPriceRoom({
           valueSub={formatPrice(totalPrice, {
             currency: currency?.currency_code,
           })}
-          textDesc={`${t(
-            'The remaining balance will be added to the e-wallet:',
-          )} `}
+          textDesc={`${t('the_remaining_balance_add')} `}
           valueDesc={`+${formatPrice(voucher_discount - totalPrice, {
             currency: currency?.currency_code,
           })}`}

@@ -16,28 +16,26 @@ export default function ListToken({dataP}) {
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
   });
+
   const listToken = useMemo(
     () => [
       {
         name: 'TOBECHAIN',
-        value: data?.data.TBC,
+        value: data?.data?.[0]?.balance,
         unit: 'TOBE',
         image: images.logoTBH,
-        data: dataP ? dataP : '',
       },
       {
         name: 'TOBE HOUSE',
-        value: data?.data.TBH,
+        value: data?.data?.[2]?.balance,
         unit: 'TBH',
         image: images.logoTBH,
-        data: dataP ? dataP : '',
       },
       {
         name: 'ECOSYSTEM (TOBECHAIN)',
-        value: data?.data.ETOBE || 0,
+        value: data?.data?.[1]?.balance,
         unit: 'ETOBE',
         image: images.logoEcoTOBE,
-        data: dataP ? dataP : '',
       },
     ],
     [data?.data],
@@ -64,7 +62,7 @@ export default function ListToken({dataP}) {
             onPress={() => {
               navigate('NoBottomTab', {
                 screen: 'DetailTokenScreen',
-                params: item,
+                params: {listToken: item, data: dataP},
               });
             }}
             key={index}

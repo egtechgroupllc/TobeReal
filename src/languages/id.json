@@ -1126,5 +1126,25 @@
   "note_map_distance": "Catatan: Harap datang ke lokasi persis properti Anda dalam jarak 5 meter dan pilih lokasi yang tepat untuk diposting (ini akan membantu mengidentifikasi properti Anda di sistem dengan lebih baik)",
   "distance": "Jarak",
   "phone_area_code": "Kode area telepon",
-  "invalid_phone": "Nomor telepon tidak valid"
+  "invalid_phone": "Nomor telepon tidak valid",
+
+  "type_payment": "Jenis pembayaran",
+  "view_review": "Lihat ulasan",
+  "would_you_like_share_short_video": "Apakah Anda ingin membagikan pengalaman Anda di hotel ini melalui video pendek? Video-video ini akan muncul di tren!",
+  "video_caption": "Keterangan video",
+  "edit_accommodation": "Edit Akomodasi",
+  "post_video_short": "Posting video pendek",
+  "check_in_qrscan": "Pindai QR untuk check-in",
+  "share_detail_hotel_short_video": "Bagikan detail hotel Anda melalui video pendek, video-video ini akan muncul di tren!",
+  "share_detail_estate_short_video": "Bagikan detail properti Anda melalui video pendek, video-video ini akan muncul di tren!",
+  "description_video_short": "Deskripsi video pendek",
+  "click_to_select_video": "Klik untuk memilih video yang akan diunggah",
+  "video_short_review": "Ulasan video pendek",
+  "please_give_qrcode_to": "Silakan berikan kode QR ini kepada pemilik hotel untuk check-in",
+  "no_more_room_today": "Tidak ada kamar lagi hari ini",
+  "please_repost": "Postingan ini telah kedaluwarsa, silakan posting ulang",
+  "repost": "Posting ulang",
+  "video_short": "video pendek",
+  "wallet_ready_to_use": "Dompet kripto Anda siap digunakan",
+  "the_remaining_balance_add": "Sisa saldo akan ditambahkan ke dompet manajemen saldo:"
 }

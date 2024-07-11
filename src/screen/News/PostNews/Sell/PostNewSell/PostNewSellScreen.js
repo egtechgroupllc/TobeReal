@@ -52,6 +52,7 @@ export default function PostNewSellScreen() {
     delete value?.currency;
     delete value?.province;
 
+    params?.title && delete value?.title;
     navigate('PostConfigurationSellScreen', value);
   };
 
@@ -69,6 +70,10 @@ export default function PostNewSellScreen() {
         'wallet_address',
         'images',
         'active',
+        'address',
+        'latitude',
+        'longitude',
+        'slug',
       ];
 
       entries.map(item => {

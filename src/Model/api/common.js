@@ -77,8 +77,36 @@ export const getListConstant = async () => {
 
   return responsive.data;
 };
+
+////-----Video-Short------//
 export const getListVideoRandom = async () => {
   const responsive = await instanceCommon.get('/video-short/list-random');
+
+  return responsive.data;
+};
+
+export const getLinkData = async ({table_name, table_id, token}) => {
+  const responsive = await instanceCommon.get(
+    `/video-short/linked-data?table_name=${table_name}&table_id=${table_id}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  );
+  return responsive.data;
+};
+export const postVideoShort = async ({data, token}) => {
+  const responsive = await instanceCommon.post(
+    '/video-short/post-video',
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: token,
+      },
+    },
+  );
 
   return responsive.data;
 };

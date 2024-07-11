@@ -162,7 +162,9 @@ export default function WalletTokenScreen() {
               alignItems: 'center',
             }}>
             <BottomHelpCenter />
-            <MenuAddressWallet data={data?.data} />
+            {data?.data?.wallet_address && (
+              <MenuAddressWallet data={data?.data} />
+            )}
           </View>
         );
       },

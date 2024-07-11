@@ -11,13 +11,12 @@ import {IconError} from '../../assets/icon/Icon';
 
 export default function DepositTokenScreen() {
   const params = useRoute().params;
-  console.log(params);
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const [secondEnd, setSecondEnd] = useState(false);
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: `${t('receive')} ${params?.unit}`,
+      headerTitle: `${t('receive')} ${params?.listToken?.unit}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

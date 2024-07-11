@@ -4,6 +4,8 @@ import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {
   IconEditProfile,
   IconError,
+  IconPlayVideo,
+  IconReset,
   IconTrash,
 } from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
@@ -13,7 +15,12 @@ import {formatDate} from '../../../../../utils/format';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function CreateSellItem({data, onPressMore, onEdit}) {
+export default function CreateSellItem({
+  data,
+  onPressMore,
+  onEdit,
+  onVideoShort,
+}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
 
@@ -22,13 +29,58 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data.package_post_item?.package_post?.level],
   );
+  const dateExpire = useMemo(
+    () =>
+      formatDate(data?.date_start, {
+        addDays: data?.package_post_item?.number_day,
+        dateStyle: 'yyyy-MM-dd',
+      }),
+    [data?.package_post_item?.number_day, data?.date_start],
+  );
+  const today = formatDate(new Date());
+
   return (
     <TouchableOpacity
-      style={styles.wrapper}
+      style={{...styles.wrapper, padding: dateExpire <= today ? 0 : scale(10)}}
       activeOpacity={0.7}
+      disabled={dateExpire <= today ? true : false}
       onPress={() => {
         navigate('DetailBuyScreen', data);
       }}>
+      {dateExpire <= today && (
+        <View
+          style={{
+            position: 'absolute',
+            zIndex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            backgroundColor: COLORS.black + '80',
+            rowGap: scale(20),
+            borderRadius: scale(6),
+          }}>
+          <CustomText
+            textType="semiBold"
+            style={{
+              color: COLORS.primary,
+              fontSize: SIZES.medium,
+              textAlign: 'center',
+              width: '80%',
+            }}>
+            {t('please_repost')}!
+          </CustomText>
+          <CustomButton
+            onPress={() => onEdit({isRestore: true})}
+            activeOpacity={0.9}
+            text={t('repost')}
+            buttonType="small"
+            iconRight={IconReset}
+            styleIcon={{color: COLORS.white}}
+            styleWrapper={{width: '30%'}}
+          />
+        </View>
+      )}
       <View style={styles.top}>
         <CustomImage
           source={data.images[0].url}
@@ -107,12 +159,7 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>{t('expiration_date')}</CustomText>
-          <CustomText textType="medium">
-            {formatDate(data?.date_start, {
-              addDays: data?.package_post_item?.number_day,
-              dateStyle: 'yyyy-MM-dd',
-            })}
-          </CustomText>
+          <CustomText textType="medium">{dateExpire}</CustomText>
         </View>
       </View>
 
@@ -139,7 +186,25 @@ export default function CreateSellItem({data, onPressMore, onEdit}) {
           }}
           onPress={onEdit}
         />
-
+        <CustomButton
+          outline
+          buttonType="normal"
+          iconRight={IconPlayVideo}
+          text={t('video_short')}
+          styleIcon={{
+            color: COLORS.overlay,
+          }}
+          style={{
+            flex: 1,
+          }}
+          styleText={{color: COLORS.black, textType: 'regular'}}
+          onPress={onVideoShort}
+          styleOutline={{
+            borderColor: COLORS.primary,
+            backgroundColor: COLORS.subPrimary,
+            borderWidth: 1,
+          }}
+        />
         <TouchableOpacity
           style={styles.box}
           activeOpacity={0.7}
@@ -163,7 +228,6 @@ const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(10),
     backgroundColor: '#fff',
-    padding: scale(10),
     width: scale(400 / 1.3),
     borderRadius: scale(6),
     ...SHADOW,

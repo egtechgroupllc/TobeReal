@@ -25,7 +25,7 @@ setup_permissions([
   # 'Bluetooth',
   # 'Calendars',
   # 'CalendarsWriteOnly',
-  # 'Camera',
+  'Camera',
   # 'Contacts',
   # 'FaceID',
   'LocationAccuracy',

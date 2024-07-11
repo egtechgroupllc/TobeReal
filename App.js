@@ -5,12 +5,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
+  Keyboard,
   Platform,
   StatusBar,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
@@ -239,6 +241,9 @@ export default function App() {
                             barStyle="dark-content"
                             backgroundColor={COLORS.primary}
                           />
+                          {/* <TouchableWithoutFeedback
+                            accessible={false}
+                            onPress={Keyboard.dismiss}> */}
                           <KeyboardAvoidingView
                             style={{flex: 1}}
                             behavior={
@@ -246,6 +251,7 @@ export default function App() {
                             }>
                             <Layout />
                           </KeyboardAvoidingView>
+                          {/* </TouchableWithoutFeedback> */}
                         </BottomSheetModalProvider>
                       </TourGuideProvider>
                     </AuthProvider>

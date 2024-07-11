@@ -4,15 +4,16 @@ import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconMarker} from '../../../assets/icon/Icon';
 import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
-import {formatDateTime, formatPrice} from '../../../utils/format';
+import {formatDate, formatDateTime, formatPrice} from '../../../utils/format';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import QRCode from 'react-native-qrcode-svg';
 
-export default function BookingItem({data, onPress, onReView}) {
+export default function BookingItem({data, onPress, onReView, onViewDetail}) {
   const objAccom = data?.accommodation;
   const {currency} = useCountry();
   const {t} = useLanguage();
+  const today = formatDate(new Date());
 
   return (
     <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
@@ -79,12 +80,30 @@ export default function BookingItem({data, onPress, onReView}) {
             />
           </View>
         ) : (
-          <CustomButton
-            styleWrapper={{flex: 0.4}}
-            text={t('review')}
-            style={{height: scale(25)}}
-            onPress={onReView}
-          />
+          <>
+            {/* {data?.check_out_date < today &&
+              (data?.accommodation_review ? (
+                <CustomButton
+                  styleWrapper={{minWidth: scale(50)}}
+                  text={t('review')}
+                  style={{height: scale(25)}}
+                  onPress={onReView}
+                />
+              ) : (
+                <CustomButton
+                  styleWrapper={{minWidth: scale(50)}}
+                  text={t('view_review')}
+                  style={{height: scale(25), backgroundColor: COLORS.grey}}
+                  onPress={onViewDetail}
+                />
+              ))} */}
+            <CustomButton
+              styleWrapper={{flex: 0.4}}
+              text={t('review')}
+              style={{height: scale(25)}}
+              onPress={onReView}
+            />
+          </>
         )}
       </View>
       <View style={styles.line} />

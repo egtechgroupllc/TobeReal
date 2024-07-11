@@ -58,7 +58,13 @@ export const postCreateAccommoLease = async data => {
 
   return responsive.data;
 };
+export const postUpdateAccom = async ({id_accom, formData}) => {
+  const responsive = await instanceAccom.post(`/${id_accom}/update`, formData, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
 
+  return responsive.data;
+};
 export const getMyListCreateAccom = async ({page = 1, hasRoom, limit = 10}) => {
   const responsive = await instanceAccom.get(
     `/my-list?page=${page}&limit=${limit}${
@@ -88,7 +94,8 @@ export const postCreateAccommoRoomLease = async ({id_accomo, formData}) => {
 
   return responsive.data;
 };
-export const postUpdateAccom = async ({id_room, formData}) => {
+
+export const postUpdateRoomAccom = async ({id_room, formData}) => {
   const responsive = await instanceAccom.post(
     `/room/${id_room}/update`,
     formData,
@@ -268,6 +275,16 @@ export const postBuyVoucher = async data => {
 //-----Check-in-----//
 export const postCreateQR = async data => {
   const responsive = await instanceAccom.post('/room/booking/create-qr', data);
+
+  return responsive.data;
+};
+export const postScanQR = async data => {
+  const responsive = await instanceAccom.post('/room/booking/scan-qr', data);
+
+  return responsive.data;
+};
+export const postCheckIn = async data => {
+  const responsive = await instanceAccom.post('/room/booking/check-in', data);
 
   return responsive.data;
 };

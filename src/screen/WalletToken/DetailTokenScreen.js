@@ -13,7 +13,6 @@ import EmptyData from '../../components/EmptyData';
 
 export default function DetailTokenScreen() {
   const params = useRoute().params;
-  console.log(params);
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   useLayoutEffect(() => {
@@ -35,7 +34,7 @@ export default function DetailTokenScreen() {
           <View style={styles.icon}>
             <CustomImage
               isAvatar
-              source={params?.image}
+              source={params?.listToken?.image}
               style={{
                 width: scale(40),
                 aspectRatio: 1,
@@ -44,7 +43,7 @@ export default function DetailTokenScreen() {
             />
           </View>
           <CustomText style={{fontSize: SIZES.large}} textType="medium">
-            {params?.value} {params?.unit}
+            {params?.listToken?.value} {params?.listToken?.unit}
           </CustomText>
           <View
             style={{

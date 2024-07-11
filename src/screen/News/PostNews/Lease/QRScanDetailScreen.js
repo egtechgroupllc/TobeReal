@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Modal,
@@ -7,40 +7,49 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
-import {IconBan, IconPeople, IconRoom, IconWifi} from '../../assets/icon/Icon';
-import CustomText from '../../components/CustomText';
-import MainWrapper from '../../components/MainWrapper';
-import {useLanguage} from '../../hooks/useLanguage';
-import ItemUtil from '../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
-import Contact from './components/DetailBooking/Contact';
-import FooterButton from './components/DetailBooking/FooterButton';
-import TimeBookingCheckInOut from './components/DetailBooking/TimeBookingCheckInOut';
-import TotalPriceBooking from './components/DetailBooking/TotalPriceBooking';
-import QRCode from 'react-native-qrcode-svg';
-import {CustomButton} from '../../components';
-import {postCreateQR} from '../../Model/api/apiAccom';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {
+  IconBan,
+  IconPeople,
+  IconRoom,
+  IconWifi,
+} from '../../../../assets/icon/Icon';
+import {CustomText} from '../../../../components';
+import MainWrapper from '../../../../components/MainWrapper';
+import {useLanguage} from '../../../../hooks/useLanguage';
+import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
+import Contact from '../../../Bookings/components/DetailBooking/Contact';
+import TimeBookingCheckInOut from '../../../Bookings/components/DetailBooking/TimeBookingCheckInOut';
+import TotalPriceBooking from '../../../Bookings/components/DetailBooking/TotalPriceBooking';
+import {
+  postCheckIn,
+  postCreateQR,
+  postScanQR,
+} from '../../../../Model/api/apiAccom';
 import {useMutation} from '@tanstack/react-query';
+import FooterButton from './components/FooterButton';
+import {showMess} from '../../../../assets/constants/Helper';
 
 export default function DetailBookingScreen() {
   const {t} = useLanguage();
   const data = useRoute().params;
-  const objAccmo = data?.accommodation;
-  const {setOptions} = useNavigation();
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [qrCode, setQrCode] = useState([]);
-  const createQRMutation = useMutation({
-    mutationFn: postCreateQR,
+  const {navigate, goBack} = useNavigation();
+  const checkInMutation = useMutation({
+    mutationFn: postCheckIn,
   });
-  const handleCreateQR = value => {
-    createQRMutation.mutate(
-      {bookingId: data?.id},
+  const handleCheckIn = value => {
+    checkInMutation.mutate(
+      {id: data?.id, qr_code: data?.qr_code},
       {
         onSuccess: dataInside => {
           if (dataInside?.status) {
-            setQrCode(dataInside?.data);
+            navigate('NoBottomTab', {
+              screen: 'CheckInSuccessScreen',
+              params: dataInside?.data,
+            });
+            return;
           }
+          showMess(dataInside?.message, 'error');
         },
         onError: err => {
           console.log(err);
@@ -48,14 +57,7 @@ export default function DetailBookingScreen() {
       },
     );
   };
-  useEffect(() => {
-    handleCreateQR();
-  }, []);
-  useLayoutEffect(() => {
-    return setOptions({
-      headerTitle: t('booking_detail'),
-    });
-  }, []);
+
   return (
     <>
       <MainWrapper styleContent={styles.wrapper}>
@@ -92,13 +94,6 @@ export default function DetailBookingScreen() {
         </View>
 
         <View style={styles.content}>
-          <View>
-            <CustomText textType="bold" size={SIZES.medium}>
-              {objAccmo?.name}
-            </CustomText>
-            <CustomText>{objAccmo?.address}</CustomText>
-          </View>
-
           <TimeBookingCheckInOut data={data} />
 
           <View
@@ -114,41 +109,7 @@ export default function DetailBookingScreen() {
                 ({data?.number_room} {t('room')} - {data?.room?.room_type?.name}
                 ){'  '} {data?.room?.name}
               </CustomText>
-
-              <ItemUtil
-                Icon={IconPeople}
-                value={`${data?.room?.max_occupancy} ${t('guest')}`}
-                valueBold
-                styleTextValue={styles.textValueUntil}
-                styleIcon={styles.iconUntil}
-              />
-              <ItemUtil
-                Icon={IconRoom}
-                value={`${data?.room?.room_bed_type?.name}`}
-                valueBold
-                styleTextValue={styles.textValueUntil}
-                styleIcon={styles.iconUntil}
-              />
-              <ItemUtil
-                Icon={IconWifi}
-                value={`${t('free_wifi')}`}
-                valueBold
-                styleTextValue={styles.textValueUntil}
-                styleIcon={styles.iconUntil}
-              />
             </View>
-            <TouchableOpacity
-              onPress={() => setIsOpen(true)}
-              style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
-              {qrCode ? (
-                <QRCode value={JSON.stringify(qrCode)} color="#000" />
-              ) : (
-                <ActivityIndicator color={COLORS.primary} size="large" />
-              )}
-              <CustomText style={{width: scale(150), textAlign: 'center'}}>
-                {t('please_give_qrcode_to')}
-              </CustomText>
-            </TouchableOpacity>
           </View>
 
           <View>
@@ -210,59 +171,12 @@ export default function DetailBookingScreen() {
           </CustomText>
         </View>
       </MainWrapper>
-      {data.status !== 'SUCCESS' && <FooterButton />}
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={!!isOpen}
-        onRequestClose={() => setIsOpen(false)}>
-        <View style={styles.wrappers}>
-          <TouchableOpacity
-            activeOpacity={1}
-            style={{
-              backgroundColor: '#00000070',
-              ...StyleSheet.absoluteFill,
-            }}
-            onPress={() => setIsOpen(false)}
-          />
-
-          <View
-            style={{
-              padding: scale(10),
-              backgroundColor: '#fff',
-              borderRadius: scale(10),
-              rowGap: scale(10),
-            }}>
-            <View style={styles.content}>
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <View>
-                  {qrCode ? (
-                    <QRCode
-                      size={scale(220)}
-                      value={JSON.stringify(qrCode)}
-                      color="#000"
-                    />
-                  ) : (
-                    <ActivityIndicator color={COLORS.primary} size="large" />
-                  )}
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <CustomButton
-            buttonType="normal"
-            text={t('close')}
-            onPress={() => setIsOpen(false)}
-            style={{minWidth: scale(100), marginTop: scale(10)}}
-          />
-        </View>
-      </Modal>
+      {data.status == 'SUCCESS' && (
+        <FooterButton
+          onPressConfirm={() => handleCheckIn()}
+          onPressCancel={() => goBack()}
+        />
+      )}
     </>
   );
 }

@@ -16,6 +16,7 @@ import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
 import RealEstateType from '../../../components/RealEstateType';
 import SelectCountry from '../../../components/SelectCountry';
+import {useRoute} from '@react-navigation/native';
 
 export default function GeneralInformation({
   maxCharacters,
@@ -25,6 +26,7 @@ export default function GeneralInformation({
   errors,
 }) {
   const {t} = useLanguage();
+  const params = useRoute().params;
 
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
@@ -76,6 +78,7 @@ export default function GeneralInformation({
             label={t('real_estate_title')}
             control={control}
             name="title"
+            editable={params?.title ? false : true}
             multiline
             maxLength={100}
             placeholder={t('enter_real_estate_title')}
@@ -122,16 +125,20 @@ export default function GeneralInformation({
             }
           />
 
-          <View style={styles.line} />
+          {!params?.address && (
+            <>
+              <View style={styles.line} />
 
-          <EstateSetMap
-            control={control}
-            watch={watch}
-            onChange={value => {
-              setValue('latitude', value?.latitude);
-              setValue('longitude', value?.longitude);
-            }}
-          />
+              <EstateSetMap
+                control={control}
+                watch={watch}
+                onChange={value => {
+                  setValue('latitude', value?.latitude);
+                  setValue('longitude', value?.longitude);
+                }}
+              />
+            </>
+          )}
 
           <View style={styles.line} />
 
@@ -145,15 +152,17 @@ export default function GeneralInformation({
             // }}
           />
 
-          <CustomInput
-            styleTextLabel={styles.label}
-            label={t('address')}
-            control={control}
-            name="address"
-            placeholder={t('address')}
-            rules={requireField(t('this_field_required'))}
-            style={styles.textInput}
-          />
+          {!params?.address && (
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('address')}
+              control={control}
+              name="address"
+              placeholder={t('address')}
+              rules={requireField(t('this_field_required'))}
+              style={styles.textInput}
+            />
+          )}
         </Collapsible>
       </InViewPort>
     </View>

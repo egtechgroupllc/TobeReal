@@ -15,6 +15,7 @@ export default function BookingActive() {
     queryKey: ['accommodation', 'room', 'my-booking'],
     queryFn: getListBookingAccomo,
   });
+
   return (
     <FlatList
       data={data?.data?.rows || (isLoading && [...Array(3)])}
@@ -22,6 +23,7 @@ export default function BookingActive() {
         paddingVertical: scale(10),
         rowGap: scale(10),
       }}
+      style={{width: '100%', padding: scale(15)}}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
       ListEmptyComponent={() => <EmptyData styleWrapper={{marginTop: '40%'}} />}
@@ -34,6 +36,12 @@ export default function BookingActive() {
             onReView={() =>
               navigate('NoBottomTab', {
                 screen: 'PostReviewScreen',
+                params: item,
+              })
+            }
+            onViewDetail={() =>
+              navigate('NoBottomTab', {
+                screen: 'DetailReviewScreen',
                 params: item,
               })
             }

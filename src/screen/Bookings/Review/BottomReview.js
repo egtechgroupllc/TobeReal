@@ -9,9 +9,10 @@ import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 
-export default function BottomReview({handleSubmit, roomID}) {
+export default function BottomReview({handleSubmit, roomID, txhashId}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
+  const {navigate} = useNavigation();
 
   const {goBack} = useNavigation();
   const queryClient = useQueryClient();
@@ -48,18 +49,19 @@ export default function BottomReview({handleSubmit, roomID}) {
     value?.rating &&
       postReviewAccmoMu.mutate(formData, {
         onSuccess: dataInside => {
-          console.log(dataInside);
           showMess(
             dataInside?.message ? dataInside?.message : 'Success!',
             dataInside?.status ? 'success' : 'error',
           );
           if (dataInside?.status) {
-            queryClient.invalidateQueries([
-              'accommodation',
-              'room',
-              'my-booking',
-            ]);
-            goBack();
+            navigate('PostVideoShortReviewScreen', txhashId);
+
+            // queryClient.invalidateQueries([
+            //   'accommodation',
+            //   'room',
+            //   'my-booking',
+            // ]);
+            // goBack();
           }
         },
         onError: err => {

@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import {
+  Alert,
   Animated,
   AppState,
   FlatList,
@@ -25,6 +26,8 @@ import VideoPlay from './components/VideoPlay';
 import Comment from './Comment';
 import {showMess} from '../../assets/constants/Helper';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useQuery} from '@tanstack/react-query';
+import {getListVideoRandom} from '../../Model/api/common';
 
 const listVideo = [
   {
@@ -77,15 +80,18 @@ export default function ListVideoInfluencerScreen() {
   const isFocused = useIsFocused();
   const [videoPlay, setVideoPlay] = useState(true);
 
-  const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
-    if (viewableItems.length > 0 && viewableItems[0].isViewable) {
-      setVideoPlay(viewableItems[0].item?.id);
-    }
-  }, []);
+  const handlerViewableItemsChanged = useCallback(
+    ({viewableItems}) => {
+      if (viewableItems.length > 0 && viewableItems[0].isViewable) {
+        setVideoPlay(viewableItems[0].item?.id);
+      }
+    },
+    [videoPlay],
+  );
 
-  useLayoutEffect(() => {
-    scrollToIndex(params?.index);
-  }, [params?.index]);
+  // useLayoutEffect(() => {
+  //   scrollToIndex(params?.index);
+  // }, [params?.index]);
 
   const scrollToIndex = useCallback((index = 0) => {
     flatListRef.current.scrollToIndex({
@@ -93,6 +99,10 @@ export default function ListVideoInfluencerScreen() {
       index: index,
     });
   }, []);
+  const {data, isLoading} = useQuery({
+    queryKey: ['video-short', 'list-random'],
+    queryFn: getListVideoRandom,
+  });
 
   // const handleProgress = useCallback(value => {
   //   return setOptions({
@@ -133,14 +143,14 @@ export default function ListVideoInfluencerScreen() {
 
   return (
     <View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         activeOpacity={0.7}
         onPress={goBack}
         style={{...styles.goBack, top: insets.top}}>
         <IconGoBack fill={'#fff'} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <FlatList
-        data={listVideo}
+        data={data?.data?.rows}
         ref={flatListRef}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -165,20 +175,24 @@ export default function ListVideoInfluencerScreen() {
         }}
         onViewableItemsChanged={handlerViewableItemsChanged}
         // onEndReached={e => Alert.alert('Đã gan cuôi r')}
-        onEndReachedThreshold={listVideo?.length - (listVideo?.length - 2)}
-        renderItem={({item, index}) => (
-          <VideoPlay
-            ref={videoRef}
-            data={item}
-            paused={item?.id !== videoPlay}
-            play={item?.id === videoPlay && isFocused}
-            // onProgress={value => {
-            //   handleProgress(value);
-            // }}
-            // onComment={() => commentRef.current?.open()}
-            onComment={() => showMess(t('comming_soon'), 'error')}
-          />
-        )}
+        onEndReachedThreshold={
+          data?.data?.rows?.length - (data?.data?.rows?.length - 2)
+        }
+        renderItem={({item, index}) => {
+          return (
+            <VideoPlay
+              ref={videoRef}
+              data={item}
+              paused={item?.id !== videoPlay}
+              play={item?.id === videoPlay && isFocused}
+              // onProgress={value => {
+              //   handleProgress(value);
+              // }}
+              // onComment={() => commentRef.current?.open()}
+              onComment={() => showMess(t('comming_soon'), 'error')}
+            />
+          );
+        }}
       />
 
       <View

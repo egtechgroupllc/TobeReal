@@ -9,6 +9,7 @@ import {
   postCreateAccommoRoomLease,
   postPolicyToRoom,
   postUpdateAccom,
+  postUpdateRoomAccom,
 } from '../../../../../Model/api/apiAccom';
 import {images} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
@@ -56,7 +57,7 @@ export default function AddRoomTypeScreen() {
     mutationFn: postCreateAccommoRoomLease,
   });
   const updateAccommodationRoomMu = useMutation({
-    mutationFn: postUpdateAccom,
+    mutationFn: postUpdateRoomAccom,
   });
 
   // const createAddPolicyToRoom = useMutation({

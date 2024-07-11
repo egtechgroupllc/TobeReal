@@ -125,7 +125,7 @@ export default forwardRef(function VideoPlay(
           <Video
             ref={videoRef}
             {...props}
-            source={isImgAsset ? data?.src : {uri: data?.src}}
+            source={isImgAsset ? data?.src : {uri: data?.url}}
             style={[styles.video, style]}
             paused={pausedVideo}
             onProgress={value => {
@@ -140,7 +140,6 @@ export default forwardRef(function VideoPlay(
             onLoad={response => {
               const {width, height} = response.naturalSize;
               const heightScaled = height / width;
-              console.log(heightScaled);
               setResizeMode(height > width ? 'cover' : 'contain');
             }}
           />
@@ -162,11 +161,11 @@ export default forwardRef(function VideoPlay(
       {true && (
         <>
           <VideoCaption data={data} />
-          <SideBar
+          {/* <SideBar
             data={data}
             isFavourite={!!hearts.length}
             onComment={onComment}
-          />
+          /> */}
 
           {pausedVideo && (
             <IconPlayVideo

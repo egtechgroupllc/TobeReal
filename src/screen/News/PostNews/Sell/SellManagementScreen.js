@@ -81,8 +81,14 @@ export default function SellManagementScreen() {
                       setDataItemEstate(item);
                       bottomSheetRef.current.open();
                     }}
-                    onEdit={() => {
-                      navigate('PostNewSellScreen', item);
+                    onEdit={value => {
+                      navigate('PostNewSellScreen', {...item, value});
+                    }}
+                    onVideoShort={() => {
+                      navigate('PostVideoShortScreen', {
+                        Estate: true,
+                        estateId: item?.id,
+                      });
                     }}
                   />
                 ) : (

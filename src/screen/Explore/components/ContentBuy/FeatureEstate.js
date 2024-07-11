@@ -1,5 +1,5 @@
 import {StyleSheet, Text, FlatList, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import WrapperContent from '../WrapperContent';
 import {formatPrice} from '../../../../utils/format';
 
@@ -12,6 +12,7 @@ import {getListSell} from '../../../../Model/api/apiEstate';
 import {useQuery} from '@tanstack/react-query';
 import {getListCountry} from '../../../../Model/api/common';
 import {useCountry} from '../../../../hooks/useCountry';
+import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 
 export default function FeatureEstate() {
   const {t} = useLanguage();
@@ -20,6 +21,22 @@ export default function FeatureEstate() {
   const title = [t('feature_estate')];
   const [filter, setFilter] = useState();
   const {country} = useCountry();
+  const [current, setCurrent] = useState(null);
+
+  const currentPosition = useCallback(async () => {
+    const {coords} = await getCurrentLocation();
+    if (coords) {
+      const coordinates = {
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+      };
+      setCurrent(coordinates);
+      return coordinates;
+    }
+  }, []);
+  useEffect(() => {
+    currentPosition();
+  }, []);
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'estate',
@@ -27,10 +44,19 @@ export default function FeatureEstate() {
       {
         estate_type_id: 1,
         country_id: country?.id,
+        distance: 10000,
+        latitude: current?.latitude,
+        longitude: current?.longitude,
         // province_id: filter?.id,
       },
     ],
-    queryFn: () => getListSell({country_id: country?.id}),
+    queryFn: () =>
+      getListSell({
+        country_id: country?.id,
+        distance: 10000,
+        latitude: current?.latitude,
+        longitude: current?.longitude,
+      }),
   });
   // const listCountry = useQuery({
   //   queryKey: ['common', 'list-country', 1562822],
@@ -39,7 +65,8 @@ export default function FeatureEstate() {
   // useEffect(() => {
   //   setFilter(listCountry.data?.data?.[0]);
   // }, [listCountry.data?.data]);
-  if (!(data?.data?.count !== 0)) return null;
+  if (!(data?.data?.count !== 0) && !isLoading) return null;
+  if (!data?.data?.count && !isLoading) return null;
   return (
     <InViewPort>
       <WrapperContent
@@ -48,15 +75,15 @@ export default function FeatureEstate() {
         // worldTour
         // isCategory
         // dataCategory={listCountry.data?.data?.slice(0, 9)}
-        onPressSeeAll={() =>
-          navigate('NoBottomTab', {
-            screen: 'SeeAllBuyScreen',
-            params: {
-              title: title || '',
-            },
-          })
-        }
-        onPressCategory={item => setFilter(item)}
+        // onPressSeeAll={() =>
+        //   navigate('NoBottomTab', {
+        //     screen: 'SeeAllBuyScreen',
+        //     params: {
+        //       title: title || '',
+        //     },
+        //   })
+        // }
+        // onPressCategory={item => setFilter(item)}
         heading={title}
         subHeading={t('explore_popular_estate')}
         styleWrapper={{backgroundColor: 'transparent'}}>
