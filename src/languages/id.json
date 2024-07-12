@@ -1146,5 +1146,11 @@
   "repost": "Posting ulang",
   "video_short": "video pendek",
   "wallet_ready_to_use": "Dompet kripto Anda siap digunakan",
-  "the_remaining_balance_add": "Sisa saldo akan ditambahkan ke dompet manajemen saldo:"
+  "the_remaining_balance_add": "Sisa saldo akan ditambahkan ke dompet manajemen saldo:",
+
+  "incomplete_registration": "Proses Registrasi Belum Selesai",
+  "detail_review": "Ulasan Detail",
+  "your_review": "Ulasan Anda",
+  "view_your_video_short_at": "Lihat video singkat Anda di",
+  "manage_video_short": "Kelola video singkat"
 }

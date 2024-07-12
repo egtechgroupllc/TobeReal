@@ -6,10 +6,12 @@ import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import {StarRating} from '../../../../../components';
 import {formatDateTime} from '../../../../../utils/format';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default function ItemBox({style, isShadow = true, data}) {
   const [seeMoreOwn, setSeeMoreOwn] = useState(false);
   const [isBtnSeeMoreOwn, setIsBtnSeeMoreOwn] = useState(false);
+  const {t} = useLanguage();
 
   const [seeMoreUser, setSeeMoreUser] = useState(false);
   const [isBtnSeeMoreUser, setIsBtnSeeMoreUser] = useState(false);
@@ -104,7 +106,7 @@ export default function ItemBox({style, isShadow = true, data}) {
               }}>
               ...
             </CustomText>
-            Xem thêm
+            {t('show_more')}
           </CustomText>
         )}
       </View>

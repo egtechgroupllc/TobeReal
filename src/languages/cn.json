@@ -1171,5 +1171,11 @@
   "repost": "重新发布",
   "video_short": "短视频",
   "wallet_ready_to_use": "您的加密货币钱包已准备好使用",
-  "the_remaining_balance_add": "剩余余额将添加到余额管理钱包中："
+  "the_remaining_balance_add": "剩余余额将添加到余额管理钱包中：",
+
+  "incomplete_registration": "注册过程未完成",
+  "detail_review": "详细审查",
+  "your_review": "您的评论",
+  "view_your_video_short_at": "在这里观看您的短视频",
+  "manage_video_short": "管理短视频"
 }

@@ -64,7 +64,6 @@ export default function AccommodationPremium({currency}) {
   });
   if (!(data?.data?.count !== 0) && !isLoading) return null;
   if (!data?.data?.count && !isLoading) return null;
-  console.log(current, 32131232112);
   return (
     <WrapperContent
       // isSeeAll

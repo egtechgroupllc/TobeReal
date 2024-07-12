@@ -9,14 +9,15 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {AppState, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, AppState, StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
-import {WIDTH, scale} from '../../../assets/constants';
+import {COLORS, WIDTH, images, scale} from '../../../assets/constants';
 import {IconPlayVideo} from '../../../assets/icon/Icon';
 import SideBar from './SideBar';
 import VideoCaption from './VideoCaption';
 import AnimatedHeartClick from './AnimatedHeartClick';
+import {CustomImage, CustomText} from '../../../components';
 function getUniqueID() {
   return Math.floor(Math.random() * Date.now()).toString();
 }
@@ -28,7 +29,8 @@ export default forwardRef(function VideoPlay(
     play,
     resetVideo,
     style,
-
+    Bottom,
+    styleBottom,
     muted,
     onProgress,
     isFavourite,
@@ -39,11 +41,11 @@ export default forwardRef(function VideoPlay(
 ) {
   const videoRef = useRef();
   const isImgAsset = typeof data?.src === 'number';
-  const heightBottomTab = useBottomTabBarHeight();
+  const heightBottomTab = Bottom ? 0 : useBottomTabBarHeight();
 
   const [pausedVideo, setPausedVideo] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [resizeMode, setResizeMode] = useState('contain');
+  const [resizeMode, setResizeMode] = useState(null);
   const [hearts, setHearts] = useState([]);
 
   const handleCompleteAnimation = useCallback(id => {
@@ -118,6 +120,23 @@ export default forwardRef(function VideoPlay(
         ...styles.container,
         height: WIDTH.heightScreen - heightBottomTab,
       }}>
+      {!resizeMode && (
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: COLORS.black,
+          }}>
+          {/* <CustomImage
+            source={images.logoLoading}
+            style={{width: scale(100), height: scale(100)}}
+          /> */}
+          <ActivityIndicator color={COLORS.primary} size="large" />
+        </View>
+      )}
       <GestureDetector
         gesture={Gesture.Exclusive(doubleTap, singleTap)}
         hitSlop>
@@ -136,7 +155,7 @@ export default forwardRef(function VideoPlay(
             }}
             repeat
             muted={muted}
-            resizeMode={resizeMode}
+            resizeMode={resizeMode || 'contain'}
             onLoad={response => {
               const {width, height} = response.naturalSize;
               const heightScaled = height / width;
@@ -160,7 +179,7 @@ export default forwardRef(function VideoPlay(
 
       {true && (
         <>
-          <VideoCaption data={data} />
+          <VideoCaption data={data} styleBottom={styleBottom} />
           {/* <SideBar
             data={data}
             isFavourite={!!hearts.length}

@@ -9,16 +9,18 @@ import React, {
   useState,
 } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Animated,
   AppState,
   FlatList,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {animations, scale} from '../../assets/constants';
+import {COLORS, animations, images, scale} from '../../assets/constants';
 import video from '../../assets/constants/video';
 import {IconGoBack} from '../../assets/icon/Icon';
 import RangeSlider from './components/RangeSlider';
@@ -28,6 +30,8 @@ import {showMess} from '../../assets/constants/Helper';
 import {useLanguage} from '../../hooks/useLanguage';
 import {useQuery} from '@tanstack/react-query';
 import {getListVideoRandom} from '../../Model/api/common';
+import {CustomImage} from '../../components';
+import EmptyData from '../../components/EmptyData';
 
 const listVideo = [
   {
@@ -69,7 +73,6 @@ const listVideo = [
 export default function ListVideoInfluencerScreen() {
   const {t} = useLanguage();
 
-  const {goBack, setOptions} = useNavigation();
   const insets = useSafeAreaInsets();
   const params = useRoute().params;
 
@@ -79,30 +82,27 @@ export default function ListVideoInfluencerScreen() {
 
   const isFocused = useIsFocused();
   const [videoPlay, setVideoPlay] = useState(true);
-
-  const handlerViewableItemsChanged = useCallback(
-    ({viewableItems}) => {
-      if (viewableItems.length > 0 && viewableItems[0].isViewable) {
-        setVideoPlay(viewableItems[0].item?.id);
-      }
-    },
-    [videoPlay],
-  );
-
+  const {data, isLoading} = useQuery({
+    queryKey: ['video-short', 'list-random'],
+    queryFn: () => getListVideoRandom({table_name: 'accommodation'}),
+  });
+  const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
+    if (viewableItems.length > 0 && viewableItems[0].isViewable) {
+      setVideoPlay(viewableItems[0].item?.id);
+    }
+  }, []);
   // useLayoutEffect(() => {
   //   scrollToIndex(params?.index);
   // }, [params?.index]);
-
+  const viewabilityConfig = {
+    itemVisiblePercentThreshold: 50,
+  };
   const scrollToIndex = useCallback((index = 0) => {
     flatListRef.current.scrollToIndex({
       animated: true,
       index: index,
     });
   }, []);
-  const {data, isLoading} = useQuery({
-    queryKey: ['video-short', 'list-random'],
-    queryFn: getListVideoRandom,
-  });
 
   // const handleProgress = useCallback(value => {
   //   return setOptions({
@@ -140,9 +140,27 @@ export default function ListVideoInfluencerScreen() {
   //     tabBarButton: () => <Comment />,
   //   });
   // }, []);
-
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: COLORS.black,
+        }}>
+        {/* <CustomImage
+          source={images.logoLoading}
+          style={{width: scale(100), height: scale(100)}}
+        /> */}
+        <ActivityIndicator color={COLORS.primary} size="large" />
+      </View>
+    );
+  }
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: '#000'}}>
       {/* <TouchableOpacity
         activeOpacity={0.7}
         onPress={goBack}
@@ -162,22 +180,18 @@ export default function ListVideoInfluencerScreen() {
             scrollToIndex(index);
           });
         }}
-        style={{
-          backgroundColor: '#000',
-          height: '100%',
-        }}
+        style={{flex: 1}}
         contentContainerStyle={{
           backgroundColor: '#000',
           justifyContent: 'center',
         }}
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 50,
-        }}
+        viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={handlerViewableItemsChanged}
         // onEndReached={e => Alert.alert('Đã gan cuôi r')}
         onEndReachedThreshold={
           data?.data?.rows?.length - (data?.data?.rows?.length - 2)
         }
+        ListEmptyComponent={<EmptyData styleWrapper={{marginTop: '50%'}} />}
         renderItem={({item, index}) => {
           return (
             <VideoPlay
@@ -195,7 +209,7 @@ export default function ListVideoInfluencerScreen() {
         }}
       />
 
-      <View
+      {/* <View
         style={{
           width: '100%',
           height: scale(28) + insets.bottom,
@@ -210,14 +224,14 @@ export default function ListVideoInfluencerScreen() {
               top: scale(-30),
             },
           ]}>
-          {/* <RangeSlider
+          <RangeSlider
           // progressValue={value?.currentTime}
           // onValueChange={videoRef.current?.handleValueChange}
           // maximumValue={value?.seekableDuration}
-          /> */}
+          />
         </View>
         <Comment ref={commentRef} />
-      </View>
+      </View> */}
     </View>
   );
 }

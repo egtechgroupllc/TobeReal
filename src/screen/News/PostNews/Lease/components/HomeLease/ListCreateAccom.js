@@ -8,9 +8,11 @@ import Pagination from '../../../../../../components/Pagination';
 import usePagination from '../../../../../../hooks/usePagination';
 import CreateAccomItem from './CreateAccomItem';
 import ListCreateAccomLoading from './ListCreateAccomLoading';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
 export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const {data, page, isLoading, setPage} = usePagination(keyArr, callFunc, {
     keyQuery: keyQuery,
@@ -34,7 +36,7 @@ export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
           paddingHorizontal: scale(20),
           color: COLORS.white,
         }}>
-        Incomplete Registration Process
+        {t('incomplete_registration')}
       </CustomText>
 
       <ScrollView

@@ -1,29 +1,30 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useLanguage} from '../../hooks/useLanguage';
+import {useLanguage} from '../../../hooks/useLanguage';
 import {useForm} from 'react-hook-form';
-import {useAuthentication} from '../../hooks/useAuthentication';
-import {getLinkData, postVideoShort} from '../../Model/api/common';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useAuthentication} from '../../../hooks/useAuthentication';
+import {getLinkData, postVideoShort} from '../../../Model/api/common';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {
   CustomButton,
   CustomInput,
   CustomText,
   MainWrapper,
-} from '../../components';
-import {IconLogoSaveloka} from '../../assets/icon/Icon';
-import ChooseVideoPicker from '../Bookings/Review/ChooseVideoPicker';
-import FooterButton from './PostNews/Lease/components/FooterButton';
-import {SIZES, scale} from '../../assets/constants';
-import {requireField} from '../../utils/validate';
-import {showMess} from '../../assets/constants/Helper';
+} from '../../../components';
+import {IconLogoSaveloka} from '../../../assets/icon/Icon';
+import ChooseVideoPicker from '../../Bookings/Review/ChooseVideoPicker';
+import FooterButton from '../PostNews/Lease/components/FooterButton';
+import {SIZES, scale} from '../../../assets/constants';
+import {requireField} from '../../../utils/validate';
+import {showMess} from '../../../assets/constants/Helper';
 
 export default function PostVideoShortScreen() {
   const {setOptions, navigate, goBack} = useNavigation();
   const {control, watch, setValue, handleSubmit} = useForm();
   const params = useRoute().params;
   const [pausedVideo, setPausedVideo] = useState(false);
+  const queryClient = useQueryClient();
 
   const {t} = useLanguage();
   const {token} = useAuthentication();
@@ -33,7 +34,6 @@ export default function PostVideoShortScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const {data, isLoading, error} = useQuery({
     queryKey: ['common', 'linked-data', params?.accomId || params?.estateId],
     queryFn: () =>
@@ -43,6 +43,7 @@ export default function PostVideoShortScreen() {
         table_id: params?.accomId || params?.estateId,
       }),
   });
+
   const txHashId = data?.data?.rows[0]?.id;
 
   const postVideoShortMu = useMutation({
@@ -86,8 +87,15 @@ export default function PostVideoShortScreen() {
             dataInside?.status ? 'success' : 'error',
           );
           if (dataInside?.status) {
+            queryClient.invalidateQueries([
+              'common',
+              'video-short',
+              'my-list',
+              params?.accomId || params?.estateId,
+            ]);
+
             setPausedVideo(true);
-            navigate('Explore');
+            goBack();
           }
         },
         onError: err => {

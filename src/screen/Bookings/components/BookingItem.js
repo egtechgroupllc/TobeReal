@@ -81,8 +81,8 @@ export default function BookingItem({data, onPress, onReView, onViewDetail}) {
           </View>
         ) : (
           <>
-            {/* {data?.check_out_date < today &&
-              (data?.accommodation_review ? (
+            {data?.check_out_date < today &&
+              (!data?.accommodation_review ? (
                 <CustomButton
                   styleWrapper={{minWidth: scale(50)}}
                   text={t('review')}
@@ -96,13 +96,13 @@ export default function BookingItem({data, onPress, onReView, onViewDetail}) {
                   style={{height: scale(25), backgroundColor: COLORS.grey}}
                   onPress={onViewDetail}
                 />
-              ))} */}
-            <CustomButton
+              ))}
+            {/* <CustomButton
               styleWrapper={{flex: 0.4}}
               text={t('review')}
               style={{height: scale(25)}}
               onPress={onReView}
-            />
+            /> */}
           </>
         )}
       </View>

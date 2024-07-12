@@ -1169,5 +1169,11 @@
   "repost": "Repost",
   "video_short": "maikling video",
   "wallet_ready_to_use": "Ang iyong cryptocurrency wallet ay handa nang gamitin",
-  "the_remaining_balance_add": "Ang natitirang balanse ay idaragdag sa pamamahala ng balanse wallet:"
+  "the_remaining_balance_add": "Ang natitirang balanse ay idaragdag sa pamamahala ng balanse wallet:",
+
+  "incomplete_registration": "Di Kumpletong Proses ng Paggawa ng Patala",
+  "detail_review": "Detalyadong Pagsusuri",
+  "your_review": "Ang Iyong Pagsusuri",
+  "view_your_video_short_at": "Tingnan ang iyong maikling video sa",
+  "manage_video_short": "Pamahalaan ang maikling video"
 }

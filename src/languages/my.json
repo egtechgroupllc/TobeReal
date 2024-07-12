@@ -1151,5 +1151,11 @@
   "repost": "Pos semula",
   "video_short": "video pendek",
   "wallet_ready_to_use": "Dompet kripto anda sedia untuk digunakan",
-  "the_remaining_balance_add": "Baki yang tinggal akan ditambah ke dalam dompet pengurusan baki:"
+  "the_remaining_balance_add": "Baki yang tinggal akan ditambah ke dalam dompet pengurusan baki:",
+
+  "incomplete_registration": "Proses Pendaftaran Belum Selesai",
+  "detail_review": "Ulasan Terperinci",
+  "your_review": "Ulasan Anda",
+  "view_your_video_short_at": "Lihat video pendek anda di",
+  "manage_video_short": "Urus video pendek"
 }

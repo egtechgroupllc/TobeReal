@@ -215,14 +215,25 @@ export default function AdminManageLeaseScreen() {
             navigate('RoomManageScreen', {...params, admin: adminScreen})
           }
         />
-        <CustomButton
+        {/* <CustomButton
           text={t('post_video_short')}
+          style={{width: '85%', height: scale(45)}}
+      
+          onPress={() =>
+            navigate('PostVideoShortScreen', {Accom: true, accomId: params?.id})
+          }
+        /> */}
+        <CustomButton
+          text={t('manage_video_short')}
           style={{width: '85%', height: scale(45)}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
           onPress={() =>
-            navigate('PostVideoShortScreen', {Accom: true, accomId: params?.id})
+            navigate('ManageVideoShortScreen', {
+              Accom: true,
+              accomId: params?.id,
+            })
           }
         />
         <CustomButton

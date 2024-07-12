@@ -1181,5 +1181,11 @@
   "repost": "Repost",
   "video_short": "video_short",
   "wallet_ready_to_use": "Your cryptocurrency wallet is ready to use",
-  "the_remaining_balance_add": "The remaining balance will be added to the balance management wallet:"
+  "the_remaining_balance_add": "The remaining balance will be added to the balance management wallet:",
+
+  "incomplete_registration": "Incomplete Registration Process",
+  "detail_review": "Detail review",
+  "your_review": "Your review",
+  "view_your_video_short_at": "View your video short at",
+  "manage_video_short": "Manage video short"
 }

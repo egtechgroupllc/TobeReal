@@ -8,8 +8,10 @@ import usePagination from '../../../../hooks/usePagination';
 import ListCreateAccomLoading from '../Lease/components/HomeLease/ListCreateAccomLoading';
 import CreateTourItem from './components/CreateTourItem';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
+import {useLanguage} from '../../../../hooks/useLanguage';
 export default function ListCreateTour({keyArr, callFunc, keyQuery, isTour}) {
   const {navigate} = useNavigation();
+  const {t} = useLanguage();
 
   const {data, page, isLoading, setPage} = usePagination(keyArr, callFunc, {
     keyQuery: keyQuery,
@@ -33,7 +35,7 @@ export default function ListCreateTour({keyArr, callFunc, keyQuery, isTour}) {
           paddingHorizontal: scale(20),
           color: COLORS.white,
         }}>
-        Incomplete Registration Process
+        {t('incomplete_registration')}
       </CustomText>
 
       <ScrollView

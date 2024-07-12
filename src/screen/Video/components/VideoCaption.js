@@ -11,7 +11,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getListRoomDetailAccmo} from '../../../Model/api/apiAccom';
 import {formatDate} from '../../../utils/format';
 
-export default memo(function VideoCaption({data}) {
+export default memo(function VideoCaption({data, styleBottom}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
 
@@ -24,20 +24,18 @@ export default memo(function VideoCaption({data}) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(data, 3123122);
   return (
     <LinearGradient
       colors={[isMoreText ? '#000000CF' : '#00000060', '#00000000']}
       start={{x: 0, y: 1}}
       end={{x: 0, y: 0}}
-      style={styles.wrapper}>
-      <View
-        style={{
-          rowGap: scale(6),
-          flex: 1,
-        }}>
+      style={{...styles.wrapper, ...styleBottom}}>
+      <View style={[styles.contain]}>
         <CustomText textType="bold" style={styles.name}>
-          {data?.user?.username}
+          {data?.user?.username ||
+            data?.accommodation?.contact_name ||
+            data?.estate?.contact_name}
         </CustomText>
 
         <TouchableOpacity
@@ -130,7 +128,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: SIZES.medium,
   },
-
+  contain: {
+    rowGap: scale(6),
+    flex: 1,
+  },
   textDesc: {
     color: '#fff',
     fontSize: SIZES.xMedium,

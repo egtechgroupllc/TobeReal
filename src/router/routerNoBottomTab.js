@@ -8,6 +8,8 @@ import BuyVoucherScreen from '../screen/Bookings/components/BookingRoom/ContentS
 import {SelectDefaultCountryScreen} from '../screen/DefaultCountry';
 import {DetailAccommodationScreen, RoomScreen} from '../screen/Explore';
 
+import DetailReviewScreen from '../screen/Bookings/DetailReviewScreen';
+import PostVideoShortReviewScreen from '../screen/Bookings/PostVideoShortReviewScreen';
 import {SeeAllRentScreen} from '../screen/Explore/components/ContentAccommodation/SeeAll';
 import {DetailBuyScreen} from '../screen/Explore/components/ContentBuy';
 import {DetailBrokerScreen} from '../screen/Explore/components/ContentBuy/DetailBuy/DetailBroker';
@@ -26,6 +28,8 @@ import {
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
+import CheckInSuccessScreen from '../screen/News/PostNews/Lease/CheckInSuccessScreen';
+import QRScanDetailScreen from '../screen/News/PostNews/Lease/QRScanDetailScreen';
 import AddVoucherScreen from '../screen/News/PostNews/Lease/VoucherManage/AddVoucherScreen';
 import VoucherManageScreen from '../screen/News/PostNews/Lease/VoucherManage/VoucherManageScreen';
 import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/PolicyManage/PolicyManageScreen';
@@ -38,6 +42,9 @@ import TourManagementScreen from '../screen/News/PostNews/Tour/TourManagementScr
 import AdminManageTourScreen from '../screen/News/PostNews/Tour/components/AdminManageTourScreen';
 import TicketManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketManageScreen';
 import {MapSetAccomdScreen} from '../screen/News/PostNews/components';
+import DetailVideoShortScreen from '../screen/News/VideoShortManage/DetailVideoShortScreen';
+import ManageVideoShortScreen from '../screen/News/VideoShortManage/ManageVideoShortScreen';
+import PostVideoShortScreen from '../screen/News/VideoShortManage/PostVideoShortScreen';
 import {SelectLanguageScreen} from '../screen/Profile';
 import {
   ConfirmDepositScreen,
@@ -52,17 +59,10 @@ import {
 import {ListVideoInfluencerScreen} from '../screen/Video';
 import DepositTokenScreen from '../screen/WalletToken/DepositTokenScreen';
 import DetailTokenScreen from '../screen/WalletToken/DetailTokenScreen';
-import WithdrawTokenScreen from '../screen/WalletToken/WithdrawTokenScreen';
-import HistoryTokenDataScreen from '../screen/WalletToken/HistoryTokenDataScreen';
-import HistoryTokenData from '../screen/WalletToken/HistoryTokenDataScreen';
-import {CountryScreen, CurrencyScreen} from '../screen/components';
 import HelpCenterTokenScreen from '../screen/WalletToken/HelpCenterTokenScreen';
-import QRScanDetailScreen from '../screen/News/PostNews/Lease/QRScanDetailScreen';
-import CheckInSuccessScreen from '../screen/News/PostNews/Lease/CheckInSuccessScreen';
-import PostVideoShortReview from '../screen/Bookings/PostVideoShortReviewScreen';
-import PostVideoShortReviewScreen from '../screen/Bookings/PostVideoShortReviewScreen';
-import PostVideoShortScreen from '../screen/News/PostVideoShortScreen';
-import DetailReviewScreen from '../screen/Bookings/DetailReviewScreen';
+import HistoryTokenDataScreen from '../screen/WalletToken/HistoryTokenDataScreen';
+import WithdrawTokenScreen from '../screen/WalletToken/WithdrawTokenScreen';
+import {CountryScreen, CurrencyScreen} from '../screen/components';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -329,5 +329,14 @@ export default routerNoBottomTab = [
   {
     name: 'DetailReviewScreen',
     component: DetailReviewScreen,
+  },
+  {
+    name: 'ManageVideoShortScreen',
+    component: ManageVideoShortScreen,
+  },
+  {
+    name: 'DetailVideoShortScreen',
+    component: DetailVideoShortScreen,
+    options: {contentStyle: {backgroundColor: '#000'}, headerShown: false},
   },
 ];

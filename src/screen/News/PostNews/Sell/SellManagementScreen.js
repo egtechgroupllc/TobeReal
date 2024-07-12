@@ -85,7 +85,7 @@ export default function SellManagementScreen() {
                       navigate('PostNewSellScreen', {...item, value});
                     }}
                     onVideoShort={() => {
-                      navigate('PostVideoShortScreen', {
+                      navigate('ManageVideoShortScreen', {
                         Estate: true,
                         estateId: item?.id,
                       });

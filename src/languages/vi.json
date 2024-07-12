@@ -1175,5 +1175,11 @@
   "repost": "Đăng lại",
   "video_short": "video ngắn",
   "wallet_ready_to_use": "Ví tiền mã hoá của bạn đã sẵn sàng để sử dụng",
-  "the_remaining_balance_add": "Số dư còn lại sẽ được thêm vào ví quản lý số dư:"
+  "the_remaining_balance_add": "Số dư còn lại sẽ được thêm vào ví quản lý số dư:",
+
+  "incomplete_registration": "Quá trình đăng ký chưa hoàn tất",
+  "detail_review": "Đánh giá chi tiết",
+  "your_review": "Đánh giá của bạn",
+  "view_your_video_short_at": "Xem lại video ngắn của bạn tại",
+  "manage_video_short": "Quản lý video ngắn"
 }
