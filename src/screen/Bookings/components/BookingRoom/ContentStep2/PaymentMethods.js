@@ -10,7 +10,7 @@ import PaymentMethodsItem from './PaymentMethodsItem';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function PaymentMethods({onChange, onChangeBalance}) {
+export default function PaymentMethods({onChange, onChangeBalance, isTour}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
   const {currency} = useCountry();
@@ -48,6 +48,7 @@ export default function PaymentMethods({onChange, onChangeBalance}) {
               onGoBack: dataBack => {
                 setMethodsPay(dataBack);
               },
+              isTour: isTour,
             })
           }>
           {methodsPay ? t('see_all') : t('select')}

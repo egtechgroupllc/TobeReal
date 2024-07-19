@@ -18,6 +18,7 @@ import {formatNumber, formatPrice} from '../utils/format';
 import CustomText from './CustomText';
 import {Calendar} from 'react-native-calendars';
 import InViewport from './InViewport';
+import {getListTicketDate} from '../Model/api/apiTour';
 
 var hd = new Holidays('VN');
 
@@ -26,12 +27,15 @@ export default memo(function CalendarRange({
   startDate,
   endDate,
   onDateChange,
+  isOneDay,
   id,
+  percentTour,
 }) {
   const [dateSelect, setDateSelect] = useState({
     date_start: startDate || null,
-    date_end: endDate || null,
+    date_end: (!isOneDay && endDate) || null,
   });
+
   const [isRender, setIsRender] = useState(false);
 
   const clicked = useRef(false);
@@ -51,25 +55,39 @@ export default memo(function CalendarRange({
   });
 
   const {data, isLoading} = useQuery({
-    queryKey: [
-      'accommodation',
-      'detail',
-      'list-room-date',
-      {
-        id_room: id,
-        ...dayMonth,
-      },
-    ],
+    queryKey: isOneDay
+      ? [
+          'list',
+          'ticket-date',
+          {
+            id_ticket: id,
+            ...dayMonth,
+          },
+        ]
+      : [
+          'accommodation',
+          'detail',
+          'list-room-date',
+          {
+            id_room: id,
+            ...dayMonth,
+          },
+        ],
     queryFn: () =>
-      getListPriceRoomDate({
-        id_room: id,
-        ...dayMonth,
-      }),
+      isOneDay
+        ? getListTicketDate({
+            id_ticket: id,
+            ...dayMonth,
+          })
+        : getListPriceRoomDate({
+            id_room: id,
+            ...dayMonth,
+          }),
     enabled: !!id,
   });
 
   const handlePress = useCallback(value => {
-    if (clicked.current) {
+    if (clicked.current && !isOneDay) {
       setDateSelect(prev => ({
         ...prev,
         date_end: value,
@@ -85,7 +103,7 @@ export default memo(function CalendarRange({
   }, []);
 
   useEffect(() => {
-    if (endDate) {
+    if (endDate && !isOneDay) {
       setDateSelect({
         date_start: startDate,
         date_end: endDate,
@@ -142,8 +160,9 @@ export default memo(function CalendarRange({
     });
     const isDateStart = dateSelect.date_start === date.date.dateString;
     const isDateEnd = dateSelect.date_end === date.date.dateString;
-    const isDisableToday =
-      !dateSelect.date_end && dateSelect.date_start && date.state === 'today';
+    const isDisableToday = isOneDay
+      ? false
+      : !dateSelect.date_end && dateSelect.date_start && date.state === 'today';
 
     return (
       <View
@@ -181,6 +200,7 @@ export default memo(function CalendarRange({
           date={date}
           isLoading={isLoading}
           isWeekend={isWeekend}
+          percentTour={percentTour}
         />
       </View>
     );
@@ -191,7 +211,11 @@ export default memo(function CalendarRange({
       delay={30}
       styleLoading={{width: scale(120), height: scale(120)}}>
       <Calendar
-        minDate={(!dateSelect.date_end && dateSelect.date_start) || minDate}
+        minDate={
+          isOneDay
+            ? minDate
+            : (!dateSelect.date_end && dateSelect.date_start) || minDate
+        }
         startDate={minDate}
         hideExtraDays
         enableSwipeMonths
@@ -248,7 +272,7 @@ const BoxText = ({
   );
 };
 
-const TextPrice = ({isLoading, date, isWeekend, data}) => {
+const TextPrice = ({isLoading, date, isWeekend, data, percentTour}) => {
   const dataDateDetail =
     data &&
     data?.find(item => {
@@ -264,7 +288,11 @@ const TextPrice = ({isLoading, date, isWeekend, data}) => {
           style={{
             color: '#000',
           }}>
-          {formatNumber(dataDateDetail?.price)}
+          {formatNumber(
+            percentTour
+              ? dataDateDetail?.price * percentTour
+              : dataDateDetail?.price,
+          )}
         </CustomText>
       );
 };

@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import MainAuth from '../../../../../../components/MainAuth';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import Header from '../../../../../Profile/components/Header';
 import CustomText from '../../../../../../components/CustomText';
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,25 +21,58 @@ import {
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import CustomImage from '../../../../../../components/CustomImage';
 import ChooseCalendar from '../../../FindAccommodation/ChooseCalendar';
+import BoxTypeTicket from './components/BoxTypeTicket';
+import ChooseCalendarRoom from '../../../DetailAccommodation/Rooms/ChooseCalendarRoom';
+import BoxDetailPrice from './components/BoxDetailPrice';
+import {useQuery} from '@tanstack/react-query';
+import {getListTicketDate} from '../../../../../../Model/api/apiTour';
+import {formatDate} from '../../../../../../utils/format';
+import BoxContact from './components/BoxContact';
+import {CustomButton} from '../../../../../../components';
 
-export default function BookTourScreen({route}) {
-  const data = route.params;
+export default function BookTourScreen() {
+  const data = useRoute().params;
+  const [date, setDate] = useState();
+
+  const [listAddTicket, setListAddTicket] = useState([]);
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox1 = () => {
     setCheck1(prevCheck => !prevCheck);
   };
 
   const {t} = useLanguage();
-  const {setOptions} = useNavigation();
+  const {setOptions, navigate} = useNavigation();
   useEffect(() => {
     return setOptions({
       headerTitle: t('detail_tour_ticket'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const resultPercent = data?.tour_ticket_items?.map(item => {
+    return item?.price_percent;
+  });
+  const minPercent = Math.min(...resultPercent);
 
   const notify = () => {};
-  const Ok = () => {};
+  const dataPriceTicket = useQuery({
+    queryKey: [
+      'list',
+      'ticket-date',
+      {
+        id_ticket: data?.id,
+        date_start: formatDate(date?.selectedStartDate),
+        date_end: formatDate(date?.selectedStartDate, {addDays: 1}),
+      },
+    ],
+    queryFn: () =>
+      getListTicketDate({
+        id_ticket: data?.id,
+        date_start: formatDate(date?.selectedStartDate),
+        date_end: formatDate(date?.selectedStartDate, {addDays: 1}),
+      }),
+  });
+
+  const dataPriceTicketEx = dataPriceTicket?.data?.data?.data?.rows[0]?.price;
   return (
     <MainAuth>
       <View style={styles.container}>
@@ -66,6 +99,16 @@ export default function BookTourScreen({route}) {
               {data?.name}
             </CustomText>
           </View>
+          {/* <TouchableOpacity>
+            <CustomText
+              textType="semiBold"
+              style={{
+                ...styles.text2,
+                color: COLORS.primary,
+              }}>
+              {t('ticket_detail')}
+            </CustomText>
+          </TouchableOpacity> */}
           <View
             style={{
               ...styles.line,
@@ -85,355 +128,29 @@ export default function BookTourScreen({route}) {
           </CustomText>
           <View
             style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
-            <ChooseCalendar />
+            <ChooseCalendarRoom
+              isOneDay
+              onSelectDate={value => {
+                setDate(value);
+              }}
+              data={data}
+              percentTour={minPercent}
+            />
           </View>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              marginTop: scale(10),
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-            }}>
-            {t('add_number_guest')}:
-          </CustomText>
-          <View
-            style={{
-              ...styles.box,
-              marginTop: scale(10),
-              borderTopLeftRadius: scale(5),
-              borderTopRightRadius: scale(5),
-              minHeight: scale(30),
-            }}>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text1,
-                color: COLORS.black,
-                marginTop: scale(10),
-                alignSelf: 'flex-start',
-              }}>
-              {t('adult')}
-            </CustomText>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: COLORS.primary,
-                }}>
-                $ 56,04
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text1,
-                  color: COLORS.grey,
-                  alignSelf: 'center',
-                  // marginRight:'10%'
-                }}>
-                $ 66,04
-              </CustomText>
-              <View
-                style={{
-                  ...styles.line,
-                  position: 'absolute',
-                  width: '10%',
-                  left: '40%',
-                  top: '50%',
-                }}
-              />
-              <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity style={styles.boxSum}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text,
-                      color: COLORS.grey,
-                    }}>
-                    -
-                  </CustomText>
-                </TouchableOpacity>
-                <View style={styles.boxQuantity}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text1,
-                      color: COLORS.grey,
-                    }}>
-                    1
-                  </CustomText>
-                </View>
-                <TouchableOpacity style={styles.boxSum}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text,
-                      color: COLORS.grey,
-                    }}>
-                    +
-                  </CustomText>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text1,
-                color: COLORS.grey,
-                alignSelf: 'flex-start',
-              }}>
-              {t('adult_year_old')}
-            </CustomText>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text2,
-                color: COLORS.black,
-                marginTop: scale(10),
-                alignSelf: 'flex-start',
-              }}>
-              {t('children')}
-            </CustomText>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: COLORS.primary,
-                }}>
-                $ 56,04
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text1,
-                  color: COLORS.grey,
-                  alignSelf: 'center',
-                  // marginRight:'10%'
-                }}>
-                $ 66,04
-              </CustomText>
-              <View
-                style={{
-                  ...styles.line,
-                  position: 'absolute',
-                  width: '10%',
-                  left: '40%',
-                  top: '50%',
-                }}></View>
-              <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity style={styles.boxSum}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text,
-                      color: COLORS.grey,
-                    }}>
-                    -
-                  </CustomText>
-                </TouchableOpacity>
-                <View style={styles.boxQuantity}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text1,
-                      color: COLORS.grey,
-                    }}>
-                    0
-                  </CustomText>
-                </View>
-                <TouchableOpacity style={styles.boxSum}>
-                  <CustomText
-                    textType="medium"
-                    style={{
-                      ...styles.text,
-                      color: COLORS.grey,
-                    }}>
-                    +
-                  </CustomText>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text1,
-                color: COLORS.grey,
-                alignSelf: 'flex-start',
-              }}>
-              {t('children_year_old')}
-            </CustomText>
-          </View>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              marginTop: scale(10),
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-            }}>
-            {t('things_need_to_know')}:
-          </CustomText>
-          <View style={{flexDirection: 'row', columnGap: scale(30)}}>
-            <TouchableOpacity
-              style={{
-                height: scale(30),
-                marginTop: scale(10),
-                width: '40%',
-                backgroundColor: '#F2F2F2',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: scale(33),
-              }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                }}>
-                {t('inexperienced')}
-              </CustomText>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: scale(30),
-                marginTop: scale(10),
-                width: '40%',
-                backgroundColor: '#F2F2F2',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: scale(33),
-              }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                }}>
-                {t('inseparable')}
-              </CustomText>
-            </TouchableOpacity>
-          </View>
-          <CustomText
-            textType="medium"
-            style={{
-              ...styles.text2,
-              color: COLORS.black,
-              alignSelf: 'flex-start',
-              paddingHorizontal: scale(20),
-              marginTop: scale(10),
-            }}>
-            {t('price_detail')}:
-          </CustomText>
-          <View
-            style={{
-              ...styles.box,
-              marginTop: scale(10),
-              borderTopLeftRadius: scale(5),
-              borderTopRightRadius: scale(5),
-              minHeight: scale(30),
-              paddingBottom: scale(0),
-              marginBottom: scale(20),
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-                paddingHorizontal: scale(20),
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('adult')}:
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('1')}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-                paddingHorizontal: scale(20),
-              }}>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('children')}:
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text2,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('0')}
-              </CustomText>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-                paddingHorizontal: scale(20),
-                paddingBottom: scale(10),
-              }}>
-              <CustomText
-                textType="semiBold"
-                style={{
-                  ...styles.text,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('total')}:
-              </CustomText>
-              <CustomText
-                textType="medium"
-                style={{
-                  ...styles.text,
-                  color: COLORS.black,
-                  marginTop: scale(10),
-                  flex: 1,
-                }}>
-                {t('$ 49,888,300')}
-              </CustomText>
-            </View>
-            <CustomText
-              textType="medium"
-              style={{
-                ...styles.text2,
-                color: COLORS.black,
-                paddingHorizontal: scale(20),
-                paddingBottom: scale(10),
-              }}>
-              {t('include_addition')}
-            </CustomText>
-          </View>
-          <TouchableOpacity
+
+          <BoxTypeTicket
+            data={data}
+            onChangeQuantity={value => setListAddTicket(value)}
+            dataPriceTicket={dataPriceTicketEx}
+          />
+          <BoxContact data={data} />
+          <BoxDetailPrice
+            data={data}
+            quantity={listAddTicket}
+            dataPriceTicket={dataPriceTicketEx}
+          />
+
+          {/* <TouchableOpacity
             onPress={toggleCheckBox1}
             style={{width: '100%', alignItems: 'center'}}>
             <LinearGradient
@@ -454,9 +171,22 @@ export default function BookTourScreen({route}) {
                 </View>
               </View>
             </LinearGradient>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        <Button title={t('request_to_book_tour')} onPress={Ok} />
+        <CustomButton
+          styleWrapper={{
+            alignSelf: 'center',
+            width: '70%',
+            marginTop: scale(10),
+          }}
+          text={t('request_to_book_tour')}
+          onPress={() =>
+            navigate('NoBottomTab', {
+              screen: 'BookingTourConfirmScreen',
+              params: {data, listAddTicket, dataPriceTicketEx, date},
+            })
+          }
+        />
       </View>
     </MainAuth>
   );

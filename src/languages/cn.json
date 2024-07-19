@@ -1177,5 +1177,30 @@
   "detail_review": "详细审查",
   "your_review": "您的评论",
   "view_your_video_short_at": "在这里观看您的短视频",
-  "manage_video_short": "管理短视频"
+  "manage_video_short": "管理短视频",
+
+  "deleted_ticket_type_cannot_be_restored": "已删除的票类型无法恢复",
+  "deleted_ticket_cannot_be_restored": "已删除的票无法恢复",
+  "delete": "删除",
+  "ticket_id": "票ID",
+  "tour_ticket_type_management": "旅游票类型管理",
+  "add_more_ticket_type": "添加更多票类型",
+  "ticket_type_id": "票类型ID",
+  "enter_name_type_ticket": "输入票类型名称",
+  "price_ticket": "票价",
+  "listed_price_tour": "本次旅游的挂牌价",
+  "listed_price_tour_change": "本次旅游的挂牌价已更改",
+  "listed_price_room_change": "本房间的挂牌价已更改",
+  "create_new_tour": "创建新旅游",
+  "there_are_no_one_review": "还没有评论！",
+  "pay_booking_tour": "支付旅游预订",
+
+  "are_you_sure_delete_tour": "你确定要删除这个旅游吗？",
+  "deleted_tour_cannot_restored": "已删除的旅游无法恢复！",
+  "hotel_booking_history": "酒店预订历史",
+  "tour_booking_history": "旅游预订历史",
+  "booking_tour_detail": "预订旅游详情",
+  "booking_tour_code": "预订旅游代码",
+  "qr_code": "二维码",
+  "please_give_qrcode_to_tourguide": "请将此二维码交给导游以确认开始您的旅游"
 }

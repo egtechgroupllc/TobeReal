@@ -34,7 +34,7 @@ export default function PostVideoShortScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const {data, isLoading, error} = useQuery({
+  const {data, isLoading, error, isError} = useQuery({
     queryKey: ['common', 'linked-data', params?.accomId || params?.estateId],
     queryFn: () =>
       getLinkData({

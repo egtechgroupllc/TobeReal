@@ -8,7 +8,7 @@ import EmptyData from '../../../components/EmptyData';
 import BookingItem from './BookingItem';
 import BookingItemLoading from './BookingItemLoading';
 
-export default function BookingActive() {
+export default function BookingAccom() {
   const params = useRoute().params;
   const {navigate} = useNavigation();
   const {data, isLoading} = useQuery({

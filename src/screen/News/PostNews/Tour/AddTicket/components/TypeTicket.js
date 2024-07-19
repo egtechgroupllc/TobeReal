@@ -23,6 +23,7 @@ import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '../../../../../../components/CheckBox';
 import CustomText from '../../../../../../components/CustomText';
+import PricePercentTicket from './PricePercentTicket';
 
 export default function TypeTicket({
   maxCharacters,
@@ -30,6 +31,8 @@ export default function TypeTicket({
   setValue,
   watch,
   errors,
+  manage,
+  priceListed,
 }) {
   const richTextRef = useRef(null);
   const {t} = useLanguage();
@@ -65,10 +68,10 @@ export default function TypeTicket({
   };
 
   const arrKeywords = useRef([
-    'type',
     'description',
     'quantity',
-    'price',
+    'price_percent',
+    'name',
   ]).current;
 
   useEffect(() => {
@@ -84,92 +87,62 @@ export default function TypeTicket({
         errors={errors}
         watch={watch}
         arrKeywords={arrKeywords}
+        disabled={!watch('price') ? true : false}
       />
 
       <InViewPort noLoading={true}>
-        <Collapsible collapsed={!isView} style={styles.box}>
-          {listSort.map((item, index) => (
-            <View key={index}>
-              <CheckBox
-                textLeft
-                style={{
-                  height: scale(40),
-                  justifyContent: 'space-between',
-                  borderWidth: scale(1),
-                  borderColor: '#EEEEEE',
-                  paddingHorizontal: scale(10),
-                  backgroundColor: COLORS.white,
-                  borderTopLeftRadius: arraySelect.includes(index)
-                    ? scale(10)
-                    : scale(0),
-                  borderTopRightRadius: arraySelect.includes(index)
-                    ? scale(10)
-                    : scale(0),
-                  paddingVertical: scale(5),
-                }}
-                defaultValue={arraySelect[index] === item?.id}
-                text={
-                  <CustomText textType="regular" style={{...styles.label}}>
-                    {item.name}
-                  </CustomText>
-                }
-                checked={arraySelect[index] === item?.id}
-                disabled={!index}
-                onPress={() => index && handleSelectOption(item?.id)}
-              />
+        <Collapsible collapsed={!manage ? !isView : isView} style={styles.box}>
+          <View
+            style={{
+              borderWidth: scale(1),
+              borderColor: '#EEEEEE',
+              marginBottom: scale(10),
+              minHeight: scale(40),
+              padding: scale(10),
+              rowGap: scale(10),
+            }}>
+            <CustomInput
+              label={t('name')}
+              control={control}
+              name="name_item"
+              placeholder={t('enter_name_type_ticket')}
+              rules={requireField(t('this_field_required'))}
+              style={{...styles.textInput}}
+            />
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('description_content')}
+              control={control}
+              name="description_item"
+              placeholder={t('enter_a_description')}
+              rules={[requireField(t('this_field_required'))]}
+              style={[
+                styles.textInput,
+                {
+                  minHeight: scale(50),
+                  maxHeight: scale(300),
+                },
+              ]}
+            />
+            <PricePercentTicket
+              watch={watch}
+              control={control}
+              setValue={setValue}
+              priceListed={priceListed}
+            />
 
-              {arraySelect.includes(item?.id) && (
-                <>
-                  <View
-                    style={{
-                      borderWidth: scale(1),
-                      borderColor: '#EEEEEE',
-                      marginBottom: scale(10),
-                      minHeight: scale(40),
-                      padding: scale(10),
-                      rowGap: scale(10),
-                    }}>
-                    <CustomInput
-                      label={t('price')}
-                      control={control}
-                      name="price_percent"
-                      placeholder={t('enter_price')}
-                      rules={requireField(t('this_field_required'))}
-                      style={{...styles.textInput}}
-                      keyboardType="number-pad"
-                      enableFormatNum
-                    />
-                    <CustomInput
-                      styleTextLabel={styles.label}
-                      label={t('description_content')}
-                      control={control}
-                      name="description_item"
-                      placeholder={t('enter_a_description')}
-                      rules={[requireField(t('this_field_required'))]}
-                      style={[
-                        styles.textInput,
-                        {
-                          minHeight: scale(50),
-                          maxHeight: scale(300),
-                        },
-                      ]}
-                    />
-                    <CustomInput
-                      label={t('quantity')}
-                      control={control}
-                      name="quantity"
-                      placeholder={t('Enter quantity')}
-                      rules={requireField(t('this_field_required'))}
-                      style={{...styles.textInput}}
-                      keyboardType="number-pad"
-                      enableFormatNum
-                      maxLength={2}
-                    />
-                  </View>
-                </>
-              )}
-            </View>
-          ))}
+            <CustomInput
+              label={t('quantity')}
+              control={control}
+              name="quantity"
+              placeholder={t('Enter quantity')}
+              rules={requireField(t('this_field_required'))}
+              style={{...styles.textInput}}
+              keyboardType="number-pad"
+              enableFormatNum
+              maxLength={2}
+            />
+          </View>
         </Collapsible>
       </InViewPort>
     </View>

@@ -1,5 +1,5 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {IconMapView} from '../../../../assets/icon/Icon';
@@ -11,6 +11,7 @@ import {formatPrice} from '../../../../utils/format';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import TopImg from './BoxPlaceItem/TopImg';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
+import {useCountry} from '../../../../hooks/useCountry';
 
 export default function BoxPlaceItem({
   data,
@@ -29,7 +30,22 @@ export default function BoxPlaceItem({
   time,
 }) {
   const {t} = useLanguage();
-  const price = data?.tour_tickets?.[0]?.tour_ticket_dates?.[0]?.price_final;
+  const {currency} = useCountry();
+  const priceFinal = useMemo(() => {
+    const resultPri = data?.tour_tickets?.map(element => {
+      const result = element?.tour_ticket_items?.map(percent => {
+        const resultPolicy = element?.tour_ticket_dates.reduce((acc, price) => {
+          return percent?.price_percent * price?.price_final;
+        }, 0);
+
+        return resultPolicy;
+      });
+
+      return Math.min(...result);
+    });
+    return Math.min(...resultPri);
+  }, [data?.tour_tickets]);
+
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -126,8 +142,8 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.black},
                       ]}>
-                      {formatPrice(price, {
-                        locales: 'vi',
+                      {formatPrice(priceFinal, {
+                        currency: currency?.currency_code,
                       })}{' '}
                       {time && (
                         <CustomText

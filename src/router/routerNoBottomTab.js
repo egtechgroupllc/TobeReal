@@ -63,6 +63,10 @@ import HelpCenterTokenScreen from '../screen/WalletToken/HelpCenterTokenScreen';
 import HistoryTokenDataScreen from '../screen/WalletToken/HistoryTokenDataScreen';
 import WithdrawTokenScreen from '../screen/WalletToken/WithdrawTokenScreen';
 import {CountryScreen, CurrencyScreen} from '../screen/components';
+import TicketTypeManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketTypeManageScreen';
+import AddTypeTicketScreen from '../screen/News/PostNews/Tour/AddTicket/AddTypeTicketScreen';
+import BookingTourConfirm from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookingTourConfirmScreen';
+import BookingTourConfirmScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookingTourConfirmScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -338,5 +342,17 @@ export default routerNoBottomTab = [
     name: 'DetailVideoShortScreen',
     component: DetailVideoShortScreen,
     options: {contentStyle: {backgroundColor: '#000'}, headerShown: false},
+  },
+  {
+    name: 'TicketTypeManageScreen',
+    component: TicketTypeManageScreen,
+  },
+  {
+    name: 'AddTypeTicketScreen',
+    component: AddTypeTicketScreen,
+  },
+  {
+    name: 'BookingTourConfirmScreen',
+    component: BookingTourConfirmScreen,
   },
 ];

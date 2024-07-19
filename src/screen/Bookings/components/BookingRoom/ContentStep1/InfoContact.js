@@ -5,7 +5,7 @@ import CheckBox from '../../../../../components/CheckBox';
 import FormChangeContact from './FormChangeContact';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function InfoContact({data}) {
+export default function InfoContact({data, isTour}) {
   const {t} = useLanguage();
 
   const typePeopleBooking = useRef([
@@ -25,6 +25,7 @@ export default function InfoContact({data}) {
       <FormChangeContact
         data={data}
         isOpen={userBooking === typePeopleBooking[1]}
+        isTour={isTour}
       />
 
       <View style={styles.typePeople}>

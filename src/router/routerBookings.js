@@ -1,4 +1,5 @@
 import {DetailBookingScreen, HomeBookingsScreen} from '../screen/Bookings';
+import DetailBookingTourScreen from '../screen/Bookings/DetailBookingTourScreen';
 
 export default routerBookings = [
   {
@@ -8,6 +9,13 @@ export default routerBookings = [
   {
     name: 'DetailBookingScreen',
     component: DetailBookingScreen,
+    options: {
+      headerShown: true,
+    },
+  },
+  {
+    name: 'DetailBookingTourScreen',
+    component: DetailBookingTourScreen,
     options: {
       headerShown: true,
     },

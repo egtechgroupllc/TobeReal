@@ -9,15 +9,15 @@ import EmptyData from '../../../components/EmptyData';
 import BookingItem from './BookingItem';
 import BookingItemLoading from './BookingItemLoading';
 import {useAuthentication} from '../../../hooks/useAuthentication';
+import {getListBookingTour} from '../../../Model/api/apiTour';
+import BookingTourItem from './BookingTourItem';
 
-export default function BookingHistory() {
+export default function BookingTour() {
   const {navigate} = useNavigation();
-  const {token} = useAuthentication();
 
   const {data, isLoading} = useQuery({
-    queryKey: ['accommodation', 'room', 'my-booking'],
-    queryFn: getListBookingAccomo,
-    enabled: !!token,
+    queryKey: ['tour', 'my-booking'],
+    queryFn: getListBookingTour,
   });
   return (
     <FlatList
@@ -25,22 +25,23 @@ export default function BookingHistory() {
       contentContainerStyle={{
         paddingVertical: scale(10),
         rowGap: scale(10),
+        padding: scale(10),
       }}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
       ListEmptyComponent={() => <EmptyData styleWrapper={{marginTop: '40%'}} />}
       renderItem={({item, index}) =>
         item?.id ? (
-          <BookingItem
+          <BookingTourItem
             key={index}
             data={item}
-            onPress={() => navigate('DetailBookingScreen', item)}
-            onReView={() =>
-              navigate('NoBottomTab', {
-                screen: 'PostReviewScreen',
-                params: item,
-              })
-            }
+            onPress={() => navigate('DetailBookingTourScreen', item)}
+            // onReView={() =>
+            //   navigate('NoBottomTab', {
+            //     screen: 'PostReviewScreen',
+            //     params: item,
+            //   })
+            // }
           />
         ) : (
           <BookingItemLoading />

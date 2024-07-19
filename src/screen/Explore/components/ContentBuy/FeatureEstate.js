@@ -20,10 +20,10 @@ export default function FeatureEstate() {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('feature_estate')];
   const [filter, setFilter] = useState();
   const {country} = useCountry();
   const [current, setCurrent] = useState(null);
+  const title = [t('explore_nearby_estate')];
 
   const currentPosition = useCallback(async () => {
     await getCurrentLocation(({coords}) => {
@@ -87,7 +87,6 @@ export default function FeatureEstate() {
       // }
       // onPressCategory={item => setFilter(item)}
       heading={title}
-      subHeading={t('explore_popular_estate')}
       styleWrapper={{backgroundColor: 'transparent'}}>
       <InViewport
         loadingMap

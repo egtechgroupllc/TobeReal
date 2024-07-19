@@ -147,7 +147,7 @@ export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
   return responsive.data;
 };
 
-export const getListPopularProvince = async (parent = '') => {
+export const getListPopularProvinceAccom = async (parent = '') => {
   const responsive = await instanceAccom.get(
     `/statistic/popular-province?parent=${parent}`,
   );

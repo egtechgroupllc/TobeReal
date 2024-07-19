@@ -62,27 +62,29 @@ export default function ItemAccommdSearch({
     );
   };
   const priceFinal = useMemo(() => {
-    const resultPri = data?.rooms?.map(element => {
-      const result = element?.room_dates
-        .slice(0, element?.room_dates.length - 1)
-        .map(room => {
-          console.log(room.date, data.name);
+    if (!data?.estate_type) {
+      const resultPri = data?.rooms?.map(element => {
+        const result = element?.room_dates
+          .slice(0, element?.room_dates.length - 1)
+          .map(room => {
+            console.log(room.date, data.name);
 
-          const resultPolicy = element?.accommodation_policies.reduce(
-            (acc, policy) => {
-              return policy?.price_percent * room?.price_final;
-            },
-            0,
-          );
+            const resultPolicy = element?.accommodation_policies.reduce(
+              (acc, policy) => {
+                return policy?.price_percent * room?.price_final;
+              },
+              0,
+            );
 
-          return resultPolicy;
-        });
+            return resultPolicy;
+          });
 
-      return Math.min(...result);
-    });
-    return Math.min(...resultPri);
+        return Math.min(...result);
+      });
+      return Math.min(...resultPri);
+    }
   }, [data?.rooms]);
-  console.log(priceFinal);
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -178,17 +180,27 @@ export default function ItemAccommdSearch({
               marginTop: scale(5),
               justifyContent: 'space-between',
             }}>
-            <CustomText
-              textType="medium"
-              numberOfLines={1}
-              style={{color: COLORS.primary}}>
-              {formatPrice(
-                priceFinal ||
-                  data?.rooms?.[0]?.room_dates?.[0]?.price_final ||
-                  data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
-                {currency: currency?.currency_code},
-              )}{' '}
-            </CustomText>
+            {!data?.estate_type && (
+              <CustomText
+                textType="medium"
+                numberOfLines={1}
+                style={{color: COLORS.primary}}>
+                {formatPrice(
+                  priceFinal ||
+                    data?.rooms?.[0]?.room_dates?.[0]?.price_final ||
+                    data?.tour_tickets?.[0]?.tour_ticket_items?.[0]?.price,
+                  {currency: currency?.currency_code},
+                )}{' '}
+              </CustomText>
+            )}
+            {data?.estate_type && (
+              <CustomText
+                textType="medium"
+                numberOfLines={1}
+                style={{color: COLORS.primary}}>
+                {formatPrice(data?.price, {currency: currency?.currency_code})}
+              </CustomText>
+            )}
             <View style={{flexDirection: 'row'}}>
               <IconMapView />
               <CustomText>

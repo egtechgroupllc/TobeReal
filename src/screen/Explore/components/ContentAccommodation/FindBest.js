@@ -5,6 +5,7 @@ import {FlatList, StyleSheet} from 'react-native';
 
 import {
   getListPopularProvince,
+  getListPopularProvinceAccom,
   getListRent,
 } from '../../../../Model/api/apiAccom';
 import {getListCountry} from '../../../../Model/api/common';
@@ -47,7 +48,7 @@ export default function FindBest({country, currency}) {
   });
   const listProvince = useQuery({
     queryKey: ['accommodation', 'list-popular-province', country?.geoname_id],
-    queryFn: () => getListPopularProvince(country?.geoname_id),
+    queryFn: () => getListPopularProvinceAccom(country?.geoname_id),
   });
   useEffect(() => {
     setFilter(listProvince.data?.data?.rows?.[0]);

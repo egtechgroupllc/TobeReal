@@ -19,25 +19,24 @@ import TourSchedule from './DetailTour/TourSchedule';
 import BookAccommodation from '../BookAccommodation';
 import BookTour from './DetailTour/BookTour';
 import {showMess} from '../../../../assets/constants/Helper';
+import TicketOption from './DetailTour/TicketOption';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
-
   const listNavBar = useRef([
     {
       text: t('overview'),
+    },
+    {
+      text: t('ticket_detail'),
     },
     {
       text: t('location'),
     },
     {
       text: t('reviews'),
-    },
-
-    {
-      text: t('others'),
     },
   ]).current;
 
@@ -50,7 +49,9 @@ export default function DetailTourScreen() {
     return [
       // <InfoUnitFacilities />,
 
-      <InfoDetail data={dataDetail} />,
+      <InfoDetail data={dataDetail} paramsTour={params} />,
+      <TicketOption data={dataDetail} paramsTour={params} />,
+
       <DetailAccommoMap data={dataDetail} />,
       <Review dataP={dataDetail} />,
       // <View>
@@ -67,9 +68,11 @@ export default function DetailTourScreen() {
     ];
   }, [data?.data]);
 
+  const refScroll = useRef();
   return (
     <MainWrapper scrollEnabled={false} noImgColor>
       <AnimateScrollWrapper
+        ref={refScroll}
         lisViewComponent={listView}
         listNav={listNavBar}
         dataDetail={data?.data}
@@ -77,7 +80,14 @@ export default function DetailTourScreen() {
         ContentBookComponent={
           <BookTour
             isLoading={false}
-            data={{...data?.data, dataFilter: params?.dataFilter}}
+            onPress={() => {
+              refScroll.current?.setSelectScrollIndex(1);
+            }}
+            data={{
+              ...data?.data,
+              dataFilter: params?.dataFilter,
+              params: params,
+            }}
           />
         }
       />

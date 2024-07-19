@@ -15,8 +15,9 @@ import {formatDateTime} from '../../../../../utils/format';
 import Introduction from '../../DetailAccommodation/Detail/Introduction';
 import TicketOption from './TicketOption';
 
-export default function InfoDetail({data, name}) {
+export default function InfoDetail({data, name, paramsTour}) {
   const {t} = useLanguage();
+
   return (
     <View>
       <View style={styles.wrapper}>
@@ -27,10 +28,26 @@ export default function InfoDetail({data, name}) {
         </View>
 
         <View style={styles.room}>
-          <StarRating rating={2} />
-          <CustomText textType="medium" style={styles.text}>
-            0 {t('review')}
-          </CustomText>
+          {paramsTour?.review_count > 0 ? (
+            <>
+              <View
+                style={{
+                  backgroundColor: COLORS.primary,
+                  height: scale(35),
+                  width: scale(35),
+                  borderRadius: scale(10),
+                }}>
+                {paramsTour?.review_average}
+              </View>
+              <CustomText textType="medium" style={styles.text}>
+                {paramsTour?.review_count} {t('review')}
+              </CustomText>
+            </>
+          ) : (
+            <CustomText textType="medium" style={styles.text}>
+              ({t('no_review_yet')})
+            </CustomText>
+          )}
           {/* <TouchableOpacity>
             <CustomImage
               source={images.iconTiktok}
@@ -72,7 +89,7 @@ export default function InfoDetail({data, name}) {
             {data?.address || ''}
           </CustomText>
         </View>
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             paddingHorizontal: scale(20),
@@ -90,7 +107,7 @@ export default function InfoDetail({data, name}) {
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
             {formatDateTime(data?.tour_tickets?.[0]?.createdAt)}
           </CustomText>
-        </View>
+        </View> */}
         <View
           style={{
             flexDirection: 'row',
@@ -114,7 +131,6 @@ export default function InfoDetail({data, name}) {
       <View style={styles.line} />
       <Introduction data={data} />
       <View style={styles.line} />
-      <TicketOption data={data} />
     </View>
   );
 }

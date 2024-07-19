@@ -32,7 +32,7 @@ export default function PostConfigurationSellScreen() {
     return setOptions({
       headerTitle: !params?.update ? t('create_room') : t('edit_room'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

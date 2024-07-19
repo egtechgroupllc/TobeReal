@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {
   COLORS,
@@ -12,14 +12,20 @@ import {
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
-import {TabSelect} from '../../../../../components';
+import {CustomButton, TabSelect} from '../../../../../components';
 import ChooseCalendar from '../../FindAccommodation/ChooseCalendar';
 import {IconCalendar, IconRefund} from '../../../../../assets/icon/Icon';
 import Button from '../../../../Profile/components/Button';
 import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
-import {getListTicket} from '../../../../../Model/api/apiTour';
+import {
+  getListTicket,
+  getListTicketDate,
+} from '../../../../../Model/api/apiTour';
 import {showMess} from '../../../../../assets/constants/Helper';
+import ChooseCalendarRoom from '../../DetailAccommodation/Rooms/ChooseCalendarRoom';
+import {formatDate, formatPrice} from '../../../../../utils/format';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 const data = [
   {
@@ -36,11 +42,34 @@ const data = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default function TicketOption() {
+export default function TicketOption({paramsTour}) {
+  const [date, setDate] = useState();
   const params = useRoute().params;
+  const {currency} = useCountry();
   const {data, isLoading} = useQuery({
-    queryKey: ['tour', 'detail', 'list-ticket', {id_tour: params?.id}],
-    queryFn: () => getListTicket({id_tour: params?.id}),
+    queryKey: [
+      'tour',
+      'detail',
+      'list-ticket',
+      params?.id,
+      date?.selectedStartDate,
+    ],
+    queryFn: () =>
+      getListTicket({
+        id_tour: params?.id,
+        date_end: formatDate(date?.selectedStartDate, {addDays: 1}),
+        date_start: formatDate(date?.selectedStartDate),
+      }),
+  });
+
+  const dataListTicket = useQuery({
+    queryKey: ['tour', 'list-ticket-date', data?.id],
+    queryFn: () =>
+      getListTicketDate({
+        id_ticket: data?.id,
+        date_end: formatDate(),
+        date_start: formatDate(),
+      }),
   });
   const {t} = useLanguage();
   const {isFocused, dispatch} = useNavigation();
@@ -64,103 +93,129 @@ export default function TicketOption() {
           style={{...styles.name, paddingHorizontal: scale(20)}}>
           {t('ticket_option')}
         </CustomText>
-        <View style={{width: '90%', alignSelf: 'center', marginTop: scale(10)}}>
-          <ChooseCalendar />
+        <View
+          style={{
+            width: '90%',
+            alignSelf: 'center',
+            marginTop: scale(10),
+          }}>
+          <ChooseCalendarRoom
+            isOneDay
+            onSelectDate={value => {
+              setDate(value);
+            }}
+            data={data}
+          />
         </View>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          data={data?.data}
+          data={data?.data?.rows}
           contentContainerStyle={styles.content}
           style={{alignSelf: 'center', width: '100%'}}
-          renderItem={({item}) => (
-            <View style={styles.boxItem}>
-              <TouchableOpacity
-                onPress={() => {
-                  if (isFocused()) {
-                    dispatch(
-                      StackActions.push('NoBottomTab', {
-                        screen: 'DetailTicketScreen',
-                        params: {...item, images: params?.images},
-                      }),
-                    );
-                  }
-                }}>
+          renderItem={({item}) => {
+            const resultPercent = item?.tour_ticket_items?.map(item => {
+              return item?.price_percent;
+            });
+            const resultPrice = item?.tour_ticket_dates?.map(item => {
+              return item?.price;
+            });
+            const minPercent = Math.min(...resultPercent);
+            const minPrice = Math.min(...resultPrice);
+
+            return (
+              <View style={styles.boxItem}>
                 <CustomText
                   textType="semiBold"
                   style={{...styles.text, paddingHorizontal: scale(10)}}>
                   {item.name}
                 </CustomText>
-
-                <CustomText
-                  textType="semiBold"
-                  style={{
-                    ...styles.text,
-                    paddingHorizontal: scale(10),
-                    marginTop: scale(5),
-                    color: COLORS.primary,
+                {/* <TouchableOpacity
+                  onPress={() => {
+                    if (isFocused()) {
+                      dispatch(
+                        StackActions.push('NoBottomTab', {
+                          screen: 'DetailTicketScreen',
+                          params: {...item, images: params?.images},
+                        }),
+                      );
+                    }
                   }}>
-                  {t('see_detail')}
-                </CustomText>
-              </TouchableOpacity>
-              <View style={styles.line}></View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  paddingHorizontal: scale(10),
-                  paddingVertical: scale(10),
-                }}>
-                <View style={{flexDirection: 'row'}}>
-                  <IconRefund width={scale(15)} height={scale(15)} />
-                  <CustomText
-                    textType="semiBold"
-                    style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    {t('easy_refund')}
-                  </CustomText>
-                </View>
-                <View style={{flexDirection: 'row', marginLeft: '10%'}}>
-                  <IconCalendar width={scale(15)} height={scale(15)} />
-                  <CustomText
-                    textType="semiBold"
-                    style={{...styles.text, paddingHorizontal: scale(10)}}>
-                    {t('easy_reschedule')}
-                  </CustomText>
-                </View>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                }}>
-                <View style={{flexDirection: 'row'}}>
                   <CustomText
                     textType="semiBold"
                     style={{
                       ...styles.text,
                       paddingHorizontal: scale(10),
+                      marginTop: scale(5),
                       color: COLORS.primary,
                     }}>
-                    ${' '}
-                    {item?.tour_ticket_items?.map(item => {
-                      return item?.price_percent;
-                    })}
+                    {t('see_detail')}
                   </CustomText>
-                </View>
-                <View style={{flexDirection: 'row', marginLeft: '25%'}}>
-                  <View style={styles.discount}>
+                </TouchableOpacity> */}
+                <View style={styles.line}></View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    paddingHorizontal: scale(10),
+                    paddingVertical: scale(10),
+                  }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <IconRefund width={scale(15)} height={scale(15)} />
                     <CustomText
                       textType="semiBold"
-                      style={{...styles.text1, color: COLORS.primary}}>
-                      -25%
+                      style={{...styles.text, paddingHorizontal: scale(10)}}>
+                      {t('easy_refund')}
+                    </CustomText>
+                  </View>
+                  <View style={{flexDirection: 'row', marginLeft: '10%'}}>
+                    <IconCalendar width={scale(15)} height={scale(15)} />
+                    <CustomText
+                      textType="semiBold"
+                      style={{...styles.text, paddingHorizontal: scale(10)}}>
+                      {t('easy_reschedule')}
                     </CustomText>
                   </View>
                 </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <CustomText
+                      textType="semiBold"
+                      style={{
+                        ...styles.text,
+                        paddingHorizontal: scale(10),
+                        color: COLORS.primary,
+                      }}>
+                      {formatPrice(minPercent * minPrice, {
+                        currency: currency?.currency_code,
+                      })}
+                    </CustomText>
+                  </View>
+                  {/* <View style={{flexDirection: 'row', marginLeft: '25%'}}>
+                    <View style={styles.discount}>
+                      <CustomText
+                        textType="semiBold"
+                        style={{...styles.text1, color: COLORS.primary}}>
+                        -25%
+                      </CustomText>
+                    </View>
+                  </View> */}
+                </View>
+                <CustomButton
+                  text={t('select_ticket')}
+                  buttonType="small"
+                  styleWrapper={{
+                    width: '60%',
+                    alignSelf: 'center',
+                    marginTop: scale(10),
+                  }}
+                  onPress={() => booktour(item)}
+                  // onPress={() => showMess(t('comming_soon'), 'error')}
+                />
               </View>
-              <Button
-                title={t('select_ticket')}
-                // onPress={() => booktour(item)}
-                onPress={() => showMess(t('comming_soon'), 'error')}
-              />
-            </View>
-          )}
+            );
+          }}
         />
       </View>
     </View>

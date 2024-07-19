@@ -19,6 +19,8 @@ export default function TabSelect({
   isLine,
   keyView = 'name',
   isObj,
+  sizeText,
+  transformText,
 }) {
   const [tab, setTab] = useState(0);
 
@@ -74,8 +76,8 @@ export default function TabSelect({
                     ? styleTabActive?.color || '#F0B90B'
                     : styleTabDefault?.color || COLORS.textSub,
                 textType: 'bold',
-                textTransform: 'uppercase',
-                fontSize: SIZES.xMedium,
+                textTransform: transformText || 'uppercase',
+                fontSize: sizeText || SIZES.xMedium,
               }}
               onPress={() => {
                 setTab(index);

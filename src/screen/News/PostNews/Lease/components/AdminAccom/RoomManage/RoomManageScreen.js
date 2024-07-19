@@ -21,7 +21,7 @@ export default function RoomManageScreen() {
     return setOptions({
       headerTitle: t('room_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -96,7 +96,7 @@ export default function RoomManageScreen() {
         )}
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Operation'}
+          titleIndicator={t('notification')}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

@@ -13,6 +13,7 @@ export default memo(function ButtonTabValidate({
   title,
   errors,
   style,
+  disabled,
 }) {
   const [isValid, setIsValid] = useState(false);
 
@@ -33,6 +34,7 @@ export default memo(function ButtonTabValidate({
 
   return (
     <CustomButton
+      disabled={disabled}
       outline
       style={[
         style || styles.buttonCategories,

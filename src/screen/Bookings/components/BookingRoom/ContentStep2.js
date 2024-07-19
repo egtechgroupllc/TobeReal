@@ -154,6 +154,7 @@ export default function ContentStep2({data}) {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
+
   return (
     <View style={styles.container}>
       <TopStep2

@@ -1181,5 +1181,30 @@
   "detail_review": "Đánh giá chi tiết",
   "your_review": "Đánh giá của bạn",
   "view_your_video_short_at": "Xem lại video ngắn của bạn tại",
-  "manage_video_short": "Quản lý video ngắn"
+  "manage_video_short": "Quản lý video ngắn",
+
+  "deleted_ticket_type_cannot_be_restored": "Loại vé đã xóa không thể khôi phục",
+  "deleted_ticket_cannot_be_restored": "Vé đã xóa không thể khôi phục",
+  "delete": "Xóa",
+  "ticket_id": "ID vé",
+  "tour_ticket_type_management": "Quản lý loại vé tour",
+  "add_more_ticket_type": "Thêm loại vé",
+  "ticket_type_id": "ID loại vé",
+  "enter_name_type_ticket": "Nhập tên loại vé",
+  "price_ticket": "Giá vé",
+  "listed_price_tour": "Giá niêm yết của tour này",
+  "listed_price_tour_change": "Giá niêm yết của tour này đã thay đổi",
+  "listed_price_room_change": "Giá niêm yết của phòng này đã thay đổi",
+  "create_new_tour": "Tạo tour mới",
+  "there_are_no_one_review": "Chưa có đánh giá nào!",
+  "pay_booking_tour": "Thanh toán đặt tour",
+
+  "are_you_sure_delete_tour": "Bạn có chắc chắn muốn xóa tour này không?",
+  "deleted_tour_cannot_restored": "Tour đã xóa không thể khôi phục!",
+  "hotel_booking_history": "Lịch sử đặt khách sạn",
+  "tour_booking_history": "Lịch sử đặt tour",
+  "booking_tour_detail": "Chi tiết đặt tour",
+  "booking_tour_code": "Mã đặt tour",
+  "qr_code": "Mã QR",
+  "please_give_qrcode_to_tourguide": "Vui lòng đưa mã QR này cho hướng dẫn viên để xác nhận bắt đầu tour của bạn"
 }

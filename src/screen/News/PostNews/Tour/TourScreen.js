@@ -33,7 +33,7 @@ export default function TourScreen() {
     {
       title: t('register_new_tour'),
       desc: t('list_new_tour_registration'),
-      textBtn: 'List New Tour',
+      textBtn: t('create_new_tour'),
       navigate: 'PostNewTourScreen',
     },
   ];

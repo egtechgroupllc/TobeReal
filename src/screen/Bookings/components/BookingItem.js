@@ -16,71 +16,75 @@ export default function BookingItem({data, onPress, onReView, onViewDetail}) {
   const today = formatDate(new Date());
 
   return (
-    <TouchableOpacity style={styles.box} activeOpacity={0.7} onPress={onPress}>
-      <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
-        {objAccom?.name}
-      </CustomText>
+    <>
+      {data?.status === 'SUCCESS' && (
+        <TouchableOpacity
+          style={styles.box}
+          activeOpacity={0.7}
+          onPress={onPress}>
+          <CustomText textType="bold" numberOfLines={2} size={SIZES.xMedium}>
+            {objAccom?.name}
+          </CustomText>
 
-      <View style={styles.code}>
-        <View style={{flexDirection: 'row'}}>
-          <CustomText
-            style={{flex: 1}}
-            numberOfLines={1}
-            ellipsizeMode="middle">
-            {t('booking_code')}:{' '}
-            <CustomText textType="semiBold" numberOfLines={1}>
-              {data?.id}
+          <View style={styles.code}>
+            <View style={{flexDirection: 'row'}}>
+              <CustomText
+                style={{flex: 1}}
+                numberOfLines={1}
+                ellipsizeMode="middle">
+                {t('booking_code')}:{' '}
+                <CustomText textType="semiBold" numberOfLines={1}>
+                  {data?.id}
+                </CustomText>
+              </CustomText>
+
+              <CustomText>
+                {t('price')}:{' '}
+                <CustomText textType="semiBold">
+                  {formatPrice(data?.price * currency?.exchange_rate, {
+                    currency: currency?.currency_code,
+                  })}
+                </CustomText>
+              </CustomText>
+            </View>
+            <CustomText>
+              {t('type_payment')}:{' '}
+              <CustomText textType="semiBold">{data?.type_payment} </CustomText>
             </CustomText>
-          </CustomText>
-
-          <CustomText>
-            {t('price')}:{' '}
-            <CustomText textType="semiBold">
-              {formatPrice(data?.price * currency?.exchange_rate, {
-                currency: currency?.currency_code,
-              })}
-            </CustomText>
-          </CustomText>
-        </View>
-        <CustomText>
-          {t('type_payment')}:{' '}
-          <CustomText textType="semiBold">{data?.type_payment} </CustomText>
-        </CustomText>
-      </View>
-
-      <View style={styles.address}>
-        <View style={styles.address}>
-          <IconMarker width={scale(15)} height={scale(15)} />
-          <CustomText
-            numberOfLines={2}
-            textType="medium"
-            style={{
-              flex: 1,
-            }}>
-            {objAccom?.country?.name}, {objAccom?.province?.name}
-          </CustomText>
-        </View>
-
-        {data.status !== 'SUCCESS' ? (
-          <View style={styles.address}>
-            <CustomButton
-              styleWrapper={{flex: 1}}
-              text={t('pay')}
-              style={{height: scale(25)}}
-            />
-            <CustomButton
-              text={t('cancel')}
-              styleWrapper={{flex: 1}}
-              outline
-              style={{
-                height: scale(25),
-                borderColor: COLORS.grey,
-              }}
-              styleText={{color: COLORS.black, textType: 'regular'}}
-            />
           </View>
-        ) : (
-          <>
+
+          <View style={styles.address}>
+            <View style={styles.address}>
+              <IconMarker width={scale(15)} height={scale(15)} />
+              <CustomText
+                numberOfLines={2}
+                textType="medium"
+                style={{
+                  flex: 1,
+                }}>
+                {objAccom?.country?.name}, {objAccom?.province?.name}
+              </CustomText>
+            </View>
+
+            {/* {data.status !== 'SUCCESS' ? (
+              <View style={styles.address}>
+                <CustomButton
+                  styleWrapper={{flex: 1}}
+                  text={t('pay')}
+                  style={{height: scale(25)}}
+                />
+                <CustomButton
+                  text={t('cancel')}
+                  styleWrapper={{flex: 1}}
+                  outline
+                  style={{
+                    height: scale(25),
+                    borderColor: COLORS.grey,
+                  }}
+                  styleText={{color: COLORS.black, textType: 'regular'}}
+                />
+              </View>
+            ) : ( */}
             {data?.check_out_date < today &&
               (!data?.accommodation_review ? (
                 <CustomButton
@@ -98,40 +102,44 @@ export default function BookingItem({data, onPress, onReView, onViewDetail}) {
                 />
               ))}
             {/* <CustomButton
-              styleWrapper={{flex: 0.4}}
-              text={t('review')}
-              style={{height: scale(25)}}
-              onPress={onReView}
-            /> */}
-          </>
-        )}
-      </View>
-      <View style={styles.line} />
-      <View style={styles.address}>
-        <View
-          style={{
-            backgroundColor: data.status === 'SUCCESS' ? '#42b00b' : '#e03c31',
-            ...styles.boxStatus,
-          }}>
-          <CustomText size={SIZES.xSmall} textType="bold" color={COLORS.white}>
-            {data.status === 'SUCCESS'
-              ? t('success_transaction')
-              : t('exceed_limit')}
-          </CustomText>
-        </View>
-        <CustomText
-          textType="regular"
-          size={SIZES.xSmall}
-          color={COLORS.text}
-          style={{
-            position: 'absolute',
-            right: 0,
-            bottom: scale(-2),
-          }}>
-          {formatDateTime(data?.createdAt)}
-        </CustomText>
-      </View>
-    </TouchableOpacity>
+                styleWrapper={{flex: 0.4}}
+                text={t('review')}
+                style={{height: scale(25)}}
+                onPress={onReView}
+              /> */}
+          </View>
+          <View style={styles.line} />
+          <View style={styles.address}>
+            <View
+              style={{
+                backgroundColor:
+                  data.status === 'SUCCESS' ? '#42b00b' : '#e03c31',
+                ...styles.boxStatus,
+              }}>
+              <CustomText
+                size={SIZES.xSmall}
+                textType="bold"
+                color={COLORS.white}>
+                {data.status === 'SUCCESS'
+                  ? t('success_transaction')
+                  : t('exceed_limit')}
+              </CustomText>
+            </View>
+            <CustomText
+              textType="regular"
+              size={SIZES.xSmall}
+              color={COLORS.text}
+              style={{
+                position: 'absolute',
+                right: 0,
+                bottom: scale(-2),
+              }}>
+              {formatDateTime(data?.createdAt)}
+            </CustomText>
+          </View>
+        </TouchableOpacity>
+      )}
+    </>
   );
 }
 

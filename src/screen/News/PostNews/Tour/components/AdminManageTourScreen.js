@@ -25,7 +25,7 @@ export default function AdminManageTourScreen() {
     return setOptions({
       headerTitle: t('tour_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -65,22 +65,22 @@ export default function AdminManageTourScreen() {
   };
   const handleDelete = () =>
     Alert.alert(
-      'Bạn có chắc xoá tour này?',
-      'Tour đã xoá không thể khôi phục!',
+      t('are_you_sure_delete_tour'),
+      t('deleted_tour_cannot_restored'),
       [
         {
-          text: 'Cancel',
+          text: t('cancel'),
           // onPress: () => Alert.alert('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: 'OK', onPress: () => Delete()},
+        {text: t('confirm'), onPress: () => Delete()},
       ],
     );
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
         style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
-        <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
+        <CustomText textType="semiBold" style={{fontSize: SIZES.medium}}>
           {params?.name}
         </CustomText>
         <CustomImage
@@ -135,14 +135,7 @@ export default function AdminManageTourScreen() {
             </CustomText>
           </View>
         </CustomImage>
-        <CustomButton
-          text={t('booking_count')}
-          style={{width: '85%', height: scale(45)}}
-        />
-        <CustomButton
-          text={t('reviews')}
-          style={{width: '85%', height: scale(45)}}
-        />
+
         <CustomButton
           text={t('tour_ticket_management')}
           style={{width: '85%', height: scale(45)}}
@@ -153,6 +146,17 @@ export default function AdminManageTourScreen() {
             navigate('TicketManageScreen', {...params, admin: adminScreen})
           }
         />
+
+        {/* <CustomButton
+          text={t('edit_tour')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() =>
+            navigate('PostNewTourScreen', {...params, admin: adminScreen})
+          }
+        /> */}
         {/* <CustomButton
           text="Policy management"
           style={{width: '85%', height: scale(45)}}

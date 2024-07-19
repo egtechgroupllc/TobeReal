@@ -129,6 +129,7 @@ export default function PostNewLeaseScreen() {
     }
 
     const formData = getFormData(value);
+    // console.log(formData);
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
@@ -238,7 +239,7 @@ export default function PostNewLeaseScreen() {
             control={control}
             setValue={setValue}
             watch={watch}
-            errors={errors}
+            errors={errors} 
           /> */}
       </View>
 

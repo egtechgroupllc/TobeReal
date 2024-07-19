@@ -1157,5 +1157,30 @@
   "detail_review": "Ulasan Terperinci",
   "your_review": "Ulasan Anda",
   "view_your_video_short_at": "Lihat video pendek anda di",
-  "manage_video_short": "Urus video pendek"
+  "manage_video_short": "Urus video pendek",
+
+  "deleted_ticket_type_cannot_be_restored": "Jenis tiket yang dipadam tidak boleh dipulihkan",
+  "deleted_ticket_cannot_be_restored": "Tiket yang dipadam tidak boleh dipulihkan",
+  "delete": "Padam",
+  "ticket_id": "ID tiket",
+  "tour_ticket_type_management": "Pengurusan jenis tiket lawatan",
+  "add_more_ticket_type": "Tambah lebih banyak jenis tiket",
+  "ticket_type_id": "ID jenis tiket",
+  "enter_name_type_ticket": "Masukkan nama jenis tiket",
+  "price_ticket": "Harga tiket",
+  "listed_price_tour": "Harga tersenarai lawatan ini",
+  "listed_price_tour_change": "Harga tersenarai lawatan ini berubah",
+  "listed_price_room_change": "Harga tersenarai bilik ini berubah",
+  "create_new_tour": "Buat lawatan baru",
+  "there_are_no_one_review": "Tiada ulasan lagi!",
+  "pay_booking_tour": "Pembayaran untuk tempahan lawatan",
+
+  "are_you_sure_delete_tour": "Adakah anda pasti untuk memadamkan lawatan ini?",
+  "deleted_tour_cannot_restored": "Lawatan yang dipadam tidak boleh dipulihkan!",
+  "hotel_booking_history": "Sejarah tempahan hotel",
+  "tour_booking_history": "Sejarah tempahan lawatan",
+  "booking_tour_detail": "Butiran tempahan lawatan",
+  "booking_tour_code": "Kod tempahan lawatan",
+  "qr_code": "Kod QR",
+  "please_give_qrcode_to_tourguide": "Sila berikan kod QR ini kepada pemandu lawatan untuk pengesahan memulakan lawatan anda"
 }

@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../hooks/useLanguage';
 import {HeaderBar} from '../../components';
 import WithdrawTokenScreen from './WithdrawTokenScreen';
@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function FinancialTokenScreen() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const data = useRoute().params;
 
   return (
     <Tab.Navigator
@@ -37,6 +38,7 @@ export default function FinancialTokenScreen() {
       <Tab.Screen
         name={'WithdrawTokenScreen'}
         component={WithdrawTokenScreen}
+        initialParams={data}
         options={{
           tabBarLabel: t('withdraw_point_voucher'),
           tabBarIcon: ({focused}) => (

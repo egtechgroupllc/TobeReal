@@ -237,20 +237,21 @@ export default function App() {
                         tooltipComponent={TooltipComponent}
                         preventOutsideInteraction>
                         <BottomSheetModalProvider>
-                          <StatusBar
-                            barStyle="dark-content"
-                            backgroundColor={COLORS.primary}
-                          />
                           {/* <TouchableWithoutFeedback
                             accessible={false}
                             onPress={Keyboard.dismiss}> */}
-                          <KeyboardAvoidingView
+                          {/* <KeyboardAvoidingView
                             style={{flex: 1}}
                             behavior={
                               Platform.OS === 'ios' ? 'padding' : 'height'
-                            }>
-                            <Layout />
-                          </KeyboardAvoidingView>
+                            }> */}
+                          <Layout />
+                          <StatusBar
+                            barStyle="light-content"
+                            backgroundColor={'transparent'}
+                            translucent
+                          />
+                          {/* </KeyboardAvoidingView> */}
                           {/* </TouchableWithoutFeedback> */}
                         </BottomSheetModalProvider>
                       </TourGuideProvider>

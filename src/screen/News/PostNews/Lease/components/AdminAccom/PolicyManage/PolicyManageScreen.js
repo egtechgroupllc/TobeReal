@@ -50,7 +50,7 @@ export default function PolicyManageScreen() {
     return setOptions({
       headerTitle: t('policy_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -256,7 +256,7 @@ export default function PolicyManageScreen() {
 
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Operation'}
+          titleIndicator={t('notification')}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

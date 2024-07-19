@@ -37,10 +37,10 @@ export default function TabContent() {
     }
   };
   const goRentBuy = () => {
-    // if (handleCheckAccc()) {
-    //   navigation.navigate('TourScreen');
-    // }
-    showMess(t('comming_soon'), 'error');
+    if (handleCheckAccc()) {
+      navigation.navigate('TourScreen');
+    }
+    // showMess(t('comming_soon'), 'error');
   };
 
   // const goSell = () => {

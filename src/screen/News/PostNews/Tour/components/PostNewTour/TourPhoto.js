@@ -23,7 +23,7 @@ export default function TourPhoto({
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
 
-  const arrKeywords = useRef(['description_img', 'kyc']).current;
+  const arrKeywords = useRef(['files', 'kyc']).current;
 
   const formatImgEdit = images => {
     const result = images.map((item, index) => {
@@ -96,10 +96,10 @@ export default function TourPhoto({
             control={control}
             rules={
               !imgDes && [
-                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+                validateMinLength(t('Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
               ]
             }
-            name={'description_img'}
+            name={'files'}
           />
 
           {imgDes && (

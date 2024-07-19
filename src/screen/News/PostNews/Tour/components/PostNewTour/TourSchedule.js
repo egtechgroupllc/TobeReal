@@ -46,6 +46,7 @@ export default function TourSchedule({
   watch,
   errors,
   unregister,
+  params,
 }) {
   const {t} = useLanguage();
 
@@ -89,19 +90,30 @@ export default function TourSchedule({
     setValue('total_hours', numDays.days * 24 + numDays.hours);
     setValue('refund_fee', 1);
   }, []);
+  useEffect(() => {
+    if (typeof watch('schedule') === 'string') {
+      const dataSchedule = JSON.parse(watch('schedule'));
+      setValue('schedule', dataSchedule);
+      dataSchedule.map((item, index) => {
+        setValue(`description_day${index}`, item?.description);
+      });
+    }
+  }, [watch('schedule')]);
   const handleConfirm = value => {
     if (numDays.days > value) {
       setSelectedDay(value);
     }
-    const result = watch('schedule')?.filter(
+
+    const dataSchedule = watch('schedule');
+
+    const result = dataSchedule?.filter(
       item =>
         item?.description !== watch(`description_day${selectedDay}`) &&
         item?.title !== `Day ${selectedDay + 1}`,
     );
-
     setValue(
       'schedule',
-      watch('schedule')
+      dataSchedule
         ? [
             ...result,
             {
@@ -289,14 +301,16 @@ export default function TourSchedule({
                         {5000}
                       </Text>
                     }
+                    onEndEditing={() => handleConfirm(dayNumber + 1)}
+                    onBlur={() => handleConfirm(dayNumber + 1)}
                   />
 
-                  <CustomButton
+                  {/* <CustomButton
                     styleWrapper={{width: '20%', alignSelf: 'flex-end'}}
                     buttonType="small"
                     text={t('ok')}
                     onPress={() => handleConfirm(dayNumber + 1)}
-                  />
+                  /> */}
                 </>
               ),
           )}

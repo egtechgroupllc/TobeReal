@@ -16,7 +16,6 @@ export default function ListToken({dataP}) {
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
   });
-
   const listToken = useMemo(
     () => [
       {

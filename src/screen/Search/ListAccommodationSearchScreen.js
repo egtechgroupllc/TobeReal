@@ -11,9 +11,14 @@ import ListAccomSearchContent from './ListAccomSearchContent';
 import ListEstateSearchContent from './ListEstateSearchContent';
 import ListTourSearchContent from './ListTourSearchContent';
 import SearchNavBar from './components/SearchNavBar';
+import {useLanguage} from '../../hooks/useLanguage';
+import {CustomText} from '../../components';
+import {COLORS, SIZES} from '../../assets/constants';
 
 export default function ListAccommodationSearchScreen() {
   const params = useRoute().params;
+  const {t} = useLanguage();
+
   const {country, currency} = useCountry();
   const [filter, setFilter] = useState();
   const [current, setCurrent] = useState({});
@@ -59,15 +64,22 @@ export default function ListAccommodationSearchScreen() {
 
   useEffect(() => {
     return setOptions({
-      headerTitleComponent: () => (
-        <SearchNavBar
-          data={objFilter}
-          onEmpale={value => {
-            isFilter.current = false;
-            setEmpale(value);
-          }}
-        />
-      ),
+      headerTitleComponent: () =>
+        params?.menu === 'RENT' ? (
+          <SearchNavBar
+            data={objFilter}
+            onEmpale={value => {
+              isFilter.current = false;
+              setEmpale(value);
+            }}
+          />
+        ) : (
+          <CustomText
+            style={{color: COLORS.white, fontSize: SIZES.medium}}
+            textType="semiBold">
+            {t('find_real_estate')}
+          </CustomText>
+        ),
       headerTitleStyle: {
         textAlign: 'left',
       },

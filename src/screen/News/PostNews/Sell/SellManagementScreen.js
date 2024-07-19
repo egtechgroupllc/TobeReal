@@ -107,7 +107,7 @@ export default function SellManagementScreen() {
 
           <BottomSheet
             ref={bottomSheetRef}
-            titleIndicator={'Operation'}
+            titleIndicator={t('notification')}
             snapPoints={['30%']}
             disableScroll
             styleContent={styles.bottomSheet}>

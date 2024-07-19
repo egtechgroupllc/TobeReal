@@ -20,22 +20,25 @@ import {requireField} from '../../../../../utils/validate';
 
 import MainWrapper from '../../../../../components/MainWrapper';
 
-import {postCreateTour} from '../../../../../Model/api/apiTour';
+import {postCreateTour, postUpdateTour} from '../../../../../Model/api/apiTour';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import EstateContact from '../../Lease/components/PostNewLease/EstateContact';
 import GeneralInformation from '../components/PostNewTour/GeneralInformation';
 import PolicyTour from '../components/PostNewTour/PolicyTour';
 import TourPhoto from '../components/PostNewTour/TourPhoto';
 import TourSchedule from '../components/PostNewTour/TourSchedule';
 import {IconHome} from '../../../../../assets/icon/Icon';
+import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
   const {navigate, setOptions} = useNavigation();
+  const params = useRoute().params;
+
   useEffect(() => {
     return setOptions({
-      headerTitle: t('post_new_tour'),
+      headerTitle: !params?.admin ? t('post_new_tour') : t('edit'),
       headerLeftNavigate: 'TourScreen',
       // headerLeft: () => (
       //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
@@ -59,13 +62,15 @@ export default function PostNewTourScreen() {
   const createTourMu = useMutation({
     mutationFn: postCreateTour,
   });
-
+  const updateTourMu = useMutation({
+    mutationFn: postUpdateTour,
+  });
   const getFormData = (object = {}) => {
     const formData = new FormData();
 
     Object.keys(object).reduce((item, key) => {
       if (
-        !['description_img', 'schedule', 'refund_fee'].includes(key) &&
+        !['files', 'schedule', 'refund_fee'].includes(key) &&
         !key.includes('description_day')
       ) {
         item.append(key, object[key]);
@@ -74,7 +79,7 @@ export default function PostNewTourScreen() {
       return item;
     }, formData);
 
-    const arrImage_description = object?.description_img?.map(image => {
+    const arrImage_description = object?.files?.map(image => {
       formData.append('files', image);
 
       return {
@@ -84,39 +89,75 @@ export default function PostNewTourScreen() {
     });
 
     formData.append('schedule', JSON.stringify(object?.schedule));
+
     formData.append(
       'refund_fee',
       object?.refund_fee ? object?.refund_fee / 100 : 1,
     );
-    formData.append('image_description', JSON.stringify(arrImage_description));
+    object?.files &&
+      formData.append(
+        'image_description',
+        JSON.stringify(arrImage_description),
+      );
 
     return formData;
   };
 
   const handlePostTour = value => {
     delete value?.check;
+    delete value?.admin;
     // delete value?.description_0;
     const formData = getFormData(value);
-
-    createTourMu.mutate(formData, {
+    const mutationConfig = {
       onSuccess: dataInside => {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
-          reset();
-          queryClient.invalidateQueries(['tour', 'create']);
-          navigate('NoBottomTab', {
-            screen: 'AddTicketScreen',
-            params: {id: dataInside?.data?.id},
-          });
+          if (!params?.address) {
+            reset();
+            navigate('NoBottomTab', {
+              screen: 'AddTicketScreen',
+              params: {id: dataInside?.data?.id},
+            });
+          } else {
+            navigate('NoBottomTab', {
+              screen: 'TourManagementScreen',
+            });
+            queryClient.invalidateQueries(['tour', 'my-list']);
+          }
         }
       },
       onError: err => {
         console.log({err});
       },
-    });
+    };
+    if (params?.admin) {
+      updateTourMu.mutate(
+        {data: formData, id_tour: params?.id},
+        mutationConfig,
+      );
+      return;
+    }
+    createTourMu.mutate(formData, mutationConfig);
   };
 
+  useEffect(() => {
+    if (params?.admin) {
+      reset();
+
+      const entries = Object.entries(params);
+      const arrKeyno = ['address', 'latitude', 'longitude'];
+
+      entries.map(item => {
+        if (!arrKeyno.includes(item[0])) {
+          const checkNum = typeof item[1] === 'number';
+          setValue(item[0], checkNum ? String(item[1]) : item[1]);
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <MainWrapper styleContent={styles.wrapper}>
       <View style={styles.button}>
@@ -137,6 +178,7 @@ export default function PostNewTourScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          params={params}
         />
         {/* <EstateDetail
           control={control}
@@ -150,6 +192,7 @@ export default function PostNewTourScreen() {
           watch={watch}
           errors={errors}
           unregister={unregister}
+          params={params}
         />
         <PolicyTour
           control={control}
@@ -170,10 +213,11 @@ export default function PostNewTourScreen() {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          arrImg={params?.images}
         />
       </View>
 
-      <CheckBox
+      {/* <CheckBox
         name="check"
         control={control}
         rules={requireField(t('this_field_required'))}
@@ -186,16 +230,15 @@ export default function PostNewTourScreen() {
         styleWrapper={{
           alignItems: 'center',
         }}
-      />
+      /> */}
 
       <CustomButton
-        linearGradientProps
         buttonType="medium"
-        text={t('Next')}
+        text={t('confirm')}
         onPress={handleSubmit(handlePostTour)}
         style={{
           marginTop: scale(20),
-          width: '100%',
+          width: '70%',
         }}
         // disabled={createTourMu.isPending}
       />

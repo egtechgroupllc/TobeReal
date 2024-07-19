@@ -9,7 +9,7 @@ import {useCountry} from '../../../../hooks/useCountry';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {differenceInDays} from 'date-fns';
 
-export default function TotalPriceBooking({data}) {
+export default function TotalPriceBooking({data, isTour}) {
   const {currency} = useCountry();
   const {t} = useLanguage();
 
@@ -19,13 +19,24 @@ export default function TotalPriceBooking({data}) {
   );
   return (
     <View style={styles.wrapper}>
-      <ItemUtil
-        Icon={IconInvoice}
-        title={`${t('total_room')}`}
-        value={`${data?.number_room} ${t('room')}, ${difference} ${t('night')}`}
-        styleTextValue={styles.textValueUntil}
-        styleIcon={styles.iconUntil}
-      />
+      {!isTour ? (
+        <ItemUtil
+          Icon={IconInvoice}
+          title={`${t('total_room')}`}
+          value={`${data?.number_room} ${t('room')}, ${difference} ${t(
+            'night',
+          )}`}
+          styleTextValue={styles.textValueUntil}
+          styleIcon={styles.iconUntil}
+        />
+      ) : (
+        <ItemUtil
+          Icon={IconInvoice}
+          title={`${t('total_price')}`}
+          styleTextValue={styles.textValueUntil}
+          styleIcon={styles.iconUntil}
+        />
+      )}
       <View
         style={{
           alignItems: 'flex-end',

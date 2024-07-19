@@ -13,6 +13,7 @@ import {IconHome} from '../../../../../../assets/icon/Icon';
 
 export default function DetailBrokerScreen() {
   const params = useRoute().params;
+
   const {t} = useLanguage();
   const {setOptions} = useNavigation();
 

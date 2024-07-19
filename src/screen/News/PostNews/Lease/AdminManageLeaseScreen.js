@@ -28,6 +28,7 @@ import {requestCameraPermission} from '../../../../utils/permission/permissionCa
 
 export default function AdminManageLeaseScreen() {
   const params = useRoute().params;
+
   const {t} = useLanguage();
   const queryClient = useQueryClient();
 
@@ -39,7 +40,7 @@ export default function AdminManageLeaseScreen() {
     return setOptions({
       headerTitle: t('accom_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

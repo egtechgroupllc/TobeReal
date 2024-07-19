@@ -1,5 +1,13 @@
 import {StyleSheet, Text, View, Animated} from 'react-native';
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import DynamicHeader from './DetailAccommodation/Detail/DynamicHeader';
 
 import DetailAccommodationLoading from './DetailAccommodation/Detail/DetailAccommodationLoading';
@@ -7,13 +15,16 @@ import {WIDTH, scale} from '../../../assets/constants';
 import BookAccommodation from './BookAccommodation';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
-export default function AnimateScrollWrapper({
-  lisViewComponent = [],
-  listNav = [{text: ''}],
-  dataDetail,
-  ContentBookComponent,
-  isLoading,
-}) {
+export default forwardRef(function AnimateScrollWrapper(
+  {
+    lisViewComponent = [],
+    listNav = [{text: ''}],
+    dataDetail,
+    ContentBookComponent,
+    isLoading,
+  },
+  ref,
+) {
   const [dataSourceCords, setDataSourceCords] = useState([]);
   const [isSelect, setIsSelect] = useState(true);
   const [tabBarHeight, setTabBarHeight] = useState(0);
@@ -65,6 +76,15 @@ export default function AnimateScrollWrapper({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      setSelectScrollIndex: value => {
+        selectScrollHandler({index: value});
+      },
+    }),
+    [],
+  );
   const ItemView = (item, key) => {
     return (
       <View
@@ -113,7 +133,7 @@ export default function AnimateScrollWrapper({
       />
     </>
   );
-}
+});
 
 const styles = StyleSheet.create({
   content: {

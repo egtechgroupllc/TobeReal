@@ -34,7 +34,7 @@ export default function AccommoManagementScreen() {
     return setOptions({
       headerTitle: t('accom_list_create'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

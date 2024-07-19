@@ -21,6 +21,7 @@ import {useCountry} from '../../../../../../../hooks/useCountry';
 
 export default function DetailRoomManageScreen() {
   const params = useRoute().params;
+
   const {setOptions, goBack} = useNavigation();
   const {t} = useLanguage();
   const {currency} = useCountry();
@@ -58,7 +59,7 @@ export default function DetailRoomManageScreen() {
     return setOptions({
       headerTitle: 'Room management detail',
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -108,6 +109,7 @@ export default function DetailRoomManageScreen() {
       },
       {text: t('ok'), onPress: () => Delete()},
     ]);
+
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View

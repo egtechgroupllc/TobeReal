@@ -58,13 +58,12 @@ export default function BuyVoucherScreen() {
       {id: params?.item?.id, quantity: quantity},
       {
         onSuccess: dataInside => {
-          console.log(dataInside);
           showMess(
             dataInside?.message,
             dataInside?.status ? 'success' : 'error',
           );
           if (dataInside?.status) {
-            navigate('HomeListVoucherScreen', {params, isSuccess: true});
+            navigate('HomeListVoucherScreen', {...params, isSuccess: true});
           }
         },
 

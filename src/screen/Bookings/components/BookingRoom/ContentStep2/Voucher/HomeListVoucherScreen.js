@@ -94,7 +94,6 @@ export default function HomeListVoucherScreen() {
     () => voucher.map(itemPrev => itemPrev?.id),
     [`${voucher}`],
   );
-
   const voucherCheckBox = item => {
     setVoucher(prev => {
       const check = arrIds?.includes(item.id);
@@ -106,6 +105,7 @@ export default function HomeListVoucherScreen() {
       return [...prev, item];
     });
   };
+  console.log(params, 321312321);
   return (
     <>
       <MainWrapper
@@ -149,7 +149,7 @@ export default function HomeListVoucherScreen() {
                 buyVoucher={tab === 2 && true}
                 onPressVoucher={() => {
                   tab === 2
-                    ? navigate('BuyVoucherScreen', {params, item})
+                    ? navigate('BuyVoucherScreen', {...params, item})
                     : voucherCheckBox(item);
                 }}
                 // onPressMore={() => {
@@ -168,7 +168,6 @@ export default function HomeListVoucherScreen() {
       </MainWrapper>
       {tab === 1 && (
         <SelectVoucherFooter
-          countVoucherAvailable={data?.data?.count}
           count={voucher?.length}
           data={voucher}
           onGoBack={params?.onGoBack}

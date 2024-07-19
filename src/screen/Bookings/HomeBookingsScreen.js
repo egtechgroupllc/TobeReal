@@ -10,8 +10,10 @@ import {CustomButton, TabSelect} from '../../components';
 import CustomText from '../../components/CustomText';
 import MainWrapper from '../../components/MainWrapper';
 import {useLanguage} from '../../hooks/useLanguage';
-import BookingHistory from './components/BookingHistory';
-import BookingActive from './components/BookingActive';
+import BookingHistory from './components/BookingTour';
+import BookingActive from './components/BookingAccom';
+import BookingAccom from './components/BookingAccom';
+import BookingTour from './components/BookingTour';
 
 const dataWaiting = [
   {
@@ -54,7 +56,7 @@ const dataWaiting = [
 export default function HomeBookingsScreen() {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
-  const listTab = [t('active_booking'), t('booking_history')];
+  const listTab = [t('hotel_booking_history'), t('tour_booking_history')];
 
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
@@ -89,29 +91,32 @@ export default function HomeBookingsScreen() {
   // );
   return (
     <MainWrapper scrollEnabled={false}>
-      {/* <TabSelect
-          data={listTab}
-          styleWrapper={{
-            alignItems: 'center',
-            borderRadius: 5,
-            paddingBottom: scale(5),
-          }}
-          styleContainerTab={styles.containTab}
-          styleTabActive={styles.tabActive}
-          styleTabDefault={{
-            backgroundColor: 'transparent',
-          }}
-          onChange={e => setTabSelect(e)}
-        />
-        {tabSelect === listTab[0] ? <BookingActive /> : <BookingHistory />} */}
-      <View
+      <TabSelect
+        data={listTab}
+        styleWrapper={{
+          alignItems: 'center',
+          borderRadius: 5,
+          paddingBottom: scale(5),
+          padding: scale(10),
+        }}
+        sizeText={SIZES.small}
+        transformText={'medium'}
+        styleContainerTab={styles.containTab}
+        styleTabActive={styles.tabActive}
+        styleTabDefault={{
+          backgroundColor: 'transparent',
+        }}
+        onChange={e => setTabSelect(e)}
+      />
+      {tabSelect === listTab[0] ? <BookingAccom /> : <BookingTour />}
+      {/* <View
         style={{
           alignItems: 'center',
           borderRadius: 5,
           width: '100%',
         }}>
         <BookingActive />
-      </View>
+      </View> */}
     </MainWrapper>
   );
 }

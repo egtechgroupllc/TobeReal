@@ -19,6 +19,7 @@ import {requireField} from '../../../../utils/validate';
 import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {showMess} from '../../../../assets/constants/Helper';
 
 export default function FindContent({isBuy, rental, tour, dataFind}) {
   const {t} = useLanguage();
@@ -92,7 +93,8 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
           </View>
 
           <CustomButton
-            onPress={handleSubmit(handleSearch)}
+            // onPress={handleSubmit(handleSearch)}
+            onPress={() => showMess(t('comming_soon'), 'error')}
             buttonType="medium"
             text={t('find_recommend_tour')}
             styleText={{

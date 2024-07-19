@@ -8,6 +8,7 @@ import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
 import {CustomButton, TabSelect} from '../../../../../components';
 import LinearGradient from 'react-native-linear-gradient';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const listTab = ['Trip highlights'];
 export default function TourSchedule({data}) {
@@ -20,6 +21,10 @@ export default function TourSchedule({data}) {
   const handleDayClick = value => {
     setSelectedDay(value);
   };
+
+  const context = JSON.parse(data?.schedule).find(
+    item => item?.title === selectedDay,
+  );
 
   return (
     <WrapperContent
@@ -72,20 +77,22 @@ export default function TourSchedule({data}) {
         }
         styleContent={{
           paddingHorizontal: scale(16),
+          rowGap: scale(10),
         }}>
-        <View style={styles.content}>
-          {JSON.parse(data?.schedule)?.map((item, index) => (
-            <>
-              <CustomButton
-                key={item?.title}
-                text={item?.title}
-                style={{width: '20%', height: scale(30)}}
-                onPress={() => handleDayClick(item?.title)}
-              />
+        <ScrollView horizontal>
+          <View style={styles.content}>
+            {JSON.parse(data?.schedule)?.map((item, index) => (
+              <View>
+                <CustomButton
+                  key={item?.title}
+                  text={item?.title}
+                  style={{width: scale(70), height: scale(30)}}
+                  onPress={() => handleDayClick(item?.title)}
+                />
+                {/* {item?.title === selectedDay && (
+                <View key={`key-${item}-${index}`} style={styles.itemFac}>
+                  <View style={styles.dot} />
 
-              <View key={`key-${item}-${index}`} style={styles.itemFac}>
-                <View style={styles.dot} />
-                {item?.title === selectedDay && (
                   <CustomText
                     textType="regular"
                     style={{
@@ -93,10 +100,22 @@ export default function TourSchedule({data}) {
                     }}>
                     {item?.description}
                   </CustomText>
-                )}
+                </View>
+              )} */}
               </View>
-            </>
-          ))}
+            ))}
+          </View>
+        </ScrollView>
+
+        <View style={styles.itemFac}>
+          <View style={styles.dot} />
+          <CustomText
+            textType="regular"
+            style={{
+              fontSize: SIZES.xMedium,
+            }}>
+            {context?.description}
+          </CustomText>
         </View>
       </BottomSheet>
     </WrapperContent>
@@ -119,6 +138,8 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     width: WIDTH.widthContain,
     maxHeight: scale(130),
+    flexDirection: 'row',
+    columnGap: scale(10),
   },
   dot: {
     backgroundColor: COLORS.black,

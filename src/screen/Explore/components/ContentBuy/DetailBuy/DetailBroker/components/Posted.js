@@ -6,6 +6,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../../../../Model/api/apiEstate';
 import BoxPlaceItem from '../../../BoxPlaceItem';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {useCountry} from '../../../../../../../hooks/useCountry';
 
 // const data = [
 //   {
@@ -85,17 +86,17 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 // ];
 export default function Posted({dataPost}) {
   const {t} = useLanguage();
-
+  const {country} = useCountry();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
       'estate',
       'list-post',
       {
         estate_type_id: 1,
-        country_id: 241,
+        country_id: country?.country_id,
       },
     ],
-    queryFn: () => getListSell({country_id: 241}),
+    queryFn: () => getListSell({country_id: country?.country_id}),
   });
   const dataFilter = data?.data?.rows.filter((item, index) => {
     if (item?.contact_name === dataPost?.contact_name) {

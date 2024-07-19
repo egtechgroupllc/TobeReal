@@ -24,7 +24,6 @@ export default memo(function VideoCaption({data, styleBottom}) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(data, 3123122);
   return (
     <LinearGradient
       colors={[isMoreText ? '#000000CF' : '#00000060', '#00000000']}

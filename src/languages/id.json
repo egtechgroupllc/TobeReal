@@ -1152,5 +1152,30 @@
   "detail_review": "Ulasan Detail",
   "your_review": "Ulasan Anda",
   "view_your_video_short_at": "Lihat video singkat Anda di",
-  "manage_video_short": "Kelola video singkat"
+  "manage_video_short": "Kelola video singkat",
+
+  "deleted_ticket_type_cannot_be_restored": "Jenis tiket yang dihapus tidak dapat dipulihkan",
+  "deleted_ticket_cannot_be_restored": "Tiket yang dihapus tidak dapat dipulihkan",
+  "delete": "Hapus",
+  "ticket_id": "ID tiket",
+  "tour_ticket_type_management": "Manajemen jenis tiket tur",
+  "add_more_ticket_type": "Tambah jenis tiket lagi",
+  "ticket_type_id": "ID jenis tiket",
+  "enter_name_type_ticket": "Masukkan nama jenis tiket",
+  "price_ticket": "Harga tiket",
+  "listed_price_tour": "Harga tercantum dari tur ini",
+  "listed_price_tour_change": "Harga tercantum dari tur ini berubah",
+  "listed_price_room_change": "Harga tercantum dari kamar ini berubah",
+  "create_new_tour": "Buat tur baru",
+  "there_are_no_one_review": "Belum ada ulasan!",
+  "pay_booking_tour": "Pembayaran untuk pemesanan tur",
+
+  "are_you_sure_delete_tour": "Apakah Anda yakin ingin menghapus tur ini?",
+  "deleted_tour_cannot_restored": "Tur yang dihapus tidak dapat dipulihkan!",
+  "hotel_booking_history": "Riwayat pemesanan hotel",
+  "tour_booking_history": "Riwayat pemesanan tur",
+  "booking_tour_detail": "Detail pemesanan tur",
+  "booking_tour_code": "Kode pemesanan tur",
+  "qr_code": "Kode QR",
+  "please_give_qrcode_to_tourguide": "Harap berikan kode QR ini kepada pemandu wisata untuk konfirmasi memulai tur Anda"
 }

@@ -79,7 +79,10 @@ export default function ListPaymentMethodsScreen({route}) {
             tag={item?.tag}
             backgroundColor="#fff"
             onPress={() => {
-              if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
+              if (
+                item?.type === 'FIAT' ||
+                (item?.type === 'VOUCHER' && !dataParams?.isTour)
+              ) {
                 dataParams?.onGoBack(item);
                 goBack();
               } else {

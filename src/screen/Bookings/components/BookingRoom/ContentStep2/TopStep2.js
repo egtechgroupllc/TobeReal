@@ -22,6 +22,7 @@ export default function TopStep2({
   onCheckVoucher,
   dataVoucher,
   onChangeBalance,
+  isTour,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -37,20 +38,16 @@ export default function TopStep2({
             style={{
               alignItems: 'center',
               rowGap: scale(4),
+              flex: 1,
             }}>
-            <CustomText
-              color={COLORS.black}
-              textType="semiBold"
-              style={{
-                textAlign: 'center',
-              }}>
-              {data?.nameAccom}
+            <CustomText color={COLORS.black} textType="semiBold">
+              {data?.nameAccom || data?.name}
             </CustomText>
             <CustomText color={COLORS.black}>
               {formatDate(data?.date?.selectedStartDate, {
                 dateStyle: 'dd-MM-yyyy',
               })}
-              , {data?.date?.numNight} {t('night')}{' '}
+              , {data?.date?.numNight} {data?.date?.numNight && t('night')}{' '}
             </CustomText>
           </View>
           <IconDown fill={COLORS.black} />
@@ -62,13 +59,21 @@ export default function TopStep2({
             width: scale(16),
             height: scale(16),
           }}
-          value={`${t('room')} id: ${data?.id}`}
+          value={
+            !isTour
+              ? `${t('room')} id: ${data?.id}`
+              : `${t('tour_code')}: ${data?.id}`
+          }
           color={COLORS.black}
           valueBold
           styleWrapper={styles.roomCode}
         />
 
-        <PaymentMethods onChange={onChange} onChangeBalance={onChangeBalance} />
+        <PaymentMethods
+          onChange={onChange}
+          onChangeBalance={onChangeBalance}
+          isTour={isTour}
+        />
       </View>
       {typePayment === 'VOUCHER' && (
         <ApplyVoucher

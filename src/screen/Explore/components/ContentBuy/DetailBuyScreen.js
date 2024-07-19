@@ -20,9 +20,7 @@ import Traceability from '../DetailAccommodation/Detail/Traceability';
 
 export default function DetailBuyScreen() {
   const params = useRoute().params;
-  console.log('====================================');
-  console.log(params);
-  console.log('====================================');
+
   const {t} = useLanguage();
 
   const listNavBar = useRef([

@@ -1,18 +1,34 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {IconTrash} from '../../../../../../assets/icon/Icon';
+import {IconEditProfile, IconTrash} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import CustomImage from '../../../../../../components/CustomImage';
 import CustomText from '../../../../../../components/CustomText';
-import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-export default function TicketItem({data, isTour, onPressMore, onEdit}) {
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {useQuery} from '@tanstack/react-query';
+import {
+  getListTicket,
+  getListTicketDate,
+} from '../../../../../../Model/api/apiTour';
+import {formatDate, formatPrice} from '../../../../../../utils/format';
+import {useCountry} from '../../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+export default function TicketItem({
+  data,
+  isTour,
+  onPressMore,
+  onEdit,
+  onManage,
+  onChangePrice,
+}) {
   const {navigate} = useNavigation();
-  console.log(data, 31232312231);
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
+  const {t} = useLanguage();
 
+  const {currency} = useCountry();
   // const navigateDetail = () => {
   //   navigate(isTour ? 'DetailTourScreen' : 'DetailAccommodationScreen', {
   //     ...data,
@@ -25,85 +41,115 @@ export default function TicketItem({data, isTour, onPressMore, onEdit}) {
     // handleContinue();
     navigate('DetailRoomManageScreen', {...data});
   };
+
+  // const priceFinal = useMemo(() => {
+  //   if (data?.item?.tour_ticket_items) {
+  //     const resultPri = data?.item?.tour_ticket_items?.map(element => {
+  //       return element?.price_percent * dataPriceEx;
+  //     });
+
+  //     return Math.min(...resultPri);
+  //   }
+  // }, [data?.tour_ticket_items, dataPriceEx]);
+  const percentMin = useMemo(() => {
+    const result = data?.item?.tour_ticket_items?.map(percent => {
+      return percent?.price_percent;
+    });
+    return Math.min(...result);
+  }, [data?.item?.tour_ticket_items]);
+  const priceMin = useMemo(() => {
+    const result = data?.item?.tour_ticket_dates.map(item => {
+      return item?.price;
+    });
+
+    return Math.min(...result);
+  }, [data?.item?.tour_ticket_items]);
+
+  const priceFinal = useMemo(() => {
+    return priceMin * percentMin;
+  }, [priceMin, percentMin]);
   return (
     <View
       activeOpacity={0.7}
       onPress={() => {
         handleTouch();
       }}>
-      <CustomImage
-        source={data?.images[0]?.url}
+      <View
         style={{
-          borderRadius: scale(7),
-          minHeight: scale(160),
-          width: scale(400 / 1.4),
+          backgroundColor: COLORS.white,
+          flex: 1,
+          borderRadius: scale(10),
+          ...SHADOW,
         }}>
-        <View
-          style={{
-            backgroundColor: COLORS.overlay,
-            flex: 1,
-          }}>
-          <View style={styles.content}>
+        <View style={styles.content}>
+          <CustomText
+            textType="semiBold"
+            style={{
+              fontSize: SIZES.xlSmall,
+            }}>
+            {t('ticket_id')}: {data?.item?.id}
+          </CustomText>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
             <CustomText
               textType="semiBold"
               style={{
-                color: COLORS.white,
+                flex: 1,
               }}
               numberOfLines={2}>
-              {data?.name}
-            </CustomText>
-            <CustomText
-              textType="semiBold"
-              style={{
-                color: COLORS.white,
-                fontSize: SIZES.xSmall,
-              }}>
-              Room id: {data?.id}
+              {data?.item?.name}
             </CustomText>
           </View>
 
-          {/* <View style={styles.bottom}>
-            <CustomButton
-              text={
-                !data?.rooms?.length <= 0 || !data?.tour_tickets?.length <= 0
-                  ? isTour
-                    ? 'Thêm Vé'
-                    : 'Add Room'
-                  : 'Incomplete Property Information'
-              }
-              buttonType="normal"
-              style={styles.btnInfo}
-              styleText={{
-                fontSize: SIZES.xSmall,
-              }}
-              onPress={handleContinue}
-            />
+          <CustomText
+            textType="medium"
+            numberOfLines={2}
+            style={{
+              fontSize: SIZES.xSmall,
+            }}>
+            {data?.item?.description}
+          </CustomText>
+          <CustomText
+            textType="bold"
+            style={{
+              color: COLORS.primary,
+              fontSize: SIZES.medium,
+            }}>
+            {formatPrice(priceFinal, {currency: currency?.currency_code})}
+          </CustomText>
+        </View>
 
-            <CustomButton
-              text="Continue"
-              buttonType="normal"
-              style={styles.continue}
-              outline
-              iconRight={IconArrowRight}
-              styleIcon={styles.iconCon}
-              styleText={{
-                fontSize: SIZES.xSmall,
+        <View style={styles.bottom}>
+          <CustomButton
+            buttonType="normal"
+            text={t('manage')}
+            style={styles.btnInfo}
+            styleText={{
+              fontSize: SIZES.xSmall,
+            }}
+            onPress={onManage}
+          />
+          <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+            {/* <TouchableOpacity
+              style={{
+                ...styles.box,
+                padding: 2,
               }}
-              onPress={handleContinue}
-            />
-          </View> */}
-          <View style={styles.bottom}>
-            <CustomButton
-              buttonType="normal"
-              text="Edit"
-              style={styles.btnInfo}
-              styleText={{
-                fontSize: SIZES.xSmall,
-              }}
-              onPress={onEdit}
-            />
+              activeOpacity={0.7}
+              onPress={onEdit}>
+              <IconEditProfile
+                style={{
+                  width: scale(20),
+                  height: scale(20),
+                }}
+              />
+            </TouchableOpacity> */}
             <TouchableOpacity
-              style={styles.box}
+              style={{...styles.box, padding: 2}}
               activeOpacity={0.7}
               onPress={onPressMore}>
               <IconTrash
@@ -115,7 +161,7 @@ export default function TicketItem({data, isTour, onPressMore, onEdit}) {
             </TouchableOpacity>
           </View>
         </View>
-      </CustomImage>
+      </View>
     </View>
   );
 }
@@ -152,7 +198,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // width: '50%',
     padding: scale(8),
-    paddingHorizontal: scale(50),
     alignItems: 'center',
     // justifyContent: 'center',
     marginTop: 'auto',
@@ -163,7 +208,6 @@ const styles = StyleSheet.create({
     height: scale(26),
     minWidth: scale(150),
     maxWidth: scale(260),
-    paddingHorizontal: scale(6),
   },
   continue: {
     height: scale(26),

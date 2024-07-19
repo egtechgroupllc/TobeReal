@@ -10,7 +10,7 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 import {requireField, validateEmail} from '../../../../../utils/validate';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export default function FormChangeContact({data, isOpen}) {
+export default function FormChangeContact({data, isOpen, isTour}) {
   const {t} = useLanguage();
   const {control, handleSubmit} = useForm();
 
@@ -19,21 +19,32 @@ export default function FormChangeContact({data, isOpen}) {
 
   useEffect(() => {
     const dataStart = async () => {
-      await EncryptedStorage.setItem(
-        '@infoBooking',
-        JSON.stringify({
-          username: data?.username,
-          phone: data?.phone,
-          email: data?.email,
-        }),
-      );
+      !isTour
+        ? await EncryptedStorage.setItem(
+            '@infoBooking',
+            JSON.stringify({
+              username: data?.username,
+              phone: data?.phone,
+              email: data?.email,
+            }),
+          )
+        : await EncryptedStorage.setItem(
+            '@infoBookingTour',
+            JSON.stringify({
+              username: data?.username,
+              phone: data?.phone,
+              email: data?.email,
+            }),
+          );
     };
     dataStart();
   }, [JSON.stringify(data)]);
 
   useEffect(() => {
     const loadInfoBooking = async () => {
-      const result = await EncryptedStorage.getItem('@infoBooking');
+      const result = !isTour
+        ? await EncryptedStorage.getItem('@infoBooking')
+        : await EncryptedStorage.getItem('@infoBookingTour');
 
       if (result) {
         setApply(JSON.parse(result));
@@ -47,7 +58,12 @@ export default function FormChangeContact({data, isOpen}) {
   }, [isOpen]);
 
   const handleApply = async value => {
-    await EncryptedStorage.setItem('@infoBooking', JSON.stringify(value));
+    !isTour
+      ? await EncryptedStorage.setItem('@infoBooking', JSON.stringify(value))
+      : await EncryptedStorage.setItem(
+          '@infoBookingTour',
+          JSON.stringify(value),
+        );
     setApply(value);
     bottomSheetRef.current.close();
   };

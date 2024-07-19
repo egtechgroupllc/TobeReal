@@ -17,6 +17,8 @@ import {
 } from '../../../../../../Model/api/apiTour';
 import {useQuery} from '@tanstack/react-query';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
+import DeleteTicket from './DeleteTicket';
+import {formatDate} from '../../../../../../utils/format';
 
 export default function TicketManageScreen() {
   const {t} = useLanguage();
@@ -29,7 +31,7 @@ export default function TicketManageScreen() {
     return setOptions({
       headerTitle: t('tour_ticket_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -38,14 +40,16 @@ export default function TicketManageScreen() {
   }, [params]);
 
   const {data, isLoading, isError} = useQuery({
-    queryKey: ['ticket', 'tour', 'my-list', params?.id],
+    queryKey: ['list', 'ticket', params?.id],
     queryFn: () =>
       getListTicket({
         id_tour: params?.id,
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
       }),
   });
-  const numColumns = Math.ceil(params?.rooms?.length / 4);
 
+  const numColumns = Math.ceil(data?.data?.rows?.length / 4);
   return (
     <MainWrapper
       refreshControl
@@ -61,45 +65,42 @@ export default function TicketManageScreen() {
         {numColumns ? (
           <>
             <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              alwaysBounceVertical={false}
-              directionalLockEnabled={true}
               contentContainerStyle={{
                 gap: scale(10),
               }}>
               <FlatList
                 // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
-                data={params}
-                numColumns={numColumns}
-                alwaysBounceVertical={false}
-                directionalLockEnabled={true}
+                data={data?.data?.rows}
                 keyExtractor={(item, index) => `$key_${item.id}-${index}`}
-                columnWrapperStyle={
-                  numColumns >= 2 && {
-                    columnGap: scale(10),
-                  }
-                }
                 contentContainerStyle={{
                   paddingHorizontal: scale(20),
                   rowGap: scale(10),
+                  paddingVertical: scale(10),
                 }}
-                renderItem={({item, index}) => (
-                  <TicketItem
-                    key={`key_${item?.id}-${index}`}
-                    data={item}
-                    onPressMore={() => {
-                      setDataItemAccom(item);
-                      bottomSheetRef.current.open();
-                    }}
-                    onEdit={() => {
-                      navigate('AddTicketScreen', {
-                        ...item,
-                        update: true,
-                      });
-                    }}
-                  />
-                )}
+                renderItem={(item, index) => {
+                  return (
+                    <TicketItem
+                      key={`key_${item?.id}-${index}`}
+                      data={item}
+                      onPressMore={() => {
+                        setDataItemAccom(item);
+                        bottomSheetRef.current.open();
+                      }}
+                      onEdit={() => {
+                        navigate('TicketTypeManageScreen', {
+                          ...item,
+                          update: true,
+                        });
+                      }}
+                      onManage={() => {
+                        navigate('TicketTypeManageScreen', {
+                          ...item,
+                          update: true,
+                        });
+                      }}
+                    />
+                  );
+                }}
               />
             </ScrollView>
           </>
@@ -113,11 +114,11 @@ export default function TicketManageScreen() {
         )}
         <BottomSheet
           ref={bottomSheetRef}
-          titleIndicator={'Operation'}
+          titleIndicator={t('notification')}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>
-          <DeleteRoom
+          <DeleteTicket
             data={dataItemAccom}
             onSuccess={() => {
               bottomSheetRef.current.close();

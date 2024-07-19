@@ -5,10 +5,20 @@ import {useNavigation} from '@react-navigation/native';
 import {CustomText} from '../../../../../../../components';
 import {IconVoucher} from '../../../../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {useQuery} from '@tanstack/react-query';
+import {getListVoucherCanUse} from '../../../../../../../Model/api/apiAccom';
 
 export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
   const {navigate} = useNavigation();
+
   const {t} = useLanguage();
+  const dataVoucherCanUse = useQuery({
+    queryKey: ['voucher', 'list-voucher-can-use', data?.accommodation_id],
+    queryFn: () => getListVoucherCanUse(data?.accommodation_id),
+  });
+  console.log('====================================');
+  console.log(dataVoucher);
+  console.log('====================================');
   return (
     <View style={styles.voucherView}>
       <CustomText
@@ -49,13 +59,16 @@ export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
               style={{
                 textAlign: 'center',
               }}>
-              {dataVoucher?.length} {t('voucher_applied')}
+              {dataVoucher ? dataVoucher?.length : 0} {t('voucher_applied')}
             </CustomText>
           </View>
           <TouchableOpacity
             onPress={() =>
               navigate('HomeListVoucherScreen', {
                 onGoBack: valueBack => {
+                  console.log('====================================');
+                  console.log(valueBack, 'HomeListVoucherScreen');
+                  console.log('====================================');
                   onCheckVoucher && onCheckVoucher(valueBack);
                 },
                 accomId: data?.accommodation_id,
@@ -86,7 +99,9 @@ export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
             style={{
               textAlign: 'left',
             }}>
-            {t('you_have')} 0 {t('available_voucher_left').toLowerCase()}
+            {t('you_have')}{' '}
+            {dataVoucherCanUse ? dataVoucherCanUse?.data?.data?.count : 0}{' '}
+            {t('available_voucher_left').toLowerCase()}
           </CustomText>
         </View>
       </View>

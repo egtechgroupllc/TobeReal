@@ -1180,5 +1180,30 @@
   "detail_review": "รีวิวรายละเอียด",
   "your_review": "รีวิวของคุณ",
   "view_your_video_short_at": "ดูวิดีโอสั้นของคุณที่",
-  "manage_video_short": "จัดการวิดีโอสั้น"
+  "manage_video_short": "จัดการวิดีโอสั้น",
+
+  "deleted_ticket_type_cannot_be_restored": "ประเภทตั๋วที่ถูกลบไม่สามารถกู้คืนได้",
+  "deleted_ticket_cannot_be_restored": "ตั๋วที่ถูกลบไม่สามารถกู้คืนได้",
+  "delete": "ลบ",
+  "ticket_id": "ID ตั๋ว",
+  "tour_ticket_type_management": "การจัดการประเภทตั๋วทัวร์",
+  "add_more_ticket_type": "เพิ่มประเภทตั๋วเพิ่มเติม",
+  "ticket_type_id": "ID ประเภทตั๋ว",
+  "enter_name_type_ticket": "ป้อนชื่อประเภทตั๋ว",
+  "price_ticket": "ราคาตั๋ว",
+  "listed_price_tour": "ราคาที่ระบุของทัวร์นี้",
+  "listed_price_tour_change": "ราคาที่ระบุของทัวร์นี้เปลี่ยนไป",
+  "listed_price_room_change": "ราคาที่ระบุของห้องนี้เปลี่ยนไป",
+  "create_new_tour": "สร้างทัวร์ใหม่",
+  "there_are_no_one_review": "ยังไม่มีรีวิว!",
+  "pay_booking_tour": "ชำระเงินสำหรับการจองทัวร์",
+
+  "are_you_sure_delete_tour": "คุณแน่ใจหรือไม่ว่าจะลบทัวร์นี้?",
+  "deleted_tour_cannot_restored": "ทัวร์ที่ถูกลบไม่สามารถกู้คืนได้!",
+  "hotel_booking_history": "ประวัติการจองโรงแรม",
+  "tour_booking_history": "ประวัติการจองทัวร์",
+  "booking_tour_detail": "รายละเอียดการจองทัวร์",
+  "booking_tour_code": "รหัสการจองทัวร์",
+  "qr_code": "รหัส QR",
+  "please_give_qrcode_to_tourguide": "กรุณาให้รหัส QR นี้กับไกด์ทัวร์เพื่อยืนยันการเริ่มทัวร์ของคุณ"
 }

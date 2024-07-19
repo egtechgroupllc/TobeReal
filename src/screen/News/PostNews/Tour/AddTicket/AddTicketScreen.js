@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import MainWrapper from '../../../../../components/MainWrapper';
 import {useForm} from 'react-hook-form';
 import {showMess} from '../../../../../assets/constants/Helper';
@@ -32,12 +32,13 @@ import TypeTicket from './components/TypeTicket';
 export default function AddTicketScreen() {
   const params = useRoute().params;
   const {setOptions, navigate} = useNavigation();
-
+  const {t} = useLanguage();
+  const [forms, setForms] = useState([0]);
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('create_tour_ticket'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -68,25 +69,34 @@ export default function AddTicketScreen() {
     mutationFn: postAddTypeTicket,
   });
   const AddTypeTicket = value => {
-    const {price_percent, description_item, quantity, type} = getValues();
+    const {price_percent, description_item, quantity, name_item} = getValues();
+    const price_percent_final = value?.isDiscount
+      ? (100 - price_percent) / 100
+      : price_percent / 100 + 1;
+    delete value?.isDiscount;
 
     addTypeTicketMu.mutate(
       {
         tour_ticket_id: value,
-        type,
+        name: name_item,
         description: description_item,
         quantity,
-        price_percent,
+        price_percent: price_percent_final,
       },
       {
         onSuccess: dataInside => {
-          console.log({dataInside}, 132);
-          reset();
+          showMess(
+            dataInside?.message,
+            dataInside?.status ? 'success' : 'error',
+          );
+          if (dataInside?.status) {
+            reset();
 
-          queryClient.invalidateQueries(['tour', 'my-list']);
-          navigate('NoBottomTab', {
-            screen: 'TourManagementScreen',
-          });
+            queryClient.invalidateQueries(['tour', 'my-list']);
+            navigate('NoBottomTab', {
+              screen: 'TourManagementScreen',
+            });
+          }
         },
         onError: err => {
           console.log({err});
@@ -94,11 +104,15 @@ export default function AddTicketScreen() {
       },
     );
   };
+
   const handlePostAddTicket = data => {
     delete data?.price_percent;
     delete data?.description_item;
     delete data?.quantity;
     delete data?.type;
+    delete data?.name_item;
+    delete data?.isDiscount;
+
     addTicketMu.mutate(
       {data, tour_id: params?.id},
       {
@@ -119,7 +133,6 @@ export default function AddTicketScreen() {
     );
   };
 
-  const {t} = useLanguage();
   return (
     <MainWrapper
       refreshControl={false}
@@ -225,20 +238,19 @@ export default function AddTicketScreen() {
         watch={watch}
         errors={errors}
       />
-      <TicketDetail
+      {/* <TicketDetail
         control={control}
         setValue={setValue}
         watch={watch}
         errors={errors}
-      />
+      /> */}
 
       <CustomButton
-        linearGradientProps
         buttonType="medium"
-        text={'Submit'}
+        text={t('confirm')}
         onPress={handleSubmit(handlePostAddTicket)}
         style={{
-          width: '100%',
+          width: '70%',
           marginTop: scale(20),
         }}
       />

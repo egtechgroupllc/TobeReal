@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
-import {IconCheck} from '../../../assets/icon/Icon';
+import {IconCheck, IconProfile} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
@@ -17,7 +17,8 @@ export default function TopProfile({name, data}) {
         style={{
           marginTop: scale(-20),
         }}>
-        <CustomImage source={images.vietnam} style={styles.avatar} />
+        <CustomImage source={images.iconProfile} style={styles.avatar} />
+
         <IconCheck style={styles.iconCheck} size={scale(16)} />
       </View>
       <CustomText textType="bold" size={SIZES.medium}>

@@ -112,11 +112,11 @@ export default memo(function ChooseImgPicker({
                       {title}
                     </CustomText>
                   )}
-                  {subHeading && (
+                  {/* {subHeading && (
                     <CustomText textType="regular" style={styles.text}>
                       {subHeading}
                     </CustomText>
-                  )}
+                  )} */}
                 </View>
 
                 {title && (

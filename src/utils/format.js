@@ -36,6 +36,17 @@ export const formatPrice = (
   // Thêm đơn vị tự chọn
   return formattedPrice + (unit ? ` ${unit}` : '');
 };
+
+export function formatToken(number) {
+  // Convert the number to a string using toFixed to handle the precision
+  let numStr = number.toFixed(10);
+
+  // Remove trailing zeros after the decimal point
+  numStr = numStr.replace(/\.?0+$/, '');
+
+  // Return the formatted number
+  return numStr;
+}
 export function formatNumber(num) {
   if (num > 1e11) return '100B+';
 

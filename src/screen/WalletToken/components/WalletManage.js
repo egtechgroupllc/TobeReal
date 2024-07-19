@@ -4,7 +4,7 @@ import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import {useQuery} from '@tanstack/react-query';
 import {getBalanceWallet} from '../../../Model/api/wallet';
-import {formatPrice} from '../../../utils/format';
+import {formatPrice, formatToken} from '../../../utils/format';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 import {IconArrowRight, IconRight} from '../../../assets/icon/Icon';
@@ -76,9 +76,8 @@ export default function WalletManage({data}) {
                   paddingTop: scale(3),
                 }}>
                 <CustomText textType="medium">
-                  {formatPrice(data?.balance_token_data, {
-                    showCurrency: false,
-                    decimalPlaces: 6,
+                  {formatToken(data?.balance_token_data, {
+                    decimalPlaces: 20,
                   })}{' '}
                   TBH
                 </CustomText>

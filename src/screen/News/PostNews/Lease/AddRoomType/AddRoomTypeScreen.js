@@ -37,7 +37,7 @@ export default function AddRoomTypeScreen() {
     return setOptions({
       headerTitle: !params?.update ? t('create_room') : t('edit_room'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -143,7 +143,7 @@ export default function AddRoomTypeScreen() {
 
     params?.update && delete value?.number_room;
     params?.update && delete value?.price;
-
+    params?.update && delete value?.currency_id;
     // const policy = value?.policy;
 
     // if (!value?.policy || policy.length <= 0) {

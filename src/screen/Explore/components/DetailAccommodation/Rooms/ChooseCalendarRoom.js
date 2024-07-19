@@ -2,7 +2,7 @@
 import {differenceInDays} from 'date-fns';
 import React, {memo, useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {scale} from '../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../assets/constants';
 import {IconCalendar} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 import BottomSheet from '../../../../../components/BottomSheet';
@@ -28,7 +28,12 @@ const minDate = formatDateStyle(minDate);
 
 const dateEnd = formatDateStyle(minDate, 1);
 
-export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
+export default memo(function ChooseCalendarRoom({
+  onSelectDate,
+  isOneDay,
+  data,
+  percentTour,
+}) {
   const bottomSheetRef = useRef();
   const bottomSheetChild = useRef();
   const {t} = useLanguage();
@@ -64,13 +69,22 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
   }, [selectedEndDate]);
 
   useEffect(() => {
-    onSelectDate &&
+    !isOneDay &&
+      onSelectDate &&
       onSelectDate({
         selectedEndDate,
         selectedStartDate,
         numNight: selected?.value,
       });
   }, []);
+
+  useEffect(() => {
+    isOneDay &&
+      onSelectDate &&
+      onSelectDate({
+        selectedStartDate,
+      });
+  }, [isOneDay, selectedStartDate]);
 
   const handleSelectDate = () => {
     bottomSheetRef.current.close();
@@ -95,13 +109,34 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
         style={{
           ...styles.row,
           ...styles.textDate,
+          borderRightWidth: isOneDay ? 0 : 1,
         }}
         onPress={() => bottomSheetRef.current.open()}>
-        <IconCalendar style={styles.icon} />
-        <CustomText textType="medium">
-          {selectedStartDate} - {selectedEndDate ? selectedEndDate : '_'},{' '}
-          {selected?.text}
-        </CustomText>
+        {!isOneDay && <IconCalendar style={styles.icon} />}
+        {isOneDay ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              columnGap: scale(10),
+              backgroundColor: COLORS.primary,
+              padding: 5,
+              borderRadius: scale(5),
+            }}>
+            <CustomText textType="medium" style={{color: COLORS.white}}>
+              {t('select_date')}:
+            </CustomText>
+
+            <CustomText textType="medium" style={{color: COLORS.white}}>
+              {selectedStartDate}
+            </CustomText>
+            <IconCalendar style={styles.icon} fill={COLORS.white} />
+          </View>
+        ) : (
+          <CustomText textType="medium">
+            {selectedStartDate} - {selectedEndDate ? selectedEndDate : '_'},{' '}
+            {selected?.text}
+          </CustomText>
+        )}
       </TouchableOpacity>
 
       <BottomSheet
@@ -127,14 +162,16 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
           rowGap: scale(10),
           paddingHorizontal: scale(20),
         }}>
-        <TopCalendar
-          value={selected?.text}
-          checkIn={selectedStartDate}
-          checkOut={selectedEndDate}
-          onPressTime={() => {
-            bottomSheetChild.current.openChild();
-          }}
-        />
+        {!isOneDay && (
+          <TopCalendar
+            value={selected?.text}
+            checkIn={selectedStartDate}
+            checkOut={selectedEndDate}
+            onPressTime={() => {
+              bottomSheetChild.current.openChild();
+            }}
+          />
+        )}
 
         <View style={{flex: 1}}>
           <CalendarRange
@@ -143,6 +180,8 @@ export default memo(function ChooseCalendarRoom({onSelectDate, data}) {
             endDate={selectedEndDate}
             onDateChange={onDateChange}
             id={data?.id}
+            isOneDay={isOneDay}
+            percentTour={percentTour}
           />
         </View>
 

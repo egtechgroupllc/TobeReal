@@ -82,6 +82,7 @@ export default function MainWrapper({
         <View />
         {scrollEnabled ? (
           <ScrollView
+            keyboardDismissMode="on-drag"
             overScrollMode="never"
             nestedScrollEnabled
             refreshControl={

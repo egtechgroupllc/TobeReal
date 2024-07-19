@@ -9,11 +9,11 @@ import {
   CustomText,
   MainWrapper,
 } from '../../components';
-import {formatPrice} from '../../utils/format';
+import {formatPrice, formatToken} from '../../utils/format';
 import {COLORS, SHADOW, SIZES, images, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
 import {useForm} from 'react-hook-form';
-import {requireField} from '../../utils/validate';
+import {requireField, validateMinAmount} from '../../utils/validate';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postWithdrawToken} from '../../Model/api/auth';
 import {showMess} from '../../assets/constants/Helper';
@@ -22,6 +22,7 @@ export default function WithdrawTokenScreen() {
   const {setOptions, goBack} = useNavigation();
   const {t} = useLanguage();
   const data = useRoute().params;
+
   const {control, handleSubmit} = useForm({});
   useLayoutEffect(() => {
     setOptions({
@@ -59,11 +60,7 @@ export default function WithdrawTokenScreen() {
             textType="bold"
             numberOfLines={1}
             style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
-            {formatPrice(data?.balance_token_data, {
-              showCurrency: false,
-              decimalPlaces: 6,
-            })}{' '}
-            TBH
+            {formatToken(data?.balance_token_data, {decimal: 20})} TBH
           </CustomText>
         </View>
         <View style={styles.icon}>
@@ -86,7 +83,16 @@ export default function WithdrawTokenScreen() {
           control={control}
           name="amount"
           placeholder={t('enter_amount_you_want_withdraw')}
-          rules={[requireField(t('this_field_required'))]}
+          rules={[
+            requireField(t('this_field_required')),
+            validateMinAmount(
+              `${t('minimum_amount')} ${formatPrice(0.01, {
+                currency: 'TBH',
+                decimalPlaces: 10,
+              })}`,
+              0.01,
+            ),
+          ]}
         />
         <CustomButton
           onPress={handleSubmit(handleWidraw)}

@@ -1175,5 +1175,30 @@
   "detail_review": "Detalyadong Pagsusuri",
   "your_review": "Ang Iyong Pagsusuri",
   "view_your_video_short_at": "Tingnan ang iyong maikling video sa",
-  "manage_video_short": "Pamahalaan ang maikling video"
+  "manage_video_short": "Pamahalaan ang maikling video",
+
+  "deleted_ticket_type_cannot_be_restored": "Ang uri ng tiket na tinanggal ay hindi maaaring maibalik",
+  "deleted_ticket_cannot_be_restored": "Ang tiket na tinanggal ay hindi maaaring maibalik",
+  "delete": "Tanggalin",
+  "ticket_id": "ID ng tiket",
+  "tour_ticket_type_management": "Pamamahala sa uri ng tiket ng tour",
+  "add_more_ticket_type": "Magdagdag ng higit pang uri ng tiket",
+  "ticket_type_id": "ID ng uri ng tiket",
+  "enter_name_type_ticket": "Ipasok ang pangalan ng uri ng tiket",
+  "price_ticket": "Presyo ng tiket",
+  "listed_price_tour": "Nakalistang presyo ng tour na ito",
+  "listed_price_tour_change": "Nabago ang nakalistang presyo ng tour na ito",
+  "listed_price_room_change": "Nabago ang nakalistang presyo ng kuwarto na ito",
+  "create_new_tour": "Gumawa ng bagong tour",
+  "there_are_no_one_review": "Wala pang mga review!",
+  "pay_booking_tour": "Pagbabayad para sa pag-book ng tour",
+
+  "are_you_sure_delete_tour": "Sigurado ka bang gusto mong tanggalin ang tour na ito?",
+  "deleted_tour_cannot_restored": "Ang tour na tinanggal ay hindi na maibabalik!",
+  "hotel_booking_history": "Kasaysayan ng pag-book ng hotel",
+  "tour_booking_history": "Kasaysayan ng pag-book ng tour",
+  "booking_tour_detail": "Detalye ng pag-book ng tour",
+  "booking_tour_code": "Code ng pag-book ng tour",
+  "qr_code": "QR code",
+  "please_give_qrcode_to_tourguide": "Pakibigay ang QR code na ito sa tour guide para makumpirma ang pagsisimula ng iyong tour"
 }

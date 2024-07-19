@@ -128,7 +128,7 @@ export default function RulesPolicy6({
           textType="semiBold"
           size={SIZES.small}
           style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
-          {t('listed_price_room')}:{' '}
+          {t('listed_price_room_change')}:{' '}
           {isSelect.id === 1
             ? formatPrice(data?.price * (1 - watch('price_percent') / 100), {
                 currency: currency?.currency_code,

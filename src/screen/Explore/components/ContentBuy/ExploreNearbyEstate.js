@@ -14,13 +14,17 @@ import {getListSell} from '../../../../Model/api/apiEstate';
 import {IconBookings} from '../../../../assets/icon/Icon';
 import CustomText from '../../../../components/CustomText';
 import {useCountry} from '../../../../hooks/useCountry';
-import {getListPopularProvince} from '../../../../Model/api/apiAccom';
+import {
+  getListPopularProvince,
+  getListPopularProvinceAccom,
+} from '../../../../Model/api/apiAccom';
 
 export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
-  const title = [t('explore_nearby_estate')];
+  const title = [t('feature_estate')];
+
   const [filter, setFilter] = useState();
   const {data, isLoading, isError, error} = useQuery({
     queryKey: [
@@ -37,7 +41,7 @@ export default function ExploreNearbyEstate({country}) {
   });
   const listProvince = useQuery({
     queryKey: ['accommodation', 'list-popular-province', country?.geoname_id],
-    queryFn: () => getListPopularProvince(country?.geoname_id),
+    queryFn: () => getListPopularProvinceAccom(country?.geoname_id),
   });
   useEffect(() => {
     setFilter(listProvince.data?.data?.rows?.[0]);
@@ -59,6 +63,7 @@ export default function ExploreNearbyEstate({country}) {
           })
         }
         onPressCategory={item => setFilter(item)}
+        subHeading={t('explore_popular_estate')}
         heading={title}
         // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
         styleWrapper={{backgroundColor: 'transparent'}}>

@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import ContentStep1 from './ContentStep1';
 import ContentStep2 from './ContentStep2';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {IconHome} from '../../../../assets/icon/Icon';
 
 const stepCount = 2;
 const firstIndicatorStyles = {
@@ -20,7 +21,7 @@ const firstIndicatorStyles = {
 };
 
 export default function HorizontalStepIndicator({data}) {
-  const {setOptions} = useNavigation();
+  const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const [currentPage, setCurrentPage] = React.useState(0);
 
@@ -80,6 +81,11 @@ export default function HorizontalStepIndicator({data}) {
             }
           />
         </View>
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
       ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

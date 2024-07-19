@@ -172,7 +172,7 @@ export default function WalletTokenScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <MainWrapper>
+    <MainWrapper refreshControl>
       <View style={styles.wrapper}>
         <CustomImage
           source={images.logo}

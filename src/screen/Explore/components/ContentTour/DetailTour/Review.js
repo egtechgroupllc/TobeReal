@@ -111,7 +111,7 @@ export default function Review({dataP}) {
           <CustomText
             textType="semiBold"
             style={{fontSize: SIZES.small, color: COLORS.grey}}>
-            There are no customer reviews yet!
+            {t('there_are_no_one_review')}
           </CustomText>
         </View>
       )}

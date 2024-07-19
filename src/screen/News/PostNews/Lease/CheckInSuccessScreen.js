@@ -28,7 +28,7 @@ export default function CheckInSuccessScreen() {
     return setOptions({
       headerTitle: t('check_in_success'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

@@ -5,7 +5,7 @@ import Collapsible from 'react-native-collapsible';
 
 import {getListTypeEstateSell} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
+import {CustomInput, CustomText} from '../../../../../../components';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {
@@ -129,6 +129,11 @@ export default function General({
             keyboardType="number-pad"
             enableFormatNum
           />
+          {!watch('price') && (
+            <CustomText style={{color: COLORS.error, alignSelf: 'flex-start'}}>
+              {t('this_field_required')}
+            </CustomText>
+          )}
         </Collapsible>
       </InViewPort>
     </View>

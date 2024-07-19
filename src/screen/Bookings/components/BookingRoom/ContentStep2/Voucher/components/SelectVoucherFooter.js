@@ -20,7 +20,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export default function SelectVoucherFooter({
   count,
   data,
-  onGoBack,
+  onGoBack = () => {},
   buyVoucher,
   quantity,
   setQuantity,
@@ -74,10 +74,10 @@ export default function SelectVoucherFooter({
       <CustomButton
         onPress={() => {
           if (!buyVoucher) {
-            onGoBack && onGoBack(data);
+            onGoBack(data);
             goBack();
           } else {
-            onBuy && onBuy();
+            onBuy && onBuy(data);
           }
         }}
         buttonType="small"

@@ -9,7 +9,9 @@ import {CustomButton} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import {deleteTicket} from '../../../../../../Model/api/apiTour';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 export default function DeleteTicket({data, onSuccess, onCancel}) {
+  const {t} = useLanguage();
   const [confirm, setConfirm] = useState(true);
   const {navigate} = useNavigation();
   const queryClient = useQueryClient();
@@ -20,7 +22,7 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
   const handDelete = value => {
     deleteTicketMu.mutate(
       {
-        id_room: data?.id,
+        id_ticket: data?.item?.id,
       },
       {
         onSuccess: dataInside => {
@@ -31,8 +33,7 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
 
           if (dataInside?.status) {
             onSuccess();
-            navigate('LeaseScreen');
-            // queryClient.invalidateQueries(['accommodation', 'my-list']);
+            queryClient.invalidateQueries(['tour', 'my-list']);
           }
         },
 
@@ -52,7 +53,7 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
       }}>
       {!confirm ? (
         <CustomButton
-          text="Xoá tin"
+          text={t('delete')}
           onPress={() => {
             setConfirm(true);
           }}
@@ -85,10 +86,10 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
                 style={{
                   fontSize: SIZES.xMedium,
                 }}>
-                Tour id{' '}
+                {t('ticket_id')}{' '}
               </CustomText>
               <CustomText textType="medium" style={styles.textRight}>
-                {data?.id}
+                {data?.item?.id}
               </CustomText>
             </View>
             {/* <View
@@ -121,16 +122,16 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
             <CustomText
               textType="semiBold"
               style={{fontSize: SIZES.xMedium, color: '#dfab04'}}>
-              Note:{' '}
-              <CustomText style={{fontSize: SIZES.xMedium}}>
-                Deleted ticket cannot be restored
+              {t('note')}:{' '}
+              <CustomText style={{fontSize: SIZES.small}}>
+                {t('deleted_ticket_cannot_be_restored')}
               </CustomText>
             </CustomText>
           </View>
 
           <View style={styles.footer}>
             <CustomButton
-              text="Cancel"
+              text={t('cancel')}
               buttonType="normal"
               onPress={onCancel}
               style={{
@@ -144,7 +145,7 @@ export default function DeleteTicket({data, onSuccess, onCancel}) {
             />
             <CustomButton
               buttonType="normal"
-              text="Delete"
+              text={t('delete')}
               onPress={handDelete}
               style={{
                 backgroundColor: COLORS.error,

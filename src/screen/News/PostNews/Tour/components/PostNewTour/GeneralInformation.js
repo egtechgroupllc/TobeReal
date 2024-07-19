@@ -5,7 +5,7 @@ import Collapsible from 'react-native-collapsible';
 
 import {getListTypeEstateSell} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {CustomInput} from '../../../../../../components';
+import {CustomInput, CustomText} from '../../../../../../components';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {
@@ -15,6 +15,7 @@ import {
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
 import EstateSetMap from '../../../Lease/components/PostNewLease/GeneralInformation/EstateSetMap';
 import SelectCountry from '../../../components/SelectCountry';
+import InputLeaseMulti from '../../../Lease/components/PostNewLease/GeneralInformation/InputLeaseMulti';
 
 export default function GeneralInformation({
   maxCharacters,
@@ -22,6 +23,7 @@ export default function GeneralInformation({
   setValue,
   watch,
   errors,
+  params,
 }) {
   const {t} = useLanguage();
 
@@ -54,87 +56,64 @@ export default function GeneralInformation({
 
       <InViewPort noLoading={true}>
         <Collapsible collapsed={!isView} style={styles.box}>
-          <CustomInput
-            styleTextLabel={styles.label}
+          <InputLeaseMulti
             label={t('title')}
-            control={control}
             name="name"
-            multiline
+            control={control}
+            // editable={params?.name ? false : true}
             maxLength={100}
             placeholder={t('title')}
-            rules={[
-              requireField(t('this_field_required')),
-              validateMaxLengthText(`${100} characters limit`, 100),
-            ]}
-            style={[
-              styles.textInput,
-              {
-                height: scale(60),
-              },
-            ]}
-            componentRight={
-              <Text style={styles.numText}>
-                {watch('name')?.length || 0}/{100}
-              </Text>
-            }
           />
-
-          <CustomInput
-            styleTextLabel={styles.label}
+          <InputLeaseMulti
             label={t('description_content')}
-            control={control}
             name="description"
-            maxLength={5000}
-            multiline
-            placeholder={t('enter_a_description')}
-            rules={[
-              requireField(t('this_field_required')),
-              validateMaxLengthText(`${5000} characters limit`, 5000),
-            ]}
-            style={[
-              styles.textInput,
-              {
-                minHeight: scale(130),
-                maxHeight: scale(500),
-              },
-            ]}
-            componentRight={
-              <Text style={styles.numText}>
-                {watch('description')?.length || 0}/{5000}
-              </Text>
-            }
-          />
-
-          <View style={styles.line} />
-
-          <EstateSetMap
             control={control}
-            onChange={value => {
-              setValue('latitude', value?.latitude);
-              setValue('longitude', value?.longitude);
+            maxLength={5000}
+            placeholder={t('enter_a_description')}
+            styleInput={{
+              minHeight: scale(120),
+              maxHeight: scale(500),
+              height: 'auto',
             }}
           />
 
           <View style={styles.line} />
 
-          <SelectCountry
-            setValue={setValue}
-            control={control}
-            // onChange={value => {
-            //   setValue('country_id', value?.id);
-            //   setValue('province_id', value?.province?.id);
-            // }}
-          />
+          {!params?.address && (
+            <>
+              <View style={styles.line} />
+              <EstateSetMap
+                control={control}
+                onChange={value => {
+                  setValue('latitude', value?.latitude);
+                  setValue('longitude', value?.longitude);
+                }}
+                address={watch('address')}
+              />
 
-          <CustomInput
-            styleTextLabel={styles.label}
-            label={t('address')}
-            control={control}
-            name="address"
-            placeholder={t('address')}
-            rules={requireField(t('this_field_required'))}
-            style={styles.textInput}
-          />
+              {!watch('latitude') && (
+                <CustomText style={{color: COLORS.error}}>
+                  {t('please_choose_coordinates')}
+                </CustomText>
+              )}
+            </>
+          )}
+
+          <View style={styles.line} />
+
+          <SelectCountry setValue={setValue} control={control} watch={watch} />
+
+          {!params?.address && (
+            <CustomInput
+              styleTextLabel={styles.label}
+              label={t('address')}
+              control={control}
+              name="address"
+              placeholder={t('address')}
+              rules={requireField(t('this_field_required'))}
+              style={styles.textInput}
+            />
+          )}
         </Collapsible>
       </InViewPort>
     </View>
