@@ -1171,7 +1171,6 @@
   "repost": "重新发布",
   "video_short": "短视频",
   "wallet_ready_to_use": "您的加密货币钱包已准备好使用",
-  "the_remaining_balance_add": "剩余余额将添加到余额管理钱包中：",
 
   "incomplete_registration": "注册过程未完成",
   "detail_review": "详细审查",
@@ -1202,5 +1201,11 @@
   "booking_tour_detail": "预订旅游详情",
   "booking_tour_code": "预订旅游代码",
   "qr_code": "二维码",
-  "please_give_qrcode_to_tourguide": "请将此二维码交给导游以确认开始您的旅游"
+  "please_give_qrcode_to_tourguide": "请将此二维码交给导游以确认开始您的旅游",
+
+  "value": "价值",
+  "discount_remaining": "剩余折扣",
+  "voucher_tour": "旅游代金券",
+  "apply_discount": "已应用折扣",
+  "the_remaining_balance_add": "剩余余额将返回到应用的代金券"
 }

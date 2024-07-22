@@ -138,7 +138,7 @@ export default function ContentStep2({data}) {
   const priceVoucher = useMemo(() => {
     if (dataVoucher && typePayment === 'VOUCHER') {
       const countDis = dataVoucher.reduce((acc, item) => {
-        return acc + item?.price_discount;
+        return acc + item?.price_discount_real;
       }, 0);
 
       return countDis;
@@ -154,7 +154,6 @@ export default function ContentStep2({data}) {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
-
   return (
     <View style={styles.container}>
       <TopStep2
@@ -178,7 +177,7 @@ export default function ContentStep2({data}) {
           <DetailPriceRoom
             data={data}
             priceVoucher={priceVoucher}
-            onChangeTotalPrice={value => setTotalPrice(value)}
+            onChangeTotalPrice={value => console.log(value, 3213123)}
           />
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x

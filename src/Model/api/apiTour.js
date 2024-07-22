@@ -162,3 +162,37 @@ export const getListPopularProvinceTour = async (parent = '') => {
 
   return responsive.data;
 };
+
+export const postCreateVoucherTour = async data => {
+  const responsive = await instance.post('/voucher/create', data);
+
+  return responsive.data;
+};
+
+export const getListVoucherTourSelling = async tour_id => {
+  const responsive = await instance.get(
+    `/detail/${tour_id}/list-voucher-selling`,
+  );
+
+  return responsive.data;
+};
+
+export const getListVoucherTourCanUse = async tour_id => {
+  const responsive = await instance.get(`/${tour_id}/list-voucher-can-use`);
+
+  return responsive.data;
+};
+
+export const postBuyVoucherTour = async data => {
+  const responsive = await instance.post('/voucher/buy', data);
+
+  return responsive.data;
+};
+
+export const postReviewTour = async data => {
+  const responsive = await instance.post('ticket/booking/post-review', data, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
+
+  return responsive.data;
+};

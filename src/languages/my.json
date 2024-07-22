@@ -1151,7 +1151,6 @@
   "repost": "Pos semula",
   "video_short": "video pendek",
   "wallet_ready_to_use": "Dompet kripto anda sedia untuk digunakan",
-  "the_remaining_balance_add": "Baki yang tinggal akan ditambah ke dalam dompet pengurusan baki:",
 
   "incomplete_registration": "Proses Pendaftaran Belum Selesai",
   "detail_review": "Ulasan Terperinci",
@@ -1182,5 +1181,11 @@
   "booking_tour_detail": "Butiran tempahan lawatan",
   "booking_tour_code": "Kod tempahan lawatan",
   "qr_code": "Kod QR",
-  "please_give_qrcode_to_tourguide": "Sila berikan kod QR ini kepada pemandu lawatan untuk pengesahan memulakan lawatan anda"
+  "please_give_qrcode_to_tourguide": "Sila berikan kod QR ini kepada pemandu lawatan untuk pengesahan memulakan lawatan anda",
+
+  "value": "Nilai",
+  "discount_remaining": "Diskaun yang tinggal",
+  "voucher_tour": "Baucar pelancongan",
+  "apply_discount": "Diskaun yang digunakan",
+  "the_remaining_balance_add": "Baki yang tinggal akan dikembalikan ke baucar yang digunakan"
 }

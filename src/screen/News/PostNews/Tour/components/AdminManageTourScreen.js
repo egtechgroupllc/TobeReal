@@ -16,7 +16,6 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function AdminManageTourScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
-
   const {setOptions} = useNavigation();
   const {navigate, goBack} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
@@ -144,6 +143,16 @@ export default function AdminManageTourScreen() {
           // }
           onPress={() =>
             navigate('TicketManageScreen', {...params, admin: adminScreen})
+          }
+        />
+        <CustomButton
+          text={t('voucher_manage')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() =>
+            navigate('VoucherManageScreen', {...params, isTour: true})
           }
         />
 

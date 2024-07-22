@@ -21,18 +21,23 @@ import {
 } from '../../../../../components';
 import DateStart from './components/DateTime';
 import DateTime from './components/DateTime';
-import {requireField, validateMinLength} from '../../../../../utils/validate';
+import {
+  requireField,
+  validateMinAmount,
+  validateMinLength,
+} from '../../../../../utils/validate';
 import InputPrice from './components/InputPriceVoucher';
 import InputPriceVoucher from './components/InputPriceVoucher';
 import ChooseImgPicker from '../../../../components/ChooseImgPicker';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {postCreateVoucherTour} from '../../../../../Model/api/apiTour';
+import {formatPrice} from '../../../../../utils/format';
 
 export default function AddVoucherScreen() {
   const params = useRoute().params;
   const {navigate, setOptions, goBack} = useNavigation();
   const {t} = useLanguage();
   const queryClient = useQueryClient();
-
   const {
     handleSubmit,
     control,
@@ -54,11 +59,16 @@ export default function AddVoucherScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   useEffect(() => {
-    setValue('accommodation_id', params?.id);
-  }, []);
+    !params?.isTour
+      ? setValue('accommodation_id', params?.id)
+      : setValue('tour_id', params?.id);
+  }, [params?.isTour, params?.id]);
 
   const createVoucherMu = useMutation({
     mutationFn: postCreateVoucher,
+  });
+  const createVoucherTourMu = useMutation({
+    mutationFn: postCreateVoucherTour,
   });
 
   const getFormData = (object = {}) => {
@@ -100,23 +110,39 @@ export default function AddVoucherScreen() {
     // navigate('NoBottomTab', {
     //   screen: 'AccommoManagementScreen',
     // });
-
     const formData = getFormData(value);
-    createVoucherMu.mutate(formData, {
+
+    const mutationConfig = {
       onSuccess: dataInside => {
         showMess(
           dataInside?.message ? dataInside?.message : 'Success!',
           dataInside?.status ? 'success' : 'error',
         );
         if (dataInside?.status) {
-          queryClient.invalidateQueries(['voucher', 'my-list', params?.id]);
+          !params?.isTour
+            ? queryClient.invalidateQueries([
+                'voucher',
+                'list-voucer-selling',
+                params?.id,
+              ])
+            : queryClient.invalidateQueries([
+                'voucher',
+                'list-voucer-selling-tour',
+                params?.id,
+              ]);
           goBack();
         }
       },
       onError: err => {
         console.log({err});
       },
-    });
+    };
+    if (params?.isTour) {
+      createVoucherTourMu.mutate(formData, mutationConfig);
+
+      return;
+    }
+    createVoucherMu.mutate(formData, mutationConfig);
   };
   const imgDes = useMemo(() => {
     if (watch('images')) {

@@ -8,7 +8,10 @@ import {IconCheckBox} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../../utils/format';
-import {requireField} from '../../../../../../utils/validate';
+import {
+  requireField,
+  validateMinAmount,
+} from '../../../../../../utils/validate';
 import ItemUtil from '../../../../../Explore/components/DetailAccommodation/Rooms/components/ItemUtil';
 import {useCountry} from '../../../../../../hooks/useCountry';
 import {useForm} from 'react-hook-form';
@@ -45,7 +48,16 @@ export default memo(function InputPriceVoucher({
         control={control}
         setValue={setValue}
         label={priceType}
-        rules={requireField(t('this_field_required'))}
+        rules={[
+          requireField(t('this_field_required')),
+          validateMinAmount(
+            `${t('minimum_amount')} ${formatPrice(0.001, {
+              currency: 'TBH',
+              decimalPlaces: 10,
+            })}`,
+            0.001,
+          ),
+        ]}
         placeholder={t('enter_price')}
         style={styles.textInput}
         namePrice={namePrice}

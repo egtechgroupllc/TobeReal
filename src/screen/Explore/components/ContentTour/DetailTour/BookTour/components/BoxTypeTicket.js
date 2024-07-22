@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {CustomText} from '../../../../../../../components';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
@@ -12,9 +12,15 @@ export default function BoxTypeTicket({
   dataPriceTicket,
 }) {
   const {t} = useLanguage();
+
+  const dataNew = useMemo(
+    () => data?.tour_ticket_items?.filter(item => item?.quantity_real > 0),
+    [data?.tour_ticket_items?.length],
+  );
+
   const [listAddTicket, setListAddTicket] = useState([
     {
-      ...data?.tour_ticket_items[0],
+      ...dataNew[0],
       quantity: 1,
     },
   ]);
@@ -76,7 +82,7 @@ export default function BoxTypeTicket({
         <FlatList
           scrollEnabled={false}
           // key={`accommodation/my-list-1-${page}_${data?.data?.count}_${numColumns}`}
-          data={data?.tour_ticket_items}
+          data={dataNew}
           keyExtractor={(item, index) => `$key_${item.id}-${index}`}
           contentContainerStyle={{
             paddingTop: scale(10),

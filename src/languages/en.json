@@ -1181,7 +1181,6 @@
   "repost": "Repost",
   "video_short": "video_short",
   "wallet_ready_to_use": "Your cryptocurrency wallet is ready to use",
-  "the_remaining_balance_add": "The remaining balance will be added to the balance management wallet:",
 
   "incomplete_registration": "Incomplete Registration Process",
   "detail_review": "Detail review",
@@ -1212,5 +1211,11 @@
   "booking_tour_detail": "Detail booking tour",
   "booking_tour_code": "Booking tour code",
   "qr_code": "QR code",
-  "please_give_qrcode_to_tourguide": "Please give this QR code to the tour guide for confirm to start your tour"
+  "please_give_qrcode_to_tourguide": "Please give this QR code to the tour guide for confirm to start your tour",
+
+  "value": "Value",
+  "discount_remaining": "Discount remaining",
+  "voucher_tour": "Voucher of tour",
+  "apply_discount": "Aplied discount",
+  "the_remaining_balance_add": "The remaining balance will be returned to the applied voucher"
 }

@@ -45,7 +45,6 @@ export default function PostVideoShortScreen() {
   });
 
   const txHashId = data?.data?.rows[0]?.id;
-
   const postVideoShortMu = useMutation({
     mutationFn: postVideoShort,
   });

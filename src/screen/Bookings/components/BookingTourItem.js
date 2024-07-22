@@ -89,8 +89,8 @@ export default function BookingTourItem({
                 />
               </View>
             ) : ( */}
-            {/* {data?.check_out_date < today &&
-              (!data?.accommodation_review ? (
+            {data?.date < today &&
+              (!data?.tour_review ? (
                 <CustomButton
                   styleWrapper={{minWidth: scale(50)}}
                   text={t('review')}
@@ -104,7 +104,7 @@ export default function BookingTourItem({
                   style={{height: scale(25), backgroundColor: COLORS.grey}}
                   onPress={onViewDetail}
                 />
-              ))} */}
+              ))}
             {/* <CustomButton
                 styleWrapper={{flex: 0.4}}
                 text={t('review')}

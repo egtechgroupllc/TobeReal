@@ -21,6 +21,7 @@ import {useForm} from 'react-hook-form';
 import {postBuyVoucher} from '../../../../../../../Model/api/apiAccom';
 import {useMutation} from '@tanstack/react-query';
 import {showMess} from '../../../../../../../assets/constants/Helper';
+import {postBuyVoucherTour} from '../../../../../../../Model/api/apiTour';
 
 export default function BuyVoucherScreen() {
   const {t} = useLanguage();
@@ -38,6 +39,9 @@ export default function BuyVoucherScreen() {
   const buyVoucherMutation = useMutation({
     mutationFn: postBuyVoucher,
   });
+  const buyVoucherTourMutation = useMutation({
+    mutationFn: postBuyVoucherTour,
+  });
   const handleAlert = () => {
     Alert.alert(
       t('are_you_sure_want_buy_voucher'),
@@ -52,27 +56,31 @@ export default function BuyVoucherScreen() {
       ],
     );
   };
-
   const BuyVoucher = () => {
-    buyVoucherMutation.mutate(
-      {id: params?.item?.id, quantity: quantity},
-      {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message,
-            dataInside?.status ? 'success' : 'error',
-          );
-          if (dataInside?.status) {
-            navigate('HomeListVoucherScreen', {...params, isSuccess: true});
-          }
-        },
-
-        onError: error => {
-          if (error.response) {
-            showMess(error?.response?.data?.message, 'error');
-          }
-        },
+    const mutationConfig = {
+      onSuccess: dataInside => {
+        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        if (dataInside?.status) {
+          navigate('HomeListVoucherScreen', {...params, isSuccess: true});
+        }
       },
+
+      onError: error => {
+        if (error.response) {
+          showMess(error?.response?.data?.message, 'error');
+        }
+      },
+    };
+    if (!params?.isTour) {
+      buyVoucherMutation.mutate(
+        {id: params?.item?.id, quantity: quantity},
+        mutationConfig,
+      );
+      return;
+    }
+    buyVoucherTourMutation.mutate(
+      {id: params?.item?.id, quantity: quantity},
+      mutationConfig,
     );
   };
   return (

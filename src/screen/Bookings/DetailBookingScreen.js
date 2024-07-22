@@ -25,6 +25,7 @@ import {useMutation} from '@tanstack/react-query';
 export default function DetailBookingScreen() {
   const {t} = useLanguage();
   const data = useRoute().params;
+  console.log(data?.type_payment, 312312321);
   const objAccmo = data?.accommodation;
   const {setOptions} = useNavigation();
 
@@ -137,18 +138,20 @@ export default function DetailBookingScreen() {
                 styleIcon={styles.iconUntil}
               />
             </View>
-            <TouchableOpacity
-              onPress={() => setIsOpen(true)}
-              style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
-              {qrCode ? (
-                <QRCode value={JSON.stringify(qrCode)} color="#000" />
-              ) : (
-                <ActivityIndicator color={COLORS.primary} size="large" />
-              )}
-              <CustomText style={{width: scale(150), textAlign: 'center'}}>
-                {t('please_give_qrcode_to')}
-              </CustomText>
-            </TouchableOpacity>
+            {data?.type_payment && data?.type_payment === 'FIAT' && (
+              <TouchableOpacity
+                onPress={() => setIsOpen(true)}
+                style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
+                {qrCode ? (
+                  <QRCode value={JSON.stringify(qrCode)} color="#000" />
+                ) : (
+                  <ActivityIndicator color={COLORS.primary} size="large" />
+                )}
+                <CustomText style={{width: scale(150), textAlign: 'center'}}>
+                  {t('please_give_qrcode_to')}
+                </CustomText>
+              </TouchableOpacity>
+            )}
           </View>
 
           <View>

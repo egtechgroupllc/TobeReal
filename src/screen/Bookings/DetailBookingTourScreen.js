@@ -72,14 +72,14 @@ export default function DetailBookingTourScreen() {
           <CustomText size={SIZES.xMedium} color={COLORS.textSub}>
             {t('booking_tour_code')}: {data?.id}
           </CustomText>
-          {data.status && (
+          {data?.status && (
             <View
               style={{
                 ...styles.boxStatus,
                 backgroundColor:
-                  data.status === 'SUCCESS'
+                  data?.status === 'SUCCESS'
                     ? '#42b00b'
-                    : data.status === 'PENDING'
+                    : data?.status === 'PENDING'
                     ? COLORS.primary
                     : '#e03c31',
               }}>
@@ -87,7 +87,7 @@ export default function DetailBookingTourScreen() {
                 textType="semiBold"
                 color={COLORS.white}
                 size={SIZES.xSmall}>
-                {data.status}
+                {data?.status}
               </CustomText>
             </View>
           )}
@@ -102,24 +102,29 @@ export default function DetailBookingTourScreen() {
           </View>
 
           <TimeBookingTour data={data} />
-          <CustomText
-            textType="bold"
-            size={SIZES.xMedium}
-            style={{marginBottom: scale(5)}}>
-            {t('qr_code')}:
-          </CustomText>
-          <TouchableOpacity
-            onPress={() => setIsOpen(true)}
-            style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
-            {qrCode ? (
-              <QRCode value={JSON.stringify(qrCode)} color="#000" />
-            ) : (
-              <ActivityIndicator color={COLORS.primary} size="large" />
-            )}
-            <CustomText style={{width: scale(300), textAlign: 'center'}}>
-              {t('please_give_qrcode_to_tourguide')}
-            </CustomText>
-          </TouchableOpacity>
+
+          {data?.type_payment && data?.type_payment === 'FIAT' && (
+            <>
+              <CustomText
+                textType="bold"
+                size={SIZES.xMedium}
+                style={{marginBottom: scale(5)}}>
+                {t('qr_code')}:
+              </CustomText>
+              <TouchableOpacity
+                onPress={() => setIsOpen(true)}
+                style={{flex: 1, alignItems: 'center', rowGap: scale(10)}}>
+                {qrCode ? (
+                  <QRCode value={JSON.stringify(qrCode)} color="#000" />
+                ) : (
+                  <ActivityIndicator color={COLORS.primary} size="large" />
+                )}
+                <CustomText style={{width: scale(300), textAlign: 'center'}}>
+                  {t('please_give_qrcode_to_tourguide')}
+                </CustomText>
+              </TouchableOpacity>
+            </>
+          )}
           <View style={{rowGap: scale(3), width: '100%'}}>
             <CustomText
               textType="bold"

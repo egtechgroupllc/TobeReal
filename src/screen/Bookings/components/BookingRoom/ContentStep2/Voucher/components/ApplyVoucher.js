@@ -7,18 +7,26 @@ import {IconVoucher} from '../../../../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {useQuery} from '@tanstack/react-query';
 import {getListVoucherCanUse} from '../../../../../../../Model/api/apiAccom';
+import {getListVoucherTourCanUse} from '../../../../../../../Model/api/apiTour';
 
-export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
+export default function ApplyVoucher({
+  data,
+  onCheckVoucher,
+  dataVoucher,
+  isTour,
+}) {
   const {navigate} = useNavigation();
 
   const {t} = useLanguage();
   const dataVoucherCanUse = useQuery({
-    queryKey: ['voucher', 'list-voucher-can-use', data?.accommodation_id],
-    queryFn: () => getListVoucherCanUse(data?.accommodation_id),
+    queryKey: !isTour
+      ? ['voucher', 'list-voucher-can-use', data?.accommodation_id]
+      : ['voucher', 'list-voucher-tour-can-use', data?.tour_id],
+    queryFn: () =>
+      !isTour
+        ? getListVoucherCanUse(data?.accommodation_id)
+        : getListVoucherTourCanUse(data?.tour_id),
   });
-  console.log('====================================');
-  console.log(dataVoucher);
-  console.log('====================================');
   return (
     <View style={styles.voucherView}>
       <CustomText
@@ -66,12 +74,11 @@ export default function ApplyVoucher({data, onCheckVoucher, dataVoucher}) {
             onPress={() =>
               navigate('HomeListVoucherScreen', {
                 onGoBack: valueBack => {
-                  console.log('====================================');
-                  console.log(valueBack, 'HomeListVoucherScreen');
-                  console.log('====================================');
                   onCheckVoucher && onCheckVoucher(valueBack);
                 },
                 accomId: data?.accommodation_id,
+                tourId: data?.tour_id,
+                isTour: isTour,
               })
             }>
             <CustomText

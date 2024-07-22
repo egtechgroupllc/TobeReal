@@ -17,22 +17,30 @@ export default function ManageVideoShortScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
   const {token} = useAuthentication();
+  const table_name =
+    params?.Accom || params?.accommodation?.id
+      ? 'accommodation'
+      : params?.estateId
+      ? 'estate'
+      : params?.tour?.id
+      ? 'tour'
+      : 'estate';
+
+  const table_id =
+    params?.accomId ||
+    params?.accommodation?.id ||
+    params?.estateId ||
+    params?.tour?.id;
   const {data, isLoading, error} = useQuery({
-    queryKey: [
-      'common',
-      'video-short',
-      'my-list',
-      params?.accomId || params?.estateId,
-    ],
+    queryKey: ['common', 'video-short', 'my-list', table_id],
     queryFn: () =>
       getMyListVideoShort({
         token: token,
-        table_name:
-          params?.Accom || params?.accommodation ? 'accommodation' : 'estate',
-        table_id:
-          params?.accomId || params?.accommodation?.id || params?.estateId,
+        table_name: table_name,
+        table_id: table_id,
       }),
   });
+  console.log(data, 3123312213);
   const videoRef = useRef();
   useLayoutEffect(() => {
     return setOptions({

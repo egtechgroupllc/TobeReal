@@ -14,12 +14,8 @@ export default function DateTime({onChange, title}) {
   const [openCheckStart, setOpenCheckStart] = useState(false);
   const [openCheckEnd, setOpenCheckEnd] = useState(false);
 
-  const [timeCheckStart, setTimeCheckStart] = useState(
-    new Date('2024-01-01T06:00:00'),
-  );
-  const [timeCheckEnd, setTimeCheckEnd] = useState(
-    new Date('2024-01-02T12:00:00'),
-  );
+  const [timeCheckStart, setTimeCheckStart] = useState(new Date());
+  const [timeCheckEnd, setTimeCheckEnd] = useState(new Date());
 
   useEffect(() => {
     onChange &&

@@ -82,9 +82,8 @@ export default function TourSchedule({data}) {
         <ScrollView horizontal>
           <View style={styles.content}>
             {JSON.parse(data?.schedule)?.map((item, index) => (
-              <View>
+              <View key={index}>
                 <CustomButton
-                  key={item?.title}
                   text={item?.title}
                   style={{width: scale(70), height: scale(30)}}
                   onPress={() => handleDayClick(item?.title)}

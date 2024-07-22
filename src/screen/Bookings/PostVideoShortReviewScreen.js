@@ -69,6 +69,7 @@ export default function PostVideoShortReviewScreen() {
 
     return formData;
   };
+  console.log(params, 3213312);
 
   const handlePostVideoShort = value => {
     const formData = getFormData(value);

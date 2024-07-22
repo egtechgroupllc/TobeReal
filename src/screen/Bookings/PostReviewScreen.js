@@ -16,12 +16,12 @@ import {useForm} from 'react-hook-form';
 import {useLanguage} from '../../hooks/useLanguage';
 import {useQuery} from '@tanstack/react-query';
 import {getLinkData} from '../../Model/api/common';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useAuthentication} from '../../hooks/useAuthentication';
 
-export default function PostReviewScreen({route}) {
+export default function PostReviewScreen() {
   const {control, watch, setValue, handleSubmit} = useForm();
-  const paramData = route.params;
+  const paramData = useRoute().params;
   const {token} = useAuthentication();
   const {navigate, setOptions} = useNavigation();
   const {t} = useLanguage();
@@ -32,15 +32,19 @@ export default function PostReviewScreen({route}) {
     });
   }, []);
   const {data, isLoading, error} = useQuery({
-    queryKey: ['common', 'linked-data', paramData?.accommodation?.id],
+    queryKey: [
+      'common',
+      'linked-data',
+      paramData?.accommodation?.id || paramData?.tour?.id,
+    ],
     queryFn: () =>
       getLinkData({
         token: token,
-        table_name: 'accommodation',
-        table_id: paramData?.accommodation?.id,
+        table_name: !paramData?.isTour ? 'accommodation' : 'tour',
+        table_id: paramData?.accommodation?.id || paramData?.tour?.id,
       }),
   });
-
+  console.log(paramData?.accommodation?.id);
   return (
     // <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
     <>
@@ -50,8 +54,9 @@ export default function PostReviewScreen({route}) {
       </MainWrapper>
       <BottomReview
         handleSubmit={handleSubmit}
-        roomID={paramData?.id}
+        id={paramData?.id}
         txhashId={data?.data?.rows[0]?.id}
+        isTour={paramData?.isTour}
       />
     </>
     // </TouchableWithoutFeedback>

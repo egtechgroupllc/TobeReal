@@ -77,6 +77,7 @@ export default function TopStep2({
       </View>
       {typePayment === 'VOUCHER' && (
         <ApplyVoucher
+          isTour={isTour}
           data={data}
           onCheckVoucher={onCheckVoucher}
           dataVoucher={dataVoucher}

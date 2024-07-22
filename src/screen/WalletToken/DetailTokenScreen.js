@@ -17,7 +17,7 @@ export default function DetailTokenScreen() {
   const {t} = useLanguage();
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: params?.name,
+      headerTitle: params?.listToken?.name,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);

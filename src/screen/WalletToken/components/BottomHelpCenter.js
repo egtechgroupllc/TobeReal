@@ -39,8 +39,9 @@ export default function BottomHelpCenter() {
           paddingHorizontal: scale(16),
           rowGap: scale(12),
         }}>
-        {listQuestion.map(item => (
+        {listQuestion.map((item, index) => (
           <TouchableOpacity
+            key={index}
             activeOpacity={0.7}
             onPress={() => {
               bottomSheetRef.current.close();

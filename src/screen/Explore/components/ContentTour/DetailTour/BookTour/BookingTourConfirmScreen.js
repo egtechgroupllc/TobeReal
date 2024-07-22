@@ -159,7 +159,7 @@ export default function BookingTourConfirmScreen() {
   const priceVoucher = useMemo(() => {
     if (dataVoucher && typePayment === 'VOUCHER') {
       const countDis = dataVoucher.reduce((acc, item) => {
-        return acc + item?.price_discount;
+        return acc + item?.price_discount_real;
       }, 0);
 
       return countDis;

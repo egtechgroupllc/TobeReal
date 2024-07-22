@@ -44,12 +44,13 @@ export default function DetailPriceRoom({
     }, 0);
 
   useEffect(() => {
-    if (voucher_discount > totalPrice) {
+    if (voucher_discount > (totalPrice || totalSumTour)) {
       setCheckPrice(true);
     } else {
       setCheckPrice(false);
     }
-  }, [voucher_discount, totalPrice, checkPrice]);
+  }, [voucher_discount, totalPrice, checkPrice, totalSumTour]);
+
   useEffect(() => {
     totalPrice ||
       (totalSumTour &&
@@ -59,7 +60,7 @@ export default function DetailPriceRoom({
 
   const checkTotalPrice = () => {
     if (isTour) {
-      return totalSumTour;
+      return !checkPrice ? totalSumTour - voucher_discount || totalSumTour : 0;
     } else {
       return !checkPrice ? totalPrice - voucher_discount || totalPrice : 0;
     }
@@ -89,10 +90,13 @@ export default function DetailPriceRoom({
             currency: currency?.currency_code,
           })}
           textDescThird={`${numNight} ${t('day')}, ${numRoom} ${t('room')}`}
-          textDesc={`${t('the_remaining_balance_add')} `}
-          valueDesc={`+${formatPrice(voucher_discount - totalPrice, {
-            currency: currency?.currency_code,
-          })}`}
+          textDesc={`${t('the_remaining_balance_add')}: `}
+          valueDesc={`+${formatPrice(
+            voucher_discount - (totalPrice || totalSumTour),
+            {
+              currency: currency?.currency_code,
+            },
+          )}`}
           value={formatPrice(checkTotalPrice(), {
             currency: currency?.currency_code,
           })}
@@ -142,7 +146,7 @@ export default function DetailPriceRoom({
             />
             {!!priceVoucher && (
               <Row
-                title={t('voucher discount')}
+                title={t('apply_discount')}
                 value={`-${formatPrice(voucher_discount, {
                   currency: currency?.currency_code,
                 })}`}
@@ -161,9 +165,9 @@ export default function DetailPriceRoom({
           </>
         ) : (
           <>
-            {data?.listAddTicket?.map(item => {
+            {data?.listAddTicket?.map((item, index) => {
               return (
-                <View style={{rowGap: scale(5)}}>
+                <View style={{rowGap: scale(5)}} key={index}>
                   <View
                     style={{
                       flexDirection: 'row',
@@ -195,6 +199,16 @@ export default function DetailPriceRoom({
                       },
                     )}
                   </CustomText>
+                  {!!priceVoucher && (
+                    <Row
+                      title={t('apply_discount')}
+                      value={`-${formatPrice(voucher_discount, {
+                        currency: currency?.currency_code,
+                      })}`}
+                      textType="regular"
+                      colorValue={COLORS.text}
+                    />
+                  )}
                 </View>
               );
             })}

@@ -20,7 +20,7 @@ export default function Traceability({data}) {
 
   const handleOpenLink = async () => {
     await Linking.openURL(
-      `https://tobescan.com/address/${data.user.wallet_address}`,
+      `https://eco.tobescan.com/address/${data.user.wallet_address}`,
     );
   };
   return (

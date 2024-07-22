@@ -73,7 +73,7 @@ export default function VoucherItem({
         style={{
           flex: 1,
         }}>
-        <View style={{rowGap: scale(30)}}>
+        <View style={{rowGap: scale(20)}}>
           <View style={{rowGap: scale(3), width: scale(220)}}>
             <CustomText
               textType="bold"
@@ -100,13 +100,19 @@ export default function VoucherItem({
               style={{
                 color: COLORS.black,
                 fontSize: SIZES.xSmall,
-                marginTop: !buyVoucher && scale(10),
               }}>
-              {t('Giá trị sử dụng: ')}
-              {t('giảm ')}
-              {formatPrice(data?.price_discount, {
+              {t('value')}: {t('discount_remaining')}{' '}
+              {formatPrice(data?.price_discount_real, {
                 currency: currency?.currency_code,
               })}
+            </CustomText>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: COLORS.black,
+                fontSize: SIZES.xSmall,
+              }}>
+              {t('quantity')}: {data?.quantity_real}
             </CustomText>
           </View>
           <View

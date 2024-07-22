@@ -1174,7 +1174,6 @@
   "repost": "โพสต์ใหม่",
   "video_short": "วิดีโอสั้น",
   "wallet_ready_to_use": "กระเป๋าเงินคริปโตของคุณพร้อมใช้งานแล้ว",
-  "the_remaining_balance_add": "ยอดคงเหลือที่เหลือจะถูกเพิ่มไปยังกระเป๋าเงินจัดการยอดคงเหลือ:",
 
   "incomplete_registration": "กระบวนการลงทะเบียนไม่สมบูรณ์",
   "detail_review": "รีวิวรายละเอียด",
@@ -1205,5 +1204,11 @@
   "booking_tour_detail": "รายละเอียดการจองทัวร์",
   "booking_tour_code": "รหัสการจองทัวร์",
   "qr_code": "รหัส QR",
-  "please_give_qrcode_to_tourguide": "กรุณาให้รหัส QR นี้กับไกด์ทัวร์เพื่อยืนยันการเริ่มทัวร์ของคุณ"
+  "please_give_qrcode_to_tourguide": "กรุณาให้รหัส QR นี้กับไกด์ทัวร์เพื่อยืนยันการเริ่มทัวร์ของคุณ",
+
+  "value": "ค่า",
+  "discount_remaining": "ส่วนลดที่เหลือ",
+  "voucher_tour": "บัตรกำนัลทัวร์",
+  "apply_discount": "ส่วนลดที่ใช้",
+  "the_remaining_balance_add": "ยอดเงินคงเหลือจะถูกส่งคืนไปยังบัตรกำนัลที่ใช้"
 }

@@ -22,6 +22,10 @@ import {IconNoVoucher} from '../../../../../../assets/icon/Icon';
 import {showMess} from '../../../../../../assets/constants/Helper';
 import BookAccommodation from '../../../../../Explore/components/DetailAccommodation/Detail/BookAccommodation';
 import SelectVoucherFooter from './components/SelectVoucherFooter';
+import {
+  getListVoucherTourCanUse,
+  getListVoucherTourSelling,
+} from '../../../../../../Model/api/apiTour';
 
 export default function HomeListVoucherScreen() {
   const params = useRoute().params;
@@ -29,7 +33,7 @@ export default function HomeListVoucherScreen() {
   const {t} = useLanguage();
   const transferType = [
     {id: 1, name: t('your_voucher')},
-    {id: 2, name: t('hotel_voucher')},
+    {id: 2, name: !params?.isTour ? t('hotel_voucher') : t('voucher_tour')},
   ];
   useEffect(() => {
     if (params?.isSuccess) {
@@ -76,20 +80,30 @@ export default function HomeListVoucherScreen() {
   const {data, error} = useQuery({
     queryKey:
       tab === 2
-        ? ['voucher', 'list-voucher-selling']
-        : ['voucher', 'list-voucher-can-use'],
+        ? !params?.isTour
+          ? ['voucher', 'list-voucher-selling']
+          : ['voucher', 'list-voucher-tour-selling', params?.tourId]
+        : !params?.isTour
+        ? ['voucher', 'list-voucher-can-use']
+        : ['voucher', 'list-voucher-tour-can-use', params?.tourId],
     queryFn: () =>
       tab === 2
-        ? getListVoucherSelling(
+        ? !params?.isTour
+          ? getListVoucherSelling(
+              params?.accomId || params?.params?.item?.accommodation_id,
+            )
+          : getListVoucherTourSelling(
+              params?.tourId || params?.params?.item?.tour_id,
+            )
+        : !params?.isTour
+        ? getListVoucherCanUse(
             params?.accomId || params?.params?.item?.accommodation_id,
           )
-        : getListVoucherCanUse(
-            params?.accomId || params?.params?.item?.accommodation_id,
+        : getListVoucherTourCanUse(
+            params?.tourId || params?.params?.item?.tour_id,
           ),
   });
-
   const [voucher, setVoucher] = useState([]);
-
   const arrIds = useMemo(
     () => voucher.map(itemPrev => itemPrev?.id),
     [`${voucher}`],
@@ -105,7 +119,6 @@ export default function HomeListVoucherScreen() {
       return [...prev, item];
     });
   };
-  console.log(params, 321312321);
   return (
     <>
       <MainWrapper
@@ -149,7 +162,11 @@ export default function HomeListVoucherScreen() {
                 buyVoucher={tab === 2 && true}
                 onPressVoucher={() => {
                   tab === 2
-                    ? navigate('BuyVoucherScreen', {...params, item})
+                    ? navigate('BuyVoucherScreen', {
+                        ...params,
+                        item,
+                        isTour: params?.isTour,
+                      })
                     : voucherCheckBox(item);
                 }}
                 // onPressMore={() => {

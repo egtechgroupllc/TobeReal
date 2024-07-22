@@ -20,6 +20,7 @@ import BookAccommodation from '../BookAccommodation';
 import BookTour from './DetailTour/BookTour';
 import {showMess} from '../../../../assets/constants/Helper';
 import TicketOption from './DetailTour/TicketOption';
+import Traceability from '../DetailAccommodation/Detail/Traceability';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
 export default function DetailTourScreen() {
@@ -28,6 +29,9 @@ export default function DetailTourScreen() {
   const listNavBar = useRef([
     {
       text: t('overview'),
+    },
+    {
+      text: t('traceability'),
     },
     {
       text: t('ticket_detail'),
@@ -50,8 +54,8 @@ export default function DetailTourScreen() {
       // <InfoUnitFacilities />,
 
       <InfoDetail data={dataDetail} paramsTour={params} />,
+      <Traceability data={dataDetail} />,
       <TicketOption data={dataDetail} paramsTour={params} />,
-
       <DetailAccommoMap data={dataDetail} />,
       <Review dataP={dataDetail} />,
       // <View>

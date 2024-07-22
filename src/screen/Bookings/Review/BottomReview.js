@@ -8,8 +8,9 @@ import {SHADOW, scale} from '../../../assets/constants';
 import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {postReviewTour} from '../../../Model/api/apiTour';
 
-export default function BottomReview({handleSubmit, roomID, txhashId}) {
+export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -20,7 +21,9 @@ export default function BottomReview({handleSubmit, roomID, txhashId}) {
   const postReviewAccmoMu = useMutation({
     mutationFn: postReviewAccmo,
   });
-
+  const postReviewTourMu = useMutation({
+    mutationFn: postReviewTour,
+  });
   const getFormData = (object = {}) => {
     const formData = new FormData();
 
@@ -36,38 +39,43 @@ export default function BottomReview({handleSubmit, roomID, txhashId}) {
       formData.append('files', image);
     });
 
-    formData.append('room_booking_id', roomID);
+    !isTour
+      ? formData.append('room_booking_id', id)
+      : formData.append('tour_ticket_booking_id', id);
 
     return formData;
   };
-
   const hanPostReview = value => {
     if (!value?.rating) {
       showMess('Please select a rating', 'error');
     }
     const formData = getFormData(value);
-    value?.rating &&
-      postReviewAccmoMu.mutate(formData, {
-        onSuccess: dataInside => {
-          showMess(
-            dataInside?.message ? dataInside?.message : 'Success!',
-            dataInside?.status ? 'success' : 'error',
-          );
-          if (dataInside?.status) {
-            navigate('PostVideoShortReviewScreen', txhashId);
+    const mutationConfig = {
+      onSuccess: dataInside => {
+        showMess(
+          dataInside?.message ? dataInside?.message : 'Success!',
+          dataInside?.status ? 'success' : 'error',
+        );
+        if (dataInside?.status) {
+          navigate('PostVideoShortReviewScreen', txhashId);
 
-            // queryClient.invalidateQueries([
-            //   'accommodation',
-            //   'room',
-            //   'my-booking',
-            // ]);
-            // goBack();
-          }
-        },
-        onError: err => {
-          console.log({err});
-        },
-      });
+          // queryClient.invalidateQueries([
+          //   'accommodation',
+          //   'room',
+          //   'my-booking',
+          // ]);
+          // goBack();
+        }
+      },
+      onError: err => {
+        console.log({err});
+      },
+    };
+    if (isTour && value?.rating) {
+      postReviewTourMu.mutate(formData, mutationConfig);
+      return;
+    }
+    postReviewAccmoMu.mutate(formData, mutationConfig);
   };
 
   return (

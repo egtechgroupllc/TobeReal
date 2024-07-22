@@ -15,7 +15,9 @@ export default function TopReview({data}) {
         columnGap: scale(10),
       }}>
       <CustomImage
-        source={data?.accommodation?.images[0]?.url}
+        source={
+          data?.accommodation?.images[0]?.url || data?.tour?.images[0]?.url
+        }
         style={{
           width: scale(80),
           height: scale(80),
@@ -32,7 +34,7 @@ export default function TopReview({data}) {
           textType="semiBold"
           size={SIZES.xMedium}
           color={COLORS.text}>
-          {t('please_review')} {data?.accommodation?.name}
+          {t('please_review')} {data?.accommodation?.name || data?.tour?.name}
         </CustomText>
         <CustomText color={COLORS.textSub}>
           {t('review_for_improve')}!

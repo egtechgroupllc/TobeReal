@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
 import {
@@ -11,44 +11,75 @@ import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import StarRating from '../../../../../components/StarRating';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import {formatDateTime} from '../../../../../utils/format';
+import {
+  formatDateTime,
+  formatNumber,
+  formatPrice,
+} from '../../../../../utils/format';
 import Introduction from '../../DetailAccommodation/Detail/Introduction';
 import TicketOption from './TicketOption';
+import QRCode from 'react-native-qrcode-svg';
+import QRWalletBlockChain from '../../../../Profile/components/QRWalletBlockChain';
 
 export default function InfoDetail({data, name, paramsTour}) {
   const {t} = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
 
+  const calculateDaysAndHours = totalHours => {
+    const days = Math.floor(totalHours / 24);
+    const hours = totalHours % 24;
+    return {days, hours};
+  };
+  const result = calculateDaysAndHours(data?.total_hours);
+  if (!data?.wallet_address) return null;
   return (
     <View>
-      <View style={styles.wrapper}>
-        <View style={styles.header}>
-          <CustomText textType="semiBold" style={styles.name}>
-            {data?.name || name}
-          </CustomText>
-        </View>
-
-        <View style={styles.room}>
-          {paramsTour?.review_count > 0 ? (
-            <>
-              <View
-                style={{
-                  backgroundColor: COLORS.primary,
-                  height: scale(35),
-                  width: scale(35),
-                  borderRadius: scale(10),
-                }}>
-                {paramsTour?.review_average}
-              </View>
-              <CustomText textType="medium" style={styles.text}>
-                {paramsTour?.review_count} {t('review')}
-              </CustomText>
-            </>
-          ) : (
-            <CustomText textType="medium" style={styles.text}>
-              ({t('no_review_yet')})
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          backgroundColor: '#fff',
+          justifyContent: 'space-between',
+          padding: scale(16),
+        }}>
+        <View style={styles.wrapper}>
+          <View style={styles.header}>
+            <CustomText textType="semiBold" style={styles.name}>
+              {data?.name || name}
             </CustomText>
-          )}
-          {/* <TouchableOpacity>
+          </View>
+
+          <View style={styles.room}>
+            {paramsTour?.review_count > 0 ? (
+              <>
+                <View
+                  style={{
+                    backgroundColor: COLORS.primary,
+                    height: scale(30),
+                    minWidth: scale(30),
+                    borderRadius: scale(10),
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <CustomText
+                    textType="medium"
+                    style={{color: COLORS.white, fontSize: SIZES.xMedium}}>
+                    {formatPrice(paramsTour?.review_average, {
+                      showCurrency: false,
+                      decimalPlaces: 2,
+                    })}
+                  </CustomText>
+                </View>
+                <CustomText textType="medium" style={styles.text}>
+                  {paramsTour?.review_count} {t('review')}
+                </CustomText>
+              </>
+            ) : (
+              <CustomText textType="medium" style={styles.text}>
+                ({t('no_review_yet')})
+              </CustomText>
+            )}
+            {/* <TouchableOpacity>
             <CustomImage
               source={images.iconTiktok}
               style={{width: scale(20), height: scale(20)}}
@@ -63,8 +94,20 @@ export default function InfoDetail({data, name, paramsTour}) {
           <CustomText textType="medium" style={styles.text1}>
             {t('watch_the_most')}
           </CustomText> */}
+          </View>
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setIsOpen(true)}
+          style={{
+            backgroundColor: COLORS.white70,
+            padding: scale(8),
+            borderRadius: scale(9),
+          }}>
+          <QRCode value={data?.wallet_address} size={scale(80)} />
+        </TouchableOpacity>
       </View>
+
       <View style={styles.line} />
       <View style={styles.boxTourTime}>
         <View
@@ -124,11 +167,20 @@ export default function InfoDetail({data, name, paramsTour}) {
           <CustomText
             textType="regular"
             style={{...styles.text, color: COLORS.black, marginLeft: '1%'}}>
-            {data?.total_hours} {t('hour')}
+            {result.days > 0 && `${result.days} ${t('day')}`} {result.hours}{' '}
+            {t('hour')}
           </CustomText>
         </View>
       </View>
       <View style={styles.line} />
+      {isOpen && (
+        <QRWalletBlockChain
+          hotelAddress
+          data={data}
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
       <Introduction data={data} />
       <View style={styles.line} />
     </View>
@@ -137,11 +189,9 @@ export default function InfoDetail({data, name, paramsTour}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    // width: WIDTH.widthContain,
     rowGap: scale(8),
-    backgroundColor: '#fff',
-    padding: scale(16),
     paddingBottom: scale(4),
+    width: '70%',
   },
   header: {
     flexDirection: 'row',

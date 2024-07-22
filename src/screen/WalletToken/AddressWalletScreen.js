@@ -96,6 +96,7 @@ export default function AddressWalletScreen() {
       {listWallet.map((item, index) => {
         return (
           <WalletItem
+            key={index}
             item={item}
             onPress={() => {
               if (item?.isBeta) {

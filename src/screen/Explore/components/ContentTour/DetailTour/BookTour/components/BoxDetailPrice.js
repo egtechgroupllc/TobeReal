@@ -34,10 +34,10 @@ export default function BoxDetailPrice({data, quantity, dataPriceTicket}) {
           paddingBottom: scale(0),
           marginBottom: scale(20),
         }}>
-        {quantity?.map(item => {
+        {quantity?.map((item, index) => {
           return (
             !!item && (
-              <View style={{rowGap: scale(5)}}>
+              <View style={{rowGap: scale(5)}} key={index}>
                 <View
                   style={{
                     flexDirection: 'row',

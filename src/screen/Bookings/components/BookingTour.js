@@ -15,7 +15,7 @@ import BookingTourItem from './BookingTourItem';
 export default function BookingTour() {
   const {navigate} = useNavigation();
 
-  const {data, isLoading} = useQuery({
+  const {data, isLoading, isError} = useQuery({
     queryKey: ['tour', 'my-booking'],
     queryFn: getListBookingTour,
   });
@@ -36,12 +36,18 @@ export default function BookingTour() {
             key={index}
             data={item}
             onPress={() => navigate('DetailBookingTourScreen', item)}
-            // onReView={() =>
-            //   navigate('NoBottomTab', {
-            //     screen: 'PostReviewScreen',
-            //     params: item,
-            //   })
-            // }
+            onReView={() =>
+              navigate('NoBottomTab', {
+                screen: 'PostReviewScreen',
+                params: {...item, isTour: true},
+              })
+            }
+            onViewDetail={() =>
+              navigate('NoBottomTab', {
+                screen: 'DetailReviewTourScreen',
+                params: item,
+              })
+            }
           />
         ) : (
           <BookingItemLoading />

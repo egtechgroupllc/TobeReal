@@ -1169,7 +1169,6 @@
   "repost": "Repost",
   "video_short": "maikling video",
   "wallet_ready_to_use": "Ang iyong cryptocurrency wallet ay handa nang gamitin",
-  "the_remaining_balance_add": "Ang natitirang balanse ay idaragdag sa pamamahala ng balanse wallet:",
 
   "incomplete_registration": "Di Kumpletong Proses ng Paggawa ng Patala",
   "detail_review": "Detalyadong Pagsusuri",
@@ -1200,5 +1199,11 @@
   "booking_tour_detail": "Detalye ng pag-book ng tour",
   "booking_tour_code": "Code ng pag-book ng tour",
   "qr_code": "QR code",
-  "please_give_qrcode_to_tourguide": "Pakibigay ang QR code na ito sa tour guide para makumpirma ang pagsisimula ng iyong tour"
+  "please_give_qrcode_to_tourguide": "Pakibigay ang QR code na ito sa tour guide para makumpirma ang pagsisimula ng iyong tour",
+
+  "value": "Halaga",
+  "discount_remaining": "Natitirang diskwento",
+  "voucher_tour": "Voucher ng tour",
+  "apply_discount": "Inaplay na diskwento",
+  "the_remaining_balance_add": "Ang natitirang balanse ay ibabalik sa inaplay na voucher"
 }

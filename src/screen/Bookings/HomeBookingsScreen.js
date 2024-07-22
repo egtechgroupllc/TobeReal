@@ -100,7 +100,7 @@ export default function HomeBookingsScreen() {
           padding: scale(10),
         }}
         sizeText={SIZES.small}
-        transformText={'medium'}
+        transformText={'none'}
         styleContainerTab={styles.containTab}
         styleTabActive={styles.tabActive}
         styleTabDefault={{

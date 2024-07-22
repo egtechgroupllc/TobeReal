@@ -79,10 +79,18 @@ export default function ListPaymentMethodsScreen({route}) {
             tag={item?.tag}
             backgroundColor="#fff"
             onPress={() => {
-              if (
-                item?.type === 'FIAT' ||
-                (item?.type === 'VOUCHER' && !dataParams?.isTour)
-              ) {
+              // if (
+              //   item?.type === 'FIAT' ||
+              //   (item?.type === 'VOUCHER' && !dataParams?.isTour)
+              // ) {
+              //   dataParams?.onGoBack(item);
+              //   goBack();
+              // } else {
+              //   showMess(t('comming_soon'), 'error', {
+              //     duration: 500,
+              //   });
+              // }
+              if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
                 dataParams?.onGoBack(item);
                 goBack();
               } else {

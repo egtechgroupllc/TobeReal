@@ -24,12 +24,12 @@ import {
 } from '../../../../../Model/api/apiAccom';
 import {useQuery} from '@tanstack/react-query';
 import EmptyData from '../../../../../components/EmptyData';
+import {getListVoucherTourSelling} from '../../../../../Model/api/apiTour';
 
 export default function VoucherManageScreen() {
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const params = useRoute().params;
-
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('voucher_manage'),
@@ -42,9 +42,14 @@ export default function VoucherManageScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   const {data} = useQuery({
-    queryKey: ['voucher', 'list-voucer-selling', params?.id],
+    queryKey: !params?.isTour
+      ? ['voucher', 'list-voucer-selling', params?.id]
+      : ['voucher', 'list-voucer-selling-tour', params?.id],
 
-    queryFn: () => getListVoucherSelling(params?.id),
+    queryFn: () =>
+      !params?.isTour
+        ? getListVoucherSelling(params?.id)
+        : getListVoucherTourSelling(params?.id),
   });
   const numColumns = Math.ceil(data?.data?.rows?.length / 4);
 

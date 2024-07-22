@@ -1175,7 +1175,6 @@
   "repost": "Đăng lại",
   "video_short": "video ngắn",
   "wallet_ready_to_use": "Ví tiền mã hoá của bạn đã sẵn sàng để sử dụng",
-  "the_remaining_balance_add": "Số dư còn lại sẽ được thêm vào ví quản lý số dư:",
 
   "incomplete_registration": "Quá trình đăng ký chưa hoàn tất",
   "detail_review": "Đánh giá chi tiết",
@@ -1206,5 +1205,11 @@
   "booking_tour_detail": "Chi tiết đặt tour",
   "booking_tour_code": "Mã đặt tour",
   "qr_code": "Mã QR",
-  "please_give_qrcode_to_tourguide": "Vui lòng đưa mã QR này cho hướng dẫn viên để xác nhận bắt đầu tour của bạn"
+  "please_give_qrcode_to_tourguide": "Vui lòng đưa mã QR này cho hướng dẫn viên để xác nhận bắt đầu tour của bạn",
+
+  "value": "Giá trị",
+  "discount_remaining": "Giảm giá còn lại",
+  "voucher_tour": "Phiếu giảm giá tour",
+  "apply_discount": "Giảm giá đã áp dụng",
+  "the_remaining_balance_add": "Số dư còn lại sẽ được trả lại vào phiếu đã áp dụng"
 }

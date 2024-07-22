@@ -47,7 +47,11 @@ export default function ReviewDetail({data}) {
               {data?.contact_name}
             </CustomText>
 
-            <StarRating rating={data?.accommodation_review?.rating} />
+            <StarRating
+              rating={
+                data?.accommodation_review?.rating || data?.tour_review?.rating
+              }
+            />
           </View>
         </View>
 
@@ -56,7 +60,7 @@ export default function ReviewDetail({data}) {
             textType="regular"
             numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
             onTextLayout={onTextLayoutUser}>
-            {data?.accommodation_review?.content}
+            {data?.accommodation_review?.content || data?.tour_review?.content}
           </CustomText>
 
           {isBtnSeeMoreUser && !seeMoreUser && (
@@ -108,7 +112,7 @@ export default function ReviewDetail({data}) {
           <CustomText
             textType="regular"
             style={{marginTop: 'auto', color: '#687176'}}>
-            {formatDateTime(data?.updatedAt, {
+            {formatDateTime(data?.tour_review?.updatedAt, {
               dateStyle: 'dd-MM-yyyy, HH:mm',
             })}
           </CustomText>

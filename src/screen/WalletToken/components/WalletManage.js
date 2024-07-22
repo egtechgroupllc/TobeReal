@@ -12,7 +12,6 @@ import {IconArrowRight, IconRight} from '../../../assets/icon/Icon';
 export default function WalletManage({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-
   return (
     <View
       style={{
