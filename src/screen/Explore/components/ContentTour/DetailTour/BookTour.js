@@ -10,7 +10,7 @@ import {useAuthentication} from '../../../../../hooks/useAuthentication';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Skeleton from '../../../../../components/Skeleton';
 import {useLanguage} from '../../../../../hooks/useLanguage';
-import {formatPrice} from '../../../../../utils/format';
+import {formatDate, formatPrice} from '../../../../../utils/format';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   IconEmail,
@@ -24,29 +24,50 @@ import {
 } from '../../../../../assets/icon/Icon';
 import {useCountry} from '../../../../../hooks/useCountry';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {getListTicket} from '../../../../../Model/api/apiTour';
+import {useQuery} from '@tanstack/react-query';
 
 export default memo(function BookTour({data, onPress}) {
   const {t} = useLanguage();
 
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
-  const params = useRoute().params;
+  // const params = useRoute().params;
   const {currency} = useCountry();
-
+  const {data: dataQ, isLoading} = useQuery({
+    queryKey: ['list', 'ticket', data?.id],
+    queryFn: () =>
+      getListTicket({
+        id_tour: data?.id,
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
+      }),
+  });
   const priceFinal = useMemo(() => {
-    const resultPri = params?.tour_tickets?.map(element => {
-      const result = element?.tour_ticket_items?.map(percent => {
-        const resultPolicy = element?.tour_ticket_dates.reduce((acc, price) => {
-          return percent?.price_percent * price?.price_final;
-        }, 0);
+    if (!isLoading) {
+      const dataTicket = dataQ?.data?.rows;
+      const resultPri = dataTicket?.map(element => {
+        const result = element?.tour_ticket_items?.map(percent => {
+          const resultPolicy = element?.tour_ticket_dates.reduce(
+            (acc, price) => {
+              return (
+                percent?.price_percent * (price?.price_final || price?.price)
+              );
+            },
+            0,
+          );
 
-        return resultPolicy;
+          return resultPolicy;
+        });
+
+        return Math.min(...result);
       });
 
-      return Math.min(...result);
-    });
-    return Math.min(...resultPri);
-  }, [params?.tour_tickets]);
+      return Math.min(...resultPri);
+    }
+
+    return 0;
+  }, [dataQ?.data?.rows, isLoading]);
   return (
     <View style={styles.wrapper}>
       <View

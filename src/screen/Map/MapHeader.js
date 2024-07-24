@@ -91,6 +91,7 @@ export default memo(function MapHeader({
     if (keyReset.includes('province')) {
       reset();
     }
+    setValue('menu', {menu: {id: 'RENT', name: t('RENT')}});
     setIsRender(false);
   }, []);
 
@@ -172,11 +173,13 @@ export default memo(function MapHeader({
           paddingHorizontal: scale(16),
           rowGap: scale(5),
         }}>
-        <CustomInput
-          placeholder={t('accommodation_name')}
-          name="name"
-          control={control}
-        />
+        {(watch('menu')?.id === 'RENT' || watch('menu')?.id === 'BUY') && (
+          <CustomInput
+            placeholder={t('accommodation_name')}
+            name="name"
+            control={control}
+          />
+        )}
 
         <InViewport
           styleLoading={{
@@ -195,7 +198,8 @@ export default memo(function MapHeader({
                   }}
                 />
 
-                {watch('menu')?.id === 'RENT' || !watch('menu') ? (
+                {watch('menu')?.id === 'RENT' ||
+                watch('menu')?.menu?.id === 'RENT' ? (
                   <>
                     <TypeAccommoda
                       value={watch('type')}
@@ -211,7 +215,8 @@ export default memo(function MapHeader({
                       }}
                     />
                   </>
-                ) : watch('menu')?.id === 'BUY' ? (
+                ) : watch('menu')?.id === 'BUY' ||
+                  watch('menu')?.menu?.id === 'BUY' ? (
                   <>
                     <TypeEstate
                       value={watch('type')}
@@ -234,7 +239,7 @@ export default memo(function MapHeader({
                     />
                   </>
                 ) : (
-                  <View></View>
+                  <></>
                 )}
               </>
             )}

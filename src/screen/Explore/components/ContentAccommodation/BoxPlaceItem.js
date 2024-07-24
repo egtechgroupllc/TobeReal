@@ -6,7 +6,7 @@ import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {IconMapView} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
-import {formatPrice} from '../../../../utils/format';
+import {formatDate, formatPrice} from '../../../../utils/format';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -17,6 +17,8 @@ import Ribbon from '../../../components/Ribbon';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import TopImg from './BoxPlaceItem/TopImg';
+import {getListTicket} from '../../../../Model/api/apiTour';
+import {useQuery} from '@tanstack/react-query';
 
 export default function BoxPlaceItem({
   data,
@@ -71,6 +73,40 @@ export default function BoxPlaceItem({
     }
   }, [data?.rooms]);
 
+  const {data: dataQ} = useQuery({
+    queryKey: ['list', 'ticket', data?.id],
+    queryFn: () =>
+      getListTicket({
+        id_tour: data?.id,
+        date_end: formatDate(new Date(), {addDays: 1}),
+        date_start: formatDate(),
+      }),
+  });
+  const priceFinalTour = useMemo(() => {
+    if (dataQ?.data?.rows?.length > 0) {
+      const dataTicket = dataQ?.data?.rows;
+      const resultPri = dataTicket?.map(element => {
+        const result = element?.tour_ticket_items?.map(percent => {
+          const resultPolicy = element?.tour_ticket_dates.reduce(
+            (acc, price) => {
+              return (
+                percent?.price_percent * (price?.price_final || price?.price)
+              );
+            },
+            0,
+          );
+
+          return resultPolicy;
+        });
+
+        return Math.min(...result);
+      });
+
+      return Math.min(...resultPri);
+    }
+
+    return 0;
+  }, [dataQ?.data?.rows]);
   const freeCancel = useMemo(() => {
     if (data?.rooms) {
       let num = 0;
@@ -134,6 +170,7 @@ export default function BoxPlaceItem({
               // rating={rating}
               // isStar={isStar}
               // textRating={textRating}
+              isTour={dataQ ? true : false}
               isHeart={isHeart}
               type={data?.accommodation_type?.name || data?.estate_type?.name}
             />
@@ -213,9 +250,12 @@ export default function BoxPlaceItem({
                         isStar && {fontSize: SIZES.xMedium},
                         isDiscount && {color: COLORS.primary},
                       ]}>
-                      {formatPrice(priceFinal || data?.price, {
-                        currency: country?.currency_code,
-                      })}{' '}
+                      {formatPrice(
+                        priceFinal || data?.price || priceFinalTour,
+                        {
+                          currency: country?.currency_code,
+                        },
+                      )}{' '}
                       {time && type === 'RENT' && (
                         <CustomText
                           textType="regular"

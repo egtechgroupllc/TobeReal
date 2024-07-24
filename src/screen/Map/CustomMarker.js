@@ -15,7 +15,31 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
       },
     ],
   };
+  const priceFinalTour = useMemo(() => {
+    if (data?.tour_tickets) {
+      const dataTicket = data?.tour_tickets;
+      const resultPri = dataTicket?.map(element => {
+        const result = element?.tour_ticket_items?.map(percent => {
+          const resultPolicy = element?.tour_ticket_dates.reduce(
+            (acc, price) => {
+              return (
+                percent?.price_percent * (price?.price_final || price?.price)
+              );
+            },
+            0,
+          );
 
+          return resultPolicy;
+        });
+
+        return Math.min(...result);
+      });
+
+      return Math.min(...resultPri);
+    }
+
+    return 0;
+  }, [data?.tour_tickets]);
   const priceFinal = useMemo(() => {
     if (data?.rooms) {
       const resultPri = data?.rooms?.map(element => {
@@ -118,7 +142,7 @@ const CustomMarker = ({scaleValue, data, markerFocus, checkFilter}) => {
               color: markerFocus ? COLORS.white : COLORS.primary,
               fontFamily: FONTS.semiBold,
             }}>
-            {formatPrice(priceFinal || data?.price, {
+            {formatPrice(priceFinal || data?.price || priceFinalTour, {
               currency: currency?.currency_code,
             })}
           </Animated.Text>

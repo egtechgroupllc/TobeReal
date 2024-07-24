@@ -24,7 +24,7 @@ export default function AdminManageTourScreen() {
     return setOptions({
       headerTitle: t('tour_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -155,7 +155,18 @@ export default function AdminManageTourScreen() {
             navigate('VoucherManageScreen', {...params, isTour: true})
           }
         />
-
+        <CustomButton
+          text={t('manage_video_short')}
+          style={{width: '85%', height: scale(45)}}
+          // onPress={() =>
+          //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
+          // }
+          onPress={() =>
+            navigate('ManageVideoShortScreen', {
+              tour: {id: params?.id, isTour: true},
+            })
+          }
+        />
         {/* <CustomButton
           text={t('edit_tour')}
           style={{width: '85%', height: scale(45)}}

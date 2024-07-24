@@ -17,14 +17,11 @@ export default function ManageVideoShortScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
   const {token} = useAuthentication();
-  const table_name =
-    params?.Accom || params?.accommodation?.id
-      ? 'accommodation'
-      : params?.estateId
-      ? 'estate'
-      : params?.tour?.id
-      ? 'tour'
-      : 'estate';
+  const table_name = params?.accommodation?.id
+    ? 'accommodation'
+    : params?.estateId
+    ? 'estate'
+    : 'tour';
 
   const table_id =
     params?.accomId ||
@@ -40,7 +37,6 @@ export default function ManageVideoShortScreen() {
         table_id: table_id,
       }),
   });
-  console.log(data, 3123312213);
   const videoRef = useRef();
   useLayoutEffect(() => {
     return setOptions({
@@ -48,7 +44,7 @@ export default function ManageVideoShortScreen() {
 
       headerRight: () => (
         <>
-          {params?.accomId || params?.estateId ? (
+          {params?.accomId || params?.estateId || params?.tour?.id ? (
             <TouchableOpacity
               onPress={() => {
                 const navigateParams = params?.accomId
@@ -56,9 +52,14 @@ export default function ManageVideoShortScreen() {
                       Accom: params?.Accom,
                       accomId: params?.accomId,
                     }
-                  : {
+                  : params?.estateId
+                  ? {
                       Estate: params?.Estate,
                       estateId: params?.estateId,
+                    }
+                  : {
+                      Tour: params?.tour?.isTour,
+                      tourId: params?.tour?.id,
                     };
 
                 navigate('PostVideoShortScreen', navigateParams);

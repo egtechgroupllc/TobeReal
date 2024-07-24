@@ -1207,5 +1207,8 @@
   "discount_remaining": "剩余折扣",
   "voucher_tour": "旅游代金券",
   "apply_discount": "已应用折扣",
-  "the_remaining_balance_add": "剩余余额将返回到应用的代金券"
+  "the_remaining_balance_add": "剩余余额将返回到应用的代金券",
+
+  "please_select_check_out": "请选择退房日期",
+  "add_your_youtube_video": "添加您的房地产YouTube视频链接（如果有）"
 }

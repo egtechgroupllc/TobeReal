@@ -21,7 +21,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {showMess} from '../../../../assets/constants/Helper';
 
-export default function FindContent({isBuy, rental, tour, dataFind}) {
+export default function FindContent({isBuy, rental, dataFind}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const params = useRoute().params;
@@ -72,163 +72,127 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
 
   return (
     <View style={styles.findContent}>
-      {tour ? (
-        <View style={styles.findContent}>
-          <CustomInput
-            // control={control}
-            rules={requireField(t('please_add'))}
-            // name="location"
-            value={params?.name || t('around_me')}
-            iconLeft={IconMarker}
-            styleIcon={styles.icon}
-            style={{width: '90%'}}
-            onPress={() =>
-              navigate('NoBottomTab', {
-                screen: 'HomeSearchAccommodScreen',
-              })
-            }
-          />
-          <View style={{width: '165%'}}>
-            <ChooseCalendar rental={rental} />
+      <View
+        style={{
+          paddingHorizontal: scale(16),
+          rowGap: scale(10),
+          alignItems: 'center',
+        }}>
+        <CustomInput
+          // control={control}
+          // rules={requireField('Vui long them')}
+          // name="location"
+          value={params?.name || t('around_me')}
+          // defaultValue={t('around_me')}
+          iconLeft={IconMarker}
+          styleIcon={styles.icon}
+          onPress={() =>
+            navigate('NoBottomTab', {
+              screen: 'HomeSearchAccommodScreen',
+            })
+          }
+        />
+        {!isBuy && (
+          <>
+            <ChooseCalendar
+              rental={rental}
+              onDate={value => {
+                setValue('date', value);
+              }}
+            />
+
+            <ChooseOccupancy setValue={setValue} />
+          </>
+        )}
+        {isBuy && (
+          <View style={styles.optionBox}>
+            <View style={styles.boxIcon}>
+              <IconRoom />
+            </View>
+            <OptionAccommodation
+              outline
+              isSelectAll
+              styleContent={{
+                flex: 1,
+                columnGap: scale(8),
+              }}
+              data={[
+                {
+                  text: 'All',
+                },
+                {
+                  text: t('studio'),
+                },
+                {
+                  text: '1BR',
+                },
+                {
+                  text: '2BR',
+                },
+                {
+                  text: '3BR+',
+                },
+              ]}
+            />
           </View>
-
-          <CustomButton
-            // onPress={handleSubmit(handleSearch)}
-            onPress={() => showMess(t('comming_soon'), 'error')}
-            buttonType="medium"
-            text={t('find_recommend_tour')}
-            styleText={{
-              color: COLORS.white,
-              textType: 'bold',
-              textTransform: 'uppercase',
-            }}
-            style={{
-              width: '92%',
-            }}
-          />
-        </View>
-      ) : (
-        <View
-          style={{
-            paddingHorizontal: scale(16),
-            rowGap: scale(10),
-            alignItems: 'center',
-          }}>
-          <CustomInput
-            // control={control}
-            // rules={requireField('Vui long them')}
-            // name="location"
-            value={params?.name || t('around_me')}
-            // defaultValue={t('around_me')}
-            iconLeft={IconMarker}
-            styleIcon={styles.icon}
-            onPress={() =>
-              navigate('NoBottomTab', {
-                screen: 'HomeSearchAccommodScreen',
-              })
-            }
-          />
-          {!isBuy && (
-            <>
-              <ChooseCalendar
-                rental={rental}
-                onDate={value => {
-                  setValue('date', value);
-                }}
-              />
-
-              <ChooseOccupancy setValue={setValue} />
-            </>
-          )}
-          {isBuy && (
-            <View style={styles.optionBox}>
-              <View style={styles.boxIcon}>
-                <IconRoom />
-              </View>
-              <OptionAccommodation
-                outline
-                isSelectAll
-                styleContent={{
-                  flex: 1,
-                  columnGap: scale(8),
-                }}
-                data={[
-                  {
-                    text: 'All',
-                  },
-                  {
-                    text: t('studio'),
-                  },
-                  {
-                    text: '1BR',
-                  },
-                  {
-                    text: '2BR',
-                  },
-                  {
-                    text: '3BR+',
-                  },
-                ]}
-              />
+        )}
+        {isBuy && (
+          <View style={styles.optionBox}>
+            <View style={styles.boxIcon}>
+              <IconFurniture />
             </View>
-          )}
-          {isBuy && (
-            <View style={styles.optionBox}>
-              <View style={styles.boxIcon}>
-                <IconFurniture />
-              </View>
-              <OptionAccommodation
-                outline
-                scrollEnabled
-                isSelectAll
-                styleContent={{
-                  flex: 1,
-                  columnGap: scale(8),
-                }}
-                data={[
-                  {
-                    text: t('all'),
-                  },
-                  {
-                    text: t('full_furnished'),
-                  },
-                  {
-                    text: t('unfurnished'),
-                  },
-                ]}
-              />
-            </View>
-          )}
+            <OptionAccommodation
+              outline
+              scrollEnabled
+              isSelectAll
+              styleContent={{
+                flex: 1,
+                columnGap: scale(8),
+              }}
+              data={[
+                {
+                  text: t('all'),
+                },
+                {
+                  text: t('full_furnished'),
+                },
+                {
+                  text: t('unfurnished'),
+                },
+              ]}
+            />
+          </View>
+        )}
 
-          {isBuy && (
-            <View style={styles.optionBox}>
-              <View style={styles.boxIcon}>
-                <IconTag />
-              </View>
-              <OptionAccommodation
-                outline
-                // multiSelect
-                isSelectAll
-                styleContent={{
-                  flex: 1,
-                  columnGap: scale(8),
-                }}
-                data={[
-                  {
-                    text: t('all'),
-                  },
-                  {
-                    text: t('fixed_price'),
-                  },
-                  {
-                    text: t('negotiable'),
-                  },
-                ]}
-              />
+        {isBuy && (
+          <View style={styles.optionBox}>
+            <View style={styles.boxIcon}>
+              <IconTag />
             </View>
-          )}
+            <OptionAccommodation
+              outline
+              // multiSelect
+              isSelectAll
+              styleContent={{
+                flex: 1,
+                columnGap: scale(8),
+              }}
+              data={[
+                {
+                  text: t('all'),
+                },
+                {
+                  text: t('fixed_price'),
+                },
+                {
+                  text: t('negotiable'),
+                },
+              ]}
+            />
+          </View>
+        )}
 
-          {/* <View
+        {/* <View
             style={{
               flexDirection: 'row',
               columnGap: scale(6),
@@ -246,21 +210,20 @@ export default function FindContent({isBuy, rental, tour, dataFind}) {
             />
           </View> */}
 
-          <CustomButton
-            onPress={handleSubmit(handleSearch)}
-            buttonType="medium"
-            text={!isBuy ? t('Find_Accommodation') : t('find_real_estate')}
-            styleText={{
-              color: COLORS.white,
-              textType: 'bold',
-              textTransform: 'uppercase',
-            }}
-            style={{
-              minWidth: '90%',
-            }}
-          />
-        </View>
-      )}
+        <CustomButton
+          onPress={handleSubmit(handleSearch)}
+          buttonType="medium"
+          text={!isBuy ? t('Find_Accommodation') : t('find_real_estate')}
+          styleText={{
+            color: COLORS.white,
+            textType: 'bold',
+            textTransform: 'uppercase',
+          }}
+          style={{
+            minWidth: '90%',
+          }}
+        />
+      </View>
     </View>
   );
 }

@@ -25,7 +25,6 @@ export default function PostVideoShortScreen() {
   const params = useRoute().params;
   const [pausedVideo, setPausedVideo] = useState(false);
   const queryClient = useQueryClient();
-
   const {t} = useLanguage();
   const {token} = useAuthentication();
   useLayoutEffect(() => {
@@ -34,13 +33,19 @@ export default function PostVideoShortScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const table_name = params.Accom
+    ? 'accommodation'
+    : params?.Estate
+    ? 'estate'
+    : 'tour';
+  const table_id = params?.accomId || params?.estateId || params?.tourId;
   const {data, isLoading, error, isError} = useQuery({
-    queryKey: ['common', 'linked-data', params?.accomId || params?.estateId],
+    queryKey: ['common', 'linked-data', table_id],
     queryFn: () =>
       getLinkData({
         token: token,
-        table_name: params.Accom ? 'accommodation' : 'estate',
-        table_id: params?.accomId || params?.estateId,
+        table_name: table_name,
+        table_id: table_id,
       }),
   });
 
@@ -90,7 +95,7 @@ export default function PostVideoShortScreen() {
               'common',
               'video-short',
               'my-list',
-              params?.accomId || params?.estateId,
+              params?.accomId || params?.estateId || params?.tourId,
             ]);
 
             setPausedVideo(true);
@@ -122,7 +127,9 @@ export default function PostVideoShortScreen() {
             }}>
             {params.Accom
               ? t('share_detail_hotel_short_video')
-              : t('share_detail_estate_short_video')}
+              : params?.Estate
+              ? t('share_detail_estate_short_video')
+              : t('share_detail_tour_short_video')}
           </CustomText>
         </View>
         <CustomInput

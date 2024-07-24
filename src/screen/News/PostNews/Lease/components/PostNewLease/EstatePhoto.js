@@ -164,7 +164,7 @@ export default function EstatePhoto({
 
           <CustomInput
             styleTextLabel={styles.label}
-            label={t('Add your real estate YouTube link video(if any)')}
+            label={t('add_your_youtube_video')}
             control={control}
             name="video_link"
             placeholder={t('link_youtube')}

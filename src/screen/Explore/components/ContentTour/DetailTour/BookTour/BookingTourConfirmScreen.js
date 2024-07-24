@@ -31,6 +31,7 @@ import DetailPriceRoom from '../../../../../Bookings/components/BookingRoom/Cont
 import ModalBookingSuccess from '../../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
 import TopStep2 from '../../../../../Bookings/components/BookingRoom/ContentStep2/TopStep2';
 import {postBookingTour} from '../../../../../../Model/api/apiTour';
+import DetailPriceTour from './components/DetailPriceTour';
 export default function BookingTourConfirmScreen() {
   const data = useRoute().params;
   const {t} = useLanguage();
@@ -127,8 +128,9 @@ export default function BookingTourConfirmScreen() {
 
             setTimeout(
               () => {
+                setOpenContact(false);
+
                 if (dataInside?.status) {
-                  setOpenContact(false);
                   // queryClient.invalidateQueries([
                   //   'accommodation',
                   //   'detail',
@@ -196,7 +198,7 @@ export default function BookingTourConfirmScreen() {
       />
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
-          <DetailPriceRoom
+          <DetailPriceTour
             isTour
             data={data}
             priceVoucher={priceVoucher}

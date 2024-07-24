@@ -66,7 +66,7 @@ export const postAddTypeTicket = async data => {
   return responsive.data;
 };
 export const getListTour = async ({
-  page = 1,
+  pageParam = 1,
   country_id,
   province_id,
   name = '',
@@ -87,9 +87,8 @@ export const getListTour = async ({
   const lat = latitude ? `latitude=${latitude}` : '';
   const long = longitude ? `longitude=${longitude}` : '';
   const responsive = await instance.get(
-    `/list-sell?page=${page}&${country}&${province}&name=${name}&${minprice}&${maxprice}&date_start=${date_start}&date_end=${date_end}&${dist}&${lat}&${long}&currency_id=${currency_id}`,
+    `/list-sell?page=${pageParam}&limit=10&${country}&${province}&name=${name}&${minprice}&${maxprice}&date_start=${date_start}&date_end=${date_end}&${dist}&${lat}&${long}&currency_id=${currency_id}`,
   );
-
   return responsive.data;
 };
 export const getDetailTour = async id_tour => {
@@ -158,6 +157,13 @@ export const postBookingTour = async data => {
 export const getListPopularProvinceTour = async (parent = '') => {
   const responsive = await instance.get(
     `/statistic/popular-province?parent=${parent}`,
+  );
+
+  return responsive.data;
+};
+export const getListPopularCountryTour = async (hidden_id = '') => {
+  const responsive = await instance.get(
+    `/statistic/popular-country?hidden_id=${hidden_id}`,
   );
 
   return responsive.data;

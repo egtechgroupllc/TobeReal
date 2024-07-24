@@ -177,7 +177,7 @@ export default function ContentStep2({data}) {
           <DetailPriceRoom
             data={data}
             priceVoucher={priceVoucher}
-            onChangeTotalPrice={value => console.log(value, 3213123)}
+            onChangeTotalPrice={value => setTotalPrice(value)}
           />
           <CustomText textType="semiBold">
             {data?.name} ({data?.room_bed_type?.name}),{data?.numRoomSelect}x

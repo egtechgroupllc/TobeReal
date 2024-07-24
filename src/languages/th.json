@@ -1210,5 +1210,8 @@
   "discount_remaining": "ส่วนลดที่เหลือ",
   "voucher_tour": "บัตรกำนัลทัวร์",
   "apply_discount": "ส่วนลดที่ใช้",
-  "the_remaining_balance_add": "ยอดเงินคงเหลือจะถูกส่งคืนไปยังบัตรกำนัลที่ใช้"
+  "the_remaining_balance_add": "ยอดเงินคงเหลือจะถูกส่งคืนไปยังบัตรกำนัลที่ใช้",
+
+  "please_select_check_out": "กรุณาเลือกวันที่เช็คเอาท์",
+  "add_your_youtube_video": "เพิ่มลิงก์วิดีโอ YouTube อสังหาริมทรัพย์ของคุณ (ถ้ามี)"
 }

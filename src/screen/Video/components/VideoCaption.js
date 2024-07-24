@@ -34,7 +34,8 @@ export default memo(function VideoCaption({data, styleBottom}) {
         <CustomText textType="bold" style={styles.name}>
           {data?.user?.username ||
             data?.accommodation?.contact_name ||
-            data?.estate?.contact_name}
+            data?.estate?.contact_name ||
+            data?.tour?.contact_name}
         </CustomText>
 
         <TouchableOpacity
@@ -69,7 +70,9 @@ export default memo(function VideoCaption({data, styleBottom}) {
         </CustomText> */}
 
         <CustomText textType="medium" style={styles.textDesc}>
-          {data?.accommodation?.address || data?.estate?.address}
+          {data?.accommodation?.address ||
+            data?.estate?.address ||
+            data?.tour?.address}
         </CustomText>
       </View>
       <View>
@@ -100,7 +103,9 @@ export default memo(function VideoCaption({data, styleBottom}) {
             navigate('NoBottomTab', {
               screen: data?.accommodation
                 ? 'DetailAccommodationScreen'
-                : 'DetailBuyScreen',
+                : data?.estate
+                ? 'DetailBuyScreen'
+                : 'DetailTourScreen',
               params: {data, isVideo: true},
             });
           }}

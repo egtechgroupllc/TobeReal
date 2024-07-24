@@ -1,51 +1,46 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
-import {IconDown} from '../../../../../assets/icon/Icon';
-import CustomText from '../../../../../components/CustomText';
-import {formatPrice} from '../../../../../utils/format';
-import {useCountry} from '../../../../../hooks/useCountry';
-import {useLanguage} from '../../../../../hooks/useLanguage';
+import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {IconDown} from '../../../../../../../assets/icon/Icon';
+import {CustomText} from '../../../../../../../components';
+import {formatPrice} from '../../../../../../../utils/format';
+import {useCountry} from '../../../../../../../hooks/useCountry';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
-export default function DetailPriceRoom({
+export default function DetailPriceTour({
   data,
   priceVoucher,
   onChangeTotalPrice,
+  isTour,
   dataPriceTicket,
 }) {
   const {t} = useLanguage();
-  const numRoom = data?.numRoomSelect;
-  const numNight = data?.date?.numNight;
+
   const [isMorePrice, setIsMorePrice] = useState(false);
   const [checkPrice, setCheckPrice] = useState(false);
   const {currency} = useCountry();
 
-  const calculatePrice = () => {
-    // if (data?.percentDiscount && data?.percentDiscount === 1) {
-    //   return priceAverage;
-    // } else {
-    //   return priceAverage - priceAverage * data?.percentDiscount;
-    // }
-    return data?.priceAverage * data?.percentDiscount;
-  };
-  const feePrice = calculatePrice() * 0;
-  const price_per_day = calculatePrice();
-  const total_price_per_day = calculatePrice() * numNight;
   const voucher_discount = priceVoucher;
-  const totalPrice = calculatePrice() * numRoom * numNight + feePrice;
+  const totalSumTour =
+    isTour &&
+    data?.listAddTicket.reduce((acc, currentItem) => {
+      const totalPrice =
+        currentItem?.quantity * dataPriceTicket * currentItem?.price_percent;
+      return acc + totalPrice;
+    }, 0);
 
   useEffect(() => {
-    if (voucher_discount > totalPrice) {
+    if (voucher_discount > totalSumTour) {
       setCheckPrice(true);
     } else {
       setCheckPrice(false);
     }
-  }, [voucher_discount, totalPrice, checkPrice]);
+  }, [voucher_discount, checkPrice, totalSumTour]);
 
   useEffect(() => {
-    totalPrice && onChangeTotalPrice && onChangeTotalPrice(totalPrice);
-  }, [onChangeTotalPrice, totalPrice]);
+    totalSumTour && onChangeTotalPrice && onChangeTotalPrice(totalSumTour);
+  }, [onChangeTotalPrice, totalSumTour]);
 
   return (
     <View style={{rowGap: scale(5)}}>
@@ -58,6 +53,7 @@ export default function DetailPriceRoom({
           paddingVertical: scale(10),
         }}>
         <Row
+          isTour
           textTypeTitle={'bold'}
           title={t('total_price')}
           styleTitle={{
@@ -67,16 +63,15 @@ export default function DetailPriceRoom({
             fontSize: SIZES.medium,
           }}
           priceVoucher={priceVoucher}
-          valueSub={formatPrice(totalPrice, {
+          valueSub={formatPrice(totalSumTour, {
             currency: currency?.currency_code,
           })}
-          textDescThird={`${numNight} ${t('day')}, ${numRoom} ${t('room')}`}
           textDesc={`${t('the_remaining_balance_add')}: `}
-          valueDesc={`+${formatPrice(voucher_discount - totalPrice, {
+          valueDesc={`+${formatPrice(voucher_discount - totalSumTour, {
             currency: currency?.currency_code,
           })}`}
           value={formatPrice(
-            !checkPrice ? totalPrice - voucher_discount || totalPrice : 0,
+            !checkPrice ? totalSumTour - voucher_discount || totalSumTour : 0,
             {
               currency: currency?.currency_code,
             },
@@ -105,42 +100,53 @@ export default function DetailPriceRoom({
         }}>
         <View style={styles.line} />
 
-        <Row title={t('room_number')} value={numRoom} />
-
-        <Row
-          title={t('price_per_day')}
-          value={formatPrice(price_per_day, {
-            currency: currency?.currency_code,
-          })}
-          colorValue={COLORS.black}
-          textType="medium"
-        />
-        <Row
-          title={`${t('total_price_for')} ${numNight} ${t('day')}`}
-          value={formatPrice(total_price_per_day, {
-            currency: currency?.currency_code,
-          })}
-          colorValue={COLORS.primary}
-          textType="semiBold"
-        />
-        {!!priceVoucher && (
-          <Row
-            title={t('apply_discount')}
-            value={`-${formatPrice(voucher_discount, {
-              currency: currency?.currency_code,
-            })}`}
-            textType="regular"
-            colorValue={COLORS.text}
-          />
-        )}
-        <Row
-          title={t('taxes_and_fees')}
-          value={formatPrice(feePrice, {
-            currency: currency?.currency_code,
-          })}
-          textType="regular"
-          colorValue={COLORS.text}
-        />
+        {data?.listAddTicket?.map((item, index) => {
+          return (
+            <View style={{rowGap: scale(5)}} key={index}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                }}>
+                <CustomText
+                  textType="medium"
+                  numberOfLines={3}
+                  style={{
+                    ...styles.text2,
+                    color: COLORS.black,
+                  }}>
+                  ({item?.quantity}) x {item?.name}
+                </CustomText>
+              </View>
+              <CustomText
+                textType="semiBold"
+                numberOfLines={3}
+                style={{
+                  fontSize: SIZES.small,
+                  color: COLORS.primary,
+                }}>
+                {t('price')}:{' '}
+                {formatPrice(
+                  item?.quantity *
+                    data?.dataPriceTicketEx *
+                    item?.price_percent,
+                  {
+                    currency: currency?.currency_code,
+                  },
+                )}
+              </CustomText>
+              {!!priceVoucher && (
+                <Row
+                  title={t('apply_discount')}
+                  value={`-${formatPrice(voucher_discount, {
+                    currency: currency?.currency_code,
+                  })}`}
+                  textType="regular"
+                  colorValue={COLORS.text}
+                />
+              )}
+            </View>
+          );
+        })}
       </Collapsible>
     </View>
   );
@@ -160,6 +166,7 @@ const Row = ({
   checkPrice,
   textDesc,
   textDescThird,
+  isTour,
 }) => {
   return (
     <View>
@@ -174,7 +181,7 @@ const Row = ({
             style={{fontSize: SIZES.xMedium, ...styleTitle}}>
             {title}
           </CustomText>
-          {textDescThird && (
+          {textDescThird && !isTour && (
             <CustomText
               textType={'medium'}
               style={{

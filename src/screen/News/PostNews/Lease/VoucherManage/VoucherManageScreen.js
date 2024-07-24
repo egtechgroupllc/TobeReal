@@ -34,7 +34,7 @@ export default function VoucherManageScreen() {
     return setOptions({
       headerTitle: t('voucher_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

@@ -1217,5 +1217,8 @@
   "discount_remaining": "Discount remaining",
   "voucher_tour": "Voucher of tour",
   "apply_discount": "Aplied discount",
-  "the_remaining_balance_add": "The remaining balance will be returned to the applied voucher"
+  "the_remaining_balance_add": "The remaining balance will be returned to the applied voucher",
+
+  "please_select_check_out": "Please select a check-out date",
+  "add_your_youtube_video": "Add your real estate YouTube link video(if any)"
 }

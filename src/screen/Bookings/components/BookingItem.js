@@ -101,12 +101,13 @@ export default function BookingItem({data, onPress, onReView, onViewDetail}) {
                   onPress={onViewDetail}
                 />
               ))}
+
             {/* <CustomButton
-                styleWrapper={{flex: 0.4}}
-                text={t('review')}
-                style={{height: scale(25)}}
-                onPress={onReView}
-              /> */}
+              styleWrapper={{flex: 0.4}}
+              text={t('review')}
+              style={{height: scale(25)}}
+              onPress={onReView}
+            /> */}
           </View>
           <View style={styles.line} />
           <View style={styles.address}>

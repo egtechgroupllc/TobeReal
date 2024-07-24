@@ -13,7 +13,7 @@ import {IconMyLocation} from '../../assets/icon/Icon';
 import {CustomButton, MainWrapper} from '../../components';
 import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
-import {formatDate} from '../../utils/format';
+import {formatDate, formatDateTime} from '../../utils/format';
 import {getCurrentLocation} from '../../utils/getCurrentLocation';
 import CustomMarker from './CustomMarker';
 import ListLocation from './ListLocation';
@@ -73,6 +73,10 @@ export default function HomeMapScreen({showListLocation, style}) {
   };
   const objTour = {
     country_id: country?.id,
+    date_end: formatDate(new Date(), {addDays: 1}),
+    date_start: formatDate(),
+    currency_id: currency?.id,
+    province_id: filter?.province?.id,
   };
   const {data, isLoading, isError, error} = useQuery({
     queryKey:

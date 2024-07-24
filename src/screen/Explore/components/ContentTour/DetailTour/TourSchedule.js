@@ -10,11 +10,9 @@ import {CustomButton, TabSelect} from '../../../../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {ScrollView} from 'react-native-gesture-handler';
 
-const listTab = ['Trip highlights'];
 export default function TourSchedule({data}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
-  const [tabSelect, setTabSelect] = useState(listTab[0]);
   const [selectedDay, setSelectedDay] = useState(
     JSON.parse(data?.schedule)[0]?.title,
   );
@@ -72,9 +70,7 @@ export default function TourSchedule({data}) {
       <BottomSheet
         ref={bottomSheetRef}
         snapPoints={['50%', '80%']}
-        titleIndicator={
-          tabSelect === listTab[0] ? t('description_content') : 'Nearby'
-        }
+        titleIndicator={t('description_content')}
         styleContent={{
           paddingHorizontal: scale(16),
           rowGap: scale(10),

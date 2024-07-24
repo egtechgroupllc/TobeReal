@@ -68,6 +68,7 @@ import AddTypeTicketScreen from '../screen/News/PostNews/Tour/AddTicket/AddTypeT
 import BookingTourConfirm from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookingTourConfirmScreen';
 import BookingTourConfirmScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookingTourConfirmScreen';
 import DetailReviewTourScreen from '../screen/Bookings/DetailReviewTourScreen';
+import ListTourSearchScreen from '../screen/Search/ListTourSearchScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -155,6 +156,10 @@ export default routerNoBottomTab = [
   {
     name: 'ListAccommodationSearchScreen',
     component: ListAccommodationSearchScreen,
+  },
+  {
+    name: 'ListTourSearchScreen',
+    component: ListTourSearchScreen,
   },
   {
     name: 'CountryScreen',

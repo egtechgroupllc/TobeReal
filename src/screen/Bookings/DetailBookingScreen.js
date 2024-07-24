@@ -25,7 +25,6 @@ import {useMutation} from '@tanstack/react-query';
 export default function DetailBookingScreen() {
   const {t} = useLanguage();
   const data = useRoute().params;
-  console.log(data?.type_payment, 312312321);
   const objAccmo = data?.accommodation;
   const {setOptions} = useNavigation();
 
@@ -107,10 +106,11 @@ export default function DetailBookingScreen() {
               flexDirection: 'row',
               columnGap: scale(50),
             }}>
-            <View style={{rowGap: scale(3)}}>
+            <View style={{rowGap: scale(3), width: scale(150)}}>
               <CustomText
                 textType="bold"
                 size={SIZES.xMedium}
+                numberOfLines={2}
                 style={{marginBottom: scale(5)}}>
                 ({data?.number_room} {t('room')} - {data?.room?.room_type?.name}
                 ){'  '} {data?.room?.name}

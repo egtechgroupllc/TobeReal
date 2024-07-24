@@ -88,7 +88,6 @@ export default function PackageTour() {
   useEffect(() => {
     setFilter(listProvince.data?.data?.rows?.[0]);
   }, [listProvince?.data?.data?.rows]);
-
   return (
     <InViewPort>
       <WrapperContent
@@ -112,25 +111,23 @@ export default function PackageTour() {
         heading={title}
         // subHeading={t('discover_package_family') + ` ${formatPrice(1000000)}`}
         styleWrapper={{backgroundColor: 'transparent'}}>
-        {data?.data?.count !== 0 ? (
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            ListEmptyComponent={<EmptyData />}
-            renderItem={({item}) => (
-              <BoxPlaceItem isHeart isStar data={item} rental="night" />
-            )}
-          />
-        ) : (
-          <View style={{alignItems: 'center', rowGap: scale(10)}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows}
+          contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
+          renderItem={({item}) => (
+            <BoxPlaceItem isHeart isStar data={item} rental="night" />
+          )}
+        />
+
+        {/* <View style={{alignItems: 'center', rowGap: scale(10)}}>
             <IconBookings width={scale(50)} height={scale(50)} />
             <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
               {t('no_data')}
             </CustomText>
-          </View>
-        )}
+          </View> */}
       </WrapperContent>
     </InViewPort>
   );

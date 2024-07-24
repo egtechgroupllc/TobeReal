@@ -27,6 +27,7 @@ import ContentTour from '../ContentTour/ContentTour';
 import FindAccommodationStart from './FindAccommodationStart';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
+import FindContentTour from './FindContentTour';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -69,23 +70,19 @@ export default function FindAccommodation() {
     [locale],
   );
 
-  // const listTour = useMemo(
-  //   () => [
-  //     {
-  //       name: t('tour_by_topic'),
-  //       icon: IconTourTopic,
-  //     },
-  //     {
-  //       name: t('emigrate'),
-  //       icon: IconEmigrate,
-  //     },
-  //     {
-  //       name: t('world'),
-  //       icon: IconWorld,
-  //     },
-  //   ],
-  //   [locale],
-  // );
+  const listTour = useMemo(
+    () => [
+      {
+        name: t('domestic'),
+        icon: IconEmigrate,
+      },
+      {
+        name: t('world'),
+        icon: IconWorld,
+      },
+    ],
+    [locale],
+  );
   const listRent = useMemo(
     () => [
       {
@@ -200,10 +197,9 @@ export default function FindAccommodation() {
                         ? listRent || typeRent?.data?.data
                         : tabSelect === 'BUY'
                         ? listBuy || typeBuy?.data?.data
+                        : tabSelect === 'TOUR'
+                        ? listTour
                         : []
-                      // : tabSelect === 'TOUR'
-                      // ? listTour
-                      // : []
                     }
                   />
                 </View>
@@ -214,8 +210,8 @@ export default function FindAccommodation() {
                     dataFind={{type: selectedId, menu: tabSelect}}
                   />
                 ) : (
-                  <FindContent
-                    tour
+                  <FindContentTour
+                    rental={category?.id}
                     dataFind={{type: selectedId, menu: tabSelect}}
                   />
                 )}

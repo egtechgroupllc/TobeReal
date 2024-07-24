@@ -12,7 +12,13 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 const minDate = formatDate(new Date()); // Today
 const dateEnd = formatDate(minDate, {addDays: 1});
 
-export default function ChooseCalendar({rental, style, Checkin, onDate}) {
+export default function ChooseCalendar({
+  rental,
+  style,
+  Checkin,
+  onDate,
+  isOneDay,
+}) {
   const {t} = useLanguage();
 
   // Khai báo State
@@ -63,21 +69,35 @@ export default function ChooseCalendar({rental, style, Checkin, onDate}) {
           Check in - Check out
         </CustomText>
       )}
-      <CustomInput
-        // name="calendar"
-        defaultValue={`${formatDate(selectedDate?.date_start)} - ${formatDate(
-          selectedDate?.date_end || dateEnd,
-        )}`}
-        iconLeft={IconCalendar}
-        styleIcon={styles.icon}
-        onPress={() => {
-          setIsOpen(true);
-          // bottomSheetRef.current.open();
-        }}
-      />
+      {!isOneDay ? (
+        <CustomInput
+          // name="calendar"
+          defaultValue={`${formatDate(selectedDate?.date_start)} - ${formatDate(
+            selectedDate?.date_end || dateEnd,
+          )}`}
+          iconLeft={IconCalendar}
+          styleIcon={styles.icon}
+          onPress={() => {
+            setIsOpen(true);
+            // bottomSheetRef.current.open();
+          }}
+        />
+      ) : (
+        <CustomInput
+          // name="calendar"
+          defaultValue={`${formatDate(selectedDate?.date_start)}`}
+          iconLeft={IconCalendar}
+          styleIcon={styles.icon}
+          onPress={() => {
+            setIsOpen(true);
+            // bottomSheetRef.current.open();
+          }}
+        />
+      )}
 
       {isOpen && (
         <ChooseCalendarSheet
+          isOneDay={isOneDay}
           ref={bottomSheetRef}
           onDate={handleSelectDate}
           rental={rental}

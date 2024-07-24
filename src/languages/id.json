@@ -1182,5 +1182,8 @@
   "discount_remaining": "Diskon yang tersisa",
   "voucher_tour": "Voucher tur",
   "apply_discount": "Diskon diterapkan",
-  "the_remaining_balance_add": "Sisa saldo akan dikembalikan ke voucher yang diterapkan"
+  "the_remaining_balance_add": "Sisa saldo akan dikembalikan ke voucher yang diterapkan",
+
+  "please_select_check_out": "Silakan pilih tanggal check-out",
+  "add_your_youtube_video": "Tambahkan tautan video YouTube real estate Anda (jika ada)"
 }

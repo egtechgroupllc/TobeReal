@@ -56,7 +56,7 @@ export default function TicketOption({paramsTour}) {
     ],
     queryFn: () =>
       getListTicket({
-        id_tour: params?.id,
+        id_tour: params?.id || params?.data?.tour?.id,
         date_end: formatDate(date?.selectedStartDate, {addDays: 1}),
         date_start: formatDate(date?.selectedStartDate),
       }),
@@ -79,12 +79,14 @@ export default function TicketOption({paramsTour}) {
       dispatch(
         StackActions.push('NoBottomTab', {
           screen: 'BookTourScreen',
-          params: {...item, images: params?.images},
+          params: {
+            ...item,
+            images: params?.images || params?.data?.tour?.images,
+          },
         }),
       );
     }
   };
-
   return (
     <View>
       <View style={styles.boxTourTime}>

@@ -45,31 +45,31 @@ export default function DetailTourScreen() {
   ]).current;
 
   const {data, isLoading} = useQuery({
-    queryKey: ['tour', 'detail', params?.id],
-    queryFn: () => getDetailTour(params?.id),
+    queryKey: ['tour', 'detail', params?.data?.table_id || params?.id],
+    queryFn: () => getDetailTour(params?.data?.table_id || params?.id),
   });
   const listView = useMemo(() => {
     const dataDetail = data?.data;
-    return [
-      // <InfoUnitFacilities />,
+    return !dataDetail
+      ? []
+      : [
+          // <InfoUnitFacilities />,
 
-      <InfoDetail data={dataDetail} paramsTour={params} />,
-      <Traceability data={dataDetail} />,
-      <TicketOption data={dataDetail} paramsTour={params} />,
-      <DetailAccommoMap data={dataDetail} />,
-      <Review dataP={dataDetail} />,
-      // <View>
-      //   <ContactInfo
-      //     data={dataDetail}
-      //     onPress={() => {
-      //       showMess(t('comming_soon'), 'error');
-      //     }}
-      //   />
-      // </View>,
-      <TourSchedule data={dataDetail} />,
-
-      // <SimilarApartmentsNearby />,
-    ];
+          <InfoDetail data={dataDetail} paramsTour={params} />,
+          <Traceability data={dataDetail} />,
+          <TicketOption data={dataDetail} paramsTour={params} />,
+          <DetailAccommoMap data={dataDetail} />,
+          <Review dataP={dataDetail} />,
+          // <View>
+          //   <ContactInfo
+          //     data={dataDetail}
+          //     onPress={() => {
+          //       showMess(t('comming_soon'), 'error');
+          //     }}
+          //   />
+          // </View>,
+          <TourSchedule data={dataDetail} />,
+        ];
   }, [data?.data]);
 
   const refScroll = useRef();

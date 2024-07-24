@@ -26,10 +26,9 @@ export default function Review({dataP}) {
       bottomSheetRef.current?.open();
     }
   }, [isOpen]);
-
   const {data, isLoading} = useQuery({
-    queryKey: ['tour', 'list-review', dataP.id],
-    queryFn: () => getListReviewTour({id_tour: dataP.id, limit: 6}),
+    queryKey: ['tour', 'list-review', dataP?.id],
+    queryFn: () => getListReviewTour({id_tour: dataP?.id, limit: 6}),
   });
   return (
     <WrapperContent

@@ -43,7 +43,7 @@ const listSelectTimeYear = [
 ];
 
 export default forwardRef(function ChooseCalendarSheet(
-  {rental, style, value, isOpen, onDate, onDismissSheet},
+  {rental, style, value, isOpen, onDate, onDismissSheet, isOneDay},
   ref,
 ) {
   const {t} = useLanguage();
@@ -164,17 +164,21 @@ export default forwardRef(function ChooseCalendarSheet(
         rowGap: scale(10),
         paddingHorizontal: scale(20),
       }}>
-      <TopCalendar
-        value={selected?.text}
-        checkIn={selectedStartDate}
-        checkOut={selectedEndDate}
-        onPressTime={() => {
-          bottomSheetChild.current.openChild();
-        }}
-      />
+      {!isOneDay && (
+        <TopCalendar
+          value={selected?.text}
+          checkIn={selectedStartDate}
+          checkOut={selectedEndDate}
+          isOneDay={isOneDay}
+          onPressTime={() => {
+            bottomSheetChild.current.openChild();
+          }}
+        />
+      )}
 
       <View style={{flex: 1}}>
         <CalendarRange
+          isOneDay={isOneDay}
           minDate={minDate}
           startDate={selectedStartDate}
           endDate={selectedEndDate}
@@ -192,8 +196,8 @@ export default forwardRef(function ChooseCalendarSheet(
           textType: 'semiBold',
         }}
         onPress={() => {
-          if (!selectedEndDate) {
-            showMess('Vui long chon ngay tra phong ', 'error');
+          if (!selectedEndDate && !isOneDay) {
+            showMess(t('please_select_check_out'), 'error');
             return;
           }
           handleSelectDate();

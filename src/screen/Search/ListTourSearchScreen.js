@@ -12,19 +12,25 @@ import ListEstateSearchContent from './ListEstateSearchContent';
 import ListTourSearchContent from './ListTourSearchContent';
 import SearchNavBar from './components/SearchNavBar';
 import {useLanguage} from '../../hooks/useLanguage';
-import {CustomText} from '../../components';
-import {COLORS, SIZES} from '../../assets/constants';
+import {Category, CustomText} from '../../components';
+import {COLORS, SIZES, scale} from '../../assets/constants';
+import {useQuery} from '@tanstack/react-query';
+import {getListPopularProvinceTour} from '../../Model/api/apiTour';
+import CategoryTour from './components/CategoryTour';
+import MapProvince from '../Map/Header/MapProvince';
+import ProvinceTour from './components/componentTour/ProvinceTour';
+import FilterTour from './components/FilterTour';
 
-export default function ListAccommodationSearchScreen() {
+export default function ListTourSearchScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
-
   const {country, currency} = useCountry();
   const [filter, setFilter] = useState();
   const [current, setCurrent] = useState({});
   const [empale, setEmpale] = useState();
   const isFilter = useRef();
   const {setOptions} = useNavigation();
+  const bottomSheetChildRef = useRef();
 
   const currentPosition = useCallback(async () => {
     await getCurrentLocation(({coords}) => {
@@ -64,22 +70,13 @@ export default function ListAccommodationSearchScreen() {
 
   useEffect(() => {
     return setOptions({
-      headerTitleComponent: () =>
-        params?.menu === 'RENT' ? (
-          <SearchNavBar
-            data={objFilter}
-            onEmpale={value => {
-              isFilter.current = false;
-              setEmpale(value);
-            }}
-          />
-        ) : (
-          <CustomText
-            style={{color: COLORS.white, fontSize: SIZES.medium}}
-            textType="semiBold">
-            {t('find_real_estate')}
-          </CustomText>
-        ),
+      headerTitleComponent: () => (
+        <CustomText
+          style={{color: COLORS.white, fontSize: SIZES.medium}}
+          textType="semiBold">
+          {t('find_tour')}
+        </CustomText>
+      ),
       headerTitleStyle: {
         textAlign: 'left',
       },
@@ -94,42 +91,23 @@ export default function ListAccommodationSearchScreen() {
     },
     [isFilter.current],
   );
+  const {data, isLoading} = useQuery({
+    queryKey: ['list', 'popular-province-tour', country?.geoname_id],
+    queryFn: () => getListPopularProvinceTour(country?.geoname_id),
+  });
 
   return (
     <MainWrapper
       scrollEnabled={false}
       styleContent={{backgroundColor: '#f7f9fa'}}>
-      <View
-        style={{
-          flex: 1,
-          width: '100%',
-        }}>
-        {params?.menu === 'RENT' ? (
-          <MapHeader onFilter={onFilter} accom mapProvince />
-        ) : params?.menu === 'BUY' ? (
-          <MapHeader onFilter={onFilter} estate mapProvince />
-        ) : (
-          <></>
-        )}
+      <FilterTour onFilter={onFilter} />
 
-        {params?.menu === 'RENT' ? (
-          <ListAccomSearchContent
-            paramsFilter={objFilter}
-            location={current}
-            country={country}
-            currency={currency}
-          />
-        ) : params?.menu === 'BUY' ? (
-          <ListEstateSearchContent
-            paramsFilter={filter}
-            location={current}
-            country={country}
-            currency={currency}
-          />
-        ) : (
-          <></>
-        )}
-      </View>
+      <ListTourSearchContent
+        paramsFilter={objFilter}
+        location={current}
+        country={country}
+        currency={currency}
+      />
     </MainWrapper>
   );
 }

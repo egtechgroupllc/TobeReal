@@ -6,7 +6,14 @@ import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../components/Favourite';
 
-export default function TopImg({rating, isStar, textRating, isHeart, type}) {
+export default function TopImg({
+  rating,
+  isStar,
+  textRating,
+  isHeart,
+  type,
+  isTour,
+}) {
   return (
     <View style={styles.top}>
       <View style={styles.topLeft}>
@@ -14,16 +21,18 @@ export default function TopImg({rating, isStar, textRating, isHeart, type}) {
           <RatingBox rating={rating} textRating={textRating} />
         )}
 
-        <View style={styles.topBox}>
-          <IconMarker
-            fill={COLORS.black}
-            style={{
-              width: scale(10),
-              height: scale(10),
-            }}
-          />
-          <CustomText style={styles.topName}>{type}</CustomText>
-        </View>
+        {!isTour && (
+          <View style={styles.topBox}>
+            <IconMarker
+              fill={COLORS.black}
+              style={{
+                width: scale(10),
+                height: scale(10),
+              }}
+            />
+            <CustomText style={styles.topName}>{type}</CustomText>
+          </View>
+        )}
       </View>
 
       {isHeart && <Favourite />}

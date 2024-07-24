@@ -50,7 +50,7 @@ export default function PolicyManageScreen() {
     return setOptions({
       headerTitle: t('policy_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

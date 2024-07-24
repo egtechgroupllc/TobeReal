@@ -207,7 +207,7 @@ export default memo(function ContentTour() {
     <View style={styles.wrapper}>
       <PackageTour />
       {/* <ThemedTour data={dataThemed} /> */}
-      <WorldTour data={dataWorld} />
+      <WorldTour />
       {/* <DiscoveryTour data={tourData} onPressCategory={handleCategoryChange} /> */}
     </View>
   );

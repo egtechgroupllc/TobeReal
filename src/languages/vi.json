@@ -1211,5 +1211,8 @@
   "discount_remaining": "Giảm giá còn lại",
   "voucher_tour": "Phiếu giảm giá tour",
   "apply_discount": "Giảm giá đã áp dụng",
-  "the_remaining_balance_add": "Số dư còn lại sẽ được trả lại vào phiếu đã áp dụng"
+  "the_remaining_balance_add": "Số dư còn lại sẽ được trả lại vào phiếu đã áp dụng",
+
+  "please_select_check_out": "Vui lòng chọn ngày trả phòng",
+  "add_your_youtube_video": "Thêm liên kết video YouTube bất động sản của bạn (nếu có)"
 }
