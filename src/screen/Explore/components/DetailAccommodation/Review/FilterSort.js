@@ -50,7 +50,7 @@ export default function FilterSort({
               height: scale(14),
             }}
           />
-          <CustomText>{text || t('filter')}</CustomText>
+          <CustomText textType="semiBold">{text || t('filter')}</CustomText>
         </View>
         {sort && (
           <CustomText
@@ -67,7 +67,7 @@ export default function FilterSort({
 const styles = StyleSheet.create({
   wrapper: {
     height: scale(50),
-    width: '25%',
+    width: '45%',
     flexDirection: 'row-reverse',
     alignItems: 'center',
     paddingHorizontal: scale(10),
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     rowGap: scale(3),
-    minWidth: scale(80),
+    minWidth: scale(100),
     height: '80%',
   },
   icon: {

@@ -7,13 +7,17 @@ import {scale} from '../../../assets/constants';
 import EmptyData from '../../../components/EmptyData';
 import BookingItem from './BookingItem';
 import BookingItemLoading from './BookingItemLoading';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 
 export default function BookingAccom() {
   const params = useRoute().params;
   const {navigate} = useNavigation();
+  const {token} = useAuthentication();
+
   const {data, isLoading} = useQuery({
     queryKey: ['accommodation', 'room', 'my-booking'],
     queryFn: getListBookingAccomo,
+    enabled: !!token,
   });
   return (
     <FlatList

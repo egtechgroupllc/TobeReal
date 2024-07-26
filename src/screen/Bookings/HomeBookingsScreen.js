@@ -14,6 +14,7 @@ import BookingHistory from './components/BookingTour';
 import BookingActive from './components/BookingAccom';
 import BookingAccom from './components/BookingAccom';
 import BookingTour from './components/BookingTour';
+import {useAuthentication} from '../../hooks/useAuthentication';
 
 const dataWaiting = [
   {
@@ -60,10 +61,6 @@ export default function HomeBookingsScreen() {
 
   const [tabSelect, setTabSelect] = useState(listTab[0]);
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['accommodation', 'room', 'my-booking'],
-    queryFn: getListBookingAccomo,
-  });
   // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
   //   useInfiniteQuery({
   //     queryKey: ['accommodation', 'room', 'my-booking'],

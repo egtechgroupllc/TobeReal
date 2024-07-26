@@ -1,32 +1,31 @@
 import axios from 'axios';
 import {baseUrl} from '../url';
+import {Alert} from 'react-native';
+import {handleLogoutExistToken} from './common';
 
 const instance = axios.create({
   baseURL: `${baseUrl}/api/v1/tour`,
 });
 
-// Định nghĩa hàm xử lý lỗi toàn cục
-const handleGlobalError = err => {
-  const status = err.response?.status || 500;
-  switch (status) {
-    case 401:
-    case 403:
-    case 400:
-    case 404:
-    case 409:
-    case 422:
-    default:
-  }
-};
-
-// Thiết lập interceptor để xử lý lỗi toàn cục
-axios.interceptors.response.use(
-  response => response,
+let countErr = 0;
+instance.interceptors.response.use(
+  response => {
+    return response;
+  },
   error => {
-    handleGlobalError(error);
+    if (error.response && error.response.status === 401 && countErr < 1) {
+      Alert.alert(
+        'Notification',
+        'Your account has been logged in from another device, please log in again!',
+        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+      );
+
+      ++countErr;
+    }
     return Promise.reject(error);
   },
 );
+
 export const postCreateTour = async data => {
   const responsive = await instance.post('/create', data, {
     headers: {'Content-Type': 'multipart/form-data'},

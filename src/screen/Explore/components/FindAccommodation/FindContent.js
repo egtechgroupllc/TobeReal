@@ -30,7 +30,6 @@ export default function FindContent({isBuy, rental, dataFind}) {
       near_me: true,
     },
   });
-
   useEffect(() => {
     params?.id && setValue('province', params);
     // params?.name && setValue('name', params?.name);
@@ -43,6 +42,7 @@ export default function FindContent({isBuy, rental, dataFind}) {
       unregister(['near_me']);
     }
   }, [params]);
+  console.log(dataFind, 32312123);
 
   const saveRecentSearch = async () => {
     const result = await EncryptedStorage.getItem('search_recent');

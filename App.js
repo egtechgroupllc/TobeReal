@@ -211,11 +211,6 @@ export default function App() {
         style={{
           backgroundColor: COLORS.white,
         }}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={'transparent'}
-          translucent
-        />
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <CountryProvider>
@@ -250,8 +245,12 @@ export default function App() {
                             behavior={
                               Platform.OS === 'ios' ? 'padding' : 'height'
                             }> */}
-                          <Layout />
 
+                          <Layout />
+                          <StatusBar
+                            barStyle="light-content"
+                            backgroundColor={COLORS.primary}
+                          />
                           {/* </KeyboardAvoidingView> */}
                           {/* </TouchableWithoutFeedback> */}
                         </BottomSheetModalProvider>

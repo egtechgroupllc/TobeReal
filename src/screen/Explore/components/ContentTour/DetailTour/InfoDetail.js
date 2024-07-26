@@ -54,12 +54,13 @@ export default function InfoDetail({data, name, paramsTour}) {
               <>
                 <View
                   style={{
-                    backgroundColor: COLORS.primary,
+                    backgroundColor: '#013b96',
                     height: scale(30),
                     minWidth: scale(30),
-                    borderRadius: scale(10),
                     alignItems: 'center',
                     justifyContent: 'center',
+                    borderTopLeftRadius: scale(5),
+                    borderBottomLeftRadius: scale(5),
                   }}>
                   <CustomText
                     textType="medium"
@@ -70,9 +71,22 @@ export default function InfoDetail({data, name, paramsTour}) {
                     })}
                   </CustomText>
                 </View>
-                <CustomText textType="medium" style={styles.text}>
-                  {paramsTour?.review_count} {t('review')}
-                </CustomText>
+                <View
+                  style={{
+                    height: scale(30),
+                    minWidth: scale(30),
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderWidth: 1,
+                    paddingHorizontal: scale(10),
+                    borderColor: COLORS.grey,
+                    borderBottomRightRadius: scale(5),
+                    borderTopRightRadius: scale(5),
+                  }}>
+                  <CustomText textType="medium" style={styles.text}>
+                    {paramsTour?.review_count} {t('review')}
+                  </CustomText>
+                </View>
               </>
             ) : (
               <CustomText textType="medium" style={styles.text}>
@@ -221,7 +235,6 @@ const styles = StyleSheet.create({
 
   room: {
     flexDirection: 'row',
-    columnGap: scale(10),
     rowGap: scale(6),
     flex: 1,
     flexWrap: 'wrap',

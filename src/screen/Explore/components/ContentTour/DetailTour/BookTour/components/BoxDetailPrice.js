@@ -6,13 +6,21 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../../../utils/format';
 import {useCountry} from '../../../../../../../hooks/useCountry';
 
-export default function BoxDetailPrice({data, quantity, dataPriceTicket}) {
+export default function BoxDetailPrice({
+  data,
+  quantity,
+  dataPriceTicket,
+  checkDiffentCountry,
+  countryRate,
+}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
   const totalSum = quantity?.reduce((acc, currentItem) => {
     const totalPrice =
       currentItem?.quantity * dataPriceTicket * currentItem?.price_percent;
-    return acc + totalPrice;
+    return checkDiffentCountry
+      ? acc + (totalPrice / countryRate) * currency?.exchange_rate
+      : acc + totalPrice;
   }, 0);
   return (
     <View style={{width: '90%'}}>
@@ -62,7 +70,13 @@ export default function BoxDetailPrice({data, quantity, dataPriceTicket}) {
                   }}>
                   {t('price')}:{' '}
                   {formatPrice(
-                    item?.quantity * dataPriceTicket * item?.price_percent,
+                    checkDiffentCountry
+                      ? ((item?.quantity *
+                          dataPriceTicket *
+                          item?.price_percent) /
+                          countryRate) *
+                          currency?.exchange_rate
+                      : item?.quantity * dataPriceTicket * item?.price_percent,
                     {
                       currency: currency?.currency_code,
                     },

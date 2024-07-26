@@ -1103,7 +1103,6 @@
   "are_you_sure_want_buy_voucher": "Sigurado ka bang gusto mong bilhin ang voucher na ito?",
   "transaction_cant_refund": "Ang mga transaksyon na ginawa ay hindi maaaring i-refund!",
   "discount_voucher": "Discount voucher",
-  "when_paying_hotel": "Kapag nagbabayad sa hotel",
   "apply_all_hotel_system": "Magagamit sa lahat ng sistema ng hotel",
   "this_voucher_is_valid": "Ang voucher na ito ay balido hanggang",
   "this_voucher_not_apply_other_hotel": "Ang voucher na ito ay hindi magagamit sa ibang mga hotel.",
@@ -1208,5 +1207,8 @@
   "the_remaining_balance_add": "Ang natitirang balanse ay ibabalik sa inaplay na voucher",
 
   "please_select_check_out": "Mangyaring pumili ng petsa ng pag-check-out",
-  "add_your_youtube_video": "Idagdag ang link ng YouTube video ng iyong real estate (kung meron)"
+  "add_your_youtube_video": "Idagdag ang link ng YouTube video ng iyong real estate (kung meron)",
+  "when_paying_at": "Kapag nagbabayad sa",
+  "apply_all_this_tour_system": "Nalalapat sa lahat ng tour na ito",
+  "this_voucher_not_apply_other_tour": "Ang voucher na ito ay hindi nalalapat sa ibang mga tour."
 }

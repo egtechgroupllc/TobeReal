@@ -1,4 +1,4 @@
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
@@ -13,7 +13,7 @@ import {
   images,
   scale,
 } from '../../../../../../../assets/constants';
-import {IconClock} from '../../../../../../../assets/icon/Icon';
+import {IconClock, IconHome} from '../../../../../../../assets/icon/Icon';
 import {formatPrice} from '../../../../../../../utils/format';
 import {useCountry} from '../../../../../../../hooks/useCountry';
 import SelectVoucherFooter from './SelectVoucherFooter';
@@ -28,11 +28,17 @@ export default function BuyVoucherScreen() {
   const {currency} = useCountry();
 
   const params = useRoute().params;
+  console.log(params?.checkDiffrentCountry, 312321);
   const {setOptions, goBack, navigate} = useNavigation();
 
   useEffect(() => {
     return setOptions({
       headerTitle: t('buy_voucher'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
   }, []);
   const [quantity, setQuantity] = useState(1);
@@ -201,15 +207,26 @@ export default function BuyVoucherScreen() {
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
             - {t('discount_voucher')}{' '}
-            {formatPrice(params?.item?.price_discount, {
-              currency: currency?.currency_code,
-            })}{' '}
-            {t('when_paying_hotel')} {params?.item?.accommodation?.name}.
+            {formatPrice(
+              params?.checkDiffrentCountry
+                ? (params?.item?.price_discount / params?.countryRate) *
+                    currency?.exchange_rate
+                : params?.item?.price_discount,
+              {
+                currency: currency?.currency_code,
+              },
+            )}{' '}
+            {t('when_paying_at')}{' '}
+            {params?.item?.accommodation?.name || params?.item?.tour?.name}.
           </CustomText>
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('apply_all_hotel_system')} {params?.item?.accommodation?.name}.
+            -{' '}
+            {params?.accomId
+              ? t('apply_all_hotel_system')
+              : t('apply_all_this_tour_system')}{' '}
+            - {params?.item?.accommodation?.name || params?.item?.tour?.name}.
           </CustomText>
           <CustomText
             textType="medium"
@@ -219,7 +236,10 @@ export default function BuyVoucherScreen() {
           <CustomText
             textType="medium"
             style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
-            - {t('this_voucher_not_apply_other_hotel')}
+            -{' '}
+            {params?.accomId
+              ? t('this_voucher_not_apply_other_hotel')
+              : t('this_voucher_not_apply_other_tour')}
           </CustomText>
         </View>
       </View>

@@ -1081,7 +1081,6 @@
   "are_you_sure_want_buy_voucher": "Apakah Anda yakin ingin membeli voucher ini?",
   "transaction_cant_refund": "Transaksi yang dilakukan tidak dapat dikembalikan!",
   "discount_voucher": "Voucher diskon",
-  "when_paying_hotel": "Saat membayar di hotel",
   "apply_all_hotel_system": "Berlaku di semua sistem hotel",
   "this_voucher_is_valid": "Voucher ini berlaku hingga",
   "this_voucher_not_apply_other_hotel": "Voucher ini tidak berlaku untuk hotel lain.",
@@ -1185,5 +1184,8 @@
   "the_remaining_balance_add": "Sisa saldo akan dikembalikan ke voucher yang diterapkan",
 
   "please_select_check_out": "Silakan pilih tanggal check-out",
-  "add_your_youtube_video": "Tambahkan tautan video YouTube real estate Anda (jika ada)"
+  "add_your_youtube_video": "Tambahkan tautan video YouTube real estate Anda (jika ada)",
+  "when_paying_at": "Saat membayar di",
+  "apply_all_this_tour_system": "Berlaku untuk semua tur ini",
+  "this_voucher_not_apply_other_tour": "Voucher ini tidak berlaku untuk tur lain."
 }

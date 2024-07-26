@@ -1,4 +1,11 @@
-import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
@@ -18,7 +25,7 @@ import {
   getListVoucherSelling,
   postBuyVoucher,
 } from '../../../../../../Model/api/apiAccom';
-import {IconNoVoucher} from '../../../../../../assets/icon/Icon';
+import {IconHome, IconNoVoucher} from '../../../../../../assets/icon/Icon';
 import {showMess} from '../../../../../../assets/constants/Helper';
 import BookAccommodation from '../../../../../Explore/components/DetailAccommodation/Detail/BookAccommodation';
 import SelectVoucherFooter from './components/SelectVoucherFooter';
@@ -26,10 +33,12 @@ import {
   getListVoucherTourCanUse,
   getListVoucherTourSelling,
 } from '../../../../../../Model/api/apiTour';
+import {useCountry} from '../../../../../../hooks/useCountry';
 
 export default function HomeListVoucherScreen() {
   const params = useRoute().params;
   const {setOptions, goBack, navigate} = useNavigation();
+  const {currency} = useCountry();
   const {t} = useLanguage();
   const transferType = [
     {id: 1, name: t('your_voucher')},
@@ -74,6 +83,11 @@ export default function HomeListVoucherScreen() {
             );
           })}
         </View>
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
       ),
     });
   }, [tab]);
@@ -152,6 +166,8 @@ export default function HomeListVoucherScreen() {
           renderItem={({item, index}) => {
             return (
               <VoucherItem
+                checkDiffrentCountry={params?.checkDiffrentCountry}
+                countryRate={params?.countryRate}
                 key={`key_${item?.id}-${index}`}
                 data={item}
                 onPressCheckBox={evt => {

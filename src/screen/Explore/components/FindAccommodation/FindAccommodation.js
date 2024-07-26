@@ -28,13 +28,25 @@ import FindAccommodationStart from './FindAccommodationStart';
 import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
 import FindContentTour from './FindContentTour';
+import {listTypeTour} from '../../../../assets/dataFake/TourType';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
   //   import('../ContentAccommodation/ContentAccommodation'),
   // );
   const {t, locale} = useLanguage();
-
+  const listTypeTour = [
+    {
+      id: 1,
+      name: t('domestic'),
+      icon: IconEmigrate,
+    },
+    {
+      id: 2,
+      name: t('world'),
+      icon: IconWorld,
+    },
+  ];
   const listMenu = useMemo(
     () => [
       {
@@ -73,10 +85,12 @@ export default function FindAccommodation() {
   const listTour = useMemo(
     () => [
       {
+        id: 1,
         name: t('domestic'),
         icon: IconEmigrate,
       },
       {
+        id: 2,
         name: t('world'),
         icon: IconWorld,
       },
@@ -148,20 +162,19 @@ export default function FindAccommodation() {
   const [category, setCategory] = useState(listRental[0]);
   const [isRender, setIsRender] = useState();
   const [selectedId, setSelectedId] = useState(null);
-
   useEffect(() => {
     const typeId =
       tabSelect === 'RENT'
         ? typeRent?.data?.data?.[0]?.id
-        : typeBuy?.data?.data?.[0]?.id;
+        : tabSelect === 'BUY'
+        ? typeBuy?.data?.data?.[0]?.id
+        : listTypeTour?.[0]?.id;
     setSelectedId(typeId);
   }, [tabSelect, typeRent?.data?.data?.[0]?.id]);
-
   const handleChangeTab = useCallback(value => {
     setTabSelect(value?.id);
     tabSelect !== 'RENT' && setCategory(listRental[0]);
   }, []);
-
   return (
     <MainWrapper refreshControl noSafeArea>
       <View

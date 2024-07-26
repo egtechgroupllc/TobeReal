@@ -1,6 +1,6 @@
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {getProfile} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
@@ -30,7 +30,9 @@ export default function ProfileScreen() {
     <MainWrapper
       refreshControl
       optionsHeader={{
-        headerStyle: {minHeight: scale(120), paddingTop: scale(10)},
+        headerStyle: {
+          minHeight: scale(Platform.OS == 'ios' ? 120 : 70),
+        },
       }}
       headerTitleComponent={<HeaderNoToken />}
       headerShown={!token}

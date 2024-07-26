@@ -12,6 +12,8 @@ import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import TopImg from './BoxPlaceItem/TopImg';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 import {useCountry} from '../../../../hooks/useCountry';
+import RatingBox from '../ContentAccommodation/BoxPlaceItem/RatingBox';
+import StarAccomo from '../../../News/PostNews/Lease/components/PostNewLease/EstateDetail/StarAccomo';
 
 export default function BoxPlaceItem({
   data,
@@ -28,14 +30,25 @@ export default function BoxPlaceItem({
   isUnitAvailable,
   styleWrapper,
   time,
+  isRating,
 }) {
   const {t} = useLanguage();
-  const {currency} = useCountry();
+  const {currency, country} = useCountry();
+  const checkDiffentCountry = useMemo(() => {
+    if (data?.country?.id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [data?.country?.id, country?.id]);
   const priceFinal = useMemo(() => {
     const resultPri = data?.tour_tickets?.map(element => {
       const result = element?.tour_ticket_items?.map(percent => {
         const resultPolicy = element?.tour_ticket_dates.reduce((acc, price) => {
-          return percent?.price_percent * price?.price_final;
+          return checkDiffentCountry
+            ? ((percent?.price_percent * price?.price) /
+                price?.currency?.exchange_rate) *
+                currency?.exchange_rate
+            : percent?.price_percent * price?.price;
         }, 0);
 
         return resultPolicy;
@@ -45,7 +58,6 @@ export default function BoxPlaceItem({
     });
     return Math.min(...resultPri);
   }, [data?.tour_tickets]);
-
   const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
@@ -79,19 +91,11 @@ export default function BoxPlaceItem({
             {/* <Ribbon text={t('promotion') + ' 30%  🏨'} /> */}
 
             <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
-
-            <TopImg
-              rating={rating}
-              isStar={isStar}
-              textRating={textRating}
-              isHeart={isHeart}
-            />
           </View>
 
           <View
             style={{
               flex: 1,
-              marginTop: scale(18),
               margin: scale(10),
               rowGap: scale(4),
             }}>
@@ -101,8 +105,19 @@ export default function BoxPlaceItem({
               numberOfLines={1}>
               {data?.name}
             </CustomText>
-            {isStar && <StarRating rating={rating} />}
-
+            {isStar && data?.rating && <StarAccomo rating={data?.rating} />}
+            {isRating && data?.review_count > 0 ? (
+              <RatingBox
+                rating={data?.review_average}
+                textRating={data?.review_count}
+              />
+            ) : (
+              <View style={styles.boxIcon}>
+                <CustomText style={{color: COLORS.grey}} textType="semiBold">
+                  {t('no_review')}
+                </CustomText>
+              </View>
+            )}
             {/* <View style={styles.line} /> */}
 
             <View>
@@ -223,5 +238,12 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     fontSize: SIZES.xSmall,
     flex: 1,
+  },
+  boxIcon: {
+    backgroundColor: '#f5f5f5',
+    padding: scale(4),
+    paddingHorizontal: scale(6),
+    borderRadius: 6,
+    maxWidth: '80%',
   },
 });

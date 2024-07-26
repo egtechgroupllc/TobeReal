@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {Linking, StyleSheet, View} from 'react-native';
+import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -18,7 +18,7 @@ import {
 } from '../../../../../../Model/api/apiAccom';
 import {COLORS, scale} from '../../../../../../assets/constants';
 import {showMess} from '../../../../../../assets/constants/Helper';
-import {IconCoinPoint} from '../../../../../../assets/icon/Icon';
+import {IconCoinPoint, IconHome} from '../../../../../../assets/icon/Icon';
 import {CustomText} from '../../../../../../components';
 import {useCountdown} from '../../../../../../hooks/useCountdown';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
@@ -32,6 +32,7 @@ import ModalBookingSuccess from '../../../../../Bookings/components/BookingRoom/
 import TopStep2 from '../../../../../Bookings/components/BookingRoom/ContentStep2/TopStep2';
 import {postBookingTour} from '../../../../../../Model/api/apiTour';
 import DetailPriceTour from './components/DetailPriceTour';
+import {useCountry} from '../../../../../../hooks/useCountry';
 export default function BookingTourConfirmScreen() {
   const data = useRoute().params;
   const {t} = useLanguage();
@@ -45,14 +46,18 @@ export default function BookingTourConfirmScreen() {
   const [dataVoucher, setDataVoucher] = useState();
   const [balance, setBalance] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
+  const {currency} = useCountry();
   const {start, countdown} = useCountdown(10);
-
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('pay_booking_tour'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
   }, []);
-
   const bookingTourMu = useMutation({
     mutationFn: postBookingTour,
   });
@@ -161,7 +166,11 @@ export default function BookingTourConfirmScreen() {
   const priceVoucher = useMemo(() => {
     if (dataVoucher && typePayment === 'VOUCHER') {
       const countDis = dataVoucher.reduce((acc, item) => {
-        return acc + item?.price_discount_real;
+        return data?.checkDiffentCountry
+          ? acc +
+              (item?.price_discount_real / item?.currency?.exchange_rate) *
+                currency?.exchange_rate
+          : acc + item?.price_discount_real;
       }, 0);
 
       return countDis;
@@ -189,6 +198,8 @@ export default function BookingTourConfirmScreen() {
         }}
         dataVoucher={dataVoucher}
         onChangeBalance={value => setBalance(value)}
+        checkDiffrentCountry={data?.checkDiffentCountry}
+        countryRate={data?.countryRate}
       />
       <ModalBookingSuccess
         openContact={openContact}
@@ -199,11 +210,13 @@ export default function BookingTourConfirmScreen() {
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>
           <DetailPriceTour
+            checkDiffrentCountry={data?.checkDiffentCountry}
             isTour
             data={data}
             priceVoucher={priceVoucher}
             onChangeTotalPrice={value => setTotalPrice(value)}
             dataPriceTicket={data?.dataPriceTicketEx}
+            countryRate={data?.countryRate}
           />
 
           <CustomButton

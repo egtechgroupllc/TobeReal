@@ -30,7 +30,7 @@ export default function ItemTourSearch({
     navigate('DetailTourScreen', {...data, dataFilter: objFilter});
   };
 
-  const {currency} = useCountry();
+  const {currency, country, getCurrency} = useCountry();
 
   const {data: dataQ, isLoading} = useQuery({
     queryKey: ['list', 'ticket', data?.id],
@@ -41,6 +41,13 @@ export default function ItemTourSearch({
         date_start: formatDate(),
       }),
   });
+  const checkDiffentCountry = useMemo(() => {
+    if (data?.country?.id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [data?.country?.id, country?.id]);
+
   const priceFinal = useMemo(() => {
     if (!isLoading) {
       const dataTicket = dataQ?.data?.rows;
@@ -48,9 +55,12 @@ export default function ItemTourSearch({
         const result = element?.tour_ticket_items?.map(percent => {
           const resultPolicy = element?.tour_ticket_dates.reduce(
             (acc, price) => {
-              return (
-                percent?.price_percent * (price?.price_final || price?.price)
-              );
+              return checkDiffentCountry
+                ? ((percent?.price_percent *
+                    (price?.price_final || price?.price)) /
+                    price?.currency?.exchange_rate) *
+                    currency?.exchange_rate
+                : percent?.price_percent * (price?.price_final || price?.price);
             },
             0,
           );
@@ -164,7 +174,7 @@ export default function ItemTourSearch({
               textType="medium"
               numberOfLines={1}
               style={{color: COLORS.primary}}>
-              {formatPrice(data?.price || priceFinal, {
+              {formatPrice(priceFinal, {
                 currency: currency?.currency_code,
               })}
             </CustomText>

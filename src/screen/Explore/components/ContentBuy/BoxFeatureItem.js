@@ -252,7 +252,7 @@ export default function BoxFeatureItem({
                           fontSize: SIZES.xSmall,
                           minWidth: scale(35),
                         }}>
-                        {calculateTimeElapsed(data.date_start)}
+                        {calculateTimeElapsed(data?.date_start)}
                       </CustomText>
                     </View>
                   </View>

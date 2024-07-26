@@ -5,11 +5,14 @@ import {CustomText} from '../../../../../../../components';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import EmptyData from '../../../../../../../components/EmptyData';
 import TicketItem from './TicketItem';
+import {useCountry} from '../../../../../../../hooks/useCountry';
 
 export default function BoxTypeTicket({
   data,
   onChangeQuantity,
   dataPriceTicket,
+  checkDiffentCountry,
+  countryRate,
 }) {
   const {t} = useLanguage();
 
@@ -104,6 +107,8 @@ export default function BoxTypeTicket({
                 key={`key_${item?.id}-${index}`}
                 data={item}
                 index={index}
+                countryRate={countryRate}
+                checkDiffentCountry={checkDiffentCountry}
                 dataPriceTicket={dataPriceTicket}
                 onChange={quantity => {
                   handleChangeTicker({item, quantity, index});

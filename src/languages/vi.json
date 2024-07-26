@@ -1110,7 +1110,6 @@
   "are_you_sure_want_buy_voucher": "Bạn có chắc chắn muốn mua voucher này?",
   "transaction_cant_refund": "Giao dịch đã thực hiện không thể hoàn lại!",
   "discount_voucher": "Voucher giảm giá",
-  "when_paying_hotel": "Khi thanh toán tại khách sạn",
   "apply_all_hotel_system": "Áp dụng trên tất cả hệ thống khách sạn",
   "this_voucher_is_valid": "Voucher này có hiệu lực đến",
   "this_voucher_not_apply_other_hotel": "Voucher này không áp dụng cho các khách sạn khác.",
@@ -1214,5 +1213,8 @@
   "the_remaining_balance_add": "Số dư còn lại sẽ được trả lại vào phiếu đã áp dụng",
 
   "please_select_check_out": "Vui lòng chọn ngày trả phòng",
-  "add_your_youtube_video": "Thêm liên kết video YouTube bất động sản của bạn (nếu có)"
+  "add_your_youtube_video": "Thêm liên kết video YouTube bất động sản của bạn (nếu có)",
+  "when_paying_at": "Khi thanh toán tại",
+  "apply_all_this_tour_system": "Áp dụng cho tất cả các tour này",
+  "this_voucher_not_apply_other_tour": "Phiếu giảm giá này không áp dụng cho các tour khác."
 }

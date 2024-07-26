@@ -118,7 +118,7 @@ export default function PackageTour() {
           contentContainerStyle={styles.content}
           ListEmptyComponent={<EmptyData />}
           renderItem={({item}) => (
-            <BoxPlaceItem isHeart isStar data={item} rental="night" />
+            <BoxPlaceItem isHeart isStar data={item} rental="night" isRating />
           )}
         />
 

@@ -1085,7 +1085,6 @@
   "are_you_sure_want_buy_voucher": "Adakah anda pasti mahu membeli voucher ini?",
   "transaction_cant_refund": "Transaksi yang dilakukan tidak boleh dikembalikan!",
   "discount_voucher": "Voucher diskaun",
-  "when_paying_hotel": "Apabila membayar di hotel",
   "apply_all_hotel_system": "Terpakai di semua sistem hotel",
   "this_voucher_is_valid": "Voucher ini sah sehingga",
   "this_voucher_not_apply_other_hotel": "Voucher ini tidak terpakai untuk hotel lain.",
@@ -1190,5 +1189,8 @@
   "the_remaining_balance_add": "Baki yang tinggal akan dikembalikan ke baucar yang digunakan",
 
   "please_select_check_out": "Sila pilih tarikh daftar keluar",
-  "add_your_youtube_video": "Tambah pautan video YouTube hartanah anda (jika ada)"
+  "add_your_youtube_video": "Tambah pautan video YouTube hartanah anda (jika ada)",
+  "when_paying_at": "Apabila membayar di",
+  "apply_all_this_tour_system": "Terpakai untuk semua lawatan ini",
+  "this_voucher_not_apply_other_tour": "Baucar ini tidak terpakai untuk lawatan lain."
 }

@@ -14,6 +14,8 @@ export default function DetailPriceTour({
   onChangeTotalPrice,
   isTour,
   dataPriceTicket,
+  checkDiffrentCountry,
+  countryRate,
 }) {
   const {t} = useLanguage();
 
@@ -27,9 +29,10 @@ export default function DetailPriceTour({
     data?.listAddTicket.reduce((acc, currentItem) => {
       const totalPrice =
         currentItem?.quantity * dataPriceTicket * currentItem?.price_percent;
-      return acc + totalPrice;
+      return checkDiffrentCountry
+        ? acc + (totalPrice / countryRate) * currency?.exchange_rate
+        : acc + totalPrice;
     }, 0);
-
   useEffect(() => {
     if (voucher_discount > totalSumTour) {
       setCheckPrice(true);
@@ -126,9 +129,15 @@ export default function DetailPriceTour({
                 }}>
                 {t('price')}:{' '}
                 {formatPrice(
-                  item?.quantity *
-                    data?.dataPriceTicketEx *
-                    item?.price_percent,
+                  checkDiffrentCountry
+                    ? ((item?.quantity *
+                        data?.dataPriceTicketEx *
+                        item?.price_percent) /
+                        countryRate) *
+                        currency?.exchange_rate
+                    : item?.quantity *
+                        data?.dataPriceTicketEx *
+                        item?.price_percent,
                   {
                     currency: currency?.currency_code,
                   },

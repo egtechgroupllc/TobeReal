@@ -5,12 +5,14 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {images, scale} from '../../../../assets/constants';
+import {SHADOW, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
+import InViewport from '../../../../components/InViewport';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function BuySell({data}) {
   const {t} = useLanguage();
@@ -30,7 +32,20 @@ export default function BuySell({data}) {
   //   queryFn: () => getListSell({country_id: 241}),
   // });
   return (
-    <InViewPort>
+    <InViewport
+      delay={40}
+      loadingMap
+      ComponentLoading={
+        <BoxPlaceItemLoading
+          style={[
+            styles.wrapper,
+            {
+              width: scale(400 / 1.6),
+            },
+            SHADOW,
+          ]}
+        />
+      }>
       <WrapperContent
         // isSeeAll
         onPressSeeAll={() =>
@@ -41,7 +56,7 @@ export default function BuySell({data}) {
             },
           })
         }
-        onPressCategory={item => console.log(item)}
+        // onPressCategory={item => console.log(item)}
         heading={title}
         subHeading={t('There are 1,000,000 Real Estate')}
         styleWrapper={{backgroundColor: 'transparent'}}>
@@ -61,7 +76,7 @@ export default function BuySell({data}) {
           )}
         />
       </WrapperContent>
-    </InViewPort>
+    </InViewport>
   );
 }
 

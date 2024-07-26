@@ -17,12 +17,15 @@ export default function HeaderNoToken() {
         buttonType="large"
         style={{
           backgroundColor: '#fff',
-          flex: 0.5,
+          flex: 1,
           borderColor: '#fff',
         }}
         outline
         onPress={() => {
           navigate('NavigationAuth');
+        }}
+        styleWrapper={{
+          height: scale(50),
         }}
       />
       <CustomButton
@@ -32,8 +35,11 @@ export default function HeaderNoToken() {
           color: '#fff',
         }}
         style={{
-          flex: 0.5,
+          flex: 1,
           borderColor: '#fff',
+        }}
+        styleWrapper={{
+          height: scale(50),
         }}
         outline
         onPress={() => {
@@ -48,9 +54,9 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: COLORS.primary,
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // paddingVertical: scale(10),
+    justifyContent: 'center',
     paddingHorizontal: scale(20),
     columnGap: scale(10),
+    alignItems: 'center',
   },
 });

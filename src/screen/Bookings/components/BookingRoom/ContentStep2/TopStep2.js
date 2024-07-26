@@ -23,6 +23,8 @@ export default function TopStep2({
   dataVoucher,
   onChangeBalance,
   isTour,
+  checkDiffrentCountry,
+  countryRate,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -77,6 +79,8 @@ export default function TopStep2({
       </View>
       {typePayment === 'VOUCHER' && (
         <ApplyVoucher
+          checkDiffrentCountry={checkDiffrentCountry}
+          countryRate={countryRate}
           isTour={isTour}
           data={data}
           onCheckVoucher={onCheckVoucher}

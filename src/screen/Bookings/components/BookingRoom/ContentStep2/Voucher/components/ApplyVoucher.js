@@ -14,6 +14,8 @@ export default function ApplyVoucher({
   onCheckVoucher,
   dataVoucher,
   isTour,
+  checkDiffrentCountry,
+  countryRate,
 }) {
   const {navigate} = useNavigation();
 
@@ -79,6 +81,8 @@ export default function ApplyVoucher({
                 accomId: data?.accommodation_id,
                 tourId: data?.tour_id,
                 isTour: isTour,
+                checkDiffrentCountry: checkDiffrentCountry,
+                countryRate: countryRate,
               })
             }>
             <CustomText

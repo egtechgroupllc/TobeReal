@@ -31,21 +31,15 @@ export default memo(function FilterTour({
   menu,
   mapProvince,
   dataReturn,
+  listProvince,
+  listCountry,
 }) {
   const {t} = useLanguage();
 
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
-  const {country} = useCountry();
   const [openBottom, setOpenBottom] = useState(false);
-  const listProvince = useQuery({
-    queryKey: ['list', 'popular-province-tour', country?.geoname_id],
-    queryFn: () => getListPopularProvinceTour(country?.geoname_id),
-  });
-  const listCountry = useQuery({
-    queryKey: ['list', 'popular-country-tour', country?.id],
-    queryFn: () => getListPopularCountryTour(country?.id),
-  });
+
   const {control, handleSubmit, watch, setValue, reset, unregister} = useForm({
     defaultValues: {
       menu: {id: 'DOMESTIC', name: t('domestic')},

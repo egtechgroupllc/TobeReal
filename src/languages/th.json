@@ -1108,7 +1108,6 @@
   "are_you_sure_want_buy_voucher": "คุณแน่ใจหรือว่าต้องการซื้อตั๋วกำนัลนี้?",
   "transaction_cant_refund": "การทำธุรกรรมไม่สามารถคืนเงินได้!",
   "discount_voucher": "บัตรกำนัลส่วนลด",
-  "when_paying_hotel": "เมื่อชำระเงินที่โรงแรม",
   "apply_all_hotel_system": "ใช้ได้กับระบบโรงแรมทั้งหมด",
   "this_voucher_is_valid": "บัตรกำนัลนี้มีอายุถึง",
   "this_voucher_not_apply_other_hotel": "บัตรกำนัลนี้ไม่ใช้กับโรงแรมอื่น ๆ",
@@ -1213,5 +1212,8 @@
   "the_remaining_balance_add": "ยอดเงินคงเหลือจะถูกส่งคืนไปยังบัตรกำนัลที่ใช้",
 
   "please_select_check_out": "กรุณาเลือกวันที่เช็คเอาท์",
-  "add_your_youtube_video": "เพิ่มลิงก์วิดีโอ YouTube อสังหาริมทรัพย์ของคุณ (ถ้ามี)"
+  "add_your_youtube_video": "เพิ่มลิงก์วิดีโอ YouTube อสังหาริมทรัพย์ของคุณ (ถ้ามี)",
+  "when_paying_at": "เมื่อชำระเงินที่",
+  "apply_all_this_tour_system": "ใช้ได้กับทัวร์ทั้งหมดนี้",
+  "this_voucher_not_apply_other_tour": "บัตรกำนัลนี้ไม่สามารถใช้กับทัวร์อื่นได้"
 }

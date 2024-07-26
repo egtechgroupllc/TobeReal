@@ -33,7 +33,7 @@ export default memo(function BookTour({data, onPress}) {
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
   // const params = useRoute().params;
-  const {currency} = useCountry();
+  const {currency, country} = useCountry();
   const {data: dataQ, isLoading} = useQuery({
     queryKey: ['list', 'ticket', data?.id],
     queryFn: () =>
@@ -43,6 +43,12 @@ export default memo(function BookTour({data, onPress}) {
         date_start: formatDate(),
       }),
   });
+  const checkDiffentCountry = useMemo(() => {
+    if (data?.country_id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [data?.country_id, country?.id]);
   const priceFinal = useMemo(() => {
     if (!isLoading) {
       const dataTicket = dataQ?.data?.rows;
@@ -50,9 +56,11 @@ export default memo(function BookTour({data, onPress}) {
         const result = element?.tour_ticket_items?.map(percent => {
           const resultPolicy = element?.tour_ticket_dates.reduce(
             (acc, price) => {
-              return (
-                percent?.price_percent * (price?.price_final || price?.price)
-              );
+              return checkDiffentCountry
+                ? ((percent?.price_percent * price?.price) /
+                    price?.currency?.exchange_rate) *
+                    currency?.exchange_rate
+                : percent?.price_percent * price?.price;
             },
             0,
           );

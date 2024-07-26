@@ -5,7 +5,7 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {SHADOW, SIZES, images, scale} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
 import {useNavigation} from '@react-navigation/native';
 import {getListCountry} from '../../../../Model/api/common';
@@ -18,6 +18,9 @@ import {
   getListPopularProvince,
   getListPopularProvinceAccom,
 } from '../../../../Model/api/apiAccom';
+import EmptyData from '../../../../components/EmptyData';
+import InViewport from '../../../../components/InViewport';
+import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 
 export default function ExploreNearbyEstate({country}) {
   const {t} = useLanguage();
@@ -47,54 +50,62 @@ export default function ExploreNearbyEstate({country}) {
     setFilter(listProvince.data?.data?.rows?.[0]);
   }, [listProvince?.data?.data?.rows]);
   return (
-    <InViewPort>
-      <WrapperContent
-        // background={images.bgPackageTour}
-        // isSeeAll
-        // worldTour
-        isCategory
-        dataCategory={listProvince.data?.data?.rows?.slice(0, 9)}
-        onPressSeeAll={() =>
-          navigate('NoBottomTab', {
-            screen: 'SeeAllBuyScreen',
-            params: {
-              title: title || '',
-            },
-          })
-        }
-        onPressCategory={item => setFilter(item)}
-        subHeading={t('explore_popular_estate')}
-        heading={title}
-        // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-        styleWrapper={{backgroundColor: 'transparent'}}>
-        {data?.data?.count !== 0 ? (
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data?.data?.rows}
-            contentContainerStyle={styles.content}
-            renderItem={({item}) => (
-              <BoxExploreEstate isHeart isStar data={item} rental="night" />
-            )}
+    <WrapperContent
+      // background={images.bgPackageTour}
+      // isSeeAll
+      // worldTour
+      isCategory
+      dataCategory={listProvince.data?.data?.rows?.slice(0, 9)}
+      onPressSeeAll={() =>
+        navigate('NoBottomTab', {
+          screen: 'SeeAllBuyScreen',
+          params: {
+            title: title || '',
+          },
+        })
+      }
+      onPressCategory={item => setFilter(item)}
+      subHeading={t('explore_popular_estate')}
+      heading={title}
+      styleContent={{
+        justifyContent: 'center',
+        minHeight: scale(230),
+      }}
+      // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
+      styleWrapper={{backgroundColor: 'transparent'}}>
+      <InViewport
+        loadingMap
+        ComponentLoading={
+          <BoxPlaceItemLoading
+            style={[
+              {
+                width: scale(400 / 1.6),
+              },
+              SHADOW,
+            ]}
           />
-        ) : (
-          <View style={{alignItems: 'center', rowGap: scale(10)}}>
-            <IconBookings width={scale(50)} height={scale(50)} />
-            <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
-              {t('no_data')}
-            </CustomText>
-          </View>
-        )}
-      </WrapperContent>
-    </InViewPort>
+        }>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows}
+          contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
+          renderItem={({item}) => (
+            <BoxExploreEstate isHeart isStar data={item} rental="night" />
+          )}
+        />
+      </InViewport>
+    </WrapperContent>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
     columnGap: scale(14),
-    rowGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
+    minHeight: scale(250),
+    minWidth: '100%',
   },
 });

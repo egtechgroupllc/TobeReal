@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import MainAuth from '../../../../../../components/MainAuth';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -9,6 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Button from '../../../../../Profile/components/Button';
 import {
   IconCheckBoxWhite,
+  IconHome,
   IconUnCheckBoxWhite,
 } from '../../../../../../assets/icon/Icon';
 import {
@@ -29,11 +30,11 @@ import {getListTicketDate} from '../../../../../../Model/api/apiTour';
 import {formatDate} from '../../../../../../utils/format';
 import BoxContact from './components/BoxContact';
 import {CustomButton} from '../../../../../../components';
+import {useCountry} from '../../../../../../hooks/useCountry';
 
 export default function BookTourScreen() {
   const data = useRoute().params;
   const [date, setDate] = useState();
-
   const [listAddTicket, setListAddTicket] = useState([]);
   const [check1, setCheck1] = useState(false);
   const toggleCheckBox1 = () => {
@@ -41,10 +42,22 @@ export default function BookTourScreen() {
   };
 
   const {t} = useLanguage();
+  const {currency, country} = useCountry();
+
+  const checkDiffentCountry = useMemo(() => {
+    if (data?.paramsTour?.country?.id !== country?.id) {
+      return true;
+    }
+  }, [data?.paramsTour?.country?.id, country?.id]);
   const {setOptions, navigate} = useNavigation();
   useEffect(() => {
     return setOptions({
       headerTitle: t('detail_tour_ticket'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -73,6 +86,7 @@ export default function BookTourScreen() {
   });
 
   const dataPriceTicketEx = dataPriceTicket?.data?.data?.data?.rows[0]?.price;
+
   return (
     <MainAuth>
       <View style={styles.container}>
@@ -139,12 +153,22 @@ export default function BookTourScreen() {
           </View>
 
           <BoxTypeTicket
+            countryRate={
+              dataPriceTicket?.data?.data?.data?.rows[0]?.currency
+                ?.exchange_rate
+            }
+            checkDiffentCountry={checkDiffentCountry}
             data={data}
             onChangeQuantity={value => setListAddTicket(value)}
             dataPriceTicket={dataPriceTicketEx}
           />
           <BoxContact data={data} />
           <BoxDetailPrice
+            countryRate={
+              dataPriceTicket?.data?.data?.data?.rows[0]?.currency
+                ?.exchange_rate
+            }
+            checkDiffentCountry={checkDiffentCountry}
             data={data}
             quantity={listAddTicket}
             dataPriceTicket={dataPriceTicketEx}
@@ -183,7 +207,16 @@ export default function BookTourScreen() {
           onPress={() =>
             navigate('NoBottomTab', {
               screen: 'BookingTourConfirmScreen',
-              params: {data, listAddTicket, dataPriceTicketEx, date},
+              params: {
+                data,
+                listAddTicket,
+                dataPriceTicketEx,
+                date,
+                checkDiffentCountry: checkDiffentCountry,
+                countryRate:
+                  dataPriceTicket?.data?.data?.data?.rows[0]?.currency
+                    ?.exchange_rate,
+              },
             })
           }
         />

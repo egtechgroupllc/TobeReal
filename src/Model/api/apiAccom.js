@@ -1,9 +1,31 @@
 import axios from 'axios';
 import {baseUrl} from '../url';
+import {handleLogoutExistToken} from './common';
+import {Alert} from 'react-native';
 
 export const instanceAccom = axios.create({
   baseURL: `${baseUrl}/api/v1/accommodation`,
 });
+
+let countErr = 0;
+instanceAccom.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response && error.response.status === 401 && countErr < 1) {
+      Alert.alert(
+        'Notification',
+        'Your account has been logged in from another device, please log in again!',
+        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+      );
+
+      ++countErr;
+    }
+    return Promise.reject(error);
+  },
+);
+
 export const getListTypeRoom = async () => {
   const responsive = await instanceAccom.get('/room/list-type');
 

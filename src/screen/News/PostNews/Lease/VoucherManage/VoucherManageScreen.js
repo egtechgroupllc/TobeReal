@@ -6,7 +6,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useMemo, useState} from 'react';
 import {
   CustomButton,
   CustomSelectDropdown,
@@ -25,11 +25,13 @@ import {
 import {useQuery} from '@tanstack/react-query';
 import EmptyData from '../../../../../components/EmptyData';
 import {getListVoucherTourSelling} from '../../../../../Model/api/apiTour';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function VoucherManageScreen() {
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const params = useRoute().params;
+  const {country} = useCountry();
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('voucher_manage'),
@@ -52,6 +54,12 @@ export default function VoucherManageScreen() {
         : getListVoucherTourSelling(params?.id),
   });
   const numColumns = Math.ceil(data?.data?.rows?.length / 4);
+  const checkDiffentCountry = useMemo(() => {
+    if (params?.country?.country_id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [params?.country?.country_id, country?.id]);
 
   return (
     <MainWrapper
@@ -92,22 +100,25 @@ export default function VoucherManageScreen() {
               }}
             />
           }
-          renderItem={({item, index}) => (
-            <VoucherItem
-              key={`key_${item?.id}-${index}`}
-              data={item}
-
-              // onPressMore={() => {
-              //   setDataItemAccom(item);
-              //   bottomSheetRef.current.open();
-              // }}
-              // onEdit={() => {
-              //   navigate('DetailRoomManageScreen', {
-              //     ...item,
-              //   });
-              // }}
-            />
-          )}
+          renderItem={({item, index}) => {
+            return (
+              <VoucherItem
+                key={`key_${item?.id}-${index}`}
+                data={item}
+                checkDiffrentCountry={checkDiffentCountry}
+                countryRate={item?.currency?.exchange_rate}
+                // onPressMore={() => {
+                //   setDataItemAccom(item);
+                //   bottomSheetRef.current.open();
+                // }}
+                // onEdit={() => {
+                //   navigate('DetailRoomManageScreen', {
+                //     ...item,
+                //   });
+                // }}
+              />
+            );
+          }}
         />
 
         {/* <BottomSheet

@@ -26,6 +26,7 @@ import {showMess} from '../../../../../assets/constants/Helper';
 import ChooseCalendarRoom from '../../DetailAccommodation/Rooms/ChooseCalendarRoom';
 import {formatDate, formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {useAuthentication} from '../../../../../hooks/useAuthentication';
 
 const data = [
   {
@@ -45,7 +46,10 @@ const data = [
 export default function TicketOption({paramsTour}) {
   const [date, setDate] = useState();
   const params = useRoute().params;
-  const {currency} = useCountry();
+  const {currency, country} = useCountry();
+  const {token} = useAuthentication();
+  const {navigate} = useNavigation();
+
   const {data, isLoading} = useQuery({
     queryKey: [
       'tour',
@@ -82,11 +86,18 @@ export default function TicketOption({paramsTour}) {
           params: {
             ...item,
             images: params?.images || params?.data?.tour?.images,
+            paramsTour,
           },
         }),
       );
     }
   };
+  const checkDiffentCountry = useMemo(() => {
+    if (paramsTour?.country?.id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [paramsTour?.country?.id, country?.id]);
   return (
     <View>
       <View style={styles.boxTourTime}>
@@ -118,11 +129,17 @@ export default function TicketOption({paramsTour}) {
             const resultPercent = item?.tour_ticket_items?.map(item => {
               return item?.price_percent;
             });
+            const resultPriceOtherCountry = item?.tour_ticket_dates?.map(
+              item => {
+                return item?.price / item?.currency?.exchange_rate;
+              },
+            );
             const resultPrice = item?.tour_ticket_dates?.map(item => {
               return item?.price;
             });
             const minPercent = Math.min(...resultPercent);
             const minPrice = Math.min(...resultPrice);
+            const minPriceOtherCountry = Math.min(...resultPriceOtherCountry);
 
             return (
               <View style={styles.boxItem}>
@@ -189,9 +206,16 @@ export default function TicketOption({paramsTour}) {
                         paddingHorizontal: scale(10),
                         color: COLORS.primary,
                       }}>
-                      {formatPrice(minPercent * minPrice, {
-                        currency: currency?.currency_code,
-                      })}
+                      {formatPrice(
+                        checkDiffentCountry
+                          ? minPercent *
+                              minPriceOtherCountry *
+                              currency?.exchange_rate
+                          : minPercent * minPrice,
+                        {
+                          currency: currency?.currency_code,
+                        },
+                      )}
                     </CustomText>
                   </View>
                   {/* <View style={{flexDirection: 'row', marginLeft: '25%'}}>
@@ -212,7 +236,9 @@ export default function TicketOption({paramsTour}) {
                     alignSelf: 'center',
                     marginTop: scale(10),
                   }}
-                  onPress={() => booktour(item)}
+                  onPress={() =>
+                    !token ? navigate('NavigationAuth') : booktour(item)
+                  }
                   // onPress={() => showMess(t('comming_soon'), 'error')}
                 />
               </View>

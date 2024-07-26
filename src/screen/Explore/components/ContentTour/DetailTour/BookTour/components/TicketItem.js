@@ -6,7 +6,14 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {formatPrice} from '../../../../../../../utils/format';
 import {useCountry} from '../../../../../../../hooks/useCountry';
 
-export default function TicketItem({data, onChange, index, dataPriceTicket}) {
+export default function TicketItem({
+  data,
+  onChange,
+  index,
+  dataPriceTicket,
+  checkDiffentCountry,
+  countryRate,
+}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
   return (
@@ -28,9 +35,15 @@ export default function TicketItem({data, onChange, index, dataPriceTicket}) {
             style={{
               color: COLORS.primary,
             }}>
-            {formatPrice(dataPriceTicket * data?.price_percent, {
-              currency: currency?.currency_code,
-            })}
+            {formatPrice(
+              checkDiffentCountry
+                ? ((dataPriceTicket * data?.price_percent) / countryRate) *
+                    currency?.exchange_rate
+                : dataPriceTicket * data?.price_percent,
+              {
+                currency: currency?.currency_code,
+              },
+            )}
           </CustomText>
           <CustomText
             textType="medium"

@@ -30,6 +30,8 @@ export default function VoucherItem({
   isChecked,
   buyVoucher,
   onPressVoucher,
+  checkDiffrentCountry,
+  countryRate,
 }) {
   const {currency} = useCountry();
   const {t} = useLanguage();
@@ -102,9 +104,15 @@ export default function VoucherItem({
                 fontSize: SIZES.xSmall,
               }}>
               {t('value')}: {t('discount_remaining')}{' '}
-              {formatPrice(data?.price_discount_real, {
-                currency: currency?.currency_code,
-              })}
+              {formatPrice(
+                checkDiffrentCountry
+                  ? (data?.price_discount_real / countryRate) *
+                      currency?.exchange_rate
+                  : data?.price_discount_real,
+                {
+                  currency: currency?.currency_code,
+                },
+              )}
             </CustomText>
             <CustomText
               textType="semiBold"

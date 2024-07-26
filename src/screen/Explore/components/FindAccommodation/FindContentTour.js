@@ -30,7 +30,6 @@ export default function FindContentTour({rental, dataFind}) {
       near_me: true,
     },
   });
-
   useEffect(() => {
     if (params === 'near_me' || !params) {
       setValue('near_me', true);
@@ -38,7 +37,6 @@ export default function FindContentTour({rental, dataFind}) {
       unregister(['near_me']);
     }
   }, [params]);
-
   const handleSearch = value => {
     navigate('NoBottomTab', {
       screen: 'ListTourSearchScreen',

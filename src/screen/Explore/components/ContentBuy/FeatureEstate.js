@@ -104,7 +104,7 @@ export default function FeatureEstate() {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={data?.data?.rows}
+          data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
           renderItem={({item}) => (
             <BoxFeatureItem isHeart isStar data={item} rental="night" />

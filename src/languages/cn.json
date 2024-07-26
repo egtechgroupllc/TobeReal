@@ -1105,7 +1105,6 @@
   "are_you_sure_want_buy_voucher": "您确定要购买此优惠券吗?",
   "transaction_cant_refund": "已进行的交易不能退款!",
   "discount_voucher": "折扣优惠券",
-  "when_paying_hotel": "在酒店付款时",
   "apply_all_hotel_system": "适用于所有酒店系统",
   "this_voucher_is_valid": "此优惠券有效期至",
   "this_voucher_not_apply_other_hotel": "此优惠券不适用于其他酒店。",
@@ -1210,5 +1209,8 @@
   "the_remaining_balance_add": "剩余余额将返回到应用的代金券",
 
   "please_select_check_out": "请选择退房日期",
-  "add_your_youtube_video": "添加您的房地产YouTube视频链接（如果有）"
+  "add_your_youtube_video": "添加您的房地产YouTube视频链接（如果有）",
+  "when_paying_at": "支付时",
+  "apply_all_this_tour_system": "适用于所有这些旅游",
+  "this_voucher_not_apply_other_tour": "此优惠券不适用于其他旅游。"
 }

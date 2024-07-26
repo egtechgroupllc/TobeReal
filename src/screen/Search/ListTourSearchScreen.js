@@ -15,11 +15,16 @@ import {useLanguage} from '../../hooks/useLanguage';
 import {Category, CustomText} from '../../components';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 import {useQuery} from '@tanstack/react-query';
-import {getListPopularProvinceTour} from '../../Model/api/apiTour';
+import {
+  getListPopularCountryTour,
+  getListPopularProvinceTour,
+} from '../../Model/api/apiTour';
 import CategoryTour from './components/CategoryTour';
 import MapProvince from '../Map/Header/MapProvince';
 import ProvinceTour from './components/componentTour/ProvinceTour';
 import FilterTour from './components/FilterTour';
+import {IconLocation} from '../../assets/icon/Icon';
+import {type} from '../../components/Marquee';
 
 export default function ListTourSearchScreen() {
   const params = useRoute().params;
@@ -31,7 +36,6 @@ export default function ListTourSearchScreen() {
   const isFilter = useRef();
   const {setOptions} = useNavigation();
   const bottomSheetChildRef = useRef();
-
   const currentPosition = useCallback(async () => {
     await getCurrentLocation(({coords}) => {
       if (coords) {
@@ -67,7 +71,17 @@ export default function ListTourSearchScreen() {
           },
     };
   }, [JSON.stringify([params, filter, empale]), isFilter.current]);
-
+  const locationRight = () => {
+    if (!filter) {
+      return t('near_me');
+    } else {
+      if (filter?.menu?.id === 'DOMESTIC') {
+        return filter?.province?.name;
+      } else {
+        return filter?.country?.name;
+      }
+    }
+  };
   useEffect(() => {
     return setOptions({
       headerTitleComponent: () => (
@@ -76,6 +90,26 @@ export default function ListTourSearchScreen() {
           textType="semiBold">
           {t('find_tour')}
         </CustomText>
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: scale(10),
+          }}>
+          <CustomText
+            numberOfLines={2}
+            style={{
+              color: COLORS.white,
+              fontSize: SIZES.xMedium,
+              width: scale(100),
+              textAlign: 'center',
+            }}
+            textType="semiBold">
+            {locationRight()}
+          </CustomText>
+        </View>
       ),
       headerTitleStyle: {
         textAlign: 'left',
@@ -91,22 +125,33 @@ export default function ListTourSearchScreen() {
     },
     [isFilter.current],
   );
-  const {data, isLoading} = useQuery({
+
+  const listProvince = useQuery({
     queryKey: ['list', 'popular-province-tour', country?.geoname_id],
     queryFn: () => getListPopularProvinceTour(country?.geoname_id),
   });
-
+  const listCountry = useQuery({
+    queryKey: ['list', 'popular-country-tour', country?.id],
+    queryFn: () => getListPopularCountryTour(country?.id),
+  });
   return (
     <MainWrapper
       scrollEnabled={false}
       styleContent={{backgroundColor: '#f7f9fa'}}>
-      <FilterTour onFilter={onFilter} />
+      <FilterTour
+        onFilter={onFilter}
+        listProvince={listProvince}
+        listCountry={listCountry}
+      />
 
       <ListTourSearchContent
+        listCountry={listCountry}
+        listProvince={listProvince}
         paramsFilter={objFilter}
         location={current}
         country={country}
         currency={currency}
+        type={params?.type}
       />
     </MainWrapper>
   );

@@ -9,7 +9,7 @@ interface AuthProps {
   onSaveToken?: (data: any) => Promise<any>;
   onClearToken?: () => Promise<any>;
 }
-const TOKEN_KEY = '@token';
+export const TOKEN_KEY = '@token';
 export const AuthContext = createContext<AuthProps>({});
 
 export const AuthProvider = ({children}: {children: ReactNode}) => {
@@ -46,7 +46,6 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
       await EncryptedStorage.removeItem(TOKEN_KEY);
       queryClient.clear();
       RNRestart.restart();
-
     } catch (error) {}
   };
 

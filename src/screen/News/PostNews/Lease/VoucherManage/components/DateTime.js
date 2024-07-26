@@ -15,7 +15,9 @@ export default function DateTime({onChange, title}) {
   const [openCheckEnd, setOpenCheckEnd] = useState(false);
 
   const [timeCheckStart, setTimeCheckStart] = useState(new Date());
-  const [timeCheckEnd, setTimeCheckEnd] = useState(new Date());
+  const [timeCheckEnd, setTimeCheckEnd] = useState(
+    new Date(formatDate(timeCheckStart, {addDays: 1})),
+  );
 
   useEffect(() => {
     onChange &&

@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect} from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useForm} from 'react-hook-form';
@@ -31,10 +31,11 @@ import {IconHome} from '../../../../../assets/icon/Icon';
 
 export default function AddRoomTypeScreen() {
   const {t} = useLanguage();
-  const {navigate, goBack, setOptions} = useNavigation();
+  const {navigate, goBack, setOptions, addListener} = useNavigation();
   const params = useRoute().params;
   useLayoutEffect(() => {
     return setOptions({
+      // gestureEnabled: false,
       headerTitle: !params?.update ? t('create_room') : t('edit_room'),
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
@@ -240,8 +241,27 @@ export default function AddRoomTypeScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
+
+  // useEffect(() => {
+  //   addListener('beforeRemove', e => {
+  //     console.log(312323211);
+  //     console.log('event', e);
+  //     // Prevent default behavior of leaving the screen
+  //     e.preventDefault();
+  //     Alert.alert('Cảnh báo', 'Bạn không thể quay lại trang trước!', [
+  //       {text: 'OK', style: 'cancel'},
+  //     ]);
+  //     // Prompt the user before leaving the screen
+  //   });
+  // }, []);
+
   return (
-    <MainWrapper styleContent={styles.wrapper}>
+    <MainWrapper
+      styleContent={styles.wrapper}
+      // optionsHeader={{
+      //   gestureEnabled: false,
+      // }}
+    >
       <View style={styles.button}>
         <Image
           source={images.lease}

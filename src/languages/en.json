@@ -1115,7 +1115,6 @@
   "are_you_sure_want_buy_voucher": "Are you sure you want to buy this voucher?",
   "transaction_cant_refund": "Transactions made cannot be refunded!",
   "discount_voucher": "Discount voucher",
-  "when_paying_hotel": "When paying at the hotel",
   "apply_all_hotel_system": "Applicable across all hotel systems",
   "this_voucher_is_valid": "This voucher is valid until",
   "this_voucher_not_apply_other_hotel": "This voucher does not apply to other hotels.",
@@ -1220,5 +1219,8 @@
   "the_remaining_balance_add": "The remaining balance will be returned to the applied voucher",
 
   "please_select_check_out": "Please select a check-out date",
-  "add_your_youtube_video": "Add your real estate YouTube link video(if any)"
+  "add_your_youtube_video": "Add your real estate YouTube link video(if any)",
+  "when_paying_at": "When paying at",
+  "apply_all_this_tour_system": "Applicable across all this tour",
+  "this_voucher_not_apply_other_tour": "This voucher does not apply to other tours."
 }

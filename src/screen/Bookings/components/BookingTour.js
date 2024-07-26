@@ -14,10 +14,12 @@ import BookingTourItem from './BookingTourItem';
 
 export default function BookingTour() {
   const {navigate} = useNavigation();
+  const {token} = useAuthentication();
 
   const {data, isLoading, isError} = useQuery({
     queryKey: ['tour', 'my-booking'],
     queryFn: getListBookingTour,
+    enabled: !!token,
   });
   return (
     <FlatList

@@ -1,5 +1,5 @@
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {getListRent} from '../../Model/api/apiAccom';
@@ -15,9 +15,15 @@ import {type} from '../../components/Marquee';
 import {useCountry} from '../../hooks/useCountry';
 import ItemTourSearch from './components/componentTour/ItemTourSearch';
 
-export default function ListTourSearchContent({paramsFilter, location}) {
+export default function ListTourSearchContent({
+  paramsFilter,
+  location,
+  type,
+  listProvince,
+  listCountry,
+}) {
   const insets = useSafeAreaInsets();
-
+  const [typeFinal, setTypeFinal] = useState();
   const {currency} = useCountry();
   // const {data, isLoading, isError, error} = useQuery({
   //   queryKey: [
@@ -41,25 +47,78 @@ export default function ListTourSearchContent({paramsFilter, location}) {
   //     }),
   // });
   const {country} = useCountry();
+  const changeType = useMemo(() => {
+    if (paramsFilter?.menu?.id === 'WORLD') {
+      return 2;
+    } else {
+      return 1;
+    }
+  }, [paramsFilter?.menu?.id]);
+  useEffect(() => {
+    if (!paramsFilter?.menu?.id) {
+      setTypeFinal(type);
+    } else {
+      setTypeFinal(changeType);
+    }
+  }, [paramsFilter?.menu?.id, type, typeFinal, changeType]);
+  const handleCountry = useMemo(() => {
+    if (typeFinal === 2 && paramsFilter?.menu?.id !== 'WORLD') {
+      return listCountry?.data?.data?.rows?.[0]?.id;
+    } else {
+      if (paramsFilter?.menu?.id === 'WORLD') {
+        return paramsFilter?.country?.id || paramsFilter?.country_id;
+      } else {
+        return country?.id;
+      }
+    }
+  }, [
+    paramsFilter?.menu?.id,
+    typeFinal,
+    listCountry,
+    paramsFilter?.country?.id,
+  ]);
+  const handleProvince = useMemo(() => {
+    if (typeFinal === 1 && !paramsFilter?.menu?.id === 'DOMESTIC') {
+      return listProvince?.data?.data?.rows?.[0]?.id;
+    } else {
+      if (paramsFilter?.menu?.id === 'DOMESTIC') {
+        return paramsFilter?.province?.id || paramsFilter?.province_id;
+      } else {
+        return '';
+      }
+    }
+  }, [
+    paramsFilter?.menu?.id,
+    typeFinal,
+    listProvince,
+    paramsFilter?.province?.id,
+  ]);
   const objFilter = useMemo(
     () => ({
       ...paramsFilter,
       date_end: paramsFilter?.date?.date_end,
       date_start: paramsFilter?.date?.date_start,
-      country_id:
-        paramsFilter?.menu?.id === 'WORLD'
-          ? paramsFilter?.country?.id || paramsFilter?.country_id
-          : country?.id,
-      // latitude: paramsFilter?.near_me ? location?.latitude : '',
-      // longitude: paramsFilter?.near_me ? location?.longitude : '',
-      // distance: paramsFilter?.near_me ? 5000 : '',
-      province_id:
-        paramsFilter?.menu?.id === 'DOMESTIC'
-          ? paramsFilter?.province?.id || paramsFilter?.province_id
+      country_id: handleCountry,
+      distance: !paramsFilter?.menu?.id && paramsFilter?.near_me ? 5000 : '',
+      latitude:
+        !paramsFilter?.menu?.id && paramsFilter?.near_me
+          ? location?.latitude
           : '',
+      longitude:
+        !paramsFilter?.menu?.id && paramsFilter?.near_me
+          ? location?.longitude
+          : '',
+      province_id: handleProvince,
       currency_id: currency?.id,
     }),
-    [JSON.stringify([paramsFilter, location]), currency?.id, country?.id],
+    [
+      JSON.stringify([paramsFilter, location]),
+      currency?.id,
+      country?.id,
+      typeFinal,
+      handleCountry,
+      handleProvince,
+    ],
   );
 
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =

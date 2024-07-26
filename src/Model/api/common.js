@@ -1,9 +1,39 @@
 import axios from 'axios';
 import {baseUrl} from '../url';
+import {showMess} from '../../assets/constants/Helper';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {TOKEN_KEY} from '../../context/AuthContext';
+import RNRestart from 'react-native-restart';
+import {Alert} from 'react-native';
 
 export const instanceCommon = axios.create({
   baseURL: baseUrl + '/api/v1',
 });
+
+export const handleLogoutExistToken = async () => {
+  axios.defaults.headers.common['Authorization'] = '';
+  await EncryptedStorage.removeItem(TOKEN_KEY);
+  RNRestart.restart();
+};
+
+let countErr = 0;
+instanceCommon.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response && error.response.status === 401 && countErr < 1) {
+      Alert.alert(
+        'Notification',
+        'Your account has been logged in from another device, please log in again!',
+        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+      );
+
+      ++countErr;
+    }
+    return Promise.reject(error);
+  },
+);
 // ============================ Common =====================================
 export const getUserInfoLocation = async ({lat, lon}) => {
   // Encode the latitude and longitude to ensure they are correctly formatted
