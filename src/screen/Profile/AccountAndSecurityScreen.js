@@ -13,6 +13,8 @@ import {
   IconNext,
   IconPassword,
   IconProfile,
+  IconUnViewablePassword,
+  IconViewablePassword,
 } from '../../assets/icon/Icon';
 import {CustomText, MainWrapper} from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
@@ -38,6 +40,7 @@ export default function AccountAndSecurityScreen() {
           desc={'Các thông tin cá nhân'}
           nameScreen={'InformationScreen'}
         />
+
         <Item
           Icon={IconHandShake}
           title={'Tài khoản doanh nghiệp'}
@@ -52,11 +55,11 @@ export default function AccountAndSecurityScreen() {
           }}
           nameScreen="1"
         />
-        <Item
+        {/* <Item
           Icon={IconDeleteAccount}
           title={'Xoá tài khoản'}
           desc={'Tài khoản và nội dung sẽ bị xoá vinh viễn'}
-        />
+        /> */}
         {/* <Item
           Icon={Platform.OS === 'ios' ? IconFaceID : IconFingerprint}
           title={'Sinh trắc học'}
@@ -72,6 +75,7 @@ export default function AccountAndSecurityScreen() {
           desc={'Sử dụng mật khẩu chưa dùng ở nơi khác'}
           nameScreen="ChangePasswordScreen"
         />
+
         {/* <Item
           Icon={Platform.OS === 'ios' ? IconFaceID : IconFingerprint}
           title={'Sinh trắc học'}

@@ -6,7 +6,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getProfile} from '../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {IconNext} from '../../../assets/icon/Icon';
-import {CustomText, MainWrapper} from '../../../components';
+import {CustomButton, CustomText, MainWrapper} from '../../../components';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -14,10 +14,9 @@ import {formatDate} from '../../../utils/format';
 
 export default function InformationScreen() {
   const {t} = useLanguage();
-
+  const {navigate} = useNavigation();
   const queryClient = useQueryClient();
   const datePro = queryClient.getQueryData(['user', 'profile'])?.data;
-
   const {country} = useCountry();
 
   return (
@@ -28,10 +27,11 @@ export default function InformationScreen() {
         paddingHorizontal: scale(12),
       }}>
       <View style={styles.wrapper}>
+        <Row title={t('user_name')} value={datePro?.username} />
         <Row title={t('phone')} value={datePro?.phone} />
-        <Row title={'Email'} value={datePro?.email} />
+        <Row title={t('email')} value={datePro?.email} />
         <Row
-          title={t('date')}
+          title={t('date_create')}
           value={formatDate(datePro?.createdAt)}
           disabled
         />
@@ -43,6 +43,10 @@ export default function InformationScreen() {
           }
         />
       </View>
+      <CustomButton
+        text={t('change_information')}
+        onPress={() => navigate('ChangeInformationScreen')}
+      />
     </MainWrapper>
   );
 }
@@ -87,6 +91,7 @@ const styles = StyleSheet.create({
     padding: scale(12),
     rowGap: scale(6),
     marginTop: scale(14),
+    marginBottom: scale(30),
   },
   row: {
     flexDirection: 'row',

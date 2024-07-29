@@ -23,7 +23,6 @@ export default function TourSchedule({data}) {
   const context = JSON.parse(data?.schedule).find(
     item => item?.title === selectedDay,
   );
-
   return (
     <WrapperContent
       heading={t('tour_schedule')}
@@ -77,14 +76,17 @@ export default function TourSchedule({data}) {
         }}>
         <ScrollView horizontal>
           <View style={styles.content}>
-            {JSON.parse(data?.schedule)?.map((item, index) => (
-              <View key={index}>
-                <CustomButton
-                  text={item?.title}
-                  style={{width: scale(70), height: scale(30)}}
-                  onPress={() => handleDayClick(item?.title)}
-                />
-                {/* {item?.title === selectedDay && (
+            {JSON.parse(data?.schedule)?.map((item, index) => {
+              return (
+                <View key={index}>
+                  {JSON.parse(data?.schedule).length > 1 && (
+                    <CustomButton
+                      text={item?.title}
+                      style={{width: scale(70), height: scale(30)}}
+                      onPress={() => handleDayClick(item?.title)}
+                    />
+                  )}
+                  {/* {item?.title === selectedDay && (
                 <View key={`key-${item}-${index}`} style={styles.itemFac}>
                   <View style={styles.dot} />
 
@@ -97,8 +99,9 @@ export default function TourSchedule({data}) {
                   </CustomText>
                 </View>
               )} */}
-              </View>
-            ))}
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
 

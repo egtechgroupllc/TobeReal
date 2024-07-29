@@ -11,7 +11,6 @@
   "enter_username": "Enter your username",
   "enter_firstname": "Enter your first name",
   "enter_lastname": "Enter your last name",
-  "enter_phone": "Enter your phone",
   "enter_email": "Enter your email",
   "enter_new_password": "Enter new password",
   "enter_password_confirm": "Enter your password confirm",
@@ -1222,5 +1221,7 @@
   "add_your_youtube_video": "Add your real estate YouTube link video(if any)",
   "when_paying_at": "When paying at",
   "apply_all_this_tour_system": "Applicable across all this tour",
-  "this_voucher_not_apply_other_tour": "This voucher does not apply to other tours."
+  "this_voucher_not_apply_other_tour": "This voucher does not apply to other tours.",
+
+  "enter_phone": "Enter your phone"
 }

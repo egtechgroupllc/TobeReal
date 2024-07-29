@@ -106,6 +106,8 @@ export default function PostNewTourScreen() {
   const handlePostTour = value => {
     delete value?.check;
     delete value?.admin;
+    delete value?.days;
+    delete value?.hours;
     // delete value?.description_0;
     const formData = getFormData(value);
     const mutationConfig = {

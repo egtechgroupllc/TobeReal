@@ -17,6 +17,7 @@ import {CustomButton} from '../../../components';
 import CustomText from '../../../components/CustomText';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
 
 const listSocial = [
   IconShare,
@@ -28,7 +29,7 @@ const listSocial = [
 export default function Bottom() {
   const {t} = useLanguage();
   const {onClearToken, token} = useAuthentication();
-
+  const {navigate} = useNavigation();
   const logoutMutation = useMutation({
     mutationFn: postLogout,
   });
@@ -111,7 +112,9 @@ export default function Bottom() {
       {token && (
         <CustomButton
           text={'Đổi tài khoản'}
-          onPress={handleLogOut}
+          onPress={() =>
+            navigate('NavigationProfile', {screen: 'ChangeAccountScreen'})
+          }
           buttonType="medium"
           linearGradientProps
           style={{

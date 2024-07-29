@@ -57,9 +57,10 @@ export const validateMinMaxAmount = (message, amount, minAmount) => {
   };
 };
 
+const regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$/;
 export const validateEmail = message => {
   return {
-    pattern: {value: /^[a-zA-Z0-9.]+@gmail\.com$/, message},
+    pattern: {value: regexEmail, message},
   };
 };
 

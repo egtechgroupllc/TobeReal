@@ -4,6 +4,7 @@ import {
   FinancialScreen,
   ProfileScreen,
 } from '../screen/Profile';
+import ChangeAccountScreen from '../screen/Profile/ChangeAccountScreen';
 import {CustomersBuyScreen} from '../screen/Profile/Client/CustomersBuy';
 import {CustomersRentScreen} from '../screen/Profile/Client/CustomersRent';
 import CustomerManagementScreen from '../screen/Profile/CustomerManagement/CustomerManagementScreen';
@@ -13,6 +14,7 @@ import {DepositWithdrawScreen} from '../screen/Profile/FinancialManagement/Depos
 import {AddBankScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw/AddBank';
 
 import {InformationScreen} from '../screen/Profile/Information';
+import ChangeInformationScreen from '../screen/Profile/Information/ChangeInformationScreen';
 import {NewsSavedScreen} from '../screen/Profile/NewsSaved';
 import PostManagementScreen from '../screen/Profile/PostManagement/PostManagement';
 import {PriceListScreen} from '../screen/Profile/PriceList';
@@ -105,5 +107,13 @@ export default routerProfile = [
     options: {
       headerShown: false,
     },
+  },
+  {
+    name: 'ChangeInformationScreen',
+    component: ChangeInformationScreen,
+  },
+  {
+    name: 'ChangeAccountScreen',
+    component: ChangeAccountScreen,
   },
 ];

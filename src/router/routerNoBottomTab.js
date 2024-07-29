@@ -69,6 +69,7 @@ import BookingTourConfirm from '../screen/Explore/components/ContentTour/DetailT
 import BookingTourConfirmScreen from '../screen/Explore/components/ContentTour/DetailTour/BookTour/BookingTourConfirmScreen';
 import DetailReviewTourScreen from '../screen/Bookings/DetailReviewTourScreen';
 import ListTourSearchScreen from '../screen/Search/ListTourSearchScreen';
+import ChangeInformationScreen from '../screen/Profile/Information/ChangeInformationScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [

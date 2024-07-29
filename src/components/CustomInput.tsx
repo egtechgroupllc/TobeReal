@@ -55,6 +55,7 @@ type CustomInputProps = {
 export default forwardRef(function CustomInput(
   {
     sizeInput,
+    keyboardType,
     iconLeft,
     iconRight,
     componentRight,

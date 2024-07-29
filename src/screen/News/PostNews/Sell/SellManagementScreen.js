@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {getMyListCreateSell} from '../../../../Model/api/apiEstate';
 import {scale} from '../../../../assets/constants';
@@ -14,6 +14,7 @@ import CreateSellItem from './components/CreateSellItem';
 import CreateSellItemLoading from './components/CreateSellItemLoading';
 import DeleteEstate from './components/PostNewSell/DeleteEstate';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {IconHome} from '../../../../assets/icon/Icon';
 
 export default function SellManagementScreen() {
   const params = useRoute().params;
@@ -26,6 +27,11 @@ export default function SellManagementScreen() {
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('real_estate_listing'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
   }, [params]);
 

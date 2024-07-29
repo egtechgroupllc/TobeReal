@@ -13,6 +13,7 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {formatDateTime} from '../../../../../../utils/format';
 import {
   requireField,
+  validateMaxAmount,
   validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
@@ -38,6 +39,8 @@ const caculateDays = (dateStart, dateEnd) => {
     hours: finalHours,
   };
 };
+const maxDays = 31;
+const maxHours = 23;
 
 export default function TourSchedule({
   maxCharacters,
@@ -79,18 +82,16 @@ export default function TourSchedule({
 
   const [selectedDay, setSelectedDay] = useState(0);
   const inputRef = useRef();
-
   const handleDayClick = dayNumber => {
     setSelectedDay(dayNumber);
   };
 
-  const numDays = caculateDays(timeCheckStart, timeCheckEnd);
-
+  // const numDays = caculateDays(timeCheckStart, timeCheckEnd);
+  const [numDays, setNumDays] = useState({days: 0, hours: 1});
   useEffect(() => {
     setValue('total_hours', numDays.days * 24 + numDays.hours);
     setValue('refund_fee', 1);
   }, [numDays.days, numDays.hours]);
-
   useEffect(() => {
     if (typeof watch('schedule') === 'string') {
       const dataSchedule = JSON.parse(watch('schedule'));
@@ -100,11 +101,11 @@ export default function TourSchedule({
       });
     }
   }, [watch('schedule')]);
+
   const handleConfirm = value => {
     if (numDays.days > value) {
       setSelectedDay(value);
     }
-
     const dataSchedule = watch('schedule');
 
     const result = dataSchedule?.filter(
@@ -131,6 +132,12 @@ export default function TourSchedule({
     );
   };
 
+  useEffect(() => {
+    setNumDays({
+      days: Number(watch('days')) || 0,
+      hours: Number(watch('hours')) || 1,
+    });
+  }, [watch('days'), watch('hours')]);
   return (
     <View>
       <ButtonTabValidate
@@ -148,7 +155,7 @@ export default function TourSchedule({
               flexDirection: 'row',
               columnGap: scale(10),
             }}>
-            <CustomInput
+            {/* <CustomInput
               label={t('Ngày bắt đầu')}
               styleWrapper={{
                 flex: 1,
@@ -216,8 +223,50 @@ export default function TourSchedule({
                   setOpenCheckEnd(false);
                 }}
               />
-            </>
+            </> */}
+            <CustomInput
+              label={t('Số ngày')}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              defaultValue="0"
+              style={styles.input}
+              styleText={styles.textInput}
+              control={control}
+              name="days"
+              maxLength={2}
+              rules={[
+                requireField(t('this_field_required')),
+                validateMaxAmount(`${t('maximum_amount')} ${maxDays}`, maxDays),
+              ]}
+              // value={setNumDays({days: watch('days')})}
+              // onPress={() => setOpenCheckEnd(true)}
+            />
+            <CustomInput
+              label={t('Số giờ')}
+              styleTextLabel={styles.label}
+              styleWrapper={{
+                flex: 1,
+              }}
+              defaultValue="1"
+              style={styles.input}
+              styleText={styles.textInput}
+              control={control}
+              name="hours"
+              maxLength={2}
+              rules={[
+                requireField(t('this_field_required')),
+                validateMaxAmount(
+                  `${t('maximum_amount')} ${maxHours}`,
+                  maxHours,
+                ),
+              ]}
+              // value={formatDateTime(timeCheckEnd)}
+              // onPress={() => setOpenCheckEnd(true)}
+            />
           </View>
+
           <CustomText style={{...styles.label, alignSelf: 'flex-start'}}>
             {t('tour_duration')}: {numDays.days} {t('days')} {numDays.hours}{' '}
             {t('hours')}
@@ -230,7 +279,7 @@ export default function TourSchedule({
               columnGap: scale(10),
             }}>
             {Array.from(
-              {length: numDays.days || (numDays.hours ? 1 : 0)},
+              {length: Number(numDays.days) || (numDays.hours ? 1 : 0)},
               (_, dayNumber) =>
                 selectedDay === dayNumber ? (
                   <LinearGradient
@@ -271,7 +320,7 @@ export default function TourSchedule({
             )}
           </ScrollView>
           {Array.from(
-            {length: numDays.days || (numDays.hours ? 1 : 0)},
+            {length: Number(numDays.days) || (numDays.hours ? 1 : 0)},
             (_, dayNumber) =>
               dayNumber === selectedDay && (
                 <>

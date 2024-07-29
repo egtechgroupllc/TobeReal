@@ -1,8 +1,8 @@
 import React, {memo, useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {SHADOW, SIZES, scale} from '../../../assets/constants';
-import {IconDeposit} from '../../../assets/icon/Icon';
+import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
+import {IconDeposit, IconProfile, IconWallet} from '../../../assets/icon/Icon';
 import {CustomText} from '../../../components';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -30,15 +30,14 @@ export default function Content({token}) {
       }}>
       <Box title={'Cài đặt'}>
         <BoxItemProfile
-          Icon={IconDeposit}
           title={t('financial_management')}
           nameScreen={token ? 'AddressWalletScreen' : 'LoginScreen'}
           nameNavigate={token ? 'NavigateWalletToken' : 'NavigationAuth'}
         />
-        {/* <BoxItemProfile
+        <BoxItemProfile
           title={'Tài khoản & Bảo mật'}
           nameScreen={'AccountAndSecurityScreen'}
-        /> */}
+        />
       </Box>
 
       {/* <Box title={'Tiện ích'}>

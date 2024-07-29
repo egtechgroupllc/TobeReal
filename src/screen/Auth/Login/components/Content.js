@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useSyncExternalStore} from 'react';
 import {useForm} from 'react-hook-form';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
 import RNRestart from 'react-native-restart';
 
@@ -17,12 +17,14 @@ import {
   validateEmail,
   validateMinLengthText,
 } from '../../../../utils/validate';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 export default function Content() {
   const {t} = useLanguage();
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
-
+  const params = useRoute().params;
+  console.log(params);
   const {navigate} = useNavigation();
 
   const loginMutation = useMutation({
@@ -36,12 +38,38 @@ export default function Content() {
     navigate('ForgotPasswordScreen');
   };
 
+  const onSavedEmail = async data => {
+    const result = await EncryptedStorage.getItem('@save_email');
+    // const result = await EncryptedStorage.removeItem('@save_email');
+    const arrsdf = result
+      ? JSON.parse(result)?.filter(item => item.email !== data?.email)
+      : [];
+    await EncryptedStorage.setItem(
+      '@save_email',
+      JSON.stringify(
+        result
+          ? [
+              {
+                username: data?.username,
+                email: data?.email,
+              },
+              ...arrsdf.slice(0, 5),
+            ]
+          : [
+              {
+                username: data?.username,
+                email: data?.email,
+              },
+            ],
+      ),
+    );
+  };
   const handleLogin = value => {
     loginMutation.mutate(value, {
       onSuccess: dataInside => {
         if (dataInside?.status) {
           onSaveToken(dataInside?.data?.token);
-
+          onSavedEmail(dataInside?.data);
           showMess(dataInside?.message, 'success');
           // navigate('HomeExploreScreen');
 
@@ -77,6 +105,7 @@ export default function Content() {
             ...requireField(t('this_field_required')),
             ...validateEmail(t('invalid_email')),
           }}
+          defaultValue={params?.email}
         />
 
         <CustomInput

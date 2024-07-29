@@ -13,6 +13,7 @@ export default memo(function BoxItemProfile({
   subTitle,
   onPress,
   titleRight,
+  fill,
 }) {
   const {navigate} = useNavigation();
 
@@ -32,7 +33,7 @@ export default memo(function BoxItemProfile({
         paddingVertical: scale(10),
         columnGap: scale(14),
       }}>
-      {Icon && <Icon width={scale(16)} height={scale(16)} />}
+      {Icon && <Icon width={scale(16)} height={scale(16)} fill={fill} />}
 
       <CustomText textType="semiBold" size={scale(13)}>
         {title}

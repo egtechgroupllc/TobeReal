@@ -5,7 +5,11 @@ import {useMutation} from '@tanstack/react-query';
 import {showMess} from '../../../../assets/constants/Helper';
 import {postResetPassword} from '../../../../Model/api/auth';
 import {useForm} from 'react-hook-form';
-import {requireField, validateEqualLength} from '../../../../utils/validate';
+import {
+  requireField,
+  validateEmail,
+  validateEqualLength,
+} from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 
@@ -45,7 +49,7 @@ export default function VerificationCode({email}) {
         name="code"
         rules={[
           requireField(t('this_field_required')),
-          validateEqualLength(t('invalid_email'), 6),
+          validateEmail(t('invalid_email')),
         ]}
       />
 

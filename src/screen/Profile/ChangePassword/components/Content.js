@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
-import {useMutation} from '@tanstack/react-query';
-import React from 'react';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import React, {useLayoutEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {postChangePassword} from '../../../../Model/api/auth';
@@ -16,6 +16,14 @@ import {
 export default function Content() {
   const {t} = useLanguage();
   const {control, handleSubmit, watch} = useForm();
+  const {setOptions, navigate} = useNavigation();
+  const queryClient = useQueryClient();
+
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('change_password'),
+    });
+  }, []);
   const {goBack, reset} = useNavigation();
 
   const changPassMutation = useMutation({
@@ -30,7 +38,8 @@ export default function Content() {
         showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
 
         if (dataInside?.status) {
-          goBack();
+          queryClient.invalidateQueries(['user', 'profile']);
+          navigate('BottomTab');
           reset();
         }
       },
@@ -92,7 +101,6 @@ export default function Content() {
       />
 
       <CustomButton
-        linearGradientProps
         text={t('ok')}
         onPress={handleSubmit(handleChangePass)}
         buttonType="medium"

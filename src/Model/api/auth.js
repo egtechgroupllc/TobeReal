@@ -59,7 +59,11 @@ export const postChangePassword = async data => {
 
   return responsive.data;
 };
+export const postEditProfile = async data => {
+  const responsive = await instance.post('/edit-profile', data);
 
+  return responsive.data;
+};
 //  ================== Deposit ======================
 export const getListMethod = async data => {
   const responsive = await instance.get('/deposit/list-method');
