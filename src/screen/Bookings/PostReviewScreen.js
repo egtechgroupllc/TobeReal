@@ -44,7 +44,6 @@ export default function PostReviewScreen() {
         table_id: paramData?.accommodation?.id || paramData?.tour?.id,
       }),
   });
-  console.log(paramData?.accommodation?.id);
   return (
     // <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
     <>

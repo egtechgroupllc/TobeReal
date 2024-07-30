@@ -65,11 +65,10 @@ export default function PostVideoShortReviewScreen() {
 
     // formData.append('file', object?.file[0]);
 
-    formData.append('txhash_wallet_id', params);
+    formData.append('txhash_wallet_id', params?.txhashId);
 
     return formData;
   };
-  console.log(params, 3213312);
 
   const handlePostVideoShort = value => {
     const formData = getFormData(value);
@@ -110,7 +109,9 @@ export default function PostVideoShortReviewScreen() {
               fontSize: SIZES.xMedium,
               width: '85%',
             }}>
-            {t('would_you_like_share_short_video')}
+            {!params?.isTour
+              ? t('would_you_like_share_short_video')
+              : t('would_you_like_share_short_video_tour')}
           </CustomText>
         </View>
         <CustomInput

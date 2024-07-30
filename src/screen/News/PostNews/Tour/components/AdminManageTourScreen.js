@@ -163,7 +163,8 @@ export default function AdminManageTourScreen() {
           // }
           onPress={() =>
             navigate('ManageVideoShortScreen', {
-              tour: {id: params?.id, isTour: true},
+              isTour: true,
+              tourId: params?.id,
             })
           }
         />

@@ -14,7 +14,6 @@ export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-
   const {goBack} = useNavigation();
   const queryClient = useQueryClient();
 
@@ -57,7 +56,14 @@ export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
           dataInside?.status ? 'success' : 'error',
         );
         if (dataInside?.status) {
-          navigate('PostVideoShortReviewScreen', txhashId);
+          {
+            txhashId
+              ? navigate('PostVideoShortReviewScreen', {
+                  txhashId: txhashId,
+                  isTour: isTour,
+                })
+              : navigate('Explore');
+          }
 
           // queryClient.invalidateQueries([
           //   'accommodation',

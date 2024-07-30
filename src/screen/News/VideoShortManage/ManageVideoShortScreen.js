@@ -27,7 +27,8 @@ export default function ManageVideoShortScreen() {
     params?.accomId ||
     params?.accommodation?.id ||
     params?.estateId ||
-    params?.tour?.id;
+    params?.tour?.id ||
+    params?.tourId;
   const {data, isLoading, error} = useQuery({
     queryKey: ['common', 'video-short', 'my-list', table_id],
     queryFn: () =>
@@ -44,7 +45,7 @@ export default function ManageVideoShortScreen() {
 
       headerRight: () => (
         <>
-          {params?.accomId || params?.estateId || params?.tour?.id ? (
+          {params?.accomId || params?.estateId || params?.tourId ? (
             <TouchableOpacity
               onPress={() => {
                 const navigateParams = params?.accomId
@@ -59,7 +60,7 @@ export default function ManageVideoShortScreen() {
                     }
                   : {
                       Tour: params?.tour?.isTour,
-                      tourId: params?.tour?.id,
+                      tourId: params?.tourId,
                     };
 
                 navigate('PostVideoShortScreen', navigateParams);

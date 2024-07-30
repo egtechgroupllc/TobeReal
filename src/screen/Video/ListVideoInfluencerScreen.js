@@ -1,38 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  Animated,
-  AppState,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useCallback} from 'react';
+import {Animated, StyleSheet, View, useWindowDimensions} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {COLORS, animations, images, scale} from '../../assets/constants';
-import video from '../../assets/constants/video';
-import {IconGoBack} from '../../assets/icon/Icon';
-import RangeSlider from './components/RangeSlider';
-import VideoPlay from './components/VideoPlay';
-import Comment from './Comment';
-import {showMess} from '../../assets/constants/Helper';
-import {useLanguage} from '../../hooks/useLanguage';
-import {useQuery} from '@tanstack/react-query';
-import {getListVideoRandom} from '../../Model/api/common';
-import {CustomImage} from '../../components';
-import EmptyData from '../../components/EmptyData';
-
+import {TabBar, TabView} from 'react-native-tab-view';
+import {COLORS, SIZES, scale} from '../../assets/constants';
+import ListVideoRENT from './components/ListVideoRENT';
+import ListVideoBUY from './components/ListVideoBUY';
+import ListVideoTOUR from './components/ListVideoTOUR';
 const listVideo = [
   {
     id: 4,
@@ -69,96 +43,42 @@ const listVideo = [
 //     </Tab.Navigator>
 //   );
 // }
+const renderScene = ({route, jumpTo, isFocused}) => {
+  switch (route.key) {
+    case 'first':
+      return <ListVideoRENT isFocused={isFocused} />;
+    case 'second':
+      return <ListVideoBUY isFocused={isFocused} />;
+    case 'third':
+      return <ListVideoTOUR isFocused={isFocused} />;
+    default:
+      return null;
+  }
+};
 
 export default function ListVideoInfluencerScreen() {
-  const {t} = useLanguage();
-
-  const insets = useSafeAreaInsets();
-  const params = useRoute().params;
-
-  const videoRef = useRef();
-  const commentRef = useRef();
-  const flatListRef = useRef(null);
-
-  const isFocused = useIsFocused();
-  const [videoPlay, setVideoPlay] = useState(true);
-  const {data, isLoading} = useQuery({
-    queryKey: ['video-short', 'list-random'],
-    queryFn: () => getListVideoRandom({table_name: 'accommodation'}),
+  const layout = useWindowDimensions();
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {key: 'first', title: 'RENT'},
+    {key: 'second', title: 'BUY'},
+    {key: 'third', title: 'TOUR'},
+  ]);
+  const {top} = useSafeAreaInsets();
+  const av = new Animated.Value(0);
+  av.addListener(() => {
+    return;
   });
-  const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
-    if (viewableItems.length > 0 && viewableItems[0].isViewable) {
-      setVideoPlay(viewableItems[0].item?.id);
-    }
-  }, []);
-  // useLayoutEffect(() => {
-  //   scrollToIndex(params?.index);
-  // }, [params?.index]);
-  const viewabilityConfig = {
-    itemVisiblePercentThreshold: 50,
-  };
-  const scrollToIndex = useCallback((index = 0) => {
-    flatListRef.current.scrollToIndex({
-      animated: true,
-      index: index,
-    });
-  }, []);
-
-  // const handleProgress = useCallback(value => {
-  //   return setOptions({
-  //     tabBarButton: () => (
-  //       <View
-  //         style={{
-  //           width: '100%',
-  //           height: scale(28) + insets.bottom,
-  //         }}>
-  //         <View
-  //           style={[
-  //             {
-  //               width: '96%',
-  //               position: 'absolute',
-  //               alignSelf: 'center',
-  //               zIndex: 999,
-  //               top: scale(-20),
-  //             },
-  //           ]}>
-  //           <RangeSlider
-  //             progressValue={value?.currentTime}
-  //             onValueChange={videoRef.current?.handleValueChange}
-  //             maximumValue={value?.seekableDuration}
-  //           />
-  //         </View>
-  //         <Comment ref={commentRef} />
-  //       </View>
-  //     ),
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // useEffect(() => {
-  //   return setOptions({
-  //     tabBarButton: () => <Comment />,
-  //   });
-  // }, []);
-  if (isLoading) {
-    return (
-      <View
-        style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: COLORS.black,
-        }}>
-        {/* <CustomImage
-          source={images.logoLoading}
-          style={{width: scale(100), height: scale(100)}}
-        /> */}
-        <ActivityIndicator color={COLORS.primary} size="large" />
-      </View>
-    );
-  }
+  const renderSceneWrapper = useCallback(
+    ({route}) => {
+      return renderScene({
+        route,
+        jumpTo: setIndex,
+        isFocused: route.key === routes[index].key,
+      });
+    },
+    [index],
+  );
   return (
     <View style={{flex: 1, backgroundColor: '#000'}}>
       {/* <TouchableOpacity
@@ -167,71 +87,24 @@ export default function ListVideoInfluencerScreen() {
         style={{...styles.goBack, top: insets.top}}>
         <IconGoBack fill={'#fff'} />
       </TouchableOpacity> */}
-      <FlatList
-        data={data?.data?.rows}
-        ref={flatListRef}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        pagingEnabled
-        snapToAlignment={'start'}
-        onScrollToIndexFailed={({index}) => {
-          const wait = new Promise(resolve => setTimeout(resolve, 100));
-          wait.then(() => {
-            scrollToIndex(index);
-          });
-        }}
-        style={{flex: 1}}
-        contentContainerStyle={{
-          backgroundColor: '#000',
-          justifyContent: 'center',
-        }}
-        viewabilityConfig={viewabilityConfig}
-        onViewableItemsChanged={handlerViewableItemsChanged}
-        // onEndReached={e => Alert.alert('Đã gan cuôi r')}
-        onEndReachedThreshold={
-          data?.data?.rows?.length - (data?.data?.rows?.length - 2)
-        }
-        ListEmptyComponent={<EmptyData styleWrapper={{marginTop: '50%'}} />}
-        renderItem={({item, index}) => {
-          return (
-            <VideoPlay
-              ref={videoRef}
-              data={item}
-              paused={item?.id !== videoPlay}
-              play={item?.id === videoPlay && isFocused}
-              // onProgress={value => {
-              //   handleProgress(value);
-              // }}
-              // onComment={() => commentRef.current?.open()}
-              onComment={() => showMess(t('comming_soon'), 'error')}
-            />
-          );
-        }}
-      />
-
-      {/* <View
-        style={{
-          width: '100%',
-          height: scale(28) + insets.bottom,
-        }}>
-        <View
-          style={[
-            {
-              width: '96%',
-              position: 'absolute',
-              alignSelf: 'center',
-              zIndex: 999,
-              top: scale(-30),
-            },
-          ]}>
-          <RangeSlider
-          // progressValue={value?.currentTime}
-          // onValueChange={videoRef.current?.handleValueChange}
-          // maximumValue={value?.seekableDuration}
+      <TabView
+        navigationState={{index, routes}}
+        renderScene={renderSceneWrapper}
+        onIndexChange={setIndex}
+        initialLayout={{width: layout.width}}
+        style={styles.tabView}
+        renderTabBar={props => (
+          <TabBar
+            {...props}
+            indicatorStyle={styles.underline}
+            style={[styles.tabBar, {top: top}]}
+            activeColor={COLORS.primary}
+            inactiveColor={COLORS.greyLight}
+            labelStyle={styles.textSelect}
+            pressColor={COLORS.grey + 40}
           />
-        </View>
-        <Comment ref={commentRef} />
-      </View> */}
+        )}
+      />
     </View>
   );
 }
@@ -253,5 +126,28 @@ const styles = StyleSheet.create({
         scale: 2.5,
       },
     ],
+  },
+  underline: {
+    backgroundColor: COLORS.primary,
+  },
+  tabBar: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    backgroundColor: 'transparent',
+  },
+  textSelect: {
+    fontSize: SIZES.medium,
+    fontWeight: '500',
+    color: COLORS.white,
+  },
+  tabView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10, // Higher zIndex to ensure it is above other elements
   },
 });
