@@ -1087,8 +1087,6 @@
   "token_balance_available": "ยอดคงเหลือ TBH (สามารถถอนได้ในกระเป๋าสตางค์)",
   "active_to_use_wallet": "เปิดใช้งานเพื่อใช้กระเป๋าสตางค์ ToBeChain",
   "active_2_types_wallet": "เปิดใช้งาน 2 ประเภทของกระเป๋าเงิน: SavePay, กระเป๋าเงินดิจิตอล และเพลิดเพลินกับการชำระเงินที่รวดเร็วและปลอดภัย",
-  "congratulate_on_receiving_coin": "ขอแสดงความยินดีที่ได้รับเหรียญ TBC!",
-  "you_will_automatic_transfer": "คุณจะถูกโอนโดยอัตโนมัติ \n ไปยังหน้าจอประวัติการจองใน \n",
   "your_transaction_has_been_canceled": "ธุรกรรมของคุณถูกยกเลิกเนื่องจาก \n ข้อผิดพลาดระหว่างกระบวนการจอง \nกรุณาลองอีกครั้ง!",
   "traceability": "การตรวจสอบย้อนกลับ",
   "property_traceability": "การตรวจสอบย้อนกลับทรัพย์สิน",
@@ -1215,5 +1213,41 @@
   "add_your_youtube_video": "เพิ่มลิงก์วิดีโอ YouTube อสังหาริมทรัพย์ของคุณ (ถ้ามี)",
   "when_paying_at": "เมื่อชำระเงินที่",
   "apply_all_this_tour_system": "ใช้ได้กับทัวร์ทั้งหมดนี้",
-  "this_voucher_not_apply_other_tour": "บัตรกำนัลนี้ไม่สามารถใช้กับทัวร์อื่นได้"
+  "this_voucher_not_apply_other_tour": "บัตรกำนัลนี้ไม่สามารถใช้กับทัวร์อื่นได้",
+
+  "enter_phone": "กรุณากรอกหมายเลขโทรศัพท์ของคุณ",
+  "days_ago": "วันที่ผ่านมา",
+  "day_ago": "วันก่อน",
+  "weeks_ago": "สัปดาห์ที่แล้ว",
+  "week_ago": "สัปดาห์ที่แล้ว",
+  "years_ago": "ปีที่แล้ว",
+  "year_ago": "ปีที่แล้ว",
+  "hour_ago": "ชั่วโมงที่แล้ว",
+  "hours_ago": "ชั่วโมงที่แล้ว",
+  "month_ago": "เดือนที่แล้ว",
+  "months_ago": "เดือนที่แล้ว",
+  "sent": "ส่งแล้ว",
+  "image": "ภาพ",
+  "my_list_group_chat": "รายการกลุ่มแชทของฉัน",
+  "enter_message": "กรอกข้อความ",
+
+  "minute_ago": "นาทีที่แล้ว",
+  "minutes_ago": "นาทีที่แล้ว",
+
+  "initially_the_system": "ในตอนแรก ระบบจะตั้งค่าพื้นที่บัญชีของคุณตามเวลาและสถานที่ในการลงทะเบียน",
+  "change_information": "เปลี่ยนข้อมูล",
+  "user_name": "ชื่อผู้ใช้",
+  "please_select_image": "กรุณาเลือกภาพก่อน",
+  "change_avatar": "เปลี่ยนภาพประจำตัว",
+  "upload_image": "อัพโหลดภาพ",
+
+  "policy_linked": "นโยบายที่เชื่อมโยง",
+  "you_will_automatic_transfer": "คุณจะถูกโอนไปยังหน้าจอโดยอัตโนมัติใน",
+  "congratulate_on_receiving_coin": "ขอแสดงความยินดีกับการรับเหรียญ TBC!",
+  "enter_amount_withdraw": "ป้อนจำนวนเงินที่คุณต้องการถอน",
+  "date_create": "วันที่สร้าง",
+
+  "create_wallet": "สร้างกระเป๋าสตางค์",
+  "no_still_pay": "ไม่, ยังคงจ่ายด้วย LokaPay",
+  "do_you_want_create_wallet": "คุณต้องการสร้างกระเป๋าสตางค์และจ่ายด้วยบัตรกำนัลเพื่อรับคะแนนฟรีหรือไม่?"
 }

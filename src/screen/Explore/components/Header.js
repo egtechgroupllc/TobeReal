@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {COLORS, images, scale} from '../../../assets/constants';
 import {
+  IconChat,
   IconNotification,
   IconSearch,
   LogoLine,
@@ -47,6 +48,11 @@ export default function Header() {
     //   screen: 'NotifyScreen',
     // });
   };
+  const goChatGroup = () => {
+    navigate('NoBottomTab', {
+      screen: 'ListChatGroupScreen',
+    });
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -57,7 +63,7 @@ export default function Header() {
             style={styles.img}
           />
         </View>
-        <View
+        {/* <View
           style={{
             flex: 1,
             height: scale(33),
@@ -75,10 +81,20 @@ export default function Header() {
             }
             style={{borderRadius: scale(20), borderColor: COLORS.white}}
           />
+        </View> */}
+        <View
+          style={{
+            flexDirection: 'row',
+            columnGap: scale(15),
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity onPress={goChatGroup}>
+            <IconChat fill={COLORS.white} />
+          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={goNotify}>
+            <IconNotification fill={COLORS.white} />
+          </TouchableOpacity> */}
         </View>
-        {/* <TouchableOpacity onPress={goNotify}>
-          <IconNotification fill={COLORS.white} />
-        </TouchableOpacity> */}
       </View>
       {/* 
       <View style={styles.content}>
@@ -127,7 +143,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     columnGap: scale(20),
     height: scale(56),
   },

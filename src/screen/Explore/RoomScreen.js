@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import React, {useLayoutEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 
@@ -17,6 +17,7 @@ import RoomFilterType from './components/DetailAccommodation/Rooms/RoomFilterTyp
 import RoomItem from './components/DetailAccommodation/Rooms/RoomItem';
 import InViewport from '../../components/InViewport';
 import Collapsible from 'react-native-collapsible';
+import {IconHome} from '../../assets/icon/Icon';
 
 export default function RoomScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -82,7 +83,19 @@ export default function RoomScreen() {
       headerTitleStyle: {
         textAlign: 'left',
       },
-      headerRight: () => <Favourite />,
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: scale(10),
+          }}>
+          <TouchableOpacity onPress={() => navigate('Explore')}>
+            <IconHome style={{width: scale(20)}} />
+          </TouchableOpacity>
+          <Favourite styleWrapper={{width: scale(15), heigth: scale(15)}} />
+        </View>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);

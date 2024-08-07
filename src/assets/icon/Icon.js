@@ -449,6 +449,18 @@ export function IconNotification({fill, ...props}) {
     </Svg>
   );
 }
+export function IconChat({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(22)}
+      height={props?.style?.height || scale(22)}
+      viewBox="0 -960 960 960"
+      fill={fill || '#e8eaed'}
+      {...props}>
+      <Path d="M280-240q-17 0-28.5-11.5T240-280v-80h520v-360h80q17 0 28.5 11.5T880-680v600L720-240H280zM80-280v-560q0-17 11.5-28.5T120-880h520q17 0 28.5 11.5T680-840v360q0 17-11.5 28.5T640-440H240L80-280zm520-240v-280H160v280h440zm-440 0v-280 280z" />
+    </Svg>
+  );
+}
 export function IconRight({fill, ...props}) {
   return (
     <Svg
@@ -801,6 +813,42 @@ export function IconAdd({fill, ...props}) {
         strokeWidth={2}
         strokeLinecap="round"
       />
+    </Svg>
+  );
+}
+export function IconSend({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(24)}
+      height={props?.style?.height || scale(24)}
+      viewBox="0 -960 960 960"
+      fill={fill || '#e8eaed'}
+      {...props}>
+      <Path d="M120-160v-640l760 320-760 320zm80-120l474-200-474-200v140l240 60-240 60v140zm0 0v-400 400z" />
+    </Svg>
+  );
+}
+export function IconSent({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(17)}
+      height={props?.style?.height || scale(17)}
+      viewBox="0 -960 960 960"
+      fill={fill || '#fff'}
+      {...props}>
+      <Path d="M382-240L154-468l57-57 171 171 367-367 57 57-424 424z" />
+    </Svg>
+  );
+}
+export function IconReceived({fill, ...props}) {
+  return (
+    <Svg
+      width={props?.style?.width || scale(17)}
+      height={props?.style?.height || scale(17)}
+      viewBox="0 -960 960 960"
+      fill={fill || '#fff'}
+      {...props}>
+      <Path d="M268-240L42-466l57-56 170 170 56 56-57 56zm226 0L268-466l56-57 170 170 368-368 56 57-424 424zm0-226l-57-56 198-198 57 56-198 198z" />
     </Svg>
   );
 }

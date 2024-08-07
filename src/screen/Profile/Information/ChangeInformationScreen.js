@@ -43,7 +43,7 @@ export default function ChangeInformationScreen() {
   return (
     <View style={styles.container}>
       <CustomInput
-        label={t('username')}
+        label={t('user_name')}
         control={control}
         name="username"
         placeholder={t('enter_username')}

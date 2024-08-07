@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -14,6 +14,8 @@ import ImgConfirmDeposit from './components/ConfirmDeposit/ImgConfirmDeposit';
 import InfoBank from './components/ConfirmDeposit/InfoBank';
 import SyntaxDeposit from './components/ConfirmDeposit/SyntaxDeposit';
 import {useLanguage} from '../../../hooks/useLanguage';
+import ModalBookingSuccess from '../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
+import {useCountdown} from '../../../hooks/useCountdown';
 
 export default function ConfirmDepositScreen({route}) {
   const {setOptions, navigate} = useNavigation();
@@ -22,6 +24,11 @@ export default function ConfirmDepositScreen({route}) {
   const data = route.params;
   const {control, handleSubmit} = useForm();
   const {bottom} = useSafeAreaInsets();
+  const [openContact, setOpenContact] = useState(false);
+
+  const [check, setCheck] = useState(false);
+  const {start, countdown} = useCountdown(5);
+  const isPending = useRef(false);
 
   useLayoutEffect(() => {
     setOptions({
@@ -36,22 +43,36 @@ export default function ConfirmDepositScreen({route}) {
   });
 
   const handleConfirmOrder = value => {
+    setOpenContact(true);
     const formData = new FormData();
 
     value?.files?.map(image => {
       formData.append('files', image);
     });
     formData.append('code', data?.code);
+    setTimeout(() => {
+      confirmDepositMu.mutate(formData, {
+        onSuccess: dataInside => {
+          isPending.current = true;
+          setCheck({
+            status: dataInside?.status,
+            mess: dataInside?.message,
+          });
+          start();
+          setTimeout(
+            () => {
+              setOpenContact(false);
 
-    confirmDepositMu.mutate(formData, {
-      onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-        if (dataInside?.status) {
-          queryClient.invalidateQueries(['deposit', 'my-order']);
-          navigate('FinancialScreen', {screen: 'HistoryTransaction'});
-        }
-      },
-    });
+              if (dataInside?.status) {
+                queryClient.invalidateQueries(['deposit', 'my-order']);
+                navigate('FinancialScreen', {screen: 'HistoryTransaction'});
+              }
+            },
+            dataInside?.status === false ? 3000 : 5000,
+          );
+        },
+      });
+    }, 2000);
   };
 
   return (
@@ -66,6 +87,12 @@ export default function ConfirmDepositScreen({route}) {
           paddingBottom: bottom + scale(10),
           ...styles.footer,
         }}>
+        <ModalBookingSuccess
+          openContact={openContact}
+          isPending={isPending}
+          check={check}
+          countdown={countdown}
+        />
         <CustomButton
           onPress={handleSubmit(handleConfirmOrder)}
           text={t('confirm_paid')}

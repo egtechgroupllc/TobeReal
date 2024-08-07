@@ -23,7 +23,6 @@ import {showMess} from '../../../../../../../assets/constants/Helper';
 
 export default function PolicyManageScreen() {
   const params = useRoute().params;
-
   const {setOptions, navigate, goBack} = useNavigation();
 
   const {t} = useLanguage();

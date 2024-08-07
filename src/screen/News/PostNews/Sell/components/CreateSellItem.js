@@ -45,7 +45,7 @@ export default function CreateSellItem({
       activeOpacity={0.7}
       disabled={dateExpire <= today ? true : false}
       onPress={() => {
-        navigate('DetailBuyScreen', data);
+        navigate('NoBottomTab', {screen: 'DetailBuyScreen', params: data});
       }}>
       {dateExpire <= today && (
         <View
@@ -70,15 +70,31 @@ export default function CreateSellItem({
             }}>
             {t('please_repost')}!
           </CustomText>
-          <CustomButton
-            onPress={() => onEdit({isRestore: true})}
-            activeOpacity={0.9}
-            text={t('repost')}
-            buttonType="small"
-            iconRight={IconReset}
-            styleIcon={{color: COLORS.white}}
-            styleWrapper={{width: '30%'}}
-          />
+          <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+            <CustomButton
+              onPress={() => onEdit({isRestore: true})}
+              activeOpacity={0.9}
+              text={t('repost')}
+              buttonType="small"
+              iconRight={IconReset}
+              styleIcon={{color: COLORS.white}}
+              styleWrapper={{width: '30%'}}
+            />
+            <TouchableOpacity
+              style={{...styles.box, backgroundColor: COLORS.white}}
+              activeOpacity={0.7}
+              onPress={onPressMore}>
+              {/* <View style={styles.dot} />
+            <View style={styles.dot} />
+            <View style={styles.dot} /> */}
+              <IconTrash
+                style={{
+                  width: scale(20),
+                  height: scale(20),
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
       <View style={styles.top}>

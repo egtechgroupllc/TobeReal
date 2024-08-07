@@ -47,7 +47,14 @@ export default function ContactInfo({data, onPress}) {
         <View style={styles.center}>
           <View style={{alignItems: 'center', rowGap: scale(7)}}>
             <View>
-              <CustomImage source={images.avatar} style={styles.avatar} />
+              <CustomImage
+                source={
+                  !data?.user?.image_avatar
+                    ? images.avatar
+                    : data?.user?.url_image_avatar
+                }
+                style={styles.avatar}
+              />
               {false && (
                 <IconArmorial
                   style={{
@@ -72,7 +79,7 @@ export default function ContactInfo({data, onPress}) {
             style={{
               flex: 1,
             }}>
-            <View style={styles.boxInfoItem}>
+            <View style={{...styles.boxInfoItem, paddingLeft: scale(16)}}>
               <IconProfile
                 fill={COLORS.primary}
                 style={{

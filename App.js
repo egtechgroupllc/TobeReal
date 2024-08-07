@@ -47,7 +47,11 @@ import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
 //   walkthroughable,
 // } from 'react-native-copilot';
 import {TourGuideProvider} from 'rn-tourguide';
-import {CustomText} from './src/components';
+import {CustomText, HeaderBar} from './src/components';
+import {useAuthentication} from './src/hooks/useAuthentication';
+import {useSocket} from './src/Model/socket/socket';
+import {AddRoomTypeScreen} from './src/screen/News/PostNews/Lease/AddRoomType';
+import {screenGestureDisable} from './src/navigation/screenGestureDisable';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -218,9 +222,10 @@ export default function App() {
                 <SplashScreen />
               ) : (
                 <KeyboardProvider>
-                  <Loading />
                   <LanguageProvider>
                     <AuthProvider>
+                      <Loading />
+
                       <FlashMessage
                         position={
                           Platform.OS === 'ios'
@@ -269,6 +274,19 @@ export default function App() {
 
 const Layout = () => {
   const {country} = useCountry();
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('connect', () => {
+        console.log('Socket connected!');
+      });
+
+      return () => {
+        socket.off('connect');
+      };
+    }
+  }, [socket]);
 
   return (
     <Stack.Navigator
@@ -277,6 +295,7 @@ const Layout = () => {
         contentStyle: {
           backgroundColor: '#f7f9fa',
         },
+        header: props => <HeaderBar {...props} />,
       }}
       initialRouteName="BottomTab">
       {country?.id ? (
@@ -294,7 +313,7 @@ const Layout = () => {
         component={NavigateWalletToken}
       />
       <Stack.Screen name="NoBottomTab" component={NoBottomTab} />
-
+      {screenGestureDisable()}
       {/* <NoBottomTab /> */}
     </Stack.Navigator>
   );

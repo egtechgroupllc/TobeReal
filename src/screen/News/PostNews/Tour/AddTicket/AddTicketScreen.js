@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import MainWrapper from '../../../../../components/MainWrapper';
 import {useForm} from 'react-hook-form';
 import {showMess} from '../../../../../assets/constants/Helper';
@@ -31,7 +31,7 @@ import TypeTicket from './components/TypeTicket';
 
 export default function AddTicketScreen() {
   const params = useRoute().params;
-  const {setOptions, navigate} = useNavigation();
+  const {setOptions, navigate, addListener} = useNavigation();
   const {t} = useLanguage();
   const [forms, setForms] = useState([0]);
   useLayoutEffect(() => {
@@ -132,9 +132,18 @@ export default function AddTicketScreen() {
       },
     );
   };
-
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      e.preventDefault();
+    });
+  }, []);
   return (
     <MainWrapper
+      optionsHeader={{
+        gestureEnabled: false,
+        headerLeft: () => {},
+        headerTitle: t('create_tour_ticket'),
+      }}
       refreshControl={false}
       styleContent={{
         marginVertical: scale(20),

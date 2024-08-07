@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {getListBookingAccomo} from '../../../Model/api/apiAccom';

@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 export default function ListToken({dataP}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const {data, error} = useQuery({
+  const {data, error, isError} = useQuery({
     queryKey: ['user', 'wallet', 'balance'],
     queryFn: getBalanceWallet,
   });
@@ -34,6 +34,12 @@ export default function ListToken({dataP}) {
         name: 'ECOSYSTEM (TOBECHAIN)',
         value: data?.data?.[1]?.balance,
         unit: 'ETOBE',
+        image: images.logoEcoTOBE,
+      },
+      {
+        name: 'TOBE AIRDROP',
+        value: data?.data?.[3]?.balance,
+        unit: 'TBC',
         image: images.logoEcoTOBE,
       },
     ],

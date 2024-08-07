@@ -1084,8 +1084,6 @@
   "token_balance_available": "TBH余额（可提取到钱包）",
   "active_to_use_wallet": "激活以使用ToBeChain钱包",
   "active_2_types_wallet": "激活两种钱包：SavePay、加密货币钱包，享受快速、安全的支付",
-  "congratulate_on_receiving_coin": "恭喜您收到TBC币！",
-  "you_will_automatic_transfer": "您将自动转移 \n 到预订历史记录屏幕 \n",
   "your_transaction_has_been_canceled": "您的交易因 \n 预订过程中出错而被取消。\n请再试一次！",
   "traceability": "可追溯性",
   "property_traceability": "财产可追溯性",
@@ -1212,5 +1210,40 @@
   "add_your_youtube_video": "添加您的房地产YouTube视频链接（如果有）",
   "when_paying_at": "支付时",
   "apply_all_this_tour_system": "适用于所有这些旅游",
-  "this_voucher_not_apply_other_tour": "此优惠券不适用于其他旅游。"
+  "this_voucher_not_apply_other_tour": "此优惠券不适用于其他旅游。",
+
+  "days_ago": "天前",
+  "day_ago": "天前",
+  "weeks_ago": "周前",
+  "week_ago": "周前",
+  "years_ago": "年前",
+  "year_ago": "年前",
+  "hour_ago": "小时前",
+  "hours_ago": "小时前",
+  "month_ago": "个月前",
+  "months_ago": "个月前",
+  "sent": "已发送",
+  "image": "图片",
+  "my_list_group_chat": "我的群聊列表",
+  "enter_message": "输入消息",
+
+  "minute_ago": "分钟前",
+  "minutes_ago": "分钟前",
+
+  "initially_the_system": "最初，系统会根据注册时间和位置设置您的帐户区域。",
+  "change_information": "更改信息",
+  "user_name": "用户名",
+  "please_select_image": "请先选择一个图像",
+  "change_avatar": "更改头像",
+  "upload_image": "上传图片",
+
+  "policy_linked": "关联政策",
+  "you_will_automatic_transfer": "您将自动转移到屏幕中",
+  "congratulate_on_receiving_coin": "恭喜你收到TBC币！",
+  "enter_amount_withdraw": "输入您想提取的金额",
+  "date_create": "创建日期",
+
+  "create_wallet": "创建钱包",
+  "no_still_pay": "不，仍然使用LokaPay付款",
+  "do_you_want_create_wallet": "您想创建钱包并使用代金券支付以获得免费积分吗?"
 }

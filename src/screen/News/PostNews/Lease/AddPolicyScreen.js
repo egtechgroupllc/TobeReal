@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
 import {SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
@@ -22,7 +22,7 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 export default function AddPolicyScreen({route}) {
   const dataParams = route?.params;
   const {t} = useLanguage();
-  const {navigate, setOptions, goBack} = useNavigation();
+  const {navigate, setOptions, goBack, addListener} = useNavigation();
   const {
     handleSubmit,
     control,
@@ -43,7 +43,6 @@ export default function AddPolicyScreen({route}) {
   });
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: t('policy_screen'),
       headerTitleStyle: {
         textAlign: 'center',
       },
@@ -55,10 +54,8 @@ export default function AddPolicyScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const handleCreatePolicy = value => {
     // const price_percent = !value?.isDiscount ? value?.price_percent / 100 : 1;
-
     const price_percent = value?.isDiscount
       ? (100 - value?.price_percent) / 100
       : value?.price_percent / 100 + 1;
@@ -76,7 +73,6 @@ export default function AddPolicyScreen({route}) {
           // navigate('NoBottomTab', {
           //   screen: 'AccommoManagementScreen',
           // });
-
           if (dataInside?.status) {
             reset();
             queryClient.invalidateQueries([
@@ -89,10 +85,7 @@ export default function AddPolicyScreen({route}) {
               dataInside?.status ? 'success' : 'error',
             );
             !dataParams?.admin
-              ? navigate('NoBottomTab', {
-                  screen: 'PolicyToRoomScreen',
-                  params: dataParams,
-                })
+              ? navigate('PolicyToRoomScreen', dataParams)
               : goBack(dataParams?.data?.accommodationId);
           }
         },
@@ -103,10 +96,21 @@ export default function AddPolicyScreen({route}) {
       },
     );
   };
-
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      // Prevent default behavior of leaving the screen
+      !dataParams?.admin && e.preventDefault();
+      // Prompt the user before leaving the screen
+    });
+  }, [dataParams?.admin]);
   return (
     <MainWrapper
       noImgColor
+      optionsHeader={{
+        gestureEnabled: false,
+        headerLeft: () => {},
+        headerTitle: t('policy_screen'),
+      }}
       styleContent={{
         paddingHorizontal: scale(10),
       }}>

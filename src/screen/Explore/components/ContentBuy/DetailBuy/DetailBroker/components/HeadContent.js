@@ -6,12 +6,17 @@ import {
   IconViewablePassword,
 } from '../../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../../components/CustomText';
-import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../../../assets/constants';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {CustomImage} from '../../../../../../../components';
 
 export default function HeadContent({data}) {
   const {t} = useLanguage();
-
   return (
     <View
       style={{
@@ -24,10 +29,17 @@ export default function HeadContent({data}) {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          columnGap: scale(30),
+          columnGap: scale(10),
         }}>
         <View style={{rowGap: scale(10)}}>
-          <Avatar width={scale(100)} height={scale(100)} />
+          <CustomImage
+            source={
+              !data?.user?.image_avatar
+                ? images.avatar
+                : data?.user?.url_image_avatar
+            }
+            style={styles.avatar}
+          />
 
           <CustomText
             textType="regular"
@@ -39,7 +51,7 @@ export default function HeadContent({data}) {
           </CustomText>
         </View>
 
-        <View style={{rowGap: scale(20)}}>
+        <View style={{rowGap: scale(10)}}>
           <CustomText
             textType="bold"
             style={{
@@ -76,4 +88,10 @@ export default function HeadContent({data}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  avatar: {
+    width: scale(100),
+    aspectRatio: 1,
+    borderRadius: scale(99),
+  },
+});

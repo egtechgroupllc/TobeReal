@@ -38,9 +38,7 @@ export default function InformationScreen() {
         <Row
           title={t('country')}
           value={country?.name && `${country?.flag} ${country?.name}`}
-          desc={
-            'Ban đầu, hệ thống thiết lập khu vực tài khoản của bạn dựa tren thời gian và địa điểm đăng ký'
-          }
+          desc={t('initially_the_system')}
         />
       </View>
       <CustomButton

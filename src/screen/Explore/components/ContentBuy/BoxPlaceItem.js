@@ -110,18 +110,16 @@ export default function BoxPlaceItem({
               data={data}
             />
           </View>
+
           <LinearGradient
             colors={['#f5f5f5', '#F5F4F8']}
             start={{x: 0, y: 1}}
             end={{x: 0, y: 0}}
             style={{
-              // backgroundColor: '#ffd847',
               flex: 1,
               marginTop: scale(18),
-              // margin: scale(5),
-              // rowGap: scale(4),
               borderRadius: scale(5),
-              height: scale(110),
+              minHeight: scale(120),
               width: '100%',
               padding: scale(10),
             }}>
@@ -175,15 +173,35 @@ export default function BoxPlaceItem({
                       />
                       <CustomText
                         textType="medium"
+                        numberOfLines={3}
                         style={{
                           fontSize: SIZES.xSmall,
                           // minWidth: scale(35),
+                          width: scale(150),
                         }}>
                         {data?.country?.name}, {data?.province?.name}
                       </CustomText>
                     </View>
                   </View>
-
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      columnGap: scale(5),
+                      marginTop: scale(5),
+                    }}>
+                    <IconAcreage width={scale(15)} height={scale(15)} />
+                    <CustomText
+                      textType="medium"
+                      style={{
+                        fontSize: SIZES.small,
+                        // flex: 1,
+                        // minWidth: scale(35),
+                      }}>
+                      {formatPrice(data?.size_width * data?.size_length, {
+                        unit: 'm²',
+                      })}
+                    </CustomText>
+                  </View>
                   <View
                     style={{
                       ...styles.price,
@@ -195,7 +213,6 @@ export default function BoxPlaceItem({
                         ...styles.topBox,
                         backgroundColor: '#234F68B0',
                         width: scale(80),
-                        // marginTop: scale(25),
                       }}>
                       <CustomText style={styles.topName} numberOfLines={1}>
                         {formatPrice(data?.price, {
@@ -203,60 +220,6 @@ export default function BoxPlaceItem({
                         })}{' '}
                       </CustomText>
                     </View>
-                    {/* <CustomText
-                      textType="bold"
-                      numberOfLines={1}
-                      style={[
-                        styles.buildingName,
-                        isStar && {fontSize: SIZES.small, color: '#0057FF'},
-                        isDiscount,
-                      ]}>
-                      {formatPrice(data?.price, {
-                        locales: 'vi',
-                      })}{' '}
-                      {time && (
-                        <CustomText
-                          textType="regular"
-                          style={{fontSize: SIZES.xSmall}}>
-                          / {rental}
-                        </CustomText>
-                      )}
-                    </CustomText> */}
-                    <View style={{flexDirection: 'row', columnGap: scale(5)}}>
-                      <IconAcreage width={scale(15)} height={scale(15)} />
-                      <CustomText
-                        textType="medium"
-                        style={{
-                          fontSize: SIZES.small,
-                          // flex: 1,
-                          // minWidth: scale(35),
-                        }}>
-                        {formatPrice(data?.size_width * data?.size_length, {
-                          unit: 'm²',
-                        })}
-                      </CustomText>
-                    </View>
-
-                    {/* <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        columnGap: scale(5),
-                      }}>
-                      <CustomText
-                        textType="medium"
-                        style={{
-                          fontSize: SIZES.small,
-                          // minWidth: scale(35),
-                        }}>
-                        {data?.number_bedroom}
-                      </CustomText>
-                      <IconRoom
-                        width={scale(10)}
-                        height={scale(10)}
-                        fill={'#4e4c4c'}
-                      />
-                    </View> */}
 
                     {isViewMap && (
                       <TouchableOpacity
@@ -283,14 +246,21 @@ export default function BoxPlaceItem({
                     alignItems: 'center',
                     columnGap: scale(5),
                   }}>
-                  <Avatar width={scale(20)} height={scale(20)}></Avatar>
-                  <View>
+                  <CustomImage
+                    source={
+                      !data?.user?.image_avatar
+                        ? images.avatar
+                        : data?.user?.url_image_avatar
+                    }
+                    style={styles.avatar}
+                  />
+                  <View style={{flex: 1}}>
                     <CustomText
                       textType="bold"
                       numberOfLines={1}
                       style={{
                         fontSize: SIZES.xSmall,
-                        minWidth: scale(35),
+                        width: scale(150),
                       }}>
                       {data?.contact_name}
                     </CustomText>
@@ -300,7 +270,7 @@ export default function BoxPlaceItem({
                       style={{
                         color: '#949090',
                         fontSize: SIZES.xSmall,
-                        minWidth: scale(35),
+                        width: scale(150),
                       }}>
                       {calculateTimeElapsed(data.date_start)}
                     </CustomText>
@@ -308,16 +278,6 @@ export default function BoxPlaceItem({
                 </View>
               </View>
             </View>
-            {/* <View style={{marginTop: scale(5)}}>
-              {!!rating && !isStar && (
-                <RatingBox rating={rating} textRating={textRating} />
-              )}
-              {isStar && (
-                <View>
-                  <Star rating={3} />
-                </View>
-              )}
-            </View> */}
           </LinearGradient>
         </TouchableOpacity>
       ) : (
@@ -385,5 +345,10 @@ const styles = StyleSheet.create({
   topName: {
     fontSize: SIZES.xSmall,
     color: COLORS.white,
+  },
+  avatar: {
+    width: scale(20),
+    height: scale(20),
+    borderRadius: scale(99),
   },
 });

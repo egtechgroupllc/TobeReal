@@ -2,25 +2,31 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
-import {IconCheck, IconProfile} from '../../../assets/icon/Icon';
+import {IconCamera, IconCheck, IconProfile} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
 import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function TopProfile({name, data}) {
   const {t} = useLanguage();
-
+  const {navigate} = useNavigation();
   return (
     <View style={styles.wrapper}>
       <View
         style={{
           marginTop: scale(-20),
         }}>
-        <CustomImage source={images.iconProfile} style={styles.avatar} />
-
+        <CustomImage
+          source={
+            !data?.image_avatar ? images.iconProfile : data?.url_image_avatar
+          }
+          style={styles.avatar}
+        />
         <IconCheck style={styles.iconCheck} size={scale(16)} />
       </View>
+
       <CustomText textType="bold" size={SIZES.medium}>
         {name}
       </CustomText>
@@ -37,7 +43,24 @@ export default function TopProfile({name, data}) {
           </CustomText>
         </View>
       </View>
-
+      <TouchableOpacity
+        onPress={() =>
+          navigate('NavigationProfile', {
+            screen: 'ChangeAvatarScreen',
+            params: data,
+          })
+        }
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          columnGap: scale(5),
+          paddingBottom: scale(10),
+        }}>
+        <CustomText style={{color: COLORS.blue}}>
+          {t('change_avatar')}
+        </CustomText>
+        <IconCamera />
+      </TouchableOpacity>
       {/* <View style={styles.bottom}>
         <TouchableOpacity
           activeOpacity={0.7}

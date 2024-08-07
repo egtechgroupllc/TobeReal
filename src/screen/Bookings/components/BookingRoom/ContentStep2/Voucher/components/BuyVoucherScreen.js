@@ -28,7 +28,6 @@ export default function BuyVoucherScreen() {
   const {currency} = useCountry();
 
   const params = useRoute().params;
-  console.log(params?.checkDiffrentCountry, 312321);
   const {setOptions, goBack, navigate} = useNavigation();
 
   useEffect(() => {

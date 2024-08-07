@@ -203,7 +203,7 @@ export default function ItemAccommdSearch({
             )}
             <View style={{flexDirection: 'row'}}>
               <IconMapView />
-              <CustomText>
+              <CustomText numberOfLines={2} style={{maxWidth: scale(150)}}>
                 {data?.country?.name}, {data?.province?.name}
               </CustomText>
             </View>

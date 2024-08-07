@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {memo} from 'react';
 import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {CustomButton} from '../../../../../components';
 import {IconPromotion} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {formatPrice} from '../../../../../utils/format';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {postInitOrderDeposit} from '../../../../../Model/api/auth';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -15,12 +15,39 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 
 export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
   const {navigate} = useNavigation();
+  const queryClient = useQueryClient();
+
+  const dataPro = queryClient.getQueryData(['user', 'profile'])?.data;
+
   const initOrderDepositMu = useMutation({
     mutationFn: postInitOrderDeposit,
   });
   const {currency} = useCountry();
   const {t} = useLanguage();
-
+  const handleAlert = () => {
+    if (!dataPro?.wallet_address) {
+      Alert.alert(
+        t('Notification'),
+        t('Do you want import wallet and pay with voucher to get point free?'),
+        [
+          {
+            text: t('import_wallet'),
+            onPress: () =>
+              navigate('NavigateWalletToken', {screen: 'AddressWalletScreen'}),
+            // onPress: () => Alert.alert('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: t('No, deposit now!'),
+            onPress: handleSubmit(handleInitOrder),
+          },
+        ],
+      );
+      return;
+    } else {
+      handleSubmit(handleInitOrder)();
+    }
+  };
   const handleInitOrder = value => {
     initOrderDepositMu.mutate(
       {
@@ -75,7 +102,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
         style={{
           minWidth: scale(130),
         }}
-        onPress={handleSubmit(handleInitOrder)}
+        onPress={handleAlert}
       />
     </View>
   );

@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {Linking, StyleSheet, View} from 'react-native';
+import {Alert, Linking, StyleSheet, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
@@ -37,7 +37,7 @@ export default function ContentStep2({data}) {
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
-  const {start, countdown} = useCountdown(10);
+  const {start, countdown} = useCountdown(5);
 
   useEffect(() => {
     const loadInfoBooking = async () => {
@@ -69,12 +69,32 @@ export default function ContentStep2({data}) {
     );
   };
   const isPending = useRef(false);
+  const handleAlert = () => {
+    if (typePayment === 'FIAT') {
+      Alert.alert(t('notification'), t('do_you_want_create_wallet'), [
+        {
+          text: t('create_wallet'),
+          onPress: () =>
+            navigate('NavigateWalletToken', {screen: 'AddressWalletScreen'}),
+          // onPress: () => Alert.alert('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: t('no_still_pay'), onPress: () => handleBookingRoom()},
+      ]);
+      return;
+    } else {
+      handleBookingRoom();
+    }
+  };
   const handleBookingRoom = value => {
     if (!typePayment) {
       showMess(t('please_select_payment'), 'error');
       return;
     }
-    setOpenContact(true);
+
+    if (typePayment !== 'FIAT') {
+      setOpenContact(true);
+    }
     setTimeout(() => {
       // setOpenContact(false);
       bookingRoomMu.mutate(
@@ -92,47 +112,74 @@ export default function ContentStep2({data}) {
         },
         {
           onSuccess: dataInside => {
-            isPending.current = true;
-            setCheck({
-              status: dataInside?.status,
-              mess: dataInside?.message,
-            });
-            start();
-            // showMess(
-            //   dataInside?.message,
-            //   dataInside?.status ? 'success' : 'error',
-            // );
+            if (dataInside?.status) {
+              if (typePayment !== 'FIAT') {
+                isPending.current = true;
+                setCheck({
+                  status: dataInside?.status,
+                  mess: dataInside?.message,
+                });
+                start();
+                // showMess(
+                //   dataInside?.message,
+                //   dataInside?.status ? 'success' : 'error',
+                // );
 
-            setTimeout(
-              () => {
-                setOpenContact(false);
+                setTimeout(
+                  () => {
+                    setOpenContact(false);
 
-                if (dataInside?.status) {
-                  queryClient.invalidateQueries([
-                    'accommodation',
-                    'detail',
-                    'list-room',
-                    data?.idAccom,
-                  ]);
-                  queryClient.invalidateQueries(['user', 'profile']);
-                  if (dataInside?.data?.payment === 'PAYPAL') {
-                    handlePaypal(dataInside?.data?.id);
-                    return;
-                  }
-                  navigate('Booking', {
-                    screen: 'HomeBookingsScreen',
-                  });
+                    if (dataInside?.status) {
+                      queryClient.invalidateQueries([
+                        'accommodation',
+                        'detail',
+                        'list-room',
+                        data?.idAccom,
+                      ]);
+                      queryClient.invalidateQueries(['user', 'profile']);
+                      if (dataInside?.data?.payment === 'PAYPAL') {
+                        handlePaypal(dataInside?.data?.id);
+                        return;
+                      }
+                      navigate('Booking', {
+                        screen: 'HomeBookingsScreen',
+                      });
+                    }
+                  },
+                  dataInside?.status === false ? 3000 : 5000,
+                );
+                return;
+              } else {
+                showMess(
+                  dataInside?.message,
+                  dataInside?.status ? 'success' : 'error',
+                );
+                queryClient.invalidateQueries([
+                  'accommodation',
+                  'detail',
+                  'list-room',
+                  data?.idAccom,
+                ]);
+                queryClient.invalidateQueries(['user', 'profile']);
+                if (dataInside?.data?.payment === 'PAYPAL') {
+                  handlePaypal(dataInside?.data?.id);
+                  return;
                 }
-              },
-              dataInside?.status === false ? 3000 : 10000,
-            );
+                navigate('Booking', {
+                  screen: 'HomeBookingsScreen',
+                });
+              }
+            } else {
+              showMess(dataInside?.message, 'error');
+              setOpenContact(false);
+            }
           },
           onError: err => {
             console.log({err});
           },
         },
       );
-    }, 2000);
+    }, 1000);
   };
 
   const priceVoucher = useMemo(() => {
@@ -184,7 +231,7 @@ export default function ContentStep2({data}) {
           </CustomText>
           <CustomButton
             text={t('pay')}
-            onPress={handleBookingRoom}
+            onPress={handleAlert}
             disabled={checkBalance}
             style={{
               backgroundColor: !checkBalance ? COLORS.primary : COLORS.grey,

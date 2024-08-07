@@ -47,10 +47,10 @@ export default routerNews = [
     name: 'PostNewTourScreen',
     component: PostNewTourScreen,
   },
-  {
-    name: 'PostConfigurationSellScreen',
-    component: PostConfigurationSellScreen,
-  },
+  // {
+  //   name: 'PostConfigurationSellScreen',
+  //   component: PostConfigurationSellScreen,
+  // },
 
   {
     name: 'PostNewSellScreen',

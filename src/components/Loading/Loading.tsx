@@ -12,6 +12,7 @@ import {COLORS, images, scale} from '../../assets/constants';
 import CustomText from '../CustomText';
 import styles from './styles';
 import CustomImage from '../CustomImage';
+import {useLoading} from '../../hooks/useLoading';
 
 export interface LoadingPropTypes {
   cancelable?: boolean;
@@ -43,6 +44,7 @@ const Loading = ({
   spinnerKey,
 }: LoadingPropTypes) => {
   const [spinnerVisible, setLoadingVisibility] = React.useState(visible);
+  const {isLoading, isStop} = useLoading();
   const close = () => {
     setLoadingVisibility(false);
   };
@@ -63,8 +65,8 @@ const Loading = ({
   // console.log({isMutating, isFetching});
 
   React.useEffect(() => {
-    setLoadingVisibility(!!isMutating);
-  }, [isMutating]);
+    !isStop && setLoadingVisibility(!!isMutating);
+  }, [isMutating, isStop]);
 
   const _renderDefaultContent = () => {
     return (
@@ -75,20 +77,20 @@ const Loading = ({
       />
     );
 
-    return (
-      <View style={[styles.background, indicatorStyle]}>
-        {/* {customIndicator || <ActivityIndicator color={color} size={size} />}
-         */}
-        <CustomImage
-          source={images.logoLoading}
-          style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
-          resizeMode="cover"
-        />
-        <CustomText style={[styles.textContent, textStyle]}>
-          {textContent}
-        </CustomText>
-      </View>
-    );
+    // return (
+    //   <View style={[styles.background, indicatorStyle]}>
+    //     {/* {customIndicator || <ActivityIndicator color={color} size={size} />}
+    //      */}
+    //     <CustomImage
+    //       source={images.logoLoading}
+    //       style={{height: scale(100), width: scale(100), alignSelf: 'center'}}
+    //       resizeMode="cover"
+    //     />
+    //     <CustomText style={[styles.textContent, textStyle]}>
+    //       {textContent}
+    //     </CustomText>
+    //   </View>
+    // );
   };
 
   const _renderLoading = () => {

@@ -14,6 +14,8 @@ import ReactNativeModal from 'react-native-modal';
 import Modal from 'react-native-modal';
 import {IconSupporterYellow} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
+import {useQuery} from '@tanstack/react-query';
+import {getListConstant} from '../../../../../Model/api/common';
 
 export default function ModalBookingSuccess({
   openContact,
@@ -22,6 +24,10 @@ export default function ModalBookingSuccess({
   countdown,
 }) {
   const {t} = useLanguage();
+  const {data, isLoading} = useQuery({
+    queryKey: ['common', 'list-constant'],
+    queryFn: getListConstant,
+  });
 
   return (
     <Modal
@@ -94,7 +100,7 @@ export default function ModalBookingSuccess({
                       alignSelf: 'center',
                       marginTop: scale(5),
                     }}>
-                    +0.5 TBC
+                    +{data?.data?.amount_token_tbc_airdrop} TBC
                   </CustomText>
                   <CustomText
                     style={{

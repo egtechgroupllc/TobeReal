@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
@@ -30,12 +30,26 @@ import TourPhoto from '../components/PostNewTour/TourPhoto';
 import TourSchedule from '../components/PostNewTour/TourSchedule';
 import {IconHome} from '../../../../../assets/icon/Icon';
 import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
+import {useCountdown} from '../../../../../hooks/useCountdown';
+import {useLoading} from '../../../../../hooks/useLoading';
+import ModalBookingSuccess from '../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
 
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
   const {navigate, setOptions} = useNavigation();
   const params = useRoute().params;
+  const [openContact, setOpenContact] = useState(false);
+  const isPending = useRef(false);
 
+  const [check, setCheck] = useState(false);
+  const {start, countdown} = useCountdown(5);
+  const {stopLoading, setLoading} = useLoading();
+  useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   useEffect(() => {
     return setOptions({
       headerTitle: !params?.admin ? t('post_new_tour') : t('edit'),
@@ -110,23 +124,44 @@ export default function PostNewTourScreen() {
     delete value?.hours;
     // delete value?.description_0;
     const formData = getFormData(value);
+    if (!params?.address) {
+      setOpenContact(true);
+    }
     const mutationConfig = {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-
         if (dataInside?.status) {
           if (!params?.address) {
-            reset();
-            navigate('NoBottomTab', {
-              screen: 'AddTicketScreen',
-              params: {id: dataInside?.data?.id},
+            isPending.current = true;
+            setCheck({
+              status: dataInside?.status,
+              mess: dataInside?.message,
             });
+            start();
+            setTimeout(
+              () => {
+                setOpenContact(false);
+                reset();
+                navigate('NoBottomTab', {
+                  screen: 'AddTicketScreen',
+                  params: {id: dataInside?.data?.id},
+                });
+                return;
+              },
+              dataInside?.status === false ? 3000 : 5000,
+            );
           } else {
+            showMess(
+              dataInside?.message,
+              dataInside?.status ? 'success' : 'error',
+            );
             navigate('NoBottomTab', {
               screen: 'TourManagementScreen',
             });
             queryClient.invalidateQueries(['tour', 'my-list']);
           }
+        } else {
+          showMess(dataInside?.message, 'error');
+          setOpenContact(false);
         }
       },
       onError: err => {
@@ -140,7 +175,9 @@ export default function PostNewTourScreen() {
       );
       return;
     }
-    createTourMu.mutate(formData, mutationConfig);
+    setTimeout(() => {
+      createTourMu.mutate(formData, mutationConfig);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -233,7 +270,12 @@ export default function PostNewTourScreen() {
           alignItems: 'center',
         }}
       /> */}
-
+      <ModalBookingSuccess
+        openContact={openContact}
+        isPending={isPending}
+        check={check}
+        countdown={countdown}
+      />
       <CustomButton
         buttonType="medium"
         text={t('confirm')}

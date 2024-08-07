@@ -2,6 +2,7 @@ import {addDays, addMonths, addYears, format} from 'date-fns';
 import {vi} from 'date-fns/locale';
 import {COUNTRY_KEY} from '../context/CountryContent';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {useLanguage} from '../hooks/useLanguage';
 
 export const formatPrice = (
   price = 0,
@@ -126,4 +127,55 @@ export const formatTime = (date = new Date(), {isHour24} = {}) => {
   const formatString = `${timeFormat}`.trim();
 
   return format(formattedDateTime, formatString);
+};
+export const formatTimeAgo = dateString => {
+  const {t} = useLanguage();
+
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInSeconds = Math.floor((now - date) / 1000);
+
+  if (diffInSeconds < 60) {
+    return t('now');
+  }
+
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return diffInMinutes === 1
+      ? `1 ${t('minute_ago')}`
+      : `${diffInMinutes} ${t('minutes_ago')}`;
+  }
+
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return diffInHours === 1
+      ? `1 ${t('hour_ago')}`
+      : `${diffInHours} ${t('hours_ago')}`;
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 7) {
+    return diffInDays === 1
+      ? `1 ${t('day_ago')}`
+      : `${diffInDays} ${t('days_ago')}`;
+  }
+
+  const diffInWeeks = Math.floor(diffInDays / 7);
+  if (diffInWeeks < 4) {
+    return diffInWeeks === 1
+      ? `1 ${t('week_ago')}`
+      : `${diffInWeeks} ${t('weeks_ago')}`;
+  }
+
+  const diffInMonths = Math.floor(diffInDays / 30);
+  if (diffInMonths < 12) {
+    return diffInMonths === 1
+      ? `1 ${t('month_ago')}`
+      : `${diffInMonths} ${t('months_ago')}`;
+  }
+
+  const diffInYears = Math.floor(diffInDays / 365);
+  return diffInYears === 1
+    ? `1 ${t('year_ago')}`
+    : `${diffInYears} ${t('years_ago')}`;
 };

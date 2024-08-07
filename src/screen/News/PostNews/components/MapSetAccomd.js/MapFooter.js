@@ -9,11 +9,17 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {showMess} from '../../../../../assets/constants/Helper';
+import {useQuery} from '@tanstack/react-query';
+import {getListConstant} from '../../../../../Model/api/common';
 
 export default function MapFooter({moveLocation, router, distance}) {
   const insets = useSafeAreaInsets();
   const {goBack} = useNavigation();
   const {t} = useLanguage();
+  const {data, isLoading} = useQuery({
+    queryKey: ['common', 'list-constant'],
+    queryFn: getListConstant,
+  });
   return (
     <View
       style={[
@@ -69,17 +75,17 @@ export default function MapFooter({moveLocation, router, distance}) {
       <CustomButton
         text={t('confirm')}
         onPress={() => {
-          // if (distance <= 5) {
-          //   router?.onGoBack(moveLocation);
-          //   goBack();
-          // } else {
-          //   showMess(
-          //     'Please choose an exact location within 5 meters to post',
-          //     'error',
-          //   );
-          // }
-          router?.onGoBack(moveLocation);
-          goBack();
+          if (data?.data?.distance_radius > 0) {
+            if (distance <= data?.data?.distance_radius) {
+              router?.onGoBack(moveLocation);
+              goBack();
+            } else {
+              showMess(t('please_choose_exact_location'), 'error');
+            }
+          } else {
+            router?.onGoBack(moveLocation);
+            goBack();
+          }
         }}
       />
     </View>

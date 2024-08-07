@@ -1089,8 +1089,6 @@
   "token_balance_available": "Số dư TBH (có sẵn để rút vào ví)",
   "active_to_use_wallet": "Kích hoạt để sử dụng Ví ToBeChain",
   "active_2_types_wallet": "Kích hoạt 2 loại ví: SavePay, ví tiền mã hoá và tận hưởng thanh toán nhanh chóng, an toàn",
-  "congratulate_on_receiving_coin": "Chúc mừng bạn đã nhận được TBC coin!",
-  "you_will_automatic_transfer": "Bạn sẽ tự động chuyển \n vào màn hình lịch sử đặt phòng trong \n",
   "your_transaction_has_been_canceled": "Giao dịch của bạn đã bị hủy do \n lỗi trong quá trình đặt phòng.\nVui lòng thử lại!",
   "traceability": "Truy xuất nguồn gốc",
   "property_traceability": "Truy xuất nguồn gốc tài sản",
@@ -1172,7 +1170,7 @@
   "no_more_room_today": "Hôm nay không còn phòng trống",
   "please_repost": "Bài đăng này đã hết hạn, vui lòng đăng lại",
   "repost": "Đăng lại",
-  "video_short": "video ngắn",
+  "video_short": "Video ngắn",
   "wallet_ready_to_use": "Ví tiền mã hoá của bạn đã sẵn sàng để sử dụng",
 
   "incomplete_registration": "Quá trình đăng ký chưa hoàn tất",
@@ -1216,5 +1214,41 @@
   "add_your_youtube_video": "Thêm liên kết video YouTube bất động sản của bạn (nếu có)",
   "when_paying_at": "Khi thanh toán tại",
   "apply_all_this_tour_system": "Áp dụng cho tất cả các tour này",
-  "this_voucher_not_apply_other_tour": "Phiếu giảm giá này không áp dụng cho các tour khác."
+  "this_voucher_not_apply_other_tour": "Phiếu giảm giá này không áp dụng cho các tour khác.",
+
+  "enter_phone": "Nhập số điện thoại của bạn",
+  "days_ago": "ngày trước",
+  "day_ago": "ngày trước",
+  "weeks_ago": "tuần trước",
+  "week_ago": "tuần trước",
+  "years_ago": "năm trước",
+  "year_ago": "năm trước",
+  "hour_ago": "giờ trước",
+  "hours_ago": "giờ trước",
+  "month_ago": "tháng trước",
+  "months_ago": "tháng trước",
+  "sent": "đã gửi",
+  "image": "hình ảnh",
+  "my_list_group_chat": "Danh sách nhóm chat của tôi",
+  "enter_message": "Nhập tin nhắn",
+
+  "minute_ago": "phút trước",
+  "minutes_ago": "phút trước",
+
+  "initially_the_system": "Ban đầu, hệ thống thiết lập khu vực tài khoản của bạn dựa trên thời gian và địa điểm đăng ký.",
+  "change_information": "Thay đổi thông tin",
+  "user_name": "Tên người dùng",
+  "please_select_image": "Vui lòng chọn một hình ảnh trước",
+  "change_avatar": "Thay đổi hình đại diện",
+  "upload_image": "Tải hình ảnh lên",
+
+  "policy_linked": "Chính sách liên kết",
+  "you_will_automatic_transfer": "Bạn sẽ tự động chuyển màn hình trong",
+  "congratulate_on_receiving_coin": "Chúc mừng bạn đã nhận được đồng TBC!",
+  "enter_amount_withdraw": "Nhập số tiền bạn muốn rút",
+  "date_create": "Ngày tạo",
+
+  "create_wallet": "Tạo ví",
+  "no_still_pay": "Không, vẫn thanh toán bằng LokaPay",
+  "do_you_want_create_wallet": "Bạn có muốn tạo ví và thanh toán bằng voucher để nhận điểm miễn phí không?"
 }

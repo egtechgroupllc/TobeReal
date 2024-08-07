@@ -1060,8 +1060,6 @@
   "token_balance_available": "Saldo TBH (tersedia untuk ditarik ke dompet)",
   "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet ToBeChain",
   "active_2_types_wallet": "Aktifkan 2 jenis dompet: SavePay, dompet cryptocurrency, dan nikmati pembayaran yang cepat, aman",
-  "congratulate_on_receiving_coin": "Selamat menerima koin TBC!",
-  "you_will_automatic_transfer": "Anda akan otomatis dipindahkan \n ke layar riwayat pemesanan dalam \n",
   "your_transaction_has_been_canceled": "Transaksi Anda telah dibatalkan karena \n kesalahan selama proses pemesanan. \nSilakan coba lagi!",
   "traceability": "Pelacakan",
   "property_traceability": "Pelacakan properti",
@@ -1187,5 +1185,41 @@
   "add_your_youtube_video": "Tambahkan tautan video YouTube real estate Anda (jika ada)",
   "when_paying_at": "Saat membayar di",
   "apply_all_this_tour_system": "Berlaku untuk semua tur ini",
-  "this_voucher_not_apply_other_tour": "Voucher ini tidak berlaku untuk tur lain."
+  "this_voucher_not_apply_other_tour": "Voucher ini tidak berlaku untuk tur lain.",
+
+  "enter_phone": "Masukkan nomor telepon Anda",
+  "days_ago": "hari yang lalu",
+  "day_ago": "hari yang lalu",
+  "weeks_ago": "minggu yang lalu",
+  "week_ago": "minggu yang lalu",
+  "years_ago": "tahun yang lalu",
+  "year_ago": "tahun yang lalu",
+  "hour_ago": "jam yang lalu",
+  "hours_ago": "jam yang lalu",
+  "month_ago": "bulan yang lalu",
+  "months_ago": "bulan yang lalu",
+  "sent": "dikirim",
+  "image": "gambar",
+  "my_list_group_chat": "Daftar grup chat saya",
+  "enter_message": "Masukkan pesan",
+
+  "minute_ago": "menit yang lalu",
+  "minutes_ago": "menit yang lalu",
+
+  "initially_the_system": "Awalnya, sistem mengatur area akun Anda berdasarkan waktu dan lokasi pendaftaran.",
+  "change_information": "Ubah informasi",
+  "user_name": "Nama pengguna",
+  "please_select_image": "Silakan pilih gambar terlebih dahulu",
+  "change_avatar": "Ganti avatar",
+  "upload_image": "Unggah gambar",
+
+  "policy_linked": "Kebijakan terhubung",
+  "you_will_automatic_transfer": "Anda akan otomatis dipindahkan ke layar dalam",
+  "congratulate_on_receiving_coin": "Selamat menerima koin TBC!",
+  "enter_amount_withdraw": "Masukkan jumlah yang ingin Anda tarik",
+  "date_create": "Tanggal pembuatan",
+
+  "create_wallet": "Buat dompet",
+  "no_still_pay": "Tidak, tetap bayar dengan LokaPay",
+  "do_you_want_create_wallet": "Apakah Anda ingin membuat dompet dan membayar dengan voucher untuk mendapatkan poin gratis?"
 }

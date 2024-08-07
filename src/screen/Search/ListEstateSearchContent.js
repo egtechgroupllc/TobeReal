@@ -57,20 +57,7 @@ export default function ListEstateSearchContent({
         max_size: filter?.acreage?.[1],
       }),
   });
-  console.log('====================================');
-  console.log({
-    country_id: country?.id,
-    estate_type_id: !paramsFilter?.type ? filter?.type : paramsFilter?.type,
-    title: filter?.name,
-    latitude: !paramsFilter && params?.near_me ? location?.latitude : '',
-    longitude: !paramsFilter && params?.near_me ? location?.longitude : '',
-    distance: !paramsFilter && params?.near_me ? 5000 : '',
-    currency_id: currency?.id,
-    province_id: filter?.province?.id || filter?.province_id,
-    min_size: filter?.acreage?.[0],
-    max_size: filter?.acreage?.[1],
-  });
-  console.log('====================================');
+
   // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
   //   useInfiniteQuery({
   //     queryKey: ['accommodation', 'list-rent'],

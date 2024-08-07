@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
@@ -29,10 +29,19 @@ import EstateFacilities from '../components/PostNewLease/EstateFacilities';
 import EstatePhoto from '../components/PostNewLease/EstatePhoto';
 import GeneralInformation from '../components/PostNewLease/GeneralInformation';
 import MainWrapper from '../../../../../components/MainWrapper';
+import ModalBookingSuccess from '../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
+import {useCountdown} from '../../../../../hooks/useCountdown';
+import {useLoading} from '../../../../../hooks/useLoading';
 
 export default function PostNewLeaseScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
+  const [openContact, setOpenContact] = useState(false);
+  const isPending = useRef(false);
+
+  const [check, setCheck] = useState(false);
+  const {start, countdown} = useCountdown(5);
+  const {stopLoading, setLoading} = useLoading();
 
   const {
     handleSubmit,
@@ -44,11 +53,18 @@ export default function PostNewLeaseScreen() {
   } = useForm();
 
   const {navigate, setOptions} = useNavigation();
+  useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: !params?.name ? t('create_new_accom') : t('edit'),
     });
   }, []);
+
   const queryClient = useQueryClient();
   const createAccommodationMu = useMutation({
     mutationFn: postCreateAccommoLease,
@@ -127,27 +143,41 @@ export default function PostNewLeaseScreen() {
       showMess(t('you_have_not_select_facility'), 'error');
       return;
     }
+    if (!params?.address) {
+      setOpenContact(true);
+    }
 
     const formData = getFormData(value);
     // console.log(formData);
     const mutationConfig = {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
-
         if (dataInside?.status) {
           if (!params?.address) {
-            reset();
-            queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
-            navigate('NoBottomTab', {
-              screen: 'AddRoomTypeScreen',
-              params: dataInside?.data,
+            isPending.current = true;
+            setCheck({
+              status: dataInside?.status,
+              mess: dataInside?.message,
             });
-            return;
+            start();
+            setTimeout(
+              () => {
+                setOpenContact(false);
+                reset();
+                queryClient.invalidateQueries(['accommodation', 'my-list', 0]);
+                navigate('AddRoomTypeScreen', dataInside?.data);
+                return;
+              },
+              dataInside?.status === false ? 3000 : 5000,
+            );
+          } else {
+            navigate('NoBottomTab', {
+              screen: 'AccommoManagementScreen',
+            });
+            queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
           }
-          navigate('NoBottomTab', {
-            screen: 'AccommoManagementScreen',
-          });
-          queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
+        } else {
+          showMess(dataInside?.message, 'error');
+          setOpenContact(false);
         }
       },
       onError: err => {
@@ -161,7 +191,9 @@ export default function PostNewLeaseScreen() {
       );
       return;
     }
-    createAccommodationMu.mutate(formData, mutationConfig);
+    setTimeout(() => {
+      createAccommodationMu.mutate(formData, mutationConfig);
+    }, 1000);
   };
   useEffect(() => {
     if (params?.address) {
@@ -257,7 +289,12 @@ export default function PostNewLeaseScreen() {
           alignItems: 'center',
         }}
       /> */}
-
+      <ModalBookingSuccess
+        openContact={openContact}
+        isPending={isPending}
+        check={check}
+        countdown={countdown}
+      />
       <CustomButton
         linearGradientProps
         buttonType="medium"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconMarker} from '../../../assets/icon/Icon';
@@ -15,10 +15,17 @@ export default function BookingTourItem({
   onReView,
   onViewDetail,
 }) {
-  const {currency} = useCountry();
+  const {currency, country} = useCountry();
   const {t} = useLanguage();
   const today = formatDate(new Date());
   const dataTour = data?.tour;
+
+  const checkDiffentCountry = useMemo(() => {
+    if (dataTour?.country?.id !== country?.id) {
+      // getCurrency(data?.country.currency_code);
+      return true;
+    }
+  }, [dataTour?.country?.id, country?.id]);
   return (
     <>
       {data?.status === 'SUCCESS' && (

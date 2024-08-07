@@ -1,4 +1,4 @@
-import React, {useEffect, useSyncExternalStore} from 'react';
+import React, {useEffect, useLayoutEffect, useSyncExternalStore} from 'react';
 import {useForm} from 'react-hook-form';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -24,13 +24,16 @@ export default function Content() {
   const {onSaveToken} = useAuthentication();
   const {control, handleSubmit} = useForm();
   const params = useRoute().params;
-  console.log(params);
-  const {navigate} = useNavigation();
+  const {navigate, setOptions} = useNavigation();
 
   const loginMutation = useMutation({
     mutationFn: postLogin,
   });
-
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('login'),
+    });
+  }, []);
   const gotoRegister = () => {
     navigate('RegisterScreen');
   };

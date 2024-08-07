@@ -28,7 +28,8 @@ export default function SellManagementScreen() {
     return setOptions({
       headerTitle: t('real_estate_listing'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewSell'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),
@@ -39,17 +40,20 @@ export default function SellManagementScreen() {
     getMyListCreateSell.queyKey,
     getMyListCreateSell,
   );
-  useEffect(
-    () =>
-      addListener('beforeRemove', e => {
-        e.preventDefault();
-        navigate('SellScreen');
-      }),
-    [],
-  );
+
   const dataNew = data?.data?.rows || (isLoading && [1, 2, 3, 4]);
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      e.preventDefault();
+    });
+  }, []);
   return (
     <MainWrapper
+      optionsHeader={{
+        gestureEnabled: false,
+        headerLeft: () => {},
+        headerTitle: t('real_estate_listing'),
+      }}
       scrollEnabled={false}
       styleContent={{
         marginBottom: scale(20),
@@ -91,9 +95,9 @@ export default function SellManagementScreen() {
                       navigate('PostNewSellScreen', {...item, value});
                     }}
                     onVideoShort={() => {
-                      navigate('ManageVideoShortScreen', {
-                        Estate: true,
-                        estateId: item?.id,
+                      navigate('NoBottomTab', {
+                        screen: 'ManageVideoShortScreen',
+                        params: {Estate: true, estateId: item?.id},
                       });
                     }}
                   />

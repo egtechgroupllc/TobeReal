@@ -24,8 +24,7 @@ export default function SellScreen() {
       title: t('already_have_property'),
       desc: t('view_registed_properties'),
       textBtn: t('continue'),
-      navigate: 'NoBottomTab',
-      screen: 'SellManagementScreen',
+      navigate: 'SellManagementScreen',
     },
     {
       title: t('want_sell_estate'),

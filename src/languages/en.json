@@ -1093,8 +1093,7 @@
   "token_balance_available": "TBH balance (available to withdraw to wallet)",
   "active_to_use_wallet": "Activate to use ToBeChain Wallet",
   "active_2_types_wallet": "Activate 2 types of wallets: SavePay, cryptocurrency wallet and enjoy fast, secure payments",
-  "congratulate_on_receiving_coin": "Congratulations on receiving TBC coin!",
-  "you_will_automatic_transfer": "You will automatic transfer \n into booking history screen in \n",
+
   "your_transaction_has_been_canceled": "Your transaction has been canceled due to \n an error during the booking process.\nPlease try again!",
   "traceability": "Traceability",
   "property_traceability": "Property traceability",
@@ -1223,5 +1222,41 @@
   "apply_all_this_tour_system": "Applicable across all this tour",
   "this_voucher_not_apply_other_tour": "This voucher does not apply to other tours.",
 
-  "enter_phone": "Enter your phone"
+  "enter_phone": "Enter your phone",
+  "days_ago": "days ago",
+  "day_ago": "day ago",
+  "weeks_ago": "weeks ago",
+  "week_ago": "week ago",
+  "years_ago": "years ago",
+  "year_ago": "year ago",
+  "hour_ago": "hour ago",
+  "hours_ago": "hours ago",
+  "month_ago": "month ago",
+  "months_ago": "months ago",
+  "sent": "sent",
+  "image": "image",
+  "my_list_group_chat": "My list group chat",
+  "enter_message": "Enter message",
+
+  "minute_ago": "minute ago",
+  "minutes_ago": "minutes ago",
+
+  "initially_the_system": "Initially, the system sets up your account area based on the time and location of registration.",
+  "change_information": "Change information",
+  "user_name": "User's name",
+  "please_select_image": "Please select an image first",
+  "change_avatar": "Change avatar",
+  "upload_image": "Upload image",
+
+  "policy_linked": "Policy linked",
+  "you_will_automatic_transfer": "You will automatic transfer screen in",
+  "congratulate_on_receiving_coin": "Congratulations on receiving TBC coin!",
+  "enter_amount_withdraw": "Enter amount you want to withdraw",
+  "date_create": "Date create",
+
+  "create_wallet": "Create wallet",
+  "no_still_pay": "No, still pay with LokaPay",
+  "do_you_want_create_wallet": "Do you want create wallet and pay with voucher to get point free?",
+
+  "please_choose_exact_location": "Please choose an exact location within 5 meters to post"
 }

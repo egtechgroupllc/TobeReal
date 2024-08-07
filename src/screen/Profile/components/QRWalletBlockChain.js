@@ -85,7 +85,6 @@ export default function QRWalletBlockChain({
                 numberOfLines={2}
                 color={COLORS.text}>
                 {data?.wallet_address}
-                {'  '}
                 <IconCopy size={scale(12)} />
               </CustomText>
             </View>

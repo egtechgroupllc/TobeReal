@@ -8,6 +8,7 @@ import ItemMethodDeposit from './components/ItemMethodDeposit';
 import CustomText from '../../../components/CustomText';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {showMess} from '../../../assets/constants/Helper';
 
 export default function ListMethodBankScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -24,7 +25,6 @@ export default function ListMethodBankScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <View style={styles.box}>
       <CustomText textType="medium">{t('please_choose_one')}</CustomText>
@@ -38,15 +38,24 @@ export default function ListMethodBankScreen() {
           rowGap: scale(10),
           paddingVertical: scale(10),
         }}
-        renderItem={({item, index}) => (
-          <ItemMethodDeposit
-            key={index}
-            data={item}
-            onPress={() =>
-              navigate('NoBottomTab', {screen: 'DepositScreen', params: item})
-            }
-          />
-        )}
+        renderItem={({item, index}) => {
+          return (
+            <ItemMethodDeposit
+              key={index}
+              data={item}
+              onPress={() => {
+                if (item?.method_deposit_items.length > 0) {
+                  navigate('NoBottomTab', {
+                    screen: 'DepositScreen',
+                    params: item,
+                  });
+                } else {
+                  showMess(t('comming_soon'), 'error');
+                }
+              }}
+            />
+          );
+        }}
       />
     </View>
   );

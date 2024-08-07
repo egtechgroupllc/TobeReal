@@ -127,11 +127,12 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
           /> */}
 
           <CustomButton
-            onPress={() => {
-              // makeCallPhone('0824232339');
-              // setOpenContact(true);
-              showMess(t('comming_soon'), 'error');
-            }}
+            // onPress={() => {
+            //   // makeCallPhone('0824232339');
+            //   // setOpenContact(true);
+            //   showMess(t('comming_soon'), 'error');
+            // }}
+            onPress={onPress}
             buttonType="medium"
             style={{flex: 0.7}}
             text={t('contact_host')}

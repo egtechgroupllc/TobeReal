@@ -62,10 +62,12 @@ export default function DetailBuyScreen() {
       <SimilarApartmentsNearby />,
     ];
   }, [data?.data]);
+  const refScroll = useRef();
 
   return (
     <MainWrapper scrollEnabled={false} noImgColor>
       <AnimateScrollWrapper
+        ref={refScroll}
         lisViewComponent={listView}
         listNav={listNavBar}
         dataDetail={data?.data}
@@ -74,7 +76,9 @@ export default function DetailBuyScreen() {
           <BookAccommodation
             price={data?.data?.price}
             isLoading={false}
-            onPress={() => {}}
+            onPress={() => {
+              refScroll.current?.setSelectScrollIndex(3);
+            }}
           />
         }
       />

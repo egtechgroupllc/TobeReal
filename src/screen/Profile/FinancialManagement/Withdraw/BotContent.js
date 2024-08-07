@@ -22,7 +22,8 @@ export default function BotContent({control, setValue}) {
       <TouchableOpacity
         style={{...styles.boxItem, marginTop: scale(10)}}
         onPress={() =>
-          navigate('ListBankScreen', {
+          navigate('NoBottomTab', {
+            screen: 'ListBankScreen',
             onGoBack: dataBack => {
               setBank(dataBack);
               setValue('bank_name', dataBack?.name);

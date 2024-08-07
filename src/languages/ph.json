@@ -1082,8 +1082,6 @@
   "token_balance_available": "Balanse ng TBH (magagamit upang i-withdraw sa pitaka)",
   "active_to_use_wallet": "I-activate upang magamit ang ToBeChain Wallet",
   "active_2_types_wallet": "Aktibo ang 2 uri ng wallet: SavePay, cryptocurrency wallet at mag-enjoy ng mabilis at ligtas na pagbabayad",
-  "congratulate_on_receiving_coin": "Binabati kita sa pagtanggap ng TBC coin!",
-  "you_will_automatic_transfer": "Ikaw ay awtomatikong ililipat \n sa screen ng kasaysayan ng booking sa \n",
   "your_transaction_has_been_canceled": "Ang iyong transaksyon ay nakansela dahil sa \n isang error sa panahon ng proseso ng pag-book. \nMangyaring subukan muli!",
   "traceability": "Pagsubaybay",
   "property_traceability": "Pagsubaybay ng ari-arian",
@@ -1210,5 +1208,41 @@
   "add_your_youtube_video": "Idagdag ang link ng YouTube video ng iyong real estate (kung meron)",
   "when_paying_at": "Kapag nagbabayad sa",
   "apply_all_this_tour_system": "Nalalapat sa lahat ng tour na ito",
-  "this_voucher_not_apply_other_tour": "Ang voucher na ito ay hindi nalalapat sa ibang mga tour."
+  "this_voucher_not_apply_other_tour": "Ang voucher na ito ay hindi nalalapat sa ibang mga tour.",
+
+  "enter_phone": "Ilagay ang iyong telepono",
+  "days_ago": "araw na ang nakalipas",
+  "day_ago": "araw na ang nakalipas",
+  "weeks_ago": "linggo na ang nakalipas",
+  "week_ago": "linggo na ang nakalipas",
+  "years_ago": "taon na ang nakalipas",
+  "year_ago": "taon na ang nakalipas",
+  "hour_ago": "oras na ang nakalipas",
+  "hours_ago": "oras na ang nakalipas",
+  "month_ago": "buwan na ang nakalipas",
+  "months_ago": "buwan na ang nakalipas",
+  "sent": "naipadala",
+  "image": "larawan",
+  "my_list_group_chat": "Aking listahan ng grupo ng chat",
+  "enter_message": "Ilagay ang mensahe",
+
+  "minute_ago": "minuto na ang nakalipas",
+  "minutes_ago": "mga minuto na ang nakalipas",
+
+  "initially_the_system": "Sa simula, itinatakda ng sistema ang iyong account area batay sa oras at lokasyon ng pagpaparehistro.",
+  "change_information": "Baguhin ang impormasyon",
+  "user_name": "Pangalan ng gumagamit",
+  "please_select_image": "Mangyaring pumili muna ng isang imahe",
+  "change_avatar": "Baguhin ang avatar",
+  "upload_image": "Mag-upload ng larawan",
+
+  "policy_linked": "Naka-link na patakaran",
+  "you_will_automatic_transfer": "Ikaw ay awtomatikong ililipat sa screen sa",
+  "congratulate_on_receiving_coin": "Binabati kita sa pagtanggap ng TBC coin!",
+  "enter_amount_withdraw": "Ilagay ang halagang nais mong i-withdraw",
+  "date_create": "Petsa ng paglikha",
+
+  "create_wallet": "Gumawa ng pitaka",
+  "no_still_pay": "Hindi, magbayad pa rin gamit ang LokaPay",
+  "do_you_want_create_wallet": "Gusto mo bang gumawa ng pitaka at magbayad gamit ang voucher para makakuha ng libreng puntos?"
 }

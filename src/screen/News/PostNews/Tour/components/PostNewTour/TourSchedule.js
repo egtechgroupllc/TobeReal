@@ -280,12 +280,13 @@ export default function TourSchedule({
             }}>
             {Array.from(
               {length: Number(numDays.days) || (numDays.hours ? 1 : 0)},
-              (_, dayNumber) =>
+              (_, dayNumber, index) =>
                 selectedDay === dayNumber ? (
                   <LinearGradient
                     colors={['#F0B90B', '#FFE55A']}
                     start={{x: 0, y: 0}}
                     end={{x: 0, y: 1}}
+                    key={index}
                     style={{
                       padding: scale(5),
                       paddingHorizontal: scale(20),
@@ -321,9 +322,9 @@ export default function TourSchedule({
           </ScrollView>
           {Array.from(
             {length: Number(numDays.days) || (numDays.hours ? 1 : 0)},
-            (_, dayNumber) =>
+            (_, dayNumber, index) =>
               dayNumber === selectedDay && (
-                <>
+                <View key={index}>
                   <CustomInput
                     ref={inputRef}
                     styleTextLabel={styles.label}
@@ -361,7 +362,7 @@ export default function TourSchedule({
                     text={t('ok')}
                     onPress={() => handleConfirm(dayNumber + 1)}
                   /> */}
-                </>
+                </View>
               ),
           )}
         </Collapsible>

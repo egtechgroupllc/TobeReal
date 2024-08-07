@@ -26,6 +26,7 @@ export default function ListVideoTOUR({isFocused}) {
   const videoRef = useRef();
   const commentRef = useRef();
   const flatListRef = useRef(null);
+  const isFocusedBottomTab = useIsFocused();
 
   const [videoPlay, setVideoPlay] = useState(true);
   const {data, isLoading} = useQuery({
@@ -88,10 +89,10 @@ export default function ListVideoTOUR({isFocused}) {
   // }, []);
 
   useEffect(() => {
-    if (!isFocused) {
-      setVideoPlay(false);
+    if (isFocused || isFocusedBottomTab) {
+      setVideoPlay(true);
     }
-  }, [isFocused]);
+  }, [isFocused, isFocusedBottomTab]);
   if (isLoading) {
     return (
       <View
@@ -143,8 +144,10 @@ export default function ListVideoTOUR({isFocused}) {
             <VideoPlay
               ref={videoRef}
               data={item}
-              paused={item?.id !== videoPlay || !isFocused}
-              play={item?.id === videoPlay && isFocused}
+              paused={
+                item?.id !== videoPlay || !isFocused || !isFocusedBottomTab
+              }
+              play={item?.id === videoPlay && isFocused && isFocusedBottomTab}
               // onProgress={value => {
               //   handleProgress(value);
               // }}

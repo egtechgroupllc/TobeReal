@@ -57,7 +57,7 @@ export default function TopContent({control}) {
 
       <CustomInput
         maxLength={10}
-        label={t('enter_amount')}
+        label={t('enter_amount_withdraw')}
         styleTextLabel={{fontSize: SIZES.medium}}
         style={{...styles.boxItem, borderWidth: 0}}
         styleWrapper={{paddingVertical: scale(10)}}

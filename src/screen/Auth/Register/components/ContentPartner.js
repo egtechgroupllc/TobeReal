@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
@@ -27,8 +27,12 @@ import SelectCountry from './SelectCountry';
 export default function ContentPartner() {
   const {t} = useLanguage();
   const {control, watch, handleSubmit, reset, setValue} = useForm();
-  const {goBack, navigate} = useNavigation();
-
+  const {goBack, navigate, setOptions} = useNavigation();
+  useLayoutEffect(() => {
+    return setOptions({
+      headerTitle: t('signup'),
+    });
+  }, []);
   const signupMutation = useMutation({
     mutationFn: postSignUp,
   });

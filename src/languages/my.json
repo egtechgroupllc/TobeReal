@@ -1064,8 +1064,6 @@
   "token_balance_available": "Baki TBH (tersedia untuk dikeluarkan ke dompet)",
   "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet ToBeChain",
   "active_2_types_wallet": "Aktifkan 2 jenis dompet: SavePay, dompet mata wang kripto dan nikmati pembayaran yang cepat, selamat",
-  "congratulate_on_receiving_coin": "Tahniah atas penerimaan syiling TBC!",
-  "you_will_automatic_transfer": "Anda akan dipindahkan secara automatik \n ke skrin sejarah tempahan dalam \n",
   "your_transaction_has_been_canceled": "Transaksi anda telah dibatalkan kerana \n ralat semasa proses tempahan. \nSila cuba lagi!",
   "traceability": "Kebolehkesanan",
   "property_traceability": "Kebolehkesanan hartanah",
@@ -1192,5 +1190,41 @@
   "add_your_youtube_video": "Tambah pautan video YouTube hartanah anda (jika ada)",
   "when_paying_at": "Apabila membayar di",
   "apply_all_this_tour_system": "Terpakai untuk semua lawatan ini",
-  "this_voucher_not_apply_other_tour": "Baucar ini tidak terpakai untuk lawatan lain."
+  "this_voucher_not_apply_other_tour": "Baucar ini tidak terpakai untuk lawatan lain.",
+
+  "enter_phone": "Masukkan nombor telefon anda",
+  "days_ago": "hari yang lalu",
+  "day_ago": "hari yang lalu",
+  "weeks_ago": "minggu yang lalu",
+  "week_ago": "minggu yang lalu",
+  "years_ago": "tahun yang lalu",
+  "year_ago": "tahun yang lalu",
+  "hour_ago": "jam yang lalu",
+  "hours_ago": "jam yang lalu",
+  "month_ago": "bulan yang lalu",
+  "months_ago": "bulan yang lalu",
+  "sent": "dihantar",
+  "image": "gambar",
+  "my_list_group_chat": "Senarai kumpulan sembang saya",
+  "enter_message": "Masukkan mesej",
+
+  "minute_ago": "minit yang lalu",
+  "minutes_ago": "minit yang lalu",
+
+  "initially_the_system": "Pada mulanya, sistem menetapkan kawasan akaun anda berdasarkan masa dan lokasi pendaftaran.",
+  "change_information": "Tukar maklumat",
+  "user_name": "Nama pengguna",
+  "please_select_image": "Sila pilih imej dahulu",
+  "change_avatar": "Tukar avatar",
+  "upload_image": "Muat naik imej",
+
+  "policy_linked": "Polisi dihubungkan",
+  "you_will_automatic_transfer": "Anda akan dipindahkan secara automatik ke skrin dalam",
+  "congratulate_on_receiving_coin": "Tahniah kerana menerima syiling TBC!",
+  "enter_amount_withdraw": "Masukkan jumlah yang anda ingin keluarkan",
+  "date_create": "Tarikh cipta",
+
+  "create_wallet": "Buat dompet",
+  "no_still_pay": "Tidak, masih bayar dengan LokaPay",
+  "do_you_want_create_wallet": "Adakah anda mahu membuat dompet dan membayar dengan baucar untuk mendapatkan mata percuma?"
 }

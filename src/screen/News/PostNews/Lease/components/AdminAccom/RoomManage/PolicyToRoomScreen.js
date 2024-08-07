@@ -41,7 +41,7 @@ import {useCountry} from '../../../../../../../hooks/useCountry';
 export default function PolicyToRoomScreen() {
   const params = useRoute().params;
   const {t} = useLanguage();
-  const {setOptions, navigate, goBack} = useNavigation();
+  const {setOptions, navigate, goBack, addListener} = useNavigation();
   const queryClient = useQueryClient();
   const {currency} = useCountry();
 
@@ -100,7 +100,6 @@ export default function PolicyToRoomScreen() {
         room_id: params?.id || '',
       }),
   });
-
   const policyIdArray = dataPolicy?.data?.data?.rows?.map(item => item?.id);
   const dataDetailRoom = useQuery({
     queryKey: ['room', 'detail', params?.id],
@@ -173,7 +172,10 @@ export default function PolicyToRoomScreen() {
             if (params?.admin) {
               goBack(params);
             } else {
-              navigate('AccommoManagementScreen', params);
+              navigate('NoBottomTab', {
+                screen: 'AccommoManagementScreen',
+                params,
+              });
             }
             queryClient.invalidateQueries([
               'accommodation',
@@ -189,8 +191,20 @@ export default function PolicyToRoomScreen() {
       },
     );
   };
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      // Prevent default behavior of leaving the screen
+      !params?.admin && e.preventDefault();
+      // Prompt the user before leaving the screen
+    });
+  }, [params?.admin]);
   return (
-    <MainWrapper>
+    <MainWrapper
+      optionsHeader={{
+        gestureEnabled: false,
+        headerLeft: () => {},
+        headerTitle: t('link_policy_to_room'),
+      }}>
       <View style={styles.wrapper}>
         <CustomText
           textType="bold"
@@ -418,25 +432,30 @@ export default function PolicyToRoomScreen() {
               />
             </View>
 
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-                marginBottom: scale(10),
-                color: COLORS.primary,
-              }}
-              activeOpacity={0.7}
-              onPress={() =>
-                navigate('PolicyManageScreen', {
-                  accommodation_id: params?.accommodation_id,
-                  PolicyToRoom: true,
-                  roomId: params?.id,
-                  price: params?.price,
-                })
-              }>
-              <CustomText style={{color: COLORS.primary}}>
-                {t('add_more_policy')}
-              </CustomText>
-            </TouchableOpacity>
+            {params?.admin && (
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                  marginBottom: scale(10),
+                  color: COLORS.primary,
+                }}
+                activeOpacity={0.7}
+                onPress={() =>
+                  navigate('NoBottomTab', {
+                    screen: 'PolicyManageScreen',
+                    params: {
+                      accommodation_id: params?.accommodation_id,
+                      PolicyToRoom: true,
+                      roomId: params?.id,
+                      price: params?.price,
+                    },
+                  })
+                }>
+                <CustomText style={{color: COLORS.primary}}>
+                  {t('add_more_policy')}
+                </CustomText>
+              </TouchableOpacity>
+            )}
           </Box>
         </View>
       </View>

@@ -20,6 +20,7 @@ export const COLORS = {
   overlay: '#00000060',
   error: '#FF0000',
   background: '#f7f9fa',
+  green: '#52b788',
 };
 export const WIDTH = {
   widthScreen: width,

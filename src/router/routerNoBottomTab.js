@@ -70,6 +70,9 @@ import BookingTourConfirmScreen from '../screen/Explore/components/ContentTour/D
 import DetailReviewTourScreen from '../screen/Bookings/DetailReviewTourScreen';
 import ListTourSearchScreen from '../screen/Search/ListTourSearchScreen';
 import ChangeInformationScreen from '../screen/Profile/Information/ChangeInformationScreen';
+import ChatBoxScreen from '../screen/Chat/ChatBoxScreen';
+import MyListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
+import ListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -190,10 +193,10 @@ export default routerNoBottomTab = [
     name: 'DetailRoomScreen',
     component: DetailRoomScreen,
   },
-  {
-    name: 'SellManagementScreen',
-    component: SellManagementScreen,
-  },
+  // {
+  //   name: 'SellManagementScreen',
+  //   component: SellManagementScreen,
+  // },
   {
     name: 'DepositScreen',
     component: DepositScreen,
@@ -252,14 +255,14 @@ export default routerNoBottomTab = [
     name: 'PolicyManageScreen',
     component: PolicyManageScreen,
   },
-  {
-    name: 'AddRoomTypeScreen',
-    component: AddRoomTypeScreen,
-  },
-  {
-    name: 'AddPolicyScreen',
-    component: AddPolicyScreen,
-  },
+  // {
+  //   name: 'AddRoomTypeScreen',
+  //   component: AddRoomTypeScreen,
+  // },
+  // {
+  //   name: 'AddPolicyScreen',
+  //   component: AddPolicyScreen,
+  // },
   {
     name: 'SelectDefaultCountryScreen',
     component: SelectDefaultCountryScreen,
@@ -281,10 +284,10 @@ export default routerNoBottomTab = [
     name: 'SelectLanguageScreen',
     component: SelectLanguageScreen,
   },
-  {
-    name: 'PolicyToRoomScreen',
-    component: PolicyToRoomScreen,
-  },
+  // {
+  //   name: 'PolicyToRoomScreen',
+  //   component: PolicyToRoomScreen,
+  // },
   {
     name: 'VoucherManageScreen',
     component: VoucherManageScreen,
@@ -365,5 +368,13 @@ export default routerNoBottomTab = [
   {
     name: 'BookingTourConfirmScreen',
     component: BookingTourConfirmScreen,
+  },
+  {
+    name: 'ChatBoxScreen',
+    component: ChatBoxScreen,
+  },
+  {
+    name: 'ListChatGroupScreen',
+    component: ListChatGroupScreen,
   },
 ];

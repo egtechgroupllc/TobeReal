@@ -153,3 +153,66 @@ export const postVideoShort = async ({data, token}) => {
 
   return responsive.data;
 };
+
+////-----Chat------//
+export const postCreateGroupChat = async ({data, token}) => {
+  const responsive = await instanceCommon.post('/chat/create-group', data, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return responsive.data;
+};
+export const postSendChat = async ({data, token}) => {
+  const responsive = await instanceCommon.post('/chat/send', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: token,
+    },
+  });
+  return responsive.data;
+};
+export const getListMessage = async ({
+  chat_group_id,
+  pageParam = 1,
+  token,
+  limit = 10,
+}) => {
+  const response = await instanceCommon.get(
+    `/chat/list-message?page=${pageParam}&limit=${limit}&chat_group_id=${chat_group_id}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  );
+  return response.data;
+};
+
+export const getListChatGroup = async ({token}) => {
+  const response = await instanceCommon.get(`/chat/my-list-group`, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return response.data;
+};
+
+export const postSeenMessage = async ({data, token}) => {
+  const responsive = await instanceCommon.post('/chat/seen-message', data, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return responsive.data;
+};
+
+export const postCheckStatus = async ({data, token}) => {
+  const responsive = await instanceCommon.post('/user/check-status', data, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  // console.log(responsive?.data);
+  return responsive.data;
+};

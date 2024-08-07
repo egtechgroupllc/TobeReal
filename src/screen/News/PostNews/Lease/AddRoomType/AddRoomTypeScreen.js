@@ -188,13 +188,10 @@ export default function AddRoomTypeScreen() {
               //     screen: 'AccommoManagementScreen',
               //     params: params?.id,
               //   });
-              navigate('NoBottomTab', {
-                screen: 'AddPolicyScreen',
-                params: {
-                  accommodation_id: params?.id,
-                  dataRoom: dataInside?.data,
-                  price: watch('price'),
-                },
+              navigate('AddPolicyScreen', {
+                accommodation_id: params?.id,
+                dataRoom: dataInside?.data,
+                price: watch('price'),
               });
         }
       },
@@ -242,26 +239,21 @@ export default function AddRoomTypeScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
-  // useEffect(() => {
-  //   addListener('beforeRemove', e => {
-  //     console.log(312323211);
-  //     console.log('event', e);
-  //     // Prevent default behavior of leaving the screen
-  //     e.preventDefault();
-  //     Alert.alert('Cảnh báo', 'Bạn không thể quay lại trang trước!', [
-  //       {text: 'OK', style: 'cancel'},
-  //     ]);
-  //     // Prompt the user before leaving the screen
-  //   });
-  // }, []);
-
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      // Prevent default behavior of leaving the screen
+      !params?.update && e.preventDefault();
+      // Prompt the user before leaving the screen
+    });
+  }, [params?.update]);
   return (
     <MainWrapper
       styleContent={styles.wrapper}
-      // optionsHeader={{
-      //   gestureEnabled: false,
-      // }}
-    >
+      optionsHeader={{
+        gestureEnabled: false,
+        headerLeft: () => {},
+        headerTitle: !params?.update ? t('create_room') : t('edit_room'),
+      }}>
       <View style={styles.button}>
         <Image
           source={images.lease}

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
@@ -18,19 +18,37 @@ import MainWrapper from '../../../../../components/MainWrapper';
 import AutoPost from '../components/PostConfiguration/AutoPost';
 import PostType from '../components/PostConfiguration/PostType';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import ModalBookingSuccess from '../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
+import {useCountdown} from '../../../../../hooks/useCountdown';
+import {useLoading} from '../../../../../hooks/useLoading';
 
 export default function PostConfigurationSellScreen() {
   const params = useRoute().params;
 
   const queryClient = useQueryClient();
   const {t} = useLanguage();
-  const {goBack, navigate, setOptions} = useNavigation();
+  const {goBack, navigate, setOptions, addListener} = useNavigation();
   const {handleSubmit, control, setValue, unregister} = useForm();
 
   const [dateEnd, setDateEnd] = useState(new Date());
+
+  const [openContact, setOpenContact] = useState(false);
+  const isPending = useRef(false);
+  const {stopLoading, setLoading} = useLoading();
+
+  const [check, setCheck] = useState(false);
+  const {start, countdown} = useCountdown(5);
+  useEffect(() => {
+    if (!params?.package_post_item_id) {
+      stopLoading();
+      return () => {
+        return setLoading(true);
+      };
+    }
+  }, [params?.package_post_item_id]);
   useEffect(() => {
     return setOptions({
-      headerTitle: !params?.update ? t('create_room') : t('edit_room'),
+      headerTitle: t('post_configuration'),
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
           <IconHome style={{width: scale(20)}} />
@@ -130,23 +148,47 @@ export default function PostConfigurationSellScreen() {
 
     return formData;
   };
-
-  const handlePostLease = value => {
+  const handlePostSell = value => {
     delete params?.package_post_item_number_repost;
     delete params?.package_post_item_id_repost;
     delete params?.package_post_item;
     delete params?.date_start;
     delete params?.value;
     const formData = getFormData({...filterEmptyValues(params), ...value});
+    if (!params?.package_post_item_id) {
+      setOpenContact(true);
+    }
 
     const mutationConfig = {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
         if (dataInside?.status) {
-          queryClient.invalidateQueries(['estate', 'my-list']);
-          navigate('NoBottomTab', {
-            screen: 'SellManagementScreen',
-          });
+          if (!params?.package_post_item_id) {
+            isPending.current = true;
+            setCheck({
+              status: dataInside?.status,
+              mess: dataInside?.message,
+            });
+            start();
+            setTimeout(
+              () => {
+                setOpenContact(false);
+                queryClient.invalidateQueries(['estate', 'my-list']);
+                navigate('SellManagementScreen');
+              },
+              dataInside?.status === false ? 3000 : 5000,
+            );
+            return;
+          } else {
+            showMess(
+              dataInside?.message,
+              dataInside?.status ? 'success' : 'error',
+            );
+            queryClient.invalidateQueries(['estate', 'my-list']);
+            navigate('SellManagementScreen');
+          }
+        } else {
+          showMess(dataInside?.message, 'error');
+          setOpenContact(false);
         }
       },
       onError: err => {
@@ -159,15 +201,25 @@ export default function PostConfigurationSellScreen() {
         {data: formData, id_estate: params?.id},
         mutationConfig,
       );
-
       return;
     }
-    createEstateSellMu.mutate(formData, mutationConfig);
+    setTimeout(() => {
+      createEstateSellMu.mutate(formData, mutationConfig);
+    }, 1000);
   };
-
+  useEffect(() => {
+    addListener('beforeRemove', e => {
+      e.preventDefault();
+    });
+  }, []);
   return (
     <View style={{flex: 1}}>
       <MainWrapper
+        optionsHeader={{
+          gestureEnabled: false,
+          headerLeft: () => {},
+          headerTitle: t('post_configuration'),
+        }}
         refreshControl={false}
         styleContent={{
           rowGap: scale(16),
@@ -197,7 +249,12 @@ export default function PostConfigurationSellScreen() {
           unregister={unregister}
         />
       </MainWrapper>
-
+      <ModalBookingSuccess
+        openContact={openContact}
+        isPending={isPending}
+        check={check}
+        countdown={countdown}
+      />
       <View style={styles.footer}>
         <CustomButton
           styleWrapper={{
@@ -226,7 +283,7 @@ export default function PostConfigurationSellScreen() {
             alignSelf: 'center',
           }}
           text={t('submit')}
-          onPress={handleSubmit(handlePostLease)}
+          onPress={handleSubmit(handlePostSell)}
           disabled={createEstateSellMu.isPending}
         />
       </View>
@@ -249,6 +306,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: scale(20),
     paddingHorizontal: scale(20),
+    paddingBottom: scale(60),
   },
 });
 //

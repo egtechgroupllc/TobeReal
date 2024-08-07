@@ -66,6 +66,7 @@ export default function BoxFeatureItem({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
+
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -233,14 +234,21 @@ export default function BoxFeatureItem({
                       alignItems: 'center',
                       columnGap: scale(5),
                     }}>
-                    <Avatar width={scale(20)} height={scale(20)}></Avatar>
-                    <View>
+                    <CustomImage
+                      source={
+                        !data?.user?.image_avatar
+                          ? images.avatar
+                          : data?.user?.url_image_avatar
+                      }
+                      style={styles.avatar}
+                    />
+                    <View style={{flex: 1}}>
                       <CustomText
                         textType="bold"
                         numberOfLines={1}
                         style={{
                           fontSize: SIZES.xSmall,
-                          minWidth: scale(35),
+                          width: scale(70),
                         }}>
                         {data?.contact_name}
                       </CustomText>
@@ -250,7 +258,7 @@ export default function BoxFeatureItem({
                         style={{
                           color: '#949090',
                           fontSize: SIZES.xSmall,
-                          minWidth: scale(35),
+                          width: scale(70),
                         }}>
                         {calculateTimeElapsed(data?.date_start)}
                       </CustomText>
@@ -336,5 +344,10 @@ const styles = StyleSheet.create({
   topName: {
     fontSize: SIZES.xSmall,
     color: COLORS.white,
+  },
+  avatar: {
+    width: scale(20),
+    height: scale(20),
+    borderRadius: scale(99),
   },
 });
