@@ -1,4 +1,10 @@
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../hooks/useLanguage';
@@ -7,7 +13,7 @@ import QRCode from 'react-native-qrcode-svg';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../assets/constants/Helper';
-import {IconError} from '../../assets/icon/Icon';
+import {IconError, IconHome} from '../../assets/icon/Icon';
 
 export default function DepositTokenScreen() {
   const params = useRoute().params;
@@ -17,6 +23,11 @@ export default function DepositTokenScreen() {
   useLayoutEffect(() => {
     setOptions({
       headerTitle: `${t('receive')} ${params?.listToken?.unit}`,
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {
   ImageBackground,
   Linking,
@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, images, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, images, scale} from '../../../assets/constants';
 import {
   IconChat,
+  IconGift,
   IconNotification,
   IconSearch,
   LogoLine,
@@ -20,6 +21,12 @@ import {CustomButton, CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
+import {getListChatGroup} from '../../../Model/api/common';
+import {useAuthentication} from '../../../hooks/useAuthentication';
+import {useLoading} from '../../../hooks/useLoading';
+import {getDailyCheckinInfo} from '../../../Model/api/auth';
+import {getBalanceWallet} from '../../../Model/api/wallet';
 
 const listSocial = [
   {
@@ -40,18 +47,51 @@ const listSocial = [
   },
 ];
 
-export default function Header() {
+export default function Header({dataCheckin, dataP, amountTOBE}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const {token} = useAuthentication();
+  const queryClient = useQueryClient();
+  const {data, isLoading, error, isError} = useQuery({
+    queryKey: ['chat', 'my-list-chat-group', token],
+    queryFn: () => getListChatGroup({token: token}),
+    enabled: !!token,
+    refetchInterval: 5000,
+  });
+
   const goNotify = () => {
-    // navigate('NoBottomTab', {
-    //   screen: 'NotifyScreen',
-    // });
+    if (!!token) {
+      navigate('NoBottomTab', {
+        screen: 'NotifyScreen',
+      });
+    } else {
+      navigate('NavigationAuth', {
+        screen: 'LoginScreen',
+      });
+    }
   };
   const goChatGroup = () => {
-    navigate('NoBottomTab', {
-      screen: 'ListChatGroupScreen',
-    });
+    if (!!token) {
+      navigate('NoBottomTab', {
+        screen: 'ListChatGroupScreen',
+      });
+    } else {
+      navigate('NavigationAuth', {
+        screen: 'LoginScreen',
+      });
+    }
+  };
+  const goDailyCheckin = () => {
+    if (token) {
+      navigate('NoBottomTab', {
+        screen: 'DailyCheckinScreen',
+        params: {dataCheckin, amountTOBE},
+      });
+    } else {
+      navigate('NavigationAuth', {
+        screen: 'LoginScreen',
+      });
+    }
   };
   return (
     <View style={styles.wrapper}>
@@ -88,8 +128,18 @@ export default function Header() {
             columnGap: scale(15),
             alignItems: 'center',
           }}>
+          <TouchableOpacity onPress={goDailyCheckin}>
+            <IconGift fill={COLORS.white} />
+            {(dataCheckin?.data?.can_check_in ||
+              (token && !dataP?.data?.wallet_address)) && (
+              <View style={styles.dot} />
+            )}
+          </TouchableOpacity>
           <TouchableOpacity onPress={goChatGroup}>
             <IconChat fill={COLORS.white} />
+            {data?.data?.rows[0]?.number_message_not_seen > 0 && (
+              <View style={styles.dot} />
+            )}
           </TouchableOpacity>
           {/* <TouchableOpacity onPress={goNotify}>
             <IconNotification fill={COLORS.white} />
@@ -168,5 +218,17 @@ const styles = StyleSheet.create({
     width: scale(176),
     justifyContent: 'center',
     flexWrap: 'wrap',
+  },
+  dot: {
+    height: scale(10),
+    width: scale(10),
+    backgroundColor: 'red',
+    borderRadius: scale(99),
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    top: scale(-2),
+    right: scale(-2),
+    borderWidth: scale(2),
+    borderColor: COLORS.white70,
   },
 });

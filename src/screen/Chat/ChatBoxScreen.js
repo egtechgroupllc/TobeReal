@@ -267,6 +267,9 @@ export default function ChatBoxScreen() {
           });
         }
       });
+      return () => {
+        socket.off('message');
+      };
     }
   }, [socket, chatGroupId, first]);
   // useEffect(() => {

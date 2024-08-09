@@ -24,6 +24,7 @@ export default function WalletItem({item, onPress}) {
           style={{
             backgroundColor: item?.backgroundColor || COLORS.black,
             ...styles.box,
+            justifyContent: 'center',
           }}>
           <View style={styles.content}>
             {!item.isToken ? (
@@ -142,7 +143,7 @@ export default function WalletItem({item, onPress}) {
 
 const styles = StyleSheet.create({
   box: {
-    height: scale(60),
+    height: scale(70),
     borderTopLeftRadius: scale(14),
     borderTopRightRadius: scale(14),
     justifyContent: 'flex-start',
@@ -157,10 +158,10 @@ const styles = StyleSheet.create({
     borderRadius: scale(99),
   },
   content: {
-    height: '89%',
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(10),
+    marginBottom: scale(10),
   },
   seperate: {
     backgroundColor: '#f7f9fa',

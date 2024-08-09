@@ -9,12 +9,13 @@ import {formatPrice} from '../../../utils/format';
 import TabSelect from './TabSelect';
 import {useNavigation} from '@react-navigation/native';
 
-export default function ListToken({dataP}) {
+export default function ListToken({dataP, token}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const {data, error, isError} = useQuery({
-    queryKey: ['user', 'wallet', 'balance'],
-    queryFn: getBalanceWallet,
+  const {data} = useQuery({
+    queryKey: ['user', 'wallet', 'balance', token],
+    queryFn: () => getBalanceWallet(token),
+    enabled: !!token,
   });
   const listToken = useMemo(
     () => [
@@ -40,7 +41,7 @@ export default function ListToken({dataP}) {
         name: 'TOBE AIRDROP',
         value: data?.data?.[3]?.balance,
         unit: 'TBC',
-        image: images.logoEcoTOBE,
+        image: images.logoTBH,
       },
     ],
     [data?.data],

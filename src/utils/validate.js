@@ -17,7 +17,13 @@ export const validateMaxLengthText = (message, length) => {
 export const validateEqualLength = (message, length) => {
   return {validate: value => value?.length === length || message};
 };
-
+export const validateYoutubeLink = message => {
+  const regex =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?v=|[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  return {
+    validate: value => !value || regex.test(value) || message,
+  };
+};
 export const validateMinLength = (message, length) => {
   return {validate: value => value?.length >= length || message};
 };

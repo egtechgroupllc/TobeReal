@@ -15,11 +15,16 @@ export default function DetailBrokerScreen() {
   const params = useRoute().params;
 
   const {t} = useLanguage();
-  const {setOptions} = useNavigation();
+  const {setOptions, navigate} = useNavigation();
 
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('detail_broker'),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -39,7 +44,6 @@ export default function DetailBrokerScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: scale(20),
     paddingBottom: scale(20),
     width: '100%',
     alignSelf: 'center',

@@ -1245,5 +1245,18 @@
 
   "create_wallet": "创建钱包",
   "no_still_pay": "不，仍然使用LokaPay付款",
-  "do_you_want_create_wallet": "您想创建钱包并使用代金券支付以获得免费积分吗?"
+  "do_you_want_create_wallet": "您想创建钱包并使用代金券支付以获得免费积分吗?",
+
+  "please_choose_exact_location": "请在5米范围内选择一个精确的位置进行发布",
+  "congratulate_on_receiving_daily_reward": "恭喜你获得每日登录奖励！",
+
+  "skip": "跳过",
+  "please_create_wallet_to_received_reward": "请创建钱包以接收每日登录奖励",
+  "receive_now": "立即领取",
+  "your_balance_fee_gas_not_enough": "您的余额不足以支付Gas费用，无法领取签到奖励，请立即从水龙头获取TOBE",
+  "received": "已领取",
+  "daily_checkin": "每日签到",
+
+  "now": "现在",
+  "you": "你"
 }

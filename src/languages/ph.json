@@ -1244,5 +1244,18 @@
 
   "create_wallet": "Gumawa ng pitaka",
   "no_still_pay": "Hindi, magbayad pa rin gamit ang LokaPay",
-  "do_you_want_create_wallet": "Gusto mo bang gumawa ng pitaka at magbayad gamit ang voucher para makakuha ng libreng puntos?"
+  "do_you_want_create_wallet": "Gusto mo bang gumawa ng pitaka at magbayad gamit ang voucher para makakuha ng libreng puntos?",
+
+  "please_choose_exact_location": "Pakitukoy ang eksaktong lokasyon sa loob ng 5 metro para mag-post",
+  "congratulate_on_receiving_daily_reward": "Binabati kita sa pagtanggap ng iyong pang-araw-araw na gantimpala sa pag-login!",
+
+  "skip": "Laktawan",
+  "please_create_wallet_to_received_reward": "Mangyaring lumikha ng pitaka upang matanggap ang pang-araw-araw na gantimpala sa pag-login",
+  "receive_now": "Tanggapin ngayon",
+  "your_balance_fee_gas_not_enough": "Ang balanse ng iyong fee gas ay hindi sapat upang matanggap ang check-in na gantimpala, mangyaring kumuha ng TOBE mula sa faucet ngayon",
+  "received": "Natanggap",
+  "daily_checkin": "Pang-araw-araw na check-in",
+
+  "now": "ngayon",
+  "you": "ikaw"
 }

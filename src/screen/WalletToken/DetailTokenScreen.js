@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {
   CustomButton,
@@ -10,6 +10,7 @@ import {
 } from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
 import EmptyData from '../../components/EmptyData';
+import {IconHome} from '../../assets/icon/Icon';
 
 export default function DetailTokenScreen() {
   const params = useRoute().params;
@@ -18,6 +19,11 @@ export default function DetailTokenScreen() {
   useLayoutEffect(() => {
     setOptions({
       headerTitle: params?.listToken?.name,
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigate('BottomTab')}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);

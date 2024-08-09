@@ -16,68 +16,7 @@ import {useLanguage} from '../../hooks/useLanguage';
 import {formatDateTime, formatTimeAgo} from '../../utils/format';
 import {IconHome, IconSearch} from '../../assets/icon/Icon';
 import BoxChatItem from './components/BoxChatItem';
-const dataFake = [
-  {
-    name: 'abc',
-    content: 'dsadasdas',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-  {
-    name: 'def',
-    content: 'cxzczccxz',
-    createAt: '20/10/2023',
-  },
-];
+
 export default function ListChatGroupScreen() {
   const {token} = useAuthentication();
   const {t} = useLanguage();
@@ -88,11 +27,6 @@ export default function ListChatGroupScreen() {
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('my_list_group_chat'),
-      headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('Explore')}>
-          <IconHome style={{width: scale(20)}} />
-        </TouchableOpacity>
-      ),
     });
   }, []);
 

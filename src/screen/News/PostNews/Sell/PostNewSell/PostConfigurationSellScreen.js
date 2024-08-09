@@ -50,7 +50,7 @@ export default function PostConfigurationSellScreen() {
     return setOptions({
       headerTitle: t('post_configuration'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

@@ -40,14 +40,12 @@ export default function AddTypeTicketScreen() {
     });
     return Math.min(...result);
   }, [params?.item?.tour_ticket_dates]);
-  console.log('====================================');
-  console.log(priceListed, 321332123321);
-  console.log('====================================');
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('create_tour_ticket'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

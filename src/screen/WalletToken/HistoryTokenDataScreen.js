@@ -26,12 +26,13 @@ import {
 import LottieView from 'lottie-react-native';
 import {formatDateTime, formatPrice} from '../../utils/format';
 import EmptyData from '../../components/EmptyData';
+import {useAuthentication} from '../../hooks/useAuthentication';
 
 export default function HistoryTokenDataScreen() {
   const {setOptions} = useNavigation();
   const {t} = useLanguage();
   const queryClient = useQueryClient();
-
+  const {token} = useAuthentication();
   useLayoutEffect(() => {
     setOptions({
       headerTitle: t('transaction_history'),
@@ -47,8 +48,8 @@ export default function HistoryTokenDataScreen() {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['user', 'token-data', 'history'],
-    queryFn: getHistoryToken,
+    queryKey: ['user', 'token-data', 'history', {token: token}],
+    queryFn: getHistoryToken({token: token}),
     getNextPageParam: (lastPage, allPages) => {
       if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
       return undefined;

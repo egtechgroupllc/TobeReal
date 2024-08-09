@@ -1258,5 +1258,16 @@
   "no_still_pay": "No, still pay with LokaPay",
   "do_you_want_create_wallet": "Do you want create wallet and pay with voucher to get point free?",
 
-  "please_choose_exact_location": "Please choose an exact location within 5 meters to post"
+  "please_choose_exact_location": "Please choose an exact location within 5 meters to post",
+  "congratulate_on_receiving_daily_reward": "Congratulations on receiving your daily login reward!",
+
+  "skip": "Skip",
+  "please_create_wallet_to_received_reward": "Please create a wallet to receive the daily login reward",
+  "receive_now": "Receive now",
+  "your_balance_fee_gas_not_enough": "Your balance fee gas not enough to received checkin reward, please faucet TOBE now",
+  "received": "Received",
+  "daily_checkin": "Daily check-in",
+
+  "now": "now",
+  "you": "you"
 }

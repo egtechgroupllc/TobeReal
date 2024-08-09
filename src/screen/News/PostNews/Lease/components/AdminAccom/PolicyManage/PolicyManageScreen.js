@@ -49,7 +49,7 @@ export default function PolicyManageScreen() {
     return setOptions({
       headerTitle: t('policy_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

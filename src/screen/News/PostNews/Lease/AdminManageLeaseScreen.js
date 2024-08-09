@@ -40,7 +40,7 @@ export default function AdminManageLeaseScreen() {
     return setOptions({
       headerTitle: t('accom_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

@@ -1250,5 +1250,18 @@
 
   "create_wallet": "Tạo ví",
   "no_still_pay": "Không, vẫn thanh toán bằng LokaPay",
-  "do_you_want_create_wallet": "Bạn có muốn tạo ví và thanh toán bằng voucher để nhận điểm miễn phí không?"
+  "do_you_want_create_wallet": "Bạn có muốn tạo ví và thanh toán bằng voucher để nhận điểm miễn phí không?",
+
+  "please_choose_exact_location": "Vui lòng chọn một vị trí chính xác trong phạm vi 5 mét để đăng bài",
+  "congratulate_on_receiving_daily_reward": "Chúc mừng bạn đã nhận được phần thưởng đăng nhập hằng ngày!",
+
+  "skip": "Bỏ qua",
+  "please_create_wallet_to_received_reward": "Vui lòng tạo ví để nhận phần thưởng đăng nhập hàng ngày",
+  "receive_now": "Nhận ngay",
+  "your_balance_fee_gas_not_enough": "Số dư phí gas của bạn không đủ để nhận phần thưởng check-in, vui lòng nhận TOBE từ faucet ngay bây giờ",
+  "received": "Đã nhận",
+  "daily_checkin": "Check-in hàng ngày",
+
+  "now": "bây giờ",
+  "you": "bạn"
 }

@@ -113,10 +113,34 @@ export const postWithdrawToken = async data => {
 
   return responsive.data;
 };
-export const getHistoryToken = async ({pageParam = 1}) => {
+export const getHistoryToken = async ({pageParam = 1, token}) => {
   const responsive = await instance.get(
     `/token-data/history?page=${pageParam}&limit=10`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
   );
+
+  return responsive.data;
+};
+
+////-----Check-in-Daily------//
+export const getDailyCheckinInfo = async token => {
+  const response = await instance.get('/daily-check-in/info', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return response.data;
+};
+export const postDailyCheckin = async ({data, token}) => {
+  const responsive = await instance.post('/daily-check-in/check-in', data, {
+    headers: {
+      Authorization: token,
+    },
+  });
 
   return responsive.data;
 };

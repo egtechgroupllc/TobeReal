@@ -30,9 +30,10 @@ export default function AddressWalletScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
-  const {data: dataQ, error} = useQuery({
-    queryKey: ['user', 'wallet', 'balance'],
-    queryFn: getBalanceWallet,
+  const {data: dataQ} = useQuery({
+    queryKey: ['user', 'wallet', 'balance', token],
+    queryFn: () => getBalanceWallet(token),
+    enabled: !!token,
   });
 
   const listWallet = useMemo(

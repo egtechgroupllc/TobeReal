@@ -13,12 +13,13 @@ import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
 import QRWalletBlockChain from '../../Profile/components/QRWalletBlockChain';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 
 export default function BoxWalletBlockChain({data}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
   const [isOpen, setIsOpen] = useState(false);
-
+  const {token} = useAuthentication();
   const balance = useMemo(
     () =>
       formatPrice(data?.balance * currency?.exchange_rate, {
@@ -33,9 +34,10 @@ export default function BoxWalletBlockChain({data}) {
     showMess(t('copy_success'));
   };
 
-  const {data: dataQ, error} = useQuery({
-    queryKey: ['user', 'wallet', 'balance'],
-    queryFn: getBalanceWallet,
+  const {data: dataQ} = useQuery({
+    queryKey: ['user', 'wallet', 'balance', token],
+    queryFn: () => getBalanceWallet(token),
+    enabled: !!token,
   });
 
   if (!data?.wallet_address) return null;

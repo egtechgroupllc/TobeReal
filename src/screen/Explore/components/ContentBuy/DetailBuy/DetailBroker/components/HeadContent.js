@@ -20,7 +20,7 @@ export default function HeadContent({data}) {
   return (
     <View
       style={{
-        marginTop: scale(50),
+        marginTop: scale(30),
         alignItems: 'center',
         flexDirection: 'row',
         paddingHorizontal: scale(50),

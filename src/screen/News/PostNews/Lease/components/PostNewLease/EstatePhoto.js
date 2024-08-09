@@ -5,7 +5,10 @@ import Collapsible from 'react-native-collapsible';
 import {scale} from '../../../../../../assets/constants';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
-import {validateMinLength} from '../../../../../../utils/validate';
+import {
+  validateMinLength,
+  validateYoutubeLink,
+} from '../../../../../../utils/validate';
 import ChooseImgPicker from '../../../../../components/ChooseImgPicker';
 import RulesPostImg from '../../../components/RulesPostImg';
 import ButtonTabValidate from '../ButtonTabValidate';
@@ -168,6 +171,7 @@ export default function EstatePhoto({
             control={control}
             name="video_link"
             placeholder={t('link_youtube')}
+            rules={[validateYoutubeLink(t('invalid_youtube_link'))]}
             style={styles.textInput}
           />
         </Collapsible>

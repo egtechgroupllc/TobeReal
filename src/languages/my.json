@@ -1226,5 +1226,18 @@
 
   "create_wallet": "Buat dompet",
   "no_still_pay": "Tidak, masih bayar dengan LokaPay",
-  "do_you_want_create_wallet": "Adakah anda mahu membuat dompet dan membayar dengan baucar untuk mendapatkan mata percuma?"
+  "do_you_want_create_wallet": "Adakah anda mahu membuat dompet dan membayar dengan baucar untuk mendapatkan mata percuma?",
+
+  "please_choose_exact_location": "Sila pilih lokasi yang tepat dalam lingkungan 5 meter untuk diposkan",
+  "congratulate_on_receiving_daily_reward": "Tahniah kerana menerima ganjaran log masuk harian anda!",
+
+  "skip": "Langkau",
+  "please_create_wallet_to_received_reward": "Sila buat dompet untuk menerima ganjaran log masuk harian",
+  "receive_now": "Terima sekarang",
+  "your_balance_fee_gas_not_enough": "Baki fee gas anda tidak mencukupi untuk menerima ganjaran check-in, sila ambil TOBE dari faucet sekarang",
+  "received": "Diterima",
+  "daily_checkin": "Daftar masuk harian",
+
+  "now": "sekarang",
+  "you": "anda"
 }

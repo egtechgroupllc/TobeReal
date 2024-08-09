@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(4),
     borderRadius: 8,
     height: scale(27),
-    width: scale(70),
+    minWidth: scale(70),
     // columnGap: scale(4),
   },
   img: {

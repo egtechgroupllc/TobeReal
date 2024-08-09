@@ -237,7 +237,7 @@ export default function WalletTokenScreen() {
               }}
               shape={'rectangle_and_keep'}
               text={t('this_is_type_point')}>
-              <ListToken dataP={data?.data} />
+              <ListToken dataP={data?.data} token={token} />
             </TourGuideZone>
             <TourGuideZone zone={3} text={t('this_is_wallet_manage')}>
               <WalletManage data={data?.data} />

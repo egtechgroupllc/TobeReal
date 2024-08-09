@@ -73,6 +73,7 @@ import ChangeInformationScreen from '../screen/Profile/Information/ChangeInforma
 import ChatBoxScreen from '../screen/Chat/ChatBoxScreen';
 import MyListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
 import ListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
+import DailyCheckinScreen from '../screen/DailyCheckin/DailyCheckinScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -376,5 +377,9 @@ export default routerNoBottomTab = [
   {
     name: 'ListChatGroupScreen',
     component: ListChatGroupScreen,
+  },
+  {
+    name: 'DailyCheckinScreen',
+    component: DailyCheckinScreen,
   },
 ];

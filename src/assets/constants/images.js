@@ -83,6 +83,9 @@ export default {
   banner: require('../images/banner.png'),
   logoSuccess: require('../images/logoSuccess.png'),
   iconProfile: require('../images/iconProfile.png'),
+  iconCongrat: require('../images/iconCongrat.png'),
+  iconGift: require('../images/iconGift.png'),
+
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),
   // c15_2: require('../images/c15_2.jpg'),

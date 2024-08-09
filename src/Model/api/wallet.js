@@ -26,8 +26,12 @@ instance.interceptors.response.use(
   },
 );
 
-export const getBalanceWallet = async () => {
-  const responsive = await instance.get('/wallet/balance');
+export const getBalanceWallet = async token => {
+  const responsive = await instance.get('/wallet/balance', {
+    headers: {
+      Authorization: token,
+    },
+  });
 
   return responsive.data;
 };

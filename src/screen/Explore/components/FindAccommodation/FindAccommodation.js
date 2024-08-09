@@ -175,6 +175,7 @@ export default function FindAccommodation() {
     setTabSelect(value?.id);
     tabSelect !== 'RENT' && setCategory(listRental[0]);
   }, []);
+
   return (
     <MainWrapper refreshControl noSafeArea>
       <View

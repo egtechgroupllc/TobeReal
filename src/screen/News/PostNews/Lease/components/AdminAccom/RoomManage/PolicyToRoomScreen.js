@@ -115,7 +115,7 @@ export default function PolicyToRoomScreen() {
     return setOptions({
       headerTitle: t('link_policy_to_room'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('PostNewsScreen')}>
+        <TouchableOpacity onPress={() => navigate('POST')}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

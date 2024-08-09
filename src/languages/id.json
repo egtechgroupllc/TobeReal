@@ -1221,5 +1221,18 @@
 
   "create_wallet": "Buat dompet",
   "no_still_pay": "Tidak, tetap bayar dengan LokaPay",
-  "do_you_want_create_wallet": "Apakah Anda ingin membuat dompet dan membayar dengan voucher untuk mendapatkan poin gratis?"
+  "do_you_want_create_wallet": "Apakah Anda ingin membuat dompet dan membayar dengan voucher untuk mendapatkan poin gratis?",
+
+  "please_choose_exact_location": "Silakan pilih lokasi yang tepat dalam radius 5 meter untuk memposting",
+  "congratulate_on_receiving_daily_reward": "Selamat telah menerima hadiah login harian Anda!",
+
+  "skip": "Lewati",
+  "please_create_wallet_to_received_reward": "Silakan buat dompet untuk menerima hadiah login harian",
+  "receive_now": "Terima sekarang",
+  "your_balance_fee_gas_not_enough": "Saldo fee gas Anda tidak cukup untuk menerima hadiah check-in, silakan ambil TOBE dari faucet sekarang",
+  "received": "Diterima",
+  "daily_checkin": "Check-in harian",
+
+  "now": "sekarang",
+  "you": "kamu"
 }
