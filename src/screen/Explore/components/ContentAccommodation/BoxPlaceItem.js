@@ -313,6 +313,7 @@ const styles = StyleSheet.create({
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
+    // ...SHADOW,
   },
   img: {
     width: '100%',

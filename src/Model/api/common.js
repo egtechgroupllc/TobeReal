@@ -10,6 +10,17 @@ export const instanceCommon = axios.create({
   baseURL: baseUrl + '/api/v1',
 });
 
+instanceCommon.interceptors.request.use(async req => {
+  if (typeof window !== 'undefined') {
+    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+
+    if (storedToken) {
+      req.headers.Authorization = `Bearer ${storedToken}`;
+    }
+  }
+
+  return req;
+});
 export const handleLogoutExistToken = async () => {
   axios.defaults.headers.common['Authorization'] = '';
   await EncryptedStorage.removeItem(TOKEN_KEY);
@@ -189,12 +200,8 @@ export const getListMessage = async ({
   return response.data;
 };
 
-export const getListChatGroup = async ({token}) => {
-  const response = await instanceCommon.get(`/chat/my-list-group`, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const getListChatGroup = async () => {
+  const response = await instanceCommon.get(`/chat/my-list-group`);
   return response.data;
 };
 

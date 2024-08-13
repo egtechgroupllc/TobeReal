@@ -22,7 +22,7 @@ import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../components/Ribbon';
 import Star from '../../../../components/StarRating';
-import {formatPrice} from '../../../../utils/format';
+import {formatCurrency, formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 import TopImg from './BoxPlaceItem/TopImg';
@@ -66,6 +66,7 @@ export default function BoxPlaceItem({
     );
   };
   const {currency} = useCountry();
+
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -87,9 +88,10 @@ export default function BoxPlaceItem({
             {
               width: scale(600 / seeViewNumber),
               // height: scale(200),
+              flex: 1,
             },
             styleWrapper,
-            // SHADOW,
+            SHADOW,
           ]}>
           <View
             style={{
@@ -212,12 +214,13 @@ export default function BoxPlaceItem({
                       style={{
                         ...styles.topBox,
                         backgroundColor: '#234F68B0',
-                        width: scale(80),
+                        minWidth: scale(90),
+                        maxWidth: scale(100),
                       }}>
                       <CustomText style={styles.topName} numberOfLines={1}>
-                        {formatPrice(data?.price, {
+                        {formatCurrency(data?.price, {
                           currency: currency?.currency_code,
-                        })}{' '}
+                        })}
                       </CustomText>
                     </View>
 
@@ -299,11 +302,11 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
-    ...SHADOW,
+    // ...SHADOW,
   },
   img: {
     width: '100%',

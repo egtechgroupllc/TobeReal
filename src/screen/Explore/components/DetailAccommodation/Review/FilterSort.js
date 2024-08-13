@@ -67,7 +67,7 @@ export default function FilterSort({
 const styles = StyleSheet.create({
   wrapper: {
     height: scale(50),
-    width: '45%',
+    width: '40%',
     flexDirection: 'row-reverse',
     alignItems: 'center',
     paddingHorizontal: scale(10),

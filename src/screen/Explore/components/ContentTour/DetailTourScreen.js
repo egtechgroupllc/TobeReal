@@ -50,6 +50,7 @@ export default function DetailTourScreen() {
   });
   const listView = useMemo(() => {
     const dataDetail = data?.data;
+
     return !dataDetail
       ? []
       : [

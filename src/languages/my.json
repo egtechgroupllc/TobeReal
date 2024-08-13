@@ -1239,5 +1239,9 @@
   "daily_checkin": "Daftar masuk harian",
 
   "now": "sekarang",
-  "you": "anda"
+  "you": "anda",
+
+  "billion": "bilion",
+  "million": "juta",
+  "invalid_youtube_link": "Pautan YouTube tidak sah"
 }

@@ -59,7 +59,11 @@ export default function WorldTour() {
       <WrapperContent
         // isSeeAll
         isCategory
-        dataCategory={listCountry.data?.data?.rows?.slice(0, 9)}
+        dataCategory={
+          !listCountry.isLoading
+            ? listCountry.data?.data?.rows?.slice(0, 9)
+            : [...Array(4)]
+        }
         onPressSeeAll={() =>
           navigate('NoBottomTab', {
             screen: 'SeeAllTourScreen',
@@ -75,11 +79,17 @@ export default function WorldTour() {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          ListEmptyComponent={<EmptyData />}
-          data={data?.data?.rows}
+          data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
           renderItem={({item}) => (
-            <BoxPlaceItem isHeart isStar data={item} rental="night" />
+            <BoxPlaceItem
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              isLoading={isLoading}
+            />
           )}
         />
 

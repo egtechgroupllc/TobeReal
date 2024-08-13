@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -12,7 +12,7 @@ import {
   CustomText,
   MainWrapper,
 } from '../../../components';
-import {IconLogoSaveloka} from '../../../assets/icon/Icon';
+import {IconHome, IconLogoSaveloka} from '../../../assets/icon/Icon';
 import ChooseVideoPicker from '../../Bookings/Review/ChooseVideoPicker';
 import FooterButton from '../PostNews/Lease/components/FooterButton';
 import {SIZES, scale} from '../../../assets/constants';
@@ -30,6 +30,12 @@ export default function PostVideoShortScreen() {
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('video_short_review'),
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
+          <IconHome style={{width: scale(20)}} />
+        </TouchableOpacity>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

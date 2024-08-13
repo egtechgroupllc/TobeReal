@@ -2,11 +2,23 @@ import axios from 'axios';
 import {baseUrl} from '../url';
 import {Alert} from 'react-native';
 import {handleLogoutExistToken} from './common';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {TOKEN_KEY} from '../../context/AuthContext';
 
 const instance = axios.create({
   baseURL: baseUrl + '/api/v1/user',
 });
+instance.interceptors.request.use(async req => {
+  if (typeof window !== 'undefined') {
+    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
 
+    if (storedToken) {
+      req.headers.Authorization = `Bearer ${storedToken}`;
+    }
+  }
+
+  return req;
+});
 let countErr = 0;
 instance.interceptors.response.use(
   response => {

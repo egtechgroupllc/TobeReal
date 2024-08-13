@@ -1258,5 +1258,9 @@
   "daily_checkin": "每日签到",
 
   "now": "现在",
-  "you": "你"
+  "you": "你",
+
+  "billion": "十亿",
+  "million": "百万",
+  "invalid_youtube_link": "YouTube 链接无效"
 }

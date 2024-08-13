@@ -1257,5 +1257,9 @@
   "daily_checkin": "Pang-araw-araw na check-in",
 
   "now": "ngayon",
-  "you": "ikaw"
+  "you": "ikaw",
+
+  "billion": "bilyon",
+  "million": "milyon",
+  "invalid_youtube_link": "Hindi wasto ang YouTube link"
 }

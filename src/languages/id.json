@@ -1234,5 +1234,9 @@
   "daily_checkin": "Check-in harian",
 
   "now": "sekarang",
-  "you": "kamu"
+  "you": "kamu",
+
+  "billion": "miliar",
+  "million": "juta",
+  "invalid_youtube_link": "Tautan YouTube tidak valid"
 }

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, FlatList, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {formatPrice} from '../../../../utils/format';
 
@@ -12,12 +12,14 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
 import InViewport from '../../../../components/InViewport';
-import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import BoxPlaceItemLoading from '../ContentAccommodation/BoxPlaceItem/BoxPlaceItemLoading';
 
-export default function BuySell({data}) {
+export default function BuySell({data, isLoading, country}) {
   const {t} = useLanguage();
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
+  const [listSavedName, setListSavedName] = useState([]);
   const title = [t('recent_view')];
 
   // const {data, isLoading, isError, error} = useQuery({
@@ -31,6 +33,31 @@ export default function BuySell({data}) {
   //   ],
   //   queryFn: () => getListSell({country_id: 241}),
   // });
+
+  useEffect(() => {
+    const loadSavedName = async () => {
+      const result = await EncryptedStorage.getItem('@save_name_estate');
+
+      setListSavedName(JSON.parse(result));
+    };
+    loadSavedName();
+  }, []);
+
+  const dataNew = useMemo(() => {
+    const filterSaved = listSavedName?.filter(item => {
+      return item?.country_id === country?.id;
+    });
+
+    const dataIds = data?.data?.rows?.map(element => element?.id) || [];
+    const result = filterSaved?.filter(item => {
+      return dataIds.includes(item?.id);
+    });
+
+    return result;
+  }, [listSavedName, country?.id, data?.data?.count]);
+  if (!(dataNew?.length !== 0) && !isLoading) return null;
+  if (!dataNew?.length && !isLoading) return null;
+
   return (
     <InViewport
       delay={40}
@@ -63,7 +90,7 @@ export default function BuySell({data}) {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={data}
+          data={!isLoading ? dataNew : [...Array(4)]}
           contentContainerStyle={styles.content}
           renderItem={({item}) => (
             <BoxPlaceItem
@@ -72,6 +99,7 @@ export default function BuySell({data}) {
               textRating={2}
               data={item}
               rental="night"
+              isLoading={!item}
             />
           )}
         />

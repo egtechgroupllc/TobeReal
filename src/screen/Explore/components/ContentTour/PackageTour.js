@@ -88,6 +88,7 @@ export default function PackageTour() {
   useEffect(() => {
     setFilter(listProvince.data?.data?.rows?.[0]);
   }, [listProvince?.data?.data?.rows]);
+
   return (
     <InViewPort>
       <WrapperContent
@@ -114,11 +115,18 @@ export default function PackageTour() {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={data?.data?.rows}
+          data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
           ListEmptyComponent={<EmptyData />}
           renderItem={({item}) => (
-            <BoxPlaceItem isHeart isStar data={item} rental="night" isRating />
+            <BoxPlaceItem
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              isRating
+              isLoading={isLoading}
+            />
           )}
         />
 

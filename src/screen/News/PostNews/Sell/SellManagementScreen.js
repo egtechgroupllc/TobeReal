@@ -29,7 +29,7 @@ export default function SellManagementScreen() {
       headerTitle: t('real_estate_listing'),
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigate('POST', {screen: 'PostNewSell'})}>
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

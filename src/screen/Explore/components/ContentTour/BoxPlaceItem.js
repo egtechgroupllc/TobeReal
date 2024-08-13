@@ -34,6 +34,7 @@ export default function BoxPlaceItem({
 }) {
   const {t} = useLanguage();
   const {currency, country} = useCountry();
+  const {navigate, isFocused, dispatch} = useNavigation();
   const checkDiffentCountry = useMemo(() => {
     if (data?.country?.id !== country?.id) {
       // getCurrency(data?.country.currency_code);
@@ -41,24 +42,28 @@ export default function BoxPlaceItem({
     }
   }, [data?.country?.id, country?.id]);
   const priceFinal = useMemo(() => {
-    const resultPri = data?.tour_tickets?.map(element => {
-      const result = element?.tour_ticket_items?.map(percent => {
-        const resultPolicy = element?.tour_ticket_dates.reduce((acc, price) => {
-          return checkDiffentCountry
-            ? ((percent?.price_percent * price?.price) /
-                price?.currency?.exchange_rate) *
-                currency?.exchange_rate
-            : percent?.price_percent * price?.price;
-        }, 0);
+    if (data?.tour_tickets) {
+      const resultPri = data?.tour_tickets?.map(element => {
+        const result = element?.tour_ticket_items?.map(percent => {
+          const resultPolicy = element?.tour_ticket_dates.reduce(
+            (acc, price) => {
+              return checkDiffentCountry
+                ? ((percent?.price_percent * price?.price) /
+                    price?.currency?.exchange_rate) *
+                    currency?.exchange_rate
+                : percent?.price_percent * price?.price;
+            },
+            0,
+          );
 
-        return resultPolicy;
+          return resultPolicy;
+        });
+
+        return Math.min(...result);
       });
-
-      return Math.min(...result);
-    });
-    return Math.min(...resultPri);
+      return Math.min(...resultPri);
+    }
   }, [data?.tour_tickets]);
-  const {navigate, isFocused, dispatch} = useNavigation();
   return (
     <View style={styles.wrapper}>
       {!isLoading ? (
@@ -206,7 +211,7 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,

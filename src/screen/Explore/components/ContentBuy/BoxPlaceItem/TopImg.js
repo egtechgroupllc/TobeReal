@@ -7,7 +7,7 @@ import CustomText from '../../../../../components/CustomText';
 import Favourite from '../../../../components/Favourite';
 import LinearGradient from 'react-native-linear-gradient';
 import Star from '../../../../../components/StarRating';
-import {formatPrice} from '../../../../../utils/format';
+import {formatCurrency, formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function TopImg({
@@ -46,12 +46,12 @@ export default function TopImg({
               backgroundColor: '#234F68B0',
               position: 'absolute',
               marginTop: scale(105),
-              width: scale(100),
+              minWidth: scale(60),
             }}>
             <CustomText style={styles.topName} numberOfLines={1}>
-              {formatPrice(data?.price, {
+              {formatCurrency(data?.price, {
                 currency: currency?.currency_code,
-              })}{' '}
+              })}
             </CustomText>
           </View>
         )}

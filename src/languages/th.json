@@ -1262,5 +1262,9 @@
   "daily_checkin": "เช็คอินรายวัน",
 
   "now": "ตอนนี้",
-  "you": "คุณ"
+  "you": "คุณ",
+
+  "billion": "พันล้าน",
+  "million": "ล้าน",
+  "invalid_youtube_link": "ลิงก์ YouTube ไม่ถูกต้อง"
 }

@@ -316,7 +316,6 @@ export default memo(function ContentBuy() {
   const {t} = useLanguage();
   const [tourData, setTourData] = useState(dataDomestic);
   const {country} = useCountry();
-  const [listSavedName, setListSavedName] = useState([]);
   const handleCategoryChange = categoryData => {
     if (categoryData === 'Domestic destination') {
       setTourData(dataDomestic);
@@ -336,30 +335,11 @@ export default memo(function ContentBuy() {
     ],
     queryFn: () => getListSell({country_id: country?.id}),
   });
-  useEffect(() => {
-    const loadSavedName = async () => {
-      const result = await EncryptedStorage.getItem('@save_name_estate');
 
-      setListSavedName(JSON.parse(result));
-    };
-    loadSavedName();
-  }, []);
-
-  const dataNew = useMemo(() => {
-    const filterSaved = listSavedName?.filter(item => {
-      return item?.country_id === country?.id;
-    });
-
-    const dataIds = data?.data?.rows?.map(element => element?.id) || [];
-    const result = filterSaved?.filter(item => {
-      return dataIds.includes(item?.id);
-    });
-
-    return result;
-  }, [listSavedName, country?.id, data?.data?.count]);
   return (
     <View style={styles.wrapper}>
-      {dataNew?.length > 0 ? <BuySell data={dataNew} /> : <View />}
+      <BuySell data={data} isLoading={isLoading} country={country} />
+
       {/* <Discount /> */}
       <FeatureEstate />
       {/* <TopEstateAgent data={dataAgent} /> */}

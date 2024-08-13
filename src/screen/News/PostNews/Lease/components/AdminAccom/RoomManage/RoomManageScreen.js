@@ -21,7 +21,8 @@ export default function RoomManageScreen() {
     return setOptions({
       headerTitle: t('room_manage'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

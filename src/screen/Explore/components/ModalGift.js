@@ -103,12 +103,26 @@ export default function ModalGift({
           ) : (
             <>
               {amountTOBE?.balance > 0.1 ? (
-                <CustomButton
-                  text={t('receive_now')}
-                  buttonType="small"
-                  styleWrapper={{width: scale(150)}}
-                  onPress={onPressReceive}
-                />
+                <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+                  <CustomButton
+                    text={t('skip')}
+                    styleText={{color: COLORS.black}}
+                    buttonType="small"
+                    styleWrapper={{width: scale(120)}}
+                    onPress={onPressCancel}
+                    style={{
+                      backgroundColor: COLORS.white,
+                      borderWidth: scale(1),
+                      borderColor: COLORS.grey,
+                    }}
+                  />
+                  <CustomButton
+                    text={t('receive_now')}
+                    buttonType="small"
+                    styleWrapper={{width: scale(120)}}
+                    onPress={onPressReceive}
+                  />
+                </View>
               ) : (
                 <View style={{alignItems: 'center', rowGap: scale(10)}}>
                   <CustomText

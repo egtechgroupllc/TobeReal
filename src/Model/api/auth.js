@@ -2,28 +2,43 @@ import axios from 'axios';
 import {baseUrl} from '../url';
 import {Alert} from 'react-native';
 import {handleLogoutExistToken} from './common';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {TOKEN_KEY} from '../../context/AuthContext';
 
 const instance = axios.create({
   baseURL: baseUrl + '/api/v1/user',
 });
+instance.interceptors.request.use(async req => {
+  if (typeof window !== 'undefined') {
+    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+
+    if (storedToken) {
+      req.headers.Authorization = `Bearer ${storedToken}`;
+    }
+  }
+
+  return req;
+});
+
 let countErr = 0;
 instance.interceptors.response.use(
   response => {
     return response;
   },
   error => {
+    console.log(error.response.status);
     if (error.response && error.response.status === 401 && countErr < 1) {
-      Alert.alert(
-        'Notification',
-        'Your account has been logged in from another device, please log in again!',
-        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
-      );
-
+      // Alert.alert(
+      //   'Notification',
+      //   'Your account has been logged in from another device, please log in again!',
+      //   [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+      // );
       ++countErr;
     }
     return Promise.reject(error);
   },
 );
+
 export const postLogin = async data => {
   const responsive = await instance.post('/login', data);
 
@@ -59,6 +74,15 @@ export const postChangePassword = async data => {
 
   return responsive.data;
 };
+// export const postEditProfile = async ({data, token}) => {
+//   const responsive = await instance.post('/edit-profile', data, {
+//     headers: {
+//       Authorization: token,
+//     },
+//   });
+
+//   return responsive.data;
+// };
 export const postEditProfile = async data => {
   const responsive = await instance.post('/edit-profile', data);
 

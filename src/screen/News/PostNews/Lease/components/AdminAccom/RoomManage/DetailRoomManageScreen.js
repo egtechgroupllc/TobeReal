@@ -57,9 +57,10 @@ export default function DetailRoomManageScreen() {
 
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: 'Room management detail',
+      headerTitle: t('room_manage_detail'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

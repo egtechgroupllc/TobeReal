@@ -15,6 +15,7 @@ import {useCountry} from '../../../../hooks/useCountry';
 import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 import InViewport from '../../../../components/InViewport';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import EmptyData from '../../../../components/EmptyData';
 
 export default function FeatureEstate() {
   const {t} = useLanguage();
@@ -68,8 +69,9 @@ export default function FeatureEstate() {
   // useEffect(() => {
   //   setFilter(listCountry.data?.data?.[0]);
   // }, [listCountry.data?.data]);
-  if (!(data?.data?.count !== 0) && !isLoading) return null;
-  if (!data?.data?.count && !isLoading) return null;
+  // if (!(data?.data?.count !== 0) && !isLoading) return null;
+  // if (!data?.data?.count && !isLoading) return null;
+
   return (
     <WrapperContent
       // background={images.bgPackageTour}
@@ -106,8 +108,15 @@ export default function FeatureEstate() {
           showsHorizontalScrollIndicator={false}
           data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
           renderItem={({item}) => (
-            <BoxFeatureItem isHeart isStar data={item} rental="night" />
+            <BoxFeatureItem
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              isLoading={isLoading}
+            />
           )}
         />
       </InViewport>
@@ -120,5 +129,7 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
+    minHeight: scale(250),
+    minWidth: '100%',
   },
 });

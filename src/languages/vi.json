@@ -1263,5 +1263,9 @@
   "daily_checkin": "Check-in hàng ngày",
 
   "now": "bây giờ",
-  "you": "bạn"
+  "you": "bạn",
+
+  "billion": "tỷ",
+  "million": "triệu",
+  "invalid_youtube_link": "Liên kết YouTube không hợp lệ"
 }

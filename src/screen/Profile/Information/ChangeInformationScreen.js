@@ -10,12 +10,14 @@ import {requireField, validateMinLengthText} from '../../../utils/validate';
 import {CustomButton, CustomInput, CustomText} from '../../../components';
 import {useForm} from 'react-hook-form';
 import {formatNumber} from '../../../utils/format';
+import {useAuthentication} from '../../../hooks/useAuthentication';
 
 export default function ChangeInformationScreen() {
   const {setOptions, navigate, reset} = useNavigation();
   const {t} = useLanguage();
   const {control, handleSubmit, watch} = useForm();
   const queryClient = useQueryClient();
+  const {token} = useAuthentication();
 
   useLayoutEffect(() => {
     return setOptions({
@@ -33,7 +35,6 @@ export default function ChangeInformationScreen() {
 
         if (dataInside?.status) {
           queryClient.invalidateQueries(['user', 'profile']);
-          reset();
           navigate('BottomTab');
         }
       },

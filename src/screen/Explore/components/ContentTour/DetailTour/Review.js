@@ -30,6 +30,7 @@ export default function Review({dataP}) {
     queryKey: ['tour', 'list-review', dataP?.id],
     queryFn: () => getListReviewTour({id_tour: dataP?.id, limit: 6}),
   });
+
   return (
     <WrapperContent
       isSeeAll

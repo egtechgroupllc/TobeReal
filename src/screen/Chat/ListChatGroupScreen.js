@@ -31,8 +31,8 @@ export default function ListChatGroupScreen() {
   }, []);
 
   const {data, isLoading, error, isError} = useQuery({
-    queryKey: ['chat', 'my-list-chat-group', token],
-    queryFn: () => getListChatGroup({token: token}),
+    queryKey: ['chat', 'my-list-chat-group'],
+    queryFn: () => getListChatGroup(),
     enabled: !!token,
     refetchInterval: 5000,
   });

@@ -53,8 +53,8 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
   const {token} = useAuthentication();
   const queryClient = useQueryClient();
   const {data, isLoading, error, isError} = useQuery({
-    queryKey: ['chat', 'my-list-chat-group', token],
-    queryFn: () => getListChatGroup({token: token}),
+    queryKey: ['chat', 'my-list-chat-group'],
+    queryFn: () => getListChatGroup(),
     enabled: !!token,
     refetchInterval: 5000,
   });
@@ -141,9 +141,9 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
               <View style={styles.dot} />
             )}
           </TouchableOpacity>
-          {/* <TouchableOpacity onPress={goNotify}>
+          <TouchableOpacity onPress={goNotify}>
             <IconNotification fill={COLORS.white} />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
       {/* 

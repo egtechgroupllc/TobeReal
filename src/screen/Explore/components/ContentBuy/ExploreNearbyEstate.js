@@ -55,7 +55,11 @@ export default function ExploreNearbyEstate({country}) {
       // isSeeAll
       // worldTour
       isCategory
-      dataCategory={listProvince.data?.data?.rows?.slice(0, 9)}
+      dataCategory={
+        !listProvince.isLoading
+          ? listProvince?.data?.data?.rows.slice(0, 9)
+          : [...Array(4)]
+      }
       onPressSeeAll={() =>
         navigate('NoBottomTab', {
           screen: 'SeeAllBuyScreen',
@@ -88,11 +92,17 @@ export default function ExploreNearbyEstate({country}) {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={data?.data?.rows}
+          data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
           ListEmptyComponent={<EmptyData />}
           renderItem={({item}) => (
-            <BoxExploreEstate isHeart isStar data={item} rental="night" />
+            <BoxExploreEstate
+              isHeart
+              isStar
+              data={item}
+              rental="night"
+              isLoading={isLoading}
+            />
           )}
         />
       </InViewport>

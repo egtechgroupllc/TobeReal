@@ -19,7 +19,7 @@ import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import Ribbon from '../../../components/Ribbon';
 import Star from '../../../../components/StarRating';
-import {formatPrice} from '../../../../utils/format';
+import {formatCurrency, formatPrice} from '../../../../utils/format';
 import RatingBox from './BoxPlaceItem/RatingBox';
 import ViewMultiPrice from './BoxPlaceItem/ViewMultiPrice';
 import TopImg from './BoxPlaceItem/TopImg';
@@ -171,9 +171,9 @@ export default function BoxFeatureItem({
                         <CustomText
                           textType="regular"
                           style={{...styles.textDiscount, color: COLORS.white}}>
-                          {formatPrice(data?.price, {
+                          {formatCurrency(data?.price, {
                             currency: currency?.currency_code,
-                          })}{' '}
+                          })}
                         </CustomText>
 
                         <CustomText
@@ -197,9 +197,9 @@ export default function BoxFeatureItem({
                           marginTop: scale(25),
                         }}>
                         <CustomText style={styles.topName} numberOfLines={1}>
-                          {formatPrice(data?.price, {
+                          {formatCurrency(data?.price, {
                             currency: currency?.currency_code,
-                          })}{' '}
+                          })}
                         </CustomText>
                       </View>
                       {/* <CustomText

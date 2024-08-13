@@ -14,7 +14,7 @@ export default function NotifyItems({
   header,
   title,
   desc,
-  backgroundColor = '#f2f3f3',
+  backgroundColor = '#fff',
   tag,
   isDot,
   isShadow,
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   boxItem: {
     borderRadius: scale(8),
     alignItems: 'flex-start',
+    ...SHADOW,
   },
   boxItemContent: {
     flexDirection: 'row',

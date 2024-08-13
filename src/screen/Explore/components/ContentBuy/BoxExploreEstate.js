@@ -218,13 +218,13 @@ export default function BoxExploreEstate({
 const styles = StyleSheet.create({
   wrapper: {
     // justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: scale(10),
+    // alignItems: 'center',
+    // paddingVertical: scale(10),
     backgroundColor: '#F5F4F8',
     // minHeight: scale(230),
     // height: 200,
     borderRadius: 12,
-    ...SHADOW,
+    // ...SHADOW,
   },
   topName: {
     fontSize: SIZES.xSmall,

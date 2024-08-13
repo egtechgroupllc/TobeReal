@@ -31,7 +31,8 @@ export default function TicketManageScreen() {
     return setOptions({
       headerTitle: t('tour_ticket_management'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

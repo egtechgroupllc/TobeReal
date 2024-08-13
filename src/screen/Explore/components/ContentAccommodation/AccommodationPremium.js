@@ -13,6 +13,7 @@ import BoxPlaceItem from './BoxPlaceItem';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import {getCurrentLocation} from '../../../../utils/getCurrentLocation';
 import Geolocation from '@react-native-community/geolocation';
+import EmptyData from '../../../../components/EmptyData';
 
 export default function AccommodationPremium({currency}) {
   const {t} = useLanguage();
@@ -62,8 +63,8 @@ export default function AccommodationPremium({currency}) {
         currency_id: currency?.id,
       }),
   });
-  if (!(data?.data?.count !== 0) && !isLoading) return null;
-  if (!data?.data?.count && !isLoading) return null;
+  // if (!(data?.data?.count !== 0) && !isLoading) return null;
+  // if (!data?.data?.count && !isLoading) return null;
   return (
     <WrapperContent
       // isSeeAll
@@ -97,6 +98,7 @@ export default function AccommodationPremium({currency}) {
           showsHorizontalScrollIndicator={false}
           data={!isLoading ? data?.data?.rows?.slice(0, 9) : [...Array(4)]}
           contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
           renderItem={({item, index}) => (
             <BoxPlaceItem
               key={index}
@@ -121,5 +123,7 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
+    minHeight: scale(250),
+    minWidth: '100%',
   },
 });

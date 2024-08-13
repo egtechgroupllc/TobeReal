@@ -51,7 +51,8 @@ export default function AddVoucherScreen() {
     return setOptions({
       headerTitle: t('add_voucher'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigate('POST')}>
+        <TouchableOpacity
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
           <IconHome style={{width: scale(20)}} />
         </TouchableOpacity>
       ),

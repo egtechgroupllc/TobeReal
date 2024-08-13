@@ -36,7 +36,8 @@ export default function Content({token}) {
         />
         <BoxItemProfile
           title={'Tài khoản & Bảo mật'}
-          nameScreen={'AccountAndSecurityScreen'}
+          nameScreen={token ? 'AccountAndSecurityScreen' : 'LoginScreen'}
+          nameNavigate={token ? 'NavigationProfile' : 'NavigationAuth'}
         />
       </Box>
 

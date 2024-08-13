@@ -8,6 +8,7 @@ import WrapperContent from '../WrapperContent';
 import BoxPlaceItem from './BoxPlaceItem';
 import {InViewport} from '../../../../components';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
+import EmptyData from '../../../../components/EmptyData';
 
 export default memo(function HotelResidence({data, isLoading, country}) {
   const {t} = useLanguage();
@@ -63,6 +64,7 @@ export default memo(function HotelResidence({data, isLoading, country}) {
           showsHorizontalScrollIndicator={false}
           data={!isLoading ? dataNew : [...Array(4)]}
           contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
           renderItem={({item, index}) => (
             <BoxPlaceItem
               key={index}

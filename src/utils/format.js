@@ -179,3 +179,23 @@ export const formatTimeAgo = dateString => {
     ? `1 ${t('year_ago')}`
     : `${diffInYears} ${t('years_ago')}`;
 };
+export const formatCurrency = (num, options = {}) => {
+  const {t} = useLanguage();
+  const {currency = ''} = options; // Lấy giá trị currency từ options
+
+  let formattedNumber;
+
+  // Tạo định dạng số cho hàng nghìn
+  const numberFormat = new Intl.NumberFormat('en-US');
+
+  if (num >= 1e9) {
+    formattedNumber = numberFormat.format(num / 1e9) + ' ' + t('billion');
+  } else if (num >= 1e6) {
+    formattedNumber = numberFormat.format(num / 1e6) + ' ' + t('million');
+  } else {
+    formattedNumber = numberFormat.format(num);
+  }
+
+  // Thêm đơn vị tiền tệ vào cuối chuỗi
+  return formattedNumber + (currency ? ` ${currency}` : '');
+};
