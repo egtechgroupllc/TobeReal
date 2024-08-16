@@ -5,22 +5,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
-  Keyboard,
   Platform,
   StatusBar,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {
-  KeyboardProvider,
-  KeyboardAvoidingView,
-} from 'react-native-keyboard-controller';
+import {KeyboardProvider} from 'react-native-keyboard-controller';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {COLORS, SIZES, images, scale} from './src/assets/constants';
@@ -47,11 +42,14 @@ import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
 //   walkthroughable,
 // } from 'react-native-copilot';
 import {TourGuideProvider} from 'rn-tourguide';
-import {CustomText, HeaderBar} from './src/components';
-import {useAuthentication} from './src/hooks/useAuthentication';
 import {useSocket} from './src/Model/socket/socket';
-import {AddRoomTypeScreen} from './src/screen/News/PostNews/Lease/AddRoomType';
+import {CustomText, HeaderBar} from './src/components';
 import {screenGestureDisable} from './src/navigation/screenGestureDisable';
+import PushNotification, {Importance} from 'react-native-push-notification';
+import {setupNotifications} from './src/utils/setupNotification';
+import {requestNotificationPermission} from './src/utils/permission/requestNotificationPermission';
+import {useLanguage} from './src/hooks/useLanguage';
+import {replaceTranslateKey} from './src/utils/replaceTranslateKey';
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -91,6 +89,10 @@ export default function App() {
     }
   }, [netInfo.isConnected]);
 
+  useEffect(() => {
+    setupNotifications();
+  }, []);
+
   const SplashScreen = () => (
     <View
       style={{
@@ -106,49 +108,6 @@ export default function App() {
     </View>
   );
 
-  // const TooltipComponent = () => {
-  //   const {
-  //     isFirstStep,
-  //     isLastStep,
-  //     goToPrev,
-  //     goToNext,
-  //     goToNth,
-  //     currentStep,
-  //     stop,
-  //   } = useCopilot();
-  //   return (
-  //     <View
-  //       style={{
-  //         backgroundColor: '#fff',
-  //         width: '100%',
-  //         borderRadius: scale(10),
-  //         minHeight: scale(100),
-  //         padding: scale(10),
-  //       }}>
-  //       <CustomText style={{textAlign: 'center', flex: 1}}>
-  //         {currentStep.text}
-  //       </CustomText>
-
-  //       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-  //         {currentStep.order > 1 ? (
-  //           <TouchableOpacity onPress={goToPrev}>
-  //             <CustomText style={{color: 'green'}}>Previous</CustomText>
-  //           </TouchableOpacity>
-  //         ) : (
-  //           <View></View>
-  //         )}
-
-  //         <TouchableOpacity onPress={goToNext}>
-  //           <CustomText style={{color: 'green'}}>Next</CustomText>
-  //         </TouchableOpacity>
-
-  //         <TouchableOpacity onPress={stop}>
-  //           <CustomText style={{color: 'green'}}>Finish</CustomText>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </View>
-  //   );
-  // };
   const TooltipComponent = tooltip => {
     return (
       <View
@@ -275,18 +234,56 @@ export default function App() {
 const Layout = () => {
   const {country} = useCountry();
   const socket = useSocket();
+  const {t} = useLanguage();
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      requestNotificationPermission();
+    }
+  }, []);
 
+  PushNotification.createChannel(
+    {
+      channelId: '1', // (required)
+      channelName: 'Default Channel', // (required)
+      channelDescription: 'A default channel', // (optional)
+      playSound: true, // (optional)
+      soundName: 'default', // (optional)
+      importance: Importance.HIGH, // (optional)
+      vibrate: true, // (optional)
+    },
+    created => console.log(`createChannel returned '${created}'`),
+  );
   useEffect(() => {
     if (socket) {
       socket.on('connect', () => {
         console.log('Socket connected!');
       });
 
+      socket.on('user_notification', value => {
+        console.log('user_notification:', value);
+
+        PushNotification.localNotification({
+          channelId: '1',
+          title: t(value?.title) || 'Notification',
+          message:
+            replaceTranslateKey(
+              t(value?.content),
+              value?.content_replacements,
+            ) || 'You have a new message.',
+          playSound: true,
+          color: 'yellow',
+          soundName: 'default',
+          smallIcon: 'ic_logo',
+          largeIcon: '',
+        });
+      });
+
       return () => {
         socket.off('connect');
+        socket.off('user_notification');
       };
     }
-  }, [socket]);
+  }, [socket, t]);
 
   return (
     <Stack.Navigator

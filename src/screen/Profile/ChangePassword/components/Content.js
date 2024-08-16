@@ -35,7 +35,10 @@ export default function Content() {
 
     changPassMutation.mutate(value, {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
 
         if (dataInside?.status) {
           queryClient.invalidateQueries(['user', 'profile']);

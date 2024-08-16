@@ -51,6 +51,34 @@ type CustomInputProps = {
   onPressIconRight?: () => void;
   onPressIconLeft?: () => void;
 } & TextInputProps;
+function formatInputPrice(price: string) {
+  if (!price && price !== '0') {
+    return '0';
+  }
+
+  // Remove all characters except digits and periods
+  let formattedPrice = price.toString().replace(/[^\d.]/g, '');
+
+  // Remove period if it is the first character
+  formattedPrice = formattedPrice.replace(/^\./, '');
+
+  // Allow only one period
+  formattedPrice = formattedPrice.replace(/(\..*)\./g, '$1');
+
+  // Split into integer and decimal parts
+  const parts = formattedPrice.split('.');
+
+  // Remove leading zeros from the integer part
+  parts[0] = parts[0].replace(/^0+(?!$)/, '');
+
+  // Format integer part with commas
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  // Combine integer and decimal parts
+  formattedPrice = parts.join('.');
+
+  return formattedPrice;
+}
 
 export default forwardRef(function CustomInput(
   {
@@ -169,7 +197,7 @@ export default forwardRef(function CustomInput(
                 onBlur={name ? onBlur : props?.onBlur}
                 value={
                   enableFormatNum
-                    ? formatPrice(value, {showCurrency: false})
+                    ? formatInputPrice(value)
                     : name
                     ? value
                     : props?.value

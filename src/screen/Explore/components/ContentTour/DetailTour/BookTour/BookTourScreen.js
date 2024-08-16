@@ -34,6 +34,7 @@ import {useCountry} from '../../../../../../hooks/useCountry';
 
 export default function BookTourScreen() {
   const data = useRoute().params;
+
   const [date, setDate] = useState();
   const [listAddTicket, setListAddTicket] = useState([]);
   const [check1, setCheck1] = useState(false);

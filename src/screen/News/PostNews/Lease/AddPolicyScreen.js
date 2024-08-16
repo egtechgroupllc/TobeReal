@@ -82,7 +82,7 @@ export default function AddPolicyScreen({route}) {
               dataParams?.accommodation_id,
             ]);
             showMess(
-              dataInside?.message,
+              t(dataInside?.message),
               dataInside?.status ? 'success' : 'error',
             );
             !dataParams?.admin
@@ -93,6 +93,7 @@ export default function AddPolicyScreen({route}) {
 
         onError: err => {
           console.log(err);
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );

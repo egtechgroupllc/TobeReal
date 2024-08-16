@@ -1220,7 +1220,7 @@
   "date_create": "Tanggal pembuatan",
 
   "create_wallet": "Buat dompet",
-  "no_still_pay": "Tidak, tetap bayar dengan LokaPay",
+  "no_still_pay": "Tidak, tetap bayar dengan SavePay",
   "do_you_want_create_wallet": "Apakah Anda ingin membuat dompet dan membayar dengan voucher untuk mendapatkan poin gratis?",
 
   "please_choose_exact_location": "Silakan pilih lokasi yang tepat dalam radius 5 meter untuk memposting",
@@ -1238,5 +1238,19 @@
 
   "billion": "miliar",
   "million": "juta",
-  "invalid_youtube_link": "Tautan YouTube tidak valid"
+  "invalid_youtube_link": "Tautan YouTube tidak valid",
+
+  "room_manage_detail": "Detail manajemen kamar",
+  "share_detail_tour_short_video": "Bagikan detail tur Anda melalui video pendek, video ini akan muncul di tren!",
+  "no_pay_with": "Tidak, bayar dengan SavePay",
+  "content_display": "Konten & Tampilan",
+  "setting": "Pengaturan",
+  "account_security": "Akun & Keamanan",
+
+  "out_of_ticket": "Tiket habis",
+  "an_error_occured": "Terjadi kesalahan selama proses. Silakan coba lagi dalam beberapa menit!",
+
+  "change_account": "Ganti akun",
+  "remove_history": "Hapus riwayat",
+  "transaction_fee_deducted": "Biaya transaksi telah dipotong"
 }

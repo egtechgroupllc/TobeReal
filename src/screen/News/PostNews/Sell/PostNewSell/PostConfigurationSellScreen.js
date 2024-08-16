@@ -167,7 +167,7 @@ export default function PostConfigurationSellScreen() {
             isPending.current = true;
             setCheck({
               status: dataInside?.status,
-              mess: dataInside?.message,
+              mess: t(dataInside?.message),
             });
             start();
             setTimeout(
@@ -181,19 +181,20 @@ export default function PostConfigurationSellScreen() {
             return;
           } else {
             showMess(
-              dataInside?.message,
+              t(dataInside?.message),
               dataInside?.status ? 'success' : 'error',
             );
             queryClient.invalidateQueries(['estate', 'my-list']);
             navigate('SellManagementScreen');
           }
         } else {
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
           setOpenContact(false);
         }
       },
       onError: err => {
         console.log({err});
+        showMess(t('an_error_occured'), 'error');
       },
     };
 

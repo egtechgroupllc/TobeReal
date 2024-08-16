@@ -49,7 +49,7 @@ export default function DetailBookingScreen() {
             });
             return;
           }
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
         },
         onError: err => {
           console.log(err);

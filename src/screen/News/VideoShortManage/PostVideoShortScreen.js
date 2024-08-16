@@ -54,7 +54,6 @@ export default function PostVideoShortScreen() {
         table_id: table_id,
       }),
   });
-
   const txHashId = data?.data?.rows[0]?.id;
   const postVideoShortMu = useMutation({
     mutationFn: postVideoShort,
@@ -84,7 +83,6 @@ export default function PostVideoShortScreen() {
 
     return formData;
   };
-
   const handlePostVideoShort = value => {
     const formData = getFormData(value);
 
@@ -93,7 +91,7 @@ export default function PostVideoShortScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message ? dataInside?.message : 'Success!',
+            dataInside?.message ? t(dataInside?.message) : 'Success!',
             dataInside?.status ? 'success' : 'error',
           );
           if (dataInside?.status) {
@@ -110,6 +108,7 @@ export default function PostVideoShortScreen() {
         },
         onError: err => {
           console.log({err});
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );
@@ -174,6 +173,7 @@ export default function PostVideoShortScreen() {
             alignSelf: 'center',
             marginTop: scale(50),
           }}
+          disabled={postVideoShortMu.isPending}
           onPress={handleSubmit(handlePostVideoShort)}
         />
       </MainWrapper>

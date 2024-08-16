@@ -120,9 +120,13 @@ export const getListConstant = async () => {
 };
 
 ////-----Video-Short------//
-export const getListVideoRandom = async ({table_name = ''}) => {
+export const getListVideoRandom = async ({
+  table_name = '',
+  pageParam = 1,
+  limit = 2,
+}) => {
   const responsive = await instanceCommon.get(
-    `/video-short/list-random?table_name=${table_name}`,
+    `/video-short/list-random?table_name=${table_name}&page=${pageParam}&limit=${limit}`,
   );
 
   return responsive.data;
@@ -139,14 +143,9 @@ export const getLinkData = async ({table_name, table_id, token}) => {
   );
   return responsive.data;
 };
-export const getMyListVideoShort = async ({table_name, table_id, token}) => {
+export const getMyListVideoShort = async ({table_name, table_id}) => {
   const responsive = await instanceCommon.get(
     `/video-short/my-list?table_name=${table_name}&table_id=${table_id}`,
-    {
-      headers: {
-        Authorization: token,
-      },
-    },
   );
   return responsive.data;
 };

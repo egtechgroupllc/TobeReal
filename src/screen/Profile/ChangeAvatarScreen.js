@@ -63,7 +63,7 @@ export default function ChangeAvatarScreen() {
       editProfileMutation.mutate(imageFormData, {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message,
+            t(dataInside?.message),
             dataInside?.status ? 'success' : 'error',
           );
 
@@ -114,6 +114,7 @@ export default function ChangeAvatarScreen() {
         />
         <CustomButton
           text={t('confirm')}
+          disabled={editProfileMutation.isPending}
           onPress={handleEditProfile}
           styleWrapper={{flex: 1}}
         />

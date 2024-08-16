@@ -9,6 +9,9 @@ import {
 } from '../../../../../assets/constants';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
+import {formatTimeAgo} from '../../../../../utils/format';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import {replaceTranslateKey} from '../../../../../utils/replaceTranslateKey';
 
 export default function NotifyItems({
   header,
@@ -20,6 +23,7 @@ export default function NotifyItems({
   isShadow,
   onPress,
   data,
+  t,
 }) {
   return (
     <View
@@ -38,39 +42,70 @@ export default function NotifyItems({
           {data?.title}
         </CustomText> */}
 
-        <View style={styles.tag}>
+        <View style={{...styles.tag}}>
           <CustomText textType="semiBold" size={SIZES.xSmall} color="#fff">
-            {data?.type}
+            {t(data?.title)}
           </CustomText>
         </View>
-
+        {!data?.is_seen && (
+          <View
+            style={{
+              position: 'absolute',
+              backgroundColor: 'red',
+              width: scale(12),
+              height: scale(12),
+              borderRadius: scale(10),
+              right: scale(-5),
+              top: scale(-5),
+              borderWidth: scale(3),
+              borderColor: COLORS.white70,
+            }}
+          />
+        )}
         <TouchableOpacity
           style={[styles.boxItemContent]}
           disabled={!onPress}
           activeOpacity={0.7}
           onPress={onPress}>
-          <View style={styles.left}>
+          <View style={{...styles.left, alignItems: 'center'}}>
             <CustomImage source={images.logo1} style={styles.img} />
             <View style={{rowGap: scale(4), flex: 1}}>
               {/* <CustomText textType="semiBold" size={scale(13)}>
-                {data?.title}
+                {data?.content}
               </CustomText> */}
               <CustomText
                 color={COLORS.text}
-                textType="medium"
+                textType={!data?.is_seen ? 'bold' : 'medium'}
                 // style={{flex: 1}}
                 numberOfLines={3}>
-                {data?.desc}
+                {replaceTranslateKey(
+                  t(data?.content),
+                  data?.content_replacements,
+                )}
               </CustomText>
             </View>
           </View>
+
           <View />
+
           {isDot && (
             <View style={styles.radio}>
               <View style={styles.dot} />
             </View>
           )}
         </TouchableOpacity>
+        <CustomText
+          color={COLORS.grey}
+          textType={'medium'}
+          style={{
+            alignSelf: 'flex-end',
+            paddingBottom: scale(5),
+            paddingHorizontal: scale(10),
+            top: scale(-5),
+          }}
+          numberOfLines={3}>
+          {formatTimeAgo(data?.createdAt)}
+        </CustomText>
       </View>
     </View>
   );
@@ -87,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     alignItems: 'center',
-    padding: scale(10),
+    padding: scale(5),
     borderRadius: scale(8),
   },
   tag: {

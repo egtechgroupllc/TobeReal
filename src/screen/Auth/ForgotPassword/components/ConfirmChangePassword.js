@@ -19,7 +19,10 @@ export default function ConfirmChangePassword() {
   const submitForgotPassword = data => {
     changePasswordMu.mutate(data, {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
 
         if (dataInside?.status) {
           reset();

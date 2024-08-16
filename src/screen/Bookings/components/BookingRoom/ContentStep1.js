@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useQueryClient} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -15,11 +15,18 @@ import ItemUtil from '../../../Explore/components/DetailAccommodation/Rooms/comp
 import TimeBookingCheckInOut from '../DetailBooking/TimeBookingCheckInOut';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import InfoContact from './ContentStep1/InfoContact';
+import {getProfile} from '../../../../Model/api/common';
+import {useAuthentication} from '../../../../hooks/useAuthentication';
 export default function ContentStep1({onPress, data}) {
   const queryClient = useQueryClient();
-  const profile = queryClient.getQueryData(['user', 'profile'])?.data;
   const {t} = useLanguage();
   const navigation = useNavigation();
+
+  const {token} = useAuthentication();
+  const {isLoading, data: profile} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(token),
+  });
 
   const formatDataCheck = {
     check_in_date: data?.date?.selectedStartDate,
@@ -104,7 +111,7 @@ export default function ContentStep1({onPress, data}) {
           </View>
         </View>
 
-        <InfoContact data={profile} />
+        <InfoContact data={profile?.data} />
 
         <Box
           title={t('price_detail')}

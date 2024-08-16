@@ -64,7 +64,10 @@ export default function BuyVoucherScreen() {
   const BuyVoucher = () => {
     const mutationConfig = {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
         if (dataInside?.status) {
           navigate('HomeListVoucherScreen', {...params, isSuccess: true});
         }

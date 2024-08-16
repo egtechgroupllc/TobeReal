@@ -15,10 +15,14 @@ export const formatPrice = (
   } = {},
 ) => {
   if (!price && price !== 0) {
-    return '';
+    return 0;
   }
   // Remove non-digit characters from price
   const numericPrice = parseFloat(price.toString().replace(/[^\d.-]/g, ''));
+
+  if (isNaN(numericPrice)) {
+    return 0;
+  }
 
   let option = {
     style: 'currency',

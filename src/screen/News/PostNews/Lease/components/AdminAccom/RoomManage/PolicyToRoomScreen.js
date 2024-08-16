@@ -37,6 +37,7 @@ import {
 import CheckBox from '../../../../../../../components/CheckBox';
 import {CustomButton} from '../../../../../../../components';
 import {useCountry} from '../../../../../../../hooks/useCountry';
+import {showMess} from '../../../../../../../assets/constants/Helper';
 
 export default function PolicyToRoomScreen() {
   const params = useRoute().params;
@@ -188,6 +189,7 @@ export default function PolicyToRoomScreen() {
         },
         onError: err => {
           console.log({err});
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );

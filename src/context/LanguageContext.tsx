@@ -1,14 +1,20 @@
-import React, {createContext, useState, useEffect, ReactNode} from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-import getTranslations from '../languages/languagesApi';
 import vietnamese from '../languages/vi.json';
 import english from '../languages/en.json';
 import philipin from '../languages/ph.json';
 import thailand from '../languages/th.json';
-import malaysia from '../languages/my.json';
+import malaysia from '../languages/ms.json';
 import indonesia from '../languages/id.json';
-import china from '../languages/cn.json';
+import china from '../languages/zh.json';
+import getTranslations from '../utils/getTranslations';
 interface LanguageTranslations {
   [locale: string]: {[key: string]: string};
 }
@@ -23,26 +29,40 @@ const languageFallback: LanguageTranslations = {
   vi: vietnamese,
   ph: philipin,
   th: thailand,
-  my: malaysia,
+  ms: malaysia,
   id: indonesia,
-  cn: china,
+  zh: china,
 };
 
 export const LanguageContext = createContext<LanguageProps>({});
 
 export const LanguageProvider = ({children}: {children: ReactNode}) => {
   const [locale, setLocale] = useState<string>('en'); // Current language
-  const [translations, setTranslations] = useState<LanguageTranslations>({});
+  const [translations, setTranslations] = useState<LanguageTranslations | null>(
+    {},
+  );
+  // Tải dữ liệu translations từ GitHub
+  useEffect(() => {
+    const fetchTranslations = async () => {
+      const translationsData = await getTranslations();
 
-  const t = React.useMemo(() => {
-    return (key: string) => {
+      setTranslations(translationsData);
+    };
+
+    fetchTranslations();
+  }, []);
+
+  const t = useCallback(
+    (key: string) => {
       return (
         translations?.[locale]?.[key] ||
         languageFallback?.[locale]?.[key] ||
+        translations?.['en']?.[key] ||
         key
       );
-    };
-  }, [locale, translations, languageFallback]);
+    },
+    [translations, locale, languageFallback],
+  );
 
   const changeLocale = async (newLocale: string) => {
     try {
@@ -53,17 +73,6 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
     }
   };
 
-  // Tải dữ liệu translations từ GitHub
-  useEffect(() => {
-    const fetchTranslations = async () => {
-      const translationsData = await getTranslations();
-      setTranslations(translationsData);
-    };
-
-    fetchTranslations();
-  }, []);
-
-  // Khôi phục ngôn ngữ đã lưu khi ứng dụng khởi động
   useEffect(() => {
     const restoreSelectedLanguage = async () => {
       try {

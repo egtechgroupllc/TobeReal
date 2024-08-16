@@ -52,15 +52,20 @@ export default memo(function BookTour({data, onPress}) {
   const priceFinal = useMemo(() => {
     if (!isLoading) {
       const dataTicket = dataQ?.data?.rows;
+
       const resultPri = dataTicket?.map(element => {
-        const result = element?.tour_ticket_items?.map(percent => {
+        const filteredPercent = element?.tour_ticket_items?.filter(
+          item => item?.quantity_real > 0,
+        );
+
+        const result = filteredPercent?.map(item => {
           const resultPolicy = element?.tour_ticket_dates.reduce(
             (acc, price) => {
               return checkDiffentCountry
-                ? ((percent?.price_percent * price?.price) /
+                ? ((item?.price_percent * price?.price) /
                     price?.currency?.exchange_rate) *
                     currency?.exchange_rate
-                : percent?.price_percent * price?.price;
+                : item?.price_percent * price?.price;
             },
             0,
           );

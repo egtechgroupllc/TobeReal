@@ -8,6 +8,7 @@ import {IconDeposit, IconHistory} from '../../assets/icon/Icon';
 import {HistoryTransactionScreen} from '../Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HistoryTokenDataScreen from './HistoryTokenDataScreen';
+import {scale} from '../../assets/constants';
 const Tab = createBottomTabNavigator();
 
 export default function FinancialTokenScreen() {
@@ -52,7 +53,11 @@ export default function FinancialTokenScreen() {
         options={{
           tabBarLabel: t('transaction_history'),
           tabBarIcon: ({focused}) => (
-            <IconHistory fill={focused && '#F0B90B'} />
+            <IconHistory
+              fill={focused && '#F0B90B'}
+              width={scale(15)}
+              height={scale(15)}
+            />
           ),
         }}
       />

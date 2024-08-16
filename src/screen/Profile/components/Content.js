@@ -10,7 +10,7 @@ import BoxItemProfile from './BoxItemProfile';
 import {useNavigation} from '@react-navigation/native';
 
 export default function Content({token}) {
-  const {t} = useLanguage();
+  const {t, locale} = useLanguage();
   const {country} = useCountry();
   const [selectedLanguage, setSelectedLanguage] = useState();
 
@@ -20,7 +20,7 @@ export default function Content({token}) {
       result && setSelectedLanguage(JSON.parse(result));
     };
     loadSavedLanguage();
-  }, []);
+  }, [locale]);
   const {navigate} = useNavigation();
   return (
     <View
@@ -28,14 +28,14 @@ export default function Content({token}) {
         rowGap: scale(20),
         marginTop: scale(30),
       }}>
-      <Box title={'Cài đặt'}>
+      <Box title={t('setting')}>
         <BoxItemProfile
           title={t('financial_management')}
           nameScreen={token ? 'AddressWalletScreen' : 'LoginScreen'}
           nameNavigate={token ? 'NavigateWalletToken' : 'NavigationAuth'}
         />
         <BoxItemProfile
-          title={'Tài khoản & Bảo mật'}
+          title={t('account_security')}
           nameScreen={token ? 'AccountAndSecurityScreen' : 'LoginScreen'}
           nameNavigate={token ? 'NavigationProfile' : 'NavigationAuth'}
         />
@@ -50,7 +50,7 @@ export default function Content({token}) {
         />
       </Box> */}
 
-      <Box title={'Nội dung & Hiển thị'}>
+      <Box title={t('content_display')}>
         <BoxItemProfile
           title={t('select_country')}
           nameScreen="CountryScreen"

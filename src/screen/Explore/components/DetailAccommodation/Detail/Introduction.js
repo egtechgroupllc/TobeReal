@@ -6,11 +6,20 @@ import {TabSelect} from '../../../../../components';
 import WrapperContent from '../../WrapperContent';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
+import useTranslation, {
+  functionTranslations,
+  translate,
+  translateTool,
+} from '../../../../../utils/translateTool';
 
 export default function Introduction({data}) {
   const {t} = useLanguage();
   const bottomSheetRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const {translations, loading, error, translateTexts} = useTranslation();
+  useEffect(() => {
+    translateTexts(data?.description); // Translate multiple texts
+  }, [translateTexts]);
 
   useEffect(() => {
     if (isOpen) {
@@ -34,9 +43,8 @@ export default function Introduction({data}) {
         style={{
           lineHeight: 18,
         }}>
-        {data?.description}
+        {translations[data?.description]}
       </CustomText>
-
       {isOpen && (
         <BottomSheet
           ref={bottomSheetRef}
@@ -51,7 +59,7 @@ export default function Introduction({data}) {
             style={{
               fontSize: SIZES.xMedium,
             }}>
-            {data?.description}
+            {translations[data?.description]}
           </CustomText>
         </BottomSheet>
       )}

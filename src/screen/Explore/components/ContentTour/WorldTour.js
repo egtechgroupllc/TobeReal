@@ -54,6 +54,7 @@ export default function WorldTour() {
   const [isRender, setIsRender] = useState(false);
   const {navigate} = useNavigation();
   const title = [t('travel_around_world')];
+
   return (
     <InViewPort>
       <WrapperContent

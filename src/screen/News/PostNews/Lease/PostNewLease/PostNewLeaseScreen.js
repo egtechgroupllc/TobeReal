@@ -156,7 +156,7 @@ export default function PostNewLeaseScreen() {
             isPending.current = true;
             setCheck({
               status: dataInside?.status,
-              mess: dataInside?.message,
+              mess: t(dataInside?.message),
             });
             start();
             setTimeout(
@@ -176,12 +176,13 @@ export default function PostNewLeaseScreen() {
             queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
           }
         } else {
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
           setOpenContact(false);
         }
       },
       onError: err => {
         console.log({err});
+        showMess(t('an_error_occured'), 'error');
       },
     };
     if (params?.address) {

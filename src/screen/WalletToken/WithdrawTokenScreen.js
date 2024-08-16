@@ -38,7 +38,10 @@ export default function WithdrawTokenScreen() {
   const handleWidraw = value => {
     withdrawMutation.mutate(value, {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
         if (dataInside?.status) {
           queryClient.invalidateQueries(['user', 'profile']);
           goBack();
@@ -81,6 +84,7 @@ export default function WithdrawTokenScreen() {
           style={{...styles.boxItem, borderWidth: 0}}
           styleWrapper={{paddingVertical: scale(10)}}
           control={control}
+          enableFormatNum
           name="amount"
           placeholder={t('enter_amount_you_want_withdraw')}
           rules={[

@@ -1225,7 +1225,7 @@
   "date_create": "Tarikh cipta",
 
   "create_wallet": "Buat dompet",
-  "no_still_pay": "Tidak, masih bayar dengan LokaPay",
+  "no_still_pay": "Tidak, masih bayar dengan SavePay",
   "do_you_want_create_wallet": "Adakah anda mahu membuat dompet dan membayar dengan baucar untuk mendapatkan mata percuma?",
 
   "please_choose_exact_location": "Sila pilih lokasi yang tepat dalam lingkungan 5 meter untuk diposkan",
@@ -1243,5 +1243,19 @@
 
   "billion": "bilion",
   "million": "juta",
-  "invalid_youtube_link": "Pautan YouTube tidak sah"
+  "invalid_youtube_link": "Pautan YouTube tidak sah",
+
+  "room_manage_detail": "Butiran pengurusan bilik",
+  "share_detail_tour_short_video": "Kongsi butiran lawatan anda melalui video pendek, video ini akan muncul dalam tren!",
+  "no_pay_with": "Tidak, bayar dengan SavePay",
+  "content_display": "Kandungan & Paparan",
+  "setting": "Tetapan",
+  "account_security": "Akaun & Keselamatan",
+
+  "out_of_ticket": "Kout tiket",
+  "an_error_occured": "Ralat berlaku semasa proses. Sila cuba lagi dalam beberapa minit!",
+
+  "change_account": "Tukar akaun",
+  "remove_history": "Buang sejarah",
+  "transaction_fee_deducted": "Yuran transaksi telah ditolak"
 }

@@ -56,7 +56,7 @@ export default function ConfirmDepositScreen({route}) {
           isPending.current = true;
           setCheck({
             status: dataInside?.status,
-            mess: dataInside?.message,
+            mess: t(dataInside?.message),
           });
           start();
           setTimeout(

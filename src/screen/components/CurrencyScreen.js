@@ -35,13 +35,15 @@ export default function CurrencyScreen() {
   const insets = useSafeAreaInsets();
   const queryClient = useQueryClient();
 
-  const data = queryClient.getQueryData(['common', 'list-currency']);
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['common', 'list-currency'],
+    queryFn: getListCurrency,
+  });
 
   const handleDone = () => {
     router && router.onGoBack(currency);
     goBack();
   };
-
   const {country, onSaveCurrency} = useCountry();
   const dataNew = useMemo(() => {
     const dataFilter = data?.data?.filter((item, index) => {

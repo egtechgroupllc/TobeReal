@@ -12,6 +12,7 @@ import {formatNumber} from '../../../../../utils/format';
 import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
 import {useQuery} from '@tanstack/react-query';
 import {getListReviewTour} from '../../../../../Model/api/apiTour';
+import ItemBoxReviewLoading from '../../DetailAccommodation/Review/ItemBoxReviewLoading';
 const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review({dataP}) {

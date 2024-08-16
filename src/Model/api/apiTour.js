@@ -155,7 +155,7 @@ export const getListTicketDate = async ({id_ticket, date_start, date_end}) => {
 export const getListBookingTour = async ({pageParam = 1, limit = 10}) => {
   const responsive = await instance.get(
     // `/room/booking/my-booking?limit=${limit}&page=${pageParam}`,
-    `/ticket/booking/my-booking`,
+    `/ticket/booking/my-booking?page=${pageParam}&limit=${limit}`,
   );
 
   return responsive.data;

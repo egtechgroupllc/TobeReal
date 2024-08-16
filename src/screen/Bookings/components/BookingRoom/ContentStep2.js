@@ -117,7 +117,7 @@ export default function ContentStep2({data}) {
                 isPending.current = true;
                 setCheck({
                   status: dataInside?.status,
-                  mess: dataInside?.message,
+                  mess: t(dataInside?.message),
                 });
                 start();
                 // showMess(
@@ -137,6 +137,11 @@ export default function ContentStep2({data}) {
                         data?.idAccom,
                       ]);
                       queryClient.invalidateQueries(['user', 'profile']);
+                      queryClient.invalidateQueries([
+                        'accommodation',
+                        'list-rent',
+                      ]);
+
                       if (dataInside?.data?.payment === 'PAYPAL') {
                         handlePaypal(dataInside?.data?.id);
                         return;
@@ -151,7 +156,7 @@ export default function ContentStep2({data}) {
                 return;
               } else {
                 showMess(
-                  dataInside?.message,
+                  t(dataInside?.message),
                   dataInside?.status ? 'success' : 'error',
                 );
                 queryClient.invalidateQueries([
@@ -170,12 +175,13 @@ export default function ContentStep2({data}) {
                 });
               }
             } else {
-              showMess(dataInside?.message, 'error');
+              showMess(t(dataInside?.message), 'error');
               setOpenContact(false);
             }
           },
           onError: err => {
             console.log({err});
+            showMess(t('an_error_occured'), 'error');
           },
         },
       );

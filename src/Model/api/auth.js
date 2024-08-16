@@ -137,9 +137,9 @@ export const postWithdrawToken = async data => {
 
   return responsive.data;
 };
-export const getHistoryToken = async ({pageParam = 1, token}) => {
+export const getHistoryToken = async ({pageParam = 1, token, limit = 10}) => {
   const responsive = await instance.get(
-    `/token-data/history?page=${pageParam}&limit=10`,
+    `/token-data/history?page=${pageParam}&limit=${limit}`,
     {
       headers: {
         Authorization: token,
@@ -151,12 +151,8 @@ export const getHistoryToken = async ({pageParam = 1, token}) => {
 };
 
 ////-----Check-in-Daily------//
-export const getDailyCheckinInfo = async token => {
-  const response = await instance.get('/daily-check-in/info', {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const getDailyCheckinInfo = async () => {
+  const response = await instance.get('/daily-check-in/info');
   return response.data;
 };
 export const postDailyCheckin = async ({data, token}) => {
@@ -166,5 +162,17 @@ export const postDailyCheckin = async ({data, token}) => {
     },
   });
 
+  return responsive.data;
+};
+////-----Notification------//
+export const getListNotification = async ({pageParam = 1, limit = 10}) => {
+  const response = await instance.get(
+    `/notification/list?page=${pageParam}&limit=${limit}`,
+  );
+  return response.data;
+};
+
+export const postSeenNotification = async data => {
+  const responsive = await instance.post('/notification/seen', data);
   return responsive.data;
 };

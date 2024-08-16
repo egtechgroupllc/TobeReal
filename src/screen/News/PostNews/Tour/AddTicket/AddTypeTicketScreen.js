@@ -104,7 +104,7 @@ export default function AddTypeTicketScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message,
+            t(dataInside?.message),
             dataInside?.status ? 'success' : 'error',
           );
           if (dataInside?.status) {

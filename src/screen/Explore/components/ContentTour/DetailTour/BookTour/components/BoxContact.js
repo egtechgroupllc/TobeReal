@@ -3,16 +3,20 @@ import React from 'react';
 import InfoContact from '../../../../../../Bookings/components/BookingRoom/ContentStep1/InfoContact';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {useCountry} from '../../../../../../../hooks/useCountry';
-import {useQueryClient} from '@tanstack/react-query';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
 import {CustomText} from '../../../../../../../components';
+import {useAuthentication} from '../../../../../../../hooks/useAuthentication';
+import {getProfile} from '../../../../../../../Model/api/common';
 
 export default function BoxContact({data}) {
   const {t} = useLanguage();
-
   const queryClient = useQueryClient();
-
-  const profile = queryClient.getQueryData(['user', 'profile'])?.data;
+  const {token} = useAuthentication();
+  const {isLoading, data: profile} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(token),
+  });
 
   return (
     <View style={{width: '90%'}}>
@@ -32,7 +36,7 @@ export default function BoxContact({data}) {
           borderRadius: scale(6),
           minHeight: scale(30),
         }}>
-        <InfoContact data={profile} isTour />
+        <InfoContact data={profile?.data} isTour />
       </View>
     </View>
   );

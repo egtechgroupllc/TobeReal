@@ -108,7 +108,7 @@ export default function BookingTourConfirmScreen() {
           // onPress: () => Alert.alert('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: t('No, pay with LokaPay'), onPress: () => handleBookingTour()},
+        {text: t('no_pay_with'), onPress: () => handleBookingTour()},
       ]);
       return;
     } else {
@@ -144,7 +144,7 @@ export default function BookingTourConfirmScreen() {
                 isPending.current = true;
                 setCheck({
                   status: dataInside?.status,
-                  mess: dataInside?.message,
+                  mess: t(dataInside?.message),
                 });
                 // showMess(
                 //   dataInside?.message,
@@ -163,7 +163,10 @@ export default function BookingTourConfirmScreen() {
                       //   'list-room',
                       //   data?.idAccom,
                       // ]);
-                      // queryClient.invalidateQueries(['user', 'profile']);
+                      queryClient.invalidateQueries(['tour', 'list-tour']);
+                      queryClient.invalidateQueries(['tour', 'detail']);
+                      queryClient.invalidateQueries(['user', 'profile']);
+
                       // if (dataInside?.data?.payment === 'PAYPAL') {
                       //   handlePaypal(dataInside?.data?.id);
                       //   return;
@@ -177,7 +180,7 @@ export default function BookingTourConfirmScreen() {
                 );
               } else {
                 showMess(
-                  dataInside?.message,
+                  t(dataInside?.message),
                   dataInside?.status ? 'success' : 'error',
                 );
                 navigate('Booking', {
@@ -185,12 +188,13 @@ export default function BookingTourConfirmScreen() {
                 });
               }
             } else {
-              showMess(dataInside?.message, 'error');
+              showMess(t(dataInside?.message), 'error');
               setOpenContact(false);
             }
           },
           onError: err => {
             console.log({err});
+            showMess(t('an_error_occured'), 'error');
           },
         },
       );

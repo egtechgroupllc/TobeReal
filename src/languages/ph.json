@@ -1243,7 +1243,7 @@
   "date_create": "Petsa ng paglikha",
 
   "create_wallet": "Gumawa ng pitaka",
-  "no_still_pay": "Hindi, magbayad pa rin gamit ang LokaPay",
+  "no_still_pay": "Hindi, magbayad pa rin gamit ang SavePay",
   "do_you_want_create_wallet": "Gusto mo bang gumawa ng pitaka at magbayad gamit ang voucher para makakuha ng libreng puntos?",
 
   "please_choose_exact_location": "Pakitukoy ang eksaktong lokasyon sa loob ng 5 metro para mag-post",
@@ -1261,5 +1261,19 @@
 
   "billion": "bilyon",
   "million": "milyon",
-  "invalid_youtube_link": "Hindi wasto ang YouTube link"
+  "invalid_youtube_link": "Hindi wasto ang YouTube link",
+
+  "room_manage_detail": "Detalyeng pamamahala ng kwarto",
+  "share_detail_tour_short_video": "I-share ang mga detalye ng iyong tour sa pamamagitan ng maiikli na video, ang mga video na ito ay lilitaw sa mga trend!",
+  "no_pay_with": "Hindi, magbayad gamit ang SavePay",
+  "content_display": "Nilalaman & Pagpapakita",
+  "setting": "Setting",
+  "account_security": "Account & Seguridad",
+
+  "out_of_ticket": "Wala nang tiket",
+  "an_error_occured": "Nagkaroon ng error sa proseso. Mangyaring subukan muli sa loob ng ilang minuto!",
+
+  "change_account": "Palitan ang account",
+  "remove_history": "Tanggalin ang kasaysayan",
+  "transaction_fee_deducted": "Naibawas na ang mga bayarin sa transaksyon"
 }

@@ -1,66 +1,73 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect, useMemo} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
-import {COLORS, SHADOW, WIDTH, scale} from '../../../../assets/constants';
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
+import {
+  COLORS,
+  SHADOW,
+  WIDTH,
+  animations,
+  scale,
+} from '../../../../assets/constants';
 import MainWrapper from '../../../../components/MainWrapper';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import EmptyData from '../../../../components/EmptyData';
-import NotifyItems from './components/NotifyItems';
-import {useInfiniteQuery, useQueryClient} from '@tanstack/react-query';
-import {getHistoryDeposit} from '../../../../Model/api/auth';
-
-const dataWaiting = [
-  {
-    id: 1,
-    desc: ' Congratulations on your successful booking at Marine Hotel.',
-    type: 'Booking',
-  },
-  {
-    id: 2,
-    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
-    type: 'Deposit',
-  },
-  {
-    id: 3,
-    desc: ' Congratulations on your successful booking at Marine Hotel.',
-    type: 'Booking',
-  },
-  {
-    id: 4,
-    desc: 'Congratulations, you have successfully deposited $100 into your Saveloka wallet.',
-    type: 'Deposit',
-  },
-  {
-    id: 5,
-    desc: ' Congratulations on your successful booking at Marine Hotel.',
-    type: 'Booking',
-  },
-];
+import NotifyItems, {replacePlaceholders} from './components/NotifyItems';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import {
+  getHistoryDeposit,
+  getListNotification,
+  postSeenNotification,
+} from '../../../../Model/api/auth';
+import LottieView from 'lottie-react-native';
+import {CustomText} from '../../../../components';
 
 export default function NotifyScreen() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  // const queryClient = useQueryClient();
-  // const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
-  //   useInfiniteQuery({
-  //     queryKey: ['deposit', 'my-order'],
-  //     queryFn: getHistoryDeposit,
-  //     getNextPageParam: (lastPage, allPages) => {
-  //       if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
 
-  //       return undefined;
-  //     },
-  //   });
-  // const dataArr = useMemo(
-  //   () =>
-  //     data?.pages
-  //       .map(page => {
-  //         if (!page) return undefined;
-  //         return page?.data?.rows;
-  //       })
-  //       .flat(),
-  //   [data?.pages],
-  // );
+  const {
+    isLoading,
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    error,
+  } = useInfiniteQuery({
+    queryKey: ['notification', 'list-notification', 10],
+    queryFn: ({pageParam}) =>
+      getListNotification({
+        pageParam,
+        limit: 10,
+      }),
+    getNextPageParam: (lastPage, allPages) => {
+      if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
+
+      return undefined;
+    },
+    refetchInterval: 5000,
+  });
+
+  const dataArr = useMemo(
+    () =>
+      data?.pages
+        .map(page => {
+          if (!page) return undefined;
+          return page?.data?.rows;
+        })
+        .flat(),
+    [data?.pages],
+  );
 
   const {setOptions} = useNavigation();
   useLayoutEffect(() => {
@@ -72,22 +79,58 @@ export default function NotifyScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const {data: dataSeen, isError} = useQuery({
+    queryKey: ['notification', 'seen-notification'],
+    queryFn: () => postSeenNotification(),
+    refetchInterval: 5000,
+  });
+  const refresh = useRef(false);
+  const queryClient = useQueryClient();
+  function pullToRefresh(value) {
+    refresh.current = true;
+    queryClient.invalidateQueries();
+    refresh.current = false;
+  }
+
   return (
     <MainWrapper scrollEnabled={false}>
       <FlatList
-        data={dataWaiting}
+        showsVerticalScrollIndicator={false}
+        data={dataArr || (isLoading && [1, 2, 3, 5])}
         style={{
           height: '100%',
         }}
-        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refresh.current}
+            onRefresh={pullToRefresh}
+            tintColor={COLORS.primary}
+          />
+        }
         contentContainerStyle={{
           rowGap: scale(10),
           padding: scale(20),
+          paddingBottom: scale(60),
         }}
-        renderItem={({item, index}) => <NotifyItems data={item} />}
         ListEmptyComponent={() => (
           <EmptyData styleWrapper={{marginTop: '40%'}} />
         )}
+        ListFooterComponent={() =>
+          isFetchingNextPage && (
+            <View style={{height: scale(30)}}>
+              <LottieView
+                autoPlay={true}
+                source={animations.loading}
+                style={{height: '100%'}}
+              />
+            </View>
+          )
+        }
+        onEndReachedThreshold={0.4}
+        onEndReached={() => {
+          hasNextPage && fetchNextPage();
+        }}
+        renderItem={({item, index}) => <NotifyItems data={item} t={t} />}
       />
     </MainWrapper>
   );

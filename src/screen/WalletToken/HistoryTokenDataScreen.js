@@ -27,6 +27,8 @@ import LottieView from 'lottie-react-native';
 import {formatDateTime, formatPrice} from '../../utils/format';
 import EmptyData from '../../components/EmptyData';
 import {useAuthentication} from '../../hooks/useAuthentication';
+import {replaceTranslateKey} from '../../utils/replaceTranslateKey';
+import {getListConstant} from '../../Model/api/common';
 
 export default function HistoryTokenDataScreen() {
   const {setOptions} = useNavigation();
@@ -39,19 +41,28 @@ export default function HistoryTokenDataScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const {data: dataConstant} = useQuery({
+    queryKey: ['common', 'list-constant'],
+    queryFn: getListConstant,
+  });
   const {
     isLoading,
-    error,
     data,
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
+    error,
   } = useInfiniteQuery({
-    queryKey: ['user', 'token-data', 'history', {token: token}],
-    queryFn: getHistoryToken({token: token}),
+    queryKey: ['user', 'token-data', 'history', {token: token, limit: 10}],
+    queryFn: ({pageParam = 1}) =>
+      getHistoryToken({
+        pageParam,
+        token: token,
+        limit: 10,
+      }),
     getNextPageParam: (lastPage, allPages) => {
       if (!(lastPage?.data?.rows?.length <= 0)) return allPages?.length + 1;
+
       return undefined;
     },
   });
@@ -65,6 +76,7 @@ export default function HistoryTokenDataScreen() {
         .flat(),
     [data?.pages],
   );
+
   const refresh = useRef(false);
 
   function pullToRefresh(value) {
@@ -73,7 +85,7 @@ export default function HistoryTokenDataScreen() {
     refresh.current = false;
   }
   return (
-    <MainWrapper noImgColor>
+    <MainWrapper noImgColor scrollEnabled={false}>
       <FlatList
         data={dataArr || (isLoading && [1, 2, 3, 5])}
         style={{
@@ -113,25 +125,33 @@ export default function HistoryTokenDataScreen() {
           )
         }
         onEndReached={hasNextPage && fetchNextPage}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.1}
         renderItem={({item, index}) =>
           item?.id ? (
             <View
               key={index}
               style={{
-                backgroundColor: COLORS.grey + '40',
+                backgroundColor: COLORS.white,
                 minHeight: scale(50),
                 borderRadius: scale(5),
                 padding: scale(10),
                 flexDirection: 'row',
                 columnGap: scale(10),
                 alignItems: 'center',
+                ...SHADOW,
               }}>
-              <CustomImage
-                source={images.logoTBH}
-                style={{width: scale(33), height: scale(33)}}
-                resizeMode="contain"
-              />
+              <View style={styles.icon}>
+                <CustomImage
+                  isAvatar
+                  source={images.logoTBH}
+                  style={{
+                    width: scale(30),
+                    aspectRatio: 1,
+                  }}
+                  resizeMode="contain"
+                />
+              </View>
+
               <View
                 style={{
                   flex: 1,
@@ -141,7 +161,12 @@ export default function HistoryTokenDataScreen() {
                   numberOfLines={2}
                   style={{fontSize: SIZES.xMedium, flex: 1}}
                   textType="semiBold">
-                  {item?.content}
+                  {item?.description_replacements
+                    ? replaceTranslateKey(
+                        t(item?.description),
+                        item?.description_replacements,
+                      )
+                    : t(item?.description)}
                 </CustomText>
                 <View
                   style={{
@@ -165,6 +190,22 @@ export default function HistoryTokenDataScreen() {
                     TBH
                   </CustomText>
                 </View>
+                {item?.amount > 0 && (
+                  <CustomText
+                    style={{
+                      color: COLORS.black + '50',
+                    }}>
+                    {t('transaction_fee_deducted')}: -
+                    {formatPrice(
+                      dataConstant?.data?.fee_commission_percent_voucher,
+                      {
+                        decimalPlaces: 6,
+                        showCurrency: false,
+                      },
+                    )}{' '}
+                    TBH
+                  </CustomText>
+                )}
               </View>
             </View>
           ) : (
@@ -176,4 +217,13 @@ export default function HistoryTokenDataScreen() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  icon: {
+    height: scale(35),
+    width: scale(35),
+    backgroundColor: COLORS.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: scale(99),
+  },
+});

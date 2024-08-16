@@ -47,107 +47,93 @@ export default function FindAccommodation() {
       icon: IconWorld,
     },
   ];
-  const listMenu = useMemo(
-    () => [
-      {
-        id: 'RENT',
-        name: t('RENT'),
-      },
-      {
-        id: 'BUY',
-        name: t('BUY'),
-      },
-      {
-        id: 'TOUR',
-        name: t('TOUR'),
-      },
-    ],
-    [locale],
-  );
-  const listRental = useMemo(
-    () => [
-      {
-        id: 'daily',
-        name: t('daily'),
-      },
-      {
-        id: 'monthly',
-        name: t('monthly'),
-      },
-      {
-        id: 'yearly',
-        name: t('yearly'),
-      },
-    ],
-    [locale],
-  );
+  const listMenu = [
+    {
+      id: 'RENT',
+      name: t('RENT'),
+    },
+    {
+      id: 'BUY',
+      name: t('BUY'),
+    },
+    {
+      id: 'TOUR',
+      name: t('TOUR'),
+    },
+  ];
 
-  const listTour = useMemo(
-    () => [
-      {
-        id: 1,
-        name: t('domestic'),
-        icon: IconEmigrate,
-      },
-      {
-        id: 2,
-        name: t('world'),
-        icon: IconWorld,
-      },
-    ],
-    [locale],
-  );
-  const listRent = useMemo(
-    () => [
-      {
-        id: 1,
-        name: t('hotel'),
-        icon: IconHotel,
-      },
-      {
-        id: 2,
-        name: t('apartment'),
-        icon: IconApartment,
-      },
-      {
-        id: 3,
-        name: t('house'),
-        icon: IconHome,
-      },
-      {
-        id: 4,
-        name: t('villa'),
-        icon: IconVilla,
-      },
-    ],
-    [locale],
-  );
+  const listRental = [
+    {
+      id: 'daily',
+      name: t('daily'),
+    },
+    {
+      id: 'monthly',
+      name: t('monthly'),
+    },
+    {
+      id: 'yearly',
+      name: t('yearly'),
+    },
+  ];
 
-  const listBuy = useMemo(
-    () => [
-      {
-        id: 1,
-        name: t('apartment'),
-        icon: IconApartment,
-      },
-      {
-        id: 2,
-        name: t('house'),
-        icon: IconHome,
-      },
-      {
-        id: 3,
-        name: t('villa'),
-        icon: IconVilla,
-      },
-      {
-        id: 4,
-        name: t('land'),
-        icon: IconLand,
-      },
-    ],
-    [locale],
-  );
+  const listTour = [
+    {
+      id: 1,
+      name: t('domestic'),
+      icon: IconEmigrate,
+    },
+    {
+      id: 2,
+      name: t('world'),
+      icon: IconWorld,
+    },
+  ];
+
+  const listRent = [
+    {
+      id: 1,
+      name: t('hotel'),
+      icon: IconHotel,
+    },
+    {
+      id: 2,
+      name: t('apartment'),
+      icon: IconApartment,
+    },
+    {
+      id: 3,
+      name: t('house'),
+      icon: IconHome,
+    },
+    {
+      id: 4,
+      name: t('villa'),
+      icon: IconVilla,
+    },
+  ];
+  const listBuy = [
+    {
+      id: 1,
+      name: t('apartment'),
+      icon: IconApartment,
+    },
+    {
+      id: 2,
+      name: t('house'),
+      icon: IconHome,
+    },
+    {
+      id: 3,
+      name: t('villa'),
+      icon: IconVilla,
+    },
+    {
+      id: 4,
+      name: t('land'),
+      icon: IconLand,
+    },
+  ];
 
   const typeRent = useQuery({
     queryKey: ['common', 'accommodation', 'list-type'],

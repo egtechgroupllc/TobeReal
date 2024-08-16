@@ -20,7 +20,7 @@ export default function DailyCheckinScreen() {
   const {token} = useAuthentication();
   const params = useRoute().params;
   const {t} = useLanguage();
-  const {navigate, setOptions} = useNavigation();
+  const {navigate, setOptions, goBack} = useNavigation();
   const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -44,13 +44,17 @@ export default function DailyCheckinScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message,
+            t(dataInside?.message),
             dataInside?.status ? 'success' : 'error',
           );
-          queryClient.invalidateQueries(['check-in-daily', 'info', token]);
+          if (dataInside?.status) {
+            queryClient.invalidateQueries(['check-in-daily', 'info']);
+            goBack();
+          }
         },
         onError: err => {
           console.log(err);
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );

@@ -116,7 +116,7 @@ export default function AddVoucherScreen() {
     const mutationConfig = {
       onSuccess: dataInside => {
         showMess(
-          dataInside?.message ? dataInside?.message : 'Success!',
+          dataInside?.message ? t(dataInside?.message) : 'Success!',
           dataInside?.status ? 'success' : 'error',
         );
         if (dataInside?.status) {
@@ -136,6 +136,7 @@ export default function AddVoucherScreen() {
       },
       onError: err => {
         console.log({err});
+        showMess(t('an_error_occured'), 'error');
       },
     };
     if (params?.isTour) {

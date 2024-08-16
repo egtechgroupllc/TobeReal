@@ -134,7 +134,7 @@ export default function PostNewTourScreen() {
             isPending.current = true;
             setCheck({
               status: dataInside?.status,
-              mess: dataInside?.message,
+              mess: t(dataInside?.message),
             });
             start();
             setTimeout(
@@ -151,7 +151,7 @@ export default function PostNewTourScreen() {
             );
           } else {
             showMess(
-              dataInside?.message,
+              t(dataInside?.message),
               dataInside?.status ? 'success' : 'error',
             );
             navigate('NoBottomTab', {
@@ -160,12 +160,13 @@ export default function PostNewTourScreen() {
             queryClient.invalidateQueries(['tour', 'my-list']);
           }
         } else {
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
           setOpenContact(false);
         }
       },
       onError: err => {
         console.log({err});
+        showMess(t('an_error_occured'), 'error');
       },
     };
     if (params?.admin) {

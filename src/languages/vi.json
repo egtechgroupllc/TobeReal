@@ -1249,7 +1249,7 @@
   "date_create": "Ngày tạo",
 
   "create_wallet": "Tạo ví",
-  "no_still_pay": "Không, vẫn thanh toán bằng LokaPay",
+  "no_still_pay": "Không, vẫn thanh toán bằng SavePay",
   "do_you_want_create_wallet": "Bạn có muốn tạo ví và thanh toán bằng voucher để nhận điểm miễn phí không?",
 
   "please_choose_exact_location": "Vui lòng chọn một vị trí chính xác trong phạm vi 5 mét để đăng bài",
@@ -1267,5 +1267,19 @@
 
   "billion": "tỷ",
   "million": "triệu",
-  "invalid_youtube_link": "Liên kết YouTube không hợp lệ"
+  "invalid_youtube_link": "Liên kết YouTube không hợp lệ",
+
+  "room_manage_detail": "Chi tiết quản lý phòng",
+  "share_detail_tour_short_video": "Chia sẻ chi tiết chuyến tham quan của bạn qua video ngắn, các video này sẽ xuất hiện trên các xu hướng!",
+  "no_pay_with": "Không, thanh toán bằng SavePay",
+  "content_display": "Nội dung & Hiển thị",
+  "setting": "Cài đặt",
+  "account_security": "Tài khoản & Bảo mật",
+
+  "out_of_ticket": "Hết vé",
+  "an_error_occured": "Đã xảy ra lỗi trong quá trình xử lý. Vui lòng thử lại sau vài phút!",
+
+  "change_account": "Thay đổi tài khoản",
+  "remove_history": "Xóa lịch sử",
+  "transaction_fee_deducted": "Phí giao dịch đã được khấu trừ"
 }

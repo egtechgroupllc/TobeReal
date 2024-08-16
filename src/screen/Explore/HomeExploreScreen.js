@@ -24,6 +24,8 @@ import {getBalanceWallet} from '../../Model/api/wallet';
 export default function HomeExploreScreen() {
   const {token} = useAuthentication();
   const [open, setOpen] = useState(true);
+  const {t} = useLanguage();
+
   const [dateSkip, setDateSkip] = useState(false);
   const {navigate} = useNavigation();
   const today = formatDate(new Date());
@@ -49,8 +51,8 @@ export default function HomeExploreScreen() {
     error,
     isError,
   } = useQuery({
-    queryKey: ['check-in-daily', 'info', token],
-    queryFn: () => getDailyCheckinInfo(token),
+    queryKey: ['check-in-daily', 'info'],
+    queryFn: () => getDailyCheckinInfo(),
     enabled: !!token,
   });
   const checkinMutation = useMutation({
@@ -62,13 +64,14 @@ export default function HomeExploreScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message,
+            t(dataInside?.message),
             dataInside?.status ? 'success' : 'error',
           );
           setOpen(false);
         },
         onError: err => {
           console.log(err);
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );

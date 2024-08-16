@@ -105,15 +105,15 @@ export default function AdminManageLeaseScreen() {
             setOpen(false);
             return;
           }
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
         },
         onError: err => {
           console.log(err);
+          showMess(t('an_error_occured'), 'error');
         },
       },
     );
   };
-
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View

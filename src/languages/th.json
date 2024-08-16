@@ -1248,7 +1248,7 @@
   "date_create": "วันที่สร้าง",
 
   "create_wallet": "สร้างกระเป๋าสตางค์",
-  "no_still_pay": "ไม่, ยังคงจ่ายด้วย LokaPay",
+  "no_still_pay": "ไม่, ยังคงจ่ายด้วย SavePay",
   "do_you_want_create_wallet": "คุณต้องการสร้างกระเป๋าสตางค์และจ่ายด้วยบัตรกำนัลเพื่อรับคะแนนฟรีหรือไม่?",
 
   "please_choose_exact_location": "กรุณาเลือกตำแหน่งที่แน่นอนภายในระยะ 5 เมตรเพื่อโพสต์",
@@ -1266,5 +1266,19 @@
 
   "billion": "พันล้าน",
   "million": "ล้าน",
-  "invalid_youtube_link": "ลิงก์ YouTube ไม่ถูกต้อง"
+  "invalid_youtube_link": "ลิงก์ YouTube ไม่ถูกต้อง",
+
+  "room_manage_detail": "รายละเอียดการจัดการห้อง",
+  "share_detail_tour_short_video": "แชร์รายละเอียดทัวร์ของคุณผ่านวิดีโอสั้น วิดีโอเหล่านี้จะปรากฏในแนวโน้ม!",
+  "no_pay_with": "ไม่, ชำระเงินด้วย SavePay",
+  "content_display": "เนื้อหา & การแสดงผล",
+  "setting": "การตั้งค่า",
+  "account_security": "บัญชี & ความปลอดภัย",
+
+  "out_of_ticket": "หมดตั๋ว",
+  "an_error_occured": "เกิดข้อผิดพลาดระหว่างกระบวนการ กรุณาลองอีกครั้งในอีกไม่กี่นาที!",
+
+  "change_account": "เปลี่ยนบัญชี",
+  "remove_history": "ลบประวัติ",
+  "transaction_fee_deducted": "หักค่าธรรมเนียมการทำธุรกรรมแล้ว"
 }

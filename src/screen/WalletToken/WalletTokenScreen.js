@@ -70,7 +70,7 @@ export default function WalletTokenScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside?.message,
+            t(dataInside?.message),
             dataInside?.status ? 'success' : 'error',
           );
 

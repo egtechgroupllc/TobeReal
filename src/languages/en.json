@@ -1255,7 +1255,7 @@
   "date_create": "Date create",
 
   "create_wallet": "Create wallet",
-  "no_still_pay": "No, still pay with LokaPay",
+  "no_still_pay": "No, still pay with SavePay",
   "do_you_want_create_wallet": "Do you want create wallet and pay with voucher to get point free?",
 
   "please_choose_exact_location": "Please choose an exact location within 5 meters to post",
@@ -1276,5 +1276,16 @@
   "invalid_youtube_link": "YouTube link is not valid",
 
   "room_manage_detail": "Room management detail",
-  "share_detail_tour_short_video": "Share the details of your tour through short videos, these videos will appear on trends!"
+  "share_detail_tour_short_video": "Share the details of your tour through short videos, these videos will appear on trends!",
+  "no_pay_with": "No, pay with SavePay",
+  "content_display": "Content & Display",
+  "setting": "Setting",
+  "account_security": "Account & Security",
+
+  "out_of_ticket": "Out of ticket",
+  "an_error_occured": "An error occurred during the process. Please try again in a few minutes!",
+
+  "change_account": "Change account",
+  "remove_history": "Remove history",
+  "transaction_fee_deducted": "Transaction fees have been deducted"
 }

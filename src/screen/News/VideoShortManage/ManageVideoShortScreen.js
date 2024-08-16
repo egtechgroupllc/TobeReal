@@ -17,11 +17,12 @@ export default function ManageVideoShortScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
   const {token} = useAuthentication();
-  const table_name = params?.accommodation?.id
-    ? 'accommodation'
-    : params?.estateId
-    ? 'estate'
-    : 'tour';
+  const table_name =
+    params?.accommodation?.id || params?.accomId
+      ? 'accommodation'
+      : params?.estateId
+      ? 'estate'
+      : 'tour';
 
   const table_id =
     params?.accomId ||
@@ -30,10 +31,17 @@ export default function ManageVideoShortScreen() {
     params?.tour?.id ||
     params?.tourId;
   const {data, isLoading, error} = useQuery({
-    queryKey: ['common', 'video-short', 'my-list', table_id],
+    queryKey: [
+      'common',
+      'video-short',
+      'my-list',
+      {
+        table_name: table_name,
+        table_id: table_id,
+      },
+    ],
     queryFn: () =>
       getMyListVideoShort({
-        token: token,
         table_name: table_name,
         table_id: table_id,
       }),
@@ -95,7 +103,6 @@ export default function ManageVideoShortScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <MainWrapper>
       <FlatList

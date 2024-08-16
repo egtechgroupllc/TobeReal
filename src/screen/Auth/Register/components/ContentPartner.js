@@ -42,7 +42,10 @@ export default function ContentPartner() {
     delete value?.province_id;
     signupMutation.mutate(value, {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
 
         if (dataInside?.status) {
           navigate('LoginScreen');

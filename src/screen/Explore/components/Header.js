@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, SHADOW, images, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
 import {
   IconChat,
   IconGift,
@@ -17,7 +17,7 @@ import {
   LogoWhatApp,
   LogoZalo,
 } from '../../../assets/icon/Icon';
-import {CustomButton, CustomInput} from '../../../components';
+import {CustomButton, CustomInput, CustomText} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import {useNavigation} from '@react-navigation/native';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -25,7 +25,10 @@ import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {getListChatGroup} from '../../../Model/api/common';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLoading} from '../../../hooks/useLoading';
-import {getDailyCheckinInfo} from '../../../Model/api/auth';
+import {
+  getDailyCheckinInfo,
+  getListNotification,
+} from '../../../Model/api/auth';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 
 const listSocial = [
@@ -52,9 +55,19 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
   const queryClient = useQueryClient();
-  const {data, isLoading, error, isError} = useQuery({
+  const {data, isLoading} = useQuery({
     queryKey: ['chat', 'my-list-chat-group'],
     queryFn: () => getListChatGroup(),
+    enabled: !!token,
+    refetchInterval: 5000,
+  });
+  const {
+    data: dataNotify,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['notification', 'list-notification', {pageParam: 1, limit: 1}],
+    queryFn: () => getListNotification({pageParam: 1, limit: 1}),
     enabled: !!token,
     refetchInterval: 5000,
   });
@@ -93,6 +106,7 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
       });
     }
   };
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -143,6 +157,30 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
           </TouchableOpacity>
           <TouchableOpacity onPress={goNotify}>
             <IconNotification fill={COLORS.white} />
+            {dataNotify?.data?.number_not_seen > 0 && (
+              <View
+                style={{
+                  ...styles.dot,
+                  minHeight: scale(20),
+                  minWidth: scale(20),
+                  top: scale(-10),
+                  right: scale(-10),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderWidth: 0,
+                }}>
+                <CustomText
+                  textType="bold"
+                  style={{
+                    fontSize: SIZES.xSmall,
+                    color: COLORS.white,
+                  }}>
+                  {dataNotify?.data?.number_not_seen > 99
+                    ? '99+'
+                    : dataNotify?.data?.number_not_seen}
+                </CustomText>
+              </View>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -225,7 +263,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: scale(99),
     position: 'absolute',
-    alignSelf: 'flex-end',
     top: scale(-2),
     right: scale(-2),
     borderWidth: scale(2),

@@ -36,7 +36,7 @@ const listLanguage = [
     id: '4',
     name: 'Malaysia',
     flag: images.malaysia,
-    languageCode: 'my',
+    languageCode: 'ms',
     checked: false,
   },
   {
@@ -57,7 +57,7 @@ const listLanguage = [
     id: '7',
     name: 'China',
     flag: images.china,
-    languageCode: 'cn',
+    languageCode: 'zh',
     checked: false,
   },
   // Add more language items as needed
@@ -88,9 +88,7 @@ export default function ContentLanguage() {
       onSaveLanguage();
       changeLocale(language?.languageCode);
       showMess(t('change_language_success'), 'success');
-      setTimeout(() => {
-        RNRestart.restart();
-      }, 1000);
+      goBack();
     } else {
       router?.onGoBack(language);
       changeLocale(language?.languageCode);

@@ -41,6 +41,7 @@ export default function BoxPlaceItem({
       return true;
     }
   }, [data?.country?.id, country?.id]);
+
   const priceFinal = useMemo(() => {
     if (data?.tour_tickets) {
       const resultPri = data?.tour_tickets?.map(element => {
@@ -215,6 +216,7 @@ const styles = StyleSheet.create({
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
+    ...SHADOW,
   },
   img: {
     width: '100%',
@@ -249,6 +251,6 @@ const styles = StyleSheet.create({
     padding: scale(4),
     paddingHorizontal: scale(6),
     borderRadius: 6,
-    maxWidth: '80%',
+    maxWidth: '85%',
   },
 });

@@ -17,11 +17,13 @@ import {postCreateGroupChat} from '../../../../../../../Model/api/common';
 import {showMess} from '../../../../../../../assets/constants/Helper';
 import {useLoading} from '../../../../../../../hooks/useLoading';
 import Communications from 'react-native-communications';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function Contact({data}) {
   const {navigate, setOptions} = useNavigation();
   const {token} = useAuthentication();
   const {stopLoading, setLoading} = useLoading();
+  const {t} = useLanguage();
 
   const postCreateGroup = useMutation({
     mutationFn: postCreateGroupChat,
@@ -51,7 +53,7 @@ export default function Contact({data}) {
             });
           } else {
             showMess(
-              dataInside?.message,
+              t(dataInside?.message),
               dataInside?.status ? 'success' : 'error',
             );
           }

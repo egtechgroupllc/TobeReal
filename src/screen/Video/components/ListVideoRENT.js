@@ -2,20 +2,22 @@ import {
   ActivityIndicator,
   Animated,
   FlatList,
+  Platform,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useFocusEffect, useIsFocused, useRoute} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
+import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
 import {getListVideoRandom} from '../../../Model/api/common';
-import {COLORS} from '../../../assets/constants';
+import {COLORS, animations, scale} from '../../../assets/constants';
 import VideoPlay from './VideoPlay';
 import EmptyData from '../../../components/EmptyData';
 import {showMess} from '../../../assets/constants/Helper';
+import LottieView from 'lottie-react-native';
 
 export default function ListVideoRENT({isFocused}) {
   const {t} = useLanguage();
@@ -27,17 +29,54 @@ export default function ListVideoRENT({isFocused}) {
   const commentRef = useRef();
   const flatListRef = useRef(null);
   const isFocusedBottomTab = useIsFocused();
-
   const [videoPlay, setVideoPlay] = useState(true);
-  const {data, isLoading} = useQuery({
+
+  const {
+    isLoading,
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    error,
+  } = useInfiniteQuery({
     queryKey: ['video-short', 'list-random', 'accommodation'],
-    queryFn: () => getListVideoRandom({table_name: 'accommodation'}),
+    queryFn: ({pageParam = 1}) =>
+      getListVideoRandom({
+        table_name: 'accommodation',
+        page: pageParam,
+        limit: 2,
+      }),
+    getNextPageParam: (lastPage, allPages) => {
+      const totalItems = lastPage?.data?.count;
+      const loadedItems = allPages.reduce(
+        (acc, page) => acc + page.data.rows.length,
+        0,
+      );
+
+      console.log('Total Items:', totalItems);
+      console.log('Loaded Items:', loadedItems);
+
+      if (loadedItems >= totalItems) {
+        return undefined;
+      }
+      return allPages.length + 1;
+    },
   });
   const handlerViewableItemsChanged = useCallback(({viewableItems}) => {
     if (viewableItems.length > 0 && viewableItems[0].isViewable) {
       setVideoPlay(viewableItems[0].item?.id);
     }
   }, []);
+  const dataArr = useMemo(
+    () =>
+      data?.pages
+        .map(page => {
+          if (!page) return undefined;
+          return page?.data?.rows;
+        })
+        .flat(),
+    [data?.pages],
+  );
   // useLayoutEffect(() => {
   //   scrollToIndex(params?.index);
   // }, [params?.index]);
@@ -115,7 +154,7 @@ export default function ListVideoRENT({isFocused}) {
   return (
     <View style={{flex: 1, backgroundColor: '#000'}}>
       <FlatList
-        data={data?.data?.rows}
+        data={dataArr}
         ref={flatListRef}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -135,13 +174,24 @@ export default function ListVideoRENT({isFocused}) {
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={handlerViewableItemsChanged}
         // onEndReached={e => Alert.alert('Đã gan cuôi r')}
-        onEndReachedThreshold={
-          data?.data?.rows?.length - (data?.data?.rows?.length - 2)
+        onEndReached={hasNextPage && fetchNextPage}
+        onEndReachedThreshold={0.2}
+        ListFooterComponent={() =>
+          isFetchingNextPage && (
+            <View style={{height: scale(30)}}>
+              <LottieView
+                autoPlay={true}
+                source={animations.loading}
+                style={{height: '100%'}}
+              />
+            </View>
+          )
         }
         ListEmptyComponent={<EmptyData styleWrapper={{marginTop: '50%'}} />}
         renderItem={({item, index}) => {
           return (
             <VideoPlay
+              key={`${item.id}-${index}`}
               ref={videoRef}
               data={item}
               paused={
@@ -152,10 +202,15 @@ export default function ListVideoRENT({isFocused}) {
               //   handleProgress(value);
               // }}
               // onComment={() => commentRef.current?.open()}
+              styleBottom={{
+                paddingBottom:
+                  Platform.OS === 'android' ? scale(40) : scale(20),
+              }}
               onComment={() => showMess(t('comming_soon'), 'error')}
             />
           );
         }}
+        keyExtractor={item => `rent + ${item.id.toString()}`}
       />
       {/* <View
         style={{

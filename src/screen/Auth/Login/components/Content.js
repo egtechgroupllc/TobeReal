@@ -73,18 +73,19 @@ export default function Content() {
         if (dataInside?.status) {
           onSaveToken(dataInside?.data?.token);
           onSavedEmail(dataInside?.data);
-          showMess(dataInside?.message, 'success');
+          showMess(t(dataInside?.message), 'success');
           // navigate('HomeExploreScreen');
 
           setTimeout(() => {
             RNRestart.restart();
           }, 500);
         } else {
-          showMess(dataInside?.message, 'error');
+          showMess(t(dataInside?.message), 'error');
         }
       },
       onError: err => {
         console.log(err);
+        showMess(t('an_error_occured'), 'error');
       },
     });
   };

@@ -24,6 +24,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>telprompt</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -33,10 +37,6 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>telprompt</string>
-    </array>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow access to the camera to take pictures</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -52,7 +52,6 @@
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 	</array>
-	
 	<key>UILaunchStoryboardName</key>
 	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>

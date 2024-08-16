@@ -46,6 +46,7 @@ const data = [
 export default function TicketOption({paramsTour}) {
   const [date, setDate] = useState();
   const params = useRoute().params;
+
   const {currency, country} = useCountry();
   const {token} = useAuthentication();
   const {navigate} = useNavigation();
@@ -140,7 +141,10 @@ export default function TicketOption({paramsTour}) {
             const minPercent = Math.min(...resultPercent);
             const minPrice = Math.min(...resultPrice);
             const minPriceOtherCountry = Math.min(...resultPriceOtherCountry);
-
+            const quantityReal = item?.tour_ticket_items?.map(item => {
+              return item?.quantity_real;
+            });
+            const minQuantityReal = Math.min(...quantityReal);
             return (
               <View style={styles.boxItem}>
                 <CustomText
@@ -228,14 +232,24 @@ export default function TicketOption({paramsTour}) {
                     </View>
                   </View> */}
                 </View>
+
                 <CustomButton
-                  text={t('select_ticket')}
+                  text={
+                    minQuantityReal > 0
+                      ? t('select_ticket')
+                      : t('out_of_ticket')
+                  }
                   buttonType="small"
                   styleWrapper={{
                     width: '60%',
                     alignSelf: 'center',
                     marginTop: scale(10),
                   }}
+                  style={{
+                    backgroundColor:
+                      minQuantityReal > 0 ? COLORS.primary : COLORS.grey,
+                  }}
+                  disabled={minQuantityReal > 0 ? false : true}
                   onPress={() =>
                     !token ? navigate('NavigationAuth') : booktour(item)
                   }

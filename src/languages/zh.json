@@ -1244,7 +1244,7 @@
   "date_create": "创建日期",
 
   "create_wallet": "创建钱包",
-  "no_still_pay": "不，仍然使用LokaPay付款",
+  "no_still_pay": "不，仍然使用SavePay付款",
   "do_you_want_create_wallet": "您想创建钱包并使用代金券支付以获得免费积分吗?",
 
   "please_choose_exact_location": "请在5米范围内选择一个精确的位置进行发布",
@@ -1262,5 +1262,19 @@
 
   "billion": "十亿",
   "million": "百万",
-  "invalid_youtube_link": "YouTube 链接无效"
+  "invalid_youtube_link": "YouTube 链接无效",
+
+  "room_manage_detail": "房间管理详情",
+  "share_detail_tour_short_video": "通过短视频分享您的旅游细节，这些视频将出现在趋势中！",
+  "no_pay_with": "不，使用 SavePay 支付",
+  "content_display": "内容 & 显示",
+  "setting": "设置",
+  "account_security": "账户 & 安全",
+
+  "out_of_ticket": "票已售罄",
+  "an_error_occured": "处理过程中发生了错误。请在几分钟后再试一次！",
+
+  "change_account": "更改帐户",
+  "remove_history": "删除历史记录",
+  "transaction_fee_deducted": "交易费用已扣除"
 }

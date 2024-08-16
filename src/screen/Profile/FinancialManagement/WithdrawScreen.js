@@ -44,7 +44,10 @@ export default function WithdrawScreen() {
     }
     withdrawMutation.mutate(value, {
       onSuccess: dataInside => {
-        showMess(dataInside?.message, dataInside?.status ? 'success' : 'error');
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
         if (dataInside?.status) {
           queryClient.invalidateQueries(['withdraw', 'my-order']);
           navigate('FinancialScreen', {
@@ -69,6 +72,7 @@ export default function WithdrawScreen() {
         <BotContent control={control} setValue={setValue} />
         <CustomButton
           text={t('confirm')}
+          disabled={withdrawMutation.isPending}
           style={{marginTop: scale(20)}}
           onPress={handleSubmit(handleWidraw)}
         />
