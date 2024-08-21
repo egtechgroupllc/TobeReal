@@ -74,6 +74,9 @@ import ChatBoxScreen from '../screen/Chat/ChatBoxScreen';
 import MyListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
 import ListChatGroupScreen from '../screen/Chat/ListChatGroupScreen';
 import DailyCheckinScreen from '../screen/DailyCheckin/DailyCheckinScreen';
+import RoomPriceManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomPriceManageScreen';
+import TicketPriceManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketPriceManageScreen';
+import RepostExpiredScreen from '../screen/News/PostNews/components/RepostExpiredScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -381,5 +384,17 @@ export default routerNoBottomTab = [
   {
     name: 'DailyCheckinScreen',
     component: DailyCheckinScreen,
+  },
+  {
+    name: 'RoomPriceManageScreen',
+    component: RoomPriceManageScreen,
+  },
+  {
+    name: 'TicketPriceManageScreen',
+    component: TicketPriceManageScreen,
+  },
+  {
+    name: 'RepostExpiredScreen',
+    component: RepostExpiredScreen,
   },
 ];

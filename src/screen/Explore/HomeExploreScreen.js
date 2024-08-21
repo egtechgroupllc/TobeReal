@@ -45,7 +45,7 @@ export default function HomeExploreScreen() {
     () => dataWallet?.data?.find(item => item?.symbol === 'TOBE'),
     [dataWallet?.data],
   );
-  instanceAccom.defaults.headers.common['Authorization'] = token;
+
   const {
     data: dataCheckin,
     error,
@@ -55,6 +55,7 @@ export default function HomeExploreScreen() {
     queryFn: () => getDailyCheckinInfo(),
     enabled: !!token,
   });
+
   const checkinMutation = useMutation({
     mutationFn: postDailyCheckin,
   });
@@ -112,6 +113,7 @@ export default function HomeExploreScreen() {
       <Header dataCheckin={dataCheckin} dataP={data} amountTOBE={amountTOBE} />
       <FindAccommodation />
       {(dataCheckin?.data?.can_check_in || !data?.data?.wallet_address) &&
+        !isLoading &&
         token &&
         !dateSkip && (
           <ModalGift

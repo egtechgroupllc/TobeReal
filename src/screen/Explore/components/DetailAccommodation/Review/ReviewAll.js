@@ -6,12 +6,15 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
 import {COLORS, animations, scale} from '../../../../../assets/constants';
 import EmptyData from '../../../../../components/EmptyData';
-import FilterSort from './FilterSort';
 import ItemBoxReview from './ItemBoxReview';
 import ItemBoxReviewLoading from './ItemBoxReviewLoading';
 import ReviewOverview from './ReviewOverview';
+import {useLanguage} from '../../../../../hooks/useLanguage';
+import FilterSort from '../../ContentTour/DetailTour/Review/FilterSort';
 
 export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
+  const {t} = useLanguage();
+
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage} =
     useInfiniteQuery({
       queryKey: ['accommodation', 'list-review', 1],
@@ -45,10 +48,10 @@ export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
         sort={valueSort}
         listFill={[
           {
-            text: 'All',
+            text: t('all'),
           },
           {
-            text: 'Have pictures',
+            text: t('have_pictures'),
           },
         ]}
       />
@@ -57,8 +60,8 @@ export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
         showsVerticalScrollIndicator={false}
         data={dataArr || (isLoading && [...Array(3)])}
         contentContainerStyle={{
-          marginTop: scale(20),
-          rowGap: scale(30),
+          marginTop: scale(10),
+          rowGap: scale(10),
           paddingHorizontal: scale(20),
         }}
         scrollEnabled={false}
@@ -92,6 +95,7 @@ export default function ReviewAll({valueSort, onSort, id_accomo, dataP}) {
         renderItem={({item, index}) =>
           item?.id ? (
             <ItemBoxReview
+              isViewAll
               data={item}
               style={{
                 width: '100%',

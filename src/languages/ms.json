@@ -1257,5 +1257,41 @@
 
   "change_account": "Tukar akaun",
   "remove_history": "Buang sejarah",
-  "transaction_fee_deducted": "Yuran transaksi telah ditolak"
+  "transaction_fee_deducted": "Yuran transaksi telah ditolak",
+
+  "room_price_manage": "Pengurusan harga bilik",
+  "enter_price_change": "Masukkan harga yang anda mahu ubah",
+  "this_price_is_listed_price": "Ini adalah harga yang terdaftar, tidak termasuk dasar",
+  "enter_number_room_change": "Masukkan bilangan bilik yang anda mahu ubah",
+  "do_you_want_change_status": "Adakah anda mahu menukar status?",
+  "active": "Aktif",
+  "lock": "Kunci",
+  "optional": "pilihan",
+
+  "ticket_price_manage": "Pengurusan harga tiket",
+  "price_adjustment": "Pelarasan harga",
+  "room_not_link_policy": "Bilik tidak dipautkan kepada sebarang dasar, sila pautkan dasar untuk mendapatkan kelulusan!",
+  "sold_out": "Habis dijual",
+  "ticket_sold_out_create_more": "Tiket habis dijual, sila buat lebih banyak!",
+
+  "create_tour_ticket_type": "Cipta jenis tiket pelancongan",
+  "update_tour_ticket_type": "Kemas kini jenis tiket pelancongan",
+
+  "quantity_left": "Jumlah tiket sebenar yang tinggal",
+  "enter_number_day": "Masukkan bilangan hari",
+  "enter_number_day_you_want": "Masukkan bilangan hari yang anda mahu tambah untuk siaran semula",
+  "minimum_amount_days": "Bilangan hari minimum",
+  "maximum_amount_days": "Bilangan hari maksimum",
+  "this_number_day_repost": "Ini adalah bilangan hari pos akan wujud yang anda ingin poskan semula dari tarikh tamat tempoh.",
+
+  "very_good": "Sangat baik",
+  "good": "Baik",
+  "average": "Purata",
+  "cleanliness": "Kebersihan",
+  "convenient": "Mudah",
+  "have_pictures": "Ada gambar",
+  "latest": "Terkini",
+  "lowest_score": "Skor terendah",
+  "highest_score": "Skor tertinggi",
+  "bad": "Buruk"
 }

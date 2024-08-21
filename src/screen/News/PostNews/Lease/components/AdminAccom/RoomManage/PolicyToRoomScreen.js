@@ -378,6 +378,11 @@ export default function PolicyToRoomScreen() {
                 contentContainerStyle={{
                   rowGap: scale(5),
                 }}
+                ListEmptyComponent={
+                  <CustomText style={{color: COLORS.error}}>
+                    {t('room_not_link_policy')}
+                  </CustomText>
+                }
                 renderItem={({item, index}) => {
                   return (
                     <View

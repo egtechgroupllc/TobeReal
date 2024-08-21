@@ -106,7 +106,6 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
       });
     }
   };
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>

@@ -17,6 +17,8 @@ export default function RoomManageScreen() {
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
+  const [roomLastDate, setRoomLastDate] = useState();
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('room_manage'),
@@ -30,7 +32,6 @@ export default function RoomManageScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   const numColumns = Math.ceil(params?.rooms?.length / 3);
-
   return (
     <MainWrapper
       refreshControl
@@ -76,6 +77,15 @@ export default function RoomManageScreen() {
                     onPressMore={() => {
                       setDataItemAccom(item);
                       bottomSheetRef.current.open();
+                    }}
+                    onRoomLastDate={value => {
+                      setRoomLastDate(value);
+                    }}
+                    onRepost={() => {
+                      navigate('RepostExpiredScreen', {
+                        ...item,
+                        roomLastDate: roomLastDate,
+                      });
                     }}
                     onEdit={() => {
                       navigate('DetailRoomManageScreen', {

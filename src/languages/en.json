@@ -1287,5 +1287,41 @@
 
   "change_account": "Change account",
   "remove_history": "Remove history",
-  "transaction_fee_deducted": "Transaction fees have been deducted"
+  "transaction_fee_deducted": "Transaction fees have been deducted",
+
+  "room_price_manage": "Room price management",
+  "enter_price_change": "Enter price you want change",
+  "this_price_is_listed_price": "This is the listed price, not including policies",
+  "enter_number_room_change": "Enter the quantity of room you want change",
+  "do_you_want_change_status": "Do you want to change the status?",
+  "active": "Active",
+  "lock": "lock",
+  "optional": "optionnal",
+
+  "ticket_price_manage": "Ticket price management",
+  "price_adjustment": "Price adjustment",
+  "room_not_link_policy": "The room is not linked to any policy, please link a policy to get approved!",
+  "sold_out": "Sold out",
+  "ticket_sold_out_create_more": "Tickets are sold out, please create more!",
+
+  "create_tour_ticket_type": "Create tour ticket type",
+  "update_tour_ticket_type": "Update tour ticket type",
+
+  "quantity_left": "Actual remaining ticket quantity",
+  "enter_number_day": "Enter number days",
+  "enter_number_day_you_want": "Enter number days you want add to repost",
+  "minimum_amount_days": "Minimum amount days",
+  "maximum_amount_days": "Maximum amount days",
+  "this_number_day_repost": "This is the number of days the post will exist that you want to repost from the expiration date.",
+
+  "very_good": "Very good",
+  "good": "Good",
+  "average": "Average",
+  "cleanliness": "Cleanliness",
+  "convenient": "Convenient",
+  "have_pictures": "Have pictures",
+  "latest": "Latest",
+  "lowest_score": "Lowest score",
+  "highest_score": "Highest score",
+  "bad": "Bad"
 }

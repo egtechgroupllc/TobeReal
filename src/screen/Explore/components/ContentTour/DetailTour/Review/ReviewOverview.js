@@ -2,11 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
-import {formatNumber} from '../../../../../../utils/format';
+import {formatNumber, formatPrice} from '../../../../../../utils/format';
 import ItemOverviewRating from './ItemOverviewRating';
 import CustomText from '../../../../../../components/CustomText';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 
-export default function ReviewOverview() {
+export default function ReviewOverview({dataP}) {
+  const {t} = useLanguage();
+
   return (
     <View style={styles.reviewOverview}>
       <View style={styles.overviewLeft}>
@@ -16,19 +19,32 @@ export default function ReviewOverview() {
             fontSize: SIZES.xxLarge,
             color: COLORS.primary,
           }}>
-          4.5
+          {formatPrice(dataP?.review_average, {
+            showCurrency: false,
+            decimalPlaces: 2,
+          }) || 0}
           <CustomText>/5</CustomText>
         </CustomText>
-        <CustomText textType="semiBold">Very good</CustomText>
-        <CustomText>{formatNumber(9999)} reviews</CustomText>
+        <CustomText textType="semiBold">
+          {dataP?.review_average > 4
+            ? t('very_good')
+            : dataP?.review_average > 3 && dataP?.review_average <= 4
+            ? t('good')
+            : dataP?.review_average > 2 && dataP?.review_average <= 3
+            ? t('average')
+            : t('bad')}
+        </CustomText>
+        <CustomText>
+          {formatNumber(dataP?.review_count)} {t('review')}
+        </CustomText>
       </View>
 
       <View style={styles.overviewRight}>
-        <ItemOverviewRating rating={1} textType="Cleanliness" />
-        <ItemOverviewRating rating={3.8} textType="Meal" />
-        <ItemOverviewRating rating={5} textType="Service" />
-        <ItemOverviewRating rating={4.3} textType="Location" />
-        <ItemOverviewRating rating={4} textType="Convenient" />
+        <ItemOverviewRating rating={1} textType={t('cleanliness')} />
+        <ItemOverviewRating rating={3.8} textType={t('meal')} />
+        <ItemOverviewRating rating={5} textType={t('service')} />
+        <ItemOverviewRating rating={4.3} textType={t('location')} />
+        <ItemOverviewRating rating={4} textType={t('convenient')} />
       </View>
     </View>
   );

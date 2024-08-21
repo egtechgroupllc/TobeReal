@@ -1,21 +1,17 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {IconHome} from '../../../../../../assets/icon/Icon';
+import React, {useLayoutEffect, useMemo, useRef, useState} from 'react';
+import {FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {scale} from '../../../../../../assets/constants';
+import {IconHome} from '../../../../../../assets/icon/Icon';
 import {
   BottomSheet,
   CustomButton,
   MainWrapper,
 } from '../../../../../../components';
-import EmptyData from '../../../../../../components/EmptyData';
-import DeleteTicket from './DeleteTicket';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
 import DeleteTypeTicket from './DeleteTypeTicket';
 import TicketTypeItem from './TicketTypeItem';
-import {ScrollView} from 'react-native-gesture-handler';
-import {formatDate} from '../../../../../../utils/format';
-import {useQuery} from '@tanstack/react-query';
 
 export default function TicketTypeManageScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -84,18 +80,13 @@ export default function TicketTypeManageScreen() {
                       setDataItemAccom(item);
                       bottomSheetRef.current.open();
                     }}
-                    // onEdit={() => {
-                    //   navigate('TicketTypeManageScreen', {
-                    //     ...item,
-                    //     update: true,
-                    //   });
-                    // }}
-                    // onManage={() => {
-                    //   navigate('TicketTypeManageScreen', {
-                    //     ...item,
-                    //     update: true,
-                    //   });
-                    // }}
+                    onEdit={() => {
+                      navigate('AddTypeTicketScreen', {
+                        ...item,
+                        update: true,
+                        ...params,
+                      });
+                    }}
                   />
                 );
               }}

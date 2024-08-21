@@ -1,7 +1,18 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  scale,
+} from '../../../../../../../assets/constants';
 import CustomImage from '../../../../../../../components/CustomImage';
 import CustomText from '../../../../../../../components/CustomText';
 import MainWrapper from '../../../../../../../components/MainWrapper';
@@ -18,6 +29,7 @@ import {showMess} from '../../../../../../../assets/constants/Helper';
 import {IconHome} from '../../../../../../../assets/icon/Icon';
 import {formatDate, formatPrice} from '../../../../../../../utils/format';
 import {useCountry} from '../../../../../../../hooks/useCountry';
+import {getMonth, getYear} from 'date-fns';
 
 export default function DetailRoomManageScreen() {
   const params = useRoute().params;
@@ -28,18 +40,42 @@ export default function DetailRoomManageScreen() {
   const {navigate} = useNavigation();
   const [adminScreen, setAdminScreen] = useState(false);
   const queryClient = useQueryClient();
+  const [dayMonth, setDayMonth] = useState(() => {
+    const month = getMonth(new Date()) + 1;
+    const year = getYear(new Date());
+
+    const monthFormat = month > 9 ? month : `0${month}`;
+
+    const day = new Date(year, month, 0).getDate();
+
+    return {
+      date_start: `${year}-${monthFormat}-01`,
+      date_end: `${year}-${monthFormat}-${day}`,
+    };
+  });
 
   const dataRoomPrice = useQuery({
     queryKey: ['accommodation', 'detail', 'list-room-date', params?.id],
     queryFn: () =>
       getListPriceRoomDate({
         id_room: params?.id,
-        date_end: formatDate(new Date(), {addDays: 1}),
-        date_start: formatDate(),
+        ...dayMonth,
       }),
   });
 
-  const price = dataRoomPrice?.data?.data?.data?.rows?.[0]?.price;
+  const price = Math.min(
+    ...(dataRoomPrice?.data?.data?.data?.rows?.flatMap(item =>
+      // Ensure that `item.price` is a number or an array of numbers.
+      Array.isArray(item?.price)
+        ? item.price
+        : typeof item?.price === 'number'
+        ? [item.price]
+        : [],
+    ) || [Infinity]), // Handle case where no valid prices are found
+  );
+
+  // If no valid price was found (all were undefined), you can handle it as follows:
+  const finalPrice = price === Infinity ? undefined : price;
   const dataTypeRoom = useQuery({
     queryKey: ['room', 'list-type'],
     queryFn: () => getListTypeRoom(),
@@ -84,7 +120,7 @@ export default function DetailRoomManageScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside.message,
+            t(dataInside.message),
             dataInside?.status ? 'success' : 'error',
           );
 
@@ -114,7 +150,11 @@ export default function DetailRoomManageScreen() {
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
-        style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
+        style={{
+          alignItems: 'center',
+          rowGap: scale(20),
+          marginTop: scale(20),
+        }}>
         <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
           {params?.name}
         </CustomText>
@@ -122,51 +162,81 @@ export default function DetailRoomManageScreen() {
           source={params?.images[0]?.url}
           style={{
             borderRadius: scale(7),
-            minHeight: scale(180),
-            width: scale(450 / 1.4),
+            minHeight: scale(200),
+            width: '85%',
           }}>
-          <View style={styles.type}>
-            <CustomText
-              textType="semiBold"
-              style={{
-                color: COLORS.error,
-              }}>
-              {roomType}
-            </CustomText>
-          </View>
-
-          <CustomText
-            textType="bold"
-            style={{
-              color: COLORS.white,
-              fontSize: SIZES.xSmall,
-              padding: scale(15),
-            }}>
-            RegID: {params?.id}
-          </CustomText>
           <View
             style={{
-              ...styles.content,
-              marginTop: scale(85),
+              flex: 1,
+              backgroundColor: COLORS.overlay,
             }}>
+            <View style={styles.type}>
+              <CustomText
+                textType="semiBold"
+                style={{
+                  color: COLORS.error,
+                }}>
+                {roomType}
+              </CustomText>
+            </View>
+
             <View
               style={{
-                maxWidth: scale(150),
-                borderRadius: scale(5),
-                height: scale(30),
-                padding: scale(5),
-                backgroundColor: COLORS.primary,
-                alignItems: 'center',
-                justifyContent: 'center',
+                padding: scale(15),
+                rowGap: scale(3),
               }}>
               <CustomText
-                numberOfLines={1}
+                textType="bold"
+                style={{
+                  color: COLORS.white,
+                  fontSize: SIZES.xSmall,
+                }}>
+                RegID: {params?.id}
+              </CustomText>
+              <CustomText
                 textType="semiBold"
                 style={{
                   color: COLORS.white,
+                  fontSize: SIZES.xSmall,
+                  ...SHADOW,
                 }}>
-                {formatPrice(price, {currency: currency?.currency_code})}
+                {t('acreage')}:{' '}
+                <CustomText
+                  textType="semiBold"
+                  style={{
+                    color: COLORS.white,
+                    fontSize: SIZES.xSmall,
+                  }}>
+                  {formatPrice(params?.size_width * params?.size_length, {
+                    unit: 'm²',
+                  })}
+                </CustomText>
               </CustomText>
+            </View>
+            <View
+              style={{
+                ...styles.content,
+                marginTop: scale(85),
+              }}>
+              <View
+                style={{
+                  maxWidth: scale(150),
+                  borderRadius: scale(5),
+                  height: scale(30),
+                  padding: scale(5),
+                  backgroundColor: COLORS.primary,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <CustomText
+                  numberOfLines={1}
+                  textType="semiBold"
+                  style={{
+                    color: COLORS.white,
+                  }}>
+                  {formatPrice(finalPrice, {currency: currency?.currency_code})}
+                </CustomText>
+              </View>
             </View>
           </View>
         </CustomImage>
@@ -180,6 +250,16 @@ export default function DetailRoomManageScreen() {
           style={{width: '85%', height: scale(45)}}
           onPress={() => {
             navigate('AddRoomTypeScreen', {
+              ...params,
+              update: true,
+            });
+          }}
+        />
+        <CustomButton
+          text={t('room_price_manage')}
+          style={{width: '85%', height: scale(45)}}
+          onPress={() => {
+            navigate('RoomPriceManageScreen', {
               ...params,
               update: true,
             });
@@ -241,7 +321,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     right: scale(10),
-    top: scale(10),
+    top: scale(15),
     backgroundColor: COLORS.white,
     borderRadius: 99,
     paddingHorizontal: scale(15),

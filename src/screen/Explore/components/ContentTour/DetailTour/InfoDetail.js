@@ -61,6 +61,7 @@ export default function InfoDetail({data, name, paramsTour}) {
                     justifyContent: 'center',
                     borderTopLeftRadius: scale(5),
                     borderBottomLeftRadius: scale(5),
+                    paddingHorizontal: scale(5),
                   }}>
                   <CustomText
                     textType="medium"

@@ -84,6 +84,10 @@ export default function PolicyManageScreen() {
       },
       {
         onSuccess: dataInside => {
+          showMess(
+            t(dataInside?.message),
+            dataInside?.status ? 'success' : 'error',
+          );
           if (dataInside?.status) {
             queryClient.invalidateQueries([
               'accommodation',

@@ -23,7 +23,7 @@ export default function ListImgView({dataImg, open, onClose}) {
   const [indexNavigation, setIndexNavigation] = useState(1);
 
   useLayoutEffect(() => {
-    if (dataImg.length > 1) {
+    if (dataImg?.length > 1) {
       flatListRef.current.scrollToIndex({
         animated: true,
         index: indexNavigation,
@@ -35,14 +35,14 @@ export default function ListImgView({dataImg, open, onClose}) {
     <Modal
       visible={!!open}
       transparent
-      animationType={dataImg.length === 1 ? 'none' : 'fade'}
+      animationType={dataImg?.length === 1 ? 'none' : 'fade'}
       onRequestClose={onClose && onClose}>
       <View
         style={{
           flex: 1,
-          backgroundColor: dataImg.length === 1 ? 'transparent' : '#fff',
+          backgroundColor: dataImg?.length === 1 ? 'transparent' : '#fff',
         }}>
-        {dataImg.length > 1 && (
+        {dataImg?.length > 1 && (
           <>
             <View
               style={{...styles.headerBar, minHeight: insets.top + scale(35)}}>
@@ -94,14 +94,14 @@ export default function ListImgView({dataImg, open, onClose}) {
           </>
         )}
 
-        {(!!visible || dataImg.length === 1 || visible === 0) && (
+        {(!!visible || dataImg?.length === 1 || visible === 0) && (
           <ImageView
             images={dataImg}
             imageIndex={visible}
             visible={true}
             onRequestClose={() => {
               setIsVisible(false);
-              dataImg.length === 1 && onClose && onClose();
+              dataImg?.length === 1 && onClose && onClose();
             }}
             onImageIndexChange={e => e && setIndexNavigation(e - 1)}
             swipeToCloseEnabled={false}

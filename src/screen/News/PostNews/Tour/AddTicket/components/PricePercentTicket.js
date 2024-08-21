@@ -19,10 +19,10 @@ export default function PricePercentTicket({
   data,
   watch,
   priceListed,
+  update,
 }) {
   const {t} = useLanguage();
   const {currency} = useCountry();
-
   const list = [
     {
       id: 1,
@@ -33,10 +33,26 @@ export default function PricePercentTicket({
       title: t('this_rate_is_expensive'),
     },
   ];
-  const [isSelect, setIsSelect] = useState(list[0]);
+  const [isSelect, setIsSelect] = useState(
+    list[watch('price_percent') > 1 ? 1 : 0],
+  );
   useEffect(() => {
     setValue('isDiscount', isSelect.id === 1);
   }, [isSelect.id]);
+  const price_percent = watch('price_percent');
+
+  useEffect(() => {
+    update &&
+      setValue(
+        'price_percent',
+        String(
+          price_percent > 1
+            ? parseInt(price_percent * 100 - 100)
+            : parseInt(100 - price_percent * 100),
+        ),
+      );
+  }, [update]);
+
   return (
     <>
       <CustomText textType="regular" style={{fontSize: SIZES.xMedium}}>
@@ -89,10 +105,10 @@ export default function PricePercentTicket({
 
             <CustomInput
               control={control}
-              defaultValue="10"
               placeholder="%"
+              defaultValue="10"
               style={styles.textInput}
-              maxLength={2}
+              maxLength={3}
               styleWrapper={{
                 flex: 0.7,
               }}
@@ -134,26 +150,15 @@ export default function PricePercentTicket({
             size={SIZES.small}
             style={{paddingTop: scale(15), paddingHorizontal: scale(5)}}>
             {t('listed_price_tour_change')}:{' '}
-            {isSelect.id === 1 && !priceListed
-              ? formatPrice(
-                  watch('price') * (1 - watch('price_percent') / 100),
-                  {
-                    currency: currency?.currency_code,
-                  },
-                )
-              : formatPrice(
-                  watch('price') * (1 + watch('price_percent') / 100),
-                  {
-                    currency: currency?.currency_code,
-                  },
-                )}
-            {isSelect.id === 1 && priceListed
-              ? formatPrice(priceListed * (1 - watch('price_percent') / 100), {
-                  currency: currency?.currency_code,
-                })
-              : formatPrice(priceListed * (1 + watch('price_percent') / 100), {
-                  currency: currency?.currency_code,
-                })}
+            {formatPrice(
+              (priceListed || watch('price')) *
+                (1 +
+                  ((isSelect.id === 1 ? -1 : 1) * watch('price_percent')) /
+                    100),
+              {
+                currency: currency?.currency_code,
+              },
+            )}
           </CustomText>
         </View>
       </View>

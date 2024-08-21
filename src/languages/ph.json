@@ -1275,5 +1275,41 @@
 
   "change_account": "Palitan ang account",
   "remove_history": "Tanggalin ang kasaysayan",
-  "transaction_fee_deducted": "Naibawas na ang mga bayarin sa transaksyon"
+  "transaction_fee_deducted": "Naibawas na ang mga bayarin sa transaksyon",
+
+  "room_price_manage": "Pamamahala ng presyo ng silid",
+  "enter_price_change": "Ilagay ang presyo na gusto mong baguhin",
+  "this_price_is_listed_price": "Ito ang nakalistang presyo, hindi kasama ang mga patakaran",
+  "enter_number_room_change": "Ilagay ang dami ng silid na gusto mong baguhin",
+  "do_you_want_change_status": "Gusto mo bang baguhin ang status?",
+  "active": "Aktibo",
+  "lock": "I-lock",
+  "optional": "opsyonal",
+
+  "ticket_price_manage": "Pamamahala ng presyo ng tiket",
+  "price_adjustment": "Pagsasaayos ng presyo",
+  "room_not_link_policy": "Ang kuwarto ay hindi naka-link sa anumang patakaran, mangyaring i-link ang isang patakaran upang maaprubahan!",
+  "sold_out": "Sold out",
+  "ticket_sold_out_create_more": "Ubus na ang mga tiket, mangyaring lumikha ng higit pa!",
+
+  "create_tour_ticket_type": "Lumikha ng uri ng tiket ng tour",
+  "update_tour_ticket_type": "I-update ang uri ng tiket ng tour",
+
+  "quantity_left": "Aktwal na natitirang bilang ng tiket",
+  "enter_number_day": "Ilagay ang bilang ng mga araw",
+  "enter_number_day_you_want": "Ilagay ang bilang ng mga araw na nais mong idagdag para sa muling pag-post",
+  "minimum_amount_days": "Pinakamababang bilang ng mga araw",
+  "maximum_amount_days": "Pinakamataas na bilang ng mga araw",
+  "this_number_day_repost": "Ito ang bilang ng mga araw na mananatili ang post na gusto mong i-repost mula sa petsa ng pag-expire.",
+
+  "very_good": "Napakaganda",
+  "good": "Maganda",
+  "average": "Katamtaman",
+  "cleanliness": "Kalinis",
+  "convenient": "Maginhawa",
+  "have_pictures": "May mga larawan",
+  "latest": "Pinakabago",
+  "lowest_score": "Pinakamababang iskor",
+  "highest_score": "Pinakamataas na iskor",
+  "bad": "Masama"
 }

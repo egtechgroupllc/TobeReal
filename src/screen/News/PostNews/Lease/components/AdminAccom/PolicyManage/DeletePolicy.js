@@ -27,7 +27,7 @@ export default function DeletePolicy({data, onSuccess, onCancel}) {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside.message,
+            t(dataInside.message),
             dataInside?.status ? 'success' : 'error',
           );
 

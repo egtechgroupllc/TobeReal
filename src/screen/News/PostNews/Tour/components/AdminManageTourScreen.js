@@ -47,7 +47,7 @@ export default function AdminManageTourScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside.message,
+            t(dataInside.message),
             dataInside?.status ? 'success' : 'error',
           );
 

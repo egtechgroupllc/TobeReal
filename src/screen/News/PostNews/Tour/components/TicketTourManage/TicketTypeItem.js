@@ -1,19 +1,13 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useMemo} from 'react';
+import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {IconEditProfile, IconTrash} from '../../../../../../assets/icon/Icon';
-import {CustomButton} from '../../../../../../components';
-import CustomImage from '../../../../../../components/CustomImage';
-import CustomText from '../../../../../../components/CustomText';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
-import {useQuery} from '@tanstack/react-query';
-import {
-  getListTicket,
-  getListTicketDate,
-} from '../../../../../../Model/api/apiTour';
-import {formatDate, formatPrice} from '../../../../../../utils/format';
+import {IconTrash} from '../../../../../../assets/icon/Icon';
+import {CustomButton} from '../../../../../../components';
+import CustomText from '../../../../../../components/CustomText';
 import {useCountry} from '../../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {formatPrice} from '../../../../../../utils/format';
 export default function TicketTypeItem({
   data,
   isTour,
@@ -67,13 +61,32 @@ export default function TicketTypeItem({
           ...SHADOW,
         }}>
         <View style={styles.content}>
-          <CustomText
-            textType="semiBold"
+          <View
             style={{
-              fontSize: SIZES.xlSmall,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flex: 1,
             }}>
-            {t('ticket_type_id')}: {data?.id}
-          </CustomText>
+            <CustomText
+              textType="semiBold"
+              style={{
+                fontSize: SIZES.xlSmall,
+              }}>
+              {t('ticket_type_id')}: {data?.id}
+            </CustomText>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: data?.quantity_real > 0 ? COLORS.black : COLORS.error,
+                fontSize: SIZES.xSmall,
+                minWidth: scale(50),
+                maxWidth: scale(220),
+              }}>
+              {t('quantity_left')}: {data?.quantity_real}
+              {data?.quantity_real > 0 ? '' : ` (${t('sold_out')})`}
+            </CustomText>
+          </View>
           <View
             style={{
               flexDirection: 'row',
@@ -103,22 +116,16 @@ export default function TicketTypeItem({
         </View>
 
         <View style={styles.bottom}>
-          <View />
+          <CustomButton
+            buttonType="normal"
+            text={t('update')}
+            style={styles.btnInfo}
+            styleText={{
+              fontSize: SIZES.xSmall,
+            }}
+            onPress={onEdit}
+          />
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
-            {/* <TouchableOpacity
-              style={{
-                ...styles.box,
-                padding: 2,
-              }}
-              activeOpacity={0.7}
-              onPress={onEdit}>
-              <IconEditProfile
-                style={{
-                  width: scale(20),
-                  height: scale(20),
-                }}
-              />
-            </TouchableOpacity> */}
             <TouchableOpacity
               style={{...styles.box, padding: 2}}
               activeOpacity={0.7}
@@ -167,8 +174,8 @@ const styles = StyleSheet.create({
     // backgroundColor: COLORS.white,
     flexDirection: 'row',
     // width: '50%',
+    padding: scale(8),
     alignItems: 'center',
-    padding: scale(2),
     // justifyContent: 'center',
     marginTop: 'auto',
     columnGap: scale(4),

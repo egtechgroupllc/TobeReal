@@ -1276,5 +1276,41 @@
 
   "change_account": "更改帐户",
   "remove_history": "删除历史记录",
-  "transaction_fee_deducted": "交易费用已扣除"
+  "transaction_fee_deducted": "交易费用已扣除",
+
+  "room_price_manage": "房价管理",
+  "enter_price_change": "输入您想更改的价格",
+  "this_price_is_listed_price": "这是标价，不包括政策",
+  "enter_number_room_change": "输入您想更改的房间数量",
+  "do_you_want_change_status": "您想要更改状态吗？",
+  "active": "活跃",
+  "lock": "锁",
+  "optional": "可选",
+
+  "ticket_price_manage": "票价管理",
+  "price_adjustment": "价格调整",
+  "room_not_link_policy": "房间尚未关联任何政策，请关联政策以获得批准！",
+  "sold_out": "售罄",
+  "ticket_sold_out_create_more": "门票已售罄，请创建更多！",
+
+  "create_tour_ticket_type": "创建旅游票类型",
+  "update_tour_ticket_type": "更新旅游票类型",
+
+  "quantity_left": "实际剩余的票数",
+  "enter_number_day": "输入天数",
+  "enter_number_day_you_want": "输入您想要添加的重新发布天数",
+  "minimum_amount_days": "最少天数",
+  "maximum_amount_days": "最多天数",
+  "this_number_day_repost": "这是您希望从到期日期重新发布的帖子存在的天数。",
+
+  "very_good": "非常好",
+  "good": "好",
+  "average": "一般",
+  "cleanliness": "清洁度",
+  "convenient": "方便",
+  "have_pictures": "有图片",
+  "latest": "最新",
+  "lowest_score": "最低分",
+  "highest_score": "最高分",
+  "bad": "差"
 }

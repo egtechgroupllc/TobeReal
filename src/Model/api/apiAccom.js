@@ -82,6 +82,19 @@ export const getListRent = async ({
   );
   return responsive.data;
 };
+export const postPriceRoomDate = async data => {
+  const responsive = await instanceAccom.post('/room/manage-room-date', data);
+
+  return responsive.data;
+};
+export const postAddRoomDate = async ({id_room, dataRoom}) => {
+  const responsive = await instanceAccom.post(
+    `/room/${id_room}/add-room-date`,
+    dataRoom,
+  );
+
+  return responsive.data;
+};
 // MARK: Key getListRent
 getListRent.queryKey = ['accommodation', 'list-rent'];
 
@@ -174,8 +187,10 @@ export const postPaypal = async data => {
   return responsive.data;
 };
 export const getListPriceRoomDate = async ({id_room, date_start, date_end}) => {
+  const dateStart = date_start ? `date_start=${date_start}` : '';
+  const dateEnd = date_end ? `date_end=${date_end}` : '';
   const responsive = await instanceAccom.get(
-    `room/${id_room}/list-room-date?date_start=${date_start}&date_end=${date_end}`,
+    `room/${id_room}/list-room-date?${dateStart}&${dateEnd}`,
   );
 
   return responsive.data;

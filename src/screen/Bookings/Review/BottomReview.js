@@ -65,11 +65,18 @@ export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
               : navigate('Explore');
           }
 
-          // queryClient.invalidateQueries([
-          //   'accommodation',
-          //   'room',
-          //   'my-booking',
-          // ]);
+          if (isTour) {
+            queryClient.invalidateQueries(['tour', 'list-tour']);
+            queryClient.invalidateQueries(['tour', 'my-booking']);
+          } else {
+            queryClient.invalidateQueries(['accommodation', 'list-rent']);
+            queryClient.invalidateQueries([
+              'accommodation',
+              'room',
+              'my-booking',
+            ]);
+          }
+
           // goBack();
         }
       },

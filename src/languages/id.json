@@ -1252,5 +1252,41 @@
 
   "change_account": "Ganti akun",
   "remove_history": "Hapus riwayat",
-  "transaction_fee_deducted": "Biaya transaksi telah dipotong"
+  "transaction_fee_deducted": "Biaya transaksi telah dipotong",
+
+  "room_price_manage": "Manajemen harga kamar",
+  "enter_price_change": "Masukkan harga yang ingin Anda ubah",
+  "this_price_is_listed_price": "Ini adalah harga yang terdaftar, belum dihitung dengan kebijakan.",
+  "enter_number_room_change": "Masukkan jumlah kamar yang ingin Anda ubah",
+  "do_you_want_change_status": "Apakah Anda ingin mengubah status?",
+  "active": "Aktif",
+  "lock": "Kunci",
+  "optional": "opsional",
+
+  "ticket_price_manage": "Manajemen harga tiket",
+  "price_adjustment": "Penyesuaian harga",
+  "room_not_link_policy": "Kamar tidak terhubung dengan kebijakan apa pun, harap tautkan kebijakan untuk disetujui!",
+  "sold_out": "Habis terjual",
+  "ticket_sold_out_create_more": "Tiket habis, harap buat lebih banyak!",
+
+  "create_tour_ticket_type": "Buat jenis tiket tur",
+  "update_tour_ticket_type": "Perbarui jenis tiket tur",
+
+  "quantity_left": "Jumlah tiket yang tersisa sebenarnya",
+  "enter_number_day": "Masukkan jumlah hari",
+  "enter_number_day_you_want": "Masukkan jumlah hari yang ingin Anda tambahkan untuk diposkan ulang",
+  "minimum_amount_days": "Jumlah hari minimum",
+  "maximum_amount_days": "Jumlah hari maksimum",
+  "this_number_day_repost": "Ini adalah jumlah hari pos akan ada yang ingin Anda poskan ulang dari tanggal kedaluwarsa.",
+
+  "very_good": "Sangat baik",
+  "good": "Baik",
+  "average": "Rata-rata",
+  "cleanliness": "Kebersihan",
+  "convenient": "Nyaman",
+  "have_pictures": "Ada gambar",
+  "latest": "Terbaru",
+  "lowest_score": "Skor terendah",
+  "highest_score": "Skor tertinggi",
+  "bad": "Buruk"
 }

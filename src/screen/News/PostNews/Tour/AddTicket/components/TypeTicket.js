@@ -33,38 +33,14 @@ export default function TypeTicket({
   errors,
   manage,
   priceListed,
+  update,
 }) {
-  const richTextRef = useRef(null);
   const {t} = useLanguage();
-  const listSort = [
-    {
-      id: 'ADULT',
-      name: t('adult'),
-    },
-    {
-      id: 'CHILDREN',
-      name: t('children'),
-    },
-  ];
-  const [isView, setView] = useState(false);
-  const [isRender, setIsRender] = useState(false);
 
-  const [arraySelect, setArraySelect] = useState([listSort[0]?.id]);
+  const [isView, setView] = useState(false);
 
   const viewGeneral = () => {
     setView(prev => !prev);
-  };
-
-  const handleSelectOption = value => {
-    setArraySelect(prev => {
-      const check = prev.includes(value);
-
-      if (check) {
-        return prev.filter(item => item !== value);
-      } else {
-        return [...prev, value];
-      }
-    });
   };
 
   const arrKeywords = useRef([
@@ -73,11 +49,6 @@ export default function TypeTicket({
     'price_percent',
     'name',
   ]).current;
-
-  useEffect(() => {
-    setValue('type', arraySelect[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(arraySelect), setValue]);
 
   return (
     <View style={{marginTop: scale(-10)}}>
@@ -91,7 +62,11 @@ export default function TypeTicket({
       />
 
       <InViewPort noLoading={true}>
-        <Collapsible collapsed={!manage ? !isView : isView} style={styles.box}>
+        <Collapsible
+          collapsed={
+            (manage && !manage) || (update && !update) ? !isView : isView
+          }
+          style={styles.box}>
           <View
             style={{
               borderWidth: scale(1),
@@ -129,6 +104,7 @@ export default function TypeTicket({
               control={control}
               setValue={setValue}
               priceListed={priceListed}
+              update={update}
             />
 
             <CustomInput

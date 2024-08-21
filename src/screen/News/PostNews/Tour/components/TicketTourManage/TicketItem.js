@@ -1,7 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {IconEditProfile, IconTrash} from '../../../../../../assets/icon/Icon';
+import {
+  IconEditProfile,
+  IconReset,
+  IconTrash,
+} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import CustomImage from '../../../../../../components/CustomImage';
 import CustomText from '../../../../../../components/CustomText';
@@ -11,7 +15,11 @@ import {
   getListTicket,
   getListTicketDate,
 } from '../../../../../../Model/api/apiTour';
-import {formatDate, formatPrice} from '../../../../../../utils/format';
+import {
+  formatDate,
+  formatDateTime,
+  formatPrice,
+} from '../../../../../../utils/format';
 import {useCountry} from '../../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 export default function TicketItem({
@@ -21,19 +29,30 @@ export default function TicketItem({
   onEdit,
   onManage,
   onChangePrice,
+  onRepost,
+  onTicketLastDate,
 }) {
   const {navigate} = useNavigation();
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
   const {t} = useLanguage();
-
   const {currency} = useCountry();
+  const today = formatDate(new Date(), {dateStyle: 'yyyy-MM-dd'});
+
   // const navigateDetail = () => {
   //   navigate(isTour ? 'DetailTourScreen' : 'DetailAccommodationScreen', {
   //     ...data,
   //   });
   // };
+  const checkQuantity = useMemo(
+    () =>
+      data?.item?.tour_ticket_items?.some(item => {
+        return item?.quantity_real === 0;
+      }),
+    [],
+  );
+
   const handleTouch = () => {
     // data?.rooms?.length <= 0 || data?.tour_tickets?.length <= 0
     //   ? handleContinue()
@@ -51,6 +70,23 @@ export default function TicketItem({
   //     return Math.min(...resultPri);
   //   }
   // }, [data?.tour_ticket_items, dataPriceEx]);
+  const {data: dataListTicketDate, isLoading} = useQuery({
+    queryKey: [
+      'tour',
+      'list-ticket-date',
+      {
+        id_ticket: data?.item?.id,
+      },
+    ],
+    queryFn: () =>
+      getListTicketDate({
+        id_ticket: data?.item?.id,
+      }),
+  });
+  const TicketLast = useMemo(() => {
+    const rows = dataListTicketDate?.data?.data?.rows;
+    return rows?.[rows.length - 1];
+  }, [dataListTicketDate]);
   const percentMin = useMemo(() => {
     const result = data?.item?.tour_ticket_items?.map(percent => {
       return percent?.price_percent;
@@ -68,20 +104,107 @@ export default function TicketItem({
   const priceFinal = useMemo(() => {
     return priceMin * percentMin;
   }, [priceMin, percentMin]);
+  useEffect(() => {
+    onTicketLastDate && onTicketLastDate(TicketLast?.date);
+  }, [TicketLast?.date, onTicketLastDate]);
+
   return (
-    <View
-      activeOpacity={0.7}
-      onPress={() => {
-        handleTouch();
-      }}>
+    <View>
       <View
         style={{
-          backgroundColor: COLORS.white,
+          backgroundColor:
+            today > TicketLast?.date ? COLORS.grey : COLORS.white,
           flex: 1,
           borderRadius: scale(10),
           ...SHADOW,
         }}>
+        {today > TicketLast?.date && (
+          <View
+            style={{
+              position: 'absolute',
+              zIndex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              backgroundColor: COLORS.black + '80',
+              rowGap: scale(20),
+              borderRadius: scale(6),
+            }}>
+            <CustomText
+              textType="semiBold"
+              style={{
+                color: COLORS.primary,
+                fontSize: SIZES.medium,
+                textAlign: 'center',
+                width: '80%',
+              }}>
+              {t('please_repost')}!
+            </CustomText>
+            <View style={{flexDirection: 'row', columnGap: scale(10)}}>
+              <CustomButton
+                onPress={onRepost}
+                activeOpacity={0.9}
+                text={t('repost')}
+                buttonType="small"
+                iconRight={IconReset}
+                styleIcon={{color: COLORS.white}}
+                styleWrapper={{width: '30%'}}
+              />
+              <TouchableOpacity
+                style={{...styles.box, backgroundColor: COLORS.white}}
+                activeOpacity={0.7}
+                onPress={onPressMore}>
+                {/* <View style={styles.dot} />
+            <View style={styles.dot} />
+            <View style={styles.dot} /> */}
+                <IconTrash
+                  style={{
+                    width: scale(20),
+                    height: scale(20),
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
         <View style={styles.content}>
+          {checkQuantity ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                columnGap: scale(10),
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  backgroundColor: COLORS.error,
+                  padding: scale(5),
+                  borderRadius: scale(5),
+                }}>
+                <CustomText
+                  textType="medium"
+                  numberOfLines={2}
+                  style={{
+                    fontSize: SIZES.xSmall,
+                    color: COLORS.white,
+                  }}>
+                  {t('sold_out')}
+                </CustomText>
+              </View>
+              <CustomText
+                textType="medium"
+                numberOfLines={2}
+                style={{
+                  fontSize: SIZES.xSmall,
+                  color: COLORS.error,
+                }}>
+                {t('ticket_sold_out_create_more')}
+              </CustomText>
+            </View>
+          ) : (
+            <></>
+          )}
           <CustomText
             textType="semiBold"
             style={{
@@ -113,6 +236,7 @@ export default function TicketItem({
             }}>
             {data?.item?.description}
           </CustomText>
+
           <CustomText
             textType="bold"
             style={{
@@ -132,6 +256,19 @@ export default function TicketItem({
               fontSize: SIZES.xSmall,
             }}
             onPress={onManage}
+          />
+          <CustomButton
+            buttonType="normal"
+            disabled={!checkQuantity ? false : true}
+            text={t('price_adjustment')}
+            style={{
+              ...styles.btnInfo,
+              backgroundColor: !checkQuantity ? COLORS.primary : COLORS.grey,
+            }}
+            styleText={{
+              fontSize: SIZES.xSmall,
+            }}
+            onPress={onChangePrice}
           />
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             {/* <TouchableOpacity
@@ -171,7 +308,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     padding: scale(10),
-    rowGap: scale(3),
+    rowGap: scale(5),
   },
   box: {
     borderRadius: scale(4),
@@ -206,8 +343,8 @@ const styles = StyleSheet.create({
   },
   btnInfo: {
     height: scale(26),
-    minWidth: scale(150),
-    maxWidth: scale(260),
+    minWidth: scale(140),
+    maxWidth: scale(230),
   },
   continue: {
     height: scale(26),

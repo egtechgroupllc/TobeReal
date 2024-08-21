@@ -11,7 +11,6 @@ import {useLanguage} from '../../../../../../hooks/useLanguage';
 export default function CreateAccomItem({data, isTour}) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
-
   const handleContinue = () => {
     navigate(isTour ? 'AddTicketScreen' : 'AddRoomTypeScreen', data);
   };
@@ -88,6 +87,7 @@ export default function CreateAccomItem({data, isTour}) {
               textType="semiBold"
               style={{
                 color: COLORS.white,
+                ...SHADOW,
               }}
               numberOfLines={2}>
               {data?.name}
@@ -97,6 +97,7 @@ export default function CreateAccomItem({data, isTour}) {
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
+                ...SHADOW,
               }}>
               {data?.address}
             </CustomText>
@@ -105,6 +106,7 @@ export default function CreateAccomItem({data, isTour}) {
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
+                ...SHADOW,
               }}>
               Id: {data?.id}
             </CustomText>
@@ -181,6 +183,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 'auto',
     columnGap: scale(4),
+
     // justifyContent: 'space-between',
   },
   btnInfo: {

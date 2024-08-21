@@ -1281,5 +1281,41 @@
 
   "change_account": "Thay đổi tài khoản",
   "remove_history": "Xóa lịch sử",
-  "transaction_fee_deducted": "Phí giao dịch đã được khấu trừ"
+  "transaction_fee_deducted": "Phí giao dịch đã được khấu trừ",
+
+  "room_price_manage": "Quản lý giá phòng",
+  "enter_price_change": "Nhập giá bạn muốn thay đổi",
+  "this_price_is_listed_price": "Đây là giá gốc chưa bao gồm chính sách",
+  "enter_number_room_change": "Nhập số lượng phòng bạn muốn thay đổi",
+  "do_you_want_change_status": "Bạn có muốn thay đổi trạng thái?",
+  "active": "Hoạt động",
+  "lock": "Khóa",
+  "optional": "không bắt buộc",
+
+  "ticket_price_manage": "Quản lý giá vé",
+  "price_adjustment": "Điều chỉnh giá",
+  "room_not_link_policy": "Phòng chưa được liên kết với chính sách nào, vui lòng liên kết chính sách để được duyệt!",
+  "sold_out": "Đã bán hết",
+  "ticket_sold_out_create_more": "Đã hết số lượng vé, vui lòng tạo thêm!",
+
+  "create_tour_ticket_type": "Tạo loại vé tour",
+  "update_tour_ticket_type": "Cập nhật loại vé tour",
+
+  "quantity_left": "Số lượng vé thực tế còn lại",
+  "enter_number_day": "Nhập số ngày",
+  "enter_number_day_you_want": "Nhập số ngày bạn muốn thêm để đăng lại",
+  "minimum_amount_days": "Số ngày tối thiểu",
+  "maximum_amount_days": "Số ngày tối đa",
+  "this_number_day_repost": "Đây là số ngày tin tồn tại bạn muốn đăng lại kể từ ngày hết hạn",
+
+  "very_good": "Rất tốt",
+  "good": "Tốt",
+  "average": "Trung bình",
+  "cleanliness": "Sạch sẽ",
+  "convenient": "Tiện lợi",
+  "have_pictures": "Có hình ảnh",
+  "latest": "Mới nhất",
+  "lowest_score": "Điểm thấp nhất",
+  "highest_score": "Điểm cao nhất",
+  "bad": "Tệ"
 }

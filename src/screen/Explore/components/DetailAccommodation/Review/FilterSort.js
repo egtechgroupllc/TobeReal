@@ -18,7 +18,7 @@ export default function FilterSort({
 
   return (
     <View style={styles.wrapper}>
-      {/* {!!listFill[0] && (
+      {!!listFill[0] && (
         <OptionAccommodation
           outline
           noSelectDefault={noSelectDefault}
@@ -37,7 +37,7 @@ export default function FilterSort({
           onSelect={e => {}}
           data={listFill}
         />
-      )} */}
+      )}
 
       <TouchableOpacity
         activeOpacity={0.7}

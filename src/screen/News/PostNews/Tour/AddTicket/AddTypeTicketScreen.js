@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useLayoutEffect, useMemo, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import MainWrapper from '../../../../../components/MainWrapper';
 import {useForm} from 'react-hook-form';
 import {showMess} from '../../../../../assets/constants/Helper';
@@ -7,6 +7,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {
   postAddTicket,
   postAddTypeTicket,
+  postUpdateTypeTicket,
 } from '../../../../../Model/api/apiTour';
 import {CustomButton, CustomInput} from '../../../../../components';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -35,15 +36,18 @@ export default function AddTypeTicketScreen() {
   const {setOptions, navigate, goBack} = useNavigation();
   const {t} = useLanguage();
   const priceListed = useMemo(() => {
-    const result = params?.item?.tour_ticket_dates?.map(item => {
-      return item?.price;
-    });
-    return Math.min(...result);
+    if (params?.item?.tour_ticket_dates) {
+      const result = params?.item?.tour_ticket_dates?.map(item => {
+        return item?.price;
+      });
+      return Math.min(...result);
+    }
   }, [params?.item?.tour_ticket_dates]);
-
   useLayoutEffect(() => {
     return setOptions({
-      headerTitle: t('create_tour_ticket'),
+      headerTitle: !params?.update
+        ? t('create_tour_ticket_type')
+        : t('update_tour_ticket_type'),
       headerRight: () => (
         <TouchableOpacity
           onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}>
@@ -59,7 +63,6 @@ export default function AddTypeTicketScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
   const {
     handleSubmit,
     control,
@@ -71,61 +74,101 @@ export default function AddTypeTicketScreen() {
   } = useForm();
 
   const queryClient = useQueryClient();
-  const addTicketMu = useMutation({
-    mutationFn: postAddTicket,
-  });
 
   const addTypeTicketMu = useMutation({
     mutationFn: postAddTypeTicket,
   });
-
+  const updateTypeTicketMu = useMutation({
+    mutationFn: postUpdateTypeTicket,
+  });
   const AddTypeTicket = value => {
     const {price_percent, description_item, quantity, name_item} = getValues();
     const price_percent_final = value?.isDiscount
       ? (100 - price_percent) / 100
       : price_percent / 100 + 1;
     delete value?.isDiscount;
-    addTypeTicketMu.mutate(
-      !params?.admin
-        ? {
-            tour_ticket_id: value,
-            name,
-            description: description_item,
-            quantity,
-            price_percent,
-          }
-        : {
-            tour_ticket_id: params?.id || params?.item?.id,
-            name: name_item,
-            description: description_item,
-            quantity: quantity,
-            price_percent: price_percent_final,
-          },
-      {
-        onSuccess: dataInside => {
-          showMess(
-            t(dataInside?.message),
-            dataInside?.status ? 'success' : 'error',
-          );
-          if (dataInside?.status) {
-            reset();
-            queryClient.invalidateQueries(['tour', 'my-list']);
-            if (!params?.admin) {
-              navigate('NoBottomTab', {
-                screen: 'TourManagementScreen',
-              });
-            }
 
-            goBack();
+    const mutationConfig = {
+      onSuccess: dataInside => {
+        showMess(
+          t(dataInside?.message),
+          dataInside?.status ? 'success' : 'error',
+        );
+        if (dataInside?.status) {
+          reset();
+          queryClient.invalidateQueries(['tour', 'my-list']);
+          if (
+            (params?.admin && !params?.admin) ||
+            (params?.update && params?.update)
+          ) {
+            navigate('NoBottomTab', {
+              screen: 'TourManagementScreen',
+            });
           }
-        },
-        onError: err => {
-          console.log({err});
-        },
+          goBack();
+        }
       },
-    );
+      onError: err => {
+        console.log({err});
+      },
+    };
+
+    if (!params?.update) {
+      addTypeTicketMu.mutate(
+        !params?.admin
+          ? {
+              tour_ticket_id: value,
+              name: name_item,
+              description: description_item,
+              quantity,
+              price_percent,
+            }
+          : {
+              tour_ticket_id: params?.id || params?.item?.id,
+              name: name_item,
+              description: description_item,
+              quantity: quantity,
+              price_percent: price_percent_final,
+            },
+        mutationConfig,
+      );
+    } else {
+      updateTypeTicketMu.mutate(
+        {
+          id: params?.id,
+          name: name_item,
+          description: description_item,
+          quantity: quantity,
+          price_percent: price_percent_final,
+        },
+        mutationConfig,
+      );
+    }
   };
 
+  useEffect(() => {
+    if (params?.update) {
+      reset();
+
+      const entries = Object.entries(params);
+      const arrKeyno = [];
+
+      entries.map(item => {
+        if (!arrKeyno.includes(item[0])) {
+          const checkNum = typeof item[1] === 'number';
+          if (item[0] === 'name') {
+            setValue('name_item', item[1]);
+          }
+          if (item[0] === 'name') {
+            setValue('description_item', item[1]);
+          }
+          setValue(item[0], checkNum ? String(item[1]) : item[1]);
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <MainWrapper
       refreshControl={false}
@@ -226,6 +269,7 @@ export default function AddTypeTicketScreen() {
         watch={watch}
         errors={errors}
         manage={params?.admin}
+        update={params?.update}
         priceListed={priceListed}
       />
 

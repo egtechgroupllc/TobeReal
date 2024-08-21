@@ -55,7 +55,7 @@ export default function NotifyScreen() {
 
       return undefined;
     },
-    refetchInterval: 5000,
+    refetchInterval: 3000,
   });
 
   const dataArr = useMemo(

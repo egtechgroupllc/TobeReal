@@ -77,6 +77,11 @@ export const postAddTypeTicket = async data => {
 
   return responsive.data;
 };
+export const postUpdateTypeTicket = async data => {
+  const responsive = await instance.post('/ticket/item/update', data);
+
+  return responsive.data;
+};
 export const getListTour = async ({
   pageParam = 1,
   country_id,
@@ -101,6 +106,19 @@ export const getListTour = async ({
   const responsive = await instance.get(
     `/list-sell?page=${pageParam}&limit=10&${country}&${province}&name=${name}&${minprice}&${maxprice}&date_start=${date_start}&date_end=${date_end}&${dist}&${lat}&${long}&currency_id=${currency_id}`,
   );
+  return responsive.data;
+};
+export const postPriceTicketDate = async data => {
+  const responsive = await instance.post('/ticket/manage-ticket-date', data);
+
+  return responsive.data;
+};
+export const postAddTicketDate = async ({id_ticket, dataTicket}) => {
+  const responsive = await instance.post(
+    `/ticket/${id_ticket}/add-ticket-date`,
+    dataTicket,
+  );
+
   return responsive.data;
 };
 export const getDetailTour = async id_tour => {
@@ -146,8 +164,10 @@ export const getListReviewTour = async ({
   return responsive.data;
 };
 export const getListTicketDate = async ({id_ticket, date_start, date_end}) => {
+  const dateStart = date_start ? `date_start=${date_start}` : '';
+  const dateEnd = date_end ? `date_end=${date_end}` : '';
   const responsive = await instance.get(
-    `/ticket/${id_ticket}/list-ticket-date?date_start=${date_start}&date_end=${date_end}`,
+    `/ticket/${id_ticket}/list-ticket-date?${dateStart}&${dateEnd}`,
   );
 
   return responsive.data;

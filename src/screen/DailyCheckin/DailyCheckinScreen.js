@@ -30,6 +30,14 @@ export default function DailyCheckinScreen() {
       headerTitle: t('daily_checkin'),
     });
   }, []);
+  const {
+    data: dataCheckin,
+    error,
+    isError,
+  } = useQuery({
+    queryKey: ['check-in-daily', 'info'],
+    queryFn: () => getDailyCheckinInfo(),
+  });
 
   const checkinMutation = useMutation({
     mutationFn: postDailyCheckin,
@@ -86,7 +94,7 @@ export default function DailyCheckinScreen() {
           width: scale(200),
           textAlign: 'center',
         }}>
-        + {params?.dataCheckin?.data?.amount} TOBE AIRDROP (TBC)
+        + {dataCheckin?.data?.amount} TOBE AIRDROP (TBC)
       </CustomText>
       {!dataP?.wallet_address ? (
         <View style={{rowGap: scale(50), alignItems: 'center', width: '70%'}}>
@@ -110,17 +118,17 @@ export default function DailyCheckinScreen() {
           {params?.amountTOBE?.balance >= 0.1 ? (
             <CustomButton
               text={
-                params?.dataCheckin?.data?.can_check_in
+                dataCheckin?.data?.can_check_in
                   ? t('receive_now')
                   : t('received')
               }
               styleWrapper={{width: '70%'}}
               style={{
-                backgroundColor: params?.dataCheckin?.data?.can_check_in
+                backgroundColor: dataCheckin?.data?.can_check_in
                   ? COLORS.primary
                   : COLORS.grey,
               }}
-              disabled={params?.dataCheckin?.data?.can_check_in ? false : true}
+              disabled={dataCheckin?.data?.can_check_in ? false : true}
               onPress={handleCheckin}
             />
           ) : (

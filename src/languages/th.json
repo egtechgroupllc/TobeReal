@@ -1280,5 +1280,41 @@
 
   "change_account": "เปลี่ยนบัญชี",
   "remove_history": "ลบประวัติ",
-  "transaction_fee_deducted": "หักค่าธรรมเนียมการทำธุรกรรมแล้ว"
+  "transaction_fee_deducted": "หักค่าธรรมเนียมการทำธุรกรรมแล้ว",
+
+  "room_price_manage": "การจัดการราคาห้องพัก",
+  "enter_price_change": "ป้อนราคาที่คุณต้องการเปลี่ยน",
+  "this_price_is_listed_price": "นี่คือราคาที่ระบุไว้ ยังไม่ได้รวมถึงนโยบาย",
+  "enter_number_room_change": "ป้อนจำนวนห้องที่คุณต้องการเปลี่ยน",
+  "do_you_want_change_status": "คุณต้องการเปลี่ยนสถานะหรือไม่?",
+  "active": "ใช้งาน",
+  "lock": "ล็อค",
+  "optional": "ตัวเลือก",
+
+  "ticket_price_manage": "การจัดการราคาตั๋ว",
+  "price_adjustment": "การปรับราคา",
+  "room_not_link_policy": "ห้องยังไม่ได้เชื่อมโยงกับนโยบายใด ๆ กรุณาเชื่อมโยงนโยบายเพื่อรับการอนุมัติ!",
+  "sold_out": "ขายหมด",
+  "ticket_sold_out_create_more": "ตั๋วขายหมดแล้ว กรุณาสร้างเพิ่มเติม!",
+
+  "create_tour_ticket_type": "สร้างประเภทตั๋วทัวร์",
+  "update_tour_ticket_type": "อัปเดตประเภทตั๋วทัวร์",
+
+  "quantity_left": "จำนวนตั๋วที่เหลืออยู่จริง",
+  "enter_number_day": "ป้อนจำนวนวัน",
+  "enter_number_day_you_want": "ป้อนจำนวนวันที่คุณต้องการเพิ่มเพื่อโพสต์ใหม่",
+  "minimum_amount_days": "จำนวนวันขั้นต่ำ",
+  "maximum_amount_days": "จำนวนวันสูงสุด",
+  "this_number_day_repost": "นี่คือจำนวนวันที่โพสต์จะคงอยู่ที่คุณต้องการโพสต์ใหม่จากวันที่หมดอายุ",
+
+  "very_good": "ดีมาก",
+  "good": "ดี",
+  "average": "ปานกลาง",
+  "cleanliness": "ความสะอาด",
+  "convenient": "สะดวกสบาย",
+  "have_pictures": "มีรูปภาพ",
+  "latest": "ล่าสุด",
+  "lowest_score": "คะแนนต่ำสุด",
+  "highest_score": "คะแนนสูงสุด",
+  "bad": "แย่"
 }

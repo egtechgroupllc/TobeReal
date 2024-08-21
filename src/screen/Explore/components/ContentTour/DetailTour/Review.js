@@ -8,15 +8,16 @@ import ItemBoxReview from './Review/ItemBoxReview';
 import ReviewAll from './Review/ReviewAll';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheetListSelect from '../../../../../components/BottomSheetListSelect';
-import {formatNumber} from '../../../../../utils/format';
+import {formatNumber, formatPrice} from '../../../../../utils/format';
 import {getListReviewAccmo} from '../../../../../Model/api/apiAccom';
 import {useQuery} from '@tanstack/react-query';
 import {getListReviewTour} from '../../../../../Model/api/apiTour';
 import ItemBoxReviewLoading from '../../DetailAccommodation/Review/ItemBoxReviewLoading';
-const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review({dataP}) {
   const {t} = useLanguage();
+  const listSort = [t('latest'), t('lowest_score'), t('highest_score')];
+
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const [select, setSelect] = useState();
@@ -42,7 +43,10 @@ export default function Review({dataP}) {
           <View style={styles.overview}>
             <View style={styles.overviewNumberRating}>
               <CustomText textType="bold" style={styles.numberRating}>
-                {dataP?.review_average || 0}
+                {formatPrice(dataP?.review_average, {
+                  showCurrency: false,
+                  decimalPlaces: 2,
+                }) || 0}
               </CustomText>
             </View>
 
@@ -97,11 +101,11 @@ export default function Review({dataP}) {
                   }}
                 />
               )}
-              titleIndicator="Review">
+              titleIndicator={t('review')}>
               <ReviewAll
                 onSort={() => bottomSheetChildRef.current.openChild()}
                 valueSort={select}
-                id_accomo={dataP.id}
+                id_tour={dataP?.id}
                 dataP={dataP}
               />
             </BottomSheet>

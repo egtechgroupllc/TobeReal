@@ -12,10 +12,11 @@ import ReviewAll from '../Review/ReviewAll';
 import BottomSheetListSelect from '../../../../../components/BottomSheetListSelect';
 import {formatNumber, formatPrice} from '../../../../../utils/format';
 import ItemBoxReviewLoading from '../Review/ItemBoxReviewLoading';
-const listSort = ['Latest', 'Oldest', 'Lowest score', 'Highest score'];
 
 export default function Review({dataP}) {
   const {t} = useLanguage();
+  const listSort = [t('latest'), t('lowest_score'), t('highest_score')];
+
   const bottomSheetRef = useRef();
   const bottomSheetChildRef = useRef();
   const [select, setSelect] = useState();

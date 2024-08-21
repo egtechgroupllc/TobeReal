@@ -1,12 +1,39 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {SHADOW, SIZES, images, scale} from '../../../../../../assets/constants';
 import CustomImage from '../../../../../../components/CustomImage';
 import CustomText from '../../../../../../components/CustomText';
 import StarRating from '../../../../../../components/StarRating';
+import {useLanguage} from '../../../../../../hooks/useLanguage';
+import {formatDateTime} from '../../../../../../utils/format';
+import {IconHeart} from '../../../../../../assets/icon/Icon';
+import ImageDetail from '../../../../../components/ImageDetail';
 
-export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
+export default function ItemBoxReview({
+  style,
+  numberOfLines = 5,
+  isShadow = true,
+  data,
+  isViewAll,
+}) {
+  const [seeMoreOwn, setSeeMoreOwn] = useState(false);
+  const [isBtnSeeMoreOwn, setIsBtnSeeMoreOwn] = useState(false);
+  const {t} = useLanguage();
+
+  const [seeMoreUser, setSeeMoreUser] = useState(false);
+  const [isBtnSeeMoreUser, setIsBtnSeeMoreUser] = useState(false);
+
+  const onTextLayoutUser = useCallback(e => {
+    if (e.nativeEvent.lines.length > 3) {
+      setIsBtnSeeMoreUser(true);
+    }
+  }, []);
+  const onTextLayoutOwn = useCallback(e => {
+    if (e.nativeEvent.lines.length > 3) {
+      setIsBtnSeeMoreOwn(true);
+    }
+  }, []);
   return (
     <View
       style={[
@@ -31,25 +58,89 @@ export default function ItemBox({style, numberOfLines = 5, isShadow = true}) {
               flex: 1,
             }}
             numberOfLines={1}>
-            David
+            {data?.user?.username}
           </CustomText>
 
-          <StarRating rating={4.5} />
+          <StarRating rating={data?.rating} />
         </View>
       </View>
 
       <CustomText
-        textType="medium"
-        style={{fontSize: SIZES.xMedium}}
-        numberOfLines={numberOfLines}>
-        Good
-      </CustomText>
-
-      <CustomText
         textType="regular"
-        style={{fontSize: SIZES.small, marginTop: 'auto'}}>
-        27-04-2023 21:08
+        numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
+        onTextLayout={onTextLayoutUser}>
+        {data?.content}
       </CustomText>
+      {data?.images && data?.images?.length > 0 && isViewAll && (
+        <ImageDetail
+          arrImg={data?.images}
+          styleWrapper={{height: scale(120)}}
+        />
+      )}
+      {isBtnSeeMoreUser && !seeMoreUser && (
+        <CustomText
+          textType="semiBold"
+          onPress={() => setSeeMoreUser(true)}
+          style={styles.moreUser}>
+          <CustomText
+            style={{
+              color: '#687176',
+            }}>
+            ...
+          </CustomText>
+          {t('show_more')}
+        </CustomText>
+      )}
+      <View style={styles.boxOwn}>
+        <CustomText
+          numberOfLines={seeMoreOwn ? 0 : isBtnSeeMoreOwn ? 3 : 4}
+          onTextLayout={onTextLayoutOwn}
+          textType="regular"
+          style={{
+            color: '#687176',
+          }}>
+          <CustomText textType="semiBold">From the Tour owner: </CustomText>
+          Thank you very much for reviewing our tour. {'\n'}We will try to
+          improve and develop further to bring the best experience to you.
+        </CustomText>
+
+        {isBtnSeeMoreOwn && !seeMoreOwn && (
+          <CustomText
+            textType="semiBold"
+            onPress={() => setSeeMoreOwn(true)}
+            style={styles.moreOwn}>
+            <CustomText
+              style={{
+                color: '#687176',
+              }}>
+              ...
+            </CustomText>
+            {t('show_more')}
+          </CustomText>
+        )}
+      </View>
+      <View style={styles.footer}>
+        <CustomText
+          textType="regular"
+          style={{marginTop: 'auto', color: '#687176'}}>
+          {formatDateTime(data?.updatedAt, {
+            dateStyle: 'dd-MM-yyyy, HH:mm',
+          })}
+        </CustomText>
+        <TouchableOpacity
+          style={{
+            padding: scale(6),
+            marginTop: scale(-6),
+          }}>
+          <IconHeart
+            style={{
+              width: scale(13),
+              height: scale(13),
+            }}
+            fill={'#687176'}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -70,5 +161,29 @@ const styles = StyleSheet.create({
     width: scale(30),
     aspectRatio: 1,
     borderRadius: 999,
+  },
+  boxOwn: {
+    backgroundColor: '#f5f5f5',
+    borderRadius: scale(6),
+    padding: scale(12),
+  },
+  moreUser: {
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: '#fff',
+    paddingHorizontal: scale(12),
+  },
+  moreOwn: {
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    bottom: scale(12),
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: scale(12),
+  },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

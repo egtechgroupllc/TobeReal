@@ -7,8 +7,14 @@ import CustomText from '../../../../../components/CustomText';
 import {StarRating} from '../../../../../components';
 import {formatDateTime} from '../../../../../utils/format';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import ImageDetail from '../../../../components/ImageDetail';
 
-export default function ItemBox({style, isShadow = true, data}) {
+export default function ItemBoxReview({
+  style,
+  isShadow = true,
+  data,
+  isViewAll,
+}) {
   const [seeMoreOwn, setSeeMoreOwn] = useState(false);
   const [isBtnSeeMoreOwn, setIsBtnSeeMoreOwn] = useState(false);
   const {t} = useLanguage();
@@ -26,7 +32,6 @@ export default function ItemBox({style, isShadow = true, data}) {
       setIsBtnSeeMoreOwn(true);
     }
   }, []);
-
   return (
     <View
       style={[
@@ -58,13 +63,19 @@ export default function ItemBox({style, isShadow = true, data}) {
         </View>
       </View>
 
-      <View>
+      <View style={{rowGap: scale(10)}}>
         <CustomText
           textType="regular"
           numberOfLines={seeMoreUser ? 0 : isBtnSeeMoreUser ? 4 : 5}
           onTextLayout={onTextLayoutUser}>
           {data?.content}
         </CustomText>
+        {data?.images && data?.images?.length > 0 && isViewAll && (
+          <ImageDetail
+            arrImg={data?.images}
+            styleWrapper={{height: scale(150)}}
+          />
+        )}
 
         {isBtnSeeMoreUser && !seeMoreUser && (
           <CustomText
@@ -77,7 +88,7 @@ export default function ItemBox({style, isShadow = true, data}) {
               }}>
               ...
             </CustomText>
-            Xem thêm
+            {t('show_more')}
           </CustomText>
         )}
       </View>

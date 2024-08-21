@@ -90,6 +90,7 @@ export default function WorldTour() {
               data={item}
               rental="night"
               isLoading={isLoading}
+              isRating
             />
           )}
         />

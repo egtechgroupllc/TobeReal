@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import MainWrapper from '../../../../components/MainWrapper';
@@ -62,7 +62,7 @@ export default function AdminManageLeaseScreen() {
       {
         onSuccess: dataInside => {
           showMess(
-            dataInside.message,
+            t(dataInside.message),
             dataInside?.status ? 'success' : 'error',
           );
 
@@ -117,7 +117,11 @@ export default function AdminManageLeaseScreen() {
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
-        style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
+        style={{
+          alignItems: 'center',
+          rowGap: scale(20),
+          marginTop: scale(20),
+        }}>
         <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
           {params?.name}
         </CustomText>
@@ -167,6 +171,7 @@ export default function AdminManageLeaseScreen() {
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
+                ...SHADOW,
               }}>
               {params?.address}
             </CustomText>
@@ -175,6 +180,7 @@ export default function AdminManageLeaseScreen() {
               style={{
                 color: COLORS.white,
                 fontSize: SIZES.xSmall,
+                ...SHADOW,
               }}>
               RegID: {params?.id}
             </CustomText>
@@ -279,6 +285,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: scale(10),
     rowGap: scale(3),
+    backgroundColor: COLORS.overlay,
   },
   type: {
     position: 'absolute',

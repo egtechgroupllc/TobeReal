@@ -27,6 +27,7 @@ export default function TicketManageScreen() {
   const {setOptions, navigate} = useNavigation();
   const bottomSheetRef = useRef();
   const [dataItemAccom, setDataItemAccom] = useState(null);
+  const [ticketLastDate, setTicketLastDate] = useState();
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('tour_ticket_management'),
@@ -51,6 +52,7 @@ export default function TicketManageScreen() {
   });
 
   const numColumns = Math.ceil(data?.data?.rows?.length / 4);
+
   return (
     <MainWrapper
       refreshControl
@@ -87,16 +89,24 @@ export default function TicketManageScreen() {
                         setDataItemAccom(item);
                         bottomSheetRef.current.open();
                       }}
-                      onEdit={() => {
-                        navigate('TicketTypeManageScreen', {
-                          ...item,
-                          update: true,
-                        });
-                      }}
                       onManage={() => {
                         navigate('TicketTypeManageScreen', {
                           ...item,
-                          update: true,
+                        });
+                      }}
+                      onTicketLastDate={value => {
+                        setTicketLastDate(value);
+                      }}
+                      onRepost={() => {
+                        navigate('RepostExpiredScreen', {
+                          isTour: true,
+                          ...item,
+                          ticketLastDate: ticketLastDate,
+                        });
+                      }}
+                      onChangePrice={() => {
+                        navigate('TicketPriceManageScreen', {
+                          ...item,
                         });
                       }}
                     />
