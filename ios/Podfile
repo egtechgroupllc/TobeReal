@@ -60,7 +60,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'Saveloka' do
+target 'PioneHouse' do
   config = use_native_modules!
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
@@ -82,7 +82,7 @@ target 'Saveloka' do
 rn_maps_path = '../node_modules/react-native-maps'
 pod 'react-native-google-maps', :path => rn_maps_path
 
-  target 'SavelokaTests' do
+  target 'PioneHouseTests' do
     inherit! :complete
     # Pods for testing
   end

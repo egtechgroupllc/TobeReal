@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface SavelokaTests : XCTestCase
+@interface PioneHouseTests : XCTestCase
 
 @end
 
-@implementation SavelokaTests
+@implementation PioneHouseTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
