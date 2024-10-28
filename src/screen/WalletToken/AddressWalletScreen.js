@@ -35,7 +35,6 @@ export default function AddressWalletScreen() {
     queryFn: () => getBalanceWallet(token),
     enabled: !!token,
   });
-
   const listWallet = useMemo(
     () => [
       {

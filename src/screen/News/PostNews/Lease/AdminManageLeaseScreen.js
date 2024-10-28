@@ -226,7 +226,6 @@ export default function AdminManageLeaseScreen() {
         {/* <CustomButton
           text={t('post_video_short')}
           style={{width: '85%', height: scale(45)}}
-      
           onPress={() =>
             navigate('PostVideoShortScreen', {Accom: true, accomId: params?.id})
           }

@@ -29,7 +29,7 @@ import Collapsible from 'react-native-collapsible';
 import {CustomButton} from '../../../../../components';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 
-export default function wwRoomItem({
+export default function RoomItem({
   dataP,
   onBooking,
   date,

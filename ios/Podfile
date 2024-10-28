@@ -61,6 +61,7 @@ if linkage != nil
 end
 
 target 'Saveloka' do
+
   config = use_native_modules!
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
