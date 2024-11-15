@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomSelectDropdown from '../../../../components/CustomSelectDropdown';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -19,6 +19,7 @@ export default memo(function RealEstateType({
   value,
   isDefaultValue,
   valueFind = '',
+  styleTextLabel,
 }) {
   // const [dataFind, setDataFind] = useState([]);
   // const Finding = () => {
@@ -55,6 +56,7 @@ export default memo(function RealEstateType({
       }}>
       <CustomSelectDropdown
         label={label}
+        styleTextLabel={styleTextLabel}
         data={data}
         name={name}
         getKeyValue={getKeyValue}
@@ -85,6 +87,7 @@ export default memo(function RealEstateType({
                 style={{
                   paddingHorizontal: SIZES.medium,
                   fontSize: scale(13),
+                  color: COLORS.black,
                 }}>
                 {item?.name}
               </CustomText>

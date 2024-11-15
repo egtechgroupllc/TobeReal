@@ -24,6 +24,7 @@ export default function SortBy({onSort, value}) {
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(4),
@@ -38,7 +39,7 @@ export default function SortBy({onSort, value}) {
             setChecked(item);
             item && onSort && onSort(item);
           }}>
-          <CustomText>{item}</CustomText>
+          <CustomText style={{color: COLORS.black}}>{item}</CustomText>
 
           <View style={styles.radio}>
             {checked === item ? <View style={styles.dot} /> : null}
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: 99,
     borderWidth: 2,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.pioPrimary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -69,6 +70,6 @@ const styles = StyleSheet.create({
     height: '70%',
     aspectRatio: 1,
     borderRadius: 99,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
   },
 });

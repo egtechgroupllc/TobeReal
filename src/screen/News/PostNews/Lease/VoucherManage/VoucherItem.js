@@ -61,6 +61,8 @@ export default function VoucherItem({
         padding: scale(6),
         borderRadius: scale(10),
         ...SHADOW,
+        borderWidth: 1,
+        borderColor: COLORS.pioBox,
       }}>
       <CustomImage
         source={data?.images[0]?.url}

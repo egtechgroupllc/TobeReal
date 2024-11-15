@@ -134,7 +134,7 @@ export default function ListImgView({dataImg, open, onClose}) {
 
 const styles = StyleSheet.create({
   headerBar: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     position: 'absolute',
     zIndex: 99,
     width: '100%',

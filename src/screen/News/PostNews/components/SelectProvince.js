@@ -19,6 +19,7 @@ export default function SelectProvince({
   country,
   setValue,
   watch = () => {},
+  styleTextLabel,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -56,7 +57,7 @@ export default function SelectProvince({
       render={({field: {onChange}, fieldState: {error}}) => {
         return (
           <View style={styles.wrapper}>
-            <CustomText style={{color: COLORS.black}}>
+            <CustomText style={{color: COLORS.black, ...styleTextLabel}}>
               {t('province_city')}
             </CustomText>
 
@@ -88,12 +89,7 @@ export default function SelectProvince({
                   },
                   styles.content,
                 ]}>
-                <CustomText
-                  style={
-                    !dataFromScreen && {
-                      color: '#aaa',
-                    }
-                  }>
+                <CustomText style={{color: COLORS.black}}>
                   {dataFromScreen?.name || t('province_city')}
                 </CustomText>
                 <IconRight />

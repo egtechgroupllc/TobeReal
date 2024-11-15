@@ -67,7 +67,7 @@ export default function EstateRooms() {
           style={{
             minWidth: '50%',
           }}
-          linearGradientProps
+          // linearGradientProps
           text={t('add_room')}
           iconLeft={() => <IconAdd />}
           onPress={goAddRoom}

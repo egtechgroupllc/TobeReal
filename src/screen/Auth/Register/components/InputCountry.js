@@ -36,6 +36,7 @@ export default function InputCountry({control, name}) {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={'Occupancy'}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['70%']}
         styleContent={{
           rowGap: scale(10),

@@ -87,7 +87,9 @@ export default memo(function BookTour({data, onPress}) {
         style={{
           rowGap: scale(2),
         }}>
-        <CustomText>{t('price_only_from')}:</CustomText>
+        <CustomText style={{color: COLORS.black}}>
+          {t('price_only_from')}:
+        </CustomText>
         <CustomText
           textType="bold"
           style={{
@@ -100,6 +102,7 @@ export default memo(function BookTour({data, onPress}) {
         </CustomText>
       </View>
       <CustomButton
+        // linearGradientProps={{colors: COLORS.linearGradient}}
         onPress={onPress}
         buttonType="medium"
         style={{flex: 0.7}}

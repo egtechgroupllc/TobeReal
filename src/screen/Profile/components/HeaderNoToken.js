@@ -20,6 +20,7 @@ export default function HeaderNoToken() {
           flex: 1,
           borderColor: '#fff',
         }}
+        styleText={{color: COLORS.pioPrimary}}
         outline
         onPress={() => {
           navigate('NavigationAuth');
@@ -52,7 +53,7 @@ export default function HeaderNoToken() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: scale(20),

@@ -142,7 +142,7 @@ export default function TabContent() {
 
         <CustomButton
           text={t('submit')}
-          linearGradientProps
+          // linearGradientProps
           onPress={handleSubmit(ok)}
           styleText={{
             fontSize: SIZES.medium,

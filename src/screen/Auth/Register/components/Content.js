@@ -122,7 +122,7 @@ export default function Content() {
           onPress={handleSubmit(handleSignup)}
           buttonType="large"
           text={t('signup')}
-          linearGradientProps
+          // linearGradientProps
           style={{
             marginTop: scale(20),
           }}
@@ -159,7 +159,7 @@ export default function Content() {
             onPress={() => navigate('RegisterPartnerScreen')}
             textType="semiBold"
             style={{...styles.text2, color: COLORS.primary}}>
-            {t('become_shome_partner')}
+            {t('become_pionehouse_partner')}
           </CustomText>
         </TouchableOpacity>
       </View>

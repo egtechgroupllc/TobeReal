@@ -14,13 +14,9 @@ export default function TopImg({isHeart, feature, showPrice, data, type}) {
           <RatingBox rating={rating} textRating={textRating} />
         )} */}
         {feature && (
-          <LinearGradient
-            colors={['#F0B90B', '#D88A00']}
-            start={{x: 0, y: 0}}
-            end={{x: 0, y: 1}}
-            style={styles.topBox}>
+          <View style={styles.topBox}>
             <CustomText style={styles.topName}>{type}</CustomText>
-          </LinearGradient>
+          </View>
         )}
         {showPrice && (
           <View
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F0B90B',
+    backgroundColor: COLORS.primary,
     paddingHorizontal: scale(6),
     paddingVertical: scale(4),
     borderRadius: 8,

@@ -5,6 +5,7 @@ import {StyleSheet} from 'react-native';
 import {COLORS, images, scale} from '../assets/constants';
 import {
   IconBookings,
+  IconLogoPione,
   IconMapView,
   IconNews,
   IconProfile,
@@ -20,6 +21,7 @@ import NavigationProfile from './NavigationProfile';
 import NavigationVideo from './NavigationVideo';
 import {WIDTH} from '../assets/constants/theme';
 import {ProfileScreen} from '../screen/Profile';
+import {CustomBottomTab} from './components/CustomBottomTab';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,11 +29,12 @@ export default function BottomTab() {
   const {t} = useLanguage();
   return (
     <Tab.Navigator
+      tabBar={props => <CustomBottomTab {...props} />}
       initialRouteName="Explore"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.white,
         tabBarItemStyle: {
           columnGap: scale(4),
         },
@@ -52,12 +55,16 @@ export default function BottomTab() {
           tabBarLabel: t('explore'),
 
           tabBarIcon: ({focused}) => (
-            <CustomImage
-              source={images.iconSaveloka}
-              style={{width: scale(25), height: scale(25)}}
-              resizeMode="cover"
+            // <CustomImage
+            //   source={images.logo1}
+            //   style={{width: scale(18), height: scale(18)}}
+            //   resizeMode="contain"
+            // />
+            <IconLogoPione
+              fill={focused && COLORS.pioPrimary}
+              width={scale(18)}
+              height={scale(18)}
             />
-            // <IconExplore fill={focused && '#F0B90B'} />
           ),
         }}
       />
@@ -67,7 +74,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('booking'),
           tabBarIcon: ({focused}) => (
-            <IconBookings fill={focused && '#F0B90B'} />
+            <IconBookings fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -89,7 +96,7 @@ export default function BottomTab() {
           tabBarLabel: t('reviews'),
 
           tabBarIcon: ({focused}) => (
-            <IconVideo fill={focused && COLORS.primary} />
+            <IconVideo fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -108,7 +115,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('map'),
           tabBarIcon: ({focused}) => (
-            <IconMapView fill={focused && '#F0B90B'} />
+            <IconMapView fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -117,7 +124,9 @@ export default function BottomTab() {
         component={NavigationNews}
         options={{
           tabBarLabel: t('post_new'),
-          tabBarIcon: ({focused}) => <IconNews fill={focused && '#F0B90B'} />,
+          tabBarIcon: ({focused}) => (
+            <IconNews fill={focused && COLORS.pioPrimary} />
+          ),
         }}
       />
 
@@ -127,7 +136,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
-            <IconProfile fill={focused && '#F0B90B'} />
+            <IconProfile fill={focused && COLORS.pioPrimary} />
           ),
           header: props => <HeaderBar {...props} />,
         }}

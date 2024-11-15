@@ -11,7 +11,7 @@ export default function RoomFilterType() {
   return (
     <View style={{marginTop: scale(10)}}>
       <Category
-        isShadow={false}
+        // isShadow={false}
         data={[t('free_cancel'), t('big_bed'), t('free_breakfast')]}
       />
     </View>

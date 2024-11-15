@@ -53,14 +53,15 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
   }, []);
 
   const t = useCallback(
-    (key: string) => {
-      return (
+    (key: string, params: any) => {
+      const text =
         translations?.[locale]?.[key] ||
         languageFallback?.[locale]?.[key] ||
         translations?.['en']?.[key] ||
-        key
-      );
+        key;
+      return params ? formatString(text, params) : text;
     },
+
     [translations, locale, languageFallback],
   );
 
@@ -103,3 +104,9 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
     </LanguageContext.Provider>
   );
 };
+
+function formatString(text: string, params: Record<string, string>): string {
+  return Object.entries(params).reduce((acc, [key, value]) => {
+    return acc.replace(new RegExp(`{${key}}`, 'g'), value);
+  }, text);
+}

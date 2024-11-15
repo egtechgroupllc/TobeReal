@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   content: {
     marginTop: scale(20),
     // columnGap: scale(20),
-    // rowGap: scale(20),
+    rowGap: scale(20),
     paddingHorizontal: scale(5),
     paddingBottom: scale(100),
     alignItems: 'center',

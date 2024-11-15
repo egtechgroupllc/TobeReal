@@ -34,6 +34,7 @@ export default function BottomHelpCenter() {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={t('help_center')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['30%']}
         styleContent={{
           paddingHorizontal: scale(16),
@@ -57,7 +58,7 @@ export default function BottomHelpCenter() {
                 columnGap: scale(10),
               }}>
               <View style={styles.dot} />
-              <CustomText style={{fontSize: SIZES.medium}}>
+              <CustomText style={{fontSize: SIZES.medium, color: COLORS.black}}>
                 {item?.title}
               </CustomText>
             </View>

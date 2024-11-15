@@ -115,7 +115,12 @@ export default function GeneralInformation({
           )}
           <View style={styles.line} />
 
-          <SelectCountry setValue={setValue} control={control} watch={watch} />
+          <SelectCountry
+            setValue={setValue}
+            control={control}
+            watch={watch}
+            styleTextLabel={styles.label}
+          />
 
           {!params?.address && (
             <CustomInput
@@ -143,11 +148,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -156,11 +161,11 @@ const styles = StyleSheet.create({
   line: {
     height: 0.5,
     width: '100%',
-    backgroundColor: '#F0B90B',
+    backgroundColor: COLORS.pioPrimary,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

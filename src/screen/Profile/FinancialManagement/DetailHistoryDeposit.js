@@ -11,14 +11,16 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function DetailHistoryDeposit({route}) {
   const {setOptions, navigate} = useNavigation();
   const {bottom} = useSafeAreaInsets();
+  const {t} = useLanguage();
   const data = route.params;
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: 'Transaction detail',
+      headerTitle: t('transaction_detail'),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -30,6 +32,7 @@ export default function DetailHistoryDeposit({route}) {
           paddingHorizontal: scale(10),
           marginTop: '2%',
           rowGap: scale(12),
+          ...SHADOW,
         }}>
         <View style={styles.boxTop}>
           <View
@@ -38,14 +41,16 @@ export default function DetailHistoryDeposit({route}) {
               padding: scale(10),
             }}>
             <View style={styles.header}>
-              <CustomImage
-                source={data?.method_deposit_item?.method_deposit?.logo_url}
-                resizeMode="contain"
-                style={{
-                  width: scale(30),
-                  height: scale(30),
-                }}
-              />
+              {data?.deposit_oder?.method_deposit?.logo && (
+                <CustomImage
+                  source={data?.method_deposit_item?.method_deposit?.logo_url}
+                  resizeMode="contain"
+                  style={{
+                    width: scale(30),
+                    height: scale(30),
+                  }}
+                />
+              )}
               <View
                 style={{
                   rowGap: scale(4),
@@ -57,7 +62,8 @@ export default function DetailHistoryDeposit({route}) {
                   style={{
                     textTransform: 'uppercase',
                   }}>
-                  {data?.nameBank} - {data?.method_deposit_item?.owner}
+                  {data?.bank_name ? data?.bank_name : data?.nameBank} -{' '}
+                  {data?.method_deposit_item?.owner || data?.bank_owner}
                 </CustomText>
                 <CustomText
                   textType="bold"
@@ -69,7 +75,7 @@ export default function DetailHistoryDeposit({route}) {
             </View>
 
             <Item
-              name={'Status'}
+              name={t('status')}
               value={data?.status}
               backgroundColor={
                 data.status === 'SUCCESS'
@@ -82,7 +88,7 @@ export default function DetailHistoryDeposit({route}) {
             />
 
             <Item
-              name={'Time'}
+              name={t('time')}
               value={formatDateTime(data?.createdAt, {
                 dateStyle: 'HH:mm - dd/MM/yyyy',
               })}
@@ -91,12 +97,12 @@ export default function DetailHistoryDeposit({route}) {
               <View style={styles.line} />
             </View>
 
-            <Item name={'Transfer id'} value={data?.code} isCopy />
+            <Item name={t('transfer_id')} value={data?.code} isCopy />
             <Item
-              name={'Card account'}
+              name={t('card_account')}
               value={data?.method_deposit_item?.method_deposit?.name}
             />
-            <Item name={'Overheads'} value="Free" />
+            <Item name={t('overheads')} value="Free" />
           </View>
 
           <View style={styles.boxSupport}>
@@ -105,39 +111,44 @@ export default function DetailHistoryDeposit({route}) {
               size={SIZES.xMedium}
               color={'#0194f3'}
               textType="medium">
-              Contact support
+              {t('contact_support')}
             </CustomText>
           </View>
         </View>
 
-        <View style={styles.boxTop}>
-          <View
-            style={{
-              rowGap: scale(16),
-              padding: scale(10),
-            }}>
-            <Item
-              name={'Card number/account'}
-              value={data?.method_deposit_item?.code}
-              isCopy
-            />
+        {data?.method_deposit_item?.code && (
+          <View style={styles.boxTop}>
+            <View
+              style={{
+                rowGap: scale(16),
+                padding: scale(10),
+              }}>
+              <Item
+                name={t('card_number_account')}
+                value={data?.method_deposit_item?.code}
+                isCopy
+              />
 
-            <Item
-              name={'Bank'}
-              value={
-                data?.method_deposit_item?.bank_name?.split('-')?.[1] ||
-                data?.method_deposit_item?.method_deposit?.name
-              }
-            />
-            <Item name={'Receiver'} value={data?.method_deposit_item?.owner} />
-            <Item
-              name={'Amount of money'}
-              value={`+${formatPrice(data?.amount, {
-                currency: data?.currency_code,
-              })}`}
-            />
+              <Item
+                name={t('bank')}
+                value={
+                  data?.method_deposit_item?.bank_name?.split('-')?.[1] ||
+                  data?.method_deposit_item?.method_deposit?.name
+                }
+              />
+              <Item
+                name={t('receiver')}
+                value={data?.method_deposit_item?.owner}
+              />
+              <Item
+                name={t('amount_of_money')}
+                value={`+${formatPrice(data?.amount, {
+                  currency: data?.currency_code,
+                })}`}
+              />
+            </View>
           </View>
-        </View>
+        )}
       </MainWrapper>
 
       <View
@@ -147,19 +158,22 @@ export default function DetailHistoryDeposit({route}) {
         }}>
         <CustomButton
           onPress={() => navigate('ListMethodBankScreen')}
-          text="Top up"
+          text={t('top_up')}
           style={{
             width: '70%',
           }}
+          // linearGradientProps={{colors: COLORS.linearGradient}}
         />
       </View>
     </>
   );
 }
 const Item = ({name, value, color, backgroundColor, isCopy}) => {
+  const {t} = useLanguage();
+
   const handleCopy = () => {
     Clipboard.setString(value);
-    showMess('Copy successfully');
+    showMess(t('copy_success'));
   };
 
   return (
@@ -213,6 +227,8 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     // overflow: 'hidden',
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   header: {
     borderRadius: scale(10),
@@ -249,6 +265,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.white,
     ...SHADOW,
+    borderTopWidth: 1,
+    borderColor: COLORS.pioBox,
     shadowOffset: {
       width: 0,
       height: -1,

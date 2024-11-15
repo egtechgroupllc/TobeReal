@@ -1,7 +1,13 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import CustomImage from '../../../../../components/CustomImage';
-import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import {useQueryClient} from '@tanstack/react-query';
 import {formatPrice} from '../../../../../utils/format';

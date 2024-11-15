@@ -12,9 +12,10 @@ export default memo(function Category({
   styleContent,
   isShadow = true,
   indexDefault = 0,
-  backgroundColorSelect = COLORS.primary,
+  backgroundColorSelect = COLORS.white,
   isObject = false,
   selected,
+  styleButton,
 }) {
   const [select, setSelect] = useState(!noSelect && 0);
 
@@ -52,12 +53,18 @@ export default memo(function Category({
                   minWidth: widthSize,
                   backgroundColor:
                     select === index ? backgroundColorSelect : '#f1f1f1',
+                  borderWidth: 1,
+                  borderColor: COLORS.border,
                 },
               ]}
               styleText={[
-                select !== index && {
-                  color: COLORS.text,
-                },
+                select !== index
+                  ? {
+                      color: COLORS.text,
+                    }
+                  : {
+                      color: COLORS.primary,
+                    },
               ]}
               onPress={() => {
                 setSelect(index);

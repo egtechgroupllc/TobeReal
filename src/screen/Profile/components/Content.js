@@ -91,10 +91,12 @@ const Box = memo(({title, children}) => {
       </CustomText>
       <View
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.white,
           paddingHorizontal: scale(12),
           paddingVertical: scale(6),
           borderRadius: scale(10),
+          borderWidth: 1,
+          borderColor: COLORS.pioBox,
         }}>
         {children}
       </View>

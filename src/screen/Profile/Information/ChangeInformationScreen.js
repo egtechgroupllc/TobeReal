@@ -7,7 +7,12 @@ import {showMess} from '../../../assets/constants/Helper';
 import {postEditProfile} from '../../../Model/api/auth';
 import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {requireField, validateMinLengthText} from '../../../utils/validate';
-import {CustomButton, CustomInput, CustomText} from '../../../components';
+import {
+  CustomButton,
+  CustomInput,
+  CustomText,
+  MainWrapper,
+} from '../../../components';
 import {useForm} from 'react-hook-form';
 import {formatNumber} from '../../../utils/format';
 import {useAuthentication} from '../../../hooks/useAuthentication';
@@ -45,43 +50,45 @@ export default function ChangeInformationScreen() {
     });
   };
   return (
-    <View style={styles.container}>
-      <CustomInput
-        label={t('user_name')}
-        control={control}
-        name="username"
-        placeholder={t('enter_username')}
-        rules={[requireField(t('this_field_required'))]}
-        style={styles.textInput}
-        sizeInput="medium"
-        styleTextLabel={styles.styleLabel}
-        styleText={{
-          fontSize: SIZES.xMedium,
-        }}
-      />
+    <MainWrapper>
+      <View style={styles.container}>
+        <CustomInput
+          label={t('user_name')}
+          control={control}
+          name="username"
+          placeholder={t('enter_username')}
+          rules={[requireField(t('this_field_required'))]}
+          style={styles.textInput}
+          sizeInput="medium"
+          styleTextLabel={styles.styleLabel}
+          styleText={{
+            fontSize: SIZES.xMedium,
+          }}
+        />
 
-      <CustomInput
-        label={t('phone')}
-        control={control}
-        name="phone"
-        placeholder={t('enter_phone')}
-        rules={[requireField(t('this_field_required'))]}
-        style={styles.textInput}
-        sizeInput="medium"
-        styleTextLabel={styles.styleLabel}
-        styleText={{
-          fontSize: SIZES.xMedium,
-        }}
-        keyboardType="numeric"
-      />
+        <CustomInput
+          label={t('phone')}
+          control={control}
+          name="phone"
+          placeholder={t('enter_phone')}
+          rules={[requireField(t('this_field_required'))]}
+          style={styles.textInput}
+          sizeInput="medium"
+          styleTextLabel={styles.styleLabel}
+          styleText={{
+            fontSize: SIZES.xMedium,
+          }}
+          keyboardType="numeric"
+        />
 
-      <CustomButton
-        text={t('ok')}
-        onPress={handleSubmit(handleEditProfile)}
-        buttonType="medium"
-        style={styles.button}
-      />
-    </View>
+        <CustomButton
+          text={t('ok')}
+          onPress={handleSubmit(handleEditProfile)}
+          buttonType="medium"
+          style={styles.button}
+        />
+      </View>
+    </MainWrapper>
   );
 }
 const styles = StyleSheet.create({

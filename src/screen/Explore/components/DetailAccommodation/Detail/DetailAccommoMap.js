@@ -61,6 +61,7 @@ export default function DetailAccommoMap({
 
   return (
     <WrapperContent
+      noBackground
       heading={t('map_view')}
       styleContent={[styles.wrapper, styleWrapper]}>
       <View
@@ -104,7 +105,9 @@ export default function DetailAccommoMap({
                 height: scale(18),
               }}
             />
-            <CustomText style={{flex: 1}} numberOfLines={2}>
+            <CustomText
+              style={{flex: 1, color: COLORS.black}}
+              numberOfLines={2}>
               {address || data?.address}
             </CustomText>
           </View>

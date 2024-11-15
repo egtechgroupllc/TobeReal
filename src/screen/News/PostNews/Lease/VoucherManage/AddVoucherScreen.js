@@ -4,6 +4,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {IconHome} from '../../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {
+  COLORS,
   SHADOW,
   SIZES,
   WIDTH,
@@ -170,7 +171,10 @@ export default function AddVoucherScreen() {
       <View style={styles.box}>
         <CustomInput
           label={t('quantity')}
-          styleTextLabel={{fontSize: SIZES.xMedium, marginTop: scale(10)}}
+          styleTextLabel={{
+            fontSize: SIZES.xMedium,
+            marginTop: scale(10),
+          }}
           placeholder={t('quantity')}
           name="quantity"
           control={control}
@@ -215,7 +219,7 @@ export default function AddVoucherScreen() {
         />
       </View>
       <CustomButton
-        linearGradientProps
+        // linearGradientProps
         buttonType="medium"
         text={t('confirm')}
         onPress={handleSubmit(handlePostVoucher)}
@@ -282,9 +286,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
+    backgroundColor: COLORS.white,
     borderColor: '#F0B90B40',
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
     ...SHADOW,
     shadowOffset: {
       width: 0,
@@ -295,21 +299,22 @@ const styles = StyleSheet.create({
   box: {
     marginTop: scale(10),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
     rowGap: scale(10),
+    ...SHADOW,
   },
   text2: {
     fontSize: SIZES.medium,
   },
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

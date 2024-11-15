@@ -15,7 +15,7 @@ import {postForgotPassword} from '../../../../Model/api/auth';
 import {showMess} from '../../../../assets/constants/Helper';
 import VerificationCode from './VerificationCode';
 import ConfirmChangePassword from './ConfirmChangePassword';
-import {IconLogoSaveloka} from '../../../../assets/icon/Icon';
+import {IconLogoPione} from '../../../../assets/icon/Icon';
 export default function Content() {
   const {t} = useLanguage();
   const {control, handleSubmit, reset, watch} = useForm();
@@ -82,7 +82,7 @@ export default function Content() {
             alignItems: 'center',
             rowGap: scale(30),
           }}>
-          <IconLogoSaveloka width={scale(100)} height={scale(100)} />
+          <IconLogoPione width={scale(100)} height={scale(100)} />
           <Wrapper
             Heading1={t('forgot_password')}
             styleWrapper={{marginBottom: scale(10)}}
@@ -104,7 +104,7 @@ export default function Content() {
 
             <CustomButton
               onPress={handleSubmit(submitForgotPassword)}
-              linearGradientProps
+              // linearGradientProps
               buttonType="large"
               text={t('submit')}
             />

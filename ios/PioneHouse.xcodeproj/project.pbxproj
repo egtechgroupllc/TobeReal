@@ -25,26 +25,26 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = "PioneHouse";
+			remoteInfo = PioneHouse;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* PioneHouseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PioneHouseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* PioneHouseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PioneHouseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* PioneHouseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PioneHouseTests.m"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* PioneHouseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PioneHouseTests.m; sourceTree = "<group>"; };
 		134A68C9F40C6CBCD1D5AAC4 /* libPods-PioneHouse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PioneHouse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* PioneHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PioneHouse.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "PioneHouse/AppDelegate.h"; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "PioneHouse/AppDelegate.mm"; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "PioneHouse/Images.xcassets"; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PioneHouse/Info.plist"; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "PioneHouse/main.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* PioneHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PioneHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PioneHouse/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = PioneHouse/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PioneHouse/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PioneHouse/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PioneHouse/main.m; sourceTree = "<group>"; };
 		23947C607683427083A5531E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		400F0E7C6D2C64B45F68FF4A /* libPods-PioneHouse-PioneHouseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PioneHouse-PioneHouseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61093AC9891A8C0A68B5A29C /* Pods-PioneHouse-PioneHouseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PioneHouse-PioneHouseTests.debug.xcconfig"; path = "Target Support Files/Pods-PioneHouse-PioneHouseTests/Pods-PioneHouse-PioneHouseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		631AADD3D0B4450F8ADA7B0A /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "PioneHouse/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PioneHouse/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD92DF1A358CCD6D4A16E6AD /* Pods-PioneHouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PioneHouse.debug.xcconfig"; path = "Target Support Files/Pods-PioneHouse/Pods-PioneHouse.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D14E1C891B4874BB2788FE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		E33066D5A4C03F983DA410C1 /* Pods-PioneHouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PioneHouse.release.xcconfig"; path = "Target Support Files/Pods-PioneHouse/Pods-PioneHouse.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 				00E356F21AD99517003FC87E /* PioneHouseTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = "PioneHouseTests";
+			path = PioneHouseTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -100,7 +100,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = "PioneHouse";
+			name = PioneHouse;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -209,8 +209,8 @@
 			);
 			dependencies = (
 			);
-			name = "PioneHouse";
-			productName = "PioneHouse";
+			name = PioneHouse;
+			productName = PioneHouse;
 			productReference = 13B07F961A680F5B00A75B9A /* PioneHouse.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -454,7 +454,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PioneHouseTests/Info.plist";
+				INFOPLIST_FILE = PioneHouseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,7 +466,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pionechain.pionehouse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -482,7 +482,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = "PioneHouseTests/Info.plist";
+				INFOPLIST_FILE = PioneHouseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -494,7 +494,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pionechain.pionehouse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -513,8 +513,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "PioneHouse/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Pione House";
+				INFOPLIST_FILE = PioneHouse/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PioneHouse;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -527,8 +526,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pionechain.pionehouse";
-				PRODUCT_NAME = "PioneHouse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
+				PRODUCT_NAME = PioneHouse;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -546,8 +545,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "PioneHouse/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Pione House";
+				INFOPLIST_FILE = PioneHouse/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PioneHouse;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -560,8 +558,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pionechain.pionehouse";
-				PRODUCT_NAME = "PioneHouse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
+				PRODUCT_NAME = PioneHouse;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;

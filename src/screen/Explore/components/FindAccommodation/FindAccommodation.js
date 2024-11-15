@@ -6,7 +6,7 @@ import {
   getListTypeEstateSell,
   getListTypeRent,
 } from '../../../../Model/api/common';
-import {WIDTH, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, WIDTH, scale} from '../../../../assets/constants';
 import {
   IconApartment,
   IconEmigrate,
@@ -187,9 +187,10 @@ export default function FindAccommodation() {
                     />
                   )}
                   <OptionAccommodation
-                    styleIcon={{color: '#BCBCBC'}}
+                    styleIcon={{color: COLORS.grey}}
                     // multiSelect
                     // isSelectAll
+
                     onSelect={value => setSelectedId(value.id)}
                     keyTextView={'name'}
                     data={
@@ -236,6 +237,7 @@ const styles = StyleSheet.create({
   category: {
     rowGap: scale(14),
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: COLORS.pioBox,
+    backgroundColor: 'transparent',
   },
 });

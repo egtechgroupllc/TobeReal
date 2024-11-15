@@ -3,7 +3,7 @@ import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 
-import {IconMapView} from '../../../../assets/icon/Icon';
+import {IconMapView, IconNoReview} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 import {formatDate, formatPrice} from '../../../../utils/format';
@@ -209,6 +209,7 @@ export default function BoxPlaceItem({
                     {t('no_review')}
                   </CustomText>
                 </View>
+                // <IconNoReview />
               )}
             </View>
             <View style={styles.line} />
@@ -309,11 +310,12 @@ export default function BoxPlaceItem({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     // minHeight: scale(200),
     // height: 200,
     borderRadius: 12,
-    // ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   img: {
     width: '100%',
@@ -322,7 +324,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(12),
   },
   line: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#cccccc90',
     width: '100%',
     height: 1,
     marginVertical: scale(3),

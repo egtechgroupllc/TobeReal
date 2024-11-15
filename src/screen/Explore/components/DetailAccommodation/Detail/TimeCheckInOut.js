@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {IconArrowRight} from '../../../../../assets/icon/Icon';

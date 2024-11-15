@@ -34,7 +34,7 @@ export default function MapFooter({moveLocation, router, distance}) {
           position: 'absolute',
           top: scale(-40),
           left: scale(10),
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.pioPrimary,
           padding: scale(8),
           minWidth: '20%',
           borderRadius: scale(10),
@@ -45,7 +45,9 @@ export default function MapFooter({moveLocation, router, distance}) {
       </View>
 
       <View>
-        <CustomText>{t('note_map_distance')}</CustomText>
+        <CustomText style={{color: COLORS.black}}>
+          {t('note_map_distance')}
+        </CustomText>
       </View>
       <View style={styles.content}>
         <View style={styles.icon}>
@@ -61,12 +63,13 @@ export default function MapFooter({moveLocation, router, distance}) {
               textType="semiBold"
               style={{
                 fontSize: SIZES.medium,
+                color: COLORS.black,
               }}>
               Lat: {moveLocation?.latitude}
             </CustomText>
           </Marquee>
 
-          <CustomText style={styles.numberPiece} numberOfLines={2}>
+          <CustomText style={{color: COLORS.black}} numberOfLines={2}>
             Lng: {moveLocation?.longitude}
           </CustomText>
         </View>

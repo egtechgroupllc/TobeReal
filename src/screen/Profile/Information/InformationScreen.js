@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {getProfile} from '../../../Model/api/common';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconNext} from '../../../assets/icon/Icon';
 import {CustomButton, CustomText, MainWrapper} from '../../../components';
 import {useAuthentication} from '../../../hooks/useAuthentication';
@@ -22,7 +22,6 @@ export default function InformationScreen() {
   return (
     <MainWrapper
       headerTitle={t('personal_information')}
-      noImgColor
       styleContent={{
         paddingHorizontal: scale(12),
       }}>
@@ -90,6 +89,9 @@ const styles = StyleSheet.create({
     rowGap: scale(6),
     marginTop: scale(14),
     marginBottom: scale(30),
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   row: {
     flexDirection: 'row',

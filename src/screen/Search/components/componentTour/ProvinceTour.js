@@ -64,8 +64,9 @@ export default function ProvinceTour({
             minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked?.id === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked?.id === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked?.id === item?.id ? COLORS.pioPrimary : '#ccc',
+            backgroundColor:
+              checked?.id === item?.id ? COLORS.pioPrimary : '#fff',
           }}>
           <CustomText
             style={{

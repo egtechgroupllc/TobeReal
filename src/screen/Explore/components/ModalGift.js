@@ -6,7 +6,7 @@ import {IconSupporterYellow} from '../../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useQuery} from '@tanstack/react-query';
-import {getListConstant} from '../../../Model/api/common';
+import {getListConstant, getTokenAirdrop} from '../../../Model/api/common';
 import Modal from 'react-native-modal';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 
@@ -24,25 +24,24 @@ export default function ModalGift({
   //   queryKey: ['common', 'list-constant'],
   //   queryFn: getListConstant,
   // });
-
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token-airdrop'],
+    queryFn: () => getTokenAirdrop(),
+  });
   return (
     <Modal isVisible={open} animationIn={'fadeIn'} animationOut={'fadeOut'}>
       <View style={styles.contact}>
-        <LinearGradient
-          colors={['#FFE55A', '#F0B90B']}
-          start={{x: 1.2, y: 0}}
-          end={{x: 0, y: 0}}
-          style={styles.contactHeader}>
+        <View style={styles.contactHeader}>
           <IconSupporterYellow height={scale(20)} width={scale(20)} />
           <CustomText
             style={{
               fontSize: SIZES.small,
-              color: COLORS.black,
+              color: COLORS.white,
             }}
             textType="bold">
             {t('notification')}
           </CustomText>
-        </LinearGradient>
+        </View>
         <View style={styles.listContact}>
           <CustomImage
             source={images.iconCongrat}
@@ -67,7 +66,8 @@ export default function ModalGift({
               width: scale(200),
               textAlign: 'center',
             }}>
-            + {dataCheckin?.data?.amount} TOBE AIRDROP (TBC)
+            + {dataCheckin?.data?.amount} {getDataToken?.data?.name} (
+            {getDataToken?.data?.symbol})
           </CustomText>
           {!dataP?.data?.wallet_address ? (
             <>
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     columnGap: scale(20),
     width: '100%',
+    backgroundColor: COLORS.pioPrimary,
   },
   listContact: {
     borderBottomLeftRadius: scale(20),

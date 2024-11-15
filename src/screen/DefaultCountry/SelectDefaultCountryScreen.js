@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import MainWrapper from '../../components/MainWrapper';
-import {SIZES, images, scale} from '../../assets/constants';
+import {COLORS, SHADOW, SIZES, images, scale} from '../../assets/constants';
 import CustomImage from '../../components/CustomImage';
 import {CustomButton} from '../../components';
 import CategoriesButton from '../Profile/components/CategoriesButton';
@@ -71,11 +71,14 @@ export default function SelectDefaultCountryScreen() {
         <CustomText
           textType="medium"
           style={{fontSize: SIZES.large, marginTop: scale(20)}}>
-          Welcome to Saveloka!
+          Welcome to Pione House!
         </CustomText>
         <CustomText textType="regular">{t('please_select_country')}</CustomText>
         <CategoriesButton
-          style={{width: '90%', marginTop: scale(30)}}
+          style={{
+            width: '90%',
+            marginTop: scale(30),
+          }}
           title={t('select_country')}
           onPress={selectCountry}
           large={true}
@@ -90,7 +93,11 @@ export default function SelectDefaultCountryScreen() {
           nameCountry={selectedLanguage?.name && selectedLanguage?.name}
         />
         <View style={{marginTop: scale(220), width: '60%'}}>
-          <CustomButton text={t('confirm')} onPress={handleConfirm} />
+          <CustomButton
+            text={t('confirm')}
+            onPress={handleConfirm}
+            // linearGradientProps={{colors: COLORS.linearGradient}}
+          />
         </View>
       </View>
     </MainWrapper>

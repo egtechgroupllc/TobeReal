@@ -298,6 +298,7 @@ const styles = StyleSheet.create({
     marginVertical: scale(30),
     rowGap: scale(20),
     alignSelf: 'center',
+    paddingBottom: scale(100),
   },
   button: {
     height: scale(63),

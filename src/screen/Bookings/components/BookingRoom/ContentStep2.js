@@ -21,6 +21,7 @@ import {formatPrice} from '../../../../utils/format';
 import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import TopStep2 from './ContentStep2/TopStep2';
 import ModalBookingSuccess from './ContentStep2/ModalBookingSuccess';
+import {useLoading} from '../../../../hooks/useLoading';
 export default function ContentStep2({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -34,6 +35,8 @@ export default function ContentStep2({data}) {
   const [dataVoucher, setDataVoucher] = useState();
   const [balance, setBalance] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
+  const {stopLoading, setLoading} = useLoading();
+
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
@@ -95,6 +98,7 @@ export default function ContentStep2({data}) {
     if (typePayment !== 'FIAT') {
       setOpenContact(true);
     }
+
     setTimeout(() => {
       // setOpenContact(false);
       bookingRoomMu.mutate(
@@ -207,6 +211,12 @@ export default function ContentStep2({data}) {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
+  useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   return (
     <View style={styles.container}>
       <TopStep2
@@ -240,7 +250,7 @@ export default function ContentStep2({data}) {
             onPress={handleAlert}
             disabled={checkBalance}
             style={{
-              backgroundColor: !checkBalance ? COLORS.primary : COLORS.grey,
+              backgroundColor: !checkBalance ? COLORS.pioPrimary : COLORS.grey,
             }}
           />
         </View>

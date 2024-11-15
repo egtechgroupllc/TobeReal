@@ -98,7 +98,7 @@ export default function ListAccommodationSearchScreen() {
   return (
     <MainWrapper
       scrollEnabled={false}
-      styleContent={{backgroundColor: '#f7f9fa'}}>
+      styleContent={{backgroundColor: 'transparent'}}>
       <View
         style={{
           flex: 1,

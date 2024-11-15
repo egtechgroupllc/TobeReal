@@ -297,7 +297,7 @@ export default function PostNewLeaseScreen() {
         countdown={countdown}
       />
       <CustomButton
-        linearGradientProps
+        // linearGradientProps
         buttonType="medium"
         text={!params?.name ? t('post') : t('update')}
         disabled={createAccommodationMu.isPending}
@@ -319,6 +319,7 @@ const styles = StyleSheet.create({
     marginVertical: scale(30),
     rowGap: scale(20),
     alignSelf: 'center',
+    paddingBottom: scale(100),
   },
   button: {
     height: scale(63),

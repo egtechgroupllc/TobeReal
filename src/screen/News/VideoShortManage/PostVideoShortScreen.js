@@ -12,7 +12,7 @@ import {
   CustomText,
   MainWrapper,
 } from '../../../components';
-import {IconHome, IconLogoSaveloka} from '../../../assets/icon/Icon';
+import {IconHome, IconLogoPione} from '../../../assets/icon/Icon';
 import ChooseVideoPicker from '../../Bookings/Review/ChooseVideoPicker';
 import FooterButton from '../PostNews/Lease/components/FooterButton';
 import {SIZES, scale} from '../../../assets/constants';
@@ -46,15 +46,22 @@ export default function PostVideoShortScreen() {
     : 'tour';
   const table_id = params?.accomId || params?.estateId || params?.tourId;
   const {data, isLoading, error, isError} = useQuery({
-    queryKey: ['common', 'linked-data', table_id],
+    queryKey: [
+      'common',
+      'linked-data',
+      {
+        table_name: table_name,
+        table_id: table_id,
+      },
+    ],
     queryFn: () =>
       getLinkData({
-        token: token,
         table_name: table_name,
         table_id: table_id,
       }),
   });
   const txHashId = data?.data?.rows[0]?.id;
+
   const postVideoShortMu = useMutation({
     mutationFn: postVideoShort,
   });
@@ -123,7 +130,7 @@ export default function PostVideoShortScreen() {
             rowGap: scale(15),
             marginTop: scale(50),
           }}>
-          <IconLogoSaveloka width={scale(100)} height={scale(100)} />
+          <IconLogoPione width={scale(100)} height={scale(100)} />
           <CustomText
             style={{
               textAlign: 'center',

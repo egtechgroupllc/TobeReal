@@ -12,6 +12,7 @@ export default function RatingBox({rating, textRating, style}) {
       <View
         style={{
           ...styles.boxIcon,
+
           borderRadius: 0,
           backgroundColor: '#013b96',
         }}>

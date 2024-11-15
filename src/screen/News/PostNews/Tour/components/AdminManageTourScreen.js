@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
 import MainWrapper from '../../../../../components/MainWrapper';
@@ -138,7 +138,8 @@ export default function AdminManageTourScreen() {
 
         <CustomButton
           text={t('tour_ticket_management')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -148,7 +149,8 @@ export default function AdminManageTourScreen() {
         />
         <CustomButton
           text={t('voucher_manage')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -158,7 +160,8 @@ export default function AdminManageTourScreen() {
         />
         <CustomButton
           text={t('manage_video_short')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -215,6 +218,14 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     paddingHorizontal: scale(15),
     paddingVertical: scale(5),
+  },
+  button: {
+    width: '85%',
+    height: scale(45),
+    backgroundColor: COLORS.white,
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   bottom: {
     // backgroundColor: COLORS.white,

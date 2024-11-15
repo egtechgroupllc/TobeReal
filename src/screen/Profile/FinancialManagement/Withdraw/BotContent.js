@@ -24,9 +24,11 @@ export default function BotContent({control, setValue}) {
         onPress={() =>
           navigate('NoBottomTab', {
             screen: 'ListBankScreen',
-            onGoBack: dataBack => {
-              setBank(dataBack);
-              setValue('bank_name', dataBack?.name);
+            params: {
+              onGoBack: dataBack => {
+                setBank(dataBack);
+                setValue('bank_name', dataBack?.name);
+              },
             },
           })
         }>
@@ -47,7 +49,7 @@ export default function BotContent({control, setValue}) {
       <CustomInput
         label={t('bank_number')}
         styleTextLabel={{fontSize: SIZES.medium}}
-        style={{...styles.boxItem, borderWidth: 0}}
+        style={{...styles.boxItem}}
         styleWrapper={{paddingVertical: scale(10)}}
         control={control}
         rules={[requireField(t('this_field_required'))]}
@@ -57,7 +59,7 @@ export default function BotContent({control, setValue}) {
       <CustomInput
         label={t('bank_holder')}
         styleTextLabel={{fontSize: SIZES.medium}}
-        style={{...styles.boxItem, borderWidth: 0}}
+        style={{...styles.boxItem}}
         styleWrapper={{paddingVertical: scale(5)}}
         control={control}
         name="bank_owner"
@@ -76,13 +78,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: scale(16),
     paddingVertical: scale(10),
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    ...SHADOW,
+
     borderRadius: scale(6),
     columnGap: scale(14),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   wallet: {
     alignSelf: 'flex-end',

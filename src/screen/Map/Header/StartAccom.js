@@ -17,8 +17,10 @@ export default function RatingReview({onSort}) {
       style={{
         rowGap: scale(10),
       }}>
-      <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
-        Hang sao
+      <CustomText
+        textType="bold"
+        style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
+        {t('star_rank')}
       </CustomText>
 
       <View
@@ -37,11 +39,11 @@ export default function RatingReview({onSort}) {
             style={{
               ...styles.item,
               borderWidth: checked === index ? 1.3 : 1,
-              borderColor: checked === index ? COLORS.primary : '#f1f1f1',
+              borderColor: checked === index ? COLORS.pioPrimary : '#f1f1f1',
             }}
             styleText={{
               fontSize: SIZES.small,
-              color: checked === index ? COLORS.primary : '#000',
+              color: checked === index ? COLORS.pioPrimary : '#000',
             }}
             styleIcon={{
               color: COLORS.primary,

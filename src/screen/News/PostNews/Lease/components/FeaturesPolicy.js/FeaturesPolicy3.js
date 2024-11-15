@@ -46,7 +46,7 @@ export default function FeaturesPolicy3({control}) {
       <Collapsible collapsed={isSelect !== 2}>
         <View style={styles.boxCheckMeal}>
           <CustomInput
-            placeholder="Describe other requirements "
+            placeholder={t('describe_other_requirements')}
             style={styles.textInput}
             maxLength={2}
             styleText={{
@@ -56,7 +56,7 @@ export default function FeaturesPolicy3({control}) {
             name="min_number_day"
             rules={[requireField(t('this_field_required'))]}
           />
-          <CustomText>Describe other requirements</CustomText>
+          <CustomText>{t('describe_other_requirements')}</CustomText>
         </View>
       </Collapsible>
     </View>

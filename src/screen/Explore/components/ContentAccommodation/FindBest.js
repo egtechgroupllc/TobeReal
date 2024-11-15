@@ -70,12 +70,10 @@ export default function FindBest({country, currency}) {
           },
         })
       }
+      noBackground
       onPressCategory={item => setFilter(item)}
       heading={title}
       subHeading={t('disc_upto') + ` 30%!`}
-      styleWrapper={{
-        backgroundColor: COLORS.subPrimary,
-      }}
       styleContent={{
         justifyContent: 'center',
         minHeight: scale(230),

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import RadioButton from '../../../../../components/RadioButton';
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import CheckBox from '../../../../../../components/CheckBox';
 import Collapsible from 'react-native-collapsible';
 import {useLanguage} from '../../../../../../hooks/useLanguage';

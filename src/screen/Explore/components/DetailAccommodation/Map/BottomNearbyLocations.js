@@ -78,6 +78,7 @@ export default memo(function BottomNearbyLocations({
     <BottomSheet
       ref={bottomSheetRef}
       titleIndicator={'Occupancy'}
+      handleStyle={{color: COLORS.black}}
       snapPoints={['20%', '40%', '95%']}
       index={1}
       styleContent={{

@@ -26,13 +26,13 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    console.log(error.response.status);
+    // console.log(error.response.status);
     if (error.response && error.response.status === 401 && countErr < 1) {
-      // Alert.alert(
-      //   'Notification',
-      //   'Your account has been logged in from another device, please log in again!',
-      //   [{text: 'OK', onPress: () => handleLogoutExistToken()}],
-      // );
+      Alert.alert(
+        'Notification',
+        'Your account has been logged in from another device, please log in again!',
+        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+      );
       ++countErr;
     }
     return Promise.reject(error);

@@ -111,7 +111,7 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
       <View style={styles.header}>
         <View style={styles.boxHeight}>
           <CustomImage
-            source={images.logoSaveloka}
+            source={images.logo}
             resizeMode="contain"
             style={styles.img}
           />
@@ -142,20 +142,20 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
             alignItems: 'center',
           }}>
           <TouchableOpacity onPress={goDailyCheckin}>
-            <IconGift fill={COLORS.white} />
+            <IconGift fill={COLORS.black} />
             {(dataCheckin?.data?.can_check_in ||
               (token && !dataP?.data?.wallet_address)) && (
               <View style={styles.dot} />
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={goChatGroup}>
-            <IconChat fill={COLORS.white} />
+            <IconChat fill={COLORS.black} />
             {data?.data?.rows[0]?.number_message_not_seen > 0 && (
               <View style={styles.dot} />
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={goNotify}>
-            <IconNotification fill={COLORS.white} />
+            <IconNotification fill={COLORS.black} />
             {dataNotify?.data?.number_not_seen > 0 && (
               <View
                 style={{
@@ -224,8 +224,11 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     rowGap: scale(20),
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.white,
     paddingHorizontal: scale(16),
+    ...SHADOW,
+    borderBottomWidth: 1,
+    borderColor: '#F0B90B40',
   },
   header: {
     flexDirection: 'row',

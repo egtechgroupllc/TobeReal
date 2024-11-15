@@ -66,15 +66,15 @@ export default function TabSelect({
                   height: '100%',
                   backgroundColor:
                     tab === index
-                      ? styleTabActive?.backgroundColor || '#fff'
-                      : styleTabDefault?.backgroundColor || '#e1e1e1',
+                      ? styleTabActive?.backgroundColor || COLORS.white
+                      : styleTabDefault?.backgroundColor || COLORS.grey50,
                 },
               ]}
               styleText={{
                 color:
                   tab === index
-                    ? styleTabActive?.color || '#F0B90B'
-                    : styleTabDefault?.color || COLORS.textSub,
+                    ? styleTabActive?.color || COLORS.primary
+                    : styleTabDefault?.color || COLORS.black,
                 textType: 'bold',
                 textTransform: transformText || 'uppercase',
                 fontSize: sizeText || SIZES.xMedium,
@@ -129,10 +129,13 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     minHeight: scale(200),
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     borderRadius: 12,
     paddingVertical: scale(16),
     rowGap: scale(14),
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
+    ...SHADOW,
   },
   tab: {
     borderTopLeftRadius: scale(6),
@@ -140,5 +143,7 @@ const styles = StyleSheet.create({
     // flex: 0.5,
     width: '100%',
     borderRadius: 0,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
 });

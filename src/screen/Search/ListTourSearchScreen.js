@@ -137,7 +137,7 @@ export default function ListTourSearchScreen() {
   return (
     <MainWrapper
       scrollEnabled={false}
-      styleContent={{backgroundColor: '#f7f9fa'}}>
+      styleContent={{backgroundColor: 'transparent'}}>
       <FilterTour
         onFilter={onFilter}
         listProvince={listProvince}

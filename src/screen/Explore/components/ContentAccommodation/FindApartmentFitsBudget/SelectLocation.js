@@ -61,6 +61,7 @@ export default function SelectLocation({control, name}) {
 
       <BottomSheet
         titleIndicator={'Select Location'}
+        handleStyle={{color: COLORS.black}}
         ref={bottomSheetRef}
         dataList={dataList}
         headerComponent={

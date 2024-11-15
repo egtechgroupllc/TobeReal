@@ -78,6 +78,7 @@ export default function FindContentTour({rental, dataFind}) {
           // onPress={() => showMess(t('comming_soon'), 'error')}
           buttonType="medium"
           text={t('find_recommend_tour')}
+          // linearGradientProps={{colors: COLORS.linearGradient}}
           styleText={{
             color: COLORS.white,
             textType: 'bold',
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
   icon: {
     width: scale(20),
     height: scale(20),
+    color: COLORS.primary,
   },
 
   question: {

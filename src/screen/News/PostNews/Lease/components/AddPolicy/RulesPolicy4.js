@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import RadioButton from '../../../../../components/RadioButton';
@@ -61,16 +61,15 @@ export default function RulesPolicy4({control, unregister}) {
             name="min_number_day"
             rules={[
               requireField(t('this_field_required')),
-              validateMinMaxAmount('Invalid minimum night stay (1 -> 28)', 28),
+              validateMinMaxAmount(t('invalid_minimum_night_stay'), 28),
             ]}
           />
-          <CustomText>Minimum night stay</CustomText>
+          <CustomText>{t('minimum_night_stay')}</CustomText>
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
-            <CustomText>
-              This will not affect any length of stay limits which is set in
-              your calendar.
+            <CustomText style={{color: COLORS.white}}>
+              {t('this_will_not_affect_any_length_of_stay_limits')}
             </CustomText>
           </View>
         </View>
@@ -91,8 +90,8 @@ const styles = StyleSheet.create({
   },
   note: {
     marginTop: scale(4),
-    backgroundColor: '#E3E3E3',
-    borderColor: '#E3E3E3',
+    backgroundColor: COLORS.pioPrimary,
+    borderColor: COLORS.pioPrimary,
     padding: scale(10),
     borderRadius: scale(6),
     alignItems: 'flex-start',
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
   arrowTop: {
     borderWidth: scale(7),
     borderColor: '#00000000',
-    borderBottomColor: '#E3E3E3',
+    borderBottomColor: COLORS.pioPrimary,
     position: 'absolute',
     top: scale(-12),
     left: scale(10),

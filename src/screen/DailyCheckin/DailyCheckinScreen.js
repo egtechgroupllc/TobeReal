@@ -15,6 +15,7 @@ import {COLORS, SIZES, images, scale} from '../../assets/constants';
 import {getBalanceWallet} from '../../Model/api/wallet';
 import {getDailyCheckinInfo, postDailyCheckin} from '../../Model/api/auth';
 import {showMess} from '../../assets/constants/Helper';
+import {getTokenAirdrop} from '../../Model/api/common';
 
 export default function DailyCheckinScreen() {
   const {token} = useAuthentication();
@@ -30,15 +31,14 @@ export default function DailyCheckinScreen() {
       headerTitle: t('daily_checkin'),
     });
   }, []);
-  const {
-    data: dataCheckin,
-    error,
-    isError,
-  } = useQuery({
+  const {data: dataCheckin} = useQuery({
     queryKey: ['check-in-daily', 'info'],
     queryFn: () => getDailyCheckinInfo(),
   });
-
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token-airdrop'],
+    queryFn: () => getTokenAirdrop(),
+  });
   const checkinMutation = useMutation({
     mutationFn: postDailyCheckin,
   });
@@ -94,7 +94,8 @@ export default function DailyCheckinScreen() {
           width: scale(200),
           textAlign: 'center',
         }}>
-        + {dataCheckin?.data?.amount} TOBE AIRDROP (TBC)
+        + {dataCheckin?.data?.amount} {getDataToken?.data?.name} (
+        {getDataToken?.data?.symbol})
       </CustomText>
       {!dataP?.wallet_address ? (
         <View style={{rowGap: scale(50), alignItems: 'center', width: '70%'}}>
@@ -125,7 +126,7 @@ export default function DailyCheckinScreen() {
               styleWrapper={{width: '70%'}}
               style={{
                 backgroundColor: dataCheckin?.data?.can_check_in
-                  ? COLORS.primary
+                  ? COLORS.pioPrimary
                   : COLORS.grey,
               }}
               disabled={dataCheckin?.data?.can_check_in ? false : true}

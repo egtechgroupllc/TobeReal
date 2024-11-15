@@ -53,9 +53,6 @@ export default function ListVideoRENT({isFocused}) {
         0,
       );
 
-      console.log('Total Items:', totalItems);
-      console.log('Loaded Items:', loadedItems);
-
       if (loadedItems >= totalItems) {
         return undefined;
       }
@@ -203,9 +200,9 @@ export default function ListVideoRENT({isFocused}) {
               // }}
               // onComment={() => commentRef.current?.open()}
               styleBottom={{
-                paddingBottom:
-                  Platform.OS === 'android' ? scale(40) : scale(20),
+                paddingBottom: scale(100),
               }}
+              Bottom
               onComment={() => showMess(t('comming_soon'), 'error')}
             />
           );

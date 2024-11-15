@@ -64,8 +64,8 @@ export default function Menubar({onType, value}) {
             minWidth: '30%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked === item?.id ? COLORS.pioPrimary : '#ccc',
+            backgroundColor: checked === item?.id ? COLORS.pioPrimary : '#fff',
           }}>
           <CustomText
             style={{

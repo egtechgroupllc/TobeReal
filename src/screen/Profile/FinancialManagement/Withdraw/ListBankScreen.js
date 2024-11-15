@@ -23,6 +23,7 @@ import {
 import CheckBox from '../../../../components/CheckBox';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {MainWrapper} from '../../../../components';
 const data = [
   {id: 1, name: 'VIETCOMBANK', icon: <IconVietcombank />},
   {id: 2, name: 'TECHCOMBANK', icon: <IconTechcombank />},
@@ -69,7 +70,7 @@ export default function ListBankScreen() {
   }, [bank?.name]);
 
   return (
-    <View>
+    <MainWrapper>
       <FlatList
         data={data}
         style={{
@@ -86,6 +87,7 @@ export default function ListBankScreen() {
               key={`key_${item?.id}`}
               isRadio
               onPress={() => setBank(item)}
+              fillColor={COLORS.primary}
               isChecked={bank?.id === item?.id}
               textLeft
               textComponent={
@@ -104,7 +106,7 @@ export default function ListBankScreen() {
           </>
         )}
       />
-    </View>
+    </MainWrapper>
   );
 }
 
@@ -129,6 +131,8 @@ const styles = StyleSheet.create({
     },
     borderRadius: scale(6),
     columnGap: scale(14),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
 });

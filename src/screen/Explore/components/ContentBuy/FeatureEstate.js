@@ -5,7 +5,7 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SHADOW, images, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, images, scale} from '../../../../assets/constants';
 import BoxFeatureItem from './BoxFeatureItem';
 import {useNavigation} from '@react-navigation/native';
 import {getListSell} from '../../../../Model/api/apiEstate';
@@ -89,7 +89,8 @@ export default function FeatureEstate() {
       // }
       // onPressCategory={item => setFilter(item)}
       heading={title}
-      styleWrapper={{backgroundColor: 'transparent'}}>
+      noBackground
+      styleWrapper={{backgroundColor: '#2A2A2A10'}}>
       <InViewport
         loadingMap
         ComponentLoading={
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     columnGap: scale(14),
     paddingVertical: scale(6),
     paddingHorizontal: scale(16),
-    minHeight: scale(250),
+    minHeight: scale(220),
     minWidth: '100%',
   },
 });

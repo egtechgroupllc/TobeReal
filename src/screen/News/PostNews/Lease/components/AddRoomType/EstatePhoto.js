@@ -87,11 +87,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

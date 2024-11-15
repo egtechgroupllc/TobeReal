@@ -1,6 +1,11 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  scale,
+} from '../../../../../../../assets/constants';
 import {useNavigation} from '@react-navigation/native';
 import {CustomText} from '../../../../../../../components';
 import {IconVoucher} from '../../../../../../../assets/icon/Icon';
@@ -124,5 +129,8 @@ const styles = StyleSheet.create({
   voucherView: {
     width: '100%',
     paddingVertical: scale(25),
+    ...SHADOW,
+    borderBottomWidth: 1,
+    borderColor: COLORS.pioBox,
   },
 });

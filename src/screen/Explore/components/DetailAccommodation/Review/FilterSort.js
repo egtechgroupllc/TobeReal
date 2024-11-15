@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import {IconSort} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import OptionAccommodation from '../../FindAccommodation/OptionAccommodation';
@@ -50,7 +50,9 @@ export default function FilterSort({
               height: scale(14),
             }}
           />
-          <CustomText textType="semiBold">{text || t('filter')}</CustomText>
+          <CustomText textType="semiBold" style={{color: COLORS.black}}>
+            {text || t('filter')}
+          </CustomText>
         </View>
         {sort && (
           <CustomText
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     columnGap: scale(10),
   },
   sort: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
     paddingHorizontal: scale(6),
     paddingVertical: scale(4),
@@ -84,6 +86,9 @@ const styles = StyleSheet.create({
     rowGap: scale(3),
     minWidth: scale(100),
     height: '80%',
+    ...SHADOW,
+    borderWidth: scale(1),
+    borderColor: COLORS.pioBox,
   },
   icon: {
     flexDirection: 'row',

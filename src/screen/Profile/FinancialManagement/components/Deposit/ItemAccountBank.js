@@ -23,7 +23,7 @@ export default function ItemAccountBank({data, onPress, isSelect}) {
 
         isSelect && {
           borderWidth: 1,
-          borderColor: COLORS.primary,
+          borderColor: COLORS.grey50,
         },
       ]}>
       <View style={styles.boxImg}>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     borderRadius: scale(6),
     columnGap: scale(14),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
   },
   boxImg: {
     borderWidth: 1,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     padding: scale(3),
   },
   code: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: COLORS.grey50,
     padding: scale(6),
     borderRadius: scale(6),
     flexDirection: 'row',

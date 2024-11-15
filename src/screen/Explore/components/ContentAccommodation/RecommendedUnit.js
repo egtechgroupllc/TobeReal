@@ -14,7 +14,7 @@ export default function RecommendedUnit({data}) {
     <InViewPort>
       <WrapperContent
         onPressSeeAll={() => console.log(1)}
-        heading={t('saveloka_recommended')}>
+        heading={t('pionehouse_recommended')}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

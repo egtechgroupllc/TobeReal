@@ -117,6 +117,7 @@ export default memo(function MapHeader({
       <BottomSheet
         snapPoints={['50%', '80%']}
         titleIndicator={t('filter&sort')}
+        handleStyle={{color: COLORS.black}}
         ref={bottomSheetRef}
         refChild={bottomSheetChildRef}
         onChange={value => {
@@ -175,6 +176,7 @@ export default memo(function MapHeader({
         }}>
         {(watch('menu')?.id === 'RENT' || watch('menu')?.id === 'BUY') && (
           <CustomInput
+            placeholderTextColor={COLORS.black}
             placeholder={t('accommodation_name')}
             name="name"
             control={control}

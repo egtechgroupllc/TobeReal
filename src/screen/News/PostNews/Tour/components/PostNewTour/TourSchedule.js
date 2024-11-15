@@ -225,7 +225,7 @@ export default function TourSchedule({
               />
             </> */}
             <CustomInput
-              label={t('Số ngày')}
+              label={t('number_of_days')}
               styleTextLabel={styles.label}
               styleWrapper={{
                 flex: 1,
@@ -244,7 +244,7 @@ export default function TourSchedule({
               // onPress={() => setOpenCheckEnd(true)}
             />
             <CustomInput
-              label={t('Số giờ')}
+              label={t('number_of_hours')}
               styleTextLabel={styles.label}
               styleWrapper={{
                 flex: 1,
@@ -254,11 +254,11 @@ export default function TourSchedule({
               styleText={styles.textInput}
               control={control}
               name="hours"
-              maxLength={2}
+              maxLength={4}
               rules={[
                 requireField(t('this_field_required')),
                 validateMaxAmount(
-                  `${t('maximum_amount')} ${maxHours}`,
+                  `${t('maximum_hours')} ${maxHours}`,
                   maxHours,
                 ),
               ]}
@@ -380,11 +380,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.pioBox,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

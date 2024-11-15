@@ -10,7 +10,7 @@ import {
 import Collapsible from 'react-native-collapsible';
 
 import {getListTypeEstateSell} from '../../../../../../Model/api/common';
-import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
@@ -137,11 +137,12 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     // alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.pioBox,
+    ...SHADOW,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),

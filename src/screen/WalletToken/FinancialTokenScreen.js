@@ -8,7 +8,7 @@ import {IconDeposit, IconHistory} from '../../assets/icon/Icon';
 import {HistoryTransactionScreen} from '../Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HistoryTokenDataScreen from './HistoryTokenDataScreen';
-import {scale} from '../../assets/constants';
+import {COLORS, scale, WIDTH} from '../../assets/constants';
 const Tab = createBottomTabNavigator();
 
 export default function FinancialTokenScreen() {
@@ -21,10 +21,22 @@ export default function FinancialTokenScreen() {
       initialRouteName="WithdrawTokenScreen"
       screenOptions={{
         headerShown: true,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.pioPrimary,
+        tabBarInactiveTintColor: COLORS.black,
         tabBarHideOnKeyboard: true,
-
+        tabBarStyle: [
+          WIDTH.widthScreen > 700 && {
+            height: scale(50),
+          },
+          {
+            zIndex: -1,
+          },
+          {
+            backgroundColor: COLORS.white,
+            borderTopWidth: 1,
+            borderColor: COLORS.pioBox,
+          },
+        ],
         header: props => (
           <HeaderBar
             {...props}
@@ -43,7 +55,7 @@ export default function FinancialTokenScreen() {
         options={{
           tabBarLabel: t('withdraw_point_voucher'),
           tabBarIcon: ({focused}) => (
-            <IconDeposit fill={focused && '#F0B90B'} />
+            <IconDeposit fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -54,7 +66,7 @@ export default function FinancialTokenScreen() {
           tabBarLabel: t('transaction_history'),
           tabBarIcon: ({focused}) => (
             <IconHistory
-              fill={focused && '#F0B90B'}
+              fill={focused && COLORS.pioPrimary}
               width={scale(15)}
               height={scale(15)}
             />

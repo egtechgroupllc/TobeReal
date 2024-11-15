@@ -140,7 +140,7 @@ export default function ContentPartner() {
           onPress={handleSubmit(handleSignup)}
           buttonType="large"
           text={t('signup')}
-          linearGradientProps
+          // linearGradientProps
           style={{
             marginTop: scale(10),
           }}

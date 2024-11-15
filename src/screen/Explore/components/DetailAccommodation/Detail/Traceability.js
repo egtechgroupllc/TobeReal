@@ -20,15 +20,18 @@ export default function Traceability({data}) {
 
   const handleOpenLink = async () => {
     await Linking.openURL(
-      `https://eco.tobescan.com/address/${data.user.wallet_address}`,
+      `https://zeroscan.org/address/${data.user.wallet_address}`,
     );
   };
   return (
     <WrapperContent
+      noBackground
       heading={t('traceability')}
       styleContent={{
         paddingHorizontal: scale(16),
         height: scale(100),
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
       }}>
       <TouchableOpacity onPress={handleOpenLink} activeOpacity={0.7}>
         <CustomText

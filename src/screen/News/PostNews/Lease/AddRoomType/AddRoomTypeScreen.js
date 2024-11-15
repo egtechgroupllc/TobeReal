@@ -14,6 +14,7 @@ import {
 import {images} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {
+  COLORS,
   SHADOW,
   SIZES,
   WIDTH,
@@ -300,7 +301,7 @@ export default function AddRoomTypeScreen() {
       />
 
       <CustomButton
-        linearGradientProps
+        // linearGradientProps
         buttonType="medium"
         text={params?.update ? t('update') : t('post')}
         disabled={createAccommodationRoomMu.isPending}
@@ -328,9 +329,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(1),
+    backgroundColor: COLORS.white,
     borderColor: '#F0B90B40',
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
     ...SHADOW,
     shadowOffset: {
       width: 0,

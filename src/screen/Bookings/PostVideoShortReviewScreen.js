@@ -16,7 +16,7 @@ import {
   MainWrapper,
 } from '../../components';
 import {COLORS, SIZES, images, scale} from '../../assets/constants';
-import {IconLogoSaveloka} from '../../assets/icon/Icon';
+import {IconLogoPione} from '../../assets/icon/Icon';
 import {useForm} from 'react-hook-form';
 import {requireField} from '../../utils/validate';
 import ChooseVideoPicker from './Review/ChooseVideoPicker';
@@ -102,7 +102,7 @@ export default function PostVideoShortReviewScreen() {
             rowGap: scale(15),
             marginTop: scale(50),
           }}>
-          <IconLogoSaveloka width={scale(100)} height={scale(100)} />
+          <IconLogoPione width={scale(100)} height={scale(100)} />
           <CustomText
             style={{
               textAlign: 'center',

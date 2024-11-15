@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton} from '../../../../components';
 import BottomSheet from '../../../../components/BottomSheet';
@@ -150,6 +150,7 @@ export default forwardRef(function ChooseCalendarSheet(
       ref={ref}
       refChild={bottomSheetChild}
       titleIndicator={t('calendar')}
+      handleStyle={{color: COLORS.black}}
       snapPoints={['75%']}
       snapPointsChild={['60%']}
       onDismiss={onDismiss}

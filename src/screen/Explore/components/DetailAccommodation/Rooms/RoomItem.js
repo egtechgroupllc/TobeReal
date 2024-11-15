@@ -217,11 +217,13 @@ export default function wwRoomItem({
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
     padding: scale(10),
     rowGap: scale(8),
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   img: {
     width: '100%',

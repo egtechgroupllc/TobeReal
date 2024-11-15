@@ -68,7 +68,7 @@ export default function MainWrapper({
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: COLORS.primary}}
+      style={{flex: 1, backgroundColor: COLORS.pioPrimary}}
       edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
       <Component
         source={images.background}
@@ -90,7 +90,7 @@ export default function MainWrapper({
                 <RefreshControl
                   refreshing={refresh.current}
                   onRefresh={pullToRefresh}
-                  tintColor={COLORS.primary}
+                  tintColor={COLORS.pioPrimary}
                 />
               )
             }

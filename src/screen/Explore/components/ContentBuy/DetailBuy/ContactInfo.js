@@ -38,10 +38,11 @@ export default function ContactInfo({data, onPress}) {
             textType="bold"
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.white,
             }}>
             {t('information')}
           </CustomText>
-          <IconRight />
+          <IconRight fill={COLORS.white} />
         </View>
 
         <View style={styles.center}>
@@ -145,9 +146,11 @@ export default function ContactInfo({data, onPress}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
     paddingVertical: scale(16),
     paddingHorizontal: scale(20),
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   content: {
     backgroundColor: '#fff',
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     ...SHADOW,
   },
   header: {
-    backgroundColor: '#FFCE00',
+    backgroundColor: COLORS.pioPrimary,
     padding: scale(10),
     borderRadius: scale(10),
     alignItems: 'center',

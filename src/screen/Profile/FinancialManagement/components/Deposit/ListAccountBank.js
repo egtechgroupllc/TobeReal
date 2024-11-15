@@ -1,6 +1,6 @@
 import React, {memo, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {COLORS, scale} from '../../../../../assets/constants';
+import {COLORS, scale, SHADOW} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import ItemAccountBank from './ItemAccountBank';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -53,6 +53,9 @@ export default memo(function ListAccountBank({
 const styles = StyleSheet.create({
   box: {
     backgroundColor: COLORS.white,
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(10),
     padding: scale(10),
     rowGap: scale(20),

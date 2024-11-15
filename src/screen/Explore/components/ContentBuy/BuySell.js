@@ -5,7 +5,7 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SHADOW, images, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useNavigation} from '@react-navigation/native';
@@ -86,7 +86,7 @@ export default function BuySell({data, isLoading, country}) {
         // onPressCategory={item => console.log(item)}
         heading={title}
         subHeading={t('There are 1,000,000 Real Estate')}
-        styleWrapper={{backgroundColor: 'transparent'}}>
+        styleWrapper={{backgroundColor: '#2A2A2A10'}}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

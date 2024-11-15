@@ -118,7 +118,7 @@ export default memo(function ChooseCalendarRoom({
             style={{
               flexDirection: 'row',
               columnGap: scale(10),
-              backgroundColor: COLORS.primary,
+              backgroundColor: COLORS.pioPrimary,
               padding: 5,
               borderRadius: scale(5),
             }}>
@@ -143,6 +143,7 @@ export default memo(function ChooseCalendarRoom({
         ref={bottomSheetRef}
         refChild={bottomSheetChild}
         titleIndicator={t('calendar')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['75%']}
         snapPointsChild={['60%']}
         onDismiss={handleSelectDate}

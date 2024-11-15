@@ -46,12 +46,8 @@ export default memo(function BoxItemProfile({
           justifyContent: 'flex-end',
           flex: 1,
         }}>
-        {titleRight && (
-          <CustomText color={COLORS.textSub} numberOfLines={1}>
-            {titleRight}
-          </CustomText>
-        )}
-        <IconNext width={scale(12)} height={scale(12)} fill={COLORS.textSub} />
+        {titleRight && <CustomText numberOfLines={1}>{titleRight}</CustomText>}
+        <IconNext width={scale(12)} height={scale(12)} />
       </View>
     </TouchableOpacity>
   );

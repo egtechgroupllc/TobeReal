@@ -8,7 +8,7 @@ import React, {
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-import {scale} from '../../assets/constants';
+import {COLORS, scale} from '../../assets/constants';
 import {IconEmojiFace} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import BottomSheet from '../../components/BottomSheet';
@@ -198,6 +198,7 @@ export default memo(
         <BottomSheet
           ref={bottomSheetRef}
           disableScroll
+          handleStyle={{color: COLORS.black}}
           titleIndicator={`${formatNumber(10000)} Comment`}
           snapPoints={['70%']}
           onDismiss={() => setIsComment(false)}>

@@ -74,7 +74,6 @@ export default function GeneralInformation({
           <View style={styles.line} />
 
           <CustomInput
-            styleTextLabel={styles.label}
             label={t('real_estate_title')}
             control={control}
             name="title"
@@ -100,7 +99,6 @@ export default function GeneralInformation({
           />
 
           <CustomInput
-            styleTextLabel={styles.label}
             label={t('description_content')}
             control={control}
             name="description"
@@ -142,15 +140,7 @@ export default function GeneralInformation({
 
           <View style={styles.line} />
 
-          <SelectCountry
-            control={control}
-            setValue={setValue}
-            watch={watch}
-            // onChange={value => {
-            //   setValue('country_id', value?.id);
-            //   setValue('province_id', value?.province?.id);
-            // }}
-          />
+          <SelectCountry control={control} setValue={setValue} watch={watch} />
 
           {!params?.address && (
             <CustomInput
@@ -172,17 +162,17 @@ export default function GeneralInformation({
 const styles = StyleSheet.create({
   label: {
     fontSize: SIZES.small,
-    color: COLORS.black,
+    color: COLORS.white,
   },
 
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -191,12 +181,11 @@ const styles = StyleSheet.create({
   line: {
     height: 0.5,
     width: '100%',
-    backgroundColor: '#F0B90B',
+    backgroundColor: COLORS.pioPrimary,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
-    borderColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderRadius: scale(6),
   },
   numText: {

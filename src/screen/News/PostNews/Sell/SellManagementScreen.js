@@ -4,7 +4,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {getMyListCreateSell} from '../../../../Model/api/apiEstate';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import BottomSheet from '../../../../components/BottomSheet';
 import EmptyData from '../../../../components/EmptyData';
 import MainWrapper from '../../../../components/MainWrapper';
@@ -47,6 +47,9 @@ export default function SellManagementScreen() {
       e.preventDefault();
     });
   }, []);
+  console.log('====================================');
+  console.log(dataNew);
+  console.log('====================================');
   return (
     <MainWrapper
       optionsHeader={{
@@ -58,7 +61,7 @@ export default function SellManagementScreen() {
       styleContent={{
         marginBottom: scale(20),
       }}>
-      {!dataNew?.length > 0 && isPending ? (
+      {!dataNew?.length > 0 || isPending ? (
         <EmptyData />
       ) : (
         <>
@@ -118,6 +121,7 @@ export default function SellManagementScreen() {
           <BottomSheet
             ref={bottomSheetRef}
             titleIndicator={t('notification')}
+            handleStyle={{color: COLORS.black}}
             snapPoints={['30%']}
             disableScroll
             styleContent={styles.bottomSheet}>

@@ -5,10 +5,11 @@ import {scale} from '../../../../../../../assets/constants';
 import CustomText from '../../../../../../../components/CustomText';
 import RadioButton from '../../../../../../components/RadioButton';
 import StarAccomo from './StarAccomo';
+import {useLanguage} from '../../../../../../../hooks/useLanguage';
 
 export default function SetStartAccomo({onChange}) {
   const [select, setSelect] = useState(0);
-
+  const {t} = useLanguage();
   useEffect(() => {
     onChange && onChange(select);
   }, [select]);
@@ -29,7 +30,9 @@ export default function SetStartAccomo({onChange}) {
           textComponent={
             !!index && (
               <View style={{flexDirection: 'row', columnGap: scale(6)}}>
-                <CustomText>{index} sao</CustomText>
+                <CustomText>
+                  {index} {t('star')}
+                </CustomText>
                 <StarAccomo isSetRating rating={index} />
               </View>
             )

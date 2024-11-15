@@ -135,6 +135,7 @@ export default function CreateSellItem({
             numberOfLines={5}
             style={{
               flex: 1,
+              color: COLORS.black,
             }}>
             <View
               style={{
@@ -165,17 +166,24 @@ export default function CreateSellItem({
       <View style={{flexDirection: 'row', columnGap: scale(10)}}>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>Id</CustomText>
-          <CustomText textType="medium" numberOfLines={1}>
+          <CustomText
+            textType="medium"
+            numberOfLines={1}
+            style={{color: COLORS.black}}>
             {data?.id}
           </CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>{t('date_posted')}</CustomText>
-          <CustomText textType="medium">{data?.date_start}</CustomText>
+          <CustomText textType="medium" style={{color: COLORS.black}}>
+            {data?.date_start}
+          </CustomText>
         </View>
         <View style={{flex: 1}}>
           <CustomText style={styles.center}>{t('expiration_date')}</CustomText>
-          <CustomText textType="medium">{dateExpire}</CustomText>
+          <CustomText textType="medium" style={{color: COLORS.black}}>
+            {dateExpire}
+          </CustomText>
         </View>
       </View>
 
@@ -243,10 +251,12 @@ export default function CreateSellItem({
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(10),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     width: scale(400 / 1.3),
     borderRadius: scale(6),
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   top: {
     flexDirection: 'row',
@@ -259,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
   },
   center: {
-    color: COLORS.text,
+    color: COLORS.black,
     marginBottom: scale(4),
   },
   box: {

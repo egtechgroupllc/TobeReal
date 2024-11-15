@@ -29,7 +29,6 @@ export default function EmptyData({
       <CustomText
         textType="bold"
         style={{
-          color: COLORS.primary,
           fontSize: SIZES.medium,
         }}>
         {desc || t('no_data')}

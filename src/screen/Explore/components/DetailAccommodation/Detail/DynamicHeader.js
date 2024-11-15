@@ -43,8 +43,8 @@ export default React.memo(
       outputRange: [
         'transparent',
         'transparent',
-        COLORS.primary,
-        COLORS.primary,
+        COLORS.pioPrimary,
+        COLORS.pioPrimary,
       ],
       extrapolate: 'clamp',
     });
@@ -52,7 +52,7 @@ export default React.memo(
     const onShare = async () => {
       Share.share({
         message: data?.name || data?.title,
-        url: 'https://saveloka.com/en',
+        url: 'https://pionehouse.com',
       })
         .then(res => {
           console.log(res);
@@ -150,6 +150,7 @@ export default React.memo(
           </Animated.View>
 
           <OptionAccommodation
+            styleTextItem={COLORS.black}
             isShaDow
             styleContent={{
               columnGap: scale(8),
@@ -158,6 +159,7 @@ export default React.memo(
             styleWrapper={{
               flex: 0,
               height: scale(46),
+              backgroundColor: COLORS.white,
             }}
             data={listInfo}
             onSelect={onSelect}
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     position: 'absolute',
     paddingHorizontal: scale(16),
     // paddingVertical: scale(10),

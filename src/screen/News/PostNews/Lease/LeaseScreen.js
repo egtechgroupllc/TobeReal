@@ -90,11 +90,13 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     padding: scale(10),
     borderRadius: scale(6),
     rowGap: scale(10),
     width: '90%',
     ...SHADOW,
+    borderWidth: 1,
   },
   icon: {
     color: COLORS.white,

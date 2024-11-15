@@ -65,5 +65,6 @@ const styles = StyleSheet.create({
   box: {
     padding: scale(10),
     rowGap: scale(10),
+    backgroundColor: COLORS.white,
   },
 });

@@ -79,12 +79,14 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             {t('price')}
           </CustomText>
           <CustomText
             style={{
               fontSize: SIZES.medium,
+              color: COLORS.black,
             }}
             textType="bold">
             {formatPrice(price, {
@@ -139,6 +141,7 @@ export default memo(function BookAccommodation({isLoading, price, onPress}) {
             styleText={{
               fontSize: SIZES.xMedium,
             }}
+            // linearGradientProps={{colors: COLORS.linearGradient}}
             iconLeft={IconPhone}
             styleIcon={{
               color: '#fff',

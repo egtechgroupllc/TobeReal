@@ -119,7 +119,7 @@ export default function BoxExploreEstate({
               <CustomText
                 textType="bold"
                 style={[isStar && {fontSize: SIZES.small, color: '#252B5C'}]}
-                numberOfLines={2}>
+                numberOfLines={1}>
                 {data?.title}
               </CustomText>
               <View
@@ -218,7 +218,7 @@ export default function BoxExploreEstate({
 const styles = StyleSheet.create({
   wrapper: {
     // justifyContent: 'center',
-    // alignItems: 'center',
+    alignItems: 'center',
     // paddingVertical: scale(10),
     backgroundColor: '#F5F4F8',
     // minHeight: scale(230),

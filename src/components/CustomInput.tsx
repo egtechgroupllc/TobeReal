@@ -179,7 +179,7 @@ export default forwardRef(function CustomInput(
 
               <TextInput
                 ref={ref}
-                placeholderTextColor={COLORS.textSub}
+                placeholderTextColor={COLORS.black}
                 secureTextEntry={viewPassword}
                 editable={!onPress}
                 autoCapitalize="none"
@@ -209,6 +209,7 @@ export default forwardRef(function CustomInput(
                   textWeight,
                   styleText,
                 ]}
+
                 pointerEvents={!!onPress ? 'none' : 'auto'}
               />
 
@@ -258,7 +259,7 @@ const styles = StyleSheet.create({
   },
   content: {
     borderWidth: 1,
-    borderColor: '#cccccc',
+    borderColor: '#cccccc90',
     borderStyle: 'solid',
     paddingHorizontal: scale(8),
     flexDirection: 'row',
@@ -275,7 +276,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(4),
     fontFamily: FONTS.medium,
     fontSize: SIZES.small,
-    color: COLORS.text,
+    color: COLORS.black,
     height: '100%',
   },
   iconBox: {

@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect, useMemo} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {IconHome, IconLogoSaveloka} from '../../../../assets/icon/Icon';
+import {IconHome, IconLogoPione} from '../../../../assets/icon/Icon';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {
   CustomButton,
@@ -127,7 +127,7 @@ export default function RepostExpiredScreen() {
         {params?.isTour ? (
           <>
             <View style={{alignItems: 'center', marginTop: scale(30)}}>
-              <IconLogoSaveloka width={scale(130)} height={scale(130)} />
+              <IconLogoPione width={scale(130)} height={scale(130)} />
             </View>
 
             <View style={styles.content}>

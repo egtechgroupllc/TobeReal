@@ -6,7 +6,12 @@ import {
   getListPolicy,
   postPolicyToRoom,
 } from '../../../../../../../Model/api/apiAccom';
-import {COLORS, SIZES, scale} from '../../../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  scale,
+} from '../../../../../../../assets/constants';
 import {
   IconBookings,
   IconHome,
@@ -112,24 +117,26 @@ export default function PolicyManageScreen() {
         <View
           style={{
             borderWidth: scale(1),
-            borderColor: COLORS.primary,
+            borderColor: COLORS.pioBox,
             marginVertical: scale(10),
             borderRadius: scale(10),
-            backgroundColor: '#FFFFFF99',
+            backgroundColor: COLORS.white,
+            ...SHADOW,
           }}>
           <View
             style={{
               borderBottomWidth: scale(1),
               padding: scale(10),
               borderRadius: scale(10),
-              borderColor: COLORS.primary,
-              backgroundColor: COLORS.subPrimary,
+              borderColor: COLORS.white70,
+              backgroundColor: COLORS.pioPrimary,
             }}>
             <CustomText
               textType="semiBold"
               style={{
                 alignSelf: 'center',
                 fontSize: SIZES.medium,
+                color: COLORS.white,
               }}>
               {t('list_policies')}
             </CustomText>
@@ -152,7 +159,11 @@ export default function PolicyManageScreen() {
                   rowGap: scale(10),
                   padding: scale(10),
                 }}>
-                <IconBookings width={scale(50)} height={scale(50)} />
+                <IconBookings
+                  width={scale(50)}
+                  height={scale(50)}
+                  fill={COLORS.white}
+                />
                 <CustomText textType="medium" style={{fontSize: SIZES.medium}}>
                   {t('no_data')}
                 </CustomText>
@@ -162,7 +173,7 @@ export default function PolicyManageScreen() {
               marginTop: scale(10),
               borderRadius: 10,
               borderWidth: 1,
-              borderColor: COLORS.primary,
+              borderColor: COLORS.white70,
               margin: scale(15),
               overflow: 'hidden',
             }}
@@ -173,8 +184,9 @@ export default function PolicyManageScreen() {
                   key={`$key_${item.id}-policy-${index}`}
                   style={{
                     height: scale(35),
-                    backgroundColor: index % 2 ? COLORS.subPrimary : '#fefae0',
-                    borderColor: COLORS.primary,
+                    backgroundColor:
+                      index % 2 ? COLORS.pioPrimary : COLORS.pioBox,
+                    borderColor: COLORS.white70,
                     borderTopWidth: index === 0 ? 0 : 1,
 
                     alignItems: 'center',
@@ -261,6 +273,7 @@ export default function PolicyManageScreen() {
         <BottomSheet
           ref={bottomSheetRef}
           titleIndicator={t('notification')}
+          handleStyle={{color: COLORS.black}}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

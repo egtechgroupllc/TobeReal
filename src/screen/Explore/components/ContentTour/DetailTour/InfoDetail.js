@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import {
   IconCalendar,
   IconClock,
@@ -20,6 +26,8 @@ import Introduction from '../../DetailAccommodation/Detail/Introduction';
 import TicketOption from './TicketOption';
 import QRCode from 'react-native-qrcode-svg';
 import QRWalletBlockChain from '../../../../Profile/components/QRWalletBlockChain';
+import {MainWrapper} from '../../../../../components';
+import WrapperContent from '../../WrapperContent';
 
 export default function InfoDetail({data, name, paramsTour}) {
   const {t} = useLanguage();
@@ -33,12 +41,16 @@ export default function InfoDetail({data, name, paramsTour}) {
   const result = calculateDaysAndHours(data?.total_hours);
   if (!data?.wallet_address) return null;
   return (
-    <View>
+    <WrapperContent
+      noBackground
+      styleContent={{
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+      }}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'flex-start',
-          backgroundColor: '#fff',
           justifyContent: 'space-between',
           padding: scale(16),
         }}>
@@ -115,9 +127,12 @@ export default function InfoDetail({data, name, paramsTour}) {
           activeOpacity={0.7}
           onPress={() => setIsOpen(true)}
           style={{
-            backgroundColor: COLORS.white70,
+            backgroundColor: COLORS.white,
             padding: scale(8),
             borderRadius: scale(9),
+            borderWidth: 1,
+            borderColor: COLORS.pioBox,
+            ...SHADOW,
           }}>
           <QRCode value={data?.wallet_address} size={scale(80)} />
         </TouchableOpacity>
@@ -197,8 +212,7 @@ export default function InfoDetail({data, name, paramsTour}) {
         />
       )}
       <Introduction data={data} />
-      <View style={styles.line} />
-    </View>
+    </WrapperContent>
   );
 }
 
@@ -217,12 +231,12 @@ const styles = StyleSheet.create({
   text: {fontSize: SIZES.small, color: COLORS.grey},
   text1: {fontSize: SIZES.xxSmall, width: '30%'},
   line: {
-    width: '100%',
+    width: '96%',
     height: scale(1),
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.pioBox,
+    alignSelf: 'center',
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },

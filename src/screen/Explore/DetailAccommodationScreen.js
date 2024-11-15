@@ -41,7 +41,7 @@ export default function DetailAccommodationScreen() {
       text: t('review'),
     },
     {
-      text: 'Chính sách',
+      text: t('policy'),
     },
     {
       text: t('others'),
@@ -60,6 +60,7 @@ export default function DetailAccommodationScreen() {
       : [
           <InfoDetail data={dataDetail} />,
           <Traceability data={dataDetail} />,
+
           <InfoUnitFacilities data={dataDetail} />,
           <View style={{rowGap: scale(8)}}>
             <DetailAccommoMap data={dataDetail} />
@@ -79,7 +80,7 @@ export default function DetailAccommodationScreen() {
   };
 
   return (
-    <MainWrapper scrollEnabled={false} noImgColor>
+    <MainWrapper scrollEnabled={false}>
       <AnimateScrollWrapper
         lisViewComponent={listView}
         listNav={listNavBar}

@@ -1,6 +1,6 @@
 import React, {forwardRef, memo, useImperativeHandle, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../../assets/constants';
+import {COLORS, scale, SHADOW} from '../../../../../assets/constants';
 import ChooseCalendarRoom from './ChooseCalendarRoom';
 import SelectNumGuestRoom from './SelectNumGuestRoom';
 
@@ -12,6 +12,9 @@ export default memo(function RoomFilter({onSelectDate, data, onChangeNum}) {
         backgroundColor: '#fff',
         paddingHorizontal: scale(8),
         paddingVertical: scale(10),
+        ...SHADOW,
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
       }}>
       <ChooseCalendarRoom
         onSelectDate={value => {

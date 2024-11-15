@@ -50,7 +50,7 @@ export default memo(function InputPriceRoom({
         style={{
           rowGap: scale(10),
         }}>
-        <CustomText color={COLORS.text}>{t('include_taxes')}</CustomText>
+        <CustomText color={COLORS.white}>{t('include_taxes')}</CustomText>
 
         <Collapsible
           collapsed={!priceValue}
@@ -65,7 +65,7 @@ export default memo(function InputPriceRoom({
             size={SIZES.xMedium}>
             {data?.data?.fee_commission_percent * 100}%{' '}
             <CustomText textType="medium" size={SIZES.xMedium}>
-              {t('commission_for_saveloka')}
+              {t('commission_for_pionehouse')}
             </CustomText>
           </CustomText>
 
@@ -97,7 +97,7 @@ export default memo(function InputPriceRoom({
 
 const styles = StyleSheet.create({
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

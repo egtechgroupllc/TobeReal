@@ -22,13 +22,6 @@ export default function Facilities({data}) {
     <View style={styles.boxTourTime}>
       <View
         style={{
-          backgroundColor: '#F5F5F5',
-          height: scale(6),
-        }}
-      />
-
-      <View
-        style={{
           paddingHorizontal: scale(20),
         }}>
         <View style={styles.listInfo}>
@@ -109,7 +102,6 @@ export default function Facilities({data}) {
 
 const styles = StyleSheet.create({
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(10),
   },
@@ -123,6 +115,6 @@ const styles = StyleSheet.create({
   line: {
     width: '100%',
     height: scale(1),
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.pioBox,
   },
 });

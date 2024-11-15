@@ -214,9 +214,9 @@ export default function ListVideoBUY({isFocused}) {
               // }}
               // onComment={() => commentRef.current?.open()}
               styleBottom={{
-                paddingBottom:
-                  Platform.OS === 'android' ? scale(40) : scale(20),
+                paddingBottom: scale(100),
               }}
+              Bottom
               onComment={() => showMess(t('comming_soon'), 'error')}
             />
           );

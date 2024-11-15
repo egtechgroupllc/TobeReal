@@ -3,12 +3,10 @@ import React, {useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
 
-
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import BottomSheet from '../../../../../components/BottomSheet';
 import WrapperContent from '../../WrapperContent';
-import { TabSelect } from '../../../../../components';
-
+import {TabSelect} from '../../../../../components';
 
 export default function Introduction() {
   const {t} = useLanguage();
@@ -81,6 +79,7 @@ export default function Introduction() {
         titleIndicator={
           tabSelect === listTab[0] ? t('description_content') : 'Nearby'
         }
+        handleStyle={{color: COLORS.black}}
         styleContent={{
           paddingHorizontal: scale(16),
         }}>

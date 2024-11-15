@@ -106,7 +106,7 @@ export default function FindContent({isBuy, rental, dataFind}) {
         {isBuy && (
           <View style={styles.optionBox}>
             <View style={styles.boxIcon}>
-              <IconRoom />
+              <IconRoom fill={COLORS.primary} />
             </View>
             <OptionAccommodation
               outline
@@ -138,7 +138,7 @@ export default function FindContent({isBuy, rental, dataFind}) {
         {isBuy && (
           <View style={styles.optionBox}>
             <View style={styles.boxIcon}>
-              <IconFurniture />
+              <IconFurniture fill={COLORS.primary} />
             </View>
             <OptionAccommodation
               outline
@@ -166,7 +166,7 @@ export default function FindContent({isBuy, rental, dataFind}) {
         {isBuy && (
           <View style={styles.optionBox}>
             <View style={styles.boxIcon}>
-              <IconTag />
+              <IconTag fill={COLORS.primary} />
             </View>
             <OptionAccommodation
               outline
@@ -218,8 +218,9 @@ export default function FindContent({isBuy, rental, dataFind}) {
             textType: 'bold',
             textTransform: 'uppercase',
           }}
+          // linearGradientProps={{colors: COLORS.linearGradient}}
           style={{
-            minWidth: '90%',
+            minWidth: '100%',
           }}
         />
       </View>
@@ -250,10 +251,11 @@ const styles = StyleSheet.create({
   icon: {
     width: scale(20),
     height: scale(20),
+    color: COLORS.primary,
   },
 
   question: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     width: scale(16),
     height: scale(16),
     borderRadius: 999,

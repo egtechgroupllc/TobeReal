@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     },
     borderRadius: scale(6),
     columnGap: scale(14),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
 });

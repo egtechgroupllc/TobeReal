@@ -5,7 +5,7 @@ import {formatDate, formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import WrapperContent from '../WrapperContent';
 import {useNavigation} from '@react-navigation/native';
@@ -111,7 +111,8 @@ export default function PackageTour() {
         onPressCategory={item => setFilter(item)}
         heading={title}
         // subHeading={t('discover_package_family') + ` ${formatPrice(1000000)}`}
-        styleWrapper={{backgroundColor: 'transparent'}}>
+        noBackground
+        styleWrapper={{backgroundColor: COLORS.pioBox}}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

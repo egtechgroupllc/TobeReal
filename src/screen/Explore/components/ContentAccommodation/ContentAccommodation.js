@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: scale(16),
     rowGap: scale(10),
+    paddingBottom: scale(80),
   },
   content: {
     columnGap: scale(14),

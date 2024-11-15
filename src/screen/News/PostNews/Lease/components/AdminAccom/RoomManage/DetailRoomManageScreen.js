@@ -247,7 +247,8 @@ export default function DetailRoomManageScreen() {
 
         <CustomButton
           text={t('edit')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           onPress={() => {
             navigate('AddRoomTypeScreen', {
               ...params,
@@ -257,7 +258,8 @@ export default function DetailRoomManageScreen() {
         />
         <CustomButton
           text={t('room_price_manage')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           onPress={() => {
             navigate('RoomPriceManageScreen', {
               ...params,
@@ -267,7 +269,8 @@ export default function DetailRoomManageScreen() {
         />
         <CustomButton
           text={t('link_policy_to_room')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           onPress={() => {
             navigate('PolicyToRoomScreen', {
               ...params,
@@ -288,7 +291,8 @@ export default function DetailRoomManageScreen() {
         /> */}
         <CustomButton
           text={t('policy_manage')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           onPress={() =>
             navigate('PolicyManageScreen', {
               ...params,
@@ -316,6 +320,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: scale(10),
     rowGap: scale(3),
+  },
+  button: {
+    width: '85%',
+    height: scale(45),
+    backgroundColor: COLORS.white,
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   type: {
     position: 'absolute',

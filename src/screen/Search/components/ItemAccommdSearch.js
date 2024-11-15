@@ -216,11 +216,11 @@ export default function ItemAccommdSearch({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
     width: '100%',
     height: scale(240),
     borderRadius: scale(10),
-    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   img: {
     borderTopLeftRadius: scale(10),

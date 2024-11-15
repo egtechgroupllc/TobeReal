@@ -104,6 +104,7 @@ export default function ImportAddressWalletBtn() {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={t('import_existing_wallet')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['30%']}
         styleContent={{
           paddingHorizontal: scale(16),

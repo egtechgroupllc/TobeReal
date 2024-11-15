@@ -4,7 +4,7 @@ import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {getProfile} from '../../Model/api/common';
 import {getBalanceWallet} from '../../Model/api/wallet';
-import {images, scale} from '../../assets/constants';
+import {COLORS, images, scale} from '../../assets/constants';
 import {showMess} from '../../assets/constants/Helper';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useCountry} from '../../hooks/useCountry';
@@ -39,10 +39,10 @@ export default function AddressWalletScreen() {
   const listWallet = useMemo(
     () => [
       {
-        name: `${t('wallet')} SavePay`,
+        name: `${t('wallet')} PionePay`,
         balance: data?.data.balance * currency?.exchange_rate,
         backgroundColor: '#FFA800',
-        logo: images.logo1,
+        logo: images.icon_wallet,
         isOpen: true,
         currency: currency?.currency_code,
         isNext: true,
@@ -55,7 +55,7 @@ export default function AddressWalletScreen() {
         des: !data?.data?.wallet_address
           ? t('active_to_use_wallet')
           : t('wallet_ready_to_use'),
-        logo: images.logoTBH,
+        logo: images.logo1,
         isOpen: data?.data?.private_key || data?.data?.passphrase,
         currency: 'TBH',
         isToken: true,
@@ -89,7 +89,7 @@ export default function AddressWalletScreen() {
       style={{
         paddingHorizontal: 10,
         paddingTop: scale(30),
-        backgroundColor: '#f7f9fa',
+        backgroundColor: COLORS.white,
         flex: 1,
       }}>
       {/* <Button title="Start tutorial" onPress={() => start()} /> */}

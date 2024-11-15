@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {IconCalendar} from '../../../../assets/icon/Icon';
 import {CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
@@ -65,7 +65,11 @@ export default function ChooseCalendar({
   return (
     <View style={style}>
       {Checkin && (
-        <CustomText style={{fontSize: SIZES.xMedium, paddingBottom: scale(5)}}>
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            paddingBottom: scale(5),
+          }}>
           Check in - Check out
         </CustomText>
       )}
@@ -115,5 +119,6 @@ const styles = StyleSheet.create({
   icon: {
     width: scale(20),
     height: scale(20),
+    color: COLORS.primary,
   },
 });

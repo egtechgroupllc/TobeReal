@@ -140,7 +140,7 @@ export default function ContentStep1({onPress, data}) {
           width: '80%',
           alignSelf: 'center',
         }}
-        linearGradientProps
+        // linearGradientProps
         styleText={{
           fontSize: SIZES.medium,
         }}

@@ -26,9 +26,8 @@ export default memo(function MapHeader({onPress, onPressMove, typeMove}) {
     <View style={styles.wrapper}>
       <View style={styles.top}>
         <CustomInput
-          placeholder={t('Search')}
+          placeholder={t('search')}
           style={{
-            backgroundColor: '#fff',
             flex: 1,
           }}
         />

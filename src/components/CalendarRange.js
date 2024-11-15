@@ -145,7 +145,7 @@ export default memo(function CalendarRange({
 
       return datesInRange.reduce((acc, date) => {
         const dateTime = format(date, 'yyyy-MM-dd');
-        acc[dateTime] = {color: COLORS.primary, textColor: 'white'};
+        acc[dateTime] = {color: COLORS.pioPrimary, textColor: 'white'};
         return acc;
       }, {});
     }
@@ -221,7 +221,7 @@ export default memo(function CalendarRange({
         enableSwipeMonths
         onMonthChange={onMonthChange}
         theme={{
-          arrowColor: COLORS.primary,
+          arrowColor: COLORS.pioPrimary,
           weekVerticalMargin: id ? scale(6) : scale(2),
         }}
         dayComponent={dayComponent}
@@ -246,7 +246,7 @@ const BoxText = ({
         borderRadius: isDateStart || isDateEnd ? 99 : 0,
         borderWidth: isDateStart || isDateEnd ? 2 : 0,
         backgroundColor: (isDateStart || isDateEnd) && '#fff',
-        borderColor: COLORS.primary,
+        borderColor: COLORS.pioPrimary,
         width: '100%',
       }}>
       <CustomText

@@ -18,6 +18,7 @@ import {showMess} from '../../../../../../../assets/constants/Helper';
 import {useLoading} from '../../../../../../../hooks/useLoading';
 import Communications from 'react-native-communications';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
+import {CustomButton} from '../../../../../../../components';
 
 export default function Contact({data}) {
   const {navigate, setOptions} = useNavigation();
@@ -93,23 +94,30 @@ export default function Contact({data}) {
   return (
     <View style={styles.container}>
       {dataItem.map((item, index) => (
-        <TouchableOpacity key={index} onPress={item?.onPress}>
-          <LinearGradient
-            colors={['#FFE55A', '#F0B90B']}
-            start={{x: 0, y: 1.5}}
-            end={{x: 0, y: 0}}
-            style={{...styles.button}}>
-            {item.icon}
-            <CustomText
-              textType="bold"
-              style={{
-                fontSize: SIZES.xSmall,
-                color: COLORS.white,
-              }}>
-              {item.name}
-            </CustomText>
-          </LinearGradient>
-        </TouchableOpacity>
+        <CustomButton
+          text={item.name}
+          onPress={item.onPress}
+          icon={item.icon}
+          style={{...styles.button}}
+        />
+
+        // <TouchableOpacity key={index} onPress={item?.onPress}>
+        //   <LinearGradient
+        //     colors={COLORS.linearGradient}
+        //     start={{x: 0, y: 1}}
+        //     end={{x: 0, y: 0}}
+        //     style={{...styles.button}}>
+        //     {item.icon}
+        //     <CustomText
+        //       textType="bold"
+        //       style={{
+        //         fontSize: SIZES.xSmall,
+        //         color: COLORS.white,
+        //       }}>
+        //       {item.name}
+        //     </CustomText>
+        //   </LinearGradient>
+        // </TouchableOpacity>
       ))}
     </View>
   );

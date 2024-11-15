@@ -61,9 +61,7 @@ export default function TabContent() {
         marginTop: scale(100),
         alignSelf: 'center',
       }}>
-      <CustomText
-        textType="bold"
-        style={{...styles.text2, color: COLORS.black}}>
+      <CustomText textType="bold" style={{...styles.text2}}>
         {t('post')}
       </CustomText>
       <ButtonPost

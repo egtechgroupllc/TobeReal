@@ -52,8 +52,8 @@ export default function MenuAddressWallet({data}) {
 
     const content = `${JSON.stringify(dataSave, null, 2)}
    Note*: 
-  - Hãy lưu trữ file này cận thận và để ở 1 nơi an toàn.
-  - Saveloka không giữa bản sao thông tin ví của bạn.      
+  - Please store this file carefully and in a safe place.
+  - Pione House does not keep copies of your wallet information.      
   `;
 
     const content2 = JSON.stringify(dataSave);
@@ -67,7 +67,7 @@ export default function MenuAddressWallet({data}) {
 
       if (res.uri) {
         // Chuyển đổi URI thành đường dẫn hợp lệ
-        const pathFolder = `${res.uri}/Saveloka`;
+        const pathFolder = `${res.uri}/PioneHouse`;
         const path =
           Platform.OS === 'android'
             ? pathFolder
@@ -97,14 +97,14 @@ export default function MenuAddressWallet({data}) {
         await RNFS.writeFile(filePath2, content2, 'utf8');
       }
 
-      showMess('Lưu file thanh công', 'success');
+      showMess(t('saved_file_successfully'), 'success');
       bottomSheetRef.current.close();
     } catch (error) {
       if (DocumentPicker.isCancel(error)) {
         console.log('Người dùng đã hủy chọn thư mục.');
       } else {
         console.error('Lỗi khi tạo tệp:', error);
-        showMess('Lỗi khi Lưu file', 'error');
+        showMess(t('error_when_saving_file'), 'error');
       }
     }
   }, [
@@ -129,6 +129,7 @@ export default function MenuAddressWallet({data}) {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={t('wallet')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['30%']}
         styleContent={{
           paddingHorizontal: scale(16),

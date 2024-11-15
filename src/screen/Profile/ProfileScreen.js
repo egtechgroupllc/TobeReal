@@ -25,13 +25,12 @@ export default function ProfileScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
-
   return (
     <MainWrapper
       refreshControl
       optionsHeader={{
         headerStyle: {
-          minHeight: scale(Platform.OS == 'ios' ? 120 : 70),
+          minHeight: scale(Platform.OS === 'ios' ? 120 : 70),
         },
       }}
       headerTitleComponent={<HeaderNoToken />}
@@ -40,8 +39,8 @@ export default function ProfileScreen() {
         paddingHorizontal: scale(12),
       }}>
       {token && (
-        <>
-          <View style={styles.wallet}>
+        <View style={{paddingTop: scale(50)}}>
+          {/* <View style={styles.wallet}>
             <IconWallet />
             <CustomText
               textType="bold"
@@ -51,14 +50,14 @@ export default function ProfileScreen() {
                 currency: currency?.currency_code,
               })}
             </CustomText>
-          </View>
+          </View> */}
           <TopProfile
             upgrade={true}
             data={data?.data}
             name={data?.data?.username || 'name'}
             onPressUpgrade={upgrade}
           />
-        </>
+        </View>
       )}
       <Content token={token} />
 

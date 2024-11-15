@@ -101,7 +101,7 @@ export default memo(function BottomSheetListSelect({
               textType: 'medium',
               color:
                 select === item?.text || select === item
-                  ? COLORS.primary
+                  ? COLORS.pioPrimary
                   : COLORS.text,
               fontSize: SIZES.xMedium,
             }}

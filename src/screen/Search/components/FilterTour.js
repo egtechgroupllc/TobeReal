@@ -92,6 +92,7 @@ export default memo(function FilterTour({
         top: 0,
         paddingHorizontal: scale(80),
         ...SHADOW,
+
         zIndex: 99,
       }}>
       {/* <HeaderBar /> */}
@@ -106,6 +107,7 @@ export default memo(function FilterTour({
       <BottomSheet
         snapPoints={['50%', '80%']}
         titleIndicator={t('filter&sort')}
+        handleStyle={{color: COLORS.black}}
         ref={bottomSheetRef}
         refChild={bottomSheetChildRef}
         onChange={value => {
@@ -134,7 +136,7 @@ export default memo(function FilterTour({
             style={{
               borderTopWidth: scale(1),
               borderColor: COLORS.grey,
-              backgroundColor: 'white',
+              backgroundColor: COLORS.white,
               height: scale(100),
               flexDirection: 'row',
               columnGap: scale(20),

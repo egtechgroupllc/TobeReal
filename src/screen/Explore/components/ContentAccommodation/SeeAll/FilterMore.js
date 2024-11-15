@@ -129,6 +129,7 @@ export default function FilterMore({
       <BottomSheet
         snapPoints={['50%', '80%']}
         titleIndicator={t('Filter more')}
+        handleStyle={{color: COLORS.black}}
         ref={bottomSheetRef}
         ComponentFooter={
           <View

@@ -39,6 +39,7 @@ export default function Ribbon({
           textType="medium"
           style={{
             fontSize: SIZES.xSmall,
+            color: COLORS.black,
           }}>
           🛌 {numberRoom}
         </CustomText>
@@ -68,6 +69,8 @@ const styles = StyleSheet.create({
     columnGap: scale(6),
     borderRadius: 6,
     marginLeft: scale(-4),
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   right: {
     backgroundColor: COLORS.white,

@@ -5,7 +5,13 @@ import {formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SHADOW, SIZES, images, scale} from '../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../assets/constants';
 import BoxExploreEstate from './BoxExploreEstate';
 import {useNavigation} from '@react-navigation/native';
 import {getListCountry} from '../../../../Model/api/common';
@@ -60,6 +66,7 @@ export default function ExploreNearbyEstate({country}) {
           ? listProvince?.data?.data?.rows.slice(0, 9)
           : [...Array(4)]
       }
+      noBackground
       onPressSeeAll={() =>
         navigate('NoBottomTab', {
           screen: 'SeeAllBuyScreen',
@@ -76,7 +83,7 @@ export default function ExploreNearbyEstate({country}) {
         minHeight: scale(230),
       }}
       // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-      styleWrapper={{backgroundColor: 'transparent'}}>
+      styleWrapper={{backgroundColor: COLORS.pioBox}}>
       <InViewport
         loadingMap
         ComponentLoading={

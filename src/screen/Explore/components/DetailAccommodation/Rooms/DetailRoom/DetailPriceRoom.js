@@ -37,6 +37,7 @@ export default function DetailPriceRoom({isOpen, onClose, data, numRoom}) {
           onDismiss={() => onClose()}
           snapPoints={['35%']}
           titleIndicator={t('price_detail')}
+          handleStyle={{color: COLORS.black}}
           styleContent={{
             paddingHorizontal: scale(20),
             rowGap: scale(10),

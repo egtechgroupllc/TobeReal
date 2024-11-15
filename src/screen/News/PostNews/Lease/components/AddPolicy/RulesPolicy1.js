@@ -147,7 +147,9 @@ export default function RulesPolicy1({setValue, control, unregister, watch}) {
 
           <View style={styles.note}>
             <View style={styles.arrowTop} />
-            <CustomText>{t('cancellation_fee_customer_pay')}</CustomText>
+            <CustomText style={{color: COLORS.white}}>
+              {t('cancellation_fee_customer_pay')}
+            </CustomText>
           </View>
         </View>
       </Collapsible>
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   },
   note: {
     marginTop: scale(4),
-    backgroundColor: '#E3E3E3',
+    backgroundColor: COLORS.pioPrimary,
     borderColor: '#E3E3E3',
     padding: scale(10),
     borderRadius: scale(6),
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
   arrowTop: {
     borderWidth: scale(7),
     borderColor: '#00000000',
-    borderBottomColor: '#E3E3E3',
+    borderBottomColor: COLORS.pioPrimary,
     position: 'absolute',
     top: scale(-12),
     left: scale(10),

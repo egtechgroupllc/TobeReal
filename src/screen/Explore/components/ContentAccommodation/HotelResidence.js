@@ -58,7 +58,8 @@ export default memo(function HotelResidence({data, isLoading, country}) {
       }>
       <WrapperContent
         heading={title}
-        styleWrapper={{backgroundColor: COLORS.grey50}}>
+        noBackground
+        styleWrapper={{backgroundColor: '#2A2A2A10'}}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

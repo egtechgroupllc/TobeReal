@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../../../components/CustomText';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconCopy} from '../../../../../assets/icon/Icon';
 import {useQueryClient} from '@tanstack/react-query';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
   },
   boxSyntax: {
-    backgroundColor: '#eee',
+    borderWidth: 1,
+    borderColor: COLORS.pioPrimary,
     borderRadius: scale(6),
     padding: scale(10),
     flexDirection: 'row',

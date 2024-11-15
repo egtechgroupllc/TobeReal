@@ -199,7 +199,8 @@ export default function AdminManageLeaseScreen() {
         /> */}
         <CustomButton
           text={t('edit_accommodation')}
-          style={{width: '85%', height: scale(45)}}
+          styleText={{color: COLORS.black}}
+          style={styles.button}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -207,7 +208,8 @@ export default function AdminManageLeaseScreen() {
         />
         <CustomButton
           text={t('voucher_manage')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -215,7 +217,8 @@ export default function AdminManageLeaseScreen() {
         />
         <CustomButton
           text={t('room_manage')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -233,7 +236,8 @@ export default function AdminManageLeaseScreen() {
         /> */}
         <CustomButton
           text={t('manage_video_short')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           // onPress={() =>
           //   navigate('AddRoomTypeScreen', {...params, admin: adminScreen})
           // }
@@ -246,7 +250,8 @@ export default function AdminManageLeaseScreen() {
         />
         <CustomButton
           text={t('check_in_qrscan')}
-          style={{width: '85%', height: scale(45)}}
+          style={styles.button}
+          styleText={{color: COLORS.black}}
           onPress={() => {
             setOpen(true);
           }}
@@ -287,6 +292,14 @@ const styles = StyleSheet.create({
     rowGap: scale(3),
     backgroundColor: COLORS.overlay,
   },
+  button: {
+    width: '85%',
+    height: scale(45),
+    backgroundColor: COLORS.white,
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
+  },
   type: {
     position: 'absolute',
     zIndex: 1,
@@ -325,15 +338,5 @@ const styles = StyleSheet.create({
     width: scale(8),
     height: scale(8),
     marginTop: scale(1),
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    columnGap: scale(10),
-    paddingHorizontal: scale(10),
-    borderRadius: scale(10),
-    backgroundColor: COLORS.primary,
-    width: '85%',
-    height: scale(45),
   },
 });

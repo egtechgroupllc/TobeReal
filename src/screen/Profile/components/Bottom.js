@@ -101,10 +101,10 @@ export default function Bottom() {
           text={t('log_out')}
           onPress={handleLogOut}
           buttonType="medium"
-          linearGradientProps
+          // linearGradientProps
           style={{
             flex: 1,
-            backgroundColor: '#000',
+            backgroundColor: '#00000060',
             marginTop: scale(12),
           }}
         />
@@ -116,10 +116,10 @@ export default function Bottom() {
             navigate('NavigationProfile', {screen: 'ChangeAccountScreen'})
           }
           buttonType="medium"
-          linearGradientProps
+          // linearGradientProps
           style={{
             flex: 1,
-            backgroundColor: '#000',
+            // backgroundColor: '#000',
             marginTop: scale(12),
           }}
         />

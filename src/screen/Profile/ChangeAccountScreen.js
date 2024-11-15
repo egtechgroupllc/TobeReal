@@ -94,6 +94,8 @@ export default function ChangeAccountScreen() {
                   justifyContent: 'center',
                   paddingHorizontal: scale(20),
                   ...SHADOW,
+                  borderWidth: 1,
+                  borderColor: COLORS.pioBox,
                 }}>
                 <View
                   style={{
@@ -113,6 +115,7 @@ export default function ChangeAccountScreen() {
                     key={index}
                     textBold
                     isRadio
+                    fillColor={COLORS.primary}
                     // text={item}
                     isChecked={dataPro?.email === item?.email}
                     // onPress={() => setUserBooking(item)}

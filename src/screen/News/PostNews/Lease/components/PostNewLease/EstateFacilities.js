@@ -82,8 +82,8 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                   )}
                   onPress={() => setShowFacilitiesItem(isActive ? -1 : index)}
                   styleText={{
-                    color: COLORS.text,
                     textType: 'medium',
+                    color: COLORS.black,
                   }}
                 />
               );
@@ -121,6 +121,7 @@ export default function EstateFacilities({control, setValue, errors, watch}) {
                         onPress={evt => {
                           facilitiesCheckBox(item);
                         }}
+                        fillColor={COLORS.primary}
                         style={styles.checkBox}
                         textStyle={{
                           flex: 1,
@@ -141,16 +142,16 @@ const styles = StyleSheet.create({
   box: {
     paddingVertical: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(20),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
   },
   select: {
     justifyContent: 'space-between',
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.pioBox,
     borderRadius: 0,
     paddingHorizontal: scale(25),
     borderTopColor: '#ddd',

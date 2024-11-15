@@ -58,11 +58,12 @@ export default function HistoryTransactionScreen() {
                   }}
                   styleWrapper={{
                     width: scale(100),
-                    paddingBottom: scale(2),
+                    paddingBottom: scale(10),
                   }}
                   text={item?.name}
                   styleText={{
-                    color: item?.name === tab ? COLORS.primary : COLORS.white,
+                    color:
+                      item?.name === tab ? COLORS.pioPrimary : COLORS.white,
                   }}
                   onPress={() => setTab(item?.name)}
                 />
@@ -127,21 +128,17 @@ export default function HistoryTransactionScreen() {
     );
   };
   const handleCancel = value => {
-    Alert.alert('Are you sure to cancel this transaction?', '', [
+    Alert.alert(t('are_you_sure_to_cancel_this_transaction'), '', [
       {
-        text: 'Cancel',
+        text: t('cancel'),
         // onPress: () => Alert.alert('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => CancelWithdraw(value)},
+      {text: t('ok'), onPress: () => CancelWithdraw(value)},
     ]);
   };
   return (
-    <MainWrapper
-      noImgColor
-      scrollEnabled={false}
-      backgroundColor={'#fff'}
-      refreshControl>
+    <MainWrapper scrollEnabled={false} refreshControl>
       <>
         <OptionAccommodation
           isShaDow

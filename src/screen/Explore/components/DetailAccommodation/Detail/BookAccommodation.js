@@ -65,7 +65,11 @@ export default memo(function BookAccommodation({data}) {
         style={{
           rowGap: scale(2),
         }}>
-        {priceFinal && <CustomText>{t('price_only_from')}:</CustomText>}
+        {priceFinal && (
+          <CustomText style={{color: COLORS.black}}>
+            {t('price_only_from')}:
+          </CustomText>
+        )}
         <CustomText
           textType="bold"
           style={{
@@ -83,6 +87,7 @@ export default memo(function BookAccommodation({data}) {
         onPress={() => {
           navigate('RoomScreen', data);
         }}
+        // linearGradientProps={{colors: COLORS.linearGradient}}
         buttonType="medium"
         style={{flex: 0.7}}
         text={t('view_room')}

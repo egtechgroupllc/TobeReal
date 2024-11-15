@@ -39,7 +39,7 @@ export default function TopContent({control}) {
   return (
     <View>
       <View style={styles.wallet}>
-        <IconWallet />
+        <IconWallet fill={COLORS.primary} />
         <CustomText
           textType="bold"
           numberOfLines={1}
@@ -59,7 +59,7 @@ export default function TopContent({control}) {
         maxLength={10}
         label={t('enter_amount_withdraw')}
         styleTextLabel={{fontSize: SIZES.medium}}
-        style={{...styles.boxItem, borderWidth: 0}}
+        style={{...styles.boxItem}}
         styleWrapper={{paddingVertical: scale(10)}}
         control={control}
         name="amount"
@@ -95,14 +95,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: scale(16),
     paddingVertical: scale(10),
-    // ...SHADOW,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    ...SHADOW,
+
     borderRadius: scale(6),
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     columnGap: scale(14),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
   },
   wallet: {
     marginBottom: scale(20),
@@ -117,6 +116,8 @@ const styles = StyleSheet.create({
     minHeight: scale(40),
     minWidth: scale(90),
     borderRadius: scale(10),
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     ...SHADOW,
   },
 });

@@ -11,7 +11,7 @@ import React, {
 import DynamicHeader from './DetailAccommodation/Detail/DynamicHeader';
 
 import DetailAccommodationLoading from './DetailAccommodation/Detail/DetailAccommodationLoading';
-import {WIDTH, scale} from '../../../assets/constants';
+import {COLORS, WIDTH, scale} from '../../../assets/constants';
 import BookAccommodation from './BookAccommodation';
 const Header_Max_Height = WIDTH.heightScreen / 3;
 
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   content: {
     rowGap: scale(8),
     marginTop: scale(-4),
+
     // alignItems: 'center',
   },
 });

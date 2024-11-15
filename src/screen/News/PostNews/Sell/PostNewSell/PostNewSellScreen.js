@@ -158,7 +158,7 @@ export default function PostNewSellScreen() {
       /> */}
 
       <CustomButton
-        linearGradientProps
+        // linearGradientProps
         buttonType="medium"
         text={t('continue')}
         onPress={handleSubmit(handlePostLease)}
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     marginVertical: scale(30),
     rowGap: scale(20),
     alignSelf: 'center',
+    paddingBottom: scale(100),
   },
   button: {
     height: scale(63),

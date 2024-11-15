@@ -23,6 +23,7 @@ export default function SelectCurrency({
   rules,
   defaultValue,
   onSelect,
+  styleTextLabel,
   watch = () => {},
 }) {
   const {t} = useLanguage();
@@ -57,7 +58,7 @@ export default function SelectCurrency({
       }) => {
         return (
           <View style={styles.wrapper}>
-            <CustomText style={{color: COLORS.black}}>
+            <CustomText style={{color: COLORS.black, ...styleTextLabel}}>
               {t('main_currency')}
             </CustomText>
 
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   content: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: COLORS.pioBox,
     height: scale(38),
     paddingHorizontal: scale(10),
     borderRadius: scale(6),

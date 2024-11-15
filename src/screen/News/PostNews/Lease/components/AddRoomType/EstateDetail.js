@@ -162,6 +162,8 @@ export default function EstateDetail({control, errors, watch, setValue}) {
               }}
               styleWrapper={{
                 flex: 0.6,
+                backgroundColor: COLORS.white,
+                borderRadius: scale(6),
               }}
             />
           </View>
@@ -189,11 +191,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -203,11 +205,11 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     width: '100%',
     marginTop: scale(10),
-    borderColor: '#F0B90B',
+    borderColor: COLORS.pioPrimary,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

@@ -89,7 +89,8 @@ export default function SearchNavBar({data, onEmpale}) {
         index={1}
         snapPoints={['50%']}
         snapPointsChild={['70%']}
-        titleIndicator={t('Điều chỉnh')}
+        titleIndicator={t('config')}
+        handleStyle={{color: COLORS.black}}
         disableScroll
         styleContent={{
           paddingHorizontal: scale(16),
@@ -142,7 +143,7 @@ export default function SearchNavBar({data, onEmpale}) {
             }, 0);
           }}
           icon={<IconLocation />}
-          label={'Điểm đến'}
+          label={t('destination')}
           name={destination?.name || t('near_me')}
         />
 
@@ -152,8 +153,8 @@ export default function SearchNavBar({data, onEmpale}) {
           <BoxItem
             onPress={() => bottomSheetChildRef.current.openChild()}
             icon={<CustomImage source={images.lease} style={styles.icon} />}
-            label={'Số đêm nghỉ'}
-            name={`Trả phòng: ${formatDate(
+            label={t('num_night')}
+            name={`${t('check_out')}: ${formatDate(
               dateCheckIn || data?.date?.date_start,
               {
                 addDays: numNight?.value,
@@ -174,7 +175,7 @@ export default function SearchNavBar({data, onEmpale}) {
             setIsOpenOccupancy(true);
           }}
           icon={<IconPeople width={scale(20)} height={scale(20)} />}
-          label={'Số lượng khách & phòng'}
+          label={t('num_guest_room')}
           name={`${occupancy?.numAdult} ${t('guest')}, ${
             occupancy?.numRoom
           } ${t('room')}`}

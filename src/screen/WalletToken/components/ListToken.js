@@ -17,35 +17,35 @@ export default function ListToken({dataP, token}) {
     queryFn: () => getBalanceWallet(token),
     enabled: !!token,
   });
-  const listToken = useMemo(
-    () => [
-      {
-        name: 'TOBECHAIN',
-        value: data?.data?.[0]?.balance,
-        unit: 'TOBE',
-        image: images.logoTBH,
-      },
-      {
-        name: 'TOBE HOUSE',
-        value: data?.data?.[2]?.balance,
-        unit: 'TBH',
-        image: images.logoTBH,
-      },
-      {
-        name: 'ECOSYSTEM (TOBECHAIN)',
-        value: data?.data?.[1]?.balance,
-        unit: 'ETOBE',
-        image: images.logoEcoTOBE,
-      },
-      {
-        name: 'TOBE AIRDROP',
-        value: data?.data?.[3]?.balance,
-        unit: 'TBC',
-        image: images.logoTBH,
-      },
-    ],
-    [data?.data],
-  );
+  // const listToken = useMemo(
+  //   () => [
+  //     {
+  //       name: 'TOBECHAIN',
+  //       value: data?.data?.[0]?.balance,
+  //       unit: 'TOBE',
+  //       image: images.logoTBH,
+  //     },
+  //     {
+  //       name: 'TOBE HOUSE',
+  //       value: data?.data?.[2]?.balance,
+  //       unit: 'TBH',
+  //       image: images.logoTBH,
+  //     },
+  //     {
+  //       name: 'ECOSYSTEM (TOBECHAIN)',
+  //       value: data?.data?.[1]?.balance,
+  //       unit: 'ETOBE',
+  //       image: images.logoEcoTOBE,
+  //     },
+  //     {
+  //       name: 'TOBE AIRDROP',
+  //       value: data?.data?.[3]?.balance,
+  //       unit: 'TBC',
+  //       image: images.logoTBH,
+  //     },
+  //   ],
+  //   [data?.data],
+  // );
   return (
     <View
       style={{
@@ -63,7 +63,7 @@ export default function ListToken({dataP, token}) {
           marginVertical: scale(14),
           width: '100%',
         }}>
-        {listToken.map((item, index) => (
+        {data?.data?.map((item, index) => (
           <TouchableOpacity
             onPress={() => {
               navigate('NoBottomTab', {
@@ -76,7 +76,7 @@ export default function ListToken({dataP, token}) {
               flexDirection: 'row',
               columnGap: scale(12),
               alignItems: 'center',
-              backgroundColor: '#4BBD9930',
+              backgroundColor: COLORS.primary + '20',
               width: '100%',
               borderRadius: scale(10),
               padding: scale(8),
@@ -84,7 +84,7 @@ export default function ListToken({dataP, token}) {
             <View style={styles.icon}>
               <CustomImage
                 isAvatar
-                source={item?.image}
+                source={item?.image_url}
                 style={{
                   width: scale(30),
                   aspectRatio: 1,
@@ -99,17 +99,17 @@ export default function ListToken({dataP, token}) {
               <CustomText
                 size={scale(13)}
                 textType="semiBold"
-                style={{color: '#52b788'}}>
+                style={{color: COLORS.primary}}>
                 {item.name}
               </CustomText>
               <View style={{flexDirection: 'row', columnGap: scale(3)}}>
                 <CustomText textType="medium">
-                  {formatPrice(item?.value, {
+                  {formatPrice(item?.balance, {
                     showCurrency: false,
                     decimalPlaces: 6,
                   })}
                 </CustomText>
-                <CustomText textType="medium">{item.unit}</CustomText>
+                <CustomText textType="medium">{item.symbol}</CustomText>
               </View>
             </View>
           </TouchableOpacity>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

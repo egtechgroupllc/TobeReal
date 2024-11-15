@@ -261,18 +261,22 @@ export default function PostConfigurationSellScreen() {
         <CustomButton
           styleWrapper={{
             alignSelf: 'center',
+            borderWidth: 1,
+            borderColor: COLORS.white,
+            borderRadius: scale(10),
           }}
           style={{
             width: '35%',
             alignSelf: 'center',
           }}
           text={t('back')}
+          styleText={{color: COLORS.black}}
           outline
           iconLeft={IconGoBack}
           styleIcon={{
-            color: COLORS.primary,
+            color: COLORS.black,
           }}
-          onPress={goBack}
+          onPress={() => navigate('POST', {screen: 'PostNewsScreen'})}
         />
 
         <CustomButton
@@ -284,6 +288,7 @@ export default function PostConfigurationSellScreen() {
             width: '80%',
             alignSelf: 'center',
           }}
+          // linearGradientProps={{colors: COLORS.linearGradient}}
           text={t('submit')}
           onPress={handleSubmit(handlePostSell)}
           disabled={createEstateSellMu.isPending}
@@ -296,19 +301,20 @@ export default function PostConfigurationSellScreen() {
 const styles = StyleSheet.create({
   content: {
     rowGap: scale(20),
-    backgroundColor: '#fff',
     padding: scale(10),
     ...SHADOW,
   },
   footer: {
     rowGap: scale(20),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     paddingVertical: scale(10),
     ...SHADOW,
     flexDirection: 'row',
     columnGap: scale(20),
     paddingHorizontal: scale(20),
     paddingBottom: scale(60),
+    borderTopWidth: 1,
+    borderColor: COLORS.border,
   },
 });
 //

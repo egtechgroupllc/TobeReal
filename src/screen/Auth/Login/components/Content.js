@@ -136,7 +136,7 @@ export default function Content() {
           onPress={handleSubmit(handleLogin)}
           buttonType="large"
           text={t('login')}
-          linearGradientProps
+          // linearGradientProps
         />
       </View>
 

@@ -8,7 +8,7 @@ import {useLanguage} from '../../../hooks/useLanguage';
 
 export default function ChangePasswordScreen() {
   return (
-    <MainWrapper noImgColor>
+    <MainWrapper>
       <Content />
     </MainWrapper>
   );

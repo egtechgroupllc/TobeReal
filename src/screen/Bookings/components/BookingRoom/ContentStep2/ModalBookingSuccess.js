@@ -15,7 +15,10 @@ import Modal from 'react-native-modal';
 import {IconSupporterYellow} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import {useQuery} from '@tanstack/react-query';
-import {getListConstant} from '../../../../../Model/api/common';
+import {
+  getListConstant,
+  getTokenAirdrop,
+} from '../../../../../Model/api/common';
 
 export default function ModalBookingSuccess({
   openContact,
@@ -28,7 +31,10 @@ export default function ModalBookingSuccess({
     queryKey: ['common', 'list-constant'],
     queryFn: getListConstant,
   });
-
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token-airdrop'],
+    queryFn: () => getTokenAirdrop(),
+  });
   return (
     <Modal
       isVisible={openContact}
@@ -36,15 +42,15 @@ export default function ModalBookingSuccess({
       animationOut={'fadeOut'}>
       <View style={styles.contact}>
         <LinearGradient
-          colors={['#FFE55A', '#F0B90B']}
-          start={{x: 1.2, y: 0}}
+          colors={[COLORS.pioPrimary, COLORS.pioPrimary]}
+          start={{x: 0, y: 0}}
           end={{x: 0, y: 0}}
           style={styles.contactHeader}>
           <IconSupporterYellow height={scale(20)} width={scale(20)} />
           <CustomText
             style={{
               fontSize: SIZES.small,
-              color: COLORS.black,
+              color: COLORS.white,
             }}
             textType="bold">
             {t('notification')}
@@ -88,6 +94,7 @@ export default function ModalBookingSuccess({
                   alignSelf: 'center',
                   justifyContent: 'center',
                   paddingHorizontal: scale(20),
+                  color: COLORS.black,
                 }}
                 textType="bold">
                 {check?.mess}!
@@ -99,15 +106,20 @@ export default function ModalBookingSuccess({
                     style={{
                       alignSelf: 'center',
                       marginTop: scale(5),
+                      color: COLORS.black,
                     }}>
-                    +{data?.data?.amount_token_tbc_airdrop} TBC
+                    +{data?.data?.amount_token_tbc_airdrop}{' '}
+                    {getDataToken?.data?.symbol}
                   </CustomText>
                   <CustomText
                     style={{
                       alignSelf: 'center',
                       marginTop: scale(5),
+                      color: COLORS.black,
                     }}>
-                    {t('congratulate_on_receiving_coin')}
+                    {t('congratulate_on_receiving_coin', {
+                      unit: getDataToken?.data?.symbol,
+                    })}
                   </CustomText>
                   <CustomText
                     style={{

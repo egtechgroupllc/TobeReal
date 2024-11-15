@@ -8,10 +8,15 @@ import {formatPrice, formatToken} from '../../../utils/format';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 import {IconArrowRight, IconRight} from '../../../assets/icon/Icon';
+import {getToken} from '../../../Model/api/common';
 
 export default function WalletManage({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <View
       style={{
@@ -47,7 +52,7 @@ export default function WalletManage({data}) {
           <View style={styles.icon}>
             <CustomImage
               isAvatar
-              source={images.logoTBH}
+              source={{uri: getDataToken?.data?.image_url}}
               style={{
                 width: scale(30),
                 aspectRatio: 1,
@@ -66,7 +71,10 @@ export default function WalletManage({data}) {
                 rowGap: scale(3),
               }}>
               <CustomText size={SIZES.xMedium} textType="medium">
-                {t('token_balance_available')}:
+                {t('token_balance_available', {
+                  unit: getDataToken?.data?.symbol,
+                })}
+                :
               </CustomText>
               <View
                 style={{
@@ -78,7 +86,7 @@ export default function WalletManage({data}) {
                   {formatToken(data?.balance_token_data, {
                     decimalPlaces: 20,
                   })}{' '}
-                  TBH
+                  {getDataToken?.data?.symbol}
                 </CustomText>
 
                 {/* <View
@@ -94,7 +102,7 @@ export default function WalletManage({data}) {
                   </View> */}
               </View>
             </View>
-            <IconRight />
+            <IconRight fill={COLORS.black} />
           </View>
         </TouchableOpacity>
       </View>
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

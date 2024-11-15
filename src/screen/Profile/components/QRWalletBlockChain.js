@@ -14,6 +14,8 @@ import {showMess} from '../../../assets/constants/Helper';
 import {IconCopy, IconError} from '../../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {getToken} from '../../../Model/api/common';
+import {useQuery} from '@tanstack/react-query';
 
 export default function QRWalletBlockChain({
   open,
@@ -28,7 +30,10 @@ export default function QRWalletBlockChain({
     Clipboard.setString(data?.wallet_address);
     showMess(t('copy_success'));
   };
-
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   if (!open) return null;
   return (
     <Modal
@@ -73,7 +78,7 @@ export default function QRWalletBlockChain({
                 flex: 1,
               }}>
               <CustomText
-                style={styles.textReceive}
+                style={{color: COLORS.black}}
                 size={SIZES.xMedium}
                 numberOfLines={1}
                 textType="medium">
@@ -135,10 +140,14 @@ export default function QRWalletBlockChain({
             <CustomText
               style={{
                 width: scale(280),
+                color: COLORS.black,
               }}>
               <IconError size={scale(12)} fill={COLORS.primary} />{' '}
               {t('this_deposit_address')}
-              <CustomText textType="semiBold"> TBH.TBRC20, </CustomText>
+              <CustomText textType="semiBold" style={{color: COLORS.black}}>
+                {' '}
+                {getDataToken?.data?.symbol}.TBRC20,{' '}
+              </CustomText>
               {t('dont_deposit_other')}.
             </CustomText>
           )}

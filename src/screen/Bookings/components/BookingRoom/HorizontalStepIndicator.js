@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import ContentStep1 from './ContentStep1';
 import ContentStep2 from './ContentStep2';
@@ -18,6 +18,14 @@ const firstIndicatorStyles = {
   currentStepStrokeWidth: 3,
   stepIndicatorLabelFontSize: SIZES.small,
   currentStepIndicatorLabelFontSize: SIZES.small,
+  stepStrokeCurrentColor: COLORS.primary,
+  stepStrokeUnFinishedColor: COLORS.primary,
+  stepStrokeFinishedColor: COLORS.primary,
+  separatorFinishedColor: COLORS.primary,
+  separatorUnFinishedColor: COLORS.primary,
+  stepIndicatorFinishedColor: COLORS.primary,
+  stepIndicatorUnFinishedColor: COLORS.primary,
+  stepIndicatorCurrentColor: COLORS.white,
 };
 
 export default function HorizontalStepIndicator({data}) {
@@ -113,6 +121,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     fontWeight: '500',
-    color: '#4aae4f',
+    color: COLORS.primary,
   },
 });

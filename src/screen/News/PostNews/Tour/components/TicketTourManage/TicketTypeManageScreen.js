@@ -2,7 +2,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import {IconHome} from '../../../../../../assets/icon/Icon';
 import {
   BottomSheet,
@@ -97,6 +97,7 @@ export default function TicketTypeManageScreen() {
         <BottomSheet
           ref={bottomSheetRef}
           titleIndicator={t('notification')}
+          handleStyle={{color: COLORS.black}}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

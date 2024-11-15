@@ -2,7 +2,7 @@
 import React, {memo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SHADOW, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, scale} from '../../../assets/constants';
 
 export default memo(function BookAccommodation({
   setBookHeight,
@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
     padding: scale(10),
     position: 'absolute',
     bottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.pioBox,
     ...SHADOW,
     shadowOffset: {
       width: 0,

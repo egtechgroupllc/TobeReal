@@ -43,7 +43,7 @@ const HeaderSearchNavBar = ({data, onPress}) => {
         </CustomText>
       </View>
       <CustomButton
-        text="Thay đổi"
+        text={t('change')}
         style={{flex: 1, height: scale(30)}}
         onPress={onPress}
       />

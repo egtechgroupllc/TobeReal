@@ -40,7 +40,7 @@ export default function DetailTokenScreen() {
           <View style={styles.icon}>
             <CustomImage
               isAvatar
-              source={params?.listToken?.image}
+              source={{uri: params?.listToken?.image_url}}
               style={{
                 width: scale(40),
                 aspectRatio: 1,
@@ -71,6 +71,8 @@ export default function DetailTokenScreen() {
           width: '100%',
           bottom: 0,
           backgroundColor: COLORS.white,
+          borderTopWidth: 1,
+          borderTopColor: COLORS.pioBox,
           paddingHorizontal: scale(20),
           ...SHADOW,
           paddingTop: scale(10),
@@ -78,6 +80,7 @@ export default function DetailTokenScreen() {
         }}>
         <CustomButton
           text="Deposit"
+          // linearGradientProps={{colors: COLORS.linearGradient}}
           style={{width: '50%'}}
           onPress={() =>
             navigate('NoBottomTab', {
@@ -93,9 +96,12 @@ export default function DetailTokenScreen() {
 
 const styles = StyleSheet.create({
   icon: {
-    height: scale(50),
-    width: scale(50),
-    backgroundColor: COLORS.black,
+    height: scale(80),
+    width: scale(80),
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
+    ...SHADOW,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

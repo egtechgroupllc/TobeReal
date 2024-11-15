@@ -14,9 +14,9 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {getListCurrency} from '../../Model/api/common';
-import {SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
+import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
-import {CustomInput} from '../../components';
+import {CustomInput, MainWrapper} from '../../components';
 import CheckBox from '../../components/CheckBox';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
@@ -104,10 +104,9 @@ export default function CurrencyScreen() {
   // }, [indexData]);
 
   return (
-    <View style={{flex: 1}}>
+    <MainWrapper>
       <View
         style={{
-          backgroundColor: '#fff',
           width: WIDTH.widthContain,
           alignSelf: 'center',
           marginTop: scale(20),
@@ -115,7 +114,6 @@ export default function CurrencyScreen() {
           rowGap: scale(16),
           padding: scale(14),
           flex: 1,
-          ...SHADOW,
         }}>
         <CustomInput
           placeholder={t('search')}
@@ -154,12 +152,13 @@ export default function CurrencyScreen() {
                 onPress={() => setCurrency(item)}
                 isChecked={currency?.currency_code === item?.currency_code}
                 style={styles.checkBox}
+                fillColor={COLORS.primary}
               />
             );
           }}
         />
       </View>
-    </View>
+    </MainWrapper>
   );
 }
 

@@ -167,7 +167,7 @@ export default function BookRoom({data}) {
           <CustomButton
             buttonType="normal"
             text={t('booking')}
-            linearGradientProps
+            // linearGradientProps
             style={{minWidth: scale(100)}}
             onPress={handleBookingRoom}
           />
@@ -188,6 +188,8 @@ const styles = StyleSheet.create({
       height: -2,
     },
     rowGap: scale(5),
+    borderTopWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   content: {
     flexDirection: 'row',

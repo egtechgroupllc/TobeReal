@@ -15,7 +15,7 @@ export default function RadioButton({title, isCheck, onPress, textComponent}) {
       }}>
       <View style={styles.radio}>{isCheck && <View style={styles.dot} />}</View>
       {textComponent || (
-        <CustomText textType="medium" color={COLORS.text} style={{flex: 1}}>
+        <CustomText textType="medium" style={{flex: 1}}>
           {title}
         </CustomText>
       )}

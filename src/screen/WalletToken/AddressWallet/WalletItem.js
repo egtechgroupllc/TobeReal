@@ -117,7 +117,7 @@ export default function WalletItem({item, onPress}) {
         <>
           <View
             style={{
-              backgroundColor: '#f7f9fa',
+              backgroundColor: COLORS.pioPrimary,
               height: 100,
               width: '100%',
               position: 'absolute',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(10),
   },
   seperate: {
-    backgroundColor: '#f7f9fa',
+    backgroundColor: COLORS.white,
     height: '30%',
     width: '100%',
     borderTopLeftRadius: scale(10),

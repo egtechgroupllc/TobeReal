@@ -14,7 +14,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
-import {CustomInput} from '../../components';
+import {CustomInput, MainWrapper} from '../../components';
 import CheckBox from '../../components/CheckBox';
 import CustomText from '../../components/CustomText';
 import EmptyData from '../../components/EmptyData';
@@ -92,7 +92,7 @@ export default function CountryScreen() {
   }, [data?.data, deferredValue]);
 
   return (
-    <View style={{flex: 1}}>
+    <MainWrapper>
       <View style={styles.content}>
         <CustomInput
           placeholder={t('search')}
@@ -126,6 +126,7 @@ export default function CountryScreen() {
                 onPress={() => setCountry(item)}
                 isChecked={country?.id === item?.id}
                 style={styles.checkBox}
+                fillColor={COLORS.primary}
               />
             ) : (
               <Skeleton height={scale(40)} />
@@ -133,7 +134,7 @@ export default function CountryScreen() {
           }
         />
       </View>
-    </View>
+    </MainWrapper>
   );
 }
 
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     width: WIDTH.widthContain,
     alignSelf: 'center',
     marginTop: scale(20),
@@ -152,7 +153,6 @@ const styles = StyleSheet.create({
     rowGap: scale(16),
     padding: scale(14),
     flex: 1,
-    ...SHADOW,
   },
   indexLetterStyle: {
     fontSize: SIZES.small,

@@ -22,10 +22,11 @@ export default function TypeEstate({onType, value}) {
 
   return (
     <WrapperContent
-      heading={t('Type estate')}
+      heading={t('type_estate')}
       styleWrapper={{marginBottom: scale(-10)}}
       styleHeading={{
         paddingHorizontal: 0,
+        color: COLORS.black,
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
@@ -62,8 +63,8 @@ export default function TypeEstate({onType, value}) {
             minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked === item?.id ? COLORS.pioPrimary : '#ccc',
+            backgroundColor: checked === item?.id ? COLORS.pioPrimary : '#fff',
           }}>
           <CustomText
             style={{

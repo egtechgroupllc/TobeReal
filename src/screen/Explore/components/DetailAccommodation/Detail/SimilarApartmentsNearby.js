@@ -33,7 +33,7 @@ export default function SimilarApartmentsNearby() {
       }),
   });
   return (
-    <WrapperContent heading={t('browse_similar')}>
+    <WrapperContent heading={t('browse_similar')} noBackground>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

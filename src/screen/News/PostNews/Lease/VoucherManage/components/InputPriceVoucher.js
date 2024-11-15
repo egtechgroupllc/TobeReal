@@ -87,7 +87,7 @@ export default memo(function InputPriceVoucher({
               size={SIZES.xMedium}>
               {data?.data?.fee_commission_percent_voucher * 100}%{' '}
               <CustomText textType="medium" size={SIZES.xMedium}>
-                {t('commission_for_saveloka')}
+                {t('commission_for_pionehouse')}
               </CustomText>
             </CustomText>
 

@@ -28,7 +28,7 @@ import {formatDateTime, formatPrice} from '../../utils/format';
 import EmptyData from '../../components/EmptyData';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {replaceTranslateKey} from '../../utils/replaceTranslateKey';
-import {getListConstant} from '../../Model/api/common';
+import {getListConstant, getToken} from '../../Model/api/common';
 
 export default function HistoryTokenDataScreen() {
   const {setOptions} = useNavigation();
@@ -44,6 +44,10 @@ export default function HistoryTokenDataScreen() {
   const {data: dataConstant} = useQuery({
     queryKey: ['common', 'list-constant'],
     queryFn: getListConstant,
+  });
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
   });
   const {
     isLoading,
@@ -85,7 +89,7 @@ export default function HistoryTokenDataScreen() {
     refresh.current = false;
   }
   return (
-    <MainWrapper noImgColor scrollEnabled={false}>
+    <MainWrapper scrollEnabled={false}>
       <FlatList
         data={dataArr || (isLoading && [1, 2, 3, 5])}
         style={{
@@ -143,7 +147,7 @@ export default function HistoryTokenDataScreen() {
               <View style={styles.icon}>
                 <CustomImage
                   isAvatar
-                  source={images.logoTBH}
+                  source={{uri: getDataToken?.data?.image_url}}
                   style={{
                     width: scale(30),
                     aspectRatio: 1,
@@ -159,7 +163,10 @@ export default function HistoryTokenDataScreen() {
                 }}>
                 <CustomText
                   numberOfLines={2}
-                  style={{fontSize: SIZES.xMedium, flex: 1}}
+                  style={{
+                    fontSize: SIZES.xMedium,
+                    flex: 1,
+                  }}
                   textType="semiBold">
                   {item?.description_replacements
                     ? replaceTranslateKey(
@@ -187,13 +194,13 @@ export default function HistoryTokenDataScreen() {
                       decimalPlaces: 6,
                       showCurrency: false,
                     })}{' '}
-                    TBH
+                    {getDataToken?.data?.symbol}
                   </CustomText>
                 </View>
                 {item?.amount > 0 && (
                   <CustomText
                     style={{
-                      color: COLORS.black + '50',
+                      color: COLORS.white,
                     }}>
                     {t('transaction_fee_deducted')}: -
                     {formatPrice(
@@ -203,7 +210,7 @@ export default function HistoryTokenDataScreen() {
                         showCurrency: false,
                       },
                     )}{' '}
-                    TBH
+                    {getDataToken?.data?.symbol}
                   </CustomText>
                 )}
               </View>
@@ -221,7 +228,9 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

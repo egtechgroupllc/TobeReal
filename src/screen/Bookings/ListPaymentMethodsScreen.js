@@ -10,8 +10,8 @@ export default function ListPaymentMethodsScreen({route}) {
   const {t} = useLanguage();
   const listMethods = [
     {
-      header: t('saveloka_wallet'),
-      title: t('saveloka_transfer'),
+      header: t('pionehouse_wallet'),
+      title: t('pionehouse_transfer'),
       desc: t('pay_with_wallet'),
       tag: t('recommended'),
       type: 'FIAT',
@@ -23,7 +23,7 @@ export default function ListPaymentMethodsScreen({route}) {
       desc: t('pay_with_voucher'),
       tag: t('recommended'),
       type: 'VOUCHER',
-      image: images.voucher_saveloka,
+      image: images.voucher_pionehouse,
     },
     {
       header: t('payment_card'),

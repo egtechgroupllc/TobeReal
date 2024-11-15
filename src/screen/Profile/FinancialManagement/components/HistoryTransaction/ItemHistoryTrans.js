@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useMemo} from 'react';
 import CustomImage from '../../../../../components/CustomImage';
-import {COLORS, SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../assets/constants';
 import CustomText from '../../../../../components/CustomText';
 import {
   formatDate,
@@ -37,7 +37,6 @@ export default function ItemHistory({
       data?.method_deposit_item?.method_deposit?.name,
     ],
   );
-
   return (
     <TouchableHighlight
       underlayColor={'#f5f5f5'}
@@ -45,18 +44,23 @@ export default function ItemHistory({
       style={{
         ...styles.wrapper,
         backgroundColor: isBackground ? '#fff' : '#f6fdff',
+        ...SHADOW,
+        borderWidth: 1,
+        borderColor: COLORS.pioBox,
       }}>
       <>
-        <View style={styles.boxImg}>
-          <CustomImage
-            source={data?.method_deposit_item?.method_deposit?.logo_url}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            resizeMode="contain"
-          />
-        </View>
+        {data?.method_deposit_item?.method_deposit?.logo_url && (
+          <View style={styles.boxImg}>
+            <CustomImage
+              source={data?.method_deposit_item?.method_deposit?.logo_url}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              resizeMode="contain"
+            />
+          </View>
+        )}
 
         <View
           style={{
@@ -110,7 +114,7 @@ export default function ItemHistory({
                 ...styles.textSmall,
                 width: '65%',
               }}>
-              Mã giao dich:{' '}
+              {t('transaction_code')}:{' '}
               <CustomText textType="semiBold" style={styles.textSmall}>
                 {data?.code}
               </CustomText>
@@ -130,6 +134,7 @@ export default function ItemHistory({
         {data?.status === 'PENDING' && tab === t('withdraw') && (
           <CustomButton
             onPress={onPressCancel}
+            // linearGradientProps={{colors: COLORS.linearGradient}}
             text={t('cancel')}
             buttonType="small"
             style={{width: '20%', height: scale(25)}}

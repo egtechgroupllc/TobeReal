@@ -30,6 +30,7 @@ export default function Introduction({data}) {
   return (
     <WrapperContent
       isSeeAll
+      noBackground
       onPressSeeAll={() => {
         setIsOpen(true);
       }}
@@ -51,6 +52,7 @@ export default function Introduction({data}) {
           onDismiss={() => setIsOpen(false)}
           snapPoints={['50%', '80%']}
           titleIndicator={t('description_content')}
+          handleStyle={{color: COLORS.black}}
           styleContent={{
             paddingHorizontal: scale(16),
           }}>
@@ -58,6 +60,7 @@ export default function Introduction({data}) {
             textType="regular"
             style={{
               fontSize: SIZES.xMedium,
+              color: COLORS.black,
             }}>
             {translations[data?.description]}
           </CustomText>

@@ -56,7 +56,7 @@ export default function ConfirmChangePassword() {
 
       <CustomButton
         onPress={handleSubmit(submitForgotPassword)}
-        linearGradientProps
+        // linearGradientProps
         buttonType="large"
         text={t('submit')}
       />

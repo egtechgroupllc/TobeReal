@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
   search: {
     borderRadius: scale(10),
     backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     ...SHADOW,
     maxHeight: WIDTH.heightScreen / 1.9,
   },

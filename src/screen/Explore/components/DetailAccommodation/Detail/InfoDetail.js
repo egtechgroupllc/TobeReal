@@ -2,7 +2,13 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import {COLORS, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {IconLocation} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
@@ -13,6 +19,8 @@ import {formatNumber} from '../../../../../utils/format';
 import QRWalletBlockChain from '../../../../Profile/components/QRWalletBlockChain';
 import Introduction from './Introduction';
 import Traceability from './Traceability';
+import {MainWrapper} from '../../../../../components';
+import WrapperContent from '../../WrapperContent';
 export default function InfoDetail({data}) {
   const {t} = useLanguage();
   const handleCopy = () => {
@@ -23,12 +31,16 @@ export default function InfoDetail({data}) {
 
   if (!data?.wallet_address) return null;
   return (
-    <View>
+    <WrapperContent
+      noBackground
+      styleContent={{
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+      }}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'flex-start',
-          backgroundColor: '#fff',
           justifyContent: 'space-between',
           padding: scale(16),
         }}>
@@ -42,7 +54,7 @@ export default function InfoDetail({data}) {
               <CustomText
                 textType="semiBold"
                 style={{
-                  color: '#7906f6',
+                  color: COLORS.white,
                 }}>
                 {data.accommodation_type.name}
               </CustomText>
@@ -60,7 +72,6 @@ export default function InfoDetail({data}) {
               flexDirection: 'row',
             }}>
             <IconLocation
-              fill={COLORS.text}
               style={{
                 width: scale(15),
                 height: scale(15),
@@ -103,9 +114,12 @@ export default function InfoDetail({data}) {
           activeOpacity={0.7}
           onPress={() => setIsOpen(true)}
           style={{
-            backgroundColor: COLORS.white70,
+            backgroundColor: COLORS.white,
             padding: scale(8),
             borderRadius: scale(9),
+            borderWidth: 1,
+            borderColor: COLORS.pioBox,
+            ...SHADOW,
           }}>
           <QRCode value={data?.wallet_address} size={scale(80)} />
         </TouchableOpacity>
@@ -119,7 +133,7 @@ export default function InfoDetail({data}) {
         />
       )}
       <Introduction data={data} />
-    </View>
+    </WrapperContent>
   );
 }
 
@@ -144,7 +158,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: scale(4),
-    backgroundColor: '#9681fA90',
+    backgroundColor: COLORS.pioPrimary,
     padding: scale(4),
     borderRadius: scale(6),
   },

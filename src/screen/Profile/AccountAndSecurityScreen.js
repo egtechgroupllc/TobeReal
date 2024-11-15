@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, SIZES, scale} from '../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {
   IconDeleteAccount,
   IconHandShake,
@@ -26,25 +26,24 @@ export default function AccountAndSecurityScreen() {
 
   return (
     <MainWrapper
-      headerTitle={'Tài khoản & Bảo mật'}
-      noImgColor
+      headerTitle={t('account_security')}
       styleContent={{
         paddingHorizontal: scale(12),
         rowGap: scale(14),
         marginTop: scale(20),
       }}>
-      <Box title={'Tài khoản'} desc={'Các dữ liệu cá nhân'}>
+      <Box title={t('account')} desc={t('personal_data')}>
         <Item
           Icon={IconProfile}
-          title={'Thông tin tài khoản'}
-          desc={'Các thông tin cá nhân'}
+          title={t('account_information')}
+          desc={t('personal_data')}
           nameScreen={'InformationScreen'}
         />
 
         <Item
           Icon={IconHandShake}
-          title={'Tài khoản doanh nghiệp'}
-          desc={'Bạn có thể sử dụng những tính năng khác dành cho doanh nghiệp'}
+          title={t('business_account')}
+          desc={t('you_can_use_other_features_for_business')}
           onPress={() => {
             navigate('NavigationAuth', {
               screen: 'RegisterPartnerScreen',
@@ -67,12 +66,12 @@ export default function AccountAndSecurityScreen() {
         /> */}
       </Box>
       <Box
-        title={'Cài đặt bảo mật'}
-        desc={'Mật khẩu và các phương thức xác thực'}>
+        title={t('security_settings')}
+        desc={t('password_and_authentication_methods')}>
         <Item
           Icon={IconPassword}
           title={t('change_password')}
-          desc={'Sử dụng mật khẩu chưa dùng ở nơi khác'}
+          desc={t('use_password_from_other_places')}
           nameScreen="ChangePasswordScreen"
         />
 
@@ -118,7 +117,7 @@ const Item = ({title, desc, Icon, nameScreen, onPress}) => {
       onPress={() => {
         onPress ? onPress() : nameScreen && navigate(nameScreen);
       }}>
-      {Icon && <Icon size={scale(20)} fill="#333" />}
+      {Icon && <Icon size={scale(20)} />}
       <View
         style={{
           rowGap: scale(4),
@@ -127,7 +126,7 @@ const Item = ({title, desc, Icon, nameScreen, onPress}) => {
         <CustomText textType="semiBold" size={scale(13)}>
           {title}
         </CustomText>
-        <CustomText color={COLORS.text}>{desc}</CustomText>
+        <CustomText>{desc}</CustomText>
       </View>
       <IconNext
         size={scale(12)}
@@ -145,6 +144,9 @@ const styles = StyleSheet.create({
     padding: scale(12),
     borderRadius: scale(10),
     rowGap: scale(0),
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   item: {
     borderTopWidth: 1,

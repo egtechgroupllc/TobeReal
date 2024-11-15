@@ -77,7 +77,7 @@ export default function ConfirmDepositScreen({route}) {
 
   return (
     <>
-      <MainWrapper noImgColor styleContent={styles.content}>
+      <MainWrapper styleContent={styles.content}>
         <InfoBank data={data} />
         <SyntaxDeposit data={data} />
         <ImgConfirmDeposit control={control} />
@@ -99,6 +99,7 @@ export default function ConfirmDepositScreen({route}) {
           style={{
             width: '70%',
           }}
+          // linearGradientProps={{colors: COLORS.linearGradient}}
         />
       </View>
     </>
@@ -109,13 +110,12 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: scale(10),
     paddingVertical: scale(20),
-    backgroundColor: '#fff',
     rowGap: scale(20),
   },
   footer: {
     paddingTop: scale(10),
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.pioPrimary,
     ...SHADOW,
     shadowOffset: {
       width: 0,

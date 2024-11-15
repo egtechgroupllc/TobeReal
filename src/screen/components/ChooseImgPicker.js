@@ -155,12 +155,7 @@ export default memo(function ChooseImgPicker({
                         activeOpacity={0.7}
                         onPress={() => pickImage(onChange, valueImg)}
                         style={[styles.img, styles.border, styles.addImg]}>
-                        <IconCamera
-                          style={{
-                            width: scale(50),
-                            height: scale(50),
-                          }}
-                        />
+                        <IconCamera />
                         <CustomText>{t('add_images')}</CustomText>
                       </TouchableOpacity>
                     )}
@@ -237,7 +232,6 @@ export default memo(function ChooseImgPicker({
                         <View style={styles.footer}>
                           <CustomText
                             style={{
-                              color: COLORS.white,
                               fontSize: SIZES.medium,
                               flex: 1,
                             }}>
@@ -266,7 +260,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: COLORS.black,
+    color: COLORS.white,
     alignSelf: 'flex-start',
   },
   label: {
@@ -280,7 +274,6 @@ const styles = StyleSheet.create({
   },
   contentImg: {
     borderRadius: scale(8),
-    backgroundColor: '#fff',
     overflow: 'hidden',
     flexDirection: 'row',
     flexWrap: 'wrap',

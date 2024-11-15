@@ -30,6 +30,7 @@ export default function OptionAccommodation({
   selectIndex,
   onSelect,
   onChange,
+  styleTextItem,
 }) {
   const _keyTextView = keyTextView || 'text';
   const _keyTextSub = keyTextSub || 'subText';
@@ -166,7 +167,7 @@ export default function OptionAccommodation({
                 },
               outline && {
                 backgroundColor: !option.includes(valueDefaultView(item, index))
-                  ? '#f5f5f5'
+                  ? COLORS.white
                   : '#F0B90B20',
               },
               checkSelect(item, index) && outline && styles.outline,
@@ -200,7 +201,7 @@ export default function OptionAccommodation({
                   style={{
                     color: checkSelect(item, index)
                       ? COLORS.primary
-                      : COLORS.text,
+                      : styleTextItem || COLORS.black,
                   }}>
                   {item?.[_keyTextView]}
                 </CustomText>
@@ -209,7 +210,7 @@ export default function OptionAccommodation({
                 <CustomText
                   style={{
                     color: checkSelect(item, index)
-                      ? COLORS.primary
+                      ? COLORS.pioPrimary
                       : COLORS.text,
                   }}>
                   {item?.[_keyTextSub]}
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     height: scale(38),
     zIndex: 1,
   },

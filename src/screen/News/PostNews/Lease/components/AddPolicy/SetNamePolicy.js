@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import {CustomInput} from '../../../../../../components';
 import CustomText from '../../../../../../components/CustomText';
 import {requireField} from '../../../../../../utils/validate';
@@ -21,7 +21,9 @@ export default function SetNamePolicy({control}) {
       />
       <View style={styles.note}>
         <View style={styles.arrowTop} />
-        <CustomText>{t('this_not_affect')}</CustomText>
+        <CustomText style={{color: COLORS.white}}>
+          {t('this_not_affect')}
+        </CustomText>
       </View>
     </View>
   );
@@ -35,8 +37,8 @@ const styles = StyleSheet.create({
     borderRadius: scale(6),
   },
   note: {
-    backgroundColor: '#E3E3E3',
-    borderColor: '#E3E3E3',
+    backgroundColor: COLORS.pioPrimary,
+    borderColor: COLORS.pioPrimary,
     padding: scale(10),
     borderRadius: scale(6),
     alignItems: 'flex-start',
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
   arrowTop: {
     borderWidth: scale(7),
     borderColor: '#00000000',
-    borderBottomColor: '#E3E3E3',
+    borderBottomColor: COLORS.pioPrimary,
     position: 'absolute',
     top: scale(-12),
     left: scale(10),

@@ -23,6 +23,7 @@ export default function WrapperContent({
   isShadow,
   dayEndDeals,
   background,
+  noBackground,
   packageTour,
   themedTour,
   worldTour,
@@ -32,8 +33,10 @@ export default function WrapperContent({
   ...props
 }) {
   const {t} = useLanguage();
+
+  const Component = noBackground ? View : ImageBackground;
   return (
-    <ImageBackground source={background || images.white}>
+    <Component source={background || images.white}>
       <View {...props} style={[styles.wrapper, styleWrapper]}>
         <View style={[styles.heading, styleHeading]}>
           <View style={styles.boxHeading}>
@@ -119,13 +122,13 @@ export default function WrapperContent({
           {children}
         </View>
       </View>
-    </ImageBackground>
+    </Component>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     paddingVertical: scale(16),
     rowGap: scale(10),
   },

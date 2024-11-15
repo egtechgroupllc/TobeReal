@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import CustomText from '../../../../../components/CustomText';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconCopy} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import {formatPrice} from '../../../../../utils/format';
@@ -25,6 +25,7 @@ export default function InfoBank({data}) {
           style={{
             flex: 1,
             fontSize: SIZES.medium,
+            color: COLORS.white,
           }}>
           {t('transfer_money')} - {nameBank}
         </CustomText>
@@ -102,14 +103,13 @@ const ItemInfo = ({name, value, isPrice, isCopy = true}) => {
 };
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.pioPrimary,
     borderRadius: scale(10),
     overflow: 'hidden',
   },
   header: {
-    backgroundColor: '#d1f0ff',
+    backgroundColor: COLORS.pioPrimary,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale, SHADOW} from '../../../../assets/constants';
 import CheckBox from '../../../../components/CheckBox';
 import CustomImage from '../../../../components/CustomImage';
 
@@ -21,6 +21,7 @@ export default function ItemLanguage({item, onPress, check}) {
         styleWrapper={{
           flex: 1,
         }}
+        fillColor={COLORS.primary}
       />
     </TouchableOpacity>
   );
@@ -34,11 +35,13 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: scale(15),
     borderWidth: scale(1),
-    borderColor: '#C2C2C2',
+    borderColor: COLORS.pioBox,
+    ...SHADOW,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: scale(20),
     columnGap: scale(16),
+    backgroundColor: COLORS.white,
   },
   image: {
     height: scale(20),

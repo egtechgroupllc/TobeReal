@@ -100,7 +100,13 @@ export default function TicketOption({paramsTour}) {
     }
   }, [paramsTour?.country?.id, country?.id]);
   return (
-    <View>
+    <WrapperContent
+      noBackground
+      styleContent={{
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+        paddingBottom: scale(30),
+      }}>
       <View style={styles.boxTourTime}>
         <CustomText
           textType="semiBold"
@@ -247,7 +253,7 @@ export default function TicketOption({paramsTour}) {
                   }}
                   style={{
                     backgroundColor:
-                      minQuantityReal > 0 ? COLORS.primary : COLORS.grey,
+                      minQuantityReal > 0 ? COLORS.pioPrimary : COLORS.grey,
                   }}
                   disabled={minQuantityReal > 0 ? false : true}
                   onPress={() =>
@@ -260,7 +266,7 @@ export default function TicketOption({paramsTour}) {
           }}
         />
       </View>
-    </View>
+    </WrapperContent>
   );
 }
 
@@ -277,7 +283,6 @@ const styles = StyleSheet.create({
     fontSize: SIZES.xMedium,
   },
   boxTourTime: {
-    backgroundColor: COLORS.white,
     minHeight: scale(50),
     paddingVertical: scale(20),
   },

@@ -101,8 +101,8 @@ export default function App() {
         justifyContent: 'center',
       }}>
       <CustomImage
-        source={images.logoSplash}
-        style={{height: '70%', width: '70%', alignSelf: 'center'}}
+        source={images.logo2}
+        style={{height: '50%', width: '50%', alignSelf: 'center'}}
         resizeMode="contain"
       />
     </View>
@@ -213,7 +213,7 @@ export default function App() {
                           <Layout />
                           <StatusBar
                             barStyle="light-content"
-                            backgroundColor={COLORS.primary}
+                            backgroundColor={COLORS.pioPrimary}
                           />
                           {/* </KeyboardAvoidingView> */}
                           {/* </TouchableWithoutFeedback> */}

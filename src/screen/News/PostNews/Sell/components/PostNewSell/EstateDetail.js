@@ -115,6 +115,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
           <View style={{flexDirection: 'row', columnGap: scale(10)}}>
             <RealEstateType
               label={t('legal_documents')}
+              styleTextLabel={styles.label}
               name={'legal_documents'}
               control={control}
               data={listLegalDoc}
@@ -156,7 +157,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             }}>
             <CustomInput
               label={t('width')}
-              placeholder="Width"
+              placeholder={t('width')}
               name="size_width"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -169,7 +170,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
 
             <CustomInput
               label={t('length')}
-              placeholder="Length"
+              placeholder={t('length')}
               name="size_length"
               control={control}
               rules={requireField(t('this_field_required'))}
@@ -248,6 +249,7 @@ export default function EstateDetail({control, errors, watch, setValue}) {
             styleWrapper={{
               width: '100%',
             }}
+            fillColor={COLORS.primary}
             checkedNumber
             control={control}
             name="is_negotiated"
@@ -270,12 +272,12 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.pioBox,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
 
     alignItems: 'center',
-    borderColor: '#F0B90B80',
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -285,11 +287,11 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     width: '100%',
     marginTop: scale(10),
-    borderColor: '#F0B90B',
+    borderColor: COLORS.pioPrimary,
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

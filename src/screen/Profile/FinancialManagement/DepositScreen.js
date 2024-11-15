@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect, useMemo, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
-import {COLORS, SIZES, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {CustomInput} from '../../../components';
 import CustomImage from '../../../components/CustomImage';
 import MainWrapper from '../../../components/MainWrapper';
@@ -44,7 +44,6 @@ export default function DepositScreen({route}) {
     <>
       <MainWrapper
         scrollEnabled={false}
-        noImgColor
         backgroundColor="#eee"
         styleContent={{
           paddingHorizontal: scale(10),
@@ -137,10 +136,13 @@ const styles = StyleSheet.create({
   hear: {
     backgroundColor: COLORS.white,
     borderRadius: scale(10),
+    ...SHADOW,
     padding: scale(20),
     // flexDirection: 'row',
     // alignItems: 'center',
     rowGap: scale(10),
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   boxImg: {
     borderWidth: 1,

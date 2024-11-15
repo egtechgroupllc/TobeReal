@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {formatDate} from '../../../../../../utils/format';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {Counter, CustomText} from '../../../../../../components';
@@ -68,7 +68,7 @@ export default function AutoPostTop({date, setValue, onCount, countNum}) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: COLORS.pioBox,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

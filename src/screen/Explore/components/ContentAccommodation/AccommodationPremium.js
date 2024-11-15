@@ -3,7 +3,7 @@ import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {getListRent} from '../../../../Model/api/apiAccom';
-import {SHADOW, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, scale} from '../../../../assets/constants';
 import {InViewport} from '../../../../components';
 import {useCountry} from '../../../../hooks/useCountry';
 import {useLanguage} from '../../../../hooks/useLanguage';
@@ -77,9 +77,10 @@ export default function AccommodationPremium({currency}) {
       //     },
       //   })
       // }
+      noBackground
       heading={title}
       subHeading={t('find_popular')}
-      styleWrapper={{backgroundColor: '#f8eede'}}>
+      styleWrapper={{backgroundColor: '#2A2A2A10'}}>
       <InViewport
         loadingMap
         ComponentLoading={

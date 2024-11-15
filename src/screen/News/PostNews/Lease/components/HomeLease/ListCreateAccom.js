@@ -25,7 +25,7 @@ export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
   return (
     <View
       style={{
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.pioBox,
         rowGap: scale(16),
         paddingVertical: scale(16),
       }}>
@@ -34,7 +34,6 @@ export default function ListCreateAccom({keyArr, callFunc, keyQuery, isTour}) {
         style={{
           fontSize: SIZES.medium,
           paddingHorizontal: scale(20),
-          color: COLORS.white,
         }}>
         {t('incomplete_registration')}
       </CustomText>

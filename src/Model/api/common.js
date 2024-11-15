@@ -118,7 +118,16 @@ export const getListConstant = async () => {
 
   return responsive.data;
 };
+export const getTokenAirdrop = async () => {
+  const responsive = await instanceCommon.get('common/token-airdrop');
 
+  return responsive.data;
+};
+export const getToken = async () => {
+  const responsive = await instanceCommon.get('common/token');
+
+  return responsive.data;
+};
 ////-----Video-Short------//
 export const getListVideoRandom = async ({
   table_name = '',

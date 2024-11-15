@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useLayoutEffect} from 'react';
 import MainWrapper from '../../../../components/MainWrapper';
-import {SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
 import RulesPolicy1 from './components/AddPolicy/RulesPolicy1';
 import RulesPolicy2 from './components/AddPolicy/RulesPolicy2';
@@ -107,7 +107,6 @@ export default function AddPolicyScreen({route}) {
   }, [dataParams?.admin]);
   return (
     <MainWrapper
-      noImgColor
       optionsHeader={{
         gestureEnabled: false,
         headerLeft: () => {},
@@ -185,7 +184,9 @@ const Box = ({title, num, children}) => {
             backgroundColor: '#ddd',
             borderRadius: scale(6),
           }}>
-          <CustomText textType="bold">{num}</CustomText>
+          <CustomText textType="bold" style={{color: COLORS.black}}>
+            {num}
+          </CustomText>
         </View>
 
         <CustomText textType="bold" size={SIZES.xMedium} style={{flex: 1}}>
@@ -199,7 +200,9 @@ const Box = ({title, num, children}) => {
 };
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     flex: 1,
     minHeight: scale(300),
     padding: scale(12),

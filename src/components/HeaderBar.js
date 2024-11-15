@@ -67,7 +67,7 @@ export default memo(function HeaderBar({back, navigation, options, route}) {
 const styles = StyleSheet.create({
   wrapper: {
     minHeight: scale(40),
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: scale(16),

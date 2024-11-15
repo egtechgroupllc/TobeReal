@@ -8,11 +8,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {COLORS, images, scale} from '../../assets/constants';
+import {animations, COLORS, images, scale} from '../../assets/constants';
 import CustomText from '../CustomText';
 import styles from './styles';
 import CustomImage from '../CustomImage';
 import {useLoading} from '../../hooks/useLoading';
+import LottieView from 'lottie-react-native';
 
 export interface LoadingPropTypes {
   cancelable?: boolean;
@@ -70,10 +71,14 @@ const Loading = ({
 
   const _renderDefaultContent = () => {
     return (
-      <CustomImage
-        source={images.logoLoading}
-        style={{height: scale(120), width: scale(120), alignSelf: 'center'}}
-        resizeMode="cover"
+      <LottieView
+        autoPlay={true}
+        source={animations.pending}
+        style={{
+          height: scale(150),
+          width: scale(150),
+        }}
+        resizeMode="contain"
       />
     );
 

@@ -210,9 +210,9 @@ export default function ListVideoTOUR({isFocused}) {
               }
               play={item?.id === videoPlay && isFocused && isFocusedBottomTab}
               styleBottom={{
-                paddingBottom:
-                  Platform.OS === 'android' ? scale(40) : scale(20),
+                paddingBottom: scale(100),
               }}
+              Bottom
               // onProgress={value => {
               //   handleProgress(value);
               // }}

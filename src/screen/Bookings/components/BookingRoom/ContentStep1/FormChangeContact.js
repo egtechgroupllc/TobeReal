@@ -100,6 +100,7 @@ export default function FormChangeContact({data, isOpen, isTour}) {
         index={1}
         snapPoints={['50%', '80%']}
         titleIndicator={t('contact_info')}
+        handleStyle={{color: COLORS.black}}
         // onDismiss={!apply && reset}
         styleContent={{
           paddingHorizontal: scale(16),

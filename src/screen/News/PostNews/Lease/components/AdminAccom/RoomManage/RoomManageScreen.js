@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect, useRef, useState} from 'react';
 import {FlatList, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
-import {scale} from '../../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../../assets/constants';
 import {CustomButton} from '../../../../../../../components';
 import BottomSheet from '../../../../../../../components/BottomSheet';
 import EmptyData from '../../../../../../../components/EmptyData';
@@ -108,6 +108,7 @@ export default function RoomManageScreen() {
         <BottomSheet
           ref={bottomSheetRef}
           titleIndicator={t('notification')}
+          handleStyle={{color: COLORS.black}}
           snapPoints={['30%']}
           disableScroll
           styleContent={styles.bottomSheet}>

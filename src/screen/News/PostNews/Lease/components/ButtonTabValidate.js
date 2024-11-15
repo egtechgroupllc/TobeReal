@@ -2,7 +2,7 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 
-import {COLORS, scale} from '../../../../../assets/constants';
+import {COLORS, scale, SHADOW} from '../../../../../assets/constants';
 import {IconRight} from '../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../components';
 
@@ -44,16 +44,18 @@ export default memo(function ButtonTabValidate({
       iconRight={() => <IconRight />}
       onPress={onPress}
       styleText={{
-        color: COLORS.text,
+        color: COLORS.black,
       }}
     />
   );
 });
 const styles = StyleSheet.create({
   buttonCategories: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
+    ...SHADOW,
     borderRadius: scale(6),
-    borderColor: '#F0B90B80',
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     height: scale(50),
     justifyContent: 'space-between',
     marginTop: scale(20),

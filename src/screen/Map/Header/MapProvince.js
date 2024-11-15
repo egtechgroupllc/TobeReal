@@ -31,6 +31,7 @@ export default function MapProvince({
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         gap: scale(8),
@@ -43,7 +44,8 @@ export default function MapProvince({
       <CustomInput
         styleText={{color: COLORS.black, alignSelf: 'flex-start'}}
         value={checked?.name}
-        placeholder="Select province"
+        placeholder={t('select_province')}
+        placeholderTextColor={COLORS.black}
         style={{
           backgroundColor: '#f5f5f5',
           borderWidth: 1,
@@ -65,8 +67,9 @@ export default function MapProvince({
             minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked?.id === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked?.id === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked?.id === item?.id ? COLORS.pioPrimary : '#ccc',
+            backgroundColor:
+              checked?.id === item?.id ? COLORS.pioPrimary : '#fff',
           }}>
           <CustomText
             style={{

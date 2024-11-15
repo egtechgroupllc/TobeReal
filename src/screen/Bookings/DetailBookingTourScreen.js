@@ -215,8 +215,8 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(12),
     borderRadius: scale(12),
     overflow: 'hidden',
-    paddingBottom: scale(0),
     marginVertical: scale(20),
+    marginBottom: scale(100),
   },
   wrappers: {
     alignItems: 'center',

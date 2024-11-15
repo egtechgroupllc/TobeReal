@@ -121,7 +121,7 @@ export default function BoxFeatureItem({
               <CustomText
                 textType="bold"
                 style={[isStar && {fontSize: SIZES.small, color: '#252B5C'}]}
-                numberOfLines={2}>
+                numberOfLines={1}>
                 {data?.title}
               </CustomText>
               <View
@@ -135,13 +135,12 @@ export default function BoxFeatureItem({
                 <CustomText
                   textType="medium"
                   style={[isStar && {fontSize: SIZES.xSmall, flex: 1}]}
-                  numberOfLines={2}>
+                  numberOfLines={1}>
                   {data?.country?.name}, {data?.province?.name}
                 </CustomText>
               </View>
               <View
                 style={{
-                  flex: 1,
                   marginTop: scale(10),
                   flexDirection: 'row',
                   columnGap: scale(5),
@@ -193,7 +192,7 @@ export default function BoxFeatureItem({
                         style={{
                           ...styles.topBox,
                           backgroundColor: '#234F68B0',
-                          width: scale(80),
+                          width: scale(100),
                           marginTop: scale(25),
                         }}>
                         <CustomText style={styles.topName} numberOfLines={1}>
@@ -298,8 +297,9 @@ export default function BoxFeatureItem({
 const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
-    backgroundColor: '#F5F4F8',
-    minHeight: scale(170),
+    backgroundColor: COLORS.white,
+    height: scale(180),
+    maxHeight: scale(220),
     // height: 200,
     borderRadius: 12,
     ...SHADOW,

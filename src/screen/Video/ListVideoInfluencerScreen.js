@@ -98,7 +98,7 @@ export default function ListVideoInfluencerScreen() {
             {...props}
             indicatorStyle={styles.underline}
             style={[styles.tabBar, {top: top}]}
-            activeColor={COLORS.primary}
+            activeColor={COLORS.pioPrimary}
             inactiveColor={COLORS.greyLight}
             labelStyle={styles.textSelect}
             pressColor={COLORS.grey + 40}
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     ],
   },
   underline: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
   },
   tabBar: {
     position: 'absolute',

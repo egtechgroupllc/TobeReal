@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import CustomText from '../../../../components/CustomText';
-import {SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import FeaturesPolicy1 from './components/FeaturesPolicy.js/FeaturesPolicy1';
 import CheckBox from '../../../../components/CheckBox';
 import FeaturesPolicy2 from './components/FeaturesPolicy.js/FeaturesPolicy2';
@@ -9,6 +9,7 @@ import FeaturesPolicy3 from './components/FeaturesPolicy.js/FeaturesPolicy3';
 import {useNavigation} from '@react-navigation/native';
 import {IconHome} from '../../../../assets/icon/Icon';
 import {useLanguage} from '../../../../hooks/useLanguage';
+import {MainWrapper} from '../../../../components';
 
 export default function FeaturesPolicyScreen() {
   const {setOptions, navigate} = useNavigation();
@@ -30,11 +31,13 @@ export default function FeaturesPolicyScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <View>
+    <MainWrapper>
       <View
         style={{
           marginHorizontal: scale(10),
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.white,
+          borderWidth: 1,
+          borderColor: COLORS.pioBox,
           borderRadius: scale(6),
           padding: scale(10),
           rowGap: scale(20),
@@ -50,7 +53,7 @@ export default function FeaturesPolicyScreen() {
           <FeaturesPolicy3 />
         </Box>
       </View>
-    </View>
+    </MainWrapper>
   );
 }
 

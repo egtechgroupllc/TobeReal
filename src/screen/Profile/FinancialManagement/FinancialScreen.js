@@ -4,7 +4,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import {HistoryTransactionScreen, ListMethodBankScreen} from '.';
-import {COLORS, scale} from '../../../assets/constants';
+import {COLORS, scale, WIDTH} from '../../../assets/constants';
 import {
   IconBookings,
   IconDeposit,
@@ -25,10 +25,22 @@ export default function FinancialScreen() {
       initialRouteName="ListMethodBankScreen"
       screenOptions={{
         headerShown: true,
-        tabBarActiveTintColor: '#F0B90B',
-        tabBarInactiveTintColor: '#000000',
+        tabBarActiveTintColor: COLORS.pioPrimary,
+        tabBarInactiveTintColor: COLORS.black,
         tabBarHideOnKeyboard: true,
-
+        tabBarStyle: [
+          WIDTH.widthScreen > 700 && {
+            height: scale(50),
+          },
+          {
+            zIndex: -1,
+          },
+          {
+            backgroundColor: COLORS.white,
+            borderTopWidth: 1,
+            borderColor: COLORS.pioBox,
+          },
+        ],
         header: props => (
           <HeaderBar
             {...props}
@@ -46,7 +58,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: t('deposit'),
           tabBarIcon: ({focused}) => (
-            <IconDeposit fill={focused && '#F0B90B'} />
+            <IconDeposit fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -56,7 +68,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: t('withdraw'),
           tabBarIcon: ({focused}) => (
-            <IconWithdraw fill={focused && '#F0B90B'} />
+            <IconWithdraw fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />
@@ -66,7 +78,7 @@ export default function FinancialScreen() {
         options={{
           tabBarLabel: t('transaction_history'),
           tabBarIcon: ({focused}) => (
-            <IconHistory fill={focused && '#F0B90B'} />
+            <IconHistory fill={focused && COLORS.pioPrimary} />
           ),
         }}
       />

@@ -96,7 +96,7 @@ export default function NotifyScreen() {
     <MainWrapper scrollEnabled={false}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={dataArr || (isLoading && [1, 2, 3, 5])}
+        data={dataArr}
         style={{
           height: '100%',
         }}
@@ -132,6 +132,29 @@ export default function NotifyScreen() {
         }}
         renderItem={({item, index}) => <NotifyItems data={item} t={t} />}
       />
+      {isLoading && (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            backgroundColor: COLORS.white70,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }}>
+          <LottieView
+            autoPlay={true}
+            source={animations.pending}
+            style={{
+              height: scale(150),
+              width: scale(150),
+            }}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </MainWrapper>
   );
 }

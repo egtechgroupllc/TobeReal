@@ -34,7 +34,13 @@ export default function Review({dataP}) {
   });
   return (
     <WrapperContent
+      noBackground
       isSeeAll
+      styleContent={{
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+        paddingBottom: scale(30),
+      }}
       onPressSeeAll={() => setIsOpen(true)}
       heading={t('reviews')}>
       {dataP?.review_count ? (
@@ -91,6 +97,7 @@ export default function Review({dataP}) {
               onDismiss={() => {
                 setIsOpen(false);
               }}
+              handleStyle={{color: COLORS.black}}
               handleChildBottom={() => (
                 <BottomSheetListSelect
                   data={listSort}

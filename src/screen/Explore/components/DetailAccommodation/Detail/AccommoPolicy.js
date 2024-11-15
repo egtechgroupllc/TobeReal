@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 import {IconClock} from '../../../../../assets/icon/Icon';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -25,6 +25,7 @@ export default function AccommoPolicy({data}) {
   }, [isOpen]);
   return (
     <WrapperContent
+      noBackground
       heading={t('accom_policy')}
       isSeeAll
       onPressSeeAll={() => {
@@ -32,6 +33,9 @@ export default function AccommoPolicy({data}) {
       }}
       styleContent={{
         paddingHorizontal: scale(16),
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+        paddingBottom: scale(30),
       }}>
       <View
         style={{
@@ -48,13 +52,14 @@ export default function AccommoPolicy({data}) {
           onDismiss={() => setIsOpen(false)}
           index={1}
           snapPoints={['50%', '80%']}
-          titleIndicator={'Chính sách lưu trú'}
+          titleIndicator={t('accom_policy')}
+          handleStyle={{color: COLORS.black}}
           styleContent={{
             paddingHorizontal: scale(16),
             rowGap: scale(16),
           }}>
           {listPolicy?.map((item, index) => (
-            <Item data={item} key={index} />
+            <Item data={item} key={index} textStyle={{color: COLORS.black}} />
           ))}
         </BottomSheet>
       )}
@@ -62,7 +67,7 @@ export default function AccommoPolicy({data}) {
   );
 }
 
-const Item = ({data}) => {
+const Item = ({data, textStyle}) => {
   return (
     <View style={styles.item}>
       {data.icon && (
@@ -83,6 +88,7 @@ const Item = ({data}) => {
           textType="semiBold"
           style={{
             fontSize: SIZES.xMedium,
+            ...textStyle,
           }}>
           {data?.name}
         </CustomText>

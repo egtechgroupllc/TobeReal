@@ -14,11 +14,15 @@ export default function InfoUnitFacilities({data}) {
   return (
     <WrapperContent
       isSeeAll
+      noBackground
       onPressSeeAll={() => bottomSheetRef.current.open()}
       heading={t('unit_facilities')}
       styleContent={{
         paddingHorizontal: scale(16),
         rowGap: scale(10),
+        paddingBottom: scale(30),
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
       }}>
       <View style={styles.header}>
         <IconHome
@@ -59,6 +63,7 @@ export default function InfoUnitFacilities({data}) {
           ref={bottomSheetRef}
           index={1}
           snapPoints={['50%', '86%']}
+          handleStyle={{color: COLORS.black}}
           titleIndicator={t('room_facilities')}>
           <View style={styles.content}>
             {data?.features.map((item, index) => (
@@ -68,6 +73,7 @@ export default function InfoUnitFacilities({data}) {
                   textType="regular"
                   style={{
                     fontSize: SIZES.xMedium,
+                    color: COLORS.black,
                   }}>
                   {t(item)}
                 </CustomText>
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
   dot: {
     width: scale(4),
     aspectRatio: 1,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.error,
     borderRadius: 99,
   },
 });

@@ -86,11 +86,9 @@ export default function SelectCountry({
                     styles.content,
                   ]}>
                   <CustomText
-                    style={
-                      !dataFromScreen && {
-                        color: '#aaa',
-                      }
-                    }>
+                    style={{
+                      color: COLORS.black,
+                    }}>
                     {dataFromScreen?.name || t('country')}
                   </CustomText>
                   <IconRight />

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {COLORS, SIZES, images, scale} from '../../../assets/constants';
+import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
 import {IconCamera, IconCheck, IconProfile} from '../../../assets/icon/Icon';
 import CustomImage from '../../../components/CustomImage';
 import CustomText from '../../../components/CustomText';
@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 export default function TopProfile({name, data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+
   return (
     <View style={styles.wrapper}>
       <View
@@ -120,6 +121,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: scale(8),
     rowGap: scale(4),
+    ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   avatar: {
     width: scale(60),

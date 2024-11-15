@@ -2,7 +2,7 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {StyleSheet, Switch, TouchableOpacity, View} from 'react-native';
 
-import {SHADOW, SIZES, scale} from '../../../../../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../../../../../assets/constants';
 import {IconEditProfile, IconReset} from '../../../../../../assets/icon/Icon';
 import {CustomButton} from '../../../../../../components';
 import BottomSheet from '../../../../../../components/BottomSheet';
@@ -124,6 +124,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
 
         <BottomSheet
           titleIndicator={t('auto_repost')}
+          handleStyle={{color: COLORS.black}}
           snapPoints={['40%']}
           ref={bottomSheetRef}
           onDismiss={() => !isConfirm && setIsEnabled(false)}
@@ -139,9 +140,15 @@ export default function AutoPost({setValue, date, params, unregister}) {
           />
 
           <View>
-            <CustomText>- {t('news_will_repost')}.</CustomText>
-            <CustomText>- {t('time_reposting')}.</CustomText>
-            <CustomText>- {t('each_time_post')}.</CustomText>
+            <CustomText style={{color: COLORS.black}}>
+              - {t('news_will_repost')}.
+            </CustomText>
+            <CustomText style={{color: COLORS.black}}>
+              - {t('time_reposting')}.
+            </CustomText>
+            <CustomText style={{color: COLORS.black}}>
+              - {t('each_time_post')}.
+            </CustomText>
           </View>
 
           <CustomButton
@@ -160,7 +167,7 @@ export default function AutoPost({setValue, date, params, unregister}) {
 const styles = StyleSheet.create({
   wrapper: {
     rowGap: scale(12),
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.pioBox,
     padding: scale(10),
     ...SHADOW,
   },

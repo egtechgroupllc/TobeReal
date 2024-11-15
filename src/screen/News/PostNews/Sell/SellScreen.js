@@ -84,6 +84,8 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     width: '90%',
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   icon: {
     color: COLORS.white,

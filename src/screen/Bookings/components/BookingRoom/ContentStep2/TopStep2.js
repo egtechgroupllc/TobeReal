@@ -93,7 +93,7 @@ export default function TopStep2({
 
 const styles = StyleSheet.create({
   top: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.pioPrimary,
     padding: scale(10),
     height: scale(100),
     borderBottomLeftRadius: scale(12),

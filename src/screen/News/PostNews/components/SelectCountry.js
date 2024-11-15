@@ -20,6 +20,7 @@ export default function SelectCountry({
   setValue = () => {},
   onSelect = () => {},
   watch = () => {},
+  styleTextLabel,
 }) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -52,7 +53,7 @@ export default function SelectCountry({
               rowGap: scale(10),
             }}>
             <View style={styles.wrapper}>
-              <CustomText style={{color: COLORS.black}}>
+              <CustomText style={{color: COLORS.black, ...styleTextLabel}}>
                 {t('country')}
               </CustomText>
 
@@ -83,11 +84,9 @@ export default function SelectCountry({
                     styles.content,
                   ]}>
                   <CustomText
-                    style={
-                      !dataFromScreen && {
-                        color: '#aaa',
-                      }
-                    }>
+                    style={{
+                      color: COLORS.black,
+                    }}>
                     {dataFromScreen?.name || t('country')}
                   </CustomText>
                   {/* <IconRight /> */}
@@ -109,6 +108,7 @@ export default function SelectCountry({
 
             {dataFromScreen && (
               <SelectProvince
+                styleTextLabel={styleTextLabel}
                 control={control}
                 setValue={setValue}
                 watch={watch}

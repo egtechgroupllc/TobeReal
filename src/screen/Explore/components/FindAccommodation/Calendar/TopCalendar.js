@@ -24,7 +24,7 @@ export default memo(function TopCalendar({
             rowGap: scale(4),
             flex: 1,
           }}>
-          <CustomText>{t('check_in')}</CustomText>
+          <CustomText style={{color: COLORS.black}}>{t('check_in')}</CustomText>
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
@@ -36,7 +36,7 @@ export default memo(function TopCalendar({
         </View>
 
         <View style={styles.centerNight}>
-          <CustomText>
+          <CustomText style={{color: COLORS.black}}>
             {checkOut ? differenceInDays(checkOut, checkIn) : '...'}{' '}
             {t('night')}
           </CustomText>
@@ -48,7 +48,9 @@ export default memo(function TopCalendar({
             flex: 1,
             alignItems: 'flex-end',
           }}>
-          <CustomText>{t('check_out')}</CustomText>
+          <CustomText style={{color: COLORS.black}}>
+            {t('check_out')}
+          </CustomText>
           <CustomText
             style={{
               fontSize: SIZES.xMedium,
@@ -63,8 +65,10 @@ export default memo(function TopCalendar({
       {onPressTime && (
         <CustomInput
           iconLeft={IconCalendar}
+          styleIcon={{color: COLORS.pioPrimary}}
           iconRight={IconDown}
           defaultValue={value}
+          styleText={{color: COLORS.black}}
           onPress={onPressTime}
         />
       )}

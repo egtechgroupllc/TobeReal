@@ -35,13 +35,24 @@ export default function Review({dataP}) {
 
   return (
     <WrapperContent
+      noBackground
       isSeeAll
+      styleContent={{
+        borderBottomWidth: 1,
+        borderColor: COLORS.pioBox,
+        paddingBottom: scale(30),
+      }}
       onPressSeeAll={() => setIsOpen(true)}
       heading={t('reviews')}>
       {dataP?.review_count ? (
         <>
           <View style={styles.overview}>
-            <View style={styles.overviewNumberRating}>
+            <View
+              style={{
+                ...styles.overviewNumberRating,
+                backgroundColor:
+                  dataP?.review_average > 3 ? COLORS.green : COLORS.primary,
+              }}>
               <CustomText textType="bold" style={styles.numberRating}>
                 {formatPrice(dataP?.review_average, {
                   showCurrency: false,
@@ -49,7 +60,6 @@ export default function Review({dataP}) {
                 }) || 0}
               </CustomText>
             </View>
-
             <View
               style={{
                 rowGap: scale(3),
@@ -101,6 +111,7 @@ export default function Review({dataP}) {
                   }}
                 />
               )}
+              handleStyle={{color: COLORS.black}}
               titleIndicator={t('review')}>
               <ReviewAll
                 onSort={() => bottomSheetChildRef.current.openChild()}

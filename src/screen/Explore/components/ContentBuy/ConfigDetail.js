@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     columnGap: scale(10),
-    backgroundColor: '#fff',
     padding: scale(20),
+    borderBottomWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   center: {
     color: COLORS.text,

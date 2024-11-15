@@ -21,6 +21,7 @@ export default function Acreage({onAcreage, value}) {
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(10),
@@ -31,12 +32,12 @@ export default function Acreage({onAcreage, value}) {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {formatPrice(multiSliderValue[0], {
             unit: 'm²',
           })}
         </CustomText>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {t('over')}{' '}
           {formatPrice(multiSliderValue[1], {
             unit: 'm²',
@@ -61,7 +62,7 @@ export default function Acreage({onAcreage, value}) {
         }}
         minMarkerOverlapDistance={10}
         selectedStyle={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.pioPrimary,
         }}
         unselectedStyle={{
           backgroundColor: '#EEF3F7',
@@ -70,7 +71,6 @@ export default function Acreage({onAcreage, value}) {
         markerOffsetY={3}
         markerStyle={{
           borderWidth: 1.2,
-          borderColor: COLORS.primary,
         }}
         onValuesChange={values => setMultiSliderValue(values)}
         onValuesChangeFinish={value => {

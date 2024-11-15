@@ -101,7 +101,7 @@ export default forwardRef(function CustomSelectDropdown(
               ])}
               rowTextStyle={arrayToObject([styles.text, props?.rowTextStyle])}
               selectedRowTextStyle={arrayToObject([
-                {color: COLORS.primary, fontFamily: FONTS.semiBold},
+                {color: COLORS.error, fontFamily: FONTS.semiBold},
                 props?.selectedRowTextStyle,
               ])}
               selectedRowStyle={arrayToObject([

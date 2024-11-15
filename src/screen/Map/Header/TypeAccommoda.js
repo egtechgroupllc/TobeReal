@@ -28,6 +28,7 @@ export default function TypeAccommoda({onType, value}) {
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         gap: scale(8),
@@ -61,8 +62,8 @@ export default function TypeAccommoda({onType, value}) {
             minWidth: '47%',
             borderRadius: 99,
             alignItems: 'center',
-            borderColor: checked === item?.id ? COLORS.primary : '#ccc',
-            backgroundColor: checked === item?.id ? COLORS.primary : '#fff',
+            borderColor: checked === item?.id ? COLORS.pioPrimary : '#ccc',
+            backgroundColor: checked === item?.id ? COLORS.pioPrimary : '#fff',
           }}>
           <CustomText
             style={{

@@ -27,8 +27,8 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
   const handleAlert = () => {
     if (!dataPro?.wallet_address) {
       Alert.alert(
-        t('Notification'),
-        t('Do you want import wallet and pay with voucher to get point free?'),
+        t('notification'),
+        t('do_you_want_import_wallet_and_pay_with_voucher_to_get_point_free'),
         [
           {
             text: t('import_wallet'),
@@ -38,7 +38,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
             style: 'cancel',
           },
           {
-            text: t('No, deposit now!'),
+            text: t('no_deposit_now'),
             onPress: handleSubmit(handleInitOrder),
           },
         ],
@@ -78,7 +78,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
         <CustomText
           style={{
             fontSize: SIZES.xSmall,
-            color: COLORS.text,
+            color: COLORS.black,
           }}>
           {t('total_amount')}:
         </CustomText>
@@ -86,6 +86,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
           textType="bold"
           style={{
             fontSize: SIZES.large,
+            color: COLORS.black,
           }}>
           {formatPrice(watch('amount') || 0, {
             currency: currency?.currency_code,
@@ -96,6 +97,7 @@ export default (function FooterDeposit({handleSubmit, watch, typeAccountBank}) {
         buttonType="normal"
         text={t('deposit')}
         iconLeft={IconPromotion}
+        // linearGradientProps={{colors: COLORS.linearGradient}}
         styleIcon={{
           color: COLORS.white,
         }}
@@ -116,9 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderTopLeftRadius: scale(16),
-    borderTopRightRadius: scale(16),
-    borderTopWidth: 2,
+    borderTopWidth: 1,
     borderTopColor: COLORS.primary,
   },
 });

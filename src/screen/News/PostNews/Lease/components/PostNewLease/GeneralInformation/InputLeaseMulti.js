@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   textInput: {
-    backgroundColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderColor: '#E3E3E3',
     borderRadius: scale(6),
   },

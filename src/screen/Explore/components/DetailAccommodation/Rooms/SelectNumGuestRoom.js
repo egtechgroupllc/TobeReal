@@ -67,6 +67,7 @@ export default memo(function SelectNumGuestRoom({onChangeNum, data}) {
         ref={bottomSheetRef}
         onDismiss={handleApply}
         titleIndicator={t('add_guest_room')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['50%']}
         styleContent={{
           rowGap: scale(14),

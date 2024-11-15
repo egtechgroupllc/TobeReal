@@ -34,7 +34,9 @@ export default function RatingReview({onSort}) {
       style={{
         rowGap: scale(10),
       }}>
-      <CustomText textType="bold" style={{fontSize: SIZES.xMedium}}>
+      <CustomText
+        textType="bold"
+        style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
         {t('review_score')}
       </CustomText>
       <View
@@ -50,7 +52,7 @@ export default function RatingReview({onSort}) {
               ...styles.item,
               borderWidth: checked?.rating === item.rating ? 1.3 : 1,
               borderColor:
-                checked?.rating === item.rating ? COLORS.primary : '#f1f1f1',
+                checked?.rating === item.rating ? COLORS.pioPrimary : '#f1f1f1',
             }}
             activeOpacity={0.7}
             onPress={() => setChecked(item)}>
@@ -58,7 +60,7 @@ export default function RatingReview({onSort}) {
               textType="semiBold"
               style={
                 checked?.rating === item.rating && {
-                  color: COLORS.primary,
+                  color: COLORS.pioPrimary,
                 }
               }>
               {item.rating}+
@@ -68,7 +70,7 @@ export default function RatingReview({onSort}) {
               numberOfLines={1}
               style={
                 checked?.rating === item.rating && {
-                  color: COLORS.primary,
+                  color: COLORS.pioPrimary,
                 }
               }>
               {item.textRating}

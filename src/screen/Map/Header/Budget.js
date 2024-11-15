@@ -8,7 +8,7 @@ import {useLanguage} from '../../../hooks/useLanguage';
 import {formatPrice} from '../../../utils/format';
 import WrapperContent from '../../Explore/components/WrapperContent';
 import {useCountry} from '../../../hooks/useCountry';
-import {IconLogoSaveloka} from '../../../assets/icon/Icon';
+import {IconLogoPione} from '../../../assets/icon/Icon';
 
 export default function Budget({onBudget, value, estateT}) {
   const min = 0;
@@ -28,6 +28,7 @@ export default function Budget({onBudget, value, estateT}) {
       }}
       styleTextHeading={{
         fontSize: SIZES.xMedium,
+        color: COLORS.black,
       }}
       styleContent={{
         rowGap: scale(10),
@@ -38,12 +39,12 @@ export default function Budget({onBudget, value, estateT}) {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {formatPrice(multiSliderValue[0] * currency?.exchange_rate, {
             currency: currency?.currency_code,
           })}
         </CustomText>
-        <CustomText>
+        <CustomText style={{color: COLORS.black}}>
           {formatPrice(multiSliderValue[1] * currency?.exchange_rate, {
             currency: currency?.currency_code,
           })}
@@ -67,7 +68,7 @@ export default function Budget({onBudget, value, estateT}) {
         }}
         minMarkerOverlapDistance={10}
         selectedStyle={{
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.pioPrimary,
         }}
         unselectedStyle={{
           backgroundColor: '#EEF3F7',
@@ -76,7 +77,6 @@ export default function Budget({onBudget, value, estateT}) {
         markerOffsetY={3}
         markerStyle={{
           borderWidth: 1.2,
-          borderColor: COLORS.primary,
         }}
         customMarker={() => {
           return (

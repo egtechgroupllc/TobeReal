@@ -16,7 +16,7 @@ import {
   postBookingRoom,
   postPaypal,
 } from '../../../../../../Model/api/apiAccom';
-import {COLORS, scale} from '../../../../../../assets/constants';
+import {COLORS, scale, SHADOW} from '../../../../../../assets/constants';
 import {showMess} from '../../../../../../assets/constants/Helper';
 import {IconCoinPoint, IconHome} from '../../../../../../assets/icon/Icon';
 import {CustomText} from '../../../../../../components';
@@ -33,6 +33,7 @@ import TopStep2 from '../../../../../Bookings/components/BookingRoom/ContentStep
 import {postBookingTour} from '../../../../../../Model/api/apiTour';
 import DetailPriceTour from './components/DetailPriceTour';
 import {useCountry} from '../../../../../../hooks/useCountry';
+import {useLoading} from '../../../../../../hooks/useLoading';
 export default function BookingTourConfirmScreen() {
   const data = useRoute().params;
   const {t} = useLanguage();
@@ -48,6 +49,8 @@ export default function BookingTourConfirmScreen() {
   const [totalPrice, setTotalPrice] = useState(null);
   const {currency} = useCountry();
   const {start, countdown} = useCountdown(5);
+  const {stopLoading, setLoading} = useLoading();
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('pay_booking_tour'),
@@ -224,6 +227,12 @@ export default function BookingTourConfirmScreen() {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
+  useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   return (
     <View style={styles.container}>
       <TopStep2
@@ -262,7 +271,7 @@ export default function BookingTourConfirmScreen() {
             onPress={handleAlert}
             disabled={checkBalance}
             style={{
-              backgroundColor: !checkBalance ? COLORS.primary : COLORS.grey,
+              backgroundColor: !checkBalance ? COLORS.pioPrimary : COLORS.grey,
             }}
           />
         </View>
@@ -289,6 +298,9 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     marginHorizontal: scale(10),
     borderRadius: scale(6),
+    ...SHADOW,
+    borderBottomWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   boxDetailPrice: {
     backgroundColor: '#fff',

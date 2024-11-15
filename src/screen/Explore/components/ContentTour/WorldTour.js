@@ -5,7 +5,7 @@ import {formatDate, formatPrice} from '../../../../utils/format';
 
 import InViewPort from '../../../../components/InViewport';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import BoxPlaceItem from './BoxPlaceItem';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
@@ -76,7 +76,8 @@ export default function WorldTour() {
         onPressCategory={item => setFilter(item)}
         heading={title}
         // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
-        styleWrapper={{backgroundColor: 'transparent'}}>
+        noBackground
+        styleWrapper={{backgroundColor: COLORS.pioBox}}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

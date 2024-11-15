@@ -14,9 +14,10 @@ import {COLORS, SHADOW, SIZES, images, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
 import {useForm} from 'react-hook-form';
 import {requireField, validateMinAmount} from '../../utils/validate';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {postWithdrawToken} from '../../Model/api/auth';
 import {showMess} from '../../assets/constants/Helper';
+import {getToken} from '../../Model/api/common';
 
 export default function WithdrawTokenScreen() {
   const {setOptions, goBack} = useNavigation();
@@ -49,6 +50,10 @@ export default function WithdrawTokenScreen() {
       },
     });
   };
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <MainWrapper
       styleContent={{
@@ -58,18 +63,29 @@ export default function WithdrawTokenScreen() {
       }}>
       <View style={styles.box}>
         <View style={styles.wallet}>
-          <IconWallet />
+          <View style={{...styles.icon, width: scale(18), height: scale(18)}}>
+            <CustomImage
+              isAvatar
+              source={{uri: getDataToken?.data?.image_url}}
+              style={{
+                height: scale(15),
+                aspectRatio: 1,
+              }}
+              resizeMode="contain"
+            />
+          </View>
           <CustomText
             textType="bold"
             numberOfLines={1}
             style={{color: COLORS.primary, fontSize: SIZES.xMedium}}>
-            {formatToken(data?.balance_token_data, {decimal: 20})} TBH
+            {formatToken(data?.balance_token_data, {decimal: 20})}{' '}
+            {getDataToken?.data?.symbol}
           </CustomText>
         </View>
         <View style={styles.icon}>
           <CustomImage
             isAvatar
-            source={images.logoTBH}
+            source={{uri: getDataToken?.data?.image_url}}
             style={{
               height: scale(120),
               aspectRatio: 1,
@@ -128,6 +144,8 @@ const styles = StyleSheet.create({
     minWidth: scale(90),
     borderRadius: scale(10),
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   boxItem: {
     width: '100%',
@@ -148,7 +166,10 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(140),
     width: scale(140),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
+    ...SHADOW,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

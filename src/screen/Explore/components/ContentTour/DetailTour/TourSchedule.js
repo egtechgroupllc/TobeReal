@@ -25,6 +25,7 @@ export default function TourSchedule({data}) {
   );
   return (
     <WrapperContent
+      noBackground
       heading={t('tour_schedule')}
       styleWrapper={
         {
@@ -42,9 +43,9 @@ export default function TourSchedule({data}) {
         {JSON.parse(data?.schedule)?.[0]?.description}
       </CustomText>
       <LinearGradient
-        colors={['#F8E85A', '#FFC803']}
+        colors={[COLORS.pioPrimary, COLORS.pioBox]}
         start={{x: 0, y: 0}}
-        end={{x: 0, y: 1}}
+        end={{x: 3, y: 0}}
         style={{
           position: 'absolute',
           bottom: scale(-10),
@@ -58,7 +59,7 @@ export default function TourSchedule({data}) {
           <CustomText
             textType="semiBold"
             style={{
-              color: COLORS.black,
+              color: COLORS.white,
               // minWidth: scale(42),
             }}>
             {t('see_all')}
@@ -70,6 +71,7 @@ export default function TourSchedule({data}) {
         ref={bottomSheetRef}
         snapPoints={['50%', '80%']}
         titleIndicator={t('description_content')}
+        handleStyle={{color: COLORS.black}}
         styleContent={{
           paddingHorizontal: scale(16),
           rowGap: scale(10),

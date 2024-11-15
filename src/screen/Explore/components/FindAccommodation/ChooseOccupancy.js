@@ -41,6 +41,7 @@ export default function ChooseOccupancy({setValue}) {
       <BottomSheet
         ref={bottomSheetRef}
         titleIndicator={t('occupancy')}
+        handleStyle={{color: COLORS.black}}
         snapPoints={['60%']}
         styleContent={{
           rowGap: scale(10),

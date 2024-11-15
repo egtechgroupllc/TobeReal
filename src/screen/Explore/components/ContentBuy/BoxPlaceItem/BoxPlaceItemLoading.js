@@ -15,6 +15,7 @@ export default function BoxPlaceItemLoading({
         style={{
           marginTop: scale(14),
           paddingHorizontal: scale(10),
+          width: scale(170),
         }}>
         <Skeleton
           shimmerStyle={{

@@ -14,15 +14,18 @@ import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../assets/constants/Helper';
 import {IconError, IconHome} from '../../assets/icon/Icon';
+import {getToken} from '../../Model/api/common';
+import {useQuery} from '@tanstack/react-query';
 
 export default function DepositTokenScreen() {
   const params = useRoute().params;
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const [secondEnd, setSecondEnd] = useState(false);
+
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: `${t('receive')} ${params?.listToken?.unit}`,
+      headerTitle: `${t('receive')} ${params?.listToken?.symbol}`,
       headerRight: () => (
         <TouchableOpacity onPress={() => navigate('BottomTab')}>
           <IconHome style={{width: scale(20)}} />
@@ -35,6 +38,10 @@ export default function DepositTokenScreen() {
     Clipboard.setString(params?.data?.wallet_address);
     showMess(t('copy_success'));
   };
+  const {data: getDataToken, error} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <MainWrapper>
       <View style={styles.content}>
@@ -43,6 +50,8 @@ export default function DepositTokenScreen() {
             backgroundColor: COLORS.white,
             padding: scale(20),
             borderRadius: scale(10),
+            borderWidth: 1,
+            borderColor: COLORS.pioBox,
             ...SHADOW,
           }}>
           <View
@@ -89,7 +98,10 @@ export default function DepositTokenScreen() {
           }}>
           <IconError size={scale(12)} fill={COLORS.primary} />{' '}
           {t('this_deposit_address')}
-          <CustomText textType="semiBold"> TBH.TBRC20, </CustomText>
+          <CustomText textType="semiBold">
+            {' '}
+            {getDataToken?.data?.symbol}.TBRC20,
+          </CustomText>
           {t('dont_deposit_other')}.
         </CustomText>
       </View>

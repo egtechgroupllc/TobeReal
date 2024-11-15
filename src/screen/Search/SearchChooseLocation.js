@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
     padding: scale(12),
     borderRadius: scale(10),
     backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.pioBox,
     ...SHADOW,
     // minHeight: 200,
     zIndex: 99,

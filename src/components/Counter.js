@@ -21,6 +21,8 @@ export default function Counter({
   styleWrapper,
   Icon,
   editable = false,
+  styleHeading,
+  styleTextInput,
 }) {
   const [quantity, setQuantity] = useState(value || min);
 
@@ -67,7 +69,14 @@ export default function Counter({
         <View style={styles.boxHeading}>
           {Icon}
           <View style={{rowGap: scale(2), styleBoxHeading}}>
-            <CustomText style={{fontSize: SIZES.xMedium}}>{heading}</CustomText>
+            <CustomText
+              style={{
+                fontSize: SIZES.xMedium,
+                color: COLORS.black,
+                ...styleHeading,
+              }}>
+              {heading}
+            </CustomText>
             {subHeading && (
               <CustomText textType="regular">{subHeading}</CustomText>
             )}
@@ -97,6 +106,8 @@ export default function Counter({
           style={styles.input}
           styleText={{
             textAlign: 'center',
+            color: COLORS.black,
+            ...styleTextInput,
           }}
           editable={editable}
           onChangeText={text => {

@@ -2,7 +2,7 @@ import React, {useMemo, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 
-import {scale} from '../../../../../../assets/constants';
+import {COLORS, scale} from '../../../../../../assets/constants';
 import InViewPort from '../../../../../../components/InViewport';
 import {useLanguage} from '../../../../../../hooks/useLanguage';
 import {
@@ -101,7 +101,10 @@ export default function EstatePhoto({
             control={control}
             rules={
               !imgDes && [
-                validateMinLength(t(' Tối thiểu là 4 ảnh và tối đa 24 ảnh'), 4),
+                validateMinLength(
+                  t('minimum_1_photos_and_maximum_24_photos'),
+                  4,
+                ),
               ]
             }
             name={'description_img'}
@@ -184,11 +187,11 @@ const styles = StyleSheet.create({
   box: {
     paddingTop: scale(20),
     minHeight: scale(100),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     alignItems: 'center',
-    borderColor: '#F0B90B80',
+    borderColor: COLORS.pioBox,
     borderWidth: scale(1),
     width: '100%',
     paddingBottom: scale(20),
@@ -196,8 +199,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    backgroundColor: '#E3E3E3',
-    borderColor: '#E3E3E3',
+    backgroundColor: 'transparent',
     borderRadius: scale(6),
   },
 });

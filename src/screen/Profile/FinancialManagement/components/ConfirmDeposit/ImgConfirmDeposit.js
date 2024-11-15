@@ -4,7 +4,7 @@ import ChooseImgPicker from '../../../../components/ChooseImgPicker';
 import {requireField} from '../../../../../utils/validate';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import CustomText from '../../../../../components/CustomText';
-import {SIZES, scale} from '../../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../../assets/constants';
 
 export default function ImgConfirmDeposit({control}) {
   const {t} = useLanguage();
