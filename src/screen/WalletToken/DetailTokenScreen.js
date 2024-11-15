@@ -11,6 +11,7 @@ import {
 import {useLanguage} from '../../hooks/useLanguage';
 import EmptyData from '../../components/EmptyData';
 import {IconHome} from '../../assets/icon/Icon';
+import {formatPrice} from '../../utils/format';
 
 export default function DetailTokenScreen() {
   const params = useRoute().params;
@@ -49,7 +50,11 @@ export default function DetailTokenScreen() {
             />
           </View>
           <CustomText style={{fontSize: SIZES.large}} textType="medium">
-            {params?.listToken?.value} {params?.listToken?.unit}
+            {formatPrice(params?.listToken?.balance, {
+              showCurrency: false,
+              decimalPlaces: 6,
+            })}{' '}
+            {params?.listToken?.symbol}
           </CustomText>
           <View
             style={{
