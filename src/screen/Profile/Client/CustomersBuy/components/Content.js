@@ -13,9 +13,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
-import { useLanguage } from '../../../../../hooks/useLanguage';
+import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function Content() {
-  const {t}= useLanguage()
+  const {t} = useLanguage();
   const data = [
     {
       id: 1,
@@ -84,7 +84,7 @@ export default function Content() {
       <CustomText
         textType="medium"
         style={{...styles.text, marginBottom: scale(10), color: COLORS.black}}>
-                {t('select_district')}:
+        {t('select_district')}:
       </CustomText>
       <CustomInput
         style={{

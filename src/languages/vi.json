@@ -1085,7 +1085,7 @@
   "enter_amount_you_want_withdraw": "Nhập số lượng bạn muốn rút",
   "look_up_transaction": "Tra cứu lịch sử giao dịch",
   "token_balance_available": "Số dư {unit} (có sẵn để rút vào ví)",
-  "active_to_use_wallet": "Kích hoạt để sử dụng Ví ToBeChain",
+  "active_to_use_wallet": "Kích hoạt để sử dụng Ví {unit}",
   "active_2_types_wallet": "Kích hoạt 2 loại ví: PionePay, ví tiền mã hoá và tận hưởng thanh toán nhanh chóng, an toàn",
   "your_transaction_has_been_canceled": "Giao dịch của bạn đã bị hủy do \n lỗi trong quá trình đặt phòng.\nVui lòng thử lại!",
   "traceability": "Truy xuất nguồn gốc",
@@ -1143,7 +1143,7 @@
   "this_is_type_point": "Đây là các loại điểm sử dụng trong ứng dụng",
   "this_is_wallet_manage": "Đây là quản lý ví điểm voucher",
   "help_center": "Trung tâm trợ giúp",
-  "how_to_add_tobechain": "Làm thế nào để thêm TobeChain vào MetaMask?",
+  "how_to_add_pionechain": "Làm thế nào để thêm PioneerChain vào MetaMask?",
 
   "create_new_policy": "Tạo chính sách mới",
   "you_have_not_select_facility": "Bạn chưa chọn cơ sở nào",
@@ -1256,7 +1256,7 @@
   "skip": "Bỏ qua",
   "please_create_wallet_to_received_reward": "Vui lòng tạo ví để nhận phần thưởng đăng nhập hàng ngày",
   "receive_now": "Nhận ngay",
-  "your_balance_fee_gas_not_enough": "Số dư phí gas của bạn không đủ để nhận phần thưởng check-in, vui lòng nhận TOBE từ faucet ngay bây giờ",
+  "your_balance_fee_gas_not_enough": "Số dư phí gas của bạn không đủ để nhận phần thưởng check-in, vui lòng nhận {unit} từ faucet ngay bây giờ",
   "received": "Đã nhận",
   "daily_checkin": "Check-in hàng ngày",
 

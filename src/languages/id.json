@@ -1056,7 +1056,7 @@
   "enter_amount_you_want_withdraw": "Masukkan jumlah yang ingin Anda tarik",
   "look_up_transaction": "Cari riwayat transaksi",
   "token_balance_available": "Saldo {unit} (tersedia untuk ditarik ke dompet)",
-  "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet ToBeChain",
+  "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet {unit}",
   "active_2_types_wallet": "Aktifkan 2 jenis dompet: PionePay, dompet cryptocurrency, dan nikmati pembayaran yang cepat, aman",
   "your_transaction_has_been_canceled": "Transaksi Anda telah dibatalkan karena \n kesalahan selama proses pemesanan. \nSilakan coba lagi!",
   "traceability": "Pelacakan",
@@ -1114,7 +1114,7 @@
   "this_is_type_point": "Ini adalah jenis poin yang digunakan dalam aplikasi",
   "this_is_wallet_manage": "Ini adalah manajemen dompet voucher poin",
   "help_center": "Pusat bantuan",
-  "how_to_add_tobechain": "Bagaimana cara menambahkan TobeChain ke MetaMask?",
+  "how_to_add_pionechain": "Bagaimana cara menambahkan PioneerChain ke MetaMask?",
 
   "create_new_policy": "Buat kebijakan baru",
   "you_have_not_select_facility": "Anda belum memilih fasilitas",
@@ -1227,7 +1227,7 @@
   "skip": "Lewati",
   "please_create_wallet_to_received_reward": "Silakan buat dompet untuk menerima hadiah login harian",
   "receive_now": "Terima sekarang",
-  "your_balance_fee_gas_not_enough": "Saldo fee gas Anda tidak cukup untuk menerima hadiah check-in, silakan ambil TOBE dari faucet sekarang",
+  "your_balance_fee_gas_not_enough": "Saldo fee gas Anda tidak cukup untuk menerima hadiah check-in, silakan ambil {unit} dari faucet sekarang",
   "received": "Diterima",
   "daily_checkin": "Check-in harian",
 

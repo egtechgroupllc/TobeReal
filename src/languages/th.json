@@ -1083,7 +1083,7 @@
   "enter_amount_you_want_withdraw": "กรอกจำนวนที่คุณต้องการถอน",
   "look_up_transaction": "ค้นหาประวัติการทำธุรกรรม",
   "token_balance_available": "ยอดคงเหลือ {unit} (สามารถถอนได้ในกระเป๋าสตางค์)",
-  "active_to_use_wallet": "เปิดใช้งานเพื่อใช้กระเป๋าสตางค์ ToBeChain",
+  "active_to_use_wallet": "เปิดใช้งานเพื่อใช้กระเป๋าสตางค์ {unit}",
   "active_2_types_wallet": "เปิดใช้งาน 2 ประเภทของกระเป๋าเงิน: PionePay, กระเป๋าเงินดิจิตอล และเพลิดเพลินกับการชำระเงินที่รวดเร็วและปลอดภัย",
   "your_transaction_has_been_canceled": "ธุรกรรมของคุณถูกยกเลิกเนื่องจาก \n ข้อผิดพลาดระหว่างกระบวนการจอง \nกรุณาลองอีกครั้ง!",
   "traceability": "การตรวจสอบย้อนกลับ",
@@ -1142,7 +1142,7 @@
   "this_is_type_point": "นี่คือประเภทของคะแนนที่ใช้ในแอป",
   "this_is_wallet_manage": "นี่คือการจัดการกระเป๋าเงินบัตรกำนัล",
   "help_center": "ศูนย์ช่วยเหลือ",
-  "how_to_add_tobechain": "วิธีเพิ่ม TobeChain ลงใน MetaMask?",
+  "how_to_add_pionechain": "วิธีเพิ่ม PioneerChain ลงใน MetaMask?",
 
   "create_new_policy": "สร้างนโยบายใหม่",
   "you_have_not_select_facility": "คุณยังไม่ได้เลือกสิ่งอำนวยความสะดวก",
@@ -1255,7 +1255,7 @@
   "skip": "ข้าม",
   "please_create_wallet_to_received_reward": "กรุณาสร้างกระเป๋าสตางค์เพื่อรับรางวัลการเข้าสู่ระบบรายวัน",
   "receive_now": "รับตอนนี้",
-  "your_balance_fee_gas_not_enough": "ค่าธรรมเนียมก๊าซของคุณไม่เพียงพอที่จะได้รับรางวัลการเช็คอิน โปรดรับ TOBE จาก faucet ทันที",
+  "your_balance_fee_gas_not_enough": "ค่าธรรมเนียมก๊าซของคุณไม่เพียงพอที่จะได้รับรางวัลการเช็คอิน โปรดรับ {unit} จาก faucet ทันที",
   "received": "ได้รับแล้ว",
   "daily_checkin": "เช็คอินรายวัน",
 

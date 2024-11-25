@@ -53,7 +53,7 @@ export default function AddressWalletScreen() {
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
         des: !data?.data?.wallet_address
-          ? t('active_to_use_wallet')
+          ? t('active_to_use_wallet', {unit: 'PioneerChain'})
           : t('wallet_ready_to_use'),
         logo: images.logo1,
         isOpen: data?.data?.private_key || data?.data?.passphrase,

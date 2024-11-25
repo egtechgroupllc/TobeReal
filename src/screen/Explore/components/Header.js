@@ -50,7 +50,7 @@ const listSocial = [
   },
 ];
 
-export default function Header({dataCheckin, dataP, amountTOBE}) {
+export default function Header({dataCheckin, dataP, amountPioneer}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
@@ -98,7 +98,7 @@ export default function Header({dataCheckin, dataP, amountTOBE}) {
     if (token) {
       navigate('NoBottomTab', {
         screen: 'DailyCheckinScreen',
-        params: {dataCheckin, amountTOBE},
+        params: {dataCheckin, amountPioneer},
       });
     } else {
       navigate('NavigationAuth', {

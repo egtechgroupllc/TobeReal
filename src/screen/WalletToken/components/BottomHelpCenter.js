@@ -13,8 +13,9 @@ export default function BottomHelpCenter() {
 
   const listQuestion = [
     {
-      title: t('how_to_add_tobechain'),
-      uri: 'https://docs.tobescan.com/docs/getting-started/add-tobechain',
+      title: t('how_to_add_pionechain'),
+      // uri: 'https://docs.tobescan.com/docs/getting-started/add-tobechain',
+      uri: 'https://docs.pionescan.com/',
     },
     // {
     //   title: t('How to deposit to TobeChain?'),

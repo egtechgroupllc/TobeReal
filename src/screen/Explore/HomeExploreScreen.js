@@ -41,8 +41,8 @@ export default function HomeExploreScreen() {
     queryFn: () => getBalanceWallet(token),
     enabled: !!token,
   });
-  const amountTOBE = useMemo(
-    () => dataWallet?.data?.find(item => item?.symbol === 'TOBE'),
+  const amountPioneer = useMemo(
+    () => dataWallet?.data?.find(item => item?.symbol === 'PIO'),
     [dataWallet?.data],
   );
 
@@ -110,14 +110,18 @@ export default function HomeExploreScreen() {
 
   return (
     <MainWrapper refreshControl scrollEnabled={false}>
-      <Header dataCheckin={dataCheckin} dataP={data} amountTOBE={amountTOBE} />
+      <Header
+        dataCheckin={dataCheckin}
+        dataP={data}
+        amountPioneer={amountPioneer}
+      />
       <FindAccommodation />
       {(dataCheckin?.data?.can_check_in || !data?.data?.wallet_address) &&
         !isLoading &&
         token &&
         !dateSkip && (
           <ModalGift
-            amountTOBE={amountTOBE}
+            amountPioneer={amountPioneer}
             open={open}
             dataP={data}
             dataCheckin={dataCheckin}

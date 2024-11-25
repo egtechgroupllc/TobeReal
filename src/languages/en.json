@@ -1089,7 +1089,7 @@
   "enter_amount_you_want_withdraw": "Enter amount you want to withdraw",
   "look_up_transaction": "Look up transaction history",
   "token_balance_available": "{unit} balance (available to withdraw to wallet)",
-  "active_to_use_wallet": "Activate to use ToBeChain Wallet",
+  "active_to_use_wallet": "Activate to use {unit} Wallet",
   "active_2_types_wallet": "Activate 2 types of wallets: PionePay, cryptocurrency wallet and enjoy fast, secure payments",
 
   "your_transaction_has_been_canceled": "Your transaction has been canceled due to \n an error during the booking process.\nPlease try again!",
@@ -1149,7 +1149,7 @@
   "this_is_type_point": "This is types of point using in app",
   "this_is_wallet_manage": "This is wallet manage voucher point",
   "help_center": "Help center",
-  "how_to_add_tobechain": "How to add TobeChain to MetaMask?",
+  "how_to_add_pionechain": "How to add PioneerChain to MetaMask?",
 
   "create_new_policy": "Create new policy",
   "you_have_not_select_facility": "You have not selected a facility yet",
@@ -1262,7 +1262,7 @@
   "skip": "Skip",
   "please_create_wallet_to_received_reward": "Please create a wallet to receive the daily login reward",
   "receive_now": "Receive now",
-  "your_balance_fee_gas_not_enough": "Your balance fee gas not enough to received checkin reward, please faucet TOBE now",
+  "your_balance_fee_gas_not_enough": "Your balance fee gas not enough to received checkin reward, please faucet {unit} now",
   "received": "Received",
   "daily_checkin": "Daily check-in",
 
@@ -1362,6 +1362,9 @@
   "maximum_hours": "Maximum hours is",
   "saved_file_successfully": "Saved file successfully",
   "error_when_saving_file": "Error when saving file",
-  "account":"Account"
+  "account":"Account",
+
+  "wallet_name": "Wallet name",
+  "wallet_symbol": "Wallet {unit}"
   
 }

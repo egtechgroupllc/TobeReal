@@ -41,7 +41,6 @@ export default function Traceability({data}) {
             color: COLORS.blue,
             textDecorationLine: 'underline',
           }}>
-          {/* https://tobescan.com/address/{data?.wallet_address} */}
           {t('property_traceability')}
         </CustomText>
       </TouchableOpacity>

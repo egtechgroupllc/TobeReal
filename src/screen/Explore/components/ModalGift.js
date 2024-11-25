@@ -17,7 +17,7 @@ export default function ModalGift({
   onPressWallet,
   onPressCancel,
   dataCheckin,
-  amountTOBE,
+  amountPioneer,
 }) {
   const {t} = useLanguage();
   // const {data} = useQuery({
@@ -102,7 +102,7 @@ export default function ModalGift({
             </>
           ) : (
             <>
-              {amountTOBE?.balance > 0.1 ? (
+              {amountPioneer?.balance > 0.1 ? (
                 <View style={{flexDirection: 'row', columnGap: scale(10)}}>
                   <CustomButton
                     text={t('skip')}
@@ -131,7 +131,7 @@ export default function ModalGift({
                       width: scale(300),
                       textAlign: 'center',
                     }}>
-                    {t('your_balance_fee_gas_not_enough')}!
+                    {t('your_balance_fee_gas_not_enough', {unit: 'Pioneer'})}!
                   </CustomText>
                   <View style={{flexDirection: 'row', columnGap: scale(10)}}>
                     <CustomButton
@@ -151,7 +151,7 @@ export default function ModalGift({
                       buttonType="small"
                       styleWrapper={{width: scale(120)}}
                       onPress={() =>
-                        Linking.openURL('https://faucet.tobescan.com/faucet')
+                        Linking.openURL('https://faucet.zeroscan.org/faucet')
                       }
                     />
                   </View>

@@ -1,24 +1,25 @@
 import {useNavigation} from '@react-navigation/native';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useLayoutEffect} from 'react';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import React, {useLayoutEffect, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 
-import {postImportWallet} from '../../Model/api/wallet';
+import {getBalanceWallet, postImportWallet} from '../../Model/api/wallet';
 import {COLORS, SIZES, scale} from '../../assets/constants';
 import {showMess} from '../../assets/constants/Helper';
 import {CustomButton, CustomInput, CustomText} from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
 import {requireField} from '../../utils/validate';
 import {formatNumber, formatPrice} from '../../utils/format';
+import {useAuthentication} from '../../hooks/useAuthentication';
 
 export default function ImportAddressWalletScreen({route}) {
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const dataP = route.params;
   const queryClient = useQueryClient();
-
+  const {token} = useAuthentication();
   const {control, handleSubmit, setValue} = useForm();
 
   useLayoutEffect(() => {
@@ -69,8 +70,8 @@ export default function ImportAddressWalletScreen({route}) {
         marginTop: '10%',
       }}>
       <CustomInput
-        value="Ví TobeChain"
-        label="Tên của ví"
+        value={t('wallet_symbol', {unit: 'Pioneer'})}
+        label={t('wallet_name')}
         editable={false}
         styleTextLabel={styles.label}
         styleText={{

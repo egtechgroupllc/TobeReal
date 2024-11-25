@@ -1080,7 +1080,7 @@
   "enter_amount_you_want_withdraw": "输入您想提取的金额",
   "look_up_transaction": "查询交易历史",
   "token_balance_available": "{unit}余额（可提取到钱包）",
-  "active_to_use_wallet": "激活以使用ToBeChain钱包",
+  "active_to_use_wallet": "激活以使用{unit}钱包",
   "active_2_types_wallet": "激活两种钱包：PionePay、加密货币钱包，享受快速、安全的支付",
   "your_transaction_has_been_canceled": "您的交易因 \n 预订过程中出错而被取消。\n请再试一次！",
   "traceability": "可追溯性",
@@ -1139,7 +1139,7 @@
   "this_is_type_point": "这是应用中使用的积分类型",
   "this_is_wallet_manage": "这是钱包管理代金券积分",
   "help_center": "帮助中心",
-  "how_to_add_tobechain": "如何将TobeChain添加到MetaMask?",
+  "how_to_add_pionechain": "如何将PioneerChain添加到MetaMask?",
 
   "create_new_policy": "创建新政策",
   "you_have_not_select_facility": "您尚未选择设施",
@@ -1251,7 +1251,7 @@
   "skip": "跳过",
   "please_create_wallet_to_received_reward": "请创建钱包以接收每日登录奖励",
   "receive_now": "立即领取",
-  "your_balance_fee_gas_not_enough": "您的余额不足以支付Gas费用，无法领取签到奖励，请立即从水龙头获取TOBE",
+  "your_balance_fee_gas_not_enough": "您的余额不足以支付Gas费用，无法领取签到奖励，请立即从水龙头获取{unit}",
   "received": "已领取",
   "daily_checkin": "每日签到",
 

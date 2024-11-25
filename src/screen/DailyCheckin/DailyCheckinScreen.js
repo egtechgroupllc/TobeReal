@@ -116,7 +116,7 @@ export default function DailyCheckinScreen() {
         </View>
       ) : (
         <>
-          {params?.amountTOBE?.balance >= 0.1 ? (
+          {params?.amountPioneer?.balance >= 0.1 ? (
             <CustomButton
               text={
                 dataCheckin?.data?.can_check_in
@@ -141,13 +141,13 @@ export default function DailyCheckinScreen() {
                   width: scale(300),
                   textAlign: 'center',
                 }}>
-                {t('your_balance_fee_gas_not_enough')}
+                {t('your_balance_fee_gas_not_enough', {unit: 'Pioneer'})}
               </CustomText>
               <CustomButton
                 text={t('Faucet now')}
                 styleWrapper={{width: '100%'}}
                 onPress={() =>
-                  Linking.openURL('https://faucet.tobescan.com/faucet')
+                  Linking.openURL('https://faucet.zeroscan.org/faucet')
                 }
               />
             </View>
