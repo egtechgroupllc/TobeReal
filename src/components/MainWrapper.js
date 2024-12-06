@@ -68,7 +68,7 @@ export default function MainWrapper({
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: COLORS.pioPrimary}}
+      style={{flex: 1, backgroundColor: COLORS.pioHeader}}
       edges={noSafeArea || !!headerHeight ? [''] : ['top', 'right', 'left']}>
       <Component
         source={images.background}

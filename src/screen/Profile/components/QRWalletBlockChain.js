@@ -34,6 +34,7 @@ export default function QRWalletBlockChain({
     queryKey: ['common', 'token'],
     queryFn: () => getToken(),
   });
+
   if (!open) return null;
   return (
     <Modal
@@ -64,7 +65,8 @@ export default function QRWalletBlockChain({
             onPress={handleCopy}>
             <View style={styles.icon}>
               <CustomImage
-                source={images.logoTBH}
+                isAvatar
+                source={{uri: getDataToken?.data?.image_url}}
                 style={{
                   width: scale(30),
                   aspectRatio: 1,
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
   icon: {
     height: scale(35),
     width: scale(35),
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scale(99),

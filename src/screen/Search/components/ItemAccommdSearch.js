@@ -201,7 +201,7 @@ export default function ItemAccommdSearch({
                 {formatPrice(data?.price, {currency: currency?.currency_code})}
               </CustomText>
             )}
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', columnGap: scale(5)}}>
               <IconMapView />
               <CustomText numberOfLines={2} style={{maxWidth: scale(150)}}>
                 {data?.country?.name}, {data?.province?.name}

@@ -10,6 +10,7 @@ export const COLORS = {
   blue: '#0194f3',
   primary: '#F0B90B',
   pioPrimary: '#FA5805',
+  pioHeader: '#27C6FE',
   pioBox: '#2A2A2A20',
   border: '#2A2A2A10',
   subPrimary: '#fcf6bd',

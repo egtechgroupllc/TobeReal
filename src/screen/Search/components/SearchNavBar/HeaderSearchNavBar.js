@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {memo} from 'react';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import CustomText from '../../../../components/CustomText';
-import {SIZES, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {formatDate} from '../../../../utils/format';
 import {differenceInDays} from 'date-fns';
 import {CustomButton} from '../../../../components';
@@ -44,8 +44,9 @@ const HeaderSearchNavBar = ({data, onPress}) => {
       </View>
       <CustomButton
         text={t('change')}
-        style={{flex: 1, height: scale(30)}}
+        style={{flex: 1, height: scale(30), backgroundColor: COLORS.white}}
         onPress={onPress}
+        styleText={{color: COLORS.black}}
       />
     </View>
   );

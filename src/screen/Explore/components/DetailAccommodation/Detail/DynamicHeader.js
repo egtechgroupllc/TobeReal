@@ -43,8 +43,8 @@ export default React.memo(
       outputRange: [
         'transparent',
         'transparent',
-        COLORS.pioPrimary,
-        COLORS.pioPrimary,
+        COLORS.pioHeader,
+        COLORS.pioHeader,
       ],
       extrapolate: 'clamp',
     });

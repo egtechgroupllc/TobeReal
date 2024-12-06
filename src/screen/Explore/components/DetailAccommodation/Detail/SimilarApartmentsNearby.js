@@ -8,6 +8,7 @@ import {formatDate} from '../../../../../utils/format';
 import {useQuery} from '@tanstack/react-query';
 import {scale} from '../../../../../assets/constants';
 import {useCountry} from '../../../../../hooks/useCountry';
+import EmptyData from '../../../../../components/EmptyData';
 
 export default function SimilarApartmentsNearby() {
   const {t} = useLanguage();
@@ -34,24 +35,27 @@ export default function SimilarApartmentsNearby() {
   });
   return (
     <WrapperContent heading={t('browse_similar')} noBackground>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data?.data?.rows?.slice(0, 9)}
-        contentContainerStyle={styles.content}
-        renderItem={({item, index}) => (
-          <BoxPlaceItem
-            data={item}
-            key={`key-${item}-${index}`}
-            seeViewNumber={1.5}
-            rating={4}
-            textRating={index % 2 !== 0 && 'New'}
-            isHeart
-            isStar
-            isViewMap
-          />
-        )}
-      />
+      <View style={{alignItems: 'center'}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows?.slice(0, 9)}
+          contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
+          renderItem={({item, index}) => (
+            <BoxPlaceItem
+              data={item}
+              key={`key-${item}-${index}`}
+              seeViewNumber={1.5}
+              rating={4}
+              textRating={index % 2 !== 0 && 'New'}
+              isHeart
+              isStar
+              isViewMap
+            />
+          )}
+        />
+      </View>
     </WrapperContent>
   );
 }

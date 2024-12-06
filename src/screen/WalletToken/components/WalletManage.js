@@ -46,6 +46,7 @@ export default function WalletManage({data}) {
             alignItems: 'center',
             backgroundColor: COLORS.grey50,
             width: '100%',
+
             borderRadius: scale(10),
             padding: scale(8),
           }}>

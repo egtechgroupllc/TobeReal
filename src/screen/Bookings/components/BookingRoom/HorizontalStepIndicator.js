@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     fontWeight: '500',
-    color: COLORS.primary,
+    color: COLORS.white,
   },
 });

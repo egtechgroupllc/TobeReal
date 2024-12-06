@@ -8,6 +8,7 @@ import {getListSell} from '../../../../../Model/api/apiEstate';
 import {useQuery} from '@tanstack/react-query';
 import {useNavigation} from '@react-navigation/native';
 import BoxFeatureItem from '../BoxFeatureItem';
+import EmptyData from '../../../../../components/EmptyData';
 const dataPackage = [
   {
     id: 1,
@@ -62,21 +63,24 @@ export default function SimilarApartmentsNearby() {
       heading={t('explore_nearby_estate')}
       // subHeading={t('Discover the 5D4D package tour for families!!') + ` ${formatPrice(1000000)}`}
       styleWrapper={{backgroundColor: 'transparent'}}>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data?.data?.rows?.slice(0, 9)}
-        contentContainerStyle={styles.content}
-        renderItem={({item}) => (
-          <BoxFeatureItem
-            isHeart
-            isStar
-            textRating={2}
-            data={item}
-            rental="night"
-          />
-        )}
-      />
+      <View style={{alignItems: 'center'}}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data?.data?.rows?.slice(0, 9)}
+          contentContainerStyle={styles.content}
+          ListEmptyComponent={<EmptyData />}
+          renderItem={({item}) => (
+            <BoxFeatureItem
+              isHeart
+              isStar
+              textRating={2}
+              data={item}
+              rental="night"
+            />
+          )}
+        />
+      </View>
     </WrapperContent>
   );
 }

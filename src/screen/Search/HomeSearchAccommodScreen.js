@@ -50,7 +50,7 @@ export default function HomeSearchAccommodScreen() {
       </View>
       <View
         style={{
-          backgroundColor: COLORS.pioPrimary,
+          backgroundColor: COLORS.pioHeader,
           height: scale(60),
           position: 'absolute',
           width: '100%',

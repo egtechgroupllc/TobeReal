@@ -47,7 +47,8 @@ export default function InfoDetail({data, price}) {
           flexDirection: 'row',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          padding: scale(16),
+          paddingHorizontal: scale(16),
+
           borderBottomWidth: 1,
           borderColor: COLORS.pioBox,
         }}>

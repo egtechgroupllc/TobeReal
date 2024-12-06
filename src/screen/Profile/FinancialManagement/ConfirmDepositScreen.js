@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   footer: {
     paddingTop: scale(10),
     alignItems: 'center',
-    backgroundColor: COLORS.pioPrimary,
+    backgroundColor: COLORS.white,
     ...SHADOW,
     shadowOffset: {
       width: 0,

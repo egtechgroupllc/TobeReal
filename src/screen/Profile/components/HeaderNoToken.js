@@ -53,7 +53,6 @@ export default function HeaderNoToken() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: COLORS.pioPrimary,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: scale(20),

@@ -73,6 +73,7 @@ export default function RoomScreen() {
             {params?.name}
           </CustomText>
           <CustomText
+            numberOfLines={1}
             style={{
               color: '#fff',
             }}>

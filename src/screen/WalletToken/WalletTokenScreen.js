@@ -158,7 +158,6 @@ export default function WalletTokenScreen() {
           <View
             style={{
               flexDirection: 'row',
-              columnGap: scale(7),
               alignItems: 'center',
             }}>
             <BottomHelpCenter />
