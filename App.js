@@ -213,7 +213,7 @@ export default function App() {
                           <Layout />
                           <StatusBar
                             barStyle="light-content"
-                            backgroundColor={COLORS.pioPrimary}
+                            backgroundColor={COLORS.pioHeader}
                           />
                           {/* </KeyboardAvoidingView> */}
                           {/* </TouchableWithoutFeedback> */}

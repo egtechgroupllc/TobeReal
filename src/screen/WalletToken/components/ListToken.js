@@ -76,7 +76,7 @@ export default function ListToken({dataP, token}) {
               flexDirection: 'row',
               columnGap: scale(12),
               alignItems: 'center',
-              backgroundColor: COLORS.primary + '20',
+              backgroundColor: COLORS.pioHeader + '20',
               width: '100%',
               borderRadius: scale(10),
               padding: scale(8),
@@ -99,7 +99,7 @@ export default function ListToken({dataP, token}) {
               <CustomText
                 size={scale(13)}
                 textType="semiBold"
-                style={{color: COLORS.primary}}>
+                style={{color: COLORS.black}}>
                 {item.name}
               </CustomText>
               <View style={{flexDirection: 'row', columnGap: scale(3)}}>

@@ -21,7 +21,7 @@ import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {CustomButton} from '../../../../../../../components';
 
 export default function Contact({data}) {
-  const {navigate, setOptions} = useNavigation();
+  const {navigate, setOptions, reset: resetNavigation} = useNavigation();
   const {token} = useAuthentication();
   const {stopLoading, setLoading} = useLoading();
   const {t} = useLanguage();
@@ -30,13 +30,6 @@ export default function Contact({data}) {
     mutationFn: postCreateGroupChat,
   });
 
-  useEffect(() => {
-    stopLoading();
-
-    return () => {
-      return setLoading(true);
-    };
-  }, []);
   const handlePostCreateGroupChat = value => {
     postCreateGroup.mutate(
       {
@@ -48,9 +41,17 @@ export default function Contact({data}) {
       {
         onSuccess: dataInside => {
           if (dataInside?.status) {
-            navigate('ChatBoxScreen', {
-              chat_group_id: dataInside?.data?.id,
-              data,
+            resetNavigation({
+              index: 0,
+              routes: [
+                {
+                  name: 'ChatBoxScreen',
+                  params: {
+                    chat_group_id: dataInside?.data?.id,
+                    data,
+                  },
+                },
+              ],
             });
           } else {
             showMess(
@@ -91,6 +92,13 @@ export default function Contact({data}) {
     },
   ];
 
+  useEffect(() => {
+    stopLoading();
+
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   return (
     <View style={styles.container}>
       {dataItem.map((item, index) => (

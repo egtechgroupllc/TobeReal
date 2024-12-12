@@ -212,10 +212,12 @@ export default function ContentStep2({data}) {
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
   useEffect(() => {
-    stopLoading();
-    return () => {
-      return setLoading(true);
-    };
+    if (typePayment === 'VOUCHER') {
+      stopLoading();
+      return () => {
+        return setLoading(true);
+      };
+    }
   }, []);
   return (
     <View style={styles.container}>

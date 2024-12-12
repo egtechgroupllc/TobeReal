@@ -21,6 +21,7 @@ import {getListPriceRoomDate} from '../../../../../../../Model/api/apiAccom';
 import {useQuery} from '@tanstack/react-query';
 import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
+import {getToken} from '../../../../../Model/api/common';
 export default function VoucherItem({
   data,
   onPressMore,
@@ -48,6 +49,10 @@ export default function VoucherItem({
   //   // handleContinue();
   //   navigate('NoBottomTab', {screen: 'DetailRoomManageScreen', params: data});
   // };
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -173,7 +178,7 @@ export default function VoucherItem({
                 fontSize: SIZES.small,
               }}>
               {formatPrice(data?.price, {
-                currency: 'TBH',
+                currency: getDataToken?.data?.symbol,
                 locales: 'vi',
                 decimalPlaces: 12,
               })}

@@ -107,7 +107,7 @@ export default function WithdrawTokenScreen() {
             requireField(t('this_field_required')),
             validateMinAmount(
               `${t('minimum_amount')} ${formatPrice(0.01, {
-                currency: 'TBH',
+                currency: getDataToken?.data?.symbol,
                 decimalPlaces: 10,
               })}`,
               0.01,

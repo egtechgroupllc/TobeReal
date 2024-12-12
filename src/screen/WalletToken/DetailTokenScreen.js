@@ -43,7 +43,7 @@ export default function DetailTokenScreen() {
               isAvatar
               source={{uri: params?.listToken?.image_url}}
               style={{
-                width: scale(40),
+                width: scale(70),
                 aspectRatio: 1,
               }}
               resizeMode="contain"

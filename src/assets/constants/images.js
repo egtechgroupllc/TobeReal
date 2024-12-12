@@ -85,6 +85,7 @@ export default {
   iconGift: require('../images/iconGift.png'),
   logo2: require('../images/logo2.png'),
   icon_wallet: require('../images/icon_wallet.png'),
+  logoPione: require('../images/logoPione.png'),
 
   // c15: require('../images/c15.jpg'),
   // c15_1: require('../images/c15_1.jpg'),

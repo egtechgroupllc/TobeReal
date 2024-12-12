@@ -11,7 +11,7 @@ import {
   images,
   scale,
 } from '../../../../../assets/constants';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useForm} from 'react-hook-form';
 import {postCreateVoucher} from '../../../../../Model/api/apiAccom';
 import {
@@ -33,6 +33,7 @@ import ChooseImgPicker from '../../../../components/ChooseImgPicker';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {postCreateVoucherTour} from '../../../../../Model/api/apiTour';
 import {formatPrice} from '../../../../../utils/format';
+import {getToken} from '../../../../../Model/api/common';
 
 export default function AddVoucherScreen() {
   const params = useRoute().params;
@@ -155,6 +156,11 @@ export default function AddVoucherScreen() {
       return image_descriptionFormat;
     }
   }, [watch('images')]);
+
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <MainWrapper styleContent={styles.wrapper}>
       <View style={styles.button}>
@@ -195,7 +201,7 @@ export default function AddVoucherScreen() {
           setValue={setValue}
           priceType={t('list_price')}
           value={'price'}
-          namePrice={'TBH'}
+          namePrice={getDataToken?.data?.symbol}
           enableFormatNum={false}
         />
         <InputPriceVoucher

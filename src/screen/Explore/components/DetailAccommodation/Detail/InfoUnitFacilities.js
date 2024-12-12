@@ -16,7 +16,7 @@ export default function InfoUnitFacilities({data}) {
       isSeeAll
       noBackground
       onPressSeeAll={() => bottomSheetRef.current.open()}
-      heading={t('unit_facilities')}
+      heading={t('room_amenities')}
       styleContent={{
         paddingHorizontal: scale(16),
         rowGap: scale(10),
@@ -24,7 +24,7 @@ export default function InfoUnitFacilities({data}) {
         borderBottomWidth: 1,
         borderColor: COLORS.pioBox,
       }}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <IconHome
           style={{
             width: scale(18),
@@ -39,7 +39,7 @@ export default function InfoUnitFacilities({data}) {
           }}>
           {t('room_amenities')}
         </CustomText>
-      </View>
+      </View> */}
 
       {data?.features && (
         <View style={styles.content}>

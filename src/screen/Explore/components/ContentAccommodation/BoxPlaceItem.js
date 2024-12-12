@@ -170,7 +170,7 @@ export default function BoxPlaceItem({
               // rating={rating}
               // isStar={isStar}
               // textRating={textRating}
-              isTour={dataQ ? true : false}
+              isTour={dataQ ? false : true}
               isHeart={isHeart}
               type={data?.accommodation_type?.name || data?.estate_type?.name}
             />

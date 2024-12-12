@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {getProfile} from '../../Model/api/common';
+import {getProfile, getToken} from '../../Model/api/common';
 import {getBalanceWallet} from '../../Model/api/wallet';
 import {COLORS, images, scale} from '../../assets/constants';
 import {showMess} from '../../assets/constants/Helper';
@@ -36,6 +36,10 @@ export default function AddressWalletScreen() {
     enabled: !!token,
   });
 
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   const listWallet = useMemo(
     () => [
       {
@@ -55,9 +59,9 @@ export default function AddressWalletScreen() {
         des: !data?.data?.wallet_address
           ? t('active_to_use_wallet', {unit: 'PioneerChain'})
           : t('wallet_ready_to_use'),
-        logo: images.logo1,
+        logo: images.logoPione,
         isOpen: data?.data?.private_key || data?.data?.passphrase,
-        currency: 'TBH',
+        currency: getDataToken?.data?.symbol,
         isToken: true,
         isNext: true,
         title: t('this_is_wallet_using_crypto_currency_to_pay'),

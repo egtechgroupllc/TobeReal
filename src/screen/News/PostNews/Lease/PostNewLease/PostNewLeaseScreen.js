@@ -176,7 +176,7 @@ export default function PostNewLeaseScreen() {
             queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
           }
         } else {
-          showMess(t(dataInside?.message), 'error');
+          // showMess(t(dataInside?.message), 'error');
           setOpenContact(false);
         }
       },

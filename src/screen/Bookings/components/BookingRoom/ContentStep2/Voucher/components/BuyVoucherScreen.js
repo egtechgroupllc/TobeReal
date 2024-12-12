@@ -19,9 +19,11 @@ import {useCountry} from '../../../../../../../hooks/useCountry';
 import SelectVoucherFooter from './SelectVoucherFooter';
 import {useForm} from 'react-hook-form';
 import {postBuyVoucher} from '../../../../../../../Model/api/apiAccom';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import {showMess} from '../../../../../../../assets/constants/Helper';
 import {postBuyVoucherTour} from '../../../../../../../Model/api/apiTour';
+import {getToken} from '../../../../../../../Model/api/common';
+import {useLoading} from '../../../../../../../hooks/useLoading';
 
 export default function BuyVoucherScreen() {
   const {t} = useLanguage();
@@ -29,7 +31,7 @@ export default function BuyVoucherScreen() {
 
   const params = useRoute().params;
   const {setOptions, goBack, navigate} = useNavigation();
-
+  const {stopLoading, setLoading} = useLoading();
   useEffect(() => {
     return setOptions({
       headerTitle: t('buy_voucher'),
@@ -91,6 +93,13 @@ export default function BuyVoucherScreen() {
       mutationConfig,
     );
   };
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
+  useEffect(() => {
+    setLoading(true);
+  }, []);
   return (
     <MainWrapper scrollEnabled={false}>
       <CustomImage
@@ -161,7 +170,7 @@ export default function BuyVoucherScreen() {
               textType="medium"
               style={{fontSize: SIZES.xMedium, color: COLORS.black}}>
               {formatPrice(params?.item?.price, {
-                currency: 'TBH',
+                currency: getDataToken?.data?.symbol,
                 locales: 'vi',
                 decimalPlaces: 12,
               })}

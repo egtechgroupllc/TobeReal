@@ -2,7 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import React, {memo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {getListConstant} from '../../../../../../Model/api/common';
+import {getListConstant, getToken} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCheckBox} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
@@ -37,7 +37,10 @@ export default memo(function InputPriceVoucher({
 
   const [typeCurrency, setTypeCurrency] = useState();
   const {currency} = useCountry();
-
+  const {data: getDataToken} = useQuery({
+    queryKey: ['common', 'token'],
+    queryFn: () => getToken(),
+  });
   return (
     <View
       style={{
@@ -52,7 +55,7 @@ export default memo(function InputPriceVoucher({
           requireField(t('this_field_required')),
           validateMinAmount(
             `${t('minimum_amount')} ${formatPrice(0.001, {
-              currency: 'TBH',
+              currency: getDataToken?.data?.symbol,
               decimalPlaces: 10,
             })}`,
             0.001,
@@ -108,7 +111,7 @@ export default memo(function InputPriceVoucher({
                 priceValue -
                   priceValue * data?.data?.fee_commission_percent_voucher,
                 {
-                  currency: 'TBH',
+                  currency: getDataToken?.data?.symbol,
                   locales: 'vi',
                   decimalPlaces: 12,
                 },
