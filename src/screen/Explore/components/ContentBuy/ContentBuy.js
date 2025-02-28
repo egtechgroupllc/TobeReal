@@ -1,6 +1,12 @@
 import React, {memo, useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {images, scale} from '../../../../assets/constants';
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {COLORS, images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import BuySell from './BuySell';
 import Discount from './Discount';
@@ -13,6 +19,8 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
 import {useQuery} from '@tanstack/react-query';
 import {getListSell} from '../../../../Model/api/apiEstate';
+import {CustomImage} from '../../../../components';
+import {showMess} from '../../../../assets/constants/Helper';
 
 const dataWorld = [
   {
@@ -312,7 +320,7 @@ const dataAgent = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default memo(function ContentBuy() {
+export default memo(function ContentBuy({dataBanner}) {
   const {t} = useLanguage();
   const [tourData, setTourData] = useState(dataDomestic);
   const {country} = useCountry();
@@ -338,6 +346,31 @@ export default memo(function ContentBuy() {
 
   return (
     <View style={styles.wrapper}>
+      {(Platform.OS === 'android'
+        ? dataBanner?.banner?.android?.is_show
+        : dataBanner?.banner?.ios?.is_show) && (
+        <TouchableOpacity
+          style={{paddingHorizontal: scale(12)}}
+          onPress={() => Linking.openURL('https://airdrop.pionechain.com')}
+          // onPress={() => showMess(t('comming_soon'), 'error')}
+        >
+          <CustomImage
+            source={{
+              uri:
+                Platform.OS === 'android'
+                  ? dataBanner?.banner?.android?.url
+                  : dataBanner?.banner?.ios?.url,
+            }}
+            style={{
+              width: '100%',
+              height: scale(180),
+              borderRadius: scale(20),
+              alignSelf: 'center',
+            }}
+            resizeMode="stretch"
+          />
+        </TouchableOpacity>
+      )}
       <BuySell data={data} isLoading={isLoading} country={country} />
 
       {/* <Discount /> */}

@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
 import React, {useLayoutEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {getProfile, getToken} from '../../Model/api/common';
+import {getProfile, getToken, getTokenAirdrop} from '../../Model/api/common';
 import {getBalanceWallet} from '../../Model/api/wallet';
 import {COLORS, images, scale} from '../../assets/constants';
 import {showMess} from '../../assets/constants/Helper';
@@ -37,13 +37,13 @@ export default function AddressWalletScreen() {
   });
 
   const {data: getDataToken} = useQuery({
-    queryKey: ['common', 'token'],
-    queryFn: () => getToken(),
+    queryKey: ['common', 'token-airdrop'],
+    queryFn: () => getTokenAirdrop(),
   });
   const listWallet = useMemo(
     () => [
       {
-        name: `${t('wallet')} PionePay`,
+        name: `${t('wallet')} HousePay`,
         balance: data?.data.balance * currency?.exchange_rate,
         backgroundColor: '#FFA800',
         logo: images.icon_wallet,
@@ -51,13 +51,14 @@ export default function AddressWalletScreen() {
         currency: currency?.currency_code,
         isNext: true,
         title: t('this_is_wallet_using_fiat_currency_to_pay'),
+        isBeta: true,
       },
       {
         name: `${t('cryptocurrency_wallet')} `,
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
         des: !data?.data?.wallet_address
-          ? t('active_to_use_wallet', {unit: 'PioneerChain'})
+          ? t('active_to_use_wallet', {unit: 'PioneChain'})
           : t('wallet_ready_to_use'),
         logo: images.logoPione,
         isOpen: data?.data?.private_key || data?.data?.passphrase,

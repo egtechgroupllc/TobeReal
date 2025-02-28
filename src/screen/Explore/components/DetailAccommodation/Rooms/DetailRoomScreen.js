@@ -100,7 +100,7 @@ export default function DetailRoomScreen({route}) {
                   {data?.features?.map((item, index) => (
                     <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
-                      <CustomText>{item}</CustomText>
+                      <CustomText>{t(item)}</CustomText>
                     </View>
                   ))}
                 </View>
@@ -117,7 +117,7 @@ export default function DetailRoomScreen({route}) {
                   {data?.features?.map((item, index) => (
                     <View style={styles.boxFeat} key={index}>
                       <View style={styles.dot} />
-                      <CustomText>{item}</CustomText>
+                      <CustomText>{t(item)}</CustomText>
                     </View>
                   ))}
                 </View>

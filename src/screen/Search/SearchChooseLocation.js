@@ -8,6 +8,7 @@ import {IconHistory, IconMyLocation, IconSearch} from '../../assets/icon/Icon';
 import {CustomInput} from '../../components';
 import CustomText from '../../components/CustomText';
 import {useLanguage} from '../../hooks/useLanguage';
+import {storage} from '../../utils/MMKVStorage';
 
 export default function SearchChooseLocation({onPress}) {
   const {navigate} = useNavigation();
@@ -17,7 +18,7 @@ export default function SearchChooseLocation({onPress}) {
 
   useEffect(() => {
     const loadSearchRecent = async () => {
-      const result = await EncryptedStorage.getItem('search_recent');
+      const result = await storage.getString('search_recent');
       setListSearchHistory(JSON.parse(result));
     };
     loadSearchRecent();

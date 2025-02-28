@@ -104,7 +104,7 @@ export default function CurrencyScreen() {
   // }, [indexData]);
 
   return (
-    <MainWrapper>
+    <MainWrapper scrollEnabled={false}>
       <View
         style={{
           width: WIDTH.widthContain,
@@ -112,7 +112,6 @@ export default function CurrencyScreen() {
           marginTop: scale(20),
           borderRadius: scale(6),
           rowGap: scale(16),
-          padding: scale(14),
           flex: 1,
         }}>
         <CustomInput
@@ -131,6 +130,7 @@ export default function CurrencyScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingBottom: insets.bottom + scale(20),
+            paddingHorizontal: scale(5),
           }}
           keyExtractor={(item, index) =>
             `key_${item?.id}-${item?.currency_code}-${index}`

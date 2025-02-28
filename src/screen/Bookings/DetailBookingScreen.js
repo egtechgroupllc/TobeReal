@@ -110,7 +110,7 @@ export default function DetailBookingScreen() {
               <CustomText
                 textType="bold"
                 size={SIZES.xMedium}
-                numberOfLines={2}
+                numberOfLines={3}
                 style={{marginBottom: scale(5)}}>
                 ({data?.number_room} {t('room')} - {data?.room?.room_type?.name}
                 ){'  '} {data?.room?.name}
@@ -154,7 +154,7 @@ export default function DetailBookingScreen() {
             )}
           </View>
 
-          <View>
+          {/* <View>
             <CustomText textType="bold" size={SIZES.xMedium}>
               {t('special_request')}
             </CustomText>
@@ -164,7 +164,7 @@ export default function DetailBookingScreen() {
               color={COLORS.textSub}>
               _
             </CustomText>
-          </View>
+          </View> */}
 
           <View style={{rowGap: scale(5)}}>
             <CustomText textType="bold" size={SIZES.xMedium}>
@@ -207,7 +207,6 @@ export default function DetailBookingScreen() {
             style={{
               textAlign: 'center',
               paddingTop: scale(12),
-              padding: scale(10),
             }}>
             {t('great_choice')}
           </CustomText>
@@ -276,7 +275,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(12),
     overflow: 'hidden',
     marginVertical: scale(20),
-    marginBottom: scale(100),
+    marginBottom: scale(120),
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   wrappers: {
     alignItems: 'center',

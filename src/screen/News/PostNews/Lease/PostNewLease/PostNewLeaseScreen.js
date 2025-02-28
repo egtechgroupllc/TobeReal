@@ -1,8 +1,14 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {useForm} from 'react-hook-form';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Linking, StyleSheet, View} from 'react-native';
 
 import {
   postCreateAccommoLease,
@@ -17,7 +23,7 @@ import {
   scale,
 } from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
-import {CustomButton} from '../../../../../components';
+import {CustomButton, CustomImage} from '../../../../../components';
 import CheckBox from '../../../../../components/CheckBox';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -32,7 +38,9 @@ import MainWrapper from '../../../../../components/MainWrapper';
 import ModalBookingSuccess from '../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
 import {useCountdown} from '../../../../../hooks/useCountdown';
 import {useLoading} from '../../../../../hooks/useLoading';
-
+import {IconSupporterYellow} from '../../../../../assets/icon/Icon';
+import LinearGradient from 'react-native-linear-gradient';
+import RNRestart from 'react-native-restart';
 export default function PostNewLeaseScreen() {
   const {t} = useLanguage();
   const params = useRoute().params;
@@ -42,6 +50,23 @@ export default function PostNewLeaseScreen() {
   const [check, setCheck] = useState(false);
   const {start, countdown} = useCountdown(5);
   const {stopLoading, setLoading} = useLoading();
+  const queryClient = useQueryClient();
+
+  const dataStatusTask = queryClient.getQueryData([
+    'common',
+    'status-task',
+  ])?.data;
+  const dataWallet = queryClient.getQueryData([
+    'user',
+    'wallet',
+    'balance',
+  ])?.data;
+  const dataP = queryClient.getQueryData(['user', 'profile'])?.data;
+
+  const dataPioneZero = useMemo(
+    () => dataWallet?.find(item => item?.symbol === 'PZO'),
+    [dataWallet],
+  );
 
   const {
     handleSubmit,
@@ -53,19 +78,20 @@ export default function PostNewLeaseScreen() {
   } = useForm();
 
   const {navigate, setOptions} = useNavigation();
+
   useEffect(() => {
     stopLoading();
     return () => {
       return setLoading(true);
     };
   }, []);
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: !params?.name ? t('create_new_accom') : t('edit'),
     });
   }, []);
 
-  const queryClient = useQueryClient();
   const createAccommodationMu = useMutation({
     mutationFn: postCreateAccommoLease,
   });
@@ -77,29 +103,60 @@ export default function PostNewLeaseScreen() {
     const formData = new FormData();
 
     Object.keys(object).reduce((item, key) => {
-      if (key !== 'description_img' && key !== 'kyc') {
-        item.append(key, object[key]);
+      if (
+        key !== 'description_img' &&
+        key !== 'kyc' &&
+        key !== 'image_update_description_kyc' &&
+        key !== 'image_update_description'
+      ) {
+        item.append(
+          key,
+          typeof object[key] === 'string'
+            ? object[key]
+            : JSON.stringify(object[key]),
+        );
       }
 
       return item;
     }, formData);
 
-    const arrImage_description = object?.description_img?.map(image => {
-      formData.append('description_img', image);
+    if (object?.image_update_description) {
+      const arrImage_descriptionUp = object?.image_update_description?.map(
+        image => {
+          return {
+            id: image?.id,
+            description: image?.description,
+          };
+        },
+      );
 
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+      formData.append(
+        'image_update_description',
+        JSON.stringify(arrImage_descriptionUp),
+      );
+    }
 
-    const arrImage_Kyc = object?.kyc?.map(image => {
-      formData.append('kyc', image);
-      return {
-        name: image?.name,
-        description: image?.description,
-      };
-    });
+    const arrImage_description = !object?.description_img
+      ? []
+      : object?.description_img?.map(image => {
+          formData.append('description_img', image);
+
+          return {
+            name: image?.name,
+            description: image?.description,
+          };
+        });
+
+    const arrImage_Kyc = !object?.kyc
+      ? []
+      : object?.kyc?.map(image => {
+          formData.append('kyc', image);
+          return {
+            name: image?.name,
+            description: image?.description,
+          };
+        });
+
     if (object?.kyc || object?.description_img) {
       formData.append(
         'image_description',
@@ -117,14 +174,13 @@ export default function PostNewLeaseScreen() {
     //     params: {},
     //   }),
     // );
-    if (`${errors}` !== '{}') {
+    if (JSON.stringify(errors) !== '{}') {
       showMess(t('please_enter_correct'), 'error');
       // return;
     }
 
     handleSubmit(handlePostLease)();
   };
-
   const handlePostLease = value => {
     if (!value?.video_link) {
       delete value?.video_link;
@@ -139,21 +195,22 @@ export default function PostNewLeaseScreen() {
       return;
     }
 
-    if (!value?.features || JSON.parse(value?.features).length <= 0) {
-      showMess(t('you_have_not_select_facility'), 'error');
-      return;
-    }
+    // if (!value?.features || JSON.parse(value?.features).length <= 0) {
+    //   showMess(t('you_have_not_select_facility'), 'error');
+    //   return;
+    // }
     if (!params?.address) {
       setOpenContact(true);
     }
 
     const formData = getFormData(value);
-    // console.log(formData);
+
     const mutationConfig = {
       onSuccess: dataInside => {
         if (dataInside?.status) {
           if (!params?.address) {
             isPending.current = true;
+
             setCheck({
               status: dataInside?.status,
               mess: t(dataInside?.message),
@@ -176,12 +233,15 @@ export default function PostNewLeaseScreen() {
             queryClient.invalidateQueries(['accommodation', 'my-list', 1]);
           }
         } else {
-          // showMess(t(dataInside?.message), 'error');
+          showMess(t(dataInside?.message), 'error');
           setOpenContact(false);
         }
       },
       onError: err => {
         console.log({err});
+        console.log('====================================');
+        console.log(err?.response);
+        console.log('====================================');
         showMess(t('an_error_occured'), 'error');
       },
     };
@@ -201,7 +261,25 @@ export default function PostNewLeaseScreen() {
       reset();
 
       const entries = Object.entries(params);
-      const arrKeyno = ['address', 'latitude', 'longitude'];
+      const arrKeyno = [
+        'address',
+        'latitude',
+        'longitude',
+        'accommodation_type',
+        'active',
+        'country',
+        'createdAt',
+        'updatedAt',
+        'note',
+        'rooms',
+        'slug',
+        'status',
+        'wallet_address',
+        'user_id',
+        'images',
+        'province',
+        'id',
+      ];
 
       entries.map(item => {
         if (!arrKeyno.includes(item[0])) {
@@ -213,8 +291,16 @@ export default function PostNewLeaseScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-  return (
-    <MainWrapper styleContent={styles.wrapper}>
+
+  return dataPioneZero?.balance >= 0.01 ? (
+    <MainWrapper
+      styleContent={styles.wrapper}
+      optionsHeader={
+        createAccommodationMu.isPending ||
+        (updateAccommodationMu.isPending && {
+          headerLeft: () => {},
+        })
+      }>
       <View style={styles.button}>
         <Image
           source={images.lease}
@@ -295,12 +381,15 @@ export default function PostNewLeaseScreen() {
         isPending={isPending}
         check={check}
         countdown={countdown}
+        isFirstTime={dataStatusTask?.is_received_airdrop_today}
       />
       <CustomButton
+        isLoading={
+          createAccommodationMu.isPending || updateAccommodationMu.isPending
+        }
         // linearGradientProps
         buttonType="medium"
         text={!params?.name ? t('post') : t('update')}
-        disabled={createAccommodationMu.isPending}
         // onPress={handleSubmit(handlePostLease)}
         onPress={checkIsValid}
         style={{
@@ -309,6 +398,92 @@ export default function PostNewLeaseScreen() {
         }}
       />
     </MainWrapper>
+  ) : (
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: scale(50),
+        rowGap: scale(50),
+      }}>
+      {dataP?.wallet_address ? (
+        <CustomText
+          style={{
+            fontSize: SIZES.xLarge,
+          }}
+          textType="bold">
+          {t('faucet_now')}
+        </CustomText>
+      ) : (
+        <CustomText
+          style={{
+            fontSize: SIZES.xLarge,
+          }}
+          textType="bold">
+          {t('create_wallet')}
+        </CustomText>
+      )}
+      <CustomImage
+        source={images.logoPione}
+        style={{width: scale(150), height: scale(150)}}
+      />
+      {dataP?.wallet_address ? (
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            textAlign: 'center',
+          }}
+          textType="bold">
+          {t('your_balance_fee_gas_not_enough', {unit: 'PZO'})}
+        </CustomText>
+      ) : (
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            textAlign: 'center',
+            width: scale(300),
+          }}
+          textType="bold">
+          {t('please_create_wallet_to_received_reward')}
+        </CustomText>
+      )}
+      <View
+        style={{
+          flexDirection: 'row',
+          columnGap: scale(20),
+          marginTop: scale(50),
+        }}>
+        <CustomButton
+          text={t('reload')}
+          buttonType="medium"
+          styleWrapper={{width: '40%'}}
+          style={{backgroundColor: COLORS.grey}}
+          onPress={() => {
+            RNRestart.restart();
+          }}
+        />
+        {dataP?.wallet_address ? (
+          <CustomButton
+            text={t('faucet_now')}
+            buttonType="medium"
+            styleWrapper={{width: '50%'}}
+            onPress={() =>
+              Linking.openURL('https://dex.pionechain.com/testnet/faucet')
+            }
+          />
+        ) : (
+          <CustomButton
+            text={t('create_wallet')}
+            buttonType="medium"
+            styleWrapper={{width: '50%'}}
+            onPress={() => {
+              navigate('NavigateWalletToken', {screen: 'AddressWalletScreen'});
+            }}
+          />
+        )}
+      </View>
+      {/* </View> */}
+    </View>
   );
 }
 
@@ -320,6 +495,16 @@ const styles = StyleSheet.create({
     rowGap: scale(20),
     alignSelf: 'center',
     paddingBottom: scale(100),
+  },
+  contactHeader: {
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(12),
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(20),
+    width: '100%',
   },
   button: {
     height: scale(63),

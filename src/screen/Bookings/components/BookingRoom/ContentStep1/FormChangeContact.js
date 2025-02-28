@@ -9,6 +9,7 @@ import {CustomButton, CustomInput} from '../../../../../components';
 import {useLanguage} from '../../../../../hooks/useLanguage';
 import {requireField, validateEmail} from '../../../../../utils/validate';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {storage} from '../../../../../utils/MMKVStorage';
 
 export default function FormChangeContact({data, isOpen, isTour}) {
   const {t} = useLanguage();
@@ -20,7 +21,7 @@ export default function FormChangeContact({data, isOpen, isTour}) {
   useEffect(() => {
     const dataStart = async () => {
       !isTour
-        ? await EncryptedStorage.setItem(
+        ? await storage.set(
             '@infoBooking',
             JSON.stringify({
               username: data?.username,
@@ -28,7 +29,7 @@ export default function FormChangeContact({data, isOpen, isTour}) {
               email: data?.email,
             }),
           )
-        : await EncryptedStorage.setItem(
+        : await storage.set(
             '@infoBookingTour',
             JSON.stringify({
               username: data?.username,
@@ -43,8 +44,8 @@ export default function FormChangeContact({data, isOpen, isTour}) {
   useEffect(() => {
     const loadInfoBooking = async () => {
       const result = !isTour
-        ? await EncryptedStorage.getItem('@infoBooking')
-        : await EncryptedStorage.getItem('@infoBookingTour');
+        ? await storage.getString('@infoBooking')
+        : await storage.getString('@infoBookingTour');
 
       if (result) {
         setApply(JSON.parse(result));
@@ -59,11 +60,8 @@ export default function FormChangeContact({data, isOpen, isTour}) {
 
   const handleApply = async value => {
     !isTour
-      ? await EncryptedStorage.setItem('@infoBooking', JSON.stringify(value))
-      : await EncryptedStorage.setItem(
-          '@infoBookingTour',
-          JSON.stringify(value),
-        );
+      ? await storage.set('@infoBooking', JSON.stringify(value))
+      : await storage.set('@infoBookingTour', JSON.stringify(value));
     setApply(value);
     bottomSheetRef.current.close();
   };

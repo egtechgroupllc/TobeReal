@@ -14,6 +14,8 @@ import {CustomButton, CustomText, MainWrapper} from '../../components';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {useLanguage} from '../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
+import Clipboard from '@react-native-clipboard/clipboard';
+import {showMess} from '../../assets/constants/Helper';
 
 export default function ShowPrivateKeyAndSecretPhrase() {
   const {t} = useLanguage();
@@ -35,31 +37,34 @@ export default function ShowPrivateKeyAndSecretPhrase() {
 
   const dataExt = data.data;
 
-  const onShare = async message => {
-    try {
-      const result = await Share.share({
-        message,
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      Alert.alert(error.message);
-    }
+  // const onShare = async message => {
+  //   try {
+  //     const result = await Share.share({
+  //       message,
+  //     });
+  //     if (result.action === Share.sharedAction) {
+  //       if (result.activityType) {
+  //         // shared with activity type of result.activityType
+  //       } else {
+  //         // shared
+  //       }
+  //     } else if (result.action === Share.dismissedAction) {
+  //       // dismissed
+  //     }
+  //   } catch (error) {
+  //     Alert.alert(error.message);
+  //   }
+  // };
+  const handleCopy = value => {
+    Clipboard.setString(value);
+    showMess(t('copy_success'));
   };
-
   return (
     <MainWrapper styleContent={styles.container} noImgColor>
       {!!dataExt?.passphrase && (
         <Item
           title={'Secret phrase'}
-          onPressCopy={() => onShare(dataExt?.passphrase)}>
+          onPressCopy={() => handleCopy(dataExt?.passphrase)}>
           <View
             style={{
               flexDirection: 'row',
@@ -81,7 +86,7 @@ export default function ShowPrivateKeyAndSecretPhrase() {
       {!!dataExt?.private_key && (
         <Item
           title={'Private key'}
-          onPressCopy={() => onShare(dataExt?.private_key)}>
+          onPressCopy={() => handleCopy(dataExt?.private_key)}>
           <View
             style={[
               styles.containPassphrase,

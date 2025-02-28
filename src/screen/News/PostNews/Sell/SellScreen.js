@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     rowGap: scale(10),
-    marginTop: '10%',
+    marginTop: scale(20),
+    paddingBottom: scale(120),
   },
   box: {
     backgroundColor: COLORS.white,

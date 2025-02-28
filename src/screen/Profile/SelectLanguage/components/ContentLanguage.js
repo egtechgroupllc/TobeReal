@@ -10,6 +10,7 @@ import ItemLanguage from './ItemLanguage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNRestart from 'react-native-restart';
 import {useCountry} from '../../../../hooks/useCountry';
+import {storage} from '../../../../utils/MMKVStorage';
 const listLanguage = [
   {
     id: '1',
@@ -67,18 +68,33 @@ export default function ContentLanguage() {
   const {t, changeLocale, locale} = useLanguage();
   const {goBack, setOptions} = useNavigation();
   const router = useRoute().params;
-  const [language, setLanguage] = useState(locale);
+  const [language, setLanguage] = useState({
+    id: '1',
+    name: 'English',
+    flag: images.usa,
+    languageCode: 'en',
+    checked: false,
+  });
+
   const onSaveLanguage = async () => {
-    await EncryptedStorage.setItem(
-      '@selectedLanguage',
-      JSON.stringify(language),
-    );
+    await storage.set('@selectedLanguage', JSON.stringify(language));
   };
 
   useEffect(() => {
     const loadSavedLanguage = async () => {
-      const result = await EncryptedStorage.getItem('@selectedLanguage');
-      setLanguage(JSON.parse(result));
+      const result = await storage.getString('@selectedLanguage');
+
+      if (!result) {
+        setLanguage({
+          id: '1',
+          name: 'English',
+          flag: images.usa,
+          languageCode: 'en',
+          checked: false,
+        });
+      } else {
+        setLanguage(JSON.parse(result));
+      }
     };
     loadSavedLanguage();
   }, []);
@@ -91,6 +107,7 @@ export default function ContentLanguage() {
       goBack();
     } else {
       router?.onGoBack(language);
+      onSaveLanguage();
       changeLocale(language?.languageCode);
       goBack();
     }
@@ -127,14 +144,16 @@ export default function ContentLanguage() {
           marginTop: '10%',
         }}
         scrollEnabled={true}
-        renderItem={({item, index}) => (
-          <ItemLanguage
-            key={index}
-            item={item}
-            check={language?.languageCode === item?.languageCode}
-            onPress={() => setLanguage(item)}
-          />
-        )}
+        renderItem={({item, index}) => {
+          return (
+            <ItemLanguage
+              key={index}
+              item={item}
+              check={language?.languageCode === item?.languageCode}
+              onPress={() => setLanguage(item)}
+            />
+          );
+        }}
         keyExtractor={item => item?.languageCode}
       />
     </View>

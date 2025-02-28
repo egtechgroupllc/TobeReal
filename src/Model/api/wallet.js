@@ -4,13 +4,14 @@ import {Alert} from 'react-native';
 import {handleLogoutExistToken} from './common';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {TOKEN_KEY} from '../../context/AuthContext';
+import {storage} from '../../utils/MMKVStorage';
 
 const instance = axios.create({
   baseURL: baseUrl + '/api/v1/user',
 });
 instance.interceptors.request.use(async req => {
   if (typeof window !== 'undefined') {
-    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+    const storedToken = await storage.getString(TOKEN_KEY);
 
     if (storedToken) {
       req.headers.Authorization = `Bearer ${storedToken}`;
@@ -28,7 +29,7 @@ instance.interceptors.response.use(
     if (error.response && error.response.status === 401 && countErr < 1) {
       Alert.alert(
         'Notification',
-        'Your account has been logged in from another device, please log in again!',
+        'Your session has expired or your account has been logged in on another device. Please log in again.',
         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
       );
 
@@ -62,6 +63,15 @@ export const postImportWallet = async data => {
 
 export const deleteWallet = async () => {
   const responsive = await instance.delete('/wallet/delete');
+
+  return responsive.data;
+};
+export const getStatusTask = async token => {
+  const responsive = await instance.get('/wallet/info', {
+    headers: {
+      Authorization: token,
+    },
+  });
 
   return responsive.data;
 };

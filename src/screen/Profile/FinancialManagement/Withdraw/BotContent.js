@@ -4,7 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import {IconNext} from '../../../../assets/icon/Icon';
-import {CustomInput} from '../../../../components';
+import {CustomImage, CustomInput} from '../../../../components';
 import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField} from '../../../../utils/validate';
@@ -20,21 +20,33 @@ export default function BotContent({control, setValue}) {
         {t('choose_bank')}:
       </CustomText>
       <TouchableOpacity
-        style={{...styles.boxItem, marginTop: scale(10)}}
+        style={{...styles.boxItem, marginTop: scale(10), flex: 1}}
         onPress={() =>
           navigate('NoBottomTab', {
             screen: 'ListBankScreen',
             params: {
               onGoBack: dataBack => {
                 setBank(dataBack);
-                setValue('bank_name', dataBack?.name);
+                setValue(
+                  'bank_name',
+                  `${dataBack?.name} (${dataBack?.short_name})`,
+                );
               },
             },
           })
         }>
-        {bank?.icon}
-        <CustomText textType="medium" style={{fontSize: SIZES.xMedium}}>
-          {bank?.name || t('select_bank')}
+        {bank?.logo && (
+          <CustomImage
+            source={{uri: bank?.logo}}
+            style={{
+              height: scale(50),
+              width: scale(50),
+            }}
+            resizeMode="contain"
+          />
+        )}
+        <CustomText textType="medium" style={{fontSize: SIZES.xSmall, flex: 1}}>
+          {bank ? `${bank.name} (${bank.short_name})` : t('select_bank')}
         </CustomText>
         <IconNext
           width={scale(12)}
@@ -76,10 +88,8 @@ const styles = StyleSheet.create({
     minHeight: scale(50),
     flexDirection: 'row',
     alignItems: 'center',
-    padding: scale(16),
-    paddingVertical: scale(10),
+    paddingHorizontal: scale(16),
     ...SHADOW,
-
     borderRadius: scale(6),
     columnGap: scale(14),
     backgroundColor: COLORS.white,

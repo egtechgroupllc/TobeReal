@@ -3,7 +3,7 @@ import {languageUrlApp, languageUrlServer} from '../Model/url';
 
 const getTranslations = async () => {
   try {
-    const typeLng = (await axios.get(`${languageUrlServer}/index.json`)).data
+    const typeLng = (await axios.get(`${languageUrlServer}/index.json`))?.data
       ?.lng;
 
     const listLng = await Promise.all(

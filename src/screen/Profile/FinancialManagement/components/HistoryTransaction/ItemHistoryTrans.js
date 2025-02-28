@@ -18,6 +18,7 @@ import {
 } from '../../../../../utils/format';
 import {CustomButton} from '../../../../../components';
 import {useLanguage} from '../../../../../hooks/useLanguage';
+import {useCountry} from '../../../../../hooks/useCountry';
 
 export default function ItemHistory({
   data,
@@ -27,7 +28,7 @@ export default function ItemHistory({
   onPressCancel,
 }) {
   const {t} = useLanguage();
-
+  const {currency} = useCountry();
   const nameBank = useMemo(
     () =>
       data?.method_deposit_item?.bank_name?.split('-')[0] ||
@@ -92,14 +93,20 @@ export default function ItemHistory({
             <CustomText
               textType="semiBold"
               style={{
-                fontSize: scale(12),
+                fontSize: SIZES.xSmall,
                 flex: 1,
               }}>
-              {nameBank || data?.bank_owner} -{' '}
-              {data?.method_deposit_item?.owner || data?.bank_name}
+              {nameBank || data?.bank_name}
             </CustomText>
           </View>
-
+          <CustomText
+            textType="semiBold"
+            style={{
+              fontSize: SIZES.xSmall,
+              flex: 1,
+            }}>
+            {data?.method_deposit_item?.owner || data?.bank_owner}
+          </CustomText>
           <CustomText style={styles.textSmall}>
             {formatDateTime(data?.createdAt, {
               dateStyle: 'HH:mm - dd/MM/yyyy',
@@ -127,7 +134,9 @@ export default function ItemHistory({
                 color: COLORS.text,
               }}>
               {tab === 'Deposit' ? '+' : '-'}
-              {formatPrice(data?.amount)}
+              {formatPrice(data?.amount, {
+                currency: currency?.currency_code,
+              })}
             </CustomText>
           </View>
         </View>
@@ -165,7 +174,7 @@ const styles = StyleSheet.create({
     columnGap: scale(6),
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   textSmall: {
     fontSize: SIZES.xSmall,

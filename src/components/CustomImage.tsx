@@ -1,12 +1,14 @@
 import React, {useMemo} from 'react';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 import {COLORS, scale} from '../assets/constants';
+import { ImageRequireSource } from 'react-native';
 
 type CustomImgProps = {
   source: string;
   isAvatar: boolean;
   isLoading: boolean;
   size: number;
+  defaultImage?: ImageRequireSource;
 } & FastImageProps;
 
 export default function CustomImage({
@@ -14,6 +16,7 @@ export default function CustomImage({
   isAvatar,
   isLoading,
   size,
+  defaultImage,
   ...props
 }: CustomImgProps) {
   const isImgAsset = useMemo(() => typeof source === 'string', [source]);
@@ -21,6 +24,7 @@ export default function CustomImage({
   return (
     <FastImage
       {...props}
+      defaultSource={defaultImage}
       style={[
         isAvatar && {
           width: size || scale(40),

@@ -29,6 +29,7 @@ import FindContent from './FindContent';
 import OptionAccommodation from './OptionAccommodation';
 import FindContentTour from './FindContentTour';
 import {listTypeTour} from '../../../../assets/dataFake/TourType';
+import {getBanner} from '../../../../Model/api/banner';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -161,6 +162,10 @@ export default function FindAccommodation() {
     setTabSelect(value?.id);
     tabSelect !== 'RENT' && setCategory(listRental[0]);
   }, []);
+  const {data: dataBanner} = useQuery({
+    queryKey: ['banner'],
+    queryFn: () => getBanner(),
+  });
 
   return (
     <MainWrapper refreshControl noSafeArea>
@@ -223,11 +228,11 @@ export default function FindAccommodation() {
       </View>
 
       {tabSelect === 'TOUR' ? (
-        <ContentTour />
+        <ContentTour dataBanner={dataBanner} />
       ) : tabSelect === 'RENT' ? (
-        <ContentAccommodation />
+        <ContentAccommodation dataBanner={dataBanner} />
       ) : (
-        <ContentBuy />
+        <ContentBuy dataBanner={dataBanner} />
       )}
     </MainWrapper>
   );

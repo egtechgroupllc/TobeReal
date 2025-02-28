@@ -8,7 +8,7 @@ import {formatPrice, formatToken} from '../../../utils/format';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 import {IconArrowRight, IconRight} from '../../../assets/icon/Icon';
-import {getToken} from '../../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../../Model/api/common';
 
 export default function WalletManage({data}) {
   const {t} = useLanguage();
@@ -20,35 +20,35 @@ export default function WalletManage({data}) {
   return (
     <View
       style={{
-        alignItems: 'flex-start',
-        width: '100%',
+        rowGap: scale(10),
       }}>
       <CustomText size={SIZES.medium} textType="medium">
         {t('manage_point_voucher')}
       </CustomText>
-      <View
+
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() =>
+          navigate('NavigationProfile', {
+            screen: 'FinancialTokenScreen',
+            params: data,
+          })
+        }
         style={{
-          rowGap: scale(10),
-          marginVertical: scale(14),
-          width: '100%',
+          flexDirection: 'row',
+          columnGap: scale(12),
+          backgroundColor: COLORS.grey50,
+          borderRadius: scale(10),
+          padding: scale(8),
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: scale(10),
         }}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() =>
-            navigate('NavigationProfile', {
-              screen: 'FinancialTokenScreen',
-              params: data,
-            })
-          }
+        <View
           style={{
             flexDirection: 'row',
-            columnGap: scale(12),
             alignItems: 'center',
-            backgroundColor: COLORS.grey50,
-            width: '100%',
-
-            borderRadius: scale(10),
-            padding: scale(8),
+            columnGap: scale(10),
           }}>
           <View style={styles.icon}>
             <CustomImage
@@ -63,15 +63,13 @@ export default function WalletManage({data}) {
           </View>
           <View
             style={{
-              flexDirection: 'row',
               alignItems: 'center',
-              columnGap: scale(60),
             }}>
             <View
               style={{
                 rowGap: scale(3),
               }}>
-              <CustomText size={SIZES.xMedium} textType="medium">
+              <CustomText size={SIZES.xSmall} textType="bold" numberOfLines={2}>
                 {t('token_balance_available', {
                   unit: getDataToken?.data?.symbol,
                 })}
@@ -91,22 +89,22 @@ export default function WalletManage({data}) {
                 </CustomText>
 
                 {/* <View
-                    style={{
-                      backgroundColor: COLORS.primary,
-                      borderRadius: scale(10),
-                      padding: scale(3),
-                      paddingHorizontal: scale(15),
-                    }}>
-                    <CustomText textType="medium" style={{color: COLORS.white}}>
-                      {t('withdraw')}
-                    </CustomText>
-                  </View> */}
+                      style={{
+                        backgroundColor: COLORS.primary,
+                        borderRadius: scale(10),
+                        padding: scale(3),
+                        paddingHorizontal: scale(15),
+                      }}>
+                      <CustomText textType="medium" style={{color: COLORS.white}}>
+                        {t('withdraw')}
+                      </CustomText>
+                    </View> */}
               </View>
             </View>
-            <IconRight fill={COLORS.black} />
           </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+        <IconRight fill={COLORS.black} />
+      </TouchableOpacity>
     </View>
   );
 }

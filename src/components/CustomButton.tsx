@@ -1,5 +1,6 @@
 import React, {memo, useMemo, useRef} from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -52,6 +53,7 @@ export default memo(function CustomButton({
   linearGradientProps,
   isIconComponent,
   isDelay,
+  isLoading,
   styleOutline,
   onPress = funcFallBlack,
   onDoublePress = funcFallBlack,
@@ -107,6 +109,7 @@ export default memo(function CustomButton({
 
   return (
     <TouchableOpacity
+      disabled={isLoading}
       activeOpacity={0.7}
       {...props}
       style={[
@@ -136,55 +139,61 @@ export default memo(function CustomButton({
           propStyle,
           propStyle.minWidth ? {minWidth: propStyle.minWidth} : {width: '100%'},
         ]}>
-        {iconLeft &&
-          (isIconComponent ? (
-            iconLeft
-          ) : (
-            <IconLeft
-              style={{...styles.icon, ...styleIcon}}
-              fill={styleIcon?.color}
-            />
-          ))}
+        {isLoading ? (
+          <ActivityIndicator size="small" color={COLORS.white} />
+        ) : (
+          <>
+            {iconLeft &&
+              (isIconComponent ? (
+                iconLeft
+            ) : (
+              <IconLeft
+                style={{...styles.icon, ...styleIcon}}
+                fill={styleIcon?.color}
+              />
+            ))}
 
-        <View style={desc && {flex: 1, justifyContent: 'center'}}>
-          {text && (
-            <CustomText
-              textType={styleText?.textType || (buttonType && 'semiBold')}
-              numberOfLines={2}
-              style={[
-                !desc && styles.text,
-                {fontSize: scale(fontSize)},
-                !linearGradientProps && {color: COLORS.white},
-                outline && {color: COLORS.pioPrimary},
-                styleText,
-              ]}>
-              {text.trim()}
-            </CustomText>
-          )}
-          {desc && (
-            <CustomText
-              textType={styleText?.textType || (buttonType && 'medium')}
-              numberOfLines={6}
-              style={[
-                !desc && styles.text,
-                {fontSize: scale(fontSize - 3)},
-                !linearGradientProps && {color: COLORS.white},
-                outline && {color: COLORS.primary},
-                textDesc,
-              ]}>
-              {desc.trim()}
-            </CustomText>
-          )}
-        </View>
-        {iconRight &&
-          (isIconComponent ? (
-            iconRight
-          ) : (
-            <IconRight
-              style={{...styles.icon, ...styleIcon}}
-              fill={styleIcon?.color}
-            />
-          ))}
+          <View style={desc && {flex: 1, justifyContent: 'center'}}>
+            {text && (
+              <CustomText
+                textType={styleText?.textType || (buttonType && 'semiBold')}
+                numberOfLines={2}
+                style={[
+                  !desc && styles.text,
+                  {fontSize: scale(fontSize)},
+                  !linearGradientProps && {color: COLORS.white},
+                  outline && {color: COLORS.pioPrimary},
+                  styleText,
+                ]}>
+                {text.trim()}
+              </CustomText>
+            )}
+            {desc && (
+              <CustomText
+                textType={styleText?.textType || (buttonType && 'medium')}
+                numberOfLines={6}
+                style={[
+                  !desc && styles.text,
+                  {fontSize: scale(fontSize - 3)},
+                  !linearGradientProps && {color: COLORS.white},
+                  outline && {color: COLORS.primary},
+                  textDesc,
+                ]}>
+                {desc.trim()}
+              </CustomText>
+            )}
+          </View>
+          {iconRight &&
+            (isIconComponent ? (
+              iconRight
+            ) : (
+              <IconRight
+                style={{...styles.icon, ...styleIcon}}
+                fill={styleIcon?.color}
+              />
+              ))}
+          </>
+        )}
       </ComponentWrapper>
     </TouchableOpacity>
   );

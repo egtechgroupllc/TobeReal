@@ -82,7 +82,11 @@ export default function Review({dataP}) {
             }}
             renderItem={({item, index}) =>
               item?.id ? (
-                <ItemBoxReview key={`key-${item}-${index}`} data={item} />
+                <ItemBoxReview
+                  key={`key-${item}-${index}`}
+                  data={item}
+                  style={{borderWidth: scale(1), borderColor: COLORS.pioBox}}
+                />
               ) : (
                 <ItemBoxReviewLoading />
               )

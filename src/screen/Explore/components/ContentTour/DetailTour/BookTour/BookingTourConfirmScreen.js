@@ -34,6 +34,7 @@ import {postBookingTour} from '../../../../../../Model/api/apiTour';
 import DetailPriceTour from './components/DetailPriceTour';
 import {useCountry} from '../../../../../../hooks/useCountry';
 import {useLoading} from '../../../../../../hooks/useLoading';
+import {storage} from '../../../../../../utils/MMKVStorage';
 export default function BookingTourConfirmScreen() {
   const data = useRoute().params;
   const {t} = useLanguage();
@@ -68,8 +69,14 @@ export default function BookingTourConfirmScreen() {
     mutationFn: postPaypal,
   });
   useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
+  useEffect(() => {
     const loadInfoBookingTour = async () => {
-      const result = await EncryptedStorage.getItem('@infoBookingTour');
+      const result = await storage.getString('@infoBookingTour');
       setContact(JSON.parse(result));
     };
     loadInfoBookingTour();
@@ -227,12 +234,7 @@ export default function BookingTourConfirmScreen() {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
-  useEffect(() => {
-    stopLoading();
-    return () => {
-      return setLoading(true);
-    };
-  }, []);
+
   return (
     <View style={styles.container}>
       <TopStep2
@@ -253,6 +255,7 @@ export default function BookingTourConfirmScreen() {
         isPending={isPending}
         check={check}
         countdown={countdown}
+        isBooking={true}
       />
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>

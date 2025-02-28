@@ -110,7 +110,7 @@ export default React.memo(
               flexDirection: 'row',
               columnGap: scale(10),
             }}>
-            <Favourite styleWrapper={styles.menu} />
+            {/* <Favourite styleWrapper={styles.menu} /> */}
             <CustomButton
               isShadow
               // text="Share"

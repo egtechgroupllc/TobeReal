@@ -147,7 +147,6 @@ export default function DetailBookingTourScreen() {
             style={{
               textAlign: 'center',
               paddingTop: scale(12),
-              padding: scale(10),
             }}>
             {t('great_choice')}
           </CustomText>
@@ -216,7 +215,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(12),
     overflow: 'hidden',
     marginVertical: scale(20),
-    marginBottom: scale(100),
+    marginBottom: scale(120),
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   wrappers: {
     alignItems: 'center',

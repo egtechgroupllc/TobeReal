@@ -86,7 +86,7 @@ export default function BoxPlaceItem({
               <CustomImage source={data?.src} style={styles.img} />
             ) : (
               <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
+                srsource={images.voucher25}
                 style={styles.img}></CustomImage>
             )}
 

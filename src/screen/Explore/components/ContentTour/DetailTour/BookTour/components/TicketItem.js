@@ -56,7 +56,7 @@ export default function TicketItem({
         <Counter
           editable={false}
           max={data?.quantity_real}
-          styleWrapper={{width: '45%'}}
+          styleWrapper={{width: '50%'}}
           // value={numRooms > numAdult ? numAdult : numRooms}
           onChange={onChange}
           min={index ? 0 : 1}

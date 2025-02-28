@@ -111,7 +111,7 @@ export default function Bottom() {
       )}
       {token && (
         <CustomButton
-          text={'Đổi tài khoản'}
+          text={t('change_account')}
           onPress={() =>
             navigate('NavigationProfile', {screen: 'ChangeAccountScreen'})
           }

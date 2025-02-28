@@ -159,7 +159,7 @@ export default function AddRoomTypeScreen() {
       : JSON.parse(value?.features);
 
     if (!value?.features || features.length <= 0) {
-      showMess('Ban chua chon tien ich cho phong', 'error');
+      showMess(t('you_have_not_select_facility'), 'error');
       return;
     }
     // navigate('NoBottomTab', {
@@ -302,6 +302,10 @@ export default function AddRoomTypeScreen() {
 
       <CustomButton
         // linearGradientProps
+        isLoading={
+          createAccommodationRoomMu.isPending ||
+          updateAccommodationRoomMu.isPending
+        }
         buttonType="medium"
         text={params?.update ? t('update') : t('post')}
         disabled={createAccommodationRoomMu.isPending}

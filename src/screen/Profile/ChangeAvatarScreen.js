@@ -84,7 +84,12 @@ export default function ChangeAvatarScreen() {
       styleContent={{alignItems: 'center', marginTop: scale(50)}}>
       <CustomImage
         source={selectedImage}
-        style={{width: scale(100), height: scale(100), borderRadius: scale(99)}}
+        style={{
+          width: scale(100),
+          height: scale(100),
+          borderRadius: scale(99),
+          backgroundColor: COLORS.grey,
+        }}
       />
       <CustomText
         style={{fontSize: SIZES.large, marginTop: scale(10)}}

@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import CustomText from '../../../../../components/CustomText';
 import {COLORS, SIZES, WIDTH, scale} from '../../../../../assets/constants';
@@ -9,6 +15,8 @@ import WrapperContent from '../../WrapperContent';
 import {CustomButton, TabSelect} from '../../../../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {ScrollView} from 'react-native-gesture-handler';
+import {preprocessHtml} from '../../../../../utils/preprocessHtml';
+import RenderHTML from 'react-native-render-html';
 
 export default function TourSchedule({data}) {
   const {t} = useLanguage();
@@ -16,6 +24,8 @@ export default function TourSchedule({data}) {
   const [selectedDay, setSelectedDay] = useState(
     JSON.parse(data?.schedule)[0]?.title,
   );
+  const width = useWindowDimensions().width;
+
   const handleDayClick = value => {
     setSelectedDay(value);
   };
@@ -33,15 +43,23 @@ export default function TourSchedule({data}) {
         }
       }
       styleContent={{
-        paddingHorizontal: scale(16),
         minHeight: scale(50),
+        paddingHorizontal: scale(16),
       }}>
-      <CustomText
-        style={{
-          lineHeight: 18,
-        }}>
-        {JSON.parse(data?.schedule)?.[0]?.description}
-      </CustomText>
+      <RenderHTML
+        contentWidth={width}
+        source={preprocessHtml(JSON.parse(data?.schedule)?.[0]?.description)}
+        baseStyle={{
+          color: 'black',
+        }}
+        tagsStyles={{
+          p: {
+            marginVertical: 0,
+            width: width - scale(16),
+          },
+        }}
+      />
+
       <LinearGradient
         colors={[COLORS.pioPrimary, COLORS.pioBox]}
         start={{x: 0, y: 0}}
@@ -73,8 +91,8 @@ export default function TourSchedule({data}) {
         titleIndicator={t('description_content')}
         handleStyle={{color: COLORS.black}}
         styleContent={{
-          paddingHorizontal: scale(16),
           rowGap: scale(10),
+          paddingHorizontal: scale(16),
         }}>
         <ScrollView horizontal>
           <View style={styles.content}>
@@ -84,7 +102,14 @@ export default function TourSchedule({data}) {
                   {JSON.parse(data?.schedule).length > 1 && (
                     <CustomButton
                       text={item?.title}
-                      style={{width: scale(70), height: scale(30)}}
+                      style={{
+                        width: scale(70),
+                        height: scale(30),
+                        backgroundColor:
+                          item?.title === selectedDay
+                            ? COLORS.pioPrimary
+                            : COLORS.grey,
+                      }}
                       onPress={() => handleDayClick(item?.title)}
                     />
                   )}
@@ -106,17 +131,27 @@ export default function TourSchedule({data}) {
             })}
           </View>
         </ScrollView>
-
-        <View style={styles.itemFac}>
-          <View style={styles.dot} />
-          <CustomText
+        {/* <View style={styles.dot} /> */}
+        <RenderHTML
+          contentWidth={width}
+          source={preprocessHtml(context?.description)}
+          baseStyle={{
+            color: 'black',
+          }}
+          tagsStyles={{
+            p: {
+              marginVertical: 0,
+              width: width - scale(16),
+            },
+          }}
+        />
+        {/* <CustomText
             textType="regular"
             style={{
               fontSize: SIZES.xMedium,
             }}>
             {context?.description}
-          </CustomText>
-        </View>
+          </CustomText> */}
       </BottomSheet>
     </WrapperContent>
   );

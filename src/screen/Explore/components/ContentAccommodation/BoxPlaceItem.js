@@ -19,6 +19,7 @@ import RatingBox from './BoxPlaceItem/RatingBox';
 import TopImg from './BoxPlaceItem/TopImg';
 import {getListTicket} from '../../../../Model/api/apiTour';
 import {useQuery} from '@tanstack/react-query';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function BoxPlaceItem({
   data,
@@ -41,12 +42,12 @@ export default function BoxPlaceItem({
   const {navigate, isFocused, dispatch} = useNavigation();
 
   const onSavedName = async () => {
-    const result = await EncryptedStorage.getItem('save_name');
+    const result = await storage.getString('save_name');
 
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.name !== data?.name)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       'save_name',
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 5)] : [data]),
     );
@@ -171,7 +172,7 @@ export default function BoxPlaceItem({
               // isStar={isStar}
               // textRating={textRating}
               isTour={dataQ ? false : true}
-              isHeart={isHeart}
+              // isHeart={isHeart}
               type={data?.accommodation_type?.name || data?.estate_type?.name}
             />
           </View>
@@ -217,7 +218,7 @@ export default function BoxPlaceItem({
             <View style={{rowGap: scale(2)}}>
               {!multiPrice ? (
                 <>
-                  {isDiscount && (
+                  {/* {isDiscount && (
                     <View
                       style={{
                         ...styles.price,
@@ -230,18 +231,8 @@ export default function BoxPlaceItem({
                           currency: country?.currency_code,
                         })}{' '}
                       </CustomText>
-
-                      {/* <CustomText
-                        textType="semiBold"
-                        style={{
-                          color: '#FF0000',
-                          fontSize: SIZES.xSmall,
-                          minWidth: scale(35),
-                        }}>
-                        20% OFF
-                      </CustomText> */}
                     </View>
-                  )}
+                  )} */}
 
                   <View style={styles.price}>
                     <CustomText

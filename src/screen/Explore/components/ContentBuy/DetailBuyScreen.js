@@ -57,7 +57,7 @@ export default function DetailBuyScreen() {
       <DetailAccommoMap data={dataDetail} />,
       <View>
         <ContactInfo data={dataDetail} />
-        <ConfigDetail data={dataDetail} />
+        {/* <ConfigDetail data={dataDetail} /> */}
       </View>,
       <SimilarApartmentsNearby />,
     ];

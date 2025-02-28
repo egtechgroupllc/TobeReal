@@ -9,6 +9,7 @@ import BoxPlaceItem from './BoxPlaceItem';
 import {InViewport} from '../../../../components';
 import BoxPlaceItemLoading from './BoxPlaceItem/BoxPlaceItemLoading';
 import EmptyData from '../../../../components/EmptyData';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default memo(function HotelResidence({data, isLoading, country}) {
   const {t} = useLanguage();
@@ -19,9 +20,12 @@ export default memo(function HotelResidence({data, isLoading, country}) {
   const [listSavedName, setListSavedName] = useState([]);
   useEffect(() => {
     const loadSavedName = async () => {
-      const result = await EncryptedStorage.getItem('save_name');
-      // const result = await EncryptedStorage.removeItem('save_name');
-      setListSavedName(JSON.parse(result));
+      const result = await storage.getString('save_name');
+      // const result = await storage.delete('save_name');
+
+      if (result) {
+        setListSavedName(JSON.parse(result));
+      }
     };
     loadSavedName();
   }, []);

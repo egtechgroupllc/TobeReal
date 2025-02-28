@@ -46,7 +46,7 @@ export default function BoxWalletBlockChain({data}) {
     <View style={styles.box}>
       <View style={styles.content}>
         <View style={styles.left}>
-          <CustomText textType="semiBold">{t('my_wallet_address')}:</CustomText>
+          <CustomText textType="semiBold">{t('my_id_address')}:</CustomText>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.walletAddress}
@@ -93,13 +93,13 @@ export default function BoxWalletBlockChain({data}) {
 const styles = StyleSheet.create({
   box: {
     backgroundColor: COLORS.white,
-    width: '90%',
+    flex: 1,
     borderRadius: scale(5),
     justifyContent: 'center',
     paddingHorizontal: scale(10),
     minHeight: scale(100),
     height: scale(85),
-    marginTop: scale(10),
+    width: '90%',
     ...SHADOW,
     borderWidth: 1,
     borderColor: COLORS.pioBox,

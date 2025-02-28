@@ -89,31 +89,31 @@ export default function AdminManageLeaseScreen() {
       {text: t('ok'), onPress: () => Delete()},
     ]);
 
-  const scanQRMutation = useMutation({
-    mutationFn: postScanQR,
-  });
-  const handleScanQR = value => {
-    scanQRMutation.mutate(
-      {id: value?.id, qr_code: value?.qr_code},
-      {
-        onSuccess: dataInside => {
-          if (dataInside?.status) {
-            navigate('NoBottomTab', {
-              screen: 'QRScanDetailScreen',
-              params: dataInside?.data,
-            });
-            setOpen(false);
-            return;
-          }
-          showMess(t(dataInside?.message), 'error');
-        },
-        onError: err => {
-          console.log(err);
-          showMess(t('an_error_occured'), 'error');
-        },
-      },
-    );
-  };
+  // const scanQRMutation = useMutation({
+  //   mutationFn: postScanQR,
+  // });
+  // const handleScanQR = value => {
+  //   scanQRMutation.mutate(
+  //     {id: value?.id, qr_code: value?.qr_code},
+  //     {
+  //       onSuccess: dataInside => {
+  //         if (dataInside?.status) {
+  //           navigate('NoBottomTab', {
+  //             screen: 'QRScanDetailScreen',
+  //             params: dataInside?.data,
+  //           });
+  //           setOpen(false);
+  //           return;
+  //         }
+  //         showMess(t(dataInside?.message), 'error');
+  //       },
+  //       onError: err => {
+  //         console.log(err);
+  //         showMess(t('an_error_occured'), 'error');
+  //       },
+  //     },
+  //   );
+  // };
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
@@ -122,7 +122,7 @@ export default function AdminManageLeaseScreen() {
           rowGap: scale(20),
           marginTop: scale(20),
         }}>
-        <CustomText textType="semiBold" style={{fontSize: SIZES.large}}>
+        <CustomText textType="semiBold" style={{fontSize: SIZES.medium}}>
           {params?.name}
         </CustomText>
         <CustomImage
@@ -248,7 +248,7 @@ export default function AdminManageLeaseScreen() {
             })
           }
         />
-        <CustomButton
+        {/* <CustomButton
           text={t('check_in_qrscan')}
           style={styles.button}
           styleText={{color: COLORS.black}}
@@ -263,7 +263,7 @@ export default function AdminManageLeaseScreen() {
           open={!!open}
           onScanner={value => handleScanQR(value)}
           onClose={() => setOpen(false)}
-        />
+        /> */}
         {/* <CustomButton
           text={t('policy_manage')}
           style={{width: '85%', height: scale(45)}}

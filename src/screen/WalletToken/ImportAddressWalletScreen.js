@@ -70,7 +70,7 @@ export default function ImportAddressWalletScreen({route}) {
         marginTop: '10%',
       }}>
       <CustomInput
-        value={t('wallet_symbol', {unit: 'Pioneer'})}
+        value={t('wallet_symbol', {unit: 'Pione Chain'})}
         label={t('wallet_name')}
         editable={false}
         styleTextLabel={styles.label}

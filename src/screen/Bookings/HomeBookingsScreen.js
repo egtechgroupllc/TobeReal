@@ -130,8 +130,10 @@ const styles = StyleSheet.create({
     height: scale(56),
     alignItems: 'center',
     borderRadius: scale(12),
-    backgroundColor: COLORS.pioBox,
+    backgroundColor: COLORS.white70,
     padding: scale(4),
+    borderWidth: scale(1),
+    borderColor: COLORS.border,
   },
   tabActive: {
     color: COLORS.white,

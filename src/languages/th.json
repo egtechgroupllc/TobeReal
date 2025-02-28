@@ -1084,7 +1084,7 @@
   "look_up_transaction": "ค้นหาประวัติการทำธุรกรรม",
   "token_balance_available": "ยอดคงเหลือ {unit} (สามารถถอนได้ในกระเป๋าสตางค์)",
   "active_to_use_wallet": "เปิดใช้งานเพื่อใช้กระเป๋าสตางค์ {unit}",
-  "active_2_types_wallet": "เปิดใช้งาน 2 ประเภทของกระเป๋าเงิน: PionePay, กระเป๋าเงินดิจิตอล และเพลิดเพลินกับการชำระเงินที่รวดเร็วและปลอดภัย",
+  "active_2_types_wallet": "เปิดใช้งาน 2 ประเภทของกระเป๋าเงิน: HousePay, กระเป๋าเงินดิจิตอล และเพลิดเพลินกับการชำระเงินที่รวดเร็วและปลอดภัย",
   "your_transaction_has_been_canceled": "ธุรกรรมของคุณถูกยกเลิกเนื่องจาก \n ข้อผิดพลาดระหว่างกระบวนการจอง \nกรุณาลองอีกครั้ง!",
   "traceability": "การตรวจสอบย้อนกลับ",
   "property_traceability": "การตรวจสอบย้อนกลับทรัพย์สิน",
@@ -1101,13 +1101,11 @@
   "there_are_no_voucher": "ไม่มีบัตรกำนัล!",
   "voucher_manage": "จัดการบัตรกำนัล",
   "value_of_the_voucher": "มูลค่าของบัตรกำนัลใช้สำหรับส่วนลด",
-  "are_you_sure_want_buy_voucher": "คุณแน่ใจหรือว่าต้องการซื้อตั๋วกำนัลนี้?",
   "transaction_cant_refund": "การทำธุรกรรมไม่สามารถคืนเงินได้!",
   "discount_voucher": "บัตรกำนัลส่วนลด",
   "apply_all_hotel_system": "ใช้ได้กับระบบโรงแรมทั้งหมด",
   "this_voucher_is_valid": "บัตรกำนัลนี้มีอายุถึง",
   "this_voucher_not_apply_other_hotel": "บัตรกำนัลนี้ไม่ใช้กับโรงแรมอื่น ๆ",
-  "buy_voucher": "ซื้อตั๋วกำนัล",
   "apply_voucher": "ใช้ตั๋วกำนัล",
   "add": "เพิ่ม",
 
@@ -1142,7 +1140,7 @@
   "this_is_type_point": "นี่คือประเภทของคะแนนที่ใช้ในแอป",
   "this_is_wallet_manage": "นี่คือการจัดการกระเป๋าเงินบัตรกำนัล",
   "help_center": "ศูนย์ช่วยเหลือ",
-  "how_to_add_pionechain": "วิธีเพิ่ม PioneerChain ลงใน MetaMask?",
+  "how_to_add_pionechain": "วิธีเพิ่ม Pione Chain ลงใน MetaMask?",
 
   "create_new_policy": "สร้างนโยบายใหม่",
   "you_have_not_select_facility": "คุณยังไม่ได้เลือกสิ่งอำนวยความสะดวก",
@@ -1246,7 +1244,7 @@
   "date_create": "วันที่สร้าง",
 
   "create_wallet": "สร้างกระเป๋าสตางค์",
-  "no_still_pay": "ไม่, ยังคงจ่ายด้วย PionePay",
+  "no_still_pay": "ไม่, ยังคงจ่ายด้วย HousePay",
   "do_you_want_create_wallet": "คุณต้องการสร้างกระเป๋าสตางค์และจ่ายด้วยบัตรกำนัลเพื่อรับคะแนนฟรีหรือไม่?",
 
   "please_choose_exact_location": "กรุณาเลือกตำแหน่งที่แน่นอนภายในระยะ 5 เมตรเพื่อโพสต์",
@@ -1268,7 +1266,7 @@
 
   "room_manage_detail": "รายละเอียดการจัดการห้อง",
   "share_detail_tour_short_video": "แชร์รายละเอียดทัวร์ของคุณผ่านวิดีโอสั้น วิดีโอเหล่านี้จะปรากฏในแนวโน้ม!",
-  "no_pay_with": "ไม่, ชำระเงินด้วย PionePay",
+  "no_pay_with": "ไม่, ชำระเงินด้วย HousePay",
   "content_display": "เนื้อหา & การแสดงผล",
   "setting": "การตั้งค่า",
   "account_security": "บัญชี & ความปลอดภัย",
@@ -1355,5 +1353,39 @@
     "maximum_hours": "สูงสุด",
     "saved_file_successfully": "บันทึกไฟล์สำเร็จ",
     "error_when_saving_file": "ข้อผิดพลาดในการบันทึกไฟล์",
-    "account": "บัญชี"
+    "account": "บัญชี",
+
+    "faucet_now": "Faucet ตอนนี้",
+    "video_size_limit_30mb": "ขนาดวิดีโอจำกัดที่ 30MB กรุณาเลือกวิดีโอที่สั้นกว่า!",
+    "scan_qr_code": "สแกนคิวอาร์โค้ด",
+    "align_qr_code_to_the_frame": "จัดแนวรหัส QR ให้อยู่ในกรอบ",
+    "remove_success": "ลบสำเร็จ",
+    "are_you_sure_want_remove_history_account": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติบัญชี?",
+    "remove_history_account": "ประวัติที่ถูกลบไม่สามารถกู้คืนได้!",
+
+    "SWAP": "สลับ",
+    "complete_the_daily_tasks": "ทำภารกิจประจำวันด้านล่างเพื่อรับรางวัล {unit} ตอนนี้",
+
+    "create_real_estate_rental_listing": "สร้างรายการอสังหาริมทรัพย์ให้เช่า",
+    "create_real_estate_sale_listing": "สร้างรายการอสังหาริมทรัพย์เพื่อขาย",
+    "create_tour_listing": "สร้างรายการทัวร์",
+
+     "complete_task": "ทำภารกิจ",
+     "officially_redeemable_after_airdrop": "{unit} จะสามารถใช้ได้อย่างเป็นทางการเมื่อโปรแกรม Airdrop สิ้นสุดลง รีบทำภารกิจเพื่อรับรางวัลกันเถอะ!",
+     "congratulations_reward_today": "ขอแสดงความยินดี! คุณได้รับรางวัลวันนี้แล้ว กลับมาใหม่พรุ่งนี้เพื่อทำภารกิจต่อไป!",
+     "my_id_address": "ที่อยู่ ID ของฉัน",
+     "congratulations_experience": "ขอแสดงความยินดี! คุณได้รับ {value} ประสบการณ์แล้ว",
+     "reload": "โหลดใหม่",
+     "not_applicable": "ไม่สามารถใช้ได้",
+     "enter_description": "ป้อนคำอธิบาย",
+      "description_day": "คำอธิบายวัน",
+     "please_create_wallet": "โปรดสร้างกระเป๋าเงินเพื่อใช้ฟังก์ชันนี้!",
+
+     "are_you_sure_want_buy_voucher": "คุณแน่ใจหรือไม่ว่าต้องการแลกบัตรกำนัลนี้?",
+    "buy_voucher": "แลกบัตรกำนัล",
+
+    "enter_point": "ป้อนคะแนน", 
+    "exchange_value_of_voucher": "นี่คือมูลค่าการแลกของบัตรกำนัล",
+    "search_province": "ค้นหาจังหวัด"
+
 }

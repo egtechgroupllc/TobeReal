@@ -29,6 +29,7 @@ export default function FilterSort({
           }}
           styleOption={{
             height: scale(30),
+            backgroundColor: COLORS.border,
           }}
           styleContent={{
             paddingHorizontal: scale(0),
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
   },
   sort: {
     backgroundColor: '#f5f5f5',
+
     borderRadius: scale(6),
     paddingHorizontal: scale(6),
     paddingVertical: scale(4),

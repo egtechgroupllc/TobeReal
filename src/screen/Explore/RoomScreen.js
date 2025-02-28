@@ -94,7 +94,7 @@ export default function RoomScreen() {
           <TouchableOpacity onPress={() => navigate('Explore')}>
             <IconHome style={{width: scale(20)}} />
           </TouchableOpacity>
-          <Favourite styleWrapper={{width: scale(15), heigth: scale(15)}} />
+          {/* <Favourite styleWrapper={{width: scale(15), heigth: scale(15)}} /> */}
         </View>
       ),
     });

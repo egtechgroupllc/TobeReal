@@ -13,6 +13,7 @@ import Bottom from './components/Bottom';
 import Content from './components/Content';
 import HeaderNoToken from './components/HeaderNoToken';
 import TopProfile from './components/TopProfile';
+import {getListRank} from '../../Model/api/auth';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -25,6 +26,55 @@ export default function ProfileScreen() {
     queryFn: () => getProfile(token),
     enabled: !!token,
   });
+
+  const {data: dataRank} = useQuery({
+    queryKey: ['user', 'rank'],
+    queryFn: () => getListRank(),
+    enabled: !!token,
+  });
+
+  const getCurrentLevel = (score, ranks) => {
+    // Log các giá trị đầu vào
+
+    // Kiểm tra điều kiện đầu vào chặt chẽ hơn
+    if (
+      score === undefined ||
+      score === null ||
+      !Array.isArray(ranks) ||
+      ranks.length === 0
+    ) {
+      return null;
+    }
+
+    // Sắp xếp ranks theo min_score tăng dần
+    const sortedRanks = [...ranks].sort((a, b) => a.min_score - b.min_score);
+
+    // Tìm level hiện tại
+    const currentLevel = sortedRanks.reduce((prev, current) => {
+      if (score >= current.min_score) {
+        return current;
+      }
+      return prev;
+    }, sortedRanks[0]);
+
+    // Tìm level tiếp theo
+    const nextLevelIndex =
+      sortedRanks.findIndex(rank => rank.id === currentLevel.id) + 1;
+    const nextLevel =
+      nextLevelIndex < sortedRanks.length ? sortedRanks[nextLevelIndex] : null;
+
+    const result = {
+      currentLevel,
+      nextLevel,
+      remainingScore: nextLevel ? nextLevel.min_score - score : 0,
+      score: score,
+    };
+
+    // Log kết quả
+    return result;
+  };
+
+  const userLevelInfo = getCurrentLevel(data?.data?.score, dataRank?.data);
   return (
     <MainWrapper
       refreshControl
@@ -56,6 +106,7 @@ export default function ProfileScreen() {
             data={data?.data}
             name={data?.data?.username || 'name'}
             onPressUpgrade={upgrade}
+            userLevelInfo={userLevelInfo}
           />
         </View>
       )}

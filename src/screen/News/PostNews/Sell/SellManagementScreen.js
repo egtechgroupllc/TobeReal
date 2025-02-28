@@ -47,9 +47,7 @@ export default function SellManagementScreen() {
       e.preventDefault();
     });
   }, []);
-  console.log('====================================');
-  console.log(dataNew);
-  console.log('====================================');
+
   return (
     <MainWrapper
       optionsHeader={{

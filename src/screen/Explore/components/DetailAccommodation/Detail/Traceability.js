@@ -20,7 +20,7 @@ export default function Traceability({data}) {
 
   const handleOpenLink = async () => {
     await Linking.openURL(
-      `https://zeroscan.org/address/${data.user.wallet_address}`,
+      `https://zeroscan.org/address/${data?.user?.wallet_address}`,
     );
   };
   return (

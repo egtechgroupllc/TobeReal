@@ -71,7 +71,7 @@ export default function BookingAccom() {
         paddingVertical: scale(10),
         rowGap: scale(10),
         padding: scale(10),
-        paddingBottom: scale(80),
+        paddingBottom: scale(120),
       }}
       refreshControl={
         <RefreshControl

@@ -1,7 +1,13 @@
 import React, {memo, useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {scale} from '../../../../assets/constants';
+import {COLORS, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import AccommodationPremium from './AccommodationPremium';
 import BigCity from './BigCity';
@@ -12,8 +18,10 @@ import {useCountry} from '../../../../hooks/useCountry';
 import {useQuery} from '@tanstack/react-query';
 import {getListRent} from '../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../utils/format';
+import {CustomImage} from '../../../../components';
+import {showMess} from '../../../../assets/constants/Helper';
 
-export default memo(function ContentAccommodation({}) {
+export default memo(function ContentAccommodation({dataBanner}) {
   const {t} = useLanguage();
 
   const {country, currency} = useCountry();
@@ -38,6 +46,31 @@ export default memo(function ContentAccommodation({}) {
 
   return (
     <View style={styles.wrapper}>
+      {(Platform.OS === 'android'
+        ? dataBanner?.banner?.android?.is_show
+        : dataBanner?.banner?.ios?.is_show) && (
+        <TouchableOpacity
+          style={{paddingHorizontal: scale(12)}}
+          onPress={() => Linking.openURL('https://airdrop.pionechain.com')}
+          // onPress={() => showMess(t('comming_soon'), 'error')}
+        >
+          <CustomImage
+            source={{
+              uri:
+                Platform.OS === 'android'
+                  ? dataBanner?.banner?.android?.url
+                  : dataBanner?.banner?.ios?.url,
+            }}
+            style={{
+              width: '100%',
+              height: scale(180),
+              borderRadius: scale(20),
+              alignSelf: 'center',
+            }}
+            resizeMode="stretch"
+          />
+        </TouchableOpacity>
+      )}
       <HotelResidence
         data={data?.data?.rows}
         isLoading={isLoading}

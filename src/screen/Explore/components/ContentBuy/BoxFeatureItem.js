@@ -31,6 +31,7 @@ import Favourite from '../../../components/Favourite';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useCountry} from '../../../../hooks/useCountry';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function BoxFeatureItem({
   data,
@@ -56,16 +57,17 @@ export default function BoxFeatureItem({
   const {navigate, isFocused, dispatch} = useNavigation();
   const {currency} = useCountry();
   const onSavedName = async () => {
-    const result = await EncryptedStorage.getItem('@save_name_estate');
+    const result = await storage.getString('@save_name_estate');
 
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.title !== data?.title)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       '@save_name_estate',
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
+  console.log(data);
 
   return (
     <View style={styles.wrapper}>
@@ -259,14 +261,14 @@ export default function BoxFeatureItem({
                           fontSize: SIZES.xSmall,
                           width: scale(70),
                         }}>
-                        {calculateTimeElapsed(data?.date_start)}
+                        {calculateTimeElapsed(data?.createdAt)}
                       </CustomText>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
-            <View
+            {/* <View
               style={{
                 position: 'absolute',
                 alignSelf: 'flex-end',
@@ -274,7 +276,7 @@ export default function BoxFeatureItem({
                 left: scale(250),
               }}>
               <Favourite />
-            </View>
+            </View> */}
           </View>
         </TouchableOpacity>
       ) : (

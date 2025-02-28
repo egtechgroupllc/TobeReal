@@ -35,6 +35,8 @@ export default function InfoDetail({data, price}) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!data?.wallet_address) return null;
+  console.log(data);
+
   return (
     <WrapperContent
       noBackground
@@ -96,10 +98,10 @@ export default function InfoDetail({data, price}) {
             }}
           />
 
-          {new Date() - new Date(data?.date_start) > 0 && (
+          {new Date() - new Date(data?.createdAt) > 0 && (
             <InfoItem
               Icon={IconClock}
-              value={calculateTimeElapsed(data.date_start)}
+              value={calculateTimeElapsed(data?.createdAt)}
               styleIcon={{
                 width: scale(14),
                 height: scale(14),

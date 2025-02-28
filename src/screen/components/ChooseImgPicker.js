@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: COLORS.white,
+    color: COLORS.black,
     alignSelf: 'flex-start',
   },
   label: {

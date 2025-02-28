@@ -41,7 +41,7 @@ export default function DetailAccommodationScreen() {
       text: t('review'),
     },
     {
-      text: t('policy'),
+      text: t('accom_policy'),
     },
     {
       text: t('others'),

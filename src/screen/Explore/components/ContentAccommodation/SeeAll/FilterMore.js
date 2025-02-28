@@ -201,7 +201,7 @@ export default function FilterMore({
             setValue('max_acreage', selectedItem[1]);
           }}
         />
-        <RatingReview />
+        {/* <RatingReview /> */}
         {/* <BedRoom /> */}
         <TypeAccommoda
           value={watch('type')}

@@ -1057,7 +1057,7 @@
   "look_up_transaction": "Cari riwayat transaksi",
   "token_balance_available": "Saldo {unit} (tersedia untuk ditarik ke dompet)",
   "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet {unit}",
-  "active_2_types_wallet": "Aktifkan 2 jenis dompet: PionePay, dompet cryptocurrency, dan nikmati pembayaran yang cepat, aman",
+  "active_2_types_wallet": "Aktifkan 2 jenis dompet: HousePay, dompet cryptocurrency, dan nikmati pembayaran yang cepat, aman",
   "your_transaction_has_been_canceled": "Transaksi Anda telah dibatalkan karena \n kesalahan selama proses pemesanan. \nSilakan coba lagi!",
   "traceability": "Pelacakan",
   "property_traceability": "Pelacakan properti",
@@ -1074,13 +1074,11 @@
   "there_are_no_voucher": "Tidak ada voucher yang tersedia!",
   "voucher_manage": "Kelola voucher",
   "value_of_the_voucher": "Nilai voucher digunakan untuk menerapkan diskon",
-  "are_you_sure_want_buy_voucher": "Apakah Anda yakin ingin membeli voucher ini?",
   "transaction_cant_refund": "Transaksi yang dilakukan tidak dapat dikembalikan!",
   "discount_voucher": "Voucher diskon",
   "apply_all_hotel_system": "Berlaku di semua sistem hotel",
   "this_voucher_is_valid": "Voucher ini berlaku hingga",
   "this_voucher_not_apply_other_hotel": "Voucher ini tidak berlaku untuk hotel lain.",
-  "buy_voucher": "Beli voucher",
   "apply_voucher": "Terapkan voucher",
   "add": "Tambah",
 
@@ -1114,7 +1112,7 @@
   "this_is_type_point": "Ini adalah jenis poin yang digunakan dalam aplikasi",
   "this_is_wallet_manage": "Ini adalah manajemen dompet voucher poin",
   "help_center": "Pusat bantuan",
-  "how_to_add_pionechain": "Bagaimana cara menambahkan PioneerChain ke MetaMask?",
+  "how_to_add_pionechain": "Bagaimana cara menambahkan Pione Chain ke MetaMask?",
 
   "create_new_policy": "Buat kebijakan baru",
   "you_have_not_select_facility": "Anda belum memilih fasilitas",
@@ -1213,12 +1211,12 @@
 
   "policy_linked": "Kebijakan terhubung",
   "you_will_automatic_transfer": "Anda akan otomatis dipindahkan ke layar dalam",
-  "congratulate_on_receiving_coin": "Selamat menerima koin {unit}!",
+  "congratulate_on_receiving_coin": "Selamat atas perolehan poin {unit}!",
   "enter_amount_withdraw": "Masukkan jumlah yang ingin Anda tarik",
   "date_create": "Tanggal pembuatan",
 
   "create_wallet": "Buat dompet",
-  "no_still_pay": "Tidak, tetap bayar dengan PionePay",
+  "no_still_pay": "Tidak, tetap bayar dengan HousePay",
   "do_you_want_create_wallet": "Apakah Anda ingin membuat dompet dan membayar dengan voucher untuk mendapatkan poin gratis?",
 
   "please_choose_exact_location": "Silakan pilih lokasi yang tepat dalam radius 5 meter untuk memposting",
@@ -1240,7 +1238,7 @@
 
   "room_manage_detail": "Detail manajemen kamar",
   "share_detail_tour_short_video": "Bagikan detail tur Anda melalui video pendek, video ini akan muncul di tren!",
-  "no_pay_with": "Tidak, bayar dengan PionePay",
+  "no_pay_with": "Tidak, bayar dengan HousePay",
   "content_display": "Konten & Tampilan",
   "setting": "Pengaturan",
   "account_security": "Akun & Keamanan",
@@ -1327,5 +1325,39 @@
     "maximum_hours": "Jam maksimum adalah",
     "saved_file_successfully": "Berhasil menyimpan file",
     "error_when_saving_file": "Kesalahan saat menyimpan file",
-    "account": "Akun"
+    "account": "Akun",
+
+    "faucet_now": "Faucet sekarang",
+    "video_size_limit_30mb": "Batas ukuran video 30MB, silakan pilih video yang lebih pendek!",
+    "scan_qr_code": "Pindai kode QR",
+    "align_qr_code_to_the_frame": "Sesuaikan kode QR dengan bingkai",
+    "remove_success": "Berhasil dihapus",
+    "are_you_sure_want_remove_history_account": "Apakah Anda yakin ingin menghapus riwayat akun?",
+    "remove_history_account": "Riwayat yang dihapus tidak dapat dipulihkan!",
+
+    "SWAP": "TUKAR",
+    "complete_the_daily_tasks": "Selesaikan tugas harian di bawah untuk mendapatkan hadiah {unit} sekarang.",
+
+    "create_real_estate_rental_listing": "Buat daftar properti sewaan",
+    "create_real_estate_sale_listing": "Buat daftar properti dijual",
+    "create_tour_listing": "Buat daftar tur",
+
+    "complete_task": "Selesaikan tugas",
+   "officially_redeemable_after_airdrop": "{unit} akan resmi tersedia setelah program Airdrop berakhir. Segera selesaikan tugas untuk mendapatkan hadiah!",
+    "congratulations_reward_today": "Selamat! Anda telah menerima hadiah hari ini. Kembali besok untuk melanjutkan menyelesaikan tugas!",
+    "my_id_address": "Alamat ID saya",
+    "congratulations_experience": "Selamat! Anda telah menerima {value} pengalaman.",
+     "reload": "Muat ulang",
+     "not_applicable": "Tidak berlaku",
+      "description_day": "Deskripsi hari",
+    "please_create_wallet": "Silakan buat dompet untuk menjalankan fungsi ini!",
+
+    "are_you_sure_want_buy_voucher": "Apakah Anda yakin ingin menukar voucher ini?",
+    "buy_voucher": "Tukar voucher",
+
+    "enter_point": "Masukkan poin", 
+    "exchange_value_of_voucher": "Ini adalah nilai tukar voucher",
+    "search_province": "Cari provinsi"
+
+
 }

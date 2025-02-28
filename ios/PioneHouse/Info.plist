@@ -38,13 +38,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to the camera to take pictures</string>
+	<string>This app requires access to your camera to take photos and scan QR codes</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Please allow location access to search for locations near you.</string>
+	<string>Allow location access to display nearby service locations and enhance location-based features for a better experience.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Please allow location access to search for locations near you.</string>
+	<string>Allow location access to display nearby service locations and enhance location-based features for a better experience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to the photo library to select pictures</string>
+	<string>This app requires access to your photo library to upload images for your profile and upload property images</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Medium.ttf</string>

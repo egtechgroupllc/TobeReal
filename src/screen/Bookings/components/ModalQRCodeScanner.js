@@ -19,6 +19,7 @@ import {COLORS, SIZES, scale} from '../../../assets/constants';
 import {IconX} from '../../../assets/icon/Icon';
 import {CustomText} from '../../../components';
 import {requestCameraPermission} from '../../../utils/permission/requesPermissionCamera';
+import {useLanguage} from '../../../hooks/useLanguage';
 // import {COLORS, SIZES} from '~/assets/constants';
 // import {scale} from '~/utils/scale';
 // import {Button, CText} from '~components';
@@ -87,6 +88,7 @@ export default function ModalQrCodeScanner({
   if (!open) {
     return null;
   }
+  const {t} = useLanguage();
   return (
     <Modal
       animationType="fade"
@@ -103,7 +105,7 @@ export default function ModalQrCodeScanner({
           cornerColor="#fff"
           scanBarColor={COLORS.primary}
           cornerBorderWidth={scale(6)}
-          hintText=""
+          hintText={t('align_qr_code_to_the_frame')}
           rectHeight={scale(300)}
           rectWidth={scale(300)}
         />
@@ -125,7 +127,7 @@ export default function ModalQrCodeScanner({
               size={SIZES.xMedium}
               textType="medium"
               style={{color: COLORS.white}}>
-              Scan QR code
+              {t('scan_qr_code')}
             </CustomText>
           </View>
         </View>

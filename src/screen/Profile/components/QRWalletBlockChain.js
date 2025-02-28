@@ -14,7 +14,7 @@ import {showMess} from '../../../assets/constants/Helper';
 import {IconCopy, IconError} from '../../../assets/icon/Icon';
 import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
-import {getToken} from '../../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../../Model/api/common';
 import {useQuery} from '@tanstack/react-query';
 
 export default function QRWalletBlockChain({
@@ -66,7 +66,7 @@ export default function QRWalletBlockChain({
             <View style={styles.icon}>
               <CustomImage
                 isAvatar
-                source={{uri: getDataToken?.data?.image_url}}
+                source={images.logoPione}
                 style={{
                   width: scale(30),
                   aspectRatio: 1,
@@ -106,7 +106,7 @@ export default function QRWalletBlockChain({
                 {data?.wallet_address ? (
                   <QRCode
                     size={scale(220)}
-                    value={JSON.stringify(data?.wallet_address)}
+                    value={data?.wallet_address}
                     color="#000"
                   />
                 ) : (
@@ -138,7 +138,7 @@ export default function QRWalletBlockChain({
               </CustomText>
             </View>
           </View> */}
-          {!hotelAddress && (
+          {/* {!hotelAddress && (
             <CustomText
               style={{
                 width: scale(280),
@@ -148,11 +148,11 @@ export default function QRWalletBlockChain({
               {t('this_deposit_address')}
               <CustomText textType="semiBold" style={{color: COLORS.black}}>
                 {' '}
-                {getDataToken?.data?.symbol}.TBRC20,{' '}
+                {getDataToken?.data?.symbol}.ZORC20,{' '}
               </CustomText>
               {t('dont_deposit_other')}.
             </CustomText>
-          )}
+          )} */}
         </View>
 
         <CustomButton

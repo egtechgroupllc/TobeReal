@@ -2,50 +2,39 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
 import CustomText from '../../../../components/CustomText';
-import {
-  IconACB,
-  IconAcreage,
-  IconBIDV,
-  IconDongAbank,
-  IconEximbank,
-  IconMBbank,
-  IconMSB,
-  IconOCB,
-  IconSCB,
-  IconSEABANK,
-  IconTechcombank,
-  IconVIB,
-  IconVPbank,
-  IconVietcombank,
-  IconVietinbank,
-  IconViettinbank,
-} from '../../../../assets/icon/Icon';
+
 import CheckBox from '../../../../components/CheckBox';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../../hooks/useLanguage';
-import {MainWrapper} from '../../../../components';
-const data = [
-  {id: 1, name: 'VIETCOMBANK', icon: <IconVietcombank />},
-  {id: 2, name: 'TECHCOMBANK', icon: <IconTechcombank />},
-  {id: 3, name: 'MB BANK', icon: <IconMBbank />},
-  {id: 4, name: 'MARITIME BANK', icon: <IconMSB />},
-  {id: 5, name: 'BIDV', icon: <IconBIDV />},
-  {id: 6, name: 'VPBANK', icon: <IconVPbank />},
-  {id: 7, name: 'VIETINBANK', icon: <IconVietinbank />},
-  {id: 8, name: 'VIB', icon: <IconVIB />},
-  {id: 9, name: 'DONG A BANK', icon: <IconDongAbank />},
-  {id: 10, name: 'ACB', icon: <IconACB />},
-  {id: 11, name: 'OCB', icon: <IconOCB />},
-  {id: 12, name: 'SCB', icon: <IconSCB />},
-  {id: 13, name: 'Eximbank', icon: <IconEximbank />},
-  {id: 14, name: 'SeABank', icon: <IconSEABANK />},
-];
+import {CustomImage, MainWrapper, CustomInput} from '../../../../components';
+import {useQuery} from '@tanstack/react-query';
+import {getListBank} from '../../../../Model/api/apiListBank';
+import {listBank} from '../../../../utils/listBank';
+
 export default function ListBankScreen() {
   const [bank, setBank] = useState();
+  const [searchText, setSearchText] = useState('');
+  const [filteredBanks, setFilteredBanks] = useState(listBank);
   const router = useRoute().params;
   const {t} = useLanguage();
 
   const {setOptions, goBack} = useNavigation();
+
+  useEffect(() => {
+    const filtered = listBank.filter(item => {
+      const name = item.name.toLowerCase();
+      const shortName = item.short_name.toLowerCase();
+      const bankCode = item.code.toLowerCase();
+      const search = searchText.toLowerCase();
+      return (
+        name.includes(search) ||
+        shortName.includes(search) ||
+        bankCode.includes(search)
+      );
+    });
+    setFilteredBanks(filtered);
+  }, [searchText]);
+
   const handleDone = () => {
     router?.onGoBack(bank);
     goBack();
@@ -67,12 +56,20 @@ export default function ListBankScreen() {
         </CustomText>
       ),
     });
-  }, [bank?.name]);
+  }, [bank?.name, t]);
 
   return (
-    <MainWrapper>
+    <MainWrapper scrollEnabled={false}>
+      <View style={styles.searchContainer}>
+        <CustomInput
+          placeholder={t('search')}
+          value={searchText}
+          onChangeText={setSearchText}
+          containerStyle={styles.searchInput}
+        />
+      </View>
       <FlatList
-        data={data}
+        data={filteredBanks}
         style={{
           height: '100%',
         }}
@@ -96,9 +93,26 @@ export default function ListBankScreen() {
                     flexDirection: 'row',
                     alignItems: 'center',
                     columnGap: scale(10),
+                    flex: 1,
                   }}>
-                  {item?.icon}
-                  <CustomText>{item?.name}</CustomText>
+                  <CustomImage
+                    source={{uri: item?.logo}}
+                    style={{height: scale(60), width: scale(60)}}
+                    resizeMode="contain"
+                  />
+                  <View style={{flex: 1}}>
+                    <CustomText
+                      numberOfLines={1}
+                      style={{fontSize: SIZES.xSmall}}
+                      textType="semiBold">
+                      {item?.short_name}, {item?.code}
+                    </CustomText>
+                    <CustomText
+                      style={{fontSize: SIZES.xSmall}}
+                      numberOfLines={2}>
+                      {item?.name}
+                    </CustomText>
+                  </View>
                 </View>
               }
               style={styles.boxItem}
@@ -122,8 +136,7 @@ const styles = StyleSheet.create({
     minHeight: scale(50),
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: scale(16),
-    paddingVertical: scale(10),
+    paddingHorizontal: scale(16),
     ...SHADOW,
     shadowOffset: {
       width: 0,
@@ -134,5 +147,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: COLORS.pioBox,
+  },
+  searchContainer: {
+    padding: scale(10),
+    width: '100%',
+  },
+  searchInput: {
+    backgroundColor: COLORS.white,
   },
 });

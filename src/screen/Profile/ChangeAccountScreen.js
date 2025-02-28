@@ -20,6 +20,7 @@ import EmptyData from '../../components/EmptyData';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useQueryClient} from '@tanstack/react-query';
 import {showMess} from '../../assets/constants/Helper';
+import {storage} from '../../utils/MMKVStorage';
 
 export default function ChangeAccountScreen() {
   const {setOptions, navigate, goBack} = useNavigation();
@@ -36,21 +37,21 @@ export default function ChangeAccountScreen() {
 
   useEffect(() => {
     const loadSavedEmail = async () => {
-      const result = await EncryptedStorage.getItem('@save_email');
+      const result = await storage.getString('@save_email');
 
       result && setListSavedEmail(JSON.parse(result));
     };
     loadSavedEmail();
   }, []);
   const RemoveKey = async () => {
-    await EncryptedStorage.removeItem('@save_email');
-    showMess('remove_success', 'success');
+    await storage.delete('@save_email');
+    showMess(t('remove_success'), 'success');
     goBack();
   };
   const handleRemove = () => {
     Alert.alert(
-      t('are_you_sure_want_buy_voucher'),
-      t('transaction_cant_refund'),
+      t('are_you_sure_want_remove_history_account'),
+      t('remove_history_account'),
       [
         {
           text: t('cancel'),

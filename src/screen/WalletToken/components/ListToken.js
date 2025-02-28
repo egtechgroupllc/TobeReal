@@ -49,72 +49,64 @@ export default function ListToken({dataP, token}) {
   return (
     <View
       style={{
-        alignItems: 'flex-start',
-        width: '100%',
+        rowGap: scale(10),
       }}>
       {/* <TabSelect data={dataP} /> */}
       <CustomText size={SIZES.medium} textType="medium">
         {t('point')}
       </CustomText>
 
-      <View
-        style={{
-          rowGap: scale(10),
-          marginVertical: scale(14),
-          width: '100%',
-        }}>
-        {data?.data?.map((item, index) => (
-          <TouchableOpacity
-            onPress={() => {
-              navigate('NoBottomTab', {
-                screen: 'DetailTokenScreen',
-                params: {listToken: item, data: dataP},
-              });
-            }}
-            key={index}
-            style={{
-              flexDirection: 'row',
-              columnGap: scale(12),
-              alignItems: 'center',
-              backgroundColor: COLORS.pioHeader + '20',
-              width: '100%',
-              borderRadius: scale(10),
-              padding: scale(8),
-            }}>
-            <View style={styles.icon}>
-              <CustomImage
-                isAvatar
-                source={item?.image_url}
-                style={{
-                  width: scale(30),
-                  aspectRatio: 1,
-                }}
-                resizeMode="contain"
-              />
-            </View>
-            <View
+      {data?.data?.map((item, index) => (
+        <TouchableOpacity
+          onPress={() => {
+            navigate('NoBottomTab', {
+              screen: 'DetailTokenScreen',
+              params: {listToken: item, data: dataP},
+            });
+          }}
+          key={index}
+          style={{
+            flexDirection: 'row',
+            columnGap: scale(12),
+            alignItems: 'center',
+            rowGap: scale(10),
+            backgroundColor: COLORS.pioHeader + '20',
+            borderRadius: scale(10),
+            padding: scale(8),
+          }}>
+          <View style={styles.icon}>
+            <CustomImage
+              isAvatar
+              source={item?.image_url}
               style={{
-                rowGap: scale(3),
-              }}>
-              <CustomText
-                size={scale(13)}
-                textType="semiBold"
-                style={{color: COLORS.black}}>
-                {item.name}
+                width: scale(30),
+                aspectRatio: 1,
+              }}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{
+              rowGap: scale(3),
+            }}>
+            <CustomText
+              size={scale(13)}
+              textType="semiBold"
+              style={{color: COLORS.black}}>
+              {item.name}
+            </CustomText>
+            <View style={{flexDirection: 'row', columnGap: scale(3)}}>
+              <CustomText textType="medium">
+                {formatPrice(item?.balance, {
+                  showCurrency: false,
+                  decimalPlaces: 6,
+                })}
               </CustomText>
-              <View style={{flexDirection: 'row', columnGap: scale(3)}}>
-                <CustomText textType="medium">
-                  {formatPrice(item?.balance, {
-                    showCurrency: false,
-                    decimalPlaces: 6,
-                  })}
-                </CustomText>
-                <CustomText textType="medium">{item.symbol}</CustomText>
-              </View>
+              <CustomText textType="medium">{item.symbol}</CustomText>
             </View>
-          </TouchableOpacity>
-        ))}
-      </View>
+          </View>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }

@@ -17,6 +17,9 @@ import {
   validateMaxLengthText,
 } from '../../../../../../utils/validate';
 import ButtonTabValidate from '../../../Lease/components/ButtonTabValidate';
+import {useNavigation} from '@react-navigation/native';
+import RenderHTML from 'react-native-render-html';
+import {preprocessHtml} from '../../../../../../utils/preprocessHtml';
 
 const caculateDays = (dateStart, dateEnd) => {
   const startDate = new Date(dateStart);
@@ -52,10 +55,10 @@ export default function TourSchedule({
   params,
 }) {
   const {t} = useLanguage();
-
+  const navigation = useNavigation();
   const [isView, setView] = useState(false);
   const [isRender, setIsRender] = useState(false);
-
+  const [dataGoBack, setDataGoBack] = useState('');
   const viewGeneral = () => {
     setView(prev => !prev);
   };
@@ -138,6 +141,7 @@ export default function TourSchedule({
       hours: Number(watch('hours')) || 1,
     });
   }, [watch('days'), watch('hours')]);
+
   return (
     <View>
       <ButtonTabValidate
@@ -324,37 +328,86 @@ export default function TourSchedule({
             {length: Number(numDays.days) || (numDays.hours ? 1 : 0)},
             (_, dayNumber, index) =>
               dayNumber === selectedDay && (
-                <View key={index}>
-                  <CustomInput
-                    ref={inputRef}
-                    styleTextLabel={styles.label}
-                    label={t('description_content')}
-                    control={control}
-                    name={`description_day${selectedDay}`}
-                    maxLength={5000}
-                    multiline
-                    value={watch(`description_day${selectedDay}`)}
-                    placeholder={t('enter_a_description')}
-                    rules={[
-                      requireField(t('this_field_required')),
-                      validateMaxLengthText(`${5000} characters limit`, 5000),
-                    ]}
-                    style={[
-                      styles.textDesc,
-                      {
-                        minHeight: scale(130),
-                        maxHeight: scale(300),
-                      },
-                    ]}
-                    componentRight={
-                      <Text style={styles.numText}>
-                        {watch(`description_${selectedDay}`)?.length || 0}/
-                        {5000}
-                      </Text>
-                    }
-                    onEndEditing={() => handleConfirm(dayNumber + 1)}
-                    onBlur={() => handleConfirm(dayNumber + 1)}
-                  />
+                <View key={index} style={{width: '100%'}}>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: COLORS.border,
+                      borderRadius: scale(10),
+                      padding: scale(10),
+                      height: scale(150),
+                    }}
+                    onPress={() => {
+                      navigation.navigate('NoBottomTab', {
+                        screen: 'EditorScreen',
+                        params: {
+                          dataExist: {
+                            editorContent:
+                              watch(`description_day${selectedDay}`) ||
+                              'Start editing!',
+                            day: selectedDay + 1,
+                          },
+                          title: `description_day${selectedDay}`,
+                          onGoBack: async value => {
+                            const content =
+                              typeof value === 'string'
+                                ? value
+                                : value?.editorContent;
+
+                            if (content) {
+                              await setValue(
+                                `description_day${selectedDay}`,
+                                content,
+                              );
+
+                              const currentSchedule = watch('schedule') || [];
+                              const newSchedule = [
+                                ...currentSchedule.filter(
+                                  item =>
+                                    item?.title !== `Day ${selectedDay + 1}`,
+                                ),
+                                {
+                                  title: `Day ${selectedDay + 1}`,
+                                  description: content,
+                                },
+                              ];
+
+                              setValue('schedule', newSchedule);
+                              setDataGoBack({
+                                editorContent: content,
+                                day: selectedDay + 1,
+                              });
+                              handleConfirm(selectedDay + 1);
+                            }
+                          },
+                        },
+                      });
+                    }}
+                    // onEndEditing={() => handleConfirm(dayNumber + 1)}
+                    // onBlur={() => handleConfirm(dayNumber + 1)}
+                  >
+                    {watch(`description_day${selectedDay}`) ? (
+                      <RenderHTML
+                        contentWidth={400}
+                        source={preprocessHtml(
+                          watch(`description_day${selectedDay}`),
+                        )}
+                        baseStyle={{
+                          color: 'black',
+                        }}
+                        tagsStyles={{
+                          p: {
+                            marginVertical: 0,
+                          },
+                        }}
+                      />
+                    ) : (
+                      <View>
+                        <CustomText style={{fontSize: SIZES.xMedium}}>
+                          {t('enter_description')}
+                        </CustomText>
+                      </View>
+                    )}
+                  </TouchableOpacity>
 
                   {/* <CustomButton
                     styleWrapper={{width: '20%', alignSelf: 'flex-end'}}

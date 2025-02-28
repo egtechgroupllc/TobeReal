@@ -12,12 +12,14 @@ import {showMess} from '../../../assets/constants/Helper';
 import {CustomButton} from '../../../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useLanguage} from '../../../hooks/useLanguage';
+import {useCountry} from '../../../hooks/useCountry';
 
 export default function DetailHistoryDeposit({route}) {
   const {setOptions, navigate} = useNavigation();
   const {bottom} = useSafeAreaInsets();
   const {t} = useLanguage();
   const data = route.params;
+  const {currency} = useCountry();
   useLayoutEffect(() => {
     setOptions({
       headerTitle: t('transaction_detail'),
@@ -62,14 +64,24 @@ export default function DetailHistoryDeposit({route}) {
                   style={{
                     textTransform: 'uppercase',
                   }}>
-                  {data?.bank_name ? data?.bank_name : data?.nameBank} -{' '}
+                  {data?.bank_name ? data?.bank_name : data?.nameBank}
+                </CustomText>
+                <CustomText
+                  size={SIZES.small}
+                  color={COLORS.black}
+                  style={{
+                    textTransform: 'uppercase',
+                  }}>
                   {data?.method_deposit_item?.owner || data?.bank_owner}
                 </CustomText>
                 <CustomText
                   textType="bold"
                   size={SIZES.large}
                   color={COLORS.text}>
-                  +{formatPrice(data?.amount, {currency: data?.currency_code})}
+                  +
+                  {formatPrice(data?.amount, {
+                    currency: currency?.currency_code,
+                  })}
                 </CustomText>
               </View>
             </View>

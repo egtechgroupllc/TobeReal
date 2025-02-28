@@ -30,6 +30,7 @@ import {
   getListNotification,
 } from '../../../Model/api/auth';
 import {getBalanceWallet} from '../../../Model/api/wallet';
+import {showMess} from '../../../assets/constants/Helper';
 
 const listSocial = [
   {
@@ -50,7 +51,13 @@ const listSocial = [
   },
 ];
 
-export default function Header({dataCheckin, dataP, amountPioneer}) {
+export default function Header({
+  dataCheckin,
+  dataP,
+  amountPione,
+  isCanCheckIn,
+  dataStatusTask,
+}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
@@ -94,12 +101,25 @@ export default function Header({dataCheckin, dataP, amountPioneer}) {
       });
     }
   };
+  const goChart = () => {
+    navigate('NoBottomTab', {
+      screen: 'ChartScreen',
+    });
+  };
+
   const goDailyCheckin = () => {
     if (token) {
-      navigate('NoBottomTab', {
-        screen: 'DailyCheckinScreen',
-        params: {dataCheckin, amountPioneer},
-      });
+      if (dataP?.data?.wallet_address) {
+        navigate('NoBottomTab', {
+          screen: 'DailyCheckinScreen',
+          params: {dataCheckin, amountPione, dataStatusTask},
+        });
+      } else {
+        showMess(t('please_create_wallet'), 'error');
+        navigate('NavigateWalletToken', {
+          screen: 'AddressWalletScreen',
+        });
+      }
     } else {
       navigate('NavigationAuth', {
         screen: 'LoginScreen',
@@ -141,12 +161,14 @@ export default function Header({dataCheckin, dataP, amountPioneer}) {
             columnGap: scale(15),
             alignItems: 'center',
           }}>
+          {/* <TouchableOpacity onPress={goChart}>
+            <IconGift fill={COLORS.black} />
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={goDailyCheckin}>
             <IconGift fill={COLORS.black} />
-            {(dataCheckin?.data?.can_check_in ||
-              (token && !dataP?.data?.wallet_address)) && (
-              <View style={styles.dot} />
-            )}
+            {!dataStatusTask?.data?.is_received_airdrop_today &&
+              token &&
+              dataP?.data?.wallet_address && <View style={styles.dot} />}
           </TouchableOpacity>
           <TouchableOpacity onPress={goChatGroup}>
             <IconChat fill={COLORS.black} />

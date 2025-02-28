@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {
   CustomButton,
@@ -28,6 +28,7 @@ export default function DetailTokenScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
+
   return (
     <>
       <MainWrapper>
@@ -72,28 +73,49 @@ export default function DetailTokenScreen() {
       </MainWrapper>
       <View
         style={{
-          height: scale(90),
-          width: '100%',
-          bottom: 0,
           backgroundColor: COLORS.white,
           borderTopWidth: 1,
-          borderTopColor: COLORS.pioBox,
-          paddingHorizontal: scale(20),
-          ...SHADOW,
-          paddingTop: scale(10),
-          alignItems: 'flex-end',
+          borderColor: COLORS.pioBox,
         }}>
-        <CustomButton
-          text="Deposit"
-          // linearGradientProps={{colors: COLORS.linearGradient}}
-          style={{width: '50%'}}
-          onPress={() =>
-            navigate('NoBottomTab', {
-              screen: 'DepositTokenScreen',
-              params: params,
-            })
-          }
-        />
+        <View
+          style={{
+            height: scale(120),
+            ...SHADOW,
+            paddingTop: scale(10),
+            flexDirection: 'row',
+            paddingHorizontal: scale(20),
+            columnGap: scale(20),
+            alignItems: 'center',
+            paddingBottom: scale(30),
+            justifyContent: 'center',
+          }}>
+          {(params?.listToken?.symbol === 'USDP' ||
+            params?.listToken?.symbol === 'PZO') && (
+            <CustomButton
+              styleWrapper={{flex: 1}}
+              text={t('faucet_now')}
+              onPress={() =>
+                Linking.openURL('https://dex.pionechain.com/testnet/faucet')
+              }
+            />
+          )}
+          <CustomButton
+            text="Deposit"
+            styleWrapper={{
+              flex:
+                params?.listToken?.symbol === 'USDP' ||
+                params?.listToken?.symbol === 'PZO'
+                  ? 1
+                  : 0.7,
+            }}
+            onPress={() =>
+              navigate('NoBottomTab', {
+                screen: 'DepositTokenScreen',
+                params: params,
+              })
+            }
+          />
+        </View>
       </View>
     </>
   );

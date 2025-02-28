@@ -47,7 +47,7 @@
   "disc_upto": "Giảm giá lên đến",
   "see_all": "Xem tất cả",
   "promotion": "Khuyến mãi",
-  "find_best": "Tìm các đơn vị tốt nhất cho kỳ nghỉ 🌴",
+  "find_best": "Tìm các bất động sản tốt nhất cho kỳ nghỉ 🌴",
   "thematic_instagram": "Đơn vị chủ đề và Instagramable!✨",
   "stay_with": "Ở với bầu không khí mới!",
   "find_appartment": "Tìm căn hộ phù hợp với ngân sách của bạn! 💳",
@@ -1086,7 +1086,7 @@
   "look_up_transaction": "Tra cứu lịch sử giao dịch",
   "token_balance_available": "Số dư {unit} (có sẵn để rút vào ví)",
   "active_to_use_wallet": "Kích hoạt để sử dụng Ví {unit}",
-  "active_2_types_wallet": "Kích hoạt 2 loại ví: PionePay, ví tiền mã hoá và tận hưởng thanh toán nhanh chóng, an toàn",
+  "active_2_types_wallet": "Kích hoạt 2 loại ví: HousePay, ví tiền mã hoá và tận hưởng thanh toán nhanh chóng, an toàn",
   "your_transaction_has_been_canceled": "Giao dịch của bạn đã bị hủy do \n lỗi trong quá trình đặt phòng.\nVui lòng thử lại!",
   "traceability": "Truy xuất nguồn gốc",
   "property_traceability": "Truy xuất nguồn gốc tài sản",
@@ -1103,13 +1103,11 @@
   "there_are_no_voucher": "Không có voucher nào!",
   "voucher_manage": "Quản lý voucher",
   "value_of_the_voucher": "Giá trị của voucher được sử dụng để áp dụng giảm giá",
-  "are_you_sure_want_buy_voucher": "Bạn có chắc chắn muốn mua voucher này?",
   "transaction_cant_refund": "Giao dịch đã thực hiện không thể hoàn lại!",
   "discount_voucher": "Voucher giảm giá",
   "apply_all_hotel_system": "Áp dụng trên tất cả hệ thống khách sạn",
   "this_voucher_is_valid": "Voucher này có hiệu lực đến",
   "this_voucher_not_apply_other_hotel": "Voucher này không áp dụng cho các khách sạn khác.",
-  "buy_voucher": "Mua voucher",
   "apply_voucher": "Áp dụng voucher",
   "add": "Thêm",
 
@@ -1143,7 +1141,7 @@
   "this_is_type_point": "Đây là các loại điểm sử dụng trong ứng dụng",
   "this_is_wallet_manage": "Đây là quản lý ví điểm voucher",
   "help_center": "Trung tâm trợ giúp",
-  "how_to_add_pionechain": "Làm thế nào để thêm PioneerChain vào MetaMask?",
+  "how_to_add_pionechain": "Làm thế nào để thêm Pione Chain vào MetaMask?",
 
   "create_new_policy": "Tạo chính sách mới",
   "you_have_not_select_facility": "Bạn chưa chọn cơ sở nào",
@@ -1247,7 +1245,7 @@
   "date_create": "Ngày tạo",
 
   "create_wallet": "Tạo ví",
-  "no_still_pay": "Không, vẫn thanh toán bằng PionePay",
+  "no_still_pay": "Không, vẫn thanh toán bằng HousePay",
   "do_you_want_create_wallet": "Bạn có muốn tạo ví và thanh toán bằng voucher để nhận điểm miễn phí không?",
 
   "please_choose_exact_location": "Vui lòng chọn một vị trí chính xác trong phạm vi 5 mét để đăng bài",
@@ -1269,7 +1267,7 @@
 
   "room_manage_detail": "Chi tiết quản lý phòng",
   "share_detail_tour_short_video": "Chia sẻ chi tiết chuyến tham quan của bạn qua video ngắn, các video này sẽ xuất hiện trên các xu hướng!",
-  "no_pay_with": "Không, thanh toán bằng PionePay",
+  "no_pay_with": "Không, thanh toán bằng HousePay",
   "content_display": "Nội dung & Hiển thị",
   "setting": "Cài đặt",
   "account_security": "Tài khoản & Bảo mật",
@@ -1356,5 +1354,38 @@
     "maximum_hours": "Giờ tối đa là",
     "saved_file_successfully": "Đã lưu tệp thành công",
     "error_when_saving_file": "Lỗi khi lưu tệp",
-    "account": "Tài khoản"
+    "account": "Tài khoản",
+    
+    "faucet_now": "Faucet ngay",
+    "video_size_limit_30mb": "Giới hạn kích thước video 30MB, vui lòng chọn video ngắn hơn!",
+    "scan_qr_code": "Quét mã QR",
+    "align_qr_code_to_the_frame": "Căn chỉnh mã QR vào khung",
+    "remove_success": "Xóa thành công",
+    "are_you_sure_want_remove_history_account": "Bạn có chắc chắn muốn xóa lịch sử tài khoản không?",
+    "remove_history_account": "Lịch sử đã bị xóa sẽ không thể khôi phục!",
+
+    "SWAP": "ĐỔI",
+    "complete_the_daily_tasks": "Thực hiện các nhiệm vụ hằng ngày bên dưới để nhận phần thưởng {unit} ngay bây giờ.",
+
+    "create_real_estate_rental_listing": "Tạo tin đăng bất động sản cho thuê",
+    "create_real_estate_sale_listing": "Tạo tin đăng bán bất động sản",
+    "create_tour_listing": "Tạo tin tour du lịch",
+
+    "complete_task": "Thực hiện nhiệm vụ",
+        "officially_redeemable_after_airdrop": "{unit} sẽ chính thức khả dụng khi chương trình Airdrop kết thúc. Hãy nhanh tay tham gia làm nhiệm vụ để nhận thưởng!",
+        "congratulations_reward_today": "Chúc mừng bạn đã nhận được phần thưởng hôm nay, hãy quay lại vào ngày mai để tiếp tục làm nhiệm vụ nhé!",
+        "my_id_address": "Địa chỉ ID của tôi",
+        "congratulations_experience": "Chúc mừng bạn đã nhận được {value} kinh nghiệm.",
+        "reload": "Tải lại",
+        "not_applicable": "Không áp dụng",
+         "enter_description": "Nhập mô tả",
+         "description_day": "Mô tả ngày",
+        "please_create_wallet": "Vui lòng tạo ví để thực hiện chức năng này!",
+
+        "are_you_sure_want_buy_voucher": "Bạn có chắc chắn muốn đổi voucher này không?",
+    "buy_voucher": "Đổi voucher",
+
+    "enter_point": "Nhập điểm", 
+    "exchange_value_of_voucher": "Đây là giá trị quy đổi của voucher" 
+
 }

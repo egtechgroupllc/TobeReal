@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLanguage} from '../../../hooks/useLanguage';
@@ -39,7 +39,7 @@ export default function PostVideoShortScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const table_name = params.Accom
+  const model_name = params.Accom
     ? 'accommodation'
     : params?.Estate
     ? 'estate'
@@ -50,18 +50,17 @@ export default function PostVideoShortScreen() {
       'common',
       'linked-data',
       {
-        table_name: table_name,
+        model_name: model_name,
         table_id: table_id,
       },
     ],
     queryFn: () =>
       getLinkData({
-        table_name: table_name,
+        model_name: model_name,
         table_id: table_id,
       }),
   });
   const txHashId = data?.data?.rows[0]?.id;
-
   const postVideoShortMu = useMutation({
     mutationFn: postVideoShort,
   });
@@ -92,7 +91,15 @@ export default function PostVideoShortScreen() {
   };
   const handlePostVideoShort = value => {
     const formData = getFormData(value);
+    if (value?.file?.[0]) {
+      const fileSize = value.file[0].fileSize; // Kích thước tính bằng bytes
+      const fileSizeInMB = fileSize / (1024 * 1024); // Chuyển đổi sang MB
 
+      if (fileSizeInMB > 100) {
+        showMess(t('video_size_limit_100mb'), 'error');
+        return;
+      }
+    }
     postVideoShortMu.mutate(
       {data: formData, token: token},
       {

@@ -1,7 +1,13 @@
 import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {COLORS, SHADOW, SIZES, scale} from '../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../assets/constants';
 import {IconHeart, IconMapView, IconMarker} from '../../../../assets/icon/Icon';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
@@ -83,9 +89,7 @@ export default function BoxDiscoveryItem({
                 </CustomText>
               </CustomImage>
             ) : (
-              <CustomImage
-                src="https://saveloka.com/images/home/hotel-image/real-sale/real-sale-1.jpg"
-                style={styles.img}>
+              <CustomImage source={images.voucher25} style={styles.img}>
                 <CustomText
                   textType="semiBold"
                   style={[

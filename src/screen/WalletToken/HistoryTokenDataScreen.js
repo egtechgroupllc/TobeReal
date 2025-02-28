@@ -28,7 +28,11 @@ import {formatDateTime, formatPrice} from '../../utils/format';
 import EmptyData from '../../components/EmptyData';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import {replaceTranslateKey} from '../../utils/replaceTranslateKey';
-import {getListConstant, getToken} from '../../Model/api/common';
+import {
+  getListConstant,
+  getToken,
+  getTokenAirdrop,
+} from '../../Model/api/common';
 
 export default function HistoryTokenDataScreen() {
   const {setOptions} = useNavigation();
@@ -88,6 +92,7 @@ export default function HistoryTokenDataScreen() {
     queryClient.invalidateQueries();
     refresh.current = false;
   }
+
   return (
     <MainWrapper scrollEnabled={false}>
       <FlatList
@@ -130,18 +135,18 @@ export default function HistoryTokenDataScreen() {
         }
         onEndReached={hasNextPage && fetchNextPage}
         onEndReachedThreshold={0.1}
-        renderItem={({item, index}) =>
-          item?.id ? (
+        renderItem={({item, index}) => {
+          return item?.id ? (
             <View
               key={index}
               style={{
                 backgroundColor: COLORS.white,
-                minHeight: scale(50),
+                height: scale(75),
                 borderRadius: scale(5),
-                padding: scale(10),
                 flexDirection: 'row',
                 columnGap: scale(10),
                 alignItems: 'center',
+                paddingHorizontal: scale(10),
                 ...SHADOW,
               }}>
               <View style={styles.icon}>
@@ -162,10 +167,9 @@ export default function HistoryTokenDataScreen() {
                   rowGap: scale(6),
                 }}>
                 <CustomText
-                  numberOfLines={2}
+                  numberOfLines={1}
                   style={{
-                    fontSize: SIZES.xMedium,
-                    flex: 1,
+                    fontSize: SIZES.small,
                   }}
                   textType="semiBold">
                   {item?.description_replacements
@@ -200,7 +204,7 @@ export default function HistoryTokenDataScreen() {
                 {item?.amount > 0 && (
                   <CustomText
                     style={{
-                      color: COLORS.white,
+                      color: COLORS.grey,
                     }}>
                     {t('transaction_fee_deducted')}: -
                     {formatPrice(
@@ -217,8 +221,8 @@ export default function HistoryTokenDataScreen() {
             </View>
           ) : (
             <Skeleton height={scale(50)} />
-          )
-        }
+          );
+        }}
       />
     </MainWrapper>
   );

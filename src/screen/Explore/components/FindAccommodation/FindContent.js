@@ -20,6 +20,7 @@ import CheckBox from '../../../../components/CheckBox';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {showMess} from '../../../../assets/constants/Helper';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function FindContent({isBuy, rental, dataFind}) {
   const {t} = useLanguage();
@@ -44,14 +45,14 @@ export default function FindContent({isBuy, rental, dataFind}) {
   }, [params]);
 
   const saveRecentSearch = async () => {
-    const result = await EncryptedStorage.getItem('search_recent');
-    // const result = await EncryptedStorage.removeItem('search_recent');
+    const result = await storage.getString('search_recent');
+    // const result = await storage.delete('search_recent');
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.name !== params?.name)
       : [];
 
     params?.name &&
-      (await EncryptedStorage.setItem(
+      (await storage.set(
         'search_recent',
         JSON.stringify(result ? [params, ...arrsdf.slice(0, 4)] : [params]),
       ));
@@ -115,6 +116,10 @@ export default function FindContent({isBuy, rental, dataFind}) {
                 flex: 1,
                 columnGap: scale(8),
               }}
+              scrollEnabled={true}
+              styleOption={{
+                backgroundColor: COLORS.background,
+              }}
               data={[
                 {
                   text: 'All',
@@ -142,8 +147,11 @@ export default function FindContent({isBuy, rental, dataFind}) {
             </View>
             <OptionAccommodation
               outline
-              scrollEnabled
               isSelectAll
+              scrollEnabled={true}
+              styleOption={{
+                backgroundColor: COLORS.background,
+              }}
               styleContent={{
                 flex: 1,
                 columnGap: scale(8),
@@ -172,6 +180,10 @@ export default function FindContent({isBuy, rental, dataFind}) {
               outline
               // multiSelect
               isSelectAll
+              scrollEnabled={true}
+              styleOption={{
+                backgroundColor: COLORS.background,
+              }}
               styleContent={{
                 flex: 1,
                 columnGap: scale(8),

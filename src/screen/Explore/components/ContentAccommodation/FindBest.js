@@ -73,7 +73,7 @@ export default function FindBest({country, currency}) {
       noBackground
       onPressCategory={item => setFilter(item)}
       heading={title}
-      subHeading={t('disc_upto') + ` 30%!`}
+      // subHeading={t('disc_upto') + ` 30%!`}
       styleContent={{
         justifyContent: 'center',
         minHeight: scale(230),

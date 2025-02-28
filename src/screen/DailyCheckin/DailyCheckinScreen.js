@@ -6,14 +6,19 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {IconHome} from '../../assets/icon/Icon';
 import {
+  CheckBox,
   CustomButton,
   CustomImage,
   CustomText,
   MainWrapper,
 } from '../../components';
 import {COLORS, SIZES, images, scale} from '../../assets/constants';
-import {getBalanceWallet} from '../../Model/api/wallet';
-import {getDailyCheckinInfo, postDailyCheckin} from '../../Model/api/auth';
+import {getBalanceWallet, getStatusTask} from '../../Model/api/wallet';
+import {
+  getDailyCheckinInfo,
+  postCallContractCheckin,
+  postDailyCheckin,
+} from '../../Model/api/auth';
 import {showMess} from '../../assets/constants/Helper';
 import {getTokenAirdrop} from '../../Model/api/common';
 
@@ -24,77 +29,184 @@ export default function DailyCheckinScreen() {
   const {navigate, setOptions, goBack} = useNavigation();
   const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [checkTask, setCheckTask] = useState({
+    id: 1,
+    title: t('create_real_estate_rental_listing'),
+    screen: 'PostNewLeaseScreen',
+  });
   const dataP = queryClient.getQueryData(['user', 'profile'])?.data;
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('daily_checkin'),
     });
   }, []);
-  const {data: dataCheckin} = useQuery({
-    queryKey: ['check-in-daily', 'info'],
-    queryFn: () => getDailyCheckinInfo(),
-  });
+
   const {data: getDataToken, error} = useQuery({
     queryKey: ['common', 'token-airdrop'],
     queryFn: () => getTokenAirdrop(),
   });
-  const checkinMutation = useMutation({
-    mutationFn: postDailyCheckin,
-  });
-  // const {data: params} = useQuery({
-  //   queryKey: ['check-in-daily', 'info', token],
-  //   queryFn: () => getDailyCheckinInfo(token),
+
+  // const callContractMutation = useMutation({
+  //   mutationFn: postCallContractCheckin,
   // });
-  const handleCheckin = value => {
-    checkinMutation.mutate(
-      {token: token},
-      {
-        onSuccess: dataInside => {
-          showMess(
-            t(dataInside?.message),
-            dataInside?.status ? 'success' : 'error',
-          );
-          if (dataInside?.status) {
-            queryClient.invalidateQueries(['check-in-daily', 'info']);
-            goBack();
-          }
-        },
-        onError: err => {
-          console.log(err);
-          showMess(t('an_error_occured'), 'error');
-        },
-      },
-    );
-  };
+
+  // const handleCallContractCheckin = () => {
+  //   callContractMutation.mutate(
+  //     {
+  //       data: {
+  //         type: 'WRITE',
+  //         name: 'checkIn',
+  //         params: [],
+  //       },
+  //     },
+  //     {
+  //       onSuccess: dataInside => {
+  //         if (dataInside?.status) {
+  //           showMess(
+  //             t(dataInside?.message),
+  //             dataInside?.status ? 'success' : 'error',
+  //           );
+  //           // showMess(
+  //           //   t(dataInside?.message),
+  //           //   dataInside?.status ? 'success' : 'error',
+  //           // );
+  //           // setOpen(false);
+  //         }
+  //       },
+  //       onError: err => {
+  //         console.log(err);
+  //         showMess(t('an_error_occured'), 'error');
+  //       },
+  //     },
+  //   );
+  // };
+  const dataTask = [
+    {
+      id: 1,
+      title: t('create_real_estate_rental_listing'),
+      screen: 'PostNewLeaseScreen',
+    },
+    {
+      id: 2,
+      title: t('create_real_estate_sale_listing'),
+      screen: 'PostNewSellScreen',
+    },
+    {
+      id: 3,
+      title: t('create_tour_listing'),
+      screen: 'PostNewTourScreen',
+    },
+  ];
+
   return (
     <MainWrapper
       scrollEnabled={false}
       styleContent={{
-        alignItems: 'center',
-        marginTop: scale(80),
-        rowGap: scale(20),
+        marginTop: scale(50),
       }}>
-      <CustomImage
-        source={images.iconGift}
-        style={{width: scale(100), height: scale(100)}}
-      />
-      <CustomText
-        style={{
-          fontSize: SIZES.xMedium,
-          width: scale(300),
-          textAlign: 'center',
-        }}>
-        {t('congratulate_on_receiving_daily_reward')}
-      </CustomText>
-      <CustomText
+      {!params?.dataStatusTask?.data?.is_received_airdrop_today ? (
+        <View
+          style={{
+            rowGap: scale(20),
+            paddingHorizontal: scale(20),
+          }}>
+          <CustomImage
+            source={images.iconGift}
+            style={{width: scale(100), height: scale(100), alignSelf: 'center'}}
+          />
+          <CustomText
+            textType="semiBold"
+            style={{
+              fontSize: SIZES.xMedium,
+              textAlign: 'center',
+            }}>
+            {t('complete_the_daily_tasks', {
+              unit: `(${getDataToken?.data?.symbol})`,
+            })}
+          </CustomText>
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: COLORS.grey,
+              padding: scale(10),
+              rowGap: scale(15),
+              borderRadius: scale(10),
+            }}>
+            {dataTask?.map((item, index) => {
+              return (
+                <View key={index}>
+                  <CheckBox
+                    key={index}
+                    textBold
+                    isRadio
+                    text={item?.title}
+                    isChecked={item?.id === checkTask?.id}
+                    onPress={() => setCheckTask(item)}
+                    textStyle={{
+                      fontSize: SIZES.xMedium,
+                    }}
+                  />
+                </View>
+              );
+            })}
+          </View>
+          <CustomText
+            style={{
+              fontSize: SIZES.small,
+            }}>
+            *{t('note')}:{' '}
+            {t('officially_redeemable_after_airdrop', {
+              unit: `${getDataToken?.data?.name} (${getDataToken?.data?.symbol}.ZORC20)`,
+            })}
+          </CustomText>
+          <CustomButton
+            styleWrapper={{marginTop: scale(20)}}
+            text={t('complete_task')}
+            onPress={() => {
+              if (dataP?.role_id === 2 || dataP?.role_id === undefined) {
+                navigate('NavigationAuth', {
+                  screen: 'RegisterPartnerScreen',
+                });
+                showMess(t('please_become_partner'), 'error');
+              } else {
+                navigate('NoBottomTab', {screen: checkTask?.screen});
+              }
+            }}
+          />
+        </View>
+      ) : (
+        <View
+          style={{
+            rowGap: scale(20),
+            paddingHorizontal: scale(30),
+          }}>
+          <CustomImage
+            source={images.iconGift}
+            style={{
+              width: scale(120),
+              height: scale(120),
+              alignSelf: 'center',
+            }}
+            resizeMode="contain"
+          />
+          <CustomText
+            textType="semiBold"
+            style={{
+              fontSize: SIZES.xMedium,
+              textAlign: 'center',
+            }}>
+            {t('congratulations_reward_today')}
+          </CustomText>
+        </View>
+      )}
+      {/* <CustomText
         textType="semiBold"
         style={{
           fontSize: SIZES.xMedium,
           width: scale(200),
           textAlign: 'center',
         }}>
-        + {dataCheckin?.data?.amount} {getDataToken?.data?.name} (
+        + {params?.dataCheckin?.userRewards?.point} {getDataToken?.data?.name} (
         {getDataToken?.data?.symbol})
       </CustomText>
       {!dataP?.wallet_address ? (
@@ -116,21 +228,21 @@ export default function DailyCheckinScreen() {
         </View>
       ) : (
         <>
-          {params?.amountPioneer?.balance >= 0.1 ? (
+          {params?.amountPione?.balance >= 0.1 ? (
             <CustomButton
               text={
-                dataCheckin?.data?.can_check_in
+                params?.dataCheckin?.isCanCheckIn
                   ? t('receive_now')
                   : t('received')
               }
               styleWrapper={{width: '70%'}}
               style={{
-                backgroundColor: dataCheckin?.data?.can_check_in
+                backgroundColor: params?.dataCheckin?.isCanCheckIn
                   ? COLORS.pioPrimary
                   : COLORS.grey,
               }}
-              disabled={dataCheckin?.data?.can_check_in ? false : true}
-              onPress={handleCheckin}
+              disabled={params?.dataCheckin?.isCanCheckIn ? false : true}
+              onPress={handleCallContractCheckin}
             />
           ) : (
             <View
@@ -141,7 +253,7 @@ export default function DailyCheckinScreen() {
                   width: scale(300),
                   textAlign: 'center',
                 }}>
-                {t('your_balance_fee_gas_not_enough', {unit: 'Pioneer'})}
+                {t('your_balance_fee_gas_not_enough', {unit: 'PZO'})}
               </CustomText>
               <CustomButton
                 text={t('Faucet now')}
@@ -153,7 +265,7 @@ export default function DailyCheckinScreen() {
             </View>
           )}
         </>
-      )}
+      )} */}
     </MainWrapper>
   );
 }

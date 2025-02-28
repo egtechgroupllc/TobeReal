@@ -93,12 +93,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.pionechain.pionehouse"
+    namespace "com.tobechain.saveloka"
     defaultConfig {
-        applicationId "com.pionechain.pionehouse"
+        applicationId "com.tobechain.saveloka"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 19
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
     }

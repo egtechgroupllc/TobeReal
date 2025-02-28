@@ -33,7 +33,7 @@ import ChooseImgPicker from '../../../../components/ChooseImgPicker';
 import {showMess} from '../../../../../assets/constants/Helper';
 import {postCreateVoucherTour} from '../../../../../Model/api/apiTour';
 import {formatPrice} from '../../../../../utils/format';
-import {getToken} from '../../../../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../../../../Model/api/common';
 
 export default function AddVoucherScreen() {
   const params = useRoute().params;
@@ -199,10 +199,11 @@ export default function AddVoucherScreen() {
           control={control}
           priceValue={watch('price')}
           setValue={setValue}
-          priceType={t('list_price')}
+          priceType={t('point')}
           value={'price'}
           namePrice={getDataToken?.data?.symbol}
           enableFormatNum={false}
+          point
         />
         <InputPriceVoucher
           control={control}

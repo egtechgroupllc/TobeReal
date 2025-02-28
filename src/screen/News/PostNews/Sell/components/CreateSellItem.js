@@ -41,13 +41,14 @@ export default function CreateSellItem({
 
   return (
     <TouchableOpacity
-      style={{...styles.wrapper, padding: dateExpire <= today ? 0 : scale(10)}}
+      // style={{...styles.wrapper, padding: dateExpire <= today ? 0 : scale(10)}}
+      style={{...styles.wrapper, padding: scale(10)}}
       activeOpacity={0.7}
-      disabled={dateExpire <= today ? true : false}
+      // disabled={dateExpire <= today ? true : false}
       onPress={() => {
         navigate('NoBottomTab', {screen: 'DetailBuyScreen', params: data});
       }}>
-      {dateExpire <= today && (
+      {/* {dateExpire <= today && (
         <View
           style={{
             position: 'absolute',
@@ -84,9 +85,7 @@ export default function CreateSellItem({
               style={{...styles.box, backgroundColor: COLORS.white}}
               activeOpacity={0.7}
               onPress={onPressMore}>
-              {/* <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={styles.dot} /> */}
+              
               <IconTrash
                 style={{
                   width: scale(20),
@@ -96,7 +95,7 @@ export default function CreateSellItem({
             </TouchableOpacity>
           </View>
         </View>
-      )}
+      )} */}
       <View style={styles.top}>
         <CustomImage
           source={data.images[0].url}
@@ -104,7 +103,7 @@ export default function CreateSellItem({
           style={styles.img}
         />
 
-        <View
+        {/* <View
           style={{
             backgroundColor:
               dataPackagePost?.level === 2
@@ -123,7 +122,7 @@ export default function CreateSellItem({
           <CustomText textType="semiBold" style={{color: COLORS.white}}>
             {dataPackagePost?.name}{' '}
           </CustomText>
-        </View>
+        </View> */}
 
         <View
           style={{
@@ -173,7 +172,7 @@ export default function CreateSellItem({
             {data?.id}
           </CustomText>
         </View>
-        <View style={{flex: 1}}>
+        {/* <View style={{flex: 1}}>
           <CustomText style={styles.center}>{t('date_posted')}</CustomText>
           <CustomText textType="medium" style={{color: COLORS.black}}>
             {data?.date_start}
@@ -184,7 +183,7 @@ export default function CreateSellItem({
           <CustomText textType="medium" style={{color: COLORS.black}}>
             {dateExpire}
           </CustomText>
-        </View>
+        </View> */}
       </View>
 
       {data?.note && data?.status === 'NOT_APPROVED' && (

@@ -46,7 +46,7 @@ export default memo(function InputPriceRoom({
         // onChangeCurrency={value => setTypeCurrency(currency?.currency_code)}
       />
 
-      <View
+      {/* <View
         style={{
           rowGap: scale(10),
         }}>
@@ -90,7 +90,7 @@ export default memo(function InputPriceRoom({
             </CustomText>
           </CustomText>
         </Collapsible>
-      </View>
+      </View> */}
     </View>
   );
 });

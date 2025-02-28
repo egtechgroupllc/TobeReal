@@ -1090,7 +1090,7 @@
   "look_up_transaction": "Look up transaction history",
   "token_balance_available": "{unit} balance (available to withdraw to wallet)",
   "active_to_use_wallet": "Activate to use {unit} Wallet",
-  "active_2_types_wallet": "Activate 2 types of wallets: PionePay, cryptocurrency wallet and enjoy fast, secure payments",
+  "active_2_types_wallet": "Activate 2 types of wallets: HousePay, cryptocurrency wallet and enjoy fast, secure payments",
 
   "your_transaction_has_been_canceled": "Your transaction has been canceled due to \n an error during the booking process.\nPlease try again!",
   "traceability": "Traceability",
@@ -1108,13 +1108,13 @@
   "there_are_no_voucher": "There are no vouchers available!",
   "voucher_manage": "Voucher manage",
   "value_of_the_voucher": "The value of the voucher is used to apply the discount",
-  "are_you_sure_want_buy_voucher": "Are you sure you want to buy this voucher?",
+  "are_you_sure_want_buy_voucher": "Are you sure you want to swap this voucher?",
   "transaction_cant_refund": "Transactions made cannot be refunded!",
   "discount_voucher": "Discount voucher",
   "apply_all_hotel_system": "Applicable across all hotel systems",
   "this_voucher_is_valid": "This voucher is valid until",
   "this_voucher_not_apply_other_hotel": "This voucher does not apply to other hotels.",
-  "buy_voucher": "Buy voucher",
+  "buy_voucher": "Swap voucher",
   "apply_voucher": "Apply voucher",
   "add": "Add",
 
@@ -1149,7 +1149,7 @@
   "this_is_type_point": "This is types of point using in app",
   "this_is_wallet_manage": "This is wallet manage voucher point",
   "help_center": "Help center",
-  "how_to_add_pionechain": "How to add PioneerChain to MetaMask?",
+  "how_to_add_pionechain": "How to add Pione Chain to MetaMask?",
 
   "create_new_policy": "Create new policy",
   "you_have_not_select_facility": "You have not selected a facility yet",
@@ -1174,7 +1174,7 @@
   "no_more_room_today": "No more room today",
   "please_repost": "This post have been expired, please repost it",
   "repost": "Repost",
-  "video_short": "video_short",
+  "video_short": "Video short",
   "wallet_ready_to_use": "Your cryptocurrency wallet is ready to use",
 
   "incomplete_registration": "Incomplete Registration Process",
@@ -1248,12 +1248,12 @@
 
   "policy_linked": "Policy linked",
   "you_will_automatic_transfer": "You will automatic transfer screen in",
-  "congratulate_on_receiving_coin": "Congratulations on receiving {unit} coin!",
+  "congratulate_on_receiving_coin": "Congratulations on receiving point {unit}!",
   "enter_amount_withdraw": "Enter amount you want to withdraw",
   "date_create": "Date create",
 
   "create_wallet": "Create wallet",
-  "no_still_pay": "No, still pay with PionePay",
+  "no_still_pay": "No, still pay with HousePay",
   "do_you_want_create_wallet": "Do you want create wallet and pay with voucher to get point free?",
 
   "please_choose_exact_location": "Please choose an exact location within 5 meters to post",
@@ -1275,7 +1275,7 @@
 
   "room_manage_detail": "Room management detail",
   "share_detail_tour_short_video": "Share the details of your tour through short videos, these videos will appear on trends!",
-  "no_pay_with": "No, pay with PionePay",
+  "no_pay_with": "No, pay with HousePay",
   "content_display": "Content & Display",
   "setting": "Setting",
   "account_security": "Account & Security",
@@ -1365,6 +1365,35 @@
   "account":"Account",
 
   "wallet_name": "Wallet name",
-  "wallet_symbol": "Wallet {unit}"
+  "wallet_symbol": "Wallet {unit}",
   
+  "faucet_now": "Faucet now",
+  "video_size_limit_30mb": "Video size limit 30MB, please choose another video shorter!",
+  "scan_qr_code": "Scan QR code",
+  "align_qr_code_to_the_frame": "Align QR code to the frame",
+  "remove_success": "Remove success",
+  "are_you_sure_want_remove_history_account": "Are you sure you want to remove history account?",
+  "remove_history_account": "Removed history cannot be restored!",
+  
+  "SWAP":"SWAP",
+  "complete_the_daily_tasks":"Complete the daily tasks below to claim rewards {unit} now",
+
+  "create_real_estate_rental_listing": "Create a real estate rental listing",
+  "create_real_estate_sale_listing": "Create a real estate sale listing",
+  "create_tour_listing": "Create a tour listing",
+
+  "complete_task": "Complete the task",
+  "officially_redeemable_after_airdrop": "{unit} will be officially available when the Airdrop program ends. Hurry up and complete tasks to earn rewards!",
+  "congratulations_reward_today": "Congratulations! You have received today's reward. Come back tomorrow to continue completing tasks!",
+  "my_id_address": "My ID address",
+  "congratulations_experience": "Congratulations! You have received {value} experience.",
+  "reload": "Reload",
+  "not_applicable": "Not applicable",
+  "enter_description": "Enter description",
+   "description_day": "Day description",
+  "please_create_wallet":"Please create a wallet to perform this function!",
+
+  "enter_point":"Enter point",
+  "exchange_value_of_voucher":"This is the exchange value of the voucher",
+  "search_province":"Search province"
 }

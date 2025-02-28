@@ -28,7 +28,7 @@ export default memo(
       <View
         style={{
           position: 'absolute',
-          paddingBottom: scale(80),
+          paddingBottom: scale(100),
           bottom: 0,
           // bottom: insets.bottom,
           width: '100%',

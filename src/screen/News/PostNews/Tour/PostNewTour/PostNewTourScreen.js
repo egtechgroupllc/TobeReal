@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {
   COLORS,
@@ -12,7 +12,7 @@ import {
   scale,
 } from '../../../../../assets/constants';
 import {showMess} from '../../../../../assets/constants/Helper';
-import {CustomButton} from '../../../../../components';
+import {CustomButton, CustomImage} from '../../../../../components';
 import CheckBox from '../../../../../components/CheckBox';
 import CustomText from '../../../../../components/CustomText';
 import {useLanguage} from '../../../../../hooks/useLanguage';
@@ -33,7 +33,7 @@ import EstatePhoto from '../../Lease/components/PostNewLease/EstatePhoto';
 import {useCountdown} from '../../../../../hooks/useCountdown';
 import {useLoading} from '../../../../../hooks/useLoading';
 import ModalBookingSuccess from '../../../../Bookings/components/BookingRoom/ContentStep2/ModalBookingSuccess';
-
+import RNRestart from 'react-native-restart';
 export default function PostNewTourScreen() {
   const {t} = useLanguage();
   const {navigate, setOptions} = useNavigation();
@@ -44,6 +44,23 @@ export default function PostNewTourScreen() {
   const [check, setCheck] = useState(false);
   const {start, countdown} = useCountdown(5);
   const {stopLoading, setLoading} = useLoading();
+  const queryClient = useQueryClient();
+
+  const dataStatusTask = queryClient.getQueryData([
+    'common',
+    'status-task',
+  ])?.data;
+  const dataWallet = queryClient.getQueryData([
+    'user',
+    'wallet',
+    'balance',
+  ])?.data;
+  const dataPioneZero = useMemo(
+    () => dataWallet?.find(item => item?.symbol === 'PZO'),
+    [dataWallet],
+  );
+  const dataP = queryClient.getQueryData(['user', 'profile'])?.data;
+
   useEffect(() => {
     stopLoading();
     return () => {
@@ -53,7 +70,6 @@ export default function PostNewTourScreen() {
   useEffect(() => {
     return setOptions({
       headerTitle: !params?.admin ? t('post_new_tour') : t('edit'),
-      headerLeftNavigate: 'TourScreen',
       // headerLeft: () => (
       //   <TouchableOpacity onPress={() => navigate('PostNewLeaseScreen')}>
       //     <IconGoBack style={{width: scale(20)}} />
@@ -72,7 +88,6 @@ export default function PostNewTourScreen() {
     formState: {errors},
   } = useForm();
 
-  const queryClient = useQueryClient();
   const createTourMu = useMutation({
     mutationFn: postCreateTour,
   });
@@ -92,6 +107,22 @@ export default function PostNewTourScreen() {
 
       return item;
     }, formData);
+
+    if (object?.image_update_description) {
+      const arrImage_descriptionUp = object?.image_update_description?.map(
+        image => {
+          return {
+            id: image?.id,
+            description: image?.description,
+          };
+        },
+      );
+
+      formData.append(
+        'image_update_description',
+        JSON.stringify(arrImage_descriptionUp),
+      );
+    }
 
     const arrImage_description = object?.files?.map(image => {
       formData.append('files', image);
@@ -132,6 +163,7 @@ export default function PostNewTourScreen() {
         if (dataInside?.status) {
           if (!params?.address) {
             isPending.current = true;
+
             setCheck({
               status: dataInside?.status,
               mess: t(dataInside?.message),
@@ -198,7 +230,8 @@ export default function PostNewTourScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-  return (
+
+  return dataPioneZero?.balance >= 0.01 ? (
     <MainWrapper styleContent={styles.wrapper}>
       <View style={styles.button}>
         <Image
@@ -276,6 +309,7 @@ export default function PostNewTourScreen() {
         isPending={isPending}
         check={check}
         countdown={countdown}
+        isFirstTime={dataStatusTask?.is_received_airdrop_today}
       />
       <CustomButton
         buttonType="medium"
@@ -288,6 +322,92 @@ export default function PostNewTourScreen() {
         // disabled={createTourMu.isPending}
       />
     </MainWrapper>
+  ) : (
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: scale(50),
+        rowGap: scale(50),
+      }}>
+      {dataP?.wallet_address ? (
+        <CustomText
+          style={{
+            fontSize: SIZES.xLarge,
+          }}
+          textType="bold">
+          {t('faucet_now')}
+        </CustomText>
+      ) : (
+        <CustomText
+          style={{
+            fontSize: SIZES.xLarge,
+          }}
+          textType="bold">
+          {t('create_wallet')}
+        </CustomText>
+      )}
+      <CustomImage
+        source={images.logoPione}
+        style={{width: scale(150), height: scale(150)}}
+      />
+      {dataP?.wallet_address ? (
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            textAlign: 'center',
+          }}
+          textType="bold">
+          {t('your_balance_fee_gas_not_enough', {unit: 'PZO'})}
+        </CustomText>
+      ) : (
+        <CustomText
+          style={{
+            fontSize: SIZES.xMedium,
+            textAlign: 'center',
+            width: scale(300),
+          }}
+          textType="bold">
+          {t('please_create_wallet_to_received_reward')}
+        </CustomText>
+      )}
+      <View
+        style={{
+          flexDirection: 'row',
+          columnGap: scale(20),
+          marginTop: scale(50),
+        }}>
+        <CustomButton
+          text={t('reload')}
+          buttonType="medium"
+          styleWrapper={{width: '40%'}}
+          style={{backgroundColor: COLORS.grey}}
+          onPress={() => {
+            RNRestart.restart();
+          }}
+        />
+        {dataP?.wallet_address ? (
+          <CustomButton
+            text={t('faucet_now')}
+            buttonType="medium"
+            styleWrapper={{width: '50%'}}
+            onPress={() =>
+              Linking.openURL('https://dex.pionechain.com/testnet/faucet')
+            }
+          />
+        ) : (
+          <CustomButton
+            text={t('create_wallet')}
+            buttonType="medium"
+            styleWrapper={{width: '50%'}}
+            onPress={() => {
+              navigate('NavigateWalletToken', {screen: 'AddressWalletScreen'});
+            }}
+          />
+        )}
+      </View>
+      {/* </View> */}
+    </View>
   );
 }
 
@@ -299,6 +419,16 @@ const styles = StyleSheet.create({
     rowGap: scale(20),
     alignSelf: 'center',
     paddingBottom: scale(100),
+  },
+  contactHeader: {
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(12),
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: scale(20),
+    width: '100%',
   },
   button: {
     height: scale(63),

@@ -21,7 +21,7 @@ import {getListPriceRoomDate} from '../../../../../../../Model/api/apiAccom';
 import {useQuery} from '@tanstack/react-query';
 import {formatPrice} from '../../../../../utils/format';
 import {useCountry} from '../../../../../hooks/useCountry';
-import {getToken} from '../../../../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../../../../Model/api/common';
 export default function VoucherItem({
   data,
   onPressMore,
@@ -159,7 +159,7 @@ export default function VoucherItem({
                     color: COLORS.white,
                     fontSize: SIZES.xlSmall,
                   }}>
-                  {t('BUY')}
+                  {t('SWAP')}
                 </CustomText>
               </View>
             )}
@@ -178,10 +178,12 @@ export default function VoucherItem({
                 fontSize: SIZES.small,
               }}>
               {formatPrice(data?.price, {
-                currency: getDataToken?.data?.symbol,
-                locales: 'vi',
+                // currency: getDataToken?.data?.symbol,
+                // locales: 'vi',
+                showCurrency: false,
                 decimalPlaces: 12,
-              })}
+              })}{' '}
+              {getDataToken?.data?.symbol}
             </CustomText>
             <View
               style={{

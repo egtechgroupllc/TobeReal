@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, {ReactNode, createContext, useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNRestart from 'react-native-restart';
+import {storage} from '../utils/MMKVStorage';
 
 interface AuthProps {
   token?: string;
@@ -19,7 +20,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
 
   useEffect(() => {
     const loadToken = async () => {
-      const result = await EncryptedStorage.getItem(TOKEN_KEY);
+      const result = await storage.getString(TOKEN_KEY);
       if (result) {
         saveToken(result);
       }
@@ -33,7 +34,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
 
       setToken(`Bearer ${data}`);
 
-      await EncryptedStorage.setItem(TOKEN_KEY, data);
+      await storage.set(TOKEN_KEY, data);
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +44,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     try {
       setToken(undefined);
       axios.defaults.headers.common['Authorization'] = '';
-      await EncryptedStorage.removeItem(TOKEN_KEY);
+      await storage.delete(TOKEN_KEY);
       queryClient.clear();
       RNRestart.restart();
     } catch (error) {}

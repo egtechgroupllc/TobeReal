@@ -30,32 +30,32 @@ export default function ImportAddressWalletBtn() {
     navigate('ImportAddressWalletScreen', {type});
   };
 
-  const handleReadFile = async () => {
-    try {
-      const pathDoc = RNFS.CachesDirectoryPath;
-      const filePath2 = `${pathDoc}/Wallet/wallet.txt`;
+  // const handleReadFile = async () => {
+  //   try {
+  //     const pathDoc = RNFS.CachesDirectoryPath;
+  //     const filePath2 = `${pathDoc}/Wallet/wallet.txt`;
 
-      // Kiểm tra sự tồn tại của tệp
-      const fileExists = await RNFS.exists(filePath2);
+  //     // Kiểm tra sự tồn tại của tệp
+  //     const fileExists = await RNFS.exists(filePath2);
 
-      if (!fileExists) {
-        console.error('Tệp không tồn tại:', filePath2);
-        return;
-      }
+  //     if (!fileExists) {
+  //       console.error('Tệp không tồn tại:', filePath2);
+  //       return;
+  //     }
 
-      const content = await RNFS.readFile(filePath2, 'utf8');
+  //     const content = await RNFS.readFile(filePath2, 'utf8');
 
-      if (content) {
-        setCheckImportFile(JSON.parse(content));
-      }
-    } catch (error) {
-      console.error('Lỗi khi đọc tệp:', error);
-    }
-  };
+  //     if (content) {
+  //       setCheckImportFile(JSON.parse(content));
+  //     }
+  //   } catch (error) {
+  //     console.error('Lỗi khi đọc tệp:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    handleReadFile();
-  }, []);
+  // useEffect(() => {
+  //   handleReadFile();
+  // }, []);
 
   const postImportWalletMu = useMutation({
     mutationFn: postImportWallet,

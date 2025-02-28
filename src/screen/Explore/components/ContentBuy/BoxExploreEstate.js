@@ -29,6 +29,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {type} from '../../../../components/Marquee';
 import calculateTimeElapsed from '../../../../utils/calculateTimeElapsed';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function BoxExploreEstate({
   data,
@@ -53,12 +54,12 @@ export default function BoxExploreEstate({
   const {t} = useLanguage();
   const {navigate, isFocused, dispatch} = useNavigation();
   const onSavedName = async () => {
-    const result = await EncryptedStorage.getItem('@save_name_estate');
+    const result = await storage.getString('@save_name_estate');
 
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.title !== data?.title)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       '@save_name_estate',
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
@@ -102,7 +103,7 @@ export default function BoxExploreEstate({
               // isStar={isStar}
               level
               textRating={textRating}
-              isHeart={isHeart}
+              // isHeart={isHeart}
               showPrice
               data={data}
             />
@@ -189,7 +190,7 @@ export default function BoxExploreEstate({
                           fontSize: SIZES.xSmall,
                           width: scale(150),
                         }}>
-                        {calculateTimeElapsed(data.date_start)}
+                        {calculateTimeElapsed(data?.createdAt)}
                       </CustomText>
                     </View>
                   </View>

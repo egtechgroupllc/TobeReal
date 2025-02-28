@@ -13,6 +13,7 @@ import {
   getUserInfoLocation,
 } from '../Model/api/common';
 import {getCurrentLocation} from '../utils/getCurrentLocation';
+import { storage } from '../utils/MMKVStorage';
 
 interface CountryProps {
   onSaveCountry?: (data: string) => Promise<any>;
@@ -96,9 +97,9 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
 
   useEffect(() => {
     const loadCountry = async () => {
-      const result = (await EncryptedStorage.getItem(COUNTRY_KEY)) || '';
+      const result = (await storage.getString(COUNTRY_KEY)) || '';
       const resultCurrency =
-        (await EncryptedStorage.getItem(CURRENCY_KEY)) || '';
+        (await storage.getString(CURRENCY_KEY)) || '';
 
       if (result) {
         setCountry(JSON.parse(result));
@@ -122,7 +123,7 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
 
   const onSaveCountry = async (value: any) => {
     try {
-      await EncryptedStorage.setItem(COUNTRY_KEY, JSON.stringify(value));
+      await storage.set(COUNTRY_KEY, JSON.stringify(value));
       setCountry(value);
     } catch (error) {
       console.log(error);
@@ -131,7 +132,7 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
 
   const onSaveCurrency = async (value: any) => {
     try {
-      await EncryptedStorage.setItem(CURRENCY_KEY, JSON.stringify(value));
+      await storage.set(CURRENCY_KEY, JSON.stringify(value));
       setCurrency(value);
     } catch (error) {
       console.log(error);
@@ -139,8 +140,8 @@ export const CountryProvider = ({children}: {children: ReactNode}) => {
   };
 
   const onClear = async () => {
-    await EncryptedStorage.removeItem(COUNTRY_KEY);
-    await EncryptedStorage.removeItem(CURRENCY_KEY);
+    await storage.delete(COUNTRY_KEY);
+    await storage.delete(CURRENCY_KEY);
   };
 
   const value = {

@@ -22,6 +22,7 @@ import {useLanguage} from '../../../../../hooks/useLanguage';
 export default function ContactInfo({data, onPress}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity

@@ -1,6 +1,12 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {SHADOW, SIZES, images, scale} from '../../../../../assets/constants';
+import {
+  COLORS,
+  SHADOW,
+  SIZES,
+  images,
+  scale,
+} from '../../../../../assets/constants';
 import {IconHeart} from '../../../../../assets/icon/Icon';
 import CustomImage from '../../../../../components/CustomImage';
 import CustomText from '../../../../../components/CustomText';
@@ -93,7 +99,7 @@ export default function ItemBoxReview({
         )}
       </View>
 
-      <View style={styles.boxOwn}>
+      {/* <View style={styles.boxOwn}>
         <CustomText
           numberOfLines={seeMoreOwn ? 0 : isBtnSeeMoreOwn ? 3 : 4}
           onTextLayout={onTextLayoutOwn}
@@ -120,7 +126,7 @@ export default function ItemBoxReview({
             {t('show_more')}
           </CustomText>
         )}
-      </View>
+      </View> */}
 
       <View style={styles.footer}>
         <CustomText
@@ -130,7 +136,7 @@ export default function ItemBoxReview({
             dateStyle: 'dd-MM-yyyy, HH:mm',
           })}
         </CustomText>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             padding: scale(6),
             marginTop: scale(-6),
@@ -142,7 +148,7 @@ export default function ItemBoxReview({
             }}
             fill={'#687176'}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -156,6 +162,7 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     marginBottom: scale(2),
   },
+
   infoCustomer: {
     flexDirection: 'row',
     columnGap: scale(10),

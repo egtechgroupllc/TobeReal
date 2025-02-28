@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "243866584886",
-    "project_id": "pionehouse-57f69",
-    "storage_bucket": "pionehouse-57f69.firebasestorage.app"
+    "project_number": "1078380466992",
+    "project_id": "saveloka",
+    "storage_bucket": "saveloka.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:243866584886:android:9a18c11ae318bb4d309597",
+        "mobilesdk_app_id": "1:1078380466992:android:ea4f58b0da17ba847daef5",
         "android_client_info": {
-          "package_name": "com.pionechain.pionehouse"
+          "package_name": "com.tobechain.saveloka"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAvcuCmZ8WSZffaDejURDD2bNvF6vAEH7c"
+          "current_key": "AIzaSyCxaCU5wb31K0mJCFqo0uIXDY2v4iSbtrw"
         }
       ],
       "services": {

@@ -25,16 +25,20 @@ export default function ModalBookingSuccess({
   isPending,
   check,
   countdown,
+  isFirstTime,
+  isBooking,
 }) {
   const {t} = useLanguage();
   const {data, isLoading} = useQuery({
     queryKey: ['common', 'list-constant'],
-    queryFn: getListConstant,
+    queryFn: getListConstant(),
   });
   const {data: getDataToken, error} = useQuery({
     queryKey: ['common', 'token-airdrop'],
     queryFn: () => getTokenAirdrop(),
   });
+  if (!openContact) return null;
+
   return (
     <Modal
       isVisible={openContact}
@@ -56,6 +60,7 @@ export default function ModalBookingSuccess({
             {t('notification')}
           </CustomText>
         </LinearGradient>
+
         <View style={styles.listContact}>
           {!isPending.current ? (
             <LottieView
@@ -99,28 +104,46 @@ export default function ModalBookingSuccess({
                 textType="bold">
                 {check?.mess}!
               </CustomText>
-              {check?.status ? (
+              {check?.status && !isBooking ? (
                 <>
-                  <CustomText
-                    textType="bold"
-                    style={{
-                      alignSelf: 'center',
-                      marginTop: scale(5),
-                      color: COLORS.black,
-                    }}>
-                    +{data?.data?.amount_token_tbc_airdrop}{' '}
-                    {getDataToken?.data?.symbol}
-                  </CustomText>
-                  <CustomText
-                    style={{
-                      alignSelf: 'center',
-                      marginTop: scale(5),
-                      color: COLORS.black,
-                    }}>
-                    {t('congratulate_on_receiving_coin', {
-                      unit: getDataToken?.data?.symbol,
-                    })}
-                  </CustomText>
+                  {!isFirstTime ? (
+                    <View>
+                      <CustomText
+                        textType="bold"
+                        style={{
+                          alignSelf: 'center',
+                          marginTop: scale(5),
+                          color: COLORS.black,
+                        }}>
+                        +{data?.data?.amount_token_airdrop}{' '}
+                        {getDataToken?.data?.symbol}
+                      </CustomText>
+                      <CustomText
+                        style={{
+                          alignSelf: 'center',
+                          marginTop: scale(5),
+                          color: COLORS.black,
+                        }}>
+                        {t('congratulate_on_receiving_coin', {
+                          unit: getDataToken?.data?.symbol,
+                        })}
+                      </CustomText>
+                    </View>
+                  ) : (
+                    <View>
+                      <CustomText
+                        textType="bold"
+                        style={{
+                          alignSelf: 'center',
+                          marginTop: scale(5),
+                          color: COLORS.black,
+                        }}>
+                        {t('congratulations_experience', {
+                          value: data?.data?.amount_score_reward,
+                        })}
+                      </CustomText>
+                    </View>
+                  )}
                   <CustomText
                     style={{
                       alignSelf: 'center',
@@ -132,6 +155,19 @@ export default function ModalBookingSuccess({
                     {t('you_will_automatic_transfer')} ... {countdown}s
                   </CustomText>
                 </>
+              ) : check?.status ? (
+                <View>
+                  <CustomText
+                    style={{
+                      alignSelf: 'center',
+                      marginTop: scale(5),
+                      paddingBottom: scale(20),
+                      textAlign: 'center',
+                      color: COLORS.textSub,
+                    }}>
+                    {t('you_will_automatic_transfer')} ... {countdown}s
+                  </CustomText>
+                </View>
               ) : (
                 <>
                   <CustomText

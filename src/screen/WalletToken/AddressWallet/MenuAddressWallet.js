@@ -135,7 +135,7 @@ export default function MenuAddressWallet({data}) {
           paddingHorizontal: scale(16),
           rowGap: scale(12),
         }}>
-        <CustomButton
+        {/* <CustomButton
           iconLeft={IconExportFile}
           text={t('export_wallet')}
           styleText={{textAlign: 'left'}}
@@ -143,7 +143,7 @@ export default function MenuAddressWallet({data}) {
             color: '#fff',
           }}
           onPress={handleDownload}
-        />
+        /> */}
         <CustomButton
           onPress={handleDeleteWallet}
           outline

@@ -62,7 +62,7 @@ export default function TicketManageScreen() {
       <>
         <CustomButton
           text={t('add_more_ticket')}
-          style={{width: '50%', marginLeft: scale(20), marginBottom: scale(10)}}
+          style={{width: '40%', marginLeft: scale(20), marginBottom: scale(10)}}
           onPress={() => navigate('AddTicketScreen', {...params})}
         />
         {numColumns ? (

@@ -63,6 +63,7 @@ export default function AccommodationPremium({currency}) {
         currency_id: currency?.id,
       }),
   });
+
   // if (!(data?.data?.count !== 0) && !isLoading) return null;
   // if (!data?.data?.count && !isLoading) return null;
 

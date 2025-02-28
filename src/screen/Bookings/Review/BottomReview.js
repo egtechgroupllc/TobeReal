@@ -13,7 +13,7 @@ import {postReviewTour} from '../../../Model/api/apiTour';
 export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
   const insets = useSafeAreaInsets();
   const {t} = useLanguage();
-  const {navigate} = useNavigation();
+  const {navigate, reset} = useNavigation();
   const {goBack} = useNavigation();
   const queryClient = useQueryClient();
 
@@ -58,9 +58,17 @@ export default function BottomReview({handleSubmit, id, txhashId, isTour}) {
         if (dataInside?.status) {
           {
             txhashId
-              ? navigate('PostVideoShortReviewScreen', {
-                  txhashId: txhashId,
-                  isTour: isTour,
+              ? reset({
+                  index: 0,
+                  routes: [
+                    {
+                      name: 'PostVideoShortReviewScreen',
+                      params: {
+                        txhashId: txhashId,
+                        isTour: isTour,
+                      },
+                    },
+                  ],
                 })
               : navigate('Explore');
           }

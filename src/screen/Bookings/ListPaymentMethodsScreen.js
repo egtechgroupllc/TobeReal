@@ -46,7 +46,7 @@ export default function ListPaymentMethodsScreen({route}) {
     //   image: images.iconDirect,
     // },
   ];
-  const {setOptions, goBack} = useNavigation();
+  const {setOptions, goBack, navigate} = useNavigation();
   const dataParams = route?.params;
   useLayoutEffect(() => {
     return setOptions({
@@ -90,7 +90,14 @@ export default function ListPaymentMethodsScreen({route}) {
               //     duration: 500,
               //   });
               // }
-              if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
+              // if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
+              if (item?.type === 'VOUCHER') {
+                if (!dataParams?.wallet_address) {
+                  showMess(t('please_create_wallet'), 'error');
+                  navigate('NavigateWalletToken', {
+                    screen: 'AddressWalletScreen',
+                  });
+                }
                 dataParams?.onGoBack(item);
                 goBack();
               } else {

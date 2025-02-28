@@ -190,4 +190,10 @@ export default {
   ratingPostSilver: require('../images/ratingPostSilver.png'),
   ratingPostGold: require('../images/ratingPostGold.png'),
   ratingPostDiamond: require('../images/ratingPostDiamond.png'),
+  lv1: require('../images/lv1.png'),
+  lv2: require('../images/lv2.png'),
+  lv3: require('../images/lv3.png'),
+  lv4: require('../images/lv4.png'),
+  lv5: require('../images/lv5.png'),
+  lv6: require('../images/lv6.png'),
 };

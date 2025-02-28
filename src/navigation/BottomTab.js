@@ -62,8 +62,8 @@ export default function BottomTab() {
             // />
             <IconLogoPione
               fill={focused && COLORS.pioPrimary}
-              width={scale(18)}
-              height={scale(18)}
+              width={scale(25)}
+              height={scale(25)}
             />
           ),
         }}
@@ -74,7 +74,11 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('booking'),
           tabBarIcon: ({focused}) => (
-            <IconBookings fill={focused && COLORS.pioPrimary} />
+            <IconBookings
+              fill={focused && COLORS.pioPrimary}
+              width={scale(20)}
+              height={scale(20)}
+            />
           ),
         }}
       />
@@ -96,7 +100,11 @@ export default function BottomTab() {
           tabBarLabel: t('reviews'),
 
           tabBarIcon: ({focused}) => (
-            <IconVideo fill={focused && COLORS.pioPrimary} />
+            <IconVideo
+              fill={focused && COLORS.pioPrimary}
+              width={scale(20)}
+              height={scale(20)}
+            />
           ),
         }}
       />
@@ -115,7 +123,11 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('map'),
           tabBarIcon: ({focused}) => (
-            <IconMapView fill={focused && COLORS.pioPrimary} />
+            <IconMapView
+              fill={focused && COLORS.pioPrimary}
+              width={scale(20)}
+              height={scale(20)}
+            />
           ),
         }}
       />
@@ -125,7 +137,11 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('post_new'),
           tabBarIcon: ({focused}) => (
-            <IconNews fill={focused && COLORS.pioPrimary} />
+            <IconNews
+              fill={focused && COLORS.pioPrimary}
+              width={scale(20)}
+              height={scale(20)}
+            />
           ),
         }}
       />
@@ -136,7 +152,11 @@ export default function BottomTab() {
         options={{
           tabBarLabel: t('profile'),
           tabBarIcon: ({focused}) => (
-            <IconProfile fill={focused && COLORS.pioPrimary} />
+            <IconProfile
+              fill={focused && COLORS.pioPrimary}
+              width={scale(20)}
+              height={scale(20)}
+            />
           ),
           header: props => <HeaderBar {...props} />,
         }}

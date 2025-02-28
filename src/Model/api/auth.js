@@ -4,13 +4,14 @@ import {Alert} from 'react-native';
 import {handleLogoutExistToken} from './common';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {TOKEN_KEY} from '../../context/AuthContext';
+import {storage} from '../../utils/MMKVStorage';
 
 const instance = axios.create({
   baseURL: baseUrl + '/api/v1/user',
 });
 instance.interceptors.request.use(async req => {
   if (typeof window !== 'undefined') {
-    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+    const storedToken = await storage.getString(TOKEN_KEY);
 
     if (storedToken) {
       req.headers.Authorization = `Bearer ${storedToken}`;
@@ -30,7 +31,7 @@ instance.interceptors.response.use(
     if (error.response && error.response.status === 401 && countErr < 1) {
       Alert.alert(
         'Notification',
-        'Your account has been logged in from another device, please log in again!',
+        'Your session has expired or your account has been logged in on another device. Please log in again.',
         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
       );
       ++countErr;
@@ -151,16 +152,21 @@ export const getHistoryToken = async ({pageParam = 1, token, limit = 10}) => {
 };
 
 ////-----Check-in-Daily------//
-export const getDailyCheckinInfo = async () => {
-  const response = await instance.get('/daily-check-in/info');
-  return response.data;
+export const postCallContractCheckin = async ({data}) => {
+  const responsive = await instance.post('/daily-check-in/call-contract', data);
+
+  const result = {
+    point: responsive.data?.data[0],
+    lastCheckIn: responsive.data?.data[1],
+    isActive: responsive.data?.data[2],
+  };
+  return {
+    ...responsive.data,
+    ...result,
+  };
 };
-export const postDailyCheckin = async ({data, token}) => {
-  const responsive = await instance.post('/daily-check-in/check-in', data, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const postRegisterCheckin = async data => {
+  const responsive = await instance.post('/daily-check-in/register', data);
 
   return responsive.data;
 };
@@ -174,5 +180,11 @@ export const getListNotification = async ({pageParam = 1, limit = 10}) => {
 
 export const postSeenNotification = async data => {
   const responsive = await instance.post('/notification/seen', data);
+  return responsive.data;
+};
+
+export const getListRank = async () => {
+  const responsive = await instance.get('/list-rank');
+
   return responsive.data;
 };

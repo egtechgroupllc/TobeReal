@@ -12,6 +12,7 @@ import TopImg from './TopImg';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {StarRating} from '../../../components';
 import {useCountry} from '../../../hooks/useCountry';
+import {storage} from '../../../utils/MMKVStorage';
 
 export default function ItemAccommdSearch({
   data,
@@ -39,24 +40,24 @@ export default function ItemAccommdSearch({
     }
   };
   const onSavedName = async () => {
-    const result = await EncryptedStorage.getItem('save_name');
+    const result = await storage.getString('save_name');
 
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.name !== data?.name)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       'save_name',
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 4)] : [data]),
     );
   };
   const {currency} = useCountry();
   const onSavedNameEstate = async () => {
-    const result = await EncryptedStorage.getItem('@save_name_estate');
+    const result = await storage.getString('@save_name_estate');
 
     const arrsdf = result
       ? JSON.parse(result).filter(item => item?.title !== data?.title)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       '@save_name_estate',
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
@@ -96,7 +97,7 @@ export default function ItemAccommdSearch({
       <TopImg
         // rating
         // isStar
-        isHeart
+        // isHeart
         feature
         type={data?.accommodation_type?.name || data?.estate_type?.name}
       />
@@ -121,7 +122,7 @@ export default function ItemAccommdSearch({
             columnGap: scale(50),
           }}>
           {isStar && (
-            <StarRating rating={rating} style={{marginTop: scale(2)}} />
+            <StarRating rating={data?.rating} style={{marginTop: scale(2)}} />
           )}
           {isRating && data?.review_count > 0 && (
             <RatingBox
@@ -150,7 +151,7 @@ export default function ItemAccommdSearch({
           <View style={{overflow: 'hidden', width: '100%'}}>
             <View style={styles.line} />
           </View>
-          {isDiscount && (
+          {/* {isDiscount && (
             <View
               style={{
                 ...styles.price,
@@ -163,7 +164,7 @@ export default function ItemAccommdSearch({
                 })}{' '}
               </CustomText>
 
-              {/* <CustomText
+              <CustomText
                         textType="semiBold"
                         style={{
                           color: '#FF0000',
@@ -171,9 +172,9 @@ export default function ItemAccommdSearch({
                           minWidth: scale(35),
                         }}>
                         20% OFF
-                      </CustomText> */}
+                      </CustomText>
             </View>
-          )}
+          )} */}
           <View
             style={{
               flexDirection: 'row',

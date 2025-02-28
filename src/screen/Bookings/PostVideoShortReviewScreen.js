@@ -44,7 +44,9 @@ export default function PostVideoShortReviewScreen() {
   const postVideoShortMu = useMutation({
     mutationFn: postVideoShort,
   });
-
+  console.log('====================================');
+  console.log(params, 321312);
+  console.log('====================================');
   const getFormData = (object = {}) => {
     const formData = new FormData();
 
@@ -66,13 +68,20 @@ export default function PostVideoShortReviewScreen() {
     // formData.append('file', object?.file[0]);
 
     formData.append('txhash_wallet_id', params?.txhashId);
-
     return formData;
   };
 
   const handlePostVideoShort = value => {
     const formData = getFormData(value);
+    if (value?.file?.[0]) {
+      const fileSize = value.file[0].fileSize; // Kích thước tính bằng bytes
+      const fileSizeInMB = fileSize / (1024 * 1024); // Chuyển đổi sang MB
 
+      if (fileSizeInMB > 100) {
+        showMess(t('video_size_limit_100mb'), 'error');
+        return;
+      }
+    }
     postVideoShortMu.mutate(
       {data: formData, token: token},
       {

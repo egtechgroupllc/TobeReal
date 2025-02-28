@@ -1,6 +1,7 @@
 import {
   Alert,
   FlatList,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -161,6 +162,7 @@ export default function PolicyToRoomScreen() {
       },
     );
   };
+
   const handleLinkPolicy = value => {
     createAddPolicyToRoom.mutate(
       {
@@ -174,9 +176,13 @@ export default function PolicyToRoomScreen() {
             if (params?.admin) {
               goBack(params);
             } else {
+              showMess(t(dataInside?.message));
+              if (Platform.OS === 'ios') {
+                navigate('AccommoManagementScreen', params);
+              }
               navigate('NoBottomTab', {
                 screen: 'AccommoManagementScreen',
-                params,
+                params: params,
               });
             }
             queryClient.invalidateQueries([
@@ -358,7 +364,7 @@ export default function PolicyToRoomScreen() {
                       style={{
                         fontSize: SIZES.xMedium,
                       }}>
-                      {item}
+                      {t(item)}
                     </CustomText>
                   </View>
                 ))}

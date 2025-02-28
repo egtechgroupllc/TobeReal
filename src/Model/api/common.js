@@ -5,6 +5,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import {TOKEN_KEY} from '../../context/AuthContext';
 import RNRestart from 'react-native-restart';
 import {Alert} from 'react-native';
+import {storage} from '../../utils/MMKVStorage';
 
 export const instanceCommon = axios.create({
   baseURL: baseUrl + '/api/v1',
@@ -12,7 +13,7 @@ export const instanceCommon = axios.create({
 
 instanceCommon.interceptors.request.use(async req => {
   if (typeof window !== 'undefined') {
-    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+    const storedToken = await storage.getString(TOKEN_KEY);
 
     if (storedToken) {
       req.headers.Authorization = `Bearer ${storedToken}`;
@@ -23,7 +24,7 @@ instanceCommon.interceptors.request.use(async req => {
 });
 export const handleLogoutExistToken = async () => {
   axios.defaults.headers.common['Authorization'] = '';
-  await EncryptedStorage.removeItem(TOKEN_KEY);
+  await storage.delete(TOKEN_KEY);
   RNRestart.restart();
 };
 
@@ -36,7 +37,7 @@ instanceCommon.interceptors.response.use(
     if (error.response && error.response.status === 401 && countErr < 1) {
       Alert.alert(
         'Notification',
-        'Your account has been logged in from another device, please log in again!',
+        'Your session has expired or your account has been logged in on another device. Please log in again.',
         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
       );
 
@@ -130,20 +131,20 @@ export const getToken = async () => {
 };
 ////-----Video-Short------//
 export const getListVideoRandom = async ({
-  table_name = '',
+  model_name = '',
   pageParam = 1,
   limit = 2,
 }) => {
   const responsive = await instanceCommon.get(
-    `/video-short/list-random?table_name=${table_name}&page=${pageParam}&limit=${limit}`,
+    `/video-short/list-random?model_name=${model_name}&page=${pageParam}&limit=${limit}`,
   );
 
   return responsive.data;
 };
 
-export const getLinkData = async ({table_name, table_id, token}) => {
+export const getLinkData = async ({model_name, table_id, token}) => {
   const responsive = await instanceCommon.get(
-    `/video-short/linked-data?table_name=${table_name}&table_id=${table_id}`,
+    `/video-short/linked-data?model_name=${model_name}&table_id=${table_id}`,
     {
       headers: {
         Authorization: token,
@@ -152,9 +153,9 @@ export const getLinkData = async ({table_name, table_id, token}) => {
   );
   return responsive.data;
 };
-export const getMyListVideoShort = async ({table_name, table_id}) => {
+export const getMyListVideoShort = async ({model_name, table_id}) => {
   const responsive = await instanceCommon.get(
-    `/video-short/my-list?table_name=${table_name}&table_id=${table_id}`,
+    `/video-short/my-list?model_name=${model_name}&table_id=${table_id}`,
   );
   return responsive.data;
 };
@@ -209,7 +210,7 @@ export const getListMessage = async ({
 };
 
 export const getListChatGroup = async () => {
-  const response = await instanceCommon.get(`/chat/my-list-group`);
+  const response = await instanceCommon.get('/chat/my-list-group');
   return response.data;
 };
 

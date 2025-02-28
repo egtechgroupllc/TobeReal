@@ -64,9 +64,10 @@ export default function BottomSheetChildTour({
   return (
     <>
       <BottomSheetTextInput
-        placeholder={t('Search province')}
+        placeholder={t('search_province')}
         onChangeText={setSearch}
         style={styles.input}
+        placeholderTextColor={COLORS.black}
       />
       <BottomSheetFlatList
         ref={flatListRef}

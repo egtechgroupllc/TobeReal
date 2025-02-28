@@ -1081,7 +1081,7 @@
   "look_up_transaction": "查询交易历史",
   "token_balance_available": "{unit}余额（可提取到钱包）",
   "active_to_use_wallet": "激活以使用{unit}钱包",
-  "active_2_types_wallet": "激活两种钱包：PionePay、加密货币钱包，享受快速、安全的支付",
+  "active_2_types_wallet": "激活两种钱包：HousePay、加密货币钱包，享受快速、安全的支付",
   "your_transaction_has_been_canceled": "您的交易因 \n 预订过程中出错而被取消。\n请再试一次！",
   "traceability": "可追溯性",
   "property_traceability": "财产可追溯性",
@@ -1098,13 +1098,11 @@
   "there_are_no_voucher": "没有可用的优惠券!",
   "voucher_manage": "优惠券管理",
   "value_of_the_voucher": "优惠券的价值用于折扣",
-  "are_you_sure_want_buy_voucher": "您确定要购买此优惠券吗?",
   "transaction_cant_refund": "已进行的交易不能退款!",
   "discount_voucher": "折扣优惠券",
   "apply_all_hotel_system": "适用于所有酒店系统",
   "this_voucher_is_valid": "此优惠券有效期至",
   "this_voucher_not_apply_other_hotel": "此优惠券不适用于其他酒店。",
-  "buy_voucher": "购买优惠券",
   "apply_voucher": "应用优惠券",
   "add": "添加",
 
@@ -1139,7 +1137,7 @@
   "this_is_type_point": "这是应用中使用的积分类型",
   "this_is_wallet_manage": "这是钱包管理代金券积分",
   "help_center": "帮助中心",
-  "how_to_add_pionechain": "如何将PioneerChain添加到MetaMask?",
+  "how_to_add_pionechain": "如何将Pione Chain添加到MetaMask?",
 
   "create_new_policy": "创建新政策",
   "you_have_not_select_facility": "您尚未选择设施",
@@ -1237,12 +1235,12 @@
 
   "policy_linked": "关联政策",
   "you_will_automatic_transfer": "您将自动转移到屏幕中",
-  "congratulate_on_receiving_coin": "恭喜你收到{unit}币！",
+  "congratulate_on_receiving_coin": "恭喜您获得积分 {unit}!",
   "enter_amount_withdraw": "输入您想提取的金额",
   "date_create": "创建日期",
 
   "create_wallet": "创建钱包",
-  "no_still_pay": "不，仍然使用PionePay付款",
+  "no_still_pay": "不，仍然使用HousePay付款",
   "do_you_want_create_wallet": "您想创建钱包并使用代金券支付以获得免费积分吗?",
 
   "please_choose_exact_location": "请在5米范围内选择一个精确的位置进行发布",
@@ -1264,7 +1262,7 @@
 
   "room_manage_detail": "房间管理详情",
   "share_detail_tour_short_video": "通过短视频分享您的旅游细节，这些视频将出现在趋势中！",
-  "no_pay_with": "不，使用 PionePay 支付",
+  "no_pay_with": "不，使用 HousePay 支付",
   "content_display": "内容 & 显示",
   "setting": "设置",
   "account_security": "账户 & 安全",
@@ -1351,5 +1349,38 @@
     "maximum_hours": "最大小时数为",
     "saved_file_successfully": "文件保存成功",
     "error_when_saving_file": "保存文件时出错",
-    "account": "账户"
+    "account": "账户",
+
+    "faucet_now": "Faucet 现在",
+    "video_size_limit_30mb": "视频大小限制为30MB，请选择更短的视频！",
+    "scan_qr_code": "扫描二维码",
+    "align_qr_code_to_the_frame": "对齐二维码到框架",
+    "remove_success": "删除成功",
+    "are_you_sure_want_remove_history_account": "您确定要删除账户历史记录吗？",
+    "remove_history_account": "已删除的历史记录无法恢复！",
+
+     "SWAP": "交换",
+     "complete_the_daily_tasks": "完成下面的日常任务即可立即领取奖励 {unit}。",
+
+     "create_real_estate_rental_listing": "创建出租房源",
+     "create_real_estate_sale_listing": "创建出售房源",
+     "create_tour_listing": "创建旅游行程",
+
+     "complete_task": "完成任务",
+        "officially_redeemable_after_airdrop": "{unit} 将在 Airdrop 计划结束后正式可用。快来完成任务领取奖励吧！",
+         "congratulations_reward_today": "恭喜你！你已领取今日奖励。明天再来继续完成任务吧！",
+         "my_id_address": "我的 ID 地址",
+          "reload": "重新加载",
+          "not_applicable": "不适用",
+          "enter_description": "输入描述",
+          "description_day": "日期描述",
+         "please_create_wallet": "请创建钱包以执行此功能！",
+
+         "are_you_sure_want_buy_voucher": "您确定要兑换此优惠券吗？",
+    "buy_voucher": "兑换优惠券",
+
+    "enter_point": "输入积分", 
+    "exchange_value_of_voucher": "这是代金券的兑换价值",
+    "search_province": "搜索省份"
+
 }

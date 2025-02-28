@@ -24,7 +24,7 @@ export default function PostNewsScreen() {
   };
 
   return (
-    <MainWrapper>
+    <MainWrapper refreshControl>
       <TabContent />
 
       {(profile?.role_id === 2 || profile?.role_id === undefined) &&

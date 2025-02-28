@@ -22,6 +22,7 @@ import DetailPriceRoom from './ContentStep1/DetailPriceRoom';
 import TopStep2 from './ContentStep2/TopStep2';
 import ModalBookingSuccess from './ContentStep2/ModalBookingSuccess';
 import {useLoading} from '../../../../hooks/useLoading';
+import {storage} from '../../../../utils/MMKVStorage';
 export default function ContentStep2({data}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
@@ -40,11 +41,17 @@ export default function ContentStep2({data}) {
   const bookingRoomMu = useMutation({
     mutationFn: postBookingRoom,
   });
+  useEffect(() => {
+    stopLoading();
+    return () => {
+      return setLoading(true);
+    };
+  }, []);
   const {start, countdown} = useCountdown(5);
 
   useEffect(() => {
     const loadInfoBooking = async () => {
-      const result = await EncryptedStorage.getItem('@infoBooking');
+      const result = await storage.getString('@infoBooking');
       setContact(JSON.parse(result));
     };
     loadInfoBooking();
@@ -71,6 +78,7 @@ export default function ContentStep2({data}) {
       },
     );
   };
+
   const isPending = useRef(false);
   const handleAlert = () => {
     if (typePayment === 'FIAT') {
@@ -211,14 +219,7 @@ export default function ContentStep2({data}) {
     }
     return false; // Default return value
   }, [priceVoucher, totalPrice, balance, typePayment]);
-  useEffect(() => {
-    if (typePayment === 'VOUCHER') {
-      stopLoading();
-      return () => {
-        return setLoading(true);
-      };
-    }
-  }, []);
+
   return (
     <View style={styles.container}>
       <TopStep2
@@ -236,6 +237,7 @@ export default function ContentStep2({data}) {
         isPending={isPending}
         check={check}
         countdown={countdown}
+        isBooking={true}
       />
       <View style={{...styles.footer, marginBottom: scale(10) + insets.bottom}}>
         <View style={styles.boxDetailPrice}>

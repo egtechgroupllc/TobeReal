@@ -79,7 +79,12 @@ export default function AdminManageTourScreen() {
   return (
     <MainWrapper scrollEnabled={false} refreshControl>
       <View
-        style={{alignItems: 'center', rowGap: scale(20), marginTop: scale(20)}}>
+        style={{
+          alignItems: 'center',
+          rowGap: scale(20),
+          marginTop: scale(20),
+          paddingHorizontal: scale(20),
+        }}>
         <CustomText textType="semiBold" style={{fontSize: SIZES.medium}}>
           {params?.name}
         </CustomText>
@@ -89,6 +94,7 @@ export default function AdminManageTourScreen() {
             borderRadius: scale(7),
             minHeight: scale(180),
             width: scale(450 / 1.4),
+            backgroundColor: COLORS.grey,
           }}>
           {params?.status && (
             <View

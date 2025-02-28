@@ -22,6 +22,28 @@ import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
 import Skeleton from '../../components/Skeleton';
 
+// Tách thành component con để tránh re-render không cần thiết
+const CountryItem = React.memo(({item, onPress, isChecked, isPhone}) => {
+  if (!item?.id) {
+    return <Skeleton height={scale(40)} />;
+  }
+
+  return (
+    <CheckBox
+      key={`key_${item?.id}`}
+      text={`${item?.flag || ''} ${item?.name}${
+        isPhone ? ` (${item?.phone_code})` : ''
+      }`}
+      textLeft
+      isRadio
+      onPress={() => onPress(item)}
+      isChecked={isChecked}
+      style={styles.checkBox}
+      fillColor={COLORS.primary}
+    />
+  );
+});
+
 export default function CountryScreen() {
   const {t} = useLanguage();
   const {setOptions, goBack} = useNavigation();
@@ -83,16 +105,34 @@ export default function CountryScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country?.name]);
 
+  // Tối ưu việc lọc dữ liệu bằng useMemo
   const dataNew = useMemo(() => {
-    const dataFilter = data?.data?.filter((item, index) => {
-      return item?.name?.toLowerCase().includes(deferredValue?.toLowerCase());
-    });
+    if (!data?.data || !deferredValue) return data?.data;
 
-    return dataFilter;
+    return data.data.filter(item =>
+      item?.name?.toLowerCase().includes(deferredValue.toLowerCase()),
+    );
   }, [data?.data, deferredValue]);
 
+  // Tối ưu callback để tránh tạo mới function mỗi lần render
+  const handleSelectCountry = React.useCallback(item => {
+    setCountry(item);
+  }, []);
+
+  const renderItem = React.useCallback(
+    ({item}) => (
+      <CountryItem
+        item={item}
+        onPress={handleSelectCountry}
+        isChecked={country?.id === item?.id}
+        isPhone={router?.isPhone}
+      />
+    ),
+    [country?.id, handleSelectCountry, router?.isPhone],
+  );
+
   return (
-    <MainWrapper>
+    <MainWrapper scrollEnabled={false}>
       <View style={styles.content}>
         <CustomInput
           placeholder={t('search')}
@@ -108,30 +148,18 @@ export default function CountryScreen() {
           contentContainerStyle={{
             paddingBottom: insets.bottom + scale(20),
             rowGap: scale(6),
+            paddingHorizontal: scale(5),
           }}
           keyExtractor={(item, index) =>
             `key_${item?.id}-${item?.name}-${index}`
           }
           showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => <EmptyData />}
-          renderItem={({item}) =>
-            item?.id ? (
-              <CheckBox
-                key={`key_${item?.id}`}
-                text={`${item?.flag ? item?.flag : ''} ${item?.name}${
-                  router?.isPhone ? ` (${item?.phone_code})` : ''
-                }`}
-                textLeft
-                isRadio
-                onPress={() => setCountry(item)}
-                isChecked={country?.id === item?.id}
-                style={styles.checkBox}
-                fillColor={COLORS.primary}
-              />
-            ) : (
-              <Skeleton height={scale(40)} />
-            )
-          }
+          ListEmptyComponent={EmptyData}
+          renderItem={renderItem}
+          removeClippedSubviews={true}
+          maxToRenderPerBatch={10}
+          windowSize={10}
+          initialNumToRender={10}
         />
       </View>
     </MainWrapper>
@@ -151,7 +179,6 @@ const styles = StyleSheet.create({
     marginTop: scale(20),
     borderRadius: scale(6),
     rowGap: scale(16),
-    padding: scale(14),
     flex: 1,
   },
   indexLetterStyle: {

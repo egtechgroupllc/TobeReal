@@ -92,12 +92,13 @@ export default function Posted({dataPost}) {
       'estate',
       'list-post',
       {
-        estate_type_id: 1,
+        estate_type_id: dataPost?.estate_type_id,
         country_id: country?.country_id,
       },
     ],
     queryFn: () => getListSell({country_id: country?.country_id}),
   });
+
   const dataFilter = data?.data?.rows.filter((item, index) => {
     if (item?.contact_name === dataPost?.contact_name) {
       return item;

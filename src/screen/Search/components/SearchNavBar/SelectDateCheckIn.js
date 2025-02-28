@@ -16,7 +16,7 @@ const SelectDateCheckIn = memo(({data, onConfirm}) => {
       <BoxItem
         onPress={() => setIsOpenDate(true)}
         icon={<IconCalendar fill={COLORS.grey} />}
-        label={'Ngày nhận phòng'}
+        label={t('check_in')}
         name={formatDate(date, {
           dateStyle: 'EEEE, yyyy-MM-dd',
         })}

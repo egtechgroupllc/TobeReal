@@ -35,9 +35,13 @@ export default function PostConfigurationSellScreen() {
   const [openContact, setOpenContact] = useState(false);
   const isPending = useRef(false);
   const {stopLoading, setLoading} = useLoading();
-
+  const [isFirstTime, setIsFirstTime] = useState(false);
   const [check, setCheck] = useState(false);
   const {start, countdown} = useCountdown(5);
+  const dataStatusTask = queryClient.getQueryData([
+    'common',
+    'status-task',
+  ])?.data;
   useEffect(() => {
     if (!params?.package_post_item_id) {
       stopLoading();
@@ -165,6 +169,9 @@ export default function PostConfigurationSellScreen() {
         if (dataInside?.status) {
           if (!params?.package_post_item_id) {
             isPending.current = true;
+            if (!dataStatusTask?.is_received_airdrop_today) {
+              setIsFirstTime(true);
+            }
             setCheck({
               status: dataInside?.status,
               mess: t(dataInside?.message),
@@ -256,6 +263,7 @@ export default function PostConfigurationSellScreen() {
         isPending={isPending}
         check={check}
         countdown={countdown}
+        isFirstTime={isFirstTime}
       />
       <View style={styles.footer}>
         <CustomButton

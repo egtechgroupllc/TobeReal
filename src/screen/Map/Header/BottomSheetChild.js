@@ -64,7 +64,7 @@ export default function BottomSheetChild({
   return (
     <>
       <BottomSheetTextInput
-        placeholder={t('Search province')}
+        placeholder={t('search_province')}
         onChangeText={setSearch}
         style={styles.input}
       />

@@ -87,16 +87,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     rowGap: scale(10),
     marginTop: scale(20),
+    paddingBottom: scale(120),
   },
   box: {
     backgroundColor: COLORS.white,
-    borderColor: COLORS.pioBox,
+
     padding: scale(10),
     borderRadius: scale(6),
     rowGap: scale(10),
     width: '90%',
     ...SHADOW,
     borderWidth: 1,
+    borderColor: COLORS.pioBox,
   },
   icon: {
     color: COLORS.white,

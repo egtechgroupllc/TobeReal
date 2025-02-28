@@ -1,4 +1,4 @@
-import {Linking, StyleSheet, Text, View} from 'react-native';
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import {COLORS, SIZES, images, scale} from '../../../assets/constants';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,7 +17,7 @@ export default function ModalGift({
   onPressWallet,
   onPressCancel,
   dataCheckin,
-  amountPioneer,
+  amountPione,
 }) {
   const {t} = useLanguage();
   // const {data} = useQuery({
@@ -28,8 +28,19 @@ export default function ModalGift({
     queryKey: ['common', 'token-airdrop'],
     queryFn: () => getTokenAirdrop(),
   });
+
+  if (!open) return null;
   return (
-    <Modal isVisible={open} animationIn={'fadeIn'} animationOut={'fadeOut'}>
+    <TouchableOpacity
+      onPress={onPressCancel}
+      activeOpacity={1}
+      style={{
+        zIndex: 12,
+        position: 'absolute',
+        ...StyleSheet.absoluteFill,
+        paddingHorizontal: scale(20),
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      }}>
       <View style={styles.contact}>
         <View style={styles.contactHeader}>
           <IconSupporterYellow height={scale(20)} width={scale(20)} />
@@ -66,7 +77,7 @@ export default function ModalGift({
               width: scale(200),
               textAlign: 'center',
             }}>
-            + {dataCheckin?.data?.amount} {getDataToken?.data?.name} (
+            + {dataCheckin?.userRewards?.point} {getDataToken?.data?.name} (
             {getDataToken?.data?.symbol})
           </CustomText>
           {!dataP?.data?.wallet_address ? (
@@ -102,7 +113,7 @@ export default function ModalGift({
             </>
           ) : (
             <>
-              {amountPioneer?.balance > 0.1 ? (
+              {amountPione?.balance > 0.1 ? (
                 <View style={{flexDirection: 'row', columnGap: scale(10)}}>
                   <CustomButton
                     text={t('skip')}
@@ -131,7 +142,7 @@ export default function ModalGift({
                       width: scale(300),
                       textAlign: 'center',
                     }}>
-                    {t('your_balance_fee_gas_not_enough', {unit: 'Pioneer'})}!
+                    {t('your_balance_fee_gas_not_enough', {unit: 'PZO'})}!
                   </CustomText>
                   <View style={{flexDirection: 'row', columnGap: scale(10)}}>
                     <CustomButton
@@ -146,14 +157,14 @@ export default function ModalGift({
                         borderColor: COLORS.grey,
                       }}
                     />
-                    <CustomButton
+                    {/* <CustomButton
                       text={t('Faucet now')}
                       buttonType="small"
                       styleWrapper={{width: scale(120)}}
                       onPress={() =>
                         Linking.openURL('https://faucet.zeroscan.org/faucet')
                       }
-                    />
+                    /> */}
                   </View>
                 </View>
               )}
@@ -161,7 +172,7 @@ export default function ModalGift({
           )}
         </View>
       </View>
-    </Modal>
+    </TouchableOpacity>
   );
 }
 

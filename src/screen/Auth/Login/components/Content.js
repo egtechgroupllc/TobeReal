@@ -18,6 +18,7 @@ import {
   validateMinLengthText,
 } from '../../../../utils/validate';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -42,12 +43,12 @@ export default function Content() {
   };
 
   const onSavedEmail = async data => {
-    const result = await EncryptedStorage.getItem('@save_email');
+    const result = await storage.getString('@save_email');
     // const result = await EncryptedStorage.removeItem('@save_email');
     const arrsdf = result
       ? JSON.parse(result)?.filter(item => item.email !== data?.email)
       : [];
-    await EncryptedStorage.setItem(
+    await storage.set(
       '@save_email',
       JSON.stringify(
         result

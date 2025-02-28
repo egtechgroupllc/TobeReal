@@ -3450,8 +3450,8 @@ export function IconCheckedVoucher({fill, ...props}) {
 export function IconLogoPione({fill, ...props}) {
   return (
     <Svg
-      width={props?.style?.width || scale(12)}
-      height={props?.style?.height || scale(12)}
+      width={props?.style?.width || scale(20)}
+      height={props?.style?.height || scale(20)}
       viewBox="0 0 383 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

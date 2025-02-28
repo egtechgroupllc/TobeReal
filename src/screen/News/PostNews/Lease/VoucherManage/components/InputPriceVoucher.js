@@ -2,7 +2,11 @@ import {useQuery} from '@tanstack/react-query';
 import React, {memo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {getListConstant, getToken} from '../../../../../../Model/api/common';
+import {
+  getListConstant,
+  getToken,
+  getTokenAirdrop,
+} from '../../../../../../Model/api/common';
 import {COLORS, SIZES, scale} from '../../../../../../assets/constants';
 import {IconCheckBox} from '../../../../../../assets/icon/Icon';
 import CustomText from '../../../../../../components/CustomText';
@@ -27,6 +31,7 @@ export default memo(function InputPriceVoucher({
   priceDiscount,
   namePrice,
   enableFormatNum,
+  point,
 }) {
   const {t} = useLanguage();
   const {watch} = useForm();
@@ -55,22 +60,32 @@ export default memo(function InputPriceVoucher({
           requireField(t('this_field_required')),
           validateMinAmount(
             `${t('minimum_amount')} ${formatPrice(0.001, {
-              currency: getDataToken?.data?.symbol,
+              // currency: getDataToken?.data?.symbol,
+              showCurrency: false,
               decimalPlaces: 10,
             })}`,
             0.001,
           ),
         ]}
-        placeholder={t('enter_price')}
+        placeholder={t('enter_point')}
         style={styles.textInput}
         namePrice={namePrice}
         enableFormatNum={enableFormatNum}
         // onChangeCurrency={value => setTypeCurrency(currency?.currency_code)}
       />
-      {priceDiscount && (
-        <CustomText color={COLORS.text}>{t('value_of_the_voucher')}</CustomText>
+      {point && (
+        <CustomText color={COLORS.text}>
+          *{t('note')}: {t('exchange_value_of_voucher')}
+        </CustomText>
       )}
-      {!priceDiscount && (
+
+      {priceDiscount && (
+        <CustomText color={COLORS.text}>
+          *{t('note')}: {t('value_of_the_voucher')}
+        </CustomText>
+      )}
+
+      {/* {!priceDiscount && (
         <View
           style={{
             rowGap: scale(5),
@@ -94,15 +109,6 @@ export default memo(function InputPriceVoucher({
               </CustomText>
             </CustomText>
 
-            {/* <View
-            style={{
-              marginLeft: scale(10),
-            }}>
-            <ItemUtil Icon={IconCheckBox} value={t('help_in_language')} />
-            <ItemUtil Icon={IconCheckBox} value={t('save_time_automatic')} />
-            <ItemUtil Icon={IconCheckBox} value={t('we_will_promote')} />
-          </View> */}
-
             <CustomText
               color={COLORS.primary}
               textType="semiBold"
@@ -111,18 +117,20 @@ export default memo(function InputPriceVoucher({
                 priceValue -
                   priceValue * data?.data?.fee_commission_percent_voucher,
                 {
-                  currency: getDataToken?.data?.symbol,
-                  locales: 'vi',
+                  // currency: getDataToken?.data?.symbol,
+                  // locales: 'vi',
+                  showCurrency: false,
                   decimalPlaces: 12,
                 },
               )}{' '}
+              {namePrice}
               <CustomText textType="medium" size={SIZES.xMedium}>
                 {t('your_revenue')}
               </CustomText>
             </CustomText>
           </Collapsible>
         </View>
-      )}
+      )} */}
     </View>
   );
 });

@@ -14,6 +14,7 @@ export default function EmptyData({
   image,
   iconEmpty,
   styleWrapper,
+  styleText,
 }) {
   const {navigate} = useNavigation();
   const {t} = useLanguage();
@@ -26,11 +27,7 @@ export default function EmptyData({
           style={styles.img}
         />
       )}
-      <CustomText
-        textType="bold"
-        style={{
-          fontSize: SIZES.medium,
-        }}>
+      <CustomText textType="bold" style={[styles.text, styleText]}>
         {desc || t('no_data')}
       </CustomText>
 
@@ -63,5 +60,8 @@ const styles = StyleSheet.create({
   img: {
     width: scale(220),
     height: scale(220),
+  },
+  text: {
+    fontSize: SIZES.medium,
   },
 });

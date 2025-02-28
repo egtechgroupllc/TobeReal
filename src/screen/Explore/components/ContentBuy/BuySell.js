@@ -14,6 +14,7 @@ import {getListSell} from '../../../../Model/api/apiEstate';
 import InViewport from '../../../../components/InViewport';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import BoxPlaceItemLoading from '../ContentAccommodation/BoxPlaceItem/BoxPlaceItemLoading';
+import {storage} from '../../../../utils/MMKVStorage';
 
 export default function BuySell({data, isLoading, country}) {
   const {t} = useLanguage();
@@ -36,9 +37,10 @@ export default function BuySell({data, isLoading, country}) {
 
   useEffect(() => {
     const loadSavedName = async () => {
-      const result = await EncryptedStorage.getItem('@save_name_estate');
-
-      setListSavedName(JSON.parse(result));
+      const result = await storage.getString('@save_name_estate');
+      if (result) {
+        setListSavedName(JSON.parse(result));
+      }
     };
     loadSavedName();
   }, []);
@@ -85,7 +87,7 @@ export default function BuySell({data, isLoading, country}) {
         }
         // onPressCategory={item => console.log(item)}
         heading={title}
-        subHeading={t('There are 1,000,000 Real Estate')}
+        // subHeading={t('There are 1,000,000 Real Estate')}
         styleWrapper={{backgroundColor: '#2A2A2A10'}}>
         <FlatList
           horizontal

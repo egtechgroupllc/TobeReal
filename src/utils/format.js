@@ -3,6 +3,7 @@ import {vi} from 'date-fns/locale';
 import {COUNTRY_KEY} from '../context/CountryContent';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useLanguage} from '../hooks/useLanguage';
+import {storage} from './MMKVStorage';
 
 export const formatPrice = (
   price = 0,
@@ -75,13 +76,14 @@ function formatWithComma(value, suffix) {
   return formattedValue.replace('.', ',') + suffix;
 }
 
-const getCountry = async () => {
-  const countryStorage = await EncryptedStorage.getItem(COUNTRY_KEY);
-  return JSON.parse(countryStorage)?.iso2;
-};
+// const getCountry = () => {
+//   const countryStorage = storage.getString(COUNTRY_KEY);
 
-let countrya = '';
-getCountry().then(item => (countrya = item));
+//   return JSON.parse(countryStorage || '{}')?.iso2;
+// };
+
+// let countrya = '';
+// getCountry().then(item => (countrya = item));
 
 export const formatDate = (
   date = new Date(),

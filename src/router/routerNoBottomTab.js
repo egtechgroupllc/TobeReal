@@ -25,6 +25,7 @@ import {
   AccommoManagementScreen,
   AddPolicyScreen,
   FeaturesPolicyScreen,
+  PostNewLeaseScreen,
 } from '../screen/News/PostNews/Lease';
 import {AddRoomTypeScreen} from '../screen/News/PostNews/Lease/AddRoomType';
 import AdminManageLeaseScreen from '../screen/News/PostNews/Lease/AdminManageLeaseScreen';
@@ -36,8 +37,11 @@ import PolicyManageScreen from '../screen/News/PostNews/Lease/components/AdminAc
 import DetailRoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/DetailRoomManageScreen';
 import PolicyToRoomScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/PolicyToRoomScreen';
 import RoomManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomManageScreen';
-import {SellManagementScreen} from '../screen/News/PostNews/Sell';
-import {AddTicketScreen} from '../screen/News/PostNews/Tour';
+import {
+  PostNewSellScreen,
+  SellManagementScreen,
+} from '../screen/News/PostNews/Sell';
+import {AddTicketScreen, PostNewTourScreen} from '../screen/News/PostNews/Tour';
 import TourManagementScreen from '../screen/News/PostNews/Tour/TourManagementScreen';
 import AdminManageTourScreen from '../screen/News/PostNews/Tour/components/AdminManageTourScreen';
 import TicketManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketManageScreen';
@@ -77,6 +81,7 @@ import DailyCheckinScreen from '../screen/DailyCheckin/DailyCheckinScreen';
 import RoomPriceManageScreen from '../screen/News/PostNews/Lease/components/AdminAccom/RoomManage/RoomPriceManageScreen';
 import TicketPriceManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketPriceManageScreen';
 import RepostExpiredScreen from '../screen/News/PostNews/components/RepostExpiredScreen';
+import EditorScreen from '../screen/News/PostNews/Tour/components/PostNewTour/EditorScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -196,6 +201,10 @@ export default routerNoBottomTab = [
   {
     name: 'DetailRoomScreen',
     component: DetailRoomScreen,
+  },
+  {
+    name: 'EditorScreen',
+    component: EditorScreen,
   },
   // {
   //   name: 'SellManagementScreen',
@@ -396,5 +405,17 @@ export default routerNoBottomTab = [
   {
     name: 'RepostExpiredScreen',
     component: RepostExpiredScreen,
+  },
+  {
+    name: 'PostNewLeaseScreen',
+    component: PostNewLeaseScreen,
+  },
+  {
+    name: 'PostNewTourScreen',
+    component: PostNewTourScreen,
+  },
+  {
+    name: 'PostNewSellScreen',
+    component: PostNewSellScreen,
   },
 ];

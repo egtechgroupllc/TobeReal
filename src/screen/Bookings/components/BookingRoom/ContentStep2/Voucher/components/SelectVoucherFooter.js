@@ -58,13 +58,11 @@ export default function SelectVoucherFooter({
             flexDirection: 'row',
             alignItems: 'center',
             borderRadius: scale(10),
-            borderWidth: 1,
-            borderColor: COLORS.primary,
           }}>
-          <CustomText>{t('quantity')}:</CustomText>
+          {/* <CustomText>{t('quantity')}:</CustomText> */}
           <Counter
             heading={t('adult')}
-            styleWrapper={{width: '30%'}}
+            styleWrapper={{width: '40%'}}
             onChange={setQuantity}
             value={quantity}
             max={numQuantity}
@@ -82,7 +80,7 @@ export default function SelectVoucherFooter({
         }}
         buttonType="small"
         style={{flex: 0.5}}
-        text={!buyVoucher ? t('apply') : t('BUY')}
+        text={!buyVoucher ? t('apply') : t('SWAP')}
         styleText={{
           fontSize: SIZES.xMedium,
         }}
@@ -94,6 +92,8 @@ export default function SelectVoucherFooter({
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: COLORS.white,
+    borderTopWidth: 1,
+    borderColor: COLORS.pioBox,
     flexDirection: 'row',
     columnGap: scale(20),
     paddingVertical: scale(8),

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
@@ -9,9 +9,35 @@ import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockC
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 
-export default function TopProfile({name, data}) {
+export default function TopProfile({name, data, userLevelInfo}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
+  const currentLevel = userLevelInfo?.currentLevel?.level;
+  const currentMinScore = userLevelInfo?.currentLevel?.min_score || 0;
+  const nextMinScore = userLevelInfo?.nextLevel?.min_score || 0;
+
+  const expSinceLevelUp = data?.score - currentMinScore;
+
+  const expToNextLevel = nextMinScore - currentMinScore;
+
+  const levelImage = useMemo(() => {
+    switch (currentLevel) {
+      case 1:
+        return images.lv1;
+      case 2:
+        return images.lv2;
+      case 3:
+        return images.lv3;
+      case 4:
+        return images.lv4;
+      case 5:
+        return images.lv5;
+      case 6:
+        return images.lv6;
+      default:
+        return images.lv1;
+    }
+  }, [currentLevel]);
 
   return (
     <View style={styles.wrapper}>
@@ -25,25 +51,50 @@ export default function TopProfile({name, data}) {
           }
           style={styles.avatar}
         />
-        <IconCheck style={styles.iconCheck} size={scale(16)} />
+
+        <CustomImage source={levelImage} style={styles.iconCheck} />
       </View>
 
       <CustomText textType="bold" size={SIZES.medium}>
         {name}
       </CustomText>
 
-      <View style={styles.info}>
-        <CustomText color={COLORS.text}>{data?.phone}</CustomText>
+      {data?.phone && (
+        <View style={styles.info}>
+          <CustomText color={COLORS.text}>{data?.phone}</CustomText>
 
-        <View style={styles.boxVerify}>
-          <CustomText
-            color={COLORS.white}
-            size={SIZES.xSmall}
-            textType="medium">
-            {t('verified')}
+          <View style={styles.boxVerify}>
+            <CustomText
+              color={COLORS.white}
+              size={SIZES.xSmall}
+              textType="medium">
+              {t('verified')}
+            </CustomText>
+          </View>
+        </View>
+      )}
+
+      <View style={styles.expContainer}>
+        <View style={styles.expInfo}>
+          <CustomText size={SIZES.small} color={COLORS.text}>
+            Level {userLevelInfo?.currentLevel?.level}
+          </CustomText>
+          <CustomText size={SIZES.xSmall} color={COLORS.gray}>
+            {expSinceLevelUp}/{expToNextLevel} EXP
           </CustomText>
         </View>
+        <View style={styles.expBarContainer}>
+          <View
+            style={[
+              styles.expBarFill,
+              {
+                width: `${(expSinceLevelUp / expToNextLevel) * 100}%`,
+              },
+            ]}
+          />
+        </View>
       </View>
+
       <TouchableOpacity
         onPress={() =>
           navigate('NavigationProfile', {
@@ -131,12 +182,15 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     borderWidth: 3,
     borderColor: COLORS.white,
+    backgroundColor: COLORS.grey,
   },
   iconCheck: {
     position: 'absolute',
     zIndex: 9,
     bottom: 0,
     right: 0,
+    width: scale(20),
+    height: scale(20),
   },
   info: {
     flexDirection: 'row',
@@ -176,5 +230,27 @@ const styles = StyleSheet.create({
         rotate: '-19deg',
       },
     ],
+  },
+  expContainer: {
+    paddingBottom: scale(10),
+    width: '100%',
+    paddingHorizontal: scale(40),
+  },
+  expInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: scale(4),
+  },
+  expBarContainer: {
+    height: scale(6),
+    backgroundColor: COLORS.grey,
+    borderRadius: scale(3),
+    overflow: 'hidden',
+  },
+  expBarFill: {
+    height: '100%',
+    backgroundColor: COLORS.primary,
+    borderRadius: scale(3),
   },
 });

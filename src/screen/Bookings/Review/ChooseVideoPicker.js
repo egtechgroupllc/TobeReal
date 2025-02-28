@@ -11,6 +11,7 @@ import {useLanguage} from '../../../hooks/useLanguage';
 import {arrayToObject} from '../../../utils/arrayToObject';
 import VideoItem from './VideoItem';
 import Video from 'react-native-video';
+import {showMess} from '../../../assets/constants/Helper';
 export default memo(function ChooseVideoPicker({
   title,
   subHeading,
@@ -45,21 +46,15 @@ export default memo(function ChooseVideoPicker({
       },
       response => {
         if (response.assets) {
-          // const timeNu = new Date().getTime();
-          // const dataImages = response.assets.map((item, index) => {
-          //   return {
-          //     name: timeNu + item.fileName,
-          //     type: item.type,
-          //     id: index + timeNu,
-          //     description: '',
-          //     uri:
-          //       Platform.OS === 'ios'
-          //         ? item.uri.replace('file://', '')
-          //         : item.uri,
-          //   };
-          // });
+          // Kiểm tra kích thước file
+          const fileSize = response.assets[0].fileSize; // Kích thước tính bằng bytes
+          const fileSizeInMB = fileSize / (1024 * 1024); // Chuyển đổi sang MB
 
-          // onChange(isAddMore ? [...dataImages, ...value] : dataImages);
+          if (fileSizeInMB > 30) {
+            showMess(t('video_size_limit_30mb'), 'error');
+            return;
+          }
+
           onChange(response.assets);
           onSelect && onSelect(dataImages);
         }

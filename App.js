@@ -260,7 +260,7 @@ const Layout = () => {
       });
 
       socket.on('user_notification', value => {
-        console.log('user_notification:', value);
+        // console.log('user_notification:', value);
 
         PushNotification.localNotification({
           channelId: '1',
@@ -271,7 +271,7 @@ const Layout = () => {
               value?.content_replacements,
             ) || 'You have a new message.',
           playSound: true,
-          color: 'yellow',
+          color: 'blue',
           soundName: 'default',
           smallIcon: 'ic_logo',
           largeIcon: '',
@@ -292,6 +292,7 @@ const Layout = () => {
         contentStyle: {
           backgroundColor: '#f7f9fa',
         },
+
         header: props => <HeaderBar {...props} />,
       }}
       initialRouteName="BottomTab">

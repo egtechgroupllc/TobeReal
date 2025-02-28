@@ -117,6 +117,8 @@ export default function TicketItem({
           flex: 1,
           borderRadius: scale(10),
           ...SHADOW,
+          borderWidth: 1,
+          borderColor: COLORS.pioBox,
         }}>
         {today > TicketLast?.date && (
           <View

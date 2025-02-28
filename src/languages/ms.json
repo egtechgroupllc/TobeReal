@@ -1061,7 +1061,7 @@
   "look_up_transaction": "Cari sejarah transaksi",
   "token_balance_available": "Baki {unit} (tersedia untuk dikeluarkan ke dompet)",
   "active_to_use_wallet": "Aktifkan untuk menggunakan Dompet {unit}",
-  "active_2_types_wallet": "Aktifkan 2 jenis dompet: PionePay, dompet mata wang kripto dan nikmati pembayaran yang cepat, selamat",
+  "active_2_types_wallet": "Aktifkan 2 jenis dompet: HousePay, dompet mata wang kripto dan nikmati pembayaran yang cepat, selamat",
   "your_transaction_has_been_canceled": "Transaksi anda telah dibatalkan kerana \n ralat semasa proses tempahan. \nSila cuba lagi!",
   "traceability": "Kebolehkesanan",
   "property_traceability": "Kebolehkesanan hartanah",
@@ -1078,13 +1078,11 @@
   "there_are_no_voucher": "Tiada voucher yang tersedia!",
   "voucher_manage": "Urus voucher",
   "value_of_the_voucher": "Nilai voucher digunakan untuk diskaun",
-  "are_you_sure_want_buy_voucher": "Adakah anda pasti mahu membeli voucher ini?",
   "transaction_cant_refund": "Transaksi yang dilakukan tidak boleh dikembalikan!",
   "discount_voucher": "Voucher diskaun",
   "apply_all_hotel_system": "Terpakai di semua sistem hotel",
   "this_voucher_is_valid": "Voucher ini sah sehingga",
   "this_voucher_not_apply_other_hotel": "Voucher ini tidak terpakai untuk hotel lain.",
-  "buy_voucher": "Beli voucher",
   "apply_voucher": "Guna voucher",
   "add": "Tambah",
 
@@ -1119,7 +1117,7 @@
   "this_is_type_point": "Ini adalah jenis mata yang digunakan dalam aplikasi",
   "this_is_wallet_manage": "Ini adalah pengurusan dompet mata baucar",
   "help_center": "Pusat bantuan",
-  "how_to_add_pionechain": "Bagaimana cara menambah PioneerChain ke MetaMask?",
+  "how_to_add_pionechain": "Bagaimana cara menambah Pione Chain ke MetaMask?",
 
   "create_new_policy": "Buat dasar baru",
   "you_have_not_select_facility": "Anda belum memilih kemudahan",
@@ -1218,12 +1216,12 @@
 
   "policy_linked": "Polisi dihubungkan",
   "you_will_automatic_transfer": "Anda akan dipindahkan secara automatik ke skrin dalam",
-  "congratulate_on_receiving_coin": "Tahniah kerana menerima syiling {unit}!",
+  "congratulate_on_receiving_coin": "Tahniah kerana menerima mata {unit}!",
   "enter_amount_withdraw": "Masukkan jumlah yang anda ingin keluarkan",
   "date_create": "Tarikh cipta",
 
   "create_wallet": "Buat dompet",
-  "no_still_pay": "Tidak, masih bayar dengan PionePay",
+  "no_still_pay": "Tidak, masih bayar dengan HousePay",
   "do_you_want_create_wallet": "Adakah anda mahu membuat dompet dan membayar dengan baucar untuk mendapatkan mata percuma?",
 
   "please_choose_exact_location": "Sila pilih lokasi yang tepat dalam lingkungan 5 meter untuk diposkan",
@@ -1245,7 +1243,7 @@
 
   "room_manage_detail": "Butiran pengurusan bilik",
   "share_detail_tour_short_video": "Kongsi butiran lawatan anda melalui video pendek, video ini akan muncul dalam tren!",
-  "no_pay_with": "Tidak, bayar dengan PionePay",
+  "no_pay_with": "Tidak, bayar dengan HousePay",
   "content_display": "Kandungan & Paparan",
   "setting": "Tetapan",
   "account_security": "Akaun & Keselamatan",
@@ -1332,5 +1330,39 @@
     "maximum_hours": "Jam maksimum ialah",
     "saved_file_successfully": "Berjaya menyimpan fail",
     "error_when_saving_file": "Ralat semasa menyimpan fail",
-     "account": "Akaun"
+    "account": "Akaun",
+
+    "faucet_now": "Faucet sekarang",
+    "video_size_limit_30mb": "Had saiz video 30MB, sila pilih video yang lebih pendek!",
+    "scan_qr_code": "Imbas kod QR",
+    "align_qr_code_to_the_frame": "Sejajarkan kod QR dengan bingkai",
+    "remove_success": "Berjaya dipadam",
+    "are_you_sure_want_remove_history_account": "Adakah anda pasti ingin memadam sejarah akaun?",
+    "remove_history_account": "Sejarah yang dipadam tidak boleh dipulihkan!",
+
+    "SWAP": "TUKAR",
+    "complete_the_daily_tasks": "Laksanakan tugas harian di bawah untuk menuntut ganjaran {unit} sekarang.",
+
+    "create_real_estate_rental_listing": "Buat senarai hartanah untuk disewa",
+    "create_real_estate_sale_listing": "Buat senarai hartanah untuk dijual",
+    "create_tour_listing": "Buat senarai lawatan",
+
+      "complete_task": "Laksanakan tugas",
+      "officially_redeemable_after_airdrop": "{unit} akan tersedia secara rasmi apabila program Airdrop berakhir. Cepat selesaikan tugas untuk mendapatkan ganjaran!",
+      "congratulations_reward_today": "Tahniah! Anda telah menerima ganjaran hari ini. Kembali esok untuk terus menyelesaikan tugas!",
+      "my_id_address": "Alamat ID saya",
+      "congratulations_experience": "Tahniah! Anda telah menerima {value} pengalaman.",
+      "reload": "Muat semula",
+      "not_applicable": "Tidak terpakai",
+      "enter_description": "Masukkan deskripsi",
+       "description_day": "Deskripsi hari",
+      "please_create_wallet": "Sila buat dompet untuk menjalankan fungsi ini!",
+
+       "are_you_sure_want_buy_voucher": "Adakah anda pasti ingin menukar baucar ini?",
+    "buy_voucher": "Tukar baucar",
+
+    "enter_point": "Masukkan mata", 
+    "exchange_value_of_voucher": "Ini adalah nilai pertukaran baucar",
+    "search_province": "Cari negeri" 
+
 }

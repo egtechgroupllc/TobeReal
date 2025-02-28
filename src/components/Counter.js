@@ -161,14 +161,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    width: scale(40),
+    width: scale(60),
     height: scale(30),
     borderRadius: scale(6),
     paddingHorizontal: scale(4),
   },
   icon: {
     color: COLORS.white,
-    width: scale(12),
+    width: scale(20),
     height: scale(12),
   },
 });

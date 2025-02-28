@@ -17,7 +17,7 @@ import {requireField, validateMinAmount} from '../../utils/validate';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {postWithdrawToken} from '../../Model/api/auth';
 import {showMess} from '../../assets/constants/Helper';
-import {getToken} from '../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../Model/api/common';
 
 export default function WithdrawTokenScreen() {
   const {setOptions, goBack} = useNavigation();
@@ -47,6 +47,10 @@ export default function WithdrawTokenScreen() {
           queryClient.invalidateQueries(['user', 'profile']);
           goBack();
         }
+      },
+      onError: err => {
+        console.log(err);
+        showMess(t('an_error_occured'), 'error');
       },
     });
   };
@@ -107,7 +111,8 @@ export default function WithdrawTokenScreen() {
             requireField(t('this_field_required')),
             validateMinAmount(
               `${t('minimum_amount')} ${formatPrice(0.01, {
-                currency: getDataToken?.data?.symbol,
+                // currency: getDataToken?.data?.symbol,
+                showCurrency: false,
                 decimalPlaces: 10,
               })}`,
               0.01,

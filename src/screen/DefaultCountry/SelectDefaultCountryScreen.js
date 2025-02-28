@@ -11,6 +11,7 @@ import {useLanguage} from '../../hooks/useLanguage';
 import CustomText from '../../components/CustomText';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {showMess} from '../../assets/constants/Helper';
+import {storage} from '../../utils/MMKVStorage';
 
 export default function SelectDefaultCountryScreen() {
   const navigation = useNavigation();
@@ -19,10 +20,7 @@ export default function SelectDefaultCountryScreen() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [country, setCountry] = useState(null);
   const onSaveLanguage = async () => {
-    await EncryptedStorage.setItem(
-      '@selectedLanguage',
-      JSON.stringify(selectedLanguage),
-    );
+    await storage.set('@selectedLanguage', JSON.stringify(selectedLanguage));
   };
   const selectCountry = () => {
     navigation.navigate('NoBottomTab', {
@@ -47,16 +45,25 @@ export default function SelectDefaultCountryScreen() {
   };
 
   const handleConfirm = () => {
-    if (country && selectedLanguage) {
+    if (country) {
       onSaveCountry(country);
       onSaveLanguage();
     } else {
-      showMess(
-        'Please select both of language and country to continue!',
-        'error',
-      );
+      showMess('Please select country to continue!', 'error');
     }
   };
+  useEffect(() => {
+    if (!selectedLanguage) {
+      setSelectedLanguage({
+        id: '1',
+        name: 'English',
+        flag: images.usa,
+        languageCode: 'en',
+        checked: false,
+      });
+    }
+  }, []);
+
   return (
     <MainWrapper>
       <View style={styles.contain}>
@@ -89,8 +96,12 @@ export default function SelectDefaultCountryScreen() {
           title={t('select_language')}
           onPress={selectLanguage}
           large={true}
-          IconSource={selectedLanguage?.name && selectedLanguage?.flag}
-          nameCountry={selectedLanguage?.name && selectedLanguage?.name}
+          IconSource={
+            selectedLanguage?.name ? selectedLanguage?.flag : images.usa
+          }
+          nameCountry={
+            selectedLanguage?.name ? selectedLanguage?.name : 'English'
+          }
         />
         <View style={{marginTop: scale(220), width: '60%'}}>
           <CustomButton

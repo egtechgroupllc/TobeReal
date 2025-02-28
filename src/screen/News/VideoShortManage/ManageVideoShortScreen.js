@@ -1,9 +1,22 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useLayoutEffect, useRef} from 'react';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {CustomText, MainWrapper} from '../../../components';
-import {COLORS, SIZES, WIDTH, scale} from '../../../assets/constants';
+import {
+  COLORS,
+  SIZES,
+  WIDTH,
+  animations,
+  scale,
+} from '../../../assets/constants';
 import {IconAdd} from '../../../assets/icon/Icon';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {getMyListVideoShort} from '../../../Model/api/common';
@@ -11,13 +24,15 @@ import {useQuery} from '@tanstack/react-query';
 import Video from 'react-native-video';
 import {ScrollView} from 'react-native-gesture-handler';
 import EmptyData from '../../../components/EmptyData';
+import AnimatedLottieView from 'lottie-react-native';
 
 export default function ManageVideoShortScreen() {
   const {setOptions, navigate} = useNavigation();
   const {t} = useLanguage();
   const params = useRoute().params;
   const {token} = useAuthentication();
-  const table_name =
+
+  const model_name =
     params?.accommodation?.id || params?.accomId
       ? 'accommodation'
       : params?.estateId
@@ -30,23 +45,35 @@ export default function ManageVideoShortScreen() {
     params?.estateId ||
     params?.tour?.id ||
     params?.tourId;
+
   const {data, isLoading, error} = useQuery({
     queryKey: [
       'common',
       'video-short',
       'my-list',
       {
-        table_name: table_name,
+        model_name: model_name,
         table_id: table_id,
       },
     ],
     queryFn: () =>
       getMyListVideoShort({
-        table_name: table_name,
+        model_name: model_name,
         table_id: table_id,
       }),
   });
+
   const videoRef = useRef();
+  const [loadingVideos, setLoadingVideos] = React.useState({});
+
+  const handleLoadStart = id => {
+    setLoadingVideos(prev => ({...prev, [id]: true}));
+  };
+
+  const handleLoad = id => {
+    setLoadingVideos(prev => ({...prev, [id]: false}));
+  };
+
   useLayoutEffect(() => {
     return setOptions({
       headerTitle: t('manage_video_short'),
@@ -139,10 +166,49 @@ export default function ManageVideoShortScreen() {
               repeat
               paused={true}
               resizeMode={'cover'}
+              onLoadStart={() => handleLoadStart(item.id)}
+              onLoad={() => handleLoad(item.id)}
             />
+            {loadingVideos[item.id] && (
+              <View
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'rgba(0,0,0,0.2)',
+                }}>
+                <ActivityIndicator color={COLORS.white} />
+              </View>
+            )}
           </TouchableOpacity>
         )}
       />
+      {isLoading && (
+        <View
+          style={{
+            flex: 1,
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            alignItems: 'center',
+            paddingTop: scale(200),
+            alignSelf: 'center',
+          }}>
+          <AnimatedLottieView
+            source={animations.pending}
+            autoPlay
+            loop
+            style={{
+              width: scale(150),
+              height: scale(150),
+            }}
+          />
+        </View>
+      )}
     </MainWrapper>
   );
 }

@@ -163,17 +163,17 @@ PODS:
     - hermes-engine/Pre-built (= 0.73.8)
   - hermes-engine/Pre-built (0.73.8)
   - libevent (2.1.12)
-  - libwebp (1.3.2):
-    - libwebp/demux (= 1.3.2)
-    - libwebp/mux (= 1.3.2)
-    - libwebp/sharpyuv (= 1.3.2)
-    - libwebp/webp (= 1.3.2)
-  - libwebp/demux (1.3.2):
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
     - libwebp/webp
-  - libwebp/mux (1.3.2):
+  - libwebp/mux (1.5.0):
     - libwebp/demux
-  - libwebp/sharpyuv (1.3.2)
-  - libwebp/webp (1.3.2):
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
   - lottie-ios (4.4.1)
   - lottie-react-native (6.7.2):
@@ -181,6 +181,9 @@ PODS:
     - lottie-ios (= 4.4.1)
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - MMKV (2.1.0):
+    - MMKVCore (~> 2.1.0)
+  - MMKVCore (2.1.1)
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -1092,11 +1095,16 @@ PODS:
     - React-Core
   - react-native-maps (1.10.3):
     - React-Core
+  - react-native-mmkv (2.10.1):
+    - MMKV (>= 1.2.13)
+    - React-Core
   - react-native-netinfo (11.3.0):
     - React-Core
   - react-native-pager-view (6.3.3):
     - glog
     - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - react-native-render-html (6.3.4):
     - React-Core
   - react-native-restart (0.0.27):
     - React-Core
@@ -1335,6 +1343,10 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SocketRocket (0.6.1)
+  - tentap (0.5.33):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - TOCropViewController (2.7.4)
   - Yoga (1.14.0)
 
@@ -1388,8 +1400,10 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-mmkv (from `../node_modules/react-native-mmkv`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
+  - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
@@ -1428,6 +1442,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - "tentap (from `../node_modules/@10play/tentap-editor`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1447,6 +1462,8 @@ SPEC REPOS:
     - GoogleUtilities
     - libevent
     - libwebp
+    - MMKV
+    - MMKVCore
     - nanopb
     - PromisesObjC
     - SDWebImage
@@ -1540,10 +1557,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-mmkv:
+    :path: "../node_modules/react-native-mmkv"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
+  react-native-render-html:
+    :path: "../node_modules/react-native-render-html"
   react-native-restart:
     :path: "../node_modules/react-native-restart"
   react-native-safe-area-context:
@@ -1620,6 +1641,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  tentap:
+    :path: "../node_modules/@10play/tentap-editor"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1646,9 +1669,11 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: b12d9bb1b7cee546f5e48212e7ea7e3c1665a367
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
   lottie-react-native: 2d9efc8a5ffabe688b55a1a1ac1fb94b9d971995
+  MMKV: ce484c1ac40bf76d5f09a0195d2ec5b3d3840d55
+  MMKVCore: 1eb661c6c498ab88e3df9ce5d8ff94d05fcc0567
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   QrCode: 703276888a8e1e5a77606392f82ce758d895a450
@@ -1683,8 +1708,10 @@ SPEC CHECKSUMS:
   react-native-image-picker: d3db110a3ded6e48c93aef7e8e51afdde8b16ed0
   react-native-keyboard-controller: 30f2304b54b2b34e9a6678c33d8ea12830b9cda1
   react-native-maps: 72a8a903f8a1b53e2c777ba79102078ab502e0bf
+  react-native-mmkv: dea675cf9697ad35940f1687e98e133e1358ef9f
   react-native-netinfo: 299dad906cdbf3b67bcc6f693c807f98bdd127cc
   react-native-pager-view: 4cc7e44dbc04cad0ca9e0a49c62c593d0fa793cc
+  react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-restart: 7595693413fe3ca15893702f2c8306c62a708162
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-slider: 09e5a8b7e766d3b5ae24ec15c5c4ec2679ca0f8c
@@ -1726,6 +1753,7 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  tentap: e340c1da88cdfecb228b08568d0890ba9bd541b9
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: e5b887426cee15d2a326bdd34afc0282fc0486ad
 

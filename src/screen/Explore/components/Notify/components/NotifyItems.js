@@ -116,6 +116,8 @@ const styles = StyleSheet.create({
     borderRadius: scale(8),
     alignItems: 'flex-start',
     ...SHADOW,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   boxItemContent: {
     flexDirection: 'row',

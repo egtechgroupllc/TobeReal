@@ -40,7 +40,7 @@ export default function PostReviewScreen() {
     queryFn: () =>
       getLinkData({
         token: token,
-        table_name: !paramData?.isTour ? 'accommodation' : 'tour',
+        model_name: !paramData?.isTour ? 'accommodation' : 'tour',
         table_id: paramData?.accommodation?.id || paramData?.tour?.id,
       }),
   });

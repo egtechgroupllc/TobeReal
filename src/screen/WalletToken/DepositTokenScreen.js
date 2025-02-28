@@ -14,7 +14,7 @@ import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showMess} from '../../assets/constants/Helper';
 import {IconError, IconHome} from '../../assets/icon/Icon';
-import {getToken} from '../../Model/api/common';
+import {getToken, getTokenAirdrop} from '../../Model/api/common';
 import {useQuery} from '@tanstack/react-query';
 
 export default function DepositTokenScreen() {
@@ -34,10 +34,12 @@ export default function DepositTokenScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleCopy = () => {
     Clipboard.setString(params?.data?.wallet_address);
     showMess(t('copy_success'));
   };
+
   const {data: getDataToken, error} = useQuery({
     queryKey: ['common', 'token'],
     queryFn: () => getToken(),
@@ -62,7 +64,7 @@ export default function DepositTokenScreen() {
             {params?.data?.wallet_address ? (
               <QRCode
                 size={scale(180)}
-                value={JSON.stringify(params?.data?.wallet_address)}
+                value={params?.data?.wallet_address}
                 color="#000"
               />
             ) : (
@@ -81,7 +83,7 @@ export default function DepositTokenScreen() {
           styleWrapper={{width: '50%', marginTop: scale(20)}}
           onPress={handleCopy}
         />
-        <CustomText
+        {/* <CustomText
           numberOfLines={2}
           textType="medium"
           style={{
@@ -90,20 +92,24 @@ export default function DepositTokenScreen() {
             fontSize: SIZES.medium,
           }}>
           {t('deposit_fee')}: 0
-        </CustomText>
-        <CustomText
-          style={{
-            width: scale(320),
-            marginTop: scale(30),
-          }}>
-          <IconError size={scale(12)} fill={COLORS.primary} />{' '}
-          {t('this_deposit_address')}
-          <CustomText textType="semiBold">
-            {' '}
-            {getDataToken?.data?.symbol}.TBRC20,
+        </CustomText> */}
+        {(params?.listToken?.address ||
+          params?.listToken?.symbol === 'PZO') && (
+          <CustomText
+            style={{
+              width: scale(350),
+              marginTop: scale(30),
+            }}>
+            <IconError size={scale(12)} fill={COLORS.primary} />{' '}
+            {t('this_deposit_address')}
+            <CustomText textType="semiBold">
+              {' '}
+              {params?.listToken?.symbol}
+              .ZORC20,{' '}
+            </CustomText>
+            {t('dont_deposit_other')}.
           </CustomText>
-          {t('dont_deposit_other')}.
-        </CustomText>
+        )}
       </View>
     </MainWrapper>
   );

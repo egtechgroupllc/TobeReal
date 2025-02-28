@@ -1,11 +1,19 @@
 import React, {memo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {images, scale} from '../../../../assets/constants';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import PackageTour from './PackageTour';
 import ThemedTour from './ThemedTour';
 import WorldTour from './WorldTour';
 import DiscoveryTour from './DiscoveryTour';
+import {CustomImage} from '../../../../components';
+import {showMess} from '../../../../assets/constants/Helper';
 const dataPackage = [
   {
     id: 1,
@@ -191,7 +199,7 @@ const dataInternational = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default memo(function ContentTour() {
+export default memo(function ContentTour({dataBanner}) {
   const [tourData, setTourData] = useState(dataDomestic);
 
   const handleCategoryChange = categoryData => {
@@ -205,6 +213,31 @@ export default memo(function ContentTour() {
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
+      {(Platform.OS === 'android'
+        ? dataBanner?.banner?.android?.is_show
+        : dataBanner?.banner?.ios?.is_show) && (
+        <TouchableOpacity
+          style={{paddingHorizontal: scale(12)}}
+          onPress={() => Linking.openURL('https://airdrop.pionechain.com')}
+          // onPress={() => showMess(t('comming_soon'), 'error')}
+        >
+          <CustomImage
+            source={{
+              uri:
+                Platform.OS === 'android'
+                  ? dataBanner?.banner?.android?.url
+                  : dataBanner?.banner?.ios?.url,
+            }}
+            style={{
+              width: '100%',
+              height: scale(180),
+              borderRadius: scale(20),
+              alignSelf: 'center',
+            }}
+            resizeMode="stretch"
+          />
+        </TouchableOpacity>
+      )}
       <PackageTour />
       {/* <ThemedTour data={dataThemed} /> */}
       <WorldTour />

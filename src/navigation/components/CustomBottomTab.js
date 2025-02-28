@@ -58,7 +58,7 @@ export function CustomBottomTab({state, descriptors, navigation}) {
       onLayout={onTabbarLayout}
       style={{
         flexDirection: 'row',
-        height: scale(55),
+        height: scale(20) * 3.2,
         alignItems: 'center',
         width: '97%',
         justifyContent: 'space-evenly',
@@ -67,7 +67,7 @@ export function CustomBottomTab({state, descriptors, navigation}) {
         position: 'absolute',
         borderWidth: 1,
         borderColor: COLORS.pioBox,
-        bottom: bottom,
+        bottom: bottom + scale(10),
         alignSelf: 'center',
         paddingHorizontal: horizontalSpacing,
         ...SHADOW,

@@ -8,6 +8,7 @@ import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import BoxItemProfile from './BoxItemProfile';
 import {useNavigation} from '@react-navigation/native';
+import {storage} from '../../../utils/MMKVStorage';
 
 export default function Content({token}) {
   const {t, locale} = useLanguage();
@@ -16,7 +17,7 @@ export default function Content({token}) {
 
   useEffect(() => {
     const loadSavedLanguage = async () => {
-      const result = await EncryptedStorage.getItem('@selectedLanguage');
+      const result = await storage.getString('@selectedLanguage');
       result && setSelectedLanguage(JSON.parse(result));
     };
     loadSavedLanguage();

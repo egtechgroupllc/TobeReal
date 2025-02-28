@@ -62,7 +62,7 @@ export default function TopImg({
         </View>
       )} */}
       {isHeart && <Favourite />}
-      {level && (
+      {/* {level && (
         <View
           style={{
             backgroundColor:
@@ -83,7 +83,7 @@ export default function TopImg({
             {dataPackagePost?.name}
           </CustomText>
         </View>
-      )}
+      )} */}
     </View>
   );
 }

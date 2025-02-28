@@ -1079,7 +1079,7 @@
   "look_up_transaction": "Hanapin ang kasaysayan ng transaksyon",
   "token_balance_available": "Balanse ng {unit} (magagamit upang i-withdraw sa pitaka)",
   "active_to_use_wallet": "I-activate upang magamit ang {unit} Wallet",
-  "active_2_types_wallet": "Aktibo ang 2 uri ng wallet: PionePay, cryptocurrency wallet at mag-enjoy ng mabilis at ligtas na pagbabayad",
+  "active_2_types_wallet": "Aktibo ang 2 uri ng wallet: HousePay, cryptocurrency wallet at mag-enjoy ng mabilis at ligtas na pagbabayad",
   "your_transaction_has_been_canceled": "Ang iyong transaksyon ay nakansela dahil sa \n isang error sa panahon ng proseso ng pag-book. \nMangyaring subukan muli!",
   "traceability": "Pagsubaybay",
   "property_traceability": "Pagsubaybay ng ari-arian",
@@ -1096,13 +1096,11 @@
   "there_are_no_voucher": "Walang magagamit na voucher!",
   "voucher_manage": "Pamamahala ng voucher",
   "value_of_the_voucher": "Ang halaga ng voucher ay ginagamit para mag-apply ng diskwento",
-  "are_you_sure_want_buy_voucher": "Sigurado ka bang gusto mong bilhin ang voucher na ito?",
   "transaction_cant_refund": "Ang mga transaksyon na ginawa ay hindi maaaring i-refund!",
   "discount_voucher": "Discount voucher",
   "apply_all_hotel_system": "Magagamit sa lahat ng sistema ng hotel",
   "this_voucher_is_valid": "Ang voucher na ito ay balido hanggang",
   "this_voucher_not_apply_other_hotel": "Ang voucher na ito ay hindi magagamit sa ibang mga hotel.",
-  "buy_voucher": "Bumili ng voucher",
   "apply_voucher": "I-apply ang voucher",
   "add": "Magdagdag",
 
@@ -1137,7 +1135,7 @@
   "this_is_type_point": "Ito ang mga uri ng puntos na ginagamit sa app",
   "this_is_wallet_manage": "Ito ang pamamahala ng wallet ng voucher point",
   "help_center": "Sentro ng tulong",
-  "how_to_add_pionechain": "Paano idagdag ang PioneerChain sa MetaMask?",
+  "how_to_add_pionechain": "Paano idagdag ang Pione Chain sa MetaMask?",
 
   "create_new_policy": "Gumawa ng bagong patakaran",
   "you_have_not_select_facility": "Hindi mo pa napili ang pasilidad",
@@ -1236,12 +1234,12 @@
 
   "policy_linked": "Naka-link na patakaran",
   "you_will_automatic_transfer": "Ikaw ay awtomatikong ililipat sa screen sa",
-  "congratulate_on_receiving_coin": "Binabati kita sa pagtanggap ng {unit} coin!",
+  "congratulate_on_receiving_coin": "Binabati kita sa pagtanggap ng puntos {unit}!",
   "enter_amount_withdraw": "Ilagay ang halagang nais mong i-withdraw",
   "date_create": "Petsa ng paglikha",
 
   "create_wallet": "Gumawa ng pitaka",
-  "no_still_pay": "Hindi, magbayad pa rin gamit ang PionePay",
+  "no_still_pay": "Hindi, magbayad pa rin gamit ang HousePay",
   "do_you_want_create_wallet": "Gusto mo bang gumawa ng pitaka at magbayad gamit ang voucher para makakuha ng libreng puntos?",
 
   "please_choose_exact_location": "Pakitukoy ang eksaktong lokasyon sa loob ng 5 metro para mag-post",
@@ -1263,7 +1261,7 @@
 
   "room_manage_detail": "Detalyeng pamamahala ng kwarto",
   "share_detail_tour_short_video": "I-share ang mga detalye ng iyong tour sa pamamagitan ng maiikli na video, ang mga video na ito ay lilitaw sa mga trend!",
-  "no_pay_with": "Hindi, magbayad gamit ang PionePay",
+  "no_pay_with": "Hindi, magbayad gamit ang HousePay",
   "content_display": "Nilalaman & Pagpapakita",
   "setting": "Setting",
   "account_security": "Account & Seguridad",
@@ -1350,5 +1348,39 @@
     "maximum_hours": "Maksimum na oras ay",
     "saved_file_successfully": "Matagumpay na na-save ang file",
     "error_when_saving_file": "Error sa pag-save ng file",
-    "account": "Acount"
+    "account": "Acount",
+
+    "faucet_now": "Faucet ngayon",
+   "video_size_limit_30mb": "Limitasyon sa laki ng video ay 30MB, mangyaring pumili ng mas maikling video!",
+    "scan_qr_code": "I-scan ang QR code",
+    "align_qr_code_to_the_frame": "I-align ang QR code sa frame",
+    "remove_success": "Matagumpay na natanggal",
+    "are_you_sure_want_remove_history_account": "Sigurado ka bang gusto mong tanggalin ang kasaysayan ng account?",
+    "remove_history_account": "Ang natanggal na kasaysayan ay hindi na maaaring maibalik!",
+
+    "SWAP": "PALITAN",
+    "complete_the_daily_tasks": "Gawin ang mga pang-araw-araw na gawain sa ibaba upang makuha ang mga gantimpala {unit} ngayon.",
+
+    "create_real_estate_rental_listing": "Gumawa ng listahan ng paupahang ari-arian",
+    "create_real_estate_sale_listing": "Gumawa ng listahan ng binebentang ari-arian",
+    "create_tour_listing": "Gumawa ng listahan ng tour",
+
+    "complete_task": "Gawin ang gawain",
+     "officially_redeemable_after_airdrop": "{unit} ay opisyal na magiging available kapag natapos na ang Airdrop program. Mabilisang kumpletuhin ang mga gawain upang makakuha ng gantimpala!",
+     "congratulations_reward_today": "Binabati kita! Natanggap mo na ang gantimpala para sa araw na ito. Bumalik bukas upang ipagpatuloy ang mga gawain!",
+     "my_id_address": "Ang aking ID address",
+     "congratulations_experience": "Binabati kita! Natanggap mo ang {value} karanasan.",
+     "reload": "I-reload",
+     "not_applicable": "Hindi naaangkop",
+     "enter_description": "Ilagay ang paglalarawan",
+     "description_day": "Paglalarawan ng araw",
+     "please_create_wallet": "Mangyaring lumikha ng wallet upang maisagawa ang function na ito!",
+
+     "are_you_sure_want_buy_voucher": "Sigurado ka bang gusto mong palitan ang voucher na ito?",
+    "buy_voucher": "Palitan ang voucher",
+
+    "enter_point": "Ipasok ang puntos", 
+    "exchange_value_of_voucher": "Ito ang halaga ng pagpapalit ng voucher",
+    "search_province": "Maghanap ng lalawigan"
+
 }

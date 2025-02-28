@@ -13,11 +13,12 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useFocusEffect, useIsFocused, useRoute} from '@react-navigation/native';
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
 import {getListVideoRandom} from '../../../Model/api/common';
-import {COLORS, animations, scale} from '../../../assets/constants';
+import {COLORS, WIDTH, animations, scale} from '../../../assets/constants';
 import VideoPlay from './VideoPlay';
 import EmptyData from '../../../components/EmptyData';
 import {showMess} from '../../../assets/constants/Helper';
 import LottieView from 'lottie-react-native';
+import AnimatedLottieView from 'lottie-react-native';
 
 export default function ListVideoBUY({isFocused}) {
   const {t} = useLanguage();
@@ -44,11 +45,11 @@ export default function ListVideoBUY({isFocused}) {
       'video-short',
       'list-random',
       'estate',
-      {table_name: 'estate', limit: 2},
+      {model_name: 'estate', limit: 2},
     ],
     queryFn: ({pageParam}) =>
       getListVideoRandom({
-        table_name: 'estate',
+        model_name: 'estate',
         page: pageParam,
         limit: 2,
       }),
@@ -74,16 +75,23 @@ export default function ListVideoBUY({isFocused}) {
       setVideoPlay(viewableItems[0].item?.id);
     }
   }, []);
-  const dataArr = useMemo(
-    () =>
-      data?.pages
-        .map(page => {
-          if (!page) return undefined;
-          return page?.data?.rows;
-        })
-        .flat(),
-    [data?.pages],
-  );
+  const dataArr = useMemo(() => {
+    const uniqueVideos = new Map();
+
+    data?.pages
+      .map(page => {
+        if (!page) return undefined;
+        return page?.data?.rows;
+      })
+      .flat()
+      .forEach(video => {
+        if (video && !uniqueVideos.has(video.id)) {
+          uniqueVideos.set(video.id, video);
+        }
+      });
+
+    return Array.from(uniqueVideos.values());
+  }, [data?.pages]);
   // useLayoutEffect(() => {
   //   scrollToIndex(params?.index);
   // }, [params?.index]);
@@ -177,6 +185,7 @@ export default function ListVideoBUY({isFocused}) {
         contentContainerStyle={{
           backgroundColor: '#000',
           justifyContent: 'center',
+          flex: dataArr?.length > 1 ? 0 : 1,
         }}
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={handlerViewableItemsChanged}
@@ -198,7 +207,29 @@ export default function ListVideoBUY({isFocused}) {
             </View>
           )
         }
-        ListEmptyComponent={<EmptyData styleWrapper={{marginTop: '50%'}} />}
+        ListEmptyComponent={
+          // <View
+          //   style={{
+          //     flex: 1,
+          //     position: 'absolute',
+          //     height: '100%',
+          //     width: '100%',
+          //     alignItems: 'center',
+          //     paddingTop: WIDTH.heightScreen / 1.5,
+          //     alignSelf: 'center',
+          //   }}>
+          //   <AnimatedLottieView
+          //     source={animations.pending}
+          //     autoPlay
+          //     loop
+          //     style={{
+          //       width: scale(150),
+          //       height: scale(150),
+          //     }}
+          //   />
+          // </View>
+          <EmptyData styleText={{color: COLORS.white}} />
+        }
         renderItem={({item, index}) => {
           return (
             <VideoPlay
@@ -214,7 +245,7 @@ export default function ListVideoBUY({isFocused}) {
               // }}
               // onComment={() => commentRef.current?.open()}
               styleBottom={{
-                paddingBottom: scale(100),
+                paddingBottom: scale(120),
               }}
               Bottom
               onComment={() => showMess(t('comming_soon'), 'error')}

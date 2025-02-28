@@ -25,7 +25,7 @@ export default function SetStartAccomo({onChange}) {
         <RadioButton
           key={index}
           isCheck={select === index}
-          title={!index && 'Không áp dụng'}
+          title={!index && t('not_applicable')}
           onPress={() => setSelect(index)}
           textComponent={
             !!index && (

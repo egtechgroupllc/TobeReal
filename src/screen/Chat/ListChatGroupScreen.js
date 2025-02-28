@@ -36,6 +36,7 @@ export default function ListChatGroupScreen() {
     enabled: !!token,
     refetchInterval: 5000,
   });
+
   const handleSearch = query => {
     setSearchQuery(query);
   };

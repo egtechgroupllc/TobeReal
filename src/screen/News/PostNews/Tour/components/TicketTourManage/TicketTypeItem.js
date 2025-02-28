@@ -59,6 +59,8 @@ export default function TicketTypeItem({
           flex: 1,
           borderRadius: scale(10),
           ...SHADOW,
+          borderWidth: 1,
+          borderColor: COLORS.pioBox,
         }}>
         <View style={styles.content}>
           <View

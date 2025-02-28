@@ -76,7 +76,7 @@ export default function GeneralInformation({
             label={t('real_estate_title')}
             name="name"
             control={control}
-            editable={params?.name ? false : true}
+            // editable={params?.name ? false : true}
             maxLength={100}
             placeholder={t('enter_real_estate_title')}
           />

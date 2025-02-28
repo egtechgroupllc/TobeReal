@@ -15,6 +15,7 @@ import malaysia from '../languages/ms.json';
 import indonesia from '../languages/id.json';
 import china from '../languages/zh.json';
 import getTranslations from '../utils/getTranslations';
+import {storage} from '../utils/MMKVStorage';
 interface LanguageTranslations {
   [locale: string]: {[key: string]: string};
 }
@@ -67,7 +68,7 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
 
   const changeLocale = async (newLocale: string) => {
     try {
-      await EncryptedStorage.setItem('selectedLanguage', newLocale);
+      await storage.set('selectedLanguage', newLocale);
       setLocale(newLocale);
     } catch (error) {
       console.log(error);
@@ -77,9 +78,7 @@ export const LanguageProvider = ({children}: {children: ReactNode}) => {
   useEffect(() => {
     const restoreSelectedLanguage = async () => {
       try {
-        const selectedLanguage = await EncryptedStorage.getItem(
-          'selectedLanguage',
-        );
+        const selectedLanguage = await storage.getString('selectedLanguage');
 
         if (selectedLanguage) {
           setLocale(selectedLanguage);

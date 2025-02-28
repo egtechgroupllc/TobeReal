@@ -85,11 +85,11 @@ export default function ItemTourSearch({
         onDetail();
       }}>
       <CustomImage source={data?.images?.[0]?.url} style={styles.img} />
-      <TopImg
+      {/* <TopImg
         // rating
         // isStar
         isHeart
-      />
+      /> */}
       <View
         style={{
           padding: scale(12),
@@ -140,7 +140,7 @@ export default function ItemTourSearch({
           <View style={{overflow: 'hidden', width: '100%'}}>
             <View style={styles.line} />
           </View>
-          {isDiscount && (
+          {/* {isDiscount && (
             <View
               style={{
                 ...styles.price,
@@ -152,22 +152,12 @@ export default function ItemTourSearch({
                   locales: 'en',
                 })}{' '}
               </CustomText>
-
-              {/* <CustomText
-                        textType="semiBold"
-                        style={{
-                          color: '#FF0000',
-                          fontSize: SIZES.xSmall,
-                          minWidth: scale(35),
-                        }}>
-                        20% OFF
-                      </CustomText> */}
             </View>
-          )}
+          )} */}
           <View
             style={{
               flexDirection: 'row',
-              marginTop: scale(5),
+              marginTop: scale(15),
               justifyContent: 'space-between',
             }}>
             <CustomText
@@ -195,7 +185,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#fff',
     width: '100%',
-    height: scale(240),
+    height: scale(220),
     borderRadius: scale(10),
     ...SHADOW,
   },

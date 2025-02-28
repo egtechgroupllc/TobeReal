@@ -4,13 +4,14 @@ import {handleLogoutExistToken} from './common';
 import {Alert} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {TOKEN_KEY} from '../../context/AuthContext';
+import {storage} from '../../utils/MMKVStorage';
 
 export const instanceAccom = axios.create({
   baseURL: `${baseUrl}/api/v1/accommodation`,
 });
 instanceAccom.interceptors.request.use(async req => {
   if (typeof window !== 'undefined') {
-    const storedToken = await EncryptedStorage.getItem(TOKEN_KEY);
+    const storedToken = await storage.getString(TOKEN_KEY);
 
     if (storedToken) {
       req.headers.Authorization = `Bearer ${storedToken}`;
@@ -28,7 +29,7 @@ instanceAccom.interceptors.response.use(
     if (error.response && error.response.status === 401 && countErr < 1) {
       Alert.alert(
         'Notification',
-        'Your account has been logged in from another device, please log in again!',
+        'Your session has expired or your account has been logged in on another device. Please log in again.',
         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
       );
 
@@ -105,8 +106,12 @@ export const postCreateAccommoLease = async data => {
 
   return responsive.data;
 };
-export const postUpdateAccom = async ({id_accom, formData}) => {
-  const responsive = await instanceAccom.post(`/${id_accom}/update`, formData, {
+export const postUpdateAccom = async ({id_accom, data}) => {
+  if (!data) {
+    throw new Error('Form data is required');
+  }
+
+  const responsive = await instanceAccom.post(`/${id_accom}/update`, data, {
     headers: {'Content-Type': 'multipart/form-data'},
   });
 

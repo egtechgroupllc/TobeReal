@@ -55,6 +55,7 @@ export default function PaymentMethods({onChange, onChangeBalance, isTour}) {
                 setMethodsPay(dataBack);
               },
               isTour: isTour,
+              ...profile,
             })
           }>
           {methodsPay ? t('see_all') : t('select')}
