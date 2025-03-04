@@ -1386,6 +1386,11 @@
     "buy_voucher": "Đổi voucher",
 
     "enter_point": "Nhập điểm", 
-    "exchange_value_of_voucher": "Đây là giá trị quy đổi của voucher" 
+    "exchange_value_of_voucher": "Đây là giá trị quy đổi của voucher",
+    "search_province":"Tìm tỉnh",
+
+    "delete_account_perman": "Xóa tài khoản vĩnh viễn",
+    "delete_account": "Xóa tài khoản",
+    "enter_delete_confirm": "Nhập 'Delete' để xác nhận"
 
 }

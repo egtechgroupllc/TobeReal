@@ -10,6 +10,7 @@ import {CustomersBuyScreen} from '../screen/Profile/Client/CustomersBuy';
 import {CustomersRentScreen} from '../screen/Profile/Client/CustomersRent';
 import CustomerManagementScreen from '../screen/Profile/CustomerManagement/CustomerManagementScreen';
 import {ListOfCustomersScreen} from '../screen/Profile/CustomerManagement/ListOfCustomers';
+import DeleteAccountScreen from '../screen/Profile/DeleteAccountScreen';
 
 import {DepositWithdrawScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw';
 import {AddBankScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw/AddBank';
@@ -120,5 +121,9 @@ export default routerProfile = [
   {
     name: 'ChangeAvatarScreen',
     component: ChangeAvatarScreen,
+  },
+  {
+    name: 'DeleteAccountScreen',
+    component: DeleteAccountScreen,
   },
 ];

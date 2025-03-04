@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   StyleSheet,
   TouchableHighlight,
@@ -9,6 +9,7 @@ import {
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {
   IconDeleteAccount,
+  IconDeleteText,
   IconHandShake,
   IconNext,
   IconPassword,
@@ -16,14 +17,42 @@ import {
   IconUnViewablePassword,
   IconViewablePassword,
 } from '../../assets/icon/Icon';
-import {CustomText, MainWrapper} from '../../components';
+import {CustomInput, CustomText, MainWrapper} from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useMutation} from '@tanstack/react-query';
+import {postDeleteAccount} from '../../Model/api/auth';
+import RNRestart from 'react-native-restart';
+import {showMess} from '../../assets/constants/Helper';
+import {useAuthentication} from '../../hooks/useAuthentication';
 
 export default function AccountAndSecurityScreen() {
   const {navigate, setOptions} = useNavigation();
-
+  const [deleteInput, setDeleteInput] = useState('');
   const {t} = useLanguage();
-
+  const [open, setOpen] = useState();
+  const {onClearToken} = useAuthentication();
+  const deleteMutation = useMutation({
+    mutationFn: postDeleteAccount,
+  });
+  const handleConfirm = () => {
+    deleteMutation.mutate(
+      {},
+      {
+        onSuccess: dataInside => {
+          if (dataInside?.status) {
+            showMess(t(dataInside?.data), 'success');
+            setTimeout(() => {
+              onClearToken();
+            }, 500);
+          }
+        },
+        onError: err => {
+          console.log(err);
+          showMess(t('an_error_occured'), 'error');
+        },
+      },
+    );
+  };
   return (
     <MainWrapper
       headerTitle={t('account_security')}
@@ -38,6 +67,7 @@ export default function AccountAndSecurityScreen() {
           title={t('account_information')}
           desc={t('personal_data')}
           nameScreen={'InformationScreen'}
+          fill={COLORS.black}
         />
 
         <Item
@@ -74,13 +104,102 @@ export default function AccountAndSecurityScreen() {
           desc={t('use_password_from_other_places')}
           nameScreen="ChangePasswordScreen"
         />
-
+        <Item
+          Icon={IconDeleteAccount}
+          title={t('delete_account')}
+          desc={t('delete_account_perman')}
+          onPress={() => setOpen(true)}
+        />
         {/* <Item
           Icon={Platform.OS === 'ios' ? IconFaceID : IconFingerprint}
           title={'Sinh trắc học'}
           desc={'Tất cả sinh trắc học trên thiết bị này đều có thể đăng nhập'}
         /> */}
       </Box>
+      {open && (
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Nền mờ
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+          }}>
+          <View
+            style={{
+              backgroundColor: COLORS.white,
+              width: scale(270),
+              padding: scale(16),
+              borderRadius: scale(10),
+              ...SHADOW,
+            }}>
+            {/* Tiêu đề */}
+            <CustomText textType="bold" size={SIZES.medium}>
+              {t('delete_account')}
+            </CustomText>
+            <CustomText size={SIZES.small} style={{marginVertical: scale(8)}}>
+              {t('delete_account_perman')}
+            </CustomText>
+
+            {/* Input */}
+            <CustomInput
+              value={deleteInput}
+              onChangeText={setDeleteInput}
+              placeholder={t('enter_delete_confirm')}
+              style={{
+                borderWidth: 1,
+                borderColor: COLORS.grey,
+                borderRadius: scale(5),
+                padding: scale(8),
+                marginBottom: scale(16),
+              }}
+            />
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                columnGap: scale(20),
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setOpen(false);
+                  setDeleteInput(''); // Reset input khi hủy
+                }}
+                style={{
+                  backgroundColor: COLORS.grey,
+                  padding: scale(10),
+                  borderRadius: scale(5),
+                  flex: 1,
+                  alignItems: 'center',
+                }}>
+                <CustomText textType="semiBold" color={COLORS.white}>
+                  {t('cancel')}
+                </CustomText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleConfirm()}
+                disabled={deleteInput !== 'Delete'} // Disable nếu input không đúng
+                style={{
+                  backgroundColor:
+                    deleteInput === 'Delete' ? COLORS.error : COLORS.grey,
+                  padding: scale(10),
+                  borderRadius: scale(5),
+                  flex: 1,
+                  alignItems: 'center',
+                }}>
+                <CustomText textType="semiBold" color={COLORS.white}>
+                  {t('confirm')}
+                </CustomText>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
     </MainWrapper>
   );
 }
@@ -106,18 +225,22 @@ const Box = ({title, desc, children}) => {
     </View>
   );
 };
-const Item = ({title, desc, Icon, nameScreen, onPress}) => {
+const Item = ({title, desc, Icon, nameScreen, onPress, fill}) => {
   const {navigate} = useNavigation();
 
   return (
     <TouchableOpacity
-      disabled={!nameScreen}
+      disabled={!nameScreen && !onPress}
       activeOpacity={0.7}
       style={styles.item}
       onPress={() => {
-        onPress ? onPress() : nameScreen && navigate(nameScreen);
+        if (onPress) {
+          onPress();
+        } else if (nameScreen) {
+          navigate(nameScreen);
+        }
       }}>
-      {Icon && <Icon size={scale(20)} />}
+      {Icon && <Icon size={scale(20)} fill={fill} />}
       <View
         style={{
           rowGap: scale(4),

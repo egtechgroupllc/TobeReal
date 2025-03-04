@@ -1381,6 +1381,10 @@
 
     "enter_point": "Ipasok ang puntos", 
     "exchange_value_of_voucher": "Ito ang halaga ng pagpapalit ng voucher",
-    "search_province": "Maghanap ng lalawigan"
+    "search_province": "Maghanap ng lalawigan",
+
+    "delete_account_perman": "Permanente na tanggalin ang account",
+    "delete_account": "Tanggalin ang account",
+    "enter_delete_confirm": "Ilagay ang 'Delete' upang kumpirmahin"
 
 }

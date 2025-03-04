@@ -1363,6 +1363,10 @@
 
     "enter_point": "Masukkan mata", 
     "exchange_value_of_voucher": "Ini adalah nilai pertukaran baucar",
-    "search_province": "Cari negeri" 
+    "search_province": "Cari negeri" ,
+
+    "delete_account_perman": "Padam akaun secara kekal",
+    "delete_account": "Padam akaun",
+    "enter_delete_confirm": "Masukkan 'Delete' untuk mengesahkan"
 
 }

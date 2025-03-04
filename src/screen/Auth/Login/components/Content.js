@@ -75,7 +75,6 @@ export default function Content() {
           onSaveToken(dataInside?.data?.token);
           onSavedEmail(dataInside?.data);
           showMess(t(dataInside?.message), 'success');
-          // navigate('HomeExploreScreen');
 
           setTimeout(() => {
             RNRestart.restart();

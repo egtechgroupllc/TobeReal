@@ -1357,7 +1357,9 @@
 
     "enter_point": "Masukkan poin", 
     "exchange_value_of_voucher": "Ini adalah nilai tukar voucher",
-    "search_province": "Cari provinsi"
+    "search_province": "Cari provinsi",
 
-
+    "delete_account_perman": "Hapus akun secara permanen",
+    "delete_account": "Hapus akun",
+    "enter_delete_confirm": "Masukkan 'Delete' untuk mengonfirmasi"
 }

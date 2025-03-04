@@ -15,7 +15,7 @@ export default function Info({data}) {
 
   return (
     <View style={{paddingVertical: scale(20), paddingHorizontal: scale(50)}}>
-      <View style={styles.boxInfoItem}>
+      {/* <View style={styles.boxInfoItem}>
         <View style={styles.boxIcon}>
           <IconCertificate
             style={{
@@ -51,7 +51,7 @@ export default function Info({data}) {
           }}>
           7 {t('year_paricipant')}
         </CustomText>
-      </View>
+      </View> */}
       <View style={styles.boxInfoItem}>
         <View style={styles.boxIcon}>
           <IconPhone

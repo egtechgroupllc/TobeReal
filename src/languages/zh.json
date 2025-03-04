@@ -1381,6 +1381,10 @@
 
     "enter_point": "输入积分", 
     "exchange_value_of_voucher": "这是代金券的兑换价值",
-    "search_province": "搜索省份"
+    "search_province": "搜索省份",
+
+    "delete_account_perman": "永久删除账户",
+    "delete_account": "删除账户",
+    "enter_delete_confirm": "输入 'Delete' 以确认"
 
 }

@@ -1395,5 +1395,9 @@
 
   "enter_point":"Enter point",
   "exchange_value_of_voucher":"This is the exchange value of the voucher",
-  "search_province":"Search province"
+  "search_province":"Search province",
+  
+  "delete_account_perman":"Delete account permanently",
+  "delete_account":"Delete account",
+  "enter_delete_confirm":"Enter 'Delete' to confirm"
 }

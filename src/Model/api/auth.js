@@ -34,6 +34,7 @@ instance.interceptors.response.use(
         'Your session has expired or your account has been logged in on another device. Please log in again.',
         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
       );
+
       ++countErr;
     }
     return Promise.reject(error);
@@ -84,8 +85,14 @@ export const postChangePassword = async data => {
 
 //   return responsive.data;
 // };
+
 export const postEditProfile = async data => {
   const responsive = await instance.post('/edit-profile', data);
+
+  return responsive.data;
+};
+export const postDeleteAccount = async data => {
+  const responsive = await instance.post('/delete-account', data);
 
   return responsive.data;
 };

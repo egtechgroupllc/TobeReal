@@ -67,7 +67,6 @@ export default function BoxFeatureItem({
       JSON.stringify(result ? [data, ...arrsdf.slice(0, 10)] : [data]),
     );
   };
-  console.log(data);
 
   return (
     <View style={styles.wrapper}>
