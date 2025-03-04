@@ -213,14 +213,16 @@ export default function WalletTokenScreen() {
             <MenuImportAddressWallet />
           </View>
         ) : (
-          <>
+          <View
+            style={{
+              flex: 1,
+              rowGap: scale(10),
+              width: '100%',
+            }}>
             <TourGuideZone
               zone={1}
               style={{
-                width: '100%',
-                justifyContent: 'center',
                 flexDirection: 'row',
-                alignItems: 'center',
               }}
               text={t('this_your_wallet_address')}
               borderRadius={16}>
@@ -229,12 +231,6 @@ export default function WalletTokenScreen() {
 
             <TourGuideZone
               zone={2}
-              style={{
-                paddingBottom: scale(10),
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
               shape={'rectangle_and_keep'}
               text={t('this_is_type_point')}>
               <ListToken dataP={data?.data} token={token} />
@@ -242,7 +238,7 @@ export default function WalletTokenScreen() {
             <TourGuideZone zone={3} text={t('this_is_wallet_manage')}>
               <WalletManage data={data?.data} />
             </TourGuideZone>
-          </>
+          </View>
         )}
       </View>
     </MainWrapper>

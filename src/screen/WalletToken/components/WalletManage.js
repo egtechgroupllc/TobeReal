@@ -15,34 +15,35 @@ export default function WalletManage({data}) {
   return (
     <View
       style={{
-        alignItems: 'flex-start',
-        width: '100%',
+        rowGap: scale(10),
       }}>
       <CustomText size={SIZES.medium} textType="medium">
         {t('manage_point_voucher')}
       </CustomText>
-      <View
+
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() =>
+          navigate('NavigationProfile', {
+            screen: 'FinancialTokenScreen',
+            params: data,
+          })
+        }
         style={{
-          rowGap: scale(10),
-          marginVertical: scale(14),
-          width: '100%',
+          flexDirection: 'row',
+          columnGap: scale(12),
+          backgroundColor: COLORS.grey50,
+          borderRadius: scale(10),
+          padding: scale(8),
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: scale(10),
         }}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() =>
-            navigate('NavigationProfile', {
-              screen: 'FinancialTokenScreen',
-              params: data,
-            })
-          }
+        <View
           style={{
             flexDirection: 'row',
-            columnGap: scale(12),
             alignItems: 'center',
-            backgroundColor: COLORS.grey50,
-            width: '100%',
-            borderRadius: scale(10),
-            padding: scale(8),
+            columnGap: scale(10),
           }}>
           <View style={styles.icon}>
             <CustomImage
@@ -96,8 +97,8 @@ export default function WalletManage({data}) {
             </View>
             <IconRight />
           </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
