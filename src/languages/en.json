@@ -1399,5 +1399,29 @@
   
   "delete_account_perman":"Delete account permanently",
   "delete_account":"Delete account",
-  "enter_delete_confirm":"Enter 'Delete' to confirm"
+  "enter_delete_confirm":"Enter 'Delete' to confirm",
+
+  "first_create_wallet":"First, you need to log in to your account and create a wallet or import a wallet if you already have one.",
+  "next_choose_point":"Next, you select the types of points that can be Faucet for free and proceed with the Faucet process.",
+  "link_wallet_into":"Link your existing wallet and import it into the Pione Wallet app on the {unit} website.",
+  "process_faucet_points":"Proceed with free Faucet of points for use.",
+
+  "first_register_partner":"First, you must register a partner account and wait for approval before you can post.",
+  "next_choose_function":"Next, go to the posting section and select the function you need to use.",
+  "proceed_posting":"Proceed with posting real estate rentals, real estate sales, or travel tours.",
+
+  "first_faucet_exchange":"First, you need to Faucet to have a balance of {unit} in order to exchange vouchers.",
+  "next_choose_payment":"Next, select the hotel or tour you want, then choose the payment type as a voucher and proceed with the voucher exchange.",
+  "next_choose_hotel_voucher":"Next, select the type of voucher for the hotel or tour and proceed with the exchange.",
+  "finally_apply_voucher":"Finally, apply the voucher to proceed with the booking.",
+
+  "first_select_task":"First, select the gift box icon on the home screen and check the daily tasks.",
+  "next_select_task":"Next, select the task you want to complete to receive rewards.",
+  "then_complete_task":"Then, complete one of the tasks.",
+  "after_done_rewards":"After completing the task, congratulations! You have received your reward!",
+
+  "how_to_faucet_points": "How to Faucet Points",
+  "how_to_post_news": "How to Post News",
+  "how_to_swap_voucher_and_booking": "How to Swap Voucher and Booking",
+  "how_to_complete_task_receive_rewards": "How to Complete Daily Tasks and Receive Rewards"
 }

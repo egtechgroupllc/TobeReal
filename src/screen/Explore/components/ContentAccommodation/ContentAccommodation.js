@@ -20,6 +20,8 @@ import {getListRent} from '../../../../Model/api/apiAccom';
 import {formatDate} from '../../../../utils/format';
 import {CustomImage} from '../../../../components';
 import {showMess} from '../../../../assets/constants/Helper';
+import SliderContent from '../SliderContent';
+import {getBanner} from '../../../../Model/api/banner';
 
 export default memo(function ContentAccommodation({dataBanner}) {
   const {t} = useLanguage();
@@ -46,30 +48,10 @@ export default memo(function ContentAccommodation({dataBanner}) {
 
   return (
     <View style={styles.wrapper}>
-      {(Platform.OS === 'android'
+      {(Platform?.OS === 'android'
         ? dataBanner?.banner?.android?.is_show
         : dataBanner?.banner?.ios?.is_show) && (
-        <TouchableOpacity
-          style={{paddingHorizontal: scale(12)}}
-          onPress={() => Linking.openURL('https://airdrop.pionechain.com')}
-          // onPress={() => showMess(t('comming_soon'), 'error')}
-        >
-          <CustomImage
-            source={{
-              uri:
-                Platform.OS === 'android'
-                  ? dataBanner?.banner?.android?.url
-                  : dataBanner?.banner?.ios?.url,
-            }}
-            style={{
-              width: '100%',
-              height: scale(180),
-              borderRadius: scale(20),
-              alignSelf: 'center',
-            }}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
+        <SliderContent dataBanner={dataBanner} />
       )}
       <HotelResidence
         data={data?.data?.rows}

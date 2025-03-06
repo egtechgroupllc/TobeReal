@@ -1367,6 +1367,32 @@
 
     "delete_account_perman": "Padam akaun secara kekal",
     "delete_account": "Padam akaun",
-    "enter_delete_confirm": "Masukkan 'Delete' untuk mengesahkan"
+    "enter_delete_confirm": "Masukkan 'Delete' untuk mengesahkan",
+
+    "first_create_wallet": "Pertama, anda perlu log masuk ke akaun anda dan buat dompet atau import dompet jika anda sudah mempunyainya.",
+    "next_choose_point": "Seterusnya, pilih jenis mata yang boleh Faucet secara percuma dan teruskan proses Faucet.",
+    "link_wallet_into": "Pautkan dompet anda yang sedia ada dan import ke dalam aplikasi Pione Wallet di laman web {unit}.",
+    "process_faucet_points": "Teruskan Faucet mata percuma untuk digunakan.",
+
+    "first_register_partner": "Pertama, anda mesti mendaftar akaun rakan kongsi dan menunggu kelulusan sebelum boleh membuat siaran.",
+    "next_choose_function": "Seterusnya, pergi ke bahagian siaran dan pilih fungsi yang anda perlukan.",
+    "proceed_posting": "Teruskan membuat siaran untuk sewaan hartanah, jualan hartanah atau pelancongan.",
+
+    "first_faucet_exchange": "Pertama, anda perlu Faucet untuk mempunyai baki {unit} bagi menukar baucar.",
+    "next_choose_payment": "Seterusnya, pilih hotel atau pelancongan yang anda inginkan, kemudian pilih jenis pembayaran sebagai baucar dan teruskan penukaran.",
+    "next_choose_hotel_voucher": "Seterusnya, pilih jenis baucar untuk hotel atau pelancongan dan teruskan penukaran.",
+    "finally_apply_voucher": "Akhir sekali, gunakan baucar tersebut untuk membuat tempahan.",
+
+    "first_select_task": "Pertama, pilih ikon kotak hadiah di skrin utama dan semak tugasan harian.",
+    "next_select_task": "Seterusnya, pilih tugasan yang ingin anda selesaikan untuk mendapatkan ganjaran.",
+    "then_complete_task": "Kemudian, selesaikan salah satu tugasan.",
+    "after_done_rewards": "Selepas menyelesaikan tugasan, tahniah! Anda telah menerima ganjaran anda!",
+
+    "how_to_faucet_points": "Cara Mendapatkan Mata Faucet",
+    "how_to_post_news": "Cara Membuat Siaran",
+    "how_to_swap_voucher_and_booking": "Cara Menukar Baucar dan Tempahan",
+    "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Ganjaran"
+
+
 
 }

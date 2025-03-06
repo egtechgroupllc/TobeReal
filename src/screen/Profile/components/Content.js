@@ -40,6 +40,11 @@ export default function Content({token}) {
           nameScreen={token ? 'AccountAndSecurityScreen' : 'LoginScreen'}
           nameNavigate={token ? 'NavigationProfile' : 'NavigationAuth'}
         />
+        <BoxItemProfile
+          title={t('help_center')}
+          nameScreen={'HelpCenterScreen'}
+          nameNavigate={'NavigationProfile'}
+        />
       </Box>
 
       {/* <Box title={'Tiện ích'}>

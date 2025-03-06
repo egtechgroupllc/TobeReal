@@ -1,0 +1,73 @@
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {COLORS, images, scale, SHADOW, SIZES} from '../../../assets/constants';
+import {useLanguage} from '../../../hooks/useLanguage';
+import {CustomImage, CustomText} from '../../../components';
+
+export default function PostNews() {
+  const {t} = useLanguage();
+  const data = [
+    {
+      id: 1,
+      content: t('first_register_partner'),
+      image: [images.register_partner],
+    },
+    {
+      id: 2,
+      content: t('next_choose_function'),
+      image: [images.post_new],
+    },
+    {
+      id: 3,
+      content: t('proceed_posting'),
+      image: [images.rent, images.buy, images.tour],
+    },
+  ];
+  return (
+    <View
+      style={{
+        rowGap: scale(20),
+        padding: scale(20),
+        borderWidth: scale(1),
+        borderRadius: scale(10),
+        borderColor: COLORS.pioBox,
+      }}>
+      {data?.map((item, index) => {
+        return (
+          <View style={{rowGap: scale(20)}}>
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <CustomText style={{fontSize: SIZES.xMedium}}>
+                {item?.id}.{' '}
+              </CustomText>
+              <CustomText style={{fontSize: SIZES.xMedium}}>
+                {item?.content}
+              </CustomText>
+            </View>
+            {item?.image?.map(itemImage => {
+              return (
+                <CustomImage
+                  source={itemImage}
+                  style={{
+                    width: '100%',
+                    height: scale(270),
+                    backgroundColor: COLORS.white,
+                    borderRadius: scale(5),
+                    ...SHADOW,
+                    borderWidth: scale(1),
+                    borderColor: COLORS.pioBox,
+                  }}
+                  resizeMode="contain"
+                />
+              );
+            })}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({});

@@ -166,7 +166,6 @@ export default function FindAccommodation() {
     queryKey: ['banner'],
     queryFn: () => getBanner(),
   });
-
   return (
     <MainWrapper refreshControl noSafeArea>
       <View

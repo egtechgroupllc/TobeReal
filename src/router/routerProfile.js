@@ -14,6 +14,8 @@ import DeleteAccountScreen from '../screen/Profile/DeleteAccountScreen';
 
 import {DepositWithdrawScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw';
 import {AddBankScreen} from '../screen/Profile/FinancialManagement/DepositWithdraw/AddBank';
+import HelpCenterContentScreen from '../screen/Profile/HelpCenterContentScreen';
+import HelpCenterScreen from '../screen/Profile/HelpCenterScreen';
 
 import {InformationScreen} from '../screen/Profile/Information';
 import ChangeInformationScreen from '../screen/Profile/Information/ChangeInformationScreen';
@@ -125,5 +127,13 @@ export default routerProfile = [
   {
     name: 'DeleteAccountScreen',
     component: DeleteAccountScreen,
+  },
+  {
+    name: 'HelpCenterScreen',
+    component: HelpCenterScreen,
+  },
+  {
+    name: 'HelpCenterContentScreen',
+    component: HelpCenterContentScreen,
   },
 ];

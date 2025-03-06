@@ -1391,6 +1391,30 @@
 
     "delete_account_perman": "Xóa tài khoản vĩnh viễn",
     "delete_account": "Xóa tài khoản",
-    "enter_delete_confirm": "Nhập 'Delete' để xác nhận"
+    "enter_delete_confirm": "Nhập 'Delete' để xác nhận",
+
+    "first_create_wallet": "Đầu tiên, bạn cần đăng nhập tài khoản và tạo ví hoặc import ví nếu bạn đã có ví.",
+    "next_choose_point": "Tiếp theo, bạn chọn các loại điểm có thể Faucet miễn phí và tiến hành quá trình Faucet.",
+    "link_wallet_into": "Liên kết ví của bạn đã sở hữu và import ví vào ứng dụng Pione Wallet trên trang web {unit}.",
+    "process_faucet_points": "Tiến hành Faucet miễn phí các loại điểm để sử dụng.",
+
+    "first_register_partner": "Đầu tiên, bạn phải đăng ký tài khoản đối tác và chờ duyệt trước khi có thể đăng tin.",
+    "next_choose_function": "Tiếp theo, vào mục đăng tin và chọn chức năng bạn cần sử dụng.",
+    "proceed_posting": "Tiến hành đăng tin bất động sản cho thuê, bán bất động sản hoặc tour du lịch.",
+
+    "first_faucet_exchange": "Đầu tiên, bạn cần phải Faucet để có số dư của {unit} để có thể đổi voucher.",
+    "next_choose_payment": "Tiếp theo, chọn khách sạn hoặc tour bạn mong muốn, sau đó chọn loại thanh toán là voucher và tiến hành đổi voucher.",
+    "next_choose_hotel_voucher": "Tiếp theo, chọn loại voucher của khách sạn hoặc tour du lịch và đổi voucher.",
+    "finally_apply_voucher": "Cuối cùng, áp dụng voucher đó để tiến hành đặt phòng hoặc dịch vụ.",
+
+    "first_select_task": "Đầu tiên, chọn biểu tượng hộp quà trên màn hình chính và xem nhiệm vụ hàng ngày.",
+    "next_select_task": "Tiếp theo, chọn nhiệm vụ bạn muốn thực hiện để nhận phần thưởng.",
+    "then_complete_task": "Sau đó, thực hiện một trong các nhiệm vụ.",
+    "after_done_rewards": "Sau khi hoàn thành nhiệm vụ, chúc mừng bạn đã nhận được phần thưởng!",
+
+    "how_to_faucet_points": "Cách nhận điểm Faucet",
+    "how_to_post_news": "Cách đăng tin",
+    "how_to_swap_voucher_and_booking": "Cách đổi voucher và đặt phòng",
+    "how_to_complete_task_receive_rewards": "Cách hoàn thành nhiệm vụ hàng ngày và nhận phần thưởng"
 
 }

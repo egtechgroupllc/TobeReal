@@ -1385,6 +1385,30 @@
 
     "delete_account_perman": "Permanente na tanggalin ang account",
     "delete_account": "Tanggalin ang account",
-    "enter_delete_confirm": "Ilagay ang 'Delete' upang kumpirmahin"
+    "enter_delete_confirm": "Ilagay ang 'Delete' upang kumpirmahin",
+
+    "first_create_wallet": "Una, kailangan mong mag-log in sa iyong account at lumikha ng wallet o i-import ang iyong wallet kung mayroon ka na.",
+    "next_choose_point": "Susunod, piliin ang mga uri ng puntos na maaaring Faucet nang libre at ipagpatuloy ang proseso ng Faucet.",
+    "link_wallet_into": "I-link ang iyong kasalukuyang wallet at i-import ito sa Pione Wallet app sa website ng {unit}.",
+    "process_faucet_points": "Ipagpatuloy ang libreng Faucet ng mga puntos para magamit.",
+
+    "first_register_partner": "Una, kailangan mong magrehistro ng partner account at maghintay ng pag-apruba bago ka makapag-post.",
+    "next_choose_function": "Susunod, pumunta sa seksyon ng pag-post at piliin ang function na kailangan mong gamitin.",
+    "proceed_posting": "Ipagpatuloy ang pag-post ng paupahang ari-arian, pagbebenta ng ari-arian, o paglalakbay.",
+
+    "first_faucet_exchange": "Una, kailangan mong Faucet upang magkaroon ng balanse ng {unit} upang makapagpalit ng voucher.",
+    "next_choose_payment": "Susunod, piliin ang hotel o tour na gusto mo, pagkatapos ay piliin ang uri ng pagbabayad bilang voucher at ipagpatuloy ang pagpapalit.",
+    "next_choose_hotel_voucher": "Susunod, piliin ang uri ng voucher para sa hotel o tour at ipagpatuloy ang pagpapalit.",
+    "finally_apply_voucher": "Sa wakas, gamitin ang voucher upang ipagpatuloy ang booking.",
+
+    "first_select_task": "Una, piliin ang icon ng gift box sa home screen at tingnan ang mga pang-araw-araw na gawain.",
+    "next_select_task": "Susunod, piliin ang gawain na nais mong gawin upang makatanggap ng gantimpala.",
+    "then_complete_task": "Pagkatapos, kumpletuhin ang isa sa mga gawain.",
+    "after_done_rewards": "Matapos matapos, binabati kita! Natanggap mo na ang iyong gantimpala!",
+
+    "how_to_faucet_points": "Paano Mag-Faucet ng Puntos",
+    "how_to_post_news": "Paano Mag-post ng Balita",
+    "how_to_swap_voucher_and_booking": "Paano Magpalit ng Voucher at Mag-book",
+    "how_to_complete_task_receive_rewards": "Paano Kumpletuhin ang Araw-araw na Gawain at Makakuha ng Gantimpala"
 
 }

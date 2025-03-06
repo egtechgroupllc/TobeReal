@@ -1361,5 +1361,29 @@
 
     "delete_account_perman": "Hapus akun secara permanen",
     "delete_account": "Hapus akun",
-    "enter_delete_confirm": "Masukkan 'Delete' untuk mengonfirmasi"
+    "enter_delete_confirm": "Masukkan 'Delete' untuk mengonfirmasi",
+
+    "first_create_wallet": "Pertama, Anda perlu masuk ke akun Anda dan membuat dompet atau mengimpor dompet jika sudah memilikinya.",
+    "next_choose_point": "Selanjutnya, pilih jenis poin yang dapat difaucet secara gratis dan lanjutkan proses Faucet.",
+    "link_wallet_into": "Hubungkan dompet yang sudah Anda miliki dan impor ke dalam aplikasi Pione Wallet di situs web {unit}.",
+    "process_faucet_points": "Lakukan Faucet gratis untuk mendapatkan poin yang bisa digunakan.",
+
+    "first_register_partner": "Pertama, Anda harus mendaftar akun mitra dan menunggu persetujuan sebelum dapat memposting.",
+    "next_choose_function": "Selanjutnya, masuk ke bagian posting dan pilih fungsi yang ingin Anda gunakan.",
+    "proceed_posting": "Lanjutkan dengan memposting penyewaan properti, penjualan properti, atau tur perjalanan.",
+
+    "first_faucet_exchange": "Pertama, Anda perlu Faucet untuk memiliki saldo {unit} agar dapat menukar voucher.",
+    "next_choose_payment": "Selanjutnya, pilih hotel atau tur yang Anda inginkan, lalu pilih metode pembayaran sebagai voucher dan lanjutkan dengan penukaran.",
+    "next_choose_hotel_voucher": "Selanjutnya, pilih jenis voucher untuk hotel atau tur dan lakukan penukaran.",
+    "finally_apply_voucher": "Terakhir, gunakan voucher tersebut untuk melakukan pemesanan.",
+
+    "first_select_task": "Pertama, pilih ikon kotak hadiah di layar utama dan periksa tugas harian.",
+    "next_select_task": "Selanjutnya, pilih tugas yang ingin Anda selesaikan untuk mendapatkan hadiah.",
+    "then_complete_task": "Kemudian, selesaikan salah satu tugas.",
+    "after_done_rewards": "Setelah selesai, selamat! Anda telah menerima hadiah Anda!",
+
+    "how_to_faucet_points": "Cara Faucet Poin",
+    "how_to_post_news": "Cara Memposting Berita",
+    "how_to_swap_voucher_and_booking": "Cara Menukar Voucher dan Pemesanan",
+   "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Hadiah"
 }

@@ -87,9 +87,10 @@ export default function ProfileScreen() {
       headerShown={!token}
       styleContent={{
         paddingHorizontal: scale(12),
+        paddingBottom: scale(120),
       }}>
       {token && (
-        <View style={{paddingTop: scale(50)}}>
+        <View style={{paddingTop: scale(20)}}>
           {/* <View style={styles.wallet}>
             <IconWallet />
             <CustomText

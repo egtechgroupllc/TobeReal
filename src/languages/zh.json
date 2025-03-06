@@ -1385,6 +1385,30 @@
 
     "delete_account_perman": "永久删除账户",
     "delete_account": "删除账户",
-    "enter_delete_confirm": "输入 'Delete' 以确认"
+    "enter_delete_confirm": "输入 'Delete' 以确认",
+
+    "first_create_wallet": "首先，您需要登录您的账户并创建钱包，或者如果您已有钱包，则导入钱包。",
+    "next_choose_point": "接下来，选择可以免费领取的积分类型，并进行 Faucet 过程。",
+    "link_wallet_into": "链接您已有的钱包，并将其导入 Pione Wallet 应用程序，在 {unit} 网站上使用。",
+    "process_faucet_points": "免费领取积分并进行使用。",
+
+    "first_register_partner": "首先，您必须注册合作账户并等待审批，然后才能发布信息。",
+    "next_choose_function": "接下来，进入发布信息的页面并选择您需要的功能。",
+    "proceed_posting": "发布出租房产、出售房产或旅游行程。",
+
+    "first_faucet_exchange": "首先，您需要 Faucet 以获取 {unit} 余额，然后才能兑换代金券。",
+    "next_choose_payment": "接下来，选择您想要的酒店或旅行团，然后选择代金券作为付款方式并进行兑换。",
+    "next_choose_hotel_voucher": "接下来，选择酒店或旅游的代金券类型并进行兑换。",
+    "finally_apply_voucher": "最后，使用代金券进行预订。",
+
+    "first_select_task": "首先，在主屏幕上选择礼物盒图标并查看每日任务。",
+    "next_select_task": "接下来，选择您想要完成的任务以获得奖励。",
+    "then_complete_task": "然后，完成其中一个任务。",
+    "after_done_rewards": "任务完成后，恭喜您！您已获得奖励！",
+
+    "how_to_faucet_points": "如何领取 Faucet 积分",
+    "how_to_post_news": "如何发布新闻",
+    "how_to_swap_voucher_and_booking": "如何兑换代金券和预订",
+   "how_to_complete_task_receive_rewards": "如何完成每日任务并领取奖励"
 
 }
