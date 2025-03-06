@@ -38,7 +38,7 @@ export default function CustomImage({
       source={
         !isImgAsset
           ? source || ''
-          : {uri: source || '', priority: FastImage.priority.high}
+          : {uri: source || '', cache: FastImage.cacheControl.immutable, priority:'high'}
       }
     />
   );
