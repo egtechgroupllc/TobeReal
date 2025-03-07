@@ -46,7 +46,10 @@ export default memo(function SliderContent({dataBanner}) {
   }, [currentIndex, flat]);
 
   const openSlide = item => {
-    Linking.openURL(item?.navigate);
+    navigate('NoBottomTab', {
+      screen: 'WebViewScreen',
+      params: {uri: item?.navigate},
+    });
   };
 
   return (
@@ -122,6 +125,7 @@ export default memo(function SliderContent({dataBanner}) {
 const styles = StyleSheet.create({
   view: {
     rowGap: scale(10),
+    marginTop: scale(20),
   },
   viewRow: {
     flexDirection: 'row',
@@ -163,5 +167,5 @@ const styles = StyleSheet.create({
     tintColor: COLORS.BlueBold,
   },
 
-  imageBg: {height: scale(160), width: '100%', borderRadius: scale(10)},
+  imageBg: {height: scale(180), width: '100%', borderRadius: scale(10)},
 });

@@ -39,7 +39,7 @@ export default function CompleteTask() {
       }}>
       {data?.map((item, index) => {
         return (
-          <View style={{rowGap: scale(20)}}>
+          <View style={{rowGap: scale(20)}} key={index}>
             <View
               style={{
                 flexDirection: 'row',
@@ -51,9 +51,10 @@ export default function CompleteTask() {
                 {item?.content}
               </CustomText>
             </View>
-            {item?.image?.map(itemImage => {
+            {item?.image?.map((itemImage, indexImage) => {
               return (
                 <CustomImage
+                  key={`indexImage_${indexImage}`}
                   source={itemImage}
                   style={{
                     width: '100%',

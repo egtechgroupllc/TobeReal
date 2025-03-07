@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Platform,
   StatusBar,
   StyleSheet,
@@ -32,7 +33,7 @@ import {
 } from './src/navigation';
 import NavigationAuth from './src/navigation/NavigationAuth';
 
-import {CountryProvider} from './src/context/CountryContent';
+import {COUNTRY_KEY, CountryProvider} from './src/context/CountryContent';
 import {useCountry} from './src/hooks/useCountry';
 import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
 // import {
@@ -50,6 +51,9 @@ import {setupNotifications} from './src/utils/setupNotification';
 import {requestNotificationPermission} from './src/utils/permission/requestNotificationPermission';
 import {useLanguage} from './src/hooks/useLanguage';
 import {replaceTranslateKey} from './src/utils/replaceTranslateKey';
+import {HotUpdater} from '@hot-updater/react-native';
+import {storage} from './src/utils/MMKVStorage';
+
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
 if (Text.defaultProps) {
@@ -70,16 +74,16 @@ if (TextInput.defaultProps) {
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
-export default function App() {
-  const [splashScreenVisible, setSplashScreenVisible] = useState(true);
+function App() {
+  // const [splashScreenVisible, setSplashScreenVisible] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSplashScreenVisible(false);
-    }, 1500); // Adjust the duration as needed
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setSplashScreenVisible(false);
+  //   }, 1500); // Adjust the duration as needed
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
   const netInfo = useNetInfo();
   useEffect(() => {
     if (netInfo.isConnected) {
@@ -93,20 +97,20 @@ export default function App() {
     setupNotifications();
   }, []);
 
-  const SplashScreen = () => (
-    <View
-      style={{
-        backgroundColor: COLORS.white,
-        height: '100%',
-        justifyContent: 'center',
-      }}>
-      <CustomImage
-        source={images.logo2}
-        style={{height: '50%', width: '50%', alignSelf: 'center'}}
-        resizeMode="contain"
-      />
-    </View>
-  );
+  // const SplashScreen = () => (
+  //   <View
+  //     style={{
+  //       backgroundColor: COLORS.white,
+  //       height: '100%',
+  //       justifyContent: 'center',
+  //     }}>
+  //     <CustomImage
+  //       source={images.logo2}
+  //       style={{height: '50%', width: '50%', alignSelf: 'center'}}
+  //       resizeMode="contain"
+  //     />
+  //   </View>
+  // );
 
   const TooltipComponent = tooltip => {
     return (
@@ -177,52 +181,48 @@ export default function App() {
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <CountryProvider>
-              {splashScreenVisible ? (
-                <SplashScreen />
-              ) : (
-                <KeyboardProvider>
-                  <LanguageProvider>
-                    <AuthProvider>
-                      <Loading />
+              <KeyboardProvider>
+                <LanguageProvider>
+                  <AuthProvider>
+                    <Loading />
 
-                      <FlashMessage
-                        position={
-                          Platform.OS === 'ios'
-                            ? 'top'
-                            : {
-                                top: StatusBar.currentHeight,
-                                left: 0,
-                                right: 0,
-                              }
-                        }
-                        floating={Platform.OS !== 'ios'}
-                      />
-                      <TourGuideProvider
-                        tooltipComponent={TooltipComponent}
-                        preventOutsideInteraction>
-                        <BottomSheetModalProvider>
-                          {/* <TouchableWithoutFeedback
+                    <FlashMessage
+                      position={
+                        Platform.OS === 'ios'
+                          ? 'top'
+                          : {
+                              top: StatusBar.currentHeight,
+                              left: 0,
+                              right: 0,
+                            }
+                      }
+                      floating={Platform.OS !== 'ios'}
+                    />
+                    <TourGuideProvider
+                      tooltipComponent={TooltipComponent}
+                      preventOutsideInteraction>
+                      <BottomSheetModalProvider>
+                        {/* <TouchableWithoutFeedback
                             accessible={false}
                             onPress={Keyboard.dismiss}> */}
-                          {/* <KeyboardAvoidingView
+                        {/* <KeyboardAvoidingView
                             style={{flex: 1}}
                             behavior={
                               Platform.OS === 'ios' ? 'padding' : 'height'
                             }> */}
 
-                          <Layout />
-                          <StatusBar
-                            barStyle="light-content"
-                            backgroundColor={COLORS.pioHeader}
-                          />
-                          {/* </KeyboardAvoidingView> */}
-                          {/* </TouchableWithoutFeedback> */}
-                        </BottomSheetModalProvider>
-                      </TourGuideProvider>
-                    </AuthProvider>
-                  </LanguageProvider>
-                </KeyboardProvider>
-              )}
+                        <Layout />
+                        <StatusBar
+                          barStyle="light-content"
+                          backgroundColor={COLORS.pioHeader}
+                        />
+                        {/* </KeyboardAvoidingView> */}
+                        {/* </TouchableWithoutFeedback> */}
+                      </BottomSheetModalProvider>
+                    </TourGuideProvider>
+                  </AuthProvider>
+                </LanguageProvider>
+              </KeyboardProvider>
             </CountryProvider>
           </QueryClientProvider>
         </NavigationContainer>
@@ -235,12 +235,30 @@ const Layout = () => {
   const {country} = useCountry();
   const socket = useSocket();
   const {t} = useLanguage();
+  const [isReady, setIsReady] = useState(false);
+  const [isCountry, setIsCountry] = useState(false);
   useEffect(() => {
     if (Platform.OS === 'android') {
       requestNotificationPermission();
     }
   }, []);
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        const value = await storage.getString(COUNTRY_KEY);
+        if (value) {
+          setIsCountry(true);
+        } else {
+          setIsCountry(false);
+        }
+        setIsReady(true);
+      } catch (error) {
+        setIsReady(true);
+      }
+    };
 
+    initialize();
+  }, []);
   PushNotification.createChannel(
     {
       channelId: '1', // (required)
@@ -284,6 +302,25 @@ const Layout = () => {
       };
     }
   }, [socket, t]);
+  if (!isReady || isCountry === null) {
+    return (
+      <View style={styles.loadingContainer}>
+        <CustomImage
+          source={images.logo2}
+          style={{height: '50%', width: '50%', alignSelf: 'center'}}
+          resizeMode="contain"
+        />
+        <View style={{rowGap: scale(10)}}>
+          {/* <CText
+            style={{color: COLORS.grey, fontSize: SIZES.medium}}
+            textType="bold">
+            Checking for Update...
+          </CText> */}
+          <ActivityIndicator size="large" color={COLORS.primary} />
+        </View>
+      </View>
+    );
+  }
 
   return (
     <Stack.Navigator
@@ -295,15 +332,12 @@ const Layout = () => {
 
         header: props => <HeaderBar {...props} />,
       }}
-      initialRouteName="BottomTab">
-      {country?.id ? (
-        <Stack.Screen name="BottomTab" component={BottomTab} />
-      ) : (
-        <Stack.Screen
-          name={'SelectDefaultCountryScreen'}
-          component={SelectDefaultCountryScreen}
-        />
-      )}
+      initialRouteName={isCountry ? 'BottomTab' : 'SelectDefaultCountryScreen'}>
+      <Stack.Screen name="BottomTab" component={BottomTab} />
+      <Stack.Screen
+        name={'SelectDefaultCountryScreen'}
+        component={SelectDefaultCountryScreen}
+      />
       <Stack.Screen name="NavigationAuth" component={NavigationAuth} />
       <Stack.Screen name="NavigationProfile" component={NavigationProfile} />
       <Stack.Screen
@@ -316,9 +350,46 @@ const Layout = () => {
     </Stack.Navigator>
   );
 };
-
+export default HotUpdater.wrap({
+  source: 'https://ddsfubyaulxbddvrtwkd.supabase.co/functions/v1/update-server',
+  requestHeaders: {
+    // if you want to use the request headers, you can add them here
+  },
+  fallbackComponent: ({status, progress}) => (
+    <View style={styles.loadingContainer}>
+      <CustomImage
+        source={images.logo2}
+        style={{height: '50%', width: '50%', alignSelf: 'center'}}
+        resizeMode="contain"
+      />
+      <View style={{rowGap: scale(10)}}>
+        <View style={{flexDirection: 'row'}}>
+          <CustomText
+            style={{color: COLORS.grey, fontSize: SIZES.medium}}
+            textType="bold">
+            {status === 'UPDATING' ? 'Updating...' : 'Checking for Update...'}
+          </CustomText>
+          {progress > 0 ? (
+            <CustomText
+              style={{color: COLORS.grey, fontSize: SIZES.xMedium}}
+              textType="bold">
+              {Math.round(progress * 100)}%
+            </CustomText>
+          ) : null}
+        </View>
+        <ActivityIndicator size="small" color={COLORS.primary} />
+      </View>
+    </View>
+  ),
+})(App);
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
   },
 });

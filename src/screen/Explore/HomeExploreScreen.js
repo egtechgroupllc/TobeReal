@@ -6,7 +6,7 @@ import MainWrapper from '../../components/MainWrapper';
 import {useAuthentication} from '../../hooks/useAuthentication';
 import FindAccommodation from './components/FindAccommodation/FindAccommodation';
 import Header from './components/Header';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 
 import {COLORS, SIZES, images, scale} from '../../assets/constants';
 import LinearGradient from 'react-native-linear-gradient';
@@ -27,6 +27,7 @@ import {showMess} from '../../assets/constants/Helper';
 import {getBalanceWallet, getStatusTask} from '../../Model/api/wallet';
 import {getBanner} from '../../Model/api/banner';
 import {storage} from '../../utils/MMKVStorage';
+import SliderContent from './components/SliderContent';
 
 export default function HomeExploreScreen() {
   const {token} = useAuthentication();
@@ -168,6 +169,7 @@ export default function HomeExploreScreen() {
         dataP={data}
         amountPione={amountPione}
       />
+
       <FindAccommodation />
       {/* {(isCanCheckIn || !data?.data?.wallet_address) &&
         !isLoading &&

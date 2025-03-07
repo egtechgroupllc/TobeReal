@@ -321,7 +321,7 @@ const dataAgent = [
     imgdetail: [images.tourthailand, images.tourbali, images.toursingapore],
   },
 ];
-export default memo(function ContentBuy({dataBanner}) {
+export default memo(function ContentBuy() {
   const {t} = useLanguage();
   const [tourData, setTourData] = useState(dataDomestic);
   const {country} = useCountry();
@@ -347,11 +347,6 @@ export default memo(function ContentBuy({dataBanner}) {
 
   return (
     <View style={styles.wrapper}>
-      {(Platform?.OS === 'android'
-        ? dataBanner?.banner?.android?.is_show
-        : dataBanner?.banner?.ios?.is_show) && (
-        <SliderContent dataBanner={dataBanner} />
-      )}
       <BuySell data={data} isLoading={isLoading} country={country} />
 
       {/* <Discount /> */}

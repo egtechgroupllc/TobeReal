@@ -82,6 +82,7 @@ import RoomPriceManageScreen from '../screen/News/PostNews/Lease/components/Admi
 import TicketPriceManageScreen from '../screen/News/PostNews/Tour/components/TicketTourManage/TicketPriceManageScreen';
 import RepostExpiredScreen from '../screen/News/PostNews/components/RepostExpiredScreen';
 import EditorScreen from '../screen/News/PostNews/Tour/components/PostNewTour/EditorScreen';
+import WebViewScreen from '../screen/Explore/WebViewScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -417,5 +418,9 @@ export default routerNoBottomTab = [
   {
     name: 'PostNewSellScreen',
     component: PostNewSellScreen,
+  },
+  {
+    name: 'WebViewScreen',
+    component: WebViewScreen,
   },
 ];

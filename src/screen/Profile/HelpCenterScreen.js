@@ -36,13 +36,13 @@ export default function HelpCenterScreen() {
     <MainWrapper headerTitle={t('help_center')} scrollEnabled={false}>
       <View style={{flex: 1, alignItems: 'center'}}>
         <CustomImage
-          source={images.banner1}
+          source={images.help_center}
           style={{
             width: '100%',
             height: scale(200),
             backgroundColor: COLORS.pioBox,
           }}
-          resizeMode="strech"
+          resizeMode="stretch"
         />
         <View
           style={{
@@ -62,6 +62,7 @@ export default function HelpCenterScreen() {
           {data?.map((item, index) => {
             return (
               <TouchableOpacity
+                key={index}
                 style={{rowGap: scale(10)}}
                 onPress={() => {
                   navigate('NavigationProfile', {

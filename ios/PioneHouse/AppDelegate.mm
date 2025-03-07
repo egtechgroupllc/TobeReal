@@ -5,6 +5,7 @@
 #import <RNFSBackgroundDownloads.h>
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
+#import <HotUpdater/HotUpdater.h> 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -65,11 +66,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 
 - (NSURL *)getBundleURL
 {
-#if DEBUG
-  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
-#else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-#endif
+return [HotUpdater bundleURL]; 
 }
 
 @end

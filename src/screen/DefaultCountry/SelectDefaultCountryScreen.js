@@ -48,6 +48,7 @@ export default function SelectDefaultCountryScreen() {
     if (country) {
       onSaveCountry(country);
       onSaveLanguage();
+      navigation.navigate('BottomTab');
     } else {
       showMess('Please select country to continue!', 'error');
     }

@@ -200,7 +200,7 @@ export default {
   create_import: require('../images/create_import.png'),
   list_point: require('../images/list_point.png'),
   faucet_button: require('../images/faucet_button.png'),
-  banner1: require('../images/banner1.png'),
+  help_center: require('../images/help_center.png'),
   connect_wallet: require('../images/connect_wallet.png'),
   choose_wallet: require('../images/choose_wallet.png'),
   choose_point: require('../images/choose_point.png'),

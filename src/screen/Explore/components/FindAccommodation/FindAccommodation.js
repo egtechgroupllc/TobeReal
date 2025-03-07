@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useQuery} from '@tanstack/react-query';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {
   getListTypeEstateSell,
   getListTypeRent,
@@ -30,6 +30,7 @@ import OptionAccommodation from './OptionAccommodation';
 import FindContentTour from './FindContentTour';
 import {listTypeTour} from '../../../../assets/dataFake/TourType';
 import {getBanner} from '../../../../Model/api/banner';
+import SliderContent from '../SliderContent';
 
 export default function FindAccommodation() {
   // const ContentAccommodation = React.lazy(() =>
@@ -168,6 +169,11 @@ export default function FindAccommodation() {
   });
   return (
     <MainWrapper refreshControl noSafeArea>
+      {(Platform?.OS === 'android'
+        ? dataBanner?.banner?.android?.is_show
+        : dataBanner?.banner?.ios?.is_show) && (
+        <SliderContent dataBanner={dataBanner} />
+      )}
       <View
         style={{
           width: WIDTH.widthContain,
@@ -227,11 +233,11 @@ export default function FindAccommodation() {
       </View>
 
       {tabSelect === 'TOUR' ? (
-        <ContentTour dataBanner={dataBanner} />
+        <ContentTour />
       ) : tabSelect === 'RENT' ? (
-        <ContentAccommodation dataBanner={dataBanner} />
+        <ContentAccommodation />
       ) : (
-        <ContentBuy dataBanner={dataBanner} />
+        <ContentBuy />
       )}
     </MainWrapper>
   );

@@ -48,11 +48,6 @@ export default memo(function ContentAccommodation({dataBanner}) {
 
   return (
     <View style={styles.wrapper}>
-      {(Platform?.OS === 'android'
-        ? dataBanner?.banner?.android?.is_show
-        : dataBanner?.banner?.ios?.is_show) && (
-        <SliderContent dataBanner={dataBanner} />
-      )}
       <HotelResidence
         data={data?.data?.rows}
         isLoading={isLoading}

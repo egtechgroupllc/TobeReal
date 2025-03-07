@@ -69,7 +69,7 @@ export default function MapSetAccomdScreen() {
         style={{
           ...StyleSheet.absoluteFill,
         }}
-        // mapType="hybrid"
+        mapType="hybrid"
         showsUserLocation
         initialRegion={{
           ...moveLocation,

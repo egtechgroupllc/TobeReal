@@ -214,7 +214,7 @@ export default function HomeMapScreen({showListLocation, style}) {
     <MainWrapper style={{flex: 1}} scrollEnabled={false}>
       <MapView
         ref={mapRef}
-        // mapType="hybrid"
+        mapType="hybrid"
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={[styles.map, style]}
         region={{

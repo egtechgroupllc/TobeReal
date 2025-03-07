@@ -34,7 +34,7 @@ export default function PostNews() {
       }}>
       {data?.map((item, index) => {
         return (
-          <View style={{rowGap: scale(20)}}>
+          <View style={{rowGap: scale(20)}} key={index}>
             <View
               style={{
                 flexDirection: 'row',
@@ -46,9 +46,10 @@ export default function PostNews() {
                 {item?.content}
               </CustomText>
             </View>
-            {item?.image?.map(itemImage => {
+            {item?.image?.map((itemImage, indexImage) => {
               return (
                 <CustomImage
+                  key={`indexImage_${indexImage}`}
                   source={itemImage}
                   style={{
                     width: '100%',

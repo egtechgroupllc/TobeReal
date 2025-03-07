@@ -16,15 +16,10 @@ import {CustomImage} from '../../../../components';
 import {showMess} from '../../../../assets/constants/Helper';
 import SliderContent from '../SliderContent';
 
-export default memo(function ContentTour({dataBanner}) {
+export default memo(function ContentTour() {
   const {t} = useLanguage();
   return (
     <View style={styles.wrapper}>
-      {(Platform?.OS === 'android'
-        ? dataBanner?.banner?.android?.is_show
-        : dataBanner?.banner?.ios?.is_show) && (
-        <SliderContent dataBanner={dataBanner} />
-      )}
       <PackageTour />
       {/* <ThemedTour data={dataThemed} /> */}
       <WorldTour />
