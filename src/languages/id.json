@@ -1138,7 +1138,7 @@
   "please_repost": "Postingan ini telah kedaluwarsa, silakan posting ulang",
   "repost": "Posting ulang",
   "video_short": "video pendek",
-  "wallet_ready_to_use": "Dompet kripto Anda siap digunakan",
+  "wallet_ready_to_use": "Dompet kripto Anda",
 
   "incomplete_registration": "Proses Registrasi Belum Selesai",
   "detail_review": "Ulasan Detail",
@@ -1385,5 +1385,7 @@
     "how_to_faucet_points": "Cara Faucet Poin",
     "how_to_post_news": "Cara Memposting Berita",
     "how_to_swap_voucher_and_booking": "Cara Menukar Voucher dan Pemesanan",
-   "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Hadiah"
+   "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Hadiah",
+
+  "wallet_not_connect": "Dompet belum terhubung. Silakan hubungkan dompet untuk menggunakan fungsi ini!"
 }

@@ -1163,7 +1163,7 @@
   "please_repost": "此帖子已过期，请重新发布",
   "repost": "重新发布",
   "video_short": "短视频",
-  "wallet_ready_to_use": "您的加密货币钱包已准备好使用",
+  "wallet_ready_to_use": "您的加密货币钱包",
 
   "incomplete_registration": "注册过程未完成",
   "detail_review": "详细审查",
@@ -1409,6 +1409,8 @@
     "how_to_faucet_points": "如何领取 Faucet 积分",
     "how_to_post_news": "如何发布新闻",
     "how_to_swap_voucher_and_booking": "如何兑换代金券和预订",
-   "how_to_complete_task_receive_rewards": "如何完成每日任务并领取奖励"
+   "how_to_complete_task_receive_rewards": "如何完成每日任务并领取奖励",
+
+   "wallet_not_connect": "钱包未连接。请连接钱包以使用此功能！"
 
 }

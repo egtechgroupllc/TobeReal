@@ -9,14 +9,10 @@ import {formatPrice} from '../../../utils/format';
 import TabSelect from './TabSelect';
 import {useNavigation} from '@react-navigation/native';
 
-export default function ListToken({dataP, token}) {
+export default function ListToken({dataP}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const {data} = useQuery({
-    queryKey: ['user', 'wallet', 'balance', token],
-    queryFn: () => getBalanceWallet(token),
-    enabled: !!token,
-  });
+
   // const listToken = useMemo(
   //   () => [
   //     {
@@ -56,7 +52,7 @@ export default function ListToken({dataP, token}) {
         {t('point')}
       </CustomText>
 
-      {data?.data?.map((item, index) => (
+      {dataP?.map((item, index) => (
         <TouchableOpacity
           onPress={() => {
             navigate('NoBottomTab', {
@@ -77,7 +73,7 @@ export default function ListToken({dataP, token}) {
           <View style={styles.icon}>
             <CustomImage
               isAvatar
-              source={item?.image_url}
+              source={item?.image}
               style={{
                 width: scale(30),
                 aspectRatio: 1,
@@ -93,7 +89,7 @@ export default function ListToken({dataP, token}) {
               size={scale(13)}
               textType="semiBold"
               style={{color: COLORS.black}}>
-              {item.name}
+              {item?.name}
             </CustomText>
             <View style={{flexDirection: 'row', columnGap: scale(3)}}>
               <CustomText textType="medium">
@@ -102,7 +98,7 @@ export default function ListToken({dataP, token}) {
                   decimalPlaces: 6,
                 })}
               </CustomText>
-              <CustomText textType="medium">{item.symbol}</CustomText>
+              <CustomText textType="medium">{item?.symbol}</CustomText>
             </View>
           </View>
         </TouchableOpacity>

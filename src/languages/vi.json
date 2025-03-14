@@ -1167,7 +1167,7 @@
   "please_repost": "Bài đăng này đã hết hạn, vui lòng đăng lại",
   "repost": "Đăng lại",
   "video_short": "Video ngắn",
-  "wallet_ready_to_use": "Ví tiền mã hoá của bạn đã sẵn sàng để sử dụng",
+"wallet_ready_to_use": "Ví tiền điện tử của bạn",
 
   "incomplete_registration": "Quá trình đăng ký chưa hoàn tất",
   "detail_review": "Đánh giá chi tiết",
@@ -1415,6 +1415,8 @@
     "how_to_faucet_points": "Cách nhận điểm Faucet",
     "how_to_post_news": "Cách đăng tin",
     "how_to_swap_voucher_and_booking": "Cách đổi voucher và đặt phòng",
-    "how_to_complete_task_receive_rewards": "Cách hoàn thành nhiệm vụ hàng ngày và nhận phần thưởng"
+    "how_to_complete_task_receive_rewards": "Cách hoàn thành nhiệm vụ hàng ngày và nhận phần thưởng",
+
+   "wallet_not_connect": "Ví chưa được kết nối. Vui lòng kết nối ví để sử dụng chức năng này!"
 
 }

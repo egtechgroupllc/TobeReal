@@ -207,6 +207,7 @@ export default function InfoDetail({data, name, paramsTour}) {
         <QRWalletBlockChain
           hotelAddress
           data={data}
+          walletAddress={data?.wallet_address}
           open={isOpen}
           onClose={() => setIsOpen(false)}
         />

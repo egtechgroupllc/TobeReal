@@ -21,6 +21,7 @@ export default function QRWalletBlockChain({
   open,
   data,
   onClose,
+  walletAddress,
   hotelAddress,
 }) {
   const {t} = useLanguage();
@@ -91,7 +92,7 @@ export default function QRWalletBlockChain({
                 textType="medium"
                 numberOfLines={2}
                 color={COLORS.text}>
-                {data?.wallet_address}
+                {walletAddress}
                 <IconCopy size={scale(12)} />
               </CustomText>
             </View>
@@ -103,10 +104,10 @@ export default function QRWalletBlockChain({
                 justifyContent: 'center',
               }}>
               <View style={{...styles.box, opacity: secondEnd ? 0.3 : 1}}>
-                {data?.wallet_address ? (
+                {walletAddress ? (
                   <QRCode
                     size={scale(220)}
-                    value={data?.wallet_address}
+                    value={walletAddress}
                     color="#000"
                   />
                 ) : (

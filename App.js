@@ -36,6 +36,14 @@ import NavigationAuth from './src/navigation/NavigationAuth';
 import {COUNTRY_KEY, CountryProvider} from './src/context/CountryContent';
 import {useCountry} from './src/hooks/useCountry';
 import {SelectDefaultCountryScreen} from './src/screen/DefaultCountry';
+
+import '@walletconnect/react-native-compat';
+import {Linking} from 'react-native';
+import {
+  createAppKit,
+  defaultConfig,
+  AppKit,
+} from '@reown/appkit-ethers-react-native';
 // import {
 //   CopilotProvider,
 //   CopilotStep,
@@ -73,6 +81,66 @@ if (TextInput.defaultProps) {
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
+const projectId = '9d4a3f075587d6efbb06d1091f6357b4';
+
+const metadata = {
+  name: 'Pione House',
+  url: 'https://pionehouse.com',
+  icons: ['https://pionechain.com/images/ecosystem/iconPioneHouse.png'],
+  redirect: {
+    native: 'pionehouse://',
+  },
+};
+const config = defaultConfig({metadata});
+
+// 3. Define your chains
+export const testnet = {
+  chainId: 5080,
+  name: 'Pione Zero',
+  currency: 'PZO',
+  explorerUrl: 'https://zeroscan.org',
+  rpcUrl: 'https://rpc.zeroscan.org',
+};
+export const mainnet = {
+  chainId: 5090,
+  name: 'Pione Chain',
+  currency: 'PIO',
+  explorerUrl: 'https://pionescan.com',
+  rpcUrl: 'https://rpc.pionescan.com',
+};
+
+const chains = [testnet];
+
+createAppKit({
+  projectId,
+  chains,
+  config,
+  includeWalletIds: [
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+  ],
+  excludeWalletIds: [
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+  ],
+  features: {
+    swaps: false,
+  },
+  defaultChain: testnet,
+  customWallets: [
+    {
+      id: 'com.companyname.swaptobe',
+      name: 'PioneWallet',
+      homepage: 'com.companyname.swaptobe',
+      image_url: 'https://pionescan.com/favicon/favicon.png',
+      mobile_link: 'tobewallet://',
+      desktop_link: 'desktop_link',
+      webapp_link: 'webapp_link',
+      app_store: 'https://apps.apple.com/us/app/pione-wallet/id6738914833',
+      play_store:
+        'https://play.google.com/store/apps/details?id=com.companyname.swaptobe',
+    },
+  ],
+  // enableAnalytics: true, // Optional - defaults to your Cloud configuration
+});
 
 function App() {
   // const [splashScreenVisible, setSplashScreenVisible] = useState(true);
@@ -172,13 +240,33 @@ function App() {
       </View>
     );
   };
+  const linking = {
+    prefixes: ['pionehouse://'],
+    config: {
+      screens: {
+        BottomTab: 'Home',
+        SelectDefaultCountryScreen: 'select-country',
+      },
+    },
+  };
+  useEffect(() => {
+    const handleDeepLink = event => {
+      console.log('Deeplink received:', event.url);
+    };
+
+    const subscription = Linking.addEventListener('url', handleDeepLink);
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
   return (
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider
         style={{
           backgroundColor: COLORS.white,
         }}>
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
           <QueryClientProvider client={queryClient}>
             <CountryProvider>
               <KeyboardProvider>
@@ -224,6 +312,7 @@ function App() {
                 </LanguageProvider>
               </KeyboardProvider>
             </CountryProvider>
+            <AppKit />
           </QueryClientProvider>
         </NavigationContainer>
       </SafeAreaProvider>
@@ -269,7 +358,7 @@ const Layout = () => {
       importance: Importance.HIGH, // (optional)
       vibrate: true, // (optional)
     },
-    created => console.log(`createChannel returned '${created}'`),
+    // created => console.log(`createChannel returned '${created}'`),
   );
   useEffect(() => {
     if (socket) {

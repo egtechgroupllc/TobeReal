@@ -16,6 +16,8 @@ import {formatPrice} from '../../../../../../../utils/format';
 import {useCountry} from '../../../../../../../hooks/useCountry';
 import {useLanguage} from '../../../../../../../hooks/useLanguage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useAppKit, useAppKitAccount} from '@reown/appkit-ethers-react-native';
+import {showMess} from '../../../../../../../assets/constants/Helper';
 
 export default function SelectVoucherFooter({
   count,

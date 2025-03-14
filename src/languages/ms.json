@@ -1143,7 +1143,7 @@
   "please_repost": "Catatan ini telah tamat tempoh, sila pos semula",
   "repost": "Pos semula",
   "video_short": "video pendek",
-  "wallet_ready_to_use": "Dompet kripto anda sedia untuk digunakan",
+  "wallet_ready_to_use": "Dompet mata wang kripto anda",
 
   "incomplete_registration": "Proses Pendaftaran Belum Selesai",
   "detail_review": "Ulasan Terperinci",
@@ -1391,7 +1391,9 @@
     "how_to_faucet_points": "Cara Mendapatkan Mata Faucet",
     "how_to_post_news": "Cara Membuat Siaran",
     "how_to_swap_voucher_and_booking": "Cara Menukar Baucar dan Tempahan",
-    "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Ganjaran"
+    "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Ganjaran",
+
+   "wallet_not_connect": "Dompet belum disambungkan. Sila sambungkan dompet untuk menggunakan fungsi ini!"
 
 
 

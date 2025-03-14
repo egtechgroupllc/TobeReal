@@ -4,6 +4,7 @@ import React, {ReactNode, createContext, useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNRestart from 'react-native-restart';
 import {storage} from '../utils/MMKVStorage';
+import { useAppKitAccount, useDisconnect } from '@reown/appkit-ethers-react-native';
 
 interface AuthProps {
   token?: string;
@@ -15,7 +16,8 @@ export const AuthContext = createContext<AuthProps>({});
 
 export const AuthProvider = ({children}: {children: ReactNode}) => {
   const queryClient = useQueryClient();
-
+  const {disconnect} = useDisconnect();
+  const {isConnected} = useAppKitAccount();
   const [token, setToken] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -43,6 +45,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const clearToken = async () => {
     try {
       setToken(undefined);
+      isConnected && disconnect();
       axios.defaults.headers.common['Authorization'] = '';
       await storage.delete(TOKEN_KEY);
       queryClient.clear();

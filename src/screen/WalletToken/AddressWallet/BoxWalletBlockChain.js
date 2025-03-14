@@ -16,7 +16,7 @@ import QRWalletBlockChain from '../../Profile/components/QRWalletBlockChain';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {getToken} from '../../../Model/api/common';
 
-export default function BoxWalletBlockChain({data}) {
+export default function BoxWalletBlockChain({data, walletAddress}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function BoxWalletBlockChain({data}) {
   );
 
   const handleCopy = () => {
-    Clipboard.setString(data?.wallet_address);
+    Clipboard.setString(walletAddress);
     showMess(t('copy_success'));
   };
 
@@ -41,7 +41,7 @@ export default function BoxWalletBlockChain({data}) {
     enabled: !!token,
   });
 
-  if (!data?.wallet_address) return null;
+  if (!walletAddress) return null;
   return (
     <View style={styles.box}>
       <View style={styles.content}>
@@ -59,7 +59,7 @@ export default function BoxWalletBlockChain({data}) {
               textType="semiBold"
               ellipsizeMode="middle"
               numberOfLines={1}>
-              {data?.wallet_address}
+              {walletAddress}
             </CustomText>
           </TouchableOpacity>
         </View>
@@ -75,13 +75,14 @@ export default function BoxWalletBlockChain({data}) {
             borderRadius: scale(5),
             justifyContent: 'center',
           }}>
-          <QRCode value={data?.wallet_address} size={scale(66)} />
+          <QRCode value={walletAddress} size={scale(66)} />
         </TouchableOpacity>
       </View>
 
       {isOpen && (
         <QRWalletBlockChain
           data={data}
+          walletAddress={walletAddress}
           open={isOpen}
           onClose={() => setIsOpen(false)}
         />
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     minHeight: scale(100),
     height: scale(85),
-    width: '90%',
+    width: '100%',
     ...SHADOW,
     borderWidth: 1,
     borderColor: COLORS.pioBox,

@@ -79,7 +79,7 @@ export default function InfoDetail({data}) {
             />
             <CustomText textType="regular" numberOfLines={2}>
               {' '}
-              {data.address}
+              {data?.address}
             </CustomText>
           </View>
 
@@ -128,6 +128,7 @@ export default function InfoDetail({data}) {
         <QRWalletBlockChain
           hotelAddress
           data={data}
+          walletAddress={data?.wallet_address}
           open={isOpen}
           onClose={() => setIsOpen(false)}
         />

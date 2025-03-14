@@ -7,10 +7,13 @@ import CustomText from '../../../../components/CustomText';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {useQueryClient} from '@tanstack/react-query';
 import {showMess} from '../../../../assets/constants/Helper';
+import {useAppKit, useAppKitAccount} from '@reown/appkit-ethers-react-native';
 export default function TabContent() {
   const {t} = useLanguage();
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const {isConnected} = useAppKitAccount();
+  const {open, close} = useAppKit();
 
   const profile = queryClient.getQueryData(['user', 'profile'])?.data;
   const handleCheckAccc = () => {
@@ -28,17 +31,35 @@ export default function TabContent() {
 
   const goSell = () => {
     if (handleCheckAccc()) {
-      navigation.navigate('SellScreen');
+      if (isConnected) {
+        navigation.navigate('SellScreen');
+      } else {
+        open({view: 'Connect'});
+        showMess(t('wallet_not_connect'), 'error');
+        return;
+      }
     }
   };
   const goLease = () => {
     if (handleCheckAccc()) {
-      navigation.navigate('LeaseScreen');
+      if (isConnected) {
+        navigation.navigate('LeaseScreen');
+      } else {
+        open({view: 'Connect'});
+        showMess(t('wallet_not_connect'), 'error');
+        return;
+      }
     }
   };
   const goRentBuy = () => {
     if (handleCheckAccc()) {
-      navigation.navigate('TourScreen');
+      if (isConnected) {
+        navigation.navigate('TourScreen');
+      } else {
+        open({view: 'Connect'});
+        showMess(t('wallet_not_connect'), 'error');
+        return;
+      }
     }
     // showMess(t('comming_soon'), 'error');
   };

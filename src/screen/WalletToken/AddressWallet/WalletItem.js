@@ -77,7 +77,7 @@ export default function WalletItem({item, onPress}) {
                   : item.des}
               </CustomText>
             </View>
-            {item.isOpen ? (
+            {/* {item.isOpen ? (
               item.isNext && <IconNext size={scale(12)} fill={COLORS.white} />
             ) : (
               <CustomButton
@@ -92,7 +92,7 @@ export default function WalletItem({item, onPress}) {
                   color: COLORS.black,
                 }}
               />
-            )}
+            )} */}
           </View>
         </View>
       ) : (

@@ -22,11 +22,21 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pionehouse</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>telprompt</string>
+		<string>metamask</string>
+		<string>tobewallet</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -53,7 +63,7 @@
 		<string>Montserrat-Bold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string/>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

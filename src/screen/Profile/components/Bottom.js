@@ -18,6 +18,7 @@ import CustomText from '../../../components/CustomText';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
+import {useDisconnect} from '@reown/appkit-ethers-react-native';
 
 const listSocial = [
   IconShare,

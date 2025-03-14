@@ -127,6 +127,7 @@ export default function InfoDetail({data, price}) {
       {isOpen && (
         <QRWalletBlockChain
           data={data}
+          walletAddress={data?.wallet_address}
           open={isOpen}
           onClose={() => setIsOpen(false)}
         />

@@ -5,9 +5,12 @@ import {images, scale} from '../../assets/constants';
 import PaymentMethodsItem from './components/BookingRoom/ContentStep2/PaymentMethodsItem';
 import {showMess} from '../../assets/constants/Helper';
 import {useLanguage} from '../../hooks/useLanguage';
+import {useAppKit, useAppKitAccount} from '@reown/appkit-ethers-react-native';
 
 export default function ListPaymentMethodsScreen({route}) {
   const {t} = useLanguage();
+  const {isConnected} = useAppKitAccount();
+  const {open, close} = useAppKit();
   const listMethods = [
     {
       header: t('pionehouse_wallet'),
@@ -57,6 +60,7 @@ export default function ListPaymentMethodsScreen({route}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <View>
       <FlatList
@@ -92,14 +96,13 @@ export default function ListPaymentMethodsScreen({route}) {
               // }
               // if (item?.type === 'FIAT' || item?.type === 'VOUCHER') {
               if (item?.type === 'VOUCHER') {
-                if (!dataParams?.wallet_address) {
-                  showMess(t('please_create_wallet'), 'error');
-                  navigate('NavigateWalletToken', {
-                    screen: 'AddressWalletScreen',
-                  });
+                if (!isConnected) {
+                  showMess(t('wallet_not_connect'), 'error');
+                  open();
+                } else {
+                  dataParams?.onGoBack(item);
+                  goBack();
                 }
-                dataParams?.onGoBack(item);
-                goBack();
               } else {
                 showMess(t('comming_soon'), 'error', {
                   duration: 500,

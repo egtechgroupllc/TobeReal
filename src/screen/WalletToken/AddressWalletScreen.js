@@ -57,9 +57,7 @@ export default function AddressWalletScreen() {
         name: `${t('cryptocurrency_wallet')} `,
         balance: dataQ?.data?.TBH,
         backgroundColor: '#012133',
-        des: !data?.data?.wallet_address
-          ? t('active_to_use_wallet', {unit: 'PioneChain'})
-          : t('wallet_ready_to_use'),
+        des: t('wallet_ready_to_use'),
         logo: images.logoPione,
         isOpen: data?.data?.private_key || data?.data?.passphrase,
         currency: getDataToken?.data?.symbol,

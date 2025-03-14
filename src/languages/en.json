@@ -1175,7 +1175,7 @@
   "please_repost": "This post have been expired, please repost it",
   "repost": "Repost",
   "video_short": "Video short",
-  "wallet_ready_to_use": "Your cryptocurrency wallet is ready to use",
+  "wallet_ready_to_use": "Your cryptocurrency wallet",
 
   "incomplete_registration": "Incomplete Registration Process",
   "detail_review": "Detail review",
@@ -1423,5 +1423,7 @@
   "how_to_faucet_points": "How to Faucet Points",
   "how_to_post_news": "How to Post News",
   "how_to_swap_voucher_and_booking": "How to Swap Voucher and Booking",
-  "how_to_complete_task_receive_rewards": "How to Complete Daily Tasks and Receive Rewards"
+  "how_to_complete_task_receive_rewards": "How to Complete Daily Tasks and Receive Rewards",
+
+  "wallet_not_connect":"Wallet not connected. Please connect wallet to use this function!"
 }

@@ -310,7 +310,7 @@ export default function BuyVoucherScreen() {
       <SelectVoucherFooter
         buyVoucher
         setQuantity={setQuantity}
-        numQuantity={params?.item?.quantity}
+        numQuantity={params?.item?.quantity_real}
         quantity={quantity}
         onBuy={() => handleAlert()}
       />

@@ -1161,7 +1161,7 @@
   "please_repost": "Ang post na ito ay nag-expire na, paki repost",
   "repost": "Repost",
   "video_short": "maikling video",
-  "wallet_ready_to_use": "Ang iyong cryptocurrency wallet ay handa nang gamitin",
+  "wallet_ready_to_use": "Ang iyong cryptocurrency wallet",
 
   "incomplete_registration": "Di Kumpletong Proses ng Paggawa ng Patala",
   "detail_review": "Detalyadong Pagsusuri",
@@ -1409,6 +1409,8 @@
     "how_to_faucet_points": "Paano Mag-Faucet ng Puntos",
     "how_to_post_news": "Paano Mag-post ng Balita",
     "how_to_swap_voucher_and_booking": "Paano Magpalit ng Voucher at Mag-book",
-    "how_to_complete_task_receive_rewards": "Paano Kumpletuhin ang Araw-araw na Gawain at Makakuha ng Gantimpala"
+    "how_to_complete_task_receive_rewards": "Paano Kumpletuhin ang Araw-araw na Gawain at Makakuha ng Gantimpala",
+
+    "wallet_not_connect": "Hindi pa nakakonekta ang wallet. Pakikonekta ang wallet upang magamit ang function na ito!"
 
 }

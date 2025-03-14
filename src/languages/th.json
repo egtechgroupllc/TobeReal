@@ -1166,7 +1166,7 @@
   "please_repost": "โพสต์นี้หมดอายุแล้ว กรุณาโพสต์ใหม่",
   "repost": "โพสต์ใหม่",
   "video_short": "วิดีโอสั้น",
-  "wallet_ready_to_use": "กระเป๋าเงินคริปโตของคุณพร้อมใช้งานแล้ว",
+  "wallet_ready_to_use": "กระเป๋าเงินดิจิทัลของคุณ",
 
   "incomplete_registration": "กระบวนการลงทะเบียนไม่สมบูรณ์",
   "detail_review": "รีวิวรายละเอียด",
@@ -1414,6 +1414,8 @@
     "how_to_faucet_points": "วิธีรับแต้ม Faucet",
     "how_to_post_news": "วิธีโพสต์ข่าว",
     "how_to_swap_voucher_and_booking": "วิธีแลกบัตรกำนัลและจอง",
-   "how_to_complete_task_receive_rewards": "วิธีทำภารกิจประจำวันให้สำเร็จและรับรางวัล"
+   "how_to_complete_task_receive_rewards": "วิธีทำภารกิจประจำวันให้สำเร็จและรับรางวัล",
+
+       "wallet_not_connect": "กระเป๋าเงินยังไม่ได้เชื่อมต่อ กรุณาเชื่อมต่อกระเป๋าเงินเพื่อใช้ฟังก์ชันนี้!"
 
 }

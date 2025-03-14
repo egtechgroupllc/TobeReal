@@ -60,6 +60,14 @@
         android:exported="true"
         android:screenOrientation="portrait"
         >
+           <!-- Intent filter cho Deep Linking -->
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="pionehouse"/>
+    </intent-filter>
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />

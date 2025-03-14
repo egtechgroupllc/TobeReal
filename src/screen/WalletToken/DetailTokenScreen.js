@@ -42,7 +42,7 @@ export default function DetailTokenScreen() {
           <View style={styles.icon}>
             <CustomImage
               isAvatar
-              source={{uri: params?.listToken?.image_url}}
+              source={params?.listToken?.image}
               style={{
                 width: scale(70),
                 aspectRatio: 1,
