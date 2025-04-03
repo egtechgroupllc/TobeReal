@@ -28,6 +28,9 @@ import {getBalanceWallet, getStatusTask} from '../../Model/api/wallet';
 import {getBanner} from '../../Model/api/banner';
 import {storage} from '../../utils/MMKVStorage';
 import SliderContent from './components/SliderContent';
+import {useAppKitAccount} from '@reown/appkit-ethers-react-native';
+import {testnet} from '../../../App';
+import {getCoinInfo} from '../WalletToken/components/GetTokenInfo';
 
 export default function HomeExploreScreen() {
   const {token} = useAuthentication();
@@ -37,7 +40,8 @@ export default function HomeExploreScreen() {
   const [dateSkip, setDateSkip] = useState(false);
   const [isCanCheckIn, setIsCanCheckIn] = useState(false);
   const [userRewards, setUserRewards] = useState(null);
-
+  const [amountPione, setAmountPione] = useState(null);
+  const {address, isConnected} = useAppKitAccount();
   const {navigate} = useNavigation();
   const today = formatDate(new Date());
   const queryClient = useQueryClient();
@@ -52,10 +56,12 @@ export default function HomeExploreScreen() {
     queryFn: () => getBalanceWallet(),
     enabled: !!token,
   });
-  const amountPione = useMemo(
-    () => dataWallet?.data?.find(item => item?.symbol === 'PZO'),
-    [dataWallet?.data],
-  );
+  getCoinInfo({
+    walletAddress: address,
+    chain: testnet,
+  }).then(res => {
+    setAmountPione(res?.balance);
+  });
   const callContractMutation = useMutation({
     mutationFn: postCallContractCheckin,
   });

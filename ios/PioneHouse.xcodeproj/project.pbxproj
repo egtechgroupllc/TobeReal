@@ -514,7 +514,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PioneHouse/PioneHouse.entitlements;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 3B3LR7NVDL;
+				DEVELOPMENT_TEAM = U9HJ9A8JN5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PioneHouse/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pione House";
@@ -530,7 +530,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zzzzcom.pionechain.pionehouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
 				PRODUCT_NAME = PioneHouse;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -551,7 +551,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PioneHouse/PioneHouse.entitlements;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 3B3LR7NVDL;
+				DEVELOPMENT_TEAM = U9HJ9A8JN5;
 				INFOPLIST_FILE = PioneHouse/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pione House";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -566,7 +566,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zzzzcom.pionechain.pionehouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pionechain.pionehouse;
 				PRODUCT_NAME = PioneHouse;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

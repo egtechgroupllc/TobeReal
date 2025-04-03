@@ -130,7 +130,7 @@ createAppKit({
       id: 'com.companyname.swaptobe',
       name: 'PioneWallet',
       homepage: 'com.companyname.swaptobe',
-      image_url: 'https://pionescan.com/favicon/favicon.png',
+      image_url: 'https://pionechain.com/images/ecosystem/pionechain.png',
       mobile_link: 'tobewallet://',
       desktop_link: 'desktop_link',
       webapp_link: 'webapp_link',

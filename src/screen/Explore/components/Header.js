@@ -31,6 +31,7 @@ import {
 } from '../../../Model/api/auth';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 import {showMess} from '../../../assets/constants/Helper';
+import {useAppKit, useAppKitAccount} from '@reown/appkit-ethers-react-native';
 
 const listSocial = [
   {
@@ -68,6 +69,8 @@ export default function Header({
     enabled: !!token,
     refetchInterval: 5000,
   });
+  const {address, isConnected} = useAppKitAccount();
+  const {open, close} = useAppKit();
   const {
     data: dataNotify,
     isError,
@@ -109,15 +112,16 @@ export default function Header({
 
   const goDailyCheckin = () => {
     if (token) {
-      if (dataP?.data?.wallet_address) {
+      if (!isConnected) {
+        if (!isConnected) {
+          open({view: 'Connect'});
+          showMess(t('wallet_not_connect'), 'error');
+          return;
+        }
+      } else {
         navigate('NoBottomTab', {
           screen: 'DailyCheckinScreen',
           params: {dataCheckin, amountPione, dataStatusTask},
-        });
-      } else {
-        showMess(t('please_create_wallet'), 'error');
-        navigate('NavigateWalletToken', {
-          screen: 'AddressWalletScreen',
         });
       }
     } else {
@@ -168,7 +172,7 @@ export default function Header({
             <IconGift fill={COLORS.black} />
             {!dataStatusTask?.data?.is_received_airdrop_today &&
               token &&
-              dataP?.data?.wallet_address && <View style={styles.dot} />}
+              address && <View style={styles.dot} />}
           </TouchableOpacity>
           <TouchableOpacity onPress={goChatGroup}>
             <IconChat fill={COLORS.black} />
