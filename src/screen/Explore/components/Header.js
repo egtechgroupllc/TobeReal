@@ -10,6 +10,7 @@ import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
 import {
   IconChat,
   IconGift,
+  IconLogoHorizon,
   IconNotification,
   IconSearch,
   LogoLine,
@@ -130,11 +131,7 @@ export default function Header({
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <View style={styles.boxHeight}>
-          <CustomImage
-            source={images.logo}
-            resizeMode="contain"
-            style={styles.img}
-          />
+          <IconLogoHorizon />
         </View>
         {/* <View
           style={{
@@ -262,6 +259,8 @@ const styles = StyleSheet.create({
   boxHeight: {
     height: scale(55),
     width: '40%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   img: {
     height: '100%',

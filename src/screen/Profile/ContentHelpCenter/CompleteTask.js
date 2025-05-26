@@ -59,7 +59,8 @@ export default function CompleteTask() {
                   style={{
                     width: '100%',
                     height: scale(300),
-                    backgroundColor: COLORS.white,
+                    backgroundColor: COLORS.white70,
+
                     borderRadius: scale(5),
                     ...SHADOW,
                     borderWidth: scale(1),

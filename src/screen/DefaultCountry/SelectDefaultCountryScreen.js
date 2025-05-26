@@ -12,6 +12,7 @@ import CustomText from '../../components/CustomText';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {showMess} from '../../assets/constants/Helper';
 import {storage} from '../../utils/MMKVStorage';
+import {IconLogoPione} from '../../assets/icon/Icon';
 
 export default function SelectDefaultCountryScreen() {
   const navigation = useNavigation();
@@ -68,14 +69,7 @@ export default function SelectDefaultCountryScreen() {
   return (
     <MainWrapper>
       <View style={styles.contain}>
-        <CustomImage
-          source={images.logo1}
-          resizeMode="contain"
-          style={{
-            width: '100%',
-            height: scale(120),
-          }}
-        />
+        <IconLogoPione width={scale(200)} height={scale(120)} />
         <CustomText
           textType="medium"
           style={{fontSize: SIZES.large, marginTop: scale(20)}}>

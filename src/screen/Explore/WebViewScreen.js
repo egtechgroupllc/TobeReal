@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Linking} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import {CustomButton, MainWrapper} from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
@@ -30,6 +30,21 @@ export default function WebViewScreen() {
           uri: params?.uri,
         }}
         style={{flex: 1}}
+        onShouldStartLoadWithRequest={event => {
+          const url = event.url;
+
+          if (url.startsWith('tobewallet://')) {
+            // Dùng Linking để mở ngoài
+            Linking.openURL(url).catch(err =>
+              console.warn("Can't open URL:", err),
+            );
+            return false; // chặn WebView không tự mở
+          }
+
+          // Cho phép các URL bình thường
+          return true;
+        }}
+        originWhitelist={['*']}
       />
     </MainWrapper>
   );

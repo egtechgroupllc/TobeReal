@@ -38,7 +38,8 @@ export default function DetailAccommoMap({
   const fetchPlaces = async () => {
     // const {coords} = await getCurrentLocation();
     // if (coords) {
-    //   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${data.latitude},${data.longitude}&radius=${radius}&key=${KEY_MAP}`;
+    //   const url = `https://maps
+    // .googleapis.com/maps/api/place/nearbysearch/json?location=${data.latitude},${data.longitude}&radius=${radius}&key=${KEY_MAP}`;
 
     //   fetch(url)
     //     .then(response => response.json())

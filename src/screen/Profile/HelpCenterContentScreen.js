@@ -4,7 +4,7 @@ import {MainWrapper} from '../../components';
 import {useLanguage} from '../../hooks/useLanguage';
 import {useRoute} from '@react-navigation/native';
 import FaucetPoint from './ContentHelpCenter/FaucetPoint';
-import {scale} from '../../assets/constants';
+import {COLORS, scale} from '../../assets/constants';
 import PostNews from './ContentHelpCenter/PostNews';
 import SwapVoucher from './ContentHelpCenter/SwapVoucher';
 import CompleteTask from './ContentHelpCenter/CompleteTask';

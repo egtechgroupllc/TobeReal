@@ -15,6 +15,7 @@
 		4C6556FC2BBEA0CF009FE858 /* AppDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FAF1A68108700A75B9A /* AppDelegate.h */; };
 		4C6556FD2BBEA0CF009FE858 /* AppDelegate.mm in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		4C6556FF2BBEA0CF009FE858 /* main.m in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		4CDBFF0A2DDC2406002ADA89 /* NAMDINH.kml in Resources */ = {isa = PBXBuildFile; fileRef = 4CDBFF092DDC2406002ADA89 /* NAMDINH.kml */; };
 		CE0D94CF39790E1FFEA8C582 /* libPods-PioneHouse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134A68C9F40C6CBCD1D5AAC4 /* libPods-PioneHouse.a */; };
 		EF8A041F8C493F7FFFA8361B /* libPods-PioneHouse-PioneHouseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 400F0E7C6D2C64B45F68FF4A /* libPods-PioneHouse-PioneHouseTests.a */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		23947C607683427083A5531E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		400F0E7C6D2C64B45F68FF4A /* libPods-PioneHouse-PioneHouseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PioneHouse-PioneHouseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C86505E2D5F54000091BF77 /* PioneHouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PioneHouse.entitlements; path = PioneHouse/PioneHouse.entitlements; sourceTree = "<group>"; };
+		4CDBFF092DDC2406002ADA89 /* NAMDINH.kml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NAMDINH.kml; sourceTree = "<group>"; };
 		61093AC9891A8C0A68B5A29C /* Pods-PioneHouse-PioneHouseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PioneHouse-PioneHouseTests.debug.xcconfig"; path = "Target Support Files/Pods-PioneHouse-PioneHouseTests/Pods-PioneHouse-PioneHouseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		631AADD3D0B4450F8ADA7B0A /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PioneHouse/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				4CDBFF092DDC2406002ADA89 /* NAMDINH.kml */,
 			);
 			name = PioneHouse;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				4C6556FD2BBEA0CF009FE858 /* AppDelegate.mm in Resources */,
 				4C6556FF2BBEA0CF009FE858 /* main.m in Resources */,
 				4C6556FB2BBEA0C2009FE858 /* LaunchScreen.storyboard in Resources */,
+				4CDBFF0A2DDC2406002ADA89 /* NAMDINH.kml in Resources */,
 				4C6556FA2BBEA0B6009FE858 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,7 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PioneHouse/PioneHouse.entitlements;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U9HJ9A8JN5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PioneHouse/Info.plist;
@@ -524,7 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -550,7 +554,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PioneHouse/PioneHouse.entitlements;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U9HJ9A8JN5;
 				INFOPLIST_FILE = PioneHouse/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pione House";
@@ -560,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

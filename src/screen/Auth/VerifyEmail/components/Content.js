@@ -53,7 +53,8 @@ export default function Content() {
             height: scale(165),
             marginBottom: scale(30),
             alignSelf: 'center',
-          }}></Image>
+          }}
+        />
         <CustomInput
           control={control}
           label={t('code')}

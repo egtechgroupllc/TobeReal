@@ -9,6 +9,7 @@ import {showMess} from '../../assets/constants/Helper';
 import {
   IconAdd,
   IconHelp,
+  IconLogoHorizon,
   IconMenu,
   IconSearch,
   IconWallet,
@@ -173,14 +174,7 @@ export default function WalletTokenScreen() {
   return (
     <MainWrapper refreshControl>
       <View style={styles.wrapper}>
-        <CustomImage
-          source={images.logo}
-          resizeMode="cover"
-          style={{
-            width: scale(200),
-            height: scale(50),
-          }}
-        />
+        <IconLogoHorizon width={scale(200)} height={scale(55)} />
         <CustomText
           size={scale(13)}
           textType="medium"
@@ -250,6 +244,11 @@ const styles = StyleSheet.create({
     rowGap: scale(10),
     padding: scale(20),
     paddingTop: scale(30),
+  },
+  boxHeight: {
+    height: scale(55),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   boxIcon: {
     padding: scale(10),

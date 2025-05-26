@@ -59,7 +59,7 @@ export default function FaucetPoint() {
                   style={{
                     width: '100%',
                     height: scale(270),
-                    backgroundColor: COLORS.white,
+                    backgroundColor: COLORS.white70,
                     borderRadius: scale(5),
                     ...SHADOW,
                     borderWidth: scale(1),

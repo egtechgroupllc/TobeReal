@@ -53,6 +53,7 @@ import {useLanguage} from './src/hooks/useLanguage';
 import {replaceTranslateKey} from './src/utils/replaceTranslateKey';
 import {HotUpdater} from '@hot-updater/react-native';
 import {storage} from './src/utils/MMKVStorage';
+import {IconLogoHorizon, IconLogoPione} from './src/assets/icon/Icon';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -305,11 +306,9 @@ const Layout = () => {
   if (!isReady || isCountry === null) {
     return (
       <View style={styles.loadingContainer}>
-        <CustomImage
-          source={images.logo2}
-          style={{height: '50%', width: '50%', alignSelf: 'center'}}
-          resizeMode="contain"
-        />
+        <View style={{alignItems: 'center'}}>
+          <IconLogoPione width={scale(120)} height={scale(120)} />
+        </View>
         <View style={{rowGap: scale(10)}}>
           {/* <CText
             style={{color: COLORS.grey, fontSize: SIZES.medium}}
@@ -357,11 +356,9 @@ export default HotUpdater.wrap({
   },
   fallbackComponent: ({status, progress}) => (
     <View style={styles.loadingContainer}>
-      <CustomImage
-        source={images.logo2}
-        style={{height: '50%', width: '50%', alignSelf: 'center'}}
-        resizeMode="contain"
-      />
+      <View style={{alignItems: 'center'}}>
+        <IconLogoPione width={scale(120)} height={scale(120)} />
+      </View>
       <View style={{rowGap: scale(10)}}>
         <View style={{flexDirection: 'row'}}>
           <CustomText
@@ -391,5 +388,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.white,
+    rowGap: scale(40),
   },
 });

@@ -3548,15 +3548,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:^7.6.2":
-  version: 7.6.2
-  resolution: "@react-native-community/datetimepicker@npm:7.6.2"
-  dependencies:
-    invariant: ^2.2.4
-  checksum: 24c718c01e7ff6bc4b47867bfdf77b98fb8e3a872a627ce057062c37bf24a27264ac40c46cc66c27b134fc56392dc90d5b81dfb3ad5073af2477da055c13cb17
-  languageName: node
-  linkType: hard
-
 "@react-native-community/geolocation@npm:^3.2.1":
   version: 3.2.1
   resolution: "@react-native-community/geolocation@npm:3.2.1"
@@ -7251,6 +7242,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-xml-parser@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "fast-xml-parser@npm:5.2.3"
+  dependencies:
+    strnum: ^2.1.0
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 1c21ada49b169faab7e0148d9326f58b6392daed41219d0996f8314ae59082dbc202057367e00de719fd4f615daaf0349c1b2d81ccdd82eab0a75b4722d8afeb
+  languageName: node
+  linkType: hard
+
 "fastq@npm:^1.6.0":
   version: 1.17.1
   resolution: "fastq@npm:1.17.1"
@@ -10841,7 +10843,6 @@ __metadata:
     "@miblanchard/react-native-slider": ^2.3.1
     "@ptomasroos/react-native-multi-slider": ^2.2.2
     "@react-native-clipboard/clipboard": ^1.14.0
-    "@react-native-community/datetimepicker": ^7.6.2
     "@react-native-community/geolocation": ^3.2.1
     "@react-native-community/netinfo": ^11.3.0
     "@react-native-community/push-notification-ios": ^1.11.0
@@ -10867,6 +10868,7 @@ __metadata:
     date-holidays: ^3.23.10
     dotenv: ^16.4.7
     eslint: ^8.19.0
+    fast-xml-parser: ^5.2.3
     geolib: ^3.3.4
     google-libphonenumber: ^3.2.34
     hot-updater: ^0.12.4
@@ -13256,6 +13258,13 @@ __metadata:
   version: 1.0.5
   resolution: "strnum@npm:1.0.5"
   checksum: 651b2031db5da1bf4a77fdd2f116a8ac8055157c5420f5569f64879133825915ad461513e7202a16d7fec63c54fd822410d0962f8ca12385c4334891b9ae6dd2
+  languageName: node
+  linkType: hard
+
+"strnum@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "strnum@npm:2.1.0"
+  checksum: d733b8c2700e7e0df15705e7e239dc99ae0be6d4d563d2d826310baaecdcdc0238e73bb781a5f90ef95be394669beeb130fea090bce21c3123f153204cb03af6
   languageName: node
   linkType: hard
 
