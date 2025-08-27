@@ -136,7 +136,7 @@ export default function TopProfile({name, data, userLevelInfo}) {
         </TouchableOpacity>
       </View> */}
 
-      <BoxWalletBlockChain data={data} />
+      <BoxWalletBlockChain data={data} isProfile />
 
       {/* <View style={styles.bottom}>
         <TouchableOpacity

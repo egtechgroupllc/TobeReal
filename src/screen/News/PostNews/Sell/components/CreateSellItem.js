@@ -46,7 +46,8 @@ export default function CreateSellItem({
       activeOpacity={0.7}
       // disabled={dateExpire <= today ? true : false}
       onPress={() => {
-        navigate('NoBottomTab', {screen: 'DetailBuyScreen', params: data});
+        // navigate('NoBottomTab', {screen: 'DetailBuyScreen', params: data});
+        navigate('NoBottomTab', {screen: 'FunctionSellScreen'});
       }}>
       {/* {dateExpire <= today && (
         <View

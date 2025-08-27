@@ -8,7 +8,7 @@ import {formatTime, formatDate} from '../../../../../../utils/format';
 const formatTime24 = date => {
   return formatTime(date);
 };
-export default function DateTime({onChange, title}) {
+export default function DateTime({onChange, title, styleTitle}) {
   const {t} = useLanguage();
 
   const [openCheckStart, setOpenCheckStart] = useState(false);
@@ -30,10 +30,12 @@ export default function DateTime({onChange, title}) {
 
   return (
     <View style={{width: '100%'}}>
-      <CustomText style={styles.title}>{title || t('select_date')}:</CustomText>
-      <View style={{flexDirection: 'row'}}>
+      <CustomText style={[styles.title, styleTitle]}>
+        {title || t('select_date')}:
+      </CustomText>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>
-          <CustomText style={styles.title} textType="regular">
+          <CustomText style={[styles.title, styleTitle]} textType="regular">
             {title || t('date_start')}:
           </CustomText>
 
@@ -68,7 +70,7 @@ export default function DateTime({onChange, title}) {
         </View>
 
         <View>
-          <CustomText style={styles.title} textType="regular">
+          <CustomText style={[styles.title, styleTitle]} textType="regular">
             {title || t('date_end')}:
           </CustomText>
           <CustomInput

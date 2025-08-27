@@ -30,6 +30,7 @@ export default function InfoDetail({data}) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!data?.wallet_address) return null;
+
   return (
     <WrapperContent
       noBackground

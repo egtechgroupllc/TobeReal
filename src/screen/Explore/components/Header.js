@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   ImageBackground,
   Linking,
@@ -10,8 +10,10 @@ import {COLORS, SHADOW, SIZES, images, scale} from '../../../assets/constants';
 import {
   IconChat,
   IconGift,
+  IconHome,
   IconLogoHorizon,
   IconNotification,
+  IconScan,
   IconSearch,
   LogoLine,
   LogoMessageFB,
@@ -32,6 +34,7 @@ import {
 } from '../../../Model/api/auth';
 import {getBalanceWallet} from '../../../Model/api/wallet';
 import {showMess} from '../../../assets/constants/Helper';
+import ModalQrCodeScanner from '../../Bookings/components/ModalQRCodeScanner';
 
 const listSocial = [
   {
@@ -63,12 +66,14 @@ export default function Header({
   const {navigate} = useNavigation();
   const {token} = useAuthentication();
   const queryClient = useQueryClient();
+  const [openModal, setOpenModal] = useState(false);
   const {data, isLoading} = useQuery({
     queryKey: ['chat', 'my-list-chat-group'],
     queryFn: () => getListChatGroup(),
     enabled: !!token,
     refetchInterval: 5000,
   });
+
   const {
     data: dataNotify,
     isError,
@@ -127,6 +132,13 @@ export default function Header({
       });
     }
   };
+  const handleScanQR = value => {
+    navigate('NoBottomTab', {
+      screen: 'DetailBuyScreen',
+      params: value,
+    });
+    setOpenModal(false);
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -161,6 +173,7 @@ export default function Header({
           {/* <TouchableOpacity onPress={goChart}>
             <IconGift fill={COLORS.black} />
           </TouchableOpacity> */}
+
           <TouchableOpacity onPress={goDailyCheckin}>
             <IconGift fill={COLORS.black} />
             {!dataStatusTask?.data?.is_received_airdrop_today &&
@@ -200,6 +213,9 @@ export default function Header({
               </View>
             )}
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => setOpenModal(true)}>
+            <IconScan fill={COLORS.black} />
+          </TouchableOpacity>
         </View>
       </View>
       {/* 
@@ -234,6 +250,11 @@ export default function Header({
           </View>
         </ImageBackground>
       </View> */}
+      <ModalQrCodeScanner
+        open={!!openModal}
+        onScanner={value => handleScanQR(value)}
+        onClose={() => setOpenModal(false)}
+      />
     </View>
   );
 }

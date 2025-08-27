@@ -10,6 +10,7 @@
 		00E356F31AD99517003FC87E /* PioneHouseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PioneHouseTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2EF1B37221E6F70140E661C5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3DD3F368247BE17D351E5D1F /* PrivacyInfo.xcprivacy */; };
 		4C6556FA2BBEA0B6009FE858 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		4C6556FB2BBEA0C2009FE858 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		4C6556FC2BBEA0CF009FE858 /* AppDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FAF1A68108700A75B9A /* AppDelegate.h */; };
@@ -42,6 +43,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PioneHouse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PioneHouse/main.m; sourceTree = "<group>"; };
 		23947C607683427083A5531E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		3DD3F368247BE17D351E5D1F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = PioneHouse/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		400F0E7C6D2C64B45F68FF4A /* libPods-PioneHouse-PioneHouseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PioneHouse-PioneHouseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C86505E2D5F54000091BF77 /* PioneHouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PioneHouse.entitlements; path = PioneHouse/PioneHouse.entitlements; sourceTree = "<group>"; };
 		4CDBFF092DDC2406002ADA89 /* NAMDINH.kml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NAMDINH.kml; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				4CDBFF092DDC2406002ADA89 /* NAMDINH.kml */,
+				3DD3F368247BE17D351E5D1F /* PrivacyInfo.xcprivacy */,
 			);
 			name = PioneHouse;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				4C6556FB2BBEA0C2009FE858 /* LaunchScreen.storyboard in Resources */,
 				4CDBFF0A2DDC2406002ADA89 /* NAMDINH.kml in Resources */,
 				4C6556FA2BBEA0B6009FE858 /* Images.xcassets in Resources */,
+				2EF1B37221E6F70140E661C5 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +655,11 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -719,7 +727,11 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

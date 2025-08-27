@@ -83,6 +83,9 @@ import TicketPriceManageScreen from '../screen/News/PostNews/Tour/components/Tic
 import RepostExpiredScreen from '../screen/News/PostNews/components/RepostExpiredScreen';
 import EditorScreen from '../screen/News/PostNews/Tour/components/PostNewTour/EditorScreen';
 import WebViewScreen from '../screen/Explore/WebViewScreen';
+import FunctionSellScreen from '../screen/News/PostNews/Sell/components/FunctionSellScreen';
+import UpdateBuildScreen from '../screen/News/PostNews/Sell/components/UpdateBuildScreen';
+import VerifyBlockchainScreen from '../screen/News/PostNews/Sell/components/VerifyBlockchainScreen';
 
 // eslint-disable-next-line no-undef
 export default routerNoBottomTab = [
@@ -422,5 +425,17 @@ export default routerNoBottomTab = [
   {
     name: 'WebViewScreen',
     component: WebViewScreen,
+  },
+  {
+    name: 'FunctionSellScreen',
+    component: FunctionSellScreen,
+  },
+  {
+    name: 'UpdateBuildScreen',
+    component: UpdateBuildScreen,
+  },
+  {
+    name: 'VerifyBlockchainScreen',
+    component: VerifyBlockchainScreen,
   },
 ];

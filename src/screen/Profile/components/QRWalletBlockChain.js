@@ -16,18 +16,22 @@ import {CustomButton, CustomImage, CustomText} from '../../../components';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {getToken, getTokenAirdrop} from '../../../Model/api/common';
 import {useQuery} from '@tanstack/react-query';
+import {id} from 'date-fns/locale';
 
 export default function QRWalletBlockChain({
   open,
   data,
   onClose,
   hotelAddress,
+  isProfile,
 }) {
   const {t} = useLanguage();
 
   const [secondEnd, setSecondEnd] = useState(false);
   const handleCopy = () => {
-    Clipboard.setString(data?.wallet_address);
+    Clipboard.setString(
+      isProfile ? data?.wallet_address : data?.user?.wallet_address,
+    );
     showMess(t('copy_success'));
   };
   const {data: getDataToken, error} = useQuery({
@@ -36,6 +40,7 @@ export default function QRWalletBlockChain({
   });
 
   if (!open) return null;
+
   return (
     <Modal
       animationType="fade"
@@ -91,7 +96,7 @@ export default function QRWalletBlockChain({
                 textType="medium"
                 numberOfLines={2}
                 color={COLORS.text}>
-                {data?.wallet_address}
+                {isProfile ? data?.wallet_address : data?.user?.wallet_address}
                 <IconCopy size={scale(12)} />
               </CustomText>
             </View>
@@ -103,10 +108,17 @@ export default function QRWalletBlockChain({
                 justifyContent: 'center',
               }}>
               <View style={{...styles.box, opacity: secondEnd ? 0.3 : 1}}>
-                {data?.wallet_address ? (
+                {data?.wallet_address || data?.user?.wallet_address ? (
                   <QRCode
                     size={scale(220)}
-                    value={data?.wallet_address}
+                    value={
+                      isProfile
+                        ? data?.wallet_address
+                        : JSON.stringify({
+                            wallet_address: data?.user?.wallet_address,
+                            id: data?.id,
+                          })
+                    }
                     color="#000"
                   />
                 ) : (

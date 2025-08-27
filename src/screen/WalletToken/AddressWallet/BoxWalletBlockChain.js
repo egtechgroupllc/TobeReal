@@ -16,7 +16,7 @@ import QRWalletBlockChain from '../../Profile/components/QRWalletBlockChain';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {getToken} from '../../../Model/api/common';
 
-export default function BoxWalletBlockChain({data}) {
+export default function BoxWalletBlockChain({data, isProfile}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
   const [isOpen, setIsOpen] = useState(false);
@@ -82,6 +82,7 @@ export default function BoxWalletBlockChain({data}) {
       {isOpen && (
         <QRWalletBlockChain
           data={data}
+          isProfile={isProfile}
           open={isOpen}
           onClose={() => setIsOpen(false)}
         />

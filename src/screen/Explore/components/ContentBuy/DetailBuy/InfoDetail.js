@@ -35,7 +35,6 @@ export default function InfoDetail({data, price}) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!data?.wallet_address) return null;
-  console.log(data);
 
   return (
     <WrapperContent
@@ -120,7 +119,7 @@ export default function InfoDetail({data, price}) {
             borderColor: COLORS.pioBox,
             ...SHADOW,
           }}>
-          <QRCode value={data?.wallet_address} size={scale(80)} />
+          <QRCode value={data?.user?.wallet_address} size={scale(80)} />
         </TouchableOpacity>
       </View>
 

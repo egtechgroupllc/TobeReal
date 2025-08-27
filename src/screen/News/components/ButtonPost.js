@@ -6,17 +6,34 @@ import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../../../components/CustomText';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconRight} from '../../../assets/icon/Icon';
-export default function ButtonPost({onPress, title, styleImage, image, style}) {
+export default function ButtonPost({
+  onPress,
+  title,
+  styleImage,
+  image,
+  style,
+  icon,
+  styleText,
+}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.button, style]}>
-        <Image source={image} style={styleImage} />
-        <View style={{width: '80%'}}>
-          <CustomText
-            textType="semiBold"
-            style={{...styles.text2, marginLeft: scale(10)}}>
-            {title}
-          </CustomText>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: scale(10),
+          }}>
+          {image ? (
+            <Image source={image} style={styleImage} />
+          ) : icon ? (
+            <View>{icon}</View>
+          ) : null}
+          <View>
+            <CustomText textType="semiBold" style={[styles.text2, styleText]}>
+              {title}
+            </CustomText>
+          </View>
         </View>
 
         <IconRight />
@@ -36,6 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     ...SHADOW,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   text2: {
     fontSize: SIZES.medium,

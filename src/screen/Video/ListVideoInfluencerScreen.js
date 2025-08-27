@@ -7,6 +7,7 @@ import {COLORS, SIZES, scale} from '../../assets/constants';
 import ListVideoRENT from './components/ListVideoRENT';
 import ListVideoBUY from './components/ListVideoBUY';
 import ListVideoTOUR from './components/ListVideoTOUR';
+import {useLanguage} from '../../hooks/useLanguage';
 const listVideo = [
   {
     id: 4,
@@ -59,10 +60,11 @@ const renderScene = ({route, jumpTo, isFocused}) => {
 export default function ListVideoInfluencerScreen() {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
+  const {t} = useLanguage();
   const [routes] = React.useState([
-    {key: 'first', title: 'RENT'},
-    {key: 'second', title: 'BUY'},
-    {key: 'third', title: 'TOUR'},
+    {key: 'first', title: t('RENT')},
+    {key: 'second', title: t('BUY')},
+    {key: 'third', title: t('TOUR')},
   ]);
   const {top} = useSafeAreaInsets();
   const av = new Animated.Value(0);

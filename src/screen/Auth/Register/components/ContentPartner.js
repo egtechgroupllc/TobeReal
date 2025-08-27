@@ -70,8 +70,8 @@ export default function ContentPartner() {
           maxLength={30}
           sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
-          name="username"
-          placeholder={t('enter_username')}
+          name="fullname"
+          placeholder={t('enter_fullname')}
         />
 
         <CustomInput

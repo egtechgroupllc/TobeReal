@@ -18,6 +18,7 @@ import {useCountry} from '../../../../../../hooks/useCountry';
 export default function Facilities({data}) {
   const {t} = useLanguage();
   const {currency} = useCountry();
+
   return (
     <View style={styles.boxTourTime}>
       <View
@@ -58,7 +59,7 @@ export default function Facilities({data}) {
           <InfoItem
             Icon={IconRoom}
             name={t('bedroom')}
-            value={3}
+            value={data?.number_bedroom}
             styleIcon={{
               height: scale(16),
             }}
@@ -69,7 +70,11 @@ export default function Facilities({data}) {
             value={data?.furnish}
           />
 
-          <InfoItem Icon={IconBed} name={t('toilet')} value={3} />
+          <InfoItem
+            Icon={IconBed}
+            name={t('toilet')}
+            value={data?.number_bathroom}
+          />
 
           <InfoItem
             Icon={IconDirection}
