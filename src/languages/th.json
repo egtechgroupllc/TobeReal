@@ -8,16 +8,21 @@
   "forgot_password": "ลืมรหัสผ่าน?",
   "dont_have_account": "ยังไม่มีบัญชี?",
   "signup": "ลงทะเบียน",
-  "enter_username": "กรุณาใส่ชื่อเต็มของคุณ",
+  "enter_fullname": "กรุณาใส่ชื่อเต็มของคุณ",
   "enter_email": "กรอกอีเมลของคุณ",
   "enter_new_password": "กรอกรหัสผ่านใหม่",
   "enter_password_confirm": "กรอกยืนยันรหัสผ่าน",
   "already_have_account": "มีบัญชีอยู่แล้ว?",
   "submit": "ส่ง",
-  "code": "รหัส",
+"code": "รหัสยืนยัน",
+    "enter_code": "กรอกรหัสยืนยันอีเมล",
+      "resend_code": "ส่งรหัสอีกครั้ง",
+      "resend_code_in": "ส่งรหัสอีกครั้งใน {unit}",
+      "second": "วินาที",
+    "verify_email": "ยืนยันอีเมล",
   "this_field_required": "จำเป็นต้องกรอกข้อมูลในช่องนี้",
   "password_not_match": "รหัสผ่านที่ป้อนไม่ตรงกัน ลองอีกครั้ง",
-  "use_6_characters": "ใช้รหัสผ่านที่มี 6 ตัวอักษรหรือมากกว่า",
+  "use_unit_characters": "ใช้ {unit} อักขระขึ้นไป",
   "invalid_email": "ขออภัย เฉพาะตัวอักษร (a-z), ตัวเลข (0-9), และจุด (.) เท่านั้นที่ได้รับอนุญาต",
 
   "find_accommodation": "ค้นหาที่พัก...",
@@ -244,7 +249,7 @@
   "wish_list": "รายการสิ่งที่ต้องการ",
   "change_language_success": "เปลี่ยนภาษาสำเร็จ!",
   "username_or_email": "ชื่อผู้ใช้หรืออีเมล",
-  "enter_username_email": "ป้อนชื่อผู้ใช้หรืออีเมลของคุณ",
+  "enter_fullname_email": "ป้อนชื่อผู้ใช้หรืออีเมลของคุณ",
   "for_sale": "สำหรับขาย",
   "register_partner": "ลงทะเบียนพาร์ทเนอร์",
   "become_pionehouse_partner": "เป็นพาร์ทเนอร์ Pione House",
@@ -1414,6 +1419,14 @@
     "how_to_faucet_points": "วิธีรับแต้ม Faucet",
     "how_to_post_news": "วิธีโพสต์ข่าว",
     "how_to_swap_voucher_and_booking": "วิธีแลกบัตรกำนัลและจอง",
-   "how_to_complete_task_receive_rewards": "วิธีทำภารกิจประจำวันให้สำเร็จและรับรางวัล"
+   "how_to_complete_task_receive_rewards": "วิธีทำภารกิจประจำวันให้สำเร็จและรับรางวัล",
+   "code_must_exactly": "รหัสต้องมีความยาว {unit} หลักพอดี",
+
+   "male": "ชาย",
+  "female": "หญิง",
+
+  "date_of_birth": "วันเกิด",
+  "verify_account": "ยืนยันบัญชี",
+  "verify_account_desc": "โปรดยืนยันบัญชีของคุณเพื่อใช้งานฟีเจอร์ของแอปต่อไป"
 
 }

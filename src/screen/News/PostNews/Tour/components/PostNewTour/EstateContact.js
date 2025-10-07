@@ -39,7 +39,7 @@ export default function EstateContact({control, errors, watch}) {
           placeholder={t('full_name')}
           control={control}
           name="business_name"
-          rules={requireField(t('enter_username'))}
+          rules={requireField(t('enter_fullname'))}
           style={{...styles.textInput}}
         />
         <CustomInput

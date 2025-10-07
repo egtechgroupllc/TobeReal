@@ -1,7 +1,6 @@
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import {getProfile} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconWallet} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
@@ -14,6 +13,7 @@ import Content from './components/Content';
 import HeaderNoToken from './components/HeaderNoToken';
 import TopProfile from './components/TopProfile';
 import {getListRank} from '../../Model/api/auth';
+import {getProfile} from '../../Model/api_new/user/profile';
 
 export default function ProfileScreen() {
   const upgrade = () => {};
@@ -23,8 +23,7 @@ export default function ProfileScreen() {
   const queryClient = useQueryClient();
   const {isLoading, data} = useQuery({
     queryKey: ['user', 'profile'],
-    queryFn: () => getProfile(token),
-    enabled: !!token,
+    queryFn: () => getProfile(),
   });
 
   const {data: dataRank} = useQuery({
@@ -105,7 +104,7 @@ export default function ProfileScreen() {
           <TopProfile
             upgrade={true}
             data={data?.data}
-            name={data?.data?.username || 'name'}
+            name={data?.data?.fullname || 'name'}
             onPressUpgrade={upgrade}
             userLevelInfo={userLevelInfo}
           />

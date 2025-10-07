@@ -8,10 +8,7 @@ export default function RegisterScreen() {
   const {t} = useLanguage();
 
   return (
-    <MainAuth
-      heading={t('create_an_account')}
-      style={{marginTop: scale(40)}}
-      subHeading={t('connect_with_your_friend')}>
+    <MainAuth heading={t('create_an_account')} style={{marginTop: scale(40)}}>
       <Content />
     </MainAuth>
   );

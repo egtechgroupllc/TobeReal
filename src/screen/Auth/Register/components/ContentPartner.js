@@ -95,7 +95,7 @@ export default function ContentPartner() {
         <CustomInput
           control={control}
           sizeInput="medium"
-          rules={validateMinLengthText(t('use_6_characters'), 6)}
+          rules={validateMinLengthText(t('use_unit_characters', {unit: 6}), 6)}
           name="password"
           placeholder={t('enter_password')}
           password

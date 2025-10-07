@@ -3,7 +3,6 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {getProfile} from '../../../Model/api/common';
 import {COLORS, SHADOW, SIZES, scale} from '../../../assets/constants';
 import {IconNext} from '../../../assets/icon/Icon';
 import {CustomButton, CustomText, MainWrapper} from '../../../components';
@@ -11,14 +10,22 @@ import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useCountry} from '../../../hooks/useCountry';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {formatDate} from '../../../utils/format';
+import {getGender, getProfile} from '../../../Model/api_new/user/profile';
 
 export default function InformationScreen() {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const queryClient = useQueryClient();
-  const datePro = queryClient.getQueryData(['user', 'profile'])?.data;
+  const {data: dataPro} = useQuery({
+    queryKey: ['user', 'profile'],
+    queryFn: () => getProfile(),
+  })?.data;
   const {country} = useCountry();
+  const {isLoading, data: dataGen} = useQuery({
+    queryKey: ['user', 'gender'],
+    queryFn: () => getGender(),
+  });
 
+  const SortGen = dataGen?.data?.find(item => item.id === dataPro?.genderId);
   return (
     <MainWrapper
       headerTitle={t('personal_information')}
@@ -26,12 +33,17 @@ export default function InformationScreen() {
         paddingHorizontal: scale(12),
       }}>
       <View style={styles.wrapper}>
-        <Row title={t('user_name')} value={datePro?.username} />
-        <Row title={t('phone')} value={datePro?.phone} />
-        <Row title={t('email')} value={datePro?.email} />
+        <Row title={t('full_name')} value={dataPro?.fullname} />
+        <Row title={t('gender')} value={SortGen?.name} />
+        <Row
+          title={t('date_of_birth')}
+          value={formatDate(dataPro?.dateOfBirth)}
+        />
+        <Row title={t('phone')} value={dataPro?.phone} />
+        <Row title={t('email')} value={dataPro?.email} />
         <Row
           title={t('date_create')}
-          value={formatDate(datePro?.createdAt)}
+          value={formatDate(dataPro?.createdAt)}
           disabled
         />
         <Row

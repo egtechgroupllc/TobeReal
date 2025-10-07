@@ -8,7 +8,7 @@
   "forgot_password": "忘记密码？",
   "dont_have_account": "还没有账号？",
   "signup": "注册",
-  "enter_username": "输入您的用户名",
+  "enter_fullname": "输入您的用户名",
   "enter_firstname": "输入您的名字",
   "enter_lastname": "输入您的姓氏",
   "enter_phone": "输入您的电话",
@@ -17,10 +17,15 @@
   "enter_password_confirm": "确认密码",
   "already_have_account": "已有账号？",
   "submit": "提交",
-  "code": "代码",
+  "code": "验证码",
+   "enter_code": "输入邮箱验证码",
+     "verify_email": "验证邮箱",
+     "resend_code": "重新发送验证码",
+      "resend_code_in": "{unit} 后可重新发送验证码",
+          "second": "秒",
   "this_field_required": "此字段为必填项",
   "password_not_match": "输入的密码不匹配，请重试。",
-  "use_6_characters": "密码需至少包含6个字符",
+  "use_unit_characters": "使用 {unit} 个或更多字符",
   "invalid_email": "抱歉，只允许使用字母（a-z）、数字（0-9）和句点（.）。",
   "find_accommodation": "找住宿...",
   "Find_Accommodation": "找住宿",
@@ -240,7 +245,7 @@
   "wish_list": "愿望清单",
   "change_language_success": "语言更改成功！",
   "username_or_email": "用户名或邮箱",
-  "enter_username_email": "输入您的用户名或邮箱",
+  "enter_fullname_email": "输入您的用户名或邮箱",
   "for_sale": "待售",
   "register_partner": "注册合作伙伴",
   "become_pionehouse_partner": "成为 Pione House 合作伙伴",
@@ -1409,6 +1414,14 @@
     "how_to_faucet_points": "如何领取 Faucet 积分",
     "how_to_post_news": "如何发布新闻",
     "how_to_swap_voucher_and_booking": "如何兑换代金券和预订",
-   "how_to_complete_task_receive_rewards": "如何完成每日任务并领取奖励"
+   "how_to_complete_task_receive_rewards": "如何完成每日任务并领取奖励",
+   "code_must_exactly": "验证码必须正好为 {unit} 位数字",
+    "male": "男",
+  "female": "女",
+
+  "date_of_birth": "出生日期",
+
+  "verify_account": "验证账户",
+  "verify_account_desc": "请验证您的账户以继续使用应用功能。"
 
 }

@@ -11,11 +11,12 @@ import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField, validateEmail} from '../../../../utils/validate';
 import Wrapper from '../../components/Wrapper';
 import {useMutation} from '@tanstack/react-query';
-import {postForgotPassword} from '../../../../Model/api/auth';
+
 import {showMess} from '../../../../assets/constants/Helper';
 import VerificationCode from './VerificationCode';
 import ConfirmChangePassword from './ConfirmChangePassword';
 import {IconLogoPione} from '../../../../assets/icon/Icon';
+import {postForgotPassword} from '../../../../Model/api_new/user/auth';
 export default function Content() {
   const {t} = useLanguage();
   const {control, handleSubmit, reset, watch} = useForm();
@@ -29,18 +30,22 @@ export default function Content() {
     navigate('LoginScreen');
   };
 
-  const submitForgotPassword = data => {
-    forgotPasswordMu.mutate(data, {
+  const submitForgotPassword = value => {
+    forgotPasswordMu.mutate(value, {
       onSuccess: dataInside => {
-        showMess(
-          t(dataInside?.message),
-          dataInside?.status ? 'success' : 'error',
-        );
-
         if (dataInside?.status) {
+          showMess(
+            t(dataInside?.message),
+            dataInside?.status ? 'success' : 'error',
+          );
           // reset();
           setPhase(2);
+        } else {
+          showMess(t(dataInside?.message), 'error');
         }
+      },
+      onError: err => {
+        showMess(err.response?.data?.message || t('an_error_occured'), 'error');
       },
     });
   };

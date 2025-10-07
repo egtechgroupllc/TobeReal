@@ -20,24 +20,24 @@ instance.interceptors.request.use(async req => {
 
   return req;
 });
-let countErr = 0;
-instance.interceptors.response.use(
-  response => {
-    return response;
-  },
-  error => {
-    if (error.response && error.response.status === 401 && countErr < 1) {
-      Alert.alert(
-        'Notification',
-        'Your session has expired or your account has been logged in on another device. Please log in again.',
-        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
-      );
+// let countErr = 0;
+// instance.interceptors.response.use(
+//   response => {
+//     return response;
+//   },
+//   error => {
+//     if (error.response && error.response.status === 401 && countErr < 1) {
+//       Alert.alert(
+//         'Notification',
+//         'Your session has expired or your account has been logged in on another device. Please log in again.',
+//         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+//       );
 
-      ++countErr;
-    }
-    return Promise.reject(error);
-  },
-);
+//       ++countErr;
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 export const getBalanceWallet = async token => {
   const responsive = await instance.get('/wallet/balance', {

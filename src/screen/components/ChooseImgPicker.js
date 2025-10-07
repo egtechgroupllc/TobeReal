@@ -1,15 +1,16 @@
+// ChooseImgPicker.js
 import React, {memo, useRef, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ImageView from 'react-native-image-viewing';
-
-import {COLORS, SIZES, scale} from '../../assets/constants';
+import {COLORS, SHADOW, SIZES, scale} from '../../assets/constants';
 import {IconCamera, IconError} from '../../assets/icon/Icon';
 import CustomText from '../../components/CustomText';
 import {arrayToObject} from '../../utils/arrayToObject';
 import ImgItem from './ChooseImg/ImgItem';
 import {useLanguage} from '../../hooks/useLanguage';
+import {UseUploadImages} from './UseUploadImage';
 
 export default memo(function ChooseImgPicker({
   title,
@@ -37,12 +38,12 @@ export default memo(function ChooseImgPicker({
   const pickImage = async (onChange, value) => {
     await launchImageLibrary(
       {mediaType: 'photo', selectionLimit: maxFiles},
-      response => {
+      async response => {
         if (response.assets) {
           const dataImages = response.assets.map((item, index) => {
             const timeNu = new Date().getTime();
             return {
-              name: timeNu + item.fileName,
+              name: timeNu + '_' + item.fileName,
               type: item.type,
               id: index + timeNu,
               description: '',
@@ -50,17 +51,32 @@ export default memo(function ChooseImgPicker({
                 Platform.OS === 'ios'
                   ? item.uri.replace('file://', '')
                   : item.uri,
+              file: item,
             };
           });
 
-          onChange(isAddMore ? [...dataImages, ...value] : dataImages);
-          onSelect && onSelect(dataImages);
+          const newValue = isAddMore ? [...dataImages, ...value] : dataImages;
+
+          // gọi luôn upload
+          try {
+            const uploadedList = await UseUploadImages(newValue);
+
+            // map lại: giữ object local, thêm field src từ server
+            const merged = newValue.map((f, i) => ({
+              ...f,
+              src: uploadedList?.[i]?.src,
+            }));
+
+            onChange(merged);
+          } catch (error) {
+            console.log('Upload error:', error);
+          }
         }
       },
     );
   };
-  const timer = useRef(null);
 
+  const timer = useRef(null);
   const handleDescriptionChange = (
     index,
     description = '',
@@ -68,12 +84,10 @@ export default memo(function ChooseImgPicker({
     onChange,
   ) => {
     const updatedValue = [...value];
-
     updatedValue[index] = {
       ...updatedValue[index],
       description: description,
     };
-
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       timer.current = null;
@@ -94,31 +108,21 @@ export default memo(function ChooseImgPicker({
       name={name || ''}
       defaultValue={defaultValue}
       render={({field: {onChange, value = []}, fieldState: {error}}) => {
-        const valueImg = value;
+        const valueImg = Array.isArray(value) ? value : [];
         const isShow = isAddWhenEmpty && valueImg.length <= 0;
 
         return (
           !isShow && (
             <View style={{width: '100%', rowGap: scale(12)}}>
+              {/* Header */}
               <View style={[styles.header, stylesHeader]}>
                 <View style={{flex: 1, columnGap: scale(10)}}>
                   {title && (
-                    <CustomText
-                      textType="medium"
-                      style={{
-                        ...styles.text,
-                        marginTop: scale(20),
-                      }}>
+                    <CustomText textType="medium" style={styles.text}>
                       {title}
                     </CustomText>
                   )}
-                  {/* {subHeading && (
-                    <CustomText textType="regular" style={styles.text}>
-                      {subHeading}
-                    </CustomText>
-                  )} */}
                 </View>
-
                 {title && (
                   <TouchableOpacity
                     onPress={() => pickImage(onChange, valueImg)}
@@ -128,6 +132,7 @@ export default memo(function ChooseImgPicker({
                 )}
               </View>
 
+              {/* Content */}
               <View
                 style={[
                   styleContent,
@@ -135,6 +140,7 @@ export default memo(function ChooseImgPicker({
                     minHeight: scale(170),
                     alignItems: 'center',
                     justifyContent: 'center',
+                    backgroundColor: COLORS.white,
                   },
                   (valueImg.length <= 0 || error) && styles.border,
                   error && {borderColor: '#f6465d'},
@@ -155,38 +161,39 @@ export default memo(function ChooseImgPicker({
                         activeOpacity={0.7}
                         onPress={() => pickImage(onChange, valueImg)}
                         style={[styles.img, styles.border, styles.addImg]}>
-                        <IconCamera />
+                        <IconCamera
+                          style={{width: scale(50), height: scale(50)}}
+                        />
                         <CustomText>{t('add_images')}</CustomText>
                       </TouchableOpacity>
                     )}
 
-                  {valueImg.length > 0 ? (
-                    valueImg.map((img, index) => {
-                      return (
-                        <ImgItem
-                          isDescriptionImg={isDescriptionImg}
-                          arrImg={valueImg}
-                          data={img}
-                          onViewImg={() => setViewImg(index)}
-                          key={`key_${index}-${img?.id}`}
-                          onDelete={() =>
-                            handleDelete(img?.id, valueImg, onChange)
-                          }
-                          onChangeDescription={valueText =>
-                            handleDescriptionChange(
-                              index,
-                              valueText,
-                              valueImg,
-                              onChange,
-                            )
-                          }
-                        />
-                      );
-                    })
+                  {valueImg?.length > 0 ? (
+                    valueImg?.map((img, index) => (
+                      <ImgItem
+                        // isDescriptionImg={isDescriptionImg}
+                        arrImg={valueImg}
+                        data={img}
+                        onViewImg={() => setViewImg(index)}
+                        key={`key_${index}-${img?.id}`}
+                        onDelete={() =>
+                          handleDelete(img?.id, valueImg, onChange)
+                        }
+                        onChangeDescription={valueText =>
+                          handleDescriptionChange(
+                            index,
+                            valueText,
+                            valueImg,
+                            onChange,
+                          )
+                        }
+                      />
+                    ))
                   ) : (
                     <View
                       style={{
                         alignItems: 'center',
+                        paddingHorizontal: scale(20),
                       }}>
                       <IconCamera
                         style={{
@@ -201,46 +208,25 @@ export default memo(function ChooseImgPicker({
                   )}
                 </TouchableOpacity>
               </View>
+
+              {/* Error */}
               {error && (
                 <View style={styles.errorBox}>
                   <IconError fill="#f0334b" />
-                  <CustomText
-                    style={{
-                      color: '#f0334b',
-                      flex: 1,
-                    }}>
+                  <CustomText style={{color: '#f0334b', flex: 1}}>
                     {error.message}
                   </CustomText>
                 </View>
               )}
+
+              {/* Preview */}
               {(viewImg || viewImg === 0) && (
                 <ImageView
-                  images={valueImg}
+                  images={valueImg.map(v => ({uri: v.uri}))}
                   imageIndex={viewImg}
                   visible={!!viewImg || viewImg === 0}
-                  onRequestClose={() => {
-                    setViewImg(false);
-                  }}
+                  onRequestClose={() => setViewImg(false)}
                   swipeToCloseEnabled={false}
-                  FooterComponent={({imageIndex}) => {
-                    const imgDetail = valueImg
-                      ?.map((img, index) => ({...img, index}))
-                      .find(item => item?.index === imageIndex);
-
-                    return (
-                      imgDetail?.description && (
-                        <View style={styles.footer}>
-                          <CustomText
-                            style={{
-                              fontSize: SIZES.medium,
-                              flex: 1,
-                            }}>
-                            {imgDetail?.description}
-                          </CustomText>
-                        </View>
-                      )
-                    );
-                  }}
                 />
               )}
             </View>
@@ -258,14 +244,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-
-  text: {
-    color: COLORS.black,
-    alignSelf: 'flex-start',
-  },
-  label: {
-    color: COLORS.black,
-  },
+  text: {color: COLORS.black, alignSelf: 'flex-start'},
   border: {
     borderWidth: scale(1),
     borderStyle: 'dashed',
@@ -274,6 +253,10 @@ const styles = StyleSheet.create({
   },
   contentImg: {
     borderRadius: scale(8),
+    backgroundColor: COLORS.white,
+    ...SHADOW,
+    borderWidth: scale(1),
+    borderColor: COLORS.border,
     overflow: 'hidden',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -281,29 +264,11 @@ const styles = StyleSheet.create({
     gap: scale(6),
     paddingVertical: scale(6),
   },
-  img: {
-    height: scale(170),
-    borderRadius: scale(5),
-    overflow: 'hidden',
-  },
-  addImg: {
-    width: '48%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
+  img: {height: scale(170), borderRadius: scale(5), overflow: 'hidden'},
+  addImg: {width: '48%', alignItems: 'center', justifyContent: 'center'},
   errorBox: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     columnGap: scale(5),
-  },
-
-  footer: {
-    backgroundColor: COLORS.overlay,
-    padding: scale(10),
-    borderRadius: scale(10),
-    marginBottom: scale(80),
-    marginHorizontal: scale(20),
-    alignSelf: 'flex-start',
   },
 });

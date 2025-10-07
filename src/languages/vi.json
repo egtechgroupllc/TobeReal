@@ -8,16 +8,21 @@
   "forgot_password": "Quên mật khẩu?",
   "dont_have_account": "Chưa có tài khoản?",
   "signup": "Đăng ký",
-  "enter_username": "Nhập họ và tên của bạn",
+  "enter_fullname": "Nhập họ và tên của bạn",
   "enter_email": "Nhập địa chỉ email của bạn",
   "enter_new_password": "Nhập mật khẩu mới",
   "enter_password_confirm": "Nhập mật khẩu xác nhận của bạn",
   "already_have_account": "Đã có tài khoản?",
   "submit": "Gửi",
-  "code": "Mã",
+  "code": "Mã xác thực",
+  "enter_code": "Nhập mã xác thực email",
+      "resend_code_in": "Gửi lại code sau {unit}",
+        "second": "giây",
+   "verify_email": "Xác thực email",
+       "resend_code": "Gửi lại mã",
   "this_field_required": "Trường này là bắt buộc",
   "password_not_match": "Mật khẩu nhập không khớp. Thử lại.",
-  "use_6_characters": "Sử dụng 6 ký tự trở lên cho mật khẩu của bạn",
+ "use_unit_characters": "Sử dụng {unit} ký tự trở lên",
   "invalid_email": "Xin lỗi, chỉ chấp nhận chữ (a-z), số (0-9), và dấu chấm (.)",
 
   "find_accommodation": "Tìm chỗ ở...",
@@ -242,7 +247,7 @@
   "wish_list": "Danh sách mong muốn",
   "change_language_success": "Đổi ngôn ngữ thành công!",
   "username_or_email": "Tên người dùng hoặc email",
-  "enter_username_email": "Nhập tên người dùng hoặc email của bạn",
+  "enter_fullname_email": "Nhập tên người dùng hoặc email của bạn",
   "for_sale": "Đang bán",
   "register_partner": "Đăng ký đối tác",
   "become_pionehouse_partner": "Trở thành đối tác Pione House",
@@ -1415,6 +1420,15 @@
     "how_to_faucet_points": "Cách nhận điểm Faucet",
     "how_to_post_news": "Cách đăng tin",
     "how_to_swap_voucher_and_booking": "Cách đổi voucher và đặt phòng",
-    "how_to_complete_task_receive_rewards": "Cách hoàn thành nhiệm vụ hàng ngày và nhận phần thưởng"
+    "how_to_complete_task_receive_rewards": "Cách hoàn thành nhiệm vụ hàng ngày và nhận phần thưởng",
+    "code_must_exactly": "Mã phải có đúng {unit} chữ số",
+
+     "male": "Nam",
+  "female": "Nữ",
+
+  "date_of_birth": "Ngày sinh",
+  
+  "verify_account":"Xác thực tài khoản",
+  "verify_account_desc":"Vui lòng xác thực tài khoản của bạn để tiếp tục sử dụng các tính năng của ứng dụng."
 
 }

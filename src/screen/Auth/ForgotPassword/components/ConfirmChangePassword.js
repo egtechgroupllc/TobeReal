@@ -40,7 +40,7 @@ export default function ConfirmChangePassword() {
         name="from"
         rules={[
           requireField(t('this_field_required')),
-          validateMinLengthText(t('use_6_characters'), 6),
+          validateMinLengthText(t('use_unit_characters', {unit: 6}), 6),
         ]}
       />
       <CustomInput
@@ -50,7 +50,7 @@ export default function ConfirmChangePassword() {
         name="to"
         rules={[
           requireField(t('this_field_required')),
-          validateMinLengthText(t('use_6_characters'), 6),
+          validateMinLengthText(t('use_unit_characters', {unit: 6}), 6),
         ]}
       />
 

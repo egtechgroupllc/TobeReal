@@ -1,43 +1,30 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {useLanguage} from '../../../hooks/useLanguage';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {showMess} from '../../../assets/constants/Helper';
-
-import {COLORS, SIZES, scale} from '../../../assets/constants';
-import {requireField, validateMinLengthText} from '../../../utils/validate';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   CustomButton,
   CustomInput,
   CustomText,
   MainWrapper,
-} from '../../../components';
+} from '../../components';
+import {useLanguage} from '../../hooks/useLanguage';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import {formatDate, formatNumber} from '../../../utils/format';
-import {useAuthentication} from '../../../hooks/useAuthentication';
+import {postKycAccount} from '../../Model/api_new/user/kyc';
+import {formatDate} from '../../utils/format';
+import {showMess} from '../../assets/constants/Helper';
+import {requireField} from '../../utils/validate';
+import {COLORS, scale, SIZES} from '../../assets/constants';
 import DatePicker from 'react-native-date-picker';
-import {getGender, postEditProfile} from '../../../Model/api_new/user/profile';
-import ChooseImgPicker from '../../components/ChooseImgPicker';
-import {
-  extractSrc,
-  UseUploadImages,
-  useUploadImages,
-} from '../../components/UseUploadImage';
-
-export default function ChangeInformationScreen() {
+import ChooseImgPicker from '../components/ChooseImgPicker';
+import {Camera, useCameraDevices} from 'react-native-vision-camera';
+export default function VerifyAccountScreen() {
   const {setOptions, navigate, reset} = useNavigation();
   const {t} = useLanguage();
   const {control, handleSubmit, watch, setValue} = useForm();
-  const [openCheckStart, setOpenCheckStart] = useState(false);
   const queryClient = useQueryClient();
+  const [openCheckStart, setOpenCheckStart] = useState(false);
 
-  const {isLoading, data: dataGen} = useQuery({
-    queryKey: ['user', 'gender'],
-    queryFn: () => getGender(),
-  });
-
-  const [checked, setChecked] = useState(dataGen?.data?.[0]?.id);
   const [timeCheckStart, setTimeCheckStart] = useState(
     new Date('2024-01-01T6:00:00'),
   );
@@ -48,39 +35,38 @@ export default function ChangeInformationScreen() {
     });
   }, []);
 
-  const editProfileMutation = useMutation({
-    mutationFn: postEditProfile,
-  });
+  //   const kycAccountMutation = useMutation({
+  //     mutationFn: postKycAccount,
+  //   });
 
-  const handleEditProfile = value => {
-    const avatarSrc = extractSrc(value.avatar, true);
+  //   const handleEditProfile = value => {
+  //     const avatarSrc = extractSrc(value.avatar, true);
 
-    const payload = {
-      ...value,
-      genderId: checked,
-      dateOfBirth: formatDate(timeCheckStart),
-      avatar: avatarSrc, // chỉ src
-    };
+  //     const payload = {
+  //       ...value,
+  //       dateOfBirth: formatDate(timeCheckStart),
+  //       avatar: avatarSrc, // chỉ src
+  //     };
 
-    editProfileMutation.mutate(payload, {
-      onSuccess: dataInside => {
-        showMess(
-          t(dataInside?.message),
-          dataInside?.status ? 'success' : 'error',
-        );
+  //     kycAccountMutation.mutate(payload, {
+  //       onSuccess: dataInside => {
+  //         showMess(
+  //           t(dataInside?.message),
+  //           dataInside?.status ? 'success' : 'error',
+  //         );
 
-        if (dataInside?.status) {
-          queryClient.invalidateQueries(['user', 'profile']);
-          navigate('BottomTab');
-        }
-      },
-      onError: error => {
-        if (error.response) {
-          showMess(error?.response?.data?.message, 'error');
-        }
-      },
-    });
-  };
+  //         if (dataInside?.status) {
+  //           queryClient.invalidateQueries(['user', 'profile']);
+  //           navigate('BottomTab');
+  //         }
+  //       },
+  //       onError: error => {
+  //         if (error.response) {
+  //           showMess(error?.response?.data?.message, 'error');
+  //         }
+  //       },
+  //     });
+  //   };
 
   return (
     <MainWrapper>
@@ -98,31 +84,7 @@ export default function ChangeInformationScreen() {
             fontSize: SIZES.xMedium,
           }}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: scale(130),
-            columnGap: scale(20),
-          }}>
-          <CustomText style={{fontSize: SIZES.small}} textType="medium">
-            {t('gender')}:
-          </CustomText>
-          {dataGen?.data?.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.item}
-              activeOpacity={0.7}
-              onPress={() => {
-                setChecked(item?.id);
-              }}>
-              <View style={styles.radio}>
-                {checked === item?.id ? <View style={styles.dot} /> : null}
-              </View>
-              <CustomText>{item?.name}</CustomText>
-            </TouchableOpacity>
-          ))}
-        </View>
+
         <View
           style={{
             flexDirection: 'row',
@@ -153,10 +115,10 @@ export default function ChangeInformationScreen() {
           }}
         />
         <CustomInput
-          label={t('phone')}
+          label={t('id_card_number')}
           control={control}
-          name="phone"
-          placeholder={t('enter_phone')}
+          name="idNumber"
+          placeholder={t('enter_id_card_number')}
           rules={[requireField(t('this_field_required'))]}
           style={styles.textInput}
           sizeInput="medium"
@@ -165,6 +127,18 @@ export default function ChangeInformationScreen() {
             fontSize: SIZES.xMedium,
           }}
           keyboardType="numeric"
+        />
+        <ChooseImgPicker
+          title={t('upload_avatar')}
+          control={control}
+          name={'avatar'}
+          maxFiles={1}
+        />
+        <ChooseImgPicker
+          title={t('upload_avatar')}
+          control={control}
+          name={'avatar'}
+          maxFiles={1}
         />
         <ChooseImgPicker
           title={t('upload_avatar')}

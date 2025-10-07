@@ -61,7 +61,7 @@ export default function Content() {
         name="from"
         password
         placeholder={t('enter_password')}
-        rules={validateMinLengthText(t('use_6_characters'), 6)}
+        rules={validateMinLengthText(t('use_unit_characters', {unit: 6}), 6)}
         style={styles.textInput}
         sizeInput="medium"
         styleTextLabel={styles.styleLabel}
@@ -76,7 +76,7 @@ export default function Content() {
         name="to"
         password
         placeholder={t('enter_new_password')}
-        rules={validateMinLengthText(t('use_6_characters'), 6)}
+        rules={validateMinLengthText(t('use_unit_characters', {unit: 6}), 6)}
         style={styles.textInput}
         sizeInput="medium"
         styleTextLabel={styles.styleLabel}

@@ -8,36 +8,37 @@ import CustomText from '../../../components/CustomText';
 import BoxWalletBlockChain from '../../WalletToken/AddressWallet/BoxWalletBlockChain';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
+import {baseUrl, baseUrlImage} from '../../../Model/url';
 
 export default function TopProfile({name, data, userLevelInfo}) {
   const {t} = useLanguage();
   const {navigate} = useNavigation();
-  const currentLevel = userLevelInfo?.currentLevel?.level;
-  const currentMinScore = userLevelInfo?.currentLevel?.min_score || 0;
-  const nextMinScore = userLevelInfo?.nextLevel?.min_score || 0;
+  // const currentLevel = userLevelInfo?.currentLevel?.level;
+  // const currentMinScore = userLevelInfo?.currentLevel?.min_score || 0;
+  // const nextMinScore = userLevelInfo?.nextLevel?.min_score || 0;
 
-  const expSinceLevelUp = data?.score - currentMinScore;
+  // const expSinceLevelUp = data?.score - currentMinScore;
 
-  const expToNextLevel = nextMinScore - currentMinScore;
+  // const expToNextLevel = nextMinScore - currentMinScore;
 
-  const levelImage = useMemo(() => {
-    switch (currentLevel) {
-      case 1:
-        return images.lv1;
-      case 2:
-        return images.lv2;
-      case 3:
-        return images.lv3;
-      case 4:
-        return images.lv4;
-      case 5:
-        return images.lv5;
-      case 6:
-        return images.lv6;
-      default:
-        return images.lv1;
-    }
-  }, [currentLevel]);
+  // const levelImage = useMemo(() => {
+  //   switch (currentLevel) {
+  //     case 1:
+  //       return images.lv1;
+  //     case 2:
+  //       return images.lv2;
+  //     case 3:
+  //       return images.lv3;
+  //     case 4:
+  //       return images.lv4;
+  //     case 5:
+  //       return images.lv5;
+  //     case 6:
+  //       return images.lv6;
+  //     default:
+  //       return images.lv1;
+  //   }
+  // }, [currentLevel]);
 
   return (
     <View style={styles.wrapper}>
@@ -47,12 +48,14 @@ export default function TopProfile({name, data, userLevelInfo}) {
         }}>
         <CustomImage
           source={
-            !data?.image_avatar ? images.iconProfile : data?.url_image_avatar
+            data?.avatar
+              ? {uri: `${baseUrlImage}${data.avatar}`} // fallback bằng file name
+              : images.iconProfile
           }
           style={styles.avatar}
         />
 
-        <CustomImage source={levelImage} style={styles.iconCheck} />
+        {/* <CustomImage source={levelImage} style={styles.iconCheck} /> */}
       </View>
 
       <CustomText textType="bold" size={SIZES.medium}>
@@ -74,7 +77,7 @@ export default function TopProfile({name, data, userLevelInfo}) {
         </View>
       )}
 
-      <View style={styles.expContainer}>
+      {/* <View style={styles.expContainer}>
         <View style={styles.expInfo}>
           <CustomText size={SIZES.small} color={COLORS.text}>
             Level {userLevelInfo?.currentLevel?.level}
@@ -93,9 +96,9 @@ export default function TopProfile({name, data, userLevelInfo}) {
             ]}
           />
         </View>
-      </View>
+      </View> */}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() =>
           navigate('NavigationProfile', {
             screen: 'ChangeAvatarScreen',
@@ -112,7 +115,7 @@ export default function TopProfile({name, data, userLevelInfo}) {
           {t('change_avatar')}
         </CustomText>
         <IconCamera />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {/* <View style={styles.bottom}>
         <TouchableOpacity
           activeOpacity={0.7}
@@ -175,6 +178,8 @@ const styles = StyleSheet.create({
     ...SHADOW,
     borderWidth: 1,
     borderColor: COLORS.pioBox,
+    paddingBottom: scale(10),
+    marginTop: scale(20),
   },
   avatar: {
     width: scale(60),

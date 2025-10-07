@@ -4,7 +4,6 @@ import React, {useLayoutEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {postSignUp} from '../../../../Model/api/auth';
 import {COLORS, SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {
@@ -22,6 +21,7 @@ import {
   validateUserName,
 } from '../../../../utils/validate';
 import InputPhone from '../../../components/InputPhone';
+import {postSignUp} from '../../../../Model/api_new/user/auth';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -37,6 +37,8 @@ export default function Content() {
   });
 
   const handleSignup = value => {
+    // navigate('VerifyEmailScreen', {email: value?.email});
+
     delete value?.passwordConfirm;
 
     signupMutation.mutate(value, {
@@ -47,7 +49,7 @@ export default function Content() {
         );
 
         if (dataInside?.status) {
-          navigate('LoginScreen');
+          navigate('VerifyEmailScreen', {email: value?.email});
 
           reset();
         }
@@ -69,8 +71,8 @@ export default function Content() {
           maxLength={30}
           sizeInput="medium"
           rules={[requireField(t('this_field_required'))]}
-          name="username"
-          placeholder={t('enter_username')}
+          name="fullname"
+          placeholder={t('enter_fullname')}
         />
 
         <CustomInput
@@ -83,17 +85,19 @@ export default function Content() {
           name="email"
           placeholder={t('enter_email')}
         />
-        <InputPhone
-          name={'phone'}
-          placeholder={t('phone')}
-          control={control}
-          rules={[requireField(t('this_field_required'))]}
-          style={{height: scale(45)}}
-        />
+
         <CustomInput
           control={control}
           sizeInput="medium"
-          rules={validateMinLengthText(t('use_6_characters'), 6)}
+          rules={validateMinLengthText(t('use_unit_characters', {unit: 8}), 8)}
+          name="phone"
+          placeholder={t('enter_phone')}
+        />
+
+        <CustomInput
+          control={control}
+          sizeInput="medium"
+          rules={validateMinLengthText(t('use_unit_characters', {unit: 6}), 6)}
           name="password"
           placeholder={t('enter_password')}
           password
@@ -111,15 +115,9 @@ export default function Content() {
           password
         />
 
-        <CustomInput
-          control={control}
-          sizeInput="medium"
-          // name="refid"
-          placeholder={t('enter_referral')}
-        />
-
         <CustomButton
           onPress={handleSubmit(handleSignup)}
+          // onPress={handleSignup}
           buttonType="large"
           text={t('signup')}
           // linearGradientProps
@@ -150,7 +148,7 @@ export default function Content() {
             {t('login')}
           </CustomText>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -161,7 +159,7 @@ export default function Content() {
             style={{...styles.text2, color: COLORS.primary}}>
             {t('become_pionehouse_partner')}
           </CustomText>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

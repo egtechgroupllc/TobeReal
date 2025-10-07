@@ -1,56 +1,72 @@
-import {useQueryClient} from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import React, {ReactNode, createContext, useEffect, useState} from 'react';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import React, { ReactNode, createContext, useEffect, useState } from 'react';
 import RNRestart from 'react-native-restart';
-import {storage} from '../utils/MMKVStorage';
+import { storage } from '../utils/MMKVStorage';
+import { deleteSession } from '../Model/api_new/apiClient';
 
 interface AuthProps {
   token?: string;
-  onSaveToken?: (data: any) => Promise<any>;
-  onClearToken?: () => Promise<any>;
+  onSaveToken?: (accessToken: string, refreshToken?: string) => Promise<void>;
+  onClearToken?: () => Promise<void>;
 }
-export const TOKEN_KEY = '@token';
+
+export const TOKEN_KEY = '@accessToken';
+export const REFRESH_TOKEN_KEY = '@refreshToken';
 export const AuthContext = createContext<AuthProps>({});
 
-export const AuthProvider = ({children}: {children: ReactNode}) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = useQueryClient();
-
   const [token, setToken] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const loadToken = async () => {
-      const result = await storage.getString(TOKEN_KEY);
-      if (result) {
-        saveToken(result);
+      const storedToken = storage.getString(TOKEN_KEY);
+      if (storedToken) {
+        saveToken(storedToken); // set lại vào state + axios headers
       }
     };
     loadToken();
   }, []);
 
-  const saveToken = async (data: any) => {
+  /**
+   * Lưu accessToken + refreshToken
+   */
+  const saveToken = async (accessToken: string, refreshToken?: string) => {
     try {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data}`;
+      // ⚡ đổi từ Authorization -> accessToken cho đúng backend
+      axios.defaults.headers.common['accessToken'] = accessToken;
+      setToken(accessToken);
 
-      setToken(`Bearer ${data}`);
-
-      await storage.set(TOKEN_KEY, data);
+      storage.set(TOKEN_KEY, accessToken);
+      if (refreshToken) {
+        storage.set(REFRESH_TOKEN_KEY, refreshToken);
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Error saving token:', error);
     }
   };
 
+  /**
+   * Clear toàn bộ token => logout
+   */
   const clearToken = async () => {
     try {
       setToken(undefined);
       axios.defaults.headers.common['Authorization'] = '';
-      await storage.delete(TOKEN_KEY);
+      storage.delete(TOKEN_KEY);
+      storage.delete(REFRESH_TOKEN_KEY);
+
       queryClient.clear();
+
+      // Nếu muốn reset app hẳn thì bật dòng này
       RNRestart.restart();
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error clearing token:', error);
+    }
   };
 
-  const value = {
+  const value: AuthProps = {
     onSaveToken: saveToken,
     onClearToken: clearToken,
     token,

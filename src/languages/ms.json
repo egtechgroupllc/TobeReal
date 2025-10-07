@@ -8,16 +8,21 @@
   "forgot_password": "Lupa kata laluan?",
   "dont_have_account": "Tidak mempunyai akaun?",
   "signup": "Daftar",
-  "enter_username": "Masukkan nama penuh anda",
+  "enter_fullname": "Masukkan nama penuh anda",
   "enter_email": "Masukkan emel anda",
   "enter_new_password": "Masukkan kata laluan baru",
   "enter_password_confirm": "Masukkan pengesahan kata laluan anda",
   "already_have_account": "Sudah mempunyai akaun?",
   "submit": "Hantar",
-  "code": "KOD",
+ "code": "Kod Pengesahan",
+ "enter_code": "Masukkan kod pengesahan emel",
+ "verify_email": "Sahkan Emel",
+ "resend_code": "Hantar semula kod",
+     "second": "saat",
+   "resend_code_in": "Hantar semula kod selepas {unit}",
   "this_field_required": "Medan ini diperlukan",
   "password_not_match": "Kata laluan yang dimasukkan tidak sepadan. Cuba lagi.",
-  "use_6_characters": "Gunakan 6 aksara atau lebih untuk kata laluan anda",
+  "use_unit_characters": "Gunakan {unit} aksara atau lebih",
   "invalid_email": "Maaf, hanya huruf (a-z), nombor (0-9), dan titik (.) dibenarkan.",
 
   "find_accommodation": "Cari Penginapan...",
@@ -243,7 +248,7 @@
   "wish_list": "Senarai Keinginan",
   "change_language_success": "Berjaya tukar bahasa!",
   "username_or_email": "Nama pengguna atau emel",
-  "enter_username_email": "Masukkan nama pengguna atau emel anda",
+  "enter_fullname_email": "Masukkan nama pengguna atau emel anda",
   "for_sale": "Untuk dijual",
   "register_partner": "Daftar rakan kongsi",
   "become_pionehouse_partner": "Menjadi rakan kongsi Pione House",
@@ -1391,7 +1396,14 @@
     "how_to_faucet_points": "Cara Mendapatkan Mata Faucet",
     "how_to_post_news": "Cara Membuat Siaran",
     "how_to_swap_voucher_and_booking": "Cara Menukar Baucar dan Tempahan",
-    "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Ganjaran"
+    "how_to_complete_task_receive_rewards": "Cara Menyelesaikan Tugas Harian dan Menerima Ganjaran",
+    "code_must_exactly": "Kod mestilah tepat {unit} digit",
+     "male": "Lelaki",
+  "female": "Perempuan",
+
+   "date_of_birth": "Tarikh Lahir",
+   "verify_account": "Sahkan Akaun",
+  "verify_account_desc": "Sila sahkan akaun anda untuk terus menggunakan ciri-ciri aplikasi."
 
 
 

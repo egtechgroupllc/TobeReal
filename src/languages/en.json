@@ -8,7 +8,7 @@
   "forgot_password": "Forgot password?",
   "dont_have_account": "Dont have an account?",
   "signup": "Sign Up",
-  "enter_username": "Enter your username",
+  "enter_fullname": "Enter your full name",
   "enter_firstname": "Enter your first name",
   "enter_lastname": "Enter your last name",
   "enter_email": "Enter your email",
@@ -16,10 +16,15 @@
   "enter_password_confirm": "Enter your password confirm",
   "already_have_account": "Already have an account?",
   "submit": "Submit",
-  "code": "CODE",
+ "code": "Verification Code",
+   "verify_email": "Verify Email",
+   "resend_code": "Resend Code",
+   "resend_code_in": "Resend code in {unit}",
+   "second": "second",
+ "enter_code": "Enter email verification code",
   "this_field_required": "This field is required",
   "password_not_match": "The entered password does not match. Try again.",
-  "use_6_characters": "Use 6 characters or more for your password",
+  "use_unit_characters": "Use {unit} characters or more",
   "invalid_email": "Sorry, only letters (a-z), numbers (0-9), and periods (.) are allowed.",
 
   "find_accommodation": "Find Accommodation...",
@@ -245,7 +250,7 @@
   "wish_list": "Wish list",
   "change_language_success": "Change language success!",
   "username_or_email": "Username or email",
-  "enter_username_email": "Enter your username or email",
+  "enter_fullname_email": "Enter your username or email",
   "for_sale": "For sale",
   "register_partner": "Register partner",
   "become_pionehouse_partner": "Become Pione House partner",
@@ -1423,5 +1428,11 @@
   "how_to_faucet_points": "How to Faucet Points",
   "how_to_post_news": "How to Post News",
   "how_to_swap_voucher_and_booking": "How to Swap Voucher and Booking",
-  "how_to_complete_task_receive_rewards": "How to Complete Daily Tasks and Receive Rewards"
+  "how_to_complete_task_receive_rewards": "How to Complete Daily Tasks and Receive Rewards",
+  "female":"Female",
+  "male":"Male",
+ "date_of_birth": "Date of Birth",
+ "verify_account": "Verify Account",
+  "verify_account_desc": "Please verify your account to continue using the app's features."
+  
 }

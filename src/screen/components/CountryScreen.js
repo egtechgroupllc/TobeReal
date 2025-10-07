@@ -11,7 +11,6 @@ import {StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import RNRestart from 'react-native-restart';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {getListCountry} from '../../Model/api/common';
 import {COLORS, SHADOW, SIZES, WIDTH, scale} from '../../assets/constants';
 import {IconSearch} from '../../assets/icon/Icon';
 import {CustomInput, MainWrapper} from '../../components';
@@ -21,18 +20,18 @@ import EmptyData from '../../components/EmptyData';
 import {useCountry} from '../../hooks/useCountry';
 import {useLanguage} from '../../hooks/useLanguage';
 import Skeleton from '../../components/Skeleton';
+import {getListCountry} from '../../Model/api_new/geography';
 
 // Tách thành component con để tránh re-render không cần thiết
 const CountryItem = React.memo(({item, onPress, isChecked, isPhone}) => {
   if (!item?.id) {
     return <Skeleton height={scale(40)} />;
   }
-
   return (
     <CheckBox
       key={`key_${item?.id}`}
       text={`${item?.flag || ''} ${item?.name}${
-        isPhone ? ` (${item?.phone_code})` : ''
+        isPhone ? ` (${item?.phoneCode})` : ''
       }`}
       textLeft
       isRadio
@@ -56,11 +55,16 @@ export default function CountryScreen() {
   const deferredValue = useDeferredValue(search);
   const insets = useSafeAreaInsets();
 
+  // const {data, isLoading, isError} = useQuery({
+  //   queryKey: ['common', 'list-country', router?.isProvince],
+  //   queryFn: () =>
+  //     getListCountry(router?.isProvince ? router?.country?.geoname_id : ''),
+  // });
   const {data, isLoading, isError} = useQuery({
-    queryKey: ['common', 'list-country', router?.isProvince],
-    queryFn: () =>
-      getListCountry(router?.isProvince ? router?.country?.geoname_id : ''),
+    queryKey: ['geography', 'list-country'],
+    queryFn: () => getListCountry(),
   });
+
   const {onSaveCountry, country: countryStore} = useCountry();
 
   const handleDone = () => {

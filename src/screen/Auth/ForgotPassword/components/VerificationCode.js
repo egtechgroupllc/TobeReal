@@ -3,7 +3,6 @@ import React from 'react';
 import {CustomButton, CustomInput} from '../../../../components';
 import {useMutation} from '@tanstack/react-query';
 import {showMess} from '../../../../assets/constants/Helper';
-import {postResetPassword} from '../../../../Model/api/auth';
 import {useForm} from 'react-hook-form';
 import {
   requireField,
@@ -12,10 +11,11 @@ import {
 } from '../../../../utils/validate';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
+import {postResetPassword} from '../../../../Model/api_new/user/auth';
 
 export default function VerificationCode({email}) {
   const {t} = useLanguage();
-  const {goBack} = useNavigation();
+  const {goBack, reset: resetNavigation} = useNavigation();
   const {control, handleSubmit, reset} = useForm();
 
   const forgotPasswordMu = useMutation({
@@ -33,8 +33,17 @@ export default function VerificationCode({email}) {
 
           if (dataInside?.status) {
             reset();
-            goBack();
+            resetNavigation({
+              index: 0,
+              routes: [{name: 'LoginScreen'}],
+            });
           }
+        },
+        onError: err => {
+          showMess(
+            err.response?.data?.message || t('an_error_occured'),
+            'error',
+          );
         },
       },
     );
@@ -44,13 +53,20 @@ export default function VerificationCode({email}) {
     <>
       <CustomInput
         sizeInput="medium"
-        placeholder={t('code')}
+        placeholder={t('enter_new_password')}
         control={control}
+        label={t('new_password')}
+        name="password"
+        password
+        rules={[requireField(t('this_field_required'))]}
+      />
+      <CustomInput
+        sizeInput="medium"
+        placeholder={t('enter_code')}
+        control={control}
+        label={t('code')}
         name="code"
-        rules={[
-          requireField(t('this_field_required')),
-          validateEmail(t('invalid_email')),
-        ]}
+        rules={[requireField(t('this_field_required'))]}
       />
 
       <CustomButton

@@ -1,79 +1,159 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Image, StyleSheet, View} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
-import {postVerifyEmail} from '../../../../Model/api/auth';
-import {SIZES, images, scale} from '../../../../assets/constants';
+import {COLORS, SIZES, images, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
-import {CustomButton, CustomInput} from '../../../../components';
+import {CustomButton, CustomInput, CustomText} from '../../../../components';
 import {useAuthentication} from '../../../../hooks/useAuthentication';
 import {useLanguage} from '../../../../hooks/useLanguage';
 import {requireField, validateEqualLength} from '../../../../utils/validate';
+import {IconLogoPione} from '../../../../assets/icon/Icon';
+import {
+  postResendMail,
+  postVerifyEmail,
+} from '../../../../Model/api_new/user/auth';
 
 export default function Content() {
   const {t} = useLanguage();
-
+  const {params} = useRoute();
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const loginMutation = useMutation({
+  const [cooldown, setCooldown] = useState(600);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    if (cooldown > 0) {
+      timerRef.current = setInterval(() => {
+        setCooldown(prev => {
+          if (prev <= 1) {
+            clearInterval(timerRef.current);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timerRef.current);
+  }, [cooldown]);
+  const VerifyEmailMutation = useMutation({
     mutationFn: postVerifyEmail,
   });
+  const ResendMailMutation = useMutation({
+    mutationFn: postResendMail,
+  });
+  const handleResendMail = async value => {
+    if (cooldown > 0) {
+      // đang trong cooldown, không gọi API
+      return;
+    }
+
+    try {
+      ResendMailMutation.mutate(
+        {email: params?.email},
+        {
+          onSuccess: dataInde => {
+            // console.log(dataInde,'onSuccess');
+            if (dataInde?.status) {
+              showMess(dataInde?.message, 'success');
+
+              setCooldown(600);
+            }
+          },
+          onError: error => {
+            console.log(error);
+
+            if (error.response) {
+              showMess(error?.response?.data?.message, 'error');
+            }
+          },
+        },
+      );
+    } catch (error) {
+      console.error('Resend mail failed', error);
+    }
+  };
 
   const handleVerify = value => {
-    loginMutation.mutate(value, {
-      onSuccess: dataInde => {
-        // console.log(dataInde,'onSuccess');
-        if (dataInde?.status) {
-          showMess(dataInde?.message, 'success');
-          navigation.navigate('LoginScreen');
-        } else {
-          showMess(dataInde?.message, 'error');
-        }
+    VerifyEmailMutation.mutate(
+      {email: params?.email, code: value?.code},
+      {
+        onSuccess: dataInde => {
+          // console.log(dataInde,'onSuccess');
+          if (dataInde?.status) {
+            showMess(dataInde?.message, 'success');
+            navigation.navigate('LoginScreen');
+          } else {
+            showMess(dataInde?.message, 'error');
+          }
+        },
+        onError: error => {
+          if (error.response) {
+            showMess(error?.response?.data?.message, 'error');
+          }
+        },
       },
-      onError: error => {
-        if (error.response) {
-          showMess(error?.response?.data?.message, 'error');
-        }
-      },
-    });
+    );
   };
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
-        <Image
-          source={images.logo1}
+        <View
           style={{
-            width: '30%',
-            height: scale(165),
-            marginBottom: scale(30),
-            alignSelf: 'center',
-          }}
-        />
+            alignItems: 'center',
+          }}>
+          <IconLogoPione width={scale(100)} height={scale(100)} />
+        </View>
         <CustomInput
           control={control}
           label={t('code')}
           name="code"
           sizeInput="medium"
-          placeholder="CODE"
+          placeholder={t('enter_code')}
           rules={{
             ...requireField(t('this_field_required')),
-            ...validateEqualLength(6, 'Code must be exactly 6 digits long'),
+            ...validateEqualLength(6, t('code_must_exactly', {unit: 6})),
           }}
         />
+        {cooldown > 0 && (
+          <CustomText
+            textType="semiBold"
+            style={{
+              ...styles.text,
+            }}>
+            {t('resend_code_in', {unit: cooldown})} {t('second')}
+          </CustomText>
+        )}
 
-        <CustomButton
-          onPress={handleSubmit(handleVerify)}
-          buttonType="large"
-          text={t('ok')}
-          linearGradientProps
-          style={{marginTop: scale(30)}}
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            columnGap: scale(20),
+          }}>
+          <CustomButton
+            // onPress={handleSubmit(handleSignup)}
+            onPress={handleResendMail}
+            disabled={cooldown > 0 || ResendMailMutation.isLoading}
+            buttonType="large"
+            text={t('resend_code')}
+            style={{
+              marginTop: scale(30),
+              backgroundColor: cooldown > 0 ? COLORS.grey : COLORS.green,
+              flex: 1,
+            }}
+          />
+          <CustomButton
+            onPress={handleSubmit(handleVerify)}
+            buttonType="large"
+            text={t('ok')}
+            style={{marginTop: scale(30), flex: 1}}
+          />
+        </View>
       </View>
     </View>
   );
@@ -81,7 +161,7 @@ export default function Content() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: scale(50),
+    marginTop: scale(20),
     width: '100%',
   },
   content: {

@@ -28,24 +28,24 @@ export const handleLogoutExistToken = async () => {
   RNRestart.restart();
 };
 
-let countErr = 0;
-instanceCommon.interceptors.response.use(
-  response => {
-    return response;
-  },
-  error => {
-    if (error.response && error.response.status === 401 && countErr < 1) {
-      Alert.alert(
-        'Notification',
-        'Your session has expired or your account has been logged in on another device. Please log in again.',
-        [{text: 'OK', onPress: () => handleLogoutExistToken()}],
-      );
+// let countErr = 0;
+// instanceCommon.interceptors.response.use(
+//   response => {
+//     return response;
+//   },
+//   error => {
+//     if (error.response && error.response.status === 401 && countErr < 1) {
+//       Alert.alert(
+//         'Notification',
+//         'Your session has expired or your account has been logged in on another device. Please log in again.',
+//         [{text: 'OK', onPress: () => handleLogoutExistToken()}],
+//       );
 
-      ++countErr;
-    }
-    return Promise.reject(error);
-  },
-);
+//       ++countErr;
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 // ============================ Common =====================================
 export const getUserInfoLocation = async ({lat, lon}) => {
   // Encode the latitude and longitude to ensure they are correctly formatted

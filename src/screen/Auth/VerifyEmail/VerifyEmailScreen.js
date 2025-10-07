@@ -3,15 +3,13 @@ import React from 'react';
 import MainWrapper from '../../../components/MainWrapper';
 import Content from './components/Content';
 import Auth from '../components/MainAuth';
-import { useLanguage } from '../../../hooks/useLanguage';
-import { scale } from '../../../assets/constants';
-
-
+import {useLanguage} from '../../../hooks/useLanguage';
+import {scale} from '../../../assets/constants';
 
 export default function VerifyEmailScreen() {
-const {t}= useLanguage()
+  const {t} = useLanguage();
   return (
-    <Auth heading={'Verify Email'}>
+    <Auth heading={t('verify_email')}>
       <Content />
     </Auth>
   );

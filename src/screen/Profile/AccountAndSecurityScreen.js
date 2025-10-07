@@ -24,6 +24,10 @@ import {postDeleteAccount} from '../../Model/api/auth';
 import RNRestart from 'react-native-restart';
 import {showMess} from '../../assets/constants/Helper';
 import {useAuthentication} from '../../hooks/useAuthentication';
+import {
+  IconDeviceIpadHorizontalQuestion,
+  IconShield,
+} from '@tabler/icons-react-native';
 
 export default function AccountAndSecurityScreen() {
   const {navigate, setOptions} = useNavigation();
@@ -46,9 +50,10 @@ export default function AccountAndSecurityScreen() {
             }, 500);
           }
         },
-        onError: err => {
-          console.log(err);
-          showMess(t('an_error_occured'), 'error');
+        onError: error => {
+          if (error.response) {
+            showMess(error?.response?.data?.message, 'error');
+          }
         },
       },
     );
@@ -71,18 +76,11 @@ export default function AccountAndSecurityScreen() {
         />
 
         <Item
-          Icon={IconHandShake}
-          title={t('business_account')}
-          desc={t('you_can_use_other_features_for_business')}
-          onPress={() => {
-            navigate('NavigationAuth', {
-              screen: 'RegisterPartnerScreen',
-              params: {
-                isShowHeader: true,
-              },
-            });
-          }}
-          nameScreen="1"
+          Icon={IconShield}
+          fill={COLORS.white}
+          title={t('verify_account')}
+          desc={t('verify_account_desc')}
+          nameScreen="VerifyAccountScreen"
         />
         {/* <Item
           Icon={IconDeleteAccount}
@@ -98,6 +96,13 @@ export default function AccountAndSecurityScreen() {
       <Box
         title={t('security_settings')}
         desc={t('password_and_authentication_methods')}>
+        <Item
+          Icon={IconDeviceIpadHorizontalQuestion}
+          title={t('session_manage')}
+          desc={t('session_manage_and_history')}
+          nameScreen="SessionManageScreen"
+          fill={COLORS.white}
+        />
         <Item
           Icon={IconPassword}
           title={t('change_password')}

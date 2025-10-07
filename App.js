@@ -6,6 +6,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
+  AppState,
   Platform,
   StatusBar,
   StyleSheet,
@@ -23,7 +24,11 @@ import {COLORS, SIZES, images, scale} from './src/assets/constants';
 import {showMess} from './src/assets/constants/Helper';
 import CustomImage from './src/components/CustomImage';
 import Loading from './src/components/Loading/Loading';
-import {AuthProvider} from './src/context/AuthContext';
+import {
+  AuthProvider,
+  REFRESH_TOKEN_KEY,
+  TOKEN_KEY,
+} from './src/context/AuthContext';
 import {LanguageProvider} from './src/context/LanguageContext';
 import {
   BottomTab,
@@ -54,6 +59,9 @@ import {replaceTranslateKey} from './src/utils/replaceTranslateKey';
 import {HotUpdater} from '@hot-updater/react-native';
 import {storage} from './src/utils/MMKVStorage';
 import {IconLogoHorizon, IconLogoPione} from './src/assets/icon/Icon';
+import {decodeToken} from './src/Model/api_new/apiClient';
+import {renewAccessToken} from './src/Model/api_new/user/auth';
+import {useAuthentication} from './src/hooks/useAuthentication';
 
 // Prevent them from scaling the font size based on the system's font size settings,
 // Override Text scaling
@@ -238,6 +246,7 @@ const Layout = () => {
   const {t} = useLanguage();
   const [isReady, setIsReady] = useState(false);
   const [isCountry, setIsCountry] = useState(false);
+
   useEffect(() => {
     if (Platform.OS === 'android') {
       requestNotificationPermission();

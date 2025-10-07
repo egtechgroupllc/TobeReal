@@ -1,11 +1,10 @@
 import React, {useEffect, useLayoutEffect, useSyncExternalStore} from 'react';
 import {useForm} from 'react-hook-form';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Alert, StyleSheet, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
 import RNRestart from 'react-native-restart';
 
-import {postLogin} from '../../../../Model/api/auth';
 import {SIZES, scale} from '../../../../assets/constants';
 import {showMess} from '../../../../assets/constants/Helper';
 import {CustomButton, CustomInput} from '../../../../components';
@@ -19,6 +18,7 @@ import {
 } from '../../../../utils/validate';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {storage} from '../../../../utils/MMKVStorage';
+import {postLogin} from '../../../../Model/api_new/user/auth';
 
 export default function Content() {
   const {t} = useLanguage();
@@ -72,20 +72,46 @@ export default function Content() {
     loginMutation.mutate(value, {
       onSuccess: dataInside => {
         if (dataInside?.status) {
-          onSaveToken(dataInside?.data?.token);
+          const accessToken = dataInside?.data?.accessToken;
+          const refreshToken = dataInside?.data?.refreshToken;
+
+          onSaveToken(accessToken, refreshToken);
           onSavedEmail(dataInside?.data);
           showMess(t(dataInside?.message), 'success');
 
           setTimeout(() => {
             RNRestart.restart();
           }, 500);
-        } else {
-          showMess(t(dataInside?.message), 'error');
         }
       },
       onError: err => {
         console.log(err);
-        showMess(t('an_error_occured'), 'error');
+
+        if (
+          err.response?.data?.message === 'Your email has not been verified'
+        ) {
+          Alert.alert(
+            t('email_verification_required'),
+            t('your_email_not_verified'),
+            [
+              {
+                text: t('cancel'),
+                style: 'cancel',
+              },
+              {
+                text: 'OK',
+                onPress: () => {
+                  navigate('VerifyEmailScreen', {email: value.email});
+                },
+              },
+            ],
+          );
+        } else {
+          showMess(
+            err.response?.data?.message || t('an_error_occured'),
+            'error',
+          );
+        }
       },
     });
   };
@@ -118,7 +144,7 @@ export default function Content() {
           name="password"
           rules={{
             ...requireField(t('this_field_required')),
-            ...validateMinLengthText(t('use_6_characters'), 6),
+            ...validateMinLengthText(t('use_unit_characters', {unit: 6}), 6),
           }}
           sizeInput="medium"
           placeholder={t('enter_password')}

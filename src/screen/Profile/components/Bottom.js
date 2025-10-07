@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useMutation} from '@tanstack/react-query';
 import {postLogout} from '../../../Model/api/auth';
@@ -18,6 +18,7 @@ import CustomText from '../../../components/CustomText';
 import {useAuthentication} from '../../../hooks/useAuthentication';
 import {useLanguage} from '../../../hooks/useLanguage';
 import {useNavigation} from '@react-navigation/native';
+import {deleteCurrentSession} from '../../../Model/api_new/user/auth';
 
 const listSocial = [
   IconShare,
@@ -30,31 +31,31 @@ export default function Bottom() {
   const {t} = useLanguage();
   const {onClearToken, token} = useAuthentication();
   const {navigate} = useNavigation();
-  const logoutMutation = useMutation({
-    mutationFn: postLogout,
-  });
 
   const handleLogOut = () => {
-    logoutMutation.mutate(
-      {},
-      {
-        onSuccess: dataInside => {
-          showMess(
-            t(dataInside?.message),
-            dataInside?.status ? 'success' : 'error',
-          );
-
-          if (dataInside?.status) {
-            onClearToken();
-          }
+    Alert.alert(
+      'Confirm Logout',
+      'Do you want to log out from this device?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {
+          text: 'OK',
+          onPress: async () => {
+            try {
+              // xoá session hiện tại trên server
+              await deleteCurrentSession();
+            } catch (e) {
+              console.log('Error delete current session:', e);
+            } finally {
+              // xoá token local
+              await onClearToken();
+            }
+          },
         },
-        onError: error => {
-          onClearToken();
-        },
-      },
+      ],
+      {cancelable: true},
     );
   };
-
   return (
     <View style={styles.container}>
       {/* <View style={styles.box}>

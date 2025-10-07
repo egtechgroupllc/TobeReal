@@ -24,8 +24,10 @@ import PostManagementScreen from '../screen/Profile/PostManagement/PostManagemen
 import {PriceListScreen} from '../screen/Profile/PriceList';
 import {RegisterAccountTypeScreen} from '../screen/Profile/RegisterAccountType';
 import {SelectLanguageScreen} from '../screen/Profile/SelectLanguage';
+import SessionManageScreen from '../screen/Profile/SessionManageScreen';
 import {TradingFloorScreen} from '../screen/Profile/TradingFloor';
 import {CreateTradingScreen} from '../screen/Profile/TradingFloor/CreateTradingFloor';
+import VerifyAccountScreen from '../screen/Profile/VerifyAccountScreen';
 import FinancialTokenScreen from '../screen/WalletToken/FinancialTokenScreen';
 import {HomeWishListScreen} from '../screen/WishList';
 
@@ -135,5 +137,13 @@ export default routerProfile = [
   {
     name: 'HelpCenterContentScreen',
     component: HelpCenterContentScreen,
+  },
+  {
+    name: 'SessionManageScreen',
+    component: SessionManageScreen,
+  },
+  {
+    name: 'VerifyAccountScreen',
+    component: VerifyAccountScreen,
   },
 ];
